@@ -250,7 +250,15 @@ describe('v2.ServicesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.GetServiceRequest()
       );
-      const expectedHeaderRequestParams = '';
+      const expectedHeaderRequestParamsObj: {[key: string]: string} = {};
+      // path template: projects/*/locations/{location=*}/**
+      request.name = 'projects/value/locations/value/value';
+      expectedHeaderRequestParamsObj['location'] = 'value';
+      const expectedHeaderRequestParams = Object.entries(
+        expectedHeaderRequestParamsObj
+      )
+        .map(([key, value]) => `${key}=${value}`)
+        .join('&');
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -280,7 +288,15 @@ describe('v2.ServicesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.GetServiceRequest()
       );
-      const expectedHeaderRequestParams = '';
+      const expectedHeaderRequestParamsObj: {[key: string]: string} = {};
+      // path template: projects/*/locations/{location=*}/**
+      request.name = 'projects/value/locations/value/value';
+      expectedHeaderRequestParamsObj['location'] = 'value';
+      const expectedHeaderRequestParams = Object.entries(
+        expectedHeaderRequestParamsObj
+      )
+        .map(([key, value]) => `${key}=${value}`)
+        .join('&');
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -326,7 +342,15 @@ describe('v2.ServicesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.GetServiceRequest()
       );
-      const expectedHeaderRequestParams = '';
+      const expectedHeaderRequestParamsObj: {[key: string]: string} = {};
+      // path template: projects/*/locations/{location=*}/**
+      request.name = 'projects/value/locations/value/value';
+      expectedHeaderRequestParamsObj['location'] = 'value';
+      const expectedHeaderRequestParams = Object.entries(
+        expectedHeaderRequestParamsObj
+      )
+        .map(([key, value]) => `${key}=${value}`)
+        .join('&');
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -356,6 +380,8 @@ describe('v2.ServicesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.GetServiceRequest()
       );
+      // path template: projects/*/locations/{location=*}/**
+      request.name = 'projects/value/locations/value/value';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getService(request), expectedError);
@@ -751,7 +777,15 @@ describe('v2.ServicesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.CreateServiceRequest()
       );
-      const expectedHeaderRequestParams = '';
+      const expectedHeaderRequestParamsObj: {[key: string]: string} = {};
+      // path template: projects/*/locations/{location=*}
+      request.parent = 'projects/value/locations/value';
+      expectedHeaderRequestParamsObj['location'] = 'value';
+      const expectedHeaderRequestParams = Object.entries(
+        expectedHeaderRequestParamsObj
+      )
+        .map(([key, value]) => `${key}=${value}`)
+        .join('&');
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -783,7 +817,15 @@ describe('v2.ServicesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.CreateServiceRequest()
       );
-      const expectedHeaderRequestParams = '';
+      const expectedHeaderRequestParamsObj: {[key: string]: string} = {};
+      // path template: projects/*/locations/{location=*}
+      request.parent = 'projects/value/locations/value';
+      expectedHeaderRequestParamsObj['location'] = 'value';
+      const expectedHeaderRequestParams = Object.entries(
+        expectedHeaderRequestParamsObj
+      )
+        .map(([key, value]) => `${key}=${value}`)
+        .join('&');
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -836,7 +878,15 @@ describe('v2.ServicesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.CreateServiceRequest()
       );
-      const expectedHeaderRequestParams = '';
+      const expectedHeaderRequestParamsObj: {[key: string]: string} = {};
+      // path template: projects/*/locations/{location=*}
+      request.parent = 'projects/value/locations/value';
+      expectedHeaderRequestParamsObj['location'] = 'value';
+      const expectedHeaderRequestParams = Object.entries(
+        expectedHeaderRequestParamsObj
+      )
+        .map(([key, value]) => `${key}=${value}`)
+        .join('&');
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -866,7 +916,15 @@ describe('v2.ServicesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.CreateServiceRequest()
       );
-      const expectedHeaderRequestParams = '';
+      const expectedHeaderRequestParamsObj: {[key: string]: string} = {};
+      // path template: projects/*/locations/{location=*}
+      request.parent = 'projects/value/locations/value';
+      expectedHeaderRequestParamsObj['location'] = 'value';
+      const expectedHeaderRequestParams = Object.entries(
+        expectedHeaderRequestParamsObj
+      )
+        .map(([key, value]) => `${key}=${value}`)
+        .join('&');
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -941,7 +999,16 @@ describe('v2.ServicesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.UpdateServiceRequest()
       );
-      const expectedHeaderRequestParams = '';
+      const expectedHeaderRequestParamsObj: {[key: string]: string} = {};
+      request.service = {};
+      // path template: projects/*/locations/{location=*}/**
+      request.service.name = 'projects/value/locations/value/value';
+      expectedHeaderRequestParamsObj['location'] = 'value';
+      const expectedHeaderRequestParams = Object.entries(
+        expectedHeaderRequestParamsObj
+      )
+        .map(([key, value]) => `${key}=${value}`)
+        .join('&');
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -973,7 +1040,16 @@ describe('v2.ServicesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.UpdateServiceRequest()
       );
-      const expectedHeaderRequestParams = '';
+      const expectedHeaderRequestParamsObj: {[key: string]: string} = {};
+      request.service = {};
+      // path template: projects/*/locations/{location=*}/**
+      request.service.name = 'projects/value/locations/value/value';
+      expectedHeaderRequestParamsObj['location'] = 'value';
+      const expectedHeaderRequestParams = Object.entries(
+        expectedHeaderRequestParamsObj
+      )
+        .map(([key, value]) => `${key}=${value}`)
+        .join('&');
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1026,7 +1102,16 @@ describe('v2.ServicesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.UpdateServiceRequest()
       );
-      const expectedHeaderRequestParams = '';
+      const expectedHeaderRequestParamsObj: {[key: string]: string} = {};
+      request.service = {};
+      // path template: projects/*/locations/{location=*}/**
+      request.service.name = 'projects/value/locations/value/value';
+      expectedHeaderRequestParamsObj['location'] = 'value';
+      const expectedHeaderRequestParams = Object.entries(
+        expectedHeaderRequestParamsObj
+      )
+        .map(([key, value]) => `${key}=${value}`)
+        .join('&');
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1056,7 +1141,16 @@ describe('v2.ServicesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.UpdateServiceRequest()
       );
-      const expectedHeaderRequestParams = '';
+      const expectedHeaderRequestParamsObj: {[key: string]: string} = {};
+      request.service = {};
+      // path template: projects/*/locations/{location=*}/**
+      request.service.name = 'projects/value/locations/value/value';
+      expectedHeaderRequestParamsObj['location'] = 'value';
+      const expectedHeaderRequestParams = Object.entries(
+        expectedHeaderRequestParamsObj
+      )
+        .map(([key, value]) => `${key}=${value}`)
+        .join('&');
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1131,7 +1225,15 @@ describe('v2.ServicesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.DeleteServiceRequest()
       );
-      const expectedHeaderRequestParams = '';
+      const expectedHeaderRequestParamsObj: {[key: string]: string} = {};
+      // path template: projects/*/locations/{location=*}/**
+      request.name = 'projects/value/locations/value/value';
+      expectedHeaderRequestParamsObj['location'] = 'value';
+      const expectedHeaderRequestParams = Object.entries(
+        expectedHeaderRequestParamsObj
+      )
+        .map(([key, value]) => `${key}=${value}`)
+        .join('&');
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1163,7 +1265,15 @@ describe('v2.ServicesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.DeleteServiceRequest()
       );
-      const expectedHeaderRequestParams = '';
+      const expectedHeaderRequestParamsObj: {[key: string]: string} = {};
+      // path template: projects/*/locations/{location=*}/**
+      request.name = 'projects/value/locations/value/value';
+      expectedHeaderRequestParamsObj['location'] = 'value';
+      const expectedHeaderRequestParams = Object.entries(
+        expectedHeaderRequestParamsObj
+      )
+        .map(([key, value]) => `${key}=${value}`)
+        .join('&');
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1216,7 +1326,15 @@ describe('v2.ServicesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.DeleteServiceRequest()
       );
-      const expectedHeaderRequestParams = '';
+      const expectedHeaderRequestParamsObj: {[key: string]: string} = {};
+      // path template: projects/*/locations/{location=*}/**
+      request.name = 'projects/value/locations/value/value';
+      expectedHeaderRequestParamsObj['location'] = 'value';
+      const expectedHeaderRequestParams = Object.entries(
+        expectedHeaderRequestParamsObj
+      )
+        .map(([key, value]) => `${key}=${value}`)
+        .join('&');
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1246,7 +1364,15 @@ describe('v2.ServicesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.DeleteServiceRequest()
       );
-      const expectedHeaderRequestParams = '';
+      const expectedHeaderRequestParamsObj: {[key: string]: string} = {};
+      // path template: projects/*/locations/{location=*}/**
+      request.name = 'projects/value/locations/value/value';
+      expectedHeaderRequestParamsObj['location'] = 'value';
+      const expectedHeaderRequestParams = Object.entries(
+        expectedHeaderRequestParamsObj
+      )
+        .map(([key, value]) => `${key}=${value}`)
+        .join('&');
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1321,7 +1447,15 @@ describe('v2.ServicesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.ListServicesRequest()
       );
-      const expectedHeaderRequestParams = '';
+      const expectedHeaderRequestParamsObj: {[key: string]: string} = {};
+      // path template: projects/*/locations/{location=*}
+      request.parent = 'projects/value/locations/value';
+      expectedHeaderRequestParamsObj['location'] = 'value';
+      const expectedHeaderRequestParams = Object.entries(
+        expectedHeaderRequestParamsObj
+      )
+        .map(([key, value]) => `${key}=${value}`)
+        .join('&');
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1353,7 +1487,15 @@ describe('v2.ServicesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.ListServicesRequest()
       );
-      const expectedHeaderRequestParams = '';
+      const expectedHeaderRequestParamsObj: {[key: string]: string} = {};
+      // path template: projects/*/locations/{location=*}
+      request.parent = 'projects/value/locations/value';
+      expectedHeaderRequestParamsObj['location'] = 'value';
+      const expectedHeaderRequestParams = Object.entries(
+        expectedHeaderRequestParamsObj
+      )
+        .map(([key, value]) => `${key}=${value}`)
+        .join('&');
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1401,7 +1543,15 @@ describe('v2.ServicesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.ListServicesRequest()
       );
-      const expectedHeaderRequestParams = '';
+      const expectedHeaderRequestParamsObj: {[key: string]: string} = {};
+      // path template: projects/*/locations/{location=*}
+      request.parent = 'projects/value/locations/value';
+      expectedHeaderRequestParamsObj['location'] = 'value';
+      const expectedHeaderRequestParams = Object.entries(
+        expectedHeaderRequestParamsObj
+      )
+        .map(([key, value]) => `${key}=${value}`)
+        .join('&');
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1431,7 +1581,15 @@ describe('v2.ServicesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.ListServicesRequest()
       );
-      const expectedHeaderRequestParams = '';
+      const expectedHeaderRequestParamsObj: {[key: string]: string} = {};
+      // path template: projects/*/locations/{location=*}
+      request.parent = 'projects/value/locations/value';
+      expectedHeaderRequestParamsObj['location'] = 'value';
+      const expectedHeaderRequestParams = Object.entries(
+        expectedHeaderRequestParamsObj
+      )
+        .map(([key, value]) => `${key}=${value}`)
+        .join('&');
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.run.v2.Service()),
         generateSampleMessage(new protos.google.cloud.run.v2.Service()),
@@ -1470,7 +1628,15 @@ describe('v2.ServicesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.ListServicesRequest()
       );
-      const expectedHeaderRequestParams = '';
+      const expectedHeaderRequestParamsObj: {[key: string]: string} = {};
+      // path template: projects/*/locations/{location=*}
+      request.parent = 'projects/value/locations/value';
+      expectedHeaderRequestParamsObj['location'] = 'value';
+      const expectedHeaderRequestParams = Object.entries(
+        expectedHeaderRequestParamsObj
+      )
+        .map(([key, value]) => `${key}=${value}`)
+        .join('&');
       const expectedError = new Error('expected');
       client.descriptors.page.listServices.createStream = stubPageStreamingCall(
         undefined,
@@ -1506,7 +1672,15 @@ describe('v2.ServicesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.ListServicesRequest()
       );
-      const expectedHeaderRequestParams = '';
+      const expectedHeaderRequestParamsObj: {[key: string]: string} = {};
+      // path template: projects/*/locations/{location=*}
+      request.parent = 'projects/value/locations/value';
+      expectedHeaderRequestParamsObj['location'] = 'value';
+      const expectedHeaderRequestParams = Object.entries(
+        expectedHeaderRequestParamsObj
+      )
+        .map(([key, value]) => `${key}=${value}`)
+        .join('&');
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.run.v2.Service()),
         generateSampleMessage(new protos.google.cloud.run.v2.Service()),
@@ -1537,7 +1711,15 @@ describe('v2.ServicesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.ListServicesRequest()
       );
-      const expectedHeaderRequestParams = '';
+      const expectedHeaderRequestParamsObj: {[key: string]: string} = {};
+      // path template: projects/*/locations/{location=*}
+      request.parent = 'projects/value/locations/value';
+      expectedHeaderRequestParamsObj['location'] = 'value';
+      const expectedHeaderRequestParams = Object.entries(
+        expectedHeaderRequestParamsObj
+      )
+        .map(([key, value]) => `${key}=${value}`)
+        .join('&');
       const expectedError = new Error('expected');
       client.descriptors.page.listServices.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

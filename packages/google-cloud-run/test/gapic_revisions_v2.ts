@@ -250,7 +250,15 @@ describe('v2.RevisionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.GetRevisionRequest()
       );
-      const expectedHeaderRequestParams = '';
+      const expectedHeaderRequestParamsObj: {[key: string]: string} = {};
+      // path template: projects/*/locations/{location=*}/**
+      request.name = 'projects/value/locations/value/value';
+      expectedHeaderRequestParamsObj['location'] = 'value';
+      const expectedHeaderRequestParams = Object.entries(
+        expectedHeaderRequestParamsObj
+      )
+        .map(([key, value]) => `${key}=${value}`)
+        .join('&');
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -280,7 +288,15 @@ describe('v2.RevisionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.GetRevisionRequest()
       );
-      const expectedHeaderRequestParams = '';
+      const expectedHeaderRequestParamsObj: {[key: string]: string} = {};
+      // path template: projects/*/locations/{location=*}/**
+      request.name = 'projects/value/locations/value/value';
+      expectedHeaderRequestParamsObj['location'] = 'value';
+      const expectedHeaderRequestParams = Object.entries(
+        expectedHeaderRequestParamsObj
+      )
+        .map(([key, value]) => `${key}=${value}`)
+        .join('&');
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -326,7 +342,15 @@ describe('v2.RevisionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.GetRevisionRequest()
       );
-      const expectedHeaderRequestParams = '';
+      const expectedHeaderRequestParamsObj: {[key: string]: string} = {};
+      // path template: projects/*/locations/{location=*}/**
+      request.name = 'projects/value/locations/value/value';
+      expectedHeaderRequestParamsObj['location'] = 'value';
+      const expectedHeaderRequestParams = Object.entries(
+        expectedHeaderRequestParamsObj
+      )
+        .map(([key, value]) => `${key}=${value}`)
+        .join('&');
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -356,6 +380,8 @@ describe('v2.RevisionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.GetRevisionRequest()
       );
+      // path template: projects/*/locations/{location=*}/**
+      request.name = 'projects/value/locations/value/value';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getRevision(request), expectedError);
@@ -372,7 +398,15 @@ describe('v2.RevisionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.DeleteRevisionRequest()
       );
-      const expectedHeaderRequestParams = '';
+      const expectedHeaderRequestParamsObj: {[key: string]: string} = {};
+      // path template: projects/*/locations/{location=*}/**
+      request.name = 'projects/value/locations/value/value';
+      expectedHeaderRequestParamsObj['location'] = 'value';
+      const expectedHeaderRequestParams = Object.entries(
+        expectedHeaderRequestParamsObj
+      )
+        .map(([key, value]) => `${key}=${value}`)
+        .join('&');
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -404,7 +438,15 @@ describe('v2.RevisionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.DeleteRevisionRequest()
       );
-      const expectedHeaderRequestParams = '';
+      const expectedHeaderRequestParamsObj: {[key: string]: string} = {};
+      // path template: projects/*/locations/{location=*}/**
+      request.name = 'projects/value/locations/value/value';
+      expectedHeaderRequestParamsObj['location'] = 'value';
+      const expectedHeaderRequestParams = Object.entries(
+        expectedHeaderRequestParamsObj
+      )
+        .map(([key, value]) => `${key}=${value}`)
+        .join('&');
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -457,7 +499,15 @@ describe('v2.RevisionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.DeleteRevisionRequest()
       );
-      const expectedHeaderRequestParams = '';
+      const expectedHeaderRequestParamsObj: {[key: string]: string} = {};
+      // path template: projects/*/locations/{location=*}/**
+      request.name = 'projects/value/locations/value/value';
+      expectedHeaderRequestParamsObj['location'] = 'value';
+      const expectedHeaderRequestParams = Object.entries(
+        expectedHeaderRequestParamsObj
+      )
+        .map(([key, value]) => `${key}=${value}`)
+        .join('&');
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -487,7 +537,15 @@ describe('v2.RevisionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.DeleteRevisionRequest()
       );
-      const expectedHeaderRequestParams = '';
+      const expectedHeaderRequestParamsObj: {[key: string]: string} = {};
+      // path template: projects/*/locations/{location=*}/**
+      request.name = 'projects/value/locations/value/value';
+      expectedHeaderRequestParamsObj['location'] = 'value';
+      const expectedHeaderRequestParams = Object.entries(
+        expectedHeaderRequestParamsObj
+      )
+        .map(([key, value]) => `${key}=${value}`)
+        .join('&');
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -562,7 +620,15 @@ describe('v2.RevisionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.ListRevisionsRequest()
       );
-      const expectedHeaderRequestParams = '';
+      const expectedHeaderRequestParamsObj: {[key: string]: string} = {};
+      // path template: projects/*/locations/{location=*}/**
+      request.parent = 'projects/value/locations/value/value';
+      expectedHeaderRequestParamsObj['location'] = 'value';
+      const expectedHeaderRequestParams = Object.entries(
+        expectedHeaderRequestParamsObj
+      )
+        .map(([key, value]) => `${key}=${value}`)
+        .join('&');
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -594,7 +660,15 @@ describe('v2.RevisionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.ListRevisionsRequest()
       );
-      const expectedHeaderRequestParams = '';
+      const expectedHeaderRequestParamsObj: {[key: string]: string} = {};
+      // path template: projects/*/locations/{location=*}/**
+      request.parent = 'projects/value/locations/value/value';
+      expectedHeaderRequestParamsObj['location'] = 'value';
+      const expectedHeaderRequestParams = Object.entries(
+        expectedHeaderRequestParamsObj
+      )
+        .map(([key, value]) => `${key}=${value}`)
+        .join('&');
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -642,7 +716,15 @@ describe('v2.RevisionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.ListRevisionsRequest()
       );
-      const expectedHeaderRequestParams = '';
+      const expectedHeaderRequestParamsObj: {[key: string]: string} = {};
+      // path template: projects/*/locations/{location=*}/**
+      request.parent = 'projects/value/locations/value/value';
+      expectedHeaderRequestParamsObj['location'] = 'value';
+      const expectedHeaderRequestParams = Object.entries(
+        expectedHeaderRequestParamsObj
+      )
+        .map(([key, value]) => `${key}=${value}`)
+        .join('&');
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -672,7 +754,15 @@ describe('v2.RevisionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.ListRevisionsRequest()
       );
-      const expectedHeaderRequestParams = '';
+      const expectedHeaderRequestParamsObj: {[key: string]: string} = {};
+      // path template: projects/*/locations/{location=*}/**
+      request.parent = 'projects/value/locations/value/value';
+      expectedHeaderRequestParamsObj['location'] = 'value';
+      const expectedHeaderRequestParams = Object.entries(
+        expectedHeaderRequestParamsObj
+      )
+        .map(([key, value]) => `${key}=${value}`)
+        .join('&');
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.run.v2.Revision()),
         generateSampleMessage(new protos.google.cloud.run.v2.Revision()),
@@ -711,7 +801,15 @@ describe('v2.RevisionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.ListRevisionsRequest()
       );
-      const expectedHeaderRequestParams = '';
+      const expectedHeaderRequestParamsObj: {[key: string]: string} = {};
+      // path template: projects/*/locations/{location=*}/**
+      request.parent = 'projects/value/locations/value/value';
+      expectedHeaderRequestParamsObj['location'] = 'value';
+      const expectedHeaderRequestParams = Object.entries(
+        expectedHeaderRequestParamsObj
+      )
+        .map(([key, value]) => `${key}=${value}`)
+        .join('&');
       const expectedError = new Error('expected');
       client.descriptors.page.listRevisions.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -745,7 +843,15 @@ describe('v2.RevisionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.ListRevisionsRequest()
       );
-      const expectedHeaderRequestParams = '';
+      const expectedHeaderRequestParamsObj: {[key: string]: string} = {};
+      // path template: projects/*/locations/{location=*}/**
+      request.parent = 'projects/value/locations/value/value';
+      expectedHeaderRequestParamsObj['location'] = 'value';
+      const expectedHeaderRequestParams = Object.entries(
+        expectedHeaderRequestParamsObj
+      )
+        .map(([key, value]) => `${key}=${value}`)
+        .join('&');
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.run.v2.Revision()),
         generateSampleMessage(new protos.google.cloud.run.v2.Revision()),
@@ -776,7 +882,15 @@ describe('v2.RevisionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.ListRevisionsRequest()
       );
-      const expectedHeaderRequestParams = '';
+      const expectedHeaderRequestParamsObj: {[key: string]: string} = {};
+      // path template: projects/*/locations/{location=*}/**
+      request.parent = 'projects/value/locations/value/value';
+      expectedHeaderRequestParamsObj['location'] = 'value';
+      const expectedHeaderRequestParams = Object.entries(
+        expectedHeaderRequestParamsObj
+      )
+        .map(([key, value]) => `${key}=${value}`)
+        .join('&');
       const expectedError = new Error('expected');
       client.descriptors.page.listRevisions.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

@@ -477,17 +477,18 @@ export class ServicesClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     const routingParameter = {};
-    if (
-      typeof request.name !== 'undefined' &&
-      RegExp('projects/[^/]+/locations/(?<location>[^/]+)(?:/.*)?').test(
-        request.name!
-      )
-    ) {
-      Object.assign(routingParameter, {
-        location: request.name!.match(RegExp('(?<location>[^/]+)'))![0],
-      });
+    {
+      const fieldValue = request.name;
+      if (fieldValue !== undefined && fieldValue !== null) {
+        const match = fieldValue
+          .toString()
+          .match(RegExp('projects/[^/]+/locations/(?<location>[^/]+)(?:/.*)?'));
+        if (match) {
+          const parameterValue = match.groups?.['location'] ?? fieldValue;
+          Object.assign(routingParameter, {location: parameterValue});
+        }
+      }
     }
-
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams(routingParameter);
     this.initialize();
@@ -875,17 +876,18 @@ export class ServicesClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     const routingParameter = {};
-    if (
-      typeof request.parent !== 'undefined' &&
-      RegExp('projects/[^/]+/locations/(?<location>[^/]+)').test(
-        request.parent!
-      )
-    ) {
-      Object.assign(routingParameter, {
-        location: request.parent!.match(RegExp('(?<location>[^/]+)'))![0],
-      });
+    {
+      const fieldValue = request.parent;
+      if (fieldValue !== undefined && fieldValue !== null) {
+        const match = fieldValue
+          .toString()
+          .match(RegExp('projects/[^/]+/locations/(?<location>[^/]+)'));
+        if (match) {
+          const parameterValue = match.groups?.['location'] ?? fieldValue;
+          Object.assign(routingParameter, {location: parameterValue});
+        }
+      }
     }
-
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams(routingParameter);
     this.initialize();
@@ -1029,19 +1031,18 @@ export class ServicesClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     const routingParameter = {};
-    if (
-      typeof request.service?.name !== 'undefined' &&
-      RegExp('projects/[^/]+/locations/(?<location>[^/]+)(?:/.*)?').test(
-        request.service?.name!
-      )
-    ) {
-      Object.assign(routingParameter, {
-        location: request.service?.name!.match(
-          RegExp('(?<location>[^/]+)')
-        )![0],
-      });
+    {
+      const fieldValue = request.service?.name;
+      if (fieldValue !== undefined && fieldValue !== null) {
+        const match = fieldValue
+          .toString()
+          .match(RegExp('projects/[^/]+/locations/(?<location>[^/]+)(?:/.*)?'));
+        if (match) {
+          const parameterValue = match.groups?.['location'] ?? fieldValue;
+          Object.assign(routingParameter, {location: parameterValue});
+        }
+      }
     }
-
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams(routingParameter);
     this.initialize();
@@ -1187,17 +1188,18 @@ export class ServicesClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     const routingParameter = {};
-    if (
-      typeof request.name !== 'undefined' &&
-      RegExp('projects/[^/]+/locations/(?<location>[^/]+)(?:/.*)?').test(
-        request.name!
-      )
-    ) {
-      Object.assign(routingParameter, {
-        location: request.name!.match(RegExp('(?<location>[^/]+)'))![0],
-      });
+    {
+      const fieldValue = request.name;
+      if (fieldValue !== undefined && fieldValue !== null) {
+        const match = fieldValue
+          .toString()
+          .match(RegExp('projects/[^/]+/locations/(?<location>[^/]+)(?:/.*)?'));
+        if (match) {
+          const parameterValue = match.groups?.['location'] ?? fieldValue;
+          Object.assign(routingParameter, {location: parameterValue});
+        }
+      }
     }
-
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams(routingParameter);
     this.initialize();
@@ -1326,17 +1328,18 @@ export class ServicesClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     const routingParameter = {};
-    if (
-      typeof request.parent !== 'undefined' &&
-      RegExp('projects/[^/]+/locations/(?<location>[^/]+)').test(
-        request.parent!
-      )
-    ) {
-      Object.assign(routingParameter, {
-        location: request.parent!.match(RegExp('(?<location>[^/]+)'))![0],
-      });
+    {
+      const fieldValue = request.parent;
+      if (fieldValue !== undefined && fieldValue !== null) {
+        const match = fieldValue
+          .toString()
+          .match(RegExp('projects/[^/]+/locations/(?<location>[^/]+)'));
+        if (match) {
+          const parameterValue = match.groups?.['location'] ?? fieldValue;
+          Object.assign(routingParameter, {location: parameterValue});
+        }
+      }
     }
-
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams(routingParameter);
     this.initialize();
@@ -1379,17 +1382,18 @@ export class ServicesClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     const routingParameter = {};
-    if (
-      typeof request.parent !== 'undefined' &&
-      RegExp('projects/[^/]+/locations/(?<location>[^/]+)').test(
-        request.parent!
-      )
-    ) {
-      Object.assign(routingParameter, {
-        location: request.parent!.match(RegExp('(?<location>[^/]+)'))![0],
-      });
+    {
+      const fieldValue = request.parent;
+      if (fieldValue !== undefined && fieldValue !== null) {
+        const match = fieldValue
+          .toString()
+          .match(RegExp('projects/[^/]+/locations/(?<location>[^/]+)'));
+        if (match) {
+          const parameterValue = match.groups?.['location'] ?? fieldValue;
+          Object.assign(routingParameter, {location: parameterValue});
+        }
+      }
     }
-
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams(routingParameter);
     const defaultCallSettings = this._defaults['listServices'];
@@ -1441,17 +1445,18 @@ export class ServicesClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     const routingParameter = {};
-    if (
-      typeof request.parent !== 'undefined' &&
-      RegExp('projects/[^/]+/locations/(?<location>[^/]+)').test(
-        request.parent!
-      )
-    ) {
-      Object.assign(routingParameter, {
-        location: request.parent!.match(RegExp('(?<location>[^/]+)'))![0],
-      });
+    {
+      const fieldValue = request.parent;
+      if (fieldValue !== undefined && fieldValue !== null) {
+        const match = fieldValue
+          .toString()
+          .match(RegExp('projects/[^/]+/locations/(?<location>[^/]+)'));
+        if (match) {
+          const parameterValue = match.groups?.['location'] ?? fieldValue;
+          Object.assign(routingParameter, {location: parameterValue});
+        }
+      }
     }
-
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams(routingParameter);
     const defaultCallSettings = this._defaults['listServices'];
