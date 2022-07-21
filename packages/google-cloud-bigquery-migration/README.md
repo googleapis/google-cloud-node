@@ -2,23 +2,23 @@
 [//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [:  Client](https://github.com/)
+# [BigQuery Migration API: Node.js Client](https://github.com/googleapis/nodejs-bigquery-migration)
 
 [![release level](https://img.shields.io/badge/release%20level-beta-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
-[![npm version](https://img.shields.io/npm/v/.svg)](https://www.npmjs.org/package/)
+[![npm version](https://img.shields.io/npm/v/@google-cloud/bigquery-migration.svg)](https://www.npmjs.org/package/@google-cloud/bigquery-migration)
 
 
 
 
-migration--distribution-name&#x3D;@google-cloud/biguqery-migration client for Node.js
+bigquery-migration client for Node.js
 
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com//blob/master/CHANGELOG.md).
+[the CHANGELOG](https://github.com/googleapis/nodejs-bigquery-migration/blob/main/CHANGELOG.md).
 
-
-
-* [github.com/](https://github.com/)
+* [BigQuery Migration API Node.js Client API Reference][client-docs]
+* [BigQuery Migration API Documentation][product-docs]
+* [github.com/googleapis/nodejs-bigquery-migration](https://github.com/googleapis/nodejs-bigquery-migration)
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
@@ -31,8 +31,8 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-  * [Using the client library](#using-the-client-library)
-* [Samples](#samples)
+
+
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
@@ -43,55 +43,22 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
 1.  [Select or create a Cloud Platform project][projects].
 1.  [Enable billing for your project][billing].
-1.  [Enable the  API][enable_api].
+1.  [Enable the BigQuery Migration API API][enable_api].
 1.  [Set up authentication with a service account][auth] so you can access the
     API from your local workstation.
 
 ### Installing the client library
 
 ```bash
-npm install 
-```
-
-
-### Using the client library
-
-```
-// Imports the Google Cloud client library
-
-// remove this line after package is released
-// eslint-disable-next-line node/no-missing-require
-const {MigrationServiceClient} = require('');
-
-// TODO(developer): replace with your prefered project ID.
-// const projectId = 'my-project'
-
-// Creates a client
-// eslint-disable-next-line no-unused-vars
-const client = new {MigrationServiceClient}();
-
-//TODO(library generator): write the actual function you will be testing
-async function doSomething() {
- console.log('DPE! Change this code so that it shows how to use the library! See comments below on structure.')
- // const [thing] = await client.methodName({
- // });
- // console.info(thing);
-}
-doSomething();
-
+npm install @google-cloud/bigquery-migration
 ```
 
 
 
-## Samples
-
-Samples are in the [`samples/`](https://github.com//tree/master/samples) directory. Each sample's `README.md` has instructions for running its sample.
-
-| Sample                      | Source Code                       | Try it |
-| --------------------------- | --------------------------------- | ------ |
-| Quickstart | [source code](https://github.com//blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
 
 
+The [BigQuery Migration API Node.js Client API Reference][client-docs] documentation
+also contains samples.
 
 ## Supported Node.js Versions
 
@@ -111,7 +78,7 @@ best-efforts basis with the following warnings:
 Client libraries targeting some end-of-life versions of Node.js are available, and
 can be installed through npm [dist-tags](https://docs.npmjs.com/cli/dist-tag).
 The dist-tags follow the naming convention `legacy-(version)`.
-For example, `npm install @legacy-8` installs client libraries
+For example, `npm install @google-cloud/bigquery-migration@legacy-8` installs client libraries
 for versions compatible with Node.js 8.
 
 ## Versioning
@@ -136,7 +103,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com//blob/master/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-bigquery-migration/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`, the `samples/README.md`,
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -148,12 +115,12 @@ to its templates in
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com//blob/master/LICENSE)
+See [LICENSE](https://github.com/googleapis/nodejs-bigquery-migration/blob/main/LICENSE)
 
-
-
+[client-docs]: https://cloud.google.com/nodejs/docs/reference/bigquery-migration/latest
+[product-docs]: https://cloud.google.com/bigquery/docs/migration-intro
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
-[enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=migration--distribution-name&#x3D;@google-cloud/biguqery-migration.googleapis.com
+[enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=bigquerymigration.googleapis.com
 [auth]: https://cloud.google.com/docs/authentication/getting-started

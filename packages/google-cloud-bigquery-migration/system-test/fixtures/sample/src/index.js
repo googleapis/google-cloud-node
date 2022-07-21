@@ -17,7 +17,7 @@
 // ** All changes to this file may be overwritten. **
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const migration = require('@google-cloud/migration');
+const migration = require('@google-cloud/bigquery-migration');
 
 function main() {
   const migrationServiceClient = new migration.MigrationServiceClient();

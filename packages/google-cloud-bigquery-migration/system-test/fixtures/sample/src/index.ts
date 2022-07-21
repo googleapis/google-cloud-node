@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {MigrationServiceClient} from '@google-cloud/migration';
+import {MigrationServiceClient} from '@google-cloud/bigquery-migration';
 
 // check that the client class type name can be used
 function doStuffWithMigrationServiceClient(client: MigrationServiceClient) {

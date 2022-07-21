@@ -28,7 +28,7 @@
     var $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.util;
     
     // Exported root namespace
-    var $root = $protobuf.roots.undefined_protos || ($protobuf.roots.undefined_protos = {});
+    var $root = $protobuf.roots._google_cloud_bigquery_migration_protos || ($protobuf.roots._google_cloud_bigquery_migration_protos = {});
     
     $root.google = (function() {
     
