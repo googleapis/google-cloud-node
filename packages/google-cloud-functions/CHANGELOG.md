@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.2.0](https://github.com/googleapis/nodejs-functions/compare/v2.1.0...v2.2.0) (2022-07-14)
+
+
+### Features
+
+* generating GAPIC libraries for Google Cloud Functions v2beta ([#175](https://github.com/googleapis/nodejs-functions/issues/175)) ([63a2cfd](https://github.com/googleapis/nodejs-functions/commit/63a2cfd6552495746f7af84cc5d4cdeec887f5e8))
+* support regapic LRO ([#172](https://github.com/googleapis/nodejs-functions/issues/172)) ([eb5486d](https://github.com/googleapis/nodejs-functions/commit/eb5486d20abaf81ce84730868ad4ed4f549d0f31))
+
 ## [2.1.0](https://github.com/googleapis/nodejs-functions/compare/v2.0.0...v2.1.0) (2022-06-20)
 
 
