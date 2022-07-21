@@ -13,5 +13,5 @@
 # limitations under the License.
 
 deep-copy-regex:
-    - source: /google/cloud/kms/.*-nodejs/(.*)
-      dest: /owl-bot-staging/google-cloud-kms/$1/v1
+    - source: /google/cloud/kms/(.*)/.*-nodejs
+      dest: /owl-bot-staging/google-cloud-kms/$1
