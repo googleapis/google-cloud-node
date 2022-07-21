@@ -29,7 +29,7 @@
     "@opentelemetry/tracing": "^0.24.0",
     "avro-js": "^1.10.1",
     "p-defer": "^3.0.0",
-    "protobufjs": "^6.11.2"
+    "protobufjs": "^7.0.0"
   },
   "devDependencies": {
     "@google-cloud/bigquery": "^6.0.0",
