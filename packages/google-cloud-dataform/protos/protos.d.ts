@@ -1146,6 +1146,9 @@ export namespace google {
 
                     /** ListRepositoriesResponse nextPageToken */
                     nextPageToken?: (string|null);
+
+                    /** ListRepositoriesResponse unreachable */
+                    unreachable?: (string[]|null);
                 }
 
                 /** Represents a ListRepositoriesResponse. */
@@ -1162,6 +1165,9 @@ export namespace google {
 
                     /** ListRepositoriesResponse nextPageToken. */
                     public nextPageToken: string;
+
+                    /** ListRepositoriesResponse unreachable. */
+                    public unreachable: string[];
 
                     /**
                      * Creates a new ListRepositoriesResponse instance using the specified properties.
@@ -2010,6 +2016,9 @@ export namespace google {
 
                     /** ListWorkspacesResponse nextPageToken */
                     nextPageToken?: (string|null);
+
+                    /** ListWorkspacesResponse unreachable */
+                    unreachable?: (string[]|null);
                 }
 
                 /** Represents a ListWorkspacesResponse. */
@@ -2026,6 +2035,9 @@ export namespace google {
 
                     /** ListWorkspacesResponse nextPageToken. */
                     public nextPageToken: string;
+
+                    /** ListWorkspacesResponse unreachable. */
+                    public unreachable: string[];
 
                     /**
                      * Creates a new ListWorkspacesResponse instance using the specified properties.
@@ -5625,6 +5637,9 @@ export namespace google {
 
                     /** ListCompilationResultsResponse nextPageToken */
                     nextPageToken?: (string|null);
+
+                    /** ListCompilationResultsResponse unreachable */
+                    unreachable?: (string[]|null);
                 }
 
                 /** Represents a ListCompilationResultsResponse. */
@@ -5641,6 +5656,9 @@ export namespace google {
 
                     /** ListCompilationResultsResponse nextPageToken. */
                     public nextPageToken: string;
+
+                    /** ListCompilationResultsResponse unreachable. */
+                    public unreachable: string[];
 
                     /**
                      * Creates a new ListCompilationResultsResponse instance using the specified properties.
@@ -7525,6 +7543,9 @@ export namespace google {
 
                     /** ListWorkflowInvocationsResponse nextPageToken */
                     nextPageToken?: (string|null);
+
+                    /** ListWorkflowInvocationsResponse unreachable */
+                    unreachable?: (string[]|null);
                 }
 
                 /** Represents a ListWorkflowInvocationsResponse. */
@@ -7541,6 +7562,9 @@ export namespace google {
 
                     /** ListWorkflowInvocationsResponse nextPageToken. */
                     public nextPageToken: string;
+
+                    /** ListWorkflowInvocationsResponse unreachable. */
+                    public unreachable: string[];
 
                     /**
                      * Creates a new ListWorkflowInvocationsResponse instance using the specified properties.
@@ -7991,6 +8015,9 @@ export namespace google {
                     /** WorkflowInvocationAction state */
                     state?: (google.cloud.dataform.v1alpha2.WorkflowInvocationAction.State|keyof typeof google.cloud.dataform.v1alpha2.WorkflowInvocationAction.State|null);
 
+                    /** WorkflowInvocationAction failureReason */
+                    failureReason?: (string|null);
+
                     /** WorkflowInvocationAction invocationTiming */
                     invocationTiming?: (google.type.IInterval|null);
 
@@ -8015,6 +8042,9 @@ export namespace google {
 
                     /** WorkflowInvocationAction state. */
                     public state: (google.cloud.dataform.v1alpha2.WorkflowInvocationAction.State|keyof typeof google.cloud.dataform.v1alpha2.WorkflowInvocationAction.State);
+
+                    /** WorkflowInvocationAction failureReason. */
+                    public failureReason: string;
 
                     /** WorkflowInvocationAction invocationTiming. */
                     public invocationTiming?: (google.type.IInterval|null);

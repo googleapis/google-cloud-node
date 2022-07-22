@@ -2083,6 +2083,7 @@
                          * @interface IListRepositoriesResponse
                          * @property {Array.<google.cloud.dataform.v1alpha2.IRepository>|null} [repositories] ListRepositoriesResponse repositories
                          * @property {string|null} [nextPageToken] ListRepositoriesResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListRepositoriesResponse unreachable
                          */
     
                         /**
@@ -2095,6 +2096,7 @@
                          */
                         function ListRepositoriesResponse(properties) {
                             this.repositories = [];
+                            this.unreachable = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -2116,6 +2118,14 @@
                          * @instance
                          */
                         ListRepositoriesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListRepositoriesResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.dataform.v1alpha2.ListRepositoriesResponse
+                         * @instance
+                         */
+                        ListRepositoriesResponse.prototype.unreachable = $util.emptyArray;
     
                         /**
                          * Creates a new ListRepositoriesResponse instance using the specified properties.
@@ -2146,6 +2156,9 @@
                                     $root.google.cloud.dataform.v1alpha2.Repository.encode(message.repositories[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                             if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
                             return writer;
                         };
     
@@ -2187,6 +2200,11 @@
                                     break;
                                 case 2:
                                     message.nextPageToken = reader.string();
+                                    break;
+                                case 3:
+                                    if (!(message.unreachable && message.unreachable.length))
+                                        message.unreachable = [];
+                                    message.unreachable.push(reader.string());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -2235,6 +2253,13 @@
                             if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
                                 if (!$util.isString(message.nextPageToken))
                                     return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
                             return null;
                         };
     
@@ -2262,6 +2287,13 @@
                             }
                             if (object.nextPageToken != null)
                                 message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.dataform.v1alpha2.ListRepositoriesResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
                             return message;
                         };
     
@@ -2278,8 +2310,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.repositories = [];
+                                object.unreachable = [];
+                            }
                             if (options.defaults)
                                 object.nextPageToken = "";
                             if (message.repositories && message.repositories.length) {
@@ -2289,6 +2323,11 @@
                             }
                             if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
                                 object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
                             return object;
                         };
     
@@ -4021,6 +4060,7 @@
                          * @interface IListWorkspacesResponse
                          * @property {Array.<google.cloud.dataform.v1alpha2.IWorkspace>|null} [workspaces] ListWorkspacesResponse workspaces
                          * @property {string|null} [nextPageToken] ListWorkspacesResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListWorkspacesResponse unreachable
                          */
     
                         /**
@@ -4033,6 +4073,7 @@
                          */
                         function ListWorkspacesResponse(properties) {
                             this.workspaces = [];
+                            this.unreachable = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -4054,6 +4095,14 @@
                          * @instance
                          */
                         ListWorkspacesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListWorkspacesResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.dataform.v1alpha2.ListWorkspacesResponse
+                         * @instance
+                         */
+                        ListWorkspacesResponse.prototype.unreachable = $util.emptyArray;
     
                         /**
                          * Creates a new ListWorkspacesResponse instance using the specified properties.
@@ -4084,6 +4133,9 @@
                                     $root.google.cloud.dataform.v1alpha2.Workspace.encode(message.workspaces[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                             if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
                             return writer;
                         };
     
@@ -4125,6 +4177,11 @@
                                     break;
                                 case 2:
                                     message.nextPageToken = reader.string();
+                                    break;
+                                case 3:
+                                    if (!(message.unreachable && message.unreachable.length))
+                                        message.unreachable = [];
+                                    message.unreachable.push(reader.string());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -4173,6 +4230,13 @@
                             if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
                                 if (!$util.isString(message.nextPageToken))
                                     return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
                             return null;
                         };
     
@@ -4200,6 +4264,13 @@
                             }
                             if (object.nextPageToken != null)
                                 message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.dataform.v1alpha2.ListWorkspacesResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
                             return message;
                         };
     
@@ -4216,8 +4287,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.workspaces = [];
+                                object.unreachable = [];
+                            }
                             if (options.defaults)
                                 object.nextPageToken = "";
                             if (message.workspaces && message.workspaces.length) {
@@ -4227,6 +4300,11 @@
                             }
                             if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
                                 object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
                             return object;
                         };
     
@@ -12180,6 +12258,7 @@
                          * @interface IListCompilationResultsResponse
                          * @property {Array.<google.cloud.dataform.v1alpha2.ICompilationResult>|null} [compilationResults] ListCompilationResultsResponse compilationResults
                          * @property {string|null} [nextPageToken] ListCompilationResultsResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListCompilationResultsResponse unreachable
                          */
     
                         /**
@@ -12192,6 +12271,7 @@
                          */
                         function ListCompilationResultsResponse(properties) {
                             this.compilationResults = [];
+                            this.unreachable = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -12213,6 +12293,14 @@
                          * @instance
                          */
                         ListCompilationResultsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListCompilationResultsResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.dataform.v1alpha2.ListCompilationResultsResponse
+                         * @instance
+                         */
+                        ListCompilationResultsResponse.prototype.unreachable = $util.emptyArray;
     
                         /**
                          * Creates a new ListCompilationResultsResponse instance using the specified properties.
@@ -12243,6 +12331,9 @@
                                     $root.google.cloud.dataform.v1alpha2.CompilationResult.encode(message.compilationResults[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                             if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
                             return writer;
                         };
     
@@ -12284,6 +12375,11 @@
                                     break;
                                 case 2:
                                     message.nextPageToken = reader.string();
+                                    break;
+                                case 3:
+                                    if (!(message.unreachable && message.unreachable.length))
+                                        message.unreachable = [];
+                                    message.unreachable.push(reader.string());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -12332,6 +12428,13 @@
                             if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
                                 if (!$util.isString(message.nextPageToken))
                                     return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
                             return null;
                         };
     
@@ -12359,6 +12462,13 @@
                             }
                             if (object.nextPageToken != null)
                                 message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.dataform.v1alpha2.ListCompilationResultsResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
                             return message;
                         };
     
@@ -12375,8 +12485,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.compilationResults = [];
+                                object.unreachable = [];
+                            }
                             if (options.defaults)
                                 object.nextPageToken = "";
                             if (message.compilationResults && message.compilationResults.length) {
@@ -12386,6 +12498,11 @@
                             }
                             if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
                                 object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
                             return object;
                         };
     
@@ -17263,6 +17380,7 @@
                          * @interface IListWorkflowInvocationsResponse
                          * @property {Array.<google.cloud.dataform.v1alpha2.IWorkflowInvocation>|null} [workflowInvocations] ListWorkflowInvocationsResponse workflowInvocations
                          * @property {string|null} [nextPageToken] ListWorkflowInvocationsResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListWorkflowInvocationsResponse unreachable
                          */
     
                         /**
@@ -17275,6 +17393,7 @@
                          */
                         function ListWorkflowInvocationsResponse(properties) {
                             this.workflowInvocations = [];
+                            this.unreachable = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -17296,6 +17415,14 @@
                          * @instance
                          */
                         ListWorkflowInvocationsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListWorkflowInvocationsResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.dataform.v1alpha2.ListWorkflowInvocationsResponse
+                         * @instance
+                         */
+                        ListWorkflowInvocationsResponse.prototype.unreachable = $util.emptyArray;
     
                         /**
                          * Creates a new ListWorkflowInvocationsResponse instance using the specified properties.
@@ -17326,6 +17453,9 @@
                                     $root.google.cloud.dataform.v1alpha2.WorkflowInvocation.encode(message.workflowInvocations[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                             if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
                             return writer;
                         };
     
@@ -17367,6 +17497,11 @@
                                     break;
                                 case 2:
                                     message.nextPageToken = reader.string();
+                                    break;
+                                case 3:
+                                    if (!(message.unreachable && message.unreachable.length))
+                                        message.unreachable = [];
+                                    message.unreachable.push(reader.string());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -17415,6 +17550,13 @@
                             if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
                                 if (!$util.isString(message.nextPageToken))
                                     return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
                             return null;
                         };
     
@@ -17442,6 +17584,13 @@
                             }
                             if (object.nextPageToken != null)
                                 message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.dataform.v1alpha2.ListWorkflowInvocationsResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
                             return message;
                         };
     
@@ -17458,8 +17607,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.workflowInvocations = [];
+                                object.unreachable = [];
+                            }
                             if (options.defaults)
                                 object.nextPageToken = "";
                             if (message.workflowInvocations && message.workflowInvocations.length) {
@@ -17469,6 +17620,11 @@
                             }
                             if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
                                 object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
                             return object;
                         };
     
@@ -18271,6 +18427,7 @@
                          * @property {google.cloud.dataform.v1alpha2.ITarget|null} [target] WorkflowInvocationAction target
                          * @property {google.cloud.dataform.v1alpha2.ITarget|null} [canonicalTarget] WorkflowInvocationAction canonicalTarget
                          * @property {google.cloud.dataform.v1alpha2.WorkflowInvocationAction.State|null} [state] WorkflowInvocationAction state
+                         * @property {string|null} [failureReason] WorkflowInvocationAction failureReason
                          * @property {google.type.IInterval|null} [invocationTiming] WorkflowInvocationAction invocationTiming
                          * @property {google.cloud.dataform.v1alpha2.WorkflowInvocationAction.IBigQueryAction|null} [bigqueryAction] WorkflowInvocationAction bigqueryAction
                          */
@@ -18313,6 +18470,14 @@
                          * @instance
                          */
                         WorkflowInvocationAction.prototype.state = 0;
+    
+                        /**
+                         * WorkflowInvocationAction failureReason.
+                         * @member {string} failureReason
+                         * @memberof google.cloud.dataform.v1alpha2.WorkflowInvocationAction
+                         * @instance
+                         */
+                        WorkflowInvocationAction.prototype.failureReason = "";
     
                         /**
                          * WorkflowInvocationAction invocationTiming.
@@ -18364,6 +18529,8 @@
                                 $root.google.type.Interval.encode(message.invocationTiming, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                             if (message.bigqueryAction != null && Object.hasOwnProperty.call(message, "bigqueryAction"))
                                 $root.google.cloud.dataform.v1alpha2.WorkflowInvocationAction.BigQueryAction.encode(message.bigqueryAction, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.failureReason != null && Object.hasOwnProperty.call(message, "failureReason"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.failureReason);
                             return writer;
                         };
     
@@ -18406,6 +18573,9 @@
                                     break;
                                 case 4:
                                     message.state = reader.int32();
+                                    break;
+                                case 7:
+                                    message.failureReason = reader.string();
                                     break;
                                 case 5:
                                     message.invocationTiming = $root.google.type.Interval.decode(reader, reader.uint32());
@@ -18471,6 +18641,9 @@
                                 case 6:
                                     break;
                                 }
+                            if (message.failureReason != null && message.hasOwnProperty("failureReason"))
+                                if (!$util.isString(message.failureReason))
+                                    return "failureReason: string expected";
                             if (message.invocationTiming != null && message.hasOwnProperty("invocationTiming")) {
                                 var error = $root.google.type.Interval.verify(message.invocationTiming);
                                 if (error)
@@ -18536,6 +18709,8 @@
                                 message.state = 6;
                                 break;
                             }
+                            if (object.failureReason != null)
+                                message.failureReason = String(object.failureReason);
                             if (object.invocationTiming != null) {
                                 if (typeof object.invocationTiming !== "object")
                                     throw TypeError(".google.cloud.dataform.v1alpha2.WorkflowInvocationAction.invocationTiming: object expected");
@@ -18568,6 +18743,7 @@
                                 object.state = options.enums === String ? "PENDING" : 0;
                                 object.invocationTiming = null;
                                 object.bigqueryAction = null;
+                                object.failureReason = "";
                             }
                             if (message.target != null && message.hasOwnProperty("target"))
                                 object.target = $root.google.cloud.dataform.v1alpha2.Target.toObject(message.target, options);
@@ -18579,6 +18755,8 @@
                                 object.invocationTiming = $root.google.type.Interval.toObject(message.invocationTiming, options);
                             if (message.bigqueryAction != null && message.hasOwnProperty("bigqueryAction"))
                                 object.bigqueryAction = $root.google.cloud.dataform.v1alpha2.WorkflowInvocationAction.BigQueryAction.toObject(message.bigqueryAction, options);
+                            if (message.failureReason != null && message.hasOwnProperty("failureReason"))
+                                object.failureReason = message.failureReason;
                             return object;
                         };
     

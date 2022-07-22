@@ -2,9 +2,9 @@
 [//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [:  Client](https://github.com/)
+# [Dataform API: Node.js Client](https://github.com/googleapis/nodejs-dataform)
 
-
+[![release level](https://img.shields.io/badge/release%20level-beta-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/dataform.svg)](https://www.npmjs.org/package/@google-cloud/dataform)
 
 
@@ -14,11 +14,11 @@ dataform client for Node.js
 
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com//blob/master/CHANGELOG.md).
+[the CHANGELOG](https://github.com/googleapis/nodejs-dataform/blob/main/CHANGELOG.md).
 
-
-
-* [github.com/](https://github.com/)
+* [Dataform API Node.js Client API Reference][client-docs]
+* [Dataform API Documentation][product-docs]
+* [github.com/googleapis/nodejs-dataform](https://github.com/googleapis/nodejs-dataform)
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
@@ -29,7 +29,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
 
 * [Quickstart](#quickstart)
-
+  * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
 
 
@@ -38,6 +38,14 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [License](#license)
 
 ## Quickstart
+
+### Before you begin
+
+1.  [Select or create a Cloud Platform project][projects].
+1.  [Enable billing for your project][billing].
+1.  [Enable the Dataform API API][enable_api].
+1.  [Set up authentication with a service account][auth] so you can access the
+    API from your local workstation.
 
 ### Installing the client library
 
@@ -48,6 +56,9 @@ npm install @google-cloud/dataform
 
 
 
+
+The [Dataform API Node.js Client API Reference][client-docs] documentation
+also contains samples.
 
 ## Supported Node.js Versions
 
@@ -77,6 +88,11 @@ This library follows [Semantic Versioning](http://semver.org/).
 
 
 
+This library is considered to be in **beta**. This means it is expected to be
+mostly stable while we work toward a general availability release; however,
+complete stability is not guaranteed. We will address issues and requests
+against beta libraries with a high priority.
+
 
 
 
@@ -87,7 +103,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com//blob/master/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-dataform/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`, the `samples/README.md`,
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -99,12 +115,12 @@ to its templates in
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com//blob/master/LICENSE)
+See [LICENSE](https://github.com/googleapis/nodejs-dataform/blob/main/LICENSE)
 
-
-
+[client-docs]: https://cloud.google.com/nodejs/docs/reference/dataform/latest
+[product-docs]: https://dataform.co/
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
-
+[enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=dataform.googleapis.com
 [auth]: https://cloud.google.com/docs/authentication/getting-started

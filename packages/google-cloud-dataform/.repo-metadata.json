@@ -1,3 +1,14 @@
 {
-	"default_version": "v1alpha2"
-}
+	"name": "dataform",
+	"name_pretty": "Dataform API",
+	"product_documentation": "https://dataform.co/",
+	"client_documentation": "https://cloud.google.com/nodejs/docs/reference/dataform/latest",
+	"issue_tracker": "https://github.com/googleapis/nodejs-dataform/issues",
+	"release_level": "beta",
+	"language": "nodejs",
+	"repo": "googleapis/nodejs-dataform",
+	"distribution_name": "@google-cloud/dataform",
+	"api_id": "dataform.googleapis.com",
+	"default_version": "v1alpha2",
+	"requires_billing": true
+  }
