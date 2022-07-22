@@ -27,8 +27,6 @@ import {
 import {
   API_ID,
   DESTINATION_FOLDER,
-  FOLDER_NAME,
-  GITHUB_TOKEN,
   MONO_REPO_NAME,
 } from './bootstrap-library.test';
 import {Storage} from '@google-cloud/storage';
