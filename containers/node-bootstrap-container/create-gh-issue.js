@@ -13,7 +13,7 @@
 // limitations under the License.
 
 const {Octokit} = require('@octokit/rest');
-const octokit = new Octokit({auth: process.env.GITHUB_TOKEN});
+const octokit = new Octokit();
 
 async function createGHIssue (octokit) {
     await octokit.rest.issues.create({

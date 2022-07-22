@@ -14,8 +14,8 @@ exports['tests for templates it should create the templates in the directory 1']
 # limitations under the License.
 
 deep-copy-regex:
-    - source: /google/cloud/kms/.*-nodejs/(.*)
-      dest: /owl-bot-staging/kms/$1/$2
+    - source: /google/cloud/kms/(.*)/.*-nodejs
+      dest: /owl-bot-staging/google-cloud-kms/$1
 `
 
 exports['tests for templates it should create the templates in the directory 2'] = `
