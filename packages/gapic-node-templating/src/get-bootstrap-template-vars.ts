@@ -47,6 +47,8 @@ export interface TemplateVars {
   apiPath: string;
   // API Path with dashes
   apiPathDashes: string;
+  // version in API ID, will be used as default_version
+  version: string;
 }
 
 export interface DriftApi {
@@ -151,6 +153,7 @@ export async function compileVars(
     apiId: argv['api-id'],
     apiPath: getApiPath(argv['api-id']),
     apiPathDashes: getApiPathWithDashes(argv['api-id']),
+    version: getVersion(argv['api-id']),
   };
 }
 

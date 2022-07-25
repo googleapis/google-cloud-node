@@ -33,7 +33,6 @@ export interface CliArgs {
   'api-id': string;
   'mono-repo-name': string;
   'destination-folder': string;
-  'github-token': string;
 }
 
 export const bootstrapLibrary: yargs.CommandModule<{}, CliArgs> = {
@@ -56,15 +55,16 @@ export const bootstrapLibrary: yargs.CommandModule<{}, CliArgs> = {
         type: 'string',
         demand: true,
       })
-      .option('github-token', {
-        describe: 'temporary github token',
+      .option('folder-name', {
+        describe:
+          'name of the folder for the post-processor to copy into (goes in .OwlBot.yaml)',
         type: 'string',
         demand: true,
       });
   },
   async handler(argv: CliArgs) {
     const distributionName = await getDistributionName(
-      new Octokit({auth: argv['github-token']}),
+      new Octokit(),
       argv['api-id'],
       cp.execSync
     );

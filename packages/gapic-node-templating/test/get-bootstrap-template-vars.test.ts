@@ -27,7 +27,6 @@ import {
 import {
   API_ID,
   DESTINATION_FOLDER,
-  GITHUB_TOKEN,
   MONO_REPO_NAME,
 } from './bootstrap-library.test';
 import {Storage} from '@google-cloud/storage';
@@ -71,7 +70,6 @@ describe('get bootstrap template vars', () => {
             'api-id': API_ID,
             'destination-folder': DESTINATION_FOLDER,
             'mono-repo-name': MONO_REPO_NAME,
-            'github-token': GITHUB_TOKEN,
           },
           {
             apiShortName: 'kms',
@@ -91,6 +89,7 @@ describe('get bootstrap template vars', () => {
           apiId: 'google.cloud.kms.v1',
           apiPath: 'google/cloud/kms',
           apiPathDashes: 'google-cloud-kms',
+          version: 'v1',
         }
       );
     });
@@ -115,7 +114,6 @@ describe('get bootstrap template vars', () => {
             'api-id': API_ID,
             'destination-folder': DESTINATION_FOLDER,
             'mono-repo-name': MONO_REPO_NAME,
-            'github-token': GITHUB_TOKEN,
           },
           storage
         ),
@@ -146,7 +144,6 @@ describe('get bootstrap template vars', () => {
               'api-id': API_ID,
               'destination-folder': DESTINATION_FOLDER,
               'mono-repo-name': MONO_REPO_NAME,
-              'github-token': GITHUB_TOKEN,
             },
             storage
           ),

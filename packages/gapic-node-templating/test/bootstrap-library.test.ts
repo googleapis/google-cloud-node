@@ -25,6 +25,7 @@ export const API_ID = 'google.cloud.kms.v1';
 export const DESTINATION_FOLDER = './temp';
 export const MONO_REPO_NAME = 'google-cloud-node';
 export const GITHUB_TOKEN = 'ghs_1234';
+export const FOLDER_NAME = 'google-cloud-kms';
 
 describe('tests running build trigger', () => {
   let getDriftMetadataStub: sinon.SinonStub;
@@ -53,8 +54,6 @@ describe('tests running build trigger', () => {
       destinationFolder: DESTINATION_FOLDER,
       'mono-repo-name': MONO_REPO_NAME,
       monoRepoName: MONO_REPO_NAME,
-      'github-token': GITHUB_TOKEN,
-      githubToken: GITHUB_TOKEN,
       _: [],
       $0: 'foo',
     });
