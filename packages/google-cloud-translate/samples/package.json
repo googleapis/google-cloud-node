@@ -14,7 +14,7 @@
     "test": "mocha --recursive --timeout 240000"
   },
   "dependencies": {
-    "@google-cloud/automl": "^2.0.0",
+    "@google-cloud/automl": "^3.0.0",
     "@google-cloud/text-to-speech": "^3.0.0",
     "@google-cloud/translate": "^7.0.0",
     "@google-cloud/vision": "^2.0.0",
