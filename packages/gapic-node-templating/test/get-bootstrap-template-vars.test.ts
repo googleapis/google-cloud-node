@@ -89,6 +89,7 @@ describe('get bootstrap template vars', () => {
           apiId: 'google.cloud.kms.v1',
           apiPath: 'google/cloud/kms',
           apiPathDashes: 'google-cloud-kms',
+          version: 'v1',
         }
       );
     });
