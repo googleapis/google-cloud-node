@@ -54,12 +54,6 @@ export const bootstrapLibrary: yargs.CommandModule<{}, CliArgs> = {
         describe: 'where to copy over the files',
         type: 'string',
         demand: true,
-      })
-      .option('folder-name', {
-        describe:
-          'name of the folder for the post-processor to copy into (goes in .OwlBot.yaml)',
-        type: 'string',
-        demand: true,
       });
   },
   async handler(argv: CliArgs) {
