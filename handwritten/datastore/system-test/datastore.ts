@@ -308,6 +308,42 @@ describe('Datastore', () => {
       await datastore.delete(postKey);
     });
 
+    it('should save/get/delete from a snapshot', async () => {
+      function sleep(ms: number) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+      }
+      const post2 = {
+        title: 'Another way to make pizza',
+        tags: ['pizza', 'grill'],
+        publishedAt: new Date(),
+        author: 'Silvano',
+        isDraft: false,
+        wordCount: 400,
+        rating: 5.0,
+        likes: null,
+        metadata: {
+          views: 100,
+        },
+      };
+      const path = ['Post', 'post1'];
+      const postKey = datastore.key(path);
+      await datastore.save({key: postKey, data: post});
+      await sleep(1000);
+      const savedTime = Date.now();
+      await sleep(1000);
+      // Save new post2 data, but then verify the timestamp read has post1 data
+      await datastore.save({key: postKey, data: post2});
+      const [entity] = await datastore.get(postKey, {readTime: savedTime});
+      assert.deepStrictEqual(entity[datastore.KEY], postKey);
+      const [entityNoOptions] = await datastore.get(postKey);
+      assert.deepStrictEqual(entityNoOptions[datastore.KEY], postKey);
+      delete entity[datastore.KEY];
+      assert.deepStrictEqual(entity, post);
+      delete entityNoOptions[datastore.KEY];
+      assert.deepStrictEqual(entityNoOptions, post2);
+      await datastore.delete(postKey);
+    });
+
     it('should save/get/delete with a numeric key id', async () => {
       const postKey = datastore.key(['Post', 123456789]);
       await datastore.save({key: postKey, data: post});
