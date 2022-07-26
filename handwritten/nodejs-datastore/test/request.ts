@@ -34,6 +34,7 @@ import {
   PrepareEntityObjectResponse,
   CommitResponse,
   GetResponse,
+  RequestCallback,
 } from '../src/request';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -672,6 +673,47 @@ describe('Request', () => {
   });
 
   describe('get', () => {
+    it('should pass along readTime for reading snapshots', done => {
+      const savedTime = Date.now();
+      request.request_ = (config: RequestConfig, callback: RequestCallback) => {
+        assert.deepStrictEqual(config, {
+          client: 'DatastoreClient',
+          method: 'lookup',
+          gaxOpts: undefined,
+          reqOpts: {
+            keys: [
+              {
+                path: [
+                  {
+                    kind: 'Company',
+                    id: 123,
+                  },
+                ],
+                partitionId: {namespaceId: 'namespace'},
+              },
+            ],
+            readOptions: {
+              readTime: {
+                seconds: Math.floor(savedTime / 1000),
+              },
+            },
+          },
+        });
+        callback(null, {
+          deferred: [],
+          found: [],
+          missing: [],
+          readTime: {seconds: Math.floor(savedTime / 1000), nanos: 0},
+        });
+      };
+      request.get(key, {readTime: savedTime}, (err: any) => {
+        if (err) {
+          throw err;
+        }
+        done();
+      });
+    });
+
     describe('success', () => {
       const keys = [key];
       const fakeEntities = [{a: 'a'}, {b: 'b'}];

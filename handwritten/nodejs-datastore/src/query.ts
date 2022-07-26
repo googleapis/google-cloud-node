@@ -561,6 +561,7 @@ export interface IntegerTypeCastOptions {
 
 export interface RunQueryOptions {
   consistency?: 'strong' | 'eventual';
+  readTime?: number;
   gaxOptions?: CallOptions;
   wrapNumbers?: boolean | IntegerTypeCastOptions;
 }
