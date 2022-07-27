@@ -39,6 +39,32 @@ exports['tests for templates it should create the templates in the directory 2']
 `
 
 exports['tests for templates it should create the templates in the directory 3'] = `
+{
+    "name": "kms-samples",
+    "private": true,
+    "license": "Apache-2.0",
+    "author": "Google LLC",
+    "engines": {
+      "node": ">=12.0.0"
+    },
+    "files": [
+      "*.js"
+    ],
+    "scripts": {
+      "test": "c8 mocha --timeout 600000 test/*.js"
+    },
+    "dependencies": {
+        "@google-cloud/kms": "0.1.0"
+    },
+    "devDependencies": {
+      "c8": "^7.1.0",
+      "chai": "^4.2.0",
+      "mocha": "^8.0.0"
+    }
+  }
+`
+
+exports['tests for templates it should create the templates in the directory 4'] = `
 
                                  Apache License
                            Version 2.0, January 2004
