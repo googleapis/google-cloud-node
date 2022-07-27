@@ -1,0 +1,23 @@
+{
+    "name": "appconnectors-samples",
+    "private": true,
+    "license": "Apache-2.0",
+    "author": "Google LLC",
+    "engines": {
+      "node": ">=12.0.0"
+    },
+    "files": [
+      "*.js"
+    ],
+    "scripts": {
+      "test": "echo 'no test specified'"
+    },
+    "dependencies": {
+        "@google-cloud/appconnectors": "0.1.0"
+    },
+    "devDependencies": {
+      "c8": "^7.1.0",
+      "chai": "^4.2.0",
+      "mocha": "^8.0.0"
+    }
+  }
