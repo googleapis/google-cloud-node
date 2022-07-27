@@ -1,0 +1,16 @@
+{
+  "name": "appconnectors",
+  "name_pretty": "",
+  "product_documentation": "",
+  "client_documentation": "undefined",
+  "issue_tracker": "undefined",
+  "release_level": "beta",
+  "language": "nodejs",
+  "repo": "googleapis/google-cloud-node",
+  "distribution_name": "@google-cloud/appconnectors",
+  "api_id": "google.cloud.beyondcorp.appconnectors.v1",
+  "default_version": "v1",
+  "requires_billing": true,
+  "library_type": "GAPIC_AUTO"
+}
+
