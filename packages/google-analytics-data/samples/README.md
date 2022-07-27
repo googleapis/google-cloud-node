@@ -12,6 +12,8 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
+  * [Get Common Metadata](#get-common-metadata)
+  * [Get Metadata By Property Id](#get-metadata-by-property-id)
   * [Quickstart](#quickstart)
   * [Quickstart_json_credentials](#quickstart_json_credentials)
   * [Quickstart_oauth2](#quickstart_oauth2)
@@ -40,6 +42,40 @@ Before running the samples, make sure you've followed the steps outlined in
 `cd ..`
 
 ## Samples
+
+
+
+### Get Common Metadata
+
+View the [source code](https://github.com/googleapis/nodejs-analytics-data/blob/main/samples/getCommonMetadata.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-analytics-data&page=editor&open_in_editor=samples/getCommonMetadata.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/getCommonMetadata.js`
+
+
+-----
+
+
+
+
+### Get Metadata By Property Id
+
+View the [source code](https://github.com/googleapis/nodejs-analytics-data/blob/main/samples/getMetadataByPropertyId.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-analytics-data&page=editor&open_in_editor=samples/getMetadataByPropertyId.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/getMetadataByPropertyId.js`
+
+
+-----
+
 
 
 
