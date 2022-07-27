@@ -24,6 +24,8 @@
   * [Run Report With Date Ranges](#run-report-with-date-ranges)
   * [Run Report With Dimension Exclude Filter](#run-report-with-dimension-exclude-filter)
   * [Run Report With Dimension In List Filter](#run-report-with-dimension-in-list-filter)
+  * [Run Report With Multiple Dimensions](#run-report-with-multiple-dimensions)
+  * [Run Report With Multiple Metrics](#run-report-with-multiple-metrics)
   * [Run Report With Named Date Ranges](#run-report-with-named-date-ranges)
 
 ## Before you begin
@@ -238,6 +240,40 @@ __Usage:__
 
 
 `node samples/runReportWithDimensionInListFilter.js`
+
+
+-----
+
+
+
+
+### Run Report With Multiple Dimensions
+
+View the [source code](https://github.com/googleapis/nodejs-analytics-data/blob/main/samples/runReportWithMultipleDimensions.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-analytics-data&page=editor&open_in_editor=samples/runReportWithMultipleDimensions.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/runReportWithMultipleDimensions.js`
+
+
+-----
+
+
+
+
+### Run Report With Multiple Metrics
+
+View the [source code](https://github.com/googleapis/nodejs-analytics-data/blob/main/samples/runReportWithMultipleMetrics.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-analytics-data&page=editor&open_in_editor=samples/runReportWithMultipleMetrics.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/runReportWithMultipleMetrics.js`
 
 
 -----
