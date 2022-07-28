@@ -1,3 +1,4 @@
+// Copyright 2022 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,7 +17,6 @@
 const path = require('path');
 const cp = require('child_process');
 const {describe, it} = require('mocha');
-const {assert} = require('chai');
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
@@ -26,7 +26,6 @@ describe('Quickstart', () => {
   let projectId;
 
   it('should run quickstart', async () => {
-    const stdout = execSync(`node ./quickstart.js ${projectId}`, {cwd});
-    assert(stdout, stdout.match(/\[\]/));
+    execSync(`node ./quickstart.js ${projectId}`, {cwd});
   });
 });
