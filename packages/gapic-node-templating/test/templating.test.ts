@@ -84,6 +84,7 @@ describe('tests for templates', () => {
 
     assert.ok(packageJson.match(/@google-cloud\/kms/));
     assert.ok(packageJson.match(/googleapis\/google-cloud-node/));
+    assert.ok(packageJson.match(/"main": "build\/src\/index.js"/));
 
     assert.deepStrictEqual(
       readdirSync(templateDirRead),
