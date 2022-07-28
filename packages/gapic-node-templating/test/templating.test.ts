@@ -67,6 +67,15 @@ describe('tests for templates', () => {
     snapshot(
       readFileSync(join(templateDirWrite, 'samples', 'package.json'), 'utf8')
     );
+    snapshot(
+      readFileSync(join(templateDirWrite, 'samples', 'quickstart.js'), 'utf8')
+    );
+    snapshot(
+      readFileSync(
+        join(templateDirWrite, 'samples', 'test', 'quickstart.js'),
+        'utf8'
+      )
+    );
     snapshot(readFileSync(join(templateDirWrite, 'LICENSE'), 'utf8'));
     const packageJson = readFileSync(
       join(templateDirWrite, 'package.json'),
