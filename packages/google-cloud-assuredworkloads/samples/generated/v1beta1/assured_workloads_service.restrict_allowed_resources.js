@@ -20,19 +20,23 @@
 
 'use strict';
 
-function main(name) {
-  // [START assuredworkloads_v1beta1_generated_AssuredWorkloadsService_GetWorkload_async]
+function main(name, restrictionType) {
+  // [START assuredworkloads_v1beta1_generated_AssuredWorkloadsService_RestrictAllowedResources_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the Workload to fetch. This is the workloads's
+   *  Required. The resource name of the Workload. This is the workloads's
    *  relative path in the API, formatted as
    *  "organizations/{organization_id}/locations/{location_id}/workloads/{workload_id}".
    *  For example,
    *  "organizations/123/locations/us-east1/workloads/assured-workload-1".
    */
   // const name = 'abc123'
+  /**
+   *  Required. The type of restriction for using gcp products in the Workload environment.
+   */
+  // const restrictionType = {}
 
   // Imports the Assuredworkloads library
   const {AssuredWorkloadsServiceClient} = require('@google-cloud/assured-workloads').v1beta1;
@@ -40,19 +44,20 @@ function main(name) {
   // Instantiates a client
   const assuredworkloadsClient = new AssuredWorkloadsServiceClient();
 
-  async function callGetWorkload() {
+  async function callRestrictAllowedResources() {
     // Construct request
     const request = {
       name,
+      restrictionType,
     };
 
     // Run request
-    const response = await assuredworkloadsClient.getWorkload(request);
+    const response = await assuredworkloadsClient.restrictAllowedResources(request);
     console.log(response);
   }
 
-  callGetWorkload();
-  // [END assuredworkloads_v1beta1_generated_AssuredWorkloadsService_GetWorkload_async]
+  callRestrictAllowedResources();
+  // [END assuredworkloads_v1beta1_generated_AssuredWorkloadsService_RestrictAllowedResources_async]
 }
 
 process.on('unhandledRejection', err => {

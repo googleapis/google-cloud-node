@@ -104,10 +104,98 @@
             }
         },
         {
+            "regionTag": "assuredworkloads_v1beta1_generated_AssuredWorkloadsService_RestrictAllowedServices_async",
+            "title": "AssuredWorkloadsService restrictAllowedServices Sample",
+            "origin": "API_DEFINITION",
+            "description": " Restrict the list of services allowed in the Workload environment. The current list of allowed services can be found at https://cloud.google.com/assured-workloads/docs/supported-products In addition to assuredworkloads.workload.update permission, the user should also have orgpolicy.policy.set permission on the folder resource to use this functionality.",
+            "canonical": true,
+            "file": "assured_workloads_service.restrict_allowed_services.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 59,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "RestrictAllowedServices",
+                "fullName": "google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsService.RestrictAllowedServices",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "restriction_type",
+                        "type": ".google.cloud.assuredworkloads.v1beta1.RestrictAllowedServicesRequest.RestrictionType"
+                    }
+                ],
+                "resultType": ".google.cloud.assuredworkloads.v1beta1.RestrictAllowedServicesResponse",
+                "client": {
+                    "shortName": "AssuredWorkloadsServiceClient",
+                    "fullName": "google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsServiceClient"
+                },
+                "method": {
+                    "shortName": "RestrictAllowedServices",
+                    "fullName": "google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsService.RestrictAllowedServices",
+                    "service": {
+                        "shortName": "AssuredWorkloadsService",
+                        "fullName": "google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "assuredworkloads_v1beta1_generated_AssuredWorkloadsService_RestrictAllowedResources_async",
+            "title": "AssuredWorkloadsService restrictAllowedResources Sample",
+            "origin": "API_DEFINITION",
+            "description": " Restrict the list of resources allowed in the Workload environment. The current list of allowed products can be found at https://cloud.google.com/assured-workloads/docs/supported-products In addition to assuredworkloads.workload.update permission, the user should also have orgpolicy.policy.set permission on the folder resource to use this functionality.",
+            "canonical": true,
+            "file": "assured_workloads_service.restrict_allowed_resources.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 59,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "RestrictAllowedResources",
+                "fullName": "google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsService.RestrictAllowedResources",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "restriction_type",
+                        "type": ".google.cloud.assuredworkloads.v1beta1.RestrictAllowedResourcesRequest.RestrictionType"
+                    }
+                ],
+                "resultType": ".google.cloud.assuredworkloads.v1beta1.RestrictAllowedResourcesResponse",
+                "client": {
+                    "shortName": "AssuredWorkloadsServiceClient",
+                    "fullName": "google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsServiceClient"
+                },
+                "method": {
+                    "shortName": "RestrictAllowedResources",
+                    "fullName": "google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsService.RestrictAllowedResources",
+                    "service": {
+                        "shortName": "AssuredWorkloadsService",
+                        "fullName": "google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "assuredworkloads_v1beta1_generated_AssuredWorkloadsService_DeleteWorkload_async",
             "title": "AssuredWorkloadsService deleteWorkload Sample",
             "origin": "API_DEFINITION",
-            "description": " Deletes the workload. Make sure that workload's direct children are already in a deleted state, otherwise the request will fail with a FAILED_PRECONDITION error.",
+            "description": " Deletes the workload. Make sure that workload's direct children are already in a deleted state, otherwise the request will fail with a FAILED_PRECONDITION error. In addition to assuredworkloads.workload.delete permission, the user should also have orgpolicy.policy.set permission on the deleted folder to remove Assured Workloads OrgPolicies.",
             "canonical": true,
             "file": "assured_workloads_service.delete_workload.js",
             "language": "JAVASCRIPT",
@@ -180,6 +268,54 @@
                 "method": {
                     "shortName": "GetWorkload",
                     "fullName": "google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsService.GetWorkload",
+                    "service": {
+                        "shortName": "AssuredWorkloadsService",
+                        "fullName": "google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "assuredworkloads_v1beta1_generated_AssuredWorkloadsService_AnalyzeWorkloadMove_async",
+            "title": "AssuredWorkloadsService analyzeWorkloadMove Sample",
+            "origin": "API_DEFINITION",
+            "description": " Analyze if the source Assured Workloads can be moved to the target Assured Workload",
+            "canonical": true,
+            "file": "assured_workloads_service.analyze_workload_move.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 73,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "AnalyzeWorkloadMove",
+                "fullName": "google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsService.AnalyzeWorkloadMove",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "source",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "target",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.assuredworkloads.v1beta1.AnalyzeWorkloadMoveResponse",
+                "client": {
+                    "shortName": "AssuredWorkloadsServiceClient",
+                    "fullName": "google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsServiceClient"
+                },
+                "method": {
+                    "shortName": "AnalyzeWorkloadMove",
+                    "fullName": "google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsService.AnalyzeWorkloadMove",
                     "service": {
                         "shortName": "AssuredWorkloadsService",
                         "fullName": "google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsService"

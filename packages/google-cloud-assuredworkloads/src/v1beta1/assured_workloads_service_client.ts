@@ -167,12 +167,6 @@ export class AssuredWorkloadsServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
-      locationPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}'
-      ),
-      organizationPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}'
-      ),
       workloadPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/locations/{location}/workloads/{workload}'
       ),
@@ -281,8 +275,11 @@ export class AssuredWorkloadsServiceClient {
     const assuredWorkloadsServiceStubMethods = [
       'createWorkload',
       'updateWorkload',
+      'restrictAllowedServices',
+      'restrictAllowedResources',
       'deleteWorkload',
       'getWorkload',
+      'analyzeWorkloadMove',
       'listWorkloads',
     ];
     for (const methodName of assuredWorkloadsServiceStubMethods) {
@@ -379,7 +376,7 @@ export class AssuredWorkloadsServiceClient {
    *   The request object that will be sent.
    * @param {google.cloud.assuredworkloads.v1beta1.Workload} request.workload
    *   Required. The workload to update.
-   *   The workload’s `name` field is used to identify the workload to be updated.
+   *   The workload's `name` field is used to identify the workload to be updated.
    *   Format:
    *   organizations/{org_id}/locations/{location_id}/workloads/{workload_id}
    * @param {google.protobuf.FieldMask} request.updateMask
@@ -475,9 +472,232 @@ export class AssuredWorkloadsServiceClient {
     return this.innerApiCalls.updateWorkload(request, options, callback);
   }
   /**
+   * Restrict the list of services allowed in the Workload environment.
+   * The current list of allowed services can be found at
+   * https://cloud.google.com/assured-workloads/docs/supported-products
+   * In addition to assuredworkloads.workload.update permission, the user should
+   * also have orgpolicy.policy.set permission on the folder resource
+   * to use this functionality.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the Workload. This is the workloads's
+   *   relative path in the API, formatted as
+   *   "organizations/{organization_id}/locations/{location_id}/workloads/{workload_id}".
+   *   For example,
+   *   "organizations/123/locations/us-east1/workloads/assured-workload-1".
+   * @param {google.cloud.assuredworkloads.v1beta1.RestrictAllowedServicesRequest.RestrictionType} request.restrictionType
+   *   Required. The type of restriction for using gcp services in the Workload environment.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [RestrictAllowedServicesResponse]{@link google.cloud.assuredworkloads.v1beta1.RestrictAllowedServicesResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/assured_workloads_service.restrict_allowed_services.js</caption>
+   * region_tag:assuredworkloads_v1beta1_generated_AssuredWorkloadsService_RestrictAllowedServices_async
+   */
+  restrictAllowedServices(
+    request?: protos.google.cloud.assuredworkloads.v1beta1.IRestrictAllowedServicesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.assuredworkloads.v1beta1.IRestrictAllowedServicesResponse,
+      (
+        | protos.google.cloud.assuredworkloads.v1beta1.IRestrictAllowedServicesRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  restrictAllowedServices(
+    request: protos.google.cloud.assuredworkloads.v1beta1.IRestrictAllowedServicesRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.assuredworkloads.v1beta1.IRestrictAllowedServicesResponse,
+      | protos.google.cloud.assuredworkloads.v1beta1.IRestrictAllowedServicesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  restrictAllowedServices(
+    request: protos.google.cloud.assuredworkloads.v1beta1.IRestrictAllowedServicesRequest,
+    callback: Callback<
+      protos.google.cloud.assuredworkloads.v1beta1.IRestrictAllowedServicesResponse,
+      | protos.google.cloud.assuredworkloads.v1beta1.IRestrictAllowedServicesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  restrictAllowedServices(
+    request?: protos.google.cloud.assuredworkloads.v1beta1.IRestrictAllowedServicesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.assuredworkloads.v1beta1.IRestrictAllowedServicesResponse,
+          | protos.google.cloud.assuredworkloads.v1beta1.IRestrictAllowedServicesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.assuredworkloads.v1beta1.IRestrictAllowedServicesResponse,
+      | protos.google.cloud.assuredworkloads.v1beta1.IRestrictAllowedServicesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.assuredworkloads.v1beta1.IRestrictAllowedServicesResponse,
+      (
+        | protos.google.cloud.assuredworkloads.v1beta1.IRestrictAllowedServicesRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    this.initialize();
+    return this.innerApiCalls.restrictAllowedServices(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Restrict the list of resources allowed in the Workload environment.
+   * The current list of allowed products can be found at
+   * https://cloud.google.com/assured-workloads/docs/supported-products
+   * In addition to assuredworkloads.workload.update permission, the user should
+   * also have orgpolicy.policy.set permission on the folder resource
+   * to use this functionality.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the Workload. This is the workloads's
+   *   relative path in the API, formatted as
+   *   "organizations/{organization_id}/locations/{location_id}/workloads/{workload_id}".
+   *   For example,
+   *   "organizations/123/locations/us-east1/workloads/assured-workload-1".
+   * @param {google.cloud.assuredworkloads.v1beta1.RestrictAllowedResourcesRequest.RestrictionType} request.restrictionType
+   *   Required. The type of restriction for using gcp products in the Workload environment.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [RestrictAllowedResourcesResponse]{@link google.cloud.assuredworkloads.v1beta1.RestrictAllowedResourcesResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/assured_workloads_service.restrict_allowed_resources.js</caption>
+   * region_tag:assuredworkloads_v1beta1_generated_AssuredWorkloadsService_RestrictAllowedResources_async
+   */
+  restrictAllowedResources(
+    request?: protos.google.cloud.assuredworkloads.v1beta1.IRestrictAllowedResourcesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.assuredworkloads.v1beta1.IRestrictAllowedResourcesResponse,
+      (
+        | protos.google.cloud.assuredworkloads.v1beta1.IRestrictAllowedResourcesRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  restrictAllowedResources(
+    request: protos.google.cloud.assuredworkloads.v1beta1.IRestrictAllowedResourcesRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.assuredworkloads.v1beta1.IRestrictAllowedResourcesResponse,
+      | protos.google.cloud.assuredworkloads.v1beta1.IRestrictAllowedResourcesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  restrictAllowedResources(
+    request: protos.google.cloud.assuredworkloads.v1beta1.IRestrictAllowedResourcesRequest,
+    callback: Callback<
+      protos.google.cloud.assuredworkloads.v1beta1.IRestrictAllowedResourcesResponse,
+      | protos.google.cloud.assuredworkloads.v1beta1.IRestrictAllowedResourcesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  restrictAllowedResources(
+    request?: protos.google.cloud.assuredworkloads.v1beta1.IRestrictAllowedResourcesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.assuredworkloads.v1beta1.IRestrictAllowedResourcesResponse,
+          | protos.google.cloud.assuredworkloads.v1beta1.IRestrictAllowedResourcesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.assuredworkloads.v1beta1.IRestrictAllowedResourcesResponse,
+      | protos.google.cloud.assuredworkloads.v1beta1.IRestrictAllowedResourcesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.assuredworkloads.v1beta1.IRestrictAllowedResourcesResponse,
+      (
+        | protos.google.cloud.assuredworkloads.v1beta1.IRestrictAllowedResourcesRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.restrictAllowedResources(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
    * Deletes the workload. Make sure that workload's direct children are already
    * in a deleted state, otherwise the request will fail with a
    * FAILED_PRECONDITION error.
+   * In addition to assuredworkloads.workload.delete permission, the user should
+   * also have orgpolicy.policy.set permission on the deleted folder to remove
+   * Assured Workloads OrgPolicies.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -584,8 +804,8 @@ export class AssuredWorkloadsServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the Workload to fetch. This is the
-   *   workloads's relative path in the API, formatted as
+   *   Required. The resource name of the Workload to fetch. This is the workloads's
+   *   relative path in the API, formatted as
    *   "organizations/{organization_id}/locations/{location_id}/workloads/{workload_id}".
    *   For example,
    *   "organizations/123/locations/us-east1/workloads/assured-workload-1".
@@ -672,12 +892,121 @@ export class AssuredWorkloadsServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
-      });
     this.initialize();
     return this.innerApiCalls.getWorkload(request, options, callback);
+  }
+  /**
+   * Analyze if the source Assured Workloads can be moved to the target Assured
+   * Workload
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.source
+   *   The Source is project based Workload to be moved. This is the workloads's
+   *   relative path in the API, formatted as
+   *   "organizations/{organization_id}/locations/{location_id}/workloads/{workload_id}".
+   *   For example,
+   *   "organizations/123/locations/us-east1/workloads/assured-workload-1".
+   * @param {string} request.project
+   *   The Source is a project based to be moved.
+   *   This is the project's relative path in the API, formatted as
+   *   "cloudresourcemanager.googleapis.com/projects/{project_number}"
+   *   "projects/{project_number}"
+   *   "cloudresourcemanager.googleapis.com/projects/{project_id}"
+   *   "projects/{project_id}"
+   *   For example,
+   *   "organizations/123/locations/us-east1/workloads/assured-workload-1".
+   * @param {string} request.target
+   *   Required. The resource name of the Workload to fetch. This is the workloads's
+   *   relative path in the API, formatted as
+   *   "organizations/{organization_id}/locations/{location_id}/workloads/{workload_id}".
+   *   For example,
+   *   "organizations/123/locations/us-east1/workloads/assured-workload-2".
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [AnalyzeWorkloadMoveResponse]{@link google.cloud.assuredworkloads.v1beta1.AnalyzeWorkloadMoveResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/assured_workloads_service.analyze_workload_move.js</caption>
+   * region_tag:assuredworkloads_v1beta1_generated_AssuredWorkloadsService_AnalyzeWorkloadMove_async
+   */
+  analyzeWorkloadMove(
+    request?: protos.google.cloud.assuredworkloads.v1beta1.IAnalyzeWorkloadMoveRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.assuredworkloads.v1beta1.IAnalyzeWorkloadMoveResponse,
+      (
+        | protos.google.cloud.assuredworkloads.v1beta1.IAnalyzeWorkloadMoveRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  analyzeWorkloadMove(
+    request: protos.google.cloud.assuredworkloads.v1beta1.IAnalyzeWorkloadMoveRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.assuredworkloads.v1beta1.IAnalyzeWorkloadMoveResponse,
+      | protos.google.cloud.assuredworkloads.v1beta1.IAnalyzeWorkloadMoveRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  analyzeWorkloadMove(
+    request: protos.google.cloud.assuredworkloads.v1beta1.IAnalyzeWorkloadMoveRequest,
+    callback: Callback<
+      protos.google.cloud.assuredworkloads.v1beta1.IAnalyzeWorkloadMoveResponse,
+      | protos.google.cloud.assuredworkloads.v1beta1.IAnalyzeWorkloadMoveRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  analyzeWorkloadMove(
+    request?: protos.google.cloud.assuredworkloads.v1beta1.IAnalyzeWorkloadMoveRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.assuredworkloads.v1beta1.IAnalyzeWorkloadMoveResponse,
+          | protos.google.cloud.assuredworkloads.v1beta1.IAnalyzeWorkloadMoveRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.assuredworkloads.v1beta1.IAnalyzeWorkloadMoveResponse,
+      | protos.google.cloud.assuredworkloads.v1beta1.IAnalyzeWorkloadMoveRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.assuredworkloads.v1beta1.IAnalyzeWorkloadMoveResponse,
+      (
+        | protos.google.cloud.assuredworkloads.v1beta1.IAnalyzeWorkloadMoveRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    this.initialize();
+    return this.innerApiCalls.analyzeWorkloadMove(request, options, callback);
   }
 
   /**
@@ -691,8 +1020,8 @@ export class AssuredWorkloadsServiceClient {
    * @param {google.cloud.assuredworkloads.v1beta1.Workload} request.workload
    *   Required. Assured Workload to create
    * @param {string} [request.externalId]
-   *   Optional. A identifier associated with the workload and underlying projects
-   *   which allows for the break down of billing costs for a workload. The value
+   *   Optional. A identifier associated with the workload and underlying projects which
+   *   allows for the break down of billing costs for a workload. The value
    *   provided for the identifier will add a label to the workload and contained
    *   projects with the identifier as the value.
    * @param {object} [options]
@@ -922,10 +1251,6 @@ export class AssuredWorkloadsServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
-      });
     this.initialize();
     return this.innerApiCalls.listWorkloads(request, options, callback);
   }
@@ -966,10 +1291,6 @@ export class AssuredWorkloadsServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
-      });
     const defaultCallSettings = this._defaults['listWorkloads'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -1019,10 +1340,6 @@ export class AssuredWorkloadsServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
-      });
     const defaultCallSettings = this._defaults['listWorkloads'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -1032,70 +1349,186 @@ export class AssuredWorkloadsServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.assuredworkloads.v1beta1.IWorkload>;
   }
+  /**
+   * Gets the latest state of a long-running operation.  Clients can use this
+   * method to poll the operation result at intervals as recommended by the API
+   * service.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
+   *   details.
+   * @param {function(?Error, ?Object)=} callback
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing
+   * [google.longrunning.Operation]{@link
+   * external:"google.longrunning.Operation"}.
+   * @return {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   * [google.longrunning.Operation]{@link
+   * external:"google.longrunning.Operation"}. The promise has a method named
+   * "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * const name = '';
+   * const [response] = await client.getOperation({name});
+   * // doThingsWith(response)
+   * ```
+   */
+  getOperation(
+    request: protos.google.longrunning.GetOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.longrunning.Operation,
+          protos.google.longrunning.GetOperationRequest,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.longrunning.Operation,
+      protos.google.longrunning.GetOperationRequest,
+      {} | null | undefined
+    >
+  ): Promise<[protos.google.longrunning.Operation]> {
+    return this.operationsClient.getOperation(request, options, callback);
+  }
+  /**
+   * Lists operations that match the specified filter in the request. If the
+   * server doesn't support this method, it returns `UNIMPLEMENTED`. Returns an iterable object.
+   *
+   * For-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation collection.
+   * @param {string} request.filter - The standard list filter.
+   * @param {number=} request.pageSize -
+   *   The maximum number of resources contained in the underlying API
+   *   response. If page streaming is performed per-resource, this
+   *   parameter does not affect the return value. If page streaming is
+   *   performed per-page, this determines the maximum number of
+   *   resources in a page.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
+   *   details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * for await (const response of client.listOperationsAsync(request));
+   * // doThingsWith(response)
+   * ```
+   */
+  listOperationsAsync(
+    request: protos.google.longrunning.ListOperationsRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    return this.operationsClient.listOperationsAsync(request, options);
+  }
+  /**
+   * Starts asynchronous cancellation on a long-running operation.  The server
+   * makes a best effort to cancel the operation, but success is not
+   * guaranteed.  If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
+   * {@link Operations.GetOperation} or
+   * other methods to check whether the cancellation succeeded or whether the
+   * operation completed despite cancellation. On successful cancellation,
+   * the operation is not deleted; instead, it becomes an operation with
+   * an {@link Operation.error} value with a {@link google.rpc.Status.code} of
+   * 1, corresponding to `Code.CANCELLED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be cancelled.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
+   * details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.cancelOperation({name: ''});
+   * ```
+   */
+  cancelOperation(
+    request: protos.google.longrunning.CancelOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.protobuf.Empty,
+          protos.google.longrunning.CancelOperationRequest,
+          {} | undefined | null
+        >,
+    callback?: Callback<
+      protos.google.longrunning.CancelOperationRequest,
+      protos.google.protobuf.Empty,
+      {} | undefined | null
+    >
+  ): Promise<protos.google.protobuf.Empty> {
+    return this.operationsClient.cancelOperation(request, options, callback);
+  }
+
+  /**
+   * Deletes a long-running operation. This method indicates that the client is
+   * no longer interested in the operation result. It does not cancel the
+   * operation. If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be deleted.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
+   * details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.deleteOperation({name: ''});
+   * ```
+   */
+  deleteOperation(
+    request: protos.google.longrunning.DeleteOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.protobuf.Empty,
+          protos.google.longrunning.DeleteOperationRequest,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.Empty,
+      protos.google.longrunning.DeleteOperationRequest,
+      {} | null | undefined
+    >
+  ): Promise<protos.google.protobuf.Empty> {
+    return this.operationsClient.deleteOperation(request, options, callback);
+  }
+
   // --------------------
   // -- Path templates --
   // --------------------
-
-  /**
-   * Return a fully-qualified location resource name string.
-   *
-   * @param {string} organization
-   * @param {string} location
-   * @returns {string} Resource name string.
-   */
-  locationPath(organization: string, location: string) {
-    return this.pathTemplates.locationPathTemplate.render({
-      organization: organization,
-      location: location,
-    });
-  }
-
-  /**
-   * Parse the organization from Location resource.
-   *
-   * @param {string} locationName
-   *   A fully-qualified path representing Location resource.
-   * @returns {string} A string representing the organization.
-   */
-  matchOrganizationFromLocationName(locationName: string) {
-    return this.pathTemplates.locationPathTemplate.match(locationName)
-      .organization;
-  }
-
-  /**
-   * Parse the location from Location resource.
-   *
-   * @param {string} locationName
-   *   A fully-qualified path representing Location resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromLocationName(locationName: string) {
-    return this.pathTemplates.locationPathTemplate.match(locationName).location;
-  }
-
-  /**
-   * Return a fully-qualified organization resource name string.
-   *
-   * @param {string} organization
-   * @returns {string} Resource name string.
-   */
-  organizationPath(organization: string) {
-    return this.pathTemplates.organizationPathTemplate.render({
-      organization: organization,
-    });
-  }
-
-  /**
-   * Parse the organization from Organization resource.
-   *
-   * @param {string} organizationName
-   *   A fully-qualified path representing Organization resource.
-   * @returns {string} A string representing the organization.
-   */
-  matchOrganizationFromOrganizationName(organizationName: string) {
-    return this.pathTemplates.organizationPathTemplate.match(organizationName)
-      .organization;
-  }
 
   /**
    * Return a fully-qualified workload resource name string.

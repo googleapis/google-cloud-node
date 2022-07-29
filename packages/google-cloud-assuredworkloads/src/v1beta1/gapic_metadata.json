@@ -15,6 +15,16 @@
                 "updateWorkload"
               ]
             },
+            "RestrictAllowedServices": {
+              "methods": [
+                "restrictAllowedServices"
+              ]
+            },
+            "RestrictAllowedResources": {
+              "methods": [
+                "restrictAllowedResources"
+              ]
+            },
             "DeleteWorkload": {
               "methods": [
                 "deleteWorkload"
@@ -23,6 +33,11 @@
             "GetWorkload": {
               "methods": [
                 "getWorkload"
+              ]
+            },
+            "AnalyzeWorkloadMove": {
+              "methods": [
+                "analyzeWorkloadMove"
               ]
             },
             "CreateWorkload": {
@@ -47,6 +62,16 @@
                 "updateWorkload"
               ]
             },
+            "RestrictAllowedServices": {
+              "methods": [
+                "restrictAllowedServices"
+              ]
+            },
+            "RestrictAllowedResources": {
+              "methods": [
+                "restrictAllowedResources"
+              ]
+            },
             "DeleteWorkload": {
               "methods": [
                 "deleteWorkload"
@@ -55,6 +80,11 @@
             "GetWorkload": {
               "methods": [
                 "getWorkload"
+              ]
+            },
+            "AnalyzeWorkloadMove": {
+              "methods": [
+                "analyzeWorkloadMove"
               ]
             },
             "CreateWorkload": {

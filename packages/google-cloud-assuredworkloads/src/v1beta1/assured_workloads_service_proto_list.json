@@ -1,3 +1,4 @@
 [
-  "../../protos/google/cloud/assuredworkloads/v1beta1/assuredworkloads.proto"
+  "../../protos/google/cloud/assuredworkloads/v1beta1/assuredworkloads.proto",
+  "../../protos/google/cloud/assuredworkloads/v1beta1/assuredworkloads_service.proto"
 ]

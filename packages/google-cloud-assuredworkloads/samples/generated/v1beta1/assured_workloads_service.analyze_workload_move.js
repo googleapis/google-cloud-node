@@ -20,19 +20,38 @@
 
 'use strict';
 
-function main(name) {
-  // [START assuredworkloads_v1beta1_generated_AssuredWorkloadsService_GetWorkload_async]
+function main(target) {
+  // [START assuredworkloads_v1beta1_generated_AssuredWorkloadsService_AnalyzeWorkloadMove_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the Workload to fetch. This is the workloads's
+   *  The Source is project based Workload to be moved. This is the workloads's
    *  relative path in the API, formatted as
    *  "organizations/{organization_id}/locations/{location_id}/workloads/{workload_id}".
    *  For example,
    *  "organizations/123/locations/us-east1/workloads/assured-workload-1".
    */
-  // const name = 'abc123'
+  // const source = 'abc123'
+  /**
+   *  The Source is a project based to be moved.
+   *  This is the project's relative path in the API, formatted as
+   *  "cloudresourcemanager.googleapis.com/projects/{project_number}"
+   *  "projects/{project_number}"
+   *  "cloudresourcemanager.googleapis.com/projects/{project_id}"
+   *  "projects/{project_id}"
+   *  For example,
+   *  "organizations/123/locations/us-east1/workloads/assured-workload-1".
+   */
+  // const project = 'my-project'
+  /**
+   *  Required. The resource name of the Workload to fetch. This is the workloads's
+   *  relative path in the API, formatted as
+   *  "organizations/{organization_id}/locations/{location_id}/workloads/{workload_id}".
+   *  For example,
+   *  "organizations/123/locations/us-east1/workloads/assured-workload-2".
+   */
+  // const target = 'abc123'
 
   // Imports the Assuredworkloads library
   const {AssuredWorkloadsServiceClient} = require('@google-cloud/assured-workloads').v1beta1;
@@ -40,19 +59,19 @@ function main(name) {
   // Instantiates a client
   const assuredworkloadsClient = new AssuredWorkloadsServiceClient();
 
-  async function callGetWorkload() {
+  async function callAnalyzeWorkloadMove() {
     // Construct request
     const request = {
-      name,
+      target,
     };
 
     // Run request
-    const response = await assuredworkloadsClient.getWorkload(request);
+    const response = await assuredworkloadsClient.analyzeWorkloadMove(request);
     console.log(response);
   }
 
-  callGetWorkload();
-  // [END assuredworkloads_v1beta1_generated_AssuredWorkloadsService_GetWorkload_async]
+  callAnalyzeWorkloadMove();
+  // [END assuredworkloads_v1beta1_generated_AssuredWorkloadsService_AnalyzeWorkloadMove_async]
 }
 
 process.on('unhandledRejection', err => {

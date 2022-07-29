@@ -42,12 +42,25 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "RestrictAllowedServices": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "RestrictAllowedResources": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "DeleteWorkload": {
           "timeout_millis": 60000,
           "retry_codes_name": "unavailable",
           "retry_params_name": "f412bc287ceb81ac34bc795a23656235608595af"
         },
         "GetWorkload": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "f412bc287ceb81ac34bc795a23656235608595af"
+        },
+        "AnalyzeWorkloadMove": {
           "timeout_millis": 60000,
           "retry_codes_name": "unavailable",
           "retry_params_name": "f412bc287ceb81ac34bc795a23656235608595af"

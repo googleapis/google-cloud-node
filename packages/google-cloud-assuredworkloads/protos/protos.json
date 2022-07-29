@@ -510,7 +510,7 @@
                     "csharp_namespace": "Google.Cloud.AssuredWorkloads.V1Beta1",
                     "go_package": "google.golang.org/genproto/googleapis/cloud/assuredworkloads/v1beta1;assuredworkloads",
                     "java_multiple_files": true,
-                    "java_outer_classname": "AssuredworkloadsProto",
+                    "java_outer_classname": "AssuredworkloadsServiceProto",
                     "java_package": "com.google.cloud.assuredworkloads.v1beta1",
                     "php_namespace": "Google\\Cloud\\AssuredWorkloads\\V1beta1",
                     "ruby_package": "Google::Cloud::AssuredWorkloads::V1beta1",
@@ -518,116 +518,6 @@
                     "(google.api.resource_definition).pattern": "organizations/{organization}/locations/{location}"
                   },
                   "nested": {
-                    "AssuredWorkloadsService": {
-                      "options": {
-                        "(google.api.default_host)": "assuredworkloads.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
-                      },
-                      "methods": {
-                        "CreateWorkload": {
-                          "requestType": "CreateWorkloadRequest",
-                          "responseType": "google.longrunning.Operation",
-                          "options": {
-                            "(google.api.http).post": "/v1beta1/{parent=organizations/*/locations/*}/workloads",
-                            "(google.api.http).body": "workload",
-                            "(google.api.method_signature)": "parent,workload",
-                            "(google.longrunning.operation_info).response_type": "Workload",
-                            "(google.longrunning.operation_info).metadata_type": "CreateWorkloadOperationMetadata"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "post": "/v1beta1/{parent=organizations/*/locations/*}/workloads",
-                                "body": "workload"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "parent,workload"
-                            },
-                            {
-                              "(google.longrunning.operation_info)": {
-                                "response_type": "Workload",
-                                "metadata_type": "CreateWorkloadOperationMetadata"
-                              }
-                            }
-                          ]
-                        },
-                        "UpdateWorkload": {
-                          "requestType": "UpdateWorkloadRequest",
-                          "responseType": "Workload",
-                          "options": {
-                            "(google.api.http).patch": "/v1beta1/{workload.name=organizations/*/locations/*/workloads/*}",
-                            "(google.api.http).body": "workload",
-                            "(google.api.method_signature)": "workload,update_mask"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "patch": "/v1beta1/{workload.name=organizations/*/locations/*/workloads/*}",
-                                "body": "workload"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "workload,update_mask"
-                            }
-                          ]
-                        },
-                        "DeleteWorkload": {
-                          "requestType": "DeleteWorkloadRequest",
-                          "responseType": "google.protobuf.Empty",
-                          "options": {
-                            "(google.api.http).delete": "/v1beta1/{name=organizations/*/locations/*/workloads/*}",
-                            "(google.api.method_signature)": "name"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "delete": "/v1beta1/{name=organizations/*/locations/*/workloads/*}"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "name"
-                            }
-                          ]
-                        },
-                        "GetWorkload": {
-                          "requestType": "GetWorkloadRequest",
-                          "responseType": "Workload",
-                          "options": {
-                            "(google.api.http).get": "/v1beta1/{name=organizations/*/locations/*/workloads/*}",
-                            "(google.api.method_signature)": "name"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "get": "/v1beta1/{name=organizations/*/locations/*/workloads/*}"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "name"
-                            }
-                          ]
-                        },
-                        "ListWorkloads": {
-                          "requestType": "ListWorkloadsRequest",
-                          "responseType": "ListWorkloadsResponse",
-                          "options": {
-                            "(google.api.http).get": "/v1beta1/{parent=organizations/*/locations/*}/workloads",
-                            "(google.api.method_signature)": "parent"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "get": "/v1beta1/{parent=organizations/*/locations/*}/workloads"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "parent"
-                            }
-                          ]
-                        }
-                      }
-                    },
                     "CreateWorkloadRequest": {
                       "fields": {
                         "parent": {
@@ -672,6 +562,66 @@
                         }
                       }
                     },
+                    "RestrictAllowedServicesRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "restrictionType": {
+                          "type": "RestrictionType",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "RestrictionType": {
+                          "values": {
+                            "RESTRICTION_TYPE_UNSPECIFIED": 0,
+                            "ALLOW_ALL_GCP_SERVICES": 1,
+                            "ALLOW_COMPLIANT_SERVICES": 2
+                          }
+                        }
+                      }
+                    },
+                    "RestrictAllowedServicesResponse": {
+                      "fields": {}
+                    },
+                    "RestrictAllowedResourcesRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "restrictionType": {
+                          "type": "RestrictionType",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "RestrictionType": {
+                          "values": {
+                            "RESTRICTION_TYPE_UNSPECIFIED": 0,
+                            "ALLOW_ALL_GCP_RESOURCES": 1,
+                            "ALLOW_COMPLIANT_RESOURCES": 2
+                          }
+                        }
+                      }
+                    },
+                    "RestrictAllowedResourcesResponse": {
+                      "fields": {}
+                    },
                     "DeleteWorkloadRequest": {
                       "fields": {
                         "name": {
@@ -700,6 +650,42 @@
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "assuredworkloads.googleapis.com/Workload"
                           }
+                        }
+                      }
+                    },
+                    "AnalyzeWorkloadMoveRequest": {
+                      "oneofs": {
+                        "projectOrWorkloadResource": {
+                          "oneof": [
+                            "source",
+                            "project"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "source": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "target": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "AnalyzeWorkloadMoveResponse": {
+                      "fields": {
+                        "blockers": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1
                         }
                       }
                     },
@@ -857,6 +843,7 @@
                           "type": "KMSSettings",
                           "id": 14,
                           "options": {
+                            "deprecated": true,
                             "(google.api.field_behavior)": "INPUT_ONLY"
                           }
                         },
@@ -914,7 +901,25 @@
                             }
                           }
                         },
+                        "ComplianceRegime": {
+                          "values": {
+                            "COMPLIANCE_REGIME_UNSPECIFIED": 0,
+                            "IL4": 1,
+                            "CJIS": 2,
+                            "FEDRAMP_HIGH": 3,
+                            "FEDRAMP_MODERATE": 4,
+                            "US_REGIONAL_ACCESS": 5,
+                            "HIPAA": 6,
+                            "HITRUST": 7,
+                            "EU_REGIONS_AND_SUPPORT": 8,
+                            "CA_REGIONS_AND_SUPPORT": 9,
+                            "ITAR": 10
+                          }
+                        },
                         "KMSSettings": {
+                          "options": {
+                            "deprecated": true
+                          },
                           "fields": {
                             "nextRotationTime": {
                               "type": "google.protobuf.Timestamp",
@@ -1004,6 +1009,13 @@
                             }
                           }
                         },
+                        "KajEnrollmentState": {
+                          "values": {
+                            "KAJ_ENROLLMENT_STATE_UNSPECIFIED": 0,
+                            "KAJ_ENROLLMENT_STATE_PENDING": 1,
+                            "KAJ_ENROLLMENT_STATE_COMPLETE": 2
+                          }
+                        },
                         "SaaEnrollmentResponse": {
                           "oneofs": {
                             "_setupStatus": {
@@ -1043,28 +1055,6 @@
                                 "ERROR_SETUP_CHECK_FAILED": 4
                               }
                             }
-                          }
-                        },
-                        "ComplianceRegime": {
-                          "values": {
-                            "COMPLIANCE_REGIME_UNSPECIFIED": 0,
-                            "IL4": 1,
-                            "CJIS": 2,
-                            "FEDRAMP_HIGH": 3,
-                            "FEDRAMP_MODERATE": 4,
-                            "US_REGIONAL_ACCESS": 5,
-                            "HIPAA": 6,
-                            "HITRUST": 7,
-                            "EU_REGIONS_AND_SUPPORT": 8,
-                            "CA_REGIONS_AND_SUPPORT": 9,
-                            "ITAR": 10
-                          }
-                        },
-                        "KajEnrollmentState": {
-                          "values": {
-                            "KAJ_ENROLLMENT_STATE_UNSPECIFIED": 0,
-                            "KAJ_ENROLLMENT_STATE_PENDING": 1,
-                            "KAJ_ENROLLMENT_STATE_COMPLETE": 2
                           }
                         }
                       }
@@ -1106,6 +1096,136 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        }
+                      }
+                    },
+                    "AssuredWorkloadsService": {
+                      "options": {
+                        "(google.api.default_host)": "assuredworkloads.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "CreateWorkload": {
+                          "requestType": "CreateWorkloadRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{parent=organizations/*/locations/*}/workloads",
+                            "(google.api.http).body": "workload",
+                            "(google.api.method_signature)": "parent,workload",
+                            "(google.longrunning.operation_info).response_type": "Workload",
+                            "(google.longrunning.operation_info).metadata_type": "CreateWorkloadOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{parent=organizations/*/locations/*}/workloads",
+                                "body": "workload"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,workload"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Workload",
+                                "metadata_type": "CreateWorkloadOperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "UpdateWorkload": {
+                          "requestType": "UpdateWorkloadRequest",
+                          "responseType": "Workload",
+                          "options": {
+                            "(google.api.http).patch": "/v1beta1/{workload.name=organizations/*/locations/*/workloads/*}",
+                            "(google.api.http).body": "workload",
+                            "(google.api.method_signature)": "workload,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1beta1/{workload.name=organizations/*/locations/*/workloads/*}",
+                                "body": "workload"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "workload,update_mask"
+                            }
+                          ]
+                        },
+                        "RestrictAllowedServices": {
+                          "requestType": "RestrictAllowedServicesRequest",
+                          "responseType": "RestrictAllowedServicesResponse"
+                        },
+                        "RestrictAllowedResources": {
+                          "requestType": "RestrictAllowedResourcesRequest",
+                          "responseType": "RestrictAllowedResourcesResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{name=organizations/*/locations/*/workloads/*}:restrictAllowedResources",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{name=organizations/*/locations/*/workloads/*}:restrictAllowedResources",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteWorkload": {
+                          "requestType": "DeleteWorkloadRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1beta1/{name=organizations/*/locations/*/workloads/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1beta1/{name=organizations/*/locations/*/workloads/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "GetWorkload": {
+                          "requestType": "GetWorkloadRequest",
+                          "responseType": "Workload",
+                          "options": {
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "AnalyzeWorkloadMove": {
+                          "requestType": "AnalyzeWorkloadMoveRequest",
+                          "responseType": "AnalyzeWorkloadMoveResponse",
+                          "options": {
+                            "(google.api.method_signature)": "project,target"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.method_signature)": "project,target"
+                            }
+                          ]
+                        },
+                        "ListWorkloads": {
+                          "requestType": "ListWorkloadsRequest",
+                          "responseType": "ListWorkloadsResponse",
+                          "options": {
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         }
                       }
                     }

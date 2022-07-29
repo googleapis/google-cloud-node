@@ -1471,135 +1471,6 @@ export namespace google {
             /** Namespace v1beta1. */
             namespace v1beta1 {
 
-                /** Represents an AssuredWorkloadsService */
-                class AssuredWorkloadsService extends $protobuf.rpc.Service {
-
-                    /**
-                     * Constructs a new AssuredWorkloadsService service.
-                     * @param rpcImpl RPC implementation
-                     * @param [requestDelimited=false] Whether requests are length-delimited
-                     * @param [responseDelimited=false] Whether responses are length-delimited
-                     */
-                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
-
-                    /**
-                     * Creates new AssuredWorkloadsService service using the specified rpc implementation.
-                     * @param rpcImpl RPC implementation
-                     * @param [requestDelimited=false] Whether requests are length-delimited
-                     * @param [responseDelimited=false] Whether responses are length-delimited
-                     * @returns RPC service. Useful where requests and/or responses are streamed.
-                     */
-                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): AssuredWorkloadsService;
-
-                    /**
-                     * Calls CreateWorkload.
-                     * @param request CreateWorkloadRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and Operation
-                     */
-                    public createWorkload(request: google.cloud.assuredworkloads.v1beta1.ICreateWorkloadRequest, callback: google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsService.CreateWorkloadCallback): void;
-
-                    /**
-                     * Calls CreateWorkload.
-                     * @param request CreateWorkloadRequest message or plain object
-                     * @returns Promise
-                     */
-                    public createWorkload(request: google.cloud.assuredworkloads.v1beta1.ICreateWorkloadRequest): Promise<google.longrunning.Operation>;
-
-                    /**
-                     * Calls UpdateWorkload.
-                     * @param request UpdateWorkloadRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and Workload
-                     */
-                    public updateWorkload(request: google.cloud.assuredworkloads.v1beta1.IUpdateWorkloadRequest, callback: google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsService.UpdateWorkloadCallback): void;
-
-                    /**
-                     * Calls UpdateWorkload.
-                     * @param request UpdateWorkloadRequest message or plain object
-                     * @returns Promise
-                     */
-                    public updateWorkload(request: google.cloud.assuredworkloads.v1beta1.IUpdateWorkloadRequest): Promise<google.cloud.assuredworkloads.v1beta1.Workload>;
-
-                    /**
-                     * Calls DeleteWorkload.
-                     * @param request DeleteWorkloadRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and Empty
-                     */
-                    public deleteWorkload(request: google.cloud.assuredworkloads.v1beta1.IDeleteWorkloadRequest, callback: google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsService.DeleteWorkloadCallback): void;
-
-                    /**
-                     * Calls DeleteWorkload.
-                     * @param request DeleteWorkloadRequest message or plain object
-                     * @returns Promise
-                     */
-                    public deleteWorkload(request: google.cloud.assuredworkloads.v1beta1.IDeleteWorkloadRequest): Promise<google.protobuf.Empty>;
-
-                    /**
-                     * Calls GetWorkload.
-                     * @param request GetWorkloadRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and Workload
-                     */
-                    public getWorkload(request: google.cloud.assuredworkloads.v1beta1.IGetWorkloadRequest, callback: google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsService.GetWorkloadCallback): void;
-
-                    /**
-                     * Calls GetWorkload.
-                     * @param request GetWorkloadRequest message or plain object
-                     * @returns Promise
-                     */
-                    public getWorkload(request: google.cloud.assuredworkloads.v1beta1.IGetWorkloadRequest): Promise<google.cloud.assuredworkloads.v1beta1.Workload>;
-
-                    /**
-                     * Calls ListWorkloads.
-                     * @param request ListWorkloadsRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and ListWorkloadsResponse
-                     */
-                    public listWorkloads(request: google.cloud.assuredworkloads.v1beta1.IListWorkloadsRequest, callback: google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsService.ListWorkloadsCallback): void;
-
-                    /**
-                     * Calls ListWorkloads.
-                     * @param request ListWorkloadsRequest message or plain object
-                     * @returns Promise
-                     */
-                    public listWorkloads(request: google.cloud.assuredworkloads.v1beta1.IListWorkloadsRequest): Promise<google.cloud.assuredworkloads.v1beta1.ListWorkloadsResponse>;
-                }
-
-                namespace AssuredWorkloadsService {
-
-                    /**
-                     * Callback as used by {@link google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsService#createWorkload}.
-                     * @param error Error, if any
-                     * @param [response] Operation
-                     */
-                    type CreateWorkloadCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsService#updateWorkload}.
-                     * @param error Error, if any
-                     * @param [response] Workload
-                     */
-                    type UpdateWorkloadCallback = (error: (Error|null), response?: google.cloud.assuredworkloads.v1beta1.Workload) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsService#deleteWorkload}.
-                     * @param error Error, if any
-                     * @param [response] Empty
-                     */
-                    type DeleteWorkloadCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsService#getWorkload}.
-                     * @param error Error, if any
-                     * @param [response] Workload
-                     */
-                    type GetWorkloadCallback = (error: (Error|null), response?: google.cloud.assuredworkloads.v1beta1.Workload) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsService#listWorkloads}.
-                     * @param error Error, if any
-                     * @param [response] ListWorkloadsResponse
-                     */
-                    type ListWorkloadsCallback = (error: (Error|null), response?: google.cloud.assuredworkloads.v1beta1.ListWorkloadsResponse) => void;
-                }
-
                 /** Properties of a CreateWorkloadRequest. */
                 interface ICreateWorkloadRequest {
 
@@ -1798,6 +1669,386 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** Properties of a RestrictAllowedServicesRequest. */
+                interface IRestrictAllowedServicesRequest {
+
+                    /** RestrictAllowedServicesRequest name */
+                    name?: (string|null);
+
+                    /** RestrictAllowedServicesRequest restrictionType */
+                    restrictionType?: (google.cloud.assuredworkloads.v1beta1.RestrictAllowedServicesRequest.RestrictionType|keyof typeof google.cloud.assuredworkloads.v1beta1.RestrictAllowedServicesRequest.RestrictionType|null);
+                }
+
+                /** Represents a RestrictAllowedServicesRequest. */
+                class RestrictAllowedServicesRequest implements IRestrictAllowedServicesRequest {
+
+                    /**
+                     * Constructs a new RestrictAllowedServicesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.assuredworkloads.v1beta1.IRestrictAllowedServicesRequest);
+
+                    /** RestrictAllowedServicesRequest name. */
+                    public name: string;
+
+                    /** RestrictAllowedServicesRequest restrictionType. */
+                    public restrictionType: (google.cloud.assuredworkloads.v1beta1.RestrictAllowedServicesRequest.RestrictionType|keyof typeof google.cloud.assuredworkloads.v1beta1.RestrictAllowedServicesRequest.RestrictionType);
+
+                    /**
+                     * Creates a new RestrictAllowedServicesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RestrictAllowedServicesRequest instance
+                     */
+                    public static create(properties?: google.cloud.assuredworkloads.v1beta1.IRestrictAllowedServicesRequest): google.cloud.assuredworkloads.v1beta1.RestrictAllowedServicesRequest;
+
+                    /**
+                     * Encodes the specified RestrictAllowedServicesRequest message. Does not implicitly {@link google.cloud.assuredworkloads.v1beta1.RestrictAllowedServicesRequest.verify|verify} messages.
+                     * @param message RestrictAllowedServicesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.assuredworkloads.v1beta1.IRestrictAllowedServicesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RestrictAllowedServicesRequest message, length delimited. Does not implicitly {@link google.cloud.assuredworkloads.v1beta1.RestrictAllowedServicesRequest.verify|verify} messages.
+                     * @param message RestrictAllowedServicesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.assuredworkloads.v1beta1.IRestrictAllowedServicesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RestrictAllowedServicesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RestrictAllowedServicesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.assuredworkloads.v1beta1.RestrictAllowedServicesRequest;
+
+                    /**
+                     * Decodes a RestrictAllowedServicesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RestrictAllowedServicesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.assuredworkloads.v1beta1.RestrictAllowedServicesRequest;
+
+                    /**
+                     * Verifies a RestrictAllowedServicesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RestrictAllowedServicesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RestrictAllowedServicesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.assuredworkloads.v1beta1.RestrictAllowedServicesRequest;
+
+                    /**
+                     * Creates a plain object from a RestrictAllowedServicesRequest message. Also converts values to other types if specified.
+                     * @param message RestrictAllowedServicesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.assuredworkloads.v1beta1.RestrictAllowedServicesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RestrictAllowedServicesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace RestrictAllowedServicesRequest {
+
+                    /** RestrictionType enum. */
+                    enum RestrictionType {
+                        RESTRICTION_TYPE_UNSPECIFIED = 0,
+                        ALLOW_ALL_GCP_SERVICES = 1,
+                        ALLOW_COMPLIANT_SERVICES = 2
+                    }
+                }
+
+                /** Properties of a RestrictAllowedServicesResponse. */
+                interface IRestrictAllowedServicesResponse {
+                }
+
+                /** Represents a RestrictAllowedServicesResponse. */
+                class RestrictAllowedServicesResponse implements IRestrictAllowedServicesResponse {
+
+                    /**
+                     * Constructs a new RestrictAllowedServicesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.assuredworkloads.v1beta1.IRestrictAllowedServicesResponse);
+
+                    /**
+                     * Creates a new RestrictAllowedServicesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RestrictAllowedServicesResponse instance
+                     */
+                    public static create(properties?: google.cloud.assuredworkloads.v1beta1.IRestrictAllowedServicesResponse): google.cloud.assuredworkloads.v1beta1.RestrictAllowedServicesResponse;
+
+                    /**
+                     * Encodes the specified RestrictAllowedServicesResponse message. Does not implicitly {@link google.cloud.assuredworkloads.v1beta1.RestrictAllowedServicesResponse.verify|verify} messages.
+                     * @param message RestrictAllowedServicesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.assuredworkloads.v1beta1.IRestrictAllowedServicesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RestrictAllowedServicesResponse message, length delimited. Does not implicitly {@link google.cloud.assuredworkloads.v1beta1.RestrictAllowedServicesResponse.verify|verify} messages.
+                     * @param message RestrictAllowedServicesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.assuredworkloads.v1beta1.IRestrictAllowedServicesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RestrictAllowedServicesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RestrictAllowedServicesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.assuredworkloads.v1beta1.RestrictAllowedServicesResponse;
+
+                    /**
+                     * Decodes a RestrictAllowedServicesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RestrictAllowedServicesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.assuredworkloads.v1beta1.RestrictAllowedServicesResponse;
+
+                    /**
+                     * Verifies a RestrictAllowedServicesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RestrictAllowedServicesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RestrictAllowedServicesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.assuredworkloads.v1beta1.RestrictAllowedServicesResponse;
+
+                    /**
+                     * Creates a plain object from a RestrictAllowedServicesResponse message. Also converts values to other types if specified.
+                     * @param message RestrictAllowedServicesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.assuredworkloads.v1beta1.RestrictAllowedServicesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RestrictAllowedServicesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a RestrictAllowedResourcesRequest. */
+                interface IRestrictAllowedResourcesRequest {
+
+                    /** RestrictAllowedResourcesRequest name */
+                    name?: (string|null);
+
+                    /** RestrictAllowedResourcesRequest restrictionType */
+                    restrictionType?: (google.cloud.assuredworkloads.v1beta1.RestrictAllowedResourcesRequest.RestrictionType|keyof typeof google.cloud.assuredworkloads.v1beta1.RestrictAllowedResourcesRequest.RestrictionType|null);
+                }
+
+                /** Represents a RestrictAllowedResourcesRequest. */
+                class RestrictAllowedResourcesRequest implements IRestrictAllowedResourcesRequest {
+
+                    /**
+                     * Constructs a new RestrictAllowedResourcesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.assuredworkloads.v1beta1.IRestrictAllowedResourcesRequest);
+
+                    /** RestrictAllowedResourcesRequest name. */
+                    public name: string;
+
+                    /** RestrictAllowedResourcesRequest restrictionType. */
+                    public restrictionType: (google.cloud.assuredworkloads.v1beta1.RestrictAllowedResourcesRequest.RestrictionType|keyof typeof google.cloud.assuredworkloads.v1beta1.RestrictAllowedResourcesRequest.RestrictionType);
+
+                    /**
+                     * Creates a new RestrictAllowedResourcesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RestrictAllowedResourcesRequest instance
+                     */
+                    public static create(properties?: google.cloud.assuredworkloads.v1beta1.IRestrictAllowedResourcesRequest): google.cloud.assuredworkloads.v1beta1.RestrictAllowedResourcesRequest;
+
+                    /**
+                     * Encodes the specified RestrictAllowedResourcesRequest message. Does not implicitly {@link google.cloud.assuredworkloads.v1beta1.RestrictAllowedResourcesRequest.verify|verify} messages.
+                     * @param message RestrictAllowedResourcesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.assuredworkloads.v1beta1.IRestrictAllowedResourcesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RestrictAllowedResourcesRequest message, length delimited. Does not implicitly {@link google.cloud.assuredworkloads.v1beta1.RestrictAllowedResourcesRequest.verify|verify} messages.
+                     * @param message RestrictAllowedResourcesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.assuredworkloads.v1beta1.IRestrictAllowedResourcesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RestrictAllowedResourcesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RestrictAllowedResourcesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.assuredworkloads.v1beta1.RestrictAllowedResourcesRequest;
+
+                    /**
+                     * Decodes a RestrictAllowedResourcesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RestrictAllowedResourcesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.assuredworkloads.v1beta1.RestrictAllowedResourcesRequest;
+
+                    /**
+                     * Verifies a RestrictAllowedResourcesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RestrictAllowedResourcesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RestrictAllowedResourcesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.assuredworkloads.v1beta1.RestrictAllowedResourcesRequest;
+
+                    /**
+                     * Creates a plain object from a RestrictAllowedResourcesRequest message. Also converts values to other types if specified.
+                     * @param message RestrictAllowedResourcesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.assuredworkloads.v1beta1.RestrictAllowedResourcesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RestrictAllowedResourcesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace RestrictAllowedResourcesRequest {
+
+                    /** RestrictionType enum. */
+                    enum RestrictionType {
+                        RESTRICTION_TYPE_UNSPECIFIED = 0,
+                        ALLOW_ALL_GCP_RESOURCES = 1,
+                        ALLOW_COMPLIANT_RESOURCES = 2
+                    }
+                }
+
+                /** Properties of a RestrictAllowedResourcesResponse. */
+                interface IRestrictAllowedResourcesResponse {
+                }
+
+                /** Represents a RestrictAllowedResourcesResponse. */
+                class RestrictAllowedResourcesResponse implements IRestrictAllowedResourcesResponse {
+
+                    /**
+                     * Constructs a new RestrictAllowedResourcesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.assuredworkloads.v1beta1.IRestrictAllowedResourcesResponse);
+
+                    /**
+                     * Creates a new RestrictAllowedResourcesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RestrictAllowedResourcesResponse instance
+                     */
+                    public static create(properties?: google.cloud.assuredworkloads.v1beta1.IRestrictAllowedResourcesResponse): google.cloud.assuredworkloads.v1beta1.RestrictAllowedResourcesResponse;
+
+                    /**
+                     * Encodes the specified RestrictAllowedResourcesResponse message. Does not implicitly {@link google.cloud.assuredworkloads.v1beta1.RestrictAllowedResourcesResponse.verify|verify} messages.
+                     * @param message RestrictAllowedResourcesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.assuredworkloads.v1beta1.IRestrictAllowedResourcesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RestrictAllowedResourcesResponse message, length delimited. Does not implicitly {@link google.cloud.assuredworkloads.v1beta1.RestrictAllowedResourcesResponse.verify|verify} messages.
+                     * @param message RestrictAllowedResourcesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.assuredworkloads.v1beta1.IRestrictAllowedResourcesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RestrictAllowedResourcesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RestrictAllowedResourcesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.assuredworkloads.v1beta1.RestrictAllowedResourcesResponse;
+
+                    /**
+                     * Decodes a RestrictAllowedResourcesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RestrictAllowedResourcesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.assuredworkloads.v1beta1.RestrictAllowedResourcesResponse;
+
+                    /**
+                     * Verifies a RestrictAllowedResourcesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RestrictAllowedResourcesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RestrictAllowedResourcesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.assuredworkloads.v1beta1.RestrictAllowedResourcesResponse;
+
+                    /**
+                     * Creates a plain object from a RestrictAllowedResourcesResponse message. Also converts values to other types if specified.
+                     * @param message RestrictAllowedResourcesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.assuredworkloads.v1beta1.RestrictAllowedResourcesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RestrictAllowedResourcesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Properties of a DeleteWorkloadRequest. */
                 interface IDeleteWorkloadRequest {
 
@@ -1979,6 +2230,201 @@ export namespace google {
 
                     /**
                      * Converts this GetWorkloadRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an AnalyzeWorkloadMoveRequest. */
+                interface IAnalyzeWorkloadMoveRequest {
+
+                    /** AnalyzeWorkloadMoveRequest source */
+                    source?: (string|null);
+
+                    /** AnalyzeWorkloadMoveRequest project */
+                    project?: (string|null);
+
+                    /** AnalyzeWorkloadMoveRequest target */
+                    target?: (string|null);
+                }
+
+                /** Represents an AnalyzeWorkloadMoveRequest. */
+                class AnalyzeWorkloadMoveRequest implements IAnalyzeWorkloadMoveRequest {
+
+                    /**
+                     * Constructs a new AnalyzeWorkloadMoveRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.assuredworkloads.v1beta1.IAnalyzeWorkloadMoveRequest);
+
+                    /** AnalyzeWorkloadMoveRequest source. */
+                    public source?: (string|null);
+
+                    /** AnalyzeWorkloadMoveRequest project. */
+                    public project?: (string|null);
+
+                    /** AnalyzeWorkloadMoveRequest target. */
+                    public target: string;
+
+                    /** AnalyzeWorkloadMoveRequest projectOrWorkloadResource. */
+                    public projectOrWorkloadResource?: ("source"|"project");
+
+                    /**
+                     * Creates a new AnalyzeWorkloadMoveRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AnalyzeWorkloadMoveRequest instance
+                     */
+                    public static create(properties?: google.cloud.assuredworkloads.v1beta1.IAnalyzeWorkloadMoveRequest): google.cloud.assuredworkloads.v1beta1.AnalyzeWorkloadMoveRequest;
+
+                    /**
+                     * Encodes the specified AnalyzeWorkloadMoveRequest message. Does not implicitly {@link google.cloud.assuredworkloads.v1beta1.AnalyzeWorkloadMoveRequest.verify|verify} messages.
+                     * @param message AnalyzeWorkloadMoveRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.assuredworkloads.v1beta1.IAnalyzeWorkloadMoveRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AnalyzeWorkloadMoveRequest message, length delimited. Does not implicitly {@link google.cloud.assuredworkloads.v1beta1.AnalyzeWorkloadMoveRequest.verify|verify} messages.
+                     * @param message AnalyzeWorkloadMoveRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.assuredworkloads.v1beta1.IAnalyzeWorkloadMoveRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AnalyzeWorkloadMoveRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AnalyzeWorkloadMoveRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.assuredworkloads.v1beta1.AnalyzeWorkloadMoveRequest;
+
+                    /**
+                     * Decodes an AnalyzeWorkloadMoveRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AnalyzeWorkloadMoveRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.assuredworkloads.v1beta1.AnalyzeWorkloadMoveRequest;
+
+                    /**
+                     * Verifies an AnalyzeWorkloadMoveRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AnalyzeWorkloadMoveRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AnalyzeWorkloadMoveRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.assuredworkloads.v1beta1.AnalyzeWorkloadMoveRequest;
+
+                    /**
+                     * Creates a plain object from an AnalyzeWorkloadMoveRequest message. Also converts values to other types if specified.
+                     * @param message AnalyzeWorkloadMoveRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.assuredworkloads.v1beta1.AnalyzeWorkloadMoveRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AnalyzeWorkloadMoveRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an AnalyzeWorkloadMoveResponse. */
+                interface IAnalyzeWorkloadMoveResponse {
+
+                    /** AnalyzeWorkloadMoveResponse blockers */
+                    blockers?: (string[]|null);
+                }
+
+                /** Represents an AnalyzeWorkloadMoveResponse. */
+                class AnalyzeWorkloadMoveResponse implements IAnalyzeWorkloadMoveResponse {
+
+                    /**
+                     * Constructs a new AnalyzeWorkloadMoveResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.assuredworkloads.v1beta1.IAnalyzeWorkloadMoveResponse);
+
+                    /** AnalyzeWorkloadMoveResponse blockers. */
+                    public blockers: string[];
+
+                    /**
+                     * Creates a new AnalyzeWorkloadMoveResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AnalyzeWorkloadMoveResponse instance
+                     */
+                    public static create(properties?: google.cloud.assuredworkloads.v1beta1.IAnalyzeWorkloadMoveResponse): google.cloud.assuredworkloads.v1beta1.AnalyzeWorkloadMoveResponse;
+
+                    /**
+                     * Encodes the specified AnalyzeWorkloadMoveResponse message. Does not implicitly {@link google.cloud.assuredworkloads.v1beta1.AnalyzeWorkloadMoveResponse.verify|verify} messages.
+                     * @param message AnalyzeWorkloadMoveResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.assuredworkloads.v1beta1.IAnalyzeWorkloadMoveResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AnalyzeWorkloadMoveResponse message, length delimited. Does not implicitly {@link google.cloud.assuredworkloads.v1beta1.AnalyzeWorkloadMoveResponse.verify|verify} messages.
+                     * @param message AnalyzeWorkloadMoveResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.assuredworkloads.v1beta1.IAnalyzeWorkloadMoveResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AnalyzeWorkloadMoveResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AnalyzeWorkloadMoveResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.assuredworkloads.v1beta1.AnalyzeWorkloadMoveResponse;
+
+                    /**
+                     * Decodes an AnalyzeWorkloadMoveResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AnalyzeWorkloadMoveResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.assuredworkloads.v1beta1.AnalyzeWorkloadMoveResponse;
+
+                    /**
+                     * Verifies an AnalyzeWorkloadMoveResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AnalyzeWorkloadMoveResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AnalyzeWorkloadMoveResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.assuredworkloads.v1beta1.AnalyzeWorkloadMoveResponse;
+
+                    /**
+                     * Creates a plain object from an AnalyzeWorkloadMoveResponse message. Also converts values to other types if specified.
+                     * @param message AnalyzeWorkloadMoveResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.assuredworkloads.v1beta1.AnalyzeWorkloadMoveResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AnalyzeWorkloadMoveResponse to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
@@ -2491,6 +2937,21 @@ export namespace google {
                             ENCRYPTION_KEYS_PROJECT = 2,
                             KEYRING = 3
                         }
+                    }
+
+                    /** ComplianceRegime enum. */
+                    enum ComplianceRegime {
+                        COMPLIANCE_REGIME_UNSPECIFIED = 0,
+                        IL4 = 1,
+                        CJIS = 2,
+                        FEDRAMP_HIGH = 3,
+                        FEDRAMP_MODERATE = 4,
+                        US_REGIONAL_ACCESS = 5,
+                        HIPAA = 6,
+                        HITRUST = 7,
+                        EU_REGIONS_AND_SUPPORT = 8,
+                        CA_REGIONS_AND_SUPPORT = 9,
+                        ITAR = 10
                     }
 
                     /** Properties of a KMSSettings. */
@@ -3051,6 +3512,13 @@ export namespace google {
                         public toJSON(): { [k: string]: any };
                     }
 
+                    /** KajEnrollmentState enum. */
+                    enum KajEnrollmentState {
+                        KAJ_ENROLLMENT_STATE_UNSPECIFIED = 0,
+                        KAJ_ENROLLMENT_STATE_PENDING = 1,
+                        KAJ_ENROLLMENT_STATE_COMPLETE = 2
+                    }
+
                     /** Properties of a SaaEnrollmentResponse. */
                     interface ISaaEnrollmentResponse {
 
@@ -3168,28 +3636,6 @@ export namespace google {
                             ERROR_SETUP_CHECK_FAILED = 4
                         }
                     }
-
-                    /** ComplianceRegime enum. */
-                    enum ComplianceRegime {
-                        COMPLIANCE_REGIME_UNSPECIFIED = 0,
-                        IL4 = 1,
-                        CJIS = 2,
-                        FEDRAMP_HIGH = 3,
-                        FEDRAMP_MODERATE = 4,
-                        US_REGIONAL_ACCESS = 5,
-                        HIPAA = 6,
-                        HITRUST = 7,
-                        EU_REGIONS_AND_SUPPORT = 8,
-                        CA_REGIONS_AND_SUPPORT = 9,
-                        ITAR = 10
-                    }
-
-                    /** KajEnrollmentState enum. */
-                    enum KajEnrollmentState {
-                        KAJ_ENROLLMENT_STATE_UNSPECIFIED = 0,
-                        KAJ_ENROLLMENT_STATE_PENDING = 1,
-                        KAJ_ENROLLMENT_STATE_COMPLETE = 2
-                    }
                 }
 
                 /** Properties of a CreateWorkloadOperationMetadata. */
@@ -3304,6 +3750,198 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                /** Represents an AssuredWorkloadsService */
+                class AssuredWorkloadsService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new AssuredWorkloadsService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new AssuredWorkloadsService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): AssuredWorkloadsService;
+
+                    /**
+                     * Calls CreateWorkload.
+                     * @param request CreateWorkloadRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createWorkload(request: google.cloud.assuredworkloads.v1beta1.ICreateWorkloadRequest, callback: google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsService.CreateWorkloadCallback): void;
+
+                    /**
+                     * Calls CreateWorkload.
+                     * @param request CreateWorkloadRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createWorkload(request: google.cloud.assuredworkloads.v1beta1.ICreateWorkloadRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateWorkload.
+                     * @param request UpdateWorkloadRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Workload
+                     */
+                    public updateWorkload(request: google.cloud.assuredworkloads.v1beta1.IUpdateWorkloadRequest, callback: google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsService.UpdateWorkloadCallback): void;
+
+                    /**
+                     * Calls UpdateWorkload.
+                     * @param request UpdateWorkloadRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateWorkload(request: google.cloud.assuredworkloads.v1beta1.IUpdateWorkloadRequest): Promise<google.cloud.assuredworkloads.v1beta1.Workload>;
+
+                    /**
+                     * Calls RestrictAllowedServices.
+                     * @param request RestrictAllowedServicesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and RestrictAllowedServicesResponse
+                     */
+                    public restrictAllowedServices(request: google.cloud.assuredworkloads.v1beta1.IRestrictAllowedServicesRequest, callback: google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsService.RestrictAllowedServicesCallback): void;
+
+                    /**
+                     * Calls RestrictAllowedServices.
+                     * @param request RestrictAllowedServicesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public restrictAllowedServices(request: google.cloud.assuredworkloads.v1beta1.IRestrictAllowedServicesRequest): Promise<google.cloud.assuredworkloads.v1beta1.RestrictAllowedServicesResponse>;
+
+                    /**
+                     * Calls RestrictAllowedResources.
+                     * @param request RestrictAllowedResourcesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and RestrictAllowedResourcesResponse
+                     */
+                    public restrictAllowedResources(request: google.cloud.assuredworkloads.v1beta1.IRestrictAllowedResourcesRequest, callback: google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsService.RestrictAllowedResourcesCallback): void;
+
+                    /**
+                     * Calls RestrictAllowedResources.
+                     * @param request RestrictAllowedResourcesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public restrictAllowedResources(request: google.cloud.assuredworkloads.v1beta1.IRestrictAllowedResourcesRequest): Promise<google.cloud.assuredworkloads.v1beta1.RestrictAllowedResourcesResponse>;
+
+                    /**
+                     * Calls DeleteWorkload.
+                     * @param request DeleteWorkloadRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteWorkload(request: google.cloud.assuredworkloads.v1beta1.IDeleteWorkloadRequest, callback: google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsService.DeleteWorkloadCallback): void;
+
+                    /**
+                     * Calls DeleteWorkload.
+                     * @param request DeleteWorkloadRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteWorkload(request: google.cloud.assuredworkloads.v1beta1.IDeleteWorkloadRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls GetWorkload.
+                     * @param request GetWorkloadRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Workload
+                     */
+                    public getWorkload(request: google.cloud.assuredworkloads.v1beta1.IGetWorkloadRequest, callback: google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsService.GetWorkloadCallback): void;
+
+                    /**
+                     * Calls GetWorkload.
+                     * @param request GetWorkloadRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getWorkload(request: google.cloud.assuredworkloads.v1beta1.IGetWorkloadRequest): Promise<google.cloud.assuredworkloads.v1beta1.Workload>;
+
+                    /**
+                     * Calls AnalyzeWorkloadMove.
+                     * @param request AnalyzeWorkloadMoveRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and AnalyzeWorkloadMoveResponse
+                     */
+                    public analyzeWorkloadMove(request: google.cloud.assuredworkloads.v1beta1.IAnalyzeWorkloadMoveRequest, callback: google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsService.AnalyzeWorkloadMoveCallback): void;
+
+                    /**
+                     * Calls AnalyzeWorkloadMove.
+                     * @param request AnalyzeWorkloadMoveRequest message or plain object
+                     * @returns Promise
+                     */
+                    public analyzeWorkloadMove(request: google.cloud.assuredworkloads.v1beta1.IAnalyzeWorkloadMoveRequest): Promise<google.cloud.assuredworkloads.v1beta1.AnalyzeWorkloadMoveResponse>;
+
+                    /**
+                     * Calls ListWorkloads.
+                     * @param request ListWorkloadsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListWorkloadsResponse
+                     */
+                    public listWorkloads(request: google.cloud.assuredworkloads.v1beta1.IListWorkloadsRequest, callback: google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsService.ListWorkloadsCallback): void;
+
+                    /**
+                     * Calls ListWorkloads.
+                     * @param request ListWorkloadsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listWorkloads(request: google.cloud.assuredworkloads.v1beta1.IListWorkloadsRequest): Promise<google.cloud.assuredworkloads.v1beta1.ListWorkloadsResponse>;
+                }
+
+                namespace AssuredWorkloadsService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsService#createWorkload}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateWorkloadCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsService#updateWorkload}.
+                     * @param error Error, if any
+                     * @param [response] Workload
+                     */
+                    type UpdateWorkloadCallback = (error: (Error|null), response?: google.cloud.assuredworkloads.v1beta1.Workload) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsService#restrictAllowedServices}.
+                     * @param error Error, if any
+                     * @param [response] RestrictAllowedServicesResponse
+                     */
+                    type RestrictAllowedServicesCallback = (error: (Error|null), response?: google.cloud.assuredworkloads.v1beta1.RestrictAllowedServicesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsService#restrictAllowedResources}.
+                     * @param error Error, if any
+                     * @param [response] RestrictAllowedResourcesResponse
+                     */
+                    type RestrictAllowedResourcesCallback = (error: (Error|null), response?: google.cloud.assuredworkloads.v1beta1.RestrictAllowedResourcesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsService#deleteWorkload}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteWorkloadCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsService#getWorkload}.
+                     * @param error Error, if any
+                     * @param [response] Workload
+                     */
+                    type GetWorkloadCallback = (error: (Error|null), response?: google.cloud.assuredworkloads.v1beta1.Workload) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsService#analyzeWorkloadMove}.
+                     * @param error Error, if any
+                     * @param [response] AnalyzeWorkloadMoveResponse
+                     */
+                    type AnalyzeWorkloadMoveCallback = (error: (Error|null), response?: google.cloud.assuredworkloads.v1beta1.AnalyzeWorkloadMoveResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsService#listWorkloads}.
+                     * @param error Error, if any
+                     * @param [response] ListWorkloadsResponse
+                     */
+                    type ListWorkloadsCallback = (error: (Error|null), response?: google.cloud.assuredworkloads.v1beta1.ListWorkloadsResponse) => void;
                 }
             }
         }
