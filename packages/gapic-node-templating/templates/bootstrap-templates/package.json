@@ -5,6 +5,7 @@
     "repository": "googleapis/{{monoRepoName}}",
     "license": "Apache-2.0",
     "author": "Google LLC",
+    "main": "build/src/index.js",
     "files": [
       "build/src",
       "build/protos"
@@ -32,7 +33,7 @@
       "fix": "gts fix",
       "lint": "gts check",
       "prepare": "npm run compile-protos && npm run compile",
-      "system-test": "c8 mocha build/system-test",
+      "system-test": "npm run compile && c8 mocha build/system-test",
       "test": "c8 mocha build/test",
       "samples-test": "cd samples/ && npm link ../ && npm test",
       "prelint": "cd samples; npm link ../; npm i"
