@@ -16,7 +16,19 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+import {AppConnectorsServiceClient} from '@google-cloud/appconnectors';
 
-module.exports = {
-  ...require('gts/.prettierrc.json')
+// check that the client class type name can be used
+function doStuffWithAppConnectorsServiceClient(
+  client: AppConnectorsServiceClient
+) {
+  client.close();
 }
+
+function main() {
+  // check that the client instance can be created
+  const appConnectorsServiceClient = new AppConnectorsServiceClient();
+  doStuffWithAppConnectorsServiceClient(appConnectorsServiceClient);
+}
+
+main();
