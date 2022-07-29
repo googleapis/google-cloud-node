@@ -20,32 +20,20 @@
 
 'use strict';
 
-function main(parent, utilizationReport, utilizationReportId) {
-  // [START vmmigration_v1_generated_VmMigration_CreateUtilizationReport_async]
+function main(datacenterConnector) {
+  // [START vmmigration_v1_generated_VmMigration_UpgradeAppliance_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The Utilization Report's parent.
+   *  Required. The DatacenterConnector name.
    */
-  // const parent = 'abc123'
-  /**
-   *  Required. The report to create.
-   */
-  // const utilizationReport = {}
-  /**
-   *  Required. The ID to use for the report, which will become the final
-   *  component of the reports's resource name.
-   *  This value maximum length is 63 characters, and valid characters
-   *  are /[a-z][0-9]-/. It must start with an english letter and must not
-   *  end with a hyphen.
-   */
-  // const utilizationReportId = 'abc123'
+  // const datacenterConnector = 'abc123'
   /**
    *  A request ID to identify requests. Specify a unique request ID
    *  so that if you must retry your request, the server will know to ignore
    *  the request if it has already been completed. The server will guarantee
-   *  that for at least 60 minutes since the first request.
+   *  that for at least 60 minutes after the first request.
    *  For example, consider a situation where you make an initial request and t
    *  he request times out. If you make the request again with the same request
    *  ID, the server can check if original operation with the same request ID
@@ -62,22 +50,20 @@ function main(parent, utilizationReport, utilizationReportId) {
   // Instantiates a client
   const vmmigrationClient = new VmMigrationClient();
 
-  async function callCreateUtilizationReport() {
+  async function callUpgradeAppliance() {
     // Construct request
     const request = {
-      parent,
-      utilizationReport,
-      utilizationReportId,
+      datacenterConnector,
     };
 
     // Run request
-    const [operation] = await vmmigrationClient.createUtilizationReport(request);
+    const [operation] = await vmmigrationClient.upgradeAppliance(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callCreateUtilizationReport();
-  // [END vmmigration_v1_generated_VmMigration_CreateUtilizationReport_async]
+  callUpgradeAppliance();
+  // [END vmmigration_v1_generated_VmMigration_UpgradeAppliance_async]
 }
 
 process.on('unhandledRejection', err => {

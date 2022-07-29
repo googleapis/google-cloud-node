@@ -29,6 +29,10 @@ function main(name) {
    *  Required. The name of the MigratingVm.
    */
   // const name = 'abc123'
+  /**
+   *  Optional. The level of details of the migrating VM.
+   */
+  // const view = {}
 
   // Imports the Vmmigration library
   const {VmMigrationClient} = require('@google-cloud/vmmigration').v1;

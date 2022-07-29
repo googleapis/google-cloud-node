@@ -243,6 +243,20 @@ export namespace google {
                     public deleteDatacenterConnector(request: google.cloud.vmmigration.v1.IDeleteDatacenterConnectorRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls UpgradeAppliance.
+                     * @param request UpgradeApplianceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public upgradeAppliance(request: google.cloud.vmmigration.v1.IUpgradeApplianceRequest, callback: google.cloud.vmmigration.v1.VmMigration.UpgradeApplianceCallback): void;
+
+                    /**
+                     * Calls UpgradeAppliance.
+                     * @param request UpgradeApplianceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public upgradeAppliance(request: google.cloud.vmmigration.v1.IUpgradeApplianceRequest): Promise<google.longrunning.Operation>;
+
+                    /**
                      * Calls CreateMigratingVm.
                      * @param request CreateMigratingVmRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Operation
@@ -750,6 +764,13 @@ export namespace google {
                     type DeleteDatacenterConnectorCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
+                     * Callback as used by {@link google.cloud.vmmigration.v1.VmMigration#upgradeAppliance}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpgradeApplianceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.vmmigration.v1.VmMigration#createMigratingVm}.
                      * @param error Error, if any
                      * @param [response] Operation
@@ -953,6 +974,42 @@ export namespace google {
                     type DeleteTargetProjectCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
                 }
 
+                /** UtilizationReportView enum. */
+                enum UtilizationReportView {
+                    UTILIZATION_REPORT_VIEW_UNSPECIFIED = 0,
+                    BASIC = 1,
+                    FULL = 2
+                }
+
+                /** MigratingVmView enum. */
+                enum MigratingVmView {
+                    MIGRATING_VM_VIEW_UNSPECIFIED = 0,
+                    MIGRATING_VM_VIEW_BASIC = 1,
+                    MIGRATING_VM_VIEW_FULL = 2
+                }
+
+                /** ComputeEngineDiskType enum. */
+                enum ComputeEngineDiskType {
+                    COMPUTE_ENGINE_DISK_TYPE_UNSPECIFIED = 0,
+                    COMPUTE_ENGINE_DISK_TYPE_STANDARD = 1,
+                    COMPUTE_ENGINE_DISK_TYPE_SSD = 2,
+                    COMPUTE_ENGINE_DISK_TYPE_BALANCED = 3
+                }
+
+                /** ComputeEngineLicenseType enum. */
+                enum ComputeEngineLicenseType {
+                    COMPUTE_ENGINE_LICENSE_TYPE_DEFAULT = 0,
+                    COMPUTE_ENGINE_LICENSE_TYPE_PAYG = 1,
+                    COMPUTE_ENGINE_LICENSE_TYPE_BYOL = 2
+                }
+
+                /** ComputeEngineBootOption enum. */
+                enum ComputeEngineBootOption {
+                    COMPUTE_ENGINE_BOOT_OPTION_UNSPECIFIED = 0,
+                    COMPUTE_ENGINE_BOOT_OPTION_EFI = 1,
+                    COMPUTE_ENGINE_BOOT_OPTION_BIOS = 2
+                }
+
                 /** Properties of a ReplicationCycle. */
                 interface IReplicationCycle {
 
@@ -1049,13 +1106,6 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
-                /** UtilizationReportView enum. */
-                enum UtilizationReportView {
-                    UTILIZATION_REPORT_VIEW_UNSPECIFIED = 0,
-                    BASIC = 1,
-                    FULL = 2
-                }
-
                 /** Properties of a ReplicationSync. */
                 interface IReplicationSync {
 
@@ -1146,28 +1196,6 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
-                /** ComputeEngineDiskType enum. */
-                enum ComputeEngineDiskType {
-                    COMPUTE_ENGINE_DISK_TYPE_UNSPECIFIED = 0,
-                    COMPUTE_ENGINE_DISK_TYPE_STANDARD = 1,
-                    COMPUTE_ENGINE_DISK_TYPE_SSD = 2,
-                    COMPUTE_ENGINE_DISK_TYPE_BALANCED = 3
-                }
-
-                /** ComputeEngineLicenseType enum. */
-                enum ComputeEngineLicenseType {
-                    COMPUTE_ENGINE_LICENSE_TYPE_DEFAULT = 0,
-                    COMPUTE_ENGINE_LICENSE_TYPE_PAYG = 1,
-                    COMPUTE_ENGINE_LICENSE_TYPE_BYOL = 2
-                }
-
-                /** ComputeEngineBootOption enum. */
-                enum ComputeEngineBootOption {
-                    COMPUTE_ENGINE_BOOT_OPTION_UNSPECIFIED = 0,
-                    COMPUTE_ENGINE_BOOT_OPTION_EFI = 1,
-                    COMPUTE_ENGINE_BOOT_OPTION_BIOS = 2
-                }
-
                 /** Properties of a MigratingVm. */
                 interface IMigratingVm {
 
@@ -1213,8 +1241,14 @@ export namespace google {
                     /** MigratingVm labels */
                     labels?: ({ [k: string]: string }|null);
 
+                    /** MigratingVm recentCloneJobs */
+                    recentCloneJobs?: (google.cloud.vmmigration.v1.ICloneJob[]|null);
+
                     /** MigratingVm error */
                     error?: (google.rpc.IStatus|null);
+
+                    /** MigratingVm recentCutoverJobs */
+                    recentCutoverJobs?: (google.cloud.vmmigration.v1.ICutoverJob[]|null);
                 }
 
                 /** Represents a MigratingVm. */
@@ -1268,8 +1302,14 @@ export namespace google {
                     /** MigratingVm labels. */
                     public labels: { [k: string]: string };
 
+                    /** MigratingVm recentCloneJobs. */
+                    public recentCloneJobs: google.cloud.vmmigration.v1.ICloneJob[];
+
                     /** MigratingVm error. */
                     public error?: (google.rpc.IStatus|null);
+
+                    /** MigratingVm recentCutoverJobs. */
+                    public recentCutoverJobs: google.cloud.vmmigration.v1.ICutoverJob[];
 
                     /** MigratingVm targetVmDefaults. */
                     public targetVmDefaults?: "computeEngineTargetDefaults";
@@ -1373,6 +1413,9 @@ export namespace google {
                     /** CloneJob createTime */
                     createTime?: (google.protobuf.ITimestamp|null);
 
+                    /** CloneJob endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
                     /** CloneJob name */
                     name?: (string|null);
 
@@ -1400,6 +1443,9 @@ export namespace google {
 
                     /** CloneJob createTime. */
                     public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CloneJob endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
 
                     /** CloneJob name. */
                     public name: string;
@@ -1511,6 +1557,9 @@ export namespace google {
                     /** CutoverJob createTime */
                     createTime?: (google.protobuf.ITimestamp|null);
 
+                    /** CutoverJob endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
                     /** CutoverJob name */
                     name?: (string|null);
 
@@ -1544,6 +1593,9 @@ export namespace google {
 
                     /** CutoverJob createTime. */
                     public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CutoverJob endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
 
                     /** CutoverJob name. */
                     public name: string;
@@ -2503,6 +2555,18 @@ export namespace google {
 
                     /** DatacenterConnector error */
                     error?: (google.rpc.IStatus|null);
+
+                    /** DatacenterConnector applianceInfrastructureVersion */
+                    applianceInfrastructureVersion?: (string|null);
+
+                    /** DatacenterConnector applianceSoftwareVersion */
+                    applianceSoftwareVersion?: (string|null);
+
+                    /** DatacenterConnector availableVersions */
+                    availableVersions?: (google.cloud.vmmigration.v1.IAvailableUpdates|null);
+
+                    /** DatacenterConnector upgradeStatus */
+                    upgradeStatus?: (google.cloud.vmmigration.v1.IUpgradeStatus|null);
                 }
 
                 /** Represents a DatacenterConnector. */
@@ -2543,6 +2607,18 @@ export namespace google {
 
                     /** DatacenterConnector error. */
                     public error?: (google.rpc.IStatus|null);
+
+                    /** DatacenterConnector applianceInfrastructureVersion. */
+                    public applianceInfrastructureVersion: string;
+
+                    /** DatacenterConnector applianceSoftwareVersion. */
+                    public applianceSoftwareVersion: string;
+
+                    /** DatacenterConnector availableVersions. */
+                    public availableVersions?: (google.cloud.vmmigration.v1.IAvailableUpdates|null);
+
+                    /** DatacenterConnector upgradeStatus. */
+                    public upgradeStatus?: (google.cloud.vmmigration.v1.IUpgradeStatus|null);
 
                     /**
                      * Creates a new DatacenterConnector instance using the specified properties.
@@ -2625,6 +2701,335 @@ export namespace google {
                         FAILED = 3,
                         ACTIVE = 4
                     }
+                }
+
+                /** Properties of an UpgradeStatus. */
+                interface IUpgradeStatus {
+
+                    /** UpgradeStatus version */
+                    version?: (string|null);
+
+                    /** UpgradeStatus state */
+                    state?: (google.cloud.vmmigration.v1.UpgradeStatus.State|keyof typeof google.cloud.vmmigration.v1.UpgradeStatus.State|null);
+
+                    /** UpgradeStatus error */
+                    error?: (google.rpc.IStatus|null);
+
+                    /** UpgradeStatus startTime */
+                    startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** UpgradeStatus previousVersion */
+                    previousVersion?: (string|null);
+                }
+
+                /** Represents an UpgradeStatus. */
+                class UpgradeStatus implements IUpgradeStatus {
+
+                    /**
+                     * Constructs a new UpgradeStatus.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IUpgradeStatus);
+
+                    /** UpgradeStatus version. */
+                    public version: string;
+
+                    /** UpgradeStatus state. */
+                    public state: (google.cloud.vmmigration.v1.UpgradeStatus.State|keyof typeof google.cloud.vmmigration.v1.UpgradeStatus.State);
+
+                    /** UpgradeStatus error. */
+                    public error?: (google.rpc.IStatus|null);
+
+                    /** UpgradeStatus startTime. */
+                    public startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** UpgradeStatus previousVersion. */
+                    public previousVersion: string;
+
+                    /**
+                     * Creates a new UpgradeStatus instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpgradeStatus instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IUpgradeStatus): google.cloud.vmmigration.v1.UpgradeStatus;
+
+                    /**
+                     * Encodes the specified UpgradeStatus message. Does not implicitly {@link google.cloud.vmmigration.v1.UpgradeStatus.verify|verify} messages.
+                     * @param message UpgradeStatus message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IUpgradeStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpgradeStatus message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.UpgradeStatus.verify|verify} messages.
+                     * @param message UpgradeStatus message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IUpgradeStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpgradeStatus message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpgradeStatus
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.UpgradeStatus;
+
+                    /**
+                     * Decodes an UpgradeStatus message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpgradeStatus
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.UpgradeStatus;
+
+                    /**
+                     * Verifies an UpgradeStatus message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpgradeStatus message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpgradeStatus
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.UpgradeStatus;
+
+                    /**
+                     * Creates a plain object from an UpgradeStatus message. Also converts values to other types if specified.
+                     * @param message UpgradeStatus
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.UpgradeStatus, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpgradeStatus to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace UpgradeStatus {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        RUNNING = 1,
+                        FAILED = 2,
+                        SUCCEEDED = 3
+                    }
+                }
+
+                /** Properties of an AvailableUpdates. */
+                interface IAvailableUpdates {
+
+                    /** AvailableUpdates newDeployableAppliance */
+                    newDeployableAppliance?: (google.cloud.vmmigration.v1.IApplianceVersion|null);
+
+                    /** AvailableUpdates inPlaceUpdate */
+                    inPlaceUpdate?: (google.cloud.vmmigration.v1.IApplianceVersion|null);
+                }
+
+                /** Represents an AvailableUpdates. */
+                class AvailableUpdates implements IAvailableUpdates {
+
+                    /**
+                     * Constructs a new AvailableUpdates.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IAvailableUpdates);
+
+                    /** AvailableUpdates newDeployableAppliance. */
+                    public newDeployableAppliance?: (google.cloud.vmmigration.v1.IApplianceVersion|null);
+
+                    /** AvailableUpdates inPlaceUpdate. */
+                    public inPlaceUpdate?: (google.cloud.vmmigration.v1.IApplianceVersion|null);
+
+                    /**
+                     * Creates a new AvailableUpdates instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AvailableUpdates instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IAvailableUpdates): google.cloud.vmmigration.v1.AvailableUpdates;
+
+                    /**
+                     * Encodes the specified AvailableUpdates message. Does not implicitly {@link google.cloud.vmmigration.v1.AvailableUpdates.verify|verify} messages.
+                     * @param message AvailableUpdates message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IAvailableUpdates, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AvailableUpdates message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.AvailableUpdates.verify|verify} messages.
+                     * @param message AvailableUpdates message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IAvailableUpdates, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AvailableUpdates message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AvailableUpdates
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.AvailableUpdates;
+
+                    /**
+                     * Decodes an AvailableUpdates message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AvailableUpdates
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.AvailableUpdates;
+
+                    /**
+                     * Verifies an AvailableUpdates message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AvailableUpdates message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AvailableUpdates
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.AvailableUpdates;
+
+                    /**
+                     * Creates a plain object from an AvailableUpdates message. Also converts values to other types if specified.
+                     * @param message AvailableUpdates
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.AvailableUpdates, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AvailableUpdates to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an ApplianceVersion. */
+                interface IApplianceVersion {
+
+                    /** ApplianceVersion version */
+                    version?: (string|null);
+
+                    /** ApplianceVersion uri */
+                    uri?: (string|null);
+
+                    /** ApplianceVersion critical */
+                    critical?: (boolean|null);
+
+                    /** ApplianceVersion releaseNotesUri */
+                    releaseNotesUri?: (string|null);
+                }
+
+                /** Represents an ApplianceVersion. */
+                class ApplianceVersion implements IApplianceVersion {
+
+                    /**
+                     * Constructs a new ApplianceVersion.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IApplianceVersion);
+
+                    /** ApplianceVersion version. */
+                    public version: string;
+
+                    /** ApplianceVersion uri. */
+                    public uri: string;
+
+                    /** ApplianceVersion critical. */
+                    public critical: boolean;
+
+                    /** ApplianceVersion releaseNotesUri. */
+                    public releaseNotesUri: string;
+
+                    /**
+                     * Creates a new ApplianceVersion instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ApplianceVersion instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IApplianceVersion): google.cloud.vmmigration.v1.ApplianceVersion;
+
+                    /**
+                     * Encodes the specified ApplianceVersion message. Does not implicitly {@link google.cloud.vmmigration.v1.ApplianceVersion.verify|verify} messages.
+                     * @param message ApplianceVersion message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IApplianceVersion, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ApplianceVersion message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.ApplianceVersion.verify|verify} messages.
+                     * @param message ApplianceVersion message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IApplianceVersion, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ApplianceVersion message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ApplianceVersion
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.ApplianceVersion;
+
+                    /**
+                     * Decodes an ApplianceVersion message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ApplianceVersion
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.ApplianceVersion;
+
+                    /**
+                     * Verifies an ApplianceVersion message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ApplianceVersion message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ApplianceVersion
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.ApplianceVersion;
+
+                    /**
+                     * Creates a plain object from an ApplianceVersion message. Also converts values to other types if specified.
+                     * @param message ApplianceVersion
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.ApplianceVersion, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ApplianceVersion to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
                 }
 
                 /** Properties of a ListSourcesRequest. */
@@ -5016,6 +5421,186 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** Properties of an UpgradeApplianceRequest. */
+                interface IUpgradeApplianceRequest {
+
+                    /** UpgradeApplianceRequest datacenterConnector */
+                    datacenterConnector?: (string|null);
+
+                    /** UpgradeApplianceRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents an UpgradeApplianceRequest. */
+                class UpgradeApplianceRequest implements IUpgradeApplianceRequest {
+
+                    /**
+                     * Constructs a new UpgradeApplianceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IUpgradeApplianceRequest);
+
+                    /** UpgradeApplianceRequest datacenterConnector. */
+                    public datacenterConnector: string;
+
+                    /** UpgradeApplianceRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new UpgradeApplianceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpgradeApplianceRequest instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IUpgradeApplianceRequest): google.cloud.vmmigration.v1.UpgradeApplianceRequest;
+
+                    /**
+                     * Encodes the specified UpgradeApplianceRequest message. Does not implicitly {@link google.cloud.vmmigration.v1.UpgradeApplianceRequest.verify|verify} messages.
+                     * @param message UpgradeApplianceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IUpgradeApplianceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpgradeApplianceRequest message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.UpgradeApplianceRequest.verify|verify} messages.
+                     * @param message UpgradeApplianceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IUpgradeApplianceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpgradeApplianceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpgradeApplianceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.UpgradeApplianceRequest;
+
+                    /**
+                     * Decodes an UpgradeApplianceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpgradeApplianceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.UpgradeApplianceRequest;
+
+                    /**
+                     * Verifies an UpgradeApplianceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpgradeApplianceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpgradeApplianceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.UpgradeApplianceRequest;
+
+                    /**
+                     * Creates a plain object from an UpgradeApplianceRequest message. Also converts values to other types if specified.
+                     * @param message UpgradeApplianceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.UpgradeApplianceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpgradeApplianceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an UpgradeApplianceResponse. */
+                interface IUpgradeApplianceResponse {
+                }
+
+                /** Represents an UpgradeApplianceResponse. */
+                class UpgradeApplianceResponse implements IUpgradeApplianceResponse {
+
+                    /**
+                     * Constructs a new UpgradeApplianceResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IUpgradeApplianceResponse);
+
+                    /**
+                     * Creates a new UpgradeApplianceResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpgradeApplianceResponse instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IUpgradeApplianceResponse): google.cloud.vmmigration.v1.UpgradeApplianceResponse;
+
+                    /**
+                     * Encodes the specified UpgradeApplianceResponse message. Does not implicitly {@link google.cloud.vmmigration.v1.UpgradeApplianceResponse.verify|verify} messages.
+                     * @param message UpgradeApplianceResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IUpgradeApplianceResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpgradeApplianceResponse message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.UpgradeApplianceResponse.verify|verify} messages.
+                     * @param message UpgradeApplianceResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IUpgradeApplianceResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpgradeApplianceResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpgradeApplianceResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.UpgradeApplianceResponse;
+
+                    /**
+                     * Decodes an UpgradeApplianceResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpgradeApplianceResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.UpgradeApplianceResponse;
+
+                    /**
+                     * Verifies an UpgradeApplianceResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpgradeApplianceResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpgradeApplianceResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.UpgradeApplianceResponse;
+
+                    /**
+                     * Creates a plain object from an UpgradeApplianceResponse message. Also converts values to other types if specified.
+                     * @param message UpgradeApplianceResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.UpgradeApplianceResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpgradeApplianceResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Properties of a ListDatacenterConnectorsRequest. */
                 interface IListDatacenterConnectorsRequest {
 
@@ -5180,6 +5765,12 @@ export namespace google {
 
                     /** ComputeEngineTargetDefaults metadata */
                     metadata?: ({ [k: string]: string }|null);
+
+                    /** ComputeEngineTargetDefaults additionalLicenses */
+                    additionalLicenses?: (string[]|null);
+
+                    /** ComputeEngineTargetDefaults hostname */
+                    hostname?: (string|null);
                 }
 
                 /** Represents a ComputeEngineTargetDefaults. */
@@ -5238,6 +5829,12 @@ export namespace google {
 
                     /** ComputeEngineTargetDefaults metadata. */
                     public metadata: { [k: string]: string };
+
+                    /** ComputeEngineTargetDefaults additionalLicenses. */
+                    public additionalLicenses: string[];
+
+                    /** ComputeEngineTargetDefaults hostname. */
+                    public hostname: string;
 
                     /**
                      * Creates a new ComputeEngineTargetDefaults instance using the specified properties.
@@ -5360,6 +5957,12 @@ export namespace google {
 
                     /** ComputeEngineTargetDetails metadata */
                     metadata?: ({ [k: string]: string }|null);
+
+                    /** ComputeEngineTargetDetails additionalLicenses */
+                    additionalLicenses?: (string[]|null);
+
+                    /** ComputeEngineTargetDetails hostname */
+                    hostname?: (string|null);
                 }
 
                 /** Represents a ComputeEngineTargetDetails. */
@@ -5418,6 +6021,12 @@ export namespace google {
 
                     /** ComputeEngineTargetDetails metadata. */
                     public metadata: { [k: string]: string };
+
+                    /** ComputeEngineTargetDetails additionalLicenses. */
+                    public additionalLicenses: string[];
+
+                    /** ComputeEngineTargetDetails hostname. */
+                    public hostname: string;
 
                     /**
                      * Creates a new ComputeEngineTargetDetails instance using the specified properties.
@@ -6163,6 +6772,9 @@ export namespace google {
 
                     /** ListMigratingVmsRequest orderBy */
                     orderBy?: (string|null);
+
+                    /** ListMigratingVmsRequest view */
+                    view?: (google.cloud.vmmigration.v1.MigratingVmView|keyof typeof google.cloud.vmmigration.v1.MigratingVmView|null);
                 }
 
                 /** Represents a ListMigratingVmsRequest. */
@@ -6188,6 +6800,9 @@ export namespace google {
 
                     /** ListMigratingVmsRequest orderBy. */
                     public orderBy: string;
+
+                    /** ListMigratingVmsRequest view. */
+                    public view: (google.cloud.vmmigration.v1.MigratingVmView|keyof typeof google.cloud.vmmigration.v1.MigratingVmView);
 
                     /**
                      * Creates a new ListMigratingVmsRequest instance using the specified properties.
@@ -6367,6 +6982,9 @@ export namespace google {
 
                     /** GetMigratingVmRequest name */
                     name?: (string|null);
+
+                    /** GetMigratingVmRequest view */
+                    view?: (google.cloud.vmmigration.v1.MigratingVmView|keyof typeof google.cloud.vmmigration.v1.MigratingVmView|null);
                 }
 
                 /** Represents a GetMigratingVmRequest. */
@@ -6380,6 +6998,9 @@ export namespace google {
 
                     /** GetMigratingVmRequest name. */
                     public name: string;
+
+                    /** GetMigratingVmRequest view. */
+                    public view: (google.cloud.vmmigration.v1.MigratingVmView|keyof typeof google.cloud.vmmigration.v1.MigratingVmView);
 
                     /**
                      * Creates a new GetMigratingVmRequest instance using the specified properties.
@@ -9992,7 +10613,8 @@ export namespace google {
                         OS_ADAPTATION_ERROR = 5,
                         CLONE_ERROR = 6,
                         CUTOVER_ERROR = 7,
-                        UTILIZATION_REPORT_ERROR = 8
+                        UTILIZATION_REPORT_ERROR = 8,
+                        APPLIANCE_UPGRADE_ERROR = 9
                     }
                 }
             }

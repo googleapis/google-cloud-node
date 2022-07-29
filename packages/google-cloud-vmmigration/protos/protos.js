@@ -561,6 +561,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.vmmigration.v1.VmMigration#upgradeAppliance}.
+                         * @memberof google.cloud.vmmigration.v1.VmMigration
+                         * @typedef UpgradeApplianceCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UpgradeAppliance.
+                         * @function upgradeAppliance
+                         * @memberof google.cloud.vmmigration.v1.VmMigration
+                         * @instance
+                         * @param {google.cloud.vmmigration.v1.IUpgradeApplianceRequest} request UpgradeApplianceRequest message or plain object
+                         * @param {google.cloud.vmmigration.v1.VmMigration.UpgradeApplianceCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(VmMigration.prototype.upgradeAppliance = function upgradeAppliance(request, callback) {
+                            return this.rpcCall(upgradeAppliance, $root.google.cloud.vmmigration.v1.UpgradeApplianceRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UpgradeAppliance" });
+    
+                        /**
+                         * Calls UpgradeAppliance.
+                         * @function upgradeAppliance
+                         * @memberof google.cloud.vmmigration.v1.VmMigration
+                         * @instance
+                         * @param {google.cloud.vmmigration.v1.IUpgradeApplianceRequest} request UpgradeApplianceRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.vmmigration.v1.VmMigration#createMigratingVm}.
                          * @memberof google.cloud.vmmigration.v1.VmMigration
                          * @typedef CreateMigratingVmCallback
@@ -1520,6 +1553,88 @@
                         return VmMigration;
                     })();
     
+                    /**
+                     * UtilizationReportView enum.
+                     * @name google.cloud.vmmigration.v1.UtilizationReportView
+                     * @enum {number}
+                     * @property {number} UTILIZATION_REPORT_VIEW_UNSPECIFIED=0 UTILIZATION_REPORT_VIEW_UNSPECIFIED value
+                     * @property {number} BASIC=1 BASIC value
+                     * @property {number} FULL=2 FULL value
+                     */
+                    v1.UtilizationReportView = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "UTILIZATION_REPORT_VIEW_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "BASIC"] = 1;
+                        values[valuesById[2] = "FULL"] = 2;
+                        return values;
+                    })();
+    
+                    /**
+                     * MigratingVmView enum.
+                     * @name google.cloud.vmmigration.v1.MigratingVmView
+                     * @enum {number}
+                     * @property {number} MIGRATING_VM_VIEW_UNSPECIFIED=0 MIGRATING_VM_VIEW_UNSPECIFIED value
+                     * @property {number} MIGRATING_VM_VIEW_BASIC=1 MIGRATING_VM_VIEW_BASIC value
+                     * @property {number} MIGRATING_VM_VIEW_FULL=2 MIGRATING_VM_VIEW_FULL value
+                     */
+                    v1.MigratingVmView = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "MIGRATING_VM_VIEW_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "MIGRATING_VM_VIEW_BASIC"] = 1;
+                        values[valuesById[2] = "MIGRATING_VM_VIEW_FULL"] = 2;
+                        return values;
+                    })();
+    
+                    /**
+                     * ComputeEngineDiskType enum.
+                     * @name google.cloud.vmmigration.v1.ComputeEngineDiskType
+                     * @enum {number}
+                     * @property {number} COMPUTE_ENGINE_DISK_TYPE_UNSPECIFIED=0 COMPUTE_ENGINE_DISK_TYPE_UNSPECIFIED value
+                     * @property {number} COMPUTE_ENGINE_DISK_TYPE_STANDARD=1 COMPUTE_ENGINE_DISK_TYPE_STANDARD value
+                     * @property {number} COMPUTE_ENGINE_DISK_TYPE_SSD=2 COMPUTE_ENGINE_DISK_TYPE_SSD value
+                     * @property {number} COMPUTE_ENGINE_DISK_TYPE_BALANCED=3 COMPUTE_ENGINE_DISK_TYPE_BALANCED value
+                     */
+                    v1.ComputeEngineDiskType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "COMPUTE_ENGINE_DISK_TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "COMPUTE_ENGINE_DISK_TYPE_STANDARD"] = 1;
+                        values[valuesById[2] = "COMPUTE_ENGINE_DISK_TYPE_SSD"] = 2;
+                        values[valuesById[3] = "COMPUTE_ENGINE_DISK_TYPE_BALANCED"] = 3;
+                        return values;
+                    })();
+    
+                    /**
+                     * ComputeEngineLicenseType enum.
+                     * @name google.cloud.vmmigration.v1.ComputeEngineLicenseType
+                     * @enum {number}
+                     * @property {number} COMPUTE_ENGINE_LICENSE_TYPE_DEFAULT=0 COMPUTE_ENGINE_LICENSE_TYPE_DEFAULT value
+                     * @property {number} COMPUTE_ENGINE_LICENSE_TYPE_PAYG=1 COMPUTE_ENGINE_LICENSE_TYPE_PAYG value
+                     * @property {number} COMPUTE_ENGINE_LICENSE_TYPE_BYOL=2 COMPUTE_ENGINE_LICENSE_TYPE_BYOL value
+                     */
+                    v1.ComputeEngineLicenseType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "COMPUTE_ENGINE_LICENSE_TYPE_DEFAULT"] = 0;
+                        values[valuesById[1] = "COMPUTE_ENGINE_LICENSE_TYPE_PAYG"] = 1;
+                        values[valuesById[2] = "COMPUTE_ENGINE_LICENSE_TYPE_BYOL"] = 2;
+                        return values;
+                    })();
+    
+                    /**
+                     * ComputeEngineBootOption enum.
+                     * @name google.cloud.vmmigration.v1.ComputeEngineBootOption
+                     * @enum {number}
+                     * @property {number} COMPUTE_ENGINE_BOOT_OPTION_UNSPECIFIED=0 COMPUTE_ENGINE_BOOT_OPTION_UNSPECIFIED value
+                     * @property {number} COMPUTE_ENGINE_BOOT_OPTION_EFI=1 COMPUTE_ENGINE_BOOT_OPTION_EFI value
+                     * @property {number} COMPUTE_ENGINE_BOOT_OPTION_BIOS=2 COMPUTE_ENGINE_BOOT_OPTION_BIOS value
+                     */
+                    v1.ComputeEngineBootOption = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "COMPUTE_ENGINE_BOOT_OPTION_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "COMPUTE_ENGINE_BOOT_OPTION_EFI"] = 1;
+                        values[valuesById[2] = "COMPUTE_ENGINE_BOOT_OPTION_BIOS"] = 2;
+                        return values;
+                    })();
+    
                     v1.ReplicationCycle = (function() {
     
                         /**
@@ -1735,22 +1850,6 @@
                         return ReplicationCycle;
                     })();
     
-                    /**
-                     * UtilizationReportView enum.
-                     * @name google.cloud.vmmigration.v1.UtilizationReportView
-                     * @enum {number}
-                     * @property {number} UTILIZATION_REPORT_VIEW_UNSPECIFIED=0 UTILIZATION_REPORT_VIEW_UNSPECIFIED value
-                     * @property {number} BASIC=1 BASIC value
-                     * @property {number} FULL=2 FULL value
-                     */
-                    v1.UtilizationReportView = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "UTILIZATION_REPORT_VIEW_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "BASIC"] = 1;
-                        values[valuesById[2] = "FULL"] = 2;
-                        return values;
-                    })();
-    
                     v1.ReplicationSync = (function() {
     
                         /**
@@ -1943,56 +2042,6 @@
                         return ReplicationSync;
                     })();
     
-                    /**
-                     * ComputeEngineDiskType enum.
-                     * @name google.cloud.vmmigration.v1.ComputeEngineDiskType
-                     * @enum {number}
-                     * @property {number} COMPUTE_ENGINE_DISK_TYPE_UNSPECIFIED=0 COMPUTE_ENGINE_DISK_TYPE_UNSPECIFIED value
-                     * @property {number} COMPUTE_ENGINE_DISK_TYPE_STANDARD=1 COMPUTE_ENGINE_DISK_TYPE_STANDARD value
-                     * @property {number} COMPUTE_ENGINE_DISK_TYPE_SSD=2 COMPUTE_ENGINE_DISK_TYPE_SSD value
-                     * @property {number} COMPUTE_ENGINE_DISK_TYPE_BALANCED=3 COMPUTE_ENGINE_DISK_TYPE_BALANCED value
-                     */
-                    v1.ComputeEngineDiskType = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "COMPUTE_ENGINE_DISK_TYPE_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "COMPUTE_ENGINE_DISK_TYPE_STANDARD"] = 1;
-                        values[valuesById[2] = "COMPUTE_ENGINE_DISK_TYPE_SSD"] = 2;
-                        values[valuesById[3] = "COMPUTE_ENGINE_DISK_TYPE_BALANCED"] = 3;
-                        return values;
-                    })();
-    
-                    /**
-                     * ComputeEngineLicenseType enum.
-                     * @name google.cloud.vmmigration.v1.ComputeEngineLicenseType
-                     * @enum {number}
-                     * @property {number} COMPUTE_ENGINE_LICENSE_TYPE_DEFAULT=0 COMPUTE_ENGINE_LICENSE_TYPE_DEFAULT value
-                     * @property {number} COMPUTE_ENGINE_LICENSE_TYPE_PAYG=1 COMPUTE_ENGINE_LICENSE_TYPE_PAYG value
-                     * @property {number} COMPUTE_ENGINE_LICENSE_TYPE_BYOL=2 COMPUTE_ENGINE_LICENSE_TYPE_BYOL value
-                     */
-                    v1.ComputeEngineLicenseType = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "COMPUTE_ENGINE_LICENSE_TYPE_DEFAULT"] = 0;
-                        values[valuesById[1] = "COMPUTE_ENGINE_LICENSE_TYPE_PAYG"] = 1;
-                        values[valuesById[2] = "COMPUTE_ENGINE_LICENSE_TYPE_BYOL"] = 2;
-                        return values;
-                    })();
-    
-                    /**
-                     * ComputeEngineBootOption enum.
-                     * @name google.cloud.vmmigration.v1.ComputeEngineBootOption
-                     * @enum {number}
-                     * @property {number} COMPUTE_ENGINE_BOOT_OPTION_UNSPECIFIED=0 COMPUTE_ENGINE_BOOT_OPTION_UNSPECIFIED value
-                     * @property {number} COMPUTE_ENGINE_BOOT_OPTION_EFI=1 COMPUTE_ENGINE_BOOT_OPTION_EFI value
-                     * @property {number} COMPUTE_ENGINE_BOOT_OPTION_BIOS=2 COMPUTE_ENGINE_BOOT_OPTION_BIOS value
-                     */
-                    v1.ComputeEngineBootOption = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "COMPUTE_ENGINE_BOOT_OPTION_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "COMPUTE_ENGINE_BOOT_OPTION_EFI"] = 1;
-                        values[valuesById[2] = "COMPUTE_ENGINE_BOOT_OPTION_BIOS"] = 2;
-                        return values;
-                    })();
-    
                     v1.MigratingVm = (function() {
     
                         /**
@@ -2013,7 +2062,9 @@
                          * @property {google.cloud.vmmigration.v1.IReplicationCycle|null} [currentSyncInfo] MigratingVm currentSyncInfo
                          * @property {string|null} [group] MigratingVm group
                          * @property {Object.<string,string>|null} [labels] MigratingVm labels
+                         * @property {Array.<google.cloud.vmmigration.v1.ICloneJob>|null} [recentCloneJobs] MigratingVm recentCloneJobs
                          * @property {google.rpc.IStatus|null} [error] MigratingVm error
+                         * @property {Array.<google.cloud.vmmigration.v1.ICutoverJob>|null} [recentCutoverJobs] MigratingVm recentCutoverJobs
                          */
     
                         /**
@@ -2026,6 +2077,8 @@
                          */
                         function MigratingVm(properties) {
                             this.labels = {};
+                            this.recentCloneJobs = [];
+                            this.recentCutoverJobs = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -2145,12 +2198,28 @@
                         MigratingVm.prototype.labels = $util.emptyObject;
     
                         /**
+                         * MigratingVm recentCloneJobs.
+                         * @member {Array.<google.cloud.vmmigration.v1.ICloneJob>} recentCloneJobs
+                         * @memberof google.cloud.vmmigration.v1.MigratingVm
+                         * @instance
+                         */
+                        MigratingVm.prototype.recentCloneJobs = $util.emptyArray;
+    
+                        /**
                          * MigratingVm error.
                          * @member {google.rpc.IStatus|null|undefined} error
                          * @memberof google.cloud.vmmigration.v1.MigratingVm
                          * @instance
                          */
                         MigratingVm.prototype.error = null;
+    
+                        /**
+                         * MigratingVm recentCutoverJobs.
+                         * @member {Array.<google.cloud.vmmigration.v1.ICutoverJob>} recentCutoverJobs
+                         * @memberof google.cloud.vmmigration.v1.MigratingVm
+                         * @instance
+                         */
+                        MigratingVm.prototype.recentCutoverJobs = $util.emptyArray;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -2211,10 +2280,16 @@
                             if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
                                 for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
                                     writer.uint32(/* id 16, wireType 2 =*/130).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.recentCloneJobs != null && message.recentCloneJobs.length)
+                                for (var i = 0; i < message.recentCloneJobs.length; ++i)
+                                    $root.google.cloud.vmmigration.v1.CloneJob.encode(message.recentCloneJobs[i], writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
                             if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
                                 writer.uint32(/* id 18, wireType 2 =*/146).string(message.displayName);
                             if (message.error != null && Object.hasOwnProperty.call(message, "error"))
                                 $root.google.rpc.Status.encode(message.error, writer.uint32(/* id 19, wireType 2 =*/154).fork()).ldelim();
+                            if (message.recentCutoverJobs != null && message.recentCutoverJobs.length)
+                                for (var i = 0; i < message.recentCutoverJobs.length; ++i)
+                                    $root.google.cloud.vmmigration.v1.CutoverJob.encode(message.recentCutoverJobs[i], writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
                             if (message.stateTime != null && Object.hasOwnProperty.call(message, "stateTime"))
                                 $root.google.protobuf.Timestamp.encode(message.stateTime, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
                             if (message.state != null && Object.hasOwnProperty.call(message, "state"))
@@ -2316,8 +2391,18 @@
                                     }
                                     message.labels[key] = value;
                                     break;
+                                case 17:
+                                    if (!(message.recentCloneJobs && message.recentCloneJobs.length))
+                                        message.recentCloneJobs = [];
+                                    message.recentCloneJobs.push($root.google.cloud.vmmigration.v1.CloneJob.decode(reader, reader.uint32()));
+                                    break;
                                 case 19:
                                     message.error = $root.google.rpc.Status.decode(reader, reader.uint32());
+                                    break;
+                                case 20:
+                                    if (!(message.recentCutoverJobs && message.recentCutoverJobs.length))
+                                        message.recentCutoverJobs = [];
+                                    message.recentCutoverJobs.push($root.google.cloud.vmmigration.v1.CutoverJob.decode(reader, reader.uint32()));
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -2434,10 +2519,28 @@
                                     if (!$util.isString(message.labels[key[i]]))
                                         return "labels: string{k:string} expected";
                             }
+                            if (message.recentCloneJobs != null && message.hasOwnProperty("recentCloneJobs")) {
+                                if (!Array.isArray(message.recentCloneJobs))
+                                    return "recentCloneJobs: array expected";
+                                for (var i = 0; i < message.recentCloneJobs.length; ++i) {
+                                    var error = $root.google.cloud.vmmigration.v1.CloneJob.verify(message.recentCloneJobs[i]);
+                                    if (error)
+                                        return "recentCloneJobs." + error;
+                                }
+                            }
                             if (message.error != null && message.hasOwnProperty("error")) {
                                 var error = $root.google.rpc.Status.verify(message.error);
                                 if (error)
                                     return "error." + error;
+                            }
+                            if (message.recentCutoverJobs != null && message.hasOwnProperty("recentCutoverJobs")) {
+                                if (!Array.isArray(message.recentCutoverJobs))
+                                    return "recentCutoverJobs: array expected";
+                                for (var i = 0; i < message.recentCutoverJobs.length; ++i) {
+                                    var error = $root.google.cloud.vmmigration.v1.CutoverJob.verify(message.recentCutoverJobs[i]);
+                                    if (error)
+                                        return "recentCutoverJobs." + error;
+                                }
                             }
                             return null;
                         };
@@ -2556,10 +2659,30 @@
                                 for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
                                     message.labels[keys[i]] = String(object.labels[keys[i]]);
                             }
+                            if (object.recentCloneJobs) {
+                                if (!Array.isArray(object.recentCloneJobs))
+                                    throw TypeError(".google.cloud.vmmigration.v1.MigratingVm.recentCloneJobs: array expected");
+                                message.recentCloneJobs = [];
+                                for (var i = 0; i < object.recentCloneJobs.length; ++i) {
+                                    if (typeof object.recentCloneJobs[i] !== "object")
+                                        throw TypeError(".google.cloud.vmmigration.v1.MigratingVm.recentCloneJobs: object expected");
+                                    message.recentCloneJobs[i] = $root.google.cloud.vmmigration.v1.CloneJob.fromObject(object.recentCloneJobs[i]);
+                                }
+                            }
                             if (object.error != null) {
                                 if (typeof object.error !== "object")
                                     throw TypeError(".google.cloud.vmmigration.v1.MigratingVm.error: object expected");
                                 message.error = $root.google.rpc.Status.fromObject(object.error);
+                            }
+                            if (object.recentCutoverJobs) {
+                                if (!Array.isArray(object.recentCutoverJobs))
+                                    throw TypeError(".google.cloud.vmmigration.v1.MigratingVm.recentCutoverJobs: array expected");
+                                message.recentCutoverJobs = [];
+                                for (var i = 0; i < object.recentCutoverJobs.length; ++i) {
+                                    if (typeof object.recentCutoverJobs[i] !== "object")
+                                        throw TypeError(".google.cloud.vmmigration.v1.MigratingVm.recentCutoverJobs: object expected");
+                                    message.recentCutoverJobs[i] = $root.google.cloud.vmmigration.v1.CutoverJob.fromObject(object.recentCutoverJobs[i]);
+                                }
                             }
                             return message;
                         };
@@ -2577,6 +2700,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.recentCloneJobs = [];
+                                object.recentCutoverJobs = [];
+                            }
                             if (options.objects || options.defaults)
                                 object.labels = {};
                             if (options.defaults) {
@@ -2618,10 +2745,20 @@
                                 for (var j = 0; j < keys2.length; ++j)
                                     object.labels[keys2[j]] = message.labels[keys2[j]];
                             }
+                            if (message.recentCloneJobs && message.recentCloneJobs.length) {
+                                object.recentCloneJobs = [];
+                                for (var j = 0; j < message.recentCloneJobs.length; ++j)
+                                    object.recentCloneJobs[j] = $root.google.cloud.vmmigration.v1.CloneJob.toObject(message.recentCloneJobs[j], options);
+                            }
                             if (message.displayName != null && message.hasOwnProperty("displayName"))
                                 object.displayName = message.displayName;
                             if (message.error != null && message.hasOwnProperty("error"))
                                 object.error = $root.google.rpc.Status.toObject(message.error, options);
+                            if (message.recentCutoverJobs && message.recentCutoverJobs.length) {
+                                object.recentCutoverJobs = [];
+                                for (var j = 0; j < message.recentCutoverJobs.length; ++j)
+                                    object.recentCutoverJobs[j] = $root.google.cloud.vmmigration.v1.CutoverJob.toObject(message.recentCutoverJobs[j], options);
+                            }
                             if (message.stateTime != null && message.hasOwnProperty("stateTime"))
                                 object.stateTime = $root.google.protobuf.Timestamp.toObject(message.stateTime, options);
                             if (message.state != null && message.hasOwnProperty("state"))
@@ -2690,6 +2827,7 @@
                          * @interface ICloneJob
                          * @property {google.cloud.vmmigration.v1.IComputeEngineTargetDetails|null} [computeEngineTargetDetails] CloneJob computeEngineTargetDetails
                          * @property {google.protobuf.ITimestamp|null} [createTime] CloneJob createTime
+                         * @property {google.protobuf.ITimestamp|null} [endTime] CloneJob endTime
                          * @property {string|null} [name] CloneJob name
                          * @property {google.cloud.vmmigration.v1.CloneJob.State|null} [state] CloneJob state
                          * @property {google.protobuf.ITimestamp|null} [stateTime] CloneJob stateTime
@@ -2726,6 +2864,14 @@
                          * @instance
                          */
                         CloneJob.prototype.createTime = null;
+    
+                        /**
+                         * CloneJob endTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} endTime
+                         * @memberof google.cloud.vmmigration.v1.CloneJob
+                         * @instance
+                         */
+                        CloneJob.prototype.endTime = null;
     
                         /**
                          * CloneJob name.
@@ -2809,6 +2955,8 @@
                                 $root.google.rpc.Status.encode(message.error, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
                             if (message.computeEngineTargetDetails != null && Object.hasOwnProperty.call(message, "computeEngineTargetDetails"))
                                 $root.google.cloud.vmmigration.v1.ComputeEngineTargetDetails.encode(message.computeEngineTargetDetails, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
+                            if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
+                                $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
                             return writer;
                         };
     
@@ -2848,6 +2996,9 @@
                                     break;
                                 case 1:
                                     message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 22:
+                                    message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                                     break;
                                 case 3:
                                     message.name = reader.string();
@@ -2910,6 +3061,11 @@
                                 if (error)
                                     return "createTime." + error;
                             }
+                            if (message.endTime != null && message.hasOwnProperty("endTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.endTime);
+                                if (error)
+                                    return "endTime." + error;
+                            }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -2961,6 +3117,11 @@
                                 if (typeof object.createTime !== "object")
                                     throw TypeError(".google.cloud.vmmigration.v1.CloneJob.createTime: object expected");
                                 message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.endTime != null) {
+                                if (typeof object.endTime !== "object")
+                                    throw TypeError(".google.cloud.vmmigration.v1.CloneJob.endTime: object expected");
+                                message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
                             }
                             if (object.name != null)
                                 message.name = String(object.name);
@@ -3030,6 +3191,7 @@
                                 object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
                                 object.stateTime = null;
                                 object.error = null;
+                                object.endTime = null;
                             }
                             if (message.createTime != null && message.hasOwnProperty("createTime"))
                                 object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
@@ -3046,6 +3208,8 @@
                                 if (options.oneofs)
                                     object.targetVmDetails = "computeEngineTargetDetails";
                             }
+                            if (message.endTime != null && message.hasOwnProperty("endTime"))
+                                object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
                             return object;
                         };
     
@@ -3097,6 +3261,7 @@
                          * @interface ICutoverJob
                          * @property {google.cloud.vmmigration.v1.IComputeEngineTargetDetails|null} [computeEngineTargetDetails] CutoverJob computeEngineTargetDetails
                          * @property {google.protobuf.ITimestamp|null} [createTime] CutoverJob createTime
+                         * @property {google.protobuf.ITimestamp|null} [endTime] CutoverJob endTime
                          * @property {string|null} [name] CutoverJob name
                          * @property {google.cloud.vmmigration.v1.CutoverJob.State|null} [state] CutoverJob state
                          * @property {google.protobuf.ITimestamp|null} [stateTime] CutoverJob stateTime
@@ -3135,6 +3300,14 @@
                          * @instance
                          */
                         CutoverJob.prototype.createTime = null;
+    
+                        /**
+                         * CutoverJob endTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} endTime
+                         * @memberof google.cloud.vmmigration.v1.CutoverJob
+                         * @instance
+                         */
+                        CutoverJob.prototype.endTime = null;
     
                         /**
                          * CutoverJob name.
@@ -3238,6 +3411,8 @@
                                 writer.uint32(/* id 13, wireType 0 =*/104).int32(message.progressPercent);
                             if (message.computeEngineTargetDetails != null && Object.hasOwnProperty.call(message, "computeEngineTargetDetails"))
                                 $root.google.cloud.vmmigration.v1.ComputeEngineTargetDetails.encode(message.computeEngineTargetDetails, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                            if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
+                                $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
                             return writer;
                         };
     
@@ -3277,6 +3452,9 @@
                                     break;
                                 case 1:
                                     message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 16:
+                                    message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                                     break;
                                 case 3:
                                     message.name = reader.string();
@@ -3345,6 +3523,11 @@
                                 if (error)
                                     return "createTime." + error;
                             }
+                            if (message.endTime != null && message.hasOwnProperty("endTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.endTime);
+                                if (error)
+                                    return "endTime." + error;
+                            }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -3402,6 +3585,11 @@
                                 if (typeof object.createTime !== "object")
                                     throw TypeError(".google.cloud.vmmigration.v1.CutoverJob.createTime: object expected");
                                 message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.endTime != null) {
+                                if (typeof object.endTime !== "object")
+                                    throw TypeError(".google.cloud.vmmigration.v1.CutoverJob.endTime: object expected");
+                                message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
                             }
                             if (object.name != null)
                                 message.name = String(object.name);
@@ -3477,6 +3665,7 @@
                                 object.error = null;
                                 object.stateMessage = "";
                                 object.progressPercent = 0;
+                                object.endTime = null;
                             }
                             if (message.createTime != null && message.hasOwnProperty("createTime"))
                                 object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
@@ -3497,6 +3686,8 @@
                                 if (options.oneofs)
                                     object.targetVmDetails = "computeEngineTargetDetails";
                             }
+                            if (message.endTime != null && message.hasOwnProperty("endTime"))
+                                object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
                             return object;
                         };
     
@@ -5518,6 +5709,10 @@
                          * @property {google.cloud.vmmigration.v1.DatacenterConnector.State|null} [state] DatacenterConnector state
                          * @property {google.protobuf.ITimestamp|null} [stateTime] DatacenterConnector stateTime
                          * @property {google.rpc.IStatus|null} [error] DatacenterConnector error
+                         * @property {string|null} [applianceInfrastructureVersion] DatacenterConnector applianceInfrastructureVersion
+                         * @property {string|null} [applianceSoftwareVersion] DatacenterConnector applianceSoftwareVersion
+                         * @property {google.cloud.vmmigration.v1.IAvailableUpdates|null} [availableVersions] DatacenterConnector availableVersions
+                         * @property {google.cloud.vmmigration.v1.IUpgradeStatus|null} [upgradeStatus] DatacenterConnector upgradeStatus
                          */
     
                         /**
@@ -5616,6 +5811,38 @@
                         DatacenterConnector.prototype.error = null;
     
                         /**
+                         * DatacenterConnector applianceInfrastructureVersion.
+                         * @member {string} applianceInfrastructureVersion
+                         * @memberof google.cloud.vmmigration.v1.DatacenterConnector
+                         * @instance
+                         */
+                        DatacenterConnector.prototype.applianceInfrastructureVersion = "";
+    
+                        /**
+                         * DatacenterConnector applianceSoftwareVersion.
+                         * @member {string} applianceSoftwareVersion
+                         * @memberof google.cloud.vmmigration.v1.DatacenterConnector
+                         * @instance
+                         */
+                        DatacenterConnector.prototype.applianceSoftwareVersion = "";
+    
+                        /**
+                         * DatacenterConnector availableVersions.
+                         * @member {google.cloud.vmmigration.v1.IAvailableUpdates|null|undefined} availableVersions
+                         * @memberof google.cloud.vmmigration.v1.DatacenterConnector
+                         * @instance
+                         */
+                        DatacenterConnector.prototype.availableVersions = null;
+    
+                        /**
+                         * DatacenterConnector upgradeStatus.
+                         * @member {google.cloud.vmmigration.v1.IUpgradeStatus|null|undefined} upgradeStatus
+                         * @memberof google.cloud.vmmigration.v1.DatacenterConnector
+                         * @instance
+                         */
+                        DatacenterConnector.prototype.upgradeStatus = null;
+    
+                        /**
                          * Creates a new DatacenterConnector instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.vmmigration.v1.DatacenterConnector
@@ -5659,6 +5886,14 @@
                                 $root.google.rpc.Status.encode(message.error, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                             if (message.registrationId != null && Object.hasOwnProperty.call(message, "registrationId"))
                                 writer.uint32(/* id 12, wireType 2 =*/98).string(message.registrationId);
+                            if (message.applianceInfrastructureVersion != null && Object.hasOwnProperty.call(message, "applianceInfrastructureVersion"))
+                                writer.uint32(/* id 13, wireType 2 =*/106).string(message.applianceInfrastructureVersion);
+                            if (message.applianceSoftwareVersion != null && Object.hasOwnProperty.call(message, "applianceSoftwareVersion"))
+                                writer.uint32(/* id 14, wireType 2 =*/114).string(message.applianceSoftwareVersion);
+                            if (message.availableVersions != null && Object.hasOwnProperty.call(message, "availableVersions"))
+                                $root.google.cloud.vmmigration.v1.AvailableUpdates.encode(message.availableVersions, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
+                            if (message.upgradeStatus != null && Object.hasOwnProperty.call(message, "upgradeStatus"))
+                                $root.google.cloud.vmmigration.v1.UpgradeStatus.encode(message.upgradeStatus, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
                             return writer;
                         };
     
@@ -5722,6 +5957,18 @@
                                     break;
                                 case 11:
                                     message.error = $root.google.rpc.Status.decode(reader, reader.uint32());
+                                    break;
+                                case 13:
+                                    message.applianceInfrastructureVersion = reader.string();
+                                    break;
+                                case 14:
+                                    message.applianceSoftwareVersion = reader.string();
+                                    break;
+                                case 15:
+                                    message.availableVersions = $root.google.cloud.vmmigration.v1.AvailableUpdates.decode(reader, reader.uint32());
+                                    break;
+                                case 16:
+                                    message.upgradeStatus = $root.google.cloud.vmmigration.v1.UpgradeStatus.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -5804,6 +6051,22 @@
                                 if (error)
                                     return "error." + error;
                             }
+                            if (message.applianceInfrastructureVersion != null && message.hasOwnProperty("applianceInfrastructureVersion"))
+                                if (!$util.isString(message.applianceInfrastructureVersion))
+                                    return "applianceInfrastructureVersion: string expected";
+                            if (message.applianceSoftwareVersion != null && message.hasOwnProperty("applianceSoftwareVersion"))
+                                if (!$util.isString(message.applianceSoftwareVersion))
+                                    return "applianceSoftwareVersion: string expected";
+                            if (message.availableVersions != null && message.hasOwnProperty("availableVersions")) {
+                                var error = $root.google.cloud.vmmigration.v1.AvailableUpdates.verify(message.availableVersions);
+                                if (error)
+                                    return "availableVersions." + error;
+                            }
+                            if (message.upgradeStatus != null && message.hasOwnProperty("upgradeStatus")) {
+                                var error = $root.google.cloud.vmmigration.v1.UpgradeStatus.verify(message.upgradeStatus);
+                                if (error)
+                                    return "upgradeStatus." + error;
+                            }
                             return null;
                         };
     
@@ -5871,6 +6134,20 @@
                                     throw TypeError(".google.cloud.vmmigration.v1.DatacenterConnector.error: object expected");
                                 message.error = $root.google.rpc.Status.fromObject(object.error);
                             }
+                            if (object.applianceInfrastructureVersion != null)
+                                message.applianceInfrastructureVersion = String(object.applianceInfrastructureVersion);
+                            if (object.applianceSoftwareVersion != null)
+                                message.applianceSoftwareVersion = String(object.applianceSoftwareVersion);
+                            if (object.availableVersions != null) {
+                                if (typeof object.availableVersions !== "object")
+                                    throw TypeError(".google.cloud.vmmigration.v1.DatacenterConnector.availableVersions: object expected");
+                                message.availableVersions = $root.google.cloud.vmmigration.v1.AvailableUpdates.fromObject(object.availableVersions);
+                            }
+                            if (object.upgradeStatus != null) {
+                                if (typeof object.upgradeStatus !== "object")
+                                    throw TypeError(".google.cloud.vmmigration.v1.DatacenterConnector.upgradeStatus: object expected");
+                                message.upgradeStatus = $root.google.cloud.vmmigration.v1.UpgradeStatus.fromObject(object.upgradeStatus);
+                            }
                             return message;
                         };
     
@@ -5898,6 +6175,10 @@
                                 object.bucket = "";
                                 object.error = null;
                                 object.registrationId = "";
+                                object.applianceInfrastructureVersion = "";
+                                object.applianceSoftwareVersion = "";
+                                object.availableVersions = null;
+                                object.upgradeStatus = null;
                             }
                             if (message.createTime != null && message.hasOwnProperty("createTime"))
                                 object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
@@ -5919,6 +6200,14 @@
                                 object.error = $root.google.rpc.Status.toObject(message.error, options);
                             if (message.registrationId != null && message.hasOwnProperty("registrationId"))
                                 object.registrationId = message.registrationId;
+                            if (message.applianceInfrastructureVersion != null && message.hasOwnProperty("applianceInfrastructureVersion"))
+                                object.applianceInfrastructureVersion = message.applianceInfrastructureVersion;
+                            if (message.applianceSoftwareVersion != null && message.hasOwnProperty("applianceSoftwareVersion"))
+                                object.applianceSoftwareVersion = message.applianceSoftwareVersion;
+                            if (message.availableVersions != null && message.hasOwnProperty("availableVersions"))
+                                object.availableVersions = $root.google.cloud.vmmigration.v1.AvailableUpdates.toObject(message.availableVersions, options);
+                            if (message.upgradeStatus != null && message.hasOwnProperty("upgradeStatus"))
+                                object.upgradeStatus = $root.google.cloud.vmmigration.v1.UpgradeStatus.toObject(message.upgradeStatus, options);
                             return object;
                         };
     
@@ -5954,6 +6243,807 @@
                         })();
     
                         return DatacenterConnector;
+                    })();
+    
+                    v1.UpgradeStatus = (function() {
+    
+                        /**
+                         * Properties of an UpgradeStatus.
+                         * @memberof google.cloud.vmmigration.v1
+                         * @interface IUpgradeStatus
+                         * @property {string|null} [version] UpgradeStatus version
+                         * @property {google.cloud.vmmigration.v1.UpgradeStatus.State|null} [state] UpgradeStatus state
+                         * @property {google.rpc.IStatus|null} [error] UpgradeStatus error
+                         * @property {google.protobuf.ITimestamp|null} [startTime] UpgradeStatus startTime
+                         * @property {string|null} [previousVersion] UpgradeStatus previousVersion
+                         */
+    
+                        /**
+                         * Constructs a new UpgradeStatus.
+                         * @memberof google.cloud.vmmigration.v1
+                         * @classdesc Represents an UpgradeStatus.
+                         * @implements IUpgradeStatus
+                         * @constructor
+                         * @param {google.cloud.vmmigration.v1.IUpgradeStatus=} [properties] Properties to set
+                         */
+                        function UpgradeStatus(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpgradeStatus version.
+                         * @member {string} version
+                         * @memberof google.cloud.vmmigration.v1.UpgradeStatus
+                         * @instance
+                         */
+                        UpgradeStatus.prototype.version = "";
+    
+                        /**
+                         * UpgradeStatus state.
+                         * @member {google.cloud.vmmigration.v1.UpgradeStatus.State} state
+                         * @memberof google.cloud.vmmigration.v1.UpgradeStatus
+                         * @instance
+                         */
+                        UpgradeStatus.prototype.state = 0;
+    
+                        /**
+                         * UpgradeStatus error.
+                         * @member {google.rpc.IStatus|null|undefined} error
+                         * @memberof google.cloud.vmmigration.v1.UpgradeStatus
+                         * @instance
+                         */
+                        UpgradeStatus.prototype.error = null;
+    
+                        /**
+                         * UpgradeStatus startTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} startTime
+                         * @memberof google.cloud.vmmigration.v1.UpgradeStatus
+                         * @instance
+                         */
+                        UpgradeStatus.prototype.startTime = null;
+    
+                        /**
+                         * UpgradeStatus previousVersion.
+                         * @member {string} previousVersion
+                         * @memberof google.cloud.vmmigration.v1.UpgradeStatus
+                         * @instance
+                         */
+                        UpgradeStatus.prototype.previousVersion = "";
+    
+                        /**
+                         * Creates a new UpgradeStatus instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vmmigration.v1.UpgradeStatus
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.IUpgradeStatus=} [properties] Properties to set
+                         * @returns {google.cloud.vmmigration.v1.UpgradeStatus} UpgradeStatus instance
+                         */
+                        UpgradeStatus.create = function create(properties) {
+                            return new UpgradeStatus(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpgradeStatus message. Does not implicitly {@link google.cloud.vmmigration.v1.UpgradeStatus.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vmmigration.v1.UpgradeStatus
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.IUpgradeStatus} message UpgradeStatus message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpgradeStatus.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.version != null && Object.hasOwnProperty.call(message, "version"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.version);
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.state);
+                            if (message.error != null && Object.hasOwnProperty.call(message, "error"))
+                                $root.google.rpc.Status.encode(message.error, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.startTime != null && Object.hasOwnProperty.call(message, "startTime"))
+                                $root.google.protobuf.Timestamp.encode(message.startTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.previousVersion != null && Object.hasOwnProperty.call(message, "previousVersion"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.previousVersion);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpgradeStatus message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.UpgradeStatus.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vmmigration.v1.UpgradeStatus
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.IUpgradeStatus} message UpgradeStatus message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpgradeStatus.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpgradeStatus message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vmmigration.v1.UpgradeStatus
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vmmigration.v1.UpgradeStatus} UpgradeStatus
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpgradeStatus.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmmigration.v1.UpgradeStatus();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.version = reader.string();
+                                    break;
+                                case 2:
+                                    message.state = reader.int32();
+                                    break;
+                                case 3:
+                                    message.error = $root.google.rpc.Status.decode(reader, reader.uint32());
+                                    break;
+                                case 4:
+                                    message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 5:
+                                    message.previousVersion = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpgradeStatus message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vmmigration.v1.UpgradeStatus
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vmmigration.v1.UpgradeStatus} UpgradeStatus
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpgradeStatus.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpgradeStatus message.
+                         * @function verify
+                         * @memberof google.cloud.vmmigration.v1.UpgradeStatus
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpgradeStatus.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.version != null && message.hasOwnProperty("version"))
+                                if (!$util.isString(message.version))
+                                    return "version: string expected";
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            if (message.error != null && message.hasOwnProperty("error")) {
+                                var error = $root.google.rpc.Status.verify(message.error);
+                                if (error)
+                                    return "error." + error;
+                            }
+                            if (message.startTime != null && message.hasOwnProperty("startTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.startTime);
+                                if (error)
+                                    return "startTime." + error;
+                            }
+                            if (message.previousVersion != null && message.hasOwnProperty("previousVersion"))
+                                if (!$util.isString(message.previousVersion))
+                                    return "previousVersion: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpgradeStatus message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vmmigration.v1.UpgradeStatus
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vmmigration.v1.UpgradeStatus} UpgradeStatus
+                         */
+                        UpgradeStatus.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vmmigration.v1.UpgradeStatus)
+                                return object;
+                            var message = new $root.google.cloud.vmmigration.v1.UpgradeStatus();
+                            if (object.version != null)
+                                message.version = String(object.version);
+                            switch (object.state) {
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "RUNNING":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "FAILED":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "SUCCEEDED":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            }
+                            if (object.error != null) {
+                                if (typeof object.error !== "object")
+                                    throw TypeError(".google.cloud.vmmigration.v1.UpgradeStatus.error: object expected");
+                                message.error = $root.google.rpc.Status.fromObject(object.error);
+                            }
+                            if (object.startTime != null) {
+                                if (typeof object.startTime !== "object")
+                                    throw TypeError(".google.cloud.vmmigration.v1.UpgradeStatus.startTime: object expected");
+                                message.startTime = $root.google.protobuf.Timestamp.fromObject(object.startTime);
+                            }
+                            if (object.previousVersion != null)
+                                message.previousVersion = String(object.previousVersion);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpgradeStatus message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vmmigration.v1.UpgradeStatus
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.UpgradeStatus} message UpgradeStatus
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpgradeStatus.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.version = "";
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                object.error = null;
+                                object.startTime = null;
+                                object.previousVersion = "";
+                            }
+                            if (message.version != null && message.hasOwnProperty("version"))
+                                object.version = message.version;
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.vmmigration.v1.UpgradeStatus.State[message.state] : message.state;
+                            if (message.error != null && message.hasOwnProperty("error"))
+                                object.error = $root.google.rpc.Status.toObject(message.error, options);
+                            if (message.startTime != null && message.hasOwnProperty("startTime"))
+                                object.startTime = $root.google.protobuf.Timestamp.toObject(message.startTime, options);
+                            if (message.previousVersion != null && message.hasOwnProperty("previousVersion"))
+                                object.previousVersion = message.previousVersion;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpgradeStatus to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vmmigration.v1.UpgradeStatus
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpgradeStatus.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.vmmigration.v1.UpgradeStatus.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} RUNNING=1 RUNNING value
+                         * @property {number} FAILED=2 FAILED value
+                         * @property {number} SUCCEEDED=3 SUCCEEDED value
+                         */
+                        UpgradeStatus.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "RUNNING"] = 1;
+                            values[valuesById[2] = "FAILED"] = 2;
+                            values[valuesById[3] = "SUCCEEDED"] = 3;
+                            return values;
+                        })();
+    
+                        return UpgradeStatus;
+                    })();
+    
+                    v1.AvailableUpdates = (function() {
+    
+                        /**
+                         * Properties of an AvailableUpdates.
+                         * @memberof google.cloud.vmmigration.v1
+                         * @interface IAvailableUpdates
+                         * @property {google.cloud.vmmigration.v1.IApplianceVersion|null} [newDeployableAppliance] AvailableUpdates newDeployableAppliance
+                         * @property {google.cloud.vmmigration.v1.IApplianceVersion|null} [inPlaceUpdate] AvailableUpdates inPlaceUpdate
+                         */
+    
+                        /**
+                         * Constructs a new AvailableUpdates.
+                         * @memberof google.cloud.vmmigration.v1
+                         * @classdesc Represents an AvailableUpdates.
+                         * @implements IAvailableUpdates
+                         * @constructor
+                         * @param {google.cloud.vmmigration.v1.IAvailableUpdates=} [properties] Properties to set
+                         */
+                        function AvailableUpdates(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AvailableUpdates newDeployableAppliance.
+                         * @member {google.cloud.vmmigration.v1.IApplianceVersion|null|undefined} newDeployableAppliance
+                         * @memberof google.cloud.vmmigration.v1.AvailableUpdates
+                         * @instance
+                         */
+                        AvailableUpdates.prototype.newDeployableAppliance = null;
+    
+                        /**
+                         * AvailableUpdates inPlaceUpdate.
+                         * @member {google.cloud.vmmigration.v1.IApplianceVersion|null|undefined} inPlaceUpdate
+                         * @memberof google.cloud.vmmigration.v1.AvailableUpdates
+                         * @instance
+                         */
+                        AvailableUpdates.prototype.inPlaceUpdate = null;
+    
+                        /**
+                         * Creates a new AvailableUpdates instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vmmigration.v1.AvailableUpdates
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.IAvailableUpdates=} [properties] Properties to set
+                         * @returns {google.cloud.vmmigration.v1.AvailableUpdates} AvailableUpdates instance
+                         */
+                        AvailableUpdates.create = function create(properties) {
+                            return new AvailableUpdates(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AvailableUpdates message. Does not implicitly {@link google.cloud.vmmigration.v1.AvailableUpdates.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vmmigration.v1.AvailableUpdates
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.IAvailableUpdates} message AvailableUpdates message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AvailableUpdates.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.newDeployableAppliance != null && Object.hasOwnProperty.call(message, "newDeployableAppliance"))
+                                $root.google.cloud.vmmigration.v1.ApplianceVersion.encode(message.newDeployableAppliance, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.inPlaceUpdate != null && Object.hasOwnProperty.call(message, "inPlaceUpdate"))
+                                $root.google.cloud.vmmigration.v1.ApplianceVersion.encode(message.inPlaceUpdate, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AvailableUpdates message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.AvailableUpdates.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vmmigration.v1.AvailableUpdates
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.IAvailableUpdates} message AvailableUpdates message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AvailableUpdates.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AvailableUpdates message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vmmigration.v1.AvailableUpdates
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vmmigration.v1.AvailableUpdates} AvailableUpdates
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AvailableUpdates.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmmigration.v1.AvailableUpdates();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.newDeployableAppliance = $root.google.cloud.vmmigration.v1.ApplianceVersion.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.inPlaceUpdate = $root.google.cloud.vmmigration.v1.ApplianceVersion.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AvailableUpdates message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vmmigration.v1.AvailableUpdates
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vmmigration.v1.AvailableUpdates} AvailableUpdates
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AvailableUpdates.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AvailableUpdates message.
+                         * @function verify
+                         * @memberof google.cloud.vmmigration.v1.AvailableUpdates
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AvailableUpdates.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.newDeployableAppliance != null && message.hasOwnProperty("newDeployableAppliance")) {
+                                var error = $root.google.cloud.vmmigration.v1.ApplianceVersion.verify(message.newDeployableAppliance);
+                                if (error)
+                                    return "newDeployableAppliance." + error;
+                            }
+                            if (message.inPlaceUpdate != null && message.hasOwnProperty("inPlaceUpdate")) {
+                                var error = $root.google.cloud.vmmigration.v1.ApplianceVersion.verify(message.inPlaceUpdate);
+                                if (error)
+                                    return "inPlaceUpdate." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AvailableUpdates message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vmmigration.v1.AvailableUpdates
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vmmigration.v1.AvailableUpdates} AvailableUpdates
+                         */
+                        AvailableUpdates.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vmmigration.v1.AvailableUpdates)
+                                return object;
+                            var message = new $root.google.cloud.vmmigration.v1.AvailableUpdates();
+                            if (object.newDeployableAppliance != null) {
+                                if (typeof object.newDeployableAppliance !== "object")
+                                    throw TypeError(".google.cloud.vmmigration.v1.AvailableUpdates.newDeployableAppliance: object expected");
+                                message.newDeployableAppliance = $root.google.cloud.vmmigration.v1.ApplianceVersion.fromObject(object.newDeployableAppliance);
+                            }
+                            if (object.inPlaceUpdate != null) {
+                                if (typeof object.inPlaceUpdate !== "object")
+                                    throw TypeError(".google.cloud.vmmigration.v1.AvailableUpdates.inPlaceUpdate: object expected");
+                                message.inPlaceUpdate = $root.google.cloud.vmmigration.v1.ApplianceVersion.fromObject(object.inPlaceUpdate);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AvailableUpdates message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vmmigration.v1.AvailableUpdates
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.AvailableUpdates} message AvailableUpdates
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AvailableUpdates.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.newDeployableAppliance = null;
+                                object.inPlaceUpdate = null;
+                            }
+                            if (message.newDeployableAppliance != null && message.hasOwnProperty("newDeployableAppliance"))
+                                object.newDeployableAppliance = $root.google.cloud.vmmigration.v1.ApplianceVersion.toObject(message.newDeployableAppliance, options);
+                            if (message.inPlaceUpdate != null && message.hasOwnProperty("inPlaceUpdate"))
+                                object.inPlaceUpdate = $root.google.cloud.vmmigration.v1.ApplianceVersion.toObject(message.inPlaceUpdate, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AvailableUpdates to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vmmigration.v1.AvailableUpdates
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AvailableUpdates.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return AvailableUpdates;
+                    })();
+    
+                    v1.ApplianceVersion = (function() {
+    
+                        /**
+                         * Properties of an ApplianceVersion.
+                         * @memberof google.cloud.vmmigration.v1
+                         * @interface IApplianceVersion
+                         * @property {string|null} [version] ApplianceVersion version
+                         * @property {string|null} [uri] ApplianceVersion uri
+                         * @property {boolean|null} [critical] ApplianceVersion critical
+                         * @property {string|null} [releaseNotesUri] ApplianceVersion releaseNotesUri
+                         */
+    
+                        /**
+                         * Constructs a new ApplianceVersion.
+                         * @memberof google.cloud.vmmigration.v1
+                         * @classdesc Represents an ApplianceVersion.
+                         * @implements IApplianceVersion
+                         * @constructor
+                         * @param {google.cloud.vmmigration.v1.IApplianceVersion=} [properties] Properties to set
+                         */
+                        function ApplianceVersion(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ApplianceVersion version.
+                         * @member {string} version
+                         * @memberof google.cloud.vmmigration.v1.ApplianceVersion
+                         * @instance
+                         */
+                        ApplianceVersion.prototype.version = "";
+    
+                        /**
+                         * ApplianceVersion uri.
+                         * @member {string} uri
+                         * @memberof google.cloud.vmmigration.v1.ApplianceVersion
+                         * @instance
+                         */
+                        ApplianceVersion.prototype.uri = "";
+    
+                        /**
+                         * ApplianceVersion critical.
+                         * @member {boolean} critical
+                         * @memberof google.cloud.vmmigration.v1.ApplianceVersion
+                         * @instance
+                         */
+                        ApplianceVersion.prototype.critical = false;
+    
+                        /**
+                         * ApplianceVersion releaseNotesUri.
+                         * @member {string} releaseNotesUri
+                         * @memberof google.cloud.vmmigration.v1.ApplianceVersion
+                         * @instance
+                         */
+                        ApplianceVersion.prototype.releaseNotesUri = "";
+    
+                        /**
+                         * Creates a new ApplianceVersion instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vmmigration.v1.ApplianceVersion
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.IApplianceVersion=} [properties] Properties to set
+                         * @returns {google.cloud.vmmigration.v1.ApplianceVersion} ApplianceVersion instance
+                         */
+                        ApplianceVersion.create = function create(properties) {
+                            return new ApplianceVersion(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ApplianceVersion message. Does not implicitly {@link google.cloud.vmmigration.v1.ApplianceVersion.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vmmigration.v1.ApplianceVersion
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.IApplianceVersion} message ApplianceVersion message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ApplianceVersion.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.version != null && Object.hasOwnProperty.call(message, "version"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.version);
+                            if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.uri);
+                            if (message.critical != null && Object.hasOwnProperty.call(message, "critical"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.critical);
+                            if (message.releaseNotesUri != null && Object.hasOwnProperty.call(message, "releaseNotesUri"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.releaseNotesUri);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ApplianceVersion message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.ApplianceVersion.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vmmigration.v1.ApplianceVersion
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.IApplianceVersion} message ApplianceVersion message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ApplianceVersion.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ApplianceVersion message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vmmigration.v1.ApplianceVersion
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vmmigration.v1.ApplianceVersion} ApplianceVersion
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ApplianceVersion.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmmigration.v1.ApplianceVersion();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.version = reader.string();
+                                    break;
+                                case 2:
+                                    message.uri = reader.string();
+                                    break;
+                                case 3:
+                                    message.critical = reader.bool();
+                                    break;
+                                case 4:
+                                    message.releaseNotesUri = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ApplianceVersion message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vmmigration.v1.ApplianceVersion
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vmmigration.v1.ApplianceVersion} ApplianceVersion
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ApplianceVersion.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ApplianceVersion message.
+                         * @function verify
+                         * @memberof google.cloud.vmmigration.v1.ApplianceVersion
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ApplianceVersion.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.version != null && message.hasOwnProperty("version"))
+                                if (!$util.isString(message.version))
+                                    return "version: string expected";
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                if (!$util.isString(message.uri))
+                                    return "uri: string expected";
+                            if (message.critical != null && message.hasOwnProperty("critical"))
+                                if (typeof message.critical !== "boolean")
+                                    return "critical: boolean expected";
+                            if (message.releaseNotesUri != null && message.hasOwnProperty("releaseNotesUri"))
+                                if (!$util.isString(message.releaseNotesUri))
+                                    return "releaseNotesUri: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ApplianceVersion message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vmmigration.v1.ApplianceVersion
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vmmigration.v1.ApplianceVersion} ApplianceVersion
+                         */
+                        ApplianceVersion.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vmmigration.v1.ApplianceVersion)
+                                return object;
+                            var message = new $root.google.cloud.vmmigration.v1.ApplianceVersion();
+                            if (object.version != null)
+                                message.version = String(object.version);
+                            if (object.uri != null)
+                                message.uri = String(object.uri);
+                            if (object.critical != null)
+                                message.critical = Boolean(object.critical);
+                            if (object.releaseNotesUri != null)
+                                message.releaseNotesUri = String(object.releaseNotesUri);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ApplianceVersion message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vmmigration.v1.ApplianceVersion
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.ApplianceVersion} message ApplianceVersion
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ApplianceVersion.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.version = "";
+                                object.uri = "";
+                                object.critical = false;
+                                object.releaseNotesUri = "";
+                            }
+                            if (message.version != null && message.hasOwnProperty("version"))
+                                object.version = message.version;
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                object.uri = message.uri;
+                            if (message.critical != null && message.hasOwnProperty("critical"))
+                                object.critical = message.critical;
+                            if (message.releaseNotesUri != null && message.hasOwnProperty("releaseNotesUri"))
+                                object.releaseNotesUri = message.releaseNotesUri;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ApplianceVersion to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vmmigration.v1.ApplianceVersion
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ApplianceVersion.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ApplianceVersion;
                     })();
     
                     v1.ListSourcesRequest = (function() {
@@ -11955,6 +13045,376 @@
                         return DeleteDatacenterConnectorRequest;
                     })();
     
+                    v1.UpgradeApplianceRequest = (function() {
+    
+                        /**
+                         * Properties of an UpgradeApplianceRequest.
+                         * @memberof google.cloud.vmmigration.v1
+                         * @interface IUpgradeApplianceRequest
+                         * @property {string|null} [datacenterConnector] UpgradeApplianceRequest datacenterConnector
+                         * @property {string|null} [requestId] UpgradeApplianceRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new UpgradeApplianceRequest.
+                         * @memberof google.cloud.vmmigration.v1
+                         * @classdesc Represents an UpgradeApplianceRequest.
+                         * @implements IUpgradeApplianceRequest
+                         * @constructor
+                         * @param {google.cloud.vmmigration.v1.IUpgradeApplianceRequest=} [properties] Properties to set
+                         */
+                        function UpgradeApplianceRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpgradeApplianceRequest datacenterConnector.
+                         * @member {string} datacenterConnector
+                         * @memberof google.cloud.vmmigration.v1.UpgradeApplianceRequest
+                         * @instance
+                         */
+                        UpgradeApplianceRequest.prototype.datacenterConnector = "";
+    
+                        /**
+                         * UpgradeApplianceRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.vmmigration.v1.UpgradeApplianceRequest
+                         * @instance
+                         */
+                        UpgradeApplianceRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new UpgradeApplianceRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vmmigration.v1.UpgradeApplianceRequest
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.IUpgradeApplianceRequest=} [properties] Properties to set
+                         * @returns {google.cloud.vmmigration.v1.UpgradeApplianceRequest} UpgradeApplianceRequest instance
+                         */
+                        UpgradeApplianceRequest.create = function create(properties) {
+                            return new UpgradeApplianceRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpgradeApplianceRequest message. Does not implicitly {@link google.cloud.vmmigration.v1.UpgradeApplianceRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vmmigration.v1.UpgradeApplianceRequest
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.IUpgradeApplianceRequest} message UpgradeApplianceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpgradeApplianceRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.datacenterConnector != null && Object.hasOwnProperty.call(message, "datacenterConnector"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.datacenterConnector);
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpgradeApplianceRequest message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.UpgradeApplianceRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vmmigration.v1.UpgradeApplianceRequest
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.IUpgradeApplianceRequest} message UpgradeApplianceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpgradeApplianceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpgradeApplianceRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vmmigration.v1.UpgradeApplianceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vmmigration.v1.UpgradeApplianceRequest} UpgradeApplianceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpgradeApplianceRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmmigration.v1.UpgradeApplianceRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.datacenterConnector = reader.string();
+                                    break;
+                                case 2:
+                                    message.requestId = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpgradeApplianceRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vmmigration.v1.UpgradeApplianceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vmmigration.v1.UpgradeApplianceRequest} UpgradeApplianceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpgradeApplianceRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpgradeApplianceRequest message.
+                         * @function verify
+                         * @memberof google.cloud.vmmigration.v1.UpgradeApplianceRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpgradeApplianceRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.datacenterConnector != null && message.hasOwnProperty("datacenterConnector"))
+                                if (!$util.isString(message.datacenterConnector))
+                                    return "datacenterConnector: string expected";
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpgradeApplianceRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vmmigration.v1.UpgradeApplianceRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vmmigration.v1.UpgradeApplianceRequest} UpgradeApplianceRequest
+                         */
+                        UpgradeApplianceRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vmmigration.v1.UpgradeApplianceRequest)
+                                return object;
+                            var message = new $root.google.cloud.vmmigration.v1.UpgradeApplianceRequest();
+                            if (object.datacenterConnector != null)
+                                message.datacenterConnector = String(object.datacenterConnector);
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpgradeApplianceRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vmmigration.v1.UpgradeApplianceRequest
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.UpgradeApplianceRequest} message UpgradeApplianceRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpgradeApplianceRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.datacenterConnector = "";
+                                object.requestId = "";
+                            }
+                            if (message.datacenterConnector != null && message.hasOwnProperty("datacenterConnector"))
+                                object.datacenterConnector = message.datacenterConnector;
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpgradeApplianceRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vmmigration.v1.UpgradeApplianceRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpgradeApplianceRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return UpgradeApplianceRequest;
+                    })();
+    
+                    v1.UpgradeApplianceResponse = (function() {
+    
+                        /**
+                         * Properties of an UpgradeApplianceResponse.
+                         * @memberof google.cloud.vmmigration.v1
+                         * @interface IUpgradeApplianceResponse
+                         */
+    
+                        /**
+                         * Constructs a new UpgradeApplianceResponse.
+                         * @memberof google.cloud.vmmigration.v1
+                         * @classdesc Represents an UpgradeApplianceResponse.
+                         * @implements IUpgradeApplianceResponse
+                         * @constructor
+                         * @param {google.cloud.vmmigration.v1.IUpgradeApplianceResponse=} [properties] Properties to set
+                         */
+                        function UpgradeApplianceResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new UpgradeApplianceResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vmmigration.v1.UpgradeApplianceResponse
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.IUpgradeApplianceResponse=} [properties] Properties to set
+                         * @returns {google.cloud.vmmigration.v1.UpgradeApplianceResponse} UpgradeApplianceResponse instance
+                         */
+                        UpgradeApplianceResponse.create = function create(properties) {
+                            return new UpgradeApplianceResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpgradeApplianceResponse message. Does not implicitly {@link google.cloud.vmmigration.v1.UpgradeApplianceResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vmmigration.v1.UpgradeApplianceResponse
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.IUpgradeApplianceResponse} message UpgradeApplianceResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpgradeApplianceResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpgradeApplianceResponse message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.UpgradeApplianceResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vmmigration.v1.UpgradeApplianceResponse
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.IUpgradeApplianceResponse} message UpgradeApplianceResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpgradeApplianceResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpgradeApplianceResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vmmigration.v1.UpgradeApplianceResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vmmigration.v1.UpgradeApplianceResponse} UpgradeApplianceResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpgradeApplianceResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmmigration.v1.UpgradeApplianceResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpgradeApplianceResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vmmigration.v1.UpgradeApplianceResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vmmigration.v1.UpgradeApplianceResponse} UpgradeApplianceResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpgradeApplianceResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpgradeApplianceResponse message.
+                         * @function verify
+                         * @memberof google.cloud.vmmigration.v1.UpgradeApplianceResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpgradeApplianceResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpgradeApplianceResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vmmigration.v1.UpgradeApplianceResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vmmigration.v1.UpgradeApplianceResponse} UpgradeApplianceResponse
+                         */
+                        UpgradeApplianceResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vmmigration.v1.UpgradeApplianceResponse)
+                                return object;
+                            return new $root.google.cloud.vmmigration.v1.UpgradeApplianceResponse();
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpgradeApplianceResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vmmigration.v1.UpgradeApplianceResponse
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.UpgradeApplianceResponse} message UpgradeApplianceResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpgradeApplianceResponse.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this UpgradeApplianceResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vmmigration.v1.UpgradeApplianceResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpgradeApplianceResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return UpgradeApplianceResponse;
+                    })();
+    
                     v1.ListDatacenterConnectorsRequest = (function() {
     
                         /**
@@ -12253,6 +13713,8 @@
                          * @property {boolean|null} [secureBoot] ComputeEngineTargetDefaults secureBoot
                          * @property {google.cloud.vmmigration.v1.ComputeEngineBootOption|null} [bootOption] ComputeEngineTargetDefaults bootOption
                          * @property {Object.<string,string>|null} [metadata] ComputeEngineTargetDefaults metadata
+                         * @property {Array.<string>|null} [additionalLicenses] ComputeEngineTargetDefaults additionalLicenses
+                         * @property {string|null} [hostname] ComputeEngineTargetDefaults hostname
                          */
     
                         /**
@@ -12268,6 +13730,7 @@
                             this.networkInterfaces = [];
                             this.labels = {};
                             this.metadata = {};
+                            this.additionalLicenses = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -12403,6 +13866,22 @@
                         ComputeEngineTargetDefaults.prototype.metadata = $util.emptyObject;
     
                         /**
+                         * ComputeEngineTargetDefaults additionalLicenses.
+                         * @member {Array.<string>} additionalLicenses
+                         * @memberof google.cloud.vmmigration.v1.ComputeEngineTargetDefaults
+                         * @instance
+                         */
+                        ComputeEngineTargetDefaults.prototype.additionalLicenses = $util.emptyArray;
+    
+                        /**
+                         * ComputeEngineTargetDefaults hostname.
+                         * @member {string} hostname
+                         * @memberof google.cloud.vmmigration.v1.ComputeEngineTargetDefaults
+                         * @instance
+                         */
+                        ComputeEngineTargetDefaults.prototype.hostname = "";
+    
+                        /**
                          * Creates a new ComputeEngineTargetDefaults instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.vmmigration.v1.ComputeEngineTargetDefaults
@@ -12462,6 +13941,11 @@
                             if (message.metadata != null && Object.hasOwnProperty.call(message, "metadata"))
                                 for (var keys = Object.keys(message.metadata), i = 0; i < keys.length; ++i)
                                     writer.uint32(/* id 16, wireType 2 =*/130).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.metadata[keys[i]]).ldelim();
+                            if (message.additionalLicenses != null && message.additionalLicenses.length)
+                                for (var i = 0; i < message.additionalLicenses.length; ++i)
+                                    writer.uint32(/* id 17, wireType 2 =*/138).string(message.additionalLicenses[i]);
+                            if (message.hostname != null && Object.hasOwnProperty.call(message, "hostname"))
+                                writer.uint32(/* id 18, wireType 2 =*/146).string(message.hostname);
                             return writer;
                         };
     
@@ -12585,6 +14069,14 @@
                                         }
                                     }
                                     message.metadata[key] = value;
+                                    break;
+                                case 17:
+                                    if (!(message.additionalLicenses && message.additionalLicenses.length))
+                                        message.additionalLicenses = [];
+                                    message.additionalLicenses.push(reader.string());
+                                    break;
+                                case 18:
+                                    message.hostname = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -12712,6 +14204,16 @@
                                     if (!$util.isString(message.metadata[key[i]]))
                                         return "metadata: string{k:string} expected";
                             }
+                            if (message.additionalLicenses != null && message.hasOwnProperty("additionalLicenses")) {
+                                if (!Array.isArray(message.additionalLicenses))
+                                    return "additionalLicenses: array expected";
+                                for (var i = 0; i < message.additionalLicenses.length; ++i)
+                                    if (!$util.isString(message.additionalLicenses[i]))
+                                        return "additionalLicenses: string[] expected";
+                            }
+                            if (message.hostname != null && message.hasOwnProperty("hostname"))
+                                if (!$util.isString(message.hostname))
+                                    return "hostname: string expected";
                             return null;
                         };
     
@@ -12828,6 +14330,15 @@
                                 for (var keys = Object.keys(object.metadata), i = 0; i < keys.length; ++i)
                                     message.metadata[keys[i]] = String(object.metadata[keys[i]]);
                             }
+                            if (object.additionalLicenses) {
+                                if (!Array.isArray(object.additionalLicenses))
+                                    throw TypeError(".google.cloud.vmmigration.v1.ComputeEngineTargetDefaults.additionalLicenses: array expected");
+                                message.additionalLicenses = [];
+                                for (var i = 0; i < object.additionalLicenses.length; ++i)
+                                    message.additionalLicenses[i] = String(object.additionalLicenses[i]);
+                            }
+                            if (object.hostname != null)
+                                message.hostname = String(object.hostname);
                             return message;
                         };
     
@@ -12847,6 +14358,7 @@
                             if (options.arrays || options.defaults) {
                                 object.networkTags = [];
                                 object.networkInterfaces = [];
+                                object.additionalLicenses = [];
                             }
                             if (options.objects || options.defaults) {
                                 object.labels = {};
@@ -12865,6 +14377,7 @@
                                 object.computeScheduling = null;
                                 object.secureBoot = false;
                                 object.bootOption = options.enums === String ? "COMPUTE_ENGINE_BOOT_OPTION_UNSPECIFIED" : 0;
+                                object.hostname = "";
                             }
                             if (message.vmName != null && message.hasOwnProperty("vmName"))
                                 object.vmName = message.vmName;
@@ -12911,6 +14424,13 @@
                                 for (var j = 0; j < keys2.length; ++j)
                                     object.metadata[keys2[j]] = message.metadata[keys2[j]];
                             }
+                            if (message.additionalLicenses && message.additionalLicenses.length) {
+                                object.additionalLicenses = [];
+                                for (var j = 0; j < message.additionalLicenses.length; ++j)
+                                    object.additionalLicenses[j] = message.additionalLicenses[j];
+                            }
+                            if (message.hostname != null && message.hasOwnProperty("hostname"))
+                                object.hostname = message.hostname;
                             return object;
                         };
     
@@ -12950,6 +14470,8 @@
                          * @property {boolean|null} [secureBoot] ComputeEngineTargetDetails secureBoot
                          * @property {google.cloud.vmmigration.v1.ComputeEngineBootOption|null} [bootOption] ComputeEngineTargetDetails bootOption
                          * @property {Object.<string,string>|null} [metadata] ComputeEngineTargetDetails metadata
+                         * @property {Array.<string>|null} [additionalLicenses] ComputeEngineTargetDetails additionalLicenses
+                         * @property {string|null} [hostname] ComputeEngineTargetDetails hostname
                          */
     
                         /**
@@ -12965,6 +14487,7 @@
                             this.networkInterfaces = [];
                             this.labels = {};
                             this.metadata = {};
+                            this.additionalLicenses = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -13100,6 +14623,22 @@
                         ComputeEngineTargetDetails.prototype.metadata = $util.emptyObject;
     
                         /**
+                         * ComputeEngineTargetDetails additionalLicenses.
+                         * @member {Array.<string>} additionalLicenses
+                         * @memberof google.cloud.vmmigration.v1.ComputeEngineTargetDetails
+                         * @instance
+                         */
+                        ComputeEngineTargetDetails.prototype.additionalLicenses = $util.emptyArray;
+    
+                        /**
+                         * ComputeEngineTargetDetails hostname.
+                         * @member {string} hostname
+                         * @memberof google.cloud.vmmigration.v1.ComputeEngineTargetDetails
+                         * @instance
+                         */
+                        ComputeEngineTargetDetails.prototype.hostname = "";
+    
+                        /**
                          * Creates a new ComputeEngineTargetDetails instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.vmmigration.v1.ComputeEngineTargetDetails
@@ -13159,6 +14698,11 @@
                             if (message.metadata != null && Object.hasOwnProperty.call(message, "metadata"))
                                 for (var keys = Object.keys(message.metadata), i = 0; i < keys.length; ++i)
                                     writer.uint32(/* id 16, wireType 2 =*/130).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.metadata[keys[i]]).ldelim();
+                            if (message.additionalLicenses != null && message.additionalLicenses.length)
+                                for (var i = 0; i < message.additionalLicenses.length; ++i)
+                                    writer.uint32(/* id 17, wireType 2 =*/138).string(message.additionalLicenses[i]);
+                            if (message.hostname != null && Object.hasOwnProperty.call(message, "hostname"))
+                                writer.uint32(/* id 18, wireType 2 =*/146).string(message.hostname);
                             return writer;
                         };
     
@@ -13282,6 +14826,14 @@
                                         }
                                     }
                                     message.metadata[key] = value;
+                                    break;
+                                case 17:
+                                    if (!(message.additionalLicenses && message.additionalLicenses.length))
+                                        message.additionalLicenses = [];
+                                    message.additionalLicenses.push(reader.string());
+                                    break;
+                                case 18:
+                                    message.hostname = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -13409,6 +14961,16 @@
                                     if (!$util.isString(message.metadata[key[i]]))
                                         return "metadata: string{k:string} expected";
                             }
+                            if (message.additionalLicenses != null && message.hasOwnProperty("additionalLicenses")) {
+                                if (!Array.isArray(message.additionalLicenses))
+                                    return "additionalLicenses: array expected";
+                                for (var i = 0; i < message.additionalLicenses.length; ++i)
+                                    if (!$util.isString(message.additionalLicenses[i]))
+                                        return "additionalLicenses: string[] expected";
+                            }
+                            if (message.hostname != null && message.hasOwnProperty("hostname"))
+                                if (!$util.isString(message.hostname))
+                                    return "hostname: string expected";
                             return null;
                         };
     
@@ -13525,6 +15087,15 @@
                                 for (var keys = Object.keys(object.metadata), i = 0; i < keys.length; ++i)
                                     message.metadata[keys[i]] = String(object.metadata[keys[i]]);
                             }
+                            if (object.additionalLicenses) {
+                                if (!Array.isArray(object.additionalLicenses))
+                                    throw TypeError(".google.cloud.vmmigration.v1.ComputeEngineTargetDetails.additionalLicenses: array expected");
+                                message.additionalLicenses = [];
+                                for (var i = 0; i < object.additionalLicenses.length; ++i)
+                                    message.additionalLicenses[i] = String(object.additionalLicenses[i]);
+                            }
+                            if (object.hostname != null)
+                                message.hostname = String(object.hostname);
                             return message;
                         };
     
@@ -13544,6 +15115,7 @@
                             if (options.arrays || options.defaults) {
                                 object.networkTags = [];
                                 object.networkInterfaces = [];
+                                object.additionalLicenses = [];
                             }
                             if (options.objects || options.defaults) {
                                 object.labels = {};
@@ -13562,6 +15134,7 @@
                                 object.computeScheduling = null;
                                 object.secureBoot = false;
                                 object.bootOption = options.enums === String ? "COMPUTE_ENGINE_BOOT_OPTION_UNSPECIFIED" : 0;
+                                object.hostname = "";
                             }
                             if (message.vmName != null && message.hasOwnProperty("vmName"))
                                 object.vmName = message.vmName;
@@ -13608,6 +15181,13 @@
                                 for (var j = 0; j < keys2.length; ++j)
                                     object.metadata[keys2[j]] = message.metadata[keys2[j]];
                             }
+                            if (message.additionalLicenses && message.additionalLicenses.length) {
+                                object.additionalLicenses = [];
+                                for (var j = 0; j < message.additionalLicenses.length; ++j)
+                                    object.additionalLicenses[j] = message.additionalLicenses[j];
+                            }
+                            if (message.hostname != null && message.hasOwnProperty("hostname"))
+                                object.hostname = message.hostname;
                             return object;
                         };
     
@@ -15242,6 +16822,7 @@
                          * @property {string|null} [pageToken] ListMigratingVmsRequest pageToken
                          * @property {string|null} [filter] ListMigratingVmsRequest filter
                          * @property {string|null} [orderBy] ListMigratingVmsRequest orderBy
+                         * @property {google.cloud.vmmigration.v1.MigratingVmView|null} [view] ListMigratingVmsRequest view
                          */
     
                         /**
@@ -15300,6 +16881,14 @@
                         ListMigratingVmsRequest.prototype.orderBy = "";
     
                         /**
+                         * ListMigratingVmsRequest view.
+                         * @member {google.cloud.vmmigration.v1.MigratingVmView} view
+                         * @memberof google.cloud.vmmigration.v1.ListMigratingVmsRequest
+                         * @instance
+                         */
+                        ListMigratingVmsRequest.prototype.view = 0;
+    
+                        /**
                          * Creates a new ListMigratingVmsRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.vmmigration.v1.ListMigratingVmsRequest
@@ -15333,6 +16922,8 @@
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
                             if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
                                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
+                            if (message.view != null && Object.hasOwnProperty.call(message, "view"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.view);
                             return writer;
                         };
     
@@ -15381,6 +16972,9 @@
                                     break;
                                 case 5:
                                     message.orderBy = reader.string();
+                                    break;
+                                case 6:
+                                    message.view = reader.int32();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -15432,6 +17026,15 @@
                             if (message.orderBy != null && message.hasOwnProperty("orderBy"))
                                 if (!$util.isString(message.orderBy))
                                     return "orderBy: string expected";
+                            if (message.view != null && message.hasOwnProperty("view"))
+                                switch (message.view) {
+                                default:
+                                    return "view: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -15457,6 +17060,20 @@
                                 message.filter = String(object.filter);
                             if (object.orderBy != null)
                                 message.orderBy = String(object.orderBy);
+                            switch (object.view) {
+                            case "MIGRATING_VM_VIEW_UNSPECIFIED":
+                            case 0:
+                                message.view = 0;
+                                break;
+                            case "MIGRATING_VM_VIEW_BASIC":
+                            case 1:
+                                message.view = 1;
+                                break;
+                            case "MIGRATING_VM_VIEW_FULL":
+                            case 2:
+                                message.view = 2;
+                                break;
+                            }
                             return message;
                         };
     
@@ -15479,6 +17096,7 @@
                                 object.pageToken = "";
                                 object.filter = "";
                                 object.orderBy = "";
+                                object.view = options.enums === String ? "MIGRATING_VM_VIEW_UNSPECIFIED" : 0;
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -15490,6 +17108,8 @@
                                 object.filter = message.filter;
                             if (message.orderBy != null && message.hasOwnProperty("orderBy"))
                                 object.orderBy = message.orderBy;
+                            if (message.view != null && message.hasOwnProperty("view"))
+                                object.view = options.enums === String ? $root.google.cloud.vmmigration.v1.MigratingVmView[message.view] : message.view;
                             return object;
                         };
     
@@ -15784,6 +17404,7 @@
                          * @memberof google.cloud.vmmigration.v1
                          * @interface IGetMigratingVmRequest
                          * @property {string|null} [name] GetMigratingVmRequest name
+                         * @property {google.cloud.vmmigration.v1.MigratingVmView|null} [view] GetMigratingVmRequest view
                          */
     
                         /**
@@ -15808,6 +17429,14 @@
                          * @instance
                          */
                         GetMigratingVmRequest.prototype.name = "";
+    
+                        /**
+                         * GetMigratingVmRequest view.
+                         * @member {google.cloud.vmmigration.v1.MigratingVmView} view
+                         * @memberof google.cloud.vmmigration.v1.GetMigratingVmRequest
+                         * @instance
+                         */
+                        GetMigratingVmRequest.prototype.view = 0;
     
                         /**
                          * Creates a new GetMigratingVmRequest instance using the specified properties.
@@ -15835,6 +17464,8 @@
                                 writer = $Writer.create();
                             if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.view != null && Object.hasOwnProperty.call(message, "view"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.view);
                             return writer;
                         };
     
@@ -15871,6 +17502,9 @@
                                 switch (tag >>> 3) {
                                 case 1:
                                     message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.view = reader.int32();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -15910,6 +17544,15 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
+                            if (message.view != null && message.hasOwnProperty("view"))
+                                switch (message.view) {
+                                default:
+                                    return "view: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -15927,6 +17570,20 @@
                             var message = new $root.google.cloud.vmmigration.v1.GetMigratingVmRequest();
                             if (object.name != null)
                                 message.name = String(object.name);
+                            switch (object.view) {
+                            case "MIGRATING_VM_VIEW_UNSPECIFIED":
+                            case 0:
+                                message.view = 0;
+                                break;
+                            case "MIGRATING_VM_VIEW_BASIC":
+                            case 1:
+                                message.view = 1;
+                                break;
+                            case "MIGRATING_VM_VIEW_FULL":
+                            case 2:
+                                message.view = 2;
+                                break;
+                            }
                             return message;
                         };
     
@@ -15943,10 +17600,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.name = "";
+                                object.view = options.enums === String ? "MIGRATING_VM_VIEW_UNSPECIFIED" : 0;
+                            }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
+                            if (message.view != null && message.hasOwnProperty("view"))
+                                object.view = options.enums === String ? $root.google.cloud.vmmigration.v1.MigratingVmView[message.view] : message.view;
                             return object;
                         };
     
@@ -23853,6 +25514,7 @@
                                 case 6:
                                 case 7:
                                 case 8:
+                                case 9:
                                     break;
                                 }
                             if (message.errorMessage != null && message.hasOwnProperty("errorMessage")) {
@@ -23930,6 +25592,10 @@
                             case "UTILIZATION_REPORT_ERROR":
                             case 8:
                                 message.code = 8;
+                                break;
+                            case "APPLIANCE_UPGRADE_ERROR":
+                            case 9:
+                                message.code = 9;
                                 break;
                             }
                             if (object.errorMessage != null) {
@@ -24021,6 +25687,7 @@
                          * @property {number} CLONE_ERROR=6 CLONE_ERROR value
                          * @property {number} CUTOVER_ERROR=7 CUTOVER_ERROR value
                          * @property {number} UTILIZATION_REPORT_ERROR=8 UTILIZATION_REPORT_ERROR value
+                         * @property {number} APPLIANCE_UPGRADE_ERROR=9 APPLIANCE_UPGRADE_ERROR value
                          */
                         MigrationError.ErrorCode = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -24033,6 +25700,7 @@
                             values[valuesById[6] = "CLONE_ERROR"] = 6;
                             values[valuesById[7] = "CUTOVER_ERROR"] = 7;
                             values[valuesById[8] = "UTILIZATION_REPORT_ERROR"] = 8;
+                            values[valuesById[9] = "APPLIANCE_UPGRADE_ERROR"] = 9;
                             return values;
                         })();
     

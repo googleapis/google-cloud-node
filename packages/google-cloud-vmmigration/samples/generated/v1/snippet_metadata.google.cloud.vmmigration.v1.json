@@ -688,6 +688,50 @@
             }
         },
         {
+            "regionTag": "vmmigration_v1_generated_VmMigration_UpgradeAppliance_async",
+            "title": "VmMigration upgradeAppliance Sample",
+            "origin": "API_DEFINITION",
+            "description": " Upgrades the appliance relate to this DatacenterConnector to the in-place updateable version.",
+            "canonical": true,
+            "file": "vm_migration.upgrade_appliance.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 65,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpgradeAppliance",
+                "fullName": "google.cloud.vmmigration.v1.VmMigration.UpgradeAppliance",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "datacenter_connector",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "VmMigrationClient",
+                    "fullName": "google.cloud.vmmigration.v1.VmMigrationClient"
+                },
+                "method": {
+                    "shortName": "UpgradeAppliance",
+                    "fullName": "google.cloud.vmmigration.v1.VmMigration.UpgradeAppliance",
+                    "service": {
+                        "shortName": "VmMigration",
+                        "fullName": "google.cloud.vmmigration.v1.VmMigration"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "vmmigration_v1_generated_VmMigration_CreateMigratingVm_async",
             "title": "VmMigration createMigratingVm Sample",
             "origin": "API_DEFINITION",
@@ -750,7 +794,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 75,
+                    "end": 79,
                     "type": "FULL"
                 }
             ],
@@ -778,6 +822,10 @@
                     {
                         "name": "order_by",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "view",
+                        "type": ".google.cloud.vmmigration.v1.MigratingVmView"
                     }
                 ],
                 "resultType": ".google.cloud.vmmigration.v1.ListMigratingVmsResponse",
@@ -806,7 +854,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 50,
+                    "end": 54,
                     "type": "FULL"
                 }
             ],
@@ -818,6 +866,10 @@
                     {
                         "name": "name",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "view",
+                        "type": ".google.cloud.vmmigration.v1.MigratingVmView"
                     }
                 ],
                 "resultType": ".google.cloud.vmmigration.v1.MigratingVm",

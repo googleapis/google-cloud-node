@@ -90,6 +90,11 @@
                 "deleteDatacenterConnector"
               ]
             },
+            "UpgradeAppliance": {
+              "methods": [
+                "upgradeAppliance"
+              ]
+            },
             "CreateMigratingVm": {
               "methods": [
                 "createMigratingVm"
@@ -324,6 +329,11 @@
             "DeleteDatacenterConnector": {
               "methods": [
                 "deleteDatacenterConnector"
+              ]
+            },
+            "UpgradeAppliance": {
+              "methods": [
+                "upgradeAppliance"
               ]
             },
             "CreateMigratingVm": {

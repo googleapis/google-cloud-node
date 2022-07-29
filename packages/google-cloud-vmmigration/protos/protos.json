@@ -339,6 +339,30 @@
                             }
                           ]
                         },
+                        "UpgradeAppliance": {
+                          "requestType": "UpgradeApplianceRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{datacenter_connector=projects/*/locations/*/sources/*/datacenterConnectors/*}:upgradeAppliance",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "UpgradeApplianceResponse",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{datacenter_connector=projects/*/locations/*/sources/*/datacenterConnectors/*}:upgradeAppliance",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "UpgradeApplianceResponse",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
                         "CreateMigratingVm": {
                           "requestType": "CreateMigratingVmRequest",
                           "responseType": "google.longrunning.Operation",
@@ -1039,18 +1063,6 @@
                         }
                       }
                     },
-                    "ReplicationCycle": {
-                      "fields": {
-                        "startTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 1
-                        },
-                        "progressPercent": {
-                          "type": "int32",
-                          "id": 5
-                        }
-                      }
-                    },
                     "UtilizationReportView": {
                       "values": {
                         "UTILIZATION_REPORT_VIEW_UNSPECIFIED": 0,
@@ -1058,12 +1070,11 @@
                         "FULL": 2
                       }
                     },
-                    "ReplicationSync": {
-                      "fields": {
-                        "lastSyncTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 1
-                        }
+                    "MigratingVmView": {
+                      "values": {
+                        "MIGRATING_VM_VIEW_UNSPECIFIED": 0,
+                        "MIGRATING_VM_VIEW_BASIC": 1,
+                        "MIGRATING_VM_VIEW_FULL": 2
                       }
                     },
                     "ComputeEngineDiskType": {
@@ -1086,6 +1097,26 @@
                         "COMPUTE_ENGINE_BOOT_OPTION_UNSPECIFIED": 0,
                         "COMPUTE_ENGINE_BOOT_OPTION_EFI": 1,
                         "COMPUTE_ENGINE_BOOT_OPTION_BIOS": 2
+                      }
+                    },
+                    "ReplicationCycle": {
+                      "fields": {
+                        "startTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1
+                        },
+                        "progressPercent": {
+                          "type": "int32",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "ReplicationSync": {
+                      "fields": {
+                        "lastSyncTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1
+                        }
                       }
                     },
                     "MigratingVm": {
@@ -1183,9 +1214,25 @@
                           "type": "string",
                           "id": 16
                         },
+                        "recentCloneJobs": {
+                          "rule": "repeated",
+                          "type": "CloneJob",
+                          "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "error": {
                           "type": "google.rpc.Status",
                           "id": 19,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "recentCutoverJobs": {
+                          "rule": "repeated",
+                          "type": "CutoverJob",
+                          "id": 20,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -1237,9 +1284,19 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 22,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "name": {
                           "type": "string",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "state": {
                           "type": "State",
@@ -1301,6 +1358,13 @@
                         "createTime": {
                           "type": "google.protobuf.Timestamp",
                           "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 16,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -1628,6 +1692,34 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "applianceInfrastructureVersion": {
+                          "type": "string",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "applianceSoftwareVersion": {
+                          "type": "string",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "availableVersions": {
+                          "type": "AvailableUpdates",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "upgradeStatus": {
+                          "type": "UpgradeStatus",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -1639,6 +1731,72 @@
                             "FAILED": 3,
                             "ACTIVE": 4
                           }
+                        }
+                      }
+                    },
+                    "UpgradeStatus": {
+                      "fields": {
+                        "version": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 2
+                        },
+                        "error": {
+                          "type": "google.rpc.Status",
+                          "id": 3
+                        },
+                        "startTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4
+                        },
+                        "previousVersion": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "RUNNING": 1,
+                            "FAILED": 2,
+                            "SUCCEEDED": 3
+                          }
+                        }
+                      }
+                    },
+                    "AvailableUpdates": {
+                      "fields": {
+                        "newDeployableAppliance": {
+                          "type": "ApplianceVersion",
+                          "id": 1
+                        },
+                        "inPlaceUpdate": {
+                          "type": "ApplianceVersion",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ApplianceVersion": {
+                      "fields": {
+                        "version": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "uri": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "critical": {
+                          "type": "bool",
+                          "id": 3
+                        },
+                        "releaseNotesUri": {
+                          "type": "string",
+                          "id": 4
                         }
                       }
                     },
@@ -1897,10 +2055,7 @@
                       "fields": {
                         "vmwareVms": {
                           "type": "VmwareVmsDetails",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
+                          "id": 1
                         },
                         "updateTime": {
                           "type": "google.protobuf.Timestamp",
@@ -2285,6 +2440,25 @@
                         }
                       }
                     },
+                    "UpgradeApplianceRequest": {
+                      "fields": {
+                        "datacenterConnector": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "vmmigration.googleapis.com/DatacenterConnector"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "UpgradeApplianceResponse": {
+                      "fields": {}
+                    },
                     "ListDatacenterConnectorsRequest": {
                       "fields": {
                         "parent": {
@@ -2403,6 +2577,15 @@
                           "keyType": "string",
                           "type": "string",
                           "id": 16
+                        },
+                        "additionalLicenses": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 17
+                        },
+                        "hostname": {
+                          "type": "string",
+                          "id": 18
                         }
                       }
                     },
@@ -2475,6 +2658,15 @@
                           "keyType": "string",
                           "type": "string",
                           "id": 16
+                        },
+                        "additionalLicenses": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 17
+                        },
+                        "hostname": {
+                          "type": "string",
+                          "id": 18
                         }
                       }
                     },
@@ -2662,6 +2854,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "view": {
+                          "type": "MigratingVmView",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -2700,6 +2899,13 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "vmmigration.googleapis.com/MigratingVm"
+                          }
+                        },
+                        "view": {
+                          "type": "MigratingVmView",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -2803,7 +3009,10 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -2984,7 +3193,10 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "createTime": {
                           "type": "google.protobuf.Timestamp",
@@ -3428,7 +3640,8 @@
                             "OS_ADAPTATION_ERROR": 5,
                             "CLONE_ERROR": 6,
                             "CUTOVER_ERROR": 7,
-                            "UTILIZATION_REPORT_ERROR": 8
+                            "UTILIZATION_REPORT_ERROR": 8,
+                            "APPLIANCE_UPGRADE_ERROR": 9
                           }
                         }
                       }

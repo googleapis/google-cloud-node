@@ -327,6 +327,12 @@ export class VmMigrationClient {
     const deleteDatacenterConnectorMetadata = protoFilesRoot.lookup(
       '.google.cloud.vmmigration.v1.OperationMetadata'
     ) as gax.protobuf.Type;
+    const upgradeApplianceResponse = protoFilesRoot.lookup(
+      '.google.cloud.vmmigration.v1.UpgradeApplianceResponse'
+    ) as gax.protobuf.Type;
+    const upgradeApplianceMetadata = protoFilesRoot.lookup(
+      '.google.cloud.vmmigration.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
     const createMigratingVmResponse = protoFilesRoot.lookup(
       '.google.cloud.vmmigration.v1.MigratingVm'
     ) as gax.protobuf.Type;
@@ -494,6 +500,11 @@ export class VmMigrationClient {
           deleteDatacenterConnectorMetadata
         )
       ),
+      upgradeAppliance: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        upgradeApplianceResponse.decode.bind(upgradeApplianceResponse),
+        upgradeApplianceMetadata.decode.bind(upgradeApplianceMetadata)
+      ),
       createMigratingVm: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createMigratingVmResponse.decode.bind(createMigratingVmResponse),
@@ -655,6 +666,7 @@ export class VmMigrationClient {
       'getDatacenterConnector',
       'createDatacenterConnector',
       'deleteDatacenterConnector',
+      'upgradeAppliance',
       'createMigratingVm',
       'listMigratingVms',
       'getMigratingVm',
@@ -1160,6 +1172,8 @@ export class VmMigrationClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the MigratingVm.
+   * @param {google.cloud.vmmigration.v1.MigratingVmView} [request.view]
+   *   Optional. The level of details of the migrating VM.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2073,8 +2087,8 @@ export class VmMigrationClient {
    * @param {google.cloud.vmmigration.v1.UtilizationReport} request.utilizationReport
    *   Required. The report to create.
    * @param {string} request.utilizationReportId
-   *   Required. The ID to use for the report, which will become the final component of
-   *   the reports's resource name.
+   *   Required. The ID to use for the report, which will become the final
+   *   component of the reports's resource name.
    *
    *   This value maximum length is 63 characters, and valid characters
    *   are /{@link 0-9|a-z}-/. It must start with an english letter and must not
@@ -2696,6 +2710,158 @@ export class VmMigrationClient {
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
+      protos.google.cloud.vmmigration.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Upgrades the appliance relate to this DatacenterConnector to the in-place
+   * updateable version.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.datacenterConnector
+   *   Required. The DatacenterConnector name.
+   * @param {string} request.requestId
+   *   A request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server will guarantee
+   *   that for at least 60 minutes after the first request.
+   *
+   *   For example, consider a situation where you make an initial request and t
+   *   he request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vm_migration.upgrade_appliance.js</caption>
+   * region_tag:vmmigration_v1_generated_VmMigration_UpgradeAppliance_async
+   */
+  upgradeAppliance(
+    request?: protos.google.cloud.vmmigration.v1.IUpgradeApplianceRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.vmmigration.v1.IUpgradeApplianceResponse,
+        protos.google.cloud.vmmigration.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  upgradeAppliance(
+    request: protos.google.cloud.vmmigration.v1.IUpgradeApplianceRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.vmmigration.v1.IUpgradeApplianceResponse,
+        protos.google.cloud.vmmigration.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  upgradeAppliance(
+    request: protos.google.cloud.vmmigration.v1.IUpgradeApplianceRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.vmmigration.v1.IUpgradeApplianceResponse,
+        protos.google.cloud.vmmigration.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  upgradeAppliance(
+    request?: protos.google.cloud.vmmigration.v1.IUpgradeApplianceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.vmmigration.v1.IUpgradeApplianceResponse,
+            protos.google.cloud.vmmigration.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.vmmigration.v1.IUpgradeApplianceResponse,
+        protos.google.cloud.vmmigration.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.vmmigration.v1.IUpgradeApplianceResponse,
+        protos.google.cloud.vmmigration.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        datacenter_connector: request.datacenterConnector || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.upgradeAppliance(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `upgradeAppliance()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vm_migration.upgrade_appliance.js</caption>
+   * region_tag:vmmigration_v1_generated_VmMigration_UpgradeAppliance_async
+   */
+  async checkUpgradeApplianceProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.vmmigration.v1.UpgradeApplianceResponse,
+      protos.google.cloud.vmmigration.v1.OperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.upgradeAppliance,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.vmmigration.v1.UpgradeApplianceResponse,
       protos.google.cloud.vmmigration.v1.OperationMetadata
     >;
   }
@@ -5740,8 +5906,8 @@ export class VmMigrationClient {
    *   returned. The maximum value is 1000; values above 1000 will be coerced to
    *   1000.
    * @param {string} request.pageToken
-   *   Required. A page token, received from a previous `ListUtilizationReports` call.
-   *   Provide this to retrieve the subsequent page.
+   *   Required. A page token, received from a previous `ListUtilizationReports`
+   *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to `ListUtilizationReports`
    *   must match the call that provided the page token.
@@ -5856,8 +6022,8 @@ export class VmMigrationClient {
    *   returned. The maximum value is 1000; values above 1000 will be coerced to
    *   1000.
    * @param {string} request.pageToken
-   *   Required. A page token, received from a previous `ListUtilizationReports` call.
-   *   Provide this to retrieve the subsequent page.
+   *   Required. A page token, received from a previous `ListUtilizationReports`
+   *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to `ListUtilizationReports`
    *   must match the call that provided the page token.
@@ -5916,8 +6082,8 @@ export class VmMigrationClient {
    *   returned. The maximum value is 1000; values above 1000 will be coerced to
    *   1000.
    * @param {string} request.pageToken
-   *   Required. A page token, received from a previous `ListUtilizationReports` call.
-   *   Provide this to retrieve the subsequent page.
+   *   Required. A page token, received from a previous `ListUtilizationReports`
+   *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to `ListUtilizationReports`
    *   must match the call that provided the page token.
@@ -5967,13 +6133,13 @@ export class VmMigrationClient {
    * @param {string} request.parent
    *   Required. The parent, which owns this collection of connectors.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of connectors to return. The service may return
-   *   fewer than this value. If unspecified, at most 500 sources will be
+   *   Optional. The maximum number of connectors to return. The service may
+   *   return fewer than this value. If unspecified, at most 500 sources will be
    *   returned. The maximum value is 1000; values above 1000 will be coerced to
    *   1000.
    * @param {string} request.pageToken
-   *   Required. A page token, received from a previous `ListDatacenterConnectors` call.
-   *   Provide this to retrieve the subsequent page.
+   *   Required. A page token, received from a previous `ListDatacenterConnectors`
+   *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
    *   `ListDatacenterConnectors` must match the call that provided the page
@@ -6081,13 +6247,13 @@ export class VmMigrationClient {
    * @param {string} request.parent
    *   Required. The parent, which owns this collection of connectors.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of connectors to return. The service may return
-   *   fewer than this value. If unspecified, at most 500 sources will be
+   *   Optional. The maximum number of connectors to return. The service may
+   *   return fewer than this value. If unspecified, at most 500 sources will be
    *   returned. The maximum value is 1000; values above 1000 will be coerced to
    *   1000.
    * @param {string} request.pageToken
-   *   Required. A page token, received from a previous `ListDatacenterConnectors` call.
-   *   Provide this to retrieve the subsequent page.
+   *   Required. A page token, received from a previous `ListDatacenterConnectors`
+   *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
    *   `ListDatacenterConnectors` must match the call that provided the page
@@ -6139,13 +6305,13 @@ export class VmMigrationClient {
    * @param {string} request.parent
    *   Required. The parent, which owns this collection of connectors.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of connectors to return. The service may return
-   *   fewer than this value. If unspecified, at most 500 sources will be
+   *   Optional. The maximum number of connectors to return. The service may
+   *   return fewer than this value. If unspecified, at most 500 sources will be
    *   returned. The maximum value is 1000; values above 1000 will be coerced to
    *   1000.
    * @param {string} request.pageToken
-   *   Required. A page token, received from a previous `ListDatacenterConnectors` call.
-   *   Provide this to retrieve the subsequent page.
+   *   Required. A page token, received from a previous `ListDatacenterConnectors`
+   *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
    *   `ListDatacenterConnectors` must match the call that provided the page
@@ -6196,10 +6362,10 @@ export class VmMigrationClient {
    * @param {string} request.parent
    *   Required. The parent, which owns this collection of MigratingVms.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of migrating VMs to return. The service may return
-   *   fewer than this value. If unspecified, at most 500 migrating VMs will be
-   *   returned. The maximum value is 1000; values above 1000 will be coerced to
-   *   1000.
+   *   Optional. The maximum number of migrating VMs to return. The service may
+   *   return fewer than this value. If unspecified, at most 500 migrating VMs
+   *   will be returned. The maximum value is 1000; values above 1000 will be
+   *   coerced to 1000.
    * @param {string} request.pageToken
    *   Required. A page token, received from a previous `ListMigratingVms` call.
    *   Provide this to retrieve the subsequent page.
@@ -6210,6 +6376,8 @@ export class VmMigrationClient {
    *   Optional. The filter request.
    * @param {string} [request.orderBy]
    *   Optional. the order by fields for the result.
+   * @param {google.cloud.vmmigration.v1.MigratingVmView} [request.view]
+   *   Optional. The level of details of each migrating VM.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -6305,10 +6473,10 @@ export class VmMigrationClient {
    * @param {string} request.parent
    *   Required. The parent, which owns this collection of MigratingVms.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of migrating VMs to return. The service may return
-   *   fewer than this value. If unspecified, at most 500 migrating VMs will be
-   *   returned. The maximum value is 1000; values above 1000 will be coerced to
-   *   1000.
+   *   Optional. The maximum number of migrating VMs to return. The service may
+   *   return fewer than this value. If unspecified, at most 500 migrating VMs
+   *   will be returned. The maximum value is 1000; values above 1000 will be
+   *   coerced to 1000.
    * @param {string} request.pageToken
    *   Required. A page token, received from a previous `ListMigratingVms` call.
    *   Provide this to retrieve the subsequent page.
@@ -6319,6 +6487,8 @@ export class VmMigrationClient {
    *   Optional. The filter request.
    * @param {string} [request.orderBy]
    *   Optional. the order by fields for the result.
+   * @param {google.cloud.vmmigration.v1.MigratingVmView} [request.view]
+   *   Optional. The level of details of each migrating VM.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -6362,10 +6532,10 @@ export class VmMigrationClient {
    * @param {string} request.parent
    *   Required. The parent, which owns this collection of MigratingVms.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of migrating VMs to return. The service may return
-   *   fewer than this value. If unspecified, at most 500 migrating VMs will be
-   *   returned. The maximum value is 1000; values above 1000 will be coerced to
-   *   1000.
+   *   Optional. The maximum number of migrating VMs to return. The service may
+   *   return fewer than this value. If unspecified, at most 500 migrating VMs
+   *   will be returned. The maximum value is 1000; values above 1000 will be
+   *   coerced to 1000.
    * @param {string} request.pageToken
    *   Required. A page token, received from a previous `ListMigratingVms` call.
    *   Provide this to retrieve the subsequent page.
@@ -6376,6 +6546,8 @@ export class VmMigrationClient {
    *   Optional. The filter request.
    * @param {string} [request.orderBy]
    *   Optional. the order by fields for the result.
+   * @param {google.cloud.vmmigration.v1.MigratingVmView} [request.view]
+   *   Optional. The level of details of each migrating VM.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -6418,10 +6590,10 @@ export class VmMigrationClient {
    * @param {string} request.parent
    *   Required. The parent, which owns this collection of source VMs.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of clone jobs to return. The service may return
-   *   fewer than this value. If unspecified, at most 500 clone jobs will be
-   *   returned. The maximum value is 1000; values above 1000 will be coerced to
-   *   1000.
+   *   Optional. The maximum number of clone jobs to return. The service may
+   *   return fewer than this value. If unspecified, at most 500 clone jobs will
+   *   be returned. The maximum value is 1000; values above 1000 will be coerced
+   *   to 1000.
    * @param {string} request.pageToken
    *   Required. A page token, received from a previous `ListCloneJobs` call.
    *   Provide this to retrieve the subsequent page.
@@ -6527,10 +6699,10 @@ export class VmMigrationClient {
    * @param {string} request.parent
    *   Required. The parent, which owns this collection of source VMs.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of clone jobs to return. The service may return
-   *   fewer than this value. If unspecified, at most 500 clone jobs will be
-   *   returned. The maximum value is 1000; values above 1000 will be coerced to
-   *   1000.
+   *   Optional. The maximum number of clone jobs to return. The service may
+   *   return fewer than this value. If unspecified, at most 500 clone jobs will
+   *   be returned. The maximum value is 1000; values above 1000 will be coerced
+   *   to 1000.
    * @param {string} request.pageToken
    *   Required. A page token, received from a previous `ListCloneJobs` call.
    *   Provide this to retrieve the subsequent page.
@@ -6584,10 +6756,10 @@ export class VmMigrationClient {
    * @param {string} request.parent
    *   Required. The parent, which owns this collection of source VMs.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of clone jobs to return. The service may return
-   *   fewer than this value. If unspecified, at most 500 clone jobs will be
-   *   returned. The maximum value is 1000; values above 1000 will be coerced to
-   *   1000.
+   *   Optional. The maximum number of clone jobs to return. The service may
+   *   return fewer than this value. If unspecified, at most 500 clone jobs will
+   *   be returned. The maximum value is 1000; values above 1000 will be coerced
+   *   to 1000.
    * @param {string} request.pageToken
    *   Required. A page token, received from a previous `ListCloneJobs` call.
    *   Provide this to retrieve the subsequent page.
@@ -6640,10 +6812,10 @@ export class VmMigrationClient {
    * @param {string} request.parent
    *   Required. The parent, which owns this collection of migrating VMs.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of cutover jobs to return. The service may return
-   *   fewer than this value. If unspecified, at most 500 cutover jobs will be
-   *   returned. The maximum value is 1000; values above 1000 will be coerced to
-   *   1000.
+   *   Optional. The maximum number of cutover jobs to return. The service may
+   *   return fewer than this value. If unspecified, at most 500 cutover jobs will
+   *   be returned. The maximum value is 1000; values above 1000 will be coerced
+   *   to 1000.
    * @param {string} request.pageToken
    *   Required. A page token, received from a previous `ListCutoverJobs` call.
    *   Provide this to retrieve the subsequent page.
@@ -6749,10 +6921,10 @@ export class VmMigrationClient {
    * @param {string} request.parent
    *   Required. The parent, which owns this collection of migrating VMs.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of cutover jobs to return. The service may return
-   *   fewer than this value. If unspecified, at most 500 cutover jobs will be
-   *   returned. The maximum value is 1000; values above 1000 will be coerced to
-   *   1000.
+   *   Optional. The maximum number of cutover jobs to return. The service may
+   *   return fewer than this value. If unspecified, at most 500 cutover jobs will
+   *   be returned. The maximum value is 1000; values above 1000 will be coerced
+   *   to 1000.
    * @param {string} request.pageToken
    *   Required. A page token, received from a previous `ListCutoverJobs` call.
    *   Provide this to retrieve the subsequent page.
@@ -6806,10 +6978,10 @@ export class VmMigrationClient {
    * @param {string} request.parent
    *   Required. The parent, which owns this collection of migrating VMs.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of cutover jobs to return. The service may return
-   *   fewer than this value. If unspecified, at most 500 cutover jobs will be
-   *   returned. The maximum value is 1000; values above 1000 will be coerced to
-   *   1000.
+   *   Optional. The maximum number of cutover jobs to return. The service may
+   *   return fewer than this value. If unspecified, at most 500 cutover jobs will
+   *   be returned. The maximum value is 1000; values above 1000 will be coerced
+   *   to 1000.
    * @param {string} request.pageToken
    *   Required. A page token, received from a previous `ListCutoverJobs` call.
    *   Provide this to retrieve the subsequent page.

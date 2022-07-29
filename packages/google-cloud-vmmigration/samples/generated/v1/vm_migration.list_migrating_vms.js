@@ -30,10 +30,10 @@ function main(parent, pageToken) {
    */
   // const parent = 'abc123'
   /**
-   *  Optional. The maximum number of migrating VMs to return. The service may return
-   *  fewer than this value. If unspecified, at most 500 migrating VMs will be
-   *  returned. The maximum value is 1000; values above 1000 will be coerced to
-   *  1000.
+   *  Optional. The maximum number of migrating VMs to return. The service may
+   *  return fewer than this value. If unspecified, at most 500 migrating VMs
+   *  will be returned. The maximum value is 1000; values above 1000 will be
+   *  coerced to 1000.
    */
   // const pageSize = 1234
   /**
@@ -51,6 +51,10 @@ function main(parent, pageToken) {
    *  Optional. the order by fields for the result.
    */
   // const orderBy = 'abc123'
+  /**
+   *  Optional. The level of details of each migrating VM.
+   */
+  // const view = {}
 
   // Imports the Vmmigration library
   const {VmMigrationClient} = require('@google-cloud/vmmigration').v1;

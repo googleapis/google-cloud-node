@@ -2742,6 +2742,200 @@ describe('v1.VmMigrationClient', () => {
     });
   });
 
+  describe('upgradeAppliance', () => {
+    it('invokes upgradeAppliance without error', async () => {
+      const client = new vmmigrationModule.v1.VmMigrationClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmmigration.v1.UpgradeApplianceRequest()
+      );
+      request.datacenterConnector = '';
+      const expectedHeaderRequestParams = 'datacenter_connector=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.upgradeAppliance =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.upgradeAppliance(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.upgradeAppliance as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes upgradeAppliance without error using callback', async () => {
+      const client = new vmmigrationModule.v1.VmMigrationClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmmigration.v1.UpgradeApplianceRequest()
+      );
+      request.datacenterConnector = '';
+      const expectedHeaderRequestParams = 'datacenter_connector=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.upgradeAppliance =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.upgradeAppliance(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.vmmigration.v1.IUpgradeApplianceResponse,
+              protos.google.cloud.vmmigration.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.vmmigration.v1.IUpgradeApplianceResponse,
+        protos.google.cloud.vmmigration.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.upgradeAppliance as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes upgradeAppliance with call error', async () => {
+      const client = new vmmigrationModule.v1.VmMigrationClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmmigration.v1.UpgradeApplianceRequest()
+      );
+      request.datacenterConnector = '';
+      const expectedHeaderRequestParams = 'datacenter_connector=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.upgradeAppliance = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.upgradeAppliance(request), expectedError);
+      assert(
+        (client.innerApiCalls.upgradeAppliance as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes upgradeAppliance with LRO error', async () => {
+      const client = new vmmigrationModule.v1.VmMigrationClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmmigration.v1.UpgradeApplianceRequest()
+      );
+      request.datacenterConnector = '';
+      const expectedHeaderRequestParams = 'datacenter_connector=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.upgradeAppliance = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.upgradeAppliance(request);
+      await assert.rejects(operation.promise(), expectedError);
+      assert(
+        (client.innerApiCalls.upgradeAppliance as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes checkUpgradeApplianceProgress without error', async () => {
+      const client = new vmmigrationModule.v1.VmMigrationClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkUpgradeApplianceProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkUpgradeApplianceProgress with error', async () => {
+      const client = new vmmigrationModule.v1.VmMigrationClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkUpgradeApplianceProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
   describe('createMigratingVm', () => {
     it('invokes createMigratingVm without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
