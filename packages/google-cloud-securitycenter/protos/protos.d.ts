@@ -1338,6 +1338,210 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** Properties of a Container. */
+                interface IContainer {
+
+                    /** Container name */
+                    name?: (string|null);
+
+                    /** Container uri */
+                    uri?: (string|null);
+
+                    /** Container imageId */
+                    imageId?: (string|null);
+
+                    /** Container labels */
+                    labels?: (google.cloud.securitycenter.v1.ILabel[]|null);
+                }
+
+                /** Represents a Container. */
+                class Container implements IContainer {
+
+                    /**
+                     * Constructs a new Container.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.IContainer);
+
+                    /** Container name. */
+                    public name: string;
+
+                    /** Container uri. */
+                    public uri: string;
+
+                    /** Container imageId. */
+                    public imageId: string;
+
+                    /** Container labels. */
+                    public labels: google.cloud.securitycenter.v1.ILabel[];
+
+                    /**
+                     * Creates a new Container instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Container instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.IContainer): google.cloud.securitycenter.v1.Container;
+
+                    /**
+                     * Encodes the specified Container message. Does not implicitly {@link google.cloud.securitycenter.v1.Container.verify|verify} messages.
+                     * @param message Container message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.IContainer, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Container message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.Container.verify|verify} messages.
+                     * @param message Container message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.IContainer, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Container message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Container
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.Container;
+
+                    /**
+                     * Decodes a Container message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Container
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.Container;
+
+                    /**
+                     * Verifies a Container message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Container message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Container
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.Container;
+
+                    /**
+                     * Creates a plain object from a Container message. Also converts values to other types if specified.
+                     * @param message Container
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.Container, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Container to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a Label. */
+                interface ILabel {
+
+                    /** Label name */
+                    name?: (string|null);
+
+                    /** Label value */
+                    value?: (string|null);
+                }
+
+                /** Represents a Label. */
+                class Label implements ILabel {
+
+                    /**
+                     * Constructs a new Label.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.ILabel);
+
+                    /** Label name. */
+                    public name: string;
+
+                    /** Label value. */
+                    public value: string;
+
+                    /**
+                     * Creates a new Label instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Label instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.ILabel): google.cloud.securitycenter.v1.Label;
+
+                    /**
+                     * Encodes the specified Label message. Does not implicitly {@link google.cloud.securitycenter.v1.Label.verify|verify} messages.
+                     * @param message Label message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.ILabel, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Label message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.Label.verify|verify} messages.
+                     * @param message Label message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.ILabel, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Label message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Label
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.Label;
+
+                    /**
+                     * Decodes a Label message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Label
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.Label;
+
+                    /**
+                     * Verifies a Label message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Label message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Label
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.Label;
+
+                    /**
+                     * Creates a plain object from a Label message. Also converts values to other types if specified.
+                     * @param message Label
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.Label, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Label to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Properties of an Exfiltration. */
                 interface IExfiltration {
 
@@ -1853,6 +2057,12 @@ export namespace google {
 
                     /** Finding nextSteps */
                     nextSteps?: (string|null);
+
+                    /** Finding containers */
+                    containers?: (google.cloud.securitycenter.v1.IContainer[]|null);
+
+                    /** Finding kubernetes */
+                    kubernetes?: (google.cloud.securitycenter.v1.IKubernetes|null);
                 }
 
                 /** Represents a Finding. */
@@ -1950,6 +2160,12 @@ export namespace google {
 
                     /** Finding nextSteps. */
                     public nextSteps: string;
+
+                    /** Finding containers. */
+                    public containers: google.cloud.securitycenter.v1.IContainer[];
+
+                    /** Finding kubernetes. */
+                    public kubernetes?: (google.cloud.securitycenter.v1.IKubernetes|null);
 
                     /**
                      * Creates a new Finding instance using the specified properties.
@@ -2663,6 +2879,882 @@ export namespace google {
                     }
                 }
 
+                /** Properties of a Kubernetes. */
+                interface IKubernetes {
+
+                    /** Kubernetes pods */
+                    pods?: (google.cloud.securitycenter.v1.Kubernetes.IPod[]|null);
+
+                    /** Kubernetes nodes */
+                    nodes?: (google.cloud.securitycenter.v1.Kubernetes.INode[]|null);
+
+                    /** Kubernetes nodePools */
+                    nodePools?: (google.cloud.securitycenter.v1.Kubernetes.INodePool[]|null);
+
+                    /** Kubernetes roles */
+                    roles?: (google.cloud.securitycenter.v1.Kubernetes.IRole[]|null);
+
+                    /** Kubernetes bindings */
+                    bindings?: (google.cloud.securitycenter.v1.Kubernetes.IBinding[]|null);
+
+                    /** Kubernetes accessReviews */
+                    accessReviews?: (google.cloud.securitycenter.v1.Kubernetes.IAccessReview[]|null);
+                }
+
+                /** Represents a Kubernetes. */
+                class Kubernetes implements IKubernetes {
+
+                    /**
+                     * Constructs a new Kubernetes.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.IKubernetes);
+
+                    /** Kubernetes pods. */
+                    public pods: google.cloud.securitycenter.v1.Kubernetes.IPod[];
+
+                    /** Kubernetes nodes. */
+                    public nodes: google.cloud.securitycenter.v1.Kubernetes.INode[];
+
+                    /** Kubernetes nodePools. */
+                    public nodePools: google.cloud.securitycenter.v1.Kubernetes.INodePool[];
+
+                    /** Kubernetes roles. */
+                    public roles: google.cloud.securitycenter.v1.Kubernetes.IRole[];
+
+                    /** Kubernetes bindings. */
+                    public bindings: google.cloud.securitycenter.v1.Kubernetes.IBinding[];
+
+                    /** Kubernetes accessReviews. */
+                    public accessReviews: google.cloud.securitycenter.v1.Kubernetes.IAccessReview[];
+
+                    /**
+                     * Creates a new Kubernetes instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Kubernetes instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.IKubernetes): google.cloud.securitycenter.v1.Kubernetes;
+
+                    /**
+                     * Encodes the specified Kubernetes message. Does not implicitly {@link google.cloud.securitycenter.v1.Kubernetes.verify|verify} messages.
+                     * @param message Kubernetes message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.IKubernetes, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Kubernetes message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.Kubernetes.verify|verify} messages.
+                     * @param message Kubernetes message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.IKubernetes, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Kubernetes message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Kubernetes
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.Kubernetes;
+
+                    /**
+                     * Decodes a Kubernetes message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Kubernetes
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.Kubernetes;
+
+                    /**
+                     * Verifies a Kubernetes message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Kubernetes message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Kubernetes
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.Kubernetes;
+
+                    /**
+                     * Creates a plain object from a Kubernetes message. Also converts values to other types if specified.
+                     * @param message Kubernetes
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.Kubernetes, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Kubernetes to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace Kubernetes {
+
+                    /** Properties of a Pod. */
+                    interface IPod {
+
+                        /** Pod ns */
+                        ns?: (string|null);
+
+                        /** Pod name */
+                        name?: (string|null);
+
+                        /** Pod labels */
+                        labels?: (google.cloud.securitycenter.v1.ILabel[]|null);
+
+                        /** Pod containers */
+                        containers?: (google.cloud.securitycenter.v1.IContainer[]|null);
+                    }
+
+                    /** Represents a Pod. */
+                    class Pod implements IPod {
+
+                        /**
+                         * Constructs a new Pod.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.securitycenter.v1.Kubernetes.IPod);
+
+                        /** Pod ns. */
+                        public ns: string;
+
+                        /** Pod name. */
+                        public name: string;
+
+                        /** Pod labels. */
+                        public labels: google.cloud.securitycenter.v1.ILabel[];
+
+                        /** Pod containers. */
+                        public containers: google.cloud.securitycenter.v1.IContainer[];
+
+                        /**
+                         * Creates a new Pod instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Pod instance
+                         */
+                        public static create(properties?: google.cloud.securitycenter.v1.Kubernetes.IPod): google.cloud.securitycenter.v1.Kubernetes.Pod;
+
+                        /**
+                         * Encodes the specified Pod message. Does not implicitly {@link google.cloud.securitycenter.v1.Kubernetes.Pod.verify|verify} messages.
+                         * @param message Pod message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.securitycenter.v1.Kubernetes.IPod, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Pod message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.Kubernetes.Pod.verify|verify} messages.
+                         * @param message Pod message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.securitycenter.v1.Kubernetes.IPod, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Pod message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Pod
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.Kubernetes.Pod;
+
+                        /**
+                         * Decodes a Pod message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Pod
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.Kubernetes.Pod;
+
+                        /**
+                         * Verifies a Pod message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Pod message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Pod
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.Kubernetes.Pod;
+
+                        /**
+                         * Creates a plain object from a Pod message. Also converts values to other types if specified.
+                         * @param message Pod
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.securitycenter.v1.Kubernetes.Pod, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Pod to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a Node. */
+                    interface INode {
+
+                        /** Node name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a Node. */
+                    class Node implements INode {
+
+                        /**
+                         * Constructs a new Node.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.securitycenter.v1.Kubernetes.INode);
+
+                        /** Node name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new Node instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Node instance
+                         */
+                        public static create(properties?: google.cloud.securitycenter.v1.Kubernetes.INode): google.cloud.securitycenter.v1.Kubernetes.Node;
+
+                        /**
+                         * Encodes the specified Node message. Does not implicitly {@link google.cloud.securitycenter.v1.Kubernetes.Node.verify|verify} messages.
+                         * @param message Node message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.securitycenter.v1.Kubernetes.INode, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Node message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.Kubernetes.Node.verify|verify} messages.
+                         * @param message Node message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.securitycenter.v1.Kubernetes.INode, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Node message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Node
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.Kubernetes.Node;
+
+                        /**
+                         * Decodes a Node message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Node
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.Kubernetes.Node;
+
+                        /**
+                         * Verifies a Node message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Node message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Node
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.Kubernetes.Node;
+
+                        /**
+                         * Creates a plain object from a Node message. Also converts values to other types if specified.
+                         * @param message Node
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.securitycenter.v1.Kubernetes.Node, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Node to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a NodePool. */
+                    interface INodePool {
+
+                        /** NodePool name */
+                        name?: (string|null);
+
+                        /** NodePool nodes */
+                        nodes?: (google.cloud.securitycenter.v1.Kubernetes.INode[]|null);
+                    }
+
+                    /** Represents a NodePool. */
+                    class NodePool implements INodePool {
+
+                        /**
+                         * Constructs a new NodePool.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.securitycenter.v1.Kubernetes.INodePool);
+
+                        /** NodePool name. */
+                        public name: string;
+
+                        /** NodePool nodes. */
+                        public nodes: google.cloud.securitycenter.v1.Kubernetes.INode[];
+
+                        /**
+                         * Creates a new NodePool instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns NodePool instance
+                         */
+                        public static create(properties?: google.cloud.securitycenter.v1.Kubernetes.INodePool): google.cloud.securitycenter.v1.Kubernetes.NodePool;
+
+                        /**
+                         * Encodes the specified NodePool message. Does not implicitly {@link google.cloud.securitycenter.v1.Kubernetes.NodePool.verify|verify} messages.
+                         * @param message NodePool message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.securitycenter.v1.Kubernetes.INodePool, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified NodePool message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.Kubernetes.NodePool.verify|verify} messages.
+                         * @param message NodePool message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.securitycenter.v1.Kubernetes.INodePool, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a NodePool message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns NodePool
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.Kubernetes.NodePool;
+
+                        /**
+                         * Decodes a NodePool message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns NodePool
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.Kubernetes.NodePool;
+
+                        /**
+                         * Verifies a NodePool message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a NodePool message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns NodePool
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.Kubernetes.NodePool;
+
+                        /**
+                         * Creates a plain object from a NodePool message. Also converts values to other types if specified.
+                         * @param message NodePool
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.securitycenter.v1.Kubernetes.NodePool, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this NodePool to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a Role. */
+                    interface IRole {
+
+                        /** Role kind */
+                        kind?: (google.cloud.securitycenter.v1.Kubernetes.Role.Kind|keyof typeof google.cloud.securitycenter.v1.Kubernetes.Role.Kind|null);
+
+                        /** Role ns */
+                        ns?: (string|null);
+
+                        /** Role name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a Role. */
+                    class Role implements IRole {
+
+                        /**
+                         * Constructs a new Role.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.securitycenter.v1.Kubernetes.IRole);
+
+                        /** Role kind. */
+                        public kind: (google.cloud.securitycenter.v1.Kubernetes.Role.Kind|keyof typeof google.cloud.securitycenter.v1.Kubernetes.Role.Kind);
+
+                        /** Role ns. */
+                        public ns: string;
+
+                        /** Role name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new Role instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Role instance
+                         */
+                        public static create(properties?: google.cloud.securitycenter.v1.Kubernetes.IRole): google.cloud.securitycenter.v1.Kubernetes.Role;
+
+                        /**
+                         * Encodes the specified Role message. Does not implicitly {@link google.cloud.securitycenter.v1.Kubernetes.Role.verify|verify} messages.
+                         * @param message Role message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.securitycenter.v1.Kubernetes.IRole, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Role message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.Kubernetes.Role.verify|verify} messages.
+                         * @param message Role message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.securitycenter.v1.Kubernetes.IRole, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Role message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Role
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.Kubernetes.Role;
+
+                        /**
+                         * Decodes a Role message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Role
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.Kubernetes.Role;
+
+                        /**
+                         * Verifies a Role message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Role message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Role
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.Kubernetes.Role;
+
+                        /**
+                         * Creates a plain object from a Role message. Also converts values to other types if specified.
+                         * @param message Role
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.securitycenter.v1.Kubernetes.Role, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Role to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace Role {
+
+                        /** Kind enum. */
+                        enum Kind {
+                            KIND_UNSPECIFIED = 0,
+                            ROLE = 1,
+                            CLUSTER_ROLE = 2
+                        }
+                    }
+
+                    /** Properties of a Binding. */
+                    interface IBinding {
+
+                        /** Binding ns */
+                        ns?: (string|null);
+
+                        /** Binding name */
+                        name?: (string|null);
+
+                        /** Binding role */
+                        role?: (google.cloud.securitycenter.v1.Kubernetes.IRole|null);
+
+                        /** Binding subjects */
+                        subjects?: (google.cloud.securitycenter.v1.Kubernetes.ISubject[]|null);
+                    }
+
+                    /** Represents a Binding. */
+                    class Binding implements IBinding {
+
+                        /**
+                         * Constructs a new Binding.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.securitycenter.v1.Kubernetes.IBinding);
+
+                        /** Binding ns. */
+                        public ns: string;
+
+                        /** Binding name. */
+                        public name: string;
+
+                        /** Binding role. */
+                        public role?: (google.cloud.securitycenter.v1.Kubernetes.IRole|null);
+
+                        /** Binding subjects. */
+                        public subjects: google.cloud.securitycenter.v1.Kubernetes.ISubject[];
+
+                        /**
+                         * Creates a new Binding instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Binding instance
+                         */
+                        public static create(properties?: google.cloud.securitycenter.v1.Kubernetes.IBinding): google.cloud.securitycenter.v1.Kubernetes.Binding;
+
+                        /**
+                         * Encodes the specified Binding message. Does not implicitly {@link google.cloud.securitycenter.v1.Kubernetes.Binding.verify|verify} messages.
+                         * @param message Binding message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.securitycenter.v1.Kubernetes.IBinding, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Binding message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.Kubernetes.Binding.verify|verify} messages.
+                         * @param message Binding message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.securitycenter.v1.Kubernetes.IBinding, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Binding message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Binding
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.Kubernetes.Binding;
+
+                        /**
+                         * Decodes a Binding message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Binding
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.Kubernetes.Binding;
+
+                        /**
+                         * Verifies a Binding message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Binding message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Binding
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.Kubernetes.Binding;
+
+                        /**
+                         * Creates a plain object from a Binding message. Also converts values to other types if specified.
+                         * @param message Binding
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.securitycenter.v1.Kubernetes.Binding, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Binding to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a Subject. */
+                    interface ISubject {
+
+                        /** Subject kind */
+                        kind?: (google.cloud.securitycenter.v1.Kubernetes.Subject.AuthType|keyof typeof google.cloud.securitycenter.v1.Kubernetes.Subject.AuthType|null);
+
+                        /** Subject ns */
+                        ns?: (string|null);
+
+                        /** Subject name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a Subject. */
+                    class Subject implements ISubject {
+
+                        /**
+                         * Constructs a new Subject.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.securitycenter.v1.Kubernetes.ISubject);
+
+                        /** Subject kind. */
+                        public kind: (google.cloud.securitycenter.v1.Kubernetes.Subject.AuthType|keyof typeof google.cloud.securitycenter.v1.Kubernetes.Subject.AuthType);
+
+                        /** Subject ns. */
+                        public ns: string;
+
+                        /** Subject name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new Subject instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Subject instance
+                         */
+                        public static create(properties?: google.cloud.securitycenter.v1.Kubernetes.ISubject): google.cloud.securitycenter.v1.Kubernetes.Subject;
+
+                        /**
+                         * Encodes the specified Subject message. Does not implicitly {@link google.cloud.securitycenter.v1.Kubernetes.Subject.verify|verify} messages.
+                         * @param message Subject message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.securitycenter.v1.Kubernetes.ISubject, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Subject message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.Kubernetes.Subject.verify|verify} messages.
+                         * @param message Subject message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.securitycenter.v1.Kubernetes.ISubject, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Subject message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Subject
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.Kubernetes.Subject;
+
+                        /**
+                         * Decodes a Subject message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Subject
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.Kubernetes.Subject;
+
+                        /**
+                         * Verifies a Subject message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Subject message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Subject
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.Kubernetes.Subject;
+
+                        /**
+                         * Creates a plain object from a Subject message. Also converts values to other types if specified.
+                         * @param message Subject
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.securitycenter.v1.Kubernetes.Subject, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Subject to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace Subject {
+
+                        /** AuthType enum. */
+                        enum AuthType {
+                            AUTH_TYPE_UNSPECIFIED = 0,
+                            USER = 1,
+                            SERVICEACCOUNT = 2,
+                            GROUP = 3
+                        }
+                    }
+
+                    /** Properties of an AccessReview. */
+                    interface IAccessReview {
+
+                        /** AccessReview group */
+                        group?: (string|null);
+
+                        /** AccessReview ns */
+                        ns?: (string|null);
+
+                        /** AccessReview name */
+                        name?: (string|null);
+
+                        /** AccessReview resource */
+                        resource?: (string|null);
+
+                        /** AccessReview subresource */
+                        subresource?: (string|null);
+
+                        /** AccessReview verb */
+                        verb?: (string|null);
+
+                        /** AccessReview version */
+                        version?: (string|null);
+                    }
+
+                    /** Represents an AccessReview. */
+                    class AccessReview implements IAccessReview {
+
+                        /**
+                         * Constructs a new AccessReview.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.securitycenter.v1.Kubernetes.IAccessReview);
+
+                        /** AccessReview group. */
+                        public group: string;
+
+                        /** AccessReview ns. */
+                        public ns: string;
+
+                        /** AccessReview name. */
+                        public name: string;
+
+                        /** AccessReview resource. */
+                        public resource: string;
+
+                        /** AccessReview subresource. */
+                        public subresource: string;
+
+                        /** AccessReview verb. */
+                        public verb: string;
+
+                        /** AccessReview version. */
+                        public version: string;
+
+                        /**
+                         * Creates a new AccessReview instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AccessReview instance
+                         */
+                        public static create(properties?: google.cloud.securitycenter.v1.Kubernetes.IAccessReview): google.cloud.securitycenter.v1.Kubernetes.AccessReview;
+
+                        /**
+                         * Encodes the specified AccessReview message. Does not implicitly {@link google.cloud.securitycenter.v1.Kubernetes.AccessReview.verify|verify} messages.
+                         * @param message AccessReview message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.securitycenter.v1.Kubernetes.IAccessReview, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AccessReview message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.Kubernetes.AccessReview.verify|verify} messages.
+                         * @param message AccessReview message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.securitycenter.v1.Kubernetes.IAccessReview, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AccessReview message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AccessReview
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.Kubernetes.AccessReview;
+
+                        /**
+                         * Decodes an AccessReview message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AccessReview
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.Kubernetes.AccessReview;
+
+                        /**
+                         * Verifies an AccessReview message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AccessReview message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AccessReview
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.Kubernetes.AccessReview;
+
+                        /**
+                         * Creates a plain object from an AccessReview message. Also converts values to other types if specified.
+                         * @param message AccessReview
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.securitycenter.v1.Kubernetes.AccessReview, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AccessReview to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+                }
+
                 /** Properties of a MitreAttack. */
                 interface IMitreAttack {
 
@@ -2831,7 +3923,8 @@ export namespace google {
                         MODIFY_AUTHENTICATION_PROCESS = 28,
                         DATA_DESTRUCTION = 29,
                         DOMAIN_POLICY_MODIFICATION = 30,
-                        IMPAIR_DEFENSES = 31
+                        IMPAIR_DEFENSES = 31,
+                        NETWORK_SERVICE_DISCOVERY = 32
                     }
                 }
 

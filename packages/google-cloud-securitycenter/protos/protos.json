@@ -303,6 +303,39 @@
                         }
                       }
                     },
+                    "Container": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "uri": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "imageId": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "labels": {
+                          "rule": "repeated",
+                          "type": "Label",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "Label": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "value": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
                     "Exfiltration": {
                       "fields": {
                         "sources": {
@@ -527,6 +560,15 @@
                         "nextSteps": {
                           "type": "string",
                           "id": 40
+                        },
+                        "containers": {
+                          "rule": "repeated",
+                          "type": "Container",
+                          "id": 42
+                        },
+                        "kubernetes": {
+                          "type": "Kubernetes",
+                          "id": 43
                         }
                       },
                       "nested": {
@@ -669,6 +711,189 @@
                         }
                       }
                     },
+                    "Kubernetes": {
+                      "fields": {
+                        "pods": {
+                          "rule": "repeated",
+                          "type": "Pod",
+                          "id": 1
+                        },
+                        "nodes": {
+                          "rule": "repeated",
+                          "type": "Node",
+                          "id": 2
+                        },
+                        "nodePools": {
+                          "rule": "repeated",
+                          "type": "NodePool",
+                          "id": 3
+                        },
+                        "roles": {
+                          "rule": "repeated",
+                          "type": "Role",
+                          "id": 4
+                        },
+                        "bindings": {
+                          "rule": "repeated",
+                          "type": "Binding",
+                          "id": 5
+                        },
+                        "accessReviews": {
+                          "rule": "repeated",
+                          "type": "AccessReview",
+                          "id": 6
+                        }
+                      },
+                      "nested": {
+                        "Pod": {
+                          "fields": {
+                            "ns": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "name": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "labels": {
+                              "rule": "repeated",
+                              "type": "Label",
+                              "id": 3
+                            },
+                            "containers": {
+                              "rule": "repeated",
+                              "type": "Container",
+                              "id": 4
+                            }
+                          }
+                        },
+                        "Node": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "NodePool": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "nodes": {
+                              "rule": "repeated",
+                              "type": "Node",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "Role": {
+                          "fields": {
+                            "kind": {
+                              "type": "Kind",
+                              "id": 1
+                            },
+                            "ns": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "name": {
+                              "type": "string",
+                              "id": 3
+                            }
+                          },
+                          "nested": {
+                            "Kind": {
+                              "values": {
+                                "KIND_UNSPECIFIED": 0,
+                                "ROLE": 1,
+                                "CLUSTER_ROLE": 2
+                              }
+                            }
+                          }
+                        },
+                        "Binding": {
+                          "fields": {
+                            "ns": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "name": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "role": {
+                              "type": "Role",
+                              "id": 3
+                            },
+                            "subjects": {
+                              "rule": "repeated",
+                              "type": "Subject",
+                              "id": 4
+                            }
+                          }
+                        },
+                        "Subject": {
+                          "fields": {
+                            "kind": {
+                              "type": "AuthType",
+                              "id": 1
+                            },
+                            "ns": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "name": {
+                              "type": "string",
+                              "id": 3
+                            }
+                          },
+                          "nested": {
+                            "AuthType": {
+                              "values": {
+                                "AUTH_TYPE_UNSPECIFIED": 0,
+                                "USER": 1,
+                                "SERVICEACCOUNT": 2,
+                                "GROUP": 3
+                              }
+                            }
+                          }
+                        },
+                        "AccessReview": {
+                          "fields": {
+                            "group": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "ns": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "name": {
+                              "type": "string",
+                              "id": 3
+                            },
+                            "resource": {
+                              "type": "string",
+                              "id": 4
+                            },
+                            "subresource": {
+                              "type": "string",
+                              "id": 5
+                            },
+                            "verb": {
+                              "type": "string",
+                              "id": 6
+                            },
+                            "version": {
+                              "type": "string",
+                              "id": 7
+                            }
+                          }
+                        }
+                      }
+                    },
                     "MitreAttack": {
                       "fields": {
                         "primaryTactic": {
@@ -748,7 +973,8 @@
                             "MODIFY_AUTHENTICATION_PROCESS": 28,
                             "DATA_DESTRUCTION": 29,
                             "DOMAIN_POLICY_MODIFICATION": 30,
-                            "IMPAIR_DEFENSES": 31
+                            "IMPAIR_DEFENSES": 31,
+                            "NETWORK_SERVICE_DISCOVERY": 32
                           }
                         }
                       }

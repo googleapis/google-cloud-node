@@ -3361,6 +3361,492 @@
                         return Contact;
                     })();
     
+                    v1.Container = (function() {
+    
+                        /**
+                         * Properties of a Container.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @interface IContainer
+                         * @property {string|null} [name] Container name
+                         * @property {string|null} [uri] Container uri
+                         * @property {string|null} [imageId] Container imageId
+                         * @property {Array.<google.cloud.securitycenter.v1.ILabel>|null} [labels] Container labels
+                         */
+    
+                        /**
+                         * Constructs a new Container.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @classdesc Represents a Container.
+                         * @implements IContainer
+                         * @constructor
+                         * @param {google.cloud.securitycenter.v1.IContainer=} [properties] Properties to set
+                         */
+                        function Container(properties) {
+                            this.labels = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Container name.
+                         * @member {string} name
+                         * @memberof google.cloud.securitycenter.v1.Container
+                         * @instance
+                         */
+                        Container.prototype.name = "";
+    
+                        /**
+                         * Container uri.
+                         * @member {string} uri
+                         * @memberof google.cloud.securitycenter.v1.Container
+                         * @instance
+                         */
+                        Container.prototype.uri = "";
+    
+                        /**
+                         * Container imageId.
+                         * @member {string} imageId
+                         * @memberof google.cloud.securitycenter.v1.Container
+                         * @instance
+                         */
+                        Container.prototype.imageId = "";
+    
+                        /**
+                         * Container labels.
+                         * @member {Array.<google.cloud.securitycenter.v1.ILabel>} labels
+                         * @memberof google.cloud.securitycenter.v1.Container
+                         * @instance
+                         */
+                        Container.prototype.labels = $util.emptyArray;
+    
+                        /**
+                         * Creates a new Container instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycenter.v1.Container
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IContainer=} [properties] Properties to set
+                         * @returns {google.cloud.securitycenter.v1.Container} Container instance
+                         */
+                        Container.create = function create(properties) {
+                            return new Container(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Container message. Does not implicitly {@link google.cloud.securitycenter.v1.Container.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycenter.v1.Container
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IContainer} message Container message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Container.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.uri);
+                            if (message.imageId != null && Object.hasOwnProperty.call(message, "imageId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.imageId);
+                            if (message.labels != null && message.labels.length)
+                                for (var i = 0; i < message.labels.length; ++i)
+                                    $root.google.cloud.securitycenter.v1.Label.encode(message.labels[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Container message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.Container.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.Container
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IContainer} message Container message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Container.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Container message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycenter.v1.Container
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycenter.v1.Container} Container
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Container.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.Container();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.uri = reader.string();
+                                    break;
+                                case 3:
+                                    message.imageId = reader.string();
+                                    break;
+                                case 4:
+                                    if (!(message.labels && message.labels.length))
+                                        message.labels = [];
+                                    message.labels.push($root.google.cloud.securitycenter.v1.Label.decode(reader, reader.uint32()));
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Container message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.Container
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycenter.v1.Container} Container
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Container.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Container message.
+                         * @function verify
+                         * @memberof google.cloud.securitycenter.v1.Container
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Container.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                if (!$util.isString(message.uri))
+                                    return "uri: string expected";
+                            if (message.imageId != null && message.hasOwnProperty("imageId"))
+                                if (!$util.isString(message.imageId))
+                                    return "imageId: string expected";
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!Array.isArray(message.labels))
+                                    return "labels: array expected";
+                                for (var i = 0; i < message.labels.length; ++i) {
+                                    var error = $root.google.cloud.securitycenter.v1.Label.verify(message.labels[i]);
+                                    if (error)
+                                        return "labels." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Container message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycenter.v1.Container
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycenter.v1.Container} Container
+                         */
+                        Container.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycenter.v1.Container)
+                                return object;
+                            var message = new $root.google.cloud.securitycenter.v1.Container();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.uri != null)
+                                message.uri = String(object.uri);
+                            if (object.imageId != null)
+                                message.imageId = String(object.imageId);
+                            if (object.labels) {
+                                if (!Array.isArray(object.labels))
+                                    throw TypeError(".google.cloud.securitycenter.v1.Container.labels: array expected");
+                                message.labels = [];
+                                for (var i = 0; i < object.labels.length; ++i) {
+                                    if (typeof object.labels[i] !== "object")
+                                        throw TypeError(".google.cloud.securitycenter.v1.Container.labels: object expected");
+                                    message.labels[i] = $root.google.cloud.securitycenter.v1.Label.fromObject(object.labels[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Container message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycenter.v1.Container
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.Container} message Container
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Container.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.labels = [];
+                            if (options.defaults) {
+                                object.name = "";
+                                object.uri = "";
+                                object.imageId = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                object.uri = message.uri;
+                            if (message.imageId != null && message.hasOwnProperty("imageId"))
+                                object.imageId = message.imageId;
+                            if (message.labels && message.labels.length) {
+                                object.labels = [];
+                                for (var j = 0; j < message.labels.length; ++j)
+                                    object.labels[j] = $root.google.cloud.securitycenter.v1.Label.toObject(message.labels[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Container to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycenter.v1.Container
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Container.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return Container;
+                    })();
+    
+                    v1.Label = (function() {
+    
+                        /**
+                         * Properties of a Label.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @interface ILabel
+                         * @property {string|null} [name] Label name
+                         * @property {string|null} [value] Label value
+                         */
+    
+                        /**
+                         * Constructs a new Label.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @classdesc Represents a Label.
+                         * @implements ILabel
+                         * @constructor
+                         * @param {google.cloud.securitycenter.v1.ILabel=} [properties] Properties to set
+                         */
+                        function Label(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Label name.
+                         * @member {string} name
+                         * @memberof google.cloud.securitycenter.v1.Label
+                         * @instance
+                         */
+                        Label.prototype.name = "";
+    
+                        /**
+                         * Label value.
+                         * @member {string} value
+                         * @memberof google.cloud.securitycenter.v1.Label
+                         * @instance
+                         */
+                        Label.prototype.value = "";
+    
+                        /**
+                         * Creates a new Label instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycenter.v1.Label
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.ILabel=} [properties] Properties to set
+                         * @returns {google.cloud.securitycenter.v1.Label} Label instance
+                         */
+                        Label.create = function create(properties) {
+                            return new Label(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Label message. Does not implicitly {@link google.cloud.securitycenter.v1.Label.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycenter.v1.Label
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.ILabel} message Label message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Label.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.value);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Label message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.Label.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.Label
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.ILabel} message Label message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Label.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Label message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycenter.v1.Label
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycenter.v1.Label} Label
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Label.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.Label();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.value = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Label message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.Label
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycenter.v1.Label} Label
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Label.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Label message.
+                         * @function verify
+                         * @memberof google.cloud.securitycenter.v1.Label
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Label.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.value != null && message.hasOwnProperty("value"))
+                                if (!$util.isString(message.value))
+                                    return "value: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Label message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycenter.v1.Label
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycenter.v1.Label} Label
+                         */
+                        Label.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycenter.v1.Label)
+                                return object;
+                            var message = new $root.google.cloud.securitycenter.v1.Label();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.value != null)
+                                message.value = String(object.value);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Label message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycenter.v1.Label
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.Label} message Label
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Label.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.value = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.value != null && message.hasOwnProperty("value"))
+                                object.value = message.value;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Label to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycenter.v1.Label
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Label.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return Label;
+                    })();
+    
                     v1.Exfiltration = (function() {
     
                         /**
@@ -4498,6 +4984,8 @@
                          * @property {google.cloud.securitycenter.v1.IExfiltration|null} [exfiltration] Finding exfiltration
                          * @property {Array.<google.cloud.securitycenter.v1.IIamBinding>|null} [iamBindings] Finding iamBindings
                          * @property {string|null} [nextSteps] Finding nextSteps
+                         * @property {Array.<google.cloud.securitycenter.v1.IContainer>|null} [containers] Finding containers
+                         * @property {google.cloud.securitycenter.v1.IKubernetes|null} [kubernetes] Finding kubernetes
                          */
     
                         /**
@@ -4516,6 +5004,7 @@
                             this.contacts = {};
                             this.compliances = [];
                             this.iamBindings = [];
+                            this.containers = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -4755,6 +5244,22 @@
                         Finding.prototype.nextSteps = "";
     
                         /**
+                         * Finding containers.
+                         * @member {Array.<google.cloud.securitycenter.v1.IContainer>} containers
+                         * @memberof google.cloud.securitycenter.v1.Finding
+                         * @instance
+                         */
+                        Finding.prototype.containers = $util.emptyArray;
+    
+                        /**
+                         * Finding kubernetes.
+                         * @member {google.cloud.securitycenter.v1.IKubernetes|null|undefined} kubernetes
+                         * @memberof google.cloud.securitycenter.v1.Finding
+                         * @instance
+                         */
+                        Finding.prototype.kubernetes = null;
+    
+                        /**
                          * Creates a new Finding instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.securitycenter.v1.Finding
@@ -4849,6 +5354,11 @@
                                     $root.google.cloud.securitycenter.v1.IamBinding.encode(message.iamBindings[i], writer.uint32(/* id 39, wireType 2 =*/314).fork()).ldelim();
                             if (message.nextSteps != null && Object.hasOwnProperty.call(message, "nextSteps"))
                                 writer.uint32(/* id 40, wireType 2 =*/322).string(message.nextSteps);
+                            if (message.containers != null && message.containers.length)
+                                for (var i = 0; i < message.containers.length; ++i)
+                                    $root.google.cloud.securitycenter.v1.Container.encode(message.containers[i], writer.uint32(/* id 42, wireType 2 =*/338).fork()).ldelim();
+                            if (message.kubernetes != null && Object.hasOwnProperty.call(message, "kubernetes"))
+                                $root.google.cloud.securitycenter.v1.Kubernetes.encode(message.kubernetes, writer.uint32(/* id 43, wireType 2 =*/346).fork()).ldelim();
                             return writer;
                         };
     
@@ -5034,6 +5544,14 @@
                                     break;
                                 case 40:
                                     message.nextSteps = reader.string();
+                                    break;
+                                case 42:
+                                    if (!(message.containers && message.containers.length))
+                                        message.containers = [];
+                                    message.containers.push($root.google.cloud.securitycenter.v1.Container.decode(reader, reader.uint32()));
+                                    break;
+                                case 43:
+                                    message.kubernetes = $root.google.cloud.securitycenter.v1.Kubernetes.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -5250,6 +5768,20 @@
                             if (message.nextSteps != null && message.hasOwnProperty("nextSteps"))
                                 if (!$util.isString(message.nextSteps))
                                     return "nextSteps: string expected";
+                            if (message.containers != null && message.hasOwnProperty("containers")) {
+                                if (!Array.isArray(message.containers))
+                                    return "containers: array expected";
+                                for (var i = 0; i < message.containers.length; ++i) {
+                                    var error = $root.google.cloud.securitycenter.v1.Container.verify(message.containers[i]);
+                                    if (error)
+                                        return "containers." + error;
+                                }
+                            }
+                            if (message.kubernetes != null && message.hasOwnProperty("kubernetes")) {
+                                var error = $root.google.cloud.securitycenter.v1.Kubernetes.verify(message.kubernetes);
+                                if (error)
+                                    return "kubernetes." + error;
+                            }
                             return null;
                         };
     
@@ -5478,6 +6010,21 @@
                             }
                             if (object.nextSteps != null)
                                 message.nextSteps = String(object.nextSteps);
+                            if (object.containers) {
+                                if (!Array.isArray(object.containers))
+                                    throw TypeError(".google.cloud.securitycenter.v1.Finding.containers: array expected");
+                                message.containers = [];
+                                for (var i = 0; i < object.containers.length; ++i) {
+                                    if (typeof object.containers[i] !== "object")
+                                        throw TypeError(".google.cloud.securitycenter.v1.Finding.containers: object expected");
+                                    message.containers[i] = $root.google.cloud.securitycenter.v1.Container.fromObject(object.containers[i]);
+                                }
+                            }
+                            if (object.kubernetes != null) {
+                                if (typeof object.kubernetes !== "object")
+                                    throw TypeError(".google.cloud.securitycenter.v1.Finding.kubernetes: object expected");
+                                message.kubernetes = $root.google.cloud.securitycenter.v1.Kubernetes.fromObject(object.kubernetes);
+                            }
                             return message;
                         };
     
@@ -5499,6 +6046,7 @@
                                 object.connections = [];
                                 object.compliances = [];
                                 object.iamBindings = [];
+                                object.containers = [];
                             }
                             if (options.objects || options.defaults) {
                                 object.sourceProperties = {};
@@ -5528,6 +6076,7 @@
                                 object.description = "";
                                 object.exfiltration = null;
                                 object.nextSteps = "";
+                                object.kubernetes = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -5609,6 +6158,13 @@
                             }
                             if (message.nextSteps != null && message.hasOwnProperty("nextSteps"))
                                 object.nextSteps = message.nextSteps;
+                            if (message.containers && message.containers.length) {
+                                object.containers = [];
+                                for (var j = 0; j < message.containers.length; ++j)
+                                    object.containers[j] = $root.google.cloud.securitycenter.v1.Container.toObject(message.containers[j], options);
+                            }
+                            if (message.kubernetes != null && message.hasOwnProperty("kubernetes"))
+                                object.kubernetes = $root.google.cloud.securitycenter.v1.Kubernetes.toObject(message.kubernetes, options);
                             return object;
                         };
     
@@ -7126,6 +7682,2286 @@
                         return Indicator;
                     })();
     
+                    v1.Kubernetes = (function() {
+    
+                        /**
+                         * Properties of a Kubernetes.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @interface IKubernetes
+                         * @property {Array.<google.cloud.securitycenter.v1.Kubernetes.IPod>|null} [pods] Kubernetes pods
+                         * @property {Array.<google.cloud.securitycenter.v1.Kubernetes.INode>|null} [nodes] Kubernetes nodes
+                         * @property {Array.<google.cloud.securitycenter.v1.Kubernetes.INodePool>|null} [nodePools] Kubernetes nodePools
+                         * @property {Array.<google.cloud.securitycenter.v1.Kubernetes.IRole>|null} [roles] Kubernetes roles
+                         * @property {Array.<google.cloud.securitycenter.v1.Kubernetes.IBinding>|null} [bindings] Kubernetes bindings
+                         * @property {Array.<google.cloud.securitycenter.v1.Kubernetes.IAccessReview>|null} [accessReviews] Kubernetes accessReviews
+                         */
+    
+                        /**
+                         * Constructs a new Kubernetes.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @classdesc Represents a Kubernetes.
+                         * @implements IKubernetes
+                         * @constructor
+                         * @param {google.cloud.securitycenter.v1.IKubernetes=} [properties] Properties to set
+                         */
+                        function Kubernetes(properties) {
+                            this.pods = [];
+                            this.nodes = [];
+                            this.nodePools = [];
+                            this.roles = [];
+                            this.bindings = [];
+                            this.accessReviews = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Kubernetes pods.
+                         * @member {Array.<google.cloud.securitycenter.v1.Kubernetes.IPod>} pods
+                         * @memberof google.cloud.securitycenter.v1.Kubernetes
+                         * @instance
+                         */
+                        Kubernetes.prototype.pods = $util.emptyArray;
+    
+                        /**
+                         * Kubernetes nodes.
+                         * @member {Array.<google.cloud.securitycenter.v1.Kubernetes.INode>} nodes
+                         * @memberof google.cloud.securitycenter.v1.Kubernetes
+                         * @instance
+                         */
+                        Kubernetes.prototype.nodes = $util.emptyArray;
+    
+                        /**
+                         * Kubernetes nodePools.
+                         * @member {Array.<google.cloud.securitycenter.v1.Kubernetes.INodePool>} nodePools
+                         * @memberof google.cloud.securitycenter.v1.Kubernetes
+                         * @instance
+                         */
+                        Kubernetes.prototype.nodePools = $util.emptyArray;
+    
+                        /**
+                         * Kubernetes roles.
+                         * @member {Array.<google.cloud.securitycenter.v1.Kubernetes.IRole>} roles
+                         * @memberof google.cloud.securitycenter.v1.Kubernetes
+                         * @instance
+                         */
+                        Kubernetes.prototype.roles = $util.emptyArray;
+    
+                        /**
+                         * Kubernetes bindings.
+                         * @member {Array.<google.cloud.securitycenter.v1.Kubernetes.IBinding>} bindings
+                         * @memberof google.cloud.securitycenter.v1.Kubernetes
+                         * @instance
+                         */
+                        Kubernetes.prototype.bindings = $util.emptyArray;
+    
+                        /**
+                         * Kubernetes accessReviews.
+                         * @member {Array.<google.cloud.securitycenter.v1.Kubernetes.IAccessReview>} accessReviews
+                         * @memberof google.cloud.securitycenter.v1.Kubernetes
+                         * @instance
+                         */
+                        Kubernetes.prototype.accessReviews = $util.emptyArray;
+    
+                        /**
+                         * Creates a new Kubernetes instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycenter.v1.Kubernetes
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IKubernetes=} [properties] Properties to set
+                         * @returns {google.cloud.securitycenter.v1.Kubernetes} Kubernetes instance
+                         */
+                        Kubernetes.create = function create(properties) {
+                            return new Kubernetes(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Kubernetes message. Does not implicitly {@link google.cloud.securitycenter.v1.Kubernetes.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycenter.v1.Kubernetes
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IKubernetes} message Kubernetes message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Kubernetes.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.pods != null && message.pods.length)
+                                for (var i = 0; i < message.pods.length; ++i)
+                                    $root.google.cloud.securitycenter.v1.Kubernetes.Pod.encode(message.pods[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nodes != null && message.nodes.length)
+                                for (var i = 0; i < message.nodes.length; ++i)
+                                    $root.google.cloud.securitycenter.v1.Kubernetes.Node.encode(message.nodes[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.nodePools != null && message.nodePools.length)
+                                for (var i = 0; i < message.nodePools.length; ++i)
+                                    $root.google.cloud.securitycenter.v1.Kubernetes.NodePool.encode(message.nodePools[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.roles != null && message.roles.length)
+                                for (var i = 0; i < message.roles.length; ++i)
+                                    $root.google.cloud.securitycenter.v1.Kubernetes.Role.encode(message.roles[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.bindings != null && message.bindings.length)
+                                for (var i = 0; i < message.bindings.length; ++i)
+                                    $root.google.cloud.securitycenter.v1.Kubernetes.Binding.encode(message.bindings[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.accessReviews != null && message.accessReviews.length)
+                                for (var i = 0; i < message.accessReviews.length; ++i)
+                                    $root.google.cloud.securitycenter.v1.Kubernetes.AccessReview.encode(message.accessReviews[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Kubernetes message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.Kubernetes.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.Kubernetes
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IKubernetes} message Kubernetes message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Kubernetes.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Kubernetes message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycenter.v1.Kubernetes
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycenter.v1.Kubernetes} Kubernetes
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Kubernetes.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.Kubernetes();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.pods && message.pods.length))
+                                        message.pods = [];
+                                    message.pods.push($root.google.cloud.securitycenter.v1.Kubernetes.Pod.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    if (!(message.nodes && message.nodes.length))
+                                        message.nodes = [];
+                                    message.nodes.push($root.google.cloud.securitycenter.v1.Kubernetes.Node.decode(reader, reader.uint32()));
+                                    break;
+                                case 3:
+                                    if (!(message.nodePools && message.nodePools.length))
+                                        message.nodePools = [];
+                                    message.nodePools.push($root.google.cloud.securitycenter.v1.Kubernetes.NodePool.decode(reader, reader.uint32()));
+                                    break;
+                                case 4:
+                                    if (!(message.roles && message.roles.length))
+                                        message.roles = [];
+                                    message.roles.push($root.google.cloud.securitycenter.v1.Kubernetes.Role.decode(reader, reader.uint32()));
+                                    break;
+                                case 5:
+                                    if (!(message.bindings && message.bindings.length))
+                                        message.bindings = [];
+                                    message.bindings.push($root.google.cloud.securitycenter.v1.Kubernetes.Binding.decode(reader, reader.uint32()));
+                                    break;
+                                case 6:
+                                    if (!(message.accessReviews && message.accessReviews.length))
+                                        message.accessReviews = [];
+                                    message.accessReviews.push($root.google.cloud.securitycenter.v1.Kubernetes.AccessReview.decode(reader, reader.uint32()));
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Kubernetes message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.Kubernetes
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycenter.v1.Kubernetes} Kubernetes
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Kubernetes.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Kubernetes message.
+                         * @function verify
+                         * @memberof google.cloud.securitycenter.v1.Kubernetes
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Kubernetes.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.pods != null && message.hasOwnProperty("pods")) {
+                                if (!Array.isArray(message.pods))
+                                    return "pods: array expected";
+                                for (var i = 0; i < message.pods.length; ++i) {
+                                    var error = $root.google.cloud.securitycenter.v1.Kubernetes.Pod.verify(message.pods[i]);
+                                    if (error)
+                                        return "pods." + error;
+                                }
+                            }
+                            if (message.nodes != null && message.hasOwnProperty("nodes")) {
+                                if (!Array.isArray(message.nodes))
+                                    return "nodes: array expected";
+                                for (var i = 0; i < message.nodes.length; ++i) {
+                                    var error = $root.google.cloud.securitycenter.v1.Kubernetes.Node.verify(message.nodes[i]);
+                                    if (error)
+                                        return "nodes." + error;
+                                }
+                            }
+                            if (message.nodePools != null && message.hasOwnProperty("nodePools")) {
+                                if (!Array.isArray(message.nodePools))
+                                    return "nodePools: array expected";
+                                for (var i = 0; i < message.nodePools.length; ++i) {
+                                    var error = $root.google.cloud.securitycenter.v1.Kubernetes.NodePool.verify(message.nodePools[i]);
+                                    if (error)
+                                        return "nodePools." + error;
+                                }
+                            }
+                            if (message.roles != null && message.hasOwnProperty("roles")) {
+                                if (!Array.isArray(message.roles))
+                                    return "roles: array expected";
+                                for (var i = 0; i < message.roles.length; ++i) {
+                                    var error = $root.google.cloud.securitycenter.v1.Kubernetes.Role.verify(message.roles[i]);
+                                    if (error)
+                                        return "roles." + error;
+                                }
+                            }
+                            if (message.bindings != null && message.hasOwnProperty("bindings")) {
+                                if (!Array.isArray(message.bindings))
+                                    return "bindings: array expected";
+                                for (var i = 0; i < message.bindings.length; ++i) {
+                                    var error = $root.google.cloud.securitycenter.v1.Kubernetes.Binding.verify(message.bindings[i]);
+                                    if (error)
+                                        return "bindings." + error;
+                                }
+                            }
+                            if (message.accessReviews != null && message.hasOwnProperty("accessReviews")) {
+                                if (!Array.isArray(message.accessReviews))
+                                    return "accessReviews: array expected";
+                                for (var i = 0; i < message.accessReviews.length; ++i) {
+                                    var error = $root.google.cloud.securitycenter.v1.Kubernetes.AccessReview.verify(message.accessReviews[i]);
+                                    if (error)
+                                        return "accessReviews." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Kubernetes message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycenter.v1.Kubernetes
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycenter.v1.Kubernetes} Kubernetes
+                         */
+                        Kubernetes.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycenter.v1.Kubernetes)
+                                return object;
+                            var message = new $root.google.cloud.securitycenter.v1.Kubernetes();
+                            if (object.pods) {
+                                if (!Array.isArray(object.pods))
+                                    throw TypeError(".google.cloud.securitycenter.v1.Kubernetes.pods: array expected");
+                                message.pods = [];
+                                for (var i = 0; i < object.pods.length; ++i) {
+                                    if (typeof object.pods[i] !== "object")
+                                        throw TypeError(".google.cloud.securitycenter.v1.Kubernetes.pods: object expected");
+                                    message.pods[i] = $root.google.cloud.securitycenter.v1.Kubernetes.Pod.fromObject(object.pods[i]);
+                                }
+                            }
+                            if (object.nodes) {
+                                if (!Array.isArray(object.nodes))
+                                    throw TypeError(".google.cloud.securitycenter.v1.Kubernetes.nodes: array expected");
+                                message.nodes = [];
+                                for (var i = 0; i < object.nodes.length; ++i) {
+                                    if (typeof object.nodes[i] !== "object")
+                                        throw TypeError(".google.cloud.securitycenter.v1.Kubernetes.nodes: object expected");
+                                    message.nodes[i] = $root.google.cloud.securitycenter.v1.Kubernetes.Node.fromObject(object.nodes[i]);
+                                }
+                            }
+                            if (object.nodePools) {
+                                if (!Array.isArray(object.nodePools))
+                                    throw TypeError(".google.cloud.securitycenter.v1.Kubernetes.nodePools: array expected");
+                                message.nodePools = [];
+                                for (var i = 0; i < object.nodePools.length; ++i) {
+                                    if (typeof object.nodePools[i] !== "object")
+                                        throw TypeError(".google.cloud.securitycenter.v1.Kubernetes.nodePools: object expected");
+                                    message.nodePools[i] = $root.google.cloud.securitycenter.v1.Kubernetes.NodePool.fromObject(object.nodePools[i]);
+                                }
+                            }
+                            if (object.roles) {
+                                if (!Array.isArray(object.roles))
+                                    throw TypeError(".google.cloud.securitycenter.v1.Kubernetes.roles: array expected");
+                                message.roles = [];
+                                for (var i = 0; i < object.roles.length; ++i) {
+                                    if (typeof object.roles[i] !== "object")
+                                        throw TypeError(".google.cloud.securitycenter.v1.Kubernetes.roles: object expected");
+                                    message.roles[i] = $root.google.cloud.securitycenter.v1.Kubernetes.Role.fromObject(object.roles[i]);
+                                }
+                            }
+                            if (object.bindings) {
+                                if (!Array.isArray(object.bindings))
+                                    throw TypeError(".google.cloud.securitycenter.v1.Kubernetes.bindings: array expected");
+                                message.bindings = [];
+                                for (var i = 0; i < object.bindings.length; ++i) {
+                                    if (typeof object.bindings[i] !== "object")
+                                        throw TypeError(".google.cloud.securitycenter.v1.Kubernetes.bindings: object expected");
+                                    message.bindings[i] = $root.google.cloud.securitycenter.v1.Kubernetes.Binding.fromObject(object.bindings[i]);
+                                }
+                            }
+                            if (object.accessReviews) {
+                                if (!Array.isArray(object.accessReviews))
+                                    throw TypeError(".google.cloud.securitycenter.v1.Kubernetes.accessReviews: array expected");
+                                message.accessReviews = [];
+                                for (var i = 0; i < object.accessReviews.length; ++i) {
+                                    if (typeof object.accessReviews[i] !== "object")
+                                        throw TypeError(".google.cloud.securitycenter.v1.Kubernetes.accessReviews: object expected");
+                                    message.accessReviews[i] = $root.google.cloud.securitycenter.v1.Kubernetes.AccessReview.fromObject(object.accessReviews[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Kubernetes message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycenter.v1.Kubernetes
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.Kubernetes} message Kubernetes
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Kubernetes.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.pods = [];
+                                object.nodes = [];
+                                object.nodePools = [];
+                                object.roles = [];
+                                object.bindings = [];
+                                object.accessReviews = [];
+                            }
+                            if (message.pods && message.pods.length) {
+                                object.pods = [];
+                                for (var j = 0; j < message.pods.length; ++j)
+                                    object.pods[j] = $root.google.cloud.securitycenter.v1.Kubernetes.Pod.toObject(message.pods[j], options);
+                            }
+                            if (message.nodes && message.nodes.length) {
+                                object.nodes = [];
+                                for (var j = 0; j < message.nodes.length; ++j)
+                                    object.nodes[j] = $root.google.cloud.securitycenter.v1.Kubernetes.Node.toObject(message.nodes[j], options);
+                            }
+                            if (message.nodePools && message.nodePools.length) {
+                                object.nodePools = [];
+                                for (var j = 0; j < message.nodePools.length; ++j)
+                                    object.nodePools[j] = $root.google.cloud.securitycenter.v1.Kubernetes.NodePool.toObject(message.nodePools[j], options);
+                            }
+                            if (message.roles && message.roles.length) {
+                                object.roles = [];
+                                for (var j = 0; j < message.roles.length; ++j)
+                                    object.roles[j] = $root.google.cloud.securitycenter.v1.Kubernetes.Role.toObject(message.roles[j], options);
+                            }
+                            if (message.bindings && message.bindings.length) {
+                                object.bindings = [];
+                                for (var j = 0; j < message.bindings.length; ++j)
+                                    object.bindings[j] = $root.google.cloud.securitycenter.v1.Kubernetes.Binding.toObject(message.bindings[j], options);
+                            }
+                            if (message.accessReviews && message.accessReviews.length) {
+                                object.accessReviews = [];
+                                for (var j = 0; j < message.accessReviews.length; ++j)
+                                    object.accessReviews[j] = $root.google.cloud.securitycenter.v1.Kubernetes.AccessReview.toObject(message.accessReviews[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Kubernetes to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycenter.v1.Kubernetes
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Kubernetes.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        Kubernetes.Pod = (function() {
+    
+                            /**
+                             * Properties of a Pod.
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes
+                             * @interface IPod
+                             * @property {string|null} [ns] Pod ns
+                             * @property {string|null} [name] Pod name
+                             * @property {Array.<google.cloud.securitycenter.v1.ILabel>|null} [labels] Pod labels
+                             * @property {Array.<google.cloud.securitycenter.v1.IContainer>|null} [containers] Pod containers
+                             */
+    
+                            /**
+                             * Constructs a new Pod.
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes
+                             * @classdesc Represents a Pod.
+                             * @implements IPod
+                             * @constructor
+                             * @param {google.cloud.securitycenter.v1.Kubernetes.IPod=} [properties] Properties to set
+                             */
+                            function Pod(properties) {
+                                this.labels = [];
+                                this.containers = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Pod ns.
+                             * @member {string} ns
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.Pod
+                             * @instance
+                             */
+                            Pod.prototype.ns = "";
+    
+                            /**
+                             * Pod name.
+                             * @member {string} name
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.Pod
+                             * @instance
+                             */
+                            Pod.prototype.name = "";
+    
+                            /**
+                             * Pod labels.
+                             * @member {Array.<google.cloud.securitycenter.v1.ILabel>} labels
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.Pod
+                             * @instance
+                             */
+                            Pod.prototype.labels = $util.emptyArray;
+    
+                            /**
+                             * Pod containers.
+                             * @member {Array.<google.cloud.securitycenter.v1.IContainer>} containers
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.Pod
+                             * @instance
+                             */
+                            Pod.prototype.containers = $util.emptyArray;
+    
+                            /**
+                             * Creates a new Pod instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.Pod
+                             * @static
+                             * @param {google.cloud.securitycenter.v1.Kubernetes.IPod=} [properties] Properties to set
+                             * @returns {google.cloud.securitycenter.v1.Kubernetes.Pod} Pod instance
+                             */
+                            Pod.create = function create(properties) {
+                                return new Pod(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Pod message. Does not implicitly {@link google.cloud.securitycenter.v1.Kubernetes.Pod.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.Pod
+                             * @static
+                             * @param {google.cloud.securitycenter.v1.Kubernetes.IPod} message Pod message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Pod.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.ns != null && Object.hasOwnProperty.call(message, "ns"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.ns);
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
+                                if (message.labels != null && message.labels.length)
+                                    for (var i = 0; i < message.labels.length; ++i)
+                                        $root.google.cloud.securitycenter.v1.Label.encode(message.labels[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.containers != null && message.containers.length)
+                                    for (var i = 0; i < message.containers.length; ++i)
+                                        $root.google.cloud.securitycenter.v1.Container.encode(message.containers[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Pod message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.Kubernetes.Pod.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.Pod
+                             * @static
+                             * @param {google.cloud.securitycenter.v1.Kubernetes.IPod} message Pod message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Pod.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Pod message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.Pod
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.securitycenter.v1.Kubernetes.Pod} Pod
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Pod.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.Kubernetes.Pod();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.ns = reader.string();
+                                        break;
+                                    case 2:
+                                        message.name = reader.string();
+                                        break;
+                                    case 3:
+                                        if (!(message.labels && message.labels.length))
+                                            message.labels = [];
+                                        message.labels.push($root.google.cloud.securitycenter.v1.Label.decode(reader, reader.uint32()));
+                                        break;
+                                    case 4:
+                                        if (!(message.containers && message.containers.length))
+                                            message.containers = [];
+                                        message.containers.push($root.google.cloud.securitycenter.v1.Container.decode(reader, reader.uint32()));
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Pod message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.Pod
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.securitycenter.v1.Kubernetes.Pod} Pod
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Pod.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Pod message.
+                             * @function verify
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.Pod
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Pod.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.ns != null && message.hasOwnProperty("ns"))
+                                    if (!$util.isString(message.ns))
+                                        return "ns: string expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                if (message.labels != null && message.hasOwnProperty("labels")) {
+                                    if (!Array.isArray(message.labels))
+                                        return "labels: array expected";
+                                    for (var i = 0; i < message.labels.length; ++i) {
+                                        var error = $root.google.cloud.securitycenter.v1.Label.verify(message.labels[i]);
+                                        if (error)
+                                            return "labels." + error;
+                                    }
+                                }
+                                if (message.containers != null && message.hasOwnProperty("containers")) {
+                                    if (!Array.isArray(message.containers))
+                                        return "containers: array expected";
+                                    for (var i = 0; i < message.containers.length; ++i) {
+                                        var error = $root.google.cloud.securitycenter.v1.Container.verify(message.containers[i]);
+                                        if (error)
+                                            return "containers." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Pod message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.Pod
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.securitycenter.v1.Kubernetes.Pod} Pod
+                             */
+                            Pod.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.securitycenter.v1.Kubernetes.Pod)
+                                    return object;
+                                var message = new $root.google.cloud.securitycenter.v1.Kubernetes.Pod();
+                                if (object.ns != null)
+                                    message.ns = String(object.ns);
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                if (object.labels) {
+                                    if (!Array.isArray(object.labels))
+                                        throw TypeError(".google.cloud.securitycenter.v1.Kubernetes.Pod.labels: array expected");
+                                    message.labels = [];
+                                    for (var i = 0; i < object.labels.length; ++i) {
+                                        if (typeof object.labels[i] !== "object")
+                                            throw TypeError(".google.cloud.securitycenter.v1.Kubernetes.Pod.labels: object expected");
+                                        message.labels[i] = $root.google.cloud.securitycenter.v1.Label.fromObject(object.labels[i]);
+                                    }
+                                }
+                                if (object.containers) {
+                                    if (!Array.isArray(object.containers))
+                                        throw TypeError(".google.cloud.securitycenter.v1.Kubernetes.Pod.containers: array expected");
+                                    message.containers = [];
+                                    for (var i = 0; i < object.containers.length; ++i) {
+                                        if (typeof object.containers[i] !== "object")
+                                            throw TypeError(".google.cloud.securitycenter.v1.Kubernetes.Pod.containers: object expected");
+                                        message.containers[i] = $root.google.cloud.securitycenter.v1.Container.fromObject(object.containers[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Pod message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.Pod
+                             * @static
+                             * @param {google.cloud.securitycenter.v1.Kubernetes.Pod} message Pod
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Pod.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults) {
+                                    object.labels = [];
+                                    object.containers = [];
+                                }
+                                if (options.defaults) {
+                                    object.ns = "";
+                                    object.name = "";
+                                }
+                                if (message.ns != null && message.hasOwnProperty("ns"))
+                                    object.ns = message.ns;
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                if (message.labels && message.labels.length) {
+                                    object.labels = [];
+                                    for (var j = 0; j < message.labels.length; ++j)
+                                        object.labels[j] = $root.google.cloud.securitycenter.v1.Label.toObject(message.labels[j], options);
+                                }
+                                if (message.containers && message.containers.length) {
+                                    object.containers = [];
+                                    for (var j = 0; j < message.containers.length; ++j)
+                                        object.containers[j] = $root.google.cloud.securitycenter.v1.Container.toObject(message.containers[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Pod to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.Pod
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Pod.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return Pod;
+                        })();
+    
+                        Kubernetes.Node = (function() {
+    
+                            /**
+                             * Properties of a Node.
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes
+                             * @interface INode
+                             * @property {string|null} [name] Node name
+                             */
+    
+                            /**
+                             * Constructs a new Node.
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes
+                             * @classdesc Represents a Node.
+                             * @implements INode
+                             * @constructor
+                             * @param {google.cloud.securitycenter.v1.Kubernetes.INode=} [properties] Properties to set
+                             */
+                            function Node(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Node name.
+                             * @member {string} name
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.Node
+                             * @instance
+                             */
+                            Node.prototype.name = "";
+    
+                            /**
+                             * Creates a new Node instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.Node
+                             * @static
+                             * @param {google.cloud.securitycenter.v1.Kubernetes.INode=} [properties] Properties to set
+                             * @returns {google.cloud.securitycenter.v1.Kubernetes.Node} Node instance
+                             */
+                            Node.create = function create(properties) {
+                                return new Node(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Node message. Does not implicitly {@link google.cloud.securitycenter.v1.Kubernetes.Node.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.Node
+                             * @static
+                             * @param {google.cloud.securitycenter.v1.Kubernetes.INode} message Node message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Node.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Node message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.Kubernetes.Node.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.Node
+                             * @static
+                             * @param {google.cloud.securitycenter.v1.Kubernetes.INode} message Node message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Node.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Node message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.Node
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.securitycenter.v1.Kubernetes.Node} Node
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Node.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.Kubernetes.Node();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.name = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Node message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.Node
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.securitycenter.v1.Kubernetes.Node} Node
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Node.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Node message.
+                             * @function verify
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.Node
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Node.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Node message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.Node
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.securitycenter.v1.Kubernetes.Node} Node
+                             */
+                            Node.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.securitycenter.v1.Kubernetes.Node)
+                                    return object;
+                                var message = new $root.google.cloud.securitycenter.v1.Kubernetes.Node();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Node message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.Node
+                             * @static
+                             * @param {google.cloud.securitycenter.v1.Kubernetes.Node} message Node
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Node.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Node to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.Node
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Node.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return Node;
+                        })();
+    
+                        Kubernetes.NodePool = (function() {
+    
+                            /**
+                             * Properties of a NodePool.
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes
+                             * @interface INodePool
+                             * @property {string|null} [name] NodePool name
+                             * @property {Array.<google.cloud.securitycenter.v1.Kubernetes.INode>|null} [nodes] NodePool nodes
+                             */
+    
+                            /**
+                             * Constructs a new NodePool.
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes
+                             * @classdesc Represents a NodePool.
+                             * @implements INodePool
+                             * @constructor
+                             * @param {google.cloud.securitycenter.v1.Kubernetes.INodePool=} [properties] Properties to set
+                             */
+                            function NodePool(properties) {
+                                this.nodes = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * NodePool name.
+                             * @member {string} name
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.NodePool
+                             * @instance
+                             */
+                            NodePool.prototype.name = "";
+    
+                            /**
+                             * NodePool nodes.
+                             * @member {Array.<google.cloud.securitycenter.v1.Kubernetes.INode>} nodes
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.NodePool
+                             * @instance
+                             */
+                            NodePool.prototype.nodes = $util.emptyArray;
+    
+                            /**
+                             * Creates a new NodePool instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.NodePool
+                             * @static
+                             * @param {google.cloud.securitycenter.v1.Kubernetes.INodePool=} [properties] Properties to set
+                             * @returns {google.cloud.securitycenter.v1.Kubernetes.NodePool} NodePool instance
+                             */
+                            NodePool.create = function create(properties) {
+                                return new NodePool(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified NodePool message. Does not implicitly {@link google.cloud.securitycenter.v1.Kubernetes.NodePool.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.NodePool
+                             * @static
+                             * @param {google.cloud.securitycenter.v1.Kubernetes.INodePool} message NodePool message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            NodePool.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.nodes != null && message.nodes.length)
+                                    for (var i = 0; i < message.nodes.length; ++i)
+                                        $root.google.cloud.securitycenter.v1.Kubernetes.Node.encode(message.nodes[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified NodePool message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.Kubernetes.NodePool.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.NodePool
+                             * @static
+                             * @param {google.cloud.securitycenter.v1.Kubernetes.INodePool} message NodePool message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            NodePool.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a NodePool message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.NodePool
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.securitycenter.v1.Kubernetes.NodePool} NodePool
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            NodePool.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.Kubernetes.NodePool();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.name = reader.string();
+                                        break;
+                                    case 2:
+                                        if (!(message.nodes && message.nodes.length))
+                                            message.nodes = [];
+                                        message.nodes.push($root.google.cloud.securitycenter.v1.Kubernetes.Node.decode(reader, reader.uint32()));
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a NodePool message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.NodePool
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.securitycenter.v1.Kubernetes.NodePool} NodePool
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            NodePool.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a NodePool message.
+                             * @function verify
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.NodePool
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            NodePool.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                if (message.nodes != null && message.hasOwnProperty("nodes")) {
+                                    if (!Array.isArray(message.nodes))
+                                        return "nodes: array expected";
+                                    for (var i = 0; i < message.nodes.length; ++i) {
+                                        var error = $root.google.cloud.securitycenter.v1.Kubernetes.Node.verify(message.nodes[i]);
+                                        if (error)
+                                            return "nodes." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a NodePool message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.NodePool
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.securitycenter.v1.Kubernetes.NodePool} NodePool
+                             */
+                            NodePool.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.securitycenter.v1.Kubernetes.NodePool)
+                                    return object;
+                                var message = new $root.google.cloud.securitycenter.v1.Kubernetes.NodePool();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                if (object.nodes) {
+                                    if (!Array.isArray(object.nodes))
+                                        throw TypeError(".google.cloud.securitycenter.v1.Kubernetes.NodePool.nodes: array expected");
+                                    message.nodes = [];
+                                    for (var i = 0; i < object.nodes.length; ++i) {
+                                        if (typeof object.nodes[i] !== "object")
+                                            throw TypeError(".google.cloud.securitycenter.v1.Kubernetes.NodePool.nodes: object expected");
+                                        message.nodes[i] = $root.google.cloud.securitycenter.v1.Kubernetes.Node.fromObject(object.nodes[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a NodePool message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.NodePool
+                             * @static
+                             * @param {google.cloud.securitycenter.v1.Kubernetes.NodePool} message NodePool
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            NodePool.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.nodes = [];
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                if (message.nodes && message.nodes.length) {
+                                    object.nodes = [];
+                                    for (var j = 0; j < message.nodes.length; ++j)
+                                        object.nodes[j] = $root.google.cloud.securitycenter.v1.Kubernetes.Node.toObject(message.nodes[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this NodePool to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.NodePool
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            NodePool.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return NodePool;
+                        })();
+    
+                        Kubernetes.Role = (function() {
+    
+                            /**
+                             * Properties of a Role.
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes
+                             * @interface IRole
+                             * @property {google.cloud.securitycenter.v1.Kubernetes.Role.Kind|null} [kind] Role kind
+                             * @property {string|null} [ns] Role ns
+                             * @property {string|null} [name] Role name
+                             */
+    
+                            /**
+                             * Constructs a new Role.
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes
+                             * @classdesc Represents a Role.
+                             * @implements IRole
+                             * @constructor
+                             * @param {google.cloud.securitycenter.v1.Kubernetes.IRole=} [properties] Properties to set
+                             */
+                            function Role(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Role kind.
+                             * @member {google.cloud.securitycenter.v1.Kubernetes.Role.Kind} kind
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.Role
+                             * @instance
+                             */
+                            Role.prototype.kind = 0;
+    
+                            /**
+                             * Role ns.
+                             * @member {string} ns
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.Role
+                             * @instance
+                             */
+                            Role.prototype.ns = "";
+    
+                            /**
+                             * Role name.
+                             * @member {string} name
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.Role
+                             * @instance
+                             */
+                            Role.prototype.name = "";
+    
+                            /**
+                             * Creates a new Role instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.Role
+                             * @static
+                             * @param {google.cloud.securitycenter.v1.Kubernetes.IRole=} [properties] Properties to set
+                             * @returns {google.cloud.securitycenter.v1.Kubernetes.Role} Role instance
+                             */
+                            Role.create = function create(properties) {
+                                return new Role(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Role message. Does not implicitly {@link google.cloud.securitycenter.v1.Kubernetes.Role.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.Role
+                             * @static
+                             * @param {google.cloud.securitycenter.v1.Kubernetes.IRole} message Role message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Role.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.kind != null && Object.hasOwnProperty.call(message, "kind"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.kind);
+                                if (message.ns != null && Object.hasOwnProperty.call(message, "ns"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.ns);
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.name);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Role message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.Kubernetes.Role.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.Role
+                             * @static
+                             * @param {google.cloud.securitycenter.v1.Kubernetes.IRole} message Role message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Role.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Role message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.Role
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.securitycenter.v1.Kubernetes.Role} Role
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Role.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.Kubernetes.Role();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.kind = reader.int32();
+                                        break;
+                                    case 2:
+                                        message.ns = reader.string();
+                                        break;
+                                    case 3:
+                                        message.name = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Role message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.Role
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.securitycenter.v1.Kubernetes.Role} Role
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Role.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Role message.
+                             * @function verify
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.Role
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Role.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.kind != null && message.hasOwnProperty("kind"))
+                                    switch (message.kind) {
+                                    default:
+                                        return "kind: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                if (message.ns != null && message.hasOwnProperty("ns"))
+                                    if (!$util.isString(message.ns))
+                                        return "ns: string expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Role message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.Role
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.securitycenter.v1.Kubernetes.Role} Role
+                             */
+                            Role.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.securitycenter.v1.Kubernetes.Role)
+                                    return object;
+                                var message = new $root.google.cloud.securitycenter.v1.Kubernetes.Role();
+                                switch (object.kind) {
+                                case "KIND_UNSPECIFIED":
+                                case 0:
+                                    message.kind = 0;
+                                    break;
+                                case "ROLE":
+                                case 1:
+                                    message.kind = 1;
+                                    break;
+                                case "CLUSTER_ROLE":
+                                case 2:
+                                    message.kind = 2;
+                                    break;
+                                }
+                                if (object.ns != null)
+                                    message.ns = String(object.ns);
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Role message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.Role
+                             * @static
+                             * @param {google.cloud.securitycenter.v1.Kubernetes.Role} message Role
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Role.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.kind = options.enums === String ? "KIND_UNSPECIFIED" : 0;
+                                    object.ns = "";
+                                    object.name = "";
+                                }
+                                if (message.kind != null && message.hasOwnProperty("kind"))
+                                    object.kind = options.enums === String ? $root.google.cloud.securitycenter.v1.Kubernetes.Role.Kind[message.kind] : message.kind;
+                                if (message.ns != null && message.hasOwnProperty("ns"))
+                                    object.ns = message.ns;
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Role to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.Role
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Role.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Kind enum.
+                             * @name google.cloud.securitycenter.v1.Kubernetes.Role.Kind
+                             * @enum {number}
+                             * @property {number} KIND_UNSPECIFIED=0 KIND_UNSPECIFIED value
+                             * @property {number} ROLE=1 ROLE value
+                             * @property {number} CLUSTER_ROLE=2 CLUSTER_ROLE value
+                             */
+                            Role.Kind = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "KIND_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "ROLE"] = 1;
+                                values[valuesById[2] = "CLUSTER_ROLE"] = 2;
+                                return values;
+                            })();
+    
+                            return Role;
+                        })();
+    
+                        Kubernetes.Binding = (function() {
+    
+                            /**
+                             * Properties of a Binding.
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes
+                             * @interface IBinding
+                             * @property {string|null} [ns] Binding ns
+                             * @property {string|null} [name] Binding name
+                             * @property {google.cloud.securitycenter.v1.Kubernetes.IRole|null} [role] Binding role
+                             * @property {Array.<google.cloud.securitycenter.v1.Kubernetes.ISubject>|null} [subjects] Binding subjects
+                             */
+    
+                            /**
+                             * Constructs a new Binding.
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes
+                             * @classdesc Represents a Binding.
+                             * @implements IBinding
+                             * @constructor
+                             * @param {google.cloud.securitycenter.v1.Kubernetes.IBinding=} [properties] Properties to set
+                             */
+                            function Binding(properties) {
+                                this.subjects = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Binding ns.
+                             * @member {string} ns
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.Binding
+                             * @instance
+                             */
+                            Binding.prototype.ns = "";
+    
+                            /**
+                             * Binding name.
+                             * @member {string} name
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.Binding
+                             * @instance
+                             */
+                            Binding.prototype.name = "";
+    
+                            /**
+                             * Binding role.
+                             * @member {google.cloud.securitycenter.v1.Kubernetes.IRole|null|undefined} role
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.Binding
+                             * @instance
+                             */
+                            Binding.prototype.role = null;
+    
+                            /**
+                             * Binding subjects.
+                             * @member {Array.<google.cloud.securitycenter.v1.Kubernetes.ISubject>} subjects
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.Binding
+                             * @instance
+                             */
+                            Binding.prototype.subjects = $util.emptyArray;
+    
+                            /**
+                             * Creates a new Binding instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.Binding
+                             * @static
+                             * @param {google.cloud.securitycenter.v1.Kubernetes.IBinding=} [properties] Properties to set
+                             * @returns {google.cloud.securitycenter.v1.Kubernetes.Binding} Binding instance
+                             */
+                            Binding.create = function create(properties) {
+                                return new Binding(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Binding message. Does not implicitly {@link google.cloud.securitycenter.v1.Kubernetes.Binding.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.Binding
+                             * @static
+                             * @param {google.cloud.securitycenter.v1.Kubernetes.IBinding} message Binding message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Binding.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.ns != null && Object.hasOwnProperty.call(message, "ns"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.ns);
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
+                                if (message.role != null && Object.hasOwnProperty.call(message, "role"))
+                                    $root.google.cloud.securitycenter.v1.Kubernetes.Role.encode(message.role, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.subjects != null && message.subjects.length)
+                                    for (var i = 0; i < message.subjects.length; ++i)
+                                        $root.google.cloud.securitycenter.v1.Kubernetes.Subject.encode(message.subjects[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Binding message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.Kubernetes.Binding.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.Binding
+                             * @static
+                             * @param {google.cloud.securitycenter.v1.Kubernetes.IBinding} message Binding message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Binding.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Binding message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.Binding
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.securitycenter.v1.Kubernetes.Binding} Binding
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Binding.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.Kubernetes.Binding();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.ns = reader.string();
+                                        break;
+                                    case 2:
+                                        message.name = reader.string();
+                                        break;
+                                    case 3:
+                                        message.role = $root.google.cloud.securitycenter.v1.Kubernetes.Role.decode(reader, reader.uint32());
+                                        break;
+                                    case 4:
+                                        if (!(message.subjects && message.subjects.length))
+                                            message.subjects = [];
+                                        message.subjects.push($root.google.cloud.securitycenter.v1.Kubernetes.Subject.decode(reader, reader.uint32()));
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Binding message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.Binding
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.securitycenter.v1.Kubernetes.Binding} Binding
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Binding.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Binding message.
+                             * @function verify
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.Binding
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Binding.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.ns != null && message.hasOwnProperty("ns"))
+                                    if (!$util.isString(message.ns))
+                                        return "ns: string expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                if (message.role != null && message.hasOwnProperty("role")) {
+                                    var error = $root.google.cloud.securitycenter.v1.Kubernetes.Role.verify(message.role);
+                                    if (error)
+                                        return "role." + error;
+                                }
+                                if (message.subjects != null && message.hasOwnProperty("subjects")) {
+                                    if (!Array.isArray(message.subjects))
+                                        return "subjects: array expected";
+                                    for (var i = 0; i < message.subjects.length; ++i) {
+                                        var error = $root.google.cloud.securitycenter.v1.Kubernetes.Subject.verify(message.subjects[i]);
+                                        if (error)
+                                            return "subjects." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Binding message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.Binding
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.securitycenter.v1.Kubernetes.Binding} Binding
+                             */
+                            Binding.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.securitycenter.v1.Kubernetes.Binding)
+                                    return object;
+                                var message = new $root.google.cloud.securitycenter.v1.Kubernetes.Binding();
+                                if (object.ns != null)
+                                    message.ns = String(object.ns);
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                if (object.role != null) {
+                                    if (typeof object.role !== "object")
+                                        throw TypeError(".google.cloud.securitycenter.v1.Kubernetes.Binding.role: object expected");
+                                    message.role = $root.google.cloud.securitycenter.v1.Kubernetes.Role.fromObject(object.role);
+                                }
+                                if (object.subjects) {
+                                    if (!Array.isArray(object.subjects))
+                                        throw TypeError(".google.cloud.securitycenter.v1.Kubernetes.Binding.subjects: array expected");
+                                    message.subjects = [];
+                                    for (var i = 0; i < object.subjects.length; ++i) {
+                                        if (typeof object.subjects[i] !== "object")
+                                            throw TypeError(".google.cloud.securitycenter.v1.Kubernetes.Binding.subjects: object expected");
+                                        message.subjects[i] = $root.google.cloud.securitycenter.v1.Kubernetes.Subject.fromObject(object.subjects[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Binding message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.Binding
+                             * @static
+                             * @param {google.cloud.securitycenter.v1.Kubernetes.Binding} message Binding
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Binding.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.subjects = [];
+                                if (options.defaults) {
+                                    object.ns = "";
+                                    object.name = "";
+                                    object.role = null;
+                                }
+                                if (message.ns != null && message.hasOwnProperty("ns"))
+                                    object.ns = message.ns;
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                if (message.role != null && message.hasOwnProperty("role"))
+                                    object.role = $root.google.cloud.securitycenter.v1.Kubernetes.Role.toObject(message.role, options);
+                                if (message.subjects && message.subjects.length) {
+                                    object.subjects = [];
+                                    for (var j = 0; j < message.subjects.length; ++j)
+                                        object.subjects[j] = $root.google.cloud.securitycenter.v1.Kubernetes.Subject.toObject(message.subjects[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Binding to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.Binding
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Binding.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return Binding;
+                        })();
+    
+                        Kubernetes.Subject = (function() {
+    
+                            /**
+                             * Properties of a Subject.
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes
+                             * @interface ISubject
+                             * @property {google.cloud.securitycenter.v1.Kubernetes.Subject.AuthType|null} [kind] Subject kind
+                             * @property {string|null} [ns] Subject ns
+                             * @property {string|null} [name] Subject name
+                             */
+    
+                            /**
+                             * Constructs a new Subject.
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes
+                             * @classdesc Represents a Subject.
+                             * @implements ISubject
+                             * @constructor
+                             * @param {google.cloud.securitycenter.v1.Kubernetes.ISubject=} [properties] Properties to set
+                             */
+                            function Subject(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Subject kind.
+                             * @member {google.cloud.securitycenter.v1.Kubernetes.Subject.AuthType} kind
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.Subject
+                             * @instance
+                             */
+                            Subject.prototype.kind = 0;
+    
+                            /**
+                             * Subject ns.
+                             * @member {string} ns
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.Subject
+                             * @instance
+                             */
+                            Subject.prototype.ns = "";
+    
+                            /**
+                             * Subject name.
+                             * @member {string} name
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.Subject
+                             * @instance
+                             */
+                            Subject.prototype.name = "";
+    
+                            /**
+                             * Creates a new Subject instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.Subject
+                             * @static
+                             * @param {google.cloud.securitycenter.v1.Kubernetes.ISubject=} [properties] Properties to set
+                             * @returns {google.cloud.securitycenter.v1.Kubernetes.Subject} Subject instance
+                             */
+                            Subject.create = function create(properties) {
+                                return new Subject(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Subject message. Does not implicitly {@link google.cloud.securitycenter.v1.Kubernetes.Subject.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.Subject
+                             * @static
+                             * @param {google.cloud.securitycenter.v1.Kubernetes.ISubject} message Subject message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Subject.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.kind != null && Object.hasOwnProperty.call(message, "kind"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.kind);
+                                if (message.ns != null && Object.hasOwnProperty.call(message, "ns"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.ns);
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.name);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Subject message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.Kubernetes.Subject.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.Subject
+                             * @static
+                             * @param {google.cloud.securitycenter.v1.Kubernetes.ISubject} message Subject message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Subject.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Subject message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.Subject
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.securitycenter.v1.Kubernetes.Subject} Subject
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Subject.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.Kubernetes.Subject();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.kind = reader.int32();
+                                        break;
+                                    case 2:
+                                        message.ns = reader.string();
+                                        break;
+                                    case 3:
+                                        message.name = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Subject message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.Subject
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.securitycenter.v1.Kubernetes.Subject} Subject
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Subject.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Subject message.
+                             * @function verify
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.Subject
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Subject.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.kind != null && message.hasOwnProperty("kind"))
+                                    switch (message.kind) {
+                                    default:
+                                        return "kind: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
+                                if (message.ns != null && message.hasOwnProperty("ns"))
+                                    if (!$util.isString(message.ns))
+                                        return "ns: string expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Subject message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.Subject
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.securitycenter.v1.Kubernetes.Subject} Subject
+                             */
+                            Subject.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.securitycenter.v1.Kubernetes.Subject)
+                                    return object;
+                                var message = new $root.google.cloud.securitycenter.v1.Kubernetes.Subject();
+                                switch (object.kind) {
+                                case "AUTH_TYPE_UNSPECIFIED":
+                                case 0:
+                                    message.kind = 0;
+                                    break;
+                                case "USER":
+                                case 1:
+                                    message.kind = 1;
+                                    break;
+                                case "SERVICEACCOUNT":
+                                case 2:
+                                    message.kind = 2;
+                                    break;
+                                case "GROUP":
+                                case 3:
+                                    message.kind = 3;
+                                    break;
+                                }
+                                if (object.ns != null)
+                                    message.ns = String(object.ns);
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Subject message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.Subject
+                             * @static
+                             * @param {google.cloud.securitycenter.v1.Kubernetes.Subject} message Subject
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Subject.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.kind = options.enums === String ? "AUTH_TYPE_UNSPECIFIED" : 0;
+                                    object.ns = "";
+                                    object.name = "";
+                                }
+                                if (message.kind != null && message.hasOwnProperty("kind"))
+                                    object.kind = options.enums === String ? $root.google.cloud.securitycenter.v1.Kubernetes.Subject.AuthType[message.kind] : message.kind;
+                                if (message.ns != null && message.hasOwnProperty("ns"))
+                                    object.ns = message.ns;
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Subject to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.Subject
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Subject.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * AuthType enum.
+                             * @name google.cloud.securitycenter.v1.Kubernetes.Subject.AuthType
+                             * @enum {number}
+                             * @property {number} AUTH_TYPE_UNSPECIFIED=0 AUTH_TYPE_UNSPECIFIED value
+                             * @property {number} USER=1 USER value
+                             * @property {number} SERVICEACCOUNT=2 SERVICEACCOUNT value
+                             * @property {number} GROUP=3 GROUP value
+                             */
+                            Subject.AuthType = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "AUTH_TYPE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "USER"] = 1;
+                                values[valuesById[2] = "SERVICEACCOUNT"] = 2;
+                                values[valuesById[3] = "GROUP"] = 3;
+                                return values;
+                            })();
+    
+                            return Subject;
+                        })();
+    
+                        Kubernetes.AccessReview = (function() {
+    
+                            /**
+                             * Properties of an AccessReview.
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes
+                             * @interface IAccessReview
+                             * @property {string|null} [group] AccessReview group
+                             * @property {string|null} [ns] AccessReview ns
+                             * @property {string|null} [name] AccessReview name
+                             * @property {string|null} [resource] AccessReview resource
+                             * @property {string|null} [subresource] AccessReview subresource
+                             * @property {string|null} [verb] AccessReview verb
+                             * @property {string|null} [version] AccessReview version
+                             */
+    
+                            /**
+                             * Constructs a new AccessReview.
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes
+                             * @classdesc Represents an AccessReview.
+                             * @implements IAccessReview
+                             * @constructor
+                             * @param {google.cloud.securitycenter.v1.Kubernetes.IAccessReview=} [properties] Properties to set
+                             */
+                            function AccessReview(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * AccessReview group.
+                             * @member {string} group
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.AccessReview
+                             * @instance
+                             */
+                            AccessReview.prototype.group = "";
+    
+                            /**
+                             * AccessReview ns.
+                             * @member {string} ns
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.AccessReview
+                             * @instance
+                             */
+                            AccessReview.prototype.ns = "";
+    
+                            /**
+                             * AccessReview name.
+                             * @member {string} name
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.AccessReview
+                             * @instance
+                             */
+                            AccessReview.prototype.name = "";
+    
+                            /**
+                             * AccessReview resource.
+                             * @member {string} resource
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.AccessReview
+                             * @instance
+                             */
+                            AccessReview.prototype.resource = "";
+    
+                            /**
+                             * AccessReview subresource.
+                             * @member {string} subresource
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.AccessReview
+                             * @instance
+                             */
+                            AccessReview.prototype.subresource = "";
+    
+                            /**
+                             * AccessReview verb.
+                             * @member {string} verb
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.AccessReview
+                             * @instance
+                             */
+                            AccessReview.prototype.verb = "";
+    
+                            /**
+                             * AccessReview version.
+                             * @member {string} version
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.AccessReview
+                             * @instance
+                             */
+                            AccessReview.prototype.version = "";
+    
+                            /**
+                             * Creates a new AccessReview instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.AccessReview
+                             * @static
+                             * @param {google.cloud.securitycenter.v1.Kubernetes.IAccessReview=} [properties] Properties to set
+                             * @returns {google.cloud.securitycenter.v1.Kubernetes.AccessReview} AccessReview instance
+                             */
+                            AccessReview.create = function create(properties) {
+                                return new AccessReview(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified AccessReview message. Does not implicitly {@link google.cloud.securitycenter.v1.Kubernetes.AccessReview.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.AccessReview
+                             * @static
+                             * @param {google.cloud.securitycenter.v1.Kubernetes.IAccessReview} message AccessReview message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AccessReview.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.group != null && Object.hasOwnProperty.call(message, "group"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.group);
+                                if (message.ns != null && Object.hasOwnProperty.call(message, "ns"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.ns);
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.name);
+                                if (message.resource != null && Object.hasOwnProperty.call(message, "resource"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.resource);
+                                if (message.subresource != null && Object.hasOwnProperty.call(message, "subresource"))
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.subresource);
+                                if (message.verb != null && Object.hasOwnProperty.call(message, "verb"))
+                                    writer.uint32(/* id 6, wireType 2 =*/50).string(message.verb);
+                                if (message.version != null && Object.hasOwnProperty.call(message, "version"))
+                                    writer.uint32(/* id 7, wireType 2 =*/58).string(message.version);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified AccessReview message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.Kubernetes.AccessReview.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.AccessReview
+                             * @static
+                             * @param {google.cloud.securitycenter.v1.Kubernetes.IAccessReview} message AccessReview message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AccessReview.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an AccessReview message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.AccessReview
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.securitycenter.v1.Kubernetes.AccessReview} AccessReview
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AccessReview.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.Kubernetes.AccessReview();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.group = reader.string();
+                                        break;
+                                    case 2:
+                                        message.ns = reader.string();
+                                        break;
+                                    case 3:
+                                        message.name = reader.string();
+                                        break;
+                                    case 4:
+                                        message.resource = reader.string();
+                                        break;
+                                    case 5:
+                                        message.subresource = reader.string();
+                                        break;
+                                    case 6:
+                                        message.verb = reader.string();
+                                        break;
+                                    case 7:
+                                        message.version = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an AccessReview message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.AccessReview
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.securitycenter.v1.Kubernetes.AccessReview} AccessReview
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AccessReview.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an AccessReview message.
+                             * @function verify
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.AccessReview
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            AccessReview.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.group != null && message.hasOwnProperty("group"))
+                                    if (!$util.isString(message.group))
+                                        return "group: string expected";
+                                if (message.ns != null && message.hasOwnProperty("ns"))
+                                    if (!$util.isString(message.ns))
+                                        return "ns: string expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                if (message.resource != null && message.hasOwnProperty("resource"))
+                                    if (!$util.isString(message.resource))
+                                        return "resource: string expected";
+                                if (message.subresource != null && message.hasOwnProperty("subresource"))
+                                    if (!$util.isString(message.subresource))
+                                        return "subresource: string expected";
+                                if (message.verb != null && message.hasOwnProperty("verb"))
+                                    if (!$util.isString(message.verb))
+                                        return "verb: string expected";
+                                if (message.version != null && message.hasOwnProperty("version"))
+                                    if (!$util.isString(message.version))
+                                        return "version: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an AccessReview message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.AccessReview
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.securitycenter.v1.Kubernetes.AccessReview} AccessReview
+                             */
+                            AccessReview.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.securitycenter.v1.Kubernetes.AccessReview)
+                                    return object;
+                                var message = new $root.google.cloud.securitycenter.v1.Kubernetes.AccessReview();
+                                if (object.group != null)
+                                    message.group = String(object.group);
+                                if (object.ns != null)
+                                    message.ns = String(object.ns);
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                if (object.resource != null)
+                                    message.resource = String(object.resource);
+                                if (object.subresource != null)
+                                    message.subresource = String(object.subresource);
+                                if (object.verb != null)
+                                    message.verb = String(object.verb);
+                                if (object.version != null)
+                                    message.version = String(object.version);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an AccessReview message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.AccessReview
+                             * @static
+                             * @param {google.cloud.securitycenter.v1.Kubernetes.AccessReview} message AccessReview
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            AccessReview.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.group = "";
+                                    object.ns = "";
+                                    object.name = "";
+                                    object.resource = "";
+                                    object.subresource = "";
+                                    object.verb = "";
+                                    object.version = "";
+                                }
+                                if (message.group != null && message.hasOwnProperty("group"))
+                                    object.group = message.group;
+                                if (message.ns != null && message.hasOwnProperty("ns"))
+                                    object.ns = message.ns;
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                if (message.resource != null && message.hasOwnProperty("resource"))
+                                    object.resource = message.resource;
+                                if (message.subresource != null && message.hasOwnProperty("subresource"))
+                                    object.subresource = message.subresource;
+                                if (message.verb != null && message.hasOwnProperty("verb"))
+                                    object.verb = message.verb;
+                                if (message.version != null && message.hasOwnProperty("version"))
+                                    object.version = message.version;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this AccessReview to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.securitycenter.v1.Kubernetes.AccessReview
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            AccessReview.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return AccessReview;
+                        })();
+    
+                        return Kubernetes;
+                    })();
+    
                     v1.MitreAttack = (function() {
     
                         /**
@@ -7408,6 +10244,7 @@
                                     case 29:
                                     case 30:
                                     case 31:
+                                    case 32:
                                         break;
                                     }
                             }
@@ -7475,6 +10312,7 @@
                                     case 29:
                                     case 30:
                                     case 31:
+                                    case 32:
                                         break;
                                     }
                             }
@@ -7693,6 +10531,10 @@
                                     case 31:
                                         message.primaryTechniques[i] = 31;
                                         break;
+                                    case "NETWORK_SERVICE_DISCOVERY":
+                                    case 32:
+                                        message.primaryTechniques[i] = 32;
+                                        break;
                                     }
                             }
                             if (object.additionalTactics) {
@@ -7899,6 +10741,10 @@
                                     case 31:
                                         message.additionalTechniques[i] = 31;
                                         break;
+                                    case "NETWORK_SERVICE_DISCOVERY":
+                                    case 32:
+                                        message.additionalTechniques[i] = 32;
+                                        break;
                                     }
                             }
                             if (object.version != null)
@@ -8037,6 +10883,7 @@
                          * @property {number} DATA_DESTRUCTION=29 DATA_DESTRUCTION value
                          * @property {number} DOMAIN_POLICY_MODIFICATION=30 DOMAIN_POLICY_MODIFICATION value
                          * @property {number} IMPAIR_DEFENSES=31 IMPAIR_DEFENSES value
+                         * @property {number} NETWORK_SERVICE_DISCOVERY=32 NETWORK_SERVICE_DISCOVERY value
                          */
                         MitreAttack.Technique = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -8072,6 +10919,7 @@
                             values[valuesById[29] = "DATA_DESTRUCTION"] = 29;
                             values[valuesById[30] = "DOMAIN_POLICY_MODIFICATION"] = 30;
                             values[valuesById[31] = "IMPAIR_DEFENSES"] = 31;
+                            values[valuesById[32] = "NETWORK_SERVICE_DISCOVERY"] = 32;
                             return values;
                         })();
     
