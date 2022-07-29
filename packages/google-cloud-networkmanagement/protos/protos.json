@@ -1311,6 +1311,10 @@
                           "type": "string",
                           "id": 8
                         },
+                        "cloudFunction": {
+                          "type": "CloudFunctionEndpoint",
+                          "id": 10
+                        },
                         "network": {
                           "type": "string",
                           "id": 4
@@ -1330,6 +1334,14 @@
                             "NETWORK_TYPE_UNSPECIFIED": 0,
                             "GCP_NETWORK": 1,
                             "NON_GCP_NETWORK": 2
+                          }
+                        },
+                        "CloudFunctionEndpoint": {
+                          "fields": {
+                            "uri": {
+                              "type": "string",
+                              "id": 1
+                            }
                           }
                         }
                       }
@@ -1420,6 +1432,10 @@
                         "probingLatency": {
                           "type": "LatencyDistribution",
                           "id": 8
+                        },
+                        "destinationEgressLocation": {
+                          "type": "EdgeLocation",
+                          "id": 9
                         }
                       },
                       "nested": {
@@ -1437,6 +1453,14 @@
                             "PROBING_ABORT_CAUSE_UNSPECIFIED": 0,
                             "PERMISSION_DENIED": 1,
                             "NO_SOURCE_LOCATION": 2
+                          }
+                        },
+                        "EdgeLocation": {
+                          "fields": {
+                            "metropolitanArea": {
+                              "type": "string",
+                              "id": 1
+                            }
                           }
                         }
                       }
@@ -1465,6 +1489,7 @@
                             "forwardingRule",
                             "vpnGateway",
                             "vpnTunnel",
+                            "vpcConnector",
                             "deliver",
                             "forward",
                             "abort",
@@ -1472,7 +1497,8 @@
                             "loadBalancer",
                             "network",
                             "gkeMaster",
-                            "cloudSqlInstance"
+                            "cloudSqlInstance",
+                            "cloudFunction"
                           ]
                         }
                       },
@@ -1521,6 +1547,10 @@
                           "type": "VpnTunnelInfo",
                           "id": 11
                         },
+                        "vpcConnector": {
+                          "type": "VpcConnectorInfo",
+                          "id": 21
+                        },
                         "deliver": {
                           "type": "DeliverInfo",
                           "id": 12
@@ -1552,6 +1582,10 @@
                         "cloudSqlInstance": {
                           "type": "CloudSQLInstanceInfo",
                           "id": 19
+                        },
+                        "cloudFunction": {
+                          "type": "CloudFunctionInfo",
+                          "id": 20
                         }
                       },
                       "nested": {
@@ -1563,6 +1597,7 @@
                             "START_FROM_PRIVATE_NETWORK": 3,
                             "START_FROM_GKE_MASTER": 21,
                             "START_FROM_CLOUD_SQL_INSTANCE": 22,
+                            "START_FROM_CLOUD_FUNCTION": 23,
                             "APPLY_INGRESS_FIREWALL_RULE": 4,
                             "APPLY_EGRESS_FIREWALL_RULE": 5,
                             "APPLY_ROUTE": 6,
@@ -1573,6 +1608,7 @@
                             "ARRIVE_AT_EXTERNAL_LOAD_BALANCER": 11,
                             "ARRIVE_AT_VPN_GATEWAY": 12,
                             "ARRIVE_AT_VPN_TUNNEL": 13,
+                            "ARRIVE_AT_VPC_CONNECTOR": 24,
                             "NAT": 14,
                             "PROXY_CONNECTION": 15,
                             "DELIVER": 16,
@@ -1691,7 +1727,8 @@
                             "FIREWALL_RULE_TYPE_UNSPECIFIED": 0,
                             "HIERARCHICAL_FIREWALL_POLICY_RULE": 1,
                             "VPC_FIREWALL_RULE": 2,
-                            "IMPLIED_VPC_FIREWALL_RULE": 3
+                            "IMPLIED_VPC_FIREWALL_RULE": 3,
+                            "SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE": 4
                           }
                         }
                       }
@@ -1760,7 +1797,8 @@
                             "NEXT_HOP_VPN_GATEWAY": 7,
                             "NEXT_HOP_INTERNET_GATEWAY": 8,
                             "NEXT_HOP_BLACKHOLE": 9,
-                            "NEXT_HOP_ILB": 10
+                            "NEXT_HOP_ILB": 10,
+                            "NEXT_HOP_ROUTER_APPLIANCE": 11
                           }
                         }
                       }
@@ -1983,6 +2021,10 @@
                         "destinationNetworkUri": {
                           "type": "string",
                           "id": 7
+                        },
+                        "sourceAgentUri": {
+                          "type": "string",
+                          "id": 8
                         }
                       }
                     },
@@ -2005,7 +2047,10 @@
                             "INTERNET": 2,
                             "GOOGLE_API": 3,
                             "GKE_MASTER": 4,
-                            "CLOUD_SQL_INSTANCE": 5
+                            "CLOUD_SQL_INSTANCE": 5,
+                            "PSC_PUBLISHED_SERVICE": 6,
+                            "PSC_GOOGLE_API": 7,
+                            "PSC_VPC_SC": 8
                           }
                         }
                       }
@@ -2068,7 +2113,8 @@
                             "SOURCE_ENDPOINT_NOT_FOUND": 11,
                             "MISMATCHED_SOURCE_NETWORK": 12,
                             "DESTINATION_ENDPOINT_NOT_FOUND": 13,
-                            "MISMATCHED_DESTINATION_NETWORK": 14
+                            "MISMATCHED_DESTINATION_NETWORK": 14,
+                            "UNSUPPORTED": 15
                           }
                         }
                       }
@@ -2108,7 +2154,12 @@
                             "DROPPED_INSIDE_GKE_SERVICE": 18,
                             "DROPPED_INSIDE_CLOUD_SQL_SERVICE": 19,
                             "GOOGLE_MANAGED_SERVICE_NO_PEERING": 20,
-                            "CLOUD_SQL_INSTANCE_NO_IP_ADDRESS": 21
+                            "CLOUD_SQL_INSTANCE_NO_IP_ADDRESS": 21,
+                            "CLOUD_FUNCTION_NOT_ACTIVE": 22,
+                            "VPC_CONNECTOR_NOT_SET": 23,
+                            "VPC_CONNECTOR_NOT_RUNNING": 24,
+                            "FORWARDING_RULE_REGION_MISMATCH": 25,
+                            "PSC_CONNECTION_NOT_ACCEPTED": 26
                           }
                         }
                       }
@@ -2158,6 +2209,42 @@
                         "region": {
                           "type": "string",
                           "id": 7
+                        }
+                      }
+                    },
+                    "CloudFunctionInfo": {
+                      "fields": {
+                        "displayName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "uri": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "versionId": {
+                          "type": "int64",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "VpcConnectorInfo": {
+                      "fields": {
+                        "displayName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "uri": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3
                         }
                       }
                     },

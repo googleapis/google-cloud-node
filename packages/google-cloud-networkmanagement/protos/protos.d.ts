@@ -3936,6 +3936,9 @@ export namespace google {
                     /** Endpoint cloudSqlInstance */
                     cloudSqlInstance?: (string|null);
 
+                    /** Endpoint cloudFunction */
+                    cloudFunction?: (google.cloud.networkmanagement.v1beta1.Endpoint.ICloudFunctionEndpoint|null);
+
                     /** Endpoint network */
                     network?: (string|null);
 
@@ -3969,6 +3972,9 @@ export namespace google {
 
                     /** Endpoint cloudSqlInstance. */
                     public cloudSqlInstance: string;
+
+                    /** Endpoint cloudFunction. */
+                    public cloudFunction?: (google.cloud.networkmanagement.v1beta1.Endpoint.ICloudFunctionEndpoint|null);
 
                     /** Endpoint network. */
                     public network: string;
@@ -4057,6 +4063,96 @@ export namespace google {
                         NETWORK_TYPE_UNSPECIFIED = 0,
                         GCP_NETWORK = 1,
                         NON_GCP_NETWORK = 2
+                    }
+
+                    /** Properties of a CloudFunctionEndpoint. */
+                    interface ICloudFunctionEndpoint {
+
+                        /** CloudFunctionEndpoint uri */
+                        uri?: (string|null);
+                    }
+
+                    /** Represents a CloudFunctionEndpoint. */
+                    class CloudFunctionEndpoint implements ICloudFunctionEndpoint {
+
+                        /**
+                         * Constructs a new CloudFunctionEndpoint.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.networkmanagement.v1beta1.Endpoint.ICloudFunctionEndpoint);
+
+                        /** CloudFunctionEndpoint uri. */
+                        public uri: string;
+
+                        /**
+                         * Creates a new CloudFunctionEndpoint instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CloudFunctionEndpoint instance
+                         */
+                        public static create(properties?: google.cloud.networkmanagement.v1beta1.Endpoint.ICloudFunctionEndpoint): google.cloud.networkmanagement.v1beta1.Endpoint.CloudFunctionEndpoint;
+
+                        /**
+                         * Encodes the specified CloudFunctionEndpoint message. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.Endpoint.CloudFunctionEndpoint.verify|verify} messages.
+                         * @param message CloudFunctionEndpoint message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.networkmanagement.v1beta1.Endpoint.ICloudFunctionEndpoint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CloudFunctionEndpoint message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.Endpoint.CloudFunctionEndpoint.verify|verify} messages.
+                         * @param message CloudFunctionEndpoint message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.networkmanagement.v1beta1.Endpoint.ICloudFunctionEndpoint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CloudFunctionEndpoint message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CloudFunctionEndpoint
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkmanagement.v1beta1.Endpoint.CloudFunctionEndpoint;
+
+                        /**
+                         * Decodes a CloudFunctionEndpoint message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CloudFunctionEndpoint
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkmanagement.v1beta1.Endpoint.CloudFunctionEndpoint;
+
+                        /**
+                         * Verifies a CloudFunctionEndpoint message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CloudFunctionEndpoint message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CloudFunctionEndpoint
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.networkmanagement.v1beta1.Endpoint.CloudFunctionEndpoint;
+
+                        /**
+                         * Creates a plain object from a CloudFunctionEndpoint message. Also converts values to other types if specified.
+                         * @param message CloudFunctionEndpoint
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.networkmanagement.v1beta1.Endpoint.CloudFunctionEndpoint, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CloudFunctionEndpoint to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
                     }
                 }
 
@@ -4392,6 +4488,9 @@ export namespace google {
 
                     /** ProbingDetails probingLatency */
                     probingLatency?: (google.cloud.networkmanagement.v1beta1.ILatencyDistribution|null);
+
+                    /** ProbingDetails destinationEgressLocation */
+                    destinationEgressLocation?: (google.cloud.networkmanagement.v1beta1.ProbingDetails.IEdgeLocation|null);
                 }
 
                 /** Represents a ProbingDetails. */
@@ -4426,6 +4525,9 @@ export namespace google {
 
                     /** ProbingDetails probingLatency. */
                     public probingLatency?: (google.cloud.networkmanagement.v1beta1.ILatencyDistribution|null);
+
+                    /** ProbingDetails destinationEgressLocation. */
+                    public destinationEgressLocation?: (google.cloud.networkmanagement.v1beta1.ProbingDetails.IEdgeLocation|null);
 
                     /**
                      * Creates a new ProbingDetails instance using the specified properties.
@@ -4514,6 +4616,96 @@ export namespace google {
                         PROBING_ABORT_CAUSE_UNSPECIFIED = 0,
                         PERMISSION_DENIED = 1,
                         NO_SOURCE_LOCATION = 2
+                    }
+
+                    /** Properties of an EdgeLocation. */
+                    interface IEdgeLocation {
+
+                        /** EdgeLocation metropolitanArea */
+                        metropolitanArea?: (string|null);
+                    }
+
+                    /** Represents an EdgeLocation. */
+                    class EdgeLocation implements IEdgeLocation {
+
+                        /**
+                         * Constructs a new EdgeLocation.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.networkmanagement.v1beta1.ProbingDetails.IEdgeLocation);
+
+                        /** EdgeLocation metropolitanArea. */
+                        public metropolitanArea: string;
+
+                        /**
+                         * Creates a new EdgeLocation instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns EdgeLocation instance
+                         */
+                        public static create(properties?: google.cloud.networkmanagement.v1beta1.ProbingDetails.IEdgeLocation): google.cloud.networkmanagement.v1beta1.ProbingDetails.EdgeLocation;
+
+                        /**
+                         * Encodes the specified EdgeLocation message. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.ProbingDetails.EdgeLocation.verify|verify} messages.
+                         * @param message EdgeLocation message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.networkmanagement.v1beta1.ProbingDetails.IEdgeLocation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified EdgeLocation message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.ProbingDetails.EdgeLocation.verify|verify} messages.
+                         * @param message EdgeLocation message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.networkmanagement.v1beta1.ProbingDetails.IEdgeLocation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an EdgeLocation message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns EdgeLocation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkmanagement.v1beta1.ProbingDetails.EdgeLocation;
+
+                        /**
+                         * Decodes an EdgeLocation message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns EdgeLocation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkmanagement.v1beta1.ProbingDetails.EdgeLocation;
+
+                        /**
+                         * Verifies an EdgeLocation message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an EdgeLocation message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns EdgeLocation
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.networkmanagement.v1beta1.ProbingDetails.EdgeLocation;
+
+                        /**
+                         * Creates a plain object from an EdgeLocation message. Also converts values to other types if specified.
+                         * @param message EdgeLocation
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.networkmanagement.v1beta1.ProbingDetails.EdgeLocation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this EdgeLocation to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
                     }
                 }
 
@@ -4649,6 +4841,9 @@ export namespace google {
                     /** Step vpnTunnel */
                     vpnTunnel?: (google.cloud.networkmanagement.v1beta1.IVpnTunnelInfo|null);
 
+                    /** Step vpcConnector */
+                    vpcConnector?: (google.cloud.networkmanagement.v1beta1.IVpcConnectorInfo|null);
+
                     /** Step deliver */
                     deliver?: (google.cloud.networkmanagement.v1beta1.IDeliverInfo|null);
 
@@ -4672,6 +4867,9 @@ export namespace google {
 
                     /** Step cloudSqlInstance */
                     cloudSqlInstance?: (google.cloud.networkmanagement.v1beta1.ICloudSQLInstanceInfo|null);
+
+                    /** Step cloudFunction */
+                    cloudFunction?: (google.cloud.networkmanagement.v1beta1.ICloudFunctionInfo|null);
                 }
 
                 /** Represents a Step. */
@@ -4716,6 +4914,9 @@ export namespace google {
                     /** Step vpnTunnel. */
                     public vpnTunnel?: (google.cloud.networkmanagement.v1beta1.IVpnTunnelInfo|null);
 
+                    /** Step vpcConnector. */
+                    public vpcConnector?: (google.cloud.networkmanagement.v1beta1.IVpcConnectorInfo|null);
+
                     /** Step deliver. */
                     public deliver?: (google.cloud.networkmanagement.v1beta1.IDeliverInfo|null);
 
@@ -4740,8 +4941,11 @@ export namespace google {
                     /** Step cloudSqlInstance. */
                     public cloudSqlInstance?: (google.cloud.networkmanagement.v1beta1.ICloudSQLInstanceInfo|null);
 
+                    /** Step cloudFunction. */
+                    public cloudFunction?: (google.cloud.networkmanagement.v1beta1.ICloudFunctionInfo|null);
+
                     /** Step stepInfo. */
-                    public stepInfo?: ("instance"|"firewall"|"route"|"endpoint"|"forwardingRule"|"vpnGateway"|"vpnTunnel"|"deliver"|"forward"|"abort"|"drop"|"loadBalancer"|"network"|"gkeMaster"|"cloudSqlInstance");
+                    public stepInfo?: ("instance"|"firewall"|"route"|"endpoint"|"forwardingRule"|"vpnGateway"|"vpnTunnel"|"vpcConnector"|"deliver"|"forward"|"abort"|"drop"|"loadBalancer"|"network"|"gkeMaster"|"cloudSqlInstance"|"cloudFunction");
 
                     /**
                      * Creates a new Step instance using the specified properties.
@@ -4824,6 +5028,7 @@ export namespace google {
                         START_FROM_PRIVATE_NETWORK = 3,
                         START_FROM_GKE_MASTER = 21,
                         START_FROM_CLOUD_SQL_INSTANCE = 22,
+                        START_FROM_CLOUD_FUNCTION = 23,
                         APPLY_INGRESS_FIREWALL_RULE = 4,
                         APPLY_EGRESS_FIREWALL_RULE = 5,
                         APPLY_ROUTE = 6,
@@ -4834,6 +5039,7 @@ export namespace google {
                         ARRIVE_AT_EXTERNAL_LOAD_BALANCER = 11,
                         ARRIVE_AT_VPN_GATEWAY = 12,
                         ARRIVE_AT_VPN_TUNNEL = 13,
+                        ARRIVE_AT_VPC_CONNECTOR = 24,
                         NAT = 14,
                         PROXY_CONNECTION = 15,
                         DELIVER = 16,
@@ -5229,7 +5435,8 @@ export namespace google {
                         FIREWALL_RULE_TYPE_UNSPECIFIED = 0,
                         HIERARCHICAL_FIREWALL_POLICY_RULE = 1,
                         VPC_FIREWALL_RULE = 2,
-                        IMPLIED_VPC_FIREWALL_RULE = 3
+                        IMPLIED_VPC_FIREWALL_RULE = 3,
+                        SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE = 4
                     }
                 }
 
@@ -5396,7 +5603,8 @@ export namespace google {
                         NEXT_HOP_VPN_GATEWAY = 7,
                         NEXT_HOP_INTERNET_GATEWAY = 8,
                         NEXT_HOP_BLACKHOLE = 9,
-                        NEXT_HOP_ILB = 10
+                        NEXT_HOP_ILB = 10,
+                        NEXT_HOP_ROUTER_APPLIANCE = 11
                     }
                 }
 
@@ -6076,6 +6284,9 @@ export namespace google {
 
                     /** EndpointInfo destinationNetworkUri */
                     destinationNetworkUri?: (string|null);
+
+                    /** EndpointInfo sourceAgentUri */
+                    sourceAgentUri?: (string|null);
                 }
 
                 /** Represents an EndpointInfo. */
@@ -6107,6 +6318,9 @@ export namespace google {
 
                     /** EndpointInfo destinationNetworkUri. */
                     public destinationNetworkUri: string;
+
+                    /** EndpointInfo sourceAgentUri. */
+                    public sourceAgentUri: string;
 
                     /**
                      * Creates a new EndpointInfo instance using the specified properties.
@@ -6284,7 +6498,10 @@ export namespace google {
                         INTERNET = 2,
                         GOOGLE_API = 3,
                         GKE_MASTER = 4,
-                        CLOUD_SQL_INSTANCE = 5
+                        CLOUD_SQL_INSTANCE = 5,
+                        PSC_PUBLISHED_SERVICE = 6,
+                        PSC_GOOGLE_API = 7,
+                        PSC_VPC_SC = 8
                     }
                 }
 
@@ -6518,7 +6735,8 @@ export namespace google {
                         SOURCE_ENDPOINT_NOT_FOUND = 11,
                         MISMATCHED_SOURCE_NETWORK = 12,
                         DESTINATION_ENDPOINT_NOT_FOUND = 13,
-                        MISMATCHED_DESTINATION_NETWORK = 14
+                        MISMATCHED_DESTINATION_NETWORK = 14,
+                        UNSUPPORTED = 15
                     }
                 }
 
@@ -6643,7 +6861,12 @@ export namespace google {
                         DROPPED_INSIDE_GKE_SERVICE = 18,
                         DROPPED_INSIDE_CLOUD_SQL_SERVICE = 19,
                         GOOGLE_MANAGED_SERVICE_NO_PEERING = 20,
-                        CLOUD_SQL_INSTANCE_NO_IP_ADDRESS = 21
+                        CLOUD_SQL_INSTANCE_NO_IP_ADDRESS = 21,
+                        CLOUD_FUNCTION_NOT_ACTIVE = 22,
+                        VPC_CONNECTOR_NOT_SET = 23,
+                        VPC_CONNECTOR_NOT_RUNNING = 24,
+                        FORWARDING_RULE_REGION_MISMATCH = 25,
+                        PSC_CONNECTION_NOT_ACCEPTED = 26
                     }
                 }
 
@@ -6870,6 +7093,216 @@ export namespace google {
 
                     /**
                      * Converts this CloudSQLInstanceInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a CloudFunctionInfo. */
+                interface ICloudFunctionInfo {
+
+                    /** CloudFunctionInfo displayName */
+                    displayName?: (string|null);
+
+                    /** CloudFunctionInfo uri */
+                    uri?: (string|null);
+
+                    /** CloudFunctionInfo location */
+                    location?: (string|null);
+
+                    /** CloudFunctionInfo versionId */
+                    versionId?: (number|Long|string|null);
+                }
+
+                /** Represents a CloudFunctionInfo. */
+                class CloudFunctionInfo implements ICloudFunctionInfo {
+
+                    /**
+                     * Constructs a new CloudFunctionInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkmanagement.v1beta1.ICloudFunctionInfo);
+
+                    /** CloudFunctionInfo displayName. */
+                    public displayName: string;
+
+                    /** CloudFunctionInfo uri. */
+                    public uri: string;
+
+                    /** CloudFunctionInfo location. */
+                    public location: string;
+
+                    /** CloudFunctionInfo versionId. */
+                    public versionId: (number|Long|string);
+
+                    /**
+                     * Creates a new CloudFunctionInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CloudFunctionInfo instance
+                     */
+                    public static create(properties?: google.cloud.networkmanagement.v1beta1.ICloudFunctionInfo): google.cloud.networkmanagement.v1beta1.CloudFunctionInfo;
+
+                    /**
+                     * Encodes the specified CloudFunctionInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.CloudFunctionInfo.verify|verify} messages.
+                     * @param message CloudFunctionInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkmanagement.v1beta1.ICloudFunctionInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CloudFunctionInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.CloudFunctionInfo.verify|verify} messages.
+                     * @param message CloudFunctionInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkmanagement.v1beta1.ICloudFunctionInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CloudFunctionInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CloudFunctionInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkmanagement.v1beta1.CloudFunctionInfo;
+
+                    /**
+                     * Decodes a CloudFunctionInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CloudFunctionInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkmanagement.v1beta1.CloudFunctionInfo;
+
+                    /**
+                     * Verifies a CloudFunctionInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CloudFunctionInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CloudFunctionInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkmanagement.v1beta1.CloudFunctionInfo;
+
+                    /**
+                     * Creates a plain object from a CloudFunctionInfo message. Also converts values to other types if specified.
+                     * @param message CloudFunctionInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkmanagement.v1beta1.CloudFunctionInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CloudFunctionInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a VpcConnectorInfo. */
+                interface IVpcConnectorInfo {
+
+                    /** VpcConnectorInfo displayName */
+                    displayName?: (string|null);
+
+                    /** VpcConnectorInfo uri */
+                    uri?: (string|null);
+
+                    /** VpcConnectorInfo location */
+                    location?: (string|null);
+                }
+
+                /** Represents a VpcConnectorInfo. */
+                class VpcConnectorInfo implements IVpcConnectorInfo {
+
+                    /**
+                     * Constructs a new VpcConnectorInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkmanagement.v1beta1.IVpcConnectorInfo);
+
+                    /** VpcConnectorInfo displayName. */
+                    public displayName: string;
+
+                    /** VpcConnectorInfo uri. */
+                    public uri: string;
+
+                    /** VpcConnectorInfo location. */
+                    public location: string;
+
+                    /**
+                     * Creates a new VpcConnectorInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns VpcConnectorInfo instance
+                     */
+                    public static create(properties?: google.cloud.networkmanagement.v1beta1.IVpcConnectorInfo): google.cloud.networkmanagement.v1beta1.VpcConnectorInfo;
+
+                    /**
+                     * Encodes the specified VpcConnectorInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.VpcConnectorInfo.verify|verify} messages.
+                     * @param message VpcConnectorInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkmanagement.v1beta1.IVpcConnectorInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified VpcConnectorInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.VpcConnectorInfo.verify|verify} messages.
+                     * @param message VpcConnectorInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkmanagement.v1beta1.IVpcConnectorInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a VpcConnectorInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns VpcConnectorInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkmanagement.v1beta1.VpcConnectorInfo;
+
+                    /**
+                     * Decodes a VpcConnectorInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns VpcConnectorInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkmanagement.v1beta1.VpcConnectorInfo;
+
+                    /**
+                     * Verifies a VpcConnectorInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a VpcConnectorInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns VpcConnectorInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkmanagement.v1beta1.VpcConnectorInfo;
+
+                    /**
+                     * Creates a plain object from a VpcConnectorInfo message. Also converts values to other types if specified.
+                     * @param message VpcConnectorInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkmanagement.v1beta1.VpcConnectorInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this VpcConnectorInfo to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
