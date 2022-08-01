@@ -22,7 +22,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 68,
+                    "end": 78,
                     "type": "FULL"
                 }
             ],
@@ -41,6 +41,10 @@
                     },
                     {
                         "name": "max_stream_count",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "preferred_min_stream_count",
                         "type": "TYPE_INT32"
                     }
                 ],

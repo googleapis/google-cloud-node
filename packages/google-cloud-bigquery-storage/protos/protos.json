@@ -309,6 +309,10 @@
                             "maxStreamCount": {
                               "type": "int32",
                               "id": 3
+                            },
+                            "preferredMinStreamCount": {
+                              "type": "int32",
+                              "id": 4
                             }
                           }
                         },
@@ -528,6 +532,10 @@
                               "rule": "repeated",
                               "type": "RowError",
                               "id": 4
+                            },
+                            "writeStream": {
+                              "type": "string",
+                              "id": 5
                             }
                           },
                           "nested": {

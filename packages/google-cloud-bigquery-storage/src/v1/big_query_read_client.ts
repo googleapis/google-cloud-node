@@ -376,6 +376,15 @@ export class BigQueryReadClient {
    *   Typically, clients should either leave this unset to let the system to
    *   determine an upper bound OR set this a size for the maximum "units of work"
    *   it can gracefully handle.
+   * @param {number} request.preferredMinStreamCount
+   *   The minimum preferred stream count. This parameter can be used to inform
+   *   the service that there is a desired lower bound on the number of streams.
+   *   This is typically a target parallelism of the client (e.g. a Spark
+   *   cluster with N-workers would set this to a low multiple of N to ensure
+   *   good cluster utilization).
+   *
+   *   The system will make a best effort to provide at least this number of
+   *   streams, but in some cases might provide less.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

@@ -1919,6 +1919,7 @@
                              * @property {string|null} [parent] CreateReadSessionRequest parent
                              * @property {google.cloud.bigquery.storage.v1.IReadSession|null} [readSession] CreateReadSessionRequest readSession
                              * @property {number|null} [maxStreamCount] CreateReadSessionRequest maxStreamCount
+                             * @property {number|null} [preferredMinStreamCount] CreateReadSessionRequest preferredMinStreamCount
                              */
     
                             /**
@@ -1961,6 +1962,14 @@
                             CreateReadSessionRequest.prototype.maxStreamCount = 0;
     
                             /**
+                             * CreateReadSessionRequest preferredMinStreamCount.
+                             * @member {number} preferredMinStreamCount
+                             * @memberof google.cloud.bigquery.storage.v1.CreateReadSessionRequest
+                             * @instance
+                             */
+                            CreateReadSessionRequest.prototype.preferredMinStreamCount = 0;
+    
+                            /**
                              * Creates a new CreateReadSessionRequest instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.bigquery.storage.v1.CreateReadSessionRequest
@@ -1990,6 +1999,8 @@
                                     $root.google.cloud.bigquery.storage.v1.ReadSession.encode(message.readSession, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                                 if (message.maxStreamCount != null && Object.hasOwnProperty.call(message, "maxStreamCount"))
                                     writer.uint32(/* id 3, wireType 0 =*/24).int32(message.maxStreamCount);
+                                if (message.preferredMinStreamCount != null && Object.hasOwnProperty.call(message, "preferredMinStreamCount"))
+                                    writer.uint32(/* id 4, wireType 0 =*/32).int32(message.preferredMinStreamCount);
                                 return writer;
                             };
     
@@ -2032,6 +2043,9 @@
                                         break;
                                     case 3:
                                         message.maxStreamCount = reader.int32();
+                                        break;
+                                    case 4:
+                                        message.preferredMinStreamCount = reader.int32();
                                         break;
                                     default:
                                         reader.skipType(tag & 7);
@@ -2079,6 +2093,9 @@
                                 if (message.maxStreamCount != null && message.hasOwnProperty("maxStreamCount"))
                                     if (!$util.isInteger(message.maxStreamCount))
                                         return "maxStreamCount: integer expected";
+                                if (message.preferredMinStreamCount != null && message.hasOwnProperty("preferredMinStreamCount"))
+                                    if (!$util.isInteger(message.preferredMinStreamCount))
+                                        return "preferredMinStreamCount: integer expected";
                                 return null;
                             };
     
@@ -2103,6 +2120,8 @@
                                 }
                                 if (object.maxStreamCount != null)
                                     message.maxStreamCount = object.maxStreamCount | 0;
+                                if (object.preferredMinStreamCount != null)
+                                    message.preferredMinStreamCount = object.preferredMinStreamCount | 0;
                                 return message;
                             };
     
@@ -2123,6 +2142,7 @@
                                     object.parent = "";
                                     object.readSession = null;
                                     object.maxStreamCount = 0;
+                                    object.preferredMinStreamCount = 0;
                                 }
                                 if (message.parent != null && message.hasOwnProperty("parent"))
                                     object.parent = message.parent;
@@ -2130,6 +2150,8 @@
                                     object.readSession = $root.google.cloud.bigquery.storage.v1.ReadSession.toObject(message.readSession, options);
                                 if (message.maxStreamCount != null && message.hasOwnProperty("maxStreamCount"))
                                     object.maxStreamCount = message.maxStreamCount;
+                                if (message.preferredMinStreamCount != null && message.hasOwnProperty("preferredMinStreamCount"))
+                                    object.preferredMinStreamCount = message.preferredMinStreamCount;
                                 return object;
                             };
     
@@ -4533,6 +4555,7 @@
                              * @property {google.rpc.IStatus|null} [error] AppendRowsResponse error
                              * @property {google.cloud.bigquery.storage.v1.ITableSchema|null} [updatedSchema] AppendRowsResponse updatedSchema
                              * @property {Array.<google.cloud.bigquery.storage.v1.IRowError>|null} [rowErrors] AppendRowsResponse rowErrors
+                             * @property {string|null} [writeStream] AppendRowsResponse writeStream
                              */
     
                             /**
@@ -4583,6 +4606,14 @@
                              */
                             AppendRowsResponse.prototype.rowErrors = $util.emptyArray;
     
+                            /**
+                             * AppendRowsResponse writeStream.
+                             * @member {string} writeStream
+                             * @memberof google.cloud.bigquery.storage.v1.AppendRowsResponse
+                             * @instance
+                             */
+                            AppendRowsResponse.prototype.writeStream = "";
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
@@ -4630,6 +4661,8 @@
                                 if (message.rowErrors != null && message.rowErrors.length)
                                     for (var i = 0; i < message.rowErrors.length; ++i)
                                         $root.google.cloud.bigquery.storage.v1.RowError.encode(message.rowErrors[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                if (message.writeStream != null && Object.hasOwnProperty.call(message, "writeStream"))
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.writeStream);
                                 return writer;
                             };
     
@@ -4677,6 +4710,9 @@
                                         if (!(message.rowErrors && message.rowErrors.length))
                                             message.rowErrors = [];
                                         message.rowErrors.push($root.google.cloud.bigquery.storage.v1.RowError.decode(reader, reader.uint32()));
+                                        break;
+                                    case 5:
+                                        message.writeStream = reader.string();
                                         break;
                                     default:
                                         reader.skipType(tag & 7);
@@ -4746,6 +4782,9 @@
                                             return "rowErrors." + error;
                                     }
                                 }
+                                if (message.writeStream != null && message.hasOwnProperty("writeStream"))
+                                    if (!$util.isString(message.writeStream))
+                                        return "writeStream: string expected";
                                 return null;
                             };
     
@@ -4786,6 +4825,8 @@
                                         message.rowErrors[i] = $root.google.cloud.bigquery.storage.v1.RowError.fromObject(object.rowErrors[i]);
                                     }
                                 }
+                                if (object.writeStream != null)
+                                    message.writeStream = String(object.writeStream);
                                 return message;
                             };
     
@@ -4804,8 +4845,10 @@
                                 var object = {};
                                 if (options.arrays || options.defaults)
                                     object.rowErrors = [];
-                                if (options.defaults)
+                                if (options.defaults) {
                                     object.updatedSchema = null;
+                                    object.writeStream = "";
+                                }
                                 if (message.appendResult != null && message.hasOwnProperty("appendResult")) {
                                     object.appendResult = $root.google.cloud.bigquery.storage.v1.AppendRowsResponse.AppendResult.toObject(message.appendResult, options);
                                     if (options.oneofs)
@@ -4823,6 +4866,8 @@
                                     for (var j = 0; j < message.rowErrors.length; ++j)
                                         object.rowErrors[j] = $root.google.cloud.bigquery.storage.v1.RowError.toObject(message.rowErrors[j], options);
                                 }
+                                if (message.writeStream != null && message.hasOwnProperty("writeStream"))
+                                    object.writeStream = message.writeStream;
                                 return object;
                             };
     

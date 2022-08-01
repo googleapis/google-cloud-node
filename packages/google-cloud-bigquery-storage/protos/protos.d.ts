@@ -929,6 +929,9 @@ export namespace google {
 
                         /** CreateReadSessionRequest maxStreamCount */
                         maxStreamCount?: (number|null);
+
+                        /** CreateReadSessionRequest preferredMinStreamCount */
+                        preferredMinStreamCount?: (number|null);
                     }
 
                     /** Represents a CreateReadSessionRequest. */
@@ -948,6 +951,9 @@ export namespace google {
 
                         /** CreateReadSessionRequest maxStreamCount. */
                         public maxStreamCount: number;
+
+                        /** CreateReadSessionRequest preferredMinStreamCount. */
+                        public preferredMinStreamCount: number;
 
                         /**
                          * Creates a new CreateReadSessionRequest instance using the specified properties.
@@ -2039,6 +2045,9 @@ export namespace google {
 
                         /** AppendRowsResponse rowErrors */
                         rowErrors?: (google.cloud.bigquery.storage.v1.IRowError[]|null);
+
+                        /** AppendRowsResponse writeStream */
+                        writeStream?: (string|null);
                     }
 
                     /** Represents an AppendRowsResponse. */
@@ -2061,6 +2070,9 @@ export namespace google {
 
                         /** AppendRowsResponse rowErrors. */
                         public rowErrors: google.cloud.bigquery.storage.v1.IRowError[];
+
+                        /** AppendRowsResponse writeStream. */
+                        public writeStream: string;
 
                         /** AppendRowsResponse response. */
                         public response?: ("appendResult"|"error");
