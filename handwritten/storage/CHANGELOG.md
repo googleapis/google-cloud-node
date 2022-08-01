@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+## [6.3.0](https://github.com/googleapis/nodejs-storage/compare/v6.2.3...v6.3.0) (2022-08-01)
+
+
+### Features
+
+* custom dual regions refactor implementation ([#2012](https://github.com/googleapis/nodejs-storage/issues/2012)) ([9a614fb](https://github.com/googleapis/nodejs-storage/commit/9a614fb2b624f8234fa9d40f352dae177b2b0374))
+
 ## [6.2.3](https://github.com/googleapis/nodejs-storage/compare/v6.2.2...v6.2.3) (2022-07-13)
 
 
