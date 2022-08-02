@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/security-center?activeTab=versions
 
+## [6.2.0](https://github.com/googleapis/nodejs-security-center/compare/v6.1.0...v6.2.0) (2022-07-29)
+
+
+### Features
+
+* Added container field to findings attributes ([#499](https://github.com/googleapis/nodejs-security-center/issues/499)) ([4129598](https://github.com/googleapis/nodejs-security-center/commit/4129598a9b7e9a8975b7daa0d369ffcae9d25ae0))
+
 ## [6.1.0](https://github.com/googleapis/nodejs-security-center/compare/v6.0.0...v6.1.0) (2022-07-04)
 
 
