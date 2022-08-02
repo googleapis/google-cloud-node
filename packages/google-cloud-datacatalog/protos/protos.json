@@ -1008,7 +1008,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/EntryGroup"
+                            "(google.api.resource_reference).child_type": "datacatalog.googleapis.com/EntryGroup"
                           }
                         },
                         "pageSize": {
@@ -1533,7 +1533,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/Tag"
+                            "(google.api.resource_reference).child_type": "datacatalog.googleapis.com/Tag"
                           }
                         },
                         "tag": {
@@ -4008,7 +4008,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/EntryGroup"
+                            "(google.api.resource_reference).child_type": "datacatalog.googleapis.com/EntryGroup"
                           }
                         },
                         "pageSize": {
@@ -4321,7 +4321,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/Tag"
+                            "(google.api.resource_reference).child_type": "datacatalog.googleapis.com/Tag"
                           }
                         },
                         "tag": {
