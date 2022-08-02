@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/scheduler?activeTab=versions
 
+## [3.0.2](https://github.com/googleapis/nodejs-scheduler/compare/v3.0.1...v3.0.2) (2022-07-10)
+
+
+### Bug Fixes
+
+* **deps:** do not depend on protobufjs ([#461](https://github.com/googleapis/nodejs-scheduler/issues/461)) ([2801eb5](https://github.com/googleapis/nodejs-scheduler/commit/2801eb5b59d791f0c7b4a958664af57cf8a69068))
+
 ## [3.0.1](https://github.com/googleapis/nodejs-scheduler/compare/v3.0.0...v3.0.1) (2022-06-30)
 
 
