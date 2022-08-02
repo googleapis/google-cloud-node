@@ -31,6 +31,9 @@
   * [Run Report With Multiple Dimensions](#run-report-with-multiple-dimensions)
   * [Run Report With Multiple Metrics](#run-report-with-multiple-metrics)
   * [Run Report With Named Date Ranges](#run-report-with-named-date-ranges)
+  * [Run Report With Ordering](#run-report-with-ordering)
+  * [Run Report With Pagination](#run-report-with-pagination)
+  * [Run Report With Property Quota](#run-report-with-property-quota)
 
 ## Before you begin
 
@@ -363,6 +366,57 @@ __Usage:__
 
 
 `node samples/runReportWithNamedDateRanges.js`
+
+
+-----
+
+
+
+
+### Run Report With Ordering
+
+View the [source code](https://github.com/googleapis/nodejs-analytics-data/blob/main/samples/runReportWithOrdering.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-analytics-data&page=editor&open_in_editor=samples/runReportWithOrdering.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/runReportWithOrdering.js`
+
+
+-----
+
+
+
+
+### Run Report With Pagination
+
+View the [source code](https://github.com/googleapis/nodejs-analytics-data/blob/main/samples/runReportWithPagination.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-analytics-data&page=editor&open_in_editor=samples/runReportWithPagination.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/runReportWithPagination.js`
+
+
+-----
+
+
+
+
+### Run Report With Property Quota
+
+View the [source code](https://github.com/googleapis/nodejs-analytics-data/blob/main/samples/runReportWithPropertyQuota.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-analytics-data&page=editor&open_in_editor=samples/runReportWithPropertyQuota.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/runReportWithPropertyQuota.js`
 
 
 
