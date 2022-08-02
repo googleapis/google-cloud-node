@@ -1,5 +1,18 @@
 # Changelog
 
+## [3.1.0](https://github.com/googleapis/nodejs-dialogflow-cx/compare/v3.0.0...v3.1.0) (2022-07-08)
+
+
+### Features
+
+* added webhook_config ([03c33b8](https://github.com/googleapis/nodejs-dialogflow-cx/commit/03c33b89205ee8e9e9fbdd76cda7461ef87886d4))
+* support regapic LRO ([03c33b8](https://github.com/googleapis/nodejs-dialogflow-cx/commit/03c33b89205ee8e9e9fbdd76cda7461ef87886d4))
+
+
+### Bug Fixes
+
+* fixes for dynamic routing and streaming descriptors ([03c33b8](https://github.com/googleapis/nodejs-dialogflow-cx/commit/03c33b89205ee8e9e9fbdd76cda7461ef87886d4))
+
 ## [3.0.0](https://github.com/googleapis/nodejs-dialogflow-cx/compare/v2.15.0...v3.0.0) (2022-06-23)
 
 
