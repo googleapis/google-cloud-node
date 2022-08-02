@@ -18,6 +18,8 @@
 # with a non-zero
 set -eo pipefail
 
+pwd
+
 npm install
 
 # publish library to npm

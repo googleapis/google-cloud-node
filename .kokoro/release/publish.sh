@@ -31,9 +31,7 @@ export NPM_CONFIG_PREFIX=/home/node/.npm-global
 python3 -m pip install gcp-releasetool
 python3 -m releasetool publish-reporter-script > /tmp/publisher-script; source /tmp/publisher-script
 
-cd $(dirname $0)/..
-
-NPM_TOKEN=$(cat $KOKORO_KEYSTORE_DIR/73713_google-cloud-npm-token-1)
+NPM_TOKEN=$(cat "${KOKORO_KEYSTORE_DIR}/73713_google-cloud-npm-token-1")
 echo "//wombat-dressing-room.appspot.com/:_authToken=${NPM_TOKEN}" > ~/.npmrc
 
 SCRIPT=$(realpath $(dirname $0)/./publish-single.sh)
