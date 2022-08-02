@@ -28,7 +28,7 @@ function main() {
   /**
    *  The name (project, location, cluster, node pool id) of the node pool to
    *  complete upgrade.
-   *  Specified in the format 'projects/* /locations/* /clusters/* /nodePools/*'.
+   *  Specified in the format `projects/* /locations/* /clusters/* /nodePools/*`.
    */
   // const name = 'abc123'
 

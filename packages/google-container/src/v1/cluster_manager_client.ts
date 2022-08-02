@@ -2679,7 +2679,7 @@ export class ClusterManagerClient {
    * @param {string} request.name
    *   The name (project, location, cluster, node pool id) of the node pool to
    *   complete upgrade.
-   *   Specified in the format 'projects/* /locations/* /clusters/* /nodePools/*'.
+   *   Specified in the format `projects/* /locations/* /clusters/* /nodePools/*`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

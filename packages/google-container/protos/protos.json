@@ -1485,7 +1485,10 @@
                   "fields": {
                     "enabled": {
                       "type": "bool",
-                      "id": 1
+                      "id": 1,
+                      "options": {
+                        "deprecated": true
+                      }
                     },
                     "evaluationMode": {
                       "type": "EvaluationMode",
