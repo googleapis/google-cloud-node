@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+## [5.2.0](https://github.com/googleapis/nodejs-dialogflow/compare/v5.1.0...v5.2.0) (2022-07-10)
+
+
+### Features
+
+* provide new parameter cx_current_page, the unique identifier of the CX page to override the `current_page` in the session. Add filter field to ListAnswerRecordsRequest. And add AudioInput to analysis requests docs: add more meaningful comments ([dc596ea](https://github.com/googleapis/nodejs-dialogflow/commit/dc596ea3ad8da955fa81513991f573c8665341a0))
+
+
+### Bug Fixes
+
+* **deps:** do not depend on protobufjs ([#968](https://github.com/googleapis/nodejs-dialogflow/issues/968)) ([08e36aa](https://github.com/googleapis/nodejs-dialogflow/commit/08e36aa4c4de24cbc7963f4bcf80762b892cb4c3))
+
 ## [5.1.0](https://github.com/googleapis/nodejs-dialogflow/compare/v5.0.0...v5.1.0) (2022-07-05)
 
 
