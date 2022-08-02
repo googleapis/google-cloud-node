@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.4.0](https://github.com/googleapis/nodejs-assured-workloads/compare/v3.3.0...v3.4.0) (2022-07-29)
+
+
+### Features
+
+* Updated the method signature of analyzeWorkloadMove for v1beta API to accept project as source. AnalyzeWorkloadMove now also returns information about org policy differences between the project and target folder ([#179](https://github.com/googleapis/nodejs-assured-workloads/issues/179)) ([b912379](https://github.com/googleapis/nodejs-assured-workloads/commit/b912379bd886bb48c66e92f445fe886e9beed22c))
+
 ## [3.3.0](https://github.com/googleapis/nodejs-assured-workloads/compare/v3.2.0...v3.3.0) (2022-07-04)
 
 
