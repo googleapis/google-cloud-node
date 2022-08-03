@@ -175,7 +175,7 @@
     "support_documentation": "https://cloud.google.com/automl/docs/"
   },
   {
-    "client_documentation": "https://cloud.google.com/kubernetes-engine/docs/add-on/backup-for-gke",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/gke-backup/latest",
     "api_id": "gkebackup.googleapis.com",
     "distribution_name": "@google-cloud/gke-backup",
     "release_level": "stable",
@@ -183,13 +183,13 @@
     "language": "nodejs",
     "name_pretty": "Backup for GKE API",
     "repo": "googleapis/nodejs-gke-backup",
-    "product_documentation": "https://cloud.google.com/gke-backup/docs/",
+    "product_documentation": "https://cloud.google.com/kubernetes-engine/docs/add-on/backup-for-gke",
     "requires_billing": true,
     "name": "gkebackup",
     "issue_tracker": "https://issuetracker.google.com/savedsearches/559746",
     "api_shortname": "gkebackup",
     "library_type": "GAPIC_AUTO",
-    "support_documentation": "https://cloud.google.com/gke-backup/docs/"
+    "support_documentation": "https://cloud.google.com/kubernetes-engine/docs/getting-support"
   },
   {
     "name": "bigtable",
@@ -1888,7 +1888,7 @@
     "name_pretty": "Vision API",
     "name": "vision",
     "codeowner_team": "@googleapis/ml-apis",
-    "default_version": "v1p4beta1",
+    "default_version": "v1",
     "language": "nodejs",
     "api_shortname": "vision",
     "library_type": "GAPIC_COMBO",
@@ -1950,7 +1950,7 @@
     "name": "analyticshub",
     "name_pretty": "Analytics Hub API",
     "product_documentation": "https://cloud.google.com/analytics-hub",
-    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/analyticshub/latest",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/bigquery-data-exchange/latest",
     "issue_tracker": "https://github.com/googleapis/nodejs-bigquery-data-exchange/issues",
     "release_level": "beta",
     "language": "nodejs",
@@ -1979,6 +1979,23 @@
     "api_shortname": "area120tables",
     "library_type": "GAPIC_AUTO",
     "support_documentation": "https://area120.google.com/"
+  },
+  {
+    "name": "baremetalsolution",
+    "name_pretty": "Bare Metal Solution API",
+    "product_documentation": "https://cloud.google.com/bare-metal",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/bare-metal/latest",
+    "issue_tracker": "https://github.com/googleapis/nodejs-bare-metal-solution/issues",
+    "release_level": "preview",
+    "language": "nodejs",
+    "repo": "googleapis/nodejs-bare-metal-solution",
+    "distribution_name": "@google-cloud/bare-metal-solution",
+    "api_id": "baremetalsolution.googleapis.com",
+    "default_version": "v2",
+    "requires_billing": true,
+    "api_shortname": "baremetalsolution",
+    "library_type": "GAPIC_AUTO",
+    "support_documentation": "https://cloud.google.com/bare-metal"
   },
   {
     "default_version": "v1beta1",

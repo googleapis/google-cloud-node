@@ -55,19 +55,36 @@ describe('tests for templates', () => {
       apiId: 'google.cloud.kms.v1',
       apiPath: 'google/cloud/kms',
       apiPathDashes: 'google-cloud-kms',
+      version: 'v1',
     });
 
-    snapshot(readFileSync(join(templateDirWrite, '.OwlBot.yaml'), 'utf8'));
+    snapshot(
+      readFileSync(join(templateDirWrite, '.github', '.OwlBot.yaml'), 'utf8')
+    );
     snapshot(
       readFileSync(join(templateDirWrite, '.repo-metadata.json'), 'utf8')
+    );
+    snapshot(
+      readFileSync(join(templateDirWrite, 'samples', 'package.json'), 'utf8')
+    );
+    snapshot(
+      readFileSync(join(templateDirWrite, 'samples', 'quickstart.js'), 'utf8')
+    );
+    snapshot(
+      readFileSync(
+        join(templateDirWrite, 'samples', 'test', 'quickstart.js'),
+        'utf8'
+      )
     );
     snapshot(readFileSync(join(templateDirWrite, 'LICENSE'), 'utf8'));
     const packageJson = readFileSync(
       join(templateDirWrite, 'package.json'),
       'utf8'
     );
+
     assert.ok(packageJson.match(/@google-cloud\/kms/));
     assert.ok(packageJson.match(/googleapis\/google-cloud-node/));
+    assert.ok(packageJson.match(/"main": "build\/src\/index.js"/));
 
     assert.deepStrictEqual(
       readdirSync(templateDirRead),

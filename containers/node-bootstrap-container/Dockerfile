@@ -16,21 +16,25 @@
 
 # Use the official lightweight Node.js 14 image.
 # https://hub.docker.com/_/node
-FROM golang:1.16-alpine as build
+FROM golang:1.16-alpine as gobuild
 
 RUN go install github.com/bazelbuild/buildtools/buildozer@latest
 
-FROM node:14-slim
+FROM node:14-slim as nodebuild
 
-COPY package*.json ./
+COPY package*.json /
  
 RUN npm install
 
 # Now copy all the code so we can compile
-COPY ./entrypoint.sh /
+COPY . /
 
-COPY --from=build /go/bin/buildozer /go/bin/buildozer 
+COPY --from=gobuild /go/bin/buildozer /go/bin/buildozer 
 
+
+RUN chmod 755 /entrypoint.sh \
+    /add-to-well-known-path.js \
+    /create-folder-name.js \
+    /create-gh-issue.js
 # Run the web service on container startup.
 ENTRYPOINT ["/entrypoint.sh" ]
-

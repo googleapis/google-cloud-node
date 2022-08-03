@@ -1,3 +1,4 @@
+#!/bin/bash
 # Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,6 +13,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-deep-copy-regex:
-    - source: /{{apiPath}}/.*-{{language}}/(.*)
-      dest: /owl-bot-staging/{{apiPathDashes}}/$1/$2
+# `-e` enables the script to automatically fail when a command fails
+# `-o pipefail` sets the exit code to the rightmost comment to exit
+# with a non-zero
+set -eo pipefail
+
+pwd
+
+npm install
+
+# publish library to npm
+npm publish --access=public --registry=https://wombat-dressing-room.appspot.com
