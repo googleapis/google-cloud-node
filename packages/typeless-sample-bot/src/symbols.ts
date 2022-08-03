@@ -24,7 +24,7 @@ import chalk from 'chalk';
  */
 class Symbols {
   // Controlled by the arg parser.
-  private _art: boolean = true;
+  private _art = true;
 
   get art() {
     return this._art;
@@ -82,7 +82,7 @@ class Symbols {
   get step(): string {
     return this.symbolSet[symbolEnum.step];
   }
-};
+}
 
 export const symbols = new Symbols();
 
@@ -93,16 +93,6 @@ const symbolEnum = {
   step: 3,
 };
 
-const emojiSymbols = [
-  '🐞',
-  '❌',
-  '✅',
-  '✨',
-];
+const emojiSymbols = ['🐞', '❌', '✅', '✨'];
 
-const plainSymbols = [
-  '[bug]',
-  '[error]',
-  '[success]',
-  '[step]',
-];
+const plainSymbols = ['[bug]', '[error]', '[success]', '[step]'];

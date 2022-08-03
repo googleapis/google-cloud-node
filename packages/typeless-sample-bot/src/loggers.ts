@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {GcpDebugLogFunction, placeholder} from './gcp-debuglog.js';
+import {placeholder} from './gcp-debuglog.js';
 import makeLog from './gcp-debuglog.js';
 
 // This creates our topical loggers. Since this is ESM, loading modules is

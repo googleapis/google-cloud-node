@@ -45,11 +45,9 @@ describe('sample transformation', () => {
       {
         filename: 'test.js',
         contents: fixture,
-      }
+      },
     ]);
-    const sOut = await samples.toArray(
-      samples.transformSamples(sIn)
-    );
+    const sOut = await samples.toArray(samples.transformSamples(sIn));
     // snapshot(sOut);
     assert.strictEqual(noWhitespace(sOut[0].contents), noWhitespace(fixture));
   });
@@ -61,12 +59,10 @@ describe('sample transformation', () => {
       {
         filename: 'listSchemas.ts',
         contents: fixture,
-      }
+      },
     ]);
 
-    const sOut = await samples.toArray(
-      samples.transformSamples(sIn)
-    );
+    const sOut = await samples.toArray(samples.transformSamples(sIn));
 
     snapshot(noWhitespace(sOut[0].contents));
   });
@@ -80,16 +76,10 @@ describe('command line option', () => {
   });
 
   it('"no-art" removes emojis and colours', async () => {
-    const cmdline = [
-      'node',
-      'index.ts',
-      '--no-art',
-      '-t',
-      'foo.ts',
-    ];
-    sandbox.stub(console, 'error').callsFake(function () {
-      if (typeof(arguments[0]) === 'string') {
-        assert.strictEqual(arguments[0].includes('[error]'), true);
+    const cmdline = ['node', 'index.ts', '--no-art', '-t', 'foo.ts'];
+    sandbox.stub(console, 'error').callsFake((...params) => {
+      if (typeof params[0] === 'string') {
+        assert.strictEqual(params[0].includes('[error]'), true);
       }
     });
 

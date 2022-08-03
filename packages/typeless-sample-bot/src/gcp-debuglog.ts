@@ -18,12 +18,12 @@ import * as util from 'node:util';
 
 // Adds typings for event sinks.
 export declare interface GcpDebugLogger {
-  on(event: 'log', listener: (args: any[]) => void): this;
+  on(event: 'log', listener: (args: unknown[]) => void): this;
   on(event: string, listener: Function): this;
 }
 
 // Our logger instance. This actually contains the meat of dealing
-// with log lines, including EventEmitter 
+// with log lines, including EventEmitter
 export class GcpDebugLogger extends EventEmitter {
   // The function we'll call with new log lines.
   // Should be built in Node util stuff, or the "debug" package, or whatever.
@@ -36,19 +36,17 @@ export class GcpDebugLogger extends EventEmitter {
     super();
 
     this.upstream = upstream;
-    this.func = Object.assign(
-      this.invoke.bind(this),
-      {
-        // Also add an instance pointer back to us.
-        instance: this,
+    this.func = Object.assign(this.invoke.bind(this), {
+      // Also add an instance pointer back to us.
+      instance: this,
 
-        // And pull over the EventEmitter functionality.
-        on: (event: string, listener: (args: any[]) => void) => this.on(event, listener),
-      }
-    ) as any;
+      // And pull over the EventEmitter functionality.
+      on: (event: string, listener: (args: unknown[]) => void) =>
+        this.on(event, listener),
+    }) as unknown as GcpDebugLogFunction;
   }
 
-  invoke(...args: any[]): void {
+  invoke(...args: unknown[]): void {
     // Push out any upstream logger first.
     if (this.upstream) {
       this.upstream(...args);
@@ -60,12 +58,12 @@ export class GcpDebugLogger extends EventEmitter {
 }
 
 // This can be used in place of a real logger while waiting for Promises.
-export const placeholder = (new GcpDebugLogger(() => {})).func;
+export const placeholder = new GcpDebugLogger(() => {}).func;
 
 // Add typing info for the EventEmitter we're adding to the returned function.
 export interface GcpDebugLogFunction extends Function {
   instance: GcpDebugLogger;
-  on(event: 'log', listener: (args: any[]) => void): this;
+  on(event: 'log', listener: (args: unknown[]) => void): this;
 }
 
 // Keep a copy of all namespaced loggers so users can reliably .on() them.
@@ -74,7 +72,9 @@ const loggerCache = new Map<string, GcpDebugLogger>();
 // True once we've imported any GCP logging variables into upstream loggers.
 let varsSet = false;
 
-export default async function makeLogger(namespace: string): Promise<GcpDebugLogFunction> {
+export default async function makeLogger(
+  namespace: string
+): Promise<GcpDebugLogFunction> {
   // Reuse loggers so things like sinks are persistent.
   if (loggerCache.has(namespace)) {
     return loggerCache.get(namespace)!.func;
@@ -93,7 +93,9 @@ export default async function makeLogger(namespace: string): Promise<GcpDebugLog
     if (!varsSet) {
       // Also copy over any GCP global enables.
       const existingEnables = process.env['DEBUG'] ?? '';
-      debugPkg.enable(`${existingEnables}${existingEnables ? ',' : ''}${gcpEnv}`);
+      debugPkg.enable(
+        `${existingEnables}${existingEnables ? ',' : ''}${gcpEnv}`
+      );
 
       varsSet = true;
     }
@@ -103,7 +105,9 @@ export default async function makeLogger(namespace: string): Promise<GcpDebugLog
     if (!varsSet) {
       // Also copy over any GCP global enables.
       const existingEnables = process.env['NODE_DEBUG'] ?? '';
-      process.env['NODE_DEBUG'] = `${existingEnables}${existingEnables ? ',' : ''}${gcpEnv}`;
+      process.env['NODE_DEBUG'] = `${existingEnables}${
+        existingEnables ? ',' : ''
+      }${gcpEnv}`;
 
       varsSet = true;
     }

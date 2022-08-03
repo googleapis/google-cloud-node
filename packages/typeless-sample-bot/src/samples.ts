@@ -15,7 +15,7 @@
 import loggers from './loggers.js';
 import {treeWalk} from './tree-walk.js';
 import {readFile, writeFile} from 'fs/promises';
-import babel, {GeneratorOptions, ParserOptions} from '@babel/core';
+import babel from '@babel/core';
 
 // Converts an async iterable into an array of the same type.
 export async function toArray<T>(iterable: AsyncIterable<T>): Promise<T[]> {
@@ -35,7 +35,10 @@ export async function* fromArray<T>(array: T[]): AsyncIterable<T> {
 }
 
 // Given a set of starting paths, search down for anything that matches the regex.
-export async function* findSamples(rootDirs: string[], matcher?: RegExp): AsyncIterable<string> {
+export async function* findSamples(
+  rootDirs: string[],
+  matcher?: RegExp
+): AsyncIterable<string> {
   for (const rootDir of rootDirs) {
     for await (const fn of treeWalk(rootDir)) {
       if (matcher && !matcher.test(fn)) {
@@ -56,7 +59,9 @@ export interface Sample {
 
 // Filter an async iterable by file conents. This also loads the file contents
 // and caches them, since we'll be needing them anyway.
-export async function* filterByContents(filenames: AsyncIterable<string>): AsyncIterable<Sample> {
+export async function* filterByContents(
+  filenames: AsyncIterable<string>
+): AsyncIterable<Sample> {
   for await (const fn of filenames) {
     const contents = (await readFile(fn)).toString();
     if (sampleChecker.test(contents)) {
@@ -71,30 +76,21 @@ export async function* filterByContents(filenames: AsyncIterable<string>): Async
 // Instead of a babelrc, this is used so that we can get more control over
 // the transform process.
 const babelConfig = {
-  presets: [
-    [
-      '@babel/preset-typescript',
-      {
-      },
-    ],
-  ],
-  plugins: [
-    [
-      './build/src/import-to-require',
-    ],
-  ],
-  parserOpts: {
-  } as ParserOptions,
+  presets: [['@babel/preset-typescript', {}]],
+  plugins: [['./build/src/import-to-require']],
+  parserOpts: {} as babel.ParserOptions,
   generatorOpts: {
     // Ensures that Babel keeps newlines so that comments end up
     // on separate lines as before.
     retainLines: true,
-  } as GeneratorOptions,
+  } as babel.GeneratorOptions,
 };
 
 // Transform all of the loaded samples from the async iterator,
 // producing output samples that have been transformed, with a new filename.
-export async function* transformSamples(samples: AsyncIterable<Sample>): AsyncIterable<Sample> {
+export async function* transformSamples(
+  samples: AsyncIterable<Sample>
+): AsyncIterable<Sample> {
   for await (const s of samples) {
     const config = Object.assign({}, babelConfig, {filename: s.filename});
     const transformed = await babel.transformAsync(s.contents, config);
@@ -106,7 +102,9 @@ export async function* transformSamples(samples: AsyncIterable<Sample>): AsyncIt
 }
 
 // Write out all samples to the file system.
-export async function* writeSamples(samples: AsyncIterable<Sample>): AsyncIterable<Sample> {
+export async function* writeSamples(
+  samples: AsyncIterable<Sample>
+): AsyncIterable<Sample> {
   for await (const s of samples) {
     loggers.verbose('writing new sample', s.filename);
     await writeFile(s.filename, s.contents);
@@ -116,7 +114,9 @@ export async function* writeSamples(samples: AsyncIterable<Sample>): AsyncIterab
 
 // Terminator function that waits for everything else to complete,
 // and returns a count of how many we processed.
-export async function waitForAllSamples(samples: AsyncIterable<Sample>): Promise<number> {
+export async function waitForAllSamples(
+  samples: AsyncIterable<Sample>
+): Promise<number> {
   let count = 0;
   for await (const s of samples) {
     loggers.step('Generated', s.filename);

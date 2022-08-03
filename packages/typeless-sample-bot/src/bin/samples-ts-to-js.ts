@@ -17,7 +17,14 @@ import loggers from '../loggers.js';
 import {createLoggers} from '../loggers.js';
 import util from 'node:util';
 import {symbols} from '../symbols.js';
-import {filterByContents, findSamples, transformSamples, writeSamples, waitForAllSamples, fromArray} from '../samples.js';
+import {
+  filterByContents,
+  findSamples,
+  transformSamples,
+  writeSamples,
+  waitForAllSamples,
+  fromArray,
+} from '../samples.js';
 import url from 'node:url';
 
 let returnValue = 0;
@@ -26,9 +33,9 @@ let returnValue = 0;
 // printing to the console.
 export function consolize(args: unknown[]): string {
   const strings = args.map(a => {
-    if (typeof(a) === 'string') {
+    if (typeof a === 'string') {
       return a;
-    } else if (typeof(a) === 'number') {
+    } else if (typeof a === 'number') {
       return `${a}`;
     } else {
       return util.inspect(a, false, 2, true);
@@ -38,41 +45,44 @@ export function consolize(args: unknown[]): string {
 }
 
 async function processArgs(args: string[]) {
-  const argv = await yargs(args).options({
-    targets: {
-      demandOption: true,
-      type: 'array',
-      describe: 'one or more items to process',
-      alias: [ 't' ],
-    },
-    recursive: {
-      demandOption: false,
-      boolean: true,
-      describe: 'process the target(s) as directories, recursively',
-      alias: [ 'r' ],
-    },
-    verbose: {
-      demandOption: false,
-      default: false,
-      boolean: true,
-      describe: 'set flag to get verbose output about actions (GCP_DEBUG=verbose)',
-      alias: [ 'v' ],
-    },
-    debug: {
-      demandOption: false,
-      default: false,
-      boolean: true,
-      describe: 'same as using GCP_DEBUG=*',
-      alias: [ 'd' ],
-    },
-    art: {
-      demandOption: false,
-      boolean: true,
-      default: true,
-      describe: 'allow ASCII/ANSI art/colours',
-      alias: [ 'c' ],
-    },
-  }).help().argv;
+  const argv = await yargs(args)
+    .options({
+      targets: {
+        demandOption: true,
+        type: 'array',
+        describe: 'one or more items to process',
+        alias: ['t'],
+      },
+      recursive: {
+        demandOption: false,
+        boolean: true,
+        describe: 'process the target(s) as directories, recursively',
+        alias: ['r'],
+      },
+      verbose: {
+        demandOption: false,
+        default: false,
+        boolean: true,
+        describe:
+          'set flag to get verbose output about actions (GCP_DEBUG=verbose)',
+        alias: ['v'],
+      },
+      debug: {
+        demandOption: false,
+        default: false,
+        boolean: true,
+        describe: 'same as using GCP_DEBUG=*',
+        alias: ['d'],
+      },
+      art: {
+        demandOption: false,
+        boolean: true,
+        default: true,
+        describe: 'allow ASCII/ANSI art/colours',
+        alias: ['c'],
+      },
+    })
+    .help().argv;
 
   if (argv.mode === 'help') {
     return undefined;
@@ -98,11 +108,15 @@ async function setupLoggers(verbose: boolean) {
 
   // Set up our log outputs as needed
   if (verbose) {
-    loggers.verbose.on('log', (args: any[]) => console.debug(symbols.grey(consolize([symbols.bug, ...args]))));
+    loggers.verbose.on('log', (args: unknown[]) =>
+      console.debug(symbols.grey(consolize([symbols.bug, ...args])))
+    );
   }
-  loggers.step.on('log', (args: any[]) => console.log(consolize([symbols.step, ...args])));
-  loggers.error.on('log', (args: any[]) => {
-    console.error(symbols.red(consolize([symbols.failure, ...args])))
+  loggers.step.on('log', (args: unknown[]) =>
+    console.log(consolize([symbols.step, ...args]))
+  );
+  loggers.error.on('log', (args: unknown[]) => {
+    console.error(symbols.red(consolize([symbols.failure, ...args])));
 
     // Also cause main() to return a failure.
     returnValue = 1;
@@ -112,7 +126,9 @@ async function setupLoggers(verbose: boolean) {
 }
 
 export async function main(args: string[]): Promise<number> {
-  console.log(symbols.green('Typeless sample bot, converts TS to JS sample snippets'));
+  console.log(
+    symbols.green('Typeless sample bot, converts TS to JS sample snippets')
+  );
 
   // Process command line args and get loggers configured.
   const argv = await processArgs(args);
@@ -124,7 +140,10 @@ export async function main(args: string[]): Promise<number> {
   // Find all of the samples we're interested in working on.
   let sampleFns: AsyncIterable<string>;
   if (argv.recursive) {
-    sampleFns = findSamples(argv.targets.map(i => i.toString()), /(?!node_modules).*\.ts$/);
+    sampleFns = findSamples(
+      argv.targets.map(i => i.toString()),
+      /(?!node_modules).*\.ts$/
+    );
   } else {
     sampleFns = fromArray(argv.targets.map(i => i.toString()));
   }
@@ -153,7 +172,12 @@ export async function main(args: string[]): Promise<number> {
   if (!returnValue) {
     console.log(symbols.success, symbols.green('Generation complete!'));
   } else {
-    console.log(symbols.failure, symbols.redBright('Something failed. (Maybe not everything, check the log above.)'));
+    console.log(
+      symbols.failure,
+      symbols.redBright(
+        'Something failed. (Maybe not everything, check the log above.)'
+      )
+    );
   }
 
   return returnValue;
@@ -164,7 +188,9 @@ if (import.meta.url === url.pathToFileURL(process.argv[1]).href) {
   main(process.argv.slice(2))
     .then(e => process.exit(e))
     .catch((e: Error) => {
-      console.error(`Top level exception: ${e.toString()} ${e.stack?.toString()}`);
+      console.error(
+        `Top level exception: ${e.toString()} ${e.stack?.toString()}`
+      );
       process.exit(1);
     });
 }

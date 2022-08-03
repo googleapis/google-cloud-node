@@ -17,11 +17,10 @@
 // https://github.com/esamattis/babel-plugin-ts-optchain/blob/master/packages/babel-plugin-ts-optchain/src/plugin.ts
 
 import * as Babel from '@babel/types';
-import {Node, NodePath, Visitor} from '@babel/traverse';
+import {NodePath, Visitor} from '@babel/traverse';
 
 type NodePathArray = NodePath<Babel.Node>[];
 type NodePathSingle = NodePath<Babel.Node>;
-type NodePathMaybe = NodePathSingle | NodePathArray;
 
 function getArray(path: NodePathSingle, subPathName: string): NodePathArray {
   return path.get(subPathName) as NodePathArray;
@@ -47,7 +46,12 @@ function specificImport(path: NodePathSingle) {
     const importedName = getIdentifier(s, 'imported');
     const localName = getIdentifier(s, 'local');
     if (importedName !== localName) {
-      console.error('Imported name', importedName, 'is not the same as local name', localName);
+      console.error(
+        'Imported name',
+        importedName,
+        'is not the same as local name',
+        localName
+      );
       return '';
     } else {
       return importedName;
@@ -65,11 +69,14 @@ function specificImport(path: NodePathSingle) {
 
   const declarator = Babel.variableDeclarator(
     Babel.objectPattern(properties),
-    Babel.callExpression(Babel.identifier('require'), [Babel.stringLiteral(from)])
+    Babel.callExpression(Babel.identifier('require'), [
+      Babel.stringLiteral(from),
+    ])
   );
 
   const replacement = Babel.inherits(
-    Babel.variableDeclaration('const', [declarator]), path.node
+    Babel.variableDeclaration('const', [declarator]),
+    path.node
   );
   path.replaceWith(replacement);
 }
@@ -82,7 +89,9 @@ function wildcardImport(path: NodePathSingle) {
 
   const declarator = Babel.variableDeclarator(
     Babel.identifier(ns),
-    Babel.callExpression(Babel.identifier('require'), [Babel.stringLiteral(from)])
+    Babel.callExpression(Babel.identifier('require'), [
+      Babel.stringLiteral(from),
+    ])
   );
 
   const replacement = Babel.inherits(
@@ -109,7 +118,7 @@ export default function importToRequire(): VisitorPlugin {
           }
           path.skip();
         }
-      }
+      },
     },
   };
 }

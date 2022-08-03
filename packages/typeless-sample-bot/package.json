@@ -4,20 +4,30 @@
   "version": "0.0.1",
   "license": "Apache-2.0",
   "author": "Google LLC",
+  "engines": {
+    "node": ">=16.0.0"
+  },
   "repository": "googleapis/google-cloud-node",
   "main": "node build/src/bin/samples-ts-to-js.js",
   "type": "module",
+  "files": [
+    "build/src"
+  ],
   "scripts": {
     "compile": "tsc",
     "test": "c8 mocha build/test --recursive",
+    "snapshots-update": "SNAPSHOT_UPDATE=1 npm test",
     "pretest": "npm run compile",
     "system-test": "echo no system tests yet 🙀",
-    "lint": "echo no linter yet 🙀"
+    "lint": "gts check",
+    "fix": "gts fix"
   },
   "dependencies": {
-    "@babel/plugin-transform-modules-commonjs": "^7.16.0",
-    "@babel/preset-env": "^7.16.0",
-    "@babel/preset-typescript": "^7.16.0",
+    "@babel/core": "^7.18.10",
+    "@babel/plugin-transform-modules-commonjs": "^7.18.0",
+    "@babel/preset-env": "^7.18.0",
+    "@babel/preset-typescript": "^7.18.0",
+    "@babel/traverse": "^7.18.10",
     "chalk": "^5.0.1",
     "debug": "^4.3.4",
     "recast": "^0.21.1",
