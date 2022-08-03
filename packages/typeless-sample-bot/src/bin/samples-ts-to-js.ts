@@ -18,6 +18,7 @@ import {createLoggers} from '../loggers.js';
 import util from 'node:util';
 import {symbols} from '../symbols.js';
 import {filterByContents, findSamples, transformSamples, writeSamples, waitForAllSamples, fromArray} from '../samples.js';
+import url from 'node:url';
 
 let returnValue = 0;
 
@@ -36,8 +37,8 @@ export function consolize(args: unknown[]): string {
   return strings.join(' ');
 }
 
-async function processArgs() {
-  const argv = await yargs(process.argv.slice(2)).options({
+async function processArgs(args: string[]) {
+  const argv = await yargs(args).options({
     targets: {
       demandOption: true,
       type: 'array',
@@ -82,7 +83,17 @@ async function processArgs() {
   return argv;
 }
 
+let loggersSetUp = false;
 async function setupLoggers(verbose: boolean) {
+  // This may be needed on subsequent testing runs.
+  returnValue = 0;
+
+  // Don't double-create or .on() anything. This can happen
+  // during testing.
+  if (loggersSetUp) {
+    return;
+  }
+
   await createLoggers();
 
   // Set up our log outputs as needed
@@ -96,13 +107,15 @@ async function setupLoggers(verbose: boolean) {
     // Also cause main() to return a failure.
     returnValue = 1;
   });
+
+  loggersSetUp = true;
 }
 
-async function main(): Promise<number> {
+export async function main(args: string[]): Promise<number> {
   console.log(symbols.green('Typeless sample bot, converts TS to JS sample snippets'));
 
   // Process command line args and get loggers configured.
-  const argv = await processArgs();
+  const argv = await processArgs(args);
   if (!argv) {
     return 0;
   }
@@ -111,7 +124,7 @@ async function main(): Promise<number> {
   // Find all of the samples we're interested in working on.
   let sampleFns: AsyncIterable<string>;
   if (argv.recursive) {
-    sampleFns = findSamples(argv.targets.map(i => i.toString()), /.*samples\/(?!node_modules).*\.ts$/);
+    sampleFns = findSamples(argv.targets.map(i => i.toString()), /(?!node_modules).*\.ts$/);
   } else {
     sampleFns = fromArray(argv.targets.map(i => i.toString()));
   }
@@ -125,12 +138,16 @@ async function main(): Promise<number> {
   // Write out all of the output samples.
   const written = writeSamples(transformed);
 
-  // Wait for the pipeline to complete.
-  const count = await waitForAllSamples(written);
+  try {
+    // Wait for the pipeline to complete.
+    const count = await waitForAllSamples(written);
 
-  if (!count) {
-    // Should this be considred a failure?
-    loggers.error('No samples were selected.');
+    if (!count) {
+      // Should this be considred a failure?
+      loggers.error('No samples were selected.');
+    }
+  } catch (e) {
+    loggers.error('Exception during processing:', e);
   }
 
   if (!returnValue) {
@@ -142,9 +159,12 @@ async function main(): Promise<number> {
   return returnValue;
 }
 
-main()
-  .then(e => process.exit(e))
-  .catch((e: Error) => {
-    console.error(`Top level exception: ${e.toString()} ${e.stack?.toString()}`);
-    process.exit(1);
-  });
+// Only activate our command line mode if this is the "main" module.
+if (import.meta.url === url.pathToFileURL(process.argv[1]).href) {
+  main(process.argv.slice(2))
+    .then(e => process.exit(e))
+    .catch((e: Error) => {
+      console.error(`Top level exception: ${e.toString()} ${e.stack?.toString()}`);
+      process.exit(1);
+    });
+}

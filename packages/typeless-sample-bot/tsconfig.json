@@ -6,6 +6,9 @@
     "test/*.ts",
     "tests/**/*.ts"
   ],
+  "exclude": [
+    "test/fixtures/*.ts"
+  ],
   "compilerOptions": {
     /* Visit https://aka.ms/tsconfig.json to read more about this file */
 
