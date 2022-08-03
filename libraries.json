@@ -1963,6 +1963,21 @@
     "support_documentation": "https://cloud.google.com/analytics-hub"
   },
   {
+    "name": "apigeeregistry",
+    "name_pretty": "Apigee Registry API",
+    "product_documentation": "https://cloud.google.com/apigee/docs/api-hub/get-started-registry-api",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/apigeeregistry/latest",
+    "issue_tracker": "https://github.com/googleapis/nodejs-video-transcoder/issues",
+    "release_level": "beta",
+    "language": "nodejs",
+    "repo": "googleapis/nodejs-apigee-registry",
+    "distribution_name": "@google-cloud/apigee-registry",
+    "api_id": "apigeeregistry.googleapis.com",
+    "default_version": "v1",
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/apigee/docs/api-hub/get-started-registry-api"
+  },
+  {
     "language": "nodejs",
     "repo": "googleapis/nodejs-area120-tables",
     "name": "area120tables",
@@ -1996,6 +2011,21 @@
     "api_shortname": "baremetalsolution",
     "library_type": "GAPIC_AUTO",
     "support_documentation": "https://cloud.google.com/bare-metal"
+  },
+  {
+    "name": "bigquerymigration",
+    "name_pretty": "BigQuery Migration API",
+    "product_documentation": "https://cloud.google.com/bigquery/docs/migration-intro",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/bigquery-migration/latest",
+    "issue_tracker": "https://github.com/googleapis/nodejs-bigquery-migration/issues",
+    "release_level": "beta",
+    "language": "nodejs",
+    "repo": "googleapis/nodejs-bigquery-migration",
+    "distribution_name": "@google-cloud/bigquery-migration",
+    "api_id": "bigquerymigration.googleapis.com",
+    "default_version": "v2",
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/bigquery/docs/getting-support"
   },
   {
     "default_version": "v1beta1",
@@ -2048,6 +2078,21 @@
     "api_shortname": "dataflow",
     "library_type": "GAPIC_AUTO",
     "support_documentation": "https://cloud.google.com/dataflow/"
+  },
+  {
+    "name": "dataform",
+    "name_pretty": "Dataform API",
+    "product_documentation": "https://dataform.co/",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/dataform/latest",
+    "issue_tracker": "https://github.com/googleapis/nodejs-dataform/issues",
+    "release_level": "beta",
+    "language": "nodejs",
+    "repo": "googleapis/nodejs-dataform",
+    "distribution_name": "@google-cloud/dataform",
+    "api_id": "dataform.googleapis.com",
+    "default_version": "v1alpha2",
+    "requires_billing": true,
+    "support_documentation": "https://dataform.co/"
   },
   {
     "name": "connectgateway",
