@@ -53,8 +53,8 @@ async function downloadRepoMetadata () {
   let urlsAndRepos = [];
   for (const repo of repos) {
     if (repo === 'googleapis/google-cloud-node') {
-      const googleCloudUrl = `${baseUrl}/repos/${repo}/contents/packages`;
-      const res = await github.request({ url: googleCloudUrl });
+      const googleCloudNodeUrl = `${baseUrl}/repos/${repo}/contents/packages`;
+      const res = await github.request({ url: googleCloudNodeUrl });
       const monoRepos = res.data.map(x => x.name);
       for (const monoRepo of monoRepos) {
         urlsAndRepos.push({url: `${baseUrl}/repos/${repo}/contents/packages/${monoRepo}/.repo-metadata.json`, repo: monoRepo})
