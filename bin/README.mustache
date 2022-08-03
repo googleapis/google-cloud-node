@@ -25,14 +25,12 @@ each libraries README.md.
 
 ## Authentication
 
-### Download your Service Account Credentials JSON file
+### Login using `gcloud auth application-default login`
 
-To use Application Default Credentials, You first need to download a set of JSON credentials for your project. Go to **APIs & Auth** > **Credentials** in the [Google Developers Console][devconsole] and select **Service account** from the **Add credentials** dropdown.
+To use Application Default Credentials, you first need to install the [gckoud CLI](https://cloud.google.com/sdk/docs/install).
 
-> This file is your *only copy* of these credentials. It should never be
-> committed with your source code, and should be stored securely.
-
-Once downloaded, store the path to this file in the `GOOGLE_APPLICATION_CREDENTIALS` environment variable.
+Afterwards, run [`gcloud auth application-default login`](https://cloud.google.com/sdk/gcloud/reference/auth/application-default/login) to obtain
+user access credentials when running code locally.
 
 ### Other Authentication Methods
 
