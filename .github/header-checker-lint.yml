@@ -10,6 +10,6 @@ sourceFileExtensions:
   - 'java'
 ignoreFiles:
   - "packages/*/webpack.config.js"
-  - "packages/*/__snapshot__/*.js"
+  - "packages/typeless-sample-bot/__snapshot__/*.js"
   - "packages/typeless-sample-bot/test/fixtures/**/*.ts"
   - "packages/typeless-sample-bot/test/fixtures/**/*.js"
