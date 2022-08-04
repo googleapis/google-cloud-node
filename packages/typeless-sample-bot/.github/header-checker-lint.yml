@@ -1,4 +1,0 @@
-ignoreFiles:
-  - __snapshot__/**/*.js
-  - test/fixtures/**/*.ts
-  - test/fixtures/**/*.js
