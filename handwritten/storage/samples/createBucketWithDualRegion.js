@@ -58,7 +58,14 @@ function main(
       },
     });
 
-    console.log(`${bucket.name} created in '${region1}' and '${region2}'`);
+    console.log(`Created '${bucket.name}'`);
+    console.log(`- location: '${bucket.metadata.location}'`);
+    console.log(`- locationType: '${bucket.metadata.locationType}'`);
+    console.log(
+      `- customPlacementConfig: '${JSON.stringify(
+        bucket.metadata.customPlacementConfig
+      )}'`
+    );
   }
 
   createDualRegionBucket().catch(console.error);

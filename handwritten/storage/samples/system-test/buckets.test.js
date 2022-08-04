@@ -223,11 +223,14 @@ it('should create a dual-region bucket', async () => {
     `node createBucketWithDualRegion.js ${bucketNameDualRegion} ${DUAL_REGION.LOCATION} ${DUAL_REGION.REGIONS[0]} ${DUAL_REGION.REGIONS[1]}`
   );
 
-  assert.include(
-    output,
-    `${bucketNameDualRegion} created in '${DUAL_REGION.REGIONS[0]}' and '${DUAL_REGION.REGIONS[1]}'`
-  );
+  // Ensure the sample outputs the desired result
+  assert.include(output, bucketNameDualRegion);
+  assert.include(output, DUAL_REGION.LOCATION);
+  assert.include(output, DUAL_REGION.REGIONS[0]);
+  assert.include(output, DUAL_REGION.REGIONS[1]);
+  assert.include(output, 'dual-region');
 
+  // Make API request for further verification
   const [exists] = await dualRegionBucket.exists();
   assert.strictEqual(exists, true);
 
