@@ -84,9 +84,7 @@ exports['tests for templates it should create the templates in the directory 4']
 'use strict';
 
 function main() {
-  // [START quickstart]
   console.log('Missing samples and tests');
-  // [END quickstart]
 }
 
 process.on('unhandledRejection', err => {
