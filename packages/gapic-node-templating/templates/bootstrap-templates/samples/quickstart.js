@@ -16,9 +16,7 @@
 'use strict';
 
 function main() {
-  // [START quickstart]
   console.log('Missing samples and tests');
-  // [END quickstart]
 }
 
 process.on('unhandledRejection', err => {

@@ -1,3 +1,4 @@
+#!/bin/bash
 # Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -11,7 +12,13 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-docker:
-  image: gcr.io/cloud-devrel-public-resources/owlbot-nodejs-mono-repo:latest
-  digest: sha256:c362b761a38f6df511e6741a6e175954bf14ee4ac2c2fa465aef609952072c97
-# created: 2022-06-07T21:18:30.024751809Z
+
+# `-e` enables the script to automatically fail when a command fails
+# `-o pipefail` sets the exit code to the rightmost comment to exit
+# with a non-zero
+set -eo pipefail
+
+npm install
+
+# publish docs to devsite
+npx @google-cloud/cloud-rad@0.2.5
