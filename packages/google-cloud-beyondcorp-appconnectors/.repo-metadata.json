@@ -1,9 +1,9 @@
 {
   "name": "appconnectors",
-  "name_pretty": "",
-  "product_documentation": "",
-  "client_documentation": "undefined",
-  "issue_tracker": "undefined",
+  "name_pretty": "BeyondCorp API",
+  "product_documentation": "https://cloud.google.com/beyondcorp",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/beyondcorp/latest",
+  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
   "release_level": "beta",
   "language": "nodejs",
   "repo": "googleapis/google-cloud-node",
