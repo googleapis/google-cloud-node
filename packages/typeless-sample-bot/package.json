@@ -18,6 +18,7 @@
     "test": "c8 mocha build/test --recursive",
     "snapshots-update": "SNAPSHOT_UPDATE=1 npm test",
     "pretest": "npm run compile",
+    "samples-test": "echo no system tests yet 🙀",
     "system-test": "echo no system tests yet 🙀",
     "lint": "gts check",
     "fix": "gts fix"
