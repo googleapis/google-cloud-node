@@ -1,0 +1,16 @@
+description: Nightly build with node 14
+gitFileSource:
+  path: ci/cloudbuild.yaml
+  repoType: GITHUB
+  revision: refs/heads/main
+  uri: https://github.com/googleapis/google-cloud-node
+name: samples-nightly-node14
+serviceAccount: projects/long-door-651/serviceAccounts/kokoro-system-test@long-door-651.iam.gserviceaccount.com
+sourceToBuild:
+  ref: refs/heads/main
+  repoType: GITHUB
+  uri: https://github.com/googleapis/google-cloud-node
+substitutions:
+  _BUILD_TYPE: nightly
+  _TEST_TYPE: samples
+  _LOGS_BUCKET: cloud-node-public-logs

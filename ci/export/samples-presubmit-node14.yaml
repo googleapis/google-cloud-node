@@ -1,0 +1,15 @@
+description: Presubmit build with node 14
+filename: ci/cloudbuild.yaml
+github:
+  name: google-cloud-node
+  owner: googleapis
+  pullRequest:
+    branch: ^main$
+    commentControl: COMMENTS_ENABLED_FOR_EXTERNAL_CONTRIBUTORS_ONLY
+includeBuildLogs: INCLUDE_BUILD_LOGS_WITH_STATUS
+name: samples-presubmit-node14
+serviceAccount: projects/long-door-651/serviceAccounts/kokoro-system-test@long-door-651.iam.gserviceaccount.com
+substitutions:
+  _BUILD_TYPE: presubmit
+  _TEST_TYPE: samples
+  _LOGS_BUCKET: cloud-node-public-logs

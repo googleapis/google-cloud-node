@@ -38,4 +38,10 @@ for NODE_VERSION in ${NODE_VERSIONS[@]}; do
     gcloud beta builds triggers import --source "ci/export/system-continuous-node${NODE_VERSION}.yaml"
     echo "importing nightly build for node${NODE_VERSION}"
     gcloud beta builds triggers import --source "ci/export/system-nightly-node${NODE_VERSION}.yaml"
+    echo "importing presubmit build for node${NODE_VERSION}"
+    gcloud beta builds triggers import --source "ci/export/samples-presubmit-node${NODE_VERSION}.yaml"
+    echo "importing continuous build for node${NODE_VERSION}"
+    gcloud beta builds triggers import --source "ci/export/samples-continuous-node${NODE_VERSION}.yaml"
+    echo "importing nightly build for node${NODE_VERSION}"
+    gcloud beta builds triggers import --source "ci/export/samples-nightly-node${NODE_VERSION}.yaml"
 done
