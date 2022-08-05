@@ -33,10 +33,6 @@ async function loadFixture(name: string): Promise<string> {
   return (await readFile(fn)).toString();
 }
 
-function noWhitespace(s: string): string {
-  return s.replace(/[\s]+/gm, '');
-}
-
 describe('sample transformation', () => {
   it('does not change JS', async () => {
     const fixture = await loadFixture('createTopic.js');
@@ -48,8 +44,7 @@ describe('sample transformation', () => {
       },
     ]);
     const sOut = await samples.toArray(samples.transformSamples(sIn));
-    // snapshot(sOut);
-    assert.strictEqual(noWhitespace(sOut[0].contents), noWhitespace(fixture));
+    snapshot(sOut);
   });
 
   it('correctly transforms TS', async () => {
@@ -64,7 +59,7 @@ describe('sample transformation', () => {
 
     const sOut = await samples.toArray(samples.transformSamples(sIn));
 
-    snapshot(noWhitespace(sOut[0].contents));
+    snapshot(sOut[0].contents);
   });
 });
 
