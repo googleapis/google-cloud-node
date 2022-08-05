@@ -12,6 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+// TODO(feywind) - Don't lose spaces at the front of comments
+// TODO(feywind) - Also add 'use strict' and a comment about being generated
+
 import loggers from './loggers.js';
 import {treeWalk} from './tree-walk.js';
 import {readFile, writeFile} from 'fs/promises';
