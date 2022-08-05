@@ -1,3 +1,4 @@
+createTime: '2022-08-05T20:10:57.660562803Z'
 description: Continuous build with node 14
 filename: ci/cloudbuild.yaml
 github:
@@ -5,9 +6,10 @@ github:
   owner: googleapis
   push:
     branch: ^main$
+id: 60bcf576-538e-45a8-ba92-b1b488afbf51
 name: samples-continuous-node14
 serviceAccount: projects/long-door-651/serviceAccounts/kokoro-system-test@long-door-651.iam.gserviceaccount.com
 substitutions:
   _BUILD_TYPE: continuous
-  _TEST_TYPE: samples
   _LOGS_BUCKET: cloud-node-public-logs
+  _TEST_TYPE: samples

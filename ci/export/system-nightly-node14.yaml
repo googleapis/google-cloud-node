@@ -14,5 +14,5 @@ sourceToBuild:
   uri: https://github.com/googleapis/google-cloud-node
 substitutions:
   _BUILD_TYPE: nightly
-  _TEST_TYPE: system
   _LOGS_BUCKET: cloud-node-public-logs
+  _TEST_TYPE: system
