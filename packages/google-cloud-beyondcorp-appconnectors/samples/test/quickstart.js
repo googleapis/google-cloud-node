@@ -16,7 +16,10 @@
 
 const path = require('path');
 const cp = require('child_process');
-const {describe, it} = require('mocha');
+const {describe, it, before} = require('mocha');
+const {assert} = require('chai');
+const {AppConnectorsServiceClient} = require('@google-cloud/appconnectors').v1;
+const appconnectorsClient = new AppConnectorsServiceClient();
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
@@ -25,7 +28,15 @@ const cwd = path.join(__dirname, '..');
 describe('Quickstart', () => {
   let projectId;
 
+  before(async () => {
+    projectId = await appconnectorsClient.getProjectId();
+  });
+
   it('should run quickstart', async () => {
-    execSync(`node ./quickstart.js ${projectId}`, {cwd});
+    const output = execSync(
+      `node ./quickstart.js projects/${projectId}/locations/us-central1`,
+      {cwd}
+    );
+    assert(output !== null);
   });
 });
