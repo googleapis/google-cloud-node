@@ -2,6 +2,4 @@
 **/coverage
 test/fixtures
 build/
-docs/
-protos/
-packages/
+__snapshots__/
