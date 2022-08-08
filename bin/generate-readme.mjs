@@ -50,12 +50,24 @@ async function downloadRepoMetadata () {
   const repos = await getRepos();
   checkpoint(`Discovered ${repos.length} node.js repos with metadata`);
   const repoMetadata = {};
+  let urlsAndRepos = [];
   for (const repo of repos) {
-    // download the .repo-metadata.json
-    let meta;
-    try {
-      const url = `${baseUrl}/repos/${repo}/contents/.repo-metadata.json`;
-      const res = await github.request({ url });
+    if (repo === 'googleapis/google-cloud-node') {
+      const googleCloudNodeUrl = `${baseUrl}/repos/${repo}/contents/packages`;
+      const res = await github.request({ url: googleCloudNodeUrl });
+      const monoRepos = res.data.map(x => x.name);
+      for (const monoRepo of monoRepos) {
+        urlsAndRepos.push({url: `${baseUrl}/repos/${repo}/contents/packages/${monoRepo}/.repo-metadata.json`, repo: monoRepo})
+      }
+    } else {
+      urlsAndRepos.push({url: `${baseUrl}/repos/${repo}/contents/.repo-metadata.json`, repo});
+    }
+  }
+
+  let meta;
+  for (const urlandRepo of urlsAndRepos) {
+    try { 
+      const res = await github.request({ url: urlandRepo.url });
       meta = JSON.parse(
         Buffer.from(res.data.content, 'base64').toString('utf8')
       );
@@ -63,14 +75,15 @@ async function downloadRepoMetadata () {
       if (!err.response || err.response.status !== 404) {
         throw err;
       }
-      checkpoint(`${repo} had no .repo-metadata.json`, false);
+      checkpoint(`${urlandRepo.repo} had no .repo-metadata.json`, false);
       continue;
     }
+
 
     // validate that the package has been published
     const packageName = meta.distribution_name;
     if (!packageName) {
-      checkpoint(`${repo} had no distribution_name in repo-metadata.json`, false);
+      checkpoint(`${urlAndRepo.repo} had no distribution_name in repo-metadata.json`, false);
       continue;
     }
     try {
@@ -82,13 +95,13 @@ async function downloadRepoMetadata () {
       if (!err.response || err.response.status !== 404) {
         throw err;
       }
-      checkpoint(`${repo} had no published package "${packageName}"`, false);
+      checkpoint(`${urlandRepo.repo} had no published package "${packageName}"`, false);
       continue;
     }
 
     // we have metadata, and the package is published!
-    repoMetadata[repo] = meta;
-    checkpoint(`${repo} found .repo-metadata.json`);
+    repoMetadata[urlandRepo.repo] = meta;
+    checkpoint(`${urlandRepo.repo} found .repo-metadata.json`);
     // on smoke test, just confirm that we can generate README with a single library:
     if (smokeTest) break;
   }

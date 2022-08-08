@@ -13,5 +13,5 @@ name: system-presubmit-node14
 serviceAccount: projects/long-door-651/serviceAccounts/kokoro-system-test@long-door-651.iam.gserviceaccount.com
 substitutions:
   _BUILD_TYPE: presubmit
-  _TEST_TYPE: system
   _LOGS_BUCKET: cloud-node-public-logs
+  _TEST_TYPE: system

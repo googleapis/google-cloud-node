@@ -14,8 +14,8 @@ exports['tests for templates it should create the templates in the directory 1']
 # limitations under the License.
 
 deep-copy-regex:
-    - source: /google/cloud/kms/.*-nodejs/(.*)
-      dest: /owl-bot-staging/kms/$1/$2
+    - source: /google/cloud/kms/(.*)/.*-nodejs
+      dest: /owl-bot-staging/google-cloud-kms/$1
 `
 
 exports['tests for templates it should create the templates in the directory 2'] = `
@@ -30,6 +30,7 @@ exports['tests for templates it should create the templates in the directory 2']
   "repo": "googleapis/googleapis/google-cloud-node",
   "distribution_name": "@google-cloud/kms",
   "api_id": "google.cloud.kms.v1",
+  "default_version": "v1",
   "requires_billing": true,
   "library_type": "GAPIC_AUTO"
 }
@@ -38,6 +39,98 @@ exports['tests for templates it should create the templates in the directory 2']
 `
 
 exports['tests for templates it should create the templates in the directory 3'] = `
+{
+  "name": "kms-samples",
+  "private": true,
+  "license": "Apache-2.0",
+  "author": "Google LLC",
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "files": [
+    "*.js"
+  ],
+  "scripts": {
+    "test": "c8 mocha --timeout 600000 test/*.js"
+  },
+  "dependencies": {
+    "@google-cloud/kms": "0.1.0"
+  },
+  "devDependencies": {
+    "c8": "^7.1.0",
+    "chai": "^4.2.0",
+    "mocha": "^8.0.0"
+  }
+}
+
+`
+
+exports['tests for templates it should create the templates in the directory 4'] = `
+// Copyright 2022 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     https://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+
+'use strict';
+
+function main() {
+  console.log('Missing samples and tests');
+}
+
+process.on('unhandledRejection', err => {
+  console.error(err.message);
+  process.exitCode = 1;
+});
+main(...process.argv.slice(2));
+
+`
+
+exports['tests for templates it should create the templates in the directory 5'] = `
+// Copyright 2022 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     https://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+'use strict';
+
+const path = require('path');
+const cp = require('child_process');
+const {describe, it} = require('mocha');
+
+const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
+
+const cwd = path.join(__dirname, '..');
+
+describe('Quickstart', () => {
+  let projectId;
+
+  it('should run quickstart', async () => {
+    execSync(\`node ./quickstart.js \${projectId}\`, {cwd});
+  });
+});
+
+`
+
+exports['tests for templates it should create the templates in the directory 6'] = `
 
                                  Apache License
                            Version 2.0, January 2004
