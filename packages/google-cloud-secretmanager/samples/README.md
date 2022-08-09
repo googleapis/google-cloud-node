@@ -27,6 +27,7 @@
   * [List Secrets](#list-secrets)
   * [Quickstart](#quickstart)
   * [Update Secret](#update-secret)
+  * [Update Secret With Alias](#update-secret-with-alias)
 
 ## Before you begin
 
@@ -291,6 +292,23 @@ __Usage:__
 
 
 `node samples/updateSecret.js`
+
+
+-----
+
+
+
+
+### Update Secret With Alias
+
+View the [source code](https://github.com/googleapis/nodejs-secret-manager/blob/main/samples/updateSecretWithAlias.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-secret-manager&page=editor&open_in_editor=samples/updateSecretWithAlias.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/updateSecretWithAlias.js`
 
 
 

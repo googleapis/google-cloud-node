@@ -128,6 +128,7 @@ Samples are in the [`samples/`](https://github.com/googleapis/nodejs-secret-mana
 | List Secrets | [source code](https://github.com/googleapis/nodejs-secret-manager/blob/main/samples/listSecrets.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-secret-manager&page=editor&open_in_editor=samples/listSecrets.js,samples/README.md) |
 | Quickstart | [source code](https://github.com/googleapis/nodejs-secret-manager/blob/main/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-secret-manager&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
 | Update Secret | [source code](https://github.com/googleapis/nodejs-secret-manager/blob/main/samples/updateSecret.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-secret-manager&page=editor&open_in_editor=samples/updateSecret.js,samples/README.md) |
+| Update Secret With Alias | [source code](https://github.com/googleapis/nodejs-secret-manager/blob/main/samples/updateSecretWithAlias.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-secret-manager&page=editor&open_in_editor=samples/updateSecretWithAlias.js,samples/README.md) |
 
 
 
