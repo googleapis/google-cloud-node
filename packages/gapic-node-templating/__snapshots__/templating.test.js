@@ -23,8 +23,8 @@ exports['tests for templates it should create the templates in the directory 2']
   "name": "kms",
   "name_pretty": "Key Management Service",
   "product_documentation": "https://cloud.google.com/kms",
-  "client_documentation": "undefined",
-  "issue_tracker": "undefined",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/kms/latest",
+  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
   "release_level": "beta",
   "language": "nodejs",
   "repo": "googleapis/googleapis/google-cloud-node",
@@ -84,7 +84,9 @@ exports['tests for templates it should create the templates in the directory 4']
 'use strict';
 
 function main() {
+  // [START quickstart]
   console.log('Missing samples and tests');
+  // [END quickstart]
 }
 
 process.on('unhandledRejection', err => {
