@@ -31,7 +31,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-
+  * [Using the client library](#using-the-client-library)
 * [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
@@ -53,6 +53,67 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 npm install @google-cloud/appconnectors
 ```
 
+
+### Using the client library
+
+```javascript
+/**
+ * TODO(developer): Uncomment these variables before running the sample.
+ */
+/**
+ *  Required. The resource name of the AppConnector location using the form:
+ *  `projects/{project_id}/locations/{location_id}`
+ */
+// const parent = 'abc123'
+/**
+ *  Optional. The maximum number of items to return.
+ *  If not specified, a default value of 50 will be used by the service.
+ *  Regardless of the page_size value, the response may include a partial list
+ *  and a caller should only rely on response's
+ *  next_page_token BeyondCorp.ListAppConnectorsResponse.next_page_token  to
+ *  determine if there are more instances left to be queried.
+ */
+// const pageSize = 1234
+/**
+ *  Optional. The next_page_token value returned from a previous
+ *  ListAppConnectorsRequest, if any.
+ */
+// const pageToken = 'abc123'
+/**
+ *  Optional. A filter specifying constraints of a list operation.
+ */
+// const filter = 'abc123'
+/**
+ *  Optional. Specifies the ordering of results. See
+ *  Sorting
+ *  order (https://cloud.google.com/apis/design/design_patterns#sorting_order)
+ *  for more information.
+ */
+// const orderBy = 'abc123'
+
+// Imports the Appconnectors library
+const {AppConnectorsServiceClient} =
+  require('@google-cloud/appconnectors').v1;
+
+// Instantiates a client
+const appconnectorsClient = new AppConnectorsServiceClient();
+
+async function callListAppConnectors() {
+  // Construct request
+  const request = {
+    parent,
+  };
+
+  // Run request
+  const iterable = await appconnectorsClient.listAppConnectorsAsync(request);
+  for await (const response of iterable) {
+    console.log(response);
+  }
+}
+
+callListAppConnectors();
+
+```
 
 
 
