@@ -19,7 +19,7 @@
 'use strict';
 
 function main(parent) {
-  // [START appconnectors_quickstart]
+  // [START beyondcorp_quickstart]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -75,7 +75,7 @@ function main(parent) {
   }
 
   callListAppConnectors();
-  // [END appconnectors_quickstart]
+  // [END beyondcorp_quickstart]
 }
 
 process.on('unhandledRejection', err => {
