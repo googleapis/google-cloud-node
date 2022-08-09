@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import * as querystring from 'querystring';
+import {PassThrough} from 'stream';
 
 export function normalize<T = {}, U = Function>(
   optionsOrCallback?: T | U,
@@ -165,4 +166,46 @@ export function formatAsUTCISO(
   }
 
   return resultString;
+}
+
+export class PassThroughShim extends PassThrough {
+  private shouldEmitReading = true;
+  private shouldEmitWriting = true;
+
+  _read(size: number): void {
+    if (this.shouldEmitReading) {
+      this.emit('reading');
+      this.shouldEmitReading = false;
+    }
+    super._read(size);
+  }
+
+  _write(
+    chunk: never,
+    encoding: BufferEncoding,
+    callback: (error?: Error | null | undefined) => void
+  ): void {
+    if (this.shouldEmitWriting) {
+      this.emit('writing');
+      this.shouldEmitWriting = false;
+    }
+    // Per the nodejs documention, callback must be invoked on the next tick
+    process.nextTick(() => {
+      super._write(chunk, encoding, callback);
+    });
+  }
+
+  _final(callback: (error?: Error | null | undefined) => void): void {
+    // If the stream is empty (i.e. empty file) final will be invoked before _read / _write
+    // and we should still emit the proper events.
+    if (this.shouldEmitReading) {
+      this.emit('reading');
+      this.shouldEmitReading = false;
+    }
+    if (this.shouldEmitWriting) {
+      this.emit('writing');
+      this.shouldEmitWriting = false;
+    }
+    callback(null);
+  }
 }

@@ -31,8 +31,7 @@ import * as mime from 'mime';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const pumpify = require('pumpify');
 import * as resumableUpload from './resumable-upload';
-import {Duplex, Writable, Readable, PassThrough} from 'stream';
-import * as streamEvents from 'stream-events';
+import {Writable, Readable, PassThrough} from 'stream';
 import * as zlib from 'zlib';
 import * as http from 'http';
 
@@ -65,6 +64,7 @@ import {
   objectKeyToLowercase,
   unicodeJSONStringify,
   formatAsUTCISO,
+  PassThroughShim,
 } from './util';
 import {CRC32CValidatorGenerator} from './crc32c';
 import {HashStreamValidator} from './hash-stream-validator';
@@ -1363,7 +1363,7 @@ class File extends ServiceObject<File> {
 
     let validateStream: HashStreamValidator | undefined = undefined;
 
-    const throughStream = streamEvents(new PassThrough());
+    const throughStream = new PassThroughShim();
 
     let isServedCompressed = true;
     let crc32c = true;
@@ -1938,13 +1938,18 @@ class File extends ServiceObject<File> {
       stream.emit('progress', evt);
     });
 
-    const stream = streamEvents(
-      pumpify([
-        gzip ? zlib.createGzip() : new PassThrough(),
-        validateStream,
-        fileWriteStream,
-      ])
-    ) as Duplex;
+    const passThroughShim = new PassThroughShim();
+
+    passThroughShim.on('writing', () => {
+      stream.emit('writing');
+    });
+
+    const stream = pumpify([
+      passThroughShim,
+      gzip ? zlib.createGzip() : new PassThrough(),
+      validateStream,
+      fileWriteStream,
+    ]);
 
     // Wait until we've received data to determine what upload technique to use.
     stream.on('writing', () => {
