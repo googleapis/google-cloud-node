@@ -19,7 +19,7 @@
 'use strict';
 
 function main(parent) {
-  // [START quickstart]
+  // [START appconnectors_quickstart]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -75,7 +75,7 @@ function main(parent) {
   }
 
   callListAppConnectors();
-  // [END quickstart]
+  // [END appconnectors_quickstart]
 }
 
 process.on('unhandledRejection', err => {
