@@ -622,6 +622,11 @@
                         "enableTextDetectionConfidenceScore": {
                           "type": "bool",
                           "id": 9
+                        },
+                        "advancedOcrOptions": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 11
                         }
                       }
                     },
@@ -2778,6 +2783,11 @@
                         "enableTextDetectionConfidenceScore": {
                           "type": "bool",
                           "id": 9
+                        },
+                        "advancedOcrOptions": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 11
                         }
                       }
                     },
@@ -3677,6 +3687,11 @@
                         "enableTextDetectionConfidenceScore": {
                           "type": "bool",
                           "id": 9
+                        },
+                        "advancedOcrOptions": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 11
                         }
                       }
                     },
@@ -4749,6 +4764,11 @@
                         "enableTextDetectionConfidenceScore": {
                           "type": "bool",
                           "id": 9
+                        },
+                        "advancedOcrOptions": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 11
                         }
                       }
                     },
@@ -6924,6 +6944,11 @@
                         "enableTextDetectionConfidenceScore": {
                           "type": "bool",
                           "id": 9
+                        },
+                        "advancedOcrOptions": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 11
                         }
                       }
                     },

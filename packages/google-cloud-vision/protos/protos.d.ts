@@ -2478,6 +2478,9 @@ export namespace google {
 
                     /** TextDetectionParams enableTextDetectionConfidenceScore */
                     enableTextDetectionConfidenceScore?: (boolean|null);
+
+                    /** TextDetectionParams advancedOcrOptions */
+                    advancedOcrOptions?: (string[]|null);
                 }
 
                 /** Represents a TextDetectionParams. */
@@ -2491,6 +2494,9 @@ export namespace google {
 
                     /** TextDetectionParams enableTextDetectionConfidenceScore. */
                     public enableTextDetectionConfidenceScore: boolean;
+
+                    /** TextDetectionParams advancedOcrOptions. */
+                    public advancedOcrOptions: string[];
 
                     /**
                      * Creates a new TextDetectionParams instance using the specified properties.
@@ -12453,6 +12459,9 @@ export namespace google {
 
                     /** TextDetectionParams enableTextDetectionConfidenceScore */
                     enableTextDetectionConfidenceScore?: (boolean|null);
+
+                    /** TextDetectionParams advancedOcrOptions */
+                    advancedOcrOptions?: (string[]|null);
                 }
 
                 /** Represents a TextDetectionParams. */
@@ -12466,6 +12475,9 @@ export namespace google {
 
                     /** TextDetectionParams enableTextDetectionConfidenceScore. */
                     public enableTextDetectionConfidenceScore: boolean;
+
+                    /** TextDetectionParams advancedOcrOptions. */
+                    public advancedOcrOptions: string[];
 
                     /**
                      * Creates a new TextDetectionParams instance using the specified properties.
@@ -16876,6 +16888,9 @@ export namespace google {
 
                     /** TextDetectionParams enableTextDetectionConfidenceScore */
                     enableTextDetectionConfidenceScore?: (boolean|null);
+
+                    /** TextDetectionParams advancedOcrOptions */
+                    advancedOcrOptions?: (string[]|null);
                 }
 
                 /** Represents a TextDetectionParams. */
@@ -16889,6 +16904,9 @@ export namespace google {
 
                     /** TextDetectionParams enableTextDetectionConfidenceScore. */
                     public enableTextDetectionConfidenceScore: boolean;
+
+                    /** TextDetectionParams advancedOcrOptions. */
+                    public advancedOcrOptions: string[];
 
                     /**
                      * Creates a new TextDetectionParams instance using the specified properties.
@@ -22477,6 +22495,9 @@ export namespace google {
 
                     /** TextDetectionParams enableTextDetectionConfidenceScore */
                     enableTextDetectionConfidenceScore?: (boolean|null);
+
+                    /** TextDetectionParams advancedOcrOptions */
+                    advancedOcrOptions?: (string[]|null);
                 }
 
                 /** Represents a TextDetectionParams. */
@@ -22490,6 +22511,9 @@ export namespace google {
 
                     /** TextDetectionParams enableTextDetectionConfidenceScore. */
                     public enableTextDetectionConfidenceScore: boolean;
+
+                    /** TextDetectionParams advancedOcrOptions. */
+                    public advancedOcrOptions: string[];
 
                     /**
                      * Creates a new TextDetectionParams instance using the specified properties.
@@ -32309,6 +32333,9 @@ export namespace google {
 
                     /** TextDetectionParams enableTextDetectionConfidenceScore */
                     enableTextDetectionConfidenceScore?: (boolean|null);
+
+                    /** TextDetectionParams advancedOcrOptions */
+                    advancedOcrOptions?: (string[]|null);
                 }
 
                 /** Represents a TextDetectionParams. */
@@ -32322,6 +32349,9 @@ export namespace google {
 
                     /** TextDetectionParams enableTextDetectionConfidenceScore. */
                     public enableTextDetectionConfidenceScore: boolean;
+
+                    /** TextDetectionParams advancedOcrOptions. */
+                    public advancedOcrOptions: string[];
 
                     /**
                      * Creates a new TextDetectionParams instance using the specified properties.
