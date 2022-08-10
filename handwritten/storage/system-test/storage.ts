@@ -220,130 +220,68 @@ describe('storage', () => {
 
   describe('acls', () => {
     describe('buckets', () => {
-      it('should get access controls', done => {
-        bucket.acl.get((err, accessControls) => {
-          assert.ifError(err);
-          assert(Array.isArray(accessControls));
-          done();
+      it('should get access controls', async () => {
+        const accessControls = await bucket.acl.get();
+        assert(Array.isArray(accessControls));
+      });
+
+      it('should add entity to default access controls', async () => {
+        const [accessControl] = await bucket.acl.default.add({
+          entity: USER_ACCOUNT,
+          role: storage.acl.OWNER_ROLE,
         });
-      });
+        assert.strictEqual(accessControl!.role, storage.acl.OWNER_ROLE);
 
-      it('should add entity to default access controls', done => {
-        bucket.acl.default.add(
-          {
-            entity: USER_ACCOUNT,
-            role: storage.acl.OWNER_ROLE,
-          },
-          (err, accessControl) => {
-            assert.ifError(err);
-            assert.strictEqual(accessControl!.role, storage.acl.OWNER_ROLE);
-
-            bucket.acl.default.get(
-              {
-                entity: USER_ACCOUNT,
-              },
-              (err, accessControl) => {
-                assert.ifError(err);
-                assert.strictEqual(
-                  (accessControl as AccessControlObject)!.role,
-                  storage.acl.OWNER_ROLE
-                );
-
-                bucket.acl.default.update(
-                  {
-                    entity: USER_ACCOUNT,
-                    role: storage.acl.READER_ROLE,
-                  },
-                  (err, accessControl) => {
-                    assert.ifError(err);
-                    assert.strictEqual(
-                      (accessControl as AccessControlObject).role,
-                      storage.acl.READER_ROLE
-                    );
-
-                    bucket.acl.default.delete({entity: USER_ACCOUNT}, done);
-                  }
-                );
-              }
-            );
-          }
-        );
-      });
-
-      it('should get default access controls', done => {
-        bucket.acl.default.get((err, accessControls) => {
-          assert.ifError(err);
-          assert(Array.isArray(accessControls));
-          done();
+        const [updatedAccessControl] = await bucket.acl.default.update({
+          entity: USER_ACCOUNT,
+          role: storage.acl.READER_ROLE,
         });
+        assert.strictEqual(updatedAccessControl.role, storage.acl.READER_ROLE);
+        await bucket.acl.default.delete({entity: USER_ACCOUNT});
       });
 
-      it('should grant an account access', done => {
-        bucket.acl.add(
-          {
-            entity: USER_ACCOUNT,
-            role: storage.acl.OWNER_ROLE,
-          },
-          (err, accessControl) => {
-            assert.ifError(err);
-            assert.strictEqual(accessControl!.role, storage.acl.OWNER_ROLE);
-
-            const opts = {entity: USER_ACCOUNT};
-
-            bucket.acl.get(opts, (err, accessControl) => {
-              assert.ifError(err);
-              assert.strictEqual(
-                (accessControl as AccessControlObject).role,
-                storage.acl.OWNER_ROLE
-              );
-
-              bucket.acl.delete(opts, done);
-            });
-          }
-        );
+      it('should get default access controls', async () => {
+        const accessControls = await bucket.acl.default.get();
+        assert(Array.isArray(accessControls));
       });
 
-      it('should update an account', done => {
-        bucket.acl.add(
-          {
-            entity: USER_ACCOUNT,
-            role: storage.acl.OWNER_ROLE,
-          },
-          (err, accessControl) => {
-            assert.ifError(err);
-            assert.strictEqual(accessControl!.role, storage.acl.OWNER_ROLE);
-
-            bucket.acl.update(
-              {
-                entity: USER_ACCOUNT,
-                role: storage.acl.WRITER_ROLE,
-              },
-              (err, accessControl) => {
-                assert.ifError(err);
-                assert.strictEqual(
-                  accessControl!.role,
-                  storage.acl.WRITER_ROLE
-                );
-
-                bucket.acl.delete({entity: USER_ACCOUNT}, done);
-              }
-            );
-          }
-        );
-      });
-
-      it('should make a bucket public', done => {
-        bucket.makePublic(err => {
-          assert.ifError(err);
-          bucket.acl.get({entity: 'allUsers'}, (err, aclObject) => {
-            assert.ifError(err);
-            assert.deepStrictEqual(aclObject, {
-              entity: 'allUsers',
-              role: 'READER',
-            });
-            bucket.acl.delete({entity: 'allUsers'}, done);
-          });
+      it('should grant an account access', async () => {
+        const [accessControl] = await bucket.acl.add({
+          entity: USER_ACCOUNT,
+          role: storage.acl.OWNER_ROLE,
         });
+        assert.strictEqual(accessControl!.role, storage.acl.OWNER_ROLE);
+        const opts = {entity: USER_ACCOUNT};
+        const [accessControlGet] = await bucket.acl.get(opts);
+        assert.strictEqual(
+          (accessControlGet as AccessControlObject).role,
+          storage.acl.OWNER_ROLE
+        );
+        await bucket.acl.delete(opts);
+      });
+
+      it('should update an account', async () => {
+        const [accessControl] = await bucket.acl.add({
+          entity: USER_ACCOUNT,
+          role: storage.acl.OWNER_ROLE,
+        });
+        assert.strictEqual(accessControl!.role, storage.acl.OWNER_ROLE);
+        const [updatedAcl] = await bucket.acl.update({
+          entity: USER_ACCOUNT,
+          role: storage.acl.WRITER_ROLE,
+        });
+        assert.strictEqual(updatedAcl!.role, storage.acl.WRITER_ROLE);
+        await bucket.acl.delete({entity: USER_ACCOUNT});
+      });
+
+      it('should make a bucket public', async () => {
+        await bucket.makePublic();
+        const [aclObject] = await bucket.acl.get({entity: 'allUsers'});
+        assert.deepStrictEqual(aclObject, {
+          entity: 'allUsers',
+          role: 'READER',
+        });
+        await bucket.acl.delete({entity: 'allUsers'});
       });
 
       it('should make files public', async () => {
@@ -363,22 +301,18 @@ describe('storage', () => {
         ]);
       });
 
-      it('should make a bucket private', done => {
-        bucket.makePublic(err => {
-          assert.ifError(err);
-          bucket.makePrivate(err => {
-            assert.ifError(err);
-            bucket.acl.get({entity: 'allUsers'}, (err, aclObject) => {
-              assert.strictEqual((err as ApiError).code, 404);
-              assert.strictEqual(
-                (err as ApiError).errors![0].reason,
-                'notFound'
-              );
-              assert.strictEqual(aclObject, null);
-              done();
-            });
-          });
-        });
+      it('should make a bucket private', async () => {
+        await bucket.makePublic();
+        await bucket.makePrivate();
+        const validateMakeBucketPrivateRejects = (err: ApiError) => {
+          assert.strictEqual(err.code, 404);
+          assert.strictEqual((err as ApiError).errors![0].reason, 'notFound');
+          return true;
+        };
+        await assert.rejects(
+          bucket.acl.get({entity: 'allUsers'}),
+          validateMakeBucketPrivateRejects
+        );
       });
 
       it('should make files private', async () => {
@@ -417,13 +351,9 @@ describe('storage', () => {
         file.delete(done);
       });
 
-      it('should get access controls', done => {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        file.acl.get(done as any, (err, accessControls) => {
-          assert.ifError(err);
-          assert(Array.isArray(accessControls));
-          done();
-        });
+      it('should get access controls', async () => {
+        const [accessControls] = await file.acl.get();
+        assert(Array.isArray(accessControls));
       });
 
       it('should not expose default api', () => {
@@ -431,202 +361,124 @@ describe('storage', () => {
         assert.strictEqual(typeof (file as any).default, 'undefined');
       });
 
-      it('should grant an account access', done => {
-        file.acl.add(
-          {
-            entity: USER_ACCOUNT,
-            role: storage.acl.OWNER_ROLE,
-          },
-          (err, accessControl) => {
-            assert.ifError(err);
-            assert.strictEqual(accessControl!.role, storage.acl.OWNER_ROLE);
+      it('should grant an account access', async () => {
+        const [accessControl] = await file.acl.add({
+          entity: USER_ACCOUNT,
+          role: storage.acl.OWNER_ROLE,
+        });
+        assert.strictEqual(accessControl!.role, storage.acl.OWNER_ROLE);
+        const [accessControlGet] = await file.acl.get({entity: USER_ACCOUNT});
+        assert.strictEqual(
+          (accessControlGet as AccessControlObject).role,
+          storage.acl.OWNER_ROLE
+        );
+        await file.acl.delete({entity: USER_ACCOUNT});
+      });
 
-            file.acl.get({entity: USER_ACCOUNT}, (err, accessControl) => {
-              assert.ifError(err);
-              assert.strictEqual(
-                (accessControl as AccessControlObject).role,
-                storage.acl.OWNER_ROLE
-              );
+      it('should update an account', async () => {
+        const [accessControl] = await file.acl.add({
+          entity: USER_ACCOUNT,
+          role: storage.acl.OWNER_ROLE,
+        });
+        assert.strictEqual(accessControl!.role, storage.acl.OWNER_ROLE);
+        const [accessControlUpdate] = await file.acl.update({
+          entity: USER_ACCOUNT,
+          role: storage.acl.READER_ROLE,
+        });
+        assert.strictEqual(accessControlUpdate!.role, storage.acl.READER_ROLE);
+        await file.acl.delete({entity: USER_ACCOUNT});
+      });
 
-              file.acl.delete({entity: USER_ACCOUNT}, done);
-            });
-          }
+      it('should make a file public', async () => {
+        await file.makePublic();
+        const [aclObject] = await file.acl.get({entity: 'allUsers'});
+        assert.deepStrictEqual(aclObject, {
+          entity: 'allUsers',
+          role: 'READER',
+        });
+        await file.acl.delete({entity: 'allUsers'});
+      });
+
+      it('should make a file private', async () => {
+        const validateMakeFilePrivateRejects = (err: ApiError) => {
+          assert.strictEqual(err.code, 404);
+          assert.strictEqual(err!.errors![0].reason, 'notFound');
+          return true;
+        };
+        assert.doesNotReject(file.makePublic());
+        assert.doesNotReject(file.makePrivate());
+        assert.rejects(
+          file.acl.get({entity: 'allUsers'}),
+          validateMakeFilePrivateRejects
         );
       });
 
-      it('should update an account', done => {
-        file.acl.add(
-          {
-            entity: USER_ACCOUNT,
-            role: storage.acl.OWNER_ROLE,
-          },
-          (err, accessControl) => {
-            assert.ifError(err);
-            assert.strictEqual(accessControl!.role, storage.acl.OWNER_ROLE);
-
-            file.acl.update(
-              {
-                entity: USER_ACCOUNT,
-                role: storage.acl.READER_ROLE,
-              },
-              (err, accessControl) => {
-                assert.ifError(err);
-
-                assert.strictEqual(
-                  accessControl!.role,
-                  storage.acl.READER_ROLE
-                );
-
-                file.acl.delete({entity: USER_ACCOUNT}, done);
-              }
-            );
-          }
-        );
-      });
-
-      it('should make a file public', done => {
-        file.makePublic(err => {
-          assert.ifError(err);
-          file.acl.get({entity: 'allUsers'}, (err, aclObject) => {
-            assert.ifError(err);
-            assert.deepStrictEqual(aclObject, {
-              entity: 'allUsers',
-              role: 'READER',
-            });
-            file.acl.delete({entity: 'allUsers'}, done);
-          });
-        });
-      });
-
-      it('should make a file private', done => {
-        file.makePublic(err => {
-          assert.ifError(err);
-          file.makePrivate(err => {
-            assert.ifError(err);
-            file.acl.get(
-              {entity: 'allUsers'},
-              (err: ApiError | null, aclObject) => {
-                assert.strictEqual(err!.code, 404);
-                assert.strictEqual(err!.errors![0].reason, 'notFound');
-                assert.strictEqual(aclObject, null);
-                done();
-              }
-            );
-          });
-        });
-      });
-
-      it('should set custom encryption during the upload', done => {
+      it('should set custom encryption during the upload', async () => {
         const key = '12345678901234567890123456789012';
-        bucket.upload(
-          FILES.big.path,
-          {
-            encryptionKey: key,
-            resumable: false,
-          },
-          (err, file) => {
-            assert.ifError(err);
-
-            file!.getMetadata((err: ApiError | null, metadata: Metadata) => {
-              assert.ifError(err);
-              assert.strictEqual(
-                metadata.customerEncryption.encryptionAlgorithm,
-                'AES256'
-              );
-              done();
-            });
-          }
+        const [file] = await bucket.upload(FILES.big.path, {
+          encryptionKey: key,
+          resumable: false,
+        });
+        const [metadata] = await file.getMetadata();
+        assert.strictEqual(
+          metadata.customerEncryption.encryptionAlgorithm,
+          'AES256'
         );
       });
 
-      it('should set custom encryption in a resumable upload', done => {
+      it('should set custom encryption in a resumable upload', async () => {
         const key = crypto.randomBytes(32);
-
-        bucket.upload(
-          FILES.big.path,
-          {
-            encryptionKey: key,
-            resumable: true,
-          },
-          (err, file) => {
-            assert.ifError(err);
-
-            file!.getMetadata((err: ApiError | null, metadata: Metadata) => {
-              assert.ifError(err);
-              assert.strictEqual(
-                metadata.customerEncryption.encryptionAlgorithm,
-                'AES256'
-              );
-              done();
-            });
-          }
+        const [file] = await bucket.upload(FILES.big.path, {
+          encryptionKey: key,
+          resumable: true,
+        });
+        const [metadata] = await file.getMetadata();
+        assert.strictEqual(
+          metadata.customerEncryption.encryptionAlgorithm,
+          'AES256'
         );
       });
 
-      it('should make a file public during the upload', done => {
-        bucket.upload(
-          FILES.big.path,
-          {
-            resumable: false,
-            public: true,
-          },
-          (err, file) => {
-            assert.ifError(err);
+      it('should make a file public during the upload', async () => {
+        const [file] = await bucket.upload(FILES.big.path, {
+          resumable: false,
+          public: true,
+        });
 
-            file!.acl.get({entity: 'allUsers'}, (err, aclObject) => {
-              assert.ifError(err);
-              assert.deepStrictEqual(aclObject, {
-                entity: 'allUsers',
-                role: 'READER',
-              });
-              done();
-            });
-          }
-        );
+        const [aclObject] = await file.acl.get({entity: 'allUsers'});
+        assert.deepStrictEqual(aclObject, {
+          entity: 'allUsers',
+          role: 'READER',
+        });
       });
 
-      it('should make a file public from a resumable upload', done => {
-        bucket.upload(
-          FILES.big.path,
-          {
-            resumable: true,
-            public: true,
-          },
-          (err, file) => {
-            assert.ifError(err);
-
-            file!.acl.get({entity: 'allUsers'}, (err, aclObject) => {
-              assert.ifError(err);
-              assert.deepStrictEqual(aclObject, {
-                entity: 'allUsers',
-                role: 'READER',
-              });
-              done();
-            });
-          }
-        );
+      it('should make a file public from a resumable upload', async () => {
+        const [file] = await bucket.upload(FILES.big.path, {
+          resumable: true,
+          public: true,
+        });
+        const [aclObject] = await file.acl.get({entity: 'allUsers'});
+        assert.deepStrictEqual(aclObject, {
+          entity: 'allUsers',
+          role: 'READER',
+        });
       });
 
-      it('should make a file private from a resumable upload', done => {
-        bucket.upload(
-          FILES.big.path,
-          {
+      it('should make a file private from a resumable upload', async () => {
+        const validateMakeFilePrivateRejects = (err: ApiError) => {
+          assert.strictEqual((err as ApiError)!.code, 404);
+          assert.strictEqual((err as ApiError).errors![0].reason, 'notFound');
+          return true;
+        };
+        assert.doesNotReject(
+          bucket.upload(FILES.big.path, {
             resumable: true,
             private: true,
-          },
-          (err, file) => {
-            assert.ifError(err);
-
-            file!.acl.get({entity: 'allUsers'}, (err, aclObject) => {
-              assert.strictEqual((err as ApiError)!.code, 404);
-              assert.strictEqual(
-                (err as ApiError).errors![0].reason,
-                'notFound'
-              );
-              assert.strictEqual(aclObject, null);
-              done();
-            });
-          }
+          })
+        );
+        assert.rejects(
+          file.acl.get({entity: 'allUsers'}),
+          validateMakeFilePrivateRejects
         );
       });
     });
@@ -654,49 +506,36 @@ describe('storage', () => {
         return bucket.create();
       });
 
-      it('should get a policy', done => {
-        bucket.iam.getPolicy((err, policy) => {
-          assert.ifError(err);
-          assert.deepStrictEqual(policy!.bindings, [
-            {
-              members: [
-                'projectEditor:' + PROJECT_ID,
-                'projectOwner:' + PROJECT_ID,
-              ],
-              role: 'roles/storage.legacyBucketOwner',
-            },
-            {
-              members: ['projectViewer:' + PROJECT_ID],
-              role: 'roles/storage.legacyBucketReader',
-            },
-          ]);
-
-          done();
-        });
+      it('should get a policy', async () => {
+        const [policy] = await bucket.iam.getPolicy();
+        assert.deepStrictEqual(policy!.bindings, [
+          {
+            members: [
+              'projectEditor:' + PROJECT_ID,
+              'projectOwner:' + PROJECT_ID,
+            ],
+            role: 'roles/storage.legacyBucketOwner',
+          },
+          {
+            members: ['projectViewer:' + PROJECT_ID],
+            role: 'roles/storage.legacyBucketReader',
+          },
+        ]);
       });
 
-      it('should set a policy', done => {
-        bucket.iam.getPolicy((err, policy) => {
-          assert.ifError(err);
-          policy!.bindings.push({
-            role: 'roles/storage.legacyBucketReader',
-            members: ['allUsers'],
-          });
-
-          bucket.iam.setPolicy(policy!, (err, newPolicy) => {
-            assert.ifError(err);
-
-            const legacyBucketReaderBinding = newPolicy!.bindings.filter(
-              binding => {
-                return binding.role === 'roles/storage.legacyBucketReader';
-              }
-            )[0];
-
-            assert(legacyBucketReaderBinding.members.includes('allUsers'));
-
-            done();
-          });
+      it('should set a policy', async () => {
+        const [policy] = await bucket.iam.getPolicy();
+        policy!.bindings.push({
+          role: 'roles/storage.legacyBucketReader',
+          members: ['allUsers'],
         });
+        const [newPolicy] = await bucket.iam.setPolicy(policy);
+        const legacyBucketReaderBinding = newPolicy!.bindings.filter(
+          binding => {
+            return binding.role === 'roles/storage.legacyBucketReader';
+          }
+        )[0];
+        assert(legacyBucketReaderBinding.members.includes('allUsers'));
       });
 
       it('should get-modify-set a conditional policy', async () => {
@@ -734,21 +573,15 @@ describe('storage', () => {
         assert.deepStrictEqual(newPolicy.bindings, policy.bindings);
       });
 
-      it('should test the iam permissions', done => {
+      it('should test the iam permissions', async () => {
         const testPermissions = [
           'storage.buckets.get',
           'storage.buckets.getIamPolicy',
         ];
-
-        bucket.iam.testPermissions(testPermissions, (err, permissions) => {
-          assert.ifError(err);
-
-          assert.deepStrictEqual(permissions, {
-            'storage.buckets.get': true,
-            'storage.buckets.getIamPolicy': true,
-          });
-
-          done();
+        const [permissions] = await bucket.iam.testPermissions(testPermissions);
+        assert.deepStrictEqual(permissions, {
+          'storage.buckets.get': true,
+          'storage.buckets.getIamPolicy': true,
         });
       });
     });
@@ -1177,15 +1010,12 @@ describe('storage', () => {
       );
     });
 
-    it('should get buckets', done => {
-      storage.getBuckets((err, buckets) => {
-        const createdBuckets = buckets.filter(bucket => {
-          return bucketsToCreate.indexOf(bucket.name) > -1;
-        });
-
-        assert.strictEqual(createdBuckets.length, bucketsToCreate.length);
-        done();
+    it('should get buckets', async () => {
+      const [buckets] = await storage.getBuckets();
+      const createdBuckets = buckets.filter(bucket => {
+        return bucketsToCreate.indexOf(bucket.name) > -1;
       });
+      assert.strictEqual(createdBuckets.length, bucketsToCreate.length);
     });
 
     it('should get buckets as a stream', done => {
@@ -1205,19 +1035,15 @@ describe('storage', () => {
   });
 
   describe('bucket metadata', () => {
-    it('should allow setting metadata on a bucket', done => {
+    it('should allow setting metadata on a bucket', async () => {
       const metadata = {
         website: {
           mainPageSuffix: 'http://fakeuri',
           notFoundPage: 'http://fakeuri/404.html',
         },
       };
-
-      bucket.setMetadata(metadata, (err: ApiError | null, meta: Metadata) => {
-        assert.ifError(err);
-        assert.deepStrictEqual(meta.website, metadata.website);
-        done();
-      });
+      const [meta] = await bucket.setMetadata(metadata);
+      assert.deepStrictEqual(meta.website, metadata.website);
     });
 
     it('should allow changing the storage class', async () => {
@@ -1280,113 +1106,65 @@ describe('storage', () => {
         bucket.deleteLabels(done);
       });
 
-      it('should set labels', done => {
-        bucket.setLabels(LABELS, err => {
-          assert.ifError(err);
-
-          bucket.getLabels((err, labels) => {
-            assert.ifError(err);
-            assert.deepStrictEqual(labels, LABELS);
-            done();
-          });
-        });
+      it('should set labels', async () => {
+        await bucket.setLabels(LABELS);
+        const [labels] = await bucket.getLabels();
+        assert.deepStrictEqual(labels, LABELS);
       });
 
-      it('should update labels', done => {
+      it('should update labels', async () => {
         const newLabels = {
           siblinglabel: 'labelvalue',
         };
-
-        bucket.setLabels(LABELS, err => {
-          assert.ifError(err);
-
-          bucket.setLabels(newLabels, err => {
-            assert.ifError(err);
-
-            bucket.getLabels((err, labels) => {
-              assert.ifError(err);
-              assert.deepStrictEqual(
-                labels,
-                Object.assign({}, LABELS, newLabels)
-              );
-              done();
-            });
-          });
-        });
+        await bucket.setLabels(LABELS);
+        await bucket.setLabels(newLabels);
+        const [labels] = await bucket.getLabels();
+        assert.deepStrictEqual(labels, Object.assign({}, LABELS, newLabels));
       });
 
-      it('should delete a single label', done => {
+      it('should delete a single label', async () => {
         if (Object.keys(LABELS).length <= 1) {
-          done(new Error('Maintainer Error: `LABELS` needs 2 labels.'));
-          return;
+          throw new Error('Maintainer Error: `LABELS` needs 2 labels.');
         }
 
         const labelKeyToDelete = Object.keys(LABELS)[0];
+        await bucket.setLabels(LABELS);
+        await bucket.deleteLabels(labelKeyToDelete);
+        const [labels] = await bucket.getLabels();
+        const expectedLabels = Object.assign({}, LABELS);
+        delete (expectedLabels as {[index: string]: {}})[labelKeyToDelete];
 
-        bucket.setLabels(LABELS, err => {
-          assert.ifError(err);
-
-          bucket.deleteLabels(labelKeyToDelete, err => {
-            assert.ifError(err);
-
-            bucket.getLabels((err, labels) => {
-              assert.ifError(err);
-
-              const expectedLabels = Object.assign({}, LABELS);
-              delete (expectedLabels as {[index: string]: {}})[
-                labelKeyToDelete
-              ];
-
-              assert.deepStrictEqual(labels, expectedLabels);
-
-              done();
-            });
-          });
-        });
+        assert.deepStrictEqual(labels, expectedLabels);
       });
 
-      it('should delete all labels', done => {
-        bucket.deleteLabels(err => {
-          assert.ifError(err);
-
-          bucket.getLabels((err, labels) => {
-            assert.ifError(err);
-            assert.deepStrictEqual(labels, {});
-            done();
-          });
-        });
+      it('should delete all labels', async () => {
+        await bucket.deleteLabels();
+        const [labels] = await bucket.getLabels();
+        assert.deepStrictEqual(labels, {});
       });
     });
   });
 
   describe('bucket object lifecycle management', () => {
-    it('should add a rule', done => {
-      bucket.addLifecycleRule(
-        {
-          action: 'delete',
-          condition: {
-            age: 30,
-            isLive: true,
-          },
+    it('should add a rule', async () => {
+      await bucket.addLifecycleRule({
+        action: 'delete',
+        condition: {
+          age: 30,
+          isLive: true,
         },
-        err => {
-          assert.ifError(err);
+      });
+      const rules = [].slice.call(bucket.metadata.lifecycle.rule);
 
-          const rules = [].slice.call(bucket.metadata.lifecycle.rule);
-
-          assert.deepStrictEqual(rules.pop(), {
-            action: {
-              type: 'Delete',
-            },
-            condition: {
-              age: 30,
-              isLive: true,
-            },
-          });
-
-          done();
-        }
-      );
+      assert.deepStrictEqual(rules.pop(), {
+        action: {
+          type: 'Delete',
+        },
+        condition: {
+          age: 30,
+          isLive: true,
+        },
+      });
     });
 
     it('should append a new rule', async () => {
@@ -1453,31 +1231,22 @@ describe('storage', () => {
       );
     });
 
-    it('should convert a rule with createdBefore to a date in string', done => {
-      bucket.addLifecycleRule(
-        {
-          action: 'delete',
-          condition: {
-            createdBefore: new Date('2018'),
-          },
+    it('should convert a rule with createdBefore to a date in string', async () => {
+      await bucket.addLifecycleRule({
+        action: 'delete',
+        condition: {
+          createdBefore: new Date('2018'),
         },
-        err => {
-          assert.ifError(err);
-
-          const rules = [].slice.call(bucket.metadata.lifecycle.rule);
-
-          assert.deepStrictEqual(rules.pop(), {
-            action: {
-              type: 'Delete',
-            },
-            condition: {
-              createdBefore: '2018-01-01',
-            },
-          });
-
-          done();
-        }
-      );
+      });
+      const rules = [].slice.call(bucket.metadata.lifecycle.rule);
+      assert.deepStrictEqual(rules.pop(), {
+        action: {
+          type: 'Delete',
+        },
+        condition: {
+          createdBefore: '2018-01-01',
+        },
+      });
     });
 
     it('should add a noncurrent time rule', async () => {
@@ -1524,17 +1293,12 @@ describe('storage', () => {
       );
     });
 
-    it('should remove all existing rules', done => {
-      bucket.setMetadata(
-        {
-          lifecycle: null,
-        },
-        (err: ApiError) => {
-          assert.ifError(err);
-          assert.strictEqual(bucket.metadata.lifecycle, undefined);
-          done();
-        }
-      );
+    it('should remove all existing rules', async () => {
+      await bucket.setMetadata({
+        lifecycle: null,
+      });
+
+      assert.strictEqual(bucket.metadata.lifecycle, undefined);
     });
   });
 
@@ -1709,12 +1473,9 @@ describe('storage', () => {
         assert.strictEqual(FILE.metadata.temporaryHold, false);
       });
 
-      it('should get an expiration date', done => {
-        FILE.getExpirationDate((err, expirationDate) => {
-          assert.ifError(err);
-          assert(expirationDate instanceof Date);
-          done();
-        });
+      it('should get an expiration date', async () => {
+        const [expirationDate] = await FILE.getExpirationDate();
+        assert(expirationDate instanceof Date);
       });
     });
 
@@ -1765,13 +1526,11 @@ describe('storage', () => {
         return deleteFilesAsync();
       });
 
-      it('should block an overwrite request', done => {
+      it('should block an overwrite request', async () => {
         createFile((err, file) => {
           assert.ifError(err);
-
-          file!.save('new data', err => {
-            assert.strictEqual((err as ApiError).code, 403);
-            done();
+          assert.rejects(file!.save('new data'), (err: ApiError) => {
+            assert.strictEqual(err.code, 403);
           });
         });
       });
@@ -1835,12 +1594,9 @@ describe('storage', () => {
       bucket.delete(done);
     });
 
-    it('should have enabled requesterPays functionality', done => {
-      bucket.getMetadata((err: ApiError | null, metadata: Metadata) => {
-        assert.ifError(err);
-        assert.strictEqual(metadata.billing.requesterPays, true);
-        done();
-      });
+    it('should have enabled requesterPays functionality', async () => {
+      const [metadata] = await bucket.getMetadata();
+      assert.strictEqual(metadata.billing.requesterPays, true);
     });
 
     // These tests will verify that the requesterPays functionality works from
@@ -2415,72 +2171,49 @@ describe('storage', () => {
       assert.strictEqual(String(fileContents), String(remoteContents));
     });
 
-    it('should download a file to memory', done => {
+    it('should download a file to memory', async () => {
       const fileContents = fs.readFileSync(FILES.big.path);
-      bucket.upload(FILES.big.path, (err: Error | null, file?: File | null) => {
-        assert.ifError(err);
-        file!.download((err, remoteContents) => {
-          assert.ifError(err);
-          assert.strictEqual(String(fileContents), String(remoteContents));
-          done();
-        });
-      });
+      const [file] = await bucket.upload(FILES.big.path);
+      const [remoteContents] = await file.download();
+      assert.strictEqual(String(fileContents), String(remoteContents));
     });
 
-    it('should download an empty file', done => {
+    it('should download an empty file', async () => {
       const fileContents = fs.readFileSync(FILES.empty.path);
-      bucket.upload(
-        FILES.empty.path,
-        (err: Error | null, file?: File | null) => {
-          assert.ifError(err);
-          file!.download((err, remoteContents) => {
-            assert.ifError(err);
-            assert.strictEqual(String(fileContents), String(remoteContents));
-            done();
-          });
-        }
+      const [file] = await bucket.upload(FILES.empty.path);
+      const [remoteContents] = await file.download();
+      assert.strictEqual(String(fileContents), String(remoteContents));
+    });
+
+    it('should download the specified bytes of a file', async () => {
+      const fileContents = fs.readFileSync(FILES.big.path);
+      const [file] = await bucket.upload(FILES.big.path);
+      const [remoteContents] = await file!.download({
+        start: FILE_DOWNLOAD_START_BYTE,
+        end: FILE_DOWNLOAD_END_BYTE,
+      });
+      assert.strictEqual(
+        String(fileContents).slice(0, 20),
+        String(remoteContents)
       );
     });
 
-    it('should download the specified bytes of a file', done => {
-      const fileContents = fs.readFileSync(FILES.big.path);
-      bucket.upload(FILES.big.path, (err: Error | null, file?: File | null) => {
-        assert.ifError(err);
-        file!.download(
-          {start: FILE_DOWNLOAD_START_BYTE, end: FILE_DOWNLOAD_END_BYTE},
-          (err, remoteContents) => {
-            assert.ifError(err);
-            assert.strictEqual(
-              String(fileContents).slice(0, 20),
-              String(remoteContents)
-            );
-            done();
-          }
-        );
-      });
-    });
-
-    it('should handle non-network errors', done => {
+    it('should handle non-network errors', async () => {
       const file = bucket.file('hi.jpg');
-      file.download(err => {
+      assert.rejects(file.download(), (err: ApiError) => {
         assert.strictEqual((err as ApiError).code, 404);
-        done();
       });
     });
 
-    it('should gzip a file on the fly and download it', done => {
+    it('should gzip a file on the fly and download it', async () => {
       const options = {
         gzip: true,
       };
       const expectedContents = fs.readFileSync(FILES.html.path, 'utf-8');
-      bucket.upload(FILES.html.path, options, (err, file) => {
-        assert.ifError(err);
-        file!.download((err, contents) => {
-          assert.ifError(err);
-          assert.strictEqual(contents.toString(), expectedContents);
-          file!.delete(done);
-        });
-      });
+      const [file] = await bucket.upload(FILES.html.path, options);
+      const [contents] = await file.download();
+      assert.strictEqual(contents.toString(), expectedContents);
+      await file.delete();
     });
 
     it('should upload a gzipped file and download it', async () => {
@@ -2544,16 +2277,12 @@ describe('storage', () => {
     });
 
     describe('simple write', () => {
-      it('should save arbitrary data', done => {
+      it('should save arbitrary data', async () => {
         const file = bucket.file('TestFile');
         const data = 'hello';
-        file!.save(data, err => {
-          assert.ifError(err);
-          file!.download((err, contents) => {
-            assert.strictEqual(contents.toString(), data);
-            done();
-          });
-        });
+        await file!.save(data);
+        const [contents] = await file!.download();
+        assert.strictEqual(contents.toString(), data);
       });
     });
 
@@ -2569,22 +2298,15 @@ describe('storage', () => {
           });
       });
 
-      it('should write metadata', done => {
+      it('should write metadata', async () => {
         const options = {
           metadata: {contentType: 'image/png'},
           resumable: false,
         };
-        bucket.upload(FILES.logo.path, options, (err, file) => {
-          assert.ifError(err);
-          file!.getMetadata((err: ApiError | null, metadata: Metadata) => {
-            assert.ifError(err);
-            assert.strictEqual(
-              metadata.contentType,
-              options.metadata.contentType
-            );
-            file!.delete(done);
-          });
-        });
+        const [file] = await bucket.upload(FILES.logo.path, options);
+        const [metadata] = await file.getMetadata();
+        assert.strictEqual(metadata.contentType, options.metadata.contentType);
+        await file.delete();
       });
 
       it('should resume an upload after an interruption', done => {
@@ -2679,31 +2401,18 @@ describe('storage', () => {
         file.save('secret data', {resumable: false}, done);
       });
 
-      it('should not get the hashes from the unencrypted file', done => {
-        unencryptedFile.getMetadata(
-          (err: ApiError | null, metadata: Metadata) => {
-            assert.ifError(err);
-            assert.strictEqual(metadata.crc32c, undefined);
-            done();
-          }
-        );
+      it('should not get the hashes from the unencrypted file', async () => {
+        const [metadata] = await unencryptedFile.getMetadata();
+        assert.strictEqual(metadata.crc32c, undefined);
       });
 
-      it('should get the hashes from the encrypted file', done => {
-        file.getMetadata((err: ApiError | null, metadata: Metadata) => {
-          assert.ifError(err);
-          assert.notStrictEqual(metadata.crc32c, undefined);
-          done();
-        });
+      it('should get the hashes from the encrypted file', async () => {
+        const [metadata] = await file.getMetadata();
+        assert.notStrictEqual(metadata.crc32c, undefined);
       });
 
-      it('should not download from the unencrypted file', done => {
-        unencryptedFile.download(err => {
-          if (!err) {
-            done(new Error('Expected an error.'));
-            return;
-          }
-
+      it('should not download from the unencrypted file', async () => {
+        assert.rejects(unencryptedFile.download(), (err: ApiError) => {
           assert(
             err!.message.indexOf(
               [
@@ -2712,29 +2421,19 @@ describe('storage', () => {
               ].join(' ')
             ) > -1
           );
-          done();
         });
       });
 
-      it('should download from the encrytped file', done => {
-        file.download((err, contents) => {
-          assert.ifError(err);
-          assert.strictEqual(contents.toString(), 'secret data');
-          done();
-        });
+      it('should download from the encrytped file', async () => {
+        const [contents] = await file.download();
+        assert.strictEqual(contents.toString(), 'secret data');
       });
 
-      it('should rotate encryption keys', done => {
+      it('should rotate encryption keys', async () => {
         const newEncryptionKey = crypto.randomBytes(32);
-
-        file.rotateEncryptionKey(newEncryptionKey, err => {
-          assert.ifError(err);
-          file.download((err, contents) => {
-            assert.ifError(err);
-            assert.strictEqual(contents.toString(), 'secret data');
-            done();
-          });
-        });
+        await file.rotateEncryptionKey(newEncryptionKey);
+        const [contents] = await file.download();
+        assert.strictEqual(contents.toString(), 'secret data');
       });
     });
 
@@ -2819,54 +2518,42 @@ describe('storage', () => {
           file.save(FILE_CONTENTS, {resumable: false}, done);
         });
 
-        it('should have set kmsKeyName on created file', done => {
-          file.getMetadata((err: ApiError | null, metadata: Metadata) => {
-            assert.ifError(err);
+        it('should have set kmsKeyName on created file', async () => {
+          const [metadata] = await file.getMetadata();
 
-            // Strip the project ID, as it could be the placeholder locally, but
-            // the real value upstream.
-            const projectIdRegExp = /^.+\/locations/;
-            const actualKmsKeyName = metadata.kmsKeyName.replace(
-              projectIdRegExp,
-              ''
-            );
-            let expectedKmsKeyName = kmsKeyName.replace(projectIdRegExp, '');
+          // Strip the project ID, as it could be the placeholder locally, but
+          // the real value upstream.
+          const projectIdRegExp = /^.+\/locations/;
+          const actualKmsKeyName = metadata.kmsKeyName.replace(
+            projectIdRegExp,
+            ''
+          );
+          let expectedKmsKeyName = kmsKeyName.replace(projectIdRegExp, '');
 
-            // Upstream attaches a version.
-            expectedKmsKeyName = `${expectedKmsKeyName}/cryptoKeyVersions/1`;
+          // Upstream attaches a version.
+          expectedKmsKeyName = `${expectedKmsKeyName}/cryptoKeyVersions/1`;
 
-            assert.strictEqual(actualKmsKeyName, expectedKmsKeyName);
-
-            done();
-          });
+          assert.strictEqual(actualKmsKeyName, expectedKmsKeyName);
         });
 
-        it('should set kmsKeyName on resumable uploaded file', done => {
+        it('should set kmsKeyName on resumable uploaded file', async () => {
           const file = bucket.file('resumable-file', {kmsKeyName});
+          await file.save(FILE_CONTENTS, {resumable: true});
+          const [metadata] = await file.getMetadata();
 
-          file.save(FILE_CONTENTS, {resumable: true}, err => {
-            assert.ifError(err);
+          // Strip the project ID, as it could be the placeholder locally,
+          // but the real value upstream.
+          const projectIdRegExp = /^.+\/locations/;
+          const actualKmsKeyName = metadata.kmsKeyName.replace(
+            projectIdRegExp,
+            ''
+          );
+          let expectedKmsKeyName = kmsKeyName.replace(projectIdRegExp, '');
 
-            file.getMetadata((err: ApiError | null, metadata: Metadata) => {
-              assert.ifError(err);
+          // Upstream attaches a version.
+          expectedKmsKeyName = `${expectedKmsKeyName}/cryptoKeyVersions/1`;
 
-              // Strip the project ID, as it could be the placeholder locally,
-              // but the real value upstream.
-              const projectIdRegExp = /^.+\/locations/;
-              const actualKmsKeyName = metadata.kmsKeyName.replace(
-                projectIdRegExp,
-                ''
-              );
-              let expectedKmsKeyName = kmsKeyName.replace(projectIdRegExp, '');
-
-              // Upstream attaches a version.
-              expectedKmsKeyName = `${expectedKmsKeyName}/cryptoKeyVersions/1`;
-
-              assert.strictEqual(actualKmsKeyName, expectedKmsKeyName);
-
-              done();
-            });
-          });
+          assert.strictEqual(actualKmsKeyName, expectedKmsKeyName);
         });
 
         it('should rotate encryption keys', async () => {
@@ -2879,24 +2566,13 @@ describe('storage', () => {
           assert.strictEqual(contents.toString(), FILE_CONTENTS);
         });
 
-        it('should convert CSEK to KMS key', done => {
+        it('should convert CSEK to KMS key', async () => {
           const encryptionKey = crypto.randomBytes(32);
-
           const file = bucket.file('encrypted-file', {encryptionKey});
-
-          file.save(FILE_CONTENTS, {resumable: false}, err => {
-            assert.ifError(err);
-
-            file.rotateEncryptionKey({kmsKeyName}, err => {
-              assert.ifError(err);
-
-              file.download((err, contents) => {
-                assert.ifError(err);
-                assert.strictEqual(contents.toString(), 'secret data');
-                done();
-              });
-            });
-          });
+          await file.save(FILE_CONTENTS, {resumable: false});
+          await file.rotateEncryptionKey({kmsKeyName});
+          const [contents] = await file.download();
+          assert.strictEqual(contents.toString(), 'secret data');
         });
       });
 
@@ -2922,24 +2598,15 @@ describe('storage', () => {
           );
         });
 
-        it('should have set defaultKmsKeyName on created bucket', done => {
-          bucket.getMetadata((err: ApiError | null, metadata: Metadata) => {
-            assert.ifError(err);
-
-            // Strip the project ID, as it could be the placeholder locally, but
-            // the real value upstream.
-            const projectIdRegExp = /^.+\/locations/;
-            const actualKmsKeyName =
-              metadata.encryption.defaultKmsKeyName.replace(
-                projectIdRegExp,
-                ''
-              );
-            const expectedKmsKeyName = kmsKeyName.replace(projectIdRegExp, '');
-
-            assert.strictEqual(actualKmsKeyName, expectedKmsKeyName);
-
-            done();
-          });
+        it('should have set defaultKmsKeyName on created bucket', async () => {
+          const [metadata] = await bucket.getMetadata();
+          // Strip the project ID, as it could be the placeholder locally, but
+          // the real value upstream.
+          const projectIdRegExp = /^.+\/locations/;
+          const actualKmsKeyName =
+            metadata.encryption.defaultKmsKeyName.replace(projectIdRegExp, '');
+          const expectedKmsKeyName = kmsKeyName.replace(projectIdRegExp, '');
+          assert.strictEqual(actualKmsKeyName, expectedKmsKeyName);
         });
 
         it('should update the defaultKmsKeyName', async () => {
@@ -2954,37 +2621,27 @@ describe('storage', () => {
           });
         });
 
-        it('should insert an object that inherits the kms key name', done => {
+        it('should insert an object that inherits the kms key name', async () => {
           const file = bucket.file('kms-encrypted-file');
+          const [metadata] = await bucket.getMetadata();
+          const defaultKmsKeyName = metadata.encryption.defaultKmsKeyName;
+          await file.save(FILE_CONTENTS, {resumable: false});
 
-          bucket.getMetadata((err: ApiError | null, metadata: Metadata) => {
-            assert.ifError(err);
+          // Strip the project ID, as it could be the placeholder locally,
+          // but the real value upstream.
+          const projectIdRegExp = /^.+\/locations/;
+          const actualKmsKeyName = file.metadata.kmsKeyName.replace(
+            projectIdRegExp,
+            ''
+          );
+          let expectedKmsKeyName = defaultKmsKeyName.replace(
+            projectIdRegExp,
+            ''
+          );
 
-            const defaultKmsKeyName = metadata.encryption.defaultKmsKeyName;
-
-            file.save(FILE_CONTENTS, {resumable: false}, err => {
-              assert.ifError(err);
-
-              // Strip the project ID, as it could be the placeholder locally,
-              // but the real value upstream.
-              const projectIdRegExp = /^.+\/locations/;
-              const actualKmsKeyName = file.metadata.kmsKeyName.replace(
-                projectIdRegExp,
-                ''
-              );
-              let expectedKmsKeyName = defaultKmsKeyName.replace(
-                projectIdRegExp,
-                ''
-              );
-
-              // Upstream attaches a version.
-              expectedKmsKeyName = `${expectedKmsKeyName}/cryptoKeyVersions/1`;
-
-              assert.strictEqual(actualKmsKeyName, expectedKmsKeyName);
-
-              done();
-            });
-          });
+          // Upstream attaches a version.
+          expectedKmsKeyName = `${expectedKmsKeyName}/cryptoKeyVersions/1`;
+          assert.strictEqual(actualKmsKeyName, expectedKmsKeyName);
         });
       });
     });
@@ -3063,32 +2720,17 @@ describe('storage', () => {
       await file.delete();
     });
 
-    it('should copy to another bucket given a gs:// URL', done => {
+    it('should copy to another bucket given a gs:// URL', async () => {
       const opts = {destination: 'CloudLogo'};
-      bucket.upload(FILES.logo.path, opts, (err, file) => {
-        assert.ifError(err);
-
-        const otherBucket = storage.bucket(generateName());
-        otherBucket.create((err: Error) => {
-          assert.ifError(err);
-
-          const destPath = 'gs://' + otherBucket.name + '/CloudLogoCopy';
-          file!.copy(destPath, err => {
-            assert.ifError(err);
-
-            otherBucket.getFiles((err, files) => {
-              assert.ifError(err);
-
-              assert.strictEqual(files!.length, 1);
-              const newFile = files![0];
-
-              assert.strictEqual(newFile.name, 'CloudLogoCopy');
-
-              done();
-            });
-          });
-        });
-      });
+      const [file] = await bucket.upload(FILES.logo.path, opts);
+      const otherBucket = storage.bucket(generateName());
+      await otherBucket.create();
+      const destPath = 'gs://' + otherBucket.name + '/CloudLogoCopy';
+      await file!.copy(destPath);
+      const [files] = await otherBucket.getFiles();
+      assert.strictEqual(files!.length, 1);
+      const newFile = files![0];
+      assert.strictEqual(newFile.name, 'CloudLogoCopy');
     });
 
     it('should allow changing the storage class', async () => {
@@ -3136,14 +2778,13 @@ describe('storage', () => {
   });
 
   describe('channels', () => {
-    it('should stop a channel', done => {
+    it('should stop a channel', async () => {
       // We can't actually create a channel. But we can test to see that we're
       // reaching the right endpoint with the API request.
       const channel = storage.channel('id', 'resource-id');
-      channel.stop(err => {
+      assert.rejects(channel.stop(), (err: ApiError) => {
         assert.strictEqual((err as ApiError).code, 404);
         assert.strictEqual(err!.message.indexOf("Channel 'id' not found"), 0);
-        done();
       });
     });
   });
@@ -3356,12 +2997,9 @@ describe('storage', () => {
       await Promise.all(NEW_FILES.map(file => deleteFileAsync(file)));
     });
 
-    it('should get files', done => {
-      bucket.getFiles((err, files) => {
-        assert.ifError(err);
-        assert.strictEqual(files!.length, NEW_FILES.length);
-        done();
-      });
+    it('should get files', async () => {
+      const [files] = await bucket.getFiles();
+      assert.strictEqual(files!.length, NEW_FILES.length);
     });
 
     it('should get files as a stream', done => {
@@ -3379,21 +3017,17 @@ describe('storage', () => {
         });
     });
 
-    it('should paginate the list', done => {
+    it('should paginate the list', async () => {
       const query = {
         maxResults: NEW_FILES.length - 1,
       };
 
-      bucket.getFiles(query, (err, files, nextQuery) => {
-        assert.ifError(err);
-        assert.strictEqual(files!.length, NEW_FILES.length - 1);
-        assert(nextQuery);
-        bucket.getFiles(nextQuery!, (err, files) => {
-          assert.ifError(err);
-          assert.strictEqual(files!.length, 1);
-          done();
-        });
-      });
+      const [files, nextQuery] = await bucket.getFiles(query);
+
+      assert.strictEqual(files!.length, NEW_FILES.length - 1);
+      assert(nextQuery);
+      const [nextFiles] = await bucket.getFiles(nextQuery);
+      assert.strictEqual(nextFiles!.length, 1);
     });
   });
 
@@ -3469,37 +3103,17 @@ describe('storage', () => {
       );
     });
 
-    it('should overwrite file, then get older version', done => {
+    it('should overwrite file, then get older version', async () => {
       const versionedFile = bucketWithVersioning.file(generateName());
-
-      versionedFile.save('a', err => {
-        assert.ifError(err);
-
-        versionedFile.getMetadata(
-          (err: ApiError | null, metadata: Metadata) => {
-            assert.ifError(err);
-
-            const initialGeneration = metadata.generation;
-
-            versionedFile.save('b', err => {
-              assert.ifError(err);
-
-              const firstGenFile = bucketWithVersioning.file(
-                versionedFile.name,
-                {
-                  generation: initialGeneration,
-                }
-              );
-
-              firstGenFile.download((err, contents) => {
-                assert.ifError(err);
-                assert.strictEqual(contents.toString(), 'a');
-                done();
-              });
-            });
-          }
-        );
+      await versionedFile.save('a');
+      const [metadata] = await versionedFile.getMetadata();
+      const initialGeneration = metadata.generation;
+      await versionedFile.save('b');
+      const firstGenFile = bucketWithVersioning.file(versionedFile.name, {
+        generation: initialGeneration,
       });
+      const [contents] = await firstGenFile.download();
+      assert.strictEqual(contents.toString(), 'a');
     });
 
     it('should get all files scoped to their version', async () => {
@@ -3854,46 +3468,30 @@ describe('storage', () => {
       );
     });
 
-    it('should get an existing notification', done => {
-      notification.get(err => {
-        assert.ifError(err);
-        assert(Object.keys(notification.metadata).length > 0);
-        done();
-      });
+    it('should get an existing notification', async () => {
+      await notification.get();
+      assert(Object.keys(notification.metadata).length > 0);
     });
 
-    it('should get a notifications metadata', done => {
-      notification.getMetadata((err: ApiError | null, metadata: Metadata) => {
-        assert.ifError(err);
-        assert(metadata !== null && typeof metadata === 'object');
-        done();
-      });
+    it('should get a notifications metadata', async () => {
+      const [metadata] = await notification.getMetadata();
+      assert(metadata !== null && typeof metadata === 'object');
     });
 
-    it('should tell us if a notification exists', done => {
-      notification.exists((err: ApiError | null, exists: boolean) => {
-        assert.ifError(err);
-        assert(exists);
-        done();
-      });
+    it('should tell us if a notification exists', async () => {
+      const [exists] = await notification.exists();
+      assert(exists);
     });
 
-    it('should tell us if a notification does not exist', done => {
+    it('should tell us if a notification does not exist', async () => {
       const notification = bucket.notification('123');
-
-      notification.exists((err: ApiError | null, exists: boolean) => {
-        assert.ifError(err);
-        assert.strictEqual(exists, false);
-        done();
-      });
+      const [exists] = await notification.exists();
+      assert.strictEqual(exists, false);
     });
 
-    it('should get a list of notifications', done => {
-      bucket.getNotifications((err, notifications) => {
-        assert.ifError(err);
-        assert.strictEqual(notifications!.length, 1);
-        done();
-      });
+    it('should get a list of notifications', async () => {
+      const [notifications] = await bucket.getNotifications();
+      assert.strictEqual(notifications!.length, 1);
     });
 
     it('should emit events to a subscription', done => {
