@@ -4,6 +4,15 @@
 
 [1]: https://www.npmjs.com/package/nodejs-translate?activeTab=versions
 
+## [7.0.1](https://github.com/googleapis/nodejs-translate/compare/v7.0.0...v7.0.1) (2022-08-10)
+
+
+### Bug Fixes
+
+* **deps:** do not depend on protobufjs ([#802](https://github.com/googleapis/nodejs-translate/issues/802)) ([e8f13e4](https://github.com/googleapis/nodejs-translate/commit/e8f13e412c2ee9c8cded6cd4efed31b3d78f8170))
+* **deps:** update dependency @google-cloud/automl to v3 ([#796](https://github.com/googleapis/nodejs-translate/issues/796)) ([440b1cb](https://github.com/googleapis/nodejs-translate/commit/440b1cb267a8d737038881d5525c4096629d64aa))
+* **deps:** update dependency @google-cloud/text-to-speech to v4 ([#797](https://github.com/googleapis/nodejs-translate/issues/797)) ([a210e6e](https://github.com/googleapis/nodejs-translate/commit/a210e6e7d154e137a8ed3eb344f322552cd785a8))
+
 ## [7.0.0](https://github.com/googleapis/nodejs-translate/compare/v6.3.1...v7.0.0) (2022-06-30)
 
 
