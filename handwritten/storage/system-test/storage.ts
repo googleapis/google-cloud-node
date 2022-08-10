@@ -23,7 +23,7 @@ import {promisify} from 'util';
 import * as path from 'path';
 import * as tmp from 'tmp';
 import * as uuid from 'uuid';
-import {ApiError, Metadata} from '../src/nodejs-common';
+import {ApiError} from '../src/nodejs-common';
 import {
   Storage,
   Bucket,
@@ -31,7 +31,6 @@ import {
   AccessControlObject,
   Notification,
   DeleteBucketCallback,
-  GetFileCallback,
   CRC32C,
 } from '../src';
 import * as nock from 'nock';
@@ -133,7 +132,7 @@ describe('storage', () => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     let GOOGLE_CLOUD_PROJECT: string | undefined;
 
-    before(done => {
+    before(async () => {
       // CI authentication is done with ADC. Cache it here, restore it `after`
       GOOGLE_APPLICATION_CREDENTIALS =
         process.env.GOOGLE_APPLICATION_CREDENTIALS;
@@ -142,7 +141,7 @@ describe('storage', () => {
 
       privateBucket = bucket; // `bucket` was created in the global `before`
       privateFile = privateBucket.file('file-name');
-      privateFile.save('data', done);
+      await privateFile.save('data');
     });
 
     beforeEach(() => {
@@ -334,20 +333,15 @@ describe('storage', () => {
     describe('files', () => {
       let file: File;
 
-      beforeEach(done => {
+      beforeEach(async () => {
         const options = {
           destination: generateName() + '.png',
         };
-
-        bucket.upload(FILES.logo.path, options, (err, f) => {
-          assert.ifError(err);
-          file = f!;
-          done();
-        });
+        [file] = await bucket.upload(FILES.logo.path, options);
       });
 
-      afterEach(done => {
-        file.delete(done);
+      afterEach(async () => {
+        await file.delete();
       });
 
       it('should get access controls', async () => {
@@ -486,15 +480,8 @@ describe('storage', () => {
   describe('iam', () => {
     let PROJECT_ID: string;
 
-    before(done => {
-      storage.authClient.getProjectId((err, projectId) => {
-        if (err) {
-          done(err);
-          return;
-        }
-        PROJECT_ID = projectId!;
-        done();
-      });
+    before(async () => {
+      PROJECT_ID = await storage.authClient.getProjectId();
     });
 
     describe('buckets', () => {
@@ -1101,8 +1088,8 @@ describe('storage', () => {
         labeltwo: 'labelvaluetwo',
       };
 
-      beforeEach(done => {
-        bucket.deleteLabels(done);
+      beforeEach(async () => {
+        await bucket.deleteLabels();
       });
 
       it('should set labels', async () => {
@@ -1432,22 +1419,13 @@ describe('storage', () => {
       const FILE = BUCKET.file(generateName());
 
       const BUCKET_RETENTION_PERIOD = 1;
-      before(done => {
-        BUCKET.create(
-          {
-            retentionPolicy: {
-              retentionPeriod: BUCKET_RETENTION_PERIOD,
-            },
+      before(async () => {
+        await BUCKET.create({
+          retentionPolicy: {
+            retentionPeriod: BUCKET_RETENTION_PERIOD,
           },
-          err => {
-            if (err) {
-              done(err);
-              return;
-            }
-
-            FILE.save('data', done);
-          }
-        );
+        });
+        await FILE.save('data');
       });
 
       afterEach(() => {
@@ -1484,18 +1462,11 @@ describe('storage', () => {
 
       const RETENTION_PERIOD_SECONDS = 5; // Each test has this much time!
 
-      function createFile(callback: GetFileCallback) {
+      async function createFile(): Promise<File> {
         const file = BUCKET.file(generateName());
         FILES.push(file);
-
-        file.save('data', err => {
-          if (err) {
-            callback(err);
-            return;
-          }
-
-          callback(null, file);
-        });
+        await file.save('data');
+        return file;
       }
 
       async function deleteFilesAsync() {
@@ -1510,15 +1481,12 @@ describe('storage', () => {
         );
       }
 
-      before(done => {
-        BUCKET.create(
-          {
-            retentionPolicy: {
-              retentionPeriod: RETENTION_PERIOD_SECONDS,
-            },
+      before(async () => {
+        await BUCKET.create({
+          retentionPolicy: {
+            retentionPeriod: RETENTION_PERIOD_SECONDS,
           },
-          done
-        );
+        });
       });
 
       after(() => {
@@ -1526,22 +1494,16 @@ describe('storage', () => {
       });
 
       it('should block an overwrite request', async () => {
-        createFile((err, file) => {
-          assert.ifError(err);
-          assert.rejects(file!.save('new data'), (err: ApiError) => {
-            assert.strictEqual(err.code, 403);
-          });
+        const file = await createFile();
+        assert.rejects(file.save('new data'), (err: ApiError) => {
+          assert.strictEqual(err.code, 403);
         });
       });
 
-      it('should block a delete request', done => {
-        createFile((err, file) => {
-          assert.ifError(err);
-
-          file!.delete((err: ApiError) => {
-            assert.strictEqual(err.code, 403);
-            done();
-          });
+      it('should block a delete request', async () => {
+        const file = await createFile();
+        assert.rejects(file.delete(), (err: ApiError) => {
+          assert.strictEqual(err.code, 403);
         });
       });
     });
@@ -1578,19 +1540,16 @@ describe('storage', () => {
       process.env.GCN_STORAGE_2ND_PROJECT_ID !== undefined;
     let bucket: Bucket;
 
-    before(done => {
+    before(async () => {
       bucket = storage.bucket(generateName());
 
-      bucket.create(
-        {
-          requesterPays: true,
-        },
-        done
-      );
+      await bucket.create({
+        requesterPays: true,
+      });
     });
 
-    after(done => {
-      bucket.delete(done);
+    after(async () => {
+      await bucket.delete();
     });
 
     it('should have enabled requesterPays functionality', async () => {
@@ -1613,62 +1572,33 @@ describe('storage', () => {
       // the bucket object from the requesting user.
       let bucketNonAllowList: Bucket;
 
-      function isRequesterPaysEnabled(
-        callback: (err: Error | null, isEnabled?: boolean) => void
-      ) {
-        bucket.getMetadata((err: ApiError | null, metadata: Metadata) => {
-          if (err) {
-            callback(err);
-            return;
-          }
-
-          const billing = metadata.billing || {};
-          callback(null, !!billing && billing.requesterPays === true);
-        });
+      async function isRequesterPaysEnabled(): Promise<boolean> {
+        const [metadata] = await bucket.getMetadata();
+        const billing = metadata.billing || {};
+        return !!billing && billing.requesterPays === true;
       }
 
-      before(done => {
+      before(async () => {
         bucket = storage.bucket(generateName());
         bucketNonAllowList = storageNonAllowList.bucket(bucket.name);
-        bucket.create(done);
+        await bucket.create();
       });
 
-      it('should enable requesterPays', done => {
-        isRequesterPaysEnabled((err, isEnabled) => {
-          assert.ifError(err);
-          assert.strictEqual(isEnabled, false);
-
-          bucket.enableRequesterPays(err => {
-            assert.ifError(err);
-
-            isRequesterPaysEnabled((err, isEnabled) => {
-              assert.ifError(err);
-              assert.strictEqual(isEnabled, true);
-              done();
-            });
-          });
-        });
+      it('should enable requesterPays', async () => {
+        let isEnabled = await isRequesterPaysEnabled();
+        assert.strictEqual(isEnabled, false);
+        await bucket.enableRequesterPays();
+        isEnabled = await isRequesterPaysEnabled();
+        assert.strictEqual(isEnabled, true);
       });
 
-      it('should disable requesterPays', done => {
-        bucket.enableRequesterPays(err => {
-          assert.ifError(err);
-
-          isRequesterPaysEnabled((err, isEnabled) => {
-            assert.ifError(err);
-            assert.strictEqual(isEnabled, true);
-
-            bucket.disableRequesterPays(err => {
-              assert.ifError(err);
-
-              isRequesterPaysEnabled((err, isEnabled) => {
-                assert.ifError(err);
-                assert.strictEqual(isEnabled, false);
-                done();
-              });
-            });
-          });
-        });
+      it('should disable requesterPays', async () => {
+        await bucket.enableRequesterPays();
+        let isEnabled = await isRequesterPaysEnabled();
+        assert.strictEqual(isEnabled, true);
+        await bucket.disableRequesterPays();
+        isEnabled = await isRequesterPaysEnabled();
+        assert.strictEqual(isEnabled, false);
       });
 
       describe('methods that accept userProject', () => {
@@ -2396,8 +2326,8 @@ describe('storage', () => {
       });
       const unencryptedFile = bucket.file(file.name);
 
-      before(done => {
-        file.save('secret data', {resumable: false}, done);
+      before(async () => {
+        await file.save('secret data', {resumable: false});
       });
 
       it('should not get the hashes from the unencrypted file', async () => {
@@ -2512,9 +2442,9 @@ describe('storage', () => {
       describe('files', () => {
         let file: File;
 
-        before(done => {
+        before(async () => {
           file = bucket.file('kms-encrypted-file', {kmsKeyName});
-          file.save(FILE_CONTENTS, {resumable: false}, done);
+          await file.save(FILE_CONTENTS, {resumable: false});
         });
 
         it('should have set kmsKeyName on created file', async () => {
@@ -2588,13 +2518,10 @@ describe('storage', () => {
           });
         });
 
-        after(done => {
-          bucket.setMetadata(
-            {
-              encryption: null,
-            },
-            done
-          );
+        after(async () => {
+          await bucket.setMetadata({
+            encryption: null,
+          });
         });
 
         it('should have set defaultKmsKeyName on created bucket', async () => {
@@ -3076,30 +3003,19 @@ describe('storage', () => {
   describe('file generations', () => {
     const bucketWithVersioning = storage.bucket(generateName());
 
-    before(done => {
-      bucketWithVersioning.create(
-        {
-          versioning: {
-            enabled: true,
-          },
+    before(async () => {
+      await bucketWithVersioning.create({
+        versioning: {
+          enabled: true,
         },
-        done
-      );
+      });
     });
 
-    after(done => {
-      bucketWithVersioning.deleteFiles(
-        {
-          versions: true,
-        },
-        err => {
-          if (err) {
-            done(err);
-            return;
-          }
-          bucketWithVersioning.delete(done);
-        }
-      );
+    after(async () => {
+      await bucketWithVersioning.deleteFiles({
+        versions: true,
+      });
+      await bucketWithVersioning.delete();
     });
 
     it('should overwrite file, then get older version', async () => {
