@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+## [6.4.0](https://github.com/googleapis/nodejs-storage/compare/v6.3.0...v6.4.0) (2022-08-10)
+
+
+### Features
+
+* add functionality for passing preconditions at the function level ([#1993](https://github.com/googleapis/nodejs-storage/issues/1993)) ([21f173e](https://github.com/googleapis/nodejs-storage/commit/21f173eb17d4216e2b42ffdd1ed0104aeda7cf13))
+
 ## [6.3.0](https://github.com/googleapis/nodejs-storage/compare/v6.2.3...v6.3.0) (2022-08-01)
 
 
