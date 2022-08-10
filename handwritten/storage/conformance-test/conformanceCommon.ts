@@ -92,16 +92,29 @@ export function executeScenario(testCase: RetryTestCase) {
               instructionSet.instructions,
               jsonMethod?.name.toString()
             );
-            bucket = await createBucketForTest(
-              storage,
-              testCase.preconditionProvided,
-              storageMethodString
-            );
-            file = await createFileForTest(
-              testCase.preconditionProvided,
-              storageMethodString,
-              bucket
-            );
+            if (storageMethodString.includes('InstancePrecondition')) {
+              bucket = await createBucketForTest(
+                storage,
+                testCase.preconditionProvided,
+                storageMethodString
+              );
+              file = await createFileForTest(
+                testCase.preconditionProvided,
+                storageMethodString,
+                bucket
+              );
+            } else {
+              bucket = await createBucketForTest(
+                storage,
+                false,
+                storageMethodString
+              );
+              file = await createFileForTest(
+                false,
+                storageMethodString,
+                bucket
+              );
+            }
             notification = bucket.notification(`${TESTS_PREFIX}`);
             await notification.create();
 
@@ -121,29 +134,20 @@ export function executeScenario(testCase: RetryTestCase) {
           });
 
           it(`${instructionNumber}`, async () => {
+            const methodParameters: libraryMethods.ConformanceTestOptions = {
+              bucket: bucket,
+              file: file,
+              notification: notification,
+              storage: storage,
+              hmacKey: hmacKey,
+            };
+            if (testCase.preconditionProvided) {
+              methodParameters.preconditionRequired = true;
+            }
             if (testCase.expectSuccess) {
-              assert.ifError(
-                await storageMethodObject(
-                  bucket,
-                  file,
-                  notification,
-                  storage,
-                  hmacKey
-                )
-              );
+              assert.ifError(await storageMethodObject(methodParameters));
             } else {
-              try {
-                await storageMethodObject(
-                  bucket,
-                  file,
-                  notification,
-                  storage,
-                  hmacKey
-                );
-                throw Error(`${storageMethodString} was supposed to throw.`);
-              } catch (e) {
-                assert.notStrictEqual(e, undefined);
-              }
+              await assert.rejects(storageMethodObject(methodParameters));
             }
             const testBenchResult = await getTestBenchRetryTest(
               creationResult.id
@@ -158,7 +162,7 @@ export function executeScenario(testCase: RetryTestCase) {
 
 async function createBucketForTest(
   storage: Storage,
-  preconditionProvided: boolean,
+  preconditionShouldBeOnInstance: boolean,
   storageMethodString: String
 ) {
   const name = generateName(storageMethodString, 'bucket');
@@ -166,7 +170,7 @@ async function createBucketForTest(
   await bucket.create();
   await bucket.setRetentionPeriod(DURATION_SECONDS);
 
-  if (preconditionProvided) {
+  if (preconditionShouldBeOnInstance) {
     return new Bucket(storage, bucket.name, {
       preconditionOpts: {
         ifMetagenerationMatch: 2,
@@ -177,14 +181,14 @@ async function createBucketForTest(
 }
 
 async function createFileForTest(
-  preconditionProvided: boolean,
+  preconditionShouldBeOnInstance: boolean,
   storageMethodString: String,
   bucket: Bucket
 ) {
   const name = generateName(storageMethodString, 'file');
   const file = bucket.file(name);
   await file.save(name);
-  if (preconditionProvided) {
+  if (preconditionShouldBeOnInstance) {
     return new File(bucket, file.name, {
       preconditionOpts: {
         ifMetagenerationMatch: file.metadata.metageneration,

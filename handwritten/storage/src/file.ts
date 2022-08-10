@@ -18,7 +18,9 @@ import {
   GetConfig,
   Interceptor,
   Metadata,
+  MetadataCallback,
   ServiceObject,
+  SetMetadataResponse,
   util,
 } from './nodejs-common';
 import {promisifyAll} from '@google-cloud/promisify';
@@ -71,6 +73,12 @@ import {HashStreamValidator} from './hash-stream-validator';
 import {URL} from 'url';
 
 import retry = require('async-retry');
+import {
+  DeleteCallback,
+  DeleteOptions,
+  SetMetadataOptions,
+} from './nodejs-common/service-object';
+import * as r from 'teeny-request';
 
 export type GetExpirationDateResponse = [Date];
 export interface GetExpirationDateCallback {
@@ -222,6 +230,7 @@ export interface MakeFilePrivateOptions {
   metadata?: Metadata;
   strict?: boolean;
   userProject?: string;
+  preconditionOpts?: PreconditionOptions;
 }
 
 export type MakeFilePrivateResponse = [Metadata];
@@ -264,6 +273,7 @@ export type RotateEncryptionKeyOptions = string | Buffer | EncryptionKeyOptions;
 export interface EncryptionKeyOptions {
   encryptionKey?: string | Buffer;
   kmsKeyName?: string;
+  preconditionOpts?: PreconditionOptions;
 }
 
 export type RotateEncryptionKeyCallback = CopyCallback;
@@ -1226,6 +1236,19 @@ class File extends ServiceObject<File> {
       }
     }
 
+    if (
+      !this.shouldRetryBasedOnPreconditionAndIdempotencyStrat(
+        options?.preconditionOpts
+      )
+    ) {
+      this.storage.retryOptions.autoRetry = false;
+    }
+
+    if (options.preconditionOpts?.ifGenerationMatch !== undefined) {
+      query.ifGenerationMatch = options.preconditionOpts?.ifGenerationMatch;
+      delete options.preconditionOpts;
+    }
+
     this.request(
       {
         method: 'POST',
@@ -1237,6 +1260,7 @@ class File extends ServiceObject<File> {
         headers,
       },
       (err, resp) => {
+        this.storage.retryOptions.autoRetry = this.instanceRetryValue;
         if (err) {
           callback!(err, null, resp);
           return;
@@ -2019,6 +2043,39 @@ class File extends ServiceObject<File> {
     });
 
     return stream as Writable;
+  }
+
+  /**
+   * Delete the object.
+   *
+   * @param {function=} callback - The callback function.
+   * @param {?error} callback.err - An error returned while making this request.
+   * @param {object} callback.apiResponse - The full API response.
+   */
+  delete(options?: DeleteOptions): Promise<[r.Response]>;
+  delete(options: DeleteOptions, callback: DeleteCallback): void;
+  delete(callback: DeleteCallback): void;
+  delete(
+    optionsOrCallback?: DeleteOptions | DeleteCallback,
+    cb?: DeleteCallback
+  ): Promise<[r.Response]> | void {
+    const options =
+      typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
+    cb = typeof optionsOrCallback === 'function' ? optionsOrCallback : cb;
+
+    this.disableAutoRetryConditionallyIdempotent_(
+      this.methods.delete,
+      AvailableServiceObjectMethods.delete,
+      options
+    );
+
+    super
+      .delete(options)
+      .then(resp => cb!(null, ...resp))
+      .catch(cb!)
+      .finally(() => {
+        this.storage.retryOptions.autoRetry = this.instanceRetryValue;
+      });
   }
 
   download(options?: DownloadOptions): Promise<DownloadResponse>;
@@ -2970,7 +3027,7 @@ class File extends ServiceObject<File> {
 
     util.makeRequest(
       {
-        method: 'HEAD',
+        method: 'GET',
         uri: `${this.storage.apiEndpoint}/${
           this.bucket.name
         }/${encodeURIComponent(this.name)}`,
@@ -3070,26 +3127,21 @@ class File extends ServiceObject<File> {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } as any;
 
+    if (options.preconditionOpts?.ifGenerationMatch !== undefined) {
+      query.ifGenerationMatch = options.preconditionOpts?.ifGenerationMatch;
+      delete options.preconditionOpts;
+    }
+
     if (options.userProject) {
       query.userProject = options.userProject;
     }
-
-    this.disableAutoRetryConditionallyIdempotent_(
-      this.methods.setMetadata,
-      AvailableServiceObjectMethods.setMetadata
-    );
 
     // You aren't allowed to set both predefinedAcl & acl properties on a file,
     // so acl must explicitly be nullified, destroying all previous acls on the
     // file.
     const metadata = extend({}, options.metadata, {acl: null});
 
-    this.setMetadata(metadata, query)
-      .then(resp => callback!(null, ...resp))
-      .catch(callback!)
-      .finally(() => {
-        this.storage.retryOptions.autoRetry = this.instanceRetryValue;
-      });
+    this.setMetadata(metadata, query, callback!);
   }
 
   makePublic(): Promise<MakeFilePublicResponse>;
@@ -3538,7 +3590,11 @@ class File extends ServiceObject<File> {
     }
 
     const newFile = this.bucket.file(this.id!, options);
-    this.copy(newFile, callback!);
+    const copyOptions =
+      options.preconditionOpts?.ifGenerationMatch !== undefined
+        ? {preconditionOpts: options.preconditionOpts}
+        : {};
+    this.copy(newFile, copyOptions, callback!);
   }
 
   save(data: string | Buffer, options?: SaveOptions): Promise<void>;
@@ -3665,6 +3721,44 @@ class File extends ServiceObject<File> {
         .catch(callback);
     }
   }
+
+  setMetadata(
+    metadata: Metadata,
+    options?: SetMetadataOptions
+  ): Promise<SetMetadataResponse>;
+  setMetadata(metadata: Metadata, callback: MetadataCallback): void;
+  setMetadata(
+    metadata: Metadata,
+    options: SetMetadataOptions,
+    callback: MetadataCallback
+  ): void;
+  setMetadata(
+    metadata: Metadata,
+    optionsOrCallback: SetMetadataOptions | MetadataCallback,
+    cb?: MetadataCallback
+  ): Promise<SetMetadataResponse> | void {
+    const options =
+      typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
+    cb =
+      typeof optionsOrCallback === 'function'
+        ? (optionsOrCallback as MetadataCallback)
+        : cb;
+
+    this.disableAutoRetryConditionallyIdempotent_(
+      this.methods.setMetadata,
+      AvailableServiceObjectMethods.setMetadata,
+      options
+    );
+
+    super
+      .setMetadata(metadata, options)
+      .then(resp => cb!(null, ...resp))
+      .catch(cb!)
+      .finally(() => {
+        this.storage.retryOptions.autoRetry = this.instanceRetryValue;
+      });
+  }
+
   setStorageClass(
     storageClass: string,
     options?: SetStorageClassOptions
@@ -3929,12 +4023,15 @@ class File extends ServiceObject<File> {
   disableAutoRetryConditionallyIdempotent_(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     coreOpts: any,
-    methodType: AvailableServiceObjectMethods
+    methodType: AvailableServiceObjectMethods,
+    localPreconditionOptions?: PreconditionOptions
   ): void {
     if (
       (typeof coreOpts === 'object' &&
         coreOpts?.reqOpts?.qs?.ifGenerationMatch === undefined &&
-        methodType === AvailableServiceObjectMethods.setMetadata &&
+        localPreconditionOptions?.ifGenerationMatch === undefined &&
+        (methodType === AvailableServiceObjectMethods.setMetadata ||
+          methodType === AvailableServiceObjectMethods.delete) &&
         this.storage.retryOptions.idempotencyStrategy ===
           IdempotencyStrategy.RetryConditional) ||
       this.storage.retryOptions.idempotencyStrategy ===

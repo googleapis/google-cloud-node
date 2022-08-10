@@ -20,8 +20,10 @@ import {
   ExistsCallback,
   GetConfig,
   Metadata,
+  MetadataCallback,
   ResponseBody,
   ServiceObject,
+  SetMetadataResponse,
   util,
 } from './nodejs-common';
 import {paginator} from '@google-cloud/paginator';
@@ -65,6 +67,7 @@ import {
 import {Readable} from 'stream';
 import {CRC32CValidatorGenerator} from './crc32c';
 import {URL} from 'url';
+import {SetMetadataOptions} from './nodejs-common/service-object';
 
 interface SourceObject {
   name: string;
@@ -78,6 +81,10 @@ interface CreateNotificationQuery {
 interface MetadataOptions {
   predefinedAcl: string;
   userProject?: string;
+  ifGenerationMatch?: number;
+  ifGenerationNotMatch?: number;
+  ifMetagenerationMatch?: number;
+  ifMetagenerationNotMatch?: number;
 }
 
 export type GetFilesResponse = [File[], {}, Metadata];
@@ -100,7 +107,7 @@ interface WatchAllOptions {
   versions?: boolean;
 }
 
-export interface AddLifecycleRuleOptions {
+export interface AddLifecycleRuleOptions extends PreconditionOptions {
   append?: boolean;
 }
 
@@ -110,7 +117,7 @@ export interface LifecycleRule {
   storageClass?: string;
 }
 
-export interface EnableLoggingOptions {
+export interface EnableLoggingOptions extends PreconditionOptions {
   bucket?: string | Bucket;
   prefix: string;
 }
@@ -197,6 +204,10 @@ export type DeleteLabelsResponse = [Metadata];
 
 export type DeleteLabelsCallback = SetLabelsCallback;
 
+export type DeleteLabelsOptions = PreconditionOptions;
+
+export type DisableRequesterPaysOptions = PreconditionOptions;
+
 export type DisableRequesterPaysResponse = [Metadata];
 
 export interface DisableRequesterPaysCallback {
@@ -209,6 +220,7 @@ export interface EnableRequesterPaysCallback {
   (err?: Error | null, apiResponse?: Metadata): void;
 }
 
+export type EnableRequesterPaysOptions = PreconditionOptions;
 export interface BucketExistsOptions extends GetConfig {
   userProject?: string;
 }
@@ -289,6 +301,7 @@ export interface MakeBucketPrivateOptions {
   force?: boolean;
   metadata?: Metadata;
   userProject?: string;
+  preconditionOpts?: PreconditionOptions;
 }
 
 interface MakeBucketPrivateRequest extends MakeBucketPrivateOptions {
@@ -312,7 +325,7 @@ export interface MakeBucketPublicCallback {
 
 export type MakeBucketPublicResponse = [File[]];
 
-export interface SetBucketMetadataOptions {
+export interface SetBucketMetadataOptions extends PreconditionOptions {
   userProject?: string;
 }
 
@@ -332,7 +345,7 @@ export interface Labels {
   [key: string]: string;
 }
 
-export interface SetLabelsOptions {
+export interface SetLabelsOptions extends PreconditionOptions {
   userProject?: string;
 }
 
@@ -342,7 +355,7 @@ export interface SetLabelsCallback {
   (err?: Error | null, metadata?: Metadata): void;
 }
 
-export interface SetBucketStorageClassOptions {
+export interface SetBucketStorageClassOptions extends PreconditionOptions {
   userProject?: string;
 }
 
@@ -1316,7 +1329,7 @@ class Bucket extends ServiceObject {
     optionsOrCallback?: AddLifecycleRuleOptions | SetBucketMetadataCallback,
     callback?: SetBucketMetadataCallback
   ): Promise<SetBucketMetadataResponse> | void {
-    let options;
+    let options: AddLifecycleRuleOptions = {};
 
     if (typeof optionsOrCallback === 'function') {
       callback = optionsOrCallback;
@@ -1359,18 +1372,12 @@ class Bucket extends ServiceObject {
       return apiFormattedRule;
     });
 
-    this.disableAutoRetryConditionallyIdempotent_(
-      this.methods.setMetadata,
-      AvailableServiceObjectMethods.setMetadata
-    );
-
     if (options.append === false) {
-      this.setMetadata({lifecycle: {rule: newLifecycleRules}})
-        .then(resp => callback!(null, ...resp))
-        .catch(callback!)
-        .finally(() => {
-          this.storage.retryOptions.autoRetry = this.instanceRetryValue;
-        });
+      this.setMetadata(
+        {lifecycle: {rule: newLifecycleRules}},
+        options,
+        callback!
+      );
       return;
     }
 
@@ -1386,16 +1393,15 @@ class Bucket extends ServiceObject {
         metadata.lifecycle && metadata.lifecycle.rule
       );
 
-      this.setMetadata({
-        lifecycle: {
-          rule: currentLifecycleRules.concat(newLifecycleRules),
+      this.setMetadata(
+        {
+          lifecycle: {
+            rule: currentLifecycleRules.concat(newLifecycleRules),
+          },
         },
-      })
-        .then(resp => callback!(null, ...resp))
-        .catch(callback!)
-        .finally(() => {
-          this.storage.retryOptions.autoRetry = this.instanceRetryValue;
-        });
+        options as AddLifecycleRuleOptions,
+        callback!
+      );
     });
   }
 
@@ -1506,6 +1512,12 @@ class Bucket extends ServiceObject {
       options = optionsOrCallback;
     }
 
+    this.disableAutoRetryConditionallyIdempotent_(
+      this.methods.setMetadata, // Not relevant but param is required
+      AvailableServiceObjectMethods.setMetadata, // Same as above
+      options
+    );
+
     const convertToFile = (file: string | File): File => {
       if (file instanceof File) {
         return file;
@@ -1527,19 +1539,21 @@ class Bucket extends ServiceObject {
     }
 
     let maxRetries = this.storage.retryOptions.maxRetries;
-    (sources as File[]).forEach(source => {
-      if (
-        (source?.instancePreconditionOpts?.ifGenerationMatch === undefined &&
-          this.storage.retryOptions.idempotencyStrategy ===
-            IdempotencyStrategy.RetryConditional) ||
+    if (
+      (destinationFile?.instancePreconditionOpts?.ifGenerationMatch ===
+        undefined &&
+        options.ifGenerationMatch === undefined &&
         this.storage.retryOptions.idempotencyStrategy ===
-          IdempotencyStrategy.RetryNever
-      ) {
-        maxRetries = 0;
-      }
-    });
+          IdempotencyStrategy.RetryConditional) ||
+      this.storage.retryOptions.idempotencyStrategy ===
+        IdempotencyStrategy.RetryNever
+    ) {
+      maxRetries = 0;
+    }
 
-    Object.assign(options, this.instancePreconditionOpts, options);
+    if (options.ifGenerationMatch === undefined) {
+      Object.assign(options, destinationFile.instancePreconditionOpts, options);
+    }
 
     // Make the request from the destination File object.
     destinationFile.request(
@@ -1556,13 +1570,8 @@ class Bucket extends ServiceObject {
               name: source.name,
             } as SourceObject;
 
-            if (
-              source?.metadata?.generation ||
-              source?.instancePreconditionOpts?.ifGenerationMatch
-            ) {
-              sourceObject.generation =
-                source?.metadata?.generation ||
-                source?.instancePreconditionOpts?.ifGenerationMatch;
+            if (source.metadata && source.metadata.generation) {
+              sourceObject.generation = source.metadata.generation;
             }
 
             return sourceObject;
@@ -1571,6 +1580,7 @@ class Bucket extends ServiceObject {
         qs: options,
       },
       (err, resp) => {
+        this.storage.retryOptions.autoRetry = this.instanceRetryValue;
         if (err) {
           callback!(err, null, resp);
           return;
@@ -1943,6 +1953,9 @@ class Bucket extends ServiceObject {
    * `{ force: true }` to suppress the errors until all files have had a chance
    * to be processed.
    *
+   * File preconditions cannot be passed to this function. It will not retry unless
+   * the idempotency strategy is set to retry always.
+   *
    * The `query` object passed as the first argument will also be passed to
    * {@link Bucket#getFiles}.
    *
@@ -2031,8 +2044,18 @@ class Bucket extends ServiceObject {
   }
 
   deleteLabels(labels?: string | string[]): Promise<DeleteLabelsResponse>;
+  deleteLabels(options: DeleteLabelsOptions): Promise<DeleteLabelsResponse>;
   deleteLabels(callback: DeleteLabelsCallback): void;
+  deleteLabels(
+    labels: string | string[],
+    options: DeleteLabelsOptions
+  ): Promise<DeleteLabelsResponse>;
   deleteLabels(labels: string | string[], callback: DeleteLabelsCallback): void;
+  deleteLabels(
+    labels: string | string[],
+    options: DeleteLabelsOptions,
+    callback: DeleteLabelsCallback
+  ): void;
   /**
    * @typedef {array} DeleteLabelsResponse
    * @property {object} 0 The full API response.
@@ -2048,6 +2071,7 @@ class Bucket extends ServiceObject {
    * @param {string|string[]} [labels] The labels to delete. If no labels are
    *     provided, all of the labels are removed.
    * @param {DeleteLabelsCallback} [callback] Callback function.
+   * @param {DeleteLabelsOptions} [options] Options, including precondition options
    * @returns {Promise<DeleteLabelsResponse>}
    *
    * @example
@@ -2083,14 +2107,32 @@ class Bucket extends ServiceObject {
    * ```
    */
   deleteLabels(
-    labelsOrCallback?: string | string[] | DeleteLabelsCallback,
+    labelsOrCallbackOrOptions?:
+      | string
+      | string[]
+      | DeleteLabelsCallback
+      | DeleteLabelsOptions,
+    optionsOrCallback?: DeleteLabelsCallback | DeleteLabelsOptions,
     callback?: DeleteLabelsCallback
   ): Promise<DeleteLabelsResponse> | void {
     let labels = new Array<string>();
-    if (typeof labelsOrCallback === 'function') {
-      callback = labelsOrCallback;
-    } else if (labelsOrCallback) {
-      labels = arrify(labelsOrCallback);
+    let options: DeleteLabelsOptions = {};
+
+    if (typeof labelsOrCallbackOrOptions === 'function') {
+      callback = labelsOrCallbackOrOptions;
+    } else if (
+      typeof labelsOrCallbackOrOptions === 'string' ||
+      Array.isArray(labelsOrCallbackOrOptions)
+    ) {
+      labels = arrify(labelsOrCallbackOrOptions);
+    } else if (labelsOrCallbackOrOptions) {
+      options = labelsOrCallbackOrOptions;
+    }
+
+    if (typeof optionsOrCallback === 'function') {
+      callback = optionsOrCallback;
+    } else if (optionsOrCallback) {
+      options = optionsOrCallback;
     }
 
     const deleteLabels = (labels: string[]) => {
@@ -2099,7 +2141,11 @@ class Bucket extends ServiceObject {
         return nullLabelMap;
       }, {});
 
-      this.setLabels(nullLabelMap, callback!);
+      if (options?.ifMetagenerationMatch !== undefined) {
+        this.setLabels(nullLabelMap, options, callback!);
+      } else {
+        this.setLabels(nullLabelMap, callback!);
+      }
     };
 
     if (labels.length === 0) {
@@ -2115,8 +2161,14 @@ class Bucket extends ServiceObject {
     }
   }
 
-  disableRequesterPays(): Promise<DisableRequesterPaysResponse>;
+  disableRequesterPays(
+    options?: DisableRequesterPaysOptions
+  ): Promise<DisableRequesterPaysResponse>;
   disableRequesterPays(callback: DisableRequesterPaysCallback): void;
+  disableRequesterPays(
+    options: DisableRequesterPaysOptions,
+    callback: DisableRequesterPaysCallback
+  ): void;
   /**
    * @typedef {array} DisableRequesterPaysResponse
    * @property {object} 0 The full API response.
@@ -2137,6 +2189,7 @@ class Bucket extends ServiceObject {
    * Disable `requesterPays` functionality from this bucket.
    *
    * @param {DisableRequesterPaysCallback} [callback] Callback function.
+   * @param {DisableRequesterPaysOptions} [options] Options, including precondition options
    * @returns {Promise<DisableRequesterPaysCallback>}
    *
    * @example
@@ -2164,24 +2217,27 @@ class Bucket extends ServiceObject {
    * Example of disabling requester pays:
    */
   disableRequesterPays(
+    optionsOrCallback?:
+      | DisableRequesterPaysOptions
+      | DisableRequesterPaysCallback,
     callback?: DisableRequesterPaysCallback
   ): Promise<DisableRequesterPaysResponse> | void {
-    const cb = callback || util.noop;
-    this.disableAutoRetryConditionallyIdempotent_(
-      this.methods.setMetadata,
-      AvailableServiceObjectMethods.setMetadata
-    );
+    let options: DisableRequesterPaysOptions = {};
+    if (typeof optionsOrCallback === 'function') {
+      callback = optionsOrCallback;
+    } else if (optionsOrCallback) {
+      options = optionsOrCallback;
+    }
 
-    this.setMetadata({
-      billing: {
-        requesterPays: false,
+    this.setMetadata(
+      {
+        billing: {
+          requesterPays: false,
+        },
       },
-    })
-      .then(resp => cb(null, ...resp))
-      .catch(cb)
-      .finally(() => {
-        this.storage.retryOptions.autoRetry = this.instanceRetryValue;
-      });
+      options,
+      callback!
+    );
   }
 
   enableLogging(
@@ -2265,9 +2321,14 @@ class Bucket extends ServiceObject {
       ? (config.bucket as Bucket).id || config.bucket
       : this.id;
 
+    const options: PreconditionOptions = {};
+    if (config?.ifMetagenerationMatch) {
+      options.ifMetagenerationMatch = config.ifMetagenerationMatch;
+    }
+    if (config?.ifMetagenerationNotMatch) {
+      options.ifMetagenerationNotMatch = config.ifMetagenerationNotMatch;
+    }
     (async () => {
-      let setMetadataResponse;
-
       try {
         const [policy] = await this.iam.getPolicy();
         policy.bindings.push({
@@ -2275,29 +2336,32 @@ class Bucket extends ServiceObject {
           role: 'roles/storage.objectCreator',
         });
         await this.iam.setPolicy(policy);
-        this.disableAutoRetryConditionallyIdempotent_(
-          this.methods.setMetadata,
-          AvailableServiceObjectMethods.setMetadata
-        );
-        [setMetadataResponse] = await this.setMetadata({
-          logging: {
-            logBucket,
-            logObjectPrefix: config.prefix,
+        this.setMetadata(
+          {
+            logging: {
+              logBucket,
+              logObjectPrefix: config.prefix,
+            },
           },
-        });
+          options,
+          callback!
+        );
       } catch (e) {
         callback!(e as Error);
         return;
-      } finally {
-        this.storage.retryOptions.autoRetry = this.instanceRetryValue;
       }
-
-      callback!(null, setMetadataResponse);
     })();
   }
 
-  enableRequesterPays(): Promise<EnableRequesterPaysResponse>;
+  enableRequesterPays(
+    options?: EnableRequesterPaysOptions
+  ): Promise<EnableRequesterPaysResponse>;
   enableRequesterPays(callback: EnableRequesterPaysCallback): void;
+  enableRequesterPays(
+    options: EnableRequesterPaysOptions,
+    callback: EnableRequesterPaysCallback
+  ): void;
+
   /**
    * @typedef {array} EnableRequesterPaysResponse
    * @property {object} 0 The full API response.
@@ -2319,7 +2383,8 @@ class Bucket extends ServiceObject {
    * bucket owner, to have the requesting user assume the charges for the access
    * to your bucket and its contents.
    *
-   * @param {EnableRequesterPaysCallback} [callback] Callback function.
+   * @param {EnableRequesterPaysCallback | EnableRequesterPaysOptions} [optionsOrCallback]
+   * Callback function or precondition options.
    * @returns {Promise<EnableRequesterPaysResponse>}
    *
    * @example
@@ -2347,23 +2412,27 @@ class Bucket extends ServiceObject {
    * Example of enabling requester pays:
    */
   enableRequesterPays(
-    callback?: EnableRequesterPaysCallback
+    optionsOrCallback?:
+      | EnableRequesterPaysCallback
+      | EnableRequesterPaysOptions,
+    cb?: EnableRequesterPaysCallback
   ): Promise<EnableRequesterPaysResponse> | void {
-    const cb = callback || util.noop;
-    this.disableAutoRetryConditionallyIdempotent_(
-      this.methods.setMetadata,
-      AvailableServiceObjectMethods.setMetadata
-    );
-    this.setMetadata({
-      billing: {
-        requesterPays: true,
+    let options: EnableRequesterPaysOptions = {};
+    if (typeof optionsOrCallback === 'function') {
+      cb = optionsOrCallback;
+    } else if (optionsOrCallback) {
+      options = optionsOrCallback;
+    }
+
+    this.setMetadata(
+      {
+        billing: {
+          requesterPays: true,
+        },
       },
-    })
-      .then(resp => cb(null, ...resp))
-      .catch(cb)
-      .finally(() => {
-        this.storage.retryOptions.autoRetry = this.instanceRetryValue;
-      });
+      options,
+      cb!
+    );
   }
 
   /**
@@ -3154,29 +3223,45 @@ class Bucket extends ServiceObject {
       query.userProject = options.userProject;
     }
 
-    this.disableAutoRetryConditionallyIdempotent_(
-      this.methods.setMetadata,
-      AvailableServiceObjectMethods.setMetadata
-    );
+    if (options.preconditionOpts?.ifGenerationMatch) {
+      query.ifGenerationMatch = options.preconditionOpts.ifGenerationMatch;
+    }
+
+    if (options.preconditionOpts?.ifGenerationNotMatch) {
+      query.ifGenerationNotMatch =
+        options.preconditionOpts.ifGenerationNotMatch;
+    }
+
+    if (options.preconditionOpts?.ifMetagenerationMatch) {
+      query.ifMetagenerationMatch =
+        options.preconditionOpts.ifMetagenerationMatch;
+    }
+
+    if (options.preconditionOpts?.ifMetagenerationNotMatch) {
+      query.ifMetagenerationNotMatch =
+        options.preconditionOpts.ifMetagenerationNotMatch;
+    }
 
     // You aren't allowed to set both predefinedAcl & acl properties on a bucket
     // so acl must explicitly be nullified.
     const metadata = extend({}, options.metadata, {acl: null});
 
-    this.setMetadata(metadata, query)
-      .then(() => {
+    this.setMetadata(metadata, query, err => {
+      if (err) {
+        callback!(err);
+      }
+      const internalCall = () => {
         if (options.includeFiles) {
           return promisify<MakeAllFilesPublicPrivateOptions, File[]>(
             this.makeAllFilesPublicPrivate_
           ).call(this, options);
         }
-        return [];
-      })
-      .then(files => callback!(null, files))
-      .catch(callback!)
-      .finally(() => {
-        this.storage.retryOptions.autoRetry = this.instanceRetryValue;
-      });
+        return Promise.resolve([] as File[]);
+      };
+      internalCall()
+        .then(files => callback!(null, files))
+        .catch(callback!);
+    });
   }
 
   makePublic(
@@ -3336,13 +3421,20 @@ class Bucket extends ServiceObject {
     return new Notification(this, id);
   }
 
-  removeRetentionPeriod(): Promise<SetBucketMetadataResponse>;
+  removeRetentionPeriod(
+    options?: SetBucketMetadataOptions
+  ): Promise<SetBucketMetadataResponse>;
   removeRetentionPeriod(callback: SetBucketMetadataCallback): void;
+  removeRetentionPeriod(
+    options: SetBucketMetadataOptions,
+    callback: SetBucketMetadataCallback
+  ): void;
   /**
    * Remove an already-existing retention policy from this bucket, if it is not
    * locked.
    *
    * @param {SetBucketMetadataCallback} [callback] Callback function.
+   * @param {SetBucketMetadataOptions} [options] Options, including precondition options
    * @returns {Promise<SetBucketMetadataResponse>}
    *
    * @example
@@ -3361,21 +3453,21 @@ class Bucket extends ServiceObject {
    * ```
    */
   removeRetentionPeriod(
+    optionsOrCallback?: SetBucketMetadataOptions | SetBucketMetadataCallback,
     callback?: SetBucketMetadataCallback
   ): Promise<SetBucketMetadataResponse> | void {
-    const cb = callback || util.noop;
-    this.disableAutoRetryConditionallyIdempotent_(
-      this.methods.setMetadata,
-      AvailableServiceObjectMethods.setMetadata
+    const options =
+      typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
+    callback =
+      typeof optionsOrCallback === 'function' ? optionsOrCallback : callback;
+
+    this.setMetadata(
+      {
+        retentionPolicy: null,
+      },
+      options,
+      callback!
     );
-    this.setMetadata({
-      retentionPolicy: null,
-    })
-      .then(resp => cb(null, ...resp))
-      .catch(cb)
-      .finally(() => {
-        this.storage.retryOptions.autoRetry = this.instanceRetryValue;
-      });
   }
 
   request(reqOpts: DecorateRequestOptions): Promise<[ResponseBody, Metadata]>;
@@ -3476,21 +3568,57 @@ class Bucket extends ServiceObject {
 
     callback = callback || util.noop;
 
+    this.setMetadata({labels}, options, callback);
+  }
+
+  setMetadata(
+    metadata: Metadata,
+    options?: SetMetadataOptions
+  ): Promise<SetMetadataResponse>;
+  setMetadata(metadata: Metadata, callback: MetadataCallback): void;
+  setMetadata(
+    metadata: Metadata,
+    options: SetMetadataOptions,
+    callback: MetadataCallback
+  ): void;
+  setMetadata(
+    metadata: Metadata,
+    optionsOrCallback: SetMetadataOptions | MetadataCallback,
+    cb?: MetadataCallback
+  ): Promise<SetMetadataResponse> | void {
+    const options =
+      typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
+    cb =
+      typeof optionsOrCallback === 'function'
+        ? (optionsOrCallback as MetadataCallback)
+        : cb;
+
     this.disableAutoRetryConditionallyIdempotent_(
       this.methods.setMetadata,
-      AvailableServiceObjectMethods.setMetadata
+      AvailableServiceObjectMethods.setMetadata,
+      options
     );
-    this.setMetadata({labels}, options)
-      .then(resp => callback!(null, ...resp))
-      .catch(callback!)
+
+    super
+      .setMetadata(metadata, options)
+      .then(resp => cb!(null, ...resp))
+      .catch(cb!)
       .finally(() => {
         this.storage.retryOptions.autoRetry = this.instanceRetryValue;
       });
   }
 
-  setRetentionPeriod(duration: number): Promise<SetBucketMetadataResponse>;
   setRetentionPeriod(
     duration: number,
+    options?: SetBucketMetadataOptions
+  ): Promise<SetBucketMetadataResponse>;
+  setRetentionPeriod(
+    duration: number,
+    callback: SetBucketMetadataCallback
+  ): void;
+  setRetentionPeriod(
+    duration: number,
+    options: SetBucketMetadataOptions,
     callback: SetBucketMetadataCallback
   ): void;
   /**
@@ -3508,6 +3636,7 @@ class Bucket extends ServiceObject {
    * @param {*} duration In seconds, the minimum retention time for all objects
    *     contained in this bucket.
    * @param {SetBucketMetadataCallback} [callback] Callback function.
+   * @param {SetBucketMetadataCallback} [options] Options, including precondition options.
    * @returns {Promise<SetBucketMetadataResponse>}
    *
    * @example
@@ -3532,30 +3661,35 @@ class Bucket extends ServiceObject {
    */
   setRetentionPeriod(
     duration: number,
+    optionsOrCallback?: SetBucketMetadataOptions | SetBucketMetadataCallback,
     callback?: SetBucketMetadataCallback
   ): Promise<SetBucketMetadataResponse> | void {
-    const cb = callback || util.noop;
-    this.disableAutoRetryConditionallyIdempotent_(
-      this.methods.setMetadata,
-      AvailableServiceObjectMethods.setMetadata
-    );
-    this.setMetadata({
-      retentionPolicy: {
-        retentionPeriod: duration,
+    const options =
+      typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
+    callback =
+      typeof optionsOrCallback === 'function' ? optionsOrCallback : callback;
+    this.setMetadata(
+      {
+        retentionPolicy: {
+          retentionPeriod: duration,
+        },
       },
-    })
-      .then(resp => cb(null, ...resp))
-      .catch(cb)
-      .finally(() => {
-        this.storage.retryOptions.autoRetry = this.instanceRetryValue;
-      });
+      options,
+      callback!
+    );
   }
 
   setCorsConfiguration(
-    corsConfiguration: Cors[]
+    corsConfiguration: Cors[],
+    options?: SetBucketMetadataOptions
   ): Promise<SetBucketMetadataResponse>;
   setCorsConfiguration(
     corsConfiguration: Cors[],
+    callback: SetBucketMetadataCallback
+  ): void;
+  setCorsConfiguration(
+    corsConfiguration: Cors[],
+    options: SetBucketMetadataOptions,
     callback: SetBucketMetadataCallback
   ): void;
   /**
@@ -3585,6 +3719,7 @@ class Bucket extends ServiceObject {
    * @param {string[]} [corsConfiguration.responseHeader] A header allowed for cross origin
    *     resource sharing with this bucket.
    * @param {SetBucketMetadataCallback} [callback] Callback function.
+   * @param {SetBucketMetadataOptions} [options] Options, including precondition options.
    * @returns {Promise<SetBucketMetadataResponse>}
    *
    * @example
@@ -3605,22 +3740,20 @@ class Bucket extends ServiceObject {
    */
   setCorsConfiguration(
     corsConfiguration: Cors[],
+    optionsOrCallback?: SetBucketMetadataOptions | SetBucketMetadataCallback,
     callback?: SetBucketMetadataCallback
   ): Promise<SetBucketMetadataResponse> | void {
-    const cb = callback || util.noop;
-    this.disableAutoRetryConditionallyIdempotent_(
-      this.methods.setMetadata,
-      AvailableServiceObjectMethods.setMetadata
+    const options =
+      typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
+    callback =
+      typeof optionsOrCallback === 'function' ? optionsOrCallback : callback;
+    this.setMetadata(
+      {
+        cors: corsConfiguration,
+      },
+      options,
+      callback!
     );
-
-    this.setMetadata({
-      cors: corsConfiguration,
-    })
-      .then(resp => cb(null, ...resp))
-      .catch(cb)
-      .finally(() => {
-        this.storage.retryOptions.autoRetry = this.instanceRetryValue;
-      });
   }
 
   setStorageClass(
@@ -3693,10 +3826,6 @@ class Bucket extends ServiceObject {
     callback =
       typeof optionsOrCallback === 'function' ? optionsOrCallback : callback;
 
-    this.disableAutoRetryConditionallyIdempotent_(
-      this.methods.setMetadata,
-      AvailableServiceObjectMethods.setMetadata
-    );
     // In case we get input like `storageClass`, convert to `storage_class`.
     storageClass = storageClass
       .replace(/-/g, '_')
@@ -3705,12 +3834,7 @@ class Bucket extends ServiceObject {
       })
       .toUpperCase();
 
-    this.setMetadata({storageClass}, options)
-      .then(() => callback!())
-      .catch(callback!)
-      .finally(() => {
-        this.storage.retryOptions.autoRetry = this.instanceRetryValue;
-      });
+    this.setMetadata({storageClass}, options, callback!);
   }
 
   /**
@@ -4229,11 +4353,14 @@ class Bucket extends ServiceObject {
   disableAutoRetryConditionallyIdempotent_(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     coreOpts: any,
-    methodType: AvailableServiceObjectMethods
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    methodType: AvailableServiceObjectMethods,
+    localPreconditionOptions?: PreconditionOptions
   ): void {
     if (
       typeof coreOpts === 'object' &&
       coreOpts?.reqOpts?.qs?.ifMetagenerationMatch === undefined &&
+      localPreconditionOptions?.ifMetagenerationMatch === undefined &&
       (methodType === AvailableServiceObjectMethods.setMetadata ||
         methodType === AvailableServiceObjectMethods.delete) &&
       this.storage.retryOptions.idempotencyStrategy ===

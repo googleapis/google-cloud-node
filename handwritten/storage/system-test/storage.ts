@@ -302,17 +302,16 @@ describe('storage', () => {
       });
 
       it('should make a bucket private', async () => {
-        await bucket.makePublic();
-        await bucket.makePrivate();
-        const validateMakeBucketPrivateRejects = (err: ApiError) => {
-          assert.strictEqual(err.code, 404);
-          assert.strictEqual((err as ApiError).errors![0].reason, 'notFound');
-          return true;
-        };
-        await assert.rejects(
-          bucket.acl.get({entity: 'allUsers'}),
-          validateMakeBucketPrivateRejects
-        );
+        try {
+          await bucket.makePublic();
+          await bucket.makePrivate();
+          assert.rejects(bucket.acl.get({entity: 'allUsers'}), err => {
+            assert.strictEqual((err as ApiError).code, 404);
+            assert.strictEqual((err as ApiError).errors![0].reason, 'notFound');
+          });
+        } catch (err) {
+          assert.ifError(err);
+        }
       });
 
       it('should make files private', async () => {

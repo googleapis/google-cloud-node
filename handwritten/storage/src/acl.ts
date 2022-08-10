@@ -510,6 +510,7 @@ class Acl extends AclRoleAccessorMethods {
         method: 'POST',
         uri: '',
         qs: query,
+        maxRetries: 0, //explicitly set this value since this is a non-idempotent function
         json: {
           entity: options.entity,
           role: options.role.toUpperCase(),

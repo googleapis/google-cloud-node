@@ -344,10 +344,16 @@ class Iam {
       SetPolicyCallback
     >(optionsOrCallback, callback);
 
+    let maxRetries;
+    if (policy.etag === undefined) {
+      maxRetries = 0;
+    }
+
     this.request_(
       {
         method: 'PUT',
         uri: '/iam',
+        maxRetries,
         json: Object.assign(
           {
             resourceId: this.resourceId_,

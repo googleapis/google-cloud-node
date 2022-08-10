@@ -113,7 +113,13 @@ export interface CreateCallback<T> {
   (err: ApiError | null, instance?: T | null, ...args: any[]): void;
 }
 
-export type DeleteOptions = {ignoreNotFound?: boolean} & object;
+export type DeleteOptions = {
+  ignoreNotFound?: boolean;
+  ifGenerationMatch?: number;
+  ifGenerationNotMatch?: number;
+  ifMetagenerationMatch?: number;
+  ifMetagenerationNotMatch?: number;
+} & object;
 export interface DeleteCallback {
   (err: Error | null, apiResponse?: r.Response): void;
 }

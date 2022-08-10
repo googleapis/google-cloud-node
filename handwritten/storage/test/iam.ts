@@ -135,6 +135,7 @@ describe('storage/iam', () => {
         assert.deepStrictEqual(reqOpts, {
           method: 'PUT',
           uri: '/iam',
+          maxRetries: 0,
           json: Object.assign(
             {
               resourceId: iam.resourceId_,
