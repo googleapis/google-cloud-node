@@ -18,6 +18,7 @@ import {Octokit} from 'octokit';
 import {join} from 'path';
 import ChildProcess from 'child_process';
 import {writeFileSync} from 'fs';
+import yaml from 'js-yaml';
 
 const LANGUAGE = 'nodejs';
 
@@ -25,7 +26,17 @@ export interface GHFile {
   content: string | undefined;
 }
 
-function isFile(file: GHFile | unknown): file is GHFile {
+export interface GHDir {
+  name: string;
+}
+
+export interface ServiceYaml {
+  apis: {
+    name: string;
+  }[];
+}
+
+function isFile(file: GHFile | GHDir[]): file is GHFile {
   return (file as GHFile).content !== undefined;
 }
 export interface TemplateVars {
@@ -49,6 +60,8 @@ export interface TemplateVars {
   apiPathDashes: string;
   // version in API ID, will be used as default_version
   version: string;
+  // service name of the api
+  serviceName: string;
 }
 
 export interface DriftApi {
@@ -138,10 +151,55 @@ export async function getDistributionName(
   return packageName;
 }
 
+export async function getServiceName(octokit: Octokit, apiId: string) {
+  let path = apiId.toString().replace(/\./g, '/');
+
+  const dir = (
+    await octokit.rest.repos.getContent({
+      owner: 'googleapis',
+      repo: 'googleapis',
+      path: `${path}`,
+    })
+  ).data as GHDir[];
+
+  for (const file of dir) {
+    if (file.name.endsWith('.yaml')) {
+      path = `${path}/${file.name}`;
+    }
+  }
+
+  console.log(path);
+
+  const yamlFile = (
+    await octokit.rest.repos.getContent({
+      owner: 'googleapis',
+      repo: 'googleapis',
+      path,
+    })
+  ).data;
+
+  let parsedYaml;
+  if (isFile(yamlFile as any)) {
+    parsedYaml = yaml.load(
+      Buffer.from((yamlFile as any).content, 'base64').toString('utf8')
+    );
+  }
+
+  let serviceName = '';
+  for (const api of (parsedYaml as ServiceYaml)?.apis) {
+    if (api.name.endsWith('Service')) {
+      serviceName = api.name.split('.')[api.name.split('.').length - 1];
+    }
+  }
+
+  return serviceName;
+}
+
 export async function compileVars(
   argv: CliArgs,
   driftMetadata: DriftMetadata,
-  distributionName: string
+  distributionName: string,
+  serviceName: string
 ): Promise<TemplateVars> {
   return {
     name: driftMetadata.apiShortName,
@@ -154,6 +212,7 @@ export async function compileVars(
     apiPath: getApiPath(argv['api-id']),
     apiPathDashes: getApiPathWithDashes(argv['api-id']),
     version: getVersion(argv['api-id']),
+    serviceName,
   };
 }
 
