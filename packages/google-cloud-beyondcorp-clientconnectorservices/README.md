@@ -83,10 +83,12 @@ npm install @google-cloud/clientconnectorservices
 // const orderBy = 'abc123'
 
 // Imports the Clientconnectorservices library
-const {ClientConnectorServicesServiceClient} = require('@google-cloud/clientconnectorservices').v1;
+const {ClientConnectorServicesServiceClient} =
+  require('@google-cloud/clientconnectorservices').v1;
 
 // Instantiates a client
-const clientconnectorservicesClient = new ClientConnectorServicesServiceClient();
+const clientconnectorservicesClient =
+  new ClientConnectorServicesServiceClient();
 
 async function callListClientConnectorServices() {
   // Construct request
@@ -95,9 +97,12 @@ async function callListClientConnectorServices() {
   };
 
   // Run request
-  const iterable = await clientconnectorservicesClient.listClientConnectorServicesAsync(request);
+  const iterable =
+    await clientconnectorservicesClient.listClientConnectorServicesAsync(
+      request
+    );
   for await (const response of iterable) {
-      console.log(response);
+    console.log(response);
   }
 }
 
