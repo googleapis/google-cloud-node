@@ -15,11 +15,10 @@
 import {CliArgs} from './commands/bootstrap-library';
 import {Storage} from '@google-cloud/storage';
 import {Octokit} from 'octokit';
-import {join, parse} from 'path';
+import {join} from 'path';
 import ChildProcess from 'child_process';
 import {writeFileSync} from 'fs';
 import yaml from 'js-yaml';
-import { parsed } from 'yargs';
 
 const LANGUAGE = 'nodejs';
 
@@ -181,12 +180,10 @@ export async function getServiceName(
 
   let parsedYaml;
   if (isFile((yamlFile as any))) {
-    console.log('hello!')
     parsedYaml = yaml.load(Buffer.from((yamlFile as any).content, 'base64').toString('utf8'));
   }
 
   let serviceName = '';
-  console.log(parsedYaml)
   for (const api of (parsedYaml as ServiceYaml)?.apis) {
     if (api.name.endsWith('Service')) {
       serviceName = api.name.split('.')[api.name.split('.').length - 1]
