@@ -22,10 +22,24 @@ const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
 const cwd = path.join(__dirname, '..');
 
+// Imports the Appgateways library
+const {AppGatewaysServiceClient} = require('@google-cloud/appgateways').v1;
+
+// Instantiates a client
+const appgatewaysClient = new AppGatewaysServiceClient();
+
 describe('Quickstart', () => {
   let projectId;
 
+  before(async () => {
+    projectId = await appgatewaysClient.getProjectId();
+  });
+
   it('should run quickstart', async () => {
-    execSync(`node ./quickstart.js ${projectId}`, {cwd});
+    const output = execSync(
+      `node ./quickstart.js projects/${projectId}/locations/us-central1`,
+      {cwd}
+    );
+    assert(output !== null);
   });
 });

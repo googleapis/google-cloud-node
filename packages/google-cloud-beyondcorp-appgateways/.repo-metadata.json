@@ -1,7 +1,7 @@
 {
   "name": "appgateways",
-  "name_pretty": "",
-  "product_documentation": "",
+  "name_pretty": "BeyondCorp API",
+  "product_documentation": "https://cloud.google.com/beyondcorp",
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/appgateways/latest",
   "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
   "release_level": "beta",
@@ -13,4 +13,3 @@
   "requires_billing": true,
   "library_type": "GAPIC_AUTO"
 }
-
