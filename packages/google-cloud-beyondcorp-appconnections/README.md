@@ -92,7 +92,8 @@ npm install @google-cloud/appconnections
 // const orderBy = 'abc123'
 
 // Imports the Appconnections library
-const {AppConnectionsServiceClient} = require('@google-cloud/appconnections').v1;
+const {AppConnectionsServiceClient} =
+  require('@google-cloud/appconnections').v1;
 
 // Instantiates a client
 const appconnectionsClient = new AppConnectionsServiceClient();
@@ -104,9 +105,11 @@ async function callListAppConnections() {
   };
 
   // Run request
-  const iterable = await appconnectionsClient.listAppConnectionsAsync(request);
+  const iterable = await appconnectionsClient.listAppConnectionsAsync(
+    request
+  );
   for await (const response of iterable) {
-      console.log(response);
+    console.log(response);
   }
 }
 
