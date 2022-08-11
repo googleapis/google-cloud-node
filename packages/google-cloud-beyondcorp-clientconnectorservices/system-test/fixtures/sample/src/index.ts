@@ -16,10 +16,22 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import * as v1 from './v1';
-const ClientConnectorServicesServiceClient = v1.ClientConnectorServicesServiceClient;
-type ClientConnectorServicesServiceClient = v1.ClientConnectorServicesServiceClient;
-export {v1, ClientConnectorServicesServiceClient};
-export default {v1, ClientConnectorServicesServiceClient};
-import * as protos from '../protos/protos';
-export {protos}
+import {ClientConnectorServicesServiceClient} from '@google-cloud/clientconnectorservices';
+
+// check that the client class type name can be used
+function doStuffWithClientConnectorServicesServiceClient(
+  client: ClientConnectorServicesServiceClient
+) {
+  client.close();
+}
+
+function main() {
+  // check that the client instance can be created
+  const clientConnectorServicesServiceClient =
+    new ClientConnectorServicesServiceClient();
+  doStuffWithClientConnectorServicesServiceClient(
+    clientConnectorServicesServiceClient
+  );
+}
+
+main();

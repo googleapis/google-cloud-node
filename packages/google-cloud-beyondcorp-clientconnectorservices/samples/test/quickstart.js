@@ -18,8 +18,10 @@ const assert = require('assert');
 const path = require('path');
 const cp = require('child_process');
 const {describe, it, before} = require('mocha');
-const { ClientConnectorServicesServiceClient } = require('@google-cloud/clientconnectorservices').v1;
-const clientconnectorservicesClient = new ClientConnectorServicesServiceClient();
+const {ClientConnectorServicesServiceClient} =
+  require('@google-cloud/clientconnectorservices').v1;
+const clientconnectorservicesClient =
+  new ClientConnectorServicesServiceClient();
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
@@ -33,7 +35,10 @@ describe('Quickstart', () => {
   });
 
   it('should run quickstart', async () => {
-    const output = execSync(`node ./quickstart.js projects/${projectId}/locations/us-central1`, {cwd});
+    const output = execSync(
+      `node ./quickstart.js projects/${projectId}/locations/us-central1`,
+      {cwd}
+    );
     assert(output !== null);
   });
 });

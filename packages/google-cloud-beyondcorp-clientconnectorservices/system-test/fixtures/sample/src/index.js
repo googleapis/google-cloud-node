@@ -16,17 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {ClientConnectorServicesServiceClient} from '@google-cloud/clientconnectorservices';
-
-// check that the client class type name can be used
-function doStuffWithClientConnectorServicesServiceClient(client: ClientConnectorServicesServiceClient) {
-  client.close();
-}
+/* eslint-disable node/no-missing-require, no-unused-vars */
+const clientconnectorservices = require('@google-cloud/clientconnectorservices');
 
 function main() {
-  // check that the client instance can be created
-  const clientConnectorServicesServiceClient = new ClientConnectorServicesServiceClient();
-  doStuffWithClientConnectorServicesServiceClient(clientConnectorServicesServiceClient);
+  const clientConnectorServicesServiceClient =
+    new clientconnectorservices.ClientConnectorServicesServiceClient();
 }
 
 main();
