@@ -1,8 +1,8 @@
 {
-    "name": "{{distributionName}}",
+    "name": "@google-cloud/appgateways",
     "version": "0.1.0",
-    "description": "{{namePretty}} client for Node.js",
-    "repository": "googleapis/{{monoRepoName}}",
+    "description": "BeyondCorp API client for Node.js",
+    "repository": "googleapis/google-cloud-node",
     "license": "Apache-2.0",
     "author": "Google LLC",
     "main": "build/src/index.js",
@@ -19,9 +19,9 @@
       "google cloud platform",
       "google cloud",
       "cloud",
-      "google {{name}}",
-      "{{name}}",
-      "{{namePretty}}"
+      "google appgateways",
+      "appgateways",
+      ""
     ],
     "scripts": {
       "clean": "gts clean",
