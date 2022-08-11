@@ -106,7 +106,7 @@ async function callListAppGateways() {
   // Run request
   const iterable = await appgatewaysClient.listAppGatewaysAsync(request);
   for await (const response of iterable) {
-      console.log(response);
+    console.log(response);
   }
 }
 
