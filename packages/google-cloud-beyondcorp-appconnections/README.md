@@ -31,8 +31,8 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-
-
+  * [Using the client library](#using-the-client-library)
+* [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
@@ -54,6 +54,75 @@ npm install @google-cloud/appconnections
 ```
 
 
+### Using the client library
+
+```javascript
+/**
+ * TODO(developer): Uncomment these variables before running the sample.
+ */
+/**
+ *  Required. The resource name of the AppConnection location using the form:
+ *  `projects/{project_id}/locations/{location_id}`
+ */
+// const parent = 'abc123'
+/**
+ *  Optional. The maximum number of items to return.
+ *  If not specified, a default value of 50 will be used by the service.
+ *  Regardless of the page_size value, the response may include a partial list
+ *  and a caller should only rely on response's
+ *  next_page_token BeyondCorp.ListAppConnectionsResponse.next_page_token  to
+ *  determine if there are more instances left to be queried.
+ */
+// const pageSize = 1234
+/**
+ *  Optional. The next_page_token value returned from a previous
+ *  ListAppConnectionsRequest, if any.
+ */
+// const pageToken = 'abc123'
+/**
+ *  Optional. A filter specifying constraints of a list operation.
+ */
+// const filter = 'abc123'
+/**
+ *  Optional. Specifies the ordering of results. See
+ *  Sorting
+ *  order (https://cloud.google.com/apis/design/design_patterns#sorting_order)
+ *  for more information.
+ */
+// const orderBy = 'abc123'
+
+// Imports the Appconnections library
+const {AppConnectionsServiceClient} = require('@google-cloud/appconnections').v1;
+
+// Instantiates a client
+const appconnectionsClient = new AppConnectionsServiceClient();
+
+async function callListAppConnections() {
+  // Construct request
+  const request = {
+    parent,
+  };
+
+  // Run request
+  const iterable = await appconnectionsClient.listAppConnectionsAsync(request);
+  for await (const response of iterable) {
+      console.log(response);
+  }
+}
+
+callListAppConnections();
+
+```
+
+
+
+## Samples
+
+Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/tree/main/samples) directory. Each sample's `README.md` has instructions for running its sample.
+
+| Sample                      | Source Code                       | Try it |
+| --------------------------- | --------------------------------- | ------ |
+| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/packages/google-cloud-beyondcorp-appconnections/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/packages/google-cloud-beyondcorp-appconnections/samples/quickstart.js,samples/README.md) |
 
 
 
