@@ -51,7 +51,8 @@ exports['tests for templates it should create the templates in the directory 3']
     "*.js"
   ],
   "scripts": {
-    "test": "c8 mocha --timeout 600000 test/*.js"
+    "test": "c8 mocha --timeout 600000 test/*.js",
+    "publish": "echo 'sample test; do not publish'"
   },
   "dependencies": {
     "@google-cloud/kms": "0.1.0"
