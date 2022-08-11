@@ -16,8 +16,6 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-
-
 'use strict';
 
 function main(parent) {
@@ -48,10 +46,12 @@ function main(parent) {
   // const orderBy = 'abc123'
 
   // Imports the Clientconnectorservices library
-  const {ClientConnectorServicesServiceClient} = require('@google-cloud/clientconnectorservices').v1;
+  const {ClientConnectorServicesServiceClient} =
+    require('@google-cloud/clientconnectorservices').v1;
 
   // Instantiates a client
-  const clientconnectorservicesClient = new ClientConnectorServicesServiceClient();
+  const clientconnectorservicesClient =
+    new ClientConnectorServicesServiceClient();
 
   async function callListClientConnectorServices() {
     // Construct request
@@ -60,9 +60,12 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await clientconnectorservicesClient.listClientConnectorServicesAsync(request);
+    const iterable =
+      await clientconnectorservicesClient.listClientConnectorServicesAsync(
+        request
+      );
     for await (const response of iterable) {
-        console.log(response);
+      console.log(response);
     }
   }
 
