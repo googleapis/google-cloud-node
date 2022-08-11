@@ -1,0 +1,16 @@
+{
+  "name": "clientgateways",
+  "name_pretty": "",
+  "product_documentation": "",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/clientgateways/latest",
+  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+  "release_level": "beta",
+  "language": "nodejs",
+  "repo": "googleapis/google-cloud-node",
+  "distribution_name": "@google-cloud/clientgateways",
+  "api_id": "google.cloud.beyondcorp.clientgateways.v1",
+  "default_version": "v1",
+  "requires_billing": true,
+  "library_type": "GAPIC_AUTO"
+}
+
