@@ -10,7 +10,7 @@
 
 
 
- client for Node.js
+BeyondCorp API client for Node.js
 
 
 A comprehensive list of changes in each version may be found in
