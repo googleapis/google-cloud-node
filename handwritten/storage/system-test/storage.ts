@@ -1565,6 +1565,7 @@ describe('storage', () => {
         keyFilename: process.env.GCN_STORAGE_2ND_PROJECT_KEY,
         retryOptions: {
           idempotencyStrategy: IdempotencyStrategy.RetryAlways,
+          retryDelayMultiplier: 3,
         },
       });
       // the source bucket, which will have requesterPays enabled.
