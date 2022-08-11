@@ -1,6 +1,6 @@
 {
   "release-type": "node",
   "packages": {
-    "packages/gapic-node-templating": {}
+    "packages/google-cloud-beyondcorp-appconnectors": {}
   }
 }
