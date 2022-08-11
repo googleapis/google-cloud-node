@@ -27,13 +27,13 @@ export interface GHFile {
 }
 
 export interface GHDir {
-  name: string
+  name: string;
 }
 
 export interface ServiceYaml {
   apis: {
-    name: string
-  }[]
+    name: string;
+  }[];
 }
 
 function isFile(file: GHFile | GHDir[]): file is GHFile {
@@ -151,42 +151,44 @@ export async function getDistributionName(
   return packageName;
 }
 
-export async function getServiceName(
-  octokit: Octokit,
-  apiId: string,
-) {
+export async function getServiceName(octokit: Octokit, apiId: string) {
   let path = apiId.toString().replace(/\./g, '/');
 
-  const dir = (await octokit.rest.repos.getContent({
-    owner: 'googleapis',
-    repo: 'googleapis',
-    path: `${path}`,
-  })).data as GHDir[];
+  const dir = (
+    await octokit.rest.repos.getContent({
+      owner: 'googleapis',
+      repo: 'googleapis',
+      path: `${path}`,
+    })
+  ).data as GHDir[];
 
   for (const file of dir) {
     if (file.name.endsWith('.yaml')) {
-      path = `${path}/${file.name}`
+      path = `${path}/${file.name}`;
     }
   }
 
-  console.log(path)
+  console.log(path);
 
-  const yamlFile = (await octokit.rest.repos.getContent({
-    owner: 'googleapis',
-    repo: 'googleapis',
-    path,
-  })).data;
-
+  const yamlFile = (
+    await octokit.rest.repos.getContent({
+      owner: 'googleapis',
+      repo: 'googleapis',
+      path,
+    })
+  ).data;
 
   let parsedYaml;
-  if (isFile((yamlFile as any))) {
-    parsedYaml = yaml.load(Buffer.from((yamlFile as any).content, 'base64').toString('utf8'));
+  if (isFile(yamlFile as any)) {
+    parsedYaml = yaml.load(
+      Buffer.from((yamlFile as any).content, 'base64').toString('utf8')
+    );
   }
 
   let serviceName = '';
   for (const api of (parsedYaml as ServiceYaml)?.apis) {
     if (api.name.endsWith('Service')) {
-      serviceName = api.name.split('.')[api.name.split('.').length - 1]
+      serviceName = api.name.split('.')[api.name.split('.').length - 1];
     }
   }
 
@@ -210,7 +212,7 @@ export async function compileVars(
     apiPath: getApiPath(argv['api-id']),
     apiPathDashes: getApiPathWithDashes(argv['api-id']),
     version: getVersion(argv['api-id']),
-    serviceName
+    serviceName,
   };
 }
 

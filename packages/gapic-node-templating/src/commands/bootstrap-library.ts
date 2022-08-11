@@ -64,10 +64,7 @@ export const bootstrapLibrary: yargs.CommandModule<{}, CliArgs> = {
       argv['api-id'],
       cp.execSync
     );
-    const serviceName = await getServiceName(
-      octokit,
-      argv['api-id']
-    );
+    const serviceName = await getServiceName(octokit, argv['api-id']);
     const driftMetadata = await getDriftMetadata(argv, new Storage());
     const bootstrapVars = await compileVars(
       argv,
