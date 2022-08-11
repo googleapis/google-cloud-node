@@ -37,9 +37,7 @@ function main(bucketName = 'my-bucket') {
     // Get Bucket Metadata
     const [metadata] = await storage.bucket(bucketName).getMetadata();
 
-    for (const [key, value] of Object.entries(metadata)) {
-      console.log(`${key}: ${value}`);
-    }
+    console.log(JSON.stringify(metadata, null, 2));
   }
   // [END storage_get_bucket_metadata]
   getBucketMetadata().catch(console.error);
