@@ -17,6 +17,7 @@ import {
   compileVars,
   getDistributionName,
   getDriftMetadata,
+  getServiceName,
 } from '../get-bootstrap-template-vars';
 import {compileTemplates} from '../templating';
 import * as path from 'path';
@@ -57,16 +58,19 @@ export const bootstrapLibrary: yargs.CommandModule<{}, CliArgs> = {
       });
   },
   async handler(argv: CliArgs) {
+    const octokit = new Octokit();
     const distributionName = await getDistributionName(
-      new Octokit(),
+      octokit,
       argv['api-id'],
       cp.execSync
     );
+    const serviceName = await getServiceName(octokit, argv['api-id']);
     const driftMetadata = await getDriftMetadata(argv, new Storage());
     const bootstrapVars = await compileVars(
       argv,
       driftMetadata,
-      distributionName
+      distributionName,
+      serviceName
     );
 
     await compileTemplates(

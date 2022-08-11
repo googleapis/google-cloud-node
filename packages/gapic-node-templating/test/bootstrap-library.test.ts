@@ -32,11 +32,13 @@ describe('tests running build trigger', () => {
   let compileVarsStub: sinon.SinonStub;
   let compileTemplatesStub: sinon.SinonStub;
   let getDistributionNameStub: sinon.SinonStub;
+  let getServiceNameStub: sinon.SinonStub;
   beforeEach(() => {
     getDriftMetadataStub = sinon.stub(vars, 'getDriftMetadata');
     compileVarsStub = sinon.stub(vars, 'compileVars');
     compileTemplatesStub = sinon.stub(templates, 'compileTemplates');
     getDistributionNameStub = sinon.stub(vars, 'getDistributionName');
+    getServiceNameStub = sinon.stub(vars, 'getServiceName');
   });
 
   afterEach(() => {
@@ -44,6 +46,7 @@ describe('tests running build trigger', () => {
     compileVarsStub.restore();
     compileTemplatesStub.restore();
     getDistributionNameStub.restore();
+    getServiceNameStub.restore();
   });
 
   it('it should get correct variable names', async () => {
@@ -62,5 +65,6 @@ describe('tests running build trigger', () => {
     assert.ok(getDriftMetadataStub.calledOnce);
     assert.ok(compileVarsStub.calledOnce);
     assert.ok(compileTemplatesStub.calledOnce);
+    assert.ok(getServiceNameStub.calledOnce);
   });
 });

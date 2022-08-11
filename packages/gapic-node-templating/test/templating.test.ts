@@ -56,6 +56,7 @@ describe('tests for templates', () => {
       apiPath: 'google/cloud/kms',
       apiPathDashes: 'google-cloud-kms',
       version: 'v1',
+      serviceName: 'KeyManagementService',
     });
 
     snapshot(
