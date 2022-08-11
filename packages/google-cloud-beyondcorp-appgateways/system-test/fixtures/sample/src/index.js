@@ -16,10 +16,11 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import * as v1 from './v1';
-const AppGatewaysServiceClient = v1.AppGatewaysServiceClient;
-type AppGatewaysServiceClient = v1.AppGatewaysServiceClient;
-export {v1, AppGatewaysServiceClient};
-export default {v1, AppGatewaysServiceClient};
-import * as protos from '../protos/protos';
-export {protos}
+/* eslint-disable node/no-missing-require, no-unused-vars */
+const appgateways = require('@google-cloud/appgateways');
+
+function main() {
+  const appGatewaysServiceClient = new appgateways.AppGatewaysServiceClient();
+}
+
+main();
