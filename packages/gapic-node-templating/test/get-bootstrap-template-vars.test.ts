@@ -22,6 +22,7 @@ import {
   getApiPathWithDashes,
   getDistributionName,
   getDriftMetadata,
+  getServiceName,
   getVersion,
 } from '../src/get-bootstrap-template-vars';
 import {
@@ -77,7 +78,8 @@ describe('get bootstrap template vars', () => {
             docsRootUrl: 'https://cloud.google.com/kms',
             launchStage: 'beta',
           },
-          '@google-cloud/kms'
+          '@google-cloud/kms',
+          'KeyManagementService'
         ),
         {
           name: 'kms',
@@ -90,6 +92,7 @@ describe('get bootstrap template vars', () => {
           apiPath: 'google/cloud/kms',
           apiPathDashes: 'google-cloud-kms',
           version: 'v1',
+          serviceName: 'KeyManagementService'
         }
       );
     });
@@ -185,6 +188,33 @@ describe('get bootstrap template vars', () => {
         'google.cloud.kms.v1',
         sinon.stub().returns(Buffer)
       );
+
+      fileRequest.done();
+    });
+  });
+
+  describe('get service name', () => {
+    it('should get the service name', async () => {
+      const fileRequest = nock('https://api.github.com')
+        .get(
+          '/repos/googleapis/googleapis/contents/google%2Fcloud%2Fkms%2Fv1'
+        )
+        .reply(200, [{
+          name: 'cloudkms_v1.yaml',
+          },
+          {
+            name: 'cloudkms_grpc_service_config.json',
+        }])
+        .get(
+          '/repos/googleapis/googleapis/contents/google%2Fcloud%2Fkms%2Fv1%2Fcloudkms_v1.yaml'
+        )
+        .reply(200, {content: 'e2FwaXM6IFt7bmFtZTogJ2dvb2dsZS5jbG91ZC5rbXMudjEuS2V5TWFuYWdlbWVudFNlcnZpY2UnfSwge25hbWU6ICdnb29nbGUuaWFtLnYxLklBTVBvbGljeSd9XX0='})
+      const serviceName = await getServiceName(
+        octokit,
+        'google.cloud.kms.v1'
+      );
+
+      assert.deepStrictEqual(serviceName, 'KeyManagementService');
 
       fileRequest.done();
     });
