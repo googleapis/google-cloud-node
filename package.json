@@ -34,7 +34,7 @@
   "homepage": "https://github.com/googleapis/google-cloud-node#readme",
   "dependencies": {
     "chalk": "^5.0.0",
-    "figures": "^4.0.0",
+    "figures": "^5.0.0",
     "gaxios": "^4.0.0",
     "parse-link-header": "^2.0.0"
   },
