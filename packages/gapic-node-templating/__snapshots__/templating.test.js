@@ -83,11 +83,13 @@ exports['tests for templates it should create the templates in the directory 4']
 
 'use strict';
 
+const assert = require('assert');
 const path = require('path');
 const cp = require('child_process');
 const {describe, it, before} = require('mocha');
 const { KeyManagementServiceClient } = require('@google-cloud/kms').v1;
 const kmsClient = new KeyManagementServiceClient();
+
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
 const cwd = path.join(__dirname, '..');
@@ -100,7 +102,8 @@ describe('Quickstart', () => {
   });
 
   it('should run quickstart', async () => {
-    execSync(\`node ./quickstart.js projects/\${projectId}/locations/us-central1\`, {cwd});
+    const output = execSync(\`node ./quickstart.js projects/\${projectId}/locations/us-central1\`, {cwd});
+    assert(output !== null);
   });
 });
 
