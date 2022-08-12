@@ -1,7 +1,11 @@
 [
+  "../../protos/google/cloud/documentai/v1/barcode.proto",
   "../../protos/google/cloud/documentai/v1/document.proto",
   "../../protos/google/cloud/documentai/v1/document_io.proto",
   "../../protos/google/cloud/documentai/v1/document_processor_service.proto",
+  "../../protos/google/cloud/documentai/v1/document_schema.proto",
   "../../protos/google/cloud/documentai/v1/geometry.proto",
-  "../../protos/google/cloud/documentai/v1/operation_metadata.proto"
+  "../../protos/google/cloud/documentai/v1/operation_metadata.proto",
+  "../../protos/google/cloud/documentai/v1/processor.proto",
+  "../../protos/google/cloud/documentai/v1/processor_type.proto"
 ]

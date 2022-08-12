@@ -26,7 +26,11 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The processor resource name.
+   *  Required. The resource name of Processor google.cloud.documentai.v1.Processor  or
+   *  ProcessorVersion google.cloud.documentai.v1.ProcessorVersion.
+   *  Format: `projects/{project}/locations/{location}/processors/{processor}`,
+   *  or
+   *  `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}`
    */
   // const name = 'abc123'
   /**

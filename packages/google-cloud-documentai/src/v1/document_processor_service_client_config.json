@@ -30,6 +30,62 @@
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
+        "FetchProcessorTypes": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListProcessorTypes": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListProcessors": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetProcessor": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetProcessorVersion": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListProcessorVersions": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteProcessorVersion": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeployProcessorVersion": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "UndeployProcessorVersion": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CreateProcessor": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteProcessor": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "EnableProcessor": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DisableProcessor": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "SetDefaultProcessorVersion": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "ReviewDocument": {
           "timeout_millis": 120000,
           "retry_codes_name": "idempotent",

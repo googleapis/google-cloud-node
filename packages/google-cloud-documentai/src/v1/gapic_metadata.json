@@ -15,14 +15,90 @@
                 "processDocument"
               ]
             },
+            "FetchProcessorTypes": {
+              "methods": [
+                "fetchProcessorTypes"
+              ]
+            },
+            "GetProcessor": {
+              "methods": [
+                "getProcessor"
+              ]
+            },
+            "GetProcessorVersion": {
+              "methods": [
+                "getProcessorVersion"
+              ]
+            },
+            "CreateProcessor": {
+              "methods": [
+                "createProcessor"
+              ]
+            },
             "BatchProcessDocuments": {
               "methods": [
                 "batchProcessDocuments"
               ]
             },
+            "DeleteProcessorVersion": {
+              "methods": [
+                "deleteProcessorVersion"
+              ]
+            },
+            "DeployProcessorVersion": {
+              "methods": [
+                "deployProcessorVersion"
+              ]
+            },
+            "UndeployProcessorVersion": {
+              "methods": [
+                "undeployProcessorVersion"
+              ]
+            },
+            "DeleteProcessor": {
+              "methods": [
+                "deleteProcessor"
+              ]
+            },
+            "EnableProcessor": {
+              "methods": [
+                "enableProcessor"
+              ]
+            },
+            "DisableProcessor": {
+              "methods": [
+                "disableProcessor"
+              ]
+            },
+            "SetDefaultProcessorVersion": {
+              "methods": [
+                "setDefaultProcessorVersion"
+              ]
+            },
             "ReviewDocument": {
               "methods": [
                 "reviewDocument"
+              ]
+            },
+            "ListProcessorTypes": {
+              "methods": [
+                "listProcessorTypes",
+                "listProcessorTypesStream",
+                "listProcessorTypesAsync"
+              ]
+            },
+            "ListProcessors": {
+              "methods": [
+                "listProcessors",
+                "listProcessorsStream",
+                "listProcessorsAsync"
+              ]
+            },
+            "ListProcessorVersions": {
+              "methods": [
+                "listProcessorVersions",
+                "listProcessorVersionsStream",
+                "listProcessorVersionsAsync"
               ]
             }
           }
@@ -35,14 +111,90 @@
                 "processDocument"
               ]
             },
+            "FetchProcessorTypes": {
+              "methods": [
+                "fetchProcessorTypes"
+              ]
+            },
+            "GetProcessor": {
+              "methods": [
+                "getProcessor"
+              ]
+            },
+            "GetProcessorVersion": {
+              "methods": [
+                "getProcessorVersion"
+              ]
+            },
+            "CreateProcessor": {
+              "methods": [
+                "createProcessor"
+              ]
+            },
             "BatchProcessDocuments": {
               "methods": [
                 "batchProcessDocuments"
               ]
             },
+            "DeleteProcessorVersion": {
+              "methods": [
+                "deleteProcessorVersion"
+              ]
+            },
+            "DeployProcessorVersion": {
+              "methods": [
+                "deployProcessorVersion"
+              ]
+            },
+            "UndeployProcessorVersion": {
+              "methods": [
+                "undeployProcessorVersion"
+              ]
+            },
+            "DeleteProcessor": {
+              "methods": [
+                "deleteProcessor"
+              ]
+            },
+            "EnableProcessor": {
+              "methods": [
+                "enableProcessor"
+              ]
+            },
+            "DisableProcessor": {
+              "methods": [
+                "disableProcessor"
+              ]
+            },
+            "SetDefaultProcessorVersion": {
+              "methods": [
+                "setDefaultProcessorVersion"
+              ]
+            },
             "ReviewDocument": {
               "methods": [
                 "reviewDocument"
+              ]
+            },
+            "ListProcessorTypes": {
+              "methods": [
+                "listProcessorTypes",
+                "listProcessorTypesStream",
+                "listProcessorTypesAsync"
+              ]
+            },
+            "ListProcessors": {
+              "methods": [
+                "listProcessors",
+                "listProcessorsStream",
+                "listProcessorsAsync"
+              ]
+            },
+            "ListProcessorVersions": {
+              "methods": [
+                "listProcessorVersions",
+                "listProcessorVersionsStream",
+                "listProcessorVersionsAsync"
               ]
             }
           }
