@@ -30,10 +30,8 @@ import * as crypto from 'crypto';
 import * as extend from 'extend';
 import * as fs from 'fs';
 import * as mime from 'mime';
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const pumpify = require('pumpify');
 import * as resumableUpload from './resumable-upload';
-import {Writable, Readable, PassThrough} from 'stream';
+import {Writable, Readable, pipeline, Transform, PassThrough} from 'stream';
 import * as zlib from 'zlib';
 import * as http from 'http';
 
@@ -1495,7 +1493,7 @@ class File extends ServiceObject<File> {
 
         const headers = rawResponseStream.toJSON().headers;
         isServedCompressed = headers['content-encoding'] === 'gzip';
-        const throughStreams: Writable[] = [];
+        const transformStreams: Transform[] = [];
 
         if (shouldRunValidation) {
           // The x-goog-hash header should be set with a crc32c and md5 hash.
@@ -1517,28 +1515,32 @@ class File extends ServiceObject<File> {
             crc32cGenerator: this.crc32cGenerator,
           });
 
-          throughStreams.push(validateStream);
+          transformStreams.push(validateStream);
         }
 
         if (isServedCompressed && options.decompress) {
-          throughStreams.push(zlib.createGunzip());
+          transformStreams.push(zlib.createGunzip());
         }
 
-        if (throughStreams.length === 1) {
-          rawResponseStream =
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            rawResponseStream.pipe(throughStreams[0]) as any;
-        } else if (throughStreams.length > 1) {
-          rawResponseStream = rawResponseStream.pipe(
-            pumpify.obj(throughStreams)
-          );
-        }
+        const handoffStream = new PassThrough({
+          final: async cb => {
+            // Preserving `onComplete`'s ability to
+            // close `throughStream` before pipeline
+            // attempts to.
+            await onComplete(null);
+            cb();
+          },
+        });
 
-        rawResponseStream
-          .on('error', onComplete)
-          .on('end', onComplete)
-          .pipe(throughStream, {end: false});
+        pipeline(
+          rawResponseStream,
+          ...(transformStreams as [Transform]),
+          handoffStream,
+          throughStream,
+          onComplete
+        );
       };
+
       // This is hooked to the `complete` event from the request stream. This is
       // our chance to validate the data and let the user know if anything went
       // wrong.
@@ -1948,101 +1950,92 @@ class File extends ServiceObject<File> {
       crc32c = false;
     }
 
-    // Collect data as it comes in to store in a hash. This is compared to the
-    // checksum value on the returned metadata from the API.
-    const validateStream = new HashStreamValidator({
+    /**
+     * A callback for determining when the underlying pipeline is complete.
+     * It's possible the pipeline callback could error before the write stream
+     * calls `final` so by default this will destroy the write stream unless the
+     * write stream sets this callback via its `final` handler.
+     * @param error An optional error
+     */
+    let pipelineCallback: (error?: Error | null) => void = error => {
+      writeStream.destroy(error || undefined);
+    };
+
+    // A stream for consumer to write to
+    const writeStream = new Writable({
+      final(cb) {
+        // Set the pipeline callback to this callback so the pipeline's results
+        // can be populated to the consumer
+        pipelineCallback = cb;
+
+        emitStream.end();
+      },
+      write(chunk, encoding, cb) {
+        emitStream.write(chunk, encoding, cb);
+      },
+    });
+
+    const emitStream = new PassThroughShim();
+    const hashCalculatingStream = new HashStreamValidator({
       crc32c,
       md5,
       crc32cGenerator: this.crc32cGenerator,
     });
 
     const fileWriteStream = duplexify();
+    let fileWriteStreamMetadataReceived = false;
 
-    fileWriteStream.on('progress', evt => {
-      stream.emit('progress', evt);
+    // Handing off emitted events to users
+    emitStream.on('reading', () => writeStream.emit('reading'));
+    emitStream.on('writing', () => writeStream.emit('writing'));
+    fileWriteStream.on('progress', evt => writeStream.emit('progress', evt));
+    fileWriteStream.on('response', resp => writeStream.emit('response', resp));
+    fileWriteStream.once('metadata', () => {
+      fileWriteStreamMetadataReceived = true;
     });
 
-    const passThroughShim = new PassThroughShim();
-
-    passThroughShim.on('writing', () => {
-      stream.emit('writing');
-    });
-
-    const stream = pumpify([
-      passThroughShim,
-      gzip ? zlib.createGzip() : new PassThrough(),
-      validateStream,
-      fileWriteStream,
-    ]);
-
-    // Wait until we've received data to determine what upload technique to use.
-    stream.on('writing', () => {
+    writeStream.on('writing', () => {
       if (options.resumable === false) {
         this.startSimpleUpload_(fileWriteStream, options);
-        return;
-      }
-      this.startResumableUpload_(fileWriteStream, options);
-    });
-
-    fileWriteStream.on('response', stream.emit.bind(stream, 'response'));
-
-    // This is to preserve the `finish` event. We wait until the request stream
-    // emits "complete", as that is when we do validation of the data. After
-    // that is successful, we can allow the stream to naturally finish.
-    //
-    // Reference for tracking when we can use a non-hack solution:
-    // https://github.com/nodejs/node/pull/2314
-    fileWriteStream.on('prefinish', () => {
-      stream.cork();
-    });
-
-    // Compare our hashed version vs the completed upload's version.
-    fileWriteStream.on('complete', () => {
-      const metadata = this.metadata;
-
-      // If we're doing validation, assume the worst-- a data integrity
-      // mismatch. If not, these tests won't be performed, and we can assume the
-      // best.
-      let failed = crc32c || md5;
-
-      if (crc32c && metadata.crc32c) {
-        failed = !validateStream.test('crc32c', metadata.crc32c);
+      } else {
+        this.startResumableUpload_(fileWriteStream, options);
       }
 
-      if (md5 && metadata.md5Hash) {
-        failed = !validateStream.test('md5', metadata.md5Hash);
-      }
-
-      if (failed) {
-        this.delete((err: ApiError) => {
-          let code;
-          let message;
-
-          if (err) {
-            code = 'FILE_NO_UPLOAD_DELETE';
-            message = `${FileExceptionMessages.UPLOAD_MISMATCH_DELETE_FAIL}${err.message}`;
-          } else if (md5 && !metadata.md5Hash) {
-            code = 'MD5_NOT_AVAILABLE';
-            message = FileExceptionMessages.MD5_NOT_AVAILABLE;
-          } else {
-            code = 'FILE_NO_UPLOAD';
-            message = FileExceptionMessages.UPLOAD_MISMATCH;
+      pipeline(
+        emitStream,
+        gzip ? zlib.createGzip() : new PassThrough(),
+        hashCalculatingStream,
+        fileWriteStream,
+        async e => {
+          if (e) {
+            return pipelineCallback(e);
           }
 
-          const error = new RequestError(message);
-          error.code = code;
-          error.errors = [err!];
+          // We want to make sure we've received the metadata from the server in order
+          // to properly validate the object's integrity. Depending on the type of upload,
+          // the stream could close before the response is returned.
+          if (!fileWriteStreamMetadataReceived) {
+            try {
+              await new Promise((resolve, reject) => {
+                fileWriteStream.once('metadata', resolve);
+                fileWriteStream.once('error', reject);
+              });
+            } catch (e) {
+              return pipelineCallback(e as Error);
+            }
+          }
 
-          fileWriteStream.destroy(error);
-        });
-
-        return;
-      }
-
-      stream.uncork();
+          try {
+            await this.#validateIntegrity(hashCalculatingStream, {crc32c, md5});
+            pipelineCallback();
+          } catch (e) {
+            pipelineCallback(e as Error);
+          }
+        }
+      );
     });
 
-    return stream as Writable;
+    return writeStream;
   }
 
   /**
@@ -3932,6 +3925,7 @@ class File extends ServiceObject<File> {
       })
       .on('metadata', metadata => {
         this.metadata = metadata;
+        dup.emit('metadata');
       })
       .on('finish', () => {
         dup.emit('complete');
@@ -4011,6 +4005,7 @@ class File extends ServiceObject<File> {
           }
 
           this.metadata = body;
+          dup.emit('metadata', body);
           dup.emit('response', resp);
           dup.emit('complete');
         });
@@ -4048,6 +4043,63 @@ class File extends ServiceObject<File> {
     }
 
     return Buffer.concat(buf);
+  }
+
+  /**
+   *
+   * @param hashCalculatingStream
+   * @param verify
+   * @returns {boolean} Returns `true` if valid, throws with error otherwise
+   */
+  async #validateIntegrity(
+    hashCalculatingStream: HashStreamValidator,
+    verify: {crc32c?: boolean; md5?: boolean} = {}
+  ) {
+    const metadata = this.metadata;
+
+    // If we're doing validation, assume the worst
+    let dataMismatch = !!(verify.crc32c || verify.md5);
+
+    if (verify.crc32c && metadata.crc32c) {
+      dataMismatch = !hashCalculatingStream.test('crc32c', metadata.crc32c);
+    }
+
+    if (verify.md5 && metadata.md5Hash) {
+      dataMismatch = !hashCalculatingStream.test('md5', metadata.md5Hash);
+    }
+
+    if (dataMismatch) {
+      const errors: Error[] = [];
+      let code = '';
+      let message = '';
+
+      try {
+        await this.delete();
+
+        if (verify.md5 && !metadata.md5Hash) {
+          code = 'MD5_NOT_AVAILABLE';
+          message = FileExceptionMessages.MD5_NOT_AVAILABLE;
+        } else {
+          code = 'FILE_NO_UPLOAD';
+          message = FileExceptionMessages.UPLOAD_MISMATCH;
+        }
+      } catch (e) {
+        const error = e as Error;
+
+        code = 'FILE_NO_UPLOAD_DELETE';
+        message = `${FileExceptionMessages.UPLOAD_MISMATCH_DELETE_FAIL}${error.message}`;
+
+        errors.push(error);
+      }
+
+      const error = new RequestError(message);
+      error.code = code;
+      error.errors = errors;
+
+      throw error;
+    }
+
+    return true;
   }
 }
 
