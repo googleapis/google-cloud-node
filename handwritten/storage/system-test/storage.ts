@@ -71,7 +71,10 @@ describe('storage', () => {
   const RETENTION_DURATION_SECONDS = 10;
 
   const storage = new Storage({
-    retryOptions: {idempotencyStrategy: IdempotencyStrategy.RetryAlways},
+    retryOptions: {
+      idempotencyStrategy: IdempotencyStrategy.RetryAlways,
+      retryDelayMultiplier: 3,
+    },
   });
   const bucket = storage.bucket(generateName());
 
@@ -152,7 +155,10 @@ describe('storage', () => {
       // eslint-disable-next-line @typescript-eslint/no-var-requires
       const {Storage} = require('../src');
       storageWithoutAuth = new Storage({
-        retryOptions: {idempotencyStrategy: IdempotencyStrategy.RetryAlways},
+        retryOptions: {
+          idempotencyStrategy: IdempotencyStrategy.RetryAlways,
+          retryDelayMultiplier: 3,
+        },
       });
     });
 
