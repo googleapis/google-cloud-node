@@ -524,7 +524,20 @@ export class Upload extends Writable {
   }
 
   protected async createURIAsync(): Promise<string> {
-    const metadata = this.metadata;
+    const metadata = {...this.metadata};
+    const headers: gaxios.Headers = {};
+
+    // Delete content length and content type from metadata if they exist.
+    // These are headers and should not be sent as part of the metadata.
+    if (metadata.contentLength) {
+      headers['X-Upload-Content-Length'] = metadata.contentLength.toString();
+      delete metadata.contentLength;
+    }
+
+    if (metadata.contentType) {
+      headers!['X-Upload-Content-Type'] = metadata.contentType;
+      delete metadata.contentType;
+    }
 
     // Check if headers already exist before creating new ones
     const reqOpts: GaxiosOptions = {
@@ -540,6 +553,7 @@ export class Upload extends Writable {
       data: metadata,
       headers: {
         'x-goog-api-client': `gl-node/${process.versions.node} gccl/${packageJson.version} gccl-invocation-id/${this.currentInvocationId.uri}`,
+        ...headers,
       },
     };
 

@@ -15,6 +15,15 @@
 import {Bucket, File, Notification, Storage, HmacKey, Policy} from '../src';
 import * as path from 'path';
 import {ApiError} from '../src/nodejs-common';
+import {
+  createTestBuffer,
+  createTestFileFromBuffer,
+  deleteTestFile,
+} from './testBenchUtil';
+import * as uuid from 'uuid';
+
+const FILE_SIZE_BYTES = 9 * 1024 * 1024;
+const CHUNK_SIZE_BYTES = 2 * 1024 * 1024;
 
 export interface ConformanceTestOptions {
   bucket?: Bucket;
@@ -375,35 +384,38 @@ export async function bucketSetStorageClass(options: ConformanceTestOptions) {
 export async function bucketUploadResumableInstancePrecondition(
   options: ConformanceTestOptions
 ) {
+  const filePath = path.join(__dirname, `test-data/tmp-${uuid.v4()}.txt`);
+  createTestFileFromBuffer(FILE_SIZE_BYTES, filePath);
   if (options.bucket!.instancePreconditionOpts) {
     options.bucket!.instancePreconditionOpts.ifGenerationMatch = 0;
+    delete options.bucket!.instancePreconditionOpts.ifMetagenerationMatch;
   }
-  await options.bucket!.upload(
-    path.join(
-      __dirname,
-      '../../conformance-test/test-data/retryStrategyTestData.json'
-    ),
-    {resumable: true}
-  );
+  await options.bucket!.upload(filePath, {
+    resumable: true,
+    chunkSize: CHUNK_SIZE_BYTES,
+    metadata: {contentLength: FILE_SIZE_BYTES},
+  });
+  deleteTestFile(filePath);
 }
 
 export async function bucketUploadResumable(options: ConformanceTestOptions) {
+  const filePath = path.join(__dirname, `test-data/tmp-${uuid.v4()}.txt`);
+  createTestFileFromBuffer(FILE_SIZE_BYTES, filePath);
   if (options.preconditionRequired) {
-    await options.bucket!.upload(
-      path.join(
-        __dirname,
-        '../../conformance-test/test-data/retryStrategyTestData.json'
-      ),
-      {preconditionOpts: {ifMetagenerationMatch: 2, ifGenerationMatch: 0}}
-    );
+    await options.bucket!.upload(filePath, {
+      resumable: true,
+      chunkSize: CHUNK_SIZE_BYTES,
+      metadata: {contentLength: FILE_SIZE_BYTES},
+      preconditionOpts: {ifGenerationMatch: 0},
+    });
   } else {
-    await options.bucket!.upload(
-      path.join(
-        __dirname,
-        '../../conformance-test/test-data/retryStrategyTestData.json'
-      )
-    );
+    await options.bucket!.upload(filePath, {
+      resumable: true,
+      chunkSize: CHUNK_SIZE_BYTES,
+      metadata: {contentLength: FILE_SIZE_BYTES},
+    });
   }
+  deleteTestFile(filePath);
 }
 
 export async function bucketUploadMultipartInstancePrecondition(
@@ -590,21 +602,31 @@ export async function rotateEncryptionKey(options: ConformanceTestOptions) {
 export async function saveResumableInstancePrecondition(
   options: ConformanceTestOptions
 ) {
-  await options.file!.save('testdata', {resumable: true});
+  const buf = createTestBuffer(FILE_SIZE_BYTES);
+  await options.file!.save(buf, {
+    resumable: true,
+    chunkSize: CHUNK_SIZE_BYTES,
+    metadata: {contentLength: FILE_SIZE_BYTES},
+  });
 }
 
 export async function saveResumable(options: ConformanceTestOptions) {
+  const buf = createTestBuffer(FILE_SIZE_BYTES);
   if (options.preconditionRequired) {
-    await options.file!.save('testdata', {
+    await options.file!.save(buf, {
       resumable: true,
+      chunkSize: CHUNK_SIZE_BYTES,
+      metadata: {contentLength: FILE_SIZE_BYTES},
       preconditionOpts: {
         ifGenerationMatch: options.file!.metadata.generation,
         ifMetagenerationMatch: options.file!.metadata.metageneration,
       },
     });
   } else {
-    await options.file!.save('testdata', {
+    await options.file!.save(buf, {
       resumable: true,
+      chunkSize: CHUNK_SIZE_BYTES,
+      metadata: {contentLength: FILE_SIZE_BYTES},
     });
   }
 }

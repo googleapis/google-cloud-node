@@ -402,6 +402,26 @@
       ],
       "preconditionProvided": true,
       "expectSuccess": false
+    },
+    {
+      "id": 7,
+      "description": "resumable_uploads_handle_complex_retries",
+      "cases": [
+        {
+          "instructions": ["return-reset-connection", "return-503"]
+        },
+        {
+          "instructions": ["return-503-after-256K"]
+        },
+        {
+          "instructions": ["return-503-after-8192K"]
+        }
+      ],
+      "methods": [
+        {"name": "storage.objects.insert", "group": "storage.resumable.upload", "resources": ["BUCKET"]}
+      ],
+      "preconditionProvided": true,
+      "expectSuccess": true
     }
   ]
 }

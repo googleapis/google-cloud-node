@@ -78,6 +78,12 @@
         "saveMultipart",
         "createResumableUpload"
     ],
+    "storage.resumable.upload": [
+        "bucketUploadResumableInstancePrecondition",
+        "saveResumableInstancePrecondition",
+        "bucketUploadResumable",
+        "saveResumable"
+    ],
     "storage.objects.delete": [
         "fileDeleteInstancePrecondition",
         "fileDelete"

@@ -28,6 +28,7 @@ interface RetryCase {
 interface Method {
   name: String;
   resources: String[];
+  group?: String;
 }
 
 export interface RetryTestCase {
@@ -68,7 +69,10 @@ export function executeScenario(testCase: RetryTestCase) {
   ) {
     const instructionSet: RetryCase = testCase.cases[instructionNumber];
     testCase.methods.forEach(async jsonMethod => {
-      const functionList = methodMap.get(jsonMethod?.name);
+      const functionList =
+        jsonMethod?.group !== undefined
+          ? methodMap.get(jsonMethod?.group)
+          : methodMap.get(jsonMethod?.name);
       functionList?.forEach(storageMethodString => {
         const storageMethodObject =
           libraryMethods[storageMethodString as keyof LibraryMethodsModuleType];

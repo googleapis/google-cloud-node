@@ -800,7 +800,10 @@ describe('resumable-upload', () => {
           ifGenerationMatch: GENERATION,
           ifMetagenerationNotMatch: PARAMS.ifMetagenerationNotMatch,
         });
-        assert.strictEqual(reqOpts.data, up.metadata);
+        const metadataNoHeaders = {...up.metadata};
+        delete metadataNoHeaders.contentLength;
+        delete metadataNoHeaders.contentType;
+        assert.deepStrictEqual(reqOpts.data, metadataNoHeaders);
         done();
         return {headers: {location: '/foo'}};
       };
