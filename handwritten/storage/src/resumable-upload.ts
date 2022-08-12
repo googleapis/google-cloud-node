@@ -899,25 +899,6 @@ export class Upload extends Writable {
     return successfulRequest ? res : null;
   }
 
-  private restart() {
-    if (this.numBytesWritten) {
-      const message =
-        'Attempting to restart an upload after unrecoverable bytes have been written from upstream. Stopping as this could result in data loss. Initiate a new upload to continue.';
-
-      this.emit('error', new RangeError(message));
-      return;
-    }
-
-    this.lastChunkSent = Buffer.alloc(0);
-    this.createURI(err => {
-      if (err) {
-        return this.destroy(err);
-      }
-      this.startUploading();
-      return;
-    });
-  }
-
   /**
    * @return {bool} is the request good?
    */

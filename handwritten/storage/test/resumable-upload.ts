@@ -1679,61 +1679,6 @@ describe('resumable-upload', () => {
     });
   });
 
-  describe('#restart', () => {
-    beforeEach(() => {
-      up.createURI = () => {};
-    });
-
-    it('should throw if `numBytesWritten` is not 0', done => {
-      up.numBytesWritten = 8;
-
-      up.on('error', (error: Error) => {
-        assert(error instanceof RangeError);
-        assert(
-          /Attempting to restart an upload after unrecoverable bytes have been written/.test(
-            error.message
-          )
-        );
-        done();
-      });
-
-      up.restart();
-    });
-
-    describe('starting a new upload', () => {
-      it('should create a new URI', done => {
-        up.createURI = () => {
-          done();
-        };
-
-        up.restart();
-      });
-
-      it('should destroy stream if it cannot create a URI', done => {
-        const error = new Error(':(');
-
-        up.createURI = (callback: Function) => {
-          callback(error);
-        };
-
-        up.destroy = (err: Error) => {
-          assert.strictEqual(err, error);
-          done();
-        };
-
-        up.restart();
-      });
-
-      it('should start uploading', done => {
-        up.createURI = (callback: Function) => {
-          up.startUploading = done;
-          callback();
-        };
-        up.restart();
-      });
-    });
-  });
-
   describe('#onResponse', () => {
     beforeEach(() => {
       up.numRetries = 0;
