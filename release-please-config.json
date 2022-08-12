@@ -3,6 +3,7 @@
   "packages": {
     "packages/google-cloud-beyondcorp-appconnectors": {},
     "packages/google-cloud-beyondcorp-appgateways": {},
+    "packages/google-cloud-beyondcorp-clientconnectorservices": {},
     "packages/google-cloud-beyondcorp-appconnections": {}
   }
 }
