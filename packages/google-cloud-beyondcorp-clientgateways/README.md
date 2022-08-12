@@ -83,7 +83,8 @@ npm install @google-cloud/clientgateways
 // const orderBy = 'abc123'
 
 // Imports the Clientgateways library
-const {ClientGatewaysServiceClient} = require('@google-cloud/clientgateways').v1;
+const {ClientGatewaysServiceClient} =
+  require('@google-cloud/clientgateways').v1;
 
 // Instantiates a client
 const clientgatewaysClient = new ClientGatewaysServiceClient();
@@ -95,9 +96,11 @@ async function callListClientGateways() {
   };
 
   // Run request
-  const iterable = await clientgatewaysClient.listClientGatewaysAsync(request);
+  const iterable = await clientgatewaysClient.listClientGatewaysAsync(
+    request
+  );
   for await (const response of iterable) {
-      console.log(response);
+    console.log(response);
   }
 }
 
