@@ -31,8 +31,8 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-
-
+  * [Using the client library](#using-the-client-library)
+* [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
@@ -54,6 +54,83 @@ npm install @google-cloud/kms
 ```
 
 
+### Using the client library
+
+```javascript
+/**
+ * TODO(developer): Uncomment these variables before running the sample.
+ */
+/**
+ *  Required. The resource name of the KeyRing google.cloud.kms.v1.KeyRing 
+ *  to list, in the format `projects/* /locations/* /keyRings/*`.
+ */
+// const parent = 'abc123'
+/**
+ *  Optional. Optional limit on the number of
+ *  CryptoKeys google.cloud.kms.v1.CryptoKey  to include in the response.
+ *  Further CryptoKeys google.cloud.kms.v1.CryptoKey  can subsequently be
+ *  obtained by including the
+ *  ListCryptoKeysResponse.next_page_token google.cloud.kms.v1.ListCryptoKeysResponse.next_page_token 
+ *  in a subsequent request.  If unspecified, the server will pick an
+ *  appropriate default.
+ */
+// const pageSize = 1234
+/**
+ *  Optional. Optional pagination token, returned earlier via
+ *  ListCryptoKeysResponse.next_page_token google.cloud.kms.v1.ListCryptoKeysResponse.next_page_token.
+ */
+// const pageToken = 'abc123'
+/**
+ *  The fields of the primary version to include in the response.
+ */
+// const versionView = {}
+/**
+ *  Optional. Only include resources that match the filter in the response. For
+ *  more information, see
+ *  Sorting and filtering list
+ *  results (https://cloud.google.com/kms/docs/sorting-and-filtering).
+ */
+// const filter = 'abc123'
+/**
+ *  Optional. Specify how the results should be sorted. If not specified, the
+ *  results will be sorted in the default order. For more information, see
+ *  Sorting and filtering list
+ *  results (https://cloud.google.com/kms/docs/sorting-and-filtering).
+ */
+// const orderBy = 'abc123'
+
+// Imports the Kms library
+const {KeyManagementServiceClient} = require('@google-cloud/kms').v1;
+
+// Instantiates a client
+const kmsClient = new KeyManagementServiceClient();
+
+async function callListCryptoKeys() {
+  // Construct request
+  const request = {
+    parent,
+  };
+
+  // Run request
+  const iterable = await kmsClient.listCryptoKeysAsync(request);
+  for await (const response of iterable) {
+      console.log(response);
+  }
+}
+
+callListCryptoKeys();
+
+```
+
+
+
+## Samples
+
+Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/tree/main/samples) directory. Each sample's `README.md` has instructions for running its sample.
+
+| Sample                      | Source Code                       | Try it |
+| --------------------------- | --------------------------------- | ------ |
+| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/packages/google-cloud-kms/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/packages/google-cloud-kms/samples/quickstart.js,samples/README.md) |
 
 
 
