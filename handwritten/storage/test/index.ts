@@ -311,6 +311,20 @@ describe('Storage', () => {
       assert.strictEqual(calledWith.retryOptions.retryableErrorFn(error), true);
     });
 
+    it('should retry a broken pipe error', () => {
+      const storage = new Storage({
+        projectId: PROJECT_ID,
+      });
+      const calledWith = storage.calledWith_[0];
+      const error = new ApiError('Broken pipe');
+      error.errors = [
+        {
+          reason: 'EPIPE',
+        },
+      ];
+      assert.strictEqual(calledWith.retryOptions.retryableErrorFn(error), true);
+    });
+
     it('should not retry a 999 error', () => {
       const storage = new Storage({
         projectId: PROJECT_ID,

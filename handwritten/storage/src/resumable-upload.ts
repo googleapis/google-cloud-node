@@ -742,9 +742,18 @@ export class Upload extends Writable {
         responseReceived = true;
         this.responseHandler(resp);
       }
-    } catch (err) {
-      const e = err as Error;
-      this.destroy(e);
+    } catch (e) {
+      const err = e as ApiError;
+
+      if (this.retryOptions.retryableErrorFn!(err)) {
+        this.attemptDelayedRetry({
+          status: NaN,
+          data: err,
+        });
+        return;
+      }
+
+      this.destroy(err);
     }
   }
 
@@ -833,7 +842,16 @@ export class Upload extends Writable {
       }
       this.offset = 0;
     } catch (e) {
-      const err = e as GaxiosError;
+      const err = e as ApiError;
+
+      if (this.retryOptions.retryableErrorFn!(err)) {
+        this.attemptDelayedRetry({
+          status: NaN,
+          data: err,
+        });
+        return;
+      }
+
       this.destroy(err);
     }
   }
@@ -922,7 +940,7 @@ export class Upload extends Writable {
   /**
    * @param resp GaxiosResponse object from previous attempt
    */
-  private attemptDelayedRetry(resp: GaxiosResponse) {
+  private attemptDelayedRetry(resp: Pick<GaxiosResponse, 'data' | 'status'>) {
     if (this.numRetries < this.retryOptions.maxRetries!) {
       if (
         resp.status === NOT_FOUND_STATUS_CODE &&
