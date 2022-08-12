@@ -16,18 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-const config = {
-  "enable-source-maps": true,
-  "throw-deprecation": true,
-  "timeout": 10000
+/* eslint-disable node/no-missing-require, no-unused-vars */
+const clientgateways = require('@google-cloud/clientgateways');
+
+function main() {
+  const clientGatewaysServiceClient =
+    new clientgateways.ClientGatewaysServiceClient();
 }
-if (process.env.MOCHA_THROW_DEPRECATION === 'false') {
-  delete config['throw-deprecation'];
-}
-if (process.env.MOCHA_REPORTER) {
-  config.reporter = process.env.MOCHA_REPORTER;
-}
-if (process.env.MOCHA_REPORTER_OUTPUT) {
-  config['reporter-option'] = `output=${process.env.MOCHA_REPORTER_OUTPUT}`;
-}
-module.exports = config
+
+main();
