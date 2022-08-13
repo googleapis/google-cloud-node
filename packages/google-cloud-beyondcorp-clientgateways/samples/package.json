@@ -14,7 +14,7 @@
     "publish": "echo 'sample test; do not publish'"
   },
   "dependencies": {
-    "@google-cloud/clientgateways": "0.1.0"
+    "@google-cloud/clientgateways": "^0.1.0"
   },
   "devDependencies": {
     "c8": "^7.1.0",
