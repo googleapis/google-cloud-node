@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+## [6.4.1](https://github.com/googleapis/nodejs-storage/compare/v6.4.0...v6.4.1) (2022-08-12)
+
+
+### Bug Fixes
+
+* Remove `pumpify` ([#2029](https://github.com/googleapis/nodejs-storage/issues/2029)) ([edc1d64](https://github.com/googleapis/nodejs-storage/commit/edc1d64069a6038c301c3b775f116fbf69b10b28))
+* Retry `EPIPE` Connection Errors + Attempt Retries in Resumable Upload Connection Errors ([#2040](https://github.com/googleapis/nodejs-storage/issues/2040)) ([ba35321](https://github.com/googleapis/nodejs-storage/commit/ba35321c3fef9a1874ff8fbea43885e2e7746b4f))
+
 ## [6.4.0](https://github.com/googleapis/nodejs-storage/compare/v6.3.0...v6.4.0) (2022-08-10)
 
 
