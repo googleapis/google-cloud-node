@@ -3,5 +3,6 @@
   "packages/google-cloud-beyondcorp-appconnectors": "0.2.0",
   "packages/google-cloud-beyondcorp-appgateways": "0.1.0",
   "packages/google-cloud-beyondcorp-appconnections": "0.1.0",
-  "packages/google-cloud-beyondcorp-clientconnectorservices": "0.1.0"
+  "packages/google-cloud-beyondcorp-clientconnectorservices": "0.1.0",
+  "packages/google-cloud-beyondcorp-clientgateways": "0.1.0"
 }
