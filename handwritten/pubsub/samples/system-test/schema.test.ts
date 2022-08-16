@@ -238,7 +238,7 @@ describe('schema', () => {
     await topic.flush();
 
     const output = execSync(
-      `${commandFor('listenForAvroRecords')} ${sub.name} 3`
+      `${commandFor('listenForAvroRecords')} ${sub.name} 10`
     );
     assert.include(output, 'Received message');
     assert.include(output, 'Alberta');
@@ -262,7 +262,7 @@ describe('schema', () => {
     await topic.flush();
 
     const output = execSync(
-      `${commandFor('listenForProtobufMessages')} ${sub.name} 3`
+      `${commandFor('listenForProtobufMessages')} ${sub.name} 10`
     );
     assert.include(output, 'Received message');
     assert.include(output, 'Quebec');
