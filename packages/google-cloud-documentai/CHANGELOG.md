@@ -1,5 +1,16 @@
 # Changelog
 
+## [5.0.0](https://github.com/googleapis/nodejs-document-ai/compare/v4.1.0...v5.0.0) (2022-08-12)
+
+
+### ⚠ BREAKING CHANGES
+
+* Changed the name field for ProcessRequest and BatchProcessorRequest to accept * so the name field can accept Processor and ProcessorVersion.
+
+### Documentation
+
+* fix minor docstring formatting ([#343](https://github.com/googleapis/nodejs-document-ai/issues/343)) ([fc3eb0c](https://github.com/googleapis/nodejs-document-ai/commit/fc3eb0c24bd6a9618cb404b77a4f22e57f603060))
+
 ## [4.1.0](https://github.com/googleapis/nodejs-document-ai/compare/v4.0.0...v4.1.0) (2022-07-01)
 
 
