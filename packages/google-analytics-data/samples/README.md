@@ -26,8 +26,11 @@
   * [Run Report With Aggregations](#run-report-with-aggregations)
   * [Run Report With Cohorts](#run-report-with-cohorts)
   * [Run Report With Date Ranges](#run-report-with-date-ranges)
+  * [Run Report With Dimension And Metric Filters](#run-report-with-dimension-and-metric-filters)
   * [Run Report With Dimension Exclude Filter](#run-report-with-dimension-exclude-filter)
+  * [Run Report With Dimension Filter](#run-report-with-dimension-filter)
   * [Run Report With Dimension In List Filter](#run-report-with-dimension-in-list-filter)
+  * [Run Report With Multiple Dimension Filters](#run-report-with-multiple-dimension-filters)
   * [Run Report With Multiple Dimensions](#run-report-with-multiple-dimensions)
   * [Run Report With Multiple Metrics](#run-report-with-multiple-metrics)
   * [Run Report With Named Date Ranges](#run-report-with-named-date-ranges)
@@ -288,6 +291,23 @@ __Usage:__
 
 
 
+### Run Report With Dimension And Metric Filters
+
+View the [source code](https://github.com/googleapis/nodejs-analytics-data/blob/main/samples/runReportWithDimensionAndMetricFilters.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-analytics-data&page=editor&open_in_editor=samples/runReportWithDimensionAndMetricFilters.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/runReportWithDimensionAndMetricFilters.js`
+
+
+-----
+
+
+
+
 ### Run Report With Dimension Exclude Filter
 
 View the [source code](https://github.com/googleapis/nodejs-analytics-data/blob/main/samples/runReportWithDimensionExcludeFilter.js).
@@ -305,6 +325,23 @@ __Usage:__
 
 
 
+### Run Report With Dimension Filter
+
+View the [source code](https://github.com/googleapis/nodejs-analytics-data/blob/main/samples/runReportWithDimensionFilter.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-analytics-data&page=editor&open_in_editor=samples/runReportWithDimensionFilter.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/runReportWithDimensionFilter.js`
+
+
+-----
+
+
+
+
 ### Run Report With Dimension In List Filter
 
 View the [source code](https://github.com/googleapis/nodejs-analytics-data/blob/main/samples/runReportWithDimensionInListFilter.js).
@@ -315,6 +352,23 @@ __Usage:__
 
 
 `node samples/runReportWithDimensionInListFilter.js`
+
+
+-----
+
+
+
+
+### Run Report With Multiple Dimension Filters
+
+View the [source code](https://github.com/googleapis/nodejs-analytics-data/blob/main/samples/runReportWithMultipleDimensionFilters.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-analytics-data&page=editor&open_in_editor=samples/runReportWithMultipleDimensionFilters.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/runReportWithMultipleDimensionFilters.js`
 
 
 -----
