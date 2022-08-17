@@ -15,6 +15,7 @@
   * [Access Secret Version](#access-secret-version)
   * [Add Secret Version](#add-secret-version)
   * [Create Secret](#create-secret)
+  * [Create Ummr Secret](#create-ummr-secret)
   * [Delete Secret](#delete-secret)
   * [Destroy Secret Version](#destroy-secret-version)
   * [Disable Secret Version](#disable-secret-version)
@@ -88,6 +89,23 @@ __Usage:__
 
 
 `node samples/createSecret.js`
+
+
+-----
+
+
+
+
+### Create Ummr Secret
+
+View the [source code](https://github.com/googleapis/nodejs-secret-manager/blob/main/samples/createUmmrSecret.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-secret-manager&page=editor&open_in_editor=samples/createUmmrSecret.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/createUmmrSecret.js`
 
 
 -----
