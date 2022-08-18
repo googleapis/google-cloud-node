@@ -34,6 +34,7 @@ const kmsKeyName = process.env.GOOGLE_CLOUD_KMS_KEY_US;
 const fileName = 'test.txt';
 const filePath = path.join(__dirname, '../resources', fileName);
 const downloadFilePath = path.join(__dirname, '../resources/downloaded.txt');
+const doesNotExistPrecondition = 0;
 
 const key = crypto.randomBytes(32).toString('base64');
 
@@ -56,7 +57,7 @@ it('should generate a key', () => {
 
 it('should upload a file', async () => {
   const output = execSync(
-    `node uploadEncryptedFile.js ${bucketName} ${filePath} ${fileName} ${key}`
+    `node uploadEncryptedFile.js ${bucketName} ${filePath} ${fileName} ${key} ${doesNotExistPrecondition}`
   );
   assert.match(
     output,
@@ -77,10 +78,14 @@ it('should download a file', () => {
   fs.statSync(downloadFilePath);
 });
 
-it('should rotate keys', () => {
+it('should rotate keys', async () => {
   const newKey = crypto.randomBytes(32).toString('base64');
+  const [metadata] = await storage
+    .bucket(bucketName)
+    .file(fileName)
+    .getMetadata();
   const output = execSync(
-    `node rotateEncryptionKey.js ${bucketName} ${fileName} ${key} ${newKey}`
+    `node rotateEncryptionKey.js ${bucketName} ${fileName} ${key} ${newKey} ${metadata.generation}`
   );
   assert.include(output, 'Encryption key rotated successfully');
 });
@@ -90,9 +95,13 @@ it('should convert CSEK to KMS key', async () => {
   const file = bucket.file(encryptedFileName, {
     encryptionKey: Buffer.from(key, 'base64'),
   });
+  const [metadata] = await storage
+    .bucket(bucketName)
+    .file(fileName)
+    .getMetadata();
   await file.save('secret data', {resumable: false});
   const output = execSync(
-    `node changeFileCSEKToCMEK.js ${bucketName} ${encryptedFileName} ${key} ${kmsKeyName}`
+    `node changeFileCSEKToCMEK.js ${bucketName} ${encryptedFileName} ${key} ${kmsKeyName} ${metadata.generation}`
   );
   assert.include(
     output,

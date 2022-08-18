@@ -43,6 +43,7 @@ const folderPath = path.join(cwd, 'resources');
 const downloadFilePath = path.join(cwd, 'downloaded.txt');
 const startByte = 0;
 const endByte = 20;
+const doesNotExistPrecondition = 0;
 
 const fileContent = fs.readFileSync(filePath, 'utf-8');
 
@@ -61,7 +62,7 @@ describe('file', () => {
 
   it('should upload a file', async () => {
     const output = execSync(
-      `node uploadFile.js ${bucketName} ${filePath} ${fileName}`
+      `node uploadFile.js ${bucketName} ${filePath} ${fileName} ${doesNotExistPrecondition}`
     );
     assert.match(output, new RegExp(`${filePath} uploaded to ${bucketName}`));
     const [exists] = await bucket.file(fileName).exists();
@@ -84,7 +85,7 @@ describe('file', () => {
 
   it('should upload a file without authentication', async () => {
     const output = execSync(
-      `node uploadWithoutAuthentication.js ${bucketName} ${fileContents} ${fileName}`
+      `node uploadWithoutAuthentication.js ${bucketName} ${fileContents} ${fileName} ${doesNotExistPrecondition}`
     );
     assert.match(output, new RegExp(`${fileName} uploaded to ${bucketName}`));
     const [exists] = await bucket.file(fileName).exists();
@@ -110,8 +111,9 @@ describe('file', () => {
   });
 
   it('should upload a file with a kms key', async () => {
+    const [metadata] = await bucket.file(fileName).getMetadata();
     const output = execSync(
-      `node uploadFileWithKmsKey.js ${bucketName} ${filePath} ${kmsKeyName}`
+      `node uploadFileWithKmsKey.js ${bucketName} ${filePath} ${kmsKeyName} ${metadata.generation}`
     );
     assert.include(
       output,
@@ -219,7 +221,7 @@ describe('file', () => {
 
   it('should move a file', async () => {
     const output = execSync(
-      `node moveFile.js ${bucketName} ${fileName} ${movedFileName}`
+      `node moveFile.js ${bucketName} ${fileName} ${movedFileName} ${doesNotExistPrecondition}`
     );
     assert.include(
       output,
@@ -231,7 +233,7 @@ describe('file', () => {
 
   it('should copy a file', async () => {
     const output = execSync(
-      `node copyFile.js ${bucketName} ${movedFileName} ${bucketName} ${copiedFileName}`
+      `node copyFile.js ${bucketName} ${movedFileName} ${bucketName} ${copiedFileName} ${doesNotExistPrecondition}`
     );
     assert.include(
       output,
@@ -419,14 +421,16 @@ describe('file', () => {
     assert.include(output, `Name: ${copiedFileName}`);
   });
 
-  it('should set metadata for a file', () => {
+  it('should set metadata for a file', async () => {
+    const [metadata] = await bucket.file(copiedFileName).getMetadata();
+
     // used in sample
     const userMetadata = {
       description: 'file description...',
       modified: '1900-01-01',
     };
     const output = execSync(
-      `node fileSetMetadata.js ${bucketName} ${copiedFileName}`
+      `node fileSetMetadata.js ${bucketName} ${copiedFileName} ${metadata.generation} `
     );
 
     assert.match(
@@ -438,7 +442,7 @@ describe('file', () => {
 
   it('should set storage class for a file', async () => {
     const output = execSync(
-      `node fileChangeStorageClass.js ${bucketName} ${copiedFileName} standard`
+      `node fileChangeStorageClass.js ${bucketName} ${copiedFileName} standard ${doesNotExistPrecondition}`
     );
     assert.include(output, `${copiedFileName} has been set to standard`);
     const [metadata] = await storage
@@ -477,8 +481,9 @@ describe('file', () => {
   });
 
   it('should delete a file', async () => {
+    const [metadata] = await bucket.file(copiedFileName).getMetadata();
     const output = execSync(
-      `node deleteFile.js ${bucketName} ${copiedFileName}`
+      `node deleteFile.js ${bucketName} ${copiedFileName} ${metadata.generation}`
     );
     assert.match(
       output,

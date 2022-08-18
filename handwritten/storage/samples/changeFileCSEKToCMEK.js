@@ -23,7 +23,8 @@ function main(
   bucketName = 'my-bucket',
   fileName = 'test.txt',
   encryptionKey = 'my-encription-key',
-  kmsKeyName = 'my-kms-key'
+  kmsKeyName = 'my-kms-key',
+  generationMatchPrecondition = 0
 ) {
   // [START storage_object_csek_to_cmek]
   /**
@@ -49,13 +50,25 @@ function main(
   const storage = new Storage();
 
   async function changeFileCSEKToCMEK() {
+    const rotateEncryptionKeyOptions = {
+      kmsKeyName,
+      // Optional: set a generation-match precondition to avoid potential race
+      // conditions and data corruptions. The request to upload is aborted if the
+      // object's generation number does not match your precondition.
+      preconditionOpts: {
+        ifGenerationMatch: generationMatchPrecondition,
+      },
+    };
+
+    console.log(rotateEncryptionKeyOptions);
+
     await storage
       .bucket(bucketName)
       .file(fileName, {
         encryptionKey: Buffer.from(encryptionKey, 'base64'),
       })
       .rotateEncryptionKey({
-        kmsKeyName,
+        rotateEncryptionKeyOptions,
       });
 
     console.log(

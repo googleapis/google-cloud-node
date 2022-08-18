@@ -24,7 +24,8 @@ function main(
   bucketName = 'my-bucket',
   fileName = 'test.txt',
   oldKey = process.env.GOOGLE_CLOUD_KMS_KEY_US,
-  newKey = process.env.GOOGLE_CLOUD_KMS_KEY_ASIA
+  newKey = process.env.GOOGLE_CLOUD_KMS_KEY_ASIA,
+  generationMatchPrecondition = 0
 ) {
   // [START storage_rotate_encryption_key]
   /**
@@ -53,13 +54,23 @@ function main(
   const storage = new Storage();
 
   async function rotateEncryptionKey() {
+    const rotateEncryptionKeyOptions = {
+      encryptionKey: Buffer.from(newKey, 'base64'),
+
+      // Optional: set a generation-match precondition to avoid potential race
+      // conditions and data corruptions. The request to upload is aborted if the
+      // object's generation number does not match your precondition.
+      preconditionOpts: {
+        ifGenerationMatch: generationMatchPrecondition,
+      },
+    };
     await storage
       .bucket(bucketName)
       .file(fileName, {
         encryptionKey: Buffer.from(oldKey, 'base64'),
       })
       .rotateEncryptionKey({
-        encryptionKey: Buffer.from(newKey, 'base64'),
+        rotateEncryptionKeyOptions,
       });
 
     console.log('Encryption key rotated successfully');

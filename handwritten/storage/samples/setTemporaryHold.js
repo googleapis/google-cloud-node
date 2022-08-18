@@ -20,7 +20,11 @@
  * at https://cloud.google.com/storage/docs/bucket-lock
  */
 
-function main(bucketName = 'my-bucket', fileName = 'test.txt') {
+function main(
+  bucketName = 'my-bucket',
+  fileName = 'test.txt',
+  generationMatchPrecondition = 0
+) {
   // [START storage_set_temporary_hold]
   /**
    * TODO(developer): Uncomment the following lines before running the sample.
@@ -38,9 +42,19 @@ function main(bucketName = 'my-bucket', fileName = 'test.txt') {
   const storage = new Storage();
 
   async function setTemporaryHold() {
-    await storage.bucket(bucketName).file(fileName).setMetadata({
-      temporaryHold: true,
-    });
+    // Optional: set a generation-match precondition to avoid potential race
+    // conditions and data corruptions. The request to upload is aborted if the
+    // object's generation number does not match your precondition.
+    const options = {
+      ifGenerationMatch: generationMatchPrecondition,
+    };
+
+    await storage.bucket(bucketName).file(fileName).setMetadata(
+      {
+        temporaryHold: true,
+      },
+      options
+    );
     console.log(`Temporary hold was set for ${fileName}.`);
   }
 
