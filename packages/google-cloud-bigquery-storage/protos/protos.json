@@ -83,6 +83,14 @@
                             }
                           }
                         },
+                        "AvroSerializationOptions": {
+                          "fields": {
+                            "enableDisplayNameAttribute": {
+                              "type": "bool",
+                              "id": 1
+                            }
+                          }
+                        },
                         "ProtoSchema": {
                           "fields": {
                             "protoDescriptor": {
@@ -808,7 +816,8 @@
                               "oneofs": {
                                 "outputFormatSerializationOptions": {
                                   "oneof": [
-                                    "arrowSerializationOptions"
+                                    "arrowSerializationOptions",
+                                    "avroSerializationOptions"
                                   ]
                                 }
                               },
@@ -825,6 +834,13 @@
                                 "arrowSerializationOptions": {
                                   "type": "ArrowSerializationOptions",
                                   "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "avroSerializationOptions": {
+                                  "type": "AvroSerializationOptions",
+                                  "id": 4,
                                   "options": {
                                     "(google.api.field_behavior)": "OPTIONAL"
                                   }

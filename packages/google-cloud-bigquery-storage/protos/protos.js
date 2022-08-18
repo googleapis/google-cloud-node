@@ -1145,6 +1145,193 @@
                             return AvroRows;
                         })();
     
+                        v1.AvroSerializationOptions = (function() {
+    
+                            /**
+                             * Properties of an AvroSerializationOptions.
+                             * @memberof google.cloud.bigquery.storage.v1
+                             * @interface IAvroSerializationOptions
+                             * @property {boolean|null} [enableDisplayNameAttribute] AvroSerializationOptions enableDisplayNameAttribute
+                             */
+    
+                            /**
+                             * Constructs a new AvroSerializationOptions.
+                             * @memberof google.cloud.bigquery.storage.v1
+                             * @classdesc Represents an AvroSerializationOptions.
+                             * @implements IAvroSerializationOptions
+                             * @constructor
+                             * @param {google.cloud.bigquery.storage.v1.IAvroSerializationOptions=} [properties] Properties to set
+                             */
+                            function AvroSerializationOptions(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * AvroSerializationOptions enableDisplayNameAttribute.
+                             * @member {boolean} enableDisplayNameAttribute
+                             * @memberof google.cloud.bigquery.storage.v1.AvroSerializationOptions
+                             * @instance
+                             */
+                            AvroSerializationOptions.prototype.enableDisplayNameAttribute = false;
+    
+                            /**
+                             * Creates a new AvroSerializationOptions instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.storage.v1.AvroSerializationOptions
+                             * @static
+                             * @param {google.cloud.bigquery.storage.v1.IAvroSerializationOptions=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.storage.v1.AvroSerializationOptions} AvroSerializationOptions instance
+                             */
+                            AvroSerializationOptions.create = function create(properties) {
+                                return new AvroSerializationOptions(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified AvroSerializationOptions message. Does not implicitly {@link google.cloud.bigquery.storage.v1.AvroSerializationOptions.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.storage.v1.AvroSerializationOptions
+                             * @static
+                             * @param {google.cloud.bigquery.storage.v1.IAvroSerializationOptions} message AvroSerializationOptions message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AvroSerializationOptions.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.enableDisplayNameAttribute != null && Object.hasOwnProperty.call(message, "enableDisplayNameAttribute"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enableDisplayNameAttribute);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified AvroSerializationOptions message, length delimited. Does not implicitly {@link google.cloud.bigquery.storage.v1.AvroSerializationOptions.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.storage.v1.AvroSerializationOptions
+                             * @static
+                             * @param {google.cloud.bigquery.storage.v1.IAvroSerializationOptions} message AvroSerializationOptions message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AvroSerializationOptions.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an AvroSerializationOptions message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.storage.v1.AvroSerializationOptions
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.storage.v1.AvroSerializationOptions} AvroSerializationOptions
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AvroSerializationOptions.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.storage.v1.AvroSerializationOptions();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.enableDisplayNameAttribute = reader.bool();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an AvroSerializationOptions message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.storage.v1.AvroSerializationOptions
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.storage.v1.AvroSerializationOptions} AvroSerializationOptions
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AvroSerializationOptions.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an AvroSerializationOptions message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.storage.v1.AvroSerializationOptions
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            AvroSerializationOptions.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.enableDisplayNameAttribute != null && message.hasOwnProperty("enableDisplayNameAttribute"))
+                                    if (typeof message.enableDisplayNameAttribute !== "boolean")
+                                        return "enableDisplayNameAttribute: boolean expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an AvroSerializationOptions message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.storage.v1.AvroSerializationOptions
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.storage.v1.AvroSerializationOptions} AvroSerializationOptions
+                             */
+                            AvroSerializationOptions.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.storage.v1.AvroSerializationOptions)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.storage.v1.AvroSerializationOptions();
+                                if (object.enableDisplayNameAttribute != null)
+                                    message.enableDisplayNameAttribute = Boolean(object.enableDisplayNameAttribute);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an AvroSerializationOptions message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.storage.v1.AvroSerializationOptions
+                             * @static
+                             * @param {google.cloud.bigquery.storage.v1.AvroSerializationOptions} message AvroSerializationOptions
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            AvroSerializationOptions.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.enableDisplayNameAttribute = false;
+                                if (message.enableDisplayNameAttribute != null && message.hasOwnProperty("enableDisplayNameAttribute"))
+                                    object.enableDisplayNameAttribute = message.enableDisplayNameAttribute;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this AvroSerializationOptions to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.storage.v1.AvroSerializationOptions
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            AvroSerializationOptions.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return AvroSerializationOptions;
+                        })();
+    
                         v1.ProtoSchema = (function() {
     
                             /**
@@ -7846,6 +8033,7 @@
                                  * @property {Array.<string>|null} [selectedFields] TableReadOptions selectedFields
                                  * @property {string|null} [rowRestriction] TableReadOptions rowRestriction
                                  * @property {google.cloud.bigquery.storage.v1.IArrowSerializationOptions|null} [arrowSerializationOptions] TableReadOptions arrowSerializationOptions
+                                 * @property {google.cloud.bigquery.storage.v1.IAvroSerializationOptions|null} [avroSerializationOptions] TableReadOptions avroSerializationOptions
                                  */
     
                                 /**
@@ -7888,17 +8076,25 @@
                                  */
                                 TableReadOptions.prototype.arrowSerializationOptions = null;
     
+                                /**
+                                 * TableReadOptions avroSerializationOptions.
+                                 * @member {google.cloud.bigquery.storage.v1.IAvroSerializationOptions|null|undefined} avroSerializationOptions
+                                 * @memberof google.cloud.bigquery.storage.v1.ReadSession.TableReadOptions
+                                 * @instance
+                                 */
+                                TableReadOptions.prototype.avroSerializationOptions = null;
+    
                                 // OneOf field names bound to virtual getters and setters
                                 var $oneOfFields;
     
                                 /**
                                  * TableReadOptions outputFormatSerializationOptions.
-                                 * @member {"arrowSerializationOptions"|undefined} outputFormatSerializationOptions
+                                 * @member {"arrowSerializationOptions"|"avroSerializationOptions"|undefined} outputFormatSerializationOptions
                                  * @memberof google.cloud.bigquery.storage.v1.ReadSession.TableReadOptions
                                  * @instance
                                  */
                                 Object.defineProperty(TableReadOptions.prototype, "outputFormatSerializationOptions", {
-                                    get: $util.oneOfGetter($oneOfFields = ["arrowSerializationOptions"]),
+                                    get: $util.oneOfGetter($oneOfFields = ["arrowSerializationOptions", "avroSerializationOptions"]),
                                     set: $util.oneOfSetter($oneOfFields)
                                 });
     
@@ -7933,6 +8129,8 @@
                                         writer.uint32(/* id 2, wireType 2 =*/18).string(message.rowRestriction);
                                     if (message.arrowSerializationOptions != null && Object.hasOwnProperty.call(message, "arrowSerializationOptions"))
                                         $root.google.cloud.bigquery.storage.v1.ArrowSerializationOptions.encode(message.arrowSerializationOptions, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                    if (message.avroSerializationOptions != null && Object.hasOwnProperty.call(message, "avroSerializationOptions"))
+                                        $root.google.cloud.bigquery.storage.v1.AvroSerializationOptions.encode(message.avroSerializationOptions, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                                     return writer;
                                 };
     
@@ -7977,6 +8175,9 @@
                                             break;
                                         case 3:
                                             message.arrowSerializationOptions = $root.google.cloud.bigquery.storage.v1.ArrowSerializationOptions.decode(reader, reader.uint32());
+                                            break;
+                                        case 4:
+                                            message.avroSerializationOptions = $root.google.cloud.bigquery.storage.v1.AvroSerializationOptions.decode(reader, reader.uint32());
                                             break;
                                         default:
                                             reader.skipType(tag & 7);
@@ -8032,6 +8233,16 @@
                                                 return "arrowSerializationOptions." + error;
                                         }
                                     }
+                                    if (message.avroSerializationOptions != null && message.hasOwnProperty("avroSerializationOptions")) {
+                                        if (properties.outputFormatSerializationOptions === 1)
+                                            return "outputFormatSerializationOptions: multiple values";
+                                        properties.outputFormatSerializationOptions = 1;
+                                        {
+                                            var error = $root.google.cloud.bigquery.storage.v1.AvroSerializationOptions.verify(message.avroSerializationOptions);
+                                            if (error)
+                                                return "avroSerializationOptions." + error;
+                                        }
+                                    }
                                     return null;
                                 };
     
@@ -8060,6 +8271,11 @@
                                         if (typeof object.arrowSerializationOptions !== "object")
                                             throw TypeError(".google.cloud.bigquery.storage.v1.ReadSession.TableReadOptions.arrowSerializationOptions: object expected");
                                         message.arrowSerializationOptions = $root.google.cloud.bigquery.storage.v1.ArrowSerializationOptions.fromObject(object.arrowSerializationOptions);
+                                    }
+                                    if (object.avroSerializationOptions != null) {
+                                        if (typeof object.avroSerializationOptions !== "object")
+                                            throw TypeError(".google.cloud.bigquery.storage.v1.ReadSession.TableReadOptions.avroSerializationOptions: object expected");
+                                        message.avroSerializationOptions = $root.google.cloud.bigquery.storage.v1.AvroSerializationOptions.fromObject(object.avroSerializationOptions);
                                     }
                                     return message;
                                 };
@@ -8092,6 +8308,11 @@
                                         object.arrowSerializationOptions = $root.google.cloud.bigquery.storage.v1.ArrowSerializationOptions.toObject(message.arrowSerializationOptions, options);
                                         if (options.oneofs)
                                             object.outputFormatSerializationOptions = "arrowSerializationOptions";
+                                    }
+                                    if (message.avroSerializationOptions != null && message.hasOwnProperty("avroSerializationOptions")) {
+                                        object.avroSerializationOptions = $root.google.cloud.bigquery.storage.v1.AvroSerializationOptions.toObject(message.avroSerializationOptions, options);
+                                        if (options.oneofs)
+                                            object.outputFormatSerializationOptions = "avroSerializationOptions";
                                     }
                                     return object;
                                 };
