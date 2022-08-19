@@ -229,6 +229,20 @@ export namespace google {
                     public analyzeMove(request: google.cloud.asset.v1.IAnalyzeMoveRequest): Promise<google.cloud.asset.v1.AnalyzeMoveResponse>;
 
                     /**
+                     * Calls QueryAssets.
+                     * @param request QueryAssetsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and QueryAssetsResponse
+                     */
+                    public queryAssets(request: google.cloud.asset.v1.IQueryAssetsRequest, callback: google.cloud.asset.v1.AssetService.QueryAssetsCallback): void;
+
+                    /**
+                     * Calls QueryAssets.
+                     * @param request QueryAssetsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public queryAssets(request: google.cloud.asset.v1.IQueryAssetsRequest): Promise<google.cloud.asset.v1.QueryAssetsResponse>;
+
+                    /**
                      * Calls CreateSavedQuery.
                      * @param request CreateSavedQueryRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and SavedQuery
@@ -405,6 +419,13 @@ export namespace google {
                      * @param [response] AnalyzeMoveResponse
                      */
                     type AnalyzeMoveCallback = (error: (Error|null), response?: google.cloud.asset.v1.AnalyzeMoveResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.asset.v1.AssetService#queryAssets}.
+                     * @param error Error, if any
+                     * @param [response] QueryAssetsResponse
+                     */
+                    type QueryAssetsCallback = (error: (Error|null), response?: google.cloud.asset.v1.QueryAssetsResponse) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.asset.v1.AssetService#createSavedQuery}.
@@ -5818,15 +5839,766 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
-                /** ContentType enum. */
-                enum ContentType {
-                    CONTENT_TYPE_UNSPECIFIED = 0,
-                    RESOURCE = 1,
-                    IAM_POLICY = 2,
-                    ORG_POLICY = 4,
-                    ACCESS_POLICY = 5,
-                    OS_INVENTORY = 6,
-                    RELATIONSHIP = 7
+                /** Properties of a QueryAssetsOutputConfig. */
+                interface IQueryAssetsOutputConfig {
+
+                    /** QueryAssetsOutputConfig bigqueryDestination */
+                    bigqueryDestination?: (google.cloud.asset.v1.QueryAssetsOutputConfig.IBigQueryDestination|null);
+                }
+
+                /** Represents a QueryAssetsOutputConfig. */
+                class QueryAssetsOutputConfig implements IQueryAssetsOutputConfig {
+
+                    /**
+                     * Constructs a new QueryAssetsOutputConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.asset.v1.IQueryAssetsOutputConfig);
+
+                    /** QueryAssetsOutputConfig bigqueryDestination. */
+                    public bigqueryDestination?: (google.cloud.asset.v1.QueryAssetsOutputConfig.IBigQueryDestination|null);
+
+                    /**
+                     * Creates a new QueryAssetsOutputConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns QueryAssetsOutputConfig instance
+                     */
+                    public static create(properties?: google.cloud.asset.v1.IQueryAssetsOutputConfig): google.cloud.asset.v1.QueryAssetsOutputConfig;
+
+                    /**
+                     * Encodes the specified QueryAssetsOutputConfig message. Does not implicitly {@link google.cloud.asset.v1.QueryAssetsOutputConfig.verify|verify} messages.
+                     * @param message QueryAssetsOutputConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.asset.v1.IQueryAssetsOutputConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified QueryAssetsOutputConfig message, length delimited. Does not implicitly {@link google.cloud.asset.v1.QueryAssetsOutputConfig.verify|verify} messages.
+                     * @param message QueryAssetsOutputConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.asset.v1.IQueryAssetsOutputConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a QueryAssetsOutputConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns QueryAssetsOutputConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1.QueryAssetsOutputConfig;
+
+                    /**
+                     * Decodes a QueryAssetsOutputConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns QueryAssetsOutputConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1.QueryAssetsOutputConfig;
+
+                    /**
+                     * Verifies a QueryAssetsOutputConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a QueryAssetsOutputConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns QueryAssetsOutputConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1.QueryAssetsOutputConfig;
+
+                    /**
+                     * Creates a plain object from a QueryAssetsOutputConfig message. Also converts values to other types if specified.
+                     * @param message QueryAssetsOutputConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.asset.v1.QueryAssetsOutputConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this QueryAssetsOutputConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace QueryAssetsOutputConfig {
+
+                    /** Properties of a BigQueryDestination. */
+                    interface IBigQueryDestination {
+
+                        /** BigQueryDestination dataset */
+                        dataset?: (string|null);
+
+                        /** BigQueryDestination table */
+                        table?: (string|null);
+
+                        /** BigQueryDestination writeDisposition */
+                        writeDisposition?: (string|null);
+                    }
+
+                    /** Represents a BigQueryDestination. */
+                    class BigQueryDestination implements IBigQueryDestination {
+
+                        /**
+                         * Constructs a new BigQueryDestination.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.asset.v1.QueryAssetsOutputConfig.IBigQueryDestination);
+
+                        /** BigQueryDestination dataset. */
+                        public dataset: string;
+
+                        /** BigQueryDestination table. */
+                        public table: string;
+
+                        /** BigQueryDestination writeDisposition. */
+                        public writeDisposition: string;
+
+                        /**
+                         * Creates a new BigQueryDestination instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns BigQueryDestination instance
+                         */
+                        public static create(properties?: google.cloud.asset.v1.QueryAssetsOutputConfig.IBigQueryDestination): google.cloud.asset.v1.QueryAssetsOutputConfig.BigQueryDestination;
+
+                        /**
+                         * Encodes the specified BigQueryDestination message. Does not implicitly {@link google.cloud.asset.v1.QueryAssetsOutputConfig.BigQueryDestination.verify|verify} messages.
+                         * @param message BigQueryDestination message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.asset.v1.QueryAssetsOutputConfig.IBigQueryDestination, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified BigQueryDestination message, length delimited. Does not implicitly {@link google.cloud.asset.v1.QueryAssetsOutputConfig.BigQueryDestination.verify|verify} messages.
+                         * @param message BigQueryDestination message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.asset.v1.QueryAssetsOutputConfig.IBigQueryDestination, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a BigQueryDestination message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns BigQueryDestination
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1.QueryAssetsOutputConfig.BigQueryDestination;
+
+                        /**
+                         * Decodes a BigQueryDestination message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns BigQueryDestination
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1.QueryAssetsOutputConfig.BigQueryDestination;
+
+                        /**
+                         * Verifies a BigQueryDestination message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a BigQueryDestination message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns BigQueryDestination
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1.QueryAssetsOutputConfig.BigQueryDestination;
+
+                        /**
+                         * Creates a plain object from a BigQueryDestination message. Also converts values to other types if specified.
+                         * @param message BigQueryDestination
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.asset.v1.QueryAssetsOutputConfig.BigQueryDestination, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this BigQueryDestination to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+                }
+
+                /** Properties of a QueryAssetsRequest. */
+                interface IQueryAssetsRequest {
+
+                    /** QueryAssetsRequest parent */
+                    parent?: (string|null);
+
+                    /** QueryAssetsRequest statement */
+                    statement?: (string|null);
+
+                    /** QueryAssetsRequest jobReference */
+                    jobReference?: (string|null);
+
+                    /** QueryAssetsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** QueryAssetsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** QueryAssetsRequest timeout */
+                    timeout?: (google.protobuf.IDuration|null);
+
+                    /** QueryAssetsRequest readTimeWindow */
+                    readTimeWindow?: (google.cloud.asset.v1.ITimeWindow|null);
+
+                    /** QueryAssetsRequest readTime */
+                    readTime?: (google.protobuf.ITimestamp|null);
+
+                    /** QueryAssetsRequest outputConfig */
+                    outputConfig?: (google.cloud.asset.v1.IQueryAssetsOutputConfig|null);
+                }
+
+                /** Represents a QueryAssetsRequest. */
+                class QueryAssetsRequest implements IQueryAssetsRequest {
+
+                    /**
+                     * Constructs a new QueryAssetsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.asset.v1.IQueryAssetsRequest);
+
+                    /** QueryAssetsRequest parent. */
+                    public parent: string;
+
+                    /** QueryAssetsRequest statement. */
+                    public statement?: (string|null);
+
+                    /** QueryAssetsRequest jobReference. */
+                    public jobReference?: (string|null);
+
+                    /** QueryAssetsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** QueryAssetsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** QueryAssetsRequest timeout. */
+                    public timeout?: (google.protobuf.IDuration|null);
+
+                    /** QueryAssetsRequest readTimeWindow. */
+                    public readTimeWindow?: (google.cloud.asset.v1.ITimeWindow|null);
+
+                    /** QueryAssetsRequest readTime. */
+                    public readTime?: (google.protobuf.ITimestamp|null);
+
+                    /** QueryAssetsRequest outputConfig. */
+                    public outputConfig?: (google.cloud.asset.v1.IQueryAssetsOutputConfig|null);
+
+                    /** QueryAssetsRequest query. */
+                    public query?: ("statement"|"jobReference");
+
+                    /** QueryAssetsRequest time. */
+                    public time?: ("readTimeWindow"|"readTime");
+
+                    /**
+                     * Creates a new QueryAssetsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns QueryAssetsRequest instance
+                     */
+                    public static create(properties?: google.cloud.asset.v1.IQueryAssetsRequest): google.cloud.asset.v1.QueryAssetsRequest;
+
+                    /**
+                     * Encodes the specified QueryAssetsRequest message. Does not implicitly {@link google.cloud.asset.v1.QueryAssetsRequest.verify|verify} messages.
+                     * @param message QueryAssetsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.asset.v1.IQueryAssetsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified QueryAssetsRequest message, length delimited. Does not implicitly {@link google.cloud.asset.v1.QueryAssetsRequest.verify|verify} messages.
+                     * @param message QueryAssetsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.asset.v1.IQueryAssetsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a QueryAssetsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns QueryAssetsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1.QueryAssetsRequest;
+
+                    /**
+                     * Decodes a QueryAssetsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns QueryAssetsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1.QueryAssetsRequest;
+
+                    /**
+                     * Verifies a QueryAssetsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a QueryAssetsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns QueryAssetsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1.QueryAssetsRequest;
+
+                    /**
+                     * Creates a plain object from a QueryAssetsRequest message. Also converts values to other types if specified.
+                     * @param message QueryAssetsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.asset.v1.QueryAssetsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this QueryAssetsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a QueryAssetsResponse. */
+                interface IQueryAssetsResponse {
+
+                    /** QueryAssetsResponse jobReference */
+                    jobReference?: (string|null);
+
+                    /** QueryAssetsResponse done */
+                    done?: (boolean|null);
+
+                    /** QueryAssetsResponse error */
+                    error?: (google.rpc.IStatus|null);
+
+                    /** QueryAssetsResponse queryResult */
+                    queryResult?: (google.cloud.asset.v1.IQueryResult|null);
+
+                    /** QueryAssetsResponse outputConfig */
+                    outputConfig?: (google.cloud.asset.v1.IQueryAssetsOutputConfig|null);
+                }
+
+                /** Represents a QueryAssetsResponse. */
+                class QueryAssetsResponse implements IQueryAssetsResponse {
+
+                    /**
+                     * Constructs a new QueryAssetsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.asset.v1.IQueryAssetsResponse);
+
+                    /** QueryAssetsResponse jobReference. */
+                    public jobReference: string;
+
+                    /** QueryAssetsResponse done. */
+                    public done: boolean;
+
+                    /** QueryAssetsResponse error. */
+                    public error?: (google.rpc.IStatus|null);
+
+                    /** QueryAssetsResponse queryResult. */
+                    public queryResult?: (google.cloud.asset.v1.IQueryResult|null);
+
+                    /** QueryAssetsResponse outputConfig. */
+                    public outputConfig?: (google.cloud.asset.v1.IQueryAssetsOutputConfig|null);
+
+                    /** QueryAssetsResponse response. */
+                    public response?: ("error"|"queryResult"|"outputConfig");
+
+                    /**
+                     * Creates a new QueryAssetsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns QueryAssetsResponse instance
+                     */
+                    public static create(properties?: google.cloud.asset.v1.IQueryAssetsResponse): google.cloud.asset.v1.QueryAssetsResponse;
+
+                    /**
+                     * Encodes the specified QueryAssetsResponse message. Does not implicitly {@link google.cloud.asset.v1.QueryAssetsResponse.verify|verify} messages.
+                     * @param message QueryAssetsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.asset.v1.IQueryAssetsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified QueryAssetsResponse message, length delimited. Does not implicitly {@link google.cloud.asset.v1.QueryAssetsResponse.verify|verify} messages.
+                     * @param message QueryAssetsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.asset.v1.IQueryAssetsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a QueryAssetsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns QueryAssetsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1.QueryAssetsResponse;
+
+                    /**
+                     * Decodes a QueryAssetsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns QueryAssetsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1.QueryAssetsResponse;
+
+                    /**
+                     * Verifies a QueryAssetsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a QueryAssetsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns QueryAssetsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1.QueryAssetsResponse;
+
+                    /**
+                     * Creates a plain object from a QueryAssetsResponse message. Also converts values to other types if specified.
+                     * @param message QueryAssetsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.asset.v1.QueryAssetsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this QueryAssetsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a QueryResult. */
+                interface IQueryResult {
+
+                    /** QueryResult rows */
+                    rows?: (google.protobuf.IStruct[]|null);
+
+                    /** QueryResult schema */
+                    schema?: (google.cloud.asset.v1.ITableSchema|null);
+
+                    /** QueryResult nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** QueryResult totalRows */
+                    totalRows?: (number|Long|string|null);
+                }
+
+                /** Represents a QueryResult. */
+                class QueryResult implements IQueryResult {
+
+                    /**
+                     * Constructs a new QueryResult.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.asset.v1.IQueryResult);
+
+                    /** QueryResult rows. */
+                    public rows: google.protobuf.IStruct[];
+
+                    /** QueryResult schema. */
+                    public schema?: (google.cloud.asset.v1.ITableSchema|null);
+
+                    /** QueryResult nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** QueryResult totalRows. */
+                    public totalRows: (number|Long|string);
+
+                    /**
+                     * Creates a new QueryResult instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns QueryResult instance
+                     */
+                    public static create(properties?: google.cloud.asset.v1.IQueryResult): google.cloud.asset.v1.QueryResult;
+
+                    /**
+                     * Encodes the specified QueryResult message. Does not implicitly {@link google.cloud.asset.v1.QueryResult.verify|verify} messages.
+                     * @param message QueryResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.asset.v1.IQueryResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified QueryResult message, length delimited. Does not implicitly {@link google.cloud.asset.v1.QueryResult.verify|verify} messages.
+                     * @param message QueryResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.asset.v1.IQueryResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a QueryResult message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns QueryResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1.QueryResult;
+
+                    /**
+                     * Decodes a QueryResult message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns QueryResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1.QueryResult;
+
+                    /**
+                     * Verifies a QueryResult message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a QueryResult message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns QueryResult
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1.QueryResult;
+
+                    /**
+                     * Creates a plain object from a QueryResult message. Also converts values to other types if specified.
+                     * @param message QueryResult
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.asset.v1.QueryResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this QueryResult to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a TableSchema. */
+                interface ITableSchema {
+
+                    /** TableSchema fields */
+                    fields?: (google.cloud.asset.v1.ITableFieldSchema[]|null);
+                }
+
+                /** Represents a TableSchema. */
+                class TableSchema implements ITableSchema {
+
+                    /**
+                     * Constructs a new TableSchema.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.asset.v1.ITableSchema);
+
+                    /** TableSchema fields. */
+                    public fields: google.cloud.asset.v1.ITableFieldSchema[];
+
+                    /**
+                     * Creates a new TableSchema instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TableSchema instance
+                     */
+                    public static create(properties?: google.cloud.asset.v1.ITableSchema): google.cloud.asset.v1.TableSchema;
+
+                    /**
+                     * Encodes the specified TableSchema message. Does not implicitly {@link google.cloud.asset.v1.TableSchema.verify|verify} messages.
+                     * @param message TableSchema message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.asset.v1.ITableSchema, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TableSchema message, length delimited. Does not implicitly {@link google.cloud.asset.v1.TableSchema.verify|verify} messages.
+                     * @param message TableSchema message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.asset.v1.ITableSchema, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TableSchema message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TableSchema
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1.TableSchema;
+
+                    /**
+                     * Decodes a TableSchema message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TableSchema
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1.TableSchema;
+
+                    /**
+                     * Verifies a TableSchema message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TableSchema message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TableSchema
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1.TableSchema;
+
+                    /**
+                     * Creates a plain object from a TableSchema message. Also converts values to other types if specified.
+                     * @param message TableSchema
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.asset.v1.TableSchema, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TableSchema to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a TableFieldSchema. */
+                interface ITableFieldSchema {
+
+                    /** TableFieldSchema field */
+                    field?: (string|null);
+
+                    /** TableFieldSchema type */
+                    type?: (string|null);
+
+                    /** TableFieldSchema mode */
+                    mode?: (string|null);
+
+                    /** TableFieldSchema fields */
+                    fields?: (google.cloud.asset.v1.ITableFieldSchema[]|null);
+                }
+
+                /** Represents a TableFieldSchema. */
+                class TableFieldSchema implements ITableFieldSchema {
+
+                    /**
+                     * Constructs a new TableFieldSchema.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.asset.v1.ITableFieldSchema);
+
+                    /** TableFieldSchema field. */
+                    public field: string;
+
+                    /** TableFieldSchema type. */
+                    public type: string;
+
+                    /** TableFieldSchema mode. */
+                    public mode: string;
+
+                    /** TableFieldSchema fields. */
+                    public fields: google.cloud.asset.v1.ITableFieldSchema[];
+
+                    /**
+                     * Creates a new TableFieldSchema instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TableFieldSchema instance
+                     */
+                    public static create(properties?: google.cloud.asset.v1.ITableFieldSchema): google.cloud.asset.v1.TableFieldSchema;
+
+                    /**
+                     * Encodes the specified TableFieldSchema message. Does not implicitly {@link google.cloud.asset.v1.TableFieldSchema.verify|verify} messages.
+                     * @param message TableFieldSchema message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.asset.v1.ITableFieldSchema, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TableFieldSchema message, length delimited. Does not implicitly {@link google.cloud.asset.v1.TableFieldSchema.verify|verify} messages.
+                     * @param message TableFieldSchema message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.asset.v1.ITableFieldSchema, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TableFieldSchema message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TableFieldSchema
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1.TableFieldSchema;
+
+                    /**
+                     * Decodes a TableFieldSchema message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TableFieldSchema
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1.TableFieldSchema;
+
+                    /**
+                     * Verifies a TableFieldSchema message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TableFieldSchema message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TableFieldSchema
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1.TableFieldSchema;
+
+                    /**
+                     * Creates a plain object from a TableFieldSchema message. Also converts values to other types if specified.
+                     * @param message TableFieldSchema
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.asset.v1.TableFieldSchema, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TableFieldSchema to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
                 }
 
                 /** Properties of a BatchGetEffectiveIamPoliciesRequest. */
@@ -6211,6 +6983,17 @@ export namespace google {
                             public toJSON(): { [k: string]: any };
                         }
                     }
+                }
+
+                /** ContentType enum. */
+                enum ContentType {
+                    CONTENT_TYPE_UNSPECIFIED = 0,
+                    RESOURCE = 1,
+                    IAM_POLICY = 2,
+                    ORG_POLICY = 4,
+                    ACCESS_POLICY = 5,
+                    OS_INVENTORY = 6,
+                    RELATIONSHIP = 7
                 }
 
                 /** Properties of a TemporalAsset. */
