@@ -46,6 +46,10 @@ function main(humanReviewConfig) {
    *  The priority of the human review task.
    */
   // const priority = {}
+  /**
+   *  The document schema of the human review task.
+   */
+  // const documentSchema = {}
 
   // Imports the Documentai library
   const {DocumentProcessorServiceClient} = require('@google-cloud/documentai').v1beta3;

@@ -27,7 +27,7 @@ function main(parent, processor) {
    */
   /**
    *  Required. The parent (project and location) under which to create the processor.
-   *  Format: projects/{project}/locations/{location}
+   *  Format: `projects/{project}/locations/{location}`
    */
   // const parent = 'abc123'
   /**

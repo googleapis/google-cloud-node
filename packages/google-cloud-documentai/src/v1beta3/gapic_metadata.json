@@ -20,6 +20,16 @@
                 "fetchProcessorTypes"
               ]
             },
+            "GetProcessor": {
+              "methods": [
+                "getProcessor"
+              ]
+            },
+            "GetProcessorVersion": {
+              "methods": [
+                "getProcessorVersion"
+              ]
+            },
             "CreateProcessor": {
               "methods": [
                 "createProcessor"
@@ -28,6 +38,21 @@
             "BatchProcessDocuments": {
               "methods": [
                 "batchProcessDocuments"
+              ]
+            },
+            "DeleteProcessorVersion": {
+              "methods": [
+                "deleteProcessorVersion"
+              ]
+            },
+            "DeployProcessorVersion": {
+              "methods": [
+                "deployProcessorVersion"
+              ]
+            },
+            "UndeployProcessorVersion": {
+              "methods": [
+                "undeployProcessorVersion"
               ]
             },
             "DeleteProcessor": {
@@ -45,9 +70,21 @@
                 "disableProcessor"
               ]
             },
+            "SetDefaultProcessorVersion": {
+              "methods": [
+                "setDefaultProcessorVersion"
+              ]
+            },
             "ReviewDocument": {
               "methods": [
                 "reviewDocument"
+              ]
+            },
+            "ListProcessorTypes": {
+              "methods": [
+                "listProcessorTypes",
+                "listProcessorTypesStream",
+                "listProcessorTypesAsync"
               ]
             },
             "ListProcessors": {
@@ -55,6 +92,13 @@
                 "listProcessors",
                 "listProcessorsStream",
                 "listProcessorsAsync"
+              ]
+            },
+            "ListProcessorVersions": {
+              "methods": [
+                "listProcessorVersions",
+                "listProcessorVersionsStream",
+                "listProcessorVersionsAsync"
               ]
             }
           }
@@ -72,6 +116,16 @@
                 "fetchProcessorTypes"
               ]
             },
+            "GetProcessor": {
+              "methods": [
+                "getProcessor"
+              ]
+            },
+            "GetProcessorVersion": {
+              "methods": [
+                "getProcessorVersion"
+              ]
+            },
             "CreateProcessor": {
               "methods": [
                 "createProcessor"
@@ -80,6 +134,21 @@
             "BatchProcessDocuments": {
               "methods": [
                 "batchProcessDocuments"
+              ]
+            },
+            "DeleteProcessorVersion": {
+              "methods": [
+                "deleteProcessorVersion"
+              ]
+            },
+            "DeployProcessorVersion": {
+              "methods": [
+                "deployProcessorVersion"
+              ]
+            },
+            "UndeployProcessorVersion": {
+              "methods": [
+                "undeployProcessorVersion"
               ]
             },
             "DeleteProcessor": {
@@ -97,9 +166,21 @@
                 "disableProcessor"
               ]
             },
+            "SetDefaultProcessorVersion": {
+              "methods": [
+                "setDefaultProcessorVersion"
+              ]
+            },
             "ReviewDocument": {
               "methods": [
                 "reviewDocument"
+              ]
+            },
+            "ListProcessorTypes": {
+              "methods": [
+                "listProcessorTypes",
+                "listProcessorTypesStream",
+                "listProcessorTypesAsync"
               ]
             },
             "ListProcessors": {
@@ -107,6 +188,13 @@
                 "listProcessors",
                 "listProcessorsStream",
                 "listProcessorsAsync"
+              ]
+            },
+            "ListProcessorVersions": {
+              "methods": [
+                "listProcessorVersions",
+                "listProcessorVersionsStream",
+                "listProcessorVersionsAsync"
               ]
             }
           }

@@ -27,7 +27,7 @@ function main(parent) {
    */
   /**
    *  Required. The parent (project and location) which owns this collection of Processors.
-   *  Format: projects/{project}/locations/{location}
+   *  Format: `projects/{project}/locations/{location}`
    */
   // const parent = 'abc123'
   /**

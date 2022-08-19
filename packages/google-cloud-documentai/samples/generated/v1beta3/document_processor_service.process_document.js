@@ -34,7 +34,12 @@ function main(name) {
    */
   // const rawDocument = {}
   /**
-   *  Required. The processor resource name.
+   *  Required. The resource name of the Processor google.cloud.documentai.v1beta3.Processor  or
+   *  ProcessorVersion google.cloud.documentai.v1beta3.ProcessorVersion 
+   *  to use for processing. If a Processor google.cloud.documentai.v1beta3.Processor  is specified, the server will use
+   *  its default version google.cloud.documentai.v1beta3.Processor.default_processor_version. Format:
+   *  `projects/{project}/locations/{location}/processors/{processor}`, or
+   *  `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}`
    */
   // const name = 'abc123'
   /**
@@ -46,6 +51,10 @@ function main(name) {
    *  false.
    */
   // const skipHumanReview = true
+  /**
+   *  Specifies which fields to include in ProcessResponse's document.
+   */
+  // const fieldMask = {}
 
   // Imports the Documentai library
   const {DocumentProcessorServiceClient} = require('@google-cloud/documentai').v1beta3;

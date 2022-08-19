@@ -4209,10 +4209,26 @@
                     "java_package": "com.google.cloud.documentai.v1beta3",
                     "php_namespace": "Google\\Cloud\\DocumentAI\\V1beta3",
                     "ruby_package": "Google::Cloud::DocumentAI::V1beta3",
-                    "(google.api.resource_definition).type": "documentai.googleapis.com/HumanReviewConfig",
-                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/processors/{processor}/humanReviewConfig"
+                    "(google.api.resource_definition).type": "documentai.googleapis.com/Location",
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}"
                   },
                   "nested": {
+                    "Barcode": {
+                      "fields": {
+                        "format": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "valueFormat": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "rawValue": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
                     "Document": {
                       "oneofs": {
                         "source": {
@@ -4417,6 +4433,11 @@
                               "rule": "repeated",
                               "type": "Symbol",
                               "id": 12
+                            },
+                            "detectedBarcodes": {
+                              "rule": "repeated",
+                              "type": "DetectedBarcode",
+                              "id": 15
                             },
                             "provenance": {
                               "type": "Provenance",
@@ -4712,9 +4733,29 @@
                                   "type": "string",
                                   "id": 5
                                 },
+                                "correctedKeyText": {
+                                  "type": "string",
+                                  "id": 6
+                                },
+                                "correctedValueText": {
+                                  "type": "string",
+                                  "id": 7
+                                },
                                 "provenance": {
                                   "type": "Provenance",
                                   "id": 8
+                                }
+                              }
+                            },
+                            "DetectedBarcode": {
+                              "fields": {
+                                "layout": {
+                                  "type": "Layout",
+                                  "id": 1
+                                },
+                                "barcode": {
+                                  "type": "Barcode",
+                                  "id": 2
                                 }
                               }
                             },
@@ -4822,7 +4863,9 @@
                                     "dateValue",
                                     "datetimeValue",
                                     "addressValue",
-                                    "booleanValue"
+                                    "booleanValue",
+                                    "integerValue",
+                                    "floatValue"
                                   ]
                                 }
                               },
@@ -4846,6 +4889,14 @@
                                 "booleanValue": {
                                   "type": "bool",
                                   "id": 6
+                                },
+                                "integerValue": {
+                                  "type": "int32",
+                                  "id": 7
+                                },
+                                "floatValue": {
+                                  "type": "float",
+                                  "id": 8
                                 },
                                 "text": {
                                   "type": "string",
@@ -5047,7 +5098,15 @@
                             "parent": {
                               "rule": "repeated",
                               "type": "int32",
-                              "id": 2
+                              "id": 2,
+                              "options": {
+                                "deprecated": true
+                              }
+                            },
+                            "parentIds": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 7
                             },
                             "createTime": {
                               "type": "google.protobuf.Timestamp",
@@ -5228,13 +5287,19 @@
                           "options": {
                             "(google.api.http).post": "/v1beta3/{name=projects/*/locations/*/processors/*}:process",
                             "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1beta3/{name=projects/*/locations/*/processors/*/processorVersions/*}:process",
+                            "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "post": "/v1beta3/{name=projects/*/locations/*/processors/*}:process",
-                                "body": "*"
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1beta3/{name=projects/*/locations/*/processors/*/processorVersions/*}:process",
+                                  "body": "*"
+                                }
                               }
                             },
                             {
@@ -5248,6 +5313,8 @@
                           "options": {
                             "(google.api.http).post": "/v1beta3/{name=projects/*/locations/*/processors/*}:batchProcess",
                             "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1beta3/{name=projects/*/locations/*/processors/*/processorVersions/*}:batchProcess",
+                            "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "name",
                             "(google.longrunning.operation_info).response_type": "BatchProcessResponse",
                             "(google.longrunning.operation_info).metadata_type": "BatchProcessMetadata"
@@ -5256,7 +5323,11 @@
                             {
                               "(google.api.http)": {
                                 "post": "/v1beta3/{name=projects/*/locations/*/processors/*}:batchProcess",
-                                "body": "*"
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1beta3/{name=projects/*/locations/*/processors/*/processorVersions/*}:batchProcess",
+                                  "body": "*"
+                                }
                               }
                             },
                             {
@@ -5288,6 +5359,24 @@
                             }
                           ]
                         },
+                        "ListProcessorTypes": {
+                          "requestType": "ListProcessorTypesRequest",
+                          "responseType": "ListProcessorTypesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta3/{parent=projects/*/locations/*}/processorTypes",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta3/{parent=projects/*/locations/*}/processorTypes"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
                         "ListProcessors": {
                           "requestType": "ListProcessorsRequest",
                           "responseType": "ListProcessorsResponse",
@@ -5303,6 +5392,142 @@
                             },
                             {
                               "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetProcessor": {
+                          "requestType": "GetProcessorRequest",
+                          "responseType": "Processor",
+                          "options": {
+                            "(google.api.http).get": "/v1beta3/{name=projects/*/locations/*/processors/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta3/{name=projects/*/locations/*/processors/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "GetProcessorVersion": {
+                          "requestType": "GetProcessorVersionRequest",
+                          "responseType": "ProcessorVersion",
+                          "options": {
+                            "(google.api.http).get": "/v1beta3/{name=projects/*/locations/*/processors/*/processorVersions/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta3/{name=projects/*/locations/*/processors/*/processorVersions/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListProcessorVersions": {
+                          "requestType": "ListProcessorVersionsRequest",
+                          "responseType": "ListProcessorVersionsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta3/{parent=projects/*/locations/*/processors/*}/processorVersions",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta3/{parent=projects/*/locations/*/processors/*}/processorVersions"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "DeleteProcessorVersion": {
+                          "requestType": "DeleteProcessorVersionRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1beta3/{name=projects/*/locations/*/processors/*/processorVersions/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "DeleteProcessorVersionMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1beta3/{name=projects/*/locations/*/processors/*/processorVersions/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "DeleteProcessorVersionMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeployProcessorVersion": {
+                          "requestType": "DeployProcessorVersionRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta3/{name=projects/*/locations/*/processors/*/processorVersions/*}:deploy",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "DeployProcessorVersionResponse",
+                            "(google.longrunning.operation_info).metadata_type": "DeployProcessorVersionMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta3/{name=projects/*/locations/*/processors/*/processorVersions/*}:deploy",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "DeployProcessorVersionResponse",
+                                "metadata_type": "DeployProcessorVersionMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "UndeployProcessorVersion": {
+                          "requestType": "UndeployProcessorVersionRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta3/{name=projects/*/locations/*/processors/*/processorVersions/*}:undeploy",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "UndeployProcessorVersionResponse",
+                            "(google.longrunning.operation_info).metadata_type": "UndeployProcessorVersionMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta3/{name=projects/*/locations/*/processors/*/processorVersions/*}:undeploy",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "UndeployProcessorVersionResponse",
+                                "metadata_type": "UndeployProcessorVersionMetadata"
+                              }
                             }
                           ]
                         },
@@ -5400,6 +5625,30 @@
                             }
                           ]
                         },
+                        "SetDefaultProcessorVersion": {
+                          "requestType": "SetDefaultProcessorVersionRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta3/{processor=projects/*/locations/*/processors/*}:setDefaultProcessorVersion",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "SetDefaultProcessorVersionResponse",
+                            "(google.longrunning.operation_info).metadata_type": "SetDefaultProcessorVersionMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta3/{processor=projects/*/locations/*/processors/*}:setDefaultProcessorVersion",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "SetDefaultProcessorVersionResponse",
+                                "metadata_type": "SetDefaultProcessorVersionMetadata"
+                              }
+                            }
+                          ]
+                        },
                         "ReviewDocument": {
                           "requestType": "ReviewDocumentRequest",
                           "responseType": "google.longrunning.Operation",
@@ -5453,7 +5702,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "documentai.googleapis.com/Processor"
+                            "(google.api.resource_reference).type": "*"
                           }
                         },
                         "document": {
@@ -5466,6 +5715,10 @@
                         "skipHumanReview": {
                           "type": "bool",
                           "id": 3
+                        },
+                        "fieldMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 6
                         }
                       }
                     },
@@ -5522,7 +5775,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "documentai.googleapis.com/Processor"
+                            "(google.api.resource_reference).type": "*"
                           }
                         },
                         "inputConfigs": {
@@ -5671,6 +5924,39 @@
                         }
                       }
                     },
+                    "ListProcessorTypesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "documentai.googleapis.com/ProcessorType"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListProcessorTypesResponse": {
+                      "fields": {
+                        "processorTypes": {
+                          "rule": "repeated",
+                          "type": "ProcessorType",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
                     "ListProcessorsRequest": {
                       "fields": {
                         "parent": {
@@ -5701,6 +5987,129 @@
                         "nextPageToken": {
                           "type": "string",
                           "id": 2
+                        }
+                      }
+                    },
+                    "GetProcessorRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "documentai.googleapis.com/Processor"
+                          }
+                        }
+                      }
+                    },
+                    "GetProcessorVersionRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "documentai.googleapis.com/ProcessorVersion"
+                          }
+                        }
+                      }
+                    },
+                    "ListProcessorVersionsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "documentai.googleapis.com/ProcessorVersion"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListProcessorVersionsResponse": {
+                      "fields": {
+                        "processorVersions": {
+                          "rule": "repeated",
+                          "type": "ProcessorVersion",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DeleteProcessorVersionRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "documentai.googleapis.com/ProcessorVersion"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteProcessorVersionMetadata": {
+                      "fields": {
+                        "commonMetadata": {
+                          "type": "CommonOperationMetadata",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "DeployProcessorVersionRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "documentai.googleapis.com/ProcessorVersion"
+                          }
+                        }
+                      }
+                    },
+                    "DeployProcessorVersionResponse": {
+                      "fields": {}
+                    },
+                    "DeployProcessorVersionMetadata": {
+                      "fields": {
+                        "commonMetadata": {
+                          "type": "CommonOperationMetadata",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "UndeployProcessorVersionRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "documentai.googleapis.com/ProcessorVersion"
+                          }
+                        }
+                      }
+                    },
+                    "UndeployProcessorVersionResponse": {
+                      "fields": {}
+                    },
+                    "UndeployProcessorVersionMetadata": {
+                      "fields": {
+                        "commonMetadata": {
+                          "type": "CommonOperationMetadata",
+                          "id": 1
                         }
                       }
                     },
@@ -5789,6 +6198,37 @@
                         }
                       }
                     },
+                    "SetDefaultProcessorVersionRequest": {
+                      "fields": {
+                        "processor": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "documentai.googleapis.com/Processor"
+                          }
+                        },
+                        "defaultProcessorVersion": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "documentai.googleapis.com/ProcessorVersion"
+                          }
+                        }
+                      }
+                    },
+                    "SetDefaultProcessorVersionResponse": {
+                      "fields": {}
+                    },
+                    "SetDefaultProcessorVersionMetadata": {
+                      "fields": {
+                        "commonMetadata": {
+                          "type": "CommonOperationMetadata",
+                          "id": 1
+                        }
+                      }
+                    },
                     "ReviewDocumentRequest": {
                       "oneofs": {
                         "source": {
@@ -5824,6 +6264,10 @@
                         "priority": {
                           "type": "Priority",
                           "id": 5
+                        },
+                        "documentSchema": {
+                          "type": "DocumentSchema",
+                          "id": 6
                         }
                       },
                       "nested": {
@@ -5840,6 +6284,23 @@
                         "gcsDestination": {
                           "type": "string",
                           "id": 1
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 2
+                        },
+                        "rejectionReason": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "REJECTED": 1,
+                            "SUCCEEDED": 2
+                          }
                         }
                       }
                     },
@@ -5883,6 +6344,120 @@
                         }
                       }
                     },
+                    "DocumentSchema": {
+                      "fields": {
+                        "displayName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "entityTypes": {
+                          "rule": "repeated",
+                          "type": "EntityType",
+                          "id": 3
+                        },
+                        "metadata": {
+                          "type": "Metadata",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "EntityType": {
+                          "oneofs": {
+                            "valueSource": {
+                              "oneof": [
+                                "enumValues"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "enumValues": {
+                              "type": "EnumValues",
+                              "id": 14
+                            },
+                            "displayName": {
+                              "type": "string",
+                              "id": 13
+                            },
+                            "name": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "baseTypes": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 2
+                            },
+                            "properties": {
+                              "rule": "repeated",
+                              "type": "Property",
+                              "id": 6
+                            }
+                          },
+                          "nested": {
+                            "EnumValues": {
+                              "fields": {
+                                "values": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 1
+                                }
+                              }
+                            },
+                            "Property": {
+                              "fields": {
+                                "name": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "valueType": {
+                                  "type": "string",
+                                  "id": 2
+                                },
+                                "occurrenceType": {
+                                  "type": "OccurrenceType",
+                                  "id": 3
+                                }
+                              },
+                              "nested": {
+                                "OccurrenceType": {
+                                  "values": {
+                                    "OCCURRENCE_TYPE_UNSPECIFIED": 0,
+                                    "OPTIONAL_ONCE": 1,
+                                    "OPTIONAL_MULTIPLE": 2,
+                                    "REQUIRED_ONCE": 3,
+                                    "REQUIRED_MULTIPLE": 4
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "Metadata": {
+                          "fields": {
+                            "documentSplitter": {
+                              "type": "bool",
+                              "id": 1
+                            },
+                            "documentAllowMultipleLabels": {
+                              "type": "bool",
+                              "id": 2
+                            },
+                            "prefixedNamingOnProperties": {
+                              "type": "bool",
+                              "id": 6
+                            },
+                            "skipNamingValidation": {
+                              "type": "bool",
+                              "id": 7
+                            }
+                          }
+                        }
+                      }
+                    },
                     "CommonOperationMetadata": {
                       "fields": {
                         "state": {
@@ -5892,6 +6467,10 @@
                         "stateMessage": {
                           "type": "string",
                           "id": 2
+                        },
+                        "resource": {
+                          "type": "string",
+                          "id": 5
                         },
                         "createTime": {
                           "type": "google.protobuf.Timestamp",
@@ -5911,6 +6490,75 @@
                             "SUCCEEDED": 3,
                             "FAILED": 4,
                             "CANCELLED": 5
+                          }
+                        }
+                      }
+                    },
+                    "ProcessorVersion": {
+                      "options": {
+                        "(google.api.resource).type": "documentai.googleapis.com/ProcessorVersion",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processor_version}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 6
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 7
+                        },
+                        "kmsKeyName": {
+                          "type": "string",
+                          "id": 9
+                        },
+                        "kmsKeyVersionName": {
+                          "type": "string",
+                          "id": 10
+                        },
+                        "googleManaged": {
+                          "type": "bool",
+                          "id": 11
+                        },
+                        "deprecationInfo": {
+                          "type": "DeprecationInfo",
+                          "id": 13
+                        }
+                      },
+                      "nested": {
+                        "DeprecationInfo": {
+                          "fields": {
+                            "deprecationTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 1
+                            },
+                            "replacementProcessorVersion": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.resource_reference).type": "documentai.googleapis.com/ProcessorVersion"
+                              }
+                            }
+                          }
+                        },
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "DEPLOYED": 1,
+                            "DEPLOYING": 2,
+                            "UNDEPLOYED": 3,
+                            "UNDEPLOYING": 4,
+                            "CREATING": 5,
+                            "DELETING": 6,
+                            "FAILED": 7
                           }
                         }
                       }
@@ -5945,7 +6593,10 @@
                         },
                         "defaultProcessorVersion": {
                           "type": "string",
-                          "id": 9
+                          "id": 9,
+                          "options": {
+                            "(google.api.resource_reference).type": "documentai.googleapis.com/ProcessorVersion"
+                          }
                         },
                         "processEndpoint": {
                           "type": "string",
@@ -6004,6 +6655,10 @@
                         "allowCreation": {
                           "type": "bool",
                           "id": 6
+                        },
+                        "launchStage": {
+                          "type": "google.api.LaunchStage",
+                          "id": 8
                         }
                       },
                       "nested": {
