@@ -1676,15 +1676,6 @@
             "Empty": {
               "fields": {}
             },
-            "FieldMask": {
-              "fields": {
-                "paths": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 1
-                }
-              }
-            },
             "Struct": {
               "fields": {
                 "fields": {
