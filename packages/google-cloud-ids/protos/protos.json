@@ -1529,15 +1529,6 @@
             "Empty": {
               "fields": {}
             },
-            "FieldMask": {
-              "fields": {
-                "paths": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 1
-                }
-              }
-            },
             "Timestamp": {
               "fields": {
                 "seconds": {
