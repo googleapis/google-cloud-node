@@ -9177,7 +9177,6 @@
                  * @property {boolean|null} [deprecated] FieldOptions deprecated
                  * @property {boolean|null} [weak] FieldOptions weak
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
-                 * @property {Array.<google.api.FieldBehavior>|null} [".google.api.fieldBehavior"] FieldOptions .google.api.fieldBehavior
                  */
     
                 /**
@@ -9190,7 +9189,6 @@
                  */
                 function FieldOptions(properties) {
                     this.uninterpretedOption = [];
-                    this[".google.api.fieldBehavior"] = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -9254,14 +9252,6 @@
                 FieldOptions.prototype.uninterpretedOption = $util.emptyArray;
     
                 /**
-                 * FieldOptions .google.api.fieldBehavior.
-                 * @member {Array.<google.api.FieldBehavior>} .google.api.fieldBehavior
-                 * @memberof google.protobuf.FieldOptions
-                 * @instance
-                 */
-                FieldOptions.prototype[".google.api.fieldBehavior"] = $util.emptyArray;
-    
-                /**
                  * Creates a new FieldOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.FieldOptions
@@ -9300,12 +9290,6 @@
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
-                    if (message[".google.api.fieldBehavior"] != null && message[".google.api.fieldBehavior"].length) {
-                        writer.uint32(/* id 1052, wireType 2 =*/8418).fork();
-                        for (var i = 0; i < message[".google.api.fieldBehavior"].length; ++i)
-                            writer.int32(message[".google.api.fieldBehavior"][i]);
-                        writer.ldelim();
-                    }
                     return writer;
                 };
     
@@ -9362,16 +9346,6 @@
                             if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                 message.uninterpretedOption = [];
                             message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
-                            break;
-                        case 1052:
-                            if (!(message[".google.api.fieldBehavior"] && message[".google.api.fieldBehavior"].length))
-                                message[".google.api.fieldBehavior"] = [];
-                            if ((tag & 7) === 2) {
-                                var end2 = reader.uint32() + reader.pos;
-                                while (reader.pos < end2)
-                                    message[".google.api.fieldBehavior"].push(reader.int32());
-                            } else
-                                message[".google.api.fieldBehavior"].push(reader.int32());
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -9447,24 +9421,6 @@
                                 return "uninterpretedOption." + error;
                         }
                     }
-                    if (message[".google.api.fieldBehavior"] != null && message.hasOwnProperty(".google.api.fieldBehavior")) {
-                        if (!Array.isArray(message[".google.api.fieldBehavior"]))
-                            return ".google.api.fieldBehavior: array expected";
-                        for (var i = 0; i < message[".google.api.fieldBehavior"].length; ++i)
-                            switch (message[".google.api.fieldBehavior"][i]) {
-                            default:
-                                return ".google.api.fieldBehavior: enum value[] expected";
-                            case 0:
-                            case 1:
-                            case 2:
-                            case 3:
-                            case 4:
-                            case 5:
-                            case 6:
-                            case 7:
-                                break;
-                            }
-                    }
                     return null;
                 };
     
@@ -9526,47 +9482,6 @@
                             message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
                         }
                     }
-                    if (object[".google.api.fieldBehavior"]) {
-                        if (!Array.isArray(object[".google.api.fieldBehavior"]))
-                            throw TypeError(".google.protobuf.FieldOptions..google.api.fieldBehavior: array expected");
-                        message[".google.api.fieldBehavior"] = [];
-                        for (var i = 0; i < object[".google.api.fieldBehavior"].length; ++i)
-                            switch (object[".google.api.fieldBehavior"][i]) {
-                            default:
-                            case "FIELD_BEHAVIOR_UNSPECIFIED":
-                            case 0:
-                                message[".google.api.fieldBehavior"][i] = 0;
-                                break;
-                            case "OPTIONAL":
-                            case 1:
-                                message[".google.api.fieldBehavior"][i] = 1;
-                                break;
-                            case "REQUIRED":
-                            case 2:
-                                message[".google.api.fieldBehavior"][i] = 2;
-                                break;
-                            case "OUTPUT_ONLY":
-                            case 3:
-                                message[".google.api.fieldBehavior"][i] = 3;
-                                break;
-                            case "INPUT_ONLY":
-                            case 4:
-                                message[".google.api.fieldBehavior"][i] = 4;
-                                break;
-                            case "IMMUTABLE":
-                            case 5:
-                                message[".google.api.fieldBehavior"][i] = 5;
-                                break;
-                            case "UNORDERED_LIST":
-                            case 6:
-                                message[".google.api.fieldBehavior"][i] = 6;
-                                break;
-                            case "NON_EMPTY_DEFAULT":
-                            case 7:
-                                message[".google.api.fieldBehavior"][i] = 7;
-                                break;
-                            }
-                    }
                     return message;
                 };
     
@@ -9583,10 +9498,8 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.arrays || options.defaults) {
+                    if (options.arrays || options.defaults)
                         object.uninterpretedOption = [];
-                        object[".google.api.fieldBehavior"] = [];
-                    }
                     if (options.defaults) {
                         object.ctype = options.enums === String ? "STRING" : 0;
                         object.packed = false;
@@ -9611,11 +9524,6 @@
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
                             object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options);
-                    }
-                    if (message[".google.api.fieldBehavior"] && message[".google.api.fieldBehavior"].length) {
-                        object[".google.api.fieldBehavior"] = [];
-                        for (var j = 0; j < message[".google.api.fieldBehavior"].length; ++j)
-                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
                     }
                     return object;
                 };
@@ -35768,32 +35676,6 @@
                 };
     
                 return CustomHttpPattern;
-            })();
-    
-            /**
-             * FieldBehavior enum.
-             * @name google.api.FieldBehavior
-             * @enum {number}
-             * @property {number} FIELD_BEHAVIOR_UNSPECIFIED=0 FIELD_BEHAVIOR_UNSPECIFIED value
-             * @property {number} OPTIONAL=1 OPTIONAL value
-             * @property {number} REQUIRED=2 REQUIRED value
-             * @property {number} OUTPUT_ONLY=3 OUTPUT_ONLY value
-             * @property {number} INPUT_ONLY=4 INPUT_ONLY value
-             * @property {number} IMMUTABLE=5 IMMUTABLE value
-             * @property {number} UNORDERED_LIST=6 UNORDERED_LIST value
-             * @property {number} NON_EMPTY_DEFAULT=7 NON_EMPTY_DEFAULT value
-             */
-            api.FieldBehavior = (function() {
-                var valuesById = {}, values = Object.create(valuesById);
-                values[valuesById[0] = "FIELD_BEHAVIOR_UNSPECIFIED"] = 0;
-                values[valuesById[1] = "OPTIONAL"] = 1;
-                values[valuesById[2] = "REQUIRED"] = 2;
-                values[valuesById[3] = "OUTPUT_ONLY"] = 3;
-                values[valuesById[4] = "INPUT_ONLY"] = 4;
-                values[valuesById[5] = "IMMUTABLE"] = 5;
-                values[valuesById[6] = "UNORDERED_LIST"] = 6;
-                values[valuesById[7] = "NON_EMPTY_DEFAULT"] = 7;
-                return values;
             })();
     
             return api;
