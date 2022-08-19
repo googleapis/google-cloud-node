@@ -1587,7 +1587,8 @@
                           "values": {
                             "DEPLOYMENT_RESOURCES_TYPE_UNSPECIFIED": 0,
                             "DEDICATED_RESOURCES": 1,
-                            "AUTOMATIC_RESOURCES": 2
+                            "AUTOMATIC_RESOURCES": 2,
+                            "SHARED_RESOURCES": 3
                           }
                         }
                       }
@@ -1896,6 +1897,7 @@
                           "type": "string",
                           "id": 5,
                           "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
                             "(google.api.resource_reference).type": "compute.googleapis.com/Network"
                           }
                         },
@@ -19071,7 +19073,8 @@
                           "values": {
                             "DEPLOYMENT_RESOURCES_TYPE_UNSPECIFIED": 0,
                             "DEDICATED_RESOURCES": 1,
-                            "AUTOMATIC_RESOURCES": 2
+                            "AUTOMATIC_RESOURCES": 2,
+                            "SHARED_RESOURCES": 3
                           }
                         }
                       }
@@ -19380,6 +19383,7 @@
                           "type": "string",
                           "id": 5,
                           "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
                             "(google.api.resource_reference).type": "compute.googleapis.com/Network"
                           }
                         },
@@ -20606,6 +20610,290 @@
                         }
                       }
                     },
+                    "DeploymentResourcePool": {
+                      "options": {
+                        "(google.api.resource).type": "aiplatform.googleapis.com/DeploymentResourcePool",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/deploymentResourcePools/{deployment_resource_pool}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "dedicatedResources": {
+                          "type": "DedicatedResources",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "DeploymentResourcePoolService": {
+                      "options": {
+                        "(google.api.default_host)": "aiplatform.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "CreateDeploymentResourcePool": {
+                          "requestType": "CreateDeploymentResourcePoolRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*}/deploymentResourcePools",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,deployment_resource_pool,deployment_resource_pool_id",
+                            "(google.longrunning.operation_info).response_type": "DeploymentResourcePool",
+                            "(google.longrunning.operation_info).metadata_type": "CreateDeploymentResourcePoolOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{parent=projects/*/locations/*}/deploymentResourcePools",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,deployment_resource_pool,deployment_resource_pool_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "DeploymentResourcePool",
+                                "metadata_type": "CreateDeploymentResourcePoolOperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "GetDeploymentResourcePool": {
+                          "requestType": "GetDeploymentResourcePoolRequest",
+                          "responseType": "DeploymentResourcePool",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/deploymentResourcePools/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{name=projects/*/locations/*/deploymentResourcePools/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListDeploymentResourcePools": {
+                          "requestType": "ListDeploymentResourcePoolsRequest",
+                          "responseType": "ListDeploymentResourcePoolsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*}/deploymentResourcePools",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{parent=projects/*/locations/*}/deploymentResourcePools"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "DeleteDeploymentResourcePool": {
+                          "requestType": "DeleteDeploymentResourcePoolRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/*/deploymentResourcePools/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "DeleteOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1beta1/{name=projects/*/locations/*/deploymentResourcePools/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "DeleteOperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "QueryDeployedModels": {
+                          "requestType": "QueryDeployedModelsRequest",
+                          "responseType": "QueryDeployedModelsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{deployment_resource_pool=projects/*/locations/*/deploymentResourcePools/*}:queryDeployedModels",
+                            "(google.api.method_signature)": "deployment_resource_pool"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{deployment_resource_pool=projects/*/locations/*/deploymentResourcePools/*}:queryDeployedModels"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "deployment_resource_pool"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "CreateDeploymentResourcePoolRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "deploymentResourcePool": {
+                          "type": "DeploymentResourcePool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "deploymentResourcePoolId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "CreateDeploymentResourcePoolOperationMetadata": {
+                      "fields": {
+                        "genericMetadata": {
+                          "type": "GenericOperationMetadata",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "GetDeploymentResourcePoolRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/DeploymentResourcePool"
+                          }
+                        }
+                      }
+                    },
+                    "ListDeploymentResourcePoolsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListDeploymentResourcePoolsResponse": {
+                      "fields": {
+                        "deploymentResourcePools": {
+                          "rule": "repeated",
+                          "type": "DeploymentResourcePool",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "UpdateDeploymentResourcePoolOperationMetadata": {
+                      "fields": {
+                        "genericMetadata": {
+                          "type": "GenericOperationMetadata",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "DeleteDeploymentResourcePoolRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/DeploymentResourcePool"
+                          }
+                        }
+                      }
+                    },
+                    "QueryDeployedModelsRequest": {
+                      "fields": {
+                        "deploymentResourcePool": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "QueryDeployedModelsResponse": {
+                      "fields": {
+                        "deployedModels": {
+                          "rule": "repeated",
+                          "type": "DeployedModel",
+                          "id": 1,
+                          "options": {
+                            "deprecated": true
+                          }
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "deployedModelRefs": {
+                          "rule": "repeated",
+                          "type": "DeployedModelRef",
+                          "id": 3
+                        }
+                      }
+                    },
                     "Endpoint": {
                       "options": {
                         "(google.api.resource).type": "aiplatform.googleapis.com/Endpoint",
@@ -20703,7 +20991,8 @@
                         "predictionResources": {
                           "oneof": [
                             "dedicatedResources",
-                            "automaticResources"
+                            "automaticResources",
+                            "sharedResources"
                           ]
                         }
                       },
@@ -20715,6 +21004,13 @@
                         "automaticResources": {
                           "type": "AutomaticResources",
                           "id": 8
+                        },
+                        "sharedResources": {
+                          "type": "string",
+                          "id": 17,
+                          "options": {
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/DeploymentResourcePool"
+                          }
                         },
                         "id": {
                           "type": "string",
@@ -21804,8 +22100,70 @@
                               "(google.api.method_signature)": "entity_type"
                             }
                           ]
+                        },
+                        "WriteFeatureValues": {
+                          "requestType": "WriteFeatureValuesRequest",
+                          "responseType": "WriteFeatureValuesResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{entity_type=projects/*/locations/*/featurestores/*/entityTypes/*}:writeFeatureValues",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "entity_type,payloads"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{entity_type=projects/*/locations/*/featurestores/*/entityTypes/*}:writeFeatureValues",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "entity_type,payloads"
+                            }
+                          ]
                         }
                       }
+                    },
+                    "WriteFeatureValuesRequest": {
+                      "fields": {
+                        "entityType": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/EntityType"
+                          }
+                        },
+                        "payloads": {
+                          "rule": "repeated",
+                          "type": "WriteFeatureValuesPayload",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "WriteFeatureValuesPayload": {
+                      "fields": {
+                        "entityId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "featureValues": {
+                          "keyType": "string",
+                          "type": "FeatureValue",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "WriteFeatureValuesResponse": {
+                      "fields": {}
                     },
                     "ReadFeatureValuesRequest": {
                       "fields": {

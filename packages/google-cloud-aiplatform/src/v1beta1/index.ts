@@ -17,6 +17,7 @@
 // ** All changes to this file may be overwritten. **
 
 export {DatasetServiceClient} from './dataset_service_client';
+export {DeploymentResourcePoolServiceClient} from './deployment_resource_pool_service_client';
 export {EndpointServiceClient} from './endpoint_service_client';
 export {FeaturestoreOnlineServingServiceClient} from './featurestore_online_serving_service_client';
 export {FeaturestoreServiceClient} from './featurestore_service_client';

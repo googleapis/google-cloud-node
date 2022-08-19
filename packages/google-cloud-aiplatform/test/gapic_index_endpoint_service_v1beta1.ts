@@ -3355,6 +3355,88 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       });
     });
 
+    describe('deploymentResourcePool', () => {
+      const fakePath = '/rendered/path/deploymentResourcePool';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        deployment_resource_pool: 'deploymentResourcePoolValue',
+      };
+      const client =
+        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.deploymentResourcePoolPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.deploymentResourcePoolPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('deploymentResourcePoolPath', () => {
+        const result = client.deploymentResourcePoolPath(
+          'projectValue',
+          'locationValue',
+          'deploymentResourcePoolValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.deploymentResourcePoolPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromDeploymentResourcePoolName', () => {
+        const result =
+          client.matchProjectFromDeploymentResourcePoolName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.deploymentResourcePoolPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromDeploymentResourcePoolName', () => {
+        const result =
+          client.matchLocationFromDeploymentResourcePoolName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.deploymentResourcePoolPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDeploymentResourcePoolFromDeploymentResourcePoolName', () => {
+        const result =
+          client.matchDeploymentResourcePoolFromDeploymentResourcePoolName(
+            fakePath
+          );
+        assert.strictEqual(result, 'deploymentResourcePoolValue');
+        assert(
+          (
+            client.pathTemplates.deploymentResourcePoolPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('endpoint', () => {
       const fakePath = '/rendered/path/endpoint';
       const expectedParameters = {

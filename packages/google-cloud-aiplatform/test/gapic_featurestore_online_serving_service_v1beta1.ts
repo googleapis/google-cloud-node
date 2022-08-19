@@ -360,6 +360,145 @@ describe('v1beta1.FeaturestoreOnlineServingServiceClient', () => {
     });
   });
 
+  describe('writeFeatureValues', () => {
+    it('invokes writeFeatureValues without error', async () => {
+      const client =
+        new featurestoreonlineservingserviceModule.v1beta1.FeaturestoreOnlineServingServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.WriteFeatureValuesRequest()
+      );
+      request.entityType = '';
+      const expectedHeaderRequestParams = 'entity_type=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.WriteFeatureValuesResponse()
+      );
+      client.innerApiCalls.writeFeatureValues =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.writeFeatureValues(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.writeFeatureValues as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes writeFeatureValues without error using callback', async () => {
+      const client =
+        new featurestoreonlineservingserviceModule.v1beta1.FeaturestoreOnlineServingServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.WriteFeatureValuesRequest()
+      );
+      request.entityType = '';
+      const expectedHeaderRequestParams = 'entity_type=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.WriteFeatureValuesResponse()
+      );
+      client.innerApiCalls.writeFeatureValues =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.writeFeatureValues(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.aiplatform.v1beta1.IWriteFeatureValuesResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.writeFeatureValues as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes writeFeatureValues with error', async () => {
+      const client =
+        new featurestoreonlineservingserviceModule.v1beta1.FeaturestoreOnlineServingServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.WriteFeatureValuesRequest()
+      );
+      request.entityType = '';
+      const expectedHeaderRequestParams = 'entity_type=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.writeFeatureValues = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.writeFeatureValues(request), expectedError);
+      assert(
+        (client.innerApiCalls.writeFeatureValues as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes writeFeatureValues with closed client', async () => {
+      const client =
+        new featurestoreonlineservingserviceModule.v1beta1.FeaturestoreOnlineServingServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.WriteFeatureValuesRequest()
+      );
+      request.entityType = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.writeFeatureValues(request), expectedError);
+    });
+  });
+
   describe('streamingReadFeatureValues', () => {
     it('invokes streamingReadFeatureValues without error', async () => {
       const client =
@@ -2072,6 +2211,90 @@ describe('v1beta1.FeaturestoreOnlineServingServiceClient', () => {
         assert.strictEqual(result, 'datasetValue');
         assert(
           (client.pathTemplates.datasetPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('deploymentResourcePool', () => {
+      const fakePath = '/rendered/path/deploymentResourcePool';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        deployment_resource_pool: 'deploymentResourcePoolValue',
+      };
+      const client =
+        new featurestoreonlineservingserviceModule.v1beta1.FeaturestoreOnlineServingServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      client.pathTemplates.deploymentResourcePoolPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.deploymentResourcePoolPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('deploymentResourcePoolPath', () => {
+        const result = client.deploymentResourcePoolPath(
+          'projectValue',
+          'locationValue',
+          'deploymentResourcePoolValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.deploymentResourcePoolPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromDeploymentResourcePoolName', () => {
+        const result =
+          client.matchProjectFromDeploymentResourcePoolName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.deploymentResourcePoolPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromDeploymentResourcePoolName', () => {
+        const result =
+          client.matchLocationFromDeploymentResourcePoolName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.deploymentResourcePoolPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDeploymentResourcePoolFromDeploymentResourcePoolName', () => {
+        const result =
+          client.matchDeploymentResourcePoolFromDeploymentResourcePoolName(
+            fakePath
+          );
+        assert.strictEqual(result, 'deploymentResourcePoolValue');
+        assert(
+          (
+            client.pathTemplates.deploymentResourcePoolPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
