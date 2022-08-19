@@ -59,6 +59,14 @@ function main(scope) {
    *  * `labels.env:*` to find Cloud resources that have a label "env".
    *  * `kmsKey:key` to find Cloud resources encrypted with a customer-managed
    *    encryption key whose name contains the word "key".
+   *  * `relationships:instance-group-1` to find Cloud resources that have
+   *    relationships with "instance-group-1" in the related resource name.
+   *  * `relationships:INSTANCE_TO_INSTANCEGROUP` to find compute instances that
+   *    have relationships of type "INSTANCE_TO_INSTANCEGROUP".
+   *  * `relationships.INSTANCE_TO_INSTANCEGROUP:instance-group-1` to find
+   *    compute instances that have relationships with "instance-group-1" in the
+   *    compute instance group resource name, for relationship type
+   *    "INSTANCE_TO_INSTANCEGROUP".
    *  * `state:ACTIVE` to find Cloud resources whose state contains "ACTIVE" as a
    *    word.
    *  * `NOT state:ACTIVE` to find Cloud resources whose state doesn't contain

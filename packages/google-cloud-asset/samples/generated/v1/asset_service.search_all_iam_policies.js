@@ -46,8 +46,8 @@ function main(scope) {
    *  compared against each Cloud IAM policy binding, including its principals,
    *  roles, and Cloud IAM conditions. The returned Cloud IAM policies will only
    *  contain the bindings that match your query. To learn more about the IAM
-   *  policy structure, see IAM policy
-   *  doc (https://cloud.google.com/iam/docs/policies#structure).
+   *  policy structure, see the IAM policy
+   *  documentation (https://cloud.google.com/iam/help/allow-policies/structure).
    *  Examples:
    *  * `policy:amy@gmail.com` to find IAM policy bindings that specify user
    *    "amy@gmail.com".

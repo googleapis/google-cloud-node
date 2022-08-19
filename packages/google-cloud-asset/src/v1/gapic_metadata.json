@@ -50,6 +50,11 @@
                 "analyzeMove"
               ]
             },
+            "QueryAssets": {
+              "methods": [
+                "queryAssets"
+              ]
+            },
             "CreateSavedQuery": {
               "methods": [
                 "createSavedQuery"
@@ -156,6 +161,11 @@
             "AnalyzeMove": {
               "methods": [
                 "analyzeMove"
+              ]
+            },
+            "QueryAssets": {
+              "methods": [
+                "queryAssets"
               ]
             },
             "CreateSavedQuery": {
