@@ -87,6 +87,11 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "QueryAssets": {
+          "timeout_millis": 200000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "default"
+        },
         "CreateSavedQuery": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
@@ -108,7 +113,8 @@
           "retry_params_name": "default"
         },
         "BatchGetEffectiveIamPolicies": {
-          "retry_codes_name": "non_idempotent",
+          "timeout_millis": 300000,
+          "retry_codes_name": "unavailable",
           "retry_params_name": "default"
         }
       }

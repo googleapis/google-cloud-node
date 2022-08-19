@@ -261,6 +261,22 @@
                             }
                           ]
                         },
+                        "QueryAssets": {
+                          "requestType": "QueryAssetsRequest",
+                          "responseType": "QueryAssetsResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=*/*}:queryAssets",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=*/*}:queryAssets",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
                         "CreateSavedQuery": {
                           "requestType": "CreateSavedQueryRequest",
                           "responseType": "SavedQuery",
@@ -1517,15 +1533,202 @@
                         }
                       }
                     },
-                    "ContentType": {
-                      "values": {
-                        "CONTENT_TYPE_UNSPECIFIED": 0,
-                        "RESOURCE": 1,
-                        "IAM_POLICY": 2,
-                        "ORG_POLICY": 4,
-                        "ACCESS_POLICY": 5,
-                        "OS_INVENTORY": 6,
-                        "RELATIONSHIP": 7
+                    "QueryAssetsOutputConfig": {
+                      "fields": {
+                        "bigqueryDestination": {
+                          "type": "BigQueryDestination",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "BigQueryDestination": {
+                          "fields": {
+                            "dataset": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "table": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "writeDisposition": {
+                              "type": "string",
+                              "id": 3
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "QueryAssetsRequest": {
+                      "oneofs": {
+                        "query": {
+                          "oneof": [
+                            "statement",
+                            "jobReference"
+                          ]
+                        },
+                        "time": {
+                          "oneof": [
+                            "readTimeWindow",
+                            "readTime"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "cloudasset.googleapis.com/Asset"
+                          }
+                        },
+                        "statement": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "jobReference": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "timeout": {
+                          "type": "google.protobuf.Duration",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "readTimeWindow": {
+                          "type": "TimeWindow",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "readTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "outputConfig": {
+                          "type": "QueryAssetsOutputConfig",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "QueryAssetsResponse": {
+                      "oneofs": {
+                        "response": {
+                          "oneof": [
+                            "error",
+                            "queryResult",
+                            "outputConfig"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "jobReference": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "done": {
+                          "type": "bool",
+                          "id": 2
+                        },
+                        "error": {
+                          "type": "google.rpc.Status",
+                          "id": 3
+                        },
+                        "queryResult": {
+                          "type": "QueryResult",
+                          "id": 4
+                        },
+                        "outputConfig": {
+                          "type": "QueryAssetsOutputConfig",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "QueryResult": {
+                      "fields": {
+                        "rows": {
+                          "rule": "repeated",
+                          "type": "google.protobuf.Struct",
+                          "id": 1
+                        },
+                        "schema": {
+                          "type": "TableSchema",
+                          "id": 2
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "totalRows": {
+                          "type": "int64",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "TableSchema": {
+                      "fields": {
+                        "fields": {
+                          "rule": "repeated",
+                          "type": "TableFieldSchema",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "TableFieldSchema": {
+                      "fields": {
+                        "field": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "type": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "mode": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "fields": {
+                          "rule": "repeated",
+                          "type": "TableFieldSchema",
+                          "id": 4
+                        }
                       }
                     },
                     "BatchGetEffectiveIamPoliciesRequest": {
@@ -1585,6 +1788,17 @@
                             }
                           }
                         }
+                      }
+                    },
+                    "ContentType": {
+                      "values": {
+                        "CONTENT_TYPE_UNSPECIFIED": 0,
+                        "RESOURCE": 1,
+                        "IAM_POLICY": 2,
+                        "ORG_POLICY": 4,
+                        "ACCESS_POLICY": 5,
+                        "OS_INVENTORY": 6,
+                        "RELATIONSHIP": 7
                       }
                     },
                     "TemporalAsset": {

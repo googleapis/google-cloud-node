@@ -528,6 +528,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.asset.v1.AssetService#queryAssets}.
+                         * @memberof google.cloud.asset.v1.AssetService
+                         * @typedef QueryAssetsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.asset.v1.QueryAssetsResponse} [response] QueryAssetsResponse
+                         */
+    
+                        /**
+                         * Calls QueryAssets.
+                         * @function queryAssets
+                         * @memberof google.cloud.asset.v1.AssetService
+                         * @instance
+                         * @param {google.cloud.asset.v1.IQueryAssetsRequest} request QueryAssetsRequest message or plain object
+                         * @param {google.cloud.asset.v1.AssetService.QueryAssetsCallback} callback Node-style callback called with the error, if any, and QueryAssetsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AssetService.prototype.queryAssets = function queryAssets(request, callback) {
+                            return this.rpcCall(queryAssets, $root.google.cloud.asset.v1.QueryAssetsRequest, $root.google.cloud.asset.v1.QueryAssetsResponse, request, callback);
+                        }, "name", { value: "QueryAssets" });
+    
+                        /**
+                         * Calls QueryAssets.
+                         * @function queryAssets
+                         * @memberof google.cloud.asset.v1.AssetService
+                         * @instance
+                         * @param {google.cloud.asset.v1.IQueryAssetsRequest} request QueryAssetsRequest message or plain object
+                         * @returns {Promise<google.cloud.asset.v1.QueryAssetsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.asset.v1.AssetService#createSavedQuery}.
                          * @memberof google.cloud.asset.v1.AssetService
                          * @typedef CreateSavedQueryCallback
@@ -13787,28 +13820,1964 @@
                         return MoveImpact;
                     })();
     
-                    /**
-                     * ContentType enum.
-                     * @name google.cloud.asset.v1.ContentType
-                     * @enum {number}
-                     * @property {number} CONTENT_TYPE_UNSPECIFIED=0 CONTENT_TYPE_UNSPECIFIED value
-                     * @property {number} RESOURCE=1 RESOURCE value
-                     * @property {number} IAM_POLICY=2 IAM_POLICY value
-                     * @property {number} ORG_POLICY=4 ORG_POLICY value
-                     * @property {number} ACCESS_POLICY=5 ACCESS_POLICY value
-                     * @property {number} OS_INVENTORY=6 OS_INVENTORY value
-                     * @property {number} RELATIONSHIP=7 RELATIONSHIP value
-                     */
-                    v1.ContentType = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "CONTENT_TYPE_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "RESOURCE"] = 1;
-                        values[valuesById[2] = "IAM_POLICY"] = 2;
-                        values[valuesById[4] = "ORG_POLICY"] = 4;
-                        values[valuesById[5] = "ACCESS_POLICY"] = 5;
-                        values[valuesById[6] = "OS_INVENTORY"] = 6;
-                        values[valuesById[7] = "RELATIONSHIP"] = 7;
-                        return values;
+                    v1.QueryAssetsOutputConfig = (function() {
+    
+                        /**
+                         * Properties of a QueryAssetsOutputConfig.
+                         * @memberof google.cloud.asset.v1
+                         * @interface IQueryAssetsOutputConfig
+                         * @property {google.cloud.asset.v1.QueryAssetsOutputConfig.IBigQueryDestination|null} [bigqueryDestination] QueryAssetsOutputConfig bigqueryDestination
+                         */
+    
+                        /**
+                         * Constructs a new QueryAssetsOutputConfig.
+                         * @memberof google.cloud.asset.v1
+                         * @classdesc Represents a QueryAssetsOutputConfig.
+                         * @implements IQueryAssetsOutputConfig
+                         * @constructor
+                         * @param {google.cloud.asset.v1.IQueryAssetsOutputConfig=} [properties] Properties to set
+                         */
+                        function QueryAssetsOutputConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * QueryAssetsOutputConfig bigqueryDestination.
+                         * @member {google.cloud.asset.v1.QueryAssetsOutputConfig.IBigQueryDestination|null|undefined} bigqueryDestination
+                         * @memberof google.cloud.asset.v1.QueryAssetsOutputConfig
+                         * @instance
+                         */
+                        QueryAssetsOutputConfig.prototype.bigqueryDestination = null;
+    
+                        /**
+                         * Creates a new QueryAssetsOutputConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.asset.v1.QueryAssetsOutputConfig
+                         * @static
+                         * @param {google.cloud.asset.v1.IQueryAssetsOutputConfig=} [properties] Properties to set
+                         * @returns {google.cloud.asset.v1.QueryAssetsOutputConfig} QueryAssetsOutputConfig instance
+                         */
+                        QueryAssetsOutputConfig.create = function create(properties) {
+                            return new QueryAssetsOutputConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified QueryAssetsOutputConfig message. Does not implicitly {@link google.cloud.asset.v1.QueryAssetsOutputConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.asset.v1.QueryAssetsOutputConfig
+                         * @static
+                         * @param {google.cloud.asset.v1.IQueryAssetsOutputConfig} message QueryAssetsOutputConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QueryAssetsOutputConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.bigqueryDestination != null && Object.hasOwnProperty.call(message, "bigqueryDestination"))
+                                $root.google.cloud.asset.v1.QueryAssetsOutputConfig.BigQueryDestination.encode(message.bigqueryDestination, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified QueryAssetsOutputConfig message, length delimited. Does not implicitly {@link google.cloud.asset.v1.QueryAssetsOutputConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.asset.v1.QueryAssetsOutputConfig
+                         * @static
+                         * @param {google.cloud.asset.v1.IQueryAssetsOutputConfig} message QueryAssetsOutputConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QueryAssetsOutputConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a QueryAssetsOutputConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.asset.v1.QueryAssetsOutputConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.asset.v1.QueryAssetsOutputConfig} QueryAssetsOutputConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QueryAssetsOutputConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.QueryAssetsOutputConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.bigqueryDestination = $root.google.cloud.asset.v1.QueryAssetsOutputConfig.BigQueryDestination.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a QueryAssetsOutputConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.asset.v1.QueryAssetsOutputConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.asset.v1.QueryAssetsOutputConfig} QueryAssetsOutputConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QueryAssetsOutputConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a QueryAssetsOutputConfig message.
+                         * @function verify
+                         * @memberof google.cloud.asset.v1.QueryAssetsOutputConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        QueryAssetsOutputConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.bigqueryDestination != null && message.hasOwnProperty("bigqueryDestination")) {
+                                var error = $root.google.cloud.asset.v1.QueryAssetsOutputConfig.BigQueryDestination.verify(message.bigqueryDestination);
+                                if (error)
+                                    return "bigqueryDestination." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a QueryAssetsOutputConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.asset.v1.QueryAssetsOutputConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.asset.v1.QueryAssetsOutputConfig} QueryAssetsOutputConfig
+                         */
+                        QueryAssetsOutputConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.asset.v1.QueryAssetsOutputConfig)
+                                return object;
+                            var message = new $root.google.cloud.asset.v1.QueryAssetsOutputConfig();
+                            if (object.bigqueryDestination != null) {
+                                if (typeof object.bigqueryDestination !== "object")
+                                    throw TypeError(".google.cloud.asset.v1.QueryAssetsOutputConfig.bigqueryDestination: object expected");
+                                message.bigqueryDestination = $root.google.cloud.asset.v1.QueryAssetsOutputConfig.BigQueryDestination.fromObject(object.bigqueryDestination);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a QueryAssetsOutputConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.asset.v1.QueryAssetsOutputConfig
+                         * @static
+                         * @param {google.cloud.asset.v1.QueryAssetsOutputConfig} message QueryAssetsOutputConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        QueryAssetsOutputConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.bigqueryDestination = null;
+                            if (message.bigqueryDestination != null && message.hasOwnProperty("bigqueryDestination"))
+                                object.bigqueryDestination = $root.google.cloud.asset.v1.QueryAssetsOutputConfig.BigQueryDestination.toObject(message.bigqueryDestination, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this QueryAssetsOutputConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.asset.v1.QueryAssetsOutputConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        QueryAssetsOutputConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        QueryAssetsOutputConfig.BigQueryDestination = (function() {
+    
+                            /**
+                             * Properties of a BigQueryDestination.
+                             * @memberof google.cloud.asset.v1.QueryAssetsOutputConfig
+                             * @interface IBigQueryDestination
+                             * @property {string|null} [dataset] BigQueryDestination dataset
+                             * @property {string|null} [table] BigQueryDestination table
+                             * @property {string|null} [writeDisposition] BigQueryDestination writeDisposition
+                             */
+    
+                            /**
+                             * Constructs a new BigQueryDestination.
+                             * @memberof google.cloud.asset.v1.QueryAssetsOutputConfig
+                             * @classdesc Represents a BigQueryDestination.
+                             * @implements IBigQueryDestination
+                             * @constructor
+                             * @param {google.cloud.asset.v1.QueryAssetsOutputConfig.IBigQueryDestination=} [properties] Properties to set
+                             */
+                            function BigQueryDestination(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * BigQueryDestination dataset.
+                             * @member {string} dataset
+                             * @memberof google.cloud.asset.v1.QueryAssetsOutputConfig.BigQueryDestination
+                             * @instance
+                             */
+                            BigQueryDestination.prototype.dataset = "";
+    
+                            /**
+                             * BigQueryDestination table.
+                             * @member {string} table
+                             * @memberof google.cloud.asset.v1.QueryAssetsOutputConfig.BigQueryDestination
+                             * @instance
+                             */
+                            BigQueryDestination.prototype.table = "";
+    
+                            /**
+                             * BigQueryDestination writeDisposition.
+                             * @member {string} writeDisposition
+                             * @memberof google.cloud.asset.v1.QueryAssetsOutputConfig.BigQueryDestination
+                             * @instance
+                             */
+                            BigQueryDestination.prototype.writeDisposition = "";
+    
+                            /**
+                             * Creates a new BigQueryDestination instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.asset.v1.QueryAssetsOutputConfig.BigQueryDestination
+                             * @static
+                             * @param {google.cloud.asset.v1.QueryAssetsOutputConfig.IBigQueryDestination=} [properties] Properties to set
+                             * @returns {google.cloud.asset.v1.QueryAssetsOutputConfig.BigQueryDestination} BigQueryDestination instance
+                             */
+                            BigQueryDestination.create = function create(properties) {
+                                return new BigQueryDestination(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified BigQueryDestination message. Does not implicitly {@link google.cloud.asset.v1.QueryAssetsOutputConfig.BigQueryDestination.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.asset.v1.QueryAssetsOutputConfig.BigQueryDestination
+                             * @static
+                             * @param {google.cloud.asset.v1.QueryAssetsOutputConfig.IBigQueryDestination} message BigQueryDestination message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            BigQueryDestination.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.dataset != null && Object.hasOwnProperty.call(message, "dataset"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.dataset);
+                                if (message.table != null && Object.hasOwnProperty.call(message, "table"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.table);
+                                if (message.writeDisposition != null && Object.hasOwnProperty.call(message, "writeDisposition"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.writeDisposition);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified BigQueryDestination message, length delimited. Does not implicitly {@link google.cloud.asset.v1.QueryAssetsOutputConfig.BigQueryDestination.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.asset.v1.QueryAssetsOutputConfig.BigQueryDestination
+                             * @static
+                             * @param {google.cloud.asset.v1.QueryAssetsOutputConfig.IBigQueryDestination} message BigQueryDestination message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            BigQueryDestination.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a BigQueryDestination message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.asset.v1.QueryAssetsOutputConfig.BigQueryDestination
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.asset.v1.QueryAssetsOutputConfig.BigQueryDestination} BigQueryDestination
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            BigQueryDestination.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.QueryAssetsOutputConfig.BigQueryDestination();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.dataset = reader.string();
+                                        break;
+                                    case 2:
+                                        message.table = reader.string();
+                                        break;
+                                    case 3:
+                                        message.writeDisposition = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a BigQueryDestination message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.asset.v1.QueryAssetsOutputConfig.BigQueryDestination
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.asset.v1.QueryAssetsOutputConfig.BigQueryDestination} BigQueryDestination
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            BigQueryDestination.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a BigQueryDestination message.
+                             * @function verify
+                             * @memberof google.cloud.asset.v1.QueryAssetsOutputConfig.BigQueryDestination
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            BigQueryDestination.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.dataset != null && message.hasOwnProperty("dataset"))
+                                    if (!$util.isString(message.dataset))
+                                        return "dataset: string expected";
+                                if (message.table != null && message.hasOwnProperty("table"))
+                                    if (!$util.isString(message.table))
+                                        return "table: string expected";
+                                if (message.writeDisposition != null && message.hasOwnProperty("writeDisposition"))
+                                    if (!$util.isString(message.writeDisposition))
+                                        return "writeDisposition: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a BigQueryDestination message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.asset.v1.QueryAssetsOutputConfig.BigQueryDestination
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.asset.v1.QueryAssetsOutputConfig.BigQueryDestination} BigQueryDestination
+                             */
+                            BigQueryDestination.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.asset.v1.QueryAssetsOutputConfig.BigQueryDestination)
+                                    return object;
+                                var message = new $root.google.cloud.asset.v1.QueryAssetsOutputConfig.BigQueryDestination();
+                                if (object.dataset != null)
+                                    message.dataset = String(object.dataset);
+                                if (object.table != null)
+                                    message.table = String(object.table);
+                                if (object.writeDisposition != null)
+                                    message.writeDisposition = String(object.writeDisposition);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a BigQueryDestination message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.asset.v1.QueryAssetsOutputConfig.BigQueryDestination
+                             * @static
+                             * @param {google.cloud.asset.v1.QueryAssetsOutputConfig.BigQueryDestination} message BigQueryDestination
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            BigQueryDestination.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.dataset = "";
+                                    object.table = "";
+                                    object.writeDisposition = "";
+                                }
+                                if (message.dataset != null && message.hasOwnProperty("dataset"))
+                                    object.dataset = message.dataset;
+                                if (message.table != null && message.hasOwnProperty("table"))
+                                    object.table = message.table;
+                                if (message.writeDisposition != null && message.hasOwnProperty("writeDisposition"))
+                                    object.writeDisposition = message.writeDisposition;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this BigQueryDestination to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.asset.v1.QueryAssetsOutputConfig.BigQueryDestination
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            BigQueryDestination.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return BigQueryDestination;
+                        })();
+    
+                        return QueryAssetsOutputConfig;
+                    })();
+    
+                    v1.QueryAssetsRequest = (function() {
+    
+                        /**
+                         * Properties of a QueryAssetsRequest.
+                         * @memberof google.cloud.asset.v1
+                         * @interface IQueryAssetsRequest
+                         * @property {string|null} [parent] QueryAssetsRequest parent
+                         * @property {string|null} [statement] QueryAssetsRequest statement
+                         * @property {string|null} [jobReference] QueryAssetsRequest jobReference
+                         * @property {number|null} [pageSize] QueryAssetsRequest pageSize
+                         * @property {string|null} [pageToken] QueryAssetsRequest pageToken
+                         * @property {google.protobuf.IDuration|null} [timeout] QueryAssetsRequest timeout
+                         * @property {google.cloud.asset.v1.ITimeWindow|null} [readTimeWindow] QueryAssetsRequest readTimeWindow
+                         * @property {google.protobuf.ITimestamp|null} [readTime] QueryAssetsRequest readTime
+                         * @property {google.cloud.asset.v1.IQueryAssetsOutputConfig|null} [outputConfig] QueryAssetsRequest outputConfig
+                         */
+    
+                        /**
+                         * Constructs a new QueryAssetsRequest.
+                         * @memberof google.cloud.asset.v1
+                         * @classdesc Represents a QueryAssetsRequest.
+                         * @implements IQueryAssetsRequest
+                         * @constructor
+                         * @param {google.cloud.asset.v1.IQueryAssetsRequest=} [properties] Properties to set
+                         */
+                        function QueryAssetsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * QueryAssetsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.asset.v1.QueryAssetsRequest
+                         * @instance
+                         */
+                        QueryAssetsRequest.prototype.parent = "";
+    
+                        /**
+                         * QueryAssetsRequest statement.
+                         * @member {string|null|undefined} statement
+                         * @memberof google.cloud.asset.v1.QueryAssetsRequest
+                         * @instance
+                         */
+                        QueryAssetsRequest.prototype.statement = null;
+    
+                        /**
+                         * QueryAssetsRequest jobReference.
+                         * @member {string|null|undefined} jobReference
+                         * @memberof google.cloud.asset.v1.QueryAssetsRequest
+                         * @instance
+                         */
+                        QueryAssetsRequest.prototype.jobReference = null;
+    
+                        /**
+                         * QueryAssetsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.asset.v1.QueryAssetsRequest
+                         * @instance
+                         */
+                        QueryAssetsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * QueryAssetsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.asset.v1.QueryAssetsRequest
+                         * @instance
+                         */
+                        QueryAssetsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * QueryAssetsRequest timeout.
+                         * @member {google.protobuf.IDuration|null|undefined} timeout
+                         * @memberof google.cloud.asset.v1.QueryAssetsRequest
+                         * @instance
+                         */
+                        QueryAssetsRequest.prototype.timeout = null;
+    
+                        /**
+                         * QueryAssetsRequest readTimeWindow.
+                         * @member {google.cloud.asset.v1.ITimeWindow|null|undefined} readTimeWindow
+                         * @memberof google.cloud.asset.v1.QueryAssetsRequest
+                         * @instance
+                         */
+                        QueryAssetsRequest.prototype.readTimeWindow = null;
+    
+                        /**
+                         * QueryAssetsRequest readTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} readTime
+                         * @memberof google.cloud.asset.v1.QueryAssetsRequest
+                         * @instance
+                         */
+                        QueryAssetsRequest.prototype.readTime = null;
+    
+                        /**
+                         * QueryAssetsRequest outputConfig.
+                         * @member {google.cloud.asset.v1.IQueryAssetsOutputConfig|null|undefined} outputConfig
+                         * @memberof google.cloud.asset.v1.QueryAssetsRequest
+                         * @instance
+                         */
+                        QueryAssetsRequest.prototype.outputConfig = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * QueryAssetsRequest query.
+                         * @member {"statement"|"jobReference"|undefined} query
+                         * @memberof google.cloud.asset.v1.QueryAssetsRequest
+                         * @instance
+                         */
+                        Object.defineProperty(QueryAssetsRequest.prototype, "query", {
+                            get: $util.oneOfGetter($oneOfFields = ["statement", "jobReference"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * QueryAssetsRequest time.
+                         * @member {"readTimeWindow"|"readTime"|undefined} time
+                         * @memberof google.cloud.asset.v1.QueryAssetsRequest
+                         * @instance
+                         */
+                        Object.defineProperty(QueryAssetsRequest.prototype, "time", {
+                            get: $util.oneOfGetter($oneOfFields = ["readTimeWindow", "readTime"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new QueryAssetsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.asset.v1.QueryAssetsRequest
+                         * @static
+                         * @param {google.cloud.asset.v1.IQueryAssetsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.asset.v1.QueryAssetsRequest} QueryAssetsRequest instance
+                         */
+                        QueryAssetsRequest.create = function create(properties) {
+                            return new QueryAssetsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified QueryAssetsRequest message. Does not implicitly {@link google.cloud.asset.v1.QueryAssetsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.asset.v1.QueryAssetsRequest
+                         * @static
+                         * @param {google.cloud.asset.v1.IQueryAssetsRequest} message QueryAssetsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QueryAssetsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.statement != null && Object.hasOwnProperty.call(message, "statement"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.statement);
+                            if (message.jobReference != null && Object.hasOwnProperty.call(message, "jobReference"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.jobReference);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.pageToken);
+                            if (message.timeout != null && Object.hasOwnProperty.call(message, "timeout"))
+                                $root.google.protobuf.Duration.encode(message.timeout, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.readTimeWindow != null && Object.hasOwnProperty.call(message, "readTimeWindow"))
+                                $root.google.cloud.asset.v1.TimeWindow.encode(message.readTimeWindow, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.readTime != null && Object.hasOwnProperty.call(message, "readTime"))
+                                $root.google.protobuf.Timestamp.encode(message.readTime, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.outputConfig != null && Object.hasOwnProperty.call(message, "outputConfig"))
+                                $root.google.cloud.asset.v1.QueryAssetsOutputConfig.encode(message.outputConfig, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified QueryAssetsRequest message, length delimited. Does not implicitly {@link google.cloud.asset.v1.QueryAssetsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.asset.v1.QueryAssetsRequest
+                         * @static
+                         * @param {google.cloud.asset.v1.IQueryAssetsRequest} message QueryAssetsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QueryAssetsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a QueryAssetsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.asset.v1.QueryAssetsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.asset.v1.QueryAssetsRequest} QueryAssetsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QueryAssetsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.QueryAssetsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.statement = reader.string();
+                                    break;
+                                case 3:
+                                    message.jobReference = reader.string();
+                                    break;
+                                case 4:
+                                    message.pageSize = reader.int32();
+                                    break;
+                                case 5:
+                                    message.pageToken = reader.string();
+                                    break;
+                                case 6:
+                                    message.timeout = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                    break;
+                                case 7:
+                                    message.readTimeWindow = $root.google.cloud.asset.v1.TimeWindow.decode(reader, reader.uint32());
+                                    break;
+                                case 8:
+                                    message.readTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 9:
+                                    message.outputConfig = $root.google.cloud.asset.v1.QueryAssetsOutputConfig.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a QueryAssetsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.asset.v1.QueryAssetsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.asset.v1.QueryAssetsRequest} QueryAssetsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QueryAssetsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a QueryAssetsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.asset.v1.QueryAssetsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        QueryAssetsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.statement != null && message.hasOwnProperty("statement")) {
+                                properties.query = 1;
+                                if (!$util.isString(message.statement))
+                                    return "statement: string expected";
+                            }
+                            if (message.jobReference != null && message.hasOwnProperty("jobReference")) {
+                                if (properties.query === 1)
+                                    return "query: multiple values";
+                                properties.query = 1;
+                                if (!$util.isString(message.jobReference))
+                                    return "jobReference: string expected";
+                            }
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.timeout != null && message.hasOwnProperty("timeout")) {
+                                var error = $root.google.protobuf.Duration.verify(message.timeout);
+                                if (error)
+                                    return "timeout." + error;
+                            }
+                            if (message.readTimeWindow != null && message.hasOwnProperty("readTimeWindow")) {
+                                properties.time = 1;
+                                {
+                                    var error = $root.google.cloud.asset.v1.TimeWindow.verify(message.readTimeWindow);
+                                    if (error)
+                                        return "readTimeWindow." + error;
+                                }
+                            }
+                            if (message.readTime != null && message.hasOwnProperty("readTime")) {
+                                if (properties.time === 1)
+                                    return "time: multiple values";
+                                properties.time = 1;
+                                {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.readTime);
+                                    if (error)
+                                        return "readTime." + error;
+                                }
+                            }
+                            if (message.outputConfig != null && message.hasOwnProperty("outputConfig")) {
+                                var error = $root.google.cloud.asset.v1.QueryAssetsOutputConfig.verify(message.outputConfig);
+                                if (error)
+                                    return "outputConfig." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a QueryAssetsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.asset.v1.QueryAssetsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.asset.v1.QueryAssetsRequest} QueryAssetsRequest
+                         */
+                        QueryAssetsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.asset.v1.QueryAssetsRequest)
+                                return object;
+                            var message = new $root.google.cloud.asset.v1.QueryAssetsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.statement != null)
+                                message.statement = String(object.statement);
+                            if (object.jobReference != null)
+                                message.jobReference = String(object.jobReference);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.timeout != null) {
+                                if (typeof object.timeout !== "object")
+                                    throw TypeError(".google.cloud.asset.v1.QueryAssetsRequest.timeout: object expected");
+                                message.timeout = $root.google.protobuf.Duration.fromObject(object.timeout);
+                            }
+                            if (object.readTimeWindow != null) {
+                                if (typeof object.readTimeWindow !== "object")
+                                    throw TypeError(".google.cloud.asset.v1.QueryAssetsRequest.readTimeWindow: object expected");
+                                message.readTimeWindow = $root.google.cloud.asset.v1.TimeWindow.fromObject(object.readTimeWindow);
+                            }
+                            if (object.readTime != null) {
+                                if (typeof object.readTime !== "object")
+                                    throw TypeError(".google.cloud.asset.v1.QueryAssetsRequest.readTime: object expected");
+                                message.readTime = $root.google.protobuf.Timestamp.fromObject(object.readTime);
+                            }
+                            if (object.outputConfig != null) {
+                                if (typeof object.outputConfig !== "object")
+                                    throw TypeError(".google.cloud.asset.v1.QueryAssetsRequest.outputConfig: object expected");
+                                message.outputConfig = $root.google.cloud.asset.v1.QueryAssetsOutputConfig.fromObject(object.outputConfig);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a QueryAssetsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.asset.v1.QueryAssetsRequest
+                         * @static
+                         * @param {google.cloud.asset.v1.QueryAssetsRequest} message QueryAssetsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        QueryAssetsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.timeout = null;
+                                object.outputConfig = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.statement != null && message.hasOwnProperty("statement")) {
+                                object.statement = message.statement;
+                                if (options.oneofs)
+                                    object.query = "statement";
+                            }
+                            if (message.jobReference != null && message.hasOwnProperty("jobReference")) {
+                                object.jobReference = message.jobReference;
+                                if (options.oneofs)
+                                    object.query = "jobReference";
+                            }
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.timeout != null && message.hasOwnProperty("timeout"))
+                                object.timeout = $root.google.protobuf.Duration.toObject(message.timeout, options);
+                            if (message.readTimeWindow != null && message.hasOwnProperty("readTimeWindow")) {
+                                object.readTimeWindow = $root.google.cloud.asset.v1.TimeWindow.toObject(message.readTimeWindow, options);
+                                if (options.oneofs)
+                                    object.time = "readTimeWindow";
+                            }
+                            if (message.readTime != null && message.hasOwnProperty("readTime")) {
+                                object.readTime = $root.google.protobuf.Timestamp.toObject(message.readTime, options);
+                                if (options.oneofs)
+                                    object.time = "readTime";
+                            }
+                            if (message.outputConfig != null && message.hasOwnProperty("outputConfig"))
+                                object.outputConfig = $root.google.cloud.asset.v1.QueryAssetsOutputConfig.toObject(message.outputConfig, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this QueryAssetsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.asset.v1.QueryAssetsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        QueryAssetsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return QueryAssetsRequest;
+                    })();
+    
+                    v1.QueryAssetsResponse = (function() {
+    
+                        /**
+                         * Properties of a QueryAssetsResponse.
+                         * @memberof google.cloud.asset.v1
+                         * @interface IQueryAssetsResponse
+                         * @property {string|null} [jobReference] QueryAssetsResponse jobReference
+                         * @property {boolean|null} [done] QueryAssetsResponse done
+                         * @property {google.rpc.IStatus|null} [error] QueryAssetsResponse error
+                         * @property {google.cloud.asset.v1.IQueryResult|null} [queryResult] QueryAssetsResponse queryResult
+                         * @property {google.cloud.asset.v1.IQueryAssetsOutputConfig|null} [outputConfig] QueryAssetsResponse outputConfig
+                         */
+    
+                        /**
+                         * Constructs a new QueryAssetsResponse.
+                         * @memberof google.cloud.asset.v1
+                         * @classdesc Represents a QueryAssetsResponse.
+                         * @implements IQueryAssetsResponse
+                         * @constructor
+                         * @param {google.cloud.asset.v1.IQueryAssetsResponse=} [properties] Properties to set
+                         */
+                        function QueryAssetsResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * QueryAssetsResponse jobReference.
+                         * @member {string} jobReference
+                         * @memberof google.cloud.asset.v1.QueryAssetsResponse
+                         * @instance
+                         */
+                        QueryAssetsResponse.prototype.jobReference = "";
+    
+                        /**
+                         * QueryAssetsResponse done.
+                         * @member {boolean} done
+                         * @memberof google.cloud.asset.v1.QueryAssetsResponse
+                         * @instance
+                         */
+                        QueryAssetsResponse.prototype.done = false;
+    
+                        /**
+                         * QueryAssetsResponse error.
+                         * @member {google.rpc.IStatus|null|undefined} error
+                         * @memberof google.cloud.asset.v1.QueryAssetsResponse
+                         * @instance
+                         */
+                        QueryAssetsResponse.prototype.error = null;
+    
+                        /**
+                         * QueryAssetsResponse queryResult.
+                         * @member {google.cloud.asset.v1.IQueryResult|null|undefined} queryResult
+                         * @memberof google.cloud.asset.v1.QueryAssetsResponse
+                         * @instance
+                         */
+                        QueryAssetsResponse.prototype.queryResult = null;
+    
+                        /**
+                         * QueryAssetsResponse outputConfig.
+                         * @member {google.cloud.asset.v1.IQueryAssetsOutputConfig|null|undefined} outputConfig
+                         * @memberof google.cloud.asset.v1.QueryAssetsResponse
+                         * @instance
+                         */
+                        QueryAssetsResponse.prototype.outputConfig = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * QueryAssetsResponse response.
+                         * @member {"error"|"queryResult"|"outputConfig"|undefined} response
+                         * @memberof google.cloud.asset.v1.QueryAssetsResponse
+                         * @instance
+                         */
+                        Object.defineProperty(QueryAssetsResponse.prototype, "response", {
+                            get: $util.oneOfGetter($oneOfFields = ["error", "queryResult", "outputConfig"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new QueryAssetsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.asset.v1.QueryAssetsResponse
+                         * @static
+                         * @param {google.cloud.asset.v1.IQueryAssetsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.asset.v1.QueryAssetsResponse} QueryAssetsResponse instance
+                         */
+                        QueryAssetsResponse.create = function create(properties) {
+                            return new QueryAssetsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified QueryAssetsResponse message. Does not implicitly {@link google.cloud.asset.v1.QueryAssetsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.asset.v1.QueryAssetsResponse
+                         * @static
+                         * @param {google.cloud.asset.v1.IQueryAssetsResponse} message QueryAssetsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QueryAssetsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.jobReference != null && Object.hasOwnProperty.call(message, "jobReference"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.jobReference);
+                            if (message.done != null && Object.hasOwnProperty.call(message, "done"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.done);
+                            if (message.error != null && Object.hasOwnProperty.call(message, "error"))
+                                $root.google.rpc.Status.encode(message.error, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.queryResult != null && Object.hasOwnProperty.call(message, "queryResult"))
+                                $root.google.cloud.asset.v1.QueryResult.encode(message.queryResult, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.outputConfig != null && Object.hasOwnProperty.call(message, "outputConfig"))
+                                $root.google.cloud.asset.v1.QueryAssetsOutputConfig.encode(message.outputConfig, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified QueryAssetsResponse message, length delimited. Does not implicitly {@link google.cloud.asset.v1.QueryAssetsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.asset.v1.QueryAssetsResponse
+                         * @static
+                         * @param {google.cloud.asset.v1.IQueryAssetsResponse} message QueryAssetsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QueryAssetsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a QueryAssetsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.asset.v1.QueryAssetsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.asset.v1.QueryAssetsResponse} QueryAssetsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QueryAssetsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.QueryAssetsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.jobReference = reader.string();
+                                    break;
+                                case 2:
+                                    message.done = reader.bool();
+                                    break;
+                                case 3:
+                                    message.error = $root.google.rpc.Status.decode(reader, reader.uint32());
+                                    break;
+                                case 4:
+                                    message.queryResult = $root.google.cloud.asset.v1.QueryResult.decode(reader, reader.uint32());
+                                    break;
+                                case 5:
+                                    message.outputConfig = $root.google.cloud.asset.v1.QueryAssetsOutputConfig.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a QueryAssetsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.asset.v1.QueryAssetsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.asset.v1.QueryAssetsResponse} QueryAssetsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QueryAssetsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a QueryAssetsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.asset.v1.QueryAssetsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        QueryAssetsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.jobReference != null && message.hasOwnProperty("jobReference"))
+                                if (!$util.isString(message.jobReference))
+                                    return "jobReference: string expected";
+                            if (message.done != null && message.hasOwnProperty("done"))
+                                if (typeof message.done !== "boolean")
+                                    return "done: boolean expected";
+                            if (message.error != null && message.hasOwnProperty("error")) {
+                                properties.response = 1;
+                                {
+                                    var error = $root.google.rpc.Status.verify(message.error);
+                                    if (error)
+                                        return "error." + error;
+                                }
+                            }
+                            if (message.queryResult != null && message.hasOwnProperty("queryResult")) {
+                                if (properties.response === 1)
+                                    return "response: multiple values";
+                                properties.response = 1;
+                                {
+                                    var error = $root.google.cloud.asset.v1.QueryResult.verify(message.queryResult);
+                                    if (error)
+                                        return "queryResult." + error;
+                                }
+                            }
+                            if (message.outputConfig != null && message.hasOwnProperty("outputConfig")) {
+                                if (properties.response === 1)
+                                    return "response: multiple values";
+                                properties.response = 1;
+                                {
+                                    var error = $root.google.cloud.asset.v1.QueryAssetsOutputConfig.verify(message.outputConfig);
+                                    if (error)
+                                        return "outputConfig." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a QueryAssetsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.asset.v1.QueryAssetsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.asset.v1.QueryAssetsResponse} QueryAssetsResponse
+                         */
+                        QueryAssetsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.asset.v1.QueryAssetsResponse)
+                                return object;
+                            var message = new $root.google.cloud.asset.v1.QueryAssetsResponse();
+                            if (object.jobReference != null)
+                                message.jobReference = String(object.jobReference);
+                            if (object.done != null)
+                                message.done = Boolean(object.done);
+                            if (object.error != null) {
+                                if (typeof object.error !== "object")
+                                    throw TypeError(".google.cloud.asset.v1.QueryAssetsResponse.error: object expected");
+                                message.error = $root.google.rpc.Status.fromObject(object.error);
+                            }
+                            if (object.queryResult != null) {
+                                if (typeof object.queryResult !== "object")
+                                    throw TypeError(".google.cloud.asset.v1.QueryAssetsResponse.queryResult: object expected");
+                                message.queryResult = $root.google.cloud.asset.v1.QueryResult.fromObject(object.queryResult);
+                            }
+                            if (object.outputConfig != null) {
+                                if (typeof object.outputConfig !== "object")
+                                    throw TypeError(".google.cloud.asset.v1.QueryAssetsResponse.outputConfig: object expected");
+                                message.outputConfig = $root.google.cloud.asset.v1.QueryAssetsOutputConfig.fromObject(object.outputConfig);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a QueryAssetsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.asset.v1.QueryAssetsResponse
+                         * @static
+                         * @param {google.cloud.asset.v1.QueryAssetsResponse} message QueryAssetsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        QueryAssetsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.jobReference = "";
+                                object.done = false;
+                            }
+                            if (message.jobReference != null && message.hasOwnProperty("jobReference"))
+                                object.jobReference = message.jobReference;
+                            if (message.done != null && message.hasOwnProperty("done"))
+                                object.done = message.done;
+                            if (message.error != null && message.hasOwnProperty("error")) {
+                                object.error = $root.google.rpc.Status.toObject(message.error, options);
+                                if (options.oneofs)
+                                    object.response = "error";
+                            }
+                            if (message.queryResult != null && message.hasOwnProperty("queryResult")) {
+                                object.queryResult = $root.google.cloud.asset.v1.QueryResult.toObject(message.queryResult, options);
+                                if (options.oneofs)
+                                    object.response = "queryResult";
+                            }
+                            if (message.outputConfig != null && message.hasOwnProperty("outputConfig")) {
+                                object.outputConfig = $root.google.cloud.asset.v1.QueryAssetsOutputConfig.toObject(message.outputConfig, options);
+                                if (options.oneofs)
+                                    object.response = "outputConfig";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this QueryAssetsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.asset.v1.QueryAssetsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        QueryAssetsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return QueryAssetsResponse;
+                    })();
+    
+                    v1.QueryResult = (function() {
+    
+                        /**
+                         * Properties of a QueryResult.
+                         * @memberof google.cloud.asset.v1
+                         * @interface IQueryResult
+                         * @property {Array.<google.protobuf.IStruct>|null} [rows] QueryResult rows
+                         * @property {google.cloud.asset.v1.ITableSchema|null} [schema] QueryResult schema
+                         * @property {string|null} [nextPageToken] QueryResult nextPageToken
+                         * @property {number|Long|null} [totalRows] QueryResult totalRows
+                         */
+    
+                        /**
+                         * Constructs a new QueryResult.
+                         * @memberof google.cloud.asset.v1
+                         * @classdesc Represents a QueryResult.
+                         * @implements IQueryResult
+                         * @constructor
+                         * @param {google.cloud.asset.v1.IQueryResult=} [properties] Properties to set
+                         */
+                        function QueryResult(properties) {
+                            this.rows = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * QueryResult rows.
+                         * @member {Array.<google.protobuf.IStruct>} rows
+                         * @memberof google.cloud.asset.v1.QueryResult
+                         * @instance
+                         */
+                        QueryResult.prototype.rows = $util.emptyArray;
+    
+                        /**
+                         * QueryResult schema.
+                         * @member {google.cloud.asset.v1.ITableSchema|null|undefined} schema
+                         * @memberof google.cloud.asset.v1.QueryResult
+                         * @instance
+                         */
+                        QueryResult.prototype.schema = null;
+    
+                        /**
+                         * QueryResult nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.asset.v1.QueryResult
+                         * @instance
+                         */
+                        QueryResult.prototype.nextPageToken = "";
+    
+                        /**
+                         * QueryResult totalRows.
+                         * @member {number|Long} totalRows
+                         * @memberof google.cloud.asset.v1.QueryResult
+                         * @instance
+                         */
+                        QueryResult.prototype.totalRows = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * Creates a new QueryResult instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.asset.v1.QueryResult
+                         * @static
+                         * @param {google.cloud.asset.v1.IQueryResult=} [properties] Properties to set
+                         * @returns {google.cloud.asset.v1.QueryResult} QueryResult instance
+                         */
+                        QueryResult.create = function create(properties) {
+                            return new QueryResult(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified QueryResult message. Does not implicitly {@link google.cloud.asset.v1.QueryResult.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.asset.v1.QueryResult
+                         * @static
+                         * @param {google.cloud.asset.v1.IQueryResult} message QueryResult message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QueryResult.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.rows != null && message.rows.length)
+                                for (var i = 0; i < message.rows.length; ++i)
+                                    $root.google.protobuf.Struct.encode(message.rows[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.schema != null && Object.hasOwnProperty.call(message, "schema"))
+                                $root.google.cloud.asset.v1.TableSchema.encode(message.schema, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.nextPageToken);
+                            if (message.totalRows != null && Object.hasOwnProperty.call(message, "totalRows"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int64(message.totalRows);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified QueryResult message, length delimited. Does not implicitly {@link google.cloud.asset.v1.QueryResult.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.asset.v1.QueryResult
+                         * @static
+                         * @param {google.cloud.asset.v1.IQueryResult} message QueryResult message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QueryResult.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a QueryResult message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.asset.v1.QueryResult
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.asset.v1.QueryResult} QueryResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QueryResult.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.QueryResult();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.rows && message.rows.length))
+                                        message.rows = [];
+                                    message.rows.push($root.google.protobuf.Struct.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    message.schema = $root.google.cloud.asset.v1.TableSchema.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                case 4:
+                                    message.totalRows = reader.int64();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a QueryResult message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.asset.v1.QueryResult
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.asset.v1.QueryResult} QueryResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QueryResult.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a QueryResult message.
+                         * @function verify
+                         * @memberof google.cloud.asset.v1.QueryResult
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        QueryResult.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.rows != null && message.hasOwnProperty("rows")) {
+                                if (!Array.isArray(message.rows))
+                                    return "rows: array expected";
+                                for (var i = 0; i < message.rows.length; ++i) {
+                                    var error = $root.google.protobuf.Struct.verify(message.rows[i]);
+                                    if (error)
+                                        return "rows." + error;
+                                }
+                            }
+                            if (message.schema != null && message.hasOwnProperty("schema")) {
+                                var error = $root.google.cloud.asset.v1.TableSchema.verify(message.schema);
+                                if (error)
+                                    return "schema." + error;
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.totalRows != null && message.hasOwnProperty("totalRows"))
+                                if (!$util.isInteger(message.totalRows) && !(message.totalRows && $util.isInteger(message.totalRows.low) && $util.isInteger(message.totalRows.high)))
+                                    return "totalRows: integer|Long expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a QueryResult message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.asset.v1.QueryResult
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.asset.v1.QueryResult} QueryResult
+                         */
+                        QueryResult.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.asset.v1.QueryResult)
+                                return object;
+                            var message = new $root.google.cloud.asset.v1.QueryResult();
+                            if (object.rows) {
+                                if (!Array.isArray(object.rows))
+                                    throw TypeError(".google.cloud.asset.v1.QueryResult.rows: array expected");
+                                message.rows = [];
+                                for (var i = 0; i < object.rows.length; ++i) {
+                                    if (typeof object.rows[i] !== "object")
+                                        throw TypeError(".google.cloud.asset.v1.QueryResult.rows: object expected");
+                                    message.rows[i] = $root.google.protobuf.Struct.fromObject(object.rows[i]);
+                                }
+                            }
+                            if (object.schema != null) {
+                                if (typeof object.schema !== "object")
+                                    throw TypeError(".google.cloud.asset.v1.QueryResult.schema: object expected");
+                                message.schema = $root.google.cloud.asset.v1.TableSchema.fromObject(object.schema);
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.totalRows != null)
+                                if ($util.Long)
+                                    (message.totalRows = $util.Long.fromValue(object.totalRows)).unsigned = false;
+                                else if (typeof object.totalRows === "string")
+                                    message.totalRows = parseInt(object.totalRows, 10);
+                                else if (typeof object.totalRows === "number")
+                                    message.totalRows = object.totalRows;
+                                else if (typeof object.totalRows === "object")
+                                    message.totalRows = new $util.LongBits(object.totalRows.low >>> 0, object.totalRows.high >>> 0).toNumber();
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a QueryResult message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.asset.v1.QueryResult
+                         * @static
+                         * @param {google.cloud.asset.v1.QueryResult} message QueryResult
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        QueryResult.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.rows = [];
+                            if (options.defaults) {
+                                object.schema = null;
+                                object.nextPageToken = "";
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.totalRows = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.totalRows = options.longs === String ? "0" : 0;
+                            }
+                            if (message.rows && message.rows.length) {
+                                object.rows = [];
+                                for (var j = 0; j < message.rows.length; ++j)
+                                    object.rows[j] = $root.google.protobuf.Struct.toObject(message.rows[j], options);
+                            }
+                            if (message.schema != null && message.hasOwnProperty("schema"))
+                                object.schema = $root.google.cloud.asset.v1.TableSchema.toObject(message.schema, options);
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.totalRows != null && message.hasOwnProperty("totalRows"))
+                                if (typeof message.totalRows === "number")
+                                    object.totalRows = options.longs === String ? String(message.totalRows) : message.totalRows;
+                                else
+                                    object.totalRows = options.longs === String ? $util.Long.prototype.toString.call(message.totalRows) : options.longs === Number ? new $util.LongBits(message.totalRows.low >>> 0, message.totalRows.high >>> 0).toNumber() : message.totalRows;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this QueryResult to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.asset.v1.QueryResult
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        QueryResult.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return QueryResult;
+                    })();
+    
+                    v1.TableSchema = (function() {
+    
+                        /**
+                         * Properties of a TableSchema.
+                         * @memberof google.cloud.asset.v1
+                         * @interface ITableSchema
+                         * @property {Array.<google.cloud.asset.v1.ITableFieldSchema>|null} [fields] TableSchema fields
+                         */
+    
+                        /**
+                         * Constructs a new TableSchema.
+                         * @memberof google.cloud.asset.v1
+                         * @classdesc Represents a TableSchema.
+                         * @implements ITableSchema
+                         * @constructor
+                         * @param {google.cloud.asset.v1.ITableSchema=} [properties] Properties to set
+                         */
+                        function TableSchema(properties) {
+                            this.fields = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * TableSchema fields.
+                         * @member {Array.<google.cloud.asset.v1.ITableFieldSchema>} fields
+                         * @memberof google.cloud.asset.v1.TableSchema
+                         * @instance
+                         */
+                        TableSchema.prototype.fields = $util.emptyArray;
+    
+                        /**
+                         * Creates a new TableSchema instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.asset.v1.TableSchema
+                         * @static
+                         * @param {google.cloud.asset.v1.ITableSchema=} [properties] Properties to set
+                         * @returns {google.cloud.asset.v1.TableSchema} TableSchema instance
+                         */
+                        TableSchema.create = function create(properties) {
+                            return new TableSchema(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified TableSchema message. Does not implicitly {@link google.cloud.asset.v1.TableSchema.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.asset.v1.TableSchema
+                         * @static
+                         * @param {google.cloud.asset.v1.ITableSchema} message TableSchema message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TableSchema.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.fields != null && message.fields.length)
+                                for (var i = 0; i < message.fields.length; ++i)
+                                    $root.google.cloud.asset.v1.TableFieldSchema.encode(message.fields[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified TableSchema message, length delimited. Does not implicitly {@link google.cloud.asset.v1.TableSchema.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.asset.v1.TableSchema
+                         * @static
+                         * @param {google.cloud.asset.v1.ITableSchema} message TableSchema message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TableSchema.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a TableSchema message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.asset.v1.TableSchema
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.asset.v1.TableSchema} TableSchema
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TableSchema.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.TableSchema();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.fields && message.fields.length))
+                                        message.fields = [];
+                                    message.fields.push($root.google.cloud.asset.v1.TableFieldSchema.decode(reader, reader.uint32()));
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a TableSchema message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.asset.v1.TableSchema
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.asset.v1.TableSchema} TableSchema
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TableSchema.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a TableSchema message.
+                         * @function verify
+                         * @memberof google.cloud.asset.v1.TableSchema
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        TableSchema.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.fields != null && message.hasOwnProperty("fields")) {
+                                if (!Array.isArray(message.fields))
+                                    return "fields: array expected";
+                                for (var i = 0; i < message.fields.length; ++i) {
+                                    var error = $root.google.cloud.asset.v1.TableFieldSchema.verify(message.fields[i]);
+                                    if (error)
+                                        return "fields." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a TableSchema message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.asset.v1.TableSchema
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.asset.v1.TableSchema} TableSchema
+                         */
+                        TableSchema.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.asset.v1.TableSchema)
+                                return object;
+                            var message = new $root.google.cloud.asset.v1.TableSchema();
+                            if (object.fields) {
+                                if (!Array.isArray(object.fields))
+                                    throw TypeError(".google.cloud.asset.v1.TableSchema.fields: array expected");
+                                message.fields = [];
+                                for (var i = 0; i < object.fields.length; ++i) {
+                                    if (typeof object.fields[i] !== "object")
+                                        throw TypeError(".google.cloud.asset.v1.TableSchema.fields: object expected");
+                                    message.fields[i] = $root.google.cloud.asset.v1.TableFieldSchema.fromObject(object.fields[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a TableSchema message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.asset.v1.TableSchema
+                         * @static
+                         * @param {google.cloud.asset.v1.TableSchema} message TableSchema
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        TableSchema.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.fields = [];
+                            if (message.fields && message.fields.length) {
+                                object.fields = [];
+                                for (var j = 0; j < message.fields.length; ++j)
+                                    object.fields[j] = $root.google.cloud.asset.v1.TableFieldSchema.toObject(message.fields[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this TableSchema to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.asset.v1.TableSchema
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        TableSchema.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return TableSchema;
+                    })();
+    
+                    v1.TableFieldSchema = (function() {
+    
+                        /**
+                         * Properties of a TableFieldSchema.
+                         * @memberof google.cloud.asset.v1
+                         * @interface ITableFieldSchema
+                         * @property {string|null} [field] TableFieldSchema field
+                         * @property {string|null} [type] TableFieldSchema type
+                         * @property {string|null} [mode] TableFieldSchema mode
+                         * @property {Array.<google.cloud.asset.v1.ITableFieldSchema>|null} [fields] TableFieldSchema fields
+                         */
+    
+                        /**
+                         * Constructs a new TableFieldSchema.
+                         * @memberof google.cloud.asset.v1
+                         * @classdesc Represents a TableFieldSchema.
+                         * @implements ITableFieldSchema
+                         * @constructor
+                         * @param {google.cloud.asset.v1.ITableFieldSchema=} [properties] Properties to set
+                         */
+                        function TableFieldSchema(properties) {
+                            this.fields = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * TableFieldSchema field.
+                         * @member {string} field
+                         * @memberof google.cloud.asset.v1.TableFieldSchema
+                         * @instance
+                         */
+                        TableFieldSchema.prototype.field = "";
+    
+                        /**
+                         * TableFieldSchema type.
+                         * @member {string} type
+                         * @memberof google.cloud.asset.v1.TableFieldSchema
+                         * @instance
+                         */
+                        TableFieldSchema.prototype.type = "";
+    
+                        /**
+                         * TableFieldSchema mode.
+                         * @member {string} mode
+                         * @memberof google.cloud.asset.v1.TableFieldSchema
+                         * @instance
+                         */
+                        TableFieldSchema.prototype.mode = "";
+    
+                        /**
+                         * TableFieldSchema fields.
+                         * @member {Array.<google.cloud.asset.v1.ITableFieldSchema>} fields
+                         * @memberof google.cloud.asset.v1.TableFieldSchema
+                         * @instance
+                         */
+                        TableFieldSchema.prototype.fields = $util.emptyArray;
+    
+                        /**
+                         * Creates a new TableFieldSchema instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.asset.v1.TableFieldSchema
+                         * @static
+                         * @param {google.cloud.asset.v1.ITableFieldSchema=} [properties] Properties to set
+                         * @returns {google.cloud.asset.v1.TableFieldSchema} TableFieldSchema instance
+                         */
+                        TableFieldSchema.create = function create(properties) {
+                            return new TableFieldSchema(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified TableFieldSchema message. Does not implicitly {@link google.cloud.asset.v1.TableFieldSchema.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.asset.v1.TableFieldSchema
+                         * @static
+                         * @param {google.cloud.asset.v1.ITableFieldSchema} message TableFieldSchema message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TableFieldSchema.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.field != null && Object.hasOwnProperty.call(message, "field"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.field);
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.type);
+                            if (message.mode != null && Object.hasOwnProperty.call(message, "mode"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.mode);
+                            if (message.fields != null && message.fields.length)
+                                for (var i = 0; i < message.fields.length; ++i)
+                                    $root.google.cloud.asset.v1.TableFieldSchema.encode(message.fields[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified TableFieldSchema message, length delimited. Does not implicitly {@link google.cloud.asset.v1.TableFieldSchema.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.asset.v1.TableFieldSchema
+                         * @static
+                         * @param {google.cloud.asset.v1.ITableFieldSchema} message TableFieldSchema message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TableFieldSchema.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a TableFieldSchema message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.asset.v1.TableFieldSchema
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.asset.v1.TableFieldSchema} TableFieldSchema
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TableFieldSchema.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.TableFieldSchema();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.field = reader.string();
+                                    break;
+                                case 2:
+                                    message.type = reader.string();
+                                    break;
+                                case 3:
+                                    message.mode = reader.string();
+                                    break;
+                                case 4:
+                                    if (!(message.fields && message.fields.length))
+                                        message.fields = [];
+                                    message.fields.push($root.google.cloud.asset.v1.TableFieldSchema.decode(reader, reader.uint32()));
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a TableFieldSchema message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.asset.v1.TableFieldSchema
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.asset.v1.TableFieldSchema} TableFieldSchema
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TableFieldSchema.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a TableFieldSchema message.
+                         * @function verify
+                         * @memberof google.cloud.asset.v1.TableFieldSchema
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        TableFieldSchema.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.field != null && message.hasOwnProperty("field"))
+                                if (!$util.isString(message.field))
+                                    return "field: string expected";
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                if (!$util.isString(message.type))
+                                    return "type: string expected";
+                            if (message.mode != null && message.hasOwnProperty("mode"))
+                                if (!$util.isString(message.mode))
+                                    return "mode: string expected";
+                            if (message.fields != null && message.hasOwnProperty("fields")) {
+                                if (!Array.isArray(message.fields))
+                                    return "fields: array expected";
+                                for (var i = 0; i < message.fields.length; ++i) {
+                                    var error = $root.google.cloud.asset.v1.TableFieldSchema.verify(message.fields[i]);
+                                    if (error)
+                                        return "fields." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a TableFieldSchema message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.asset.v1.TableFieldSchema
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.asset.v1.TableFieldSchema} TableFieldSchema
+                         */
+                        TableFieldSchema.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.asset.v1.TableFieldSchema)
+                                return object;
+                            var message = new $root.google.cloud.asset.v1.TableFieldSchema();
+                            if (object.field != null)
+                                message.field = String(object.field);
+                            if (object.type != null)
+                                message.type = String(object.type);
+                            if (object.mode != null)
+                                message.mode = String(object.mode);
+                            if (object.fields) {
+                                if (!Array.isArray(object.fields))
+                                    throw TypeError(".google.cloud.asset.v1.TableFieldSchema.fields: array expected");
+                                message.fields = [];
+                                for (var i = 0; i < object.fields.length; ++i) {
+                                    if (typeof object.fields[i] !== "object")
+                                        throw TypeError(".google.cloud.asset.v1.TableFieldSchema.fields: object expected");
+                                    message.fields[i] = $root.google.cloud.asset.v1.TableFieldSchema.fromObject(object.fields[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a TableFieldSchema message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.asset.v1.TableFieldSchema
+                         * @static
+                         * @param {google.cloud.asset.v1.TableFieldSchema} message TableFieldSchema
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        TableFieldSchema.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.fields = [];
+                            if (options.defaults) {
+                                object.field = "";
+                                object.type = "";
+                                object.mode = "";
+                            }
+                            if (message.field != null && message.hasOwnProperty("field"))
+                                object.field = message.field;
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                object.type = message.type;
+                            if (message.mode != null && message.hasOwnProperty("mode"))
+                                object.mode = message.mode;
+                            if (message.fields && message.fields.length) {
+                                object.fields = [];
+                                for (var j = 0; j < message.fields.length; ++j)
+                                    object.fields[j] = $root.google.cloud.asset.v1.TableFieldSchema.toObject(message.fields[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this TableFieldSchema to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.asset.v1.TableFieldSchema
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        TableFieldSchema.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return TableFieldSchema;
                     })();
     
                     v1.BatchGetEffectiveIamPoliciesRequest = (function() {
@@ -14689,6 +16658,30 @@
                         })();
     
                         return BatchGetEffectiveIamPoliciesResponse;
+                    })();
+    
+                    /**
+                     * ContentType enum.
+                     * @name google.cloud.asset.v1.ContentType
+                     * @enum {number}
+                     * @property {number} CONTENT_TYPE_UNSPECIFIED=0 CONTENT_TYPE_UNSPECIFIED value
+                     * @property {number} RESOURCE=1 RESOURCE value
+                     * @property {number} IAM_POLICY=2 IAM_POLICY value
+                     * @property {number} ORG_POLICY=4 ORG_POLICY value
+                     * @property {number} ACCESS_POLICY=5 ACCESS_POLICY value
+                     * @property {number} OS_INVENTORY=6 OS_INVENTORY value
+                     * @property {number} RELATIONSHIP=7 RELATIONSHIP value
+                     */
+                    v1.ContentType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "CONTENT_TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "RESOURCE"] = 1;
+                        values[valuesById[2] = "IAM_POLICY"] = 2;
+                        values[valuesById[4] = "ORG_POLICY"] = 4;
+                        values[valuesById[5] = "ACCESS_POLICY"] = 5;
+                        values[valuesById[6] = "OS_INVENTORY"] = 6;
+                        values[valuesById[7] = "RELATIONSHIP"] = 7;
+                        return values;
                     })();
     
                     v1.TemporalAsset = (function() {
