@@ -6533,6 +6533,7 @@
                          * @property {Array.<string>|null} [ipAddresses] Indicator ipAddresses
                          * @property {Array.<string>|null} [domains] Indicator domains
                          * @property {Array.<google.cloud.securitycenter.v1.Indicator.IProcessSignature>|null} [signatures] Indicator signatures
+                         * @property {Array.<string>|null} [uris] Indicator uris
                          */
     
                         /**
@@ -6547,6 +6548,7 @@
                             this.ipAddresses = [];
                             this.domains = [];
                             this.signatures = [];
+                            this.uris = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -6576,6 +6578,14 @@
                          * @instance
                          */
                         Indicator.prototype.signatures = $util.emptyArray;
+    
+                        /**
+                         * Indicator uris.
+                         * @member {Array.<string>} uris
+                         * @memberof google.cloud.securitycenter.v1.Indicator
+                         * @instance
+                         */
+                        Indicator.prototype.uris = $util.emptyArray;
     
                         /**
                          * Creates a new Indicator instance using the specified properties.
@@ -6610,6 +6620,9 @@
                             if (message.signatures != null && message.signatures.length)
                                 for (var i = 0; i < message.signatures.length; ++i)
                                     $root.google.cloud.securitycenter.v1.Indicator.ProcessSignature.encode(message.signatures[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.uris != null && message.uris.length)
+                                for (var i = 0; i < message.uris.length; ++i)
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.uris[i]);
                             return writer;
                         };
     
@@ -6658,6 +6671,11 @@
                                     if (!(message.signatures && message.signatures.length))
                                         message.signatures = [];
                                     message.signatures.push($root.google.cloud.securitycenter.v1.Indicator.ProcessSignature.decode(reader, reader.uint32()));
+                                    break;
+                                case 4:
+                                    if (!(message.uris && message.uris.length))
+                                        message.uris = [];
+                                    message.uris.push(reader.string());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -6717,6 +6735,13 @@
                                         return "signatures." + error;
                                 }
                             }
+                            if (message.uris != null && message.hasOwnProperty("uris")) {
+                                if (!Array.isArray(message.uris))
+                                    return "uris: array expected";
+                                for (var i = 0; i < message.uris.length; ++i)
+                                    if (!$util.isString(message.uris[i]))
+                                        return "uris: string[] expected";
+                            }
                             return null;
                         };
     
@@ -6756,6 +6781,13 @@
                                     message.signatures[i] = $root.google.cloud.securitycenter.v1.Indicator.ProcessSignature.fromObject(object.signatures[i]);
                                 }
                             }
+                            if (object.uris) {
+                                if (!Array.isArray(object.uris))
+                                    throw TypeError(".google.cloud.securitycenter.v1.Indicator.uris: array expected");
+                                message.uris = [];
+                                for (var i = 0; i < object.uris.length; ++i)
+                                    message.uris[i] = String(object.uris[i]);
+                            }
                             return message;
                         };
     
@@ -6776,6 +6808,7 @@
                                 object.ipAddresses = [];
                                 object.domains = [];
                                 object.signatures = [];
+                                object.uris = [];
                             }
                             if (message.ipAddresses && message.ipAddresses.length) {
                                 object.ipAddresses = [];
@@ -6791,6 +6824,11 @@
                                 object.signatures = [];
                                 for (var j = 0; j < message.signatures.length; ++j)
                                     object.signatures[j] = $root.google.cloud.securitycenter.v1.Indicator.ProcessSignature.toObject(message.signatures[j], options);
+                            }
+                            if (message.uris && message.uris.length) {
+                                object.uris = [];
+                                for (var j = 0; j < message.uris.length; ++j)
+                                    object.uris[j] = message.uris[j];
                             }
                             return object;
                         };
@@ -10245,6 +10283,8 @@
                                     case 30:
                                     case 31:
                                     case 32:
+                                    case 33:
+                                    case 34:
                                         break;
                                     }
                             }
@@ -10313,6 +10353,8 @@
                                     case 30:
                                     case 31:
                                     case 32:
+                                    case 33:
+                                    case 34:
                                         break;
                                     }
                             }
@@ -10535,6 +10577,14 @@
                                     case 32:
                                         message.primaryTechniques[i] = 32;
                                         break;
+                                    case "ACCESS_TOKEN_MANIPULATION":
+                                    case 33:
+                                        message.primaryTechniques[i] = 33;
+                                        break;
+                                    case "ABUSE_ELEVATION_CONTROL_MECHANISM":
+                                    case 34:
+                                        message.primaryTechniques[i] = 34;
+                                        break;
                                     }
                             }
                             if (object.additionalTactics) {
@@ -10745,6 +10795,14 @@
                                     case 32:
                                         message.additionalTechniques[i] = 32;
                                         break;
+                                    case "ACCESS_TOKEN_MANIPULATION":
+                                    case 33:
+                                        message.additionalTechniques[i] = 33;
+                                        break;
+                                    case "ABUSE_ELEVATION_CONTROL_MECHANISM":
+                                    case 34:
+                                        message.additionalTechniques[i] = 34;
+                                        break;
                                     }
                             }
                             if (object.version != null)
@@ -10884,6 +10942,8 @@
                          * @property {number} DOMAIN_POLICY_MODIFICATION=30 DOMAIN_POLICY_MODIFICATION value
                          * @property {number} IMPAIR_DEFENSES=31 IMPAIR_DEFENSES value
                          * @property {number} NETWORK_SERVICE_DISCOVERY=32 NETWORK_SERVICE_DISCOVERY value
+                         * @property {number} ACCESS_TOKEN_MANIPULATION=33 ACCESS_TOKEN_MANIPULATION value
+                         * @property {number} ABUSE_ELEVATION_CONTROL_MECHANISM=34 ABUSE_ELEVATION_CONTROL_MECHANISM value
                          */
                         MitreAttack.Technique = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -10920,6 +10980,8 @@
                             values[valuesById[30] = "DOMAIN_POLICY_MODIFICATION"] = 30;
                             values[valuesById[31] = "IMPAIR_DEFENSES"] = 31;
                             values[valuesById[32] = "NETWORK_SERVICE_DISCOVERY"] = 32;
+                            values[valuesById[33] = "ACCESS_TOKEN_MANIPULATION"] = 33;
+                            values[valuesById[34] = "ABUSE_ELEVATION_CONTROL_MECHANISM"] = 34;
                             return values;
                         })();
     

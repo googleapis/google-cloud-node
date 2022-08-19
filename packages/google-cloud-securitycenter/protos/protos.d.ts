@@ -2398,6 +2398,9 @@ export namespace google {
 
                     /** Indicator signatures */
                     signatures?: (google.cloud.securitycenter.v1.Indicator.IProcessSignature[]|null);
+
+                    /** Indicator uris */
+                    uris?: (string[]|null);
                 }
 
                 /** Represents an Indicator. */
@@ -2417,6 +2420,9 @@ export namespace google {
 
                     /** Indicator signatures. */
                     public signatures: google.cloud.securitycenter.v1.Indicator.IProcessSignature[];
+
+                    /** Indicator uris. */
+                    public uris: string[];
 
                     /**
                      * Creates a new Indicator instance using the specified properties.
@@ -3924,7 +3930,9 @@ export namespace google {
                         DATA_DESTRUCTION = 29,
                         DOMAIN_POLICY_MODIFICATION = 30,
                         IMPAIR_DEFENSES = 31,
-                        NETWORK_SERVICE_DISCOVERY = 32
+                        NETWORK_SERVICE_DISCOVERY = 32,
+                        ACCESS_TOKEN_MANIPULATION = 33,
+                        ABUSE_ELEVATION_CONTROL_MECHANISM = 34
                     }
                 }
 
