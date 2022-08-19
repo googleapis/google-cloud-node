@@ -5492,8 +5492,8 @@
                  * @property {boolean|null} [deprecated] FieldOptions deprecated
                  * @property {boolean|null} [weak] FieldOptions weak
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
-                 * @property {google.api.IResourceReference|null} [".google.api.resourceReference"] FieldOptions .google.api.resourceReference
                  * @property {Array.<google.api.FieldBehavior>|null} [".google.api.fieldBehavior"] FieldOptions .google.api.fieldBehavior
+                 * @property {google.api.IResourceReference|null} [".google.api.resourceReference"] FieldOptions .google.api.resourceReference
                  */
     
                 /**
@@ -5570,20 +5570,20 @@
                 FieldOptions.prototype.uninterpretedOption = $util.emptyArray;
     
                 /**
-                 * FieldOptions .google.api.resourceReference.
-                 * @member {google.api.IResourceReference|null|undefined} .google.api.resourceReference
-                 * @memberof google.protobuf.FieldOptions
-                 * @instance
-                 */
-                FieldOptions.prototype[".google.api.resourceReference"] = null;
-    
-                /**
                  * FieldOptions .google.api.fieldBehavior.
                  * @member {Array.<google.api.FieldBehavior>} .google.api.fieldBehavior
                  * @memberof google.protobuf.FieldOptions
                  * @instance
                  */
                 FieldOptions.prototype[".google.api.fieldBehavior"] = $util.emptyArray;
+    
+                /**
+                 * FieldOptions .google.api.resourceReference.
+                 * @member {google.api.IResourceReference|null|undefined} .google.api.resourceReference
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype[".google.api.resourceReference"] = null;
     
                 /**
                  * Creates a new FieldOptions instance using the specified properties.
@@ -5689,9 +5689,6 @@
                                 message.uninterpretedOption = [];
                             message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
                             break;
-                        case 1055:
-                            message[".google.api.resourceReference"] = $root.google.api.ResourceReference.decode(reader, reader.uint32());
-                            break;
                         case 1052:
                             if (!(message[".google.api.fieldBehavior"] && message[".google.api.fieldBehavior"].length))
                                 message[".google.api.fieldBehavior"] = [];
@@ -5701,6 +5698,9 @@
                                     message[".google.api.fieldBehavior"].push(reader.int32());
                             } else
                                 message[".google.api.fieldBehavior"].push(reader.int32());
+                            break;
+                        case 1055:
+                            message[".google.api.resourceReference"] = $root.google.api.ResourceReference.decode(reader, reader.uint32());
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -5776,11 +5776,6 @@
                                 return "uninterpretedOption." + error;
                         }
                     }
-                    if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference")) {
-                        var error = $root.google.api.ResourceReference.verify(message[".google.api.resourceReference"]);
-                        if (error)
-                            return ".google.api.resourceReference." + error;
-                    }
                     if (message[".google.api.fieldBehavior"] != null && message.hasOwnProperty(".google.api.fieldBehavior")) {
                         if (!Array.isArray(message[".google.api.fieldBehavior"]))
                             return ".google.api.fieldBehavior: array expected";
@@ -5798,6 +5793,11 @@
                             case 7:
                                 break;
                             }
+                    }
+                    if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference")) {
+                        var error = $root.google.api.ResourceReference.verify(message[".google.api.resourceReference"]);
+                        if (error)
+                            return ".google.api.resourceReference." + error;
                     }
                     return null;
                 };
@@ -5860,11 +5860,6 @@
                             message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
                         }
                     }
-                    if (object[".google.api.resourceReference"] != null) {
-                        if (typeof object[".google.api.resourceReference"] !== "object")
-                            throw TypeError(".google.protobuf.FieldOptions..google.api.resourceReference: object expected");
-                        message[".google.api.resourceReference"] = $root.google.api.ResourceReference.fromObject(object[".google.api.resourceReference"]);
-                    }
                     if (object[".google.api.fieldBehavior"]) {
                         if (!Array.isArray(object[".google.api.fieldBehavior"]))
                             throw TypeError(".google.protobuf.FieldOptions..google.api.fieldBehavior: array expected");
@@ -5905,6 +5900,11 @@
                                 message[".google.api.fieldBehavior"][i] = 7;
                                 break;
                             }
+                    }
+                    if (object[".google.api.resourceReference"] != null) {
+                        if (typeof object[".google.api.resourceReference"] !== "object")
+                            throw TypeError(".google.protobuf.FieldOptions..google.api.resourceReference: object expected");
+                        message[".google.api.resourceReference"] = $root.google.api.ResourceReference.fromObject(object[".google.api.resourceReference"]);
                     }
                     return message;
                 };
@@ -37449,6 +37449,32 @@
                 return CustomHttpPattern;
             })();
     
+            /**
+             * FieldBehavior enum.
+             * @name google.api.FieldBehavior
+             * @enum {number}
+             * @property {number} FIELD_BEHAVIOR_UNSPECIFIED=0 FIELD_BEHAVIOR_UNSPECIFIED value
+             * @property {number} OPTIONAL=1 OPTIONAL value
+             * @property {number} REQUIRED=2 REQUIRED value
+             * @property {number} OUTPUT_ONLY=3 OUTPUT_ONLY value
+             * @property {number} INPUT_ONLY=4 INPUT_ONLY value
+             * @property {number} IMMUTABLE=5 IMMUTABLE value
+             * @property {number} UNORDERED_LIST=6 UNORDERED_LIST value
+             * @property {number} NON_EMPTY_DEFAULT=7 NON_EMPTY_DEFAULT value
+             */
+            api.FieldBehavior = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "FIELD_BEHAVIOR_UNSPECIFIED"] = 0;
+                values[valuesById[1] = "OPTIONAL"] = 1;
+                values[valuesById[2] = "REQUIRED"] = 2;
+                values[valuesById[3] = "OUTPUT_ONLY"] = 3;
+                values[valuesById[4] = "INPUT_ONLY"] = 4;
+                values[valuesById[5] = "IMMUTABLE"] = 5;
+                values[valuesById[6] = "UNORDERED_LIST"] = 6;
+                values[valuesById[7] = "NON_EMPTY_DEFAULT"] = 7;
+                return values;
+            })();
+    
             api.ResourceDescriptor = (function() {
     
                 /**
@@ -38082,32 +38108,6 @@
                 };
     
                 return ResourceReference;
-            })();
-    
-            /**
-             * FieldBehavior enum.
-             * @name google.api.FieldBehavior
-             * @enum {number}
-             * @property {number} FIELD_BEHAVIOR_UNSPECIFIED=0 FIELD_BEHAVIOR_UNSPECIFIED value
-             * @property {number} OPTIONAL=1 OPTIONAL value
-             * @property {number} REQUIRED=2 REQUIRED value
-             * @property {number} OUTPUT_ONLY=3 OUTPUT_ONLY value
-             * @property {number} INPUT_ONLY=4 INPUT_ONLY value
-             * @property {number} IMMUTABLE=5 IMMUTABLE value
-             * @property {number} UNORDERED_LIST=6 UNORDERED_LIST value
-             * @property {number} NON_EMPTY_DEFAULT=7 NON_EMPTY_DEFAULT value
-             */
-            api.FieldBehavior = (function() {
-                var valuesById = {}, values = Object.create(valuesById);
-                values[valuesById[0] = "FIELD_BEHAVIOR_UNSPECIFIED"] = 0;
-                values[valuesById[1] = "OPTIONAL"] = 1;
-                values[valuesById[2] = "REQUIRED"] = 2;
-                values[valuesById[3] = "OUTPUT_ONLY"] = 3;
-                values[valuesById[4] = "INPUT_ONLY"] = 4;
-                values[valuesById[5] = "IMMUTABLE"] = 5;
-                values[valuesById[6] = "UNORDERED_LIST"] = 6;
-                values[valuesById[7] = "NON_EMPTY_DEFAULT"] = 7;
-                return values;
             })();
     
             return api;
