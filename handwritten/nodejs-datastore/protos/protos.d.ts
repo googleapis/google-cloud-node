@@ -2560,6 +2560,9 @@ export namespace google {
                 /** LookupRequest projectId */
                 projectId?: (string|null);
 
+                /** LookupRequest databaseId */
+                databaseId?: (string|null);
+
                 /** LookupRequest readOptions */
                 readOptions?: (google.datastore.v1.IReadOptions|null);
 
@@ -2578,6 +2581,9 @@ export namespace google {
 
                 /** LookupRequest projectId. */
                 public projectId: string;
+
+                /** LookupRequest databaseId. */
+                public databaseId: string;
 
                 /** LookupRequest readOptions. */
                 public readOptions?: (google.datastore.v1.IReadOptions|null);
@@ -2770,6 +2776,9 @@ export namespace google {
                 /** RunQueryRequest projectId */
                 projectId?: (string|null);
 
+                /** RunQueryRequest databaseId */
+                databaseId?: (string|null);
+
                 /** RunQueryRequest partitionId */
                 partitionId?: (google.datastore.v1.IPartitionId|null);
 
@@ -2794,6 +2803,9 @@ export namespace google {
 
                 /** RunQueryRequest projectId. */
                 public projectId: string;
+
+                /** RunQueryRequest databaseId. */
+                public databaseId: string;
 
                 /** RunQueryRequest partitionId. */
                 public partitionId?: (google.datastore.v1.IPartitionId|null);
@@ -2983,6 +2995,9 @@ export namespace google {
                 /** BeginTransactionRequest projectId */
                 projectId?: (string|null);
 
+                /** BeginTransactionRequest databaseId */
+                databaseId?: (string|null);
+
                 /** BeginTransactionRequest transactionOptions */
                 transactionOptions?: (google.datastore.v1.ITransactionOptions|null);
             }
@@ -2998,6 +3013,9 @@ export namespace google {
 
                 /** BeginTransactionRequest projectId. */
                 public projectId: string;
+
+                /** BeginTransactionRequest databaseId. */
+                public databaseId: string;
 
                 /** BeginTransactionRequest transactionOptions. */
                 public transactionOptions?: (google.datastore.v1.ITransactionOptions|null);
@@ -3169,6 +3187,9 @@ export namespace google {
                 /** RollbackRequest projectId */
                 projectId?: (string|null);
 
+                /** RollbackRequest databaseId */
+                databaseId?: (string|null);
+
                 /** RollbackRequest transaction */
                 transaction?: (Uint8Array|string|null);
             }
@@ -3184,6 +3205,9 @@ export namespace google {
 
                 /** RollbackRequest projectId. */
                 public projectId: string;
+
+                /** RollbackRequest databaseId. */
+                public databaseId: string;
 
                 /** RollbackRequest transaction. */
                 public transaction: (Uint8Array|string);
@@ -3349,6 +3373,9 @@ export namespace google {
                 /** CommitRequest projectId */
                 projectId?: (string|null);
 
+                /** CommitRequest databaseId */
+                databaseId?: (string|null);
+
                 /** CommitRequest mode */
                 mode?: (google.datastore.v1.CommitRequest.Mode|keyof typeof google.datastore.v1.CommitRequest.Mode|null);
 
@@ -3370,6 +3397,9 @@ export namespace google {
 
                 /** CommitRequest projectId. */
                 public projectId: string;
+
+                /** CommitRequest databaseId. */
+                public databaseId: string;
 
                 /** CommitRequest mode. */
                 public mode: (google.datastore.v1.CommitRequest.Mode|keyof typeof google.datastore.v1.CommitRequest.Mode);
@@ -3572,6 +3602,9 @@ export namespace google {
                 /** AllocateIdsRequest projectId */
                 projectId?: (string|null);
 
+                /** AllocateIdsRequest databaseId */
+                databaseId?: (string|null);
+
                 /** AllocateIdsRequest keys */
                 keys?: (google.datastore.v1.IKey[]|null);
             }
@@ -3587,6 +3620,9 @@ export namespace google {
 
                 /** AllocateIdsRequest projectId. */
                 public projectId: string;
+
+                /** AllocateIdsRequest databaseId. */
+                public databaseId: string;
 
                 /** AllocateIdsRequest keys. */
                 public keys: google.datastore.v1.IKey[];
@@ -4575,6 +4611,9 @@ export namespace google {
                 /** PartitionId projectId */
                 projectId?: (string|null);
 
+                /** PartitionId databaseId */
+                databaseId?: (string|null);
+
                 /** PartitionId namespaceId */
                 namespaceId?: (string|null);
             }
@@ -4590,6 +4629,9 @@ export namespace google {
 
                 /** PartitionId projectId. */
                 public projectId: string;
+
+                /** PartitionId databaseId. */
+                public databaseId: string;
 
                 /** PartitionId namespaceId. */
                 public namespaceId: string;

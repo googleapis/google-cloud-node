@@ -6162,6 +6162,7 @@
                      * @memberof google.datastore.v1
                      * @interface ILookupRequest
                      * @property {string|null} [projectId] LookupRequest projectId
+                     * @property {string|null} [databaseId] LookupRequest databaseId
                      * @property {google.datastore.v1.IReadOptions|null} [readOptions] LookupRequest readOptions
                      * @property {Array.<google.datastore.v1.IKey>|null} [keys] LookupRequest keys
                      */
@@ -6189,6 +6190,14 @@
                      * @instance
                      */
                     LookupRequest.prototype.projectId = "";
+    
+                    /**
+                     * LookupRequest databaseId.
+                     * @member {string} databaseId
+                     * @memberof google.datastore.v1.LookupRequest
+                     * @instance
+                     */
+                    LookupRequest.prototype.databaseId = "";
     
                     /**
                      * LookupRequest readOptions.
@@ -6237,6 +6246,8 @@
                                 $root.google.datastore.v1.Key.encode(message.keys[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                         if (message.projectId != null && Object.hasOwnProperty.call(message, "projectId"))
                             writer.uint32(/* id 8, wireType 2 =*/66).string(message.projectId);
+                        if (message.databaseId != null && Object.hasOwnProperty.call(message, "databaseId"))
+                            writer.uint32(/* id 9, wireType 2 =*/74).string(message.databaseId);
                         return writer;
                     };
     
@@ -6273,6 +6284,9 @@
                             switch (tag >>> 3) {
                             case 8:
                                 message.projectId = reader.string();
+                                break;
+                            case 9:
+                                message.databaseId = reader.string();
                                 break;
                             case 1:
                                 message.readOptions = $root.google.datastore.v1.ReadOptions.decode(reader, reader.uint32());
@@ -6320,6 +6334,9 @@
                         if (message.projectId != null && message.hasOwnProperty("projectId"))
                             if (!$util.isString(message.projectId))
                                 return "projectId: string expected";
+                        if (message.databaseId != null && message.hasOwnProperty("databaseId"))
+                            if (!$util.isString(message.databaseId))
+                                return "databaseId: string expected";
                         if (message.readOptions != null && message.hasOwnProperty("readOptions")) {
                             var error = $root.google.datastore.v1.ReadOptions.verify(message.readOptions);
                             if (error)
@@ -6351,6 +6368,8 @@
                         var message = new $root.google.datastore.v1.LookupRequest();
                         if (object.projectId != null)
                             message.projectId = String(object.projectId);
+                        if (object.databaseId != null)
+                            message.databaseId = String(object.databaseId);
                         if (object.readOptions != null) {
                             if (typeof object.readOptions !== "object")
                                 throw TypeError(".google.datastore.v1.LookupRequest.readOptions: object expected");
@@ -6387,6 +6406,7 @@
                         if (options.defaults) {
                             object.readOptions = null;
                             object.projectId = "";
+                            object.databaseId = "";
                         }
                         if (message.readOptions != null && message.hasOwnProperty("readOptions"))
                             object.readOptions = $root.google.datastore.v1.ReadOptions.toObject(message.readOptions, options);
@@ -6397,6 +6417,8 @@
                         }
                         if (message.projectId != null && message.hasOwnProperty("projectId"))
                             object.projectId = message.projectId;
+                        if (message.databaseId != null && message.hasOwnProperty("databaseId"))
+                            object.databaseId = message.databaseId;
                         return object;
                     };
     
@@ -6744,6 +6766,7 @@
                      * @memberof google.datastore.v1
                      * @interface IRunQueryRequest
                      * @property {string|null} [projectId] RunQueryRequest projectId
+                     * @property {string|null} [databaseId] RunQueryRequest databaseId
                      * @property {google.datastore.v1.IPartitionId|null} [partitionId] RunQueryRequest partitionId
                      * @property {google.datastore.v1.IReadOptions|null} [readOptions] RunQueryRequest readOptions
                      * @property {google.datastore.v1.IQuery|null} [query] RunQueryRequest query
@@ -6772,6 +6795,14 @@
                      * @instance
                      */
                     RunQueryRequest.prototype.projectId = "";
+    
+                    /**
+                     * RunQueryRequest databaseId.
+                     * @member {string} databaseId
+                     * @memberof google.datastore.v1.RunQueryRequest
+                     * @instance
+                     */
+                    RunQueryRequest.prototype.databaseId = "";
     
                     /**
                      * RunQueryRequest partitionId.
@@ -6853,6 +6884,8 @@
                             $root.google.datastore.v1.GqlQuery.encode(message.gqlQuery, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                         if (message.projectId != null && Object.hasOwnProperty.call(message, "projectId"))
                             writer.uint32(/* id 8, wireType 2 =*/66).string(message.projectId);
+                        if (message.databaseId != null && Object.hasOwnProperty.call(message, "databaseId"))
+                            writer.uint32(/* id 9, wireType 2 =*/74).string(message.databaseId);
                         return writer;
                     };
     
@@ -6889,6 +6922,9 @@
                             switch (tag >>> 3) {
                             case 8:
                                 message.projectId = reader.string();
+                                break;
+                            case 9:
+                                message.databaseId = reader.string();
                                 break;
                             case 2:
                                 message.partitionId = $root.google.datastore.v1.PartitionId.decode(reader, reader.uint32());
@@ -6941,6 +6977,9 @@
                         if (message.projectId != null && message.hasOwnProperty("projectId"))
                             if (!$util.isString(message.projectId))
                                 return "projectId: string expected";
+                        if (message.databaseId != null && message.hasOwnProperty("databaseId"))
+                            if (!$util.isString(message.databaseId))
+                                return "databaseId: string expected";
                         if (message.partitionId != null && message.hasOwnProperty("partitionId")) {
                             var error = $root.google.datastore.v1.PartitionId.verify(message.partitionId);
                             if (error)
@@ -6986,6 +7025,8 @@
                         var message = new $root.google.datastore.v1.RunQueryRequest();
                         if (object.projectId != null)
                             message.projectId = String(object.projectId);
+                        if (object.databaseId != null)
+                            message.databaseId = String(object.databaseId);
                         if (object.partitionId != null) {
                             if (typeof object.partitionId !== "object")
                                 throw TypeError(".google.datastore.v1.RunQueryRequest.partitionId: object expected");
@@ -7026,6 +7067,7 @@
                             object.readOptions = null;
                             object.partitionId = null;
                             object.projectId = "";
+                            object.databaseId = "";
                         }
                         if (message.readOptions != null && message.hasOwnProperty("readOptions"))
                             object.readOptions = $root.google.datastore.v1.ReadOptions.toObject(message.readOptions, options);
@@ -7043,6 +7085,8 @@
                         }
                         if (message.projectId != null && message.hasOwnProperty("projectId"))
                             object.projectId = message.projectId;
+                        if (message.databaseId != null && message.hasOwnProperty("databaseId"))
+                            object.databaseId = message.databaseId;
                         return object;
                     };
     
@@ -7287,6 +7331,7 @@
                      * @memberof google.datastore.v1
                      * @interface IBeginTransactionRequest
                      * @property {string|null} [projectId] BeginTransactionRequest projectId
+                     * @property {string|null} [databaseId] BeginTransactionRequest databaseId
                      * @property {google.datastore.v1.ITransactionOptions|null} [transactionOptions] BeginTransactionRequest transactionOptions
                      */
     
@@ -7312,6 +7357,14 @@
                      * @instance
                      */
                     BeginTransactionRequest.prototype.projectId = "";
+    
+                    /**
+                     * BeginTransactionRequest databaseId.
+                     * @member {string} databaseId
+                     * @memberof google.datastore.v1.BeginTransactionRequest
+                     * @instance
+                     */
+                    BeginTransactionRequest.prototype.databaseId = "";
     
                     /**
                      * BeginTransactionRequest transactionOptions.
@@ -7347,6 +7400,8 @@
                             writer = $Writer.create();
                         if (message.projectId != null && Object.hasOwnProperty.call(message, "projectId"))
                             writer.uint32(/* id 8, wireType 2 =*/66).string(message.projectId);
+                        if (message.databaseId != null && Object.hasOwnProperty.call(message, "databaseId"))
+                            writer.uint32(/* id 9, wireType 2 =*/74).string(message.databaseId);
                         if (message.transactionOptions != null && Object.hasOwnProperty.call(message, "transactionOptions"))
                             $root.google.datastore.v1.TransactionOptions.encode(message.transactionOptions, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                         return writer;
@@ -7385,6 +7440,9 @@
                             switch (tag >>> 3) {
                             case 8:
                                 message.projectId = reader.string();
+                                break;
+                            case 9:
+                                message.databaseId = reader.string();
                                 break;
                             case 10:
                                 message.transactionOptions = $root.google.datastore.v1.TransactionOptions.decode(reader, reader.uint32());
@@ -7427,6 +7485,9 @@
                         if (message.projectId != null && message.hasOwnProperty("projectId"))
                             if (!$util.isString(message.projectId))
                                 return "projectId: string expected";
+                        if (message.databaseId != null && message.hasOwnProperty("databaseId"))
+                            if (!$util.isString(message.databaseId))
+                                return "databaseId: string expected";
                         if (message.transactionOptions != null && message.hasOwnProperty("transactionOptions")) {
                             var error = $root.google.datastore.v1.TransactionOptions.verify(message.transactionOptions);
                             if (error)
@@ -7449,6 +7510,8 @@
                         var message = new $root.google.datastore.v1.BeginTransactionRequest();
                         if (object.projectId != null)
                             message.projectId = String(object.projectId);
+                        if (object.databaseId != null)
+                            message.databaseId = String(object.databaseId);
                         if (object.transactionOptions != null) {
                             if (typeof object.transactionOptions !== "object")
                                 throw TypeError(".google.datastore.v1.BeginTransactionRequest.transactionOptions: object expected");
@@ -7472,10 +7535,13 @@
                         var object = {};
                         if (options.defaults) {
                             object.projectId = "";
+                            object.databaseId = "";
                             object.transactionOptions = null;
                         }
                         if (message.projectId != null && message.hasOwnProperty("projectId"))
                             object.projectId = message.projectId;
+                        if (message.databaseId != null && message.hasOwnProperty("databaseId"))
+                            object.databaseId = message.databaseId;
                         if (message.transactionOptions != null && message.hasOwnProperty("transactionOptions"))
                             object.transactionOptions = $root.google.datastore.v1.TransactionOptions.toObject(message.transactionOptions, options);
                         return object;
@@ -7698,6 +7764,7 @@
                      * @memberof google.datastore.v1
                      * @interface IRollbackRequest
                      * @property {string|null} [projectId] RollbackRequest projectId
+                     * @property {string|null} [databaseId] RollbackRequest databaseId
                      * @property {Uint8Array|null} [transaction] RollbackRequest transaction
                      */
     
@@ -7723,6 +7790,14 @@
                      * @instance
                      */
                     RollbackRequest.prototype.projectId = "";
+    
+                    /**
+                     * RollbackRequest databaseId.
+                     * @member {string} databaseId
+                     * @memberof google.datastore.v1.RollbackRequest
+                     * @instance
+                     */
+                    RollbackRequest.prototype.databaseId = "";
     
                     /**
                      * RollbackRequest transaction.
@@ -7760,6 +7835,8 @@
                             writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.transaction);
                         if (message.projectId != null && Object.hasOwnProperty.call(message, "projectId"))
                             writer.uint32(/* id 8, wireType 2 =*/66).string(message.projectId);
+                        if (message.databaseId != null && Object.hasOwnProperty.call(message, "databaseId"))
+                            writer.uint32(/* id 9, wireType 2 =*/74).string(message.databaseId);
                         return writer;
                     };
     
@@ -7796,6 +7873,9 @@
                             switch (tag >>> 3) {
                             case 8:
                                 message.projectId = reader.string();
+                                break;
+                            case 9:
+                                message.databaseId = reader.string();
                                 break;
                             case 1:
                                 message.transaction = reader.bytes();
@@ -7838,6 +7918,9 @@
                         if (message.projectId != null && message.hasOwnProperty("projectId"))
                             if (!$util.isString(message.projectId))
                                 return "projectId: string expected";
+                        if (message.databaseId != null && message.hasOwnProperty("databaseId"))
+                            if (!$util.isString(message.databaseId))
+                                return "databaseId: string expected";
                         if (message.transaction != null && message.hasOwnProperty("transaction"))
                             if (!(message.transaction && typeof message.transaction.length === "number" || $util.isString(message.transaction)))
                                 return "transaction: buffer expected";
@@ -7858,6 +7941,8 @@
                         var message = new $root.google.datastore.v1.RollbackRequest();
                         if (object.projectId != null)
                             message.projectId = String(object.projectId);
+                        if (object.databaseId != null)
+                            message.databaseId = String(object.databaseId);
                         if (object.transaction != null)
                             if (typeof object.transaction === "string")
                                 $util.base64.decode(object.transaction, message.transaction = $util.newBuffer($util.base64.length(object.transaction)), 0);
@@ -7888,11 +7973,14 @@
                                     object.transaction = $util.newBuffer(object.transaction);
                             }
                             object.projectId = "";
+                            object.databaseId = "";
                         }
                         if (message.transaction != null && message.hasOwnProperty("transaction"))
                             object.transaction = options.bytes === String ? $util.base64.encode(message.transaction, 0, message.transaction.length) : options.bytes === Array ? Array.prototype.slice.call(message.transaction) : message.transaction;
                         if (message.projectId != null && message.hasOwnProperty("projectId"))
                             object.projectId = message.projectId;
+                        if (message.databaseId != null && message.hasOwnProperty("databaseId"))
+                            object.databaseId = message.databaseId;
                         return object;
                     };
     
@@ -8077,6 +8165,7 @@
                      * @memberof google.datastore.v1
                      * @interface ICommitRequest
                      * @property {string|null} [projectId] CommitRequest projectId
+                     * @property {string|null} [databaseId] CommitRequest databaseId
                      * @property {google.datastore.v1.CommitRequest.Mode|null} [mode] CommitRequest mode
                      * @property {Uint8Array|null} [transaction] CommitRequest transaction
                      * @property {Array.<google.datastore.v1.IMutation>|null} [mutations] CommitRequest mutations
@@ -8105,6 +8194,14 @@
                      * @instance
                      */
                     CommitRequest.prototype.projectId = "";
+    
+                    /**
+                     * CommitRequest databaseId.
+                     * @member {string} databaseId
+                     * @memberof google.datastore.v1.CommitRequest
+                     * @instance
+                     */
+                    CommitRequest.prototype.databaseId = "";
     
                     /**
                      * CommitRequest mode.
@@ -8177,6 +8274,8 @@
                                 $root.google.datastore.v1.Mutation.encode(message.mutations[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                         if (message.projectId != null && Object.hasOwnProperty.call(message, "projectId"))
                             writer.uint32(/* id 8, wireType 2 =*/66).string(message.projectId);
+                        if (message.databaseId != null && Object.hasOwnProperty.call(message, "databaseId"))
+                            writer.uint32(/* id 9, wireType 2 =*/74).string(message.databaseId);
                         return writer;
                     };
     
@@ -8213,6 +8312,9 @@
                             switch (tag >>> 3) {
                             case 8:
                                 message.projectId = reader.string();
+                                break;
+                            case 9:
+                                message.databaseId = reader.string();
                                 break;
                             case 5:
                                 message.mode = reader.int32();
@@ -8264,6 +8366,9 @@
                         if (message.projectId != null && message.hasOwnProperty("projectId"))
                             if (!$util.isString(message.projectId))
                                 return "projectId: string expected";
+                        if (message.databaseId != null && message.hasOwnProperty("databaseId"))
+                            if (!$util.isString(message.databaseId))
+                                return "databaseId: string expected";
                         if (message.mode != null && message.hasOwnProperty("mode"))
                             switch (message.mode) {
                             default:
@@ -8304,6 +8409,8 @@
                         var message = new $root.google.datastore.v1.CommitRequest();
                         if (object.projectId != null)
                             message.projectId = String(object.projectId);
+                        if (object.databaseId != null)
+                            message.databaseId = String(object.databaseId);
                         switch (object.mode) {
                         case "MODE_UNSPECIFIED":
                         case 0:
@@ -8354,6 +8461,7 @@
                         if (options.defaults) {
                             object.mode = options.enums === String ? "MODE_UNSPECIFIED" : 0;
                             object.projectId = "";
+                            object.databaseId = "";
                         }
                         if (message.transaction != null && message.hasOwnProperty("transaction")) {
                             object.transaction = options.bytes === String ? $util.base64.encode(message.transaction, 0, message.transaction.length) : options.bytes === Array ? Array.prototype.slice.call(message.transaction) : message.transaction;
@@ -8369,6 +8477,8 @@
                         }
                         if (message.projectId != null && message.hasOwnProperty("projectId"))
                             object.projectId = message.projectId;
+                        if (message.databaseId != null && message.hasOwnProperty("databaseId"))
+                            object.databaseId = message.databaseId;
                         return object;
                     };
     
@@ -8668,6 +8778,7 @@
                      * @memberof google.datastore.v1
                      * @interface IAllocateIdsRequest
                      * @property {string|null} [projectId] AllocateIdsRequest projectId
+                     * @property {string|null} [databaseId] AllocateIdsRequest databaseId
                      * @property {Array.<google.datastore.v1.IKey>|null} [keys] AllocateIdsRequest keys
                      */
     
@@ -8694,6 +8805,14 @@
                      * @instance
                      */
                     AllocateIdsRequest.prototype.projectId = "";
+    
+                    /**
+                     * AllocateIdsRequest databaseId.
+                     * @member {string} databaseId
+                     * @memberof google.datastore.v1.AllocateIdsRequest
+                     * @instance
+                     */
+                    AllocateIdsRequest.prototype.databaseId = "";
     
                     /**
                      * AllocateIdsRequest keys.
@@ -8732,6 +8851,8 @@
                                 $root.google.datastore.v1.Key.encode(message.keys[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                         if (message.projectId != null && Object.hasOwnProperty.call(message, "projectId"))
                             writer.uint32(/* id 8, wireType 2 =*/66).string(message.projectId);
+                        if (message.databaseId != null && Object.hasOwnProperty.call(message, "databaseId"))
+                            writer.uint32(/* id 9, wireType 2 =*/74).string(message.databaseId);
                         return writer;
                     };
     
@@ -8768,6 +8889,9 @@
                             switch (tag >>> 3) {
                             case 8:
                                 message.projectId = reader.string();
+                                break;
+                            case 9:
+                                message.databaseId = reader.string();
                                 break;
                             case 1:
                                 if (!(message.keys && message.keys.length))
@@ -8812,6 +8936,9 @@
                         if (message.projectId != null && message.hasOwnProperty("projectId"))
                             if (!$util.isString(message.projectId))
                                 return "projectId: string expected";
+                        if (message.databaseId != null && message.hasOwnProperty("databaseId"))
+                            if (!$util.isString(message.databaseId))
+                                return "databaseId: string expected";
                         if (message.keys != null && message.hasOwnProperty("keys")) {
                             if (!Array.isArray(message.keys))
                                 return "keys: array expected";
@@ -8838,6 +8965,8 @@
                         var message = new $root.google.datastore.v1.AllocateIdsRequest();
                         if (object.projectId != null)
                             message.projectId = String(object.projectId);
+                        if (object.databaseId != null)
+                            message.databaseId = String(object.databaseId);
                         if (object.keys) {
                             if (!Array.isArray(object.keys))
                                 throw TypeError(".google.datastore.v1.AllocateIdsRequest.keys: array expected");
@@ -8866,8 +8995,10 @@
                         var object = {};
                         if (options.arrays || options.defaults)
                             object.keys = [];
-                        if (options.defaults)
+                        if (options.defaults) {
                             object.projectId = "";
+                            object.databaseId = "";
+                        }
                         if (message.keys && message.keys.length) {
                             object.keys = [];
                             for (var j = 0; j < message.keys.length; ++j)
@@ -8875,6 +9006,8 @@
                         }
                         if (message.projectId != null && message.hasOwnProperty("projectId"))
                             object.projectId = message.projectId;
+                        if (message.databaseId != null && message.hasOwnProperty("databaseId"))
+                            object.databaseId = message.databaseId;
                         return object;
                     };
     
@@ -11130,6 +11263,7 @@
                      * @memberof google.datastore.v1
                      * @interface IPartitionId
                      * @property {string|null} [projectId] PartitionId projectId
+                     * @property {string|null} [databaseId] PartitionId databaseId
                      * @property {string|null} [namespaceId] PartitionId namespaceId
                      */
     
@@ -11155,6 +11289,14 @@
                      * @instance
                      */
                     PartitionId.prototype.projectId = "";
+    
+                    /**
+                     * PartitionId databaseId.
+                     * @member {string} databaseId
+                     * @memberof google.datastore.v1.PartitionId
+                     * @instance
+                     */
+                    PartitionId.prototype.databaseId = "";
     
                     /**
                      * PartitionId namespaceId.
@@ -11190,6 +11332,8 @@
                             writer = $Writer.create();
                         if (message.projectId != null && Object.hasOwnProperty.call(message, "projectId"))
                             writer.uint32(/* id 2, wireType 2 =*/18).string(message.projectId);
+                        if (message.databaseId != null && Object.hasOwnProperty.call(message, "databaseId"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.databaseId);
                         if (message.namespaceId != null && Object.hasOwnProperty.call(message, "namespaceId"))
                             writer.uint32(/* id 4, wireType 2 =*/34).string(message.namespaceId);
                         return writer;
@@ -11228,6 +11372,9 @@
                             switch (tag >>> 3) {
                             case 2:
                                 message.projectId = reader.string();
+                                break;
+                            case 3:
+                                message.databaseId = reader.string();
                                 break;
                             case 4:
                                 message.namespaceId = reader.string();
@@ -11270,6 +11417,9 @@
                         if (message.projectId != null && message.hasOwnProperty("projectId"))
                             if (!$util.isString(message.projectId))
                                 return "projectId: string expected";
+                        if (message.databaseId != null && message.hasOwnProperty("databaseId"))
+                            if (!$util.isString(message.databaseId))
+                                return "databaseId: string expected";
                         if (message.namespaceId != null && message.hasOwnProperty("namespaceId"))
                             if (!$util.isString(message.namespaceId))
                                 return "namespaceId: string expected";
@@ -11290,6 +11440,8 @@
                         var message = new $root.google.datastore.v1.PartitionId();
                         if (object.projectId != null)
                             message.projectId = String(object.projectId);
+                        if (object.databaseId != null)
+                            message.databaseId = String(object.databaseId);
                         if (object.namespaceId != null)
                             message.namespaceId = String(object.namespaceId);
                         return message;
@@ -11310,10 +11462,13 @@
                         var object = {};
                         if (options.defaults) {
                             object.projectId = "";
+                            object.databaseId = "";
                             object.namespaceId = "";
                         }
                         if (message.projectId != null && message.hasOwnProperty("projectId"))
                             object.projectId = message.projectId;
+                        if (message.databaseId != null && message.hasOwnProperty("databaseId"))
+                            object.databaseId = message.databaseId;
                         if (message.namespaceId != null && message.hasOwnProperty("namespaceId"))
                             object.namespaceId = message.namespaceId;
                         return object;

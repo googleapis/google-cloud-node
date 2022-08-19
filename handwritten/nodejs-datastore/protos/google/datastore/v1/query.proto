@@ -184,7 +184,10 @@ message CompositeFilter {
   Operator op = 1;
 
   // The list of filters to combine.
-  // Must contain at least one filter.
+  //
+  // Requires:
+  //
+  // * At least one filter is present.
   repeated Filter filters = 2;
 }
 
