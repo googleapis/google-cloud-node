@@ -23,8 +23,11 @@ import {
   CallOptions,
   Descriptors,
   ClientOptions,
+  GrpcClientOptions,
   PaginationCallback,
   GaxCall,
+  LocationsClient,
+  LocationProtos,
 } from 'google-gax';
 
 import {Transform} from 'stream';
@@ -37,7 +40,7 @@ import jsonProtos = require('../../protos/protos.json');
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
 import * as gapicConfig from './search_service_client_config.json';
-
+import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
 
 /**
@@ -65,7 +68,9 @@ export class SearchServiceClient {
   };
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
+  locationsClient: LocationsClient;
   pathTemplates: {[name: string]: gax.PathTemplate};
+  operationsClient: gax.OperationsClient;
   searchServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
@@ -143,6 +148,7 @@ export class SearchServiceClient {
     if (servicePath === staticMembers.servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
+    this.locationsClient = new LocationsClient(this._gaxGrpc, opts);
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
@@ -199,6 +205,44 @@ export class SearchServiceClient {
         'results'
       ),
     };
+
+    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    // This API contains "long-running operations", which return a
+    // an Operation object that allows for tracking of the operation,
+    // rather than holding a request open.
+    const lroOptions: GrpcClientOptions = {
+      auth: this.auth,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+    };
+    if (opts.fallback === 'rest') {
+      lroOptions.protoJson = protoFilesRoot;
+      lroOptions.httpRules = [
+        {
+          selector: 'google.longrunning.Operations.GetOperation',
+          get: '/v2beta/{name=projects/*/locations/*/catalogs/*/branches/*/operations/*}',
+          additional_bindings: [
+            {
+              get: '/v2beta/{name=projects/*/locations/*/catalogs/*/operations/*}',
+            },
+            {get: '/v2beta/{name=projects/*/locations/*/operations/*}'},
+            {get: '/v2beta/{name=projects/*/operations/*}'},
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.ListOperations',
+          get: '/v2beta/{name=projects/*/locations/*/catalogs/*}/operations',
+          additional_bindings: [
+            {get: '/v2beta/{name=projects/*/locations/*}/operations'},
+            {get: '/v2beta/{name=projects/*}/operations'},
+          ],
+        },
+      ];
+    }
+    this.operationsClient = this._gaxModule
+      .lro(lroOptions)
+      .operationsClient(opts);
+
+    this.descriptors.longrunning = {};
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
@@ -341,8 +385,10 @@ export class SearchServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.placement
-   *   Required. The resource name of the search engine placement, such as
-   *   `projects/* /locations/global/catalogs/default_catalog/placements/default_search`
+   *   Required. The resource name of the Retail Search serving config, such as
+   *   `projects/* /locations/global/catalogs/default_catalog/servingConfigs/default_serving_config`
+   *   or the name of the legacy placement resource, such as
+   *   `projects/* /locations/global/catalogs/default_catalog/placements/default_search`.
    *   This field is used to identify the serving configuration name and the set
    *   of models that will be used to make the search.
    * @param {string} request.branch
@@ -353,6 +399,11 @@ export class SearchServiceClient {
    *   products under the default branch.
    * @param {string} request.query
    *   Raw search query.
+   *
+   *   If this field is empty, the request is considered a category browsing
+   *   request and returned results are based on
+   *   {@link google.cloud.retail.v2beta.SearchRequest.filter|filter} and
+   *   {@link google.cloud.retail.v2beta.SearchRequest.page_categories|page_categories}.
    * @param {string} request.visitorId
    *   Required. A unique identifier for tracking visitors. For example, this
    *   could be implemented with an HTTP cookie, which should be able to uniquely
@@ -436,10 +487,11 @@ export class SearchServiceClient {
    *
    *   Notice that if both
    *   {@link google.cloud.retail.v2beta.ServingConfig.boost_control_ids|ServingConfig.boost_control_ids}
-   *   and [SearchRequest.boost_spec] are set, the boost conditions from both
-   *   places are evaluated. If a search request matches multiple boost
-   *   conditions, the final boost score is equal to the sum of the boost scores
-   *   from all matched boost conditions.
+   *   and
+   *   {@link google.cloud.retail.v2beta.SearchRequest.boost_spec|SearchRequest.boost_spec}
+   *   are set, the boost conditions from both places are evaluated. If a search
+   *   request matches multiple boost conditions, the final boost score is equal
+   *   to the sum of the boost scores from all matched boost conditions.
    * @param {google.cloud.retail.v2beta.SearchRequest.QueryExpansionSpec} request.queryExpansionSpec
    *   The query expansion specification that specifies the conditions under which
    *   query expansion will occur. See more details at this [user
@@ -472,7 +524,8 @@ export class SearchServiceClient {
    *   * inventory(place_id,price)
    *   * inventory(place_id,original_price)
    *   * inventory(place_id,attributes.key), where key is any key in the
-   *     {@link |Product.inventories.attributes} map.
+   *     {@link google.cloud.retail.v2beta.LocalInventory.attributes|Product.local_inventories.attributes}
+   *     map.
    *   * attributes.key, where key is any key in the
    *     {@link google.cloud.retail.v2beta.Product.attributes|Product.attributes} map.
    *   * pickupInStore.id, where id is any
@@ -532,6 +585,27 @@ export class SearchServiceClient {
    *   request triggers both product search and faceted search.
    * @param {google.cloud.retail.v2beta.SearchRequest.PersonalizationSpec} request.personalizationSpec
    *   The specification for personalization.
+   * @param {number[]} request.labels
+   *   The labels applied to a resource must meet the following requirements:
+   *
+   *   * Each resource can have multiple labels, up to a maximum of 64.
+   *   * Each label must be a key-value pair.
+   *   * Keys have a minimum length of 1 character and a maximum length of 63
+   *     characters and cannot be empty. Values can be empty and have a maximum
+   *     length of 63 characters.
+   *   * Keys and values can contain only lowercase letters, numeric characters,
+   *     underscores, and dashes. All characters must use UTF-8 encoding, and
+   *     international characters are allowed.
+   *   * The key portion of a label must be unique. However, you can use the same
+   *     key with multiple resources.
+   *   * Keys must start with a lowercase letter or international character.
+   *
+   *   See [Google Cloud
+   *   Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
+   *   for more details.
+   * @param {google.cloud.retail.v2beta.SearchRequest.SpellCorrectionSpec} request.spellCorrectionSpec
+   *   The spell correction specification that specifies the mode under
+   *   which spell correction will take effect.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -617,8 +691,10 @@ export class SearchServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.placement
-   *   Required. The resource name of the search engine placement, such as
-   *   `projects/* /locations/global/catalogs/default_catalog/placements/default_search`
+   *   Required. The resource name of the Retail Search serving config, such as
+   *   `projects/* /locations/global/catalogs/default_catalog/servingConfigs/default_serving_config`
+   *   or the name of the legacy placement resource, such as
+   *   `projects/* /locations/global/catalogs/default_catalog/placements/default_search`.
    *   This field is used to identify the serving configuration name and the set
    *   of models that will be used to make the search.
    * @param {string} request.branch
@@ -629,6 +705,11 @@ export class SearchServiceClient {
    *   products under the default branch.
    * @param {string} request.query
    *   Raw search query.
+   *
+   *   If this field is empty, the request is considered a category browsing
+   *   request and returned results are based on
+   *   {@link google.cloud.retail.v2beta.SearchRequest.filter|filter} and
+   *   {@link google.cloud.retail.v2beta.SearchRequest.page_categories|page_categories}.
    * @param {string} request.visitorId
    *   Required. A unique identifier for tracking visitors. For example, this
    *   could be implemented with an HTTP cookie, which should be able to uniquely
@@ -712,10 +793,11 @@ export class SearchServiceClient {
    *
    *   Notice that if both
    *   {@link google.cloud.retail.v2beta.ServingConfig.boost_control_ids|ServingConfig.boost_control_ids}
-   *   and [SearchRequest.boost_spec] are set, the boost conditions from both
-   *   places are evaluated. If a search request matches multiple boost
-   *   conditions, the final boost score is equal to the sum of the boost scores
-   *   from all matched boost conditions.
+   *   and
+   *   {@link google.cloud.retail.v2beta.SearchRequest.boost_spec|SearchRequest.boost_spec}
+   *   are set, the boost conditions from both places are evaluated. If a search
+   *   request matches multiple boost conditions, the final boost score is equal
+   *   to the sum of the boost scores from all matched boost conditions.
    * @param {google.cloud.retail.v2beta.SearchRequest.QueryExpansionSpec} request.queryExpansionSpec
    *   The query expansion specification that specifies the conditions under which
    *   query expansion will occur. See more details at this [user
@@ -748,7 +830,8 @@ export class SearchServiceClient {
    *   * inventory(place_id,price)
    *   * inventory(place_id,original_price)
    *   * inventory(place_id,attributes.key), where key is any key in the
-   *     {@link |Product.inventories.attributes} map.
+   *     {@link google.cloud.retail.v2beta.LocalInventory.attributes|Product.local_inventories.attributes}
+   *     map.
    *   * attributes.key, where key is any key in the
    *     {@link google.cloud.retail.v2beta.Product.attributes|Product.attributes} map.
    *   * pickupInStore.id, where id is any
@@ -808,6 +891,27 @@ export class SearchServiceClient {
    *   request triggers both product search and faceted search.
    * @param {google.cloud.retail.v2beta.SearchRequest.PersonalizationSpec} request.personalizationSpec
    *   The specification for personalization.
+   * @param {number[]} request.labels
+   *   The labels applied to a resource must meet the following requirements:
+   *
+   *   * Each resource can have multiple labels, up to a maximum of 64.
+   *   * Each label must be a key-value pair.
+   *   * Keys have a minimum length of 1 character and a maximum length of 63
+   *     characters and cannot be empty. Values can be empty and have a maximum
+   *     length of 63 characters.
+   *   * Keys and values can contain only lowercase letters, numeric characters,
+   *     underscores, and dashes. All characters must use UTF-8 encoding, and
+   *     international characters are allowed.
+   *   * The key portion of a label must be unique. However, you can use the same
+   *     key with multiple resources.
+   *   * Keys must start with a lowercase letter or international character.
+   *
+   *   See [Google Cloud
+   *   Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
+   *   for more details.
+   * @param {google.cloud.retail.v2beta.SearchRequest.SpellCorrectionSpec} request.spellCorrectionSpec
+   *   The spell correction specification that specifies the mode under
+   *   which spell correction will take effect.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -849,8 +953,10 @@ export class SearchServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.placement
-   *   Required. The resource name of the search engine placement, such as
-   *   `projects/* /locations/global/catalogs/default_catalog/placements/default_search`
+   *   Required. The resource name of the Retail Search serving config, such as
+   *   `projects/* /locations/global/catalogs/default_catalog/servingConfigs/default_serving_config`
+   *   or the name of the legacy placement resource, such as
+   *   `projects/* /locations/global/catalogs/default_catalog/placements/default_search`.
    *   This field is used to identify the serving configuration name and the set
    *   of models that will be used to make the search.
    * @param {string} request.branch
@@ -861,6 +967,11 @@ export class SearchServiceClient {
    *   products under the default branch.
    * @param {string} request.query
    *   Raw search query.
+   *
+   *   If this field is empty, the request is considered a category browsing
+   *   request and returned results are based on
+   *   {@link google.cloud.retail.v2beta.SearchRequest.filter|filter} and
+   *   {@link google.cloud.retail.v2beta.SearchRequest.page_categories|page_categories}.
    * @param {string} request.visitorId
    *   Required. A unique identifier for tracking visitors. For example, this
    *   could be implemented with an HTTP cookie, which should be able to uniquely
@@ -944,10 +1055,11 @@ export class SearchServiceClient {
    *
    *   Notice that if both
    *   {@link google.cloud.retail.v2beta.ServingConfig.boost_control_ids|ServingConfig.boost_control_ids}
-   *   and [SearchRequest.boost_spec] are set, the boost conditions from both
-   *   places are evaluated. If a search request matches multiple boost
-   *   conditions, the final boost score is equal to the sum of the boost scores
-   *   from all matched boost conditions.
+   *   and
+   *   {@link google.cloud.retail.v2beta.SearchRequest.boost_spec|SearchRequest.boost_spec}
+   *   are set, the boost conditions from both places are evaluated. If a search
+   *   request matches multiple boost conditions, the final boost score is equal
+   *   to the sum of the boost scores from all matched boost conditions.
    * @param {google.cloud.retail.v2beta.SearchRequest.QueryExpansionSpec} request.queryExpansionSpec
    *   The query expansion specification that specifies the conditions under which
    *   query expansion will occur. See more details at this [user
@@ -980,7 +1092,8 @@ export class SearchServiceClient {
    *   * inventory(place_id,price)
    *   * inventory(place_id,original_price)
    *   * inventory(place_id,attributes.key), where key is any key in the
-   *     {@link |Product.inventories.attributes} map.
+   *     {@link google.cloud.retail.v2beta.LocalInventory.attributes|Product.local_inventories.attributes}
+   *     map.
    *   * attributes.key, where key is any key in the
    *     {@link google.cloud.retail.v2beta.Product.attributes|Product.attributes} map.
    *   * pickupInStore.id, where id is any
@@ -1040,6 +1153,27 @@ export class SearchServiceClient {
    *   request triggers both product search and faceted search.
    * @param {google.cloud.retail.v2beta.SearchRequest.PersonalizationSpec} request.personalizationSpec
    *   The specification for personalization.
+   * @param {number[]} request.labels
+   *   The labels applied to a resource must meet the following requirements:
+   *
+   *   * Each resource can have multiple labels, up to a maximum of 64.
+   *   * Each label must be a key-value pair.
+   *   * Keys have a minimum length of 1 character and a maximum length of 63
+   *     characters and cannot be empty. Values can be empty and have a maximum
+   *     length of 63 characters.
+   *   * Keys and values can contain only lowercase letters, numeric characters,
+   *     underscores, and dashes. All characters must use UTF-8 encoding, and
+   *     international characters are allowed.
+   *   * The key portion of a label must be unique. However, you can use the same
+   *     key with multiple resources.
+   *   * Keys must start with a lowercase letter or international character.
+   *
+   *   See [Google Cloud
+   *   Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
+   *   for more details.
+   * @param {google.cloud.retail.v2beta.SearchRequest.SpellCorrectionSpec} request.spellCorrectionSpec
+   *   The spell correction specification that specifies the mode under
+   *   which spell correction will take effect.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -1074,6 +1208,263 @@ export class SearchServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.retail.v2beta.SearchResponse.ISearchResult>;
   }
+  /**
+   * Gets information about a location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Resource name for the location.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Location]{@link google.cloud.location.Location}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * ```
+   * const [response] = await client.getLocation(request);
+   * ```
+   */
+  getLocation(
+    request: LocationProtos.google.cloud.location.IGetLocationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          LocationProtos.google.cloud.location.ILocation,
+          | LocationProtos.google.cloud.location.IGetLocationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LocationProtos.google.cloud.location.ILocation,
+      | LocationProtos.google.cloud.location.IGetLocationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<LocationProtos.google.cloud.location.ILocation> {
+    return this.locationsClient.getLocation(request, options, callback);
+  }
+
+  /**
+   * Lists information about the supported locations for this service. Returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The resource that owns the locations collection, if applicable.
+   * @param {string} request.filter
+   *   The standard list filter.
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [Location]{@link google.cloud.location.Location}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example
+   * ```
+   * const iterable = client.listLocationsAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
+   * ```
+   */
+  listLocationsAsync(
+    request: LocationProtos.google.cloud.location.IListLocationsRequest,
+    options?: CallOptions
+  ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
+    return this.locationsClient.listLocationsAsync(request, options);
+  }
+
+  /**
+   * Gets the latest state of a long-running operation.  Clients can use this
+   * method to poll the operation result at intervals as recommended by the API
+   * service.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
+   *   details.
+   * @param {function(?Error, ?Object)=} callback
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing
+   * [google.longrunning.Operation]{@link
+   * external:"google.longrunning.Operation"}.
+   * @return {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   * [google.longrunning.Operation]{@link
+   * external:"google.longrunning.Operation"}. The promise has a method named
+   * "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * const name = '';
+   * const [response] = await client.getOperation({name});
+   * // doThingsWith(response)
+   * ```
+   */
+  getOperation(
+    request: protos.google.longrunning.GetOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.longrunning.Operation,
+          protos.google.longrunning.GetOperationRequest,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.longrunning.Operation,
+      protos.google.longrunning.GetOperationRequest,
+      {} | null | undefined
+    >
+  ): Promise<[protos.google.longrunning.Operation]> {
+    return this.operationsClient.getOperation(request, options, callback);
+  }
+  /**
+   * Lists operations that match the specified filter in the request. If the
+   * server doesn't support this method, it returns `UNIMPLEMENTED`. Returns an iterable object.
+   *
+   * For-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation collection.
+   * @param {string} request.filter - The standard list filter.
+   * @param {number=} request.pageSize -
+   *   The maximum number of resources contained in the underlying API
+   *   response. If page streaming is performed per-resource, this
+   *   parameter does not affect the return value. If page streaming is
+   *   performed per-page, this determines the maximum number of
+   *   resources in a page.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
+   *   details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * for await (const response of client.listOperationsAsync(request));
+   * // doThingsWith(response)
+   * ```
+   */
+  listOperationsAsync(
+    request: protos.google.longrunning.ListOperationsRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    return this.operationsClient.listOperationsAsync(request, options);
+  }
+  /**
+   * Starts asynchronous cancellation on a long-running operation.  The server
+   * makes a best effort to cancel the operation, but success is not
+   * guaranteed.  If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
+   * {@link Operations.GetOperation} or
+   * other methods to check whether the cancellation succeeded or whether the
+   * operation completed despite cancellation. On successful cancellation,
+   * the operation is not deleted; instead, it becomes an operation with
+   * an {@link Operation.error} value with a {@link google.rpc.Status.code} of
+   * 1, corresponding to `Code.CANCELLED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be cancelled.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
+   * details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.cancelOperation({name: ''});
+   * ```
+   */
+  cancelOperation(
+    request: protos.google.longrunning.CancelOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.protobuf.Empty,
+          protos.google.longrunning.CancelOperationRequest,
+          {} | undefined | null
+        >,
+    callback?: Callback<
+      protos.google.longrunning.CancelOperationRequest,
+      protos.google.protobuf.Empty,
+      {} | undefined | null
+    >
+  ): Promise<protos.google.protobuf.Empty> {
+    return this.operationsClient.cancelOperation(request, options, callback);
+  }
+
+  /**
+   * Deletes a long-running operation. This method indicates that the client is
+   * no longer interested in the operation result. It does not cancel the
+   * operation. If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be deleted.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
+   * details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.deleteOperation({name: ''});
+   * ```
+   */
+  deleteOperation(
+    request: protos.google.longrunning.DeleteOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.protobuf.Empty,
+          protos.google.longrunning.DeleteOperationRequest,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.Empty,
+      protos.google.longrunning.DeleteOperationRequest,
+      {} | null | undefined
+    >
+  ): Promise<protos.google.protobuf.Empty> {
+    return this.operationsClient.deleteOperation(request, options, callback);
+  }
+
   // --------------------
   // -- Path templates --
   // --------------------
@@ -1534,6 +1925,8 @@ export class SearchServiceClient {
       return this.searchServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
+        this.locationsClient.close();
+        this.operationsClient.close();
       });
     }
     return Promise.resolve();

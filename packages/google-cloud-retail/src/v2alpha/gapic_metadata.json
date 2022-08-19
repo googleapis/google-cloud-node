@@ -235,6 +235,94 @@
         }
       }
     },
+    "ModelService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ModelServiceClient",
+          "rpcs": {
+            "PauseModel": {
+              "methods": [
+                "pauseModel"
+              ]
+            },
+            "ResumeModel": {
+              "methods": [
+                "resumeModel"
+              ]
+            },
+            "DeleteModel": {
+              "methods": [
+                "deleteModel"
+              ]
+            },
+            "UpdateModel": {
+              "methods": [
+                "updateModel"
+              ]
+            },
+            "CreateModel": {
+              "methods": [
+                "createModel"
+              ]
+            },
+            "TuneModel": {
+              "methods": [
+                "tuneModel"
+              ]
+            },
+            "ListModels": {
+              "methods": [
+                "listModels",
+                "listModelsStream",
+                "listModelsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ModelServiceClient",
+          "rpcs": {
+            "PauseModel": {
+              "methods": [
+                "pauseModel"
+              ]
+            },
+            "ResumeModel": {
+              "methods": [
+                "resumeModel"
+              ]
+            },
+            "DeleteModel": {
+              "methods": [
+                "deleteModel"
+              ]
+            },
+            "UpdateModel": {
+              "methods": [
+                "updateModel"
+              ]
+            },
+            "CreateModel": {
+              "methods": [
+                "createModel"
+              ]
+            },
+            "TuneModel": {
+              "methods": [
+                "tuneModel"
+              ]
+            },
+            "ListModels": {
+              "methods": [
+                "listModels",
+                "listModelsStream",
+                "listModelsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "PredictionService": {
       "clients": {
         "grpc": {

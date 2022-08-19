@@ -27,6 +27,8 @@ import {
   LROperation,
   PaginationCallback,
   GaxCall,
+  LocationsClient,
+  LocationProtos,
 } from 'google-gax';
 
 import {Transform} from 'stream';
@@ -65,6 +67,7 @@ export class ProductServiceClient {
   };
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
+  locationsClient: LocationsClient;
   pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
   productServiceStub?: Promise<{[name: string]: Function}>;
@@ -144,6 +147,7 @@ export class ProductServiceClient {
     if (servicePath === staticMembers.servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
+    this.locationsClient = new LocationsClient(this._gaxGrpc, opts);
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
@@ -688,6 +692,11 @@ export class ProductServiceClient {
    *
    *   If an unsupported or unknown field is provided, an INVALID_ARGUMENT error
    *   is returned.
+   *
+   *   The attribute key can be updated by setting the mask path as
+   *   "attributes.${key_name}". If a key name is present in the mask but not in
+   *   the patching product from the request, this key will be deleted after the
+   *   update.
    * @param {boolean} request.allowMissing
    *   If set to true, and the {@link google.cloud.retail.v2beta.Product|Product} is
    *   not found, a new {@link google.cloud.retail.v2beta.Product|Product} will be
@@ -892,7 +901,7 @@ export class ProductServiceClient {
   /**
    * Bulk import of multiple {@link google.cloud.retail.v2beta.Product|Product}s.
    *
-   * Request processing may be synchronous. No partial updating is supported.
+   * Request processing may be synchronous.
    * Non-existing items are created.
    *
    * Note that it is possible for a subset of the
@@ -920,11 +929,18 @@ export class ProductServiceClient {
    *   imported. Defaults to
    *   {@link google.cloud.retail.v2beta.ImportProductsRequest.ReconciliationMode.INCREMENTAL|ReconciliationMode.INCREMENTAL}.
    * @param {string} request.notificationPubsubTopic
-   *   Pub/Sub topic for receiving notification. If this field is set,
+   *   Full Pub/Sub topic name for receiving notification. If this field is set,
    *   when the import is finished, a notification will be sent to
    *   specified Pub/Sub topic. The message data will be JSON string of a
    *   {@link google.longrunning.Operation|Operation}.
-   *   Format of the Pub/Sub topic is `projects/{project}/topics/{topic}`.
+   *
+   *   Format of the Pub/Sub topic is `projects/{project}/topics/{topic}`. It has
+   *   to be within the same project as
+   *   {@link google.cloud.retail.v2beta.ImportProductsRequest.parent|ImportProductsRequest.parent}.
+   *   Make sure that both
+   *   `cloud-retail-customer-data-access@system.gserviceaccount.com` and
+   *   `service-<project number>@gcp-sa-retail.iam.gserviceaccount.com`
+   *   have the `pubsub.topics.publish` IAM permission on the topic.
    *
    *   Only supported when
    *   {@link google.cloud.retail.v2beta.ImportProductsRequest.reconciliation_mode|ImportProductsRequest.reconciliation_mode}
@@ -1070,19 +1086,21 @@ export class ProductServiceClient {
    * enqueued and processed downstream. As a consequence, when a response is
    * returned, updates are not immediately manifested in the
    * {@link google.cloud.retail.v2beta.Product|Product} queried by
-   * {@link google.cloud.retail.v2beta.ProductService.GetProduct|GetProduct} or
-   * {@link google.cloud.retail.v2beta.ProductService.ListProducts|ListProducts}.
+   * {@link google.cloud.retail.v2beta.ProductService.GetProduct|ProductService.GetProduct}
+   * or
+   * {@link google.cloud.retail.v2beta.ProductService.ListProducts|ProductService.ListProducts}.
    *
    * When inventory is updated with
-   * {@link google.cloud.retail.v2beta.ProductService.CreateProduct|CreateProduct}
+   * {@link google.cloud.retail.v2beta.ProductService.CreateProduct|ProductService.CreateProduct}
    * and
-   * {@link google.cloud.retail.v2beta.ProductService.UpdateProduct|UpdateProduct},
+   * {@link google.cloud.retail.v2beta.ProductService.UpdateProduct|ProductService.UpdateProduct},
    * the specified inventory field value(s) will overwrite any existing value(s)
    * while ignoring the last update time for this field. Furthermore, the last
    * update time for the specified inventory fields will be overwritten to the
    * time of the
-   * {@link google.cloud.retail.v2beta.ProductService.CreateProduct|CreateProduct} or
-   * {@link google.cloud.retail.v2beta.ProductService.UpdateProduct|UpdateProduct}
+   * {@link google.cloud.retail.v2beta.ProductService.CreateProduct|ProductService.CreateProduct}
+   * or
+   * {@link google.cloud.retail.v2beta.ProductService.UpdateProduct|ProductService.UpdateProduct}
    * request.
    *
    * If no inventory fields are set in
@@ -1094,10 +1112,10 @@ export class ProductServiceClient {
    * then any existing inventory information will be preserved.
    *
    * Pre-existing inventory information can only be updated with
-   * {@link google.cloud.retail.v2beta.ProductService.SetInventory|SetInventory},
-   * {@link google.cloud.retail.v2beta.ProductService.AddFulfillmentPlaces|AddFulfillmentPlaces},
+   * {@link google.cloud.retail.v2beta.ProductService.SetInventory|ProductService.SetInventory},
+   * {@link google.cloud.retail.v2beta.ProductService.AddFulfillmentPlaces|ProductService.AddFulfillmentPlaces},
    * and
-   * {@link google.cloud.retail.v2beta.ProductService.RemoveFulfillmentPlaces|RemoveFulfillmentPlaces}.
+   * {@link google.cloud.retail.v2beta.ProductService.RemoveFulfillmentPlaces|ProductService.RemoveFulfillmentPlaces}.
    *
    * This feature is only available for users who have Retail Search enabled.
    * Please enable Retail Search on Cloud Console before using this feature.
@@ -1107,6 +1125,7 @@ export class ProductServiceClient {
    * @param {google.cloud.retail.v2beta.Product} request.inventory
    *   Required. The inventory information to update. The allowable fields to
    *   update are:
+   *
    *   * {@link google.cloud.retail.v2beta.Product.price_info|Product.price_info}
    *   * {@link google.cloud.retail.v2beta.Product.availability|Product.availability}
    *   * {@link google.cloud.retail.v2beta.Product.available_quantity|Product.available_quantity}
@@ -1114,8 +1133,9 @@ export class ProductServiceClient {
    *   The updated inventory fields must be specified in
    *   {@link google.cloud.retail.v2beta.SetInventoryRequest.set_mask|SetInventoryRequest.set_mask}.
    *
-   *   If {@link |SetInventoryRequest.inventory.name} is empty or invalid, an
-   *   INVALID_ARGUMENT error is returned.
+   *   If
+   *   {@link google.cloud.retail.v2beta.Product.name|SetInventoryRequest.inventory.name}
+   *   is empty or invalid, an INVALID_ARGUMENT error is returned.
    *
    *   If the caller does not have permission to update the
    *   {@link google.cloud.retail.v2beta.Product|Product} named in
@@ -1138,7 +1158,8 @@ export class ProductServiceClient {
    *   * Adds "fulfillment_info" in
    *   {@link google.cloud.retail.v2beta.SetInventoryRequest.set_mask|SetInventoryRequest.set_mask}
    *   * Specifies only the desired fulfillment types and corresponding place IDs
-   *   to update in {@link |SetInventoryRequest.inventory.fulfillment_info}
+   *   to update in
+   *   {@link google.cloud.retail.v2beta.Product.fulfillment_info|SetInventoryRequest.inventory.fulfillment_info}
    *
    *   The caller can clear all place IDs from a subset of fulfillment types in
    *   the following ways:
@@ -1146,9 +1167,9 @@ export class ProductServiceClient {
    *   * Adds "fulfillment_info" in
    *   {@link google.cloud.retail.v2beta.SetInventoryRequest.set_mask|SetInventoryRequest.set_mask}
    *   * Specifies only the desired fulfillment types to clear in
-   *   {@link |SetInventoryRequest.inventory.fulfillment_info}
+   *   {@link google.cloud.retail.v2beta.Product.fulfillment_info|SetInventoryRequest.inventory.fulfillment_info}
    *   * Checks that only the desired fulfillment info types have empty
-   *   {@link |SetInventoryRequest.inventory.fulfillment_info.place_ids}
+   *   {@link google.cloud.retail.v2beta.FulfillmentInfo.place_ids|SetInventoryRequest.inventory.fulfillment_info.place_ids}
    *
    *   The last update time is recorded for the following inventory fields:
    *   * {@link google.cloud.retail.v2beta.Product.price_info|Product.price_info}
@@ -1157,7 +1178,9 @@ export class ProductServiceClient {
    *   * {@link google.cloud.retail.v2beta.Product.fulfillment_info|Product.fulfillment_info}
    *
    *   If a full overwrite of inventory information while ignoring timestamps is
-   *   needed, {@link |UpdateProduct} should be invoked instead.
+   *   needed,
+   *   {@link google.cloud.retail.v2beta.ProductService.UpdateProduct|ProductService.UpdateProduct}
+   *   should be invoked instead.
    * @param {google.protobuf.FieldMask} request.setMask
    *   Indicates which inventory fields in the provided
    *   {@link google.cloud.retail.v2beta.Product|Product} to update.
@@ -1317,8 +1340,9 @@ export class ProductServiceClient {
    * enqueued and processed downstream. As a consequence, when a response is
    * returned, the added place IDs are not immediately manifested in the
    * {@link google.cloud.retail.v2beta.Product|Product} queried by
-   * {@link google.cloud.retail.v2beta.ProductService.GetProduct|GetProduct} or
-   * {@link google.cloud.retail.v2beta.ProductService.ListProducts|ListProducts}.
+   * {@link google.cloud.retail.v2beta.ProductService.GetProduct|ProductService.GetProduct}
+   * or
+   * {@link google.cloud.retail.v2beta.ProductService.ListProducts|ProductService.ListProducts}.
    *
    * This feature is only available for users who have Retail Search enabled.
    * Please enable Retail Search on Cloud Console before using this feature.
@@ -1352,7 +1376,8 @@ export class ProductServiceClient {
    *   If this field is set to an invalid value other than these, an
    *   INVALID_ARGUMENT error is returned.
    *
-   *   This field directly corresponds to {@link |Product.fulfillment_info.type}.
+   *   This field directly corresponds to
+   *   {@link google.cloud.retail.v2beta.FulfillmentInfo.type|Product.fulfillment_info.type}.
    * @param {string[]} request.placeIds
    *   Required. The IDs for this
    *   {@link google.cloud.retail.v2beta.AddFulfillmentPlacesRequest.type|type}, such
@@ -1520,8 +1545,9 @@ export class ProductServiceClient {
    * enqueued and processed downstream. As a consequence, when a response is
    * returned, the removed place IDs are not immediately manifested in the
    * {@link google.cloud.retail.v2beta.Product|Product} queried by
-   * {@link google.cloud.retail.v2beta.ProductService.GetProduct|GetProduct} or
-   * {@link google.cloud.retail.v2beta.ProductService.ListProducts|ListProducts}.
+   * {@link google.cloud.retail.v2beta.ProductService.GetProduct|ProductService.GetProduct}
+   * or
+   * {@link google.cloud.retail.v2beta.ProductService.ListProducts|ProductService.ListProducts}.
    *
    * This feature is only available for users who have Retail Search enabled.
    * Please enable Retail Search on Cloud Console before using this feature.
@@ -1555,7 +1581,8 @@ export class ProductServiceClient {
    *   If this field is set to an invalid value other than these, an
    *   INVALID_ARGUMENT error is returned.
    *
-   *   This field directly corresponds to {@link |Product.fulfillment_info.type}.
+   *   This field directly corresponds to
+   *   {@link google.cloud.retail.v2beta.FulfillmentInfo.type|Product.fulfillment_info.type}.
    * @param {string[]} request.placeIds
    *   Required. The IDs for this
    *   {@link google.cloud.retail.v2beta.RemoveFulfillmentPlacesRequest.type|type},
@@ -1723,13 +1750,14 @@ export class ProductServiceClient {
    * and processed downstream. As a consequence, when a response is returned,
    * updates are not immediately manifested in the
    * {@link google.cloud.retail.v2beta.Product|Product} queried by
-   * {@link google.cloud.retail.v2beta.ProductService.GetProduct|GetProduct} or
-   * {@link google.cloud.retail.v2beta.ProductService.ListProducts|ListProducts}.
+   * {@link google.cloud.retail.v2beta.ProductService.GetProduct|ProductService.GetProduct}
+   * or
+   * {@link google.cloud.retail.v2beta.ProductService.ListProducts|ProductService.ListProducts}.
    *
    * Local inventory information can only be modified using this method.
-   * {@link google.cloud.retail.v2beta.ProductService.CreateProduct|CreateProduct}
+   * {@link google.cloud.retail.v2beta.ProductService.CreateProduct|ProductService.CreateProduct}
    * and
-   * {@link google.cloud.retail.v2beta.ProductService.UpdateProduct|UpdateProduct}
+   * {@link google.cloud.retail.v2beta.ProductService.UpdateProduct|ProductService.UpdateProduct}
    * has no effect on local inventories.
    *
    * This feature is only available for users who have Retail Search enabled.
@@ -1915,13 +1943,14 @@ export class ProductServiceClient {
    * enqueued and processed downstream. As a consequence, when a response is
    * returned, removals are not immediately manifested in the
    * {@link google.cloud.retail.v2beta.Product|Product} queried by
-   * {@link google.cloud.retail.v2beta.ProductService.GetProduct|GetProduct} or
-   * {@link google.cloud.retail.v2beta.ProductService.ListProducts|ListProducts}.
+   * {@link google.cloud.retail.v2beta.ProductService.GetProduct|ProductService.GetProduct}
+   * or
+   * {@link google.cloud.retail.v2beta.ProductService.ListProducts|ProductService.ListProducts}.
    *
    * Local inventory information can only be removed using this method.
-   * {@link google.cloud.retail.v2beta.ProductService.CreateProduct|CreateProduct}
+   * {@link google.cloud.retail.v2beta.ProductService.CreateProduct|ProductService.CreateProduct}
    * and
-   * {@link google.cloud.retail.v2beta.ProductService.UpdateProduct|UpdateProduct}
+   * {@link google.cloud.retail.v2beta.ProductService.UpdateProduct|ProductService.UpdateProduct}
    * has no effect on local inventories.
    *
    * This feature is only available for users who have Retail Search enabled.
@@ -2481,6 +2510,263 @@ export class ProductServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.retail.v2beta.IProduct>;
   }
+  /**
+   * Gets information about a location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Resource name for the location.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Location]{@link google.cloud.location.Location}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * ```
+   * const [response] = await client.getLocation(request);
+   * ```
+   */
+  getLocation(
+    request: LocationProtos.google.cloud.location.IGetLocationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          LocationProtos.google.cloud.location.ILocation,
+          | LocationProtos.google.cloud.location.IGetLocationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LocationProtos.google.cloud.location.ILocation,
+      | LocationProtos.google.cloud.location.IGetLocationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<LocationProtos.google.cloud.location.ILocation> {
+    return this.locationsClient.getLocation(request, options, callback);
+  }
+
+  /**
+   * Lists information about the supported locations for this service. Returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The resource that owns the locations collection, if applicable.
+   * @param {string} request.filter
+   *   The standard list filter.
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [Location]{@link google.cloud.location.Location}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example
+   * ```
+   * const iterable = client.listLocationsAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
+   * ```
+   */
+  listLocationsAsync(
+    request: LocationProtos.google.cloud.location.IListLocationsRequest,
+    options?: CallOptions
+  ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
+    return this.locationsClient.listLocationsAsync(request, options);
+  }
+
+  /**
+   * Gets the latest state of a long-running operation.  Clients can use this
+   * method to poll the operation result at intervals as recommended by the API
+   * service.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
+   *   details.
+   * @param {function(?Error, ?Object)=} callback
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing
+   * [google.longrunning.Operation]{@link
+   * external:"google.longrunning.Operation"}.
+   * @return {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   * [google.longrunning.Operation]{@link
+   * external:"google.longrunning.Operation"}. The promise has a method named
+   * "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * const name = '';
+   * const [response] = await client.getOperation({name});
+   * // doThingsWith(response)
+   * ```
+   */
+  getOperation(
+    request: protos.google.longrunning.GetOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.longrunning.Operation,
+          protos.google.longrunning.GetOperationRequest,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.longrunning.Operation,
+      protos.google.longrunning.GetOperationRequest,
+      {} | null | undefined
+    >
+  ): Promise<[protos.google.longrunning.Operation]> {
+    return this.operationsClient.getOperation(request, options, callback);
+  }
+  /**
+   * Lists operations that match the specified filter in the request. If the
+   * server doesn't support this method, it returns `UNIMPLEMENTED`. Returns an iterable object.
+   *
+   * For-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation collection.
+   * @param {string} request.filter - The standard list filter.
+   * @param {number=} request.pageSize -
+   *   The maximum number of resources contained in the underlying API
+   *   response. If page streaming is performed per-resource, this
+   *   parameter does not affect the return value. If page streaming is
+   *   performed per-page, this determines the maximum number of
+   *   resources in a page.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
+   *   details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * for await (const response of client.listOperationsAsync(request));
+   * // doThingsWith(response)
+   * ```
+   */
+  listOperationsAsync(
+    request: protos.google.longrunning.ListOperationsRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    return this.operationsClient.listOperationsAsync(request, options);
+  }
+  /**
+   * Starts asynchronous cancellation on a long-running operation.  The server
+   * makes a best effort to cancel the operation, but success is not
+   * guaranteed.  If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
+   * {@link Operations.GetOperation} or
+   * other methods to check whether the cancellation succeeded or whether the
+   * operation completed despite cancellation. On successful cancellation,
+   * the operation is not deleted; instead, it becomes an operation with
+   * an {@link Operation.error} value with a {@link google.rpc.Status.code} of
+   * 1, corresponding to `Code.CANCELLED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be cancelled.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
+   * details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.cancelOperation({name: ''});
+   * ```
+   */
+  cancelOperation(
+    request: protos.google.longrunning.CancelOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.protobuf.Empty,
+          protos.google.longrunning.CancelOperationRequest,
+          {} | undefined | null
+        >,
+    callback?: Callback<
+      protos.google.longrunning.CancelOperationRequest,
+      protos.google.protobuf.Empty,
+      {} | undefined | null
+    >
+  ): Promise<protos.google.protobuf.Empty> {
+    return this.operationsClient.cancelOperation(request, options, callback);
+  }
+
+  /**
+   * Deletes a long-running operation. This method indicates that the client is
+   * no longer interested in the operation result. It does not cancel the
+   * operation. If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be deleted.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
+   * details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.deleteOperation({name: ''});
+   * ```
+   */
+  deleteOperation(
+    request: protos.google.longrunning.DeleteOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.protobuf.Empty,
+          protos.google.longrunning.DeleteOperationRequest,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.Empty,
+      protos.google.longrunning.DeleteOperationRequest,
+      {} | null | undefined
+    >
+  ): Promise<protos.google.protobuf.Empty> {
+    return this.operationsClient.deleteOperation(request, options, callback);
+  }
+
   // --------------------
   // -- Path templates --
   // --------------------
@@ -2941,6 +3227,7 @@ export class ProductServiceClient {
       return this.productServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
+        this.locationsClient.close();
         this.operationsClient.close();
       });
     }

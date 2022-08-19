@@ -34,8 +34,9 @@ function main(inventory) {
    *  * Product.fulfillment_info google.cloud.retail.v2beta.Product.fulfillment_info 
    *  The updated inventory fields must be specified in
    *  SetInventoryRequest.set_mask google.cloud.retail.v2beta.SetInventoryRequest.set_mask.
-   *  If SetInventoryRequest.inventory.name   is empty or invalid, an
-   *  INVALID_ARGUMENT error is returned.
+   *  If
+   *  SetInventoryRequest.inventory.name google.cloud.retail.v2beta.Product.name 
+   *  is empty or invalid, an INVALID_ARGUMENT error is returned.
    *  If the caller does not have permission to update the
    *  Product google.cloud.retail.v2beta.Product  named in
    *  Product.name google.cloud.retail.v2beta.Product.name, regardless of
@@ -53,22 +54,25 @@ function main(inventory) {
    *  * Adds "fulfillment_info" in
    *  SetInventoryRequest.set_mask google.cloud.retail.v2beta.SetInventoryRequest.set_mask 
    *  * Specifies only the desired fulfillment types and corresponding place IDs
-   *  to update in SetInventoryRequest.inventory.fulfillment_info  
+   *  to update in
+   *  SetInventoryRequest.inventory.fulfillment_info google.cloud.retail.v2beta.Product.fulfillment_info 
    *  The caller can clear all place IDs from a subset of fulfillment types in
    *  the following ways:
    *  * Adds "fulfillment_info" in
    *  SetInventoryRequest.set_mask google.cloud.retail.v2beta.SetInventoryRequest.set_mask 
    *  * Specifies only the desired fulfillment types to clear in
-   *  SetInventoryRequest.inventory.fulfillment_info  
+   *  SetInventoryRequest.inventory.fulfillment_info google.cloud.retail.v2beta.Product.fulfillment_info 
    *  * Checks that only the desired fulfillment info types have empty
-   *  SetInventoryRequest.inventory.fulfillment_info.place_ids  
+   *  SetInventoryRequest.inventory.fulfillment_info.place_ids google.cloud.retail.v2beta.FulfillmentInfo.place_ids 
    *  The last update time is recorded for the following inventory fields:
    *  * Product.price_info google.cloud.retail.v2beta.Product.price_info 
    *  * Product.availability google.cloud.retail.v2beta.Product.availability 
    *  * Product.available_quantity google.cloud.retail.v2beta.Product.available_quantity 
    *  * Product.fulfillment_info google.cloud.retail.v2beta.Product.fulfillment_info 
    *  If a full overwrite of inventory information while ignoring timestamps is
-   *  needed, UpdateProduct   should be invoked instead.
+   *  needed,
+   *  ProductService.UpdateProduct google.cloud.retail.v2beta.ProductService.UpdateProduct 
+   *  should be invoked instead.
    */
   // const inventory = {}
   /**

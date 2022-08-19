@@ -49,7 +49,8 @@ function main(product, type, placeIds) {
    *  * "custom-type-5"
    *  If this field is set to an invalid value other than these, an
    *  INVALID_ARGUMENT error is returned.
-   *  This field directly corresponds to Product.fulfillment_info.type .
+   *  This field directly corresponds to
+   *  Product.fulfillment_info.type google.cloud.retail.v2alpha.FulfillmentInfo.type.
    */
   // const type = 'abc123'
   /**

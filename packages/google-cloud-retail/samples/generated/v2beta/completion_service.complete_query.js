@@ -46,6 +46,8 @@ function main(catalog, query) {
    */
   // const visitorId = 'abc123'
   /**
+   *  Note that this field applies for `user-data` dataset only. For requests
+   *  with `cloud-retail` dataset, setting this field has no effect.
    *  The language filters applied to the output suggestions. If set, it should
    *  contain the language of the query. If not set, suggestions are returned
    *  without considering language restrictions. This is the BCP-47 language
@@ -74,9 +76,9 @@ function main(catalog, query) {
    *  events. If leave empty, it will use the "user-data".
    *  Current supported values:
    *  * user-data
-   *  * cloud-retail
-   *    This option requires additional allowlisting. Before using cloud-retail,
-   *    contact Cloud Retail support team first.
+   *  * cloud-retail:
+   *    This option requires enabling auto-learning function first. See
+   *    guidelines (https://cloud.google.com/retail/docs/completion-overview#generated-completion-dataset).
    */
   // const dataset = 'abc123'
   /**

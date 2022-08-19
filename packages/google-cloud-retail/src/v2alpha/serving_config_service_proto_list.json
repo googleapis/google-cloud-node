@@ -7,6 +7,8 @@
   "../../protos/google/cloud/retail/v2alpha/control_service.proto",
   "../../protos/google/cloud/retail/v2alpha/export_config.proto",
   "../../protos/google/cloud/retail/v2alpha/import_config.proto",
+  "../../protos/google/cloud/retail/v2alpha/model.proto",
+  "../../protos/google/cloud/retail/v2alpha/model_service.proto",
   "../../protos/google/cloud/retail/v2alpha/prediction_service.proto",
   "../../protos/google/cloud/retail/v2alpha/product.proto",
   "../../protos/google/cloud/retail/v2alpha/product_service.proto",

@@ -27,7 +27,7 @@ function main(parent, control, controlId) {
    */
   /**
    *  Required. Full resource name of parent catalog. Format:
-   *  projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}
+   *  `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}`
    */
   // const parent = 'abc123'
   /**

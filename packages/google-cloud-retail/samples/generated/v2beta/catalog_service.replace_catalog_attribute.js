@@ -27,7 +27,7 @@ function main(attributesConfig, catalogAttribute) {
    */
   /**
    *  Required. Full AttributesConfig resource name. Format:
-   *  projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/attributesConfig
+   *  `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/attributesConfig`
    */
   // const attributesConfig = 'abc123'
   /**

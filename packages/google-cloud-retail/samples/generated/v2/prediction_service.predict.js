@@ -27,13 +27,18 @@ function main(placement, userEvent) {
    */
   /**
    *  Required. Full resource name of the format:
-   *  {name=projects/* /locations/global/catalogs/default_catalog/placements/*}
-   *  The ID of the Recommendations AI placement. Before you can request
-   *  predictions from your model, you must create at least one placement for it.
-   *  For more information, see Managing
-   *  placements (https://cloud.google.com/retail/recommendations-ai/docs/manage-placements).
-   *  The full list of available placements can be seen at
-   *  https://console.cloud.google.com/recommendation/catalogs/default_catalog/placements
+   *  `{placement=projects/* /locations/global/catalogs/default_catalog/servingConfigs/*}`
+   *  or
+   *  `{placement=projects/* /locations/global/catalogs/default_catalog/placements/*}`.
+   *  We recommend using the `servingConfigs` resource. `placements` is a legacy
+   *  resource.
+   *  The ID of the Recommendations AI serving config or placement.
+   *  Before you can request predictions from your model, you must create at
+   *  least one serving config or placement for it. For more information, see
+   *  Managing serving configurations 
+   *  (https://cloud.google.com/retail/docs/manage-configs).
+   *  The full list of available serving configs can be seen at
+   *  https://console.cloud.google.com/ai/retail/catalogs/default_catalog/configs
    */
   // const placement = 'abc123'
   /**
@@ -53,14 +58,14 @@ function main(placement, userEvent) {
    */
   // const userEvent = {}
   /**
-   *  Maximum number of results to return per page. Set this property
-   *  to the number of prediction results needed. If zero, the service will
-   *  choose a reasonable default. The maximum allowed value is 100. Values
-   *  above 100 will be coerced to 100.
+   *  Maximum number of results to return. Set this property to the number of
+   *  prediction results needed. If zero, the service will choose a reasonable
+   *  default. The maximum allowed value is 100. Values above 100 will be coerced
+   *  to 100.
    */
   // const pageSize = 1234
   /**
-   *  The previous PredictResponse.next_page_token.
+   *  This field is not used; leave it unset.
    */
   // const pageToken = 'abc123'
   /**
@@ -87,6 +92,12 @@ function main(placement, userEvent) {
    *  receive empty results instead.
    *  Note that the API will never return items with storageStatus of "EXPIRED"
    *  or "DELETED" regardless of filter choices.
+   *  If `filterSyntaxV2` is set to true under the `params` field, then
+   *  attribute-based expressions are expected instead of the above described
+   *  tag-based syntax. Examples:
+   *   * (colors: ANY("Red", "Blue")) AND NOT (categories: ANY("Phones"))
+   *   * (availability: ANY("IN_STOCK")) AND
+   *     (colors: ANY("Red") OR categories: ANY("Phones"))
    */
   // const filter = 'abc123'
   /**
@@ -120,6 +131,8 @@ function main(placement, userEvent) {
    *     'medium-diversity', 'high-diversity', 'auto-diversity'}. This gives
    *     request-level control and adjusts prediction results based on product
    *     category.
+   *  * `filterSyntaxV2`: Boolean. False by default. If set to true, the `filter`
+   *    field is interpreteted according to the new, attribute-based syntax.
    */
   // const params = 1234
   /**
