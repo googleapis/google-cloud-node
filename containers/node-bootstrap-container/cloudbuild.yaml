@@ -4,21 +4,21 @@ steps:
       dir: 'containers/node-bootstrap-container'
       args: [ 'build',
         '-t', 'gcr.io/owlbot-bootstrap-prod/node-bootstrapper:$SHORT_SHA',
-        '-t', 'us-docker.pkg.dev/owlbot-bootstrap-prod/gcr.io/node-bootstrapper:$SHORT_SHA',
+        '-t', 'us-docker.pkg.dev/owlbot-bootstrap-prod/owlbot-bootstrapper-images/node-bootstrapper:$SHORT_SHA',
         '-t', 'gcr.io/owlbot-bootstrap-prod/node-bootstrapper:latest',
-        '-t', 'us-docker.pkg.dev/owlbot-bootstrap-prod/gcr.io/node-bootstrapper:latest',
+        '-t', 'us-docker.pkg.dev/owlbot-bootstrap-prod/owlbot-bootstrapper-images/node-bootstrapper:latest',
         '-t', 'gcr.io/owlbot-bootstrap-staging/node-bootstrapper:$SHORT_SHA',
-        '-t', 'us-docker.pkg.dev/owlbot-bootstrap-staging/gcr.io/node-bootstrapper:$SHORT_SHA',
+        '-t', 'us-docker.pkg.dev/owlbot-bootstrap-staging/owlbot-bootstrapper-images/node-bootstrapper:$SHORT_SHA',
         '-t', 'gcr.io/owlbot-bootstrap-staging/node-bootstrapper:latest', 
-        '-t', 'us-docker.pkg.dev/owlbot-bootstrap-staging/gcr.io/node-bootstrapper:latest',
+        '-t', 'us-docker.pkg.dev/owlbot-bootstrap-staging/owlbot-bootstrapper-images/node-bootstrapper:latest',
         '.' ]
     # Push the docker image.
 images:
   - gcr.io/owlbot-bootstrap-prod/node-bootstrapper:$SHORT_SHA
-  - us-docker.pkg.dev/owlbot-bootstrap-prod/gcr.io/node-bootstrapper:$SHORT_SHA
+  - us-docker.pkg.dev/owlbot-bootstrap-prod/owlbot-bootstrapper-images/node-bootstrapper:$SHORT_SHA
   - gcr.io/owlbot-bootstrap-prod/node-bootstrapper:latest
-  - us-docker.pkg.dev/owlbot-bootstrap-prod/gcr.io/node-bootstrapper:latest
+  - us-docker.pkg.dev/owlbot-bootstrap-prod/owlbot-bootstrapper-images/node-bootstrapper:latest
   - gcr.io/owlbot-bootstrap-staging/node-bootstrapper:$SHORT_SHA
-  - us-docker.pkg.dev/owlbot-bootstrap-staging/gcr.io/node-bootstrapper:$SHORT_SHA
+  - us-docker.pkg.dev/owlbot-bootstrap-staging/owlbot-bootstrapper-images/node-bootstrapper:$SHORT_SHA
   - gcr.io/owlbot-bootstrap-staging/node-bootstrapper:latest
-  - us-docker.pkg.dev/owlbot-bootstrap-staging/gcr.io/node-bootstrapper:latest
+  - us-docker.pkg.dev/owlbot-bootstrap-staging/owlbot-bootstrapper-images/node-bootstrapper:latest
