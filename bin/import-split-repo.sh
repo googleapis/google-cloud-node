@@ -17,7 +17,7 @@ set -ex
 
 if [ $# -lt 4 ]
 then
-  echo "Usage: $0 <source-repo> <target-repo> <source-path> <target-path> [comma,separated,folders,to,ignore] [branch-name]"
+  echo "Usage: $0 <source-repo> <target-repo> <source-path> <target-path> [folders,to,skip] [files,to,keep] [branch-name]"
   exit 1
 fi
 
