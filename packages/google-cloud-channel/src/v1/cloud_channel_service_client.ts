@@ -30,7 +30,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -568,7 +567,8 @@ export class CloudChannelServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -3201,7 +3201,7 @@ export class CloudChannelServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.provisionCloudIdentity,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.channel.v1.Customer,
@@ -3389,7 +3389,7 @@ export class CloudChannelServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createEntitlement,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.channel.v1.Entitlement,
@@ -3569,7 +3569,7 @@ export class CloudChannelServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.changeParameters,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.channel.v1.Entitlement,
@@ -3744,7 +3744,7 @@ export class CloudChannelServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.changeRenewalSettings,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.channel.v1.Entitlement,
@@ -3923,7 +3923,7 @@ export class CloudChannelServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.changeOffer,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.channel.v1.Entitlement,
@@ -4097,7 +4097,7 @@ export class CloudChannelServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.startPaidService,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.channel.v1.Entitlement,
@@ -4268,7 +4268,7 @@ export class CloudChannelServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.suspendEntitlement,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.channel.v1.Entitlement,
@@ -4444,7 +4444,7 @@ export class CloudChannelServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.cancelEntitlement,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -4621,7 +4621,7 @@ export class CloudChannelServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.activateEntitlement,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.channel.v1.Entitlement,
@@ -4807,7 +4807,7 @@ export class CloudChannelServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.transferEntitlements,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.channel.v1.TransferEntitlementsResponse,
@@ -4992,7 +4992,7 @@ export class CloudChannelServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.transferEntitlementsToGoogle,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -5159,7 +5159,7 @@ export class CloudChannelServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listCustomers.createStream(
-      this.innerApiCalls.listCustomers as gax.GaxCall,
+      this.innerApiCalls.listCustomers as GaxCall,
       request,
       callSettings
     );
@@ -5217,7 +5217,7 @@ export class CloudChannelServiceClient {
     this.initialize();
     return this.descriptors.page.listCustomers.asyncIterate(
       this.innerApiCalls['listCustomers'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.channel.v1.ICustomer>;
   }
@@ -5380,7 +5380,7 @@ export class CloudChannelServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listEntitlements.createStream(
-      this.innerApiCalls.listEntitlements as gax.GaxCall,
+      this.innerApiCalls.listEntitlements as GaxCall,
       request,
       callSettings
     );
@@ -5435,7 +5435,7 @@ export class CloudChannelServiceClient {
     this.initialize();
     return this.descriptors.page.listEntitlements.asyncIterate(
       this.innerApiCalls['listEntitlements'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.channel.v1.IEntitlement>;
   }
@@ -5643,7 +5643,7 @@ export class CloudChannelServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listTransferableSkus.createStream(
-      this.innerApiCalls.listTransferableSkus as gax.GaxCall,
+      this.innerApiCalls.listTransferableSkus as GaxCall,
       request,
       callSettings
     );
@@ -5716,7 +5716,7 @@ export class CloudChannelServiceClient {
     this.initialize();
     return this.descriptors.page.listTransferableSkus.asyncIterate(
       this.innerApiCalls['listTransferableSkus'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.channel.v1.ITransferableSku>;
   }
@@ -5910,7 +5910,7 @@ export class CloudChannelServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listTransferableOffers.createStream(
-      this.innerApiCalls.listTransferableOffers as gax.GaxCall,
+      this.innerApiCalls.listTransferableOffers as GaxCall,
       request,
       callSettings
     );
@@ -5974,7 +5974,7 @@ export class CloudChannelServiceClient {
     this.initialize();
     return this.descriptors.page.listTransferableOffers.asyncIterate(
       this.innerApiCalls['listTransferableOffers'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.channel.v1.ITransferableOffer>;
   }
@@ -6147,7 +6147,7 @@ export class CloudChannelServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listChannelPartnerLinks.createStream(
-      this.innerApiCalls.listChannelPartnerLinks as gax.GaxCall,
+      this.innerApiCalls.listChannelPartnerLinks as GaxCall,
       request,
       callSettings
     );
@@ -6204,7 +6204,7 @@ export class CloudChannelServiceClient {
     this.initialize();
     return this.descriptors.page.listChannelPartnerLinks.asyncIterate(
       this.innerApiCalls['listChannelPartnerLinks'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.channel.v1.IChannelPartnerLink>;
   }
@@ -6401,7 +6401,7 @@ export class CloudChannelServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listCustomerRepricingConfigs.createStream(
-      this.innerApiCalls.listCustomerRepricingConfigs as gax.GaxCall,
+      this.innerApiCalls.listCustomerRepricingConfigs as GaxCall,
       request,
       callSettings
     );
@@ -6465,7 +6465,7 @@ export class CloudChannelServiceClient {
     this.initialize();
     return this.descriptors.page.listCustomerRepricingConfigs.asyncIterate(
       this.innerApiCalls['listCustomerRepricingConfigs'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.channel.v1.ICustomerRepricingConfig>;
   }
@@ -6668,7 +6668,7 @@ export class CloudChannelServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listChannelPartnerRepricingConfigs.createStream(
-      this.innerApiCalls.listChannelPartnerRepricingConfigs as gax.GaxCall,
+      this.innerApiCalls.listChannelPartnerRepricingConfigs as GaxCall,
       request,
       callSettings
     );
@@ -6736,7 +6736,7 @@ export class CloudChannelServiceClient {
     this.initialize();
     return this.descriptors.page.listChannelPartnerRepricingConfigs.asyncIterate(
       this.innerApiCalls['listChannelPartnerRepricingConfigs'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.channel.v1.IChannelPartnerRepricingConfig>;
   }
@@ -6881,7 +6881,7 @@ export class CloudChannelServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listProducts.createStream(
-      this.innerApiCalls.listProducts as gax.GaxCall,
+      this.innerApiCalls.listProducts as GaxCall,
       request,
       callSettings
     );
@@ -6932,7 +6932,7 @@ export class CloudChannelServiceClient {
     this.initialize();
     return this.descriptors.page.listProducts.asyncIterate(
       this.innerApiCalls['listProducts'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.channel.v1.IProduct>;
   }
@@ -7093,7 +7093,7 @@ export class CloudChannelServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listSkus.createStream(
-      this.innerApiCalls.listSkus as gax.GaxCall,
+      this.innerApiCalls.listSkus as GaxCall,
       request,
       callSettings
     );
@@ -7153,7 +7153,7 @@ export class CloudChannelServiceClient {
     this.initialize();
     return this.descriptors.page.listSkus.asyncIterate(
       this.innerApiCalls['listSkus'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.channel.v1.ISku>;
   }
@@ -7316,7 +7316,7 @@ export class CloudChannelServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listOffers.createStream(
-      this.innerApiCalls.listOffers as gax.GaxCall,
+      this.innerApiCalls.listOffers as GaxCall,
       request,
       callSettings
     );
@@ -7377,7 +7377,7 @@ export class CloudChannelServiceClient {
     this.initialize();
     return this.descriptors.page.listOffers.asyncIterate(
       this.innerApiCalls['listOffers'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.channel.v1.IOffer>;
   }
@@ -7548,7 +7548,7 @@ export class CloudChannelServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listPurchasableSkus.createStream(
-      this.innerApiCalls.listPurchasableSkus as gax.GaxCall,
+      this.innerApiCalls.listPurchasableSkus as GaxCall,
       request,
       callSettings
     );
@@ -7607,7 +7607,7 @@ export class CloudChannelServiceClient {
     this.initialize();
     return this.descriptors.page.listPurchasableSkus.asyncIterate(
       this.innerApiCalls['listPurchasableSkus'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.channel.v1.IPurchasableSku>;
   }
@@ -7778,7 +7778,7 @@ export class CloudChannelServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listPurchasableOffers.createStream(
-      this.innerApiCalls.listPurchasableOffers as gax.GaxCall,
+      this.innerApiCalls.listPurchasableOffers as GaxCall,
       request,
       callSettings
     );
@@ -7837,7 +7837,7 @@ export class CloudChannelServiceClient {
     this.initialize();
     return this.descriptors.page.listPurchasableOffers.asyncIterate(
       this.innerApiCalls['listPurchasableOffers'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.channel.v1.IPurchasableOffer>;
   }
@@ -8008,7 +8008,7 @@ export class CloudChannelServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listSubscribers.createStream(
-      this.innerApiCalls.listSubscribers as gax.GaxCall,
+      this.innerApiCalls.listSubscribers as GaxCall,
       request,
       callSettings
     );
@@ -8063,7 +8063,7 @@ export class CloudChannelServiceClient {
     this.initialize();
     return this.descriptors.page.listSubscribers.asyncIterate(
       this.innerApiCalls['listSubscribers'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<string>;
   }
