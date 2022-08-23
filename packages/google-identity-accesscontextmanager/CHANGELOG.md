@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.1.1](https://github.com/googleapis/nodejs-access-context-manager/compare/v2.1.0...v2.1.1) (2022-08-23)
+
+
+### Bug Fixes
+
+* better support for fallback mode ([#61](https://github.com/googleapis/nodejs-access-context-manager/issues/61)) ([9780d0e](https://github.com/googleapis/nodejs-access-context-manager/commit/9780d0e0839b27aed6553304a845d7b603c7eddf))
+* change import long to require ([#62](https://github.com/googleapis/nodejs-access-context-manager/issues/62)) ([71e7a44](https://github.com/googleapis/nodejs-access-context-manager/commit/71e7a446fb61ddcd3e4e5ea812e3720e0ba2e703))
+* remove pip install statements ([#1546](https://github.com/googleapis/nodejs-access-context-manager/issues/1546)) ([#64](https://github.com/googleapis/nodejs-access-context-manager/issues/64)) ([7eacb41](https://github.com/googleapis/nodejs-access-context-manager/commit/7eacb417850097b5f7d04227691b43458c5563fb))
+
 ## [2.1.0](https://github.com/googleapis/nodejs-access-context-manager/compare/v2.0.0...v2.1.0) (2022-06-29)
 
 
