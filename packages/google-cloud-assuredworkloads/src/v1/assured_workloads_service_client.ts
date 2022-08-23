@@ -30,7 +30,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -307,7 +306,8 @@ export class AssuredWorkloadsServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -812,7 +812,7 @@ export class AssuredWorkloadsServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createWorkload,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.assuredworkloads.v1.Workload,
@@ -968,7 +968,7 @@ export class AssuredWorkloadsServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listWorkloads.createStream(
-      this.innerApiCalls.listWorkloads as gax.GaxCall,
+      this.innerApiCalls.listWorkloads as GaxCall,
       request,
       callSettings
     );
@@ -1022,7 +1022,7 @@ export class AssuredWorkloadsServiceClient {
     this.initialize();
     return this.descriptors.page.listWorkloads.asyncIterate(
       this.innerApiCalls['listWorkloads'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.assuredworkloads.v1.IWorkload>;
   }
