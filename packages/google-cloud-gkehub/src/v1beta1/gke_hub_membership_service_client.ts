@@ -34,7 +34,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -379,7 +378,8 @@ export class GkeHubMembershipServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -1038,7 +1038,7 @@ export class GkeHubMembershipServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createMembership,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.gkehub.v1beta1.Membership,
@@ -1194,7 +1194,7 @@ export class GkeHubMembershipServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteMembership,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -1358,7 +1358,7 @@ export class GkeHubMembershipServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateMembership,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.gkehub.v1beta1.Membership,
@@ -1560,7 +1560,7 @@ export class GkeHubMembershipServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listMemberships.createStream(
-      this.innerApiCalls.listMemberships as gax.GaxCall,
+      this.innerApiCalls.listMemberships as GaxCall,
       request,
       callSettings
     );
@@ -1637,7 +1637,7 @@ export class GkeHubMembershipServiceClient {
     this.initialize();
     return this.descriptors.page.listMemberships.asyncIterate(
       this.innerApiCalls['listMemberships'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.gkehub.v1beta1.IMembership>;
   }

@@ -30,7 +30,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -382,7 +381,8 @@ export class GkeHubClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -680,7 +680,7 @@ export class GkeHubClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createFeature,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.gkehub.v1alpha.Feature,
@@ -836,7 +836,7 @@ export class GkeHubClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteFeature,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -999,7 +999,7 @@ export class GkeHubClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateFeature,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.gkehub.v1alpha.Feature,
@@ -1193,7 +1193,7 @@ export class GkeHubClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listFeatures.createStream(
-      this.innerApiCalls.listFeatures as gax.GaxCall,
+      this.innerApiCalls.listFeatures as GaxCall,
       request,
       callSettings
     );
@@ -1266,7 +1266,7 @@ export class GkeHubClient {
     this.initialize();
     return this.descriptors.page.listFeatures.asyncIterate(
       this.innerApiCalls['listFeatures'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.gkehub.v1alpha.IFeature>;
   }
