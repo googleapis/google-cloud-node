@@ -30,7 +30,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -472,7 +471,8 @@ export class ManagedIdentitiesServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -875,7 +875,7 @@ export class ManagedIdentitiesServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createMicrosoftAdDomain,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.managedidentities.v1.Domain,
@@ -1020,7 +1020,7 @@ export class ManagedIdentitiesServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateDomain,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.managedidentities.v1.Domain,
@@ -1158,7 +1158,7 @@ export class ManagedIdentitiesServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteDomain,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -1298,7 +1298,7 @@ export class ManagedIdentitiesServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.attachTrust,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.managedidentities.v1.Domain,
@@ -1442,7 +1442,7 @@ export class ManagedIdentitiesServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.reconfigureTrust,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.managedidentities.v1.Domain,
@@ -1582,7 +1582,7 @@ export class ManagedIdentitiesServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.detachTrust,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.managedidentities.v1.Domain,
@@ -1723,7 +1723,7 @@ export class ManagedIdentitiesServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.validateTrust,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.managedidentities.v1.Domain,
@@ -1897,7 +1897,7 @@ export class ManagedIdentitiesServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listDomains.createStream(
-      this.innerApiCalls.listDomains as gax.GaxCall,
+      this.innerApiCalls.listDomains as GaxCall,
       request,
       callSettings
     );
@@ -1960,7 +1960,7 @@ export class ManagedIdentitiesServiceClient {
     this.initialize();
     return this.descriptors.page.listDomains.asyncIterate(
       this.innerApiCalls['listDomains'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.managedidentities.v1.IDomain>;
   }
