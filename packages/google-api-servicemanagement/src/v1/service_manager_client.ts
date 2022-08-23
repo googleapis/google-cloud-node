@@ -30,7 +30,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -381,7 +380,8 @@ export class ServiceManagerClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -1110,7 +1110,7 @@ export class ServiceManagerClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createService,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.api.servicemanagement.v1.ManagedService,
@@ -1256,7 +1256,7 @@ export class ServiceManagerClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteService,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -1400,7 +1400,7 @@ export class ServiceManagerClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.undeleteService,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.api.servicemanagement.v1.UndeleteServiceResponse,
@@ -1558,7 +1558,7 @@ export class ServiceManagerClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.submitConfigSource,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.api.servicemanagement.v1.SubmitConfigSourceResponse,
@@ -1712,7 +1712,7 @@ export class ServiceManagerClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createServiceRollout,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.api.servicemanagement.v1.Rollout,
@@ -1868,7 +1868,7 @@ export class ServiceManagerClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listServices.createStream(
-      this.innerApiCalls.listServices as gax.GaxCall,
+      this.innerApiCalls.listServices as GaxCall,
       request,
       callSettings
     );
@@ -1920,7 +1920,7 @@ export class ServiceManagerClient {
     this.initialize();
     return this.descriptors.page.listServices.asyncIterate(
       this.innerApiCalls['listServices'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.api.servicemanagement.v1.IManagedService>;
   }
@@ -2068,7 +2068,7 @@ export class ServiceManagerClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listServiceConfigs.createStream(
-      this.innerApiCalls.listServiceConfigs as gax.GaxCall,
+      this.innerApiCalls.listServiceConfigs as GaxCall,
       request,
       callSettings
     );
@@ -2119,7 +2119,7 @@ export class ServiceManagerClient {
     this.initialize();
     return this.descriptors.page.listServiceConfigs.asyncIterate(
       this.innerApiCalls['listServiceConfigs'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.api.IService>;
   }
@@ -2285,7 +2285,7 @@ export class ServiceManagerClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listServiceRollouts.createStream(
-      this.innerApiCalls.listServiceRollouts as gax.GaxCall,
+      this.innerApiCalls.listServiceRollouts as GaxCall,
       request,
       callSettings
     );
@@ -2345,7 +2345,7 @@ export class ServiceManagerClient {
     this.initialize();
     return this.descriptors.page.listServiceRollouts.asyncIterate(
       this.innerApiCalls['listServiceRollouts'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.api.servicemanagement.v1.IRollout>;
   }
