@@ -30,7 +30,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -346,7 +345,8 @@ export class ProductSearchClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -1953,7 +1953,7 @@ export class ProductSearchClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.importProductSets,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.vision.v1p3beta1.ImportProductSetsResponse,
@@ -2106,7 +2106,7 @@ export class ProductSearchClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listProductSets.createStream(
-      this.innerApiCalls.listProductSets as gax.GaxCall,
+      this.innerApiCalls.listProductSets as GaxCall,
       request,
       callSettings
     );
@@ -2156,7 +2156,7 @@ export class ProductSearchClient {
     this.initialize();
     return this.descriptors.page.listProductSets.asyncIterate(
       this.innerApiCalls['listProductSets'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.vision.v1p3beta1.IProductSet>;
   }
@@ -2307,7 +2307,7 @@ export class ProductSearchClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listProducts.createStream(
-      this.innerApiCalls.listProducts as gax.GaxCall,
+      this.innerApiCalls.listProducts as GaxCall,
       request,
       callSettings
     );
@@ -2358,7 +2358,7 @@ export class ProductSearchClient {
     this.initialize();
     return this.descriptors.page.listProducts.asyncIterate(
       this.innerApiCalls['listProducts'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.vision.v1p3beta1.IProduct>;
   }
@@ -2517,7 +2517,7 @@ export class ProductSearchClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listReferenceImages.createStream(
-      this.innerApiCalls.listReferenceImages as gax.GaxCall,
+      this.innerApiCalls.listReferenceImages as GaxCall,
       request,
       callSettings
     );
@@ -2571,7 +2571,7 @@ export class ProductSearchClient {
     this.initialize();
     return this.descriptors.page.listReferenceImages.asyncIterate(
       this.innerApiCalls['listReferenceImages'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.vision.v1p3beta1.IReferenceImage>;
   }
@@ -2728,7 +2728,7 @@ export class ProductSearchClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listProductsInProductSet.createStream(
-      this.innerApiCalls.listProductsInProductSet as gax.GaxCall,
+      this.innerApiCalls.listProductsInProductSet as GaxCall,
       request,
       callSettings
     );
@@ -2779,7 +2779,7 @@ export class ProductSearchClient {
     this.initialize();
     return this.descriptors.page.listProductsInProductSet.asyncIterate(
       this.innerApiCalls['listProductsInProductSet'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.vision.v1p3beta1.IProduct>;
   }
