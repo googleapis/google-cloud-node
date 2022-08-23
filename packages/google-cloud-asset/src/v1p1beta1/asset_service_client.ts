@@ -28,7 +28,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -246,7 +245,8 @@ export class AssetServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -493,7 +493,7 @@ export class AssetServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.searchAllResources.createStream(
-      this.innerApiCalls.searchAllResources as gax.GaxCall,
+      this.innerApiCalls.searchAllResources as GaxCall,
       request,
       callSettings
     );
@@ -562,7 +562,7 @@ export class AssetServiceClient {
     this.initialize();
     return this.descriptors.page.searchAllResources.asyncIterate(
       this.innerApiCalls['searchAllResources'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.asset.v1p1beta1.IStandardResourceMetadata>;
   }
@@ -740,7 +740,7 @@ export class AssetServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.searchAllIamPolicies.createStream(
-      this.innerApiCalls.searchAllIamPolicies as gax.GaxCall,
+      this.innerApiCalls.searchAllIamPolicies as GaxCall,
       request,
       callSettings
     );
@@ -804,7 +804,7 @@ export class AssetServiceClient {
     this.initialize();
     return this.descriptors.page.searchAllIamPolicies.asyncIterate(
       this.innerApiCalls['searchAllIamPolicies'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.asset.v1p1beta1.IIamPolicySearchResult>;
   }

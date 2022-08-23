@@ -30,7 +30,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -370,7 +369,8 @@ export class AssetServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -2055,7 +2055,7 @@ export class AssetServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.exportAssets,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.asset.v1.ExportAssetsResponse,
@@ -2225,7 +2225,7 @@ export class AssetServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.analyzeIamPolicyLongrunning,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.asset.v1.AnalyzeIamPolicyLongrunningResponse,
@@ -2464,7 +2464,7 @@ export class AssetServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listAssets.createStream(
-      this.innerApiCalls.listAssets as gax.GaxCall,
+      this.innerApiCalls.listAssets as GaxCall,
       request,
       callSettings
     );
@@ -2563,7 +2563,7 @@ export class AssetServiceClient {
     this.initialize();
     return this.descriptors.page.listAssets.asyncIterate(
       this.innerApiCalls['listAssets'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.asset.v1.IAsset>;
   }
@@ -2981,7 +2981,7 @@ export class AssetServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.searchAllResources.createStream(
-      this.innerApiCalls.searchAllResources as gax.GaxCall,
+      this.innerApiCalls.searchAllResources as GaxCall,
       request,
       callSettings
     );
@@ -3166,7 +3166,7 @@ export class AssetServiceClient {
     this.initialize();
     return this.descriptors.page.searchAllResources.asyncIterate(
       this.innerApiCalls['searchAllResources'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.asset.v1.IResourceSearchResult>;
   }
@@ -3490,7 +3490,7 @@ export class AssetServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.searchAllIamPolicies.createStream(
-      this.innerApiCalls.searchAllIamPolicies as gax.GaxCall,
+      this.innerApiCalls.searchAllIamPolicies as GaxCall,
       request,
       callSettings
     );
@@ -3628,7 +3628,7 @@ export class AssetServiceClient {
     this.initialize();
     return this.descriptors.page.searchAllIamPolicies.asyncIterate(
       this.innerApiCalls['searchAllIamPolicies'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.asset.v1.IIamPolicySearchResult>;
   }
@@ -3797,7 +3797,7 @@ export class AssetServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listSavedQueries.createStream(
-      this.innerApiCalls.listSavedQueries as gax.GaxCall,
+      this.innerApiCalls.listSavedQueries as GaxCall,
       request,
       callSettings
     );
@@ -3862,7 +3862,7 @@ export class AssetServiceClient {
     this.initialize();
     return this.descriptors.page.listSavedQueries.asyncIterate(
       this.innerApiCalls['listSavedQueries'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.asset.v1.ISavedQuery>;
   }
