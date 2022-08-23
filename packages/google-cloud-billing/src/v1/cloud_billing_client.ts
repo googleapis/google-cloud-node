@@ -28,7 +28,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -270,7 +269,8 @@ export class CloudBillingClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -1284,7 +1284,7 @@ export class CloudBillingClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listBillingAccounts.createStream(
-      this.innerApiCalls.listBillingAccounts as gax.GaxCall,
+      this.innerApiCalls.listBillingAccounts as GaxCall,
       request,
       callSettings
     );
@@ -1336,7 +1336,7 @@ export class CloudBillingClient {
     this.initialize();
     return this.descriptors.page.listBillingAccounts.asyncIterate(
       this.innerApiCalls['listBillingAccounts'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.billing.v1.IBillingAccount>;
   }
@@ -1492,7 +1492,7 @@ export class CloudBillingClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listProjectBillingInfo.createStream(
-      this.innerApiCalls.listProjectBillingInfo as gax.GaxCall,
+      this.innerApiCalls.listProjectBillingInfo as GaxCall,
       request,
       callSettings
     );
@@ -1544,7 +1544,7 @@ export class CloudBillingClient {
     this.initialize();
     return this.descriptors.page.listProjectBillingInfo.asyncIterate(
       this.innerApiCalls['listProjectBillingInfo'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.billing.v1.IProjectBillingInfo>;
   }
