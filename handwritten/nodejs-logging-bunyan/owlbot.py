@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import os
 import synthtool as s
 import synthtool.gcp as gcp
 import synthtool.languages.node as node
@@ -24,3 +25,23 @@ common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library(source_location='build/src')
 s.move(templates, excludes=[".github/auto-label.yaml"])
 node.fix_hermetic()
+
+# --------------------------------------------------------------------------
+# Modify test configs
+# --------------------------------------------------------------------------
+
+# add shared environment variables to test configs
+s.move(
+    ".kokoro/common_env_vars.cfg",
+    ".kokoro/common.cfg",
+    merge=lambda src, dst, _, : f"{dst}\n{src}",
+)
+for path, subdirs, files in os.walk(f".kokoro/continuous"):
+    for name in files:
+        if name == "common.cfg":
+            file_path = os.path.join(path, name)
+            s.move(
+                ".kokoro/common_env_vars.cfg",
+                file_path,
+                merge=lambda src, dst, _, : f"{dst}\n{src}",
+            )
