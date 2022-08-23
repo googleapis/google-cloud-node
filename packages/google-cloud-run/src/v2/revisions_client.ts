@@ -30,7 +30,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -313,7 +312,8 @@ export class RevisionsClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -621,7 +621,7 @@ export class RevisionsClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteRevision,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.run.v2.Revision,
@@ -791,7 +791,7 @@ export class RevisionsClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listRevisions.createStream(
-      this.innerApiCalls.listRevisions as gax.GaxCall,
+      this.innerApiCalls.listRevisions as GaxCall,
       request,
       callSettings
     );
@@ -856,7 +856,7 @@ export class RevisionsClient {
     this.initialize();
     return this.descriptors.page.listRevisions.asyncIterate(
       this.innerApiCalls['listRevisions'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.run.v2.IRevision>;
   }
