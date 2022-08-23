@@ -28,7 +28,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -300,7 +299,8 @@ export class DataTransferServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -1701,7 +1701,7 @@ export class DataTransferServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listDataSources.createStream(
-      this.innerApiCalls.listDataSources as gax.GaxCall,
+      this.innerApiCalls.listDataSources as GaxCall,
       request,
       callSettings
     );
@@ -1755,7 +1755,7 @@ export class DataTransferServiceClient {
     this.initialize();
     return this.descriptors.page.listDataSources.asyncIterate(
       this.innerApiCalls['listDataSources'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.bigquery.datatransfer.v1.IDataSource>;
   }
@@ -1913,7 +1913,7 @@ export class DataTransferServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listTransferConfigs.createStream(
-      this.innerApiCalls.listTransferConfigs as gax.GaxCall,
+      this.innerApiCalls.listTransferConfigs as GaxCall,
       request,
       callSettings
     );
@@ -1969,7 +1969,7 @@ export class DataTransferServiceClient {
     this.initialize();
     return this.descriptors.page.listTransferConfigs.asyncIterate(
       this.innerApiCalls['listTransferConfigs'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.bigquery.datatransfer.v1.ITransferConfig>;
   }
@@ -2132,7 +2132,7 @@ export class DataTransferServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listTransferRuns.createStream(
-      this.innerApiCalls.listTransferRuns as gax.GaxCall,
+      this.innerApiCalls.listTransferRuns as GaxCall,
       request,
       callSettings
     );
@@ -2191,7 +2191,7 @@ export class DataTransferServiceClient {
     this.initialize();
     return this.descriptors.page.listTransferRuns.asyncIterate(
       this.innerApiCalls['listTransferRuns'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.bigquery.datatransfer.v1.ITransferRun>;
   }
@@ -2350,7 +2350,7 @@ export class DataTransferServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listTransferLogs.createStream(
-      this.innerApiCalls.listTransferLogs as gax.GaxCall,
+      this.innerApiCalls.listTransferLogs as GaxCall,
       request,
       callSettings
     );
@@ -2407,7 +2407,7 @@ export class DataTransferServiceClient {
     this.initialize();
     return this.descriptors.page.listTransferLogs.asyncIterate(
       this.innerApiCalls['listTransferLogs'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.bigquery.datatransfer.v1.ITransferMessage>;
   }
