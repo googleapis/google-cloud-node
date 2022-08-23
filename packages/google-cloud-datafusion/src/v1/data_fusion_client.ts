@@ -30,7 +30,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -378,7 +377,8 @@ export class DataFusionClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -662,7 +662,7 @@ export class DataFusionClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createInstance,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.datafusion.v1.Instance,
@@ -800,7 +800,7 @@ export class DataFusionClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteInstance,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -946,7 +946,7 @@ export class DataFusionClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateInstance,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.datafusion.v1.Instance,
@@ -1085,7 +1085,7 @@ export class DataFusionClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.restartInstance,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.datafusion.v1.Instance,
@@ -1242,7 +1242,7 @@ export class DataFusionClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listAvailableVersions.createStream(
-      this.innerApiCalls.listAvailableVersions as gax.GaxCall,
+      this.innerApiCalls.listAvailableVersions as GaxCall,
       request,
       callSettings
     );
@@ -1296,7 +1296,7 @@ export class DataFusionClient {
     this.initialize();
     return this.descriptors.page.listAvailableVersions.asyncIterate(
       this.innerApiCalls['listAvailableVersions'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.datafusion.v1.IVersion>;
   }
@@ -1453,7 +1453,7 @@ export class DataFusionClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listInstances.createStream(
-      this.innerApiCalls.listInstances as gax.GaxCall,
+      this.innerApiCalls.listInstances as GaxCall,
       request,
       callSettings
     );
@@ -1509,7 +1509,7 @@ export class DataFusionClient {
     this.initialize();
     return this.descriptors.page.listInstances.asyncIterate(
       this.innerApiCalls['listInstances'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.datafusion.v1.IInstance>;
   }
