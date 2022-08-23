@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.1](https://github.com/googleapis/nodejs-bare-metal-solution/compare/v0.2.0...v0.2.1) (2022-08-23)
+
+
+### Bug Fixes
+
+* change import long to require ([#14](https://github.com/googleapis/nodejs-bare-metal-solution/issues/14)) ([982fb75](https://github.com/googleapis/nodejs-bare-metal-solution/commit/982fb75a20674de77c3ec8a931172566fe952603))
+* remove pip install statements ([#1546](https://github.com/googleapis/nodejs-bare-metal-solution/issues/1546)) ([#16](https://github.com/googleapis/nodejs-bare-metal-solution/issues/16)) ([51a12df](https://github.com/googleapis/nodejs-bare-metal-solution/commit/51a12dfd7da8be12c3cb53fc1828121a2e046e8e))
+
 ## 0.2.0 (2022-07-07)
 
 

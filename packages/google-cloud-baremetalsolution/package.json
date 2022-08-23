@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/bare-metal-solution",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "baremetalsolution client for Node.js",
   "repository": "googleapis/nodejs-bare-metal-solution",
   "license": "Apache-2.0",

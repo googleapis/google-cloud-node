@@ -13,7 +13,7 @@
     "test": "c8 mocha --timeout 600000 test/*.js"
   },
   "dependencies": {
-    "@google-cloud/bare-metal-solution": "^0.2.0"
+    "@google-cloud/bare-metal-solution": "^0.2.1"
   },
   "devDependencies": {
     "c8": "^7.1.0",
