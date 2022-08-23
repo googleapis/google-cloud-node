@@ -30,7 +30,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -439,7 +438,8 @@ export class ArtifactRegistryClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -2049,7 +2049,7 @@ export class ArtifactRegistryClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.importAptArtifacts,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.devtools.artifactregistry.v1.ImportAptArtifactsResponse,
@@ -2191,7 +2191,7 @@ export class ArtifactRegistryClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.importYumArtifacts,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.devtools.artifactregistry.v1.ImportYumArtifactsResponse,
@@ -2333,7 +2333,7 @@ export class ArtifactRegistryClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createRepository,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.devtools.artifactregistry.v1.Repository,
@@ -2472,7 +2472,7 @@ export class ArtifactRegistryClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteRepository,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -2610,7 +2610,7 @@ export class ArtifactRegistryClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deletePackage,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -2751,7 +2751,7 @@ export class ArtifactRegistryClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteVersion,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -2895,7 +2895,7 @@ export class ArtifactRegistryClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listDockerImages.createStream(
-      this.innerApiCalls.listDockerImages as gax.GaxCall,
+      this.innerApiCalls.listDockerImages as GaxCall,
       request,
       callSettings
     );
@@ -2943,7 +2943,7 @@ export class ArtifactRegistryClient {
     this.initialize();
     return this.descriptors.page.listDockerImages.asyncIterate(
       this.innerApiCalls['listDockerImages'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.devtools.artifactregistry.v1.IDockerImage>;
   }
@@ -3084,7 +3084,7 @@ export class ArtifactRegistryClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listRepositories.createStream(
-      this.innerApiCalls.listRepositories as gax.GaxCall,
+      this.innerApiCalls.listRepositories as GaxCall,
       request,
       callSettings
     );
@@ -3132,7 +3132,7 @@ export class ArtifactRegistryClient {
     this.initialize();
     return this.descriptors.page.listRepositories.asyncIterate(
       this.innerApiCalls['listRepositories'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.devtools.artifactregistry.v1.IRepository>;
   }
@@ -3273,7 +3273,7 @@ export class ArtifactRegistryClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listPackages.createStream(
-      this.innerApiCalls.listPackages as gax.GaxCall,
+      this.innerApiCalls.listPackages as GaxCall,
       request,
       callSettings
     );
@@ -3321,7 +3321,7 @@ export class ArtifactRegistryClient {
     this.initialize();
     return this.descriptors.page.listPackages.asyncIterate(
       this.innerApiCalls['listPackages'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.devtools.artifactregistry.v1.IPackage>;
   }
@@ -3470,7 +3470,7 @@ export class ArtifactRegistryClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listVersions.createStream(
-      this.innerApiCalls.listVersions as gax.GaxCall,
+      this.innerApiCalls.listVersions as GaxCall,
       request,
       callSettings
     );
@@ -3522,7 +3522,7 @@ export class ArtifactRegistryClient {
     this.initialize();
     return this.descriptors.page.listVersions.asyncIterate(
       this.innerApiCalls['listVersions'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.devtools.artifactregistry.v1.IVersion>;
   }
@@ -3695,7 +3695,7 @@ export class ArtifactRegistryClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listFiles.createStream(
-      this.innerApiCalls.listFiles as gax.GaxCall,
+      this.innerApiCalls.listFiles as GaxCall,
       request,
       callSettings
     );
@@ -3759,7 +3759,7 @@ export class ArtifactRegistryClient {
     this.initialize();
     return this.descriptors.page.listFiles.asyncIterate(
       this.innerApiCalls['listFiles'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.devtools.artifactregistry.v1.IFile>;
   }
@@ -3920,7 +3920,7 @@ export class ArtifactRegistryClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listTags.createStream(
-      this.innerApiCalls.listTags as gax.GaxCall,
+      this.innerApiCalls.listTags as GaxCall,
       request,
       callSettings
     );
@@ -3978,7 +3978,7 @@ export class ArtifactRegistryClient {
     this.initialize();
     return this.descriptors.page.listTags.asyncIterate(
       this.innerApiCalls['listTags'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.devtools.artifactregistry.v1.ITag>;
   }
