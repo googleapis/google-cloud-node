@@ -28,7 +28,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -286,7 +285,8 @@ export class TablesServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -1338,7 +1338,7 @@ export class TablesServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listTables.createStream(
-      this.innerApiCalls.listTables as gax.GaxCall,
+      this.innerApiCalls.listTables as GaxCall,
       request,
       callSettings
     );
@@ -1388,7 +1388,7 @@ export class TablesServiceClient {
     this.initialize();
     return this.descriptors.page.listTables.asyncIterate(
       this.innerApiCalls['listTables'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.area120.tables.v1alpha1.ITable>;
   }
@@ -1533,7 +1533,7 @@ export class TablesServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listWorkspaces.createStream(
-      this.innerApiCalls.listWorkspaces as gax.GaxCall,
+      this.innerApiCalls.listWorkspaces as GaxCall,
       request,
       callSettings
     );
@@ -1583,7 +1583,7 @@ export class TablesServiceClient {
     this.initialize();
     return this.descriptors.page.listWorkspaces.asyncIterate(
       this.innerApiCalls['listWorkspaces'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.area120.tables.v1alpha1.IWorkspace>;
   }
@@ -1756,7 +1756,7 @@ export class TablesServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listRows.createStream(
-      this.innerApiCalls.listRows as gax.GaxCall,
+      this.innerApiCalls.listRows as GaxCall,
       request,
       callSettings
     );
@@ -1820,7 +1820,7 @@ export class TablesServiceClient {
     this.initialize();
     return this.descriptors.page.listRows.asyncIterate(
       this.innerApiCalls['listRows'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.area120.tables.v1alpha1.IRow>;
   }
