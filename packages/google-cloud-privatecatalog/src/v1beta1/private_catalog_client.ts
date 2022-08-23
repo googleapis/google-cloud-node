@@ -28,7 +28,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -289,7 +288,8 @@ export class PrivateCatalogClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -508,7 +508,7 @@ export class PrivateCatalogClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.searchCatalogs.createStream(
-      this.innerApiCalls.searchCatalogs as gax.GaxCall,
+      this.innerApiCalls.searchCatalogs as GaxCall,
       request,
       callSettings
     );
@@ -565,7 +565,7 @@ export class PrivateCatalogClient {
     this.initialize();
     return this.descriptors.page.searchCatalogs.asyncIterate(
       this.innerApiCalls['searchCatalogs'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.privatecatalog.v1beta1.ICatalog>;
   }
@@ -727,7 +727,7 @@ export class PrivateCatalogClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.searchProducts.createStream(
-      this.innerApiCalls.searchProducts as gax.GaxCall,
+      this.innerApiCalls.searchProducts as GaxCall,
       request,
       callSettings
     );
@@ -785,7 +785,7 @@ export class PrivateCatalogClient {
     this.initialize();
     return this.descriptors.page.searchProducts.asyncIterate(
       this.innerApiCalls['searchProducts'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.privatecatalog.v1beta1.IProduct>;
   }
@@ -947,7 +947,7 @@ export class PrivateCatalogClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.searchVersions.createStream(
-      this.innerApiCalls.searchVersions as gax.GaxCall,
+      this.innerApiCalls.searchVersions as GaxCall,
       request,
       callSettings
     );
@@ -1005,7 +1005,7 @@ export class PrivateCatalogClient {
     this.initialize();
     return this.descriptors.page.searchVersions.asyncIterate(
       this.innerApiCalls['searchVersions'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.privatecatalog.v1beta1.IVersion>;
   }
