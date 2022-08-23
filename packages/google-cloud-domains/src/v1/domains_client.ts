@@ -30,7 +30,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -419,7 +418,8 @@ export class DomainsClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -1236,7 +1236,7 @@ export class DomainsClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.registerDomain,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.domains.v1.Registration,
@@ -1415,7 +1415,7 @@ export class DomainsClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.transferDomain,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.domains.v1.Registration,
@@ -1561,7 +1561,7 @@ export class DomainsClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateRegistration,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.domains.v1.Registration,
@@ -1709,7 +1709,7 @@ export class DomainsClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.configureManagementSettings,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.domains.v1.Registration,
@@ -1861,7 +1861,7 @@ export class DomainsClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.configureDnsSettings,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.domains.v1.Registration,
@@ -2015,7 +2015,7 @@ export class DomainsClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.configureContactSettings,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.domains.v1.Registration,
@@ -2161,7 +2161,7 @@ export class DomainsClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.exportRegistration,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.domains.v1.Registration,
@@ -2317,7 +2317,7 @@ export class DomainsClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteRegistration,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -2499,7 +2499,7 @@ export class DomainsClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listRegistrations.createStream(
-      this.innerApiCalls.listRegistrations as gax.GaxCall,
+      this.innerApiCalls.listRegistrations as GaxCall,
       request,
       callSettings
     );
@@ -2566,7 +2566,7 @@ export class DomainsClient {
     this.initialize();
     return this.descriptors.page.listRegistrations.asyncIterate(
       this.innerApiCalls['listRegistrations'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.domains.v1.IRegistration>;
   }
