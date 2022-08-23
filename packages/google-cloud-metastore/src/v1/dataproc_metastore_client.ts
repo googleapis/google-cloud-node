@@ -30,7 +30,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -472,7 +471,8 @@ export class DataprocMetastoreClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -960,7 +960,7 @@ export class DataprocMetastoreClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createService,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.metastore.v1.Service,
@@ -1119,7 +1119,7 @@ export class DataprocMetastoreClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateService,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.metastore.v1.Service,
@@ -1272,7 +1272,7 @@ export class DataprocMetastoreClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteService,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -1436,7 +1436,7 @@ export class DataprocMetastoreClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createMetadataImport,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.metastore.v1.MetadataImport,
@@ -1596,7 +1596,7 @@ export class DataprocMetastoreClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateMetadataImport,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.metastore.v1.MetadataImport,
@@ -1755,7 +1755,7 @@ export class DataprocMetastoreClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.exportMetadata,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.metastore.v1.MetadataExport,
@@ -1915,7 +1915,7 @@ export class DataprocMetastoreClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.restoreService,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.metastore.v1.Restore,
@@ -2078,7 +2078,7 @@ export class DataprocMetastoreClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createBackup,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.metastore.v1.Backup,
@@ -2231,7 +2231,7 @@ export class DataprocMetastoreClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteBackup,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -2405,7 +2405,7 @@ export class DataprocMetastoreClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listServices.createStream(
-      this.innerApiCalls.listServices as gax.GaxCall,
+      this.innerApiCalls.listServices as GaxCall,
       request,
       callSettings
     );
@@ -2471,7 +2471,7 @@ export class DataprocMetastoreClient {
     this.initialize();
     return this.descriptors.page.listServices.asyncIterate(
       this.innerApiCalls['listServices'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.metastore.v1.IService>;
   }
@@ -2648,7 +2648,7 @@ export class DataprocMetastoreClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listMetadataImports.createStream(
-      this.innerApiCalls.listMetadataImports as gax.GaxCall,
+      this.innerApiCalls.listMetadataImports as GaxCall,
       request,
       callSettings
     );
@@ -2714,7 +2714,7 @@ export class DataprocMetastoreClient {
     this.initialize();
     return this.descriptors.page.listMetadataImports.asyncIterate(
       this.innerApiCalls['listMetadataImports'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.metastore.v1.IMetadataImport>;
   }
@@ -2885,7 +2885,7 @@ export class DataprocMetastoreClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listBackups.createStream(
-      this.innerApiCalls.listBackups as gax.GaxCall,
+      this.innerApiCalls.listBackups as GaxCall,
       request,
       callSettings
     );
@@ -2951,7 +2951,7 @@ export class DataprocMetastoreClient {
     this.initialize();
     return this.descriptors.page.listBackups.asyncIterate(
       this.innerApiCalls['listBackups'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.metastore.v1.IBackup>;
   }
