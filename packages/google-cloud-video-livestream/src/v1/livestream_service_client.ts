@@ -30,7 +30,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -431,7 +430,8 @@ export class LivestreamServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -1140,7 +1140,7 @@ export class LivestreamServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createChannel,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.video.livestream.v1.Channel,
@@ -1297,7 +1297,7 @@ export class LivestreamServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteChannel,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -1461,7 +1461,7 @@ export class LivestreamServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateChannel,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.video.livestream.v1.Channel,
@@ -1614,7 +1614,7 @@ export class LivestreamServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.startChannel,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.video.livestream.v1.ChannelOperationResponse,
@@ -1767,7 +1767,7 @@ export class LivestreamServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.stopChannel,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.video.livestream.v1.ChannelOperationResponse,
@@ -1925,7 +1925,7 @@ export class LivestreamServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createInput,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.video.livestream.v1.Input,
@@ -2077,7 +2077,7 @@ export class LivestreamServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteInput,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -2237,7 +2237,7 @@ export class LivestreamServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateInput,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.video.livestream.v1.Input,
@@ -2401,7 +2401,7 @@ export class LivestreamServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listChannels.createStream(
-      this.innerApiCalls.listChannels as gax.GaxCall,
+      this.innerApiCalls.listChannels as GaxCall,
       request,
       callSettings
     );
@@ -2459,7 +2459,7 @@ export class LivestreamServiceClient {
     this.initialize();
     return this.descriptors.page.listChannels.asyncIterate(
       this.innerApiCalls['listChannels'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.video.livestream.v1.IChannel>;
   }
@@ -2620,7 +2620,7 @@ export class LivestreamServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listInputs.createStream(
-      this.innerApiCalls.listInputs as gax.GaxCall,
+      this.innerApiCalls.listInputs as GaxCall,
       request,
       callSettings
     );
@@ -2678,7 +2678,7 @@ export class LivestreamServiceClient {
     this.initialize();
     return this.descriptors.page.listInputs.asyncIterate(
       this.innerApiCalls['listInputs'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.video.livestream.v1.IInput>;
   }
@@ -2839,7 +2839,7 @@ export class LivestreamServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listEvents.createStream(
-      this.innerApiCalls.listEvents as gax.GaxCall,
+      this.innerApiCalls.listEvents as GaxCall,
       request,
       callSettings
     );
@@ -2897,7 +2897,7 @@ export class LivestreamServiceClient {
     this.initialize();
     return this.descriptors.page.listEvents.asyncIterate(
       this.innerApiCalls['listEvents'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.video.livestream.v1.IEvent>;
   }
