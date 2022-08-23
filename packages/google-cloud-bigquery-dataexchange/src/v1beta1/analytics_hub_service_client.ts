@@ -28,7 +28,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -285,7 +284,8 @@ export class AnalyticsHubServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -1679,7 +1679,7 @@ export class AnalyticsHubServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listDataExchanges.createStream(
-      this.innerApiCalls.listDataExchanges as gax.GaxCall,
+      this.innerApiCalls.listDataExchanges as GaxCall,
       request,
       callSettings
     );
@@ -1730,7 +1730,7 @@ export class AnalyticsHubServiceClient {
     this.initialize();
     return this.descriptors.page.listDataExchanges.asyncIterate(
       this.innerApiCalls['listDataExchanges'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange>;
   }
@@ -1877,7 +1877,7 @@ export class AnalyticsHubServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listOrgDataExchanges.createStream(
-      this.innerApiCalls.listOrgDataExchanges as gax.GaxCall,
+      this.innerApiCalls.listOrgDataExchanges as GaxCall,
       request,
       callSettings
     );
@@ -1928,7 +1928,7 @@ export class AnalyticsHubServiceClient {
     this.initialize();
     return this.descriptors.page.listOrgDataExchanges.asyncIterate(
       this.innerApiCalls['listOrgDataExchanges'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange>;
   }
@@ -2075,7 +2075,7 @@ export class AnalyticsHubServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listListings.createStream(
-      this.innerApiCalls.listListings as gax.GaxCall,
+      this.innerApiCalls.listListings as GaxCall,
       request,
       callSettings
     );
@@ -2126,7 +2126,7 @@ export class AnalyticsHubServiceClient {
     this.initialize();
     return this.descriptors.page.listListings.asyncIterate(
       this.innerApiCalls['listListings'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.bigquery.dataexchange.v1beta1.IListing>;
   }
