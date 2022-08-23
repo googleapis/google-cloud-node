@@ -4,6 +4,21 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/automl?activeTab=versions
 
+## [3.1.0](https://github.com/googleapis/nodejs-automl/compare/v3.0.0...v3.1.0) (2022-08-23)
+
+
+### Features
+
+* support regapic LRO ([#618](https://github.com/googleapis/nodejs-automl/issues/618)) ([24669e9](https://github.com/googleapis/nodejs-automl/commit/24669e921612949f777a1b5b9dc57a0d011d0a90))
+
+
+### Bug Fixes
+
+* better support for fallback mode ([#625](https://github.com/googleapis/nodejs-automl/issues/625)) ([301d706](https://github.com/googleapis/nodejs-automl/commit/301d706c3e4564da4ce7a0c6f082890e2e111b27))
+* change import long to require ([#626](https://github.com/googleapis/nodejs-automl/issues/626)) ([958e1c4](https://github.com/googleapis/nodejs-automl/commit/958e1c46e87f258356f8523548ff5b0401a12470))
+* **deps:** update dependency mathjs to v11 ([#622](https://github.com/googleapis/nodejs-automl/issues/622)) ([c0b8fa5](https://github.com/googleapis/nodejs-automl/commit/c0b8fa50f6cea30f7cc442c5f8e9599ab9cb8901))
+* remove pip install statements ([#1546](https://github.com/googleapis/nodejs-automl/issues/1546)) ([#627](https://github.com/googleapis/nodejs-automl/issues/627)) ([b333d59](https://github.com/googleapis/nodejs-automl/commit/b333d598b16ca9f97fd1a6539fbef0fee65ac3ae))
+
 ## [3.0.0](https://github.com/googleapis/nodejs-automl/compare/v2.5.2...v3.0.0) (2022-06-20)
 
 
