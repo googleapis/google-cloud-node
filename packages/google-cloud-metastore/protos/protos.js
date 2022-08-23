@@ -99,7 +99,7 @@
                         };
     
                         /**
-                         * Callback as used by {@link google.cloud.metastore.v1.DataprocMetastore#listServices}.
+                         * Callback as used by {@link google.cloud.metastore.v1.DataprocMetastore|listServices}.
                          * @memberof google.cloud.metastore.v1.DataprocMetastore
                          * @typedef ListServicesCallback
                          * @type {function}
@@ -132,7 +132,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.metastore.v1.DataprocMetastore#getService}.
+                         * Callback as used by {@link google.cloud.metastore.v1.DataprocMetastore|getService}.
                          * @memberof google.cloud.metastore.v1.DataprocMetastore
                          * @typedef GetServiceCallback
                          * @type {function}
@@ -165,7 +165,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.metastore.v1.DataprocMetastore#createService}.
+                         * Callback as used by {@link google.cloud.metastore.v1.DataprocMetastore|createService}.
                          * @memberof google.cloud.metastore.v1.DataprocMetastore
                          * @typedef CreateServiceCallback
                          * @type {function}
@@ -198,7 +198,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.metastore.v1.DataprocMetastore#updateService}.
+                         * Callback as used by {@link google.cloud.metastore.v1.DataprocMetastore|updateService}.
                          * @memberof google.cloud.metastore.v1.DataprocMetastore
                          * @typedef UpdateServiceCallback
                          * @type {function}
@@ -231,7 +231,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.metastore.v1.DataprocMetastore#deleteService}.
+                         * Callback as used by {@link google.cloud.metastore.v1.DataprocMetastore|deleteService}.
                          * @memberof google.cloud.metastore.v1.DataprocMetastore
                          * @typedef DeleteServiceCallback
                          * @type {function}
@@ -264,7 +264,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.metastore.v1.DataprocMetastore#listMetadataImports}.
+                         * Callback as used by {@link google.cloud.metastore.v1.DataprocMetastore|listMetadataImports}.
                          * @memberof google.cloud.metastore.v1.DataprocMetastore
                          * @typedef ListMetadataImportsCallback
                          * @type {function}
@@ -297,7 +297,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.metastore.v1.DataprocMetastore#getMetadataImport}.
+                         * Callback as used by {@link google.cloud.metastore.v1.DataprocMetastore|getMetadataImport}.
                          * @memberof google.cloud.metastore.v1.DataprocMetastore
                          * @typedef GetMetadataImportCallback
                          * @type {function}
@@ -330,7 +330,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.metastore.v1.DataprocMetastore#createMetadataImport}.
+                         * Callback as used by {@link google.cloud.metastore.v1.DataprocMetastore|createMetadataImport}.
                          * @memberof google.cloud.metastore.v1.DataprocMetastore
                          * @typedef CreateMetadataImportCallback
                          * @type {function}
@@ -363,7 +363,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.metastore.v1.DataprocMetastore#updateMetadataImport}.
+                         * Callback as used by {@link google.cloud.metastore.v1.DataprocMetastore|updateMetadataImport}.
                          * @memberof google.cloud.metastore.v1.DataprocMetastore
                          * @typedef UpdateMetadataImportCallback
                          * @type {function}
@@ -396,7 +396,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.metastore.v1.DataprocMetastore#exportMetadata}.
+                         * Callback as used by {@link google.cloud.metastore.v1.DataprocMetastore|exportMetadata}.
                          * @memberof google.cloud.metastore.v1.DataprocMetastore
                          * @typedef ExportMetadataCallback
                          * @type {function}
@@ -429,7 +429,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.metastore.v1.DataprocMetastore#restoreService}.
+                         * Callback as used by {@link google.cloud.metastore.v1.DataprocMetastore|restoreService}.
                          * @memberof google.cloud.metastore.v1.DataprocMetastore
                          * @typedef RestoreServiceCallback
                          * @type {function}
@@ -462,7 +462,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.metastore.v1.DataprocMetastore#listBackups}.
+                         * Callback as used by {@link google.cloud.metastore.v1.DataprocMetastore|listBackups}.
                          * @memberof google.cloud.metastore.v1.DataprocMetastore
                          * @typedef ListBackupsCallback
                          * @type {function}
@@ -495,7 +495,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.metastore.v1.DataprocMetastore#getBackup}.
+                         * Callback as used by {@link google.cloud.metastore.v1.DataprocMetastore|getBackup}.
                          * @memberof google.cloud.metastore.v1.DataprocMetastore
                          * @typedef GetBackupCallback
                          * @type {function}
@@ -528,7 +528,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.metastore.v1.DataprocMetastore#createBackup}.
+                         * Callback as used by {@link google.cloud.metastore.v1.DataprocMetastore|createBackup}.
                          * @memberof google.cloud.metastore.v1.DataprocMetastore
                          * @typedef CreateBackupCallback
                          * @type {function}
@@ -561,7 +561,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.metastore.v1.DataprocMetastore#deleteBackup}.
+                         * Callback as used by {@link google.cloud.metastore.v1.DataprocMetastore|deleteBackup}.
                          * @memberof google.cloud.metastore.v1.DataprocMetastore
                          * @typedef DeleteBackupCallback
                          * @type {function}
@@ -869,73 +869,89 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 5:
-                                    message.hiveMetastoreConfig = $root.google.cloud.metastore.v1.HiveMetastoreConfig.decode(reader, reader.uint32());
-                                    break;
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
-                                case 2:
-                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 3:
-                                    message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 4:
-                                    if (message.labels === $util.emptyObject)
-                                        message.labels = {};
-                                    var end2 = reader.uint32() + reader.pos;
-                                    key = "";
-                                    value = "";
-                                    while (reader.pos < end2) {
-                                        var tag2 = reader.uint32();
-                                        switch (tag2 >>> 3) {
-                                        case 1:
-                                            key = reader.string();
-                                            break;
-                                        case 2:
-                                            value = reader.string();
-                                            break;
-                                        default:
-                                            reader.skipType(tag2 & 7);
-                                            break;
-                                        }
+                                case 5: {
+                                        message.hiveMetastoreConfig = $root.google.cloud.metastore.v1.HiveMetastoreConfig.decode(reader, reader.uint32());
+                                        break;
                                     }
-                                    message.labels[key] = value;
-                                    break;
-                                case 7:
-                                    message.network = reader.string();
-                                    break;
-                                case 8:
-                                    message.endpointUri = reader.string();
-                                    break;
-                                case 9:
-                                    message.port = reader.int32();
-                                    break;
-                                case 10:
-                                    message.state = reader.int32();
-                                    break;
-                                case 11:
-                                    message.stateMessage = reader.string();
-                                    break;
-                                case 12:
-                                    message.artifactGcsUri = reader.string();
-                                    break;
-                                case 13:
-                                    message.tier = reader.int32();
-                                    break;
-                                case 15:
-                                    message.maintenanceWindow = $root.google.cloud.metastore.v1.MaintenanceWindow.decode(reader, reader.uint32());
-                                    break;
-                                case 16:
-                                    message.uid = reader.string();
-                                    break;
-                                case 17:
-                                    message.metadataManagementActivity = $root.google.cloud.metastore.v1.MetadataManagementActivity.decode(reader, reader.uint32());
-                                    break;
-                                case 19:
-                                    message.releaseChannel = reader.int32();
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        if (message.labels === $util.emptyObject)
+                                            message.labels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.labels[key] = value;
+                                        break;
+                                    }
+                                case 7: {
+                                        message.network = reader.string();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.endpointUri = reader.string();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.port = reader.int32();
+                                        break;
+                                    }
+                                case 10: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 11: {
+                                        message.stateMessage = reader.string();
+                                        break;
+                                    }
+                                case 12: {
+                                        message.artifactGcsUri = reader.string();
+                                        break;
+                                    }
+                                case 13: {
+                                        message.tier = reader.int32();
+                                        break;
+                                    }
+                                case 15: {
+                                        message.maintenanceWindow = $root.google.cloud.metastore.v1.MaintenanceWindow.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 16: {
+                                        message.uid = reader.string();
+                                        break;
+                                    }
+                                case 17: {
+                                        message.metadataManagementActivity = $root.google.cloud.metastore.v1.MetadataManagementActivity.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 19: {
+                                        message.releaseChannel = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -1272,6 +1288,21 @@
                         };
     
                         /**
+                         * Gets the default type url for Service
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1.Service
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Service.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1.Service";
+                        };
+    
+                        /**
                          * State enum.
                          * @name google.cloud.metastore.v1.Service.State
                          * @enum {number}
@@ -1435,12 +1466,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.hourOfDay = $root.google.protobuf.Int32Value.decode(reader, reader.uint32());
-                                    break;
-                                case 2:
-                                    message.dayOfWeek = reader.int32();
-                                    break;
+                                case 1: {
+                                        message.hourOfDay = $root.google.protobuf.Int32Value.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.dayOfWeek = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -1587,6 +1620,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for MaintenanceWindow
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1.MaintenanceWindow
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MaintenanceWindow.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1.MaintenanceWindow";
+                        };
+    
                         return MaintenanceWindow;
                     })();
     
@@ -1706,34 +1754,37 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.version = reader.string();
-                                    break;
-                                case 2:
-                                    if (message.configOverrides === $util.emptyObject)
-                                        message.configOverrides = {};
-                                    var end2 = reader.uint32() + reader.pos;
-                                    key = "";
-                                    value = "";
-                                    while (reader.pos < end2) {
-                                        var tag2 = reader.uint32();
-                                        switch (tag2 >>> 3) {
-                                        case 1:
-                                            key = reader.string();
-                                            break;
-                                        case 2:
-                                            value = reader.string();
-                                            break;
-                                        default:
-                                            reader.skipType(tag2 & 7);
-                                            break;
-                                        }
+                                case 1: {
+                                        message.version = reader.string();
+                                        break;
                                     }
-                                    message.configOverrides[key] = value;
-                                    break;
-                                case 3:
-                                    message.kerberosConfig = $root.google.cloud.metastore.v1.KerberosConfig.decode(reader, reader.uint32());
-                                    break;
+                                case 2: {
+                                        if (message.configOverrides === $util.emptyObject)
+                                            message.configOverrides = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.configOverrides[key] = value;
+                                        break;
+                                    }
+                                case 3: {
+                                        message.kerberosConfig = $root.google.cloud.metastore.v1.KerberosConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -1860,6 +1911,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for HiveMetastoreConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1.HiveMetastoreConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        HiveMetastoreConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1.HiveMetastoreConfig";
+                        };
+    
                         return HiveMetastoreConfig;
                     })();
     
@@ -1977,15 +2043,18 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.keytab = $root.google.cloud.metastore.v1.Secret.decode(reader, reader.uint32());
-                                    break;
-                                case 2:
-                                    message.principal = reader.string();
-                                    break;
-                                case 3:
-                                    message.krb5ConfigGcsUri = reader.string();
-                                    break;
+                                case 1: {
+                                        message.keytab = $root.google.cloud.metastore.v1.Secret.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.principal = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.krb5ConfigGcsUri = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -2097,6 +2166,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for KerberosConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1.KerberosConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        KerberosConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1.KerberosConfig";
+                        };
+    
                         return KerberosConfig;
                     })();
     
@@ -2206,9 +2290,10 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 2:
-                                    message.cloudSecret = reader.string();
-                                    break;
+                                case 2: {
+                                        message.cloudSecret = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -2300,6 +2385,21 @@
                          */
                         Secret.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Secret
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1.Secret
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Secret.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1.Secret";
                         };
     
                         return Secret;
@@ -2412,16 +2512,18 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    if (!(message.metadataExports && message.metadataExports.length))
-                                        message.metadataExports = [];
-                                    message.metadataExports.push($root.google.cloud.metastore.v1.MetadataExport.decode(reader, reader.uint32()));
-                                    break;
-                                case 2:
-                                    if (!(message.restores && message.restores.length))
-                                        message.restores = [];
-                                    message.restores.push($root.google.cloud.metastore.v1.Restore.decode(reader, reader.uint32()));
-                                    break;
+                                case 1: {
+                                        if (!(message.metadataExports && message.metadataExports.length))
+                                            message.metadataExports = [];
+                                        message.metadataExports.push($root.google.cloud.metastore.v1.MetadataExport.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.restores && message.restores.length))
+                                            message.restores = [];
+                                        message.restores.push($root.google.cloud.metastore.v1.Restore.decode(reader, reader.uint32()));
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -2552,6 +2654,21 @@
                          */
                         MetadataManagementActivity.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for MetadataManagementActivity
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1.MetadataManagementActivity
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MetadataManagementActivity.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1.MetadataManagementActivity";
                         };
     
                         return MetadataManagementActivity;
@@ -2729,27 +2846,34 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 6:
-                                    message.databaseDump = $root.google.cloud.metastore.v1.MetadataImport.DatabaseDump.decode(reader, reader.uint32());
-                                    break;
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
-                                case 2:
-                                    message.description = reader.string();
-                                    break;
-                                case 3:
-                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 4:
-                                    message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 7:
-                                    message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 5:
-                                    message.state = reader.int32();
-                                    break;
+                                case 6: {
+                                        message.databaseDump = $root.google.cloud.metastore.v1.MetadataImport.DatabaseDump.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -2942,6 +3066,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for MetadataImport
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1.MetadataImport
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MetadataImport.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1.MetadataImport";
+                        };
+    
                         MetadataImport.DatabaseDump = (function() {
     
                             /**
@@ -3056,15 +3195,18 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.databaseType = reader.int32();
-                                        break;
-                                    case 2:
-                                        message.gcsUri = reader.string();
-                                        break;
-                                    case 4:
-                                        message.type = reader.int32();
-                                        break;
+                                    case 1: {
+                                            message.databaseType = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.gcsUri = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.type = reader.int32();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -3200,6 +3342,21 @@
                              */
                             DatabaseDump.prototype.toJSON = function toJSON() {
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for DatabaseDump
+                             * @function getTypeUrl
+                             * @memberof google.cloud.metastore.v1.MetadataImport.DatabaseDump
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            DatabaseDump.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.metastore.v1.MetadataImport.DatabaseDump";
                             };
     
                             /**
@@ -3392,21 +3549,26 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 4:
-                                    message.destinationGcsUri = reader.string();
-                                    break;
-                                case 1:
-                                    message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 2:
-                                    message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 3:
-                                    message.state = reader.int32();
-                                    break;
-                                case 5:
-                                    message.databaseDumpType = reader.int32();
-                                    break;
+                                case 4: {
+                                        message.destinationGcsUri = reader.string();
+                                        break;
+                                    }
+                                case 1: {
+                                        message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.databaseDumpType = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -3588,6 +3750,21 @@
                          */
                         MetadataExport.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for MetadataExport
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1.MetadataExport
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MetadataExport.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1.MetadataExport";
                         };
     
                         /**
@@ -3773,29 +3950,36 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
-                                case 2:
-                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 3:
-                                    message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 4:
-                                    message.state = reader.int32();
-                                    break;
-                                case 5:
-                                    message.serviceRevision = $root.google.cloud.metastore.v1.Service.decode(reader, reader.uint32());
-                                    break;
-                                case 6:
-                                    message.description = reader.string();
-                                    break;
-                                case 7:
-                                    if (!(message.restoringServices && message.restoringServices.length))
-                                        message.restoringServices = [];
-                                    message.restoringServices.push(reader.string());
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.serviceRevision = $root.google.cloud.metastore.v1.Service.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        if (!(message.restoringServices && message.restoringServices.length))
+                                            message.restoringServices = [];
+                                        message.restoringServices.push(reader.string());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -3996,6 +4180,21 @@
                         };
     
                         /**
+                         * Gets the default type url for Backup
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1.Backup
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Backup.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1.Backup";
+                        };
+    
+                        /**
                          * State enum.
                          * @name google.cloud.metastore.v1.Backup.State
                          * @enum {number}
@@ -4167,24 +4366,30 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 2:
-                                    message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 3:
-                                    message.state = reader.int32();
-                                    break;
-                                case 4:
-                                    message.backup = reader.string();
-                                    break;
-                                case 5:
-                                    message.type = reader.int32();
-                                    break;
-                                case 6:
-                                    message.details = reader.string();
-                                    break;
+                                case 1: {
+                                        message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.backup = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.type = reader.int32();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.details = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -4372,6 +4577,21 @@
                         };
     
                         /**
+                         * Gets the default type url for Restore
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1.Restore
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Restore.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1.Restore";
+                        };
+    
+                        /**
                          * State enum.
                          * @name google.cloud.metastore.v1.Restore.State
                          * @enum {number}
@@ -4546,21 +4766,26 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.parent = reader.string();
-                                    break;
-                                case 2:
-                                    message.pageSize = reader.int32();
-                                    break;
-                                case 3:
-                                    message.pageToken = reader.string();
-                                    break;
-                                case 4:
-                                    message.filter = reader.string();
-                                    break;
-                                case 5:
-                                    message.orderBy = reader.string();
-                                    break;
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -4681,6 +4906,21 @@
                          */
                         ListServicesRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListServicesRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1.ListServicesRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListServicesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1.ListServicesRequest";
                         };
     
                         return ListServicesRequest;
@@ -4804,19 +5044,22 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    if (!(message.services && message.services.length))
-                                        message.services = [];
-                                    message.services.push($root.google.cloud.metastore.v1.Service.decode(reader, reader.uint32()));
-                                    break;
-                                case 2:
-                                    message.nextPageToken = reader.string();
-                                    break;
-                                case 3:
-                                    if (!(message.unreachable && message.unreachable.length))
-                                        message.unreachable = [];
-                                    message.unreachable.push(reader.string());
-                                    break;
+                                case 1: {
+                                        if (!(message.services && message.services.length))
+                                            message.services = [];
+                                        message.services.push($root.google.cloud.metastore.v1.Service.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -4953,6 +5196,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for ListServicesResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1.ListServicesResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListServicesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1.ListServicesResponse";
+                        };
+    
                         return ListServicesResponse;
                     })();
     
@@ -5048,9 +5306,10 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -5138,6 +5397,21 @@
                          */
                         GetServiceRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetServiceRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1.GetServiceRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetServiceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1.GetServiceRequest";
                         };
     
                         return GetServiceRequest;
@@ -5268,18 +5542,22 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.parent = reader.string();
-                                    break;
-                                case 2:
-                                    message.serviceId = reader.string();
-                                    break;
-                                case 3:
-                                    message.service = $root.google.cloud.metastore.v1.Service.decode(reader, reader.uint32());
-                                    break;
-                                case 4:
-                                    message.requestId = reader.string();
-                                    break;
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.serviceId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.service = $root.google.cloud.metastore.v1.Service.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -5399,6 +5677,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for CreateServiceRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1.CreateServiceRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateServiceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1.CreateServiceRequest";
+                        };
+    
                         return CreateServiceRequest;
                     })();
     
@@ -5516,15 +5809,18 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
-                                    break;
-                                case 2:
-                                    message.service = $root.google.cloud.metastore.v1.Service.decode(reader, reader.uint32());
-                                    break;
-                                case 3:
-                                    message.requestId = reader.string();
-                                    break;
+                                case 1: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.service = $root.google.cloud.metastore.v1.Service.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -5641,6 +5937,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for UpdateServiceRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1.UpdateServiceRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateServiceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1.UpdateServiceRequest";
+                        };
+    
                         return UpdateServiceRequest;
                     })();
     
@@ -5747,12 +6058,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
-                                case 2:
-                                    message.requestId = reader.string();
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -5849,6 +6162,21 @@
                          */
                         DeleteServiceRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteServiceRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1.DeleteServiceRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteServiceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1.DeleteServiceRequest";
                         };
     
                         return DeleteServiceRequest;
@@ -5990,21 +6318,26 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.parent = reader.string();
-                                    break;
-                                case 2:
-                                    message.pageSize = reader.int32();
-                                    break;
-                                case 3:
-                                    message.pageToken = reader.string();
-                                    break;
-                                case 4:
-                                    message.filter = reader.string();
-                                    break;
-                                case 5:
-                                    message.orderBy = reader.string();
-                                    break;
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -6125,6 +6458,21 @@
                          */
                         ListMetadataImportsRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListMetadataImportsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1.ListMetadataImportsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListMetadataImportsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1.ListMetadataImportsRequest";
                         };
     
                         return ListMetadataImportsRequest;
@@ -6248,19 +6596,22 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    if (!(message.metadataImports && message.metadataImports.length))
-                                        message.metadataImports = [];
-                                    message.metadataImports.push($root.google.cloud.metastore.v1.MetadataImport.decode(reader, reader.uint32()));
-                                    break;
-                                case 2:
-                                    message.nextPageToken = reader.string();
-                                    break;
-                                case 3:
-                                    if (!(message.unreachable && message.unreachable.length))
-                                        message.unreachable = [];
-                                    message.unreachable.push(reader.string());
-                                    break;
+                                case 1: {
+                                        if (!(message.metadataImports && message.metadataImports.length))
+                                            message.metadataImports = [];
+                                        message.metadataImports.push($root.google.cloud.metastore.v1.MetadataImport.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -6397,6 +6748,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for ListMetadataImportsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1.ListMetadataImportsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListMetadataImportsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1.ListMetadataImportsResponse";
+                        };
+    
                         return ListMetadataImportsResponse;
                     })();
     
@@ -6492,9 +6858,10 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -6582,6 +6949,21 @@
                          */
                         GetMetadataImportRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetMetadataImportRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1.GetMetadataImportRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetMetadataImportRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1.GetMetadataImportRequest";
                         };
     
                         return GetMetadataImportRequest;
@@ -6712,18 +7094,22 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.parent = reader.string();
-                                    break;
-                                case 2:
-                                    message.metadataImportId = reader.string();
-                                    break;
-                                case 3:
-                                    message.metadataImport = $root.google.cloud.metastore.v1.MetadataImport.decode(reader, reader.uint32());
-                                    break;
-                                case 4:
-                                    message.requestId = reader.string();
-                                    break;
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.metadataImportId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.metadataImport = $root.google.cloud.metastore.v1.MetadataImport.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -6843,6 +7229,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for CreateMetadataImportRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1.CreateMetadataImportRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateMetadataImportRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1.CreateMetadataImportRequest";
+                        };
+    
                         return CreateMetadataImportRequest;
                     })();
     
@@ -6960,15 +7361,18 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
-                                    break;
-                                case 2:
-                                    message.metadataImport = $root.google.cloud.metastore.v1.MetadataImport.decode(reader, reader.uint32());
-                                    break;
-                                case 3:
-                                    message.requestId = reader.string();
-                                    break;
+                                case 1: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.metadataImport = $root.google.cloud.metastore.v1.MetadataImport.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -7083,6 +7487,21 @@
                          */
                         UpdateMetadataImportRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateMetadataImportRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1.UpdateMetadataImportRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateMetadataImportRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1.UpdateMetadataImportRequest";
                         };
     
                         return UpdateMetadataImportRequest;
@@ -7224,21 +7643,26 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.parent = reader.string();
-                                    break;
-                                case 2:
-                                    message.pageSize = reader.int32();
-                                    break;
-                                case 3:
-                                    message.pageToken = reader.string();
-                                    break;
-                                case 4:
-                                    message.filter = reader.string();
-                                    break;
-                                case 5:
-                                    message.orderBy = reader.string();
-                                    break;
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -7359,6 +7783,21 @@
                          */
                         ListBackupsRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListBackupsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1.ListBackupsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListBackupsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1.ListBackupsRequest";
                         };
     
                         return ListBackupsRequest;
@@ -7482,19 +7921,22 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    if (!(message.backups && message.backups.length))
-                                        message.backups = [];
-                                    message.backups.push($root.google.cloud.metastore.v1.Backup.decode(reader, reader.uint32()));
-                                    break;
-                                case 2:
-                                    message.nextPageToken = reader.string();
-                                    break;
-                                case 3:
-                                    if (!(message.unreachable && message.unreachable.length))
-                                        message.unreachable = [];
-                                    message.unreachable.push(reader.string());
-                                    break;
+                                case 1: {
+                                        if (!(message.backups && message.backups.length))
+                                            message.backups = [];
+                                        message.backups.push($root.google.cloud.metastore.v1.Backup.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -7631,6 +8073,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for ListBackupsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1.ListBackupsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListBackupsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1.ListBackupsResponse";
+                        };
+    
                         return ListBackupsResponse;
                     })();
     
@@ -7726,9 +8183,10 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -7816,6 +8274,21 @@
                          */
                         GetBackupRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetBackupRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1.GetBackupRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetBackupRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1.GetBackupRequest";
                         };
     
                         return GetBackupRequest;
@@ -7946,18 +8419,22 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.parent = reader.string();
-                                    break;
-                                case 2:
-                                    message.backupId = reader.string();
-                                    break;
-                                case 3:
-                                    message.backup = $root.google.cloud.metastore.v1.Backup.decode(reader, reader.uint32());
-                                    break;
-                                case 4:
-                                    message.requestId = reader.string();
-                                    break;
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.backupId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.backup = $root.google.cloud.metastore.v1.Backup.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -8077,6 +8554,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for CreateBackupRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1.CreateBackupRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateBackupRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1.CreateBackupRequest";
+                        };
+    
                         return CreateBackupRequest;
                     })();
     
@@ -8183,12 +8675,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
-                                case 2:
-                                    message.requestId = reader.string();
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -8285,6 +8779,21 @@
                          */
                         DeleteBackupRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteBackupRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1.DeleteBackupRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteBackupRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1.DeleteBackupRequest";
                         };
     
                         return DeleteBackupRequest;
@@ -8429,18 +8938,22 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 2:
-                                    message.destinationGcsFolder = reader.string();
-                                    break;
-                                case 1:
-                                    message.service = reader.string();
-                                    break;
-                                case 3:
-                                    message.requestId = reader.string();
-                                    break;
-                                case 4:
-                                    message.databaseDumpType = reader.int32();
-                                    break;
+                                case 2: {
+                                        message.destinationGcsFolder = reader.string();
+                                        break;
+                                    }
+                                case 1: {
+                                        message.service = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.databaseDumpType = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -8578,6 +9091,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for ExportMetadataRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1.ExportMetadataRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ExportMetadataRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1.ExportMetadataRequest";
+                        };
+    
                         return ExportMetadataRequest;
                     })();
     
@@ -8706,18 +9234,22 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.service = reader.string();
-                                    break;
-                                case 2:
-                                    message.backup = reader.string();
-                                    break;
-                                case 3:
-                                    message.restoreType = reader.int32();
-                                    break;
-                                case 4:
-                                    message.requestId = reader.string();
-                                    break;
+                                case 1: {
+                                        message.service = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.backup = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.restoreType = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -8848,6 +9380,21 @@
                          */
                         RestoreServiceRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RestoreServiceRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1.RestoreServiceRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RestoreServiceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1.RestoreServiceRequest";
                         };
     
                         return RestoreServiceRequest;
@@ -9011,27 +9558,34 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 2:
-                                    message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 3:
-                                    message.target = reader.string();
-                                    break;
-                                case 4:
-                                    message.verb = reader.string();
-                                    break;
-                                case 5:
-                                    message.statusMessage = reader.string();
-                                    break;
-                                case 6:
-                                    message.requestedCancellation = reader.bool();
-                                    break;
-                                case 7:
-                                    message.apiVersion = reader.string();
-                                    break;
+                                case 1: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.target = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.verb = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.statusMessage = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.requestedCancellation = reader.bool();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.apiVersion = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -9180,6 +9734,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for OperationMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1.OperationMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        OperationMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1.OperationMetadata";
+                        };
+    
                         return OperationMetadata;
                     })();
     
@@ -9277,11 +9846,12 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    if (!(message.supportedHiveMetastoreVersions && message.supportedHiveMetastoreVersions.length))
-                                        message.supportedHiveMetastoreVersions = [];
-                                    message.supportedHiveMetastoreVersions.push($root.google.cloud.metastore.v1.LocationMetadata.HiveMetastoreVersion.decode(reader, reader.uint32()));
-                                    break;
+                                case 1: {
+                                        if (!(message.supportedHiveMetastoreVersions && message.supportedHiveMetastoreVersions.length))
+                                            message.supportedHiveMetastoreVersions = [];
+                                        message.supportedHiveMetastoreVersions.push($root.google.cloud.metastore.v1.LocationMetadata.HiveMetastoreVersion.decode(reader, reader.uint32()));
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -9388,6 +9958,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for LocationMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1.LocationMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        LocationMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1.LocationMetadata";
+                        };
+    
                         LocationMetadata.HiveMetastoreVersion = (function() {
     
                             /**
@@ -9491,12 +10076,14 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.version = reader.string();
-                                        break;
-                                    case 2:
-                                        message.isDefault = reader.bool();
-                                        break;
+                                    case 1: {
+                                            message.version = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.isDefault = reader.bool();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -9593,6 +10180,21 @@
                              */
                             HiveMetastoreVersion.prototype.toJSON = function toJSON() {
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for HiveMetastoreVersion
+                             * @function getTypeUrl
+                             * @memberof google.cloud.metastore.v1.LocationMetadata.HiveMetastoreVersion
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            HiveMetastoreVersion.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.metastore.v1.LocationMetadata.HiveMetastoreVersion";
                             };
     
                             return HiveMetastoreVersion;
@@ -9759,6 +10361,21 @@
                         };
     
                         /**
+                         * Gets the default type url for DatabaseDumpSpec
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1.DatabaseDumpSpec
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DatabaseDumpSpec.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1.DatabaseDumpSpec";
+                        };
+    
+                        /**
                          * Type enum.
                          * @name google.cloud.metastore.v1.DatabaseDumpSpec.Type
                          * @enum {number}
@@ -9822,7 +10439,7 @@
                         };
     
                         /**
-                         * Callback as used by {@link google.cloud.metastore.v1alpha.DataprocMetastore#listServices}.
+                         * Callback as used by {@link google.cloud.metastore.v1alpha.DataprocMetastore|listServices}.
                          * @memberof google.cloud.metastore.v1alpha.DataprocMetastore
                          * @typedef ListServicesCallback
                          * @type {function}
@@ -9855,7 +10472,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.metastore.v1alpha.DataprocMetastore#getService}.
+                         * Callback as used by {@link google.cloud.metastore.v1alpha.DataprocMetastore|getService}.
                          * @memberof google.cloud.metastore.v1alpha.DataprocMetastore
                          * @typedef GetServiceCallback
                          * @type {function}
@@ -9888,7 +10505,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.metastore.v1alpha.DataprocMetastore#createService}.
+                         * Callback as used by {@link google.cloud.metastore.v1alpha.DataprocMetastore|createService}.
                          * @memberof google.cloud.metastore.v1alpha.DataprocMetastore
                          * @typedef CreateServiceCallback
                          * @type {function}
@@ -9921,7 +10538,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.metastore.v1alpha.DataprocMetastore#updateService}.
+                         * Callback as used by {@link google.cloud.metastore.v1alpha.DataprocMetastore|updateService}.
                          * @memberof google.cloud.metastore.v1alpha.DataprocMetastore
                          * @typedef UpdateServiceCallback
                          * @type {function}
@@ -9954,7 +10571,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.metastore.v1alpha.DataprocMetastore#deleteService}.
+                         * Callback as used by {@link google.cloud.metastore.v1alpha.DataprocMetastore|deleteService}.
                          * @memberof google.cloud.metastore.v1alpha.DataprocMetastore
                          * @typedef DeleteServiceCallback
                          * @type {function}
@@ -9987,7 +10604,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.metastore.v1alpha.DataprocMetastore#listMetadataImports}.
+                         * Callback as used by {@link google.cloud.metastore.v1alpha.DataprocMetastore|listMetadataImports}.
                          * @memberof google.cloud.metastore.v1alpha.DataprocMetastore
                          * @typedef ListMetadataImportsCallback
                          * @type {function}
@@ -10020,7 +10637,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.metastore.v1alpha.DataprocMetastore#getMetadataImport}.
+                         * Callback as used by {@link google.cloud.metastore.v1alpha.DataprocMetastore|getMetadataImport}.
                          * @memberof google.cloud.metastore.v1alpha.DataprocMetastore
                          * @typedef GetMetadataImportCallback
                          * @type {function}
@@ -10053,7 +10670,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.metastore.v1alpha.DataprocMetastore#createMetadataImport}.
+                         * Callback as used by {@link google.cloud.metastore.v1alpha.DataprocMetastore|createMetadataImport}.
                          * @memberof google.cloud.metastore.v1alpha.DataprocMetastore
                          * @typedef CreateMetadataImportCallback
                          * @type {function}
@@ -10086,7 +10703,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.metastore.v1alpha.DataprocMetastore#updateMetadataImport}.
+                         * Callback as used by {@link google.cloud.metastore.v1alpha.DataprocMetastore|updateMetadataImport}.
                          * @memberof google.cloud.metastore.v1alpha.DataprocMetastore
                          * @typedef UpdateMetadataImportCallback
                          * @type {function}
@@ -10119,7 +10736,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.metastore.v1alpha.DataprocMetastore#exportMetadata}.
+                         * Callback as used by {@link google.cloud.metastore.v1alpha.DataprocMetastore|exportMetadata}.
                          * @memberof google.cloud.metastore.v1alpha.DataprocMetastore
                          * @typedef ExportMetadataCallback
                          * @type {function}
@@ -10152,7 +10769,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.metastore.v1alpha.DataprocMetastore#restoreService}.
+                         * Callback as used by {@link google.cloud.metastore.v1alpha.DataprocMetastore|restoreService}.
                          * @memberof google.cloud.metastore.v1alpha.DataprocMetastore
                          * @typedef RestoreServiceCallback
                          * @type {function}
@@ -10185,7 +10802,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.metastore.v1alpha.DataprocMetastore#listBackups}.
+                         * Callback as used by {@link google.cloud.metastore.v1alpha.DataprocMetastore|listBackups}.
                          * @memberof google.cloud.metastore.v1alpha.DataprocMetastore
                          * @typedef ListBackupsCallback
                          * @type {function}
@@ -10218,7 +10835,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.metastore.v1alpha.DataprocMetastore#getBackup}.
+                         * Callback as used by {@link google.cloud.metastore.v1alpha.DataprocMetastore|getBackup}.
                          * @memberof google.cloud.metastore.v1alpha.DataprocMetastore
                          * @typedef GetBackupCallback
                          * @type {function}
@@ -10251,7 +10868,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.metastore.v1alpha.DataprocMetastore#createBackup}.
+                         * Callback as used by {@link google.cloud.metastore.v1alpha.DataprocMetastore|createBackup}.
                          * @memberof google.cloud.metastore.v1alpha.DataprocMetastore
                          * @typedef CreateBackupCallback
                          * @type {function}
@@ -10284,7 +10901,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.metastore.v1alpha.DataprocMetastore#deleteBackup}.
+                         * Callback as used by {@link google.cloud.metastore.v1alpha.DataprocMetastore|deleteBackup}.
                          * @memberof google.cloud.metastore.v1alpha.DataprocMetastore
                          * @typedef DeleteBackupCallback
                          * @type {function}
@@ -10636,85 +11253,105 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 5:
-                                    message.hiveMetastoreConfig = $root.google.cloud.metastore.v1alpha.HiveMetastoreConfig.decode(reader, reader.uint32());
-                                    break;
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
-                                case 2:
-                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 3:
-                                    message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 4:
-                                    if (message.labels === $util.emptyObject)
-                                        message.labels = {};
-                                    var end2 = reader.uint32() + reader.pos;
-                                    key = "";
-                                    value = "";
-                                    while (reader.pos < end2) {
-                                        var tag2 = reader.uint32();
-                                        switch (tag2 >>> 3) {
-                                        case 1:
-                                            key = reader.string();
-                                            break;
-                                        case 2:
-                                            value = reader.string();
-                                            break;
-                                        default:
-                                            reader.skipType(tag2 & 7);
-                                            break;
-                                        }
+                                case 5: {
+                                        message.hiveMetastoreConfig = $root.google.cloud.metastore.v1alpha.HiveMetastoreConfig.decode(reader, reader.uint32());
+                                        break;
                                     }
-                                    message.labels[key] = value;
-                                    break;
-                                case 7:
-                                    message.network = reader.string();
-                                    break;
-                                case 8:
-                                    message.endpointUri = reader.string();
-                                    break;
-                                case 9:
-                                    message.port = reader.int32();
-                                    break;
-                                case 10:
-                                    message.state = reader.int32();
-                                    break;
-                                case 11:
-                                    message.stateMessage = reader.string();
-                                    break;
-                                case 12:
-                                    message.artifactGcsUri = reader.string();
-                                    break;
-                                case 13:
-                                    message.tier = reader.int32();
-                                    break;
-                                case 14:
-                                    message.metadataIntegration = $root.google.cloud.metastore.v1alpha.MetadataIntegration.decode(reader, reader.uint32());
-                                    break;
-                                case 15:
-                                    message.maintenanceWindow = $root.google.cloud.metastore.v1alpha.MaintenanceWindow.decode(reader, reader.uint32());
-                                    break;
-                                case 16:
-                                    message.uid = reader.string();
-                                    break;
-                                case 17:
-                                    message.metadataManagementActivity = $root.google.cloud.metastore.v1alpha.MetadataManagementActivity.decode(reader, reader.uint32());
-                                    break;
-                                case 19:
-                                    message.releaseChannel = reader.int32();
-                                    break;
-                                case 20:
-                                    message.encryptionConfig = $root.google.cloud.metastore.v1alpha.EncryptionConfig.decode(reader, reader.uint32());
-                                    break;
-                                case 21:
-                                    message.networkConfig = $root.google.cloud.metastore.v1alpha.NetworkConfig.decode(reader, reader.uint32());
-                                    break;
-                                case 22:
-                                    message.databaseType = reader.int32();
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        if (message.labels === $util.emptyObject)
+                                            message.labels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.labels[key] = value;
+                                        break;
+                                    }
+                                case 7: {
+                                        message.network = reader.string();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.endpointUri = reader.string();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.port = reader.int32();
+                                        break;
+                                    }
+                                case 10: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 11: {
+                                        message.stateMessage = reader.string();
+                                        break;
+                                    }
+                                case 12: {
+                                        message.artifactGcsUri = reader.string();
+                                        break;
+                                    }
+                                case 13: {
+                                        message.tier = reader.int32();
+                                        break;
+                                    }
+                                case 14: {
+                                        message.metadataIntegration = $root.google.cloud.metastore.v1alpha.MetadataIntegration.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 15: {
+                                        message.maintenanceWindow = $root.google.cloud.metastore.v1alpha.MaintenanceWindow.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 16: {
+                                        message.uid = reader.string();
+                                        break;
+                                    }
+                                case 17: {
+                                        message.metadataManagementActivity = $root.google.cloud.metastore.v1alpha.MetadataManagementActivity.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 19: {
+                                        message.releaseChannel = reader.int32();
+                                        break;
+                                    }
+                                case 20: {
+                                        message.encryptionConfig = $root.google.cloud.metastore.v1alpha.EncryptionConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 21: {
+                                        message.networkConfig = $root.google.cloud.metastore.v1alpha.NetworkConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 22: {
+                                        message.databaseType = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -11116,6 +11753,21 @@
                         };
     
                         /**
+                         * Gets the default type url for Service
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1alpha.Service
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Service.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1alpha.Service";
+                        };
+    
+                        /**
                          * State enum.
                          * @name google.cloud.metastore.v1alpha.Service.State
                          * @enum {number}
@@ -11295,12 +11947,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.dataCatalogConfig = $root.google.cloud.metastore.v1alpha.DataCatalogConfig.decode(reader, reader.uint32());
-                                    break;
-                                case 2:
-                                    message.dataplexConfig = $root.google.cloud.metastore.v1alpha.DataplexConfig.decode(reader, reader.uint32());
-                                    break;
+                                case 1: {
+                                        message.dataCatalogConfig = $root.google.cloud.metastore.v1alpha.DataCatalogConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.dataplexConfig = $root.google.cloud.metastore.v1alpha.DataplexConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -11409,6 +12063,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for MetadataIntegration
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1alpha.MetadataIntegration
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MetadataIntegration.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1alpha.MetadataIntegration";
+                        };
+    
                         return MetadataIntegration;
                     })();
     
@@ -11504,9 +12173,10 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 2:
-                                    message.enabled = reader.bool();
-                                    break;
+                                case 2: {
+                                        message.enabled = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -11594,6 +12264,21 @@
                          */
                         DataCatalogConfig.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DataCatalogConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1alpha.DataCatalogConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DataCatalogConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1alpha.DataCatalogConfig";
                         };
     
                         return DataCatalogConfig;
@@ -11695,28 +12380,29 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    if (message.lakeResources === $util.emptyObject)
-                                        message.lakeResources = {};
-                                    var end2 = reader.uint32() + reader.pos;
-                                    key = "";
-                                    value = null;
-                                    while (reader.pos < end2) {
-                                        var tag2 = reader.uint32();
-                                        switch (tag2 >>> 3) {
-                                        case 1:
-                                            key = reader.string();
-                                            break;
-                                        case 2:
-                                            value = $root.google.cloud.metastore.v1alpha.Lake.decode(reader, reader.uint32());
-                                            break;
-                                        default:
-                                            reader.skipType(tag2 & 7);
-                                            break;
+                                case 1: {
+                                        if (message.lakeResources === $util.emptyObject)
+                                            message.lakeResources = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = null;
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = $root.google.cloud.metastore.v1alpha.Lake.decode(reader, reader.uint32());
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
                                         }
+                                        message.lakeResources[key] = value;
+                                        break;
                                     }
-                                    message.lakeResources[key] = value;
-                                    break;
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -11825,6 +12511,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for DataplexConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1alpha.DataplexConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DataplexConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1alpha.DataplexConfig";
+                        };
+    
                         return DataplexConfig;
                     })();
     
@@ -11920,9 +12621,10 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -12010,6 +12712,21 @@
                          */
                         Lake.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Lake
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1alpha.Lake
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Lake.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1alpha.Lake";
                         };
     
                         return Lake;
@@ -12118,12 +12835,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.hourOfDay = $root.google.protobuf.Int32Value.decode(reader, reader.uint32());
-                                    break;
-                                case 2:
-                                    message.dayOfWeek = reader.int32();
-                                    break;
+                                case 1: {
+                                        message.hourOfDay = $root.google.protobuf.Int32Value.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.dayOfWeek = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -12268,6 +12987,21 @@
                          */
                         MaintenanceWindow.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for MaintenanceWindow
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1alpha.MaintenanceWindow
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MaintenanceWindow.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1alpha.MaintenanceWindow";
                         };
     
                         return MaintenanceWindow;
@@ -12415,59 +13149,64 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.version = reader.string();
-                                    break;
-                                case 2:
-                                    if (message.configOverrides === $util.emptyObject)
-                                        message.configOverrides = {};
-                                    var end2 = reader.uint32() + reader.pos;
-                                    key = "";
-                                    value = "";
-                                    while (reader.pos < end2) {
-                                        var tag2 = reader.uint32();
-                                        switch (tag2 >>> 3) {
-                                        case 1:
-                                            key = reader.string();
-                                            break;
-                                        case 2:
-                                            value = reader.string();
-                                            break;
-                                        default:
-                                            reader.skipType(tag2 & 7);
-                                            break;
-                                        }
+                                case 1: {
+                                        message.version = reader.string();
+                                        break;
                                     }
-                                    message.configOverrides[key] = value;
-                                    break;
-                                case 3:
-                                    message.kerberosConfig = $root.google.cloud.metastore.v1alpha.KerberosConfig.decode(reader, reader.uint32());
-                                    break;
-                                case 4:
-                                    message.endpointProtocol = reader.int32();
-                                    break;
-                                case 5:
-                                    if (message.auxiliaryVersions === $util.emptyObject)
-                                        message.auxiliaryVersions = {};
-                                    var end2 = reader.uint32() + reader.pos;
-                                    key = "";
-                                    value = null;
-                                    while (reader.pos < end2) {
-                                        var tag2 = reader.uint32();
-                                        switch (tag2 >>> 3) {
-                                        case 1:
-                                            key = reader.string();
-                                            break;
-                                        case 2:
-                                            value = $root.google.cloud.metastore.v1alpha.AuxiliaryVersionConfig.decode(reader, reader.uint32());
-                                            break;
-                                        default:
-                                            reader.skipType(tag2 & 7);
-                                            break;
+                                case 2: {
+                                        if (message.configOverrides === $util.emptyObject)
+                                            message.configOverrides = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
                                         }
+                                        message.configOverrides[key] = value;
+                                        break;
                                     }
-                                    message.auxiliaryVersions[key] = value;
-                                    break;
+                                case 3: {
+                                        message.kerberosConfig = $root.google.cloud.metastore.v1alpha.KerberosConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.endpointProtocol = reader.int32();
+                                        break;
+                                    }
+                                case 5: {
+                                        if (message.auxiliaryVersions === $util.emptyObject)
+                                            message.auxiliaryVersions = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = null;
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = $root.google.cloud.metastore.v1alpha.AuxiliaryVersionConfig.decode(reader, reader.uint32());
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.auxiliaryVersions[key] = value;
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -12648,6 +13387,21 @@
                         };
     
                         /**
+                         * Gets the default type url for HiveMetastoreConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1alpha.HiveMetastoreConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        HiveMetastoreConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1alpha.HiveMetastoreConfig";
+                        };
+    
+                        /**
                          * EndpointProtocol enum.
                          * @name google.cloud.metastore.v1alpha.HiveMetastoreConfig.EndpointProtocol
                          * @enum {number}
@@ -12780,15 +13534,18 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.keytab = $root.google.cloud.metastore.v1alpha.Secret.decode(reader, reader.uint32());
-                                    break;
-                                case 2:
-                                    message.principal = reader.string();
-                                    break;
-                                case 3:
-                                    message.krb5ConfigGcsUri = reader.string();
-                                    break;
+                                case 1: {
+                                        message.keytab = $root.google.cloud.metastore.v1alpha.Secret.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.principal = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.krb5ConfigGcsUri = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -12900,6 +13657,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for KerberosConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1alpha.KerberosConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        KerberosConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1alpha.KerberosConfig";
+                        };
+    
                         return KerberosConfig;
                     })();
     
@@ -13009,9 +13781,10 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 2:
-                                    message.cloudSecret = reader.string();
-                                    break;
+                                case 2: {
+                                        message.cloudSecret = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -13103,6 +13876,21 @@
                          */
                         Secret.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Secret
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1alpha.Secret
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Secret.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1alpha.Secret";
                         };
     
                         return Secret;
@@ -13200,9 +13988,10 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.kmsKey = reader.string();
-                                    break;
+                                case 1: {
+                                        message.kmsKey = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -13290,6 +14079,21 @@
                          */
                         EncryptionConfig.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for EncryptionConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1alpha.EncryptionConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        EncryptionConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1alpha.EncryptionConfig";
                         };
     
                         return EncryptionConfig;
@@ -13411,34 +14215,37 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.version = reader.string();
-                                    break;
-                                case 2:
-                                    if (message.configOverrides === $util.emptyObject)
-                                        message.configOverrides = {};
-                                    var end2 = reader.uint32() + reader.pos;
-                                    key = "";
-                                    value = "";
-                                    while (reader.pos < end2) {
-                                        var tag2 = reader.uint32();
-                                        switch (tag2 >>> 3) {
-                                        case 1:
-                                            key = reader.string();
-                                            break;
-                                        case 2:
-                                            value = reader.string();
-                                            break;
-                                        default:
-                                            reader.skipType(tag2 & 7);
-                                            break;
-                                        }
+                                case 1: {
+                                        message.version = reader.string();
+                                        break;
                                     }
-                                    message.configOverrides[key] = value;
-                                    break;
-                                case 3:
-                                    message.networkConfig = $root.google.cloud.metastore.v1alpha.NetworkConfig.decode(reader, reader.uint32());
-                                    break;
+                                case 2: {
+                                        if (message.configOverrides === $util.emptyObject)
+                                            message.configOverrides = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.configOverrides[key] = value;
+                                        break;
+                                    }
+                                case 3: {
+                                        message.networkConfig = $root.google.cloud.metastore.v1alpha.NetworkConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -13565,6 +14372,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for AuxiliaryVersionConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1alpha.AuxiliaryVersionConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AuxiliaryVersionConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1alpha.AuxiliaryVersionConfig";
+                        };
+    
                         return AuxiliaryVersionConfig;
                     })();
     
@@ -13662,11 +14484,12 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    if (!(message.consumers && message.consumers.length))
-                                        message.consumers = [];
-                                    message.consumers.push($root.google.cloud.metastore.v1alpha.NetworkConfig.Consumer.decode(reader, reader.uint32()));
-                                    break;
+                                case 1: {
+                                        if (!(message.consumers && message.consumers.length))
+                                            message.consumers = [];
+                                        message.consumers.push($root.google.cloud.metastore.v1alpha.NetworkConfig.Consumer.decode(reader, reader.uint32()));
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -13771,6 +14594,21 @@
                          */
                         NetworkConfig.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for NetworkConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1alpha.NetworkConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        NetworkConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1alpha.NetworkConfig";
                         };
     
                         NetworkConfig.Consumer = (function() {
@@ -13890,12 +14728,14 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.subnetwork = reader.string();
-                                        break;
-                                    case 3:
-                                        message.endpointUri = reader.string();
-                                        break;
+                                    case 1: {
+                                            message.subnetwork = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.endpointUri = reader.string();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -13996,6 +14836,21 @@
                              */
                             Consumer.prototype.toJSON = function toJSON() {
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Consumer
+                             * @function getTypeUrl
+                             * @memberof google.cloud.metastore.v1alpha.NetworkConfig.Consumer
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Consumer.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.metastore.v1alpha.NetworkConfig.Consumer";
                             };
     
                             return Consumer;
@@ -14111,16 +14966,18 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    if (!(message.metadataExports && message.metadataExports.length))
-                                        message.metadataExports = [];
-                                    message.metadataExports.push($root.google.cloud.metastore.v1alpha.MetadataExport.decode(reader, reader.uint32()));
-                                    break;
-                                case 2:
-                                    if (!(message.restores && message.restores.length))
-                                        message.restores = [];
-                                    message.restores.push($root.google.cloud.metastore.v1alpha.Restore.decode(reader, reader.uint32()));
-                                    break;
+                                case 1: {
+                                        if (!(message.metadataExports && message.metadataExports.length))
+                                            message.metadataExports = [];
+                                        message.metadataExports.push($root.google.cloud.metastore.v1alpha.MetadataExport.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.restores && message.restores.length))
+                                            message.restores = [];
+                                        message.restores.push($root.google.cloud.metastore.v1alpha.Restore.decode(reader, reader.uint32()));
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -14251,6 +15108,21 @@
                          */
                         MetadataManagementActivity.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for MetadataManagementActivity
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1alpha.MetadataManagementActivity
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MetadataManagementActivity.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1alpha.MetadataManagementActivity";
                         };
     
                         return MetadataManagementActivity;
@@ -14428,27 +15300,34 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 6:
-                                    message.databaseDump = $root.google.cloud.metastore.v1alpha.MetadataImport.DatabaseDump.decode(reader, reader.uint32());
-                                    break;
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
-                                case 2:
-                                    message.description = reader.string();
-                                    break;
-                                case 3:
-                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 4:
-                                    message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 7:
-                                    message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 5:
-                                    message.state = reader.int32();
-                                    break;
+                                case 6: {
+                                        message.databaseDump = $root.google.cloud.metastore.v1alpha.MetadataImport.DatabaseDump.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -14641,6 +15520,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for MetadataImport
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1alpha.MetadataImport
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MetadataImport.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1alpha.MetadataImport";
+                        };
+    
                         MetadataImport.DatabaseDump = (function() {
     
                             /**
@@ -14766,18 +15660,22 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.databaseType = reader.int32();
-                                        break;
-                                    case 2:
-                                        message.gcsUri = reader.string();
-                                        break;
-                                    case 3:
-                                        message.sourceDatabase = reader.string();
-                                        break;
-                                    case 4:
-                                        message.type = reader.int32();
-                                        break;
+                                    case 1: {
+                                            message.databaseType = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.gcsUri = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.sourceDatabase = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.type = reader.int32();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -14921,6 +15819,21 @@
                              */
                             DatabaseDump.prototype.toJSON = function toJSON() {
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for DatabaseDump
+                             * @function getTypeUrl
+                             * @memberof google.cloud.metastore.v1alpha.MetadataImport.DatabaseDump
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            DatabaseDump.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.metastore.v1alpha.MetadataImport.DatabaseDump";
                             };
     
                             /**
@@ -15113,21 +16026,26 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 4:
-                                    message.destinationGcsUri = reader.string();
-                                    break;
-                                case 1:
-                                    message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 2:
-                                    message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 3:
-                                    message.state = reader.int32();
-                                    break;
-                                case 5:
-                                    message.databaseDumpType = reader.int32();
-                                    break;
+                                case 4: {
+                                        message.destinationGcsUri = reader.string();
+                                        break;
+                                    }
+                                case 1: {
+                                        message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.databaseDumpType = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -15309,6 +16227,21 @@
                          */
                         MetadataExport.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for MetadataExport
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1alpha.MetadataExport
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MetadataExport.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1alpha.MetadataExport";
                         };
     
                         /**
@@ -15494,29 +16427,36 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
-                                case 2:
-                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 3:
-                                    message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 4:
-                                    message.state = reader.int32();
-                                    break;
-                                case 5:
-                                    message.serviceRevision = $root.google.cloud.metastore.v1alpha.Service.decode(reader, reader.uint32());
-                                    break;
-                                case 6:
-                                    message.description = reader.string();
-                                    break;
-                                case 7:
-                                    if (!(message.restoringServices && message.restoringServices.length))
-                                        message.restoringServices = [];
-                                    message.restoringServices.push(reader.string());
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.serviceRevision = $root.google.cloud.metastore.v1alpha.Service.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        if (!(message.restoringServices && message.restoringServices.length))
+                                            message.restoringServices = [];
+                                        message.restoringServices.push(reader.string());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -15717,6 +16657,21 @@
                         };
     
                         /**
+                         * Gets the default type url for Backup
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1alpha.Backup
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Backup.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1alpha.Backup";
+                        };
+    
+                        /**
                          * State enum.
                          * @name google.cloud.metastore.v1alpha.Backup.State
                          * @enum {number}
@@ -15888,24 +16843,30 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 2:
-                                    message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 3:
-                                    message.state = reader.int32();
-                                    break;
-                                case 4:
-                                    message.backup = reader.string();
-                                    break;
-                                case 5:
-                                    message.type = reader.int32();
-                                    break;
-                                case 6:
-                                    message.details = reader.string();
-                                    break;
+                                case 1: {
+                                        message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.backup = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.type = reader.int32();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.details = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -16093,6 +17054,21 @@
                         };
     
                         /**
+                         * Gets the default type url for Restore
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1alpha.Restore
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Restore.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1alpha.Restore";
+                        };
+    
+                        /**
                          * State enum.
                          * @name google.cloud.metastore.v1alpha.Restore.State
                          * @enum {number}
@@ -16267,21 +17243,26 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.parent = reader.string();
-                                    break;
-                                case 2:
-                                    message.pageSize = reader.int32();
-                                    break;
-                                case 3:
-                                    message.pageToken = reader.string();
-                                    break;
-                                case 4:
-                                    message.filter = reader.string();
-                                    break;
-                                case 5:
-                                    message.orderBy = reader.string();
-                                    break;
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -16402,6 +17383,21 @@
                          */
                         ListServicesRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListServicesRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1alpha.ListServicesRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListServicesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1alpha.ListServicesRequest";
                         };
     
                         return ListServicesRequest;
@@ -16525,19 +17521,22 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    if (!(message.services && message.services.length))
-                                        message.services = [];
-                                    message.services.push($root.google.cloud.metastore.v1alpha.Service.decode(reader, reader.uint32()));
-                                    break;
-                                case 2:
-                                    message.nextPageToken = reader.string();
-                                    break;
-                                case 3:
-                                    if (!(message.unreachable && message.unreachable.length))
-                                        message.unreachable = [];
-                                    message.unreachable.push(reader.string());
-                                    break;
+                                case 1: {
+                                        if (!(message.services && message.services.length))
+                                            message.services = [];
+                                        message.services.push($root.google.cloud.metastore.v1alpha.Service.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -16674,6 +17673,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for ListServicesResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1alpha.ListServicesResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListServicesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1alpha.ListServicesResponse";
+                        };
+    
                         return ListServicesResponse;
                     })();
     
@@ -16769,9 +17783,10 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -16859,6 +17874,21 @@
                          */
                         GetServiceRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetServiceRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1alpha.GetServiceRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetServiceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1alpha.GetServiceRequest";
                         };
     
                         return GetServiceRequest;
@@ -16989,18 +18019,22 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.parent = reader.string();
-                                    break;
-                                case 2:
-                                    message.serviceId = reader.string();
-                                    break;
-                                case 3:
-                                    message.service = $root.google.cloud.metastore.v1alpha.Service.decode(reader, reader.uint32());
-                                    break;
-                                case 4:
-                                    message.requestId = reader.string();
-                                    break;
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.serviceId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.service = $root.google.cloud.metastore.v1alpha.Service.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -17120,6 +18154,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for CreateServiceRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1alpha.CreateServiceRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateServiceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1alpha.CreateServiceRequest";
+                        };
+    
                         return CreateServiceRequest;
                     })();
     
@@ -17237,15 +18286,18 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
-                                    break;
-                                case 2:
-                                    message.service = $root.google.cloud.metastore.v1alpha.Service.decode(reader, reader.uint32());
-                                    break;
-                                case 3:
-                                    message.requestId = reader.string();
-                                    break;
+                                case 1: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.service = $root.google.cloud.metastore.v1alpha.Service.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -17362,6 +18414,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for UpdateServiceRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1alpha.UpdateServiceRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateServiceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1alpha.UpdateServiceRequest";
+                        };
+    
                         return UpdateServiceRequest;
                     })();
     
@@ -17468,12 +18535,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
-                                case 2:
-                                    message.requestId = reader.string();
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -17570,6 +18639,21 @@
                          */
                         DeleteServiceRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteServiceRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1alpha.DeleteServiceRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteServiceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1alpha.DeleteServiceRequest";
                         };
     
                         return DeleteServiceRequest;
@@ -17711,21 +18795,26 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.parent = reader.string();
-                                    break;
-                                case 2:
-                                    message.pageSize = reader.int32();
-                                    break;
-                                case 3:
-                                    message.pageToken = reader.string();
-                                    break;
-                                case 4:
-                                    message.filter = reader.string();
-                                    break;
-                                case 5:
-                                    message.orderBy = reader.string();
-                                    break;
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -17846,6 +18935,21 @@
                          */
                         ListMetadataImportsRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListMetadataImportsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1alpha.ListMetadataImportsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListMetadataImportsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1alpha.ListMetadataImportsRequest";
                         };
     
                         return ListMetadataImportsRequest;
@@ -17969,19 +19073,22 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    if (!(message.metadataImports && message.metadataImports.length))
-                                        message.metadataImports = [];
-                                    message.metadataImports.push($root.google.cloud.metastore.v1alpha.MetadataImport.decode(reader, reader.uint32()));
-                                    break;
-                                case 2:
-                                    message.nextPageToken = reader.string();
-                                    break;
-                                case 3:
-                                    if (!(message.unreachable && message.unreachable.length))
-                                        message.unreachable = [];
-                                    message.unreachable.push(reader.string());
-                                    break;
+                                case 1: {
+                                        if (!(message.metadataImports && message.metadataImports.length))
+                                            message.metadataImports = [];
+                                        message.metadataImports.push($root.google.cloud.metastore.v1alpha.MetadataImport.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -18118,6 +19225,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for ListMetadataImportsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1alpha.ListMetadataImportsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListMetadataImportsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1alpha.ListMetadataImportsResponse";
+                        };
+    
                         return ListMetadataImportsResponse;
                     })();
     
@@ -18213,9 +19335,10 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -18303,6 +19426,21 @@
                          */
                         GetMetadataImportRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetMetadataImportRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1alpha.GetMetadataImportRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetMetadataImportRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1alpha.GetMetadataImportRequest";
                         };
     
                         return GetMetadataImportRequest;
@@ -18433,18 +19571,22 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.parent = reader.string();
-                                    break;
-                                case 2:
-                                    message.metadataImportId = reader.string();
-                                    break;
-                                case 3:
-                                    message.metadataImport = $root.google.cloud.metastore.v1alpha.MetadataImport.decode(reader, reader.uint32());
-                                    break;
-                                case 4:
-                                    message.requestId = reader.string();
-                                    break;
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.metadataImportId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.metadataImport = $root.google.cloud.metastore.v1alpha.MetadataImport.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -18564,6 +19706,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for CreateMetadataImportRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1alpha.CreateMetadataImportRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateMetadataImportRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1alpha.CreateMetadataImportRequest";
+                        };
+    
                         return CreateMetadataImportRequest;
                     })();
     
@@ -18681,15 +19838,18 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
-                                    break;
-                                case 2:
-                                    message.metadataImport = $root.google.cloud.metastore.v1alpha.MetadataImport.decode(reader, reader.uint32());
-                                    break;
-                                case 3:
-                                    message.requestId = reader.string();
-                                    break;
+                                case 1: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.metadataImport = $root.google.cloud.metastore.v1alpha.MetadataImport.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -18804,6 +19964,21 @@
                          */
                         UpdateMetadataImportRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateMetadataImportRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1alpha.UpdateMetadataImportRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateMetadataImportRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1alpha.UpdateMetadataImportRequest";
                         };
     
                         return UpdateMetadataImportRequest;
@@ -18945,21 +20120,26 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.parent = reader.string();
-                                    break;
-                                case 2:
-                                    message.pageSize = reader.int32();
-                                    break;
-                                case 3:
-                                    message.pageToken = reader.string();
-                                    break;
-                                case 4:
-                                    message.filter = reader.string();
-                                    break;
-                                case 5:
-                                    message.orderBy = reader.string();
-                                    break;
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -19080,6 +20260,21 @@
                          */
                         ListBackupsRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListBackupsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1alpha.ListBackupsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListBackupsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1alpha.ListBackupsRequest";
                         };
     
                         return ListBackupsRequest;
@@ -19203,19 +20398,22 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    if (!(message.backups && message.backups.length))
-                                        message.backups = [];
-                                    message.backups.push($root.google.cloud.metastore.v1alpha.Backup.decode(reader, reader.uint32()));
-                                    break;
-                                case 2:
-                                    message.nextPageToken = reader.string();
-                                    break;
-                                case 3:
-                                    if (!(message.unreachable && message.unreachable.length))
-                                        message.unreachable = [];
-                                    message.unreachable.push(reader.string());
-                                    break;
+                                case 1: {
+                                        if (!(message.backups && message.backups.length))
+                                            message.backups = [];
+                                        message.backups.push($root.google.cloud.metastore.v1alpha.Backup.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -19352,6 +20550,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for ListBackupsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1alpha.ListBackupsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListBackupsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1alpha.ListBackupsResponse";
+                        };
+    
                         return ListBackupsResponse;
                     })();
     
@@ -19447,9 +20660,10 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -19537,6 +20751,21 @@
                          */
                         GetBackupRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetBackupRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1alpha.GetBackupRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetBackupRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1alpha.GetBackupRequest";
                         };
     
                         return GetBackupRequest;
@@ -19667,18 +20896,22 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.parent = reader.string();
-                                    break;
-                                case 2:
-                                    message.backupId = reader.string();
-                                    break;
-                                case 3:
-                                    message.backup = $root.google.cloud.metastore.v1alpha.Backup.decode(reader, reader.uint32());
-                                    break;
-                                case 4:
-                                    message.requestId = reader.string();
-                                    break;
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.backupId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.backup = $root.google.cloud.metastore.v1alpha.Backup.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -19798,6 +21031,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for CreateBackupRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1alpha.CreateBackupRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateBackupRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1alpha.CreateBackupRequest";
+                        };
+    
                         return CreateBackupRequest;
                     })();
     
@@ -19904,12 +21152,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
-                                case 2:
-                                    message.requestId = reader.string();
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -20006,6 +21256,21 @@
                          */
                         DeleteBackupRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteBackupRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1alpha.DeleteBackupRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteBackupRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1alpha.DeleteBackupRequest";
                         };
     
                         return DeleteBackupRequest;
@@ -20150,18 +21415,22 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 2:
-                                    message.destinationGcsFolder = reader.string();
-                                    break;
-                                case 1:
-                                    message.service = reader.string();
-                                    break;
-                                case 3:
-                                    message.requestId = reader.string();
-                                    break;
-                                case 4:
-                                    message.databaseDumpType = reader.int32();
-                                    break;
+                                case 2: {
+                                        message.destinationGcsFolder = reader.string();
+                                        break;
+                                    }
+                                case 1: {
+                                        message.service = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.databaseDumpType = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -20299,6 +21568,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for ExportMetadataRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1alpha.ExportMetadataRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ExportMetadataRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1alpha.ExportMetadataRequest";
+                        };
+    
                         return ExportMetadataRequest;
                     })();
     
@@ -20427,18 +21711,22 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.service = reader.string();
-                                    break;
-                                case 2:
-                                    message.backup = reader.string();
-                                    break;
-                                case 3:
-                                    message.restoreType = reader.int32();
-                                    break;
-                                case 4:
-                                    message.requestId = reader.string();
-                                    break;
+                                case 1: {
+                                        message.service = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.backup = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.restoreType = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -20569,6 +21857,21 @@
                          */
                         RestoreServiceRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RestoreServiceRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1alpha.RestoreServiceRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RestoreServiceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1alpha.RestoreServiceRequest";
                         };
     
                         return RestoreServiceRequest;
@@ -20732,27 +22035,34 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 2:
-                                    message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 3:
-                                    message.target = reader.string();
-                                    break;
-                                case 4:
-                                    message.verb = reader.string();
-                                    break;
-                                case 5:
-                                    message.statusMessage = reader.string();
-                                    break;
-                                case 6:
-                                    message.requestedCancellation = reader.bool();
-                                    break;
-                                case 7:
-                                    message.apiVersion = reader.string();
-                                    break;
+                                case 1: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.target = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.verb = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.statusMessage = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.requestedCancellation = reader.bool();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.apiVersion = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -20901,6 +22211,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for OperationMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1alpha.OperationMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        OperationMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1alpha.OperationMetadata";
+                        };
+    
                         return OperationMetadata;
                     })();
     
@@ -20998,11 +22323,12 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    if (!(message.supportedHiveMetastoreVersions && message.supportedHiveMetastoreVersions.length))
-                                        message.supportedHiveMetastoreVersions = [];
-                                    message.supportedHiveMetastoreVersions.push($root.google.cloud.metastore.v1alpha.LocationMetadata.HiveMetastoreVersion.decode(reader, reader.uint32()));
-                                    break;
+                                case 1: {
+                                        if (!(message.supportedHiveMetastoreVersions && message.supportedHiveMetastoreVersions.length))
+                                            message.supportedHiveMetastoreVersions = [];
+                                        message.supportedHiveMetastoreVersions.push($root.google.cloud.metastore.v1alpha.LocationMetadata.HiveMetastoreVersion.decode(reader, reader.uint32()));
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -21109,6 +22435,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for LocationMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1alpha.LocationMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        LocationMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1alpha.LocationMetadata";
+                        };
+    
                         LocationMetadata.HiveMetastoreVersion = (function() {
     
                             /**
@@ -21212,12 +22553,14 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.version = reader.string();
-                                        break;
-                                    case 2:
-                                        message.isDefault = reader.bool();
-                                        break;
+                                    case 1: {
+                                            message.version = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.isDefault = reader.bool();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -21314,6 +22657,21 @@
                              */
                             HiveMetastoreVersion.prototype.toJSON = function toJSON() {
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for HiveMetastoreVersion
+                             * @function getTypeUrl
+                             * @memberof google.cloud.metastore.v1alpha.LocationMetadata.HiveMetastoreVersion
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            HiveMetastoreVersion.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.metastore.v1alpha.LocationMetadata.HiveMetastoreVersion";
                             };
     
                             return HiveMetastoreVersion;
@@ -21480,6 +22838,21 @@
                         };
     
                         /**
+                         * Gets the default type url for DatabaseDumpSpec
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1alpha.DatabaseDumpSpec
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DatabaseDumpSpec.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1alpha.DatabaseDumpSpec";
+                        };
+    
+                        /**
                          * Type enum.
                          * @name google.cloud.metastore.v1alpha.DatabaseDumpSpec.Type
                          * @enum {number}
@@ -21543,7 +22916,7 @@
                         };
     
                         /**
-                         * Callback as used by {@link google.cloud.metastore.v1beta.DataprocMetastore#listServices}.
+                         * Callback as used by {@link google.cloud.metastore.v1beta.DataprocMetastore|listServices}.
                          * @memberof google.cloud.metastore.v1beta.DataprocMetastore
                          * @typedef ListServicesCallback
                          * @type {function}
@@ -21576,7 +22949,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.metastore.v1beta.DataprocMetastore#getService}.
+                         * Callback as used by {@link google.cloud.metastore.v1beta.DataprocMetastore|getService}.
                          * @memberof google.cloud.metastore.v1beta.DataprocMetastore
                          * @typedef GetServiceCallback
                          * @type {function}
@@ -21609,7 +22982,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.metastore.v1beta.DataprocMetastore#createService}.
+                         * Callback as used by {@link google.cloud.metastore.v1beta.DataprocMetastore|createService}.
                          * @memberof google.cloud.metastore.v1beta.DataprocMetastore
                          * @typedef CreateServiceCallback
                          * @type {function}
@@ -21642,7 +23015,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.metastore.v1beta.DataprocMetastore#updateService}.
+                         * Callback as used by {@link google.cloud.metastore.v1beta.DataprocMetastore|updateService}.
                          * @memberof google.cloud.metastore.v1beta.DataprocMetastore
                          * @typedef UpdateServiceCallback
                          * @type {function}
@@ -21675,7 +23048,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.metastore.v1beta.DataprocMetastore#deleteService}.
+                         * Callback as used by {@link google.cloud.metastore.v1beta.DataprocMetastore|deleteService}.
                          * @memberof google.cloud.metastore.v1beta.DataprocMetastore
                          * @typedef DeleteServiceCallback
                          * @type {function}
@@ -21708,7 +23081,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.metastore.v1beta.DataprocMetastore#listMetadataImports}.
+                         * Callback as used by {@link google.cloud.metastore.v1beta.DataprocMetastore|listMetadataImports}.
                          * @memberof google.cloud.metastore.v1beta.DataprocMetastore
                          * @typedef ListMetadataImportsCallback
                          * @type {function}
@@ -21741,7 +23114,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.metastore.v1beta.DataprocMetastore#getMetadataImport}.
+                         * Callback as used by {@link google.cloud.metastore.v1beta.DataprocMetastore|getMetadataImport}.
                          * @memberof google.cloud.metastore.v1beta.DataprocMetastore
                          * @typedef GetMetadataImportCallback
                          * @type {function}
@@ -21774,7 +23147,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.metastore.v1beta.DataprocMetastore#createMetadataImport}.
+                         * Callback as used by {@link google.cloud.metastore.v1beta.DataprocMetastore|createMetadataImport}.
                          * @memberof google.cloud.metastore.v1beta.DataprocMetastore
                          * @typedef CreateMetadataImportCallback
                          * @type {function}
@@ -21807,7 +23180,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.metastore.v1beta.DataprocMetastore#updateMetadataImport}.
+                         * Callback as used by {@link google.cloud.metastore.v1beta.DataprocMetastore|updateMetadataImport}.
                          * @memberof google.cloud.metastore.v1beta.DataprocMetastore
                          * @typedef UpdateMetadataImportCallback
                          * @type {function}
@@ -21840,7 +23213,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.metastore.v1beta.DataprocMetastore#exportMetadata}.
+                         * Callback as used by {@link google.cloud.metastore.v1beta.DataprocMetastore|exportMetadata}.
                          * @memberof google.cloud.metastore.v1beta.DataprocMetastore
                          * @typedef ExportMetadataCallback
                          * @type {function}
@@ -21873,7 +23246,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.metastore.v1beta.DataprocMetastore#restoreService}.
+                         * Callback as used by {@link google.cloud.metastore.v1beta.DataprocMetastore|restoreService}.
                          * @memberof google.cloud.metastore.v1beta.DataprocMetastore
                          * @typedef RestoreServiceCallback
                          * @type {function}
@@ -21906,7 +23279,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.metastore.v1beta.DataprocMetastore#listBackups}.
+                         * Callback as used by {@link google.cloud.metastore.v1beta.DataprocMetastore|listBackups}.
                          * @memberof google.cloud.metastore.v1beta.DataprocMetastore
                          * @typedef ListBackupsCallback
                          * @type {function}
@@ -21939,7 +23312,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.metastore.v1beta.DataprocMetastore#getBackup}.
+                         * Callback as used by {@link google.cloud.metastore.v1beta.DataprocMetastore|getBackup}.
                          * @memberof google.cloud.metastore.v1beta.DataprocMetastore
                          * @typedef GetBackupCallback
                          * @type {function}
@@ -21972,7 +23345,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.metastore.v1beta.DataprocMetastore#createBackup}.
+                         * Callback as used by {@link google.cloud.metastore.v1beta.DataprocMetastore|createBackup}.
                          * @memberof google.cloud.metastore.v1beta.DataprocMetastore
                          * @typedef CreateBackupCallback
                          * @type {function}
@@ -22005,7 +23378,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.metastore.v1beta.DataprocMetastore#deleteBackup}.
+                         * Callback as used by {@link google.cloud.metastore.v1beta.DataprocMetastore|deleteBackup}.
                          * @memberof google.cloud.metastore.v1beta.DataprocMetastore
                          * @typedef DeleteBackupCallback
                          * @type {function}
@@ -22324,76 +23697,93 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 5:
-                                    message.hiveMetastoreConfig = $root.google.cloud.metastore.v1beta.HiveMetastoreConfig.decode(reader, reader.uint32());
-                                    break;
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
-                                case 2:
-                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 3:
-                                    message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 4:
-                                    if (message.labels === $util.emptyObject)
-                                        message.labels = {};
-                                    var end2 = reader.uint32() + reader.pos;
-                                    key = "";
-                                    value = "";
-                                    while (reader.pos < end2) {
-                                        var tag2 = reader.uint32();
-                                        switch (tag2 >>> 3) {
-                                        case 1:
-                                            key = reader.string();
-                                            break;
-                                        case 2:
-                                            value = reader.string();
-                                            break;
-                                        default:
-                                            reader.skipType(tag2 & 7);
-                                            break;
-                                        }
+                                case 5: {
+                                        message.hiveMetastoreConfig = $root.google.cloud.metastore.v1beta.HiveMetastoreConfig.decode(reader, reader.uint32());
+                                        break;
                                     }
-                                    message.labels[key] = value;
-                                    break;
-                                case 7:
-                                    message.network = reader.string();
-                                    break;
-                                case 8:
-                                    message.endpointUri = reader.string();
-                                    break;
-                                case 9:
-                                    message.port = reader.int32();
-                                    break;
-                                case 10:
-                                    message.state = reader.int32();
-                                    break;
-                                case 11:
-                                    message.stateMessage = reader.string();
-                                    break;
-                                case 12:
-                                    message.artifactGcsUri = reader.string();
-                                    break;
-                                case 13:
-                                    message.tier = reader.int32();
-                                    break;
-                                case 14:
-                                    message.metadataIntegration = $root.google.cloud.metastore.v1beta.MetadataIntegration.decode(reader, reader.uint32());
-                                    break;
-                                case 15:
-                                    message.maintenanceWindow = $root.google.cloud.metastore.v1beta.MaintenanceWindow.decode(reader, reader.uint32());
-                                    break;
-                                case 16:
-                                    message.uid = reader.string();
-                                    break;
-                                case 17:
-                                    message.metadataManagementActivity = $root.google.cloud.metastore.v1beta.MetadataManagementActivity.decode(reader, reader.uint32());
-                                    break;
-                                case 19:
-                                    message.releaseChannel = reader.int32();
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        if (message.labels === $util.emptyObject)
+                                            message.labels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.labels[key] = value;
+                                        break;
+                                    }
+                                case 7: {
+                                        message.network = reader.string();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.endpointUri = reader.string();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.port = reader.int32();
+                                        break;
+                                    }
+                                case 10: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 11: {
+                                        message.stateMessage = reader.string();
+                                        break;
+                                    }
+                                case 12: {
+                                        message.artifactGcsUri = reader.string();
+                                        break;
+                                    }
+                                case 13: {
+                                        message.tier = reader.int32();
+                                        break;
+                                    }
+                                case 14: {
+                                        message.metadataIntegration = $root.google.cloud.metastore.v1beta.MetadataIntegration.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 15: {
+                                        message.maintenanceWindow = $root.google.cloud.metastore.v1beta.MaintenanceWindow.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 16: {
+                                        message.uid = reader.string();
+                                        break;
+                                    }
+                                case 17: {
+                                        message.metadataManagementActivity = $root.google.cloud.metastore.v1beta.MetadataManagementActivity.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 19: {
+                                        message.releaseChannel = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -22743,6 +24133,21 @@
                         };
     
                         /**
+                         * Gets the default type url for Service
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1beta.Service
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Service.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1beta.Service";
+                        };
+    
+                        /**
                          * State enum.
                          * @name google.cloud.metastore.v1beta.Service.State
                          * @enum {number}
@@ -22895,9 +24300,10 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.dataCatalogConfig = $root.google.cloud.metastore.v1beta.DataCatalogConfig.decode(reader, reader.uint32());
-                                    break;
+                                case 1: {
+                                        message.dataCatalogConfig = $root.google.cloud.metastore.v1beta.DataCatalogConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -22990,6 +24396,21 @@
                          */
                         MetadataIntegration.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for MetadataIntegration
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1beta.MetadataIntegration
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MetadataIntegration.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1beta.MetadataIntegration";
                         };
     
                         return MetadataIntegration;
@@ -23087,9 +24508,10 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 2:
-                                    message.enabled = reader.bool();
-                                    break;
+                                case 2: {
+                                        message.enabled = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -23177,6 +24599,21 @@
                          */
                         DataCatalogConfig.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DataCatalogConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1beta.DataCatalogConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DataCatalogConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1beta.DataCatalogConfig";
                         };
     
                         return DataCatalogConfig;
@@ -23285,12 +24722,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.hourOfDay = $root.google.protobuf.Int32Value.decode(reader, reader.uint32());
-                                    break;
-                                case 2:
-                                    message.dayOfWeek = reader.int32();
-                                    break;
+                                case 1: {
+                                        message.hourOfDay = $root.google.protobuf.Int32Value.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.dayOfWeek = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -23437,6 +24876,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for MaintenanceWindow
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1beta.MaintenanceWindow
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MaintenanceWindow.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1beta.MaintenanceWindow";
+                        };
+    
                         return MaintenanceWindow;
                     })();
     
@@ -23556,34 +25010,37 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.version = reader.string();
-                                    break;
-                                case 2:
-                                    if (message.configOverrides === $util.emptyObject)
-                                        message.configOverrides = {};
-                                    var end2 = reader.uint32() + reader.pos;
-                                    key = "";
-                                    value = "";
-                                    while (reader.pos < end2) {
-                                        var tag2 = reader.uint32();
-                                        switch (tag2 >>> 3) {
-                                        case 1:
-                                            key = reader.string();
-                                            break;
-                                        case 2:
-                                            value = reader.string();
-                                            break;
-                                        default:
-                                            reader.skipType(tag2 & 7);
-                                            break;
-                                        }
+                                case 1: {
+                                        message.version = reader.string();
+                                        break;
                                     }
-                                    message.configOverrides[key] = value;
-                                    break;
-                                case 3:
-                                    message.kerberosConfig = $root.google.cloud.metastore.v1beta.KerberosConfig.decode(reader, reader.uint32());
-                                    break;
+                                case 2: {
+                                        if (message.configOverrides === $util.emptyObject)
+                                            message.configOverrides = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.configOverrides[key] = value;
+                                        break;
+                                    }
+                                case 3: {
+                                        message.kerberosConfig = $root.google.cloud.metastore.v1beta.KerberosConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -23710,6 +25167,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for HiveMetastoreConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1beta.HiveMetastoreConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        HiveMetastoreConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1beta.HiveMetastoreConfig";
+                        };
+    
                         return HiveMetastoreConfig;
                     })();
     
@@ -23827,15 +25299,18 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.keytab = $root.google.cloud.metastore.v1beta.Secret.decode(reader, reader.uint32());
-                                    break;
-                                case 2:
-                                    message.principal = reader.string();
-                                    break;
-                                case 3:
-                                    message.krb5ConfigGcsUri = reader.string();
-                                    break;
+                                case 1: {
+                                        message.keytab = $root.google.cloud.metastore.v1beta.Secret.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.principal = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.krb5ConfigGcsUri = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -23947,6 +25422,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for KerberosConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1beta.KerberosConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        KerberosConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1beta.KerberosConfig";
+                        };
+    
                         return KerberosConfig;
                     })();
     
@@ -24056,9 +25546,10 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 2:
-                                    message.cloudSecret = reader.string();
-                                    break;
+                                case 2: {
+                                        message.cloudSecret = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -24150,6 +25641,21 @@
                          */
                         Secret.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Secret
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1beta.Secret
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Secret.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1beta.Secret";
                         };
     
                         return Secret;
@@ -24262,16 +25768,18 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    if (!(message.metadataExports && message.metadataExports.length))
-                                        message.metadataExports = [];
-                                    message.metadataExports.push($root.google.cloud.metastore.v1beta.MetadataExport.decode(reader, reader.uint32()));
-                                    break;
-                                case 2:
-                                    if (!(message.restores && message.restores.length))
-                                        message.restores = [];
-                                    message.restores.push($root.google.cloud.metastore.v1beta.Restore.decode(reader, reader.uint32()));
-                                    break;
+                                case 1: {
+                                        if (!(message.metadataExports && message.metadataExports.length))
+                                            message.metadataExports = [];
+                                        message.metadataExports.push($root.google.cloud.metastore.v1beta.MetadataExport.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.restores && message.restores.length))
+                                            message.restores = [];
+                                        message.restores.push($root.google.cloud.metastore.v1beta.Restore.decode(reader, reader.uint32()));
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -24402,6 +25910,21 @@
                          */
                         MetadataManagementActivity.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for MetadataManagementActivity
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1beta.MetadataManagementActivity
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MetadataManagementActivity.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1beta.MetadataManagementActivity";
                         };
     
                         return MetadataManagementActivity;
@@ -24568,24 +26091,30 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 6:
-                                    message.databaseDump = $root.google.cloud.metastore.v1beta.MetadataImport.DatabaseDump.decode(reader, reader.uint32());
-                                    break;
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
-                                case 2:
-                                    message.description = reader.string();
-                                    break;
-                                case 3:
-                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 4:
-                                    message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 5:
-                                    message.state = reader.int32();
-                                    break;
+                                case 6: {
+                                        message.databaseDump = $root.google.cloud.metastore.v1beta.MetadataImport.DatabaseDump.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -24765,6 +26294,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for MetadataImport
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1beta.MetadataImport
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MetadataImport.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1beta.MetadataImport";
+                        };
+    
                         MetadataImport.DatabaseDump = (function() {
     
                             /**
@@ -24890,18 +26434,22 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.databaseType = reader.int32();
-                                        break;
-                                    case 2:
-                                        message.gcsUri = reader.string();
-                                        break;
-                                    case 3:
-                                        message.sourceDatabase = reader.string();
-                                        break;
-                                    case 4:
-                                        message.type = reader.int32();
-                                        break;
+                                    case 1: {
+                                            message.databaseType = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.gcsUri = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.sourceDatabase = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.type = reader.int32();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -25040,6 +26588,21 @@
                              */
                             DatabaseDump.prototype.toJSON = function toJSON() {
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for DatabaseDump
+                             * @function getTypeUrl
+                             * @memberof google.cloud.metastore.v1beta.MetadataImport.DatabaseDump
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            DatabaseDump.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.metastore.v1beta.MetadataImport.DatabaseDump";
                             };
     
                             /**
@@ -25232,21 +26795,26 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 4:
-                                    message.destinationGcsUri = reader.string();
-                                    break;
-                                case 1:
-                                    message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 2:
-                                    message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 3:
-                                    message.state = reader.int32();
-                                    break;
-                                case 5:
-                                    message.databaseDumpType = reader.int32();
-                                    break;
+                                case 4: {
+                                        message.destinationGcsUri = reader.string();
+                                        break;
+                                    }
+                                case 1: {
+                                        message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.databaseDumpType = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -25426,6 +26994,21 @@
                         };
     
                         /**
+                         * Gets the default type url for MetadataExport
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1beta.MetadataExport
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MetadataExport.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1beta.MetadataExport";
+                        };
+    
+                        /**
                          * State enum.
                          * @name google.cloud.metastore.v1beta.MetadataExport.State
                          * @enum {number}
@@ -25595,24 +27178,30 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
-                                case 2:
-                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 3:
-                                    message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 4:
-                                    message.state = reader.int32();
-                                    break;
-                                case 5:
-                                    message.serviceRevision = $root.google.cloud.metastore.v1beta.Service.decode(reader, reader.uint32());
-                                    break;
-                                case 6:
-                                    message.description = reader.string();
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.serviceRevision = $root.google.cloud.metastore.v1beta.Service.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -25787,6 +27376,21 @@
                         };
     
                         /**
+                         * Gets the default type url for Backup
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1beta.Backup
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Backup.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1beta.Backup";
+                        };
+    
+                        /**
                          * State enum.
                          * @name google.cloud.metastore.v1beta.Backup.State
                          * @enum {number}
@@ -25956,24 +27560,30 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 2:
-                                    message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 3:
-                                    message.state = reader.int32();
-                                    break;
-                                case 4:
-                                    message.backup = reader.string();
-                                    break;
-                                case 5:
-                                    message.type = reader.int32();
-                                    break;
-                                case 6:
-                                    message.details = reader.string();
-                                    break;
+                                case 1: {
+                                        message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.backup = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.type = reader.int32();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.details = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -26161,6 +27771,21 @@
                         };
     
                         /**
+                         * Gets the default type url for Restore
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1beta.Restore
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Restore.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1beta.Restore";
+                        };
+    
+                        /**
                          * State enum.
                          * @name google.cloud.metastore.v1beta.Restore.State
                          * @enum {number}
@@ -26335,21 +27960,26 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.parent = reader.string();
-                                    break;
-                                case 2:
-                                    message.pageSize = reader.int32();
-                                    break;
-                                case 3:
-                                    message.pageToken = reader.string();
-                                    break;
-                                case 4:
-                                    message.filter = reader.string();
-                                    break;
-                                case 5:
-                                    message.orderBy = reader.string();
-                                    break;
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -26470,6 +28100,21 @@
                          */
                         ListServicesRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListServicesRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1beta.ListServicesRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListServicesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1beta.ListServicesRequest";
                         };
     
                         return ListServicesRequest;
@@ -26593,19 +28238,22 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    if (!(message.services && message.services.length))
-                                        message.services = [];
-                                    message.services.push($root.google.cloud.metastore.v1beta.Service.decode(reader, reader.uint32()));
-                                    break;
-                                case 2:
-                                    message.nextPageToken = reader.string();
-                                    break;
-                                case 3:
-                                    if (!(message.unreachable && message.unreachable.length))
-                                        message.unreachable = [];
-                                    message.unreachable.push(reader.string());
-                                    break;
+                                case 1: {
+                                        if (!(message.services && message.services.length))
+                                            message.services = [];
+                                        message.services.push($root.google.cloud.metastore.v1beta.Service.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -26742,6 +28390,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for ListServicesResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1beta.ListServicesResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListServicesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1beta.ListServicesResponse";
+                        };
+    
                         return ListServicesResponse;
                     })();
     
@@ -26837,9 +28500,10 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -26927,6 +28591,21 @@
                          */
                         GetServiceRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetServiceRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1beta.GetServiceRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetServiceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1beta.GetServiceRequest";
                         };
     
                         return GetServiceRequest;
@@ -27057,18 +28736,22 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.parent = reader.string();
-                                    break;
-                                case 2:
-                                    message.serviceId = reader.string();
-                                    break;
-                                case 3:
-                                    message.service = $root.google.cloud.metastore.v1beta.Service.decode(reader, reader.uint32());
-                                    break;
-                                case 4:
-                                    message.requestId = reader.string();
-                                    break;
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.serviceId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.service = $root.google.cloud.metastore.v1beta.Service.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -27188,6 +28871,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for CreateServiceRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1beta.CreateServiceRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateServiceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1beta.CreateServiceRequest";
+                        };
+    
                         return CreateServiceRequest;
                     })();
     
@@ -27305,15 +29003,18 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
-                                    break;
-                                case 2:
-                                    message.service = $root.google.cloud.metastore.v1beta.Service.decode(reader, reader.uint32());
-                                    break;
-                                case 3:
-                                    message.requestId = reader.string();
-                                    break;
+                                case 1: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.service = $root.google.cloud.metastore.v1beta.Service.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -27430,6 +29131,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for UpdateServiceRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1beta.UpdateServiceRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateServiceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1beta.UpdateServiceRequest";
+                        };
+    
                         return UpdateServiceRequest;
                     })();
     
@@ -27536,12 +29252,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
-                                case 2:
-                                    message.requestId = reader.string();
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -27638,6 +29356,21 @@
                          */
                         DeleteServiceRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteServiceRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1beta.DeleteServiceRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteServiceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1beta.DeleteServiceRequest";
                         };
     
                         return DeleteServiceRequest;
@@ -27779,21 +29512,26 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.parent = reader.string();
-                                    break;
-                                case 2:
-                                    message.pageSize = reader.int32();
-                                    break;
-                                case 3:
-                                    message.pageToken = reader.string();
-                                    break;
-                                case 4:
-                                    message.filter = reader.string();
-                                    break;
-                                case 5:
-                                    message.orderBy = reader.string();
-                                    break;
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -27914,6 +29652,21 @@
                          */
                         ListMetadataImportsRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListMetadataImportsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1beta.ListMetadataImportsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListMetadataImportsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1beta.ListMetadataImportsRequest";
                         };
     
                         return ListMetadataImportsRequest;
@@ -28037,19 +29790,22 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    if (!(message.metadataImports && message.metadataImports.length))
-                                        message.metadataImports = [];
-                                    message.metadataImports.push($root.google.cloud.metastore.v1beta.MetadataImport.decode(reader, reader.uint32()));
-                                    break;
-                                case 2:
-                                    message.nextPageToken = reader.string();
-                                    break;
-                                case 3:
-                                    if (!(message.unreachable && message.unreachable.length))
-                                        message.unreachable = [];
-                                    message.unreachable.push(reader.string());
-                                    break;
+                                case 1: {
+                                        if (!(message.metadataImports && message.metadataImports.length))
+                                            message.metadataImports = [];
+                                        message.metadataImports.push($root.google.cloud.metastore.v1beta.MetadataImport.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -28186,6 +29942,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for ListMetadataImportsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1beta.ListMetadataImportsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListMetadataImportsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1beta.ListMetadataImportsResponse";
+                        };
+    
                         return ListMetadataImportsResponse;
                     })();
     
@@ -28281,9 +30052,10 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -28371,6 +30143,21 @@
                          */
                         GetMetadataImportRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetMetadataImportRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1beta.GetMetadataImportRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetMetadataImportRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1beta.GetMetadataImportRequest";
                         };
     
                         return GetMetadataImportRequest;
@@ -28501,18 +30288,22 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.parent = reader.string();
-                                    break;
-                                case 2:
-                                    message.metadataImportId = reader.string();
-                                    break;
-                                case 3:
-                                    message.metadataImport = $root.google.cloud.metastore.v1beta.MetadataImport.decode(reader, reader.uint32());
-                                    break;
-                                case 4:
-                                    message.requestId = reader.string();
-                                    break;
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.metadataImportId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.metadataImport = $root.google.cloud.metastore.v1beta.MetadataImport.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -28632,6 +30423,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for CreateMetadataImportRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1beta.CreateMetadataImportRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateMetadataImportRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1beta.CreateMetadataImportRequest";
+                        };
+    
                         return CreateMetadataImportRequest;
                     })();
     
@@ -28749,15 +30555,18 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
-                                    break;
-                                case 2:
-                                    message.metadataImport = $root.google.cloud.metastore.v1beta.MetadataImport.decode(reader, reader.uint32());
-                                    break;
-                                case 3:
-                                    message.requestId = reader.string();
-                                    break;
+                                case 1: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.metadataImport = $root.google.cloud.metastore.v1beta.MetadataImport.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -28872,6 +30681,21 @@
                          */
                         UpdateMetadataImportRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateMetadataImportRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1beta.UpdateMetadataImportRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateMetadataImportRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1beta.UpdateMetadataImportRequest";
                         };
     
                         return UpdateMetadataImportRequest;
@@ -29013,21 +30837,26 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.parent = reader.string();
-                                    break;
-                                case 2:
-                                    message.pageSize = reader.int32();
-                                    break;
-                                case 3:
-                                    message.pageToken = reader.string();
-                                    break;
-                                case 4:
-                                    message.filter = reader.string();
-                                    break;
-                                case 5:
-                                    message.orderBy = reader.string();
-                                    break;
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -29148,6 +30977,21 @@
                          */
                         ListBackupsRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListBackupsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1beta.ListBackupsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListBackupsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1beta.ListBackupsRequest";
                         };
     
                         return ListBackupsRequest;
@@ -29271,19 +31115,22 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    if (!(message.backups && message.backups.length))
-                                        message.backups = [];
-                                    message.backups.push($root.google.cloud.metastore.v1beta.Backup.decode(reader, reader.uint32()));
-                                    break;
-                                case 2:
-                                    message.nextPageToken = reader.string();
-                                    break;
-                                case 3:
-                                    if (!(message.unreachable && message.unreachable.length))
-                                        message.unreachable = [];
-                                    message.unreachable.push(reader.string());
-                                    break;
+                                case 1: {
+                                        if (!(message.backups && message.backups.length))
+                                            message.backups = [];
+                                        message.backups.push($root.google.cloud.metastore.v1beta.Backup.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -29420,6 +31267,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for ListBackupsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1beta.ListBackupsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListBackupsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1beta.ListBackupsResponse";
+                        };
+    
                         return ListBackupsResponse;
                     })();
     
@@ -29515,9 +31377,10 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -29605,6 +31468,21 @@
                          */
                         GetBackupRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetBackupRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1beta.GetBackupRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetBackupRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1beta.GetBackupRequest";
                         };
     
                         return GetBackupRequest;
@@ -29735,18 +31613,22 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.parent = reader.string();
-                                    break;
-                                case 2:
-                                    message.backupId = reader.string();
-                                    break;
-                                case 3:
-                                    message.backup = $root.google.cloud.metastore.v1beta.Backup.decode(reader, reader.uint32());
-                                    break;
-                                case 4:
-                                    message.requestId = reader.string();
-                                    break;
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.backupId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.backup = $root.google.cloud.metastore.v1beta.Backup.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -29866,6 +31748,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for CreateBackupRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1beta.CreateBackupRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateBackupRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1beta.CreateBackupRequest";
+                        };
+    
                         return CreateBackupRequest;
                     })();
     
@@ -29972,12 +31869,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
-                                case 2:
-                                    message.requestId = reader.string();
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -30074,6 +31973,21 @@
                          */
                         DeleteBackupRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteBackupRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1beta.DeleteBackupRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteBackupRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1beta.DeleteBackupRequest";
                         };
     
                         return DeleteBackupRequest;
@@ -30218,18 +32132,22 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 2:
-                                    message.destinationGcsFolder = reader.string();
-                                    break;
-                                case 1:
-                                    message.service = reader.string();
-                                    break;
-                                case 3:
-                                    message.requestId = reader.string();
-                                    break;
-                                case 4:
-                                    message.databaseDumpType = reader.int32();
-                                    break;
+                                case 2: {
+                                        message.destinationGcsFolder = reader.string();
+                                        break;
+                                    }
+                                case 1: {
+                                        message.service = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.databaseDumpType = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -30362,6 +32280,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for ExportMetadataRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1beta.ExportMetadataRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ExportMetadataRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1beta.ExportMetadataRequest";
+                        };
+    
                         return ExportMetadataRequest;
                     })();
     
@@ -30490,18 +32423,22 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.service = reader.string();
-                                    break;
-                                case 2:
-                                    message.backup = reader.string();
-                                    break;
-                                case 3:
-                                    message.restoreType = reader.int32();
-                                    break;
-                                case 4:
-                                    message.requestId = reader.string();
-                                    break;
+                                case 1: {
+                                        message.service = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.backup = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.restoreType = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -30632,6 +32569,21 @@
                          */
                         RestoreServiceRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RestoreServiceRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1beta.RestoreServiceRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RestoreServiceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1beta.RestoreServiceRequest";
                         };
     
                         return RestoreServiceRequest;
@@ -30795,27 +32747,34 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 2:
-                                    message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 3:
-                                    message.target = reader.string();
-                                    break;
-                                case 4:
-                                    message.verb = reader.string();
-                                    break;
-                                case 5:
-                                    message.statusMessage = reader.string();
-                                    break;
-                                case 6:
-                                    message.requestedCancellation = reader.bool();
-                                    break;
-                                case 7:
-                                    message.apiVersion = reader.string();
-                                    break;
+                                case 1: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.target = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.verb = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.statusMessage = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.requestedCancellation = reader.bool();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.apiVersion = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -30964,6 +32923,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for OperationMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1beta.OperationMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        OperationMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1beta.OperationMetadata";
+                        };
+    
                         return OperationMetadata;
                     })();
     
@@ -31061,11 +33035,12 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    if (!(message.supportedHiveMetastoreVersions && message.supportedHiveMetastoreVersions.length))
-                                        message.supportedHiveMetastoreVersions = [];
-                                    message.supportedHiveMetastoreVersions.push($root.google.cloud.metastore.v1beta.LocationMetadata.HiveMetastoreVersion.decode(reader, reader.uint32()));
-                                    break;
+                                case 1: {
+                                        if (!(message.supportedHiveMetastoreVersions && message.supportedHiveMetastoreVersions.length))
+                                            message.supportedHiveMetastoreVersions = [];
+                                        message.supportedHiveMetastoreVersions.push($root.google.cloud.metastore.v1beta.LocationMetadata.HiveMetastoreVersion.decode(reader, reader.uint32()));
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -31172,6 +33147,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for LocationMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1beta.LocationMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        LocationMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1beta.LocationMetadata";
+                        };
+    
                         LocationMetadata.HiveMetastoreVersion = (function() {
     
                             /**
@@ -31275,12 +33265,14 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.version = reader.string();
-                                        break;
-                                    case 2:
-                                        message.isDefault = reader.bool();
-                                        break;
+                                    case 1: {
+                                            message.version = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.isDefault = reader.bool();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -31377,6 +33369,21 @@
                              */
                             HiveMetastoreVersion.prototype.toJSON = function toJSON() {
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for HiveMetastoreVersion
+                             * @function getTypeUrl
+                             * @memberof google.cloud.metastore.v1beta.LocationMetadata.HiveMetastoreVersion
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            HiveMetastoreVersion.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.metastore.v1beta.LocationMetadata.HiveMetastoreVersion";
                             };
     
                             return HiveMetastoreVersion;
@@ -31543,6 +33550,21 @@
                         };
     
                         /**
+                         * Gets the default type url for DatabaseDumpSpec
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1beta.DatabaseDumpSpec
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DatabaseDumpSpec.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1beta.DatabaseDumpSpec";
+                        };
+    
+                        /**
                          * Type enum.
                          * @name google.cloud.metastore.v1beta.DatabaseDumpSpec.Type
                          * @enum {number}
@@ -31682,14 +33704,16 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            if (!(message.rules && message.rules.length))
-                                message.rules = [];
-                            message.rules.push($root.google.api.HttpRule.decode(reader, reader.uint32()));
-                            break;
-                        case 2:
-                            message.fullyDecodeReservedExpansion = reader.bool();
-                            break;
+                        case 1: {
+                                if (!(message.rules && message.rules.length))
+                                    message.rules = [];
+                                message.rules.push($root.google.api.HttpRule.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 2: {
+                                message.fullyDecodeReservedExpansion = reader.bool();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -31803,6 +33827,21 @@
                  */
                 Http.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Http
+                 * @function getTypeUrl
+                 * @memberof google.api.Http
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Http.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.Http";
                 };
     
                 return Http;
@@ -32015,38 +34054,48 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.selector = reader.string();
-                            break;
-                        case 2:
-                            message.get = reader.string();
-                            break;
-                        case 3:
-                            message.put = reader.string();
-                            break;
-                        case 4:
-                            message.post = reader.string();
-                            break;
-                        case 5:
-                            message["delete"] = reader.string();
-                            break;
-                        case 6:
-                            message.patch = reader.string();
-                            break;
-                        case 8:
-                            message.custom = $root.google.api.CustomHttpPattern.decode(reader, reader.uint32());
-                            break;
-                        case 7:
-                            message.body = reader.string();
-                            break;
-                        case 12:
-                            message.responseBody = reader.string();
-                            break;
-                        case 11:
-                            if (!(message.additionalBindings && message.additionalBindings.length))
-                                message.additionalBindings = [];
-                            message.additionalBindings.push($root.google.api.HttpRule.decode(reader, reader.uint32()));
-                            break;
+                        case 1: {
+                                message.selector = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.get = reader.string();
+                                break;
+                            }
+                        case 3: {
+                                message.put = reader.string();
+                                break;
+                            }
+                        case 4: {
+                                message.post = reader.string();
+                                break;
+                            }
+                        case 5: {
+                                message["delete"] = reader.string();
+                                break;
+                            }
+                        case 6: {
+                                message.patch = reader.string();
+                                break;
+                            }
+                        case 8: {
+                                message.custom = $root.google.api.CustomHttpPattern.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 7: {
+                                message.body = reader.string();
+                                break;
+                            }
+                        case 12: {
+                                message.responseBody = reader.string();
+                                break;
+                            }
+                        case 11: {
+                                if (!(message.additionalBindings && message.additionalBindings.length))
+                                    message.additionalBindings = [];
+                                message.additionalBindings.push($root.google.api.HttpRule.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -32268,6 +34317,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for HttpRule
+                 * @function getTypeUrl
+                 * @memberof google.api.HttpRule
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                HttpRule.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.HttpRule";
+                };
+    
                 return HttpRule;
             })();
     
@@ -32374,12 +34438,14 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.kind = reader.string();
-                            break;
-                        case 2:
-                            message.path = reader.string();
-                            break;
+                        case 1: {
+                                message.kind = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.path = reader.string();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -32476,6 +34542,21 @@
                  */
                 CustomHttpPattern.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for CustomHttpPattern
+                 * @function getTypeUrl
+                 * @memberof google.api.CustomHttpPattern
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                CustomHttpPattern.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.CustomHttpPattern";
                 };
     
                 return CustomHttpPattern;
@@ -32672,36 +34753,43 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.type = reader.string();
-                            break;
-                        case 2:
-                            if (!(message.pattern && message.pattern.length))
-                                message.pattern = [];
-                            message.pattern.push(reader.string());
-                            break;
-                        case 3:
-                            message.nameField = reader.string();
-                            break;
-                        case 4:
-                            message.history = reader.int32();
-                            break;
-                        case 5:
-                            message.plural = reader.string();
-                            break;
-                        case 6:
-                            message.singular = reader.string();
-                            break;
-                        case 10:
-                            if (!(message.style && message.style.length))
-                                message.style = [];
-                            if ((tag & 7) === 2) {
-                                var end2 = reader.uint32() + reader.pos;
-                                while (reader.pos < end2)
+                        case 1: {
+                                message.type = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                if (!(message.pattern && message.pattern.length))
+                                    message.pattern = [];
+                                message.pattern.push(reader.string());
+                                break;
+                            }
+                        case 3: {
+                                message.nameField = reader.string();
+                                break;
+                            }
+                        case 4: {
+                                message.history = reader.int32();
+                                break;
+                            }
+                        case 5: {
+                                message.plural = reader.string();
+                                break;
+                            }
+                        case 6: {
+                                message.singular = reader.string();
+                                break;
+                            }
+                        case 10: {
+                                if (!(message.style && message.style.length))
+                                    message.style = [];
+                                if ((tag & 7) === 2) {
+                                    var end2 = reader.uint32() + reader.pos;
+                                    while (reader.pos < end2)
+                                        message.style.push(reader.int32());
+                                } else
                                     message.style.push(reader.int32());
-                            } else
-                                message.style.push(reader.int32());
-                            break;
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -32900,6 +34988,21 @@
                 };
     
                 /**
+                 * Gets the default type url for ResourceDescriptor
+                 * @function getTypeUrl
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ResourceDescriptor.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.ResourceDescriptor";
+                };
+    
+                /**
                  * History enum.
                  * @name google.api.ResourceDescriptor.History
                  * @enum {number}
@@ -33035,12 +35138,14 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.type = reader.string();
-                            break;
-                        case 2:
-                            message.childType = reader.string();
-                            break;
+                        case 1: {
+                                message.type = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.childType = reader.string();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -33137,6 +35242,21 @@
                  */
                 ResourceReference.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for ResourceReference
+                 * @function getTypeUrl
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ResourceReference.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.ResourceReference";
                 };
     
                 return ResourceReference;
@@ -33248,11 +35368,12 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            if (!(message.file && message.file.length))
-                                message.file = [];
-                            message.file.push($root.google.protobuf.FileDescriptorProto.decode(reader, reader.uint32()));
-                            break;
+                        case 1: {
+                                if (!(message.file && message.file.length))
+                                    message.file = [];
+                                message.file.push($root.google.protobuf.FileDescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -33359,6 +35480,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for FileDescriptorSet
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.FileDescriptorSet
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FileDescriptorSet.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.FileDescriptorSet";
+                };
+    
                 return FileDescriptorSet;
             })();
     
@@ -33380,6 +35516,7 @@
                  * @property {google.protobuf.IFileOptions|null} [options] FileDescriptorProto options
                  * @property {google.protobuf.ISourceCodeInfo|null} [sourceCodeInfo] FileDescriptorProto sourceCodeInfo
                  * @property {string|null} [syntax] FileDescriptorProto syntax
+                 * @property {string|null} [edition] FileDescriptorProto edition
                  */
     
                 /**
@@ -33501,6 +35638,14 @@
                 FileDescriptorProto.prototype.syntax = "";
     
                 /**
+                 * FileDescriptorProto edition.
+                 * @member {string} edition
+                 * @memberof google.protobuf.FileDescriptorProto
+                 * @instance
+                 */
+                FileDescriptorProto.prototype.edition = "";
+    
+                /**
                  * Creates a new FileDescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.FileDescriptorProto
@@ -33555,6 +35700,8 @@
                             writer.uint32(/* id 11, wireType 0 =*/88).int32(message.weakDependency[i]);
                     if (message.syntax != null && Object.hasOwnProperty.call(message, "syntax"))
                         writer.uint32(/* id 12, wireType 2 =*/98).string(message.syntax);
+                    if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
+                        writer.uint32(/* id 13, wireType 2 =*/106).string(message.edition);
                     return writer;
                 };
     
@@ -33589,66 +35736,82 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 2:
-                            message["package"] = reader.string();
-                            break;
-                        case 3:
-                            if (!(message.dependency && message.dependency.length))
-                                message.dependency = [];
-                            message.dependency.push(reader.string());
-                            break;
-                        case 10:
-                            if (!(message.publicDependency && message.publicDependency.length))
-                                message.publicDependency = [];
-                            if ((tag & 7) === 2) {
-                                var end2 = reader.uint32() + reader.pos;
-                                while (reader.pos < end2)
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message["package"] = reader.string();
+                                break;
+                            }
+                        case 3: {
+                                if (!(message.dependency && message.dependency.length))
+                                    message.dependency = [];
+                                message.dependency.push(reader.string());
+                                break;
+                            }
+                        case 10: {
+                                if (!(message.publicDependency && message.publicDependency.length))
+                                    message.publicDependency = [];
+                                if ((tag & 7) === 2) {
+                                    var end2 = reader.uint32() + reader.pos;
+                                    while (reader.pos < end2)
+                                        message.publicDependency.push(reader.int32());
+                                } else
                                     message.publicDependency.push(reader.int32());
-                            } else
-                                message.publicDependency.push(reader.int32());
-                            break;
-                        case 11:
-                            if (!(message.weakDependency && message.weakDependency.length))
-                                message.weakDependency = [];
-                            if ((tag & 7) === 2) {
-                                var end2 = reader.uint32() + reader.pos;
-                                while (reader.pos < end2)
+                                break;
+                            }
+                        case 11: {
+                                if (!(message.weakDependency && message.weakDependency.length))
+                                    message.weakDependency = [];
+                                if ((tag & 7) === 2) {
+                                    var end2 = reader.uint32() + reader.pos;
+                                    while (reader.pos < end2)
+                                        message.weakDependency.push(reader.int32());
+                                } else
                                     message.weakDependency.push(reader.int32());
-                            } else
-                                message.weakDependency.push(reader.int32());
-                            break;
-                        case 4:
-                            if (!(message.messageType && message.messageType.length))
-                                message.messageType = [];
-                            message.messageType.push($root.google.protobuf.DescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 5:
-                            if (!(message.enumType && message.enumType.length))
-                                message.enumType = [];
-                            message.enumType.push($root.google.protobuf.EnumDescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 6:
-                            if (!(message.service && message.service.length))
-                                message.service = [];
-                            message.service.push($root.google.protobuf.ServiceDescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 7:
-                            if (!(message.extension && message.extension.length))
-                                message.extension = [];
-                            message.extension.push($root.google.protobuf.FieldDescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 8:
-                            message.options = $root.google.protobuf.FileOptions.decode(reader, reader.uint32());
-                            break;
-                        case 9:
-                            message.sourceCodeInfo = $root.google.protobuf.SourceCodeInfo.decode(reader, reader.uint32());
-                            break;
-                        case 12:
-                            message.syntax = reader.string();
-                            break;
+                                break;
+                            }
+                        case 4: {
+                                if (!(message.messageType && message.messageType.length))
+                                    message.messageType = [];
+                                message.messageType.push($root.google.protobuf.DescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 5: {
+                                if (!(message.enumType && message.enumType.length))
+                                    message.enumType = [];
+                                message.enumType.push($root.google.protobuf.EnumDescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 6: {
+                                if (!(message.service && message.service.length))
+                                    message.service = [];
+                                message.service.push($root.google.protobuf.ServiceDescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 7: {
+                                if (!(message.extension && message.extension.length))
+                                    message.extension = [];
+                                message.extension.push($root.google.protobuf.FieldDescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 8: {
+                                message.options = $root.google.protobuf.FileOptions.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 9: {
+                                message.sourceCodeInfo = $root.google.protobuf.SourceCodeInfo.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 12: {
+                                message.syntax = reader.string();
+                                break;
+                            }
+                        case 13: {
+                                message.edition = reader.string();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -33760,6 +35923,9 @@
                     if (message.syntax != null && message.hasOwnProperty("syntax"))
                         if (!$util.isString(message.syntax))
                             return "syntax: string expected";
+                    if (message.edition != null && message.hasOwnProperty("edition"))
+                        if (!$util.isString(message.edition))
+                            return "edition: string expected";
                     return null;
                 };
     
@@ -33852,6 +36018,8 @@
                     }
                     if (object.syntax != null)
                         message.syntax = String(object.syntax);
+                    if (object.edition != null)
+                        message.edition = String(object.edition);
                     return message;
                 };
     
@@ -33883,6 +36051,7 @@
                         object.options = null;
                         object.sourceCodeInfo = null;
                         object.syntax = "";
+                        object.edition = "";
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -33929,6 +36098,8 @@
                     }
                     if (message.syntax != null && message.hasOwnProperty("syntax"))
                         object.syntax = message.syntax;
+                    if (message.edition != null && message.hasOwnProperty("edition"))
+                        object.edition = message.edition;
                     return object;
                 };
     
@@ -33941,6 +36112,21 @@
                  */
                 FileDescriptorProto.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for FileDescriptorProto
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.FileDescriptorProto
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FileDescriptorProto.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.FileDescriptorProto";
                 };
     
                 return FileDescriptorProto;
@@ -34153,52 +36339,62 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 2:
-                            if (!(message.field && message.field.length))
-                                message.field = [];
-                            message.field.push($root.google.protobuf.FieldDescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 6:
-                            if (!(message.extension && message.extension.length))
-                                message.extension = [];
-                            message.extension.push($root.google.protobuf.FieldDescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 3:
-                            if (!(message.nestedType && message.nestedType.length))
-                                message.nestedType = [];
-                            message.nestedType.push($root.google.protobuf.DescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 4:
-                            if (!(message.enumType && message.enumType.length))
-                                message.enumType = [];
-                            message.enumType.push($root.google.protobuf.EnumDescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 5:
-                            if (!(message.extensionRange && message.extensionRange.length))
-                                message.extensionRange = [];
-                            message.extensionRange.push($root.google.protobuf.DescriptorProto.ExtensionRange.decode(reader, reader.uint32()));
-                            break;
-                        case 8:
-                            if (!(message.oneofDecl && message.oneofDecl.length))
-                                message.oneofDecl = [];
-                            message.oneofDecl.push($root.google.protobuf.OneofDescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 7:
-                            message.options = $root.google.protobuf.MessageOptions.decode(reader, reader.uint32());
-                            break;
-                        case 9:
-                            if (!(message.reservedRange && message.reservedRange.length))
-                                message.reservedRange = [];
-                            message.reservedRange.push($root.google.protobuf.DescriptorProto.ReservedRange.decode(reader, reader.uint32()));
-                            break;
-                        case 10:
-                            if (!(message.reservedName && message.reservedName.length))
-                                message.reservedName = [];
-                            message.reservedName.push(reader.string());
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                if (!(message.field && message.field.length))
+                                    message.field = [];
+                                message.field.push($root.google.protobuf.FieldDescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 6: {
+                                if (!(message.extension && message.extension.length))
+                                    message.extension = [];
+                                message.extension.push($root.google.protobuf.FieldDescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 3: {
+                                if (!(message.nestedType && message.nestedType.length))
+                                    message.nestedType = [];
+                                message.nestedType.push($root.google.protobuf.DescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 4: {
+                                if (!(message.enumType && message.enumType.length))
+                                    message.enumType = [];
+                                message.enumType.push($root.google.protobuf.EnumDescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 5: {
+                                if (!(message.extensionRange && message.extensionRange.length))
+                                    message.extensionRange = [];
+                                message.extensionRange.push($root.google.protobuf.DescriptorProto.ExtensionRange.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 8: {
+                                if (!(message.oneofDecl && message.oneofDecl.length))
+                                    message.oneofDecl = [];
+                                message.oneofDecl.push($root.google.protobuf.OneofDescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 7: {
+                                message.options = $root.google.protobuf.MessageOptions.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 9: {
+                                if (!(message.reservedRange && message.reservedRange.length))
+                                    message.reservedRange = [];
+                                message.reservedRange.push($root.google.protobuf.DescriptorProto.ReservedRange.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 10: {
+                                if (!(message.reservedName && message.reservedName.length))
+                                    message.reservedName = [];
+                                message.reservedName.push(reader.string());
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -34499,6 +36695,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for DescriptorProto
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.DescriptorProto
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                DescriptorProto.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.DescriptorProto";
+                };
+    
                 DescriptorProto.ExtensionRange = (function() {
     
                     /**
@@ -34613,15 +36824,18 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.start = reader.int32();
-                                break;
-                            case 2:
-                                message.end = reader.int32();
-                                break;
-                            case 3:
-                                message.options = $root.google.protobuf.ExtensionRangeOptions.decode(reader, reader.uint32());
-                                break;
+                            case 1: {
+                                    message.start = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    message.end = reader.int32();
+                                    break;
+                                }
+                            case 3: {
+                                    message.options = $root.google.protobuf.ExtensionRangeOptions.decode(reader, reader.uint32());
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -34733,6 +36947,21 @@
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
+                    /**
+                     * Gets the default type url for ExtensionRange
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.DescriptorProto.ExtensionRange
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ExtensionRange.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.DescriptorProto.ExtensionRange";
+                    };
+    
                     return ExtensionRange;
                 })();
     
@@ -34839,12 +37068,14 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.start = reader.int32();
-                                break;
-                            case 2:
-                                message.end = reader.int32();
-                                break;
+                            case 1: {
+                                    message.start = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    message.end = reader.int32();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -34941,6 +37172,21 @@
                      */
                     ReservedRange.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ReservedRange
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.DescriptorProto.ReservedRange
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ReservedRange.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.DescriptorProto.ReservedRange";
                     };
     
                     return ReservedRange;
@@ -35043,11 +37289,12 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 999:
-                            if (!(message.uninterpretedOption && message.uninterpretedOption.length))
-                                message.uninterpretedOption = [];
-                            message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
-                            break;
+                        case 999: {
+                                if (!(message.uninterpretedOption && message.uninterpretedOption.length))
+                                    message.uninterpretedOption = [];
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -35152,6 +37399,21 @@
                  */
                 ExtensionRangeOptions.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for ExtensionRangeOptions
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.ExtensionRangeOptions
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ExtensionRangeOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.ExtensionRangeOptions";
                 };
     
                 return ExtensionRangeOptions;
@@ -35359,39 +37621,50 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 3:
-                            message.number = reader.int32();
-                            break;
-                        case 4:
-                            message.label = reader.int32();
-                            break;
-                        case 5:
-                            message.type = reader.int32();
-                            break;
-                        case 6:
-                            message.typeName = reader.string();
-                            break;
-                        case 2:
-                            message.extendee = reader.string();
-                            break;
-                        case 7:
-                            message.defaultValue = reader.string();
-                            break;
-                        case 9:
-                            message.oneofIndex = reader.int32();
-                            break;
-                        case 10:
-                            message.jsonName = reader.string();
-                            break;
-                        case 8:
-                            message.options = $root.google.protobuf.FieldOptions.decode(reader, reader.uint32());
-                            break;
-                        case 17:
-                            message.proto3Optional = reader.bool();
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 3: {
+                                message.number = reader.int32();
+                                break;
+                            }
+                        case 4: {
+                                message.label = reader.int32();
+                                break;
+                            }
+                        case 5: {
+                                message.type = reader.int32();
+                                break;
+                            }
+                        case 6: {
+                                message.typeName = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.extendee = reader.string();
+                                break;
+                            }
+                        case 7: {
+                                message.defaultValue = reader.string();
+                                break;
+                            }
+                        case 9: {
+                                message.oneofIndex = reader.int32();
+                                break;
+                            }
+                        case 10: {
+                                message.jsonName = reader.string();
+                                break;
+                            }
+                        case 8: {
+                                message.options = $root.google.protobuf.FieldOptions.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 17: {
+                                message.proto3Optional = reader.bool();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -35679,6 +37952,21 @@
                 };
     
                 /**
+                 * Gets the default type url for FieldDescriptorProto
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.FieldDescriptorProto
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FieldDescriptorProto.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.FieldDescriptorProto";
+                };
+    
+                /**
                  * Type enum.
                  * @name google.protobuf.FieldDescriptorProto.Type
                  * @enum {number}
@@ -35846,12 +38134,14 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 2:
-                            message.options = $root.google.protobuf.OneofOptions.decode(reader, reader.uint32());
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.options = $root.google.protobuf.OneofOptions.decode(reader, reader.uint32());
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -35953,6 +38243,21 @@
                  */
                 OneofDescriptorProto.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for OneofDescriptorProto
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.OneofDescriptorProto
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                OneofDescriptorProto.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.OneofDescriptorProto";
                 };
     
                 return OneofDescriptorProto;
@@ -36100,27 +38405,32 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 2:
-                            if (!(message.value && message.value.length))
-                                message.value = [];
-                            message.value.push($root.google.protobuf.EnumValueDescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 3:
-                            message.options = $root.google.protobuf.EnumOptions.decode(reader, reader.uint32());
-                            break;
-                        case 4:
-                            if (!(message.reservedRange && message.reservedRange.length))
-                                message.reservedRange = [];
-                            message.reservedRange.push($root.google.protobuf.EnumDescriptorProto.EnumReservedRange.decode(reader, reader.uint32()));
-                            break;
-                        case 5:
-                            if (!(message.reservedName && message.reservedName.length))
-                                message.reservedName = [];
-                            message.reservedName.push(reader.string());
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                if (!(message.value && message.value.length))
+                                    message.value = [];
+                                message.value.push($root.google.protobuf.EnumValueDescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 3: {
+                                message.options = $root.google.protobuf.EnumOptions.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 4: {
+                                if (!(message.reservedRange && message.reservedRange.length))
+                                    message.reservedRange = [];
+                                message.reservedRange.push($root.google.protobuf.EnumDescriptorProto.EnumReservedRange.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 5: {
+                                if (!(message.reservedName && message.reservedName.length))
+                                    message.reservedName = [];
+                                message.reservedName.push(reader.string());
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -36296,6 +38606,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for EnumDescriptorProto
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.EnumDescriptorProto
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                EnumDescriptorProto.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.EnumDescriptorProto";
+                };
+    
                 EnumDescriptorProto.EnumReservedRange = (function() {
     
                     /**
@@ -36399,12 +38724,14 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.start = reader.int32();
-                                break;
-                            case 2:
-                                message.end = reader.int32();
-                                break;
+                            case 1: {
+                                    message.start = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    message.end = reader.int32();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -36501,6 +38828,21 @@
                      */
                     EnumReservedRange.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for EnumReservedRange
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.EnumDescriptorProto.EnumReservedRange
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    EnumReservedRange.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.EnumDescriptorProto.EnumReservedRange";
                     };
     
                     return EnumReservedRange;
@@ -36623,15 +38965,18 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 2:
-                            message.number = reader.int32();
-                            break;
-                        case 3:
-                            message.options = $root.google.protobuf.EnumValueOptions.decode(reader, reader.uint32());
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.number = reader.int32();
+                                break;
+                            }
+                        case 3: {
+                                message.options = $root.google.protobuf.EnumValueOptions.decode(reader, reader.uint32());
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -36741,6 +39086,21 @@
                  */
                 EnumValueDescriptorProto.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for EnumValueDescriptorProto
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.EnumValueDescriptorProto
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                EnumValueDescriptorProto.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.EnumValueDescriptorProto";
                 };
     
                 return EnumValueDescriptorProto;
@@ -36862,17 +39222,20 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 2:
-                            if (!(message.method && message.method.length))
-                                message.method = [];
-                            message.method.push($root.google.protobuf.MethodDescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 3:
-                            message.options = $root.google.protobuf.ServiceOptions.decode(reader, reader.uint32());
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                if (!(message.method && message.method.length))
+                                    message.method = [];
+                                message.method.push($root.google.protobuf.MethodDescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 3: {
+                                message.options = $root.google.protobuf.ServiceOptions.decode(reader, reader.uint32());
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -37000,6 +39363,21 @@
                  */
                 ServiceDescriptorProto.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for ServiceDescriptorProto
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.ServiceDescriptorProto
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ServiceDescriptorProto.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.ServiceDescriptorProto";
                 };
     
                 return ServiceDescriptorProto;
@@ -37152,24 +39530,30 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 2:
-                            message.inputType = reader.string();
-                            break;
-                        case 3:
-                            message.outputType = reader.string();
-                            break;
-                        case 4:
-                            message.options = $root.google.protobuf.MethodOptions.decode(reader, reader.uint32());
-                            break;
-                        case 5:
-                            message.clientStreaming = reader.bool();
-                            break;
-                        case 6:
-                            message.serverStreaming = reader.bool();
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.inputType = reader.string();
+                                break;
+                            }
+                        case 3: {
+                                message.outputType = reader.string();
+                                break;
+                            }
+                        case 4: {
+                                message.options = $root.google.protobuf.MethodOptions.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 5: {
+                                message.clientStreaming = reader.bool();
+                                break;
+                            }
+                        case 6: {
+                                message.serverStreaming = reader.bool();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -37303,6 +39687,21 @@
                  */
                 MethodDescriptorProto.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for MethodDescriptorProto
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.MethodDescriptorProto
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                MethodDescriptorProto.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.MethodDescriptorProto";
                 };
     
                 return MethodDescriptorProto;
@@ -37635,76 +40034,98 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.javaPackage = reader.string();
-                            break;
-                        case 8:
-                            message.javaOuterClassname = reader.string();
-                            break;
-                        case 10:
-                            message.javaMultipleFiles = reader.bool();
-                            break;
-                        case 20:
-                            message.javaGenerateEqualsAndHash = reader.bool();
-                            break;
-                        case 27:
-                            message.javaStringCheckUtf8 = reader.bool();
-                            break;
-                        case 9:
-                            message.optimizeFor = reader.int32();
-                            break;
-                        case 11:
-                            message.goPackage = reader.string();
-                            break;
-                        case 16:
-                            message.ccGenericServices = reader.bool();
-                            break;
-                        case 17:
-                            message.javaGenericServices = reader.bool();
-                            break;
-                        case 18:
-                            message.pyGenericServices = reader.bool();
-                            break;
-                        case 42:
-                            message.phpGenericServices = reader.bool();
-                            break;
-                        case 23:
-                            message.deprecated = reader.bool();
-                            break;
-                        case 31:
-                            message.ccEnableArenas = reader.bool();
-                            break;
-                        case 36:
-                            message.objcClassPrefix = reader.string();
-                            break;
-                        case 37:
-                            message.csharpNamespace = reader.string();
-                            break;
-                        case 39:
-                            message.swiftPrefix = reader.string();
-                            break;
-                        case 40:
-                            message.phpClassPrefix = reader.string();
-                            break;
-                        case 41:
-                            message.phpNamespace = reader.string();
-                            break;
-                        case 44:
-                            message.phpMetadataNamespace = reader.string();
-                            break;
-                        case 45:
-                            message.rubyPackage = reader.string();
-                            break;
-                        case 999:
-                            if (!(message.uninterpretedOption && message.uninterpretedOption.length))
-                                message.uninterpretedOption = [];
-                            message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
-                            break;
-                        case 1053:
-                            if (!(message[".google.api.resourceDefinition"] && message[".google.api.resourceDefinition"].length))
-                                message[".google.api.resourceDefinition"] = [];
-                            message[".google.api.resourceDefinition"].push($root.google.api.ResourceDescriptor.decode(reader, reader.uint32()));
-                            break;
+                        case 1: {
+                                message.javaPackage = reader.string();
+                                break;
+                            }
+                        case 8: {
+                                message.javaOuterClassname = reader.string();
+                                break;
+                            }
+                        case 10: {
+                                message.javaMultipleFiles = reader.bool();
+                                break;
+                            }
+                        case 20: {
+                                message.javaGenerateEqualsAndHash = reader.bool();
+                                break;
+                            }
+                        case 27: {
+                                message.javaStringCheckUtf8 = reader.bool();
+                                break;
+                            }
+                        case 9: {
+                                message.optimizeFor = reader.int32();
+                                break;
+                            }
+                        case 11: {
+                                message.goPackage = reader.string();
+                                break;
+                            }
+                        case 16: {
+                                message.ccGenericServices = reader.bool();
+                                break;
+                            }
+                        case 17: {
+                                message.javaGenericServices = reader.bool();
+                                break;
+                            }
+                        case 18: {
+                                message.pyGenericServices = reader.bool();
+                                break;
+                            }
+                        case 42: {
+                                message.phpGenericServices = reader.bool();
+                                break;
+                            }
+                        case 23: {
+                                message.deprecated = reader.bool();
+                                break;
+                            }
+                        case 31: {
+                                message.ccEnableArenas = reader.bool();
+                                break;
+                            }
+                        case 36: {
+                                message.objcClassPrefix = reader.string();
+                                break;
+                            }
+                        case 37: {
+                                message.csharpNamespace = reader.string();
+                                break;
+                            }
+                        case 39: {
+                                message.swiftPrefix = reader.string();
+                                break;
+                            }
+                        case 40: {
+                                message.phpClassPrefix = reader.string();
+                                break;
+                            }
+                        case 41: {
+                                message.phpNamespace = reader.string();
+                                break;
+                            }
+                        case 44: {
+                                message.phpMetadataNamespace = reader.string();
+                                break;
+                            }
+                        case 45: {
+                                message.rubyPackage = reader.string();
+                                break;
+                            }
+                        case 999: {
+                                if (!(message.uninterpretedOption && message.uninterpretedOption.length))
+                                    message.uninterpretedOption = [];
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 1053: {
+                                if (!(message[".google.api.resourceDefinition"] && message[".google.api.resourceDefinition"].length))
+                                    message[".google.api.resourceDefinition"] = [];
+                                message[".google.api.resourceDefinition"].push($root.google.api.ResourceDescriptor.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -38018,6 +40439,21 @@
                 };
     
                 /**
+                 * Gets the default type url for FileOptions
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.FileOptions
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FileOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.FileOptions";
+                };
+    
+                /**
                  * OptimizeMode enum.
                  * @name google.protobuf.FileOptions.OptimizeMode
                  * @enum {number}
@@ -38185,26 +40621,32 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.messageSetWireFormat = reader.bool();
-                            break;
-                        case 2:
-                            message.noStandardDescriptorAccessor = reader.bool();
-                            break;
-                        case 3:
-                            message.deprecated = reader.bool();
-                            break;
-                        case 7:
-                            message.mapEntry = reader.bool();
-                            break;
-                        case 999:
-                            if (!(message.uninterpretedOption && message.uninterpretedOption.length))
-                                message.uninterpretedOption = [];
-                            message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
-                            break;
-                        case 1053:
-                            message[".google.api.resource"] = $root.google.api.ResourceDescriptor.decode(reader, reader.uint32());
-                            break;
+                        case 1: {
+                                message.messageSetWireFormat = reader.bool();
+                                break;
+                            }
+                        case 2: {
+                                message.noStandardDescriptorAccessor = reader.bool();
+                                break;
+                            }
+                        case 3: {
+                                message.deprecated = reader.bool();
+                                break;
+                            }
+                        case 7: {
+                                message.mapEntry = reader.bool();
+                                break;
+                            }
+                        case 999: {
+                                if (!(message.uninterpretedOption && message.uninterpretedOption.length))
+                                    message.uninterpretedOption = [];
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 1053: {
+                                message[".google.api.resource"] = $root.google.api.ResourceDescriptor.decode(reader, reader.uint32());
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -38358,6 +40800,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for MessageOptions
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.MessageOptions
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                MessageOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.MessageOptions";
+                };
+    
                 return MessageOptions;
             })();
     
@@ -38371,6 +40828,7 @@
                  * @property {boolean|null} [packed] FieldOptions packed
                  * @property {google.protobuf.FieldOptions.JSType|null} [jstype] FieldOptions jstype
                  * @property {boolean|null} [lazy] FieldOptions lazy
+                 * @property {boolean|null} [unverifiedLazy] FieldOptions unverifiedLazy
                  * @property {boolean|null} [deprecated] FieldOptions deprecated
                  * @property {boolean|null} [weak] FieldOptions weak
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
@@ -38426,6 +40884,14 @@
                  * @instance
                  */
                 FieldOptions.prototype.lazy = false;
+    
+                /**
+                 * FieldOptions unverifiedLazy.
+                 * @member {boolean} unverifiedLazy
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype.unverifiedLazy = false;
     
                 /**
                  * FieldOptions deprecated.
@@ -38503,6 +40969,8 @@
                         writer.uint32(/* id 6, wireType 0 =*/48).int32(message.jstype);
                     if (message.weak != null && Object.hasOwnProperty.call(message, "weak"))
                         writer.uint32(/* id 10, wireType 0 =*/80).bool(message.weak);
+                    if (message.unverifiedLazy != null && Object.hasOwnProperty.call(message, "unverifiedLazy"))
+                        writer.uint32(/* id 15, wireType 0 =*/120).bool(message.unverifiedLazy);
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -38548,42 +41016,55 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.ctype = reader.int32();
-                            break;
-                        case 2:
-                            message.packed = reader.bool();
-                            break;
-                        case 6:
-                            message.jstype = reader.int32();
-                            break;
-                        case 5:
-                            message.lazy = reader.bool();
-                            break;
-                        case 3:
-                            message.deprecated = reader.bool();
-                            break;
-                        case 10:
-                            message.weak = reader.bool();
-                            break;
-                        case 999:
-                            if (!(message.uninterpretedOption && message.uninterpretedOption.length))
-                                message.uninterpretedOption = [];
-                            message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
-                            break;
-                        case 1052:
-                            if (!(message[".google.api.fieldBehavior"] && message[".google.api.fieldBehavior"].length))
-                                message[".google.api.fieldBehavior"] = [];
-                            if ((tag & 7) === 2) {
-                                var end2 = reader.uint32() + reader.pos;
-                                while (reader.pos < end2)
+                        case 1: {
+                                message.ctype = reader.int32();
+                                break;
+                            }
+                        case 2: {
+                                message.packed = reader.bool();
+                                break;
+                            }
+                        case 6: {
+                                message.jstype = reader.int32();
+                                break;
+                            }
+                        case 5: {
+                                message.lazy = reader.bool();
+                                break;
+                            }
+                        case 15: {
+                                message.unverifiedLazy = reader.bool();
+                                break;
+                            }
+                        case 3: {
+                                message.deprecated = reader.bool();
+                                break;
+                            }
+                        case 10: {
+                                message.weak = reader.bool();
+                                break;
+                            }
+                        case 999: {
+                                if (!(message.uninterpretedOption && message.uninterpretedOption.length))
+                                    message.uninterpretedOption = [];
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 1052: {
+                                if (!(message[".google.api.fieldBehavior"] && message[".google.api.fieldBehavior"].length))
+                                    message[".google.api.fieldBehavior"] = [];
+                                if ((tag & 7) === 2) {
+                                    var end2 = reader.uint32() + reader.pos;
+                                    while (reader.pos < end2)
+                                        message[".google.api.fieldBehavior"].push(reader.int32());
+                                } else
                                     message[".google.api.fieldBehavior"].push(reader.int32());
-                            } else
-                                message[".google.api.fieldBehavior"].push(reader.int32());
-                            break;
-                        case 1055:
-                            message[".google.api.resourceReference"] = $root.google.api.ResourceReference.decode(reader, reader.uint32());
-                            break;
+                                break;
+                            }
+                        case 1055: {
+                                message[".google.api.resourceReference"] = $root.google.api.ResourceReference.decode(reader, reader.uint32());
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -38643,6 +41124,9 @@
                     if (message.lazy != null && message.hasOwnProperty("lazy"))
                         if (typeof message.lazy !== "boolean")
                             return "lazy: boolean expected";
+                    if (message.unverifiedLazy != null && message.hasOwnProperty("unverifiedLazy"))
+                        if (typeof message.unverifiedLazy !== "boolean")
+                            return "unverifiedLazy: boolean expected";
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         if (typeof message.deprecated !== "boolean")
                             return "deprecated: boolean expected";
@@ -38728,6 +41212,8 @@
                     }
                     if (object.lazy != null)
                         message.lazy = Boolean(object.lazy);
+                    if (object.unverifiedLazy != null)
+                        message.unverifiedLazy = Boolean(object.unverifiedLazy);
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
                     if (object.weak != null)
@@ -38815,6 +41301,7 @@
                         object.lazy = false;
                         object.jstype = options.enums === String ? "JS_NORMAL" : 0;
                         object.weak = false;
+                        object.unverifiedLazy = false;
                         object[".google.api.resourceReference"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
@@ -38829,6 +41316,8 @@
                         object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
                     if (message.weak != null && message.hasOwnProperty("weak"))
                         object.weak = message.weak;
+                    if (message.unverifiedLazy != null && message.hasOwnProperty("unverifiedLazy"))
+                        object.unverifiedLazy = message.unverifiedLazy;
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -38853,6 +41342,21 @@
                  */
                 FieldOptions.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for FieldOptions
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.FieldOptions
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FieldOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.FieldOptions";
                 };
     
                 /**
@@ -38984,11 +41488,12 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 999:
-                            if (!(message.uninterpretedOption && message.uninterpretedOption.length))
-                                message.uninterpretedOption = [];
-                            message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
-                            break;
+                        case 999: {
+                                if (!(message.uninterpretedOption && message.uninterpretedOption.length))
+                                    message.uninterpretedOption = [];
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -39093,6 +41598,21 @@
                  */
                 OneofOptions.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for OneofOptions
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.OneofOptions
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                OneofOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.OneofOptions";
                 };
     
                 return OneofOptions;
@@ -39214,17 +41734,20 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 2:
-                            message.allowAlias = reader.bool();
-                            break;
-                        case 3:
-                            message.deprecated = reader.bool();
-                            break;
-                        case 999:
-                            if (!(message.uninterpretedOption && message.uninterpretedOption.length))
-                                message.uninterpretedOption = [];
-                            message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
-                            break;
+                        case 2: {
+                                message.allowAlias = reader.bool();
+                                break;
+                            }
+                        case 3: {
+                                message.deprecated = reader.bool();
+                                break;
+                            }
+                        case 999: {
+                                if (!(message.uninterpretedOption && message.uninterpretedOption.length))
+                                    message.uninterpretedOption = [];
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -39349,6 +41872,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for EnumOptions
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.EnumOptions
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                EnumOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.EnumOptions";
+                };
+    
                 return EnumOptions;
             })();
     
@@ -39457,14 +41995,16 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.deprecated = reader.bool();
-                            break;
-                        case 999:
-                            if (!(message.uninterpretedOption && message.uninterpretedOption.length))
-                                message.uninterpretedOption = [];
-                            message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
-                            break;
+                        case 1: {
+                                message.deprecated = reader.bool();
+                                break;
+                            }
+                        case 999: {
+                                if (!(message.uninterpretedOption && message.uninterpretedOption.length))
+                                    message.uninterpretedOption = [];
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -39578,6 +42118,21 @@
                  */
                 EnumValueOptions.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for EnumValueOptions
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.EnumValueOptions
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                EnumValueOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.EnumValueOptions";
                 };
     
                 return EnumValueOptions;
@@ -39710,20 +42265,24 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 33:
-                            message.deprecated = reader.bool();
-                            break;
-                        case 999:
-                            if (!(message.uninterpretedOption && message.uninterpretedOption.length))
-                                message.uninterpretedOption = [];
-                            message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
-                            break;
-                        case 1049:
-                            message[".google.api.defaultHost"] = reader.string();
-                            break;
-                        case 1050:
-                            message[".google.api.oauthScopes"] = reader.string();
-                            break;
+                        case 33: {
+                                message.deprecated = reader.bool();
+                                break;
+                            }
+                        case 999: {
+                                if (!(message.uninterpretedOption && message.uninterpretedOption.length))
+                                    message.uninterpretedOption = [];
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 1049: {
+                                message[".google.api.defaultHost"] = reader.string();
+                                break;
+                            }
+                        case 1050: {
+                                message[".google.api.oauthScopes"] = reader.string();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -39854,6 +42413,21 @@
                  */
                 ServiceOptions.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for ServiceOptions
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.ServiceOptions
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ServiceOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.ServiceOptions";
                 };
     
                 return ServiceOptions;
@@ -40010,28 +42584,34 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 33:
-                            message.deprecated = reader.bool();
-                            break;
-                        case 34:
-                            message.idempotencyLevel = reader.int32();
-                            break;
-                        case 999:
-                            if (!(message.uninterpretedOption && message.uninterpretedOption.length))
-                                message.uninterpretedOption = [];
-                            message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
-                            break;
-                        case 72295728:
-                            message[".google.api.http"] = $root.google.api.HttpRule.decode(reader, reader.uint32());
-                            break;
-                        case 1051:
-                            if (!(message[".google.api.methodSignature"] && message[".google.api.methodSignature"].length))
-                                message[".google.api.methodSignature"] = [];
-                            message[".google.api.methodSignature"].push(reader.string());
-                            break;
-                        case 1049:
-                            message[".google.longrunning.operationInfo"] = $root.google.longrunning.OperationInfo.decode(reader, reader.uint32());
-                            break;
+                        case 33: {
+                                message.deprecated = reader.bool();
+                                break;
+                            }
+                        case 34: {
+                                message.idempotencyLevel = reader.int32();
+                                break;
+                            }
+                        case 999: {
+                                if (!(message.uninterpretedOption && message.uninterpretedOption.length))
+                                    message.uninterpretedOption = [];
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 72295728: {
+                                message[".google.api.http"] = $root.google.api.HttpRule.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 1051: {
+                                if (!(message[".google.api.methodSignature"] && message[".google.api.methodSignature"].length))
+                                    message[".google.api.methodSignature"] = [];
+                                message[".google.api.methodSignature"].push(reader.string());
+                                break;
+                            }
+                        case 1049: {
+                                message[".google.longrunning.operationInfo"] = $root.google.longrunning.OperationInfo.decode(reader, reader.uint32());
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -40222,6 +42802,21 @@
                 };
     
                 /**
+                 * Gets the default type url for MethodOptions
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.MethodOptions
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                MethodOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.MethodOptions";
+                };
+    
+                /**
                  * IdempotencyLevel enum.
                  * @name google.protobuf.MethodOptions.IdempotencyLevel
                  * @enum {number}
@@ -40400,29 +42995,36 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 2:
-                            if (!(message.name && message.name.length))
-                                message.name = [];
-                            message.name.push($root.google.protobuf.UninterpretedOption.NamePart.decode(reader, reader.uint32()));
-                            break;
-                        case 3:
-                            message.identifierValue = reader.string();
-                            break;
-                        case 4:
-                            message.positiveIntValue = reader.uint64();
-                            break;
-                        case 5:
-                            message.negativeIntValue = reader.int64();
-                            break;
-                        case 6:
-                            message.doubleValue = reader.double();
-                            break;
-                        case 7:
-                            message.stringValue = reader.bytes();
-                            break;
-                        case 8:
-                            message.aggregateValue = reader.string();
-                            break;
+                        case 2: {
+                                if (!(message.name && message.name.length))
+                                    message.name = [];
+                                message.name.push($root.google.protobuf.UninterpretedOption.NamePart.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 3: {
+                                message.identifierValue = reader.string();
+                                break;
+                            }
+                        case 4: {
+                                message.positiveIntValue = reader.uint64();
+                                break;
+                            }
+                        case 5: {
+                                message.negativeIntValue = reader.int64();
+                                break;
+                            }
+                        case 6: {
+                                message.doubleValue = reader.double();
+                                break;
+                            }
+                        case 7: {
+                                message.stringValue = reader.bytes();
+                                break;
+                            }
+                        case 8: {
+                                message.aggregateValue = reader.string();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -40535,7 +43137,7 @@
                     if (object.stringValue != null)
                         if (typeof object.stringValue === "string")
                             $util.base64.decode(object.stringValue, message.stringValue = $util.newBuffer($util.base64.length(object.stringValue)), 0);
-                        else if (object.stringValue.length)
+                        else if (object.stringValue.length >= 0)
                             message.stringValue = object.stringValue;
                     if (object.aggregateValue != null)
                         message.aggregateValue = String(object.aggregateValue);
@@ -40614,6 +43216,21 @@
                  */
                 UninterpretedOption.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for UninterpretedOption
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.UninterpretedOption
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                UninterpretedOption.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.UninterpretedOption";
                 };
     
                 UninterpretedOption.NamePart = (function() {
@@ -40717,12 +43334,14 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.namePart = reader.string();
-                                break;
-                            case 2:
-                                message.isExtension = reader.bool();
-                                break;
+                            case 1: {
+                                    message.namePart = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.isExtension = reader.bool();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -40821,6 +43440,21 @@
                      */
                     NamePart.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for NamePart
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.UninterpretedOption.NamePart
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    NamePart.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.UninterpretedOption.NamePart";
                     };
     
                     return NamePart;
@@ -40923,11 +43557,12 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            if (!(message.location && message.location.length))
-                                message.location = [];
-                            message.location.push($root.google.protobuf.SourceCodeInfo.Location.decode(reader, reader.uint32()));
-                            break;
+                        case 1: {
+                                if (!(message.location && message.location.length))
+                                    message.location = [];
+                                message.location.push($root.google.protobuf.SourceCodeInfo.Location.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -41032,6 +43667,21 @@
                  */
                 SourceCodeInfo.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for SourceCodeInfo
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.SourceCodeInfo
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                SourceCodeInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.SourceCodeInfo";
                 };
     
                 SourceCodeInfo.Location = (function() {
@@ -41182,37 +43832,42 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                if (!(message.path && message.path.length))
-                                    message.path = [];
-                                if ((tag & 7) === 2) {
-                                    var end2 = reader.uint32() + reader.pos;
-                                    while (reader.pos < end2)
+                            case 1: {
+                                    if (!(message.path && message.path.length))
+                                        message.path = [];
+                                    if ((tag & 7) === 2) {
+                                        var end2 = reader.uint32() + reader.pos;
+                                        while (reader.pos < end2)
+                                            message.path.push(reader.int32());
+                                    } else
                                         message.path.push(reader.int32());
-                                } else
-                                    message.path.push(reader.int32());
-                                break;
-                            case 2:
-                                if (!(message.span && message.span.length))
-                                    message.span = [];
-                                if ((tag & 7) === 2) {
-                                    var end2 = reader.uint32() + reader.pos;
-                                    while (reader.pos < end2)
+                                    break;
+                                }
+                            case 2: {
+                                    if (!(message.span && message.span.length))
+                                        message.span = [];
+                                    if ((tag & 7) === 2) {
+                                        var end2 = reader.uint32() + reader.pos;
+                                        while (reader.pos < end2)
+                                            message.span.push(reader.int32());
+                                    } else
                                         message.span.push(reader.int32());
-                                } else
-                                    message.span.push(reader.int32());
-                                break;
-                            case 3:
-                                message.leadingComments = reader.string();
-                                break;
-                            case 4:
-                                message.trailingComments = reader.string();
-                                break;
-                            case 6:
-                                if (!(message.leadingDetachedComments && message.leadingDetachedComments.length))
-                                    message.leadingDetachedComments = [];
-                                message.leadingDetachedComments.push(reader.string());
-                                break;
+                                    break;
+                                }
+                            case 3: {
+                                    message.leadingComments = reader.string();
+                                    break;
+                                }
+                            case 4: {
+                                    message.trailingComments = reader.string();
+                                    break;
+                                }
+                            case 6: {
+                                    if (!(message.leadingDetachedComments && message.leadingDetachedComments.length))
+                                        message.leadingDetachedComments = [];
+                                    message.leadingDetachedComments.push(reader.string());
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -41373,6 +44028,21 @@
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
+                    /**
+                     * Gets the default type url for Location
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.SourceCodeInfo.Location
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    Location.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.SourceCodeInfo.Location";
+                    };
+    
                     return Location;
                 })();
     
@@ -41473,11 +44143,12 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            if (!(message.annotation && message.annotation.length))
-                                message.annotation = [];
-                            message.annotation.push($root.google.protobuf.GeneratedCodeInfo.Annotation.decode(reader, reader.uint32()));
-                            break;
+                        case 1: {
+                                if (!(message.annotation && message.annotation.length))
+                                    message.annotation = [];
+                                message.annotation.push($root.google.protobuf.GeneratedCodeInfo.Annotation.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -41584,6 +44255,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for GeneratedCodeInfo
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.GeneratedCodeInfo
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                GeneratedCodeInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.GeneratedCodeInfo";
+                };
+    
                 GeneratedCodeInfo.Annotation = (function() {
     
                     /**
@@ -41594,6 +44280,7 @@
                      * @property {string|null} [sourceFile] Annotation sourceFile
                      * @property {number|null} [begin] Annotation begin
                      * @property {number|null} [end] Annotation end
+                     * @property {google.protobuf.GeneratedCodeInfo.Annotation.Semantic|null} [semantic] Annotation semantic
                      */
     
                     /**
@@ -41645,6 +44332,14 @@
                     Annotation.prototype.end = 0;
     
                     /**
+                     * Annotation semantic.
+                     * @member {google.protobuf.GeneratedCodeInfo.Annotation.Semantic} semantic
+                     * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                     * @instance
+                     */
+                    Annotation.prototype.semantic = 0;
+    
+                    /**
                      * Creates a new Annotation instance using the specified properties.
                      * @function create
                      * @memberof google.protobuf.GeneratedCodeInfo.Annotation
@@ -41680,6 +44375,8 @@
                             writer.uint32(/* id 3, wireType 0 =*/24).int32(message.begin);
                         if (message.end != null && Object.hasOwnProperty.call(message, "end"))
                             writer.uint32(/* id 4, wireType 0 =*/32).int32(message.end);
+                        if (message.semantic != null && Object.hasOwnProperty.call(message, "semantic"))
+                            writer.uint32(/* id 5, wireType 0 =*/40).int32(message.semantic);
                         return writer;
                     };
     
@@ -41714,25 +44411,33 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                if (!(message.path && message.path.length))
-                                    message.path = [];
-                                if ((tag & 7) === 2) {
-                                    var end2 = reader.uint32() + reader.pos;
-                                    while (reader.pos < end2)
+                            case 1: {
+                                    if (!(message.path && message.path.length))
+                                        message.path = [];
+                                    if ((tag & 7) === 2) {
+                                        var end2 = reader.uint32() + reader.pos;
+                                        while (reader.pos < end2)
+                                            message.path.push(reader.int32());
+                                    } else
                                         message.path.push(reader.int32());
-                                } else
-                                    message.path.push(reader.int32());
-                                break;
-                            case 2:
-                                message.sourceFile = reader.string();
-                                break;
-                            case 3:
-                                message.begin = reader.int32();
-                                break;
-                            case 4:
-                                message.end = reader.int32();
-                                break;
+                                    break;
+                                }
+                            case 2: {
+                                    message.sourceFile = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.begin = reader.int32();
+                                    break;
+                                }
+                            case 4: {
+                                    message.end = reader.int32();
+                                    break;
+                                }
+                            case 5: {
+                                    message.semantic = reader.int32();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -41784,6 +44489,15 @@
                         if (message.end != null && message.hasOwnProperty("end"))
                             if (!$util.isInteger(message.end))
                                 return "end: integer expected";
+                        if (message.semantic != null && message.hasOwnProperty("semantic"))
+                            switch (message.semantic) {
+                            default:
+                                return "semantic: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            }
                         return null;
                     };
     
@@ -41812,6 +44526,20 @@
                             message.begin = object.begin | 0;
                         if (object.end != null)
                             message.end = object.end | 0;
+                        switch (object.semantic) {
+                        case "NONE":
+                        case 0:
+                            message.semantic = 0;
+                            break;
+                        case "SET":
+                        case 1:
+                            message.semantic = 1;
+                            break;
+                        case "ALIAS":
+                        case 2:
+                            message.semantic = 2;
+                            break;
+                        }
                         return message;
                     };
     
@@ -41834,6 +44562,7 @@
                             object.sourceFile = "";
                             object.begin = 0;
                             object.end = 0;
+                            object.semantic = options.enums === String ? "NONE" : 0;
                         }
                         if (message.path && message.path.length) {
                             object.path = [];
@@ -41846,6 +44575,8 @@
                             object.begin = message.begin;
                         if (message.end != null && message.hasOwnProperty("end"))
                             object.end = message.end;
+                        if (message.semantic != null && message.hasOwnProperty("semantic"))
+                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
                         return object;
                     };
     
@@ -41859,6 +44590,37 @@
                     Annotation.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
+    
+                    /**
+                     * Gets the default type url for Annotation
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    Annotation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.GeneratedCodeInfo.Annotation";
+                    };
+    
+                    /**
+                     * Semantic enum.
+                     * @name google.protobuf.GeneratedCodeInfo.Annotation.Semantic
+                     * @enum {number}
+                     * @property {number} NONE=0 NONE value
+                     * @property {number} SET=1 SET value
+                     * @property {number} ALIAS=2 ALIAS value
+                     */
+                    Annotation.Semantic = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "NONE"] = 0;
+                        values[valuesById[1] = "SET"] = 1;
+                        values[valuesById[2] = "ALIAS"] = 2;
+                        return values;
+                    })();
     
                     return Annotation;
                 })();
@@ -41969,12 +44731,14 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.type_url = reader.string();
-                            break;
-                        case 2:
-                            message.value = reader.bytes();
-                            break;
+                        case 1: {
+                                message.type_url = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.value = reader.bytes();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -42036,7 +44800,7 @@
                     if (object.value != null)
                         if (typeof object.value === "string")
                             $util.base64.decode(object.value, message.value = $util.newBuffer($util.base64.length(object.value)), 0);
-                        else if (object.value.length)
+                        else if (object.value.length >= 0)
                             message.value = object.value;
                     return message;
                 };
@@ -42080,6 +44844,21 @@
                  */
                 Any.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Any
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Any.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Any";
                 };
     
                 return Any;
@@ -42188,12 +44967,14 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.seconds = reader.int64();
-                            break;
-                        case 2:
-                            message.nanos = reader.int32();
-                            break;
+                        case 1: {
+                                message.seconds = reader.int64();
+                                break;
+                            }
+                        case 2: {
+                                message.nanos = reader.int32();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -42304,6 +45085,21 @@
                  */
                 Duration.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Duration
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Duration
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Duration.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Duration";
                 };
     
                 return Duration;
@@ -42466,6 +45262,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for Empty
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Empty.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Empty";
+                };
+    
                 return Empty;
             })();
     
@@ -42563,11 +45374,12 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            if (!(message.paths && message.paths.length))
-                                message.paths = [];
-                            message.paths.push(reader.string());
-                            break;
+                        case 1: {
+                                if (!(message.paths && message.paths.length))
+                                    message.paths = [];
+                                message.paths.push(reader.string());
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -42667,6 +45479,21 @@
                  */
                 FieldMask.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for FieldMask
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FieldMask.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.FieldMask";
                 };
     
                 return FieldMask;
@@ -42775,12 +45602,14 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.seconds = reader.int64();
-                            break;
-                        case 2:
-                            message.nanos = reader.int32();
-                            break;
+                        case 1: {
+                                message.seconds = reader.int64();
+                                break;
+                            }
+                        case 2: {
+                                message.nanos = reader.int32();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -42893,6 +45722,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for Timestamp
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Timestamp.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Timestamp";
+                };
+    
                 return Timestamp;
             })();
     
@@ -42988,9 +45832,10 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.value = reader.double();
-                            break;
+                        case 1: {
+                                message.value = reader.double();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -43078,6 +45923,21 @@
                  */
                 DoubleValue.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for DoubleValue
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.DoubleValue
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                DoubleValue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.DoubleValue";
                 };
     
                 return DoubleValue;
@@ -43175,9 +46035,10 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.value = reader.float();
-                            break;
+                        case 1: {
+                                message.value = reader.float();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -43265,6 +46126,21 @@
                  */
                 FloatValue.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for FloatValue
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.FloatValue
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FloatValue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.FloatValue";
                 };
     
                 return FloatValue;
@@ -43362,9 +46238,10 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.value = reader.int64();
-                            break;
+                        case 1: {
+                                message.value = reader.int64();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -43468,6 +46345,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for Int64Value
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Int64Value
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Int64Value.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Int64Value";
+                };
+    
                 return Int64Value;
             })();
     
@@ -43563,9 +46455,10 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.value = reader.uint64();
-                            break;
+                        case 1: {
+                                message.value = reader.uint64();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -43669,6 +46562,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for UInt64Value
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.UInt64Value
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                UInt64Value.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.UInt64Value";
+                };
+    
                 return UInt64Value;
             })();
     
@@ -43764,9 +46672,10 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.value = reader.int32();
-                            break;
+                        case 1: {
+                                message.value = reader.int32();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -43854,6 +46763,21 @@
                  */
                 Int32Value.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Int32Value
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Int32Value
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Int32Value.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Int32Value";
                 };
     
                 return Int32Value;
@@ -43951,9 +46875,10 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.value = reader.uint32();
-                            break;
+                        case 1: {
+                                message.value = reader.uint32();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -44041,6 +46966,21 @@
                  */
                 UInt32Value.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for UInt32Value
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.UInt32Value
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                UInt32Value.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.UInt32Value";
                 };
     
                 return UInt32Value;
@@ -44138,9 +47078,10 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.value = reader.bool();
-                            break;
+                        case 1: {
+                                message.value = reader.bool();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -44228,6 +47169,21 @@
                  */
                 BoolValue.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for BoolValue
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.BoolValue
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                BoolValue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.BoolValue";
                 };
     
                 return BoolValue;
@@ -44325,9 +47281,10 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.value = reader.string();
-                            break;
+                        case 1: {
+                                message.value = reader.string();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -44415,6 +47372,21 @@
                  */
                 StringValue.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for StringValue
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.StringValue
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                StringValue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.StringValue";
                 };
     
                 return StringValue;
@@ -44512,9 +47484,10 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.value = reader.bytes();
-                            break;
+                        case 1: {
+                                message.value = reader.bytes();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -44571,7 +47544,7 @@
                     if (object.value != null)
                         if (typeof object.value === "string")
                             $util.base64.decode(object.value, message.value = $util.newBuffer($util.base64.length(object.value)), 0);
-                        else if (object.value.length)
+                        else if (object.value.length >= 0)
                             message.value = object.value;
                     return message;
                 };
@@ -44611,6 +47584,21 @@
                  */
                 BytesValue.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for BytesValue
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.BytesValue
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                BytesValue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.BytesValue";
                 };
     
                 return BytesValue;
@@ -44661,7 +47649,7 @@
                 };
     
                 /**
-                 * Callback as used by {@link google.longrunning.Operations#listOperations}.
+                 * Callback as used by {@link google.longrunning.Operations|listOperations}.
                  * @memberof google.longrunning.Operations
                  * @typedef ListOperationsCallback
                  * @type {function}
@@ -44694,7 +47682,7 @@
                  */
     
                 /**
-                 * Callback as used by {@link google.longrunning.Operations#getOperation}.
+                 * Callback as used by {@link google.longrunning.Operations|getOperation}.
                  * @memberof google.longrunning.Operations
                  * @typedef GetOperationCallback
                  * @type {function}
@@ -44727,7 +47715,7 @@
                  */
     
                 /**
-                 * Callback as used by {@link google.longrunning.Operations#deleteOperation}.
+                 * Callback as used by {@link google.longrunning.Operations|deleteOperation}.
                  * @memberof google.longrunning.Operations
                  * @typedef DeleteOperationCallback
                  * @type {function}
@@ -44760,7 +47748,7 @@
                  */
     
                 /**
-                 * Callback as used by {@link google.longrunning.Operations#cancelOperation}.
+                 * Callback as used by {@link google.longrunning.Operations|cancelOperation}.
                  * @memberof google.longrunning.Operations
                  * @typedef CancelOperationCallback
                  * @type {function}
@@ -44793,7 +47781,7 @@
                  */
     
                 /**
-                 * Callback as used by {@link google.longrunning.Operations#waitOperation}.
+                 * Callback as used by {@link google.longrunning.Operations|waitOperation}.
                  * @memberof google.longrunning.Operations
                  * @typedef WaitOperationCallback
                  * @type {function}
@@ -44978,21 +47966,26 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 2:
-                            message.metadata = $root.google.protobuf.Any.decode(reader, reader.uint32());
-                            break;
-                        case 3:
-                            message.done = reader.bool();
-                            break;
-                        case 4:
-                            message.error = $root.google.rpc.Status.decode(reader, reader.uint32());
-                            break;
-                        case 5:
-                            message.response = $root.google.protobuf.Any.decode(reader, reader.uint32());
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.metadata = $root.google.protobuf.Any.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 3: {
+                                message.done = reader.bool();
+                                break;
+                            }
+                        case 4: {
+                                message.error = $root.google.rpc.Status.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 5: {
+                                message.response = $root.google.protobuf.Any.decode(reader, reader.uint32());
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -45143,6 +48136,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for Operation
+                 * @function getTypeUrl
+                 * @memberof google.longrunning.Operation
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Operation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.longrunning.Operation";
+                };
+    
                 return Operation;
             })();
     
@@ -45238,9 +48246,10 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -45328,6 +48337,21 @@
                  */
                 GetOperationRequest.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for GetOperationRequest
+                 * @function getTypeUrl
+                 * @memberof google.longrunning.GetOperationRequest
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                GetOperationRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.longrunning.GetOperationRequest";
                 };
     
                 return GetOperationRequest;
@@ -45458,18 +48482,22 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 4:
-                            message.name = reader.string();
-                            break;
-                        case 1:
-                            message.filter = reader.string();
-                            break;
-                        case 2:
-                            message.pageSize = reader.int32();
-                            break;
-                        case 3:
-                            message.pageToken = reader.string();
-                            break;
+                        case 4: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 1: {
+                                message.filter = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.pageSize = reader.int32();
+                                break;
+                            }
+                        case 3: {
+                                message.pageToken = reader.string();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -45584,6 +48612,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for ListOperationsRequest
+                 * @function getTypeUrl
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ListOperationsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.longrunning.ListOperationsRequest";
+                };
+    
                 return ListOperationsRequest;
             })();
     
@@ -45692,14 +48735,16 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            if (!(message.operations && message.operations.length))
-                                message.operations = [];
-                            message.operations.push($root.google.longrunning.Operation.decode(reader, reader.uint32()));
-                            break;
-                        case 2:
-                            message.nextPageToken = reader.string();
-                            break;
+                        case 1: {
+                                if (!(message.operations && message.operations.length))
+                                    message.operations = [];
+                                message.operations.push($root.google.longrunning.Operation.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 2: {
+                                message.nextPageToken = reader.string();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -45815,6 +48860,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for ListOperationsResponse
+                 * @function getTypeUrl
+                 * @memberof google.longrunning.ListOperationsResponse
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ListOperationsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.longrunning.ListOperationsResponse";
+                };
+    
                 return ListOperationsResponse;
             })();
     
@@ -45910,9 +48970,10 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -46000,6 +49061,21 @@
                  */
                 CancelOperationRequest.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for CancelOperationRequest
+                 * @function getTypeUrl
+                 * @memberof google.longrunning.CancelOperationRequest
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                CancelOperationRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.longrunning.CancelOperationRequest";
                 };
     
                 return CancelOperationRequest;
@@ -46097,9 +49173,10 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -46187,6 +49264,21 @@
                  */
                 DeleteOperationRequest.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for DeleteOperationRequest
+                 * @function getTypeUrl
+                 * @memberof google.longrunning.DeleteOperationRequest
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                DeleteOperationRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.longrunning.DeleteOperationRequest";
                 };
     
                 return DeleteOperationRequest;
@@ -46295,12 +49387,14 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 2:
-                            message.timeout = $root.google.protobuf.Duration.decode(reader, reader.uint32());
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.timeout = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -46402,6 +49496,21 @@
                  */
                 WaitOperationRequest.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for WaitOperationRequest
+                 * @function getTypeUrl
+                 * @memberof google.longrunning.WaitOperationRequest
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                WaitOperationRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.longrunning.WaitOperationRequest";
                 };
     
                 return WaitOperationRequest;
@@ -46510,12 +49619,14 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.responseType = reader.string();
-                            break;
-                        case 2:
-                            message.metadataType = reader.string();
-                            break;
+                        case 1: {
+                                message.responseType = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.metadataType = reader.string();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -46612,6 +49723,21 @@
                  */
                 OperationInfo.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for OperationInfo
+                 * @function getTypeUrl
+                 * @memberof google.longrunning.OperationInfo
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                OperationInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.longrunning.OperationInfo";
                 };
     
                 return OperationInfo;
@@ -46745,17 +49871,20 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.code = reader.int32();
-                            break;
-                        case 2:
-                            message.message = reader.string();
-                            break;
-                        case 3:
-                            if (!(message.details && message.details.length))
-                                message.details = [];
-                            message.details.push($root.google.protobuf.Any.decode(reader, reader.uint32()));
-                            break;
+                        case 1: {
+                                message.code = reader.int32();
+                                break;
+                            }
+                        case 2: {
+                                message.message = reader.string();
+                                break;
+                            }
+                        case 3: {
+                                if (!(message.details && message.details.length))
+                                    message.details = [];
+                                message.details.push($root.google.protobuf.Any.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -46878,6 +50007,21 @@
                  */
                 Status.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Status
+                 * @function getTypeUrl
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Status.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.rpc.Status";
                 };
     
                 return Status;
