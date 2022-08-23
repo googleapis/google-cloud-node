@@ -83,7 +83,7 @@ async function downloadRepoMetadata () {
     // validate that the package has been published
     const packageName = meta.distribution_name;
     if (!packageName) {
-      checkpoint(`${urlAndRepo.repo} had no distribution_name in repo-metadata.json`, false);
+      checkpoint(`${urlandRepo.repo} had no distribution_name in repo-metadata.json`, false);
       continue;
     }
     try {
