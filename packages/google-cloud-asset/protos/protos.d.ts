@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import * as Long from "long";
+import Long = require("long");
 import {protobuf as $protobuf} from "google-gax";
 /** Namespace google. */
 export namespace google {
@@ -330,140 +330,140 @@ export namespace google {
                 namespace AssetService {
 
                     /**
-                     * Callback as used by {@link google.cloud.asset.v1.AssetService#exportAssets}.
+                     * Callback as used by {@link google.cloud.asset.v1.AssetService|exportAssets}.
                      * @param error Error, if any
                      * @param [response] Operation
                      */
                     type ExportAssetsCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.asset.v1.AssetService#listAssets}.
+                     * Callback as used by {@link google.cloud.asset.v1.AssetService|listAssets}.
                      * @param error Error, if any
                      * @param [response] ListAssetsResponse
                      */
                     type ListAssetsCallback = (error: (Error|null), response?: google.cloud.asset.v1.ListAssetsResponse) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.asset.v1.AssetService#batchGetAssetsHistory}.
+                     * Callback as used by {@link google.cloud.asset.v1.AssetService|batchGetAssetsHistory}.
                      * @param error Error, if any
                      * @param [response] BatchGetAssetsHistoryResponse
                      */
                     type BatchGetAssetsHistoryCallback = (error: (Error|null), response?: google.cloud.asset.v1.BatchGetAssetsHistoryResponse) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.asset.v1.AssetService#createFeed}.
+                     * Callback as used by {@link google.cloud.asset.v1.AssetService|createFeed}.
                      * @param error Error, if any
                      * @param [response] Feed
                      */
                     type CreateFeedCallback = (error: (Error|null), response?: google.cloud.asset.v1.Feed) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.asset.v1.AssetService#getFeed}.
+                     * Callback as used by {@link google.cloud.asset.v1.AssetService|getFeed}.
                      * @param error Error, if any
                      * @param [response] Feed
                      */
                     type GetFeedCallback = (error: (Error|null), response?: google.cloud.asset.v1.Feed) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.asset.v1.AssetService#listFeeds}.
+                     * Callback as used by {@link google.cloud.asset.v1.AssetService|listFeeds}.
                      * @param error Error, if any
                      * @param [response] ListFeedsResponse
                      */
                     type ListFeedsCallback = (error: (Error|null), response?: google.cloud.asset.v1.ListFeedsResponse) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.asset.v1.AssetService#updateFeed}.
+                     * Callback as used by {@link google.cloud.asset.v1.AssetService|updateFeed}.
                      * @param error Error, if any
                      * @param [response] Feed
                      */
                     type UpdateFeedCallback = (error: (Error|null), response?: google.cloud.asset.v1.Feed) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.asset.v1.AssetService#deleteFeed}.
+                     * Callback as used by {@link google.cloud.asset.v1.AssetService|deleteFeed}.
                      * @param error Error, if any
                      * @param [response] Empty
                      */
                     type DeleteFeedCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.asset.v1.AssetService#searchAllResources}.
+                     * Callback as used by {@link google.cloud.asset.v1.AssetService|searchAllResources}.
                      * @param error Error, if any
                      * @param [response] SearchAllResourcesResponse
                      */
                     type SearchAllResourcesCallback = (error: (Error|null), response?: google.cloud.asset.v1.SearchAllResourcesResponse) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.asset.v1.AssetService#searchAllIamPolicies}.
+                     * Callback as used by {@link google.cloud.asset.v1.AssetService|searchAllIamPolicies}.
                      * @param error Error, if any
                      * @param [response] SearchAllIamPoliciesResponse
                      */
                     type SearchAllIamPoliciesCallback = (error: (Error|null), response?: google.cloud.asset.v1.SearchAllIamPoliciesResponse) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.asset.v1.AssetService#analyzeIamPolicy}.
+                     * Callback as used by {@link google.cloud.asset.v1.AssetService|analyzeIamPolicy}.
                      * @param error Error, if any
                      * @param [response] AnalyzeIamPolicyResponse
                      */
                     type AnalyzeIamPolicyCallback = (error: (Error|null), response?: google.cloud.asset.v1.AnalyzeIamPolicyResponse) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.asset.v1.AssetService#analyzeIamPolicyLongrunning}.
+                     * Callback as used by {@link google.cloud.asset.v1.AssetService|analyzeIamPolicyLongrunning}.
                      * @param error Error, if any
                      * @param [response] Operation
                      */
                     type AnalyzeIamPolicyLongrunningCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.asset.v1.AssetService#analyzeMove}.
+                     * Callback as used by {@link google.cloud.asset.v1.AssetService|analyzeMove}.
                      * @param error Error, if any
                      * @param [response] AnalyzeMoveResponse
                      */
                     type AnalyzeMoveCallback = (error: (Error|null), response?: google.cloud.asset.v1.AnalyzeMoveResponse) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.asset.v1.AssetService#queryAssets}.
+                     * Callback as used by {@link google.cloud.asset.v1.AssetService|queryAssets}.
                      * @param error Error, if any
                      * @param [response] QueryAssetsResponse
                      */
                     type QueryAssetsCallback = (error: (Error|null), response?: google.cloud.asset.v1.QueryAssetsResponse) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.asset.v1.AssetService#createSavedQuery}.
+                     * Callback as used by {@link google.cloud.asset.v1.AssetService|createSavedQuery}.
                      * @param error Error, if any
                      * @param [response] SavedQuery
                      */
                     type CreateSavedQueryCallback = (error: (Error|null), response?: google.cloud.asset.v1.SavedQuery) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.asset.v1.AssetService#getSavedQuery}.
+                     * Callback as used by {@link google.cloud.asset.v1.AssetService|getSavedQuery}.
                      * @param error Error, if any
                      * @param [response] SavedQuery
                      */
                     type GetSavedQueryCallback = (error: (Error|null), response?: google.cloud.asset.v1.SavedQuery) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.asset.v1.AssetService#listSavedQueries}.
+                     * Callback as used by {@link google.cloud.asset.v1.AssetService|listSavedQueries}.
                      * @param error Error, if any
                      * @param [response] ListSavedQueriesResponse
                      */
                     type ListSavedQueriesCallback = (error: (Error|null), response?: google.cloud.asset.v1.ListSavedQueriesResponse) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.asset.v1.AssetService#updateSavedQuery}.
+                     * Callback as used by {@link google.cloud.asset.v1.AssetService|updateSavedQuery}.
                      * @param error Error, if any
                      * @param [response] SavedQuery
                      */
                     type UpdateSavedQueryCallback = (error: (Error|null), response?: google.cloud.asset.v1.SavedQuery) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.asset.v1.AssetService#deleteSavedQuery}.
+                     * Callback as used by {@link google.cloud.asset.v1.AssetService|deleteSavedQuery}.
                      * @param error Error, if any
                      * @param [response] Empty
                      */
                     type DeleteSavedQueryCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.asset.v1.AssetService#batchGetEffectiveIamPolicies}.
+                     * Callback as used by {@link google.cloud.asset.v1.AssetService|batchGetEffectiveIamPolicies}.
                      * @param error Error, if any
                      * @param [response] BatchGetEffectiveIamPoliciesResponse
                      */
@@ -558,6 +558,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AnalyzeIamPolicyLongrunningMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of an ExportAssetsRequest. */
@@ -678,6 +685,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExportAssetsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of an ExportAssetsResponse. */
@@ -780,6 +794,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExportAssetsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ListAssetsRequest. */
@@ -906,6 +927,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListAssetsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ListAssetsResponse. */
@@ -1008,6 +1036,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListAssetsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a BatchGetAssetsHistoryRequest. */
@@ -1122,6 +1157,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchGetAssetsHistoryRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a BatchGetAssetsHistoryResponse. */
@@ -1212,6 +1254,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchGetAssetsHistoryResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a CreateFeedRequest. */
@@ -1314,6 +1363,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateFeedRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a GetFeedRequest. */
@@ -1404,6 +1460,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetFeedRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ListFeedsRequest. */
@@ -1494,6 +1557,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListFeedsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ListFeedsResponse. */
@@ -1584,6 +1654,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListFeedsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of an UpdateFeedRequest. */
@@ -1680,6 +1757,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateFeedRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a DeleteFeedRequest. */
@@ -1770,6 +1854,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteFeedRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of an OutputConfig. */
@@ -1869,6 +1960,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OutputConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of an OutputResult. */
@@ -1962,6 +2060,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OutputResult
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a GcsOutputResult. */
@@ -2052,6 +2157,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GcsOutputResult
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a GcsDestination. */
@@ -2151,6 +2263,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GcsDestination
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a BigQueryDestination. */
@@ -2265,6 +2384,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BigQueryDestination
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a PartitionSpec. */
@@ -2355,6 +2481,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PartitionSpec
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 namespace PartitionSpec {
@@ -2455,6 +2588,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PubsubDestination
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a FeedOutputConfig. */
@@ -2548,6 +2688,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FeedOutputConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a Feed. */
@@ -2674,6 +2821,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Feed
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a SearchAllResourcesRequest. */
@@ -2800,6 +2954,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SearchAllResourcesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a SearchAllResourcesResponse. */
@@ -2896,6 +3057,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SearchAllResourcesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a SearchAllIamPoliciesRequest. */
@@ -3016,6 +3184,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SearchAllIamPoliciesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a SearchAllIamPoliciesResponse. */
@@ -3112,6 +3287,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SearchAllIamPoliciesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of an IamPolicyAnalysisQuery. */
@@ -3232,6 +3414,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for IamPolicyAnalysisQuery
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 namespace IamPolicyAnalysisQuery {
@@ -3324,6 +3513,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ResourceSelector
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of an IdentitySelector. */
@@ -3414,6 +3610,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for IdentitySelector
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of an AccessSelector. */
@@ -3510,6 +3713,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AccessSelector
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of an Options. */
@@ -3630,6 +3840,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Options
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a ConditionContext. */
@@ -3723,6 +3940,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ConditionContext
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
                 }
 
@@ -3826,6 +4050,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AnalyzeIamPolicyRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of an AnalyzeIamPolicyResponse. */
@@ -3928,6 +4159,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AnalyzeIamPolicyResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 namespace AnalyzeIamPolicyResponse {
@@ -4038,6 +4276,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for IamPolicyAnalysis
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
                 }
 
@@ -4138,6 +4383,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for IamPolicyAnalysisOutputConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 namespace IamPolicyAnalysisOutputConfig {
@@ -4230,6 +4482,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GcsDestination
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a BigQueryDestination. */
@@ -4338,6 +4597,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for BigQueryDestination
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     namespace BigQueryDestination {
@@ -4450,6 +4716,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AnalyzeIamPolicyLongrunningRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of an AnalyzeIamPolicyLongrunningResponse. */
@@ -4534,6 +4807,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AnalyzeIamPolicyLongrunningResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a SavedQuery. */
@@ -4666,6 +4946,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SavedQuery
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 namespace SavedQuery {
@@ -4761,6 +5048,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for QueryContent
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
                 }
 
@@ -4864,6 +5158,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateSavedQueryRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a GetSavedQueryRequest. */
@@ -4954,6 +5255,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetSavedQueryRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ListSavedQueriesRequest. */
@@ -5062,6 +5370,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListSavedQueriesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ListSavedQueriesResponse. */
@@ -5158,6 +5473,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListSavedQueriesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of an UpdateSavedQueryRequest. */
@@ -5254,6 +5576,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateSavedQueryRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a DeleteSavedQueryRequest. */
@@ -5344,6 +5673,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteSavedQueryRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of an AnalyzeMoveRequest. */
@@ -5446,6 +5782,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AnalyzeMoveRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 namespace AnalyzeMoveRequest {
@@ -5546,6 +5889,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AnalyzeMoveResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a MoveAnalysis. */
@@ -5651,6 +6001,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MoveAnalysis
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a MoveAnalysisResult. */
@@ -5747,6 +6104,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MoveAnalysisResult
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a MoveImpact. */
@@ -5837,6 +6201,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MoveImpact
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a QueryAssetsOutputConfig. */
@@ -5927,6 +6298,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for QueryAssetsOutputConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 namespace QueryAssetsOutputConfig {
@@ -6031,6 +6409,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for BigQueryDestination
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
                 }
 
@@ -6176,6 +6561,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for QueryAssetsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a QueryAssetsResponse. */
@@ -6293,6 +6685,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for QueryAssetsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a QueryResult. */
@@ -6401,6 +6800,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for QueryResult
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a TableSchema. */
@@ -6491,6 +6897,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TableSchema
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a TableFieldSchema. */
@@ -6599,6 +7012,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TableFieldSchema
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a BatchGetEffectiveIamPoliciesRequest. */
@@ -6695,6 +7115,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchGetEffectiveIamPoliciesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a BatchGetEffectiveIamPoliciesResponse. */
@@ -6785,6 +7212,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchGetEffectiveIamPoliciesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 namespace BatchGetEffectiveIamPoliciesResponse {
@@ -6883,6 +7317,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for EffectiveIamPolicy
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     namespace EffectiveIamPolicy {
@@ -6981,6 +7422,13 @@ export namespace google {
                              * @returns JSON object
                              */
                             public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for PolicyInfo
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
                     }
                 }
@@ -7108,6 +7556,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TemporalAsset
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 namespace TemporalAsset {
@@ -7216,6 +7671,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TimeWindow
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of an Asset. */
@@ -7381,6 +7843,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Asset
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a Resource. */
@@ -7507,6 +7976,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Resource
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a RelatedAssets. */
@@ -7603,6 +8079,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RelatedAssets
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a RelationshipAttributes. */
@@ -7711,6 +8194,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RelationshipAttributes
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a RelatedAsset. */
@@ -7819,6 +8309,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RelatedAsset
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ResourceSearchResult. */
@@ -8041,6 +8538,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ResourceSearchResult
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a VersionedResource. */
@@ -8137,6 +8641,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for VersionedResource
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of an AttachedResource. */
@@ -8233,6 +8744,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AttachedResource
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a RelatedResources. */
@@ -8323,6 +8841,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RelatedResources
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a RelatedResource. */
@@ -8419,6 +8944,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RelatedResource
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of an IamPolicySearchResult. */
@@ -8545,6 +9077,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for IamPolicySearchResult
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 namespace IamPolicySearchResult {
@@ -8637,6 +9176,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Explanation
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     namespace Explanation {
@@ -8729,6 +9275,13 @@ export namespace google {
                              * @returns JSON object
                              */
                             public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Permissions
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
                     }
                 }
@@ -8827,6 +9380,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for IamPolicyAnalysisState
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ConditionEvaluation. */
@@ -8917,6 +9477,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ConditionEvaluation
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 namespace ConditionEvaluation {
@@ -9042,6 +9609,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for IamPolicyAnalysisResult
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 namespace IamPolicyAnalysisResult {
@@ -9140,6 +9714,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Resource
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of an Access. */
@@ -9245,6 +9826,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Access
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of an Identity. */
@@ -9341,6 +9929,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Identity
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of an Edge. */
@@ -9437,6 +10032,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Edge
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of an AccessControlList. */
@@ -9545,6 +10147,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AccessControlList
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of an IdentityList. */
@@ -9641,6 +10250,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for IdentityList
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
                 }
             }
@@ -9700,14 +10316,14 @@ export namespace google {
                 namespace AssetService {
 
                     /**
-                     * Callback as used by {@link google.cloud.asset.v1p1beta1.AssetService#searchAllResources}.
+                     * Callback as used by {@link google.cloud.asset.v1p1beta1.AssetService|searchAllResources}.
                      * @param error Error, if any
                      * @param [response] SearchAllResourcesResponse
                      */
                     type SearchAllResourcesCallback = (error: (Error|null), response?: google.cloud.asset.v1p1beta1.SearchAllResourcesResponse) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.asset.v1p1beta1.AssetService#searchAllIamPolicies}.
+                     * Callback as used by {@link google.cloud.asset.v1p1beta1.AssetService|searchAllIamPolicies}.
                      * @param error Error, if any
                      * @param [response] SearchAllIamPoliciesResponse
                      */
@@ -9832,6 +10448,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SearchAllResourcesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a SearchAllResourcesResponse. */
@@ -9928,6 +10551,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SearchAllResourcesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a SearchAllIamPoliciesRequest. */
@@ -10036,6 +10666,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SearchAllIamPoliciesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a SearchAllIamPoliciesResponse. */
@@ -10132,6 +10769,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SearchAllIamPoliciesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a StandardResourceMetadata. */
@@ -10270,6 +10914,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for StandardResourceMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of an IamPolicySearchResult. */
@@ -10378,6 +11029,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for IamPolicySearchResult
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 namespace IamPolicySearchResult {
@@ -10470,6 +11128,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Explanation
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
                 }
 
@@ -10561,6 +11226,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Permissions
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
             }
 
@@ -10661,35 +11333,35 @@ export namespace google {
                 namespace AssetService {
 
                     /**
-                     * Callback as used by {@link google.cloud.asset.v1p2beta1.AssetService#createFeed}.
+                     * Callback as used by {@link google.cloud.asset.v1p2beta1.AssetService|createFeed}.
                      * @param error Error, if any
                      * @param [response] Feed
                      */
                     type CreateFeedCallback = (error: (Error|null), response?: google.cloud.asset.v1p2beta1.Feed) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.asset.v1p2beta1.AssetService#getFeed}.
+                     * Callback as used by {@link google.cloud.asset.v1p2beta1.AssetService|getFeed}.
                      * @param error Error, if any
                      * @param [response] Feed
                      */
                     type GetFeedCallback = (error: (Error|null), response?: google.cloud.asset.v1p2beta1.Feed) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.asset.v1p2beta1.AssetService#listFeeds}.
+                     * Callback as used by {@link google.cloud.asset.v1p2beta1.AssetService|listFeeds}.
                      * @param error Error, if any
                      * @param [response] ListFeedsResponse
                      */
                     type ListFeedsCallback = (error: (Error|null), response?: google.cloud.asset.v1p2beta1.ListFeedsResponse) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.asset.v1p2beta1.AssetService#updateFeed}.
+                     * Callback as used by {@link google.cloud.asset.v1p2beta1.AssetService|updateFeed}.
                      * @param error Error, if any
                      * @param [response] Feed
                      */
                     type UpdateFeedCallback = (error: (Error|null), response?: google.cloud.asset.v1p2beta1.Feed) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.asset.v1p2beta1.AssetService#deleteFeed}.
+                     * Callback as used by {@link google.cloud.asset.v1p2beta1.AssetService|deleteFeed}.
                      * @param error Error, if any
                      * @param [response] Empty
                      */
@@ -10796,6 +11468,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateFeedRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a GetFeedRequest. */
@@ -10886,6 +11565,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetFeedRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ListFeedsRequest. */
@@ -10976,6 +11662,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListFeedsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ListFeedsResponse. */
@@ -11066,6 +11759,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListFeedsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of an UpdateFeedRequest. */
@@ -11162,6 +11862,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateFeedRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a DeleteFeedRequest. */
@@ -11252,6 +11959,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteFeedRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of an OutputConfig. */
@@ -11345,6 +12059,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OutputConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a GcsDestination. */
@@ -11438,6 +12159,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GcsDestination
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a PubsubDestination. */
@@ -11528,6 +12256,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PubsubDestination
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a FeedOutputConfig. */
@@ -11621,6 +12356,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FeedOutputConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a Feed. */
@@ -11735,6 +12477,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Feed
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** ContentType enum. */
@@ -11844,6 +12593,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TemporalAsset
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a TimeWindow. */
@@ -11940,6 +12696,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TimeWindow
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of an Asset. */
@@ -12054,6 +12817,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Asset
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a Resource. */
@@ -12174,6 +12944,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Resource
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
             }
 
@@ -12232,14 +13009,14 @@ export namespace google {
                 namespace AssetService {
 
                     /**
-                     * Callback as used by {@link google.cloud.asset.v1p4beta1.AssetService#analyzeIamPolicy}.
+                     * Callback as used by {@link google.cloud.asset.v1p4beta1.AssetService|analyzeIamPolicy}.
                      * @param error Error, if any
                      * @param [response] AnalyzeIamPolicyResponse
                      */
                     type AnalyzeIamPolicyCallback = (error: (Error|null), response?: google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.asset.v1p4beta1.AssetService#exportIamPolicyAnalysis}.
+                     * Callback as used by {@link google.cloud.asset.v1p4beta1.AssetService|exportIamPolicyAnalysis}.
                      * @param error Error, if any
                      * @param [response] Operation
                      */
@@ -12352,6 +13129,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for IamPolicyAnalysisQuery
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 namespace IamPolicyAnalysisQuery {
@@ -12444,6 +13228,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ResourceSelector
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of an IdentitySelector. */
@@ -12534,6 +13325,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for IdentitySelector
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of an AccessSelector. */
@@ -12630,6 +13428,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AccessSelector
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
                 }
 
@@ -12727,6 +13532,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AnalyzeIamPolicyRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 namespace AnalyzeIamPolicyRequest {
@@ -12855,6 +13667,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Options
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
                 }
 
@@ -12964,6 +13783,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AnalyzeIamPolicyResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 namespace AnalyzeIamPolicyResponse {
@@ -13068,6 +13894,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for IamPolicyAnalysis
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
                 }
 
@@ -13162,6 +13995,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for IamPolicyAnalysisOutputConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 namespace IamPolicyAnalysisOutputConfig {
@@ -13254,6 +14094,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GcsDestination
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
                 }
 
@@ -13357,6 +14204,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExportIamPolicyAnalysisRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 namespace ExportIamPolicyAnalysisRequest {
@@ -13479,6 +14333,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Options
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
                 }
 
@@ -13570,6 +14431,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExportIamPolicyAnalysisResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of an IamPolicyAnalysisResult. */
@@ -13684,6 +14552,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for IamPolicyAnalysisResult
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 namespace IamPolicyAnalysisResult {
@@ -13782,6 +14657,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AnalysisState
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a Resource. */
@@ -13878,6 +14760,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Resource
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of an Access. */
@@ -13983,6 +14872,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Access
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of an Edge. */
@@ -14079,6 +14975,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Edge
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of an Identity. */
@@ -14175,6 +15078,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Identity
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of an AccessControlList. */
@@ -14277,6 +15187,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AccessControlList
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of an IdentityList. */
@@ -14373,6 +15290,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for IdentityList
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
                 }
             }
@@ -14418,7 +15342,7 @@ export namespace google {
                 namespace AssetService {
 
                     /**
-                     * Callback as used by {@link google.cloud.asset.v1p5beta1.AssetService#listAssets}.
+                     * Callback as used by {@link google.cloud.asset.v1p5beta1.AssetService|listAssets}.
                      * @param error Error, if any
                      * @param [response] ListAssetsResponse
                      */
@@ -14543,6 +15467,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListAssetsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** ContentType enum. */
@@ -14654,6 +15585,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListAssetsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of an Asset. */
@@ -14795,6 +15733,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Asset
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a Resource. */
@@ -14915,6 +15860,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Resource
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
             }
         }
@@ -15052,6 +16004,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Policy
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 namespace Policy {
@@ -15168,6 +16127,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListPolicy
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     namespace ListPolicy {
@@ -15268,6 +16234,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for BooleanPolicy
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a RestoreDefault. */
@@ -15352,6 +16325,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RestoreDefault
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
                 }
             }
@@ -15469,6 +16449,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Inventory
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 namespace Inventory {
@@ -15603,6 +16590,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for OsInfo
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of an Item. */
@@ -15732,6 +16726,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Item
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     namespace Item {
@@ -15889,6 +16890,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SoftwarePackage
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a VersionedPackage. */
@@ -15991,6 +16999,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for VersionedPackage
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a ZypperPatch. */
@@ -16099,6 +17114,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ZypperPatch
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a WindowsUpdatePackage. */
@@ -16237,6 +17259,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for WindowsUpdatePackage
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     namespace WindowsUpdatePackage {
@@ -16335,6 +17364,13 @@ export namespace google {
                              * @returns JSON object
                              */
                             public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for WindowsUpdateCategory
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
                     }
 
@@ -16444,6 +17480,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for WindowsQuickFixEngineeringPackage
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a WindowsApplication. */
@@ -16558,6 +17601,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for WindowsApplication
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
                 }
 
@@ -16655,6 +17705,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetInventoryRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ListInventoriesRequest. */
@@ -16769,6 +17826,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListInventoriesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ListInventoriesResponse. */
@@ -16865,6 +17929,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListInventoriesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** InventoryView enum. */
@@ -16974,6 +18045,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Http
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a HttpRule. */
@@ -17121,6 +18199,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for HttpRule
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a CustomHttpPattern. */
@@ -17217,6 +18302,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for CustomHttpPattern
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** FieldBehavior enum. */
@@ -17355,6 +18447,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ResourceDescriptor
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         namespace ResourceDescriptor {
@@ -17467,6 +18566,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ResourceReference
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
     }
 
@@ -17561,6 +18667,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FileDescriptorSet
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a FileDescriptorProto. */
@@ -17601,6 +18714,9 @@ export namespace google {
 
             /** FileDescriptorProto syntax */
             syntax?: (string|null);
+
+            /** FileDescriptorProto edition */
+            edition?: (string|null);
         }
 
         /** Represents a FileDescriptorProto. */
@@ -17647,6 +18763,9 @@ export namespace google {
 
             /** FileDescriptorProto syntax. */
             public syntax: string;
+
+            /** FileDescriptorProto edition. */
+            public edition: string;
 
             /**
              * Creates a new FileDescriptorProto instance using the specified properties.
@@ -17717,6 +18836,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FileDescriptorProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a DescriptorProto. */
@@ -17861,6 +18987,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for DescriptorProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         namespace DescriptorProto {
@@ -17965,6 +19098,13 @@ export namespace google {
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ExtensionRange
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
             }
 
             /** Properties of a ReservedRange. */
@@ -18061,6 +19201,13 @@ export namespace google {
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ReservedRange
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
             }
         }
 
@@ -18152,6 +19299,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ExtensionRangeOptions
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a FieldDescriptorProto. */
@@ -18302,6 +19456,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FieldDescriptorProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         namespace FieldDescriptorProto {
@@ -18430,6 +19591,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for OneofDescriptorProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of an EnumDescriptorProto. */
@@ -18544,6 +19712,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for EnumDescriptorProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         namespace EnumDescriptorProto {
@@ -18642,6 +19817,13 @@ export namespace google {
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for EnumReservedRange
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
             }
         }
 
@@ -18745,6 +19927,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for EnumValueDescriptorProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a ServiceDescriptorProto. */
@@ -18847,6 +20036,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ServiceDescriptorProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a MethodDescriptorProto. */
@@ -18967,6 +20163,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for MethodDescriptorProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a FileOptions. */
@@ -19180,6 +20383,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FileOptions
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         namespace FileOptions {
@@ -19307,6 +20517,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for MessageOptions
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a FieldOptions. */
@@ -19323,6 +20540,9 @@ export namespace google {
 
             /** FieldOptions lazy */
             lazy?: (boolean|null);
+
+            /** FieldOptions unverifiedLazy */
+            unverifiedLazy?: (boolean|null);
 
             /** FieldOptions deprecated */
             deprecated?: (boolean|null);
@@ -19360,6 +20580,9 @@ export namespace google {
 
             /** FieldOptions lazy. */
             public lazy: boolean;
+
+            /** FieldOptions unverifiedLazy. */
+            public unverifiedLazy: boolean;
 
             /** FieldOptions deprecated. */
             public deprecated: boolean;
@@ -19439,6 +20662,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FieldOptions
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         namespace FieldOptions {
@@ -19546,6 +20776,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for OneofOptions
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of an EnumOptions. */
@@ -19648,6 +20885,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for EnumOptions
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of an EnumValueOptions. */
@@ -19744,6 +20988,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for EnumValueOptions
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a ServiceOptions. */
@@ -19846,6 +21097,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ServiceOptions
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a MethodOptions. */
@@ -19957,6 +21215,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for MethodOptions
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         namespace MethodOptions {
@@ -20093,6 +21358,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for UninterpretedOption
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         namespace UninterpretedOption {
@@ -20191,6 +21463,13 @@ export namespace google {
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for NamePart
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
             }
         }
 
@@ -20282,6 +21561,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for SourceCodeInfo
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         namespace SourceCodeInfo {
@@ -20398,6 +21684,13 @@ export namespace google {
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for Location
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
             }
         }
 
@@ -20489,6 +21782,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for GeneratedCodeInfo
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         namespace GeneratedCodeInfo {
@@ -20507,6 +21807,9 @@ export namespace google {
 
                 /** Annotation end */
                 end?: (number|null);
+
+                /** Annotation semantic */
+                semantic?: (google.protobuf.GeneratedCodeInfo.Annotation.Semantic|keyof typeof google.protobuf.GeneratedCodeInfo.Annotation.Semantic|null);
             }
 
             /** Represents an Annotation. */
@@ -20529,6 +21832,9 @@ export namespace google {
 
                 /** Annotation end. */
                 public end: number;
+
+                /** Annotation semantic. */
+                public semantic: (google.protobuf.GeneratedCodeInfo.Annotation.Semantic|keyof typeof google.protobuf.GeneratedCodeInfo.Annotation.Semantic);
 
                 /**
                  * Creates a new Annotation instance using the specified properties.
@@ -20599,6 +21905,23 @@ export namespace google {
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for Annotation
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace Annotation {
+
+                /** Semantic enum. */
+                enum Semantic {
+                    NONE = 0,
+                    SET = 1,
+                    ALIAS = 2
+                }
             }
         }
 
@@ -20684,6 +22007,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Empty
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a Timestamp. */
@@ -20780,6 +22110,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Timestamp
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a Struct. */
@@ -20870,6 +22207,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Struct
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a Value. */
@@ -20993,6 +22337,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Value
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** NullValue enum. */
@@ -21088,6 +22439,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ListValue
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of an Any. */
@@ -21184,6 +22542,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Any
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a Duration. */
@@ -21280,6 +22645,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Duration
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a FieldMask. */
@@ -21370,6 +22742,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FieldMask
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
     }
 
@@ -21476,6 +22855,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Date
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of an Expr. */
@@ -21584,6 +22970,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Expr
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
     }
 
@@ -21601,6 +22994,9 @@ export namespace google {
 
                 /** Policy bindings */
                 bindings?: (google.iam.v1.IBinding[]|null);
+
+                /** Policy auditConfigs */
+                auditConfigs?: (google.iam.v1.IAuditConfig[]|null);
 
                 /** Policy etag */
                 etag?: (Uint8Array|string|null);
@@ -21620,6 +23016,9 @@ export namespace google {
 
                 /** Policy bindings. */
                 public bindings: google.iam.v1.IBinding[];
+
+                /** Policy auditConfigs. */
+                public auditConfigs: google.iam.v1.IAuditConfig[];
 
                 /** Policy etag. */
                 public etag: (Uint8Array|string);
@@ -21693,6 +23092,13 @@ export namespace google {
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for Policy
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
             }
 
             /** Properties of a Binding. */
@@ -21795,6 +23201,230 @@ export namespace google {
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for Binding
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of an AuditConfig. */
+            interface IAuditConfig {
+
+                /** AuditConfig service */
+                service?: (string|null);
+
+                /** AuditConfig auditLogConfigs */
+                auditLogConfigs?: (google.iam.v1.IAuditLogConfig[]|null);
+            }
+
+            /** Represents an AuditConfig. */
+            class AuditConfig implements IAuditConfig {
+
+                /**
+                 * Constructs a new AuditConfig.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.iam.v1.IAuditConfig);
+
+                /** AuditConfig service. */
+                public service: string;
+
+                /** AuditConfig auditLogConfigs. */
+                public auditLogConfigs: google.iam.v1.IAuditLogConfig[];
+
+                /**
+                 * Creates a new AuditConfig instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns AuditConfig instance
+                 */
+                public static create(properties?: google.iam.v1.IAuditConfig): google.iam.v1.AuditConfig;
+
+                /**
+                 * Encodes the specified AuditConfig message. Does not implicitly {@link google.iam.v1.AuditConfig.verify|verify} messages.
+                 * @param message AuditConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.iam.v1.IAuditConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified AuditConfig message, length delimited. Does not implicitly {@link google.iam.v1.AuditConfig.verify|verify} messages.
+                 * @param message AuditConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.iam.v1.IAuditConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an AuditConfig message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns AuditConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v1.AuditConfig;
+
+                /**
+                 * Decodes an AuditConfig message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns AuditConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v1.AuditConfig;
+
+                /**
+                 * Verifies an AuditConfig message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an AuditConfig message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns AuditConfig
+                 */
+                public static fromObject(object: { [k: string]: any }): google.iam.v1.AuditConfig;
+
+                /**
+                 * Creates a plain object from an AuditConfig message. Also converts values to other types if specified.
+                 * @param message AuditConfig
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.iam.v1.AuditConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this AuditConfig to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for AuditConfig
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of an AuditLogConfig. */
+            interface IAuditLogConfig {
+
+                /** AuditLogConfig logType */
+                logType?: (google.iam.v1.AuditLogConfig.LogType|keyof typeof google.iam.v1.AuditLogConfig.LogType|null);
+
+                /** AuditLogConfig exemptedMembers */
+                exemptedMembers?: (string[]|null);
+            }
+
+            /** Represents an AuditLogConfig. */
+            class AuditLogConfig implements IAuditLogConfig {
+
+                /**
+                 * Constructs a new AuditLogConfig.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.iam.v1.IAuditLogConfig);
+
+                /** AuditLogConfig logType. */
+                public logType: (google.iam.v1.AuditLogConfig.LogType|keyof typeof google.iam.v1.AuditLogConfig.LogType);
+
+                /** AuditLogConfig exemptedMembers. */
+                public exemptedMembers: string[];
+
+                /**
+                 * Creates a new AuditLogConfig instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns AuditLogConfig instance
+                 */
+                public static create(properties?: google.iam.v1.IAuditLogConfig): google.iam.v1.AuditLogConfig;
+
+                /**
+                 * Encodes the specified AuditLogConfig message. Does not implicitly {@link google.iam.v1.AuditLogConfig.verify|verify} messages.
+                 * @param message AuditLogConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.iam.v1.IAuditLogConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified AuditLogConfig message, length delimited. Does not implicitly {@link google.iam.v1.AuditLogConfig.verify|verify} messages.
+                 * @param message AuditLogConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.iam.v1.IAuditLogConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an AuditLogConfig message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns AuditLogConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v1.AuditLogConfig;
+
+                /**
+                 * Decodes an AuditLogConfig message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns AuditLogConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v1.AuditLogConfig;
+
+                /**
+                 * Verifies an AuditLogConfig message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an AuditLogConfig message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns AuditLogConfig
+                 */
+                public static fromObject(object: { [k: string]: any }): google.iam.v1.AuditLogConfig;
+
+                /**
+                 * Creates a plain object from an AuditLogConfig message. Also converts values to other types if specified.
+                 * @param message AuditLogConfig
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.iam.v1.AuditLogConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this AuditLogConfig to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for AuditLogConfig
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace AuditLogConfig {
+
+                /** LogType enum. */
+                enum LogType {
+                    LOG_TYPE_UNSPECIFIED = 0,
+                    ADMIN_READ = 1,
+                    DATA_WRITE = 2,
+                    DATA_READ = 3
+                }
             }
 
             /** Properties of a PolicyDelta. */
@@ -21891,6 +23521,13 @@ export namespace google {
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for PolicyDelta
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
             }
 
             /** Properties of a BindingDelta. */
@@ -21999,6 +23636,13 @@ export namespace google {
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for BindingDelta
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
             }
 
             namespace BindingDelta {
@@ -22117,6 +23761,13 @@ export namespace google {
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for AuditConfigDelta
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
             }
 
             namespace AuditConfigDelta {
@@ -22267,6 +23918,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AccessLevel
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a BasicLevel. */
@@ -22363,6 +24021,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BasicLevel
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 namespace BasicLevel {
@@ -22492,6 +24157,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Condition
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a CustomLevel. */
@@ -22582,6 +24254,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CustomLevel
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a DevicePolicy. */
@@ -22702,6 +24381,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DevicePolicy
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of an OsConstraint. */
@@ -22804,6 +24490,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OsConstraint
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of an AccessPolicy. */
@@ -22924,6 +24617,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AccessPolicy
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ServicePerimeter. */
@@ -23062,6 +24762,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ServicePerimeter
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 namespace ServicePerimeter {
@@ -23179,6 +24886,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ServicePerimeterConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 namespace ServicePerimeterConfig {
@@ -23277,6 +24991,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for VpcAccessibleServices
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
                 }
             }
@@ -23438,6 +25159,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Status
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
     }
 
@@ -23538,35 +25266,35 @@ export namespace google {
         namespace Operations {
 
             /**
-             * Callback as used by {@link google.longrunning.Operations#listOperations}.
+             * Callback as used by {@link google.longrunning.Operations|listOperations}.
              * @param error Error, if any
              * @param [response] ListOperationsResponse
              */
             type ListOperationsCallback = (error: (Error|null), response?: google.longrunning.ListOperationsResponse) => void;
 
             /**
-             * Callback as used by {@link google.longrunning.Operations#getOperation}.
+             * Callback as used by {@link google.longrunning.Operations|getOperation}.
              * @param error Error, if any
              * @param [response] Operation
              */
             type GetOperationCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
             /**
-             * Callback as used by {@link google.longrunning.Operations#deleteOperation}.
+             * Callback as used by {@link google.longrunning.Operations|deleteOperation}.
              * @param error Error, if any
              * @param [response] Empty
              */
             type DeleteOperationCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
 
             /**
-             * Callback as used by {@link google.longrunning.Operations#cancelOperation}.
+             * Callback as used by {@link google.longrunning.Operations|cancelOperation}.
              * @param error Error, if any
              * @param [response] Empty
              */
             type CancelOperationCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
 
             /**
-             * Callback as used by {@link google.longrunning.Operations#waitOperation}.
+             * Callback as used by {@link google.longrunning.Operations|waitOperation}.
              * @param error Error, if any
              * @param [response] Operation
              */
@@ -23688,6 +25416,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Operation
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a GetOperationRequest. */
@@ -23778,6 +25513,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for GetOperationRequest
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a ListOperationsRequest. */
@@ -23886,6 +25628,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ListOperationsRequest
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a ListOperationsResponse. */
@@ -23982,6 +25731,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ListOperationsResponse
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a CancelOperationRequest. */
@@ -24072,6 +25828,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for CancelOperationRequest
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a DeleteOperationRequest. */
@@ -24162,6 +25925,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for DeleteOperationRequest
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a WaitOperationRequest. */
@@ -24258,6 +26028,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for WaitOperationRequest
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of an OperationInfo. */
@@ -24354,6 +26131,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for OperationInfo
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
     }
 }

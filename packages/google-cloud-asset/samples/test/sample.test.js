@@ -162,7 +162,8 @@ describe('quickstart sample tests', () => {
     assert.include(stdout, assetName);
   });
 
-  it('should search all resources successfully', async () => {
+  // https://github.com/googleapis/nodejs-asset/issues/650
+  it.skip('should search all resources successfully', async () => {
     const query = `name:${instanceName}`;
     const stdout = execSync(`node searchAllResources '' ${query}`);
     assert.include(stdout, instanceName);
