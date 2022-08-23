@@ -30,7 +30,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -537,7 +536,8 @@ export class AccessContextManagerClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -1164,7 +1164,7 @@ export class AccessContextManagerClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createAccessPolicy,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.identity.accesscontextmanager.v1.AccessPolicy,
@@ -1309,7 +1309,7 @@ export class AccessContextManagerClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateAccessPolicy,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.identity.accesscontextmanager.v1.AccessPolicy,
@@ -1452,7 +1452,7 @@ export class AccessContextManagerClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteAccessPolicy,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -1604,7 +1604,7 @@ export class AccessContextManagerClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createAccessLevel,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.identity.accesscontextmanager.v1.AccessLevel,
@@ -1754,7 +1754,7 @@ export class AccessContextManagerClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateAccessLevel,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.identity.accesscontextmanager.v1.AccessLevel,
@@ -1900,7 +1900,7 @@ export class AccessContextManagerClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteAccessLevel,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -2072,7 +2072,7 @@ export class AccessContextManagerClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.replaceAccessLevels,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.identity.accesscontextmanager.v1.ReplaceAccessLevelsResponse,
@@ -2229,7 +2229,7 @@ export class AccessContextManagerClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createServicePerimeter,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.identity.accesscontextmanager.v1.ServicePerimeter,
@@ -2380,7 +2380,7 @@ export class AccessContextManagerClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateServicePerimeter,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.identity.accesscontextmanager.v1.ServicePerimeter,
@@ -2530,7 +2530,7 @@ export class AccessContextManagerClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteServicePerimeter,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -2702,7 +2702,7 @@ export class AccessContextManagerClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.replaceServicePerimeters,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.identity.accesscontextmanager.v1.ReplaceServicePerimetersResponse,
@@ -2871,7 +2871,7 @@ export class AccessContextManagerClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.commitServicePerimeters,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.identity.accesscontextmanager.v1.CommitServicePerimetersResponse,
@@ -3024,7 +3024,7 @@ export class AccessContextManagerClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createGcpUserAccessBinding,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.identity.accesscontextmanager.v1.GcpUserAccessBinding,
@@ -3178,7 +3178,7 @@ export class AccessContextManagerClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateGcpUserAccessBinding,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.identity.accesscontextmanager.v1.GcpUserAccessBinding,
@@ -3323,7 +3323,7 @@ export class AccessContextManagerClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteGcpUserAccessBinding,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -3471,7 +3471,7 @@ export class AccessContextManagerClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listAccessPolicies.createStream(
-      this.innerApiCalls.listAccessPolicies as gax.GaxCall,
+      this.innerApiCalls.listAccessPolicies as GaxCall,
       request,
       callSettings
     );
@@ -3520,7 +3520,7 @@ export class AccessContextManagerClient {
     this.initialize();
     return this.descriptors.page.listAccessPolicies.asyncIterate(
       this.innerApiCalls['listAccessPolicies'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.identity.accesscontextmanager.v1.IAccessPolicy>;
   }
@@ -3687,7 +3687,7 @@ export class AccessContextManagerClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listAccessLevels.createStream(
-      this.innerApiCalls.listAccessLevels as gax.GaxCall,
+      this.innerApiCalls.listAccessLevels as GaxCall,
       request,
       callSettings
     );
@@ -3747,7 +3747,7 @@ export class AccessContextManagerClient {
     this.initialize();
     return this.descriptors.page.listAccessLevels.asyncIterate(
       this.innerApiCalls['listAccessLevels'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.identity.accesscontextmanager.v1.IAccessLevel>;
   }
@@ -3906,7 +3906,7 @@ export class AccessContextManagerClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listServicePerimeters.createStream(
-      this.innerApiCalls.listServicePerimeters as gax.GaxCall,
+      this.innerApiCalls.listServicePerimeters as GaxCall,
       request,
       callSettings
     );
@@ -3962,7 +3962,7 @@ export class AccessContextManagerClient {
     this.initialize();
     return this.descriptors.page.listServicePerimeters.asyncIterate(
       this.innerApiCalls['listServicePerimeters'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.identity.accesscontextmanager.v1.IServicePerimeter>;
   }
@@ -4117,7 +4117,7 @@ export class AccessContextManagerClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listGcpUserAccessBindings.createStream(
-      this.innerApiCalls.listGcpUserAccessBindings as gax.GaxCall,
+      this.innerApiCalls.listGcpUserAccessBindings as GaxCall,
       request,
       callSettings
     );
@@ -4169,7 +4169,7 @@ export class AccessContextManagerClient {
     this.initialize();
     return this.descriptors.page.listGcpUserAccessBindings.asyncIterate(
       this.innerApiCalls['listGcpUserAccessBindings'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding>;
   }
