@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import * as Long from "long";
+import Long = require("long");
 import {protobuf as $protobuf} from "google-gax";
 /** Namespace google. */
 export namespace google {
@@ -260,105 +260,105 @@ export namespace google {
                 namespace Domains {
 
                     /**
-                     * Callback as used by {@link google.cloud.domains.v1.Domains#searchDomains}.
+                     * Callback as used by {@link google.cloud.domains.v1.Domains|searchDomains}.
                      * @param error Error, if any
                      * @param [response] SearchDomainsResponse
                      */
                     type SearchDomainsCallback = (error: (Error|null), response?: google.cloud.domains.v1.SearchDomainsResponse) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.domains.v1.Domains#retrieveRegisterParameters}.
+                     * Callback as used by {@link google.cloud.domains.v1.Domains|retrieveRegisterParameters}.
                      * @param error Error, if any
                      * @param [response] RetrieveRegisterParametersResponse
                      */
                     type RetrieveRegisterParametersCallback = (error: (Error|null), response?: google.cloud.domains.v1.RetrieveRegisterParametersResponse) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.domains.v1.Domains#registerDomain}.
+                     * Callback as used by {@link google.cloud.domains.v1.Domains|registerDomain}.
                      * @param error Error, if any
                      * @param [response] Operation
                      */
                     type RegisterDomainCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.domains.v1.Domains#retrieveTransferParameters}.
+                     * Callback as used by {@link google.cloud.domains.v1.Domains|retrieveTransferParameters}.
                      * @param error Error, if any
                      * @param [response] RetrieveTransferParametersResponse
                      */
                     type RetrieveTransferParametersCallback = (error: (Error|null), response?: google.cloud.domains.v1.RetrieveTransferParametersResponse) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.domains.v1.Domains#transferDomain}.
+                     * Callback as used by {@link google.cloud.domains.v1.Domains|transferDomain}.
                      * @param error Error, if any
                      * @param [response] Operation
                      */
                     type TransferDomainCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.domains.v1.Domains#listRegistrations}.
+                     * Callback as used by {@link google.cloud.domains.v1.Domains|listRegistrations}.
                      * @param error Error, if any
                      * @param [response] ListRegistrationsResponse
                      */
                     type ListRegistrationsCallback = (error: (Error|null), response?: google.cloud.domains.v1.ListRegistrationsResponse) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.domains.v1.Domains#getRegistration}.
+                     * Callback as used by {@link google.cloud.domains.v1.Domains|getRegistration}.
                      * @param error Error, if any
                      * @param [response] Registration
                      */
                     type GetRegistrationCallback = (error: (Error|null), response?: google.cloud.domains.v1.Registration) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.domains.v1.Domains#updateRegistration}.
+                     * Callback as used by {@link google.cloud.domains.v1.Domains|updateRegistration}.
                      * @param error Error, if any
                      * @param [response] Operation
                      */
                     type UpdateRegistrationCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.domains.v1.Domains#configureManagementSettings}.
+                     * Callback as used by {@link google.cloud.domains.v1.Domains|configureManagementSettings}.
                      * @param error Error, if any
                      * @param [response] Operation
                      */
                     type ConfigureManagementSettingsCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.domains.v1.Domains#configureDnsSettings}.
+                     * Callback as used by {@link google.cloud.domains.v1.Domains|configureDnsSettings}.
                      * @param error Error, if any
                      * @param [response] Operation
                      */
                     type ConfigureDnsSettingsCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.domains.v1.Domains#configureContactSettings}.
+                     * Callback as used by {@link google.cloud.domains.v1.Domains|configureContactSettings}.
                      * @param error Error, if any
                      * @param [response] Operation
                      */
                     type ConfigureContactSettingsCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.domains.v1.Domains#exportRegistration}.
+                     * Callback as used by {@link google.cloud.domains.v1.Domains|exportRegistration}.
                      * @param error Error, if any
                      * @param [response] Operation
                      */
                     type ExportRegistrationCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.domains.v1.Domains#deleteRegistration}.
+                     * Callback as used by {@link google.cloud.domains.v1.Domains|deleteRegistration}.
                      * @param error Error, if any
                      * @param [response] Operation
                      */
                     type DeleteRegistrationCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.domains.v1.Domains#retrieveAuthorizationCode}.
+                     * Callback as used by {@link google.cloud.domains.v1.Domains|retrieveAuthorizationCode}.
                      * @param error Error, if any
                      * @param [response] AuthorizationCode
                      */
                     type RetrieveAuthorizationCodeCallback = (error: (Error|null), response?: google.cloud.domains.v1.AuthorizationCode) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.domains.v1.Domains#resetAuthorizationCode}.
+                     * Callback as used by {@link google.cloud.domains.v1.Domains|resetAuthorizationCode}.
                      * @param error Error, if any
                      * @param [response] AuthorizationCode
                      */
@@ -519,6 +519,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Registration
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 namespace Registration {
@@ -637,6 +644,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ManagementSettings
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 namespace ManagementSettings {
@@ -752,6 +766,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DnsSettings
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 namespace DnsSettings {
@@ -850,6 +871,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CustomDns
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a GoogleDomainsDns. */
@@ -952,6 +980,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GoogleDomainsDns
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a DsRecord. */
@@ -1060,6 +1095,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DsRecord
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     namespace DsRecord {
@@ -1196,6 +1238,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GlueRecord
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** DsState enum. */
@@ -1312,6 +1361,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ContactSettings
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 namespace ContactSettings {
@@ -1422,6 +1478,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Contact
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
                 }
 
@@ -1519,6 +1582,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SearchDomainsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a SearchDomainsResponse. */
@@ -1609,6 +1679,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SearchDomainsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a RetrieveRegisterParametersRequest. */
@@ -1705,6 +1782,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RetrieveRegisterParametersRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a RetrieveRegisterParametersResponse. */
@@ -1795,6 +1879,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RetrieveRegisterParametersResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a RegisterDomainRequest. */
@@ -1915,6 +2006,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RegisterDomainRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a RetrieveTransferParametersRequest. */
@@ -2011,6 +2109,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RetrieveTransferParametersRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a RetrieveTransferParametersResponse. */
@@ -2101,6 +2206,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RetrieveTransferParametersResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a TransferDomainRequest. */
@@ -2221,6 +2333,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TransferDomainRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ListRegistrationsRequest. */
@@ -2329,6 +2448,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListRegistrationsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ListRegistrationsResponse. */
@@ -2425,6 +2551,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListRegistrationsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a GetRegistrationRequest. */
@@ -2515,6 +2648,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetRegistrationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of an UpdateRegistrationRequest. */
@@ -2611,6 +2751,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateRegistrationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ConfigureManagementSettingsRequest. */
@@ -2713,6 +2860,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ConfigureManagementSettingsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ConfigureDnsSettingsRequest. */
@@ -2821,6 +2975,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ConfigureDnsSettingsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ConfigureContactSettingsRequest. */
@@ -2935,6 +3096,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ConfigureContactSettingsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of an ExportRegistrationRequest. */
@@ -3025,6 +3193,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExportRegistrationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a DeleteRegistrationRequest. */
@@ -3115,6 +3290,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteRegistrationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a RetrieveAuthorizationCodeRequest. */
@@ -3205,6 +3387,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RetrieveAuthorizationCodeRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ResetAuthorizationCodeRequest. */
@@ -3295,6 +3484,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ResetAuthorizationCodeRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a RegisterParameters. */
@@ -3409,6 +3605,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RegisterParameters
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 namespace RegisterParameters {
@@ -3541,6 +3744,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TransferParameters
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of an AuthorizationCode. */
@@ -3631,6 +3841,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AuthorizationCode
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of an OperationMetadata. */
@@ -3751,6 +3968,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OperationMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** ContactPrivacy enum. */
@@ -4018,105 +4242,105 @@ export namespace google {
                 namespace Domains {
 
                     /**
-                     * Callback as used by {@link google.cloud.domains.v1alpha2.Domains#searchDomains}.
+                     * Callback as used by {@link google.cloud.domains.v1alpha2.Domains|searchDomains}.
                      * @param error Error, if any
                      * @param [response] SearchDomainsResponse
                      */
                     type SearchDomainsCallback = (error: (Error|null), response?: google.cloud.domains.v1alpha2.SearchDomainsResponse) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.domains.v1alpha2.Domains#retrieveRegisterParameters}.
+                     * Callback as used by {@link google.cloud.domains.v1alpha2.Domains|retrieveRegisterParameters}.
                      * @param error Error, if any
                      * @param [response] RetrieveRegisterParametersResponse
                      */
                     type RetrieveRegisterParametersCallback = (error: (Error|null), response?: google.cloud.domains.v1alpha2.RetrieveRegisterParametersResponse) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.domains.v1alpha2.Domains#registerDomain}.
+                     * Callback as used by {@link google.cloud.domains.v1alpha2.Domains|registerDomain}.
                      * @param error Error, if any
                      * @param [response] Operation
                      */
                     type RegisterDomainCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.domains.v1alpha2.Domains#retrieveTransferParameters}.
+                     * Callback as used by {@link google.cloud.domains.v1alpha2.Domains|retrieveTransferParameters}.
                      * @param error Error, if any
                      * @param [response] RetrieveTransferParametersResponse
                      */
                     type RetrieveTransferParametersCallback = (error: (Error|null), response?: google.cloud.domains.v1alpha2.RetrieveTransferParametersResponse) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.domains.v1alpha2.Domains#transferDomain}.
+                     * Callback as used by {@link google.cloud.domains.v1alpha2.Domains|transferDomain}.
                      * @param error Error, if any
                      * @param [response] Operation
                      */
                     type TransferDomainCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.domains.v1alpha2.Domains#listRegistrations}.
+                     * Callback as used by {@link google.cloud.domains.v1alpha2.Domains|listRegistrations}.
                      * @param error Error, if any
                      * @param [response] ListRegistrationsResponse
                      */
                     type ListRegistrationsCallback = (error: (Error|null), response?: google.cloud.domains.v1alpha2.ListRegistrationsResponse) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.domains.v1alpha2.Domains#getRegistration}.
+                     * Callback as used by {@link google.cloud.domains.v1alpha2.Domains|getRegistration}.
                      * @param error Error, if any
                      * @param [response] Registration
                      */
                     type GetRegistrationCallback = (error: (Error|null), response?: google.cloud.domains.v1alpha2.Registration) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.domains.v1alpha2.Domains#updateRegistration}.
+                     * Callback as used by {@link google.cloud.domains.v1alpha2.Domains|updateRegistration}.
                      * @param error Error, if any
                      * @param [response] Operation
                      */
                     type UpdateRegistrationCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.domains.v1alpha2.Domains#configureManagementSettings}.
+                     * Callback as used by {@link google.cloud.domains.v1alpha2.Domains|configureManagementSettings}.
                      * @param error Error, if any
                      * @param [response] Operation
                      */
                     type ConfigureManagementSettingsCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.domains.v1alpha2.Domains#configureDnsSettings}.
+                     * Callback as used by {@link google.cloud.domains.v1alpha2.Domains|configureDnsSettings}.
                      * @param error Error, if any
                      * @param [response] Operation
                      */
                     type ConfigureDnsSettingsCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.domains.v1alpha2.Domains#configureContactSettings}.
+                     * Callback as used by {@link google.cloud.domains.v1alpha2.Domains|configureContactSettings}.
                      * @param error Error, if any
                      * @param [response] Operation
                      */
                     type ConfigureContactSettingsCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.domains.v1alpha2.Domains#exportRegistration}.
+                     * Callback as used by {@link google.cloud.domains.v1alpha2.Domains|exportRegistration}.
                      * @param error Error, if any
                      * @param [response] Operation
                      */
                     type ExportRegistrationCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.domains.v1alpha2.Domains#deleteRegistration}.
+                     * Callback as used by {@link google.cloud.domains.v1alpha2.Domains|deleteRegistration}.
                      * @param error Error, if any
                      * @param [response] Operation
                      */
                     type DeleteRegistrationCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.domains.v1alpha2.Domains#retrieveAuthorizationCode}.
+                     * Callback as used by {@link google.cloud.domains.v1alpha2.Domains|retrieveAuthorizationCode}.
                      * @param error Error, if any
                      * @param [response] AuthorizationCode
                      */
                     type RetrieveAuthorizationCodeCallback = (error: (Error|null), response?: google.cloud.domains.v1alpha2.AuthorizationCode) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.domains.v1alpha2.Domains#resetAuthorizationCode}.
+                     * Callback as used by {@link google.cloud.domains.v1alpha2.Domains|resetAuthorizationCode}.
                      * @param error Error, if any
                      * @param [response] AuthorizationCode
                      */
@@ -4277,6 +4501,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Registration
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 namespace Registration {
@@ -4395,6 +4626,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ManagementSettings
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 namespace ManagementSettings {
@@ -4510,6 +4748,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DnsSettings
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 namespace DnsSettings {
@@ -4608,6 +4853,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CustomDns
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a GoogleDomainsDns. */
@@ -4710,6 +4962,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GoogleDomainsDns
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a DsRecord. */
@@ -4818,6 +5077,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DsRecord
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     namespace DsRecord {
@@ -4954,6 +5220,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GlueRecord
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** DsState enum. */
@@ -5070,6 +5343,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ContactSettings
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 namespace ContactSettings {
@@ -5180,6 +5460,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Contact
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
                 }
 
@@ -5277,6 +5564,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SearchDomainsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a SearchDomainsResponse. */
@@ -5367,6 +5661,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SearchDomainsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a RetrieveRegisterParametersRequest. */
@@ -5463,6 +5764,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RetrieveRegisterParametersRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a RetrieveRegisterParametersResponse. */
@@ -5553,6 +5861,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RetrieveRegisterParametersResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a RegisterDomainRequest. */
@@ -5673,6 +5988,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RegisterDomainRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a RetrieveTransferParametersRequest. */
@@ -5769,6 +6091,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RetrieveTransferParametersRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a RetrieveTransferParametersResponse. */
@@ -5859,6 +6188,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RetrieveTransferParametersResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a TransferDomainRequest. */
@@ -5979,6 +6315,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TransferDomainRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ListRegistrationsRequest. */
@@ -6087,6 +6430,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListRegistrationsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ListRegistrationsResponse. */
@@ -6183,6 +6533,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListRegistrationsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a GetRegistrationRequest. */
@@ -6273,6 +6630,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetRegistrationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of an UpdateRegistrationRequest. */
@@ -6369,6 +6733,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateRegistrationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ConfigureManagementSettingsRequest. */
@@ -6471,6 +6842,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ConfigureManagementSettingsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ConfigureDnsSettingsRequest. */
@@ -6579,6 +6957,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ConfigureDnsSettingsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ConfigureContactSettingsRequest. */
@@ -6693,6 +7078,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ConfigureContactSettingsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of an ExportRegistrationRequest. */
@@ -6783,6 +7175,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExportRegistrationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a DeleteRegistrationRequest. */
@@ -6873,6 +7272,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteRegistrationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a RetrieveAuthorizationCodeRequest. */
@@ -6963,6 +7369,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RetrieveAuthorizationCodeRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ResetAuthorizationCodeRequest. */
@@ -7053,6 +7466,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ResetAuthorizationCodeRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a RegisterParameters. */
@@ -7167,6 +7587,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RegisterParameters
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 namespace RegisterParameters {
@@ -7299,6 +7726,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TransferParameters
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of an AuthorizationCode. */
@@ -7389,6 +7823,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AuthorizationCode
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of an OperationMetadata. */
@@ -7509,6 +7950,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OperationMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** ContactPrivacy enum. */
@@ -7776,105 +8224,105 @@ export namespace google {
                 namespace Domains {
 
                     /**
-                     * Callback as used by {@link google.cloud.domains.v1beta1.Domains#searchDomains}.
+                     * Callback as used by {@link google.cloud.domains.v1beta1.Domains|searchDomains}.
                      * @param error Error, if any
                      * @param [response] SearchDomainsResponse
                      */
                     type SearchDomainsCallback = (error: (Error|null), response?: google.cloud.domains.v1beta1.SearchDomainsResponse) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.domains.v1beta1.Domains#retrieveRegisterParameters}.
+                     * Callback as used by {@link google.cloud.domains.v1beta1.Domains|retrieveRegisterParameters}.
                      * @param error Error, if any
                      * @param [response] RetrieveRegisterParametersResponse
                      */
                     type RetrieveRegisterParametersCallback = (error: (Error|null), response?: google.cloud.domains.v1beta1.RetrieveRegisterParametersResponse) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.domains.v1beta1.Domains#registerDomain}.
+                     * Callback as used by {@link google.cloud.domains.v1beta1.Domains|registerDomain}.
                      * @param error Error, if any
                      * @param [response] Operation
                      */
                     type RegisterDomainCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.domains.v1beta1.Domains#retrieveTransferParameters}.
+                     * Callback as used by {@link google.cloud.domains.v1beta1.Domains|retrieveTransferParameters}.
                      * @param error Error, if any
                      * @param [response] RetrieveTransferParametersResponse
                      */
                     type RetrieveTransferParametersCallback = (error: (Error|null), response?: google.cloud.domains.v1beta1.RetrieveTransferParametersResponse) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.domains.v1beta1.Domains#transferDomain}.
+                     * Callback as used by {@link google.cloud.domains.v1beta1.Domains|transferDomain}.
                      * @param error Error, if any
                      * @param [response] Operation
                      */
                     type TransferDomainCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.domains.v1beta1.Domains#listRegistrations}.
+                     * Callback as used by {@link google.cloud.domains.v1beta1.Domains|listRegistrations}.
                      * @param error Error, if any
                      * @param [response] ListRegistrationsResponse
                      */
                     type ListRegistrationsCallback = (error: (Error|null), response?: google.cloud.domains.v1beta1.ListRegistrationsResponse) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.domains.v1beta1.Domains#getRegistration}.
+                     * Callback as used by {@link google.cloud.domains.v1beta1.Domains|getRegistration}.
                      * @param error Error, if any
                      * @param [response] Registration
                      */
                     type GetRegistrationCallback = (error: (Error|null), response?: google.cloud.domains.v1beta1.Registration) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.domains.v1beta1.Domains#updateRegistration}.
+                     * Callback as used by {@link google.cloud.domains.v1beta1.Domains|updateRegistration}.
                      * @param error Error, if any
                      * @param [response] Operation
                      */
                     type UpdateRegistrationCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.domains.v1beta1.Domains#configureManagementSettings}.
+                     * Callback as used by {@link google.cloud.domains.v1beta1.Domains|configureManagementSettings}.
                      * @param error Error, if any
                      * @param [response] Operation
                      */
                     type ConfigureManagementSettingsCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.domains.v1beta1.Domains#configureDnsSettings}.
+                     * Callback as used by {@link google.cloud.domains.v1beta1.Domains|configureDnsSettings}.
                      * @param error Error, if any
                      * @param [response] Operation
                      */
                     type ConfigureDnsSettingsCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.domains.v1beta1.Domains#configureContactSettings}.
+                     * Callback as used by {@link google.cloud.domains.v1beta1.Domains|configureContactSettings}.
                      * @param error Error, if any
                      * @param [response] Operation
                      */
                     type ConfigureContactSettingsCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.domains.v1beta1.Domains#exportRegistration}.
+                     * Callback as used by {@link google.cloud.domains.v1beta1.Domains|exportRegistration}.
                      * @param error Error, if any
                      * @param [response] Operation
                      */
                     type ExportRegistrationCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.domains.v1beta1.Domains#deleteRegistration}.
+                     * Callback as used by {@link google.cloud.domains.v1beta1.Domains|deleteRegistration}.
                      * @param error Error, if any
                      * @param [response] Operation
                      */
                     type DeleteRegistrationCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.domains.v1beta1.Domains#retrieveAuthorizationCode}.
+                     * Callback as used by {@link google.cloud.domains.v1beta1.Domains|retrieveAuthorizationCode}.
                      * @param error Error, if any
                      * @param [response] AuthorizationCode
                      */
                     type RetrieveAuthorizationCodeCallback = (error: (Error|null), response?: google.cloud.domains.v1beta1.AuthorizationCode) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.domains.v1beta1.Domains#resetAuthorizationCode}.
+                     * Callback as used by {@link google.cloud.domains.v1beta1.Domains|resetAuthorizationCode}.
                      * @param error Error, if any
                      * @param [response] AuthorizationCode
                      */
@@ -8035,6 +8483,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Registration
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 namespace Registration {
@@ -8153,6 +8608,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ManagementSettings
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 namespace ManagementSettings {
@@ -8268,6 +8730,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DnsSettings
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 namespace DnsSettings {
@@ -8366,6 +8835,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CustomDns
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a GoogleDomainsDns. */
@@ -8468,6 +8944,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GoogleDomainsDns
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a DsRecord. */
@@ -8576,6 +9059,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DsRecord
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     namespace DsRecord {
@@ -8712,6 +9202,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GlueRecord
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** DsState enum. */
@@ -8828,6 +9325,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ContactSettings
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 namespace ContactSettings {
@@ -8938,6 +9442,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Contact
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
                 }
 
@@ -9035,6 +9546,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SearchDomainsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a SearchDomainsResponse. */
@@ -9125,6 +9643,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SearchDomainsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a RetrieveRegisterParametersRequest. */
@@ -9221,6 +9746,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RetrieveRegisterParametersRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a RetrieveRegisterParametersResponse. */
@@ -9311,6 +9843,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RetrieveRegisterParametersResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a RegisterDomainRequest. */
@@ -9431,6 +9970,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RegisterDomainRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a RetrieveTransferParametersRequest. */
@@ -9527,6 +10073,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RetrieveTransferParametersRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a RetrieveTransferParametersResponse. */
@@ -9617,6 +10170,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RetrieveTransferParametersResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a TransferDomainRequest. */
@@ -9737,6 +10297,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TransferDomainRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ListRegistrationsRequest. */
@@ -9845,6 +10412,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListRegistrationsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ListRegistrationsResponse. */
@@ -9941,6 +10515,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListRegistrationsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a GetRegistrationRequest. */
@@ -10031,6 +10612,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetRegistrationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of an UpdateRegistrationRequest. */
@@ -10127,6 +10715,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateRegistrationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ConfigureManagementSettingsRequest. */
@@ -10229,6 +10824,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ConfigureManagementSettingsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ConfigureDnsSettingsRequest. */
@@ -10337,6 +10939,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ConfigureDnsSettingsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ConfigureContactSettingsRequest. */
@@ -10451,6 +11060,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ConfigureContactSettingsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of an ExportRegistrationRequest. */
@@ -10541,6 +11157,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExportRegistrationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a DeleteRegistrationRequest. */
@@ -10631,6 +11254,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteRegistrationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a RetrieveAuthorizationCodeRequest. */
@@ -10721,6 +11351,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RetrieveAuthorizationCodeRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ResetAuthorizationCodeRequest. */
@@ -10811,6 +11448,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ResetAuthorizationCodeRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a RegisterParameters. */
@@ -10925,6 +11569,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RegisterParameters
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 namespace RegisterParameters {
@@ -11057,6 +11708,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TransferParameters
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of an AuthorizationCode. */
@@ -11147,6 +11805,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AuthorizationCode
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of an OperationMetadata. */
@@ -11267,6 +11932,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OperationMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** ContactPrivacy enum. */
@@ -11396,6 +12068,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Http
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a HttpRule. */
@@ -11543,6 +12222,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for HttpRule
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a CustomHttpPattern. */
@@ -11639,6 +12325,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for CustomHttpPattern
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** FieldBehavior enum. */
@@ -11777,6 +12470,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ResourceDescriptor
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         namespace ResourceDescriptor {
@@ -11889,6 +12589,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ResourceReference
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
     }
 
@@ -11983,6 +12690,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FileDescriptorSet
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a FileDescriptorProto. */
@@ -12023,6 +12737,9 @@ export namespace google {
 
             /** FileDescriptorProto syntax */
             syntax?: (string|null);
+
+            /** FileDescriptorProto edition */
+            edition?: (string|null);
         }
 
         /** Represents a FileDescriptorProto. */
@@ -12069,6 +12786,9 @@ export namespace google {
 
             /** FileDescriptorProto syntax. */
             public syntax: string;
+
+            /** FileDescriptorProto edition. */
+            public edition: string;
 
             /**
              * Creates a new FileDescriptorProto instance using the specified properties.
@@ -12139,6 +12859,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FileDescriptorProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a DescriptorProto. */
@@ -12283,6 +13010,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for DescriptorProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         namespace DescriptorProto {
@@ -12387,6 +13121,13 @@ export namespace google {
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ExtensionRange
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
             }
 
             /** Properties of a ReservedRange. */
@@ -12483,6 +13224,13 @@ export namespace google {
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ReservedRange
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
             }
         }
 
@@ -12574,6 +13322,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ExtensionRangeOptions
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a FieldDescriptorProto. */
@@ -12724,6 +13479,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FieldDescriptorProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         namespace FieldDescriptorProto {
@@ -12852,6 +13614,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for OneofDescriptorProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of an EnumDescriptorProto. */
@@ -12966,6 +13735,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for EnumDescriptorProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         namespace EnumDescriptorProto {
@@ -13064,6 +13840,13 @@ export namespace google {
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for EnumReservedRange
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
             }
         }
 
@@ -13167,6 +13950,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for EnumValueDescriptorProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a ServiceDescriptorProto. */
@@ -13269,6 +14059,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ServiceDescriptorProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a MethodDescriptorProto. */
@@ -13389,6 +14186,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for MethodDescriptorProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a FileOptions. */
@@ -13602,6 +14406,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FileOptions
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         namespace FileOptions {
@@ -13729,6 +14540,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for MessageOptions
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a FieldOptions. */
@@ -13745,6 +14563,9 @@ export namespace google {
 
             /** FieldOptions lazy */
             lazy?: (boolean|null);
+
+            /** FieldOptions unverifiedLazy */
+            unverifiedLazy?: (boolean|null);
 
             /** FieldOptions deprecated */
             deprecated?: (boolean|null);
@@ -13782,6 +14603,9 @@ export namespace google {
 
             /** FieldOptions lazy. */
             public lazy: boolean;
+
+            /** FieldOptions unverifiedLazy. */
+            public unverifiedLazy: boolean;
 
             /** FieldOptions deprecated. */
             public deprecated: boolean;
@@ -13861,6 +14685,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FieldOptions
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         namespace FieldOptions {
@@ -13968,6 +14799,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for OneofOptions
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of an EnumOptions. */
@@ -14070,6 +14908,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for EnumOptions
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of an EnumValueOptions. */
@@ -14166,6 +15011,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for EnumValueOptions
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a ServiceOptions. */
@@ -14268,6 +15120,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ServiceOptions
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a MethodOptions. */
@@ -14379,6 +15238,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for MethodOptions
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         namespace MethodOptions {
@@ -14515,6 +15381,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for UninterpretedOption
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         namespace UninterpretedOption {
@@ -14613,6 +15486,13 @@ export namespace google {
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for NamePart
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
             }
         }
 
@@ -14704,6 +15584,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for SourceCodeInfo
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         namespace SourceCodeInfo {
@@ -14820,6 +15707,13 @@ export namespace google {
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for Location
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
             }
         }
 
@@ -14911,6 +15805,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for GeneratedCodeInfo
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         namespace GeneratedCodeInfo {
@@ -14929,6 +15830,9 @@ export namespace google {
 
                 /** Annotation end */
                 end?: (number|null);
+
+                /** Annotation semantic */
+                semantic?: (google.protobuf.GeneratedCodeInfo.Annotation.Semantic|keyof typeof google.protobuf.GeneratedCodeInfo.Annotation.Semantic|null);
             }
 
             /** Represents an Annotation. */
@@ -14951,6 +15855,9 @@ export namespace google {
 
                 /** Annotation end. */
                 public end: number;
+
+                /** Annotation semantic. */
+                public semantic: (google.protobuf.GeneratedCodeInfo.Annotation.Semantic|keyof typeof google.protobuf.GeneratedCodeInfo.Annotation.Semantic);
 
                 /**
                  * Creates a new Annotation instance using the specified properties.
@@ -15021,6 +15928,23 @@ export namespace google {
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for Annotation
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace Annotation {
+
+                /** Semantic enum. */
+                enum Semantic {
+                    NONE = 0,
+                    SET = 1,
+                    ALIAS = 2
+                }
             }
         }
 
@@ -15118,6 +16042,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Any
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a Duration. */
@@ -15214,6 +16145,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Duration
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of an Empty. */
@@ -15298,6 +16236,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Empty
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a FieldMask. */
@@ -15388,6 +16333,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FieldMask
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a Timestamp. */
@@ -15484,6 +16436,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Timestamp
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
     }
 
@@ -15584,35 +16543,35 @@ export namespace google {
         namespace Operations {
 
             /**
-             * Callback as used by {@link google.longrunning.Operations#listOperations}.
+             * Callback as used by {@link google.longrunning.Operations|listOperations}.
              * @param error Error, if any
              * @param [response] ListOperationsResponse
              */
             type ListOperationsCallback = (error: (Error|null), response?: google.longrunning.ListOperationsResponse) => void;
 
             /**
-             * Callback as used by {@link google.longrunning.Operations#getOperation}.
+             * Callback as used by {@link google.longrunning.Operations|getOperation}.
              * @param error Error, if any
              * @param [response] Operation
              */
             type GetOperationCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
             /**
-             * Callback as used by {@link google.longrunning.Operations#deleteOperation}.
+             * Callback as used by {@link google.longrunning.Operations|deleteOperation}.
              * @param error Error, if any
              * @param [response] Empty
              */
             type DeleteOperationCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
 
             /**
-             * Callback as used by {@link google.longrunning.Operations#cancelOperation}.
+             * Callback as used by {@link google.longrunning.Operations|cancelOperation}.
              * @param error Error, if any
              * @param [response] Empty
              */
             type CancelOperationCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
 
             /**
-             * Callback as used by {@link google.longrunning.Operations#waitOperation}.
+             * Callback as used by {@link google.longrunning.Operations|waitOperation}.
              * @param error Error, if any
              * @param [response] Operation
              */
@@ -15734,6 +16693,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Operation
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a GetOperationRequest. */
@@ -15824,6 +16790,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for GetOperationRequest
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a ListOperationsRequest. */
@@ -15932,6 +16905,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ListOperationsRequest
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a ListOperationsResponse. */
@@ -16028,6 +17008,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ListOperationsResponse
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a CancelOperationRequest. */
@@ -16118,6 +17105,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for CancelOperationRequest
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a DeleteOperationRequest. */
@@ -16208,6 +17202,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for DeleteOperationRequest
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a WaitOperationRequest. */
@@ -16304,6 +17305,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for WaitOperationRequest
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of an OperationInfo. */
@@ -16400,6 +17408,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for OperationInfo
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
     }
 
@@ -16506,6 +17521,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Status
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
     }
 
@@ -16612,6 +17634,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Money
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a PostalAddress. */
@@ -16762,6 +17791,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for PostalAddress
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
     }
 }
