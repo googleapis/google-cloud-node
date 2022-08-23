@@ -1,5 +1,14 @@
 # Changelog
 
+## [3.0.1](https://github.com/googleapis/nodejs-analytics-data/compare/v3.0.0...v3.0.1) (2022-08-23)
+
+
+### Bug Fixes
+
+* better support for fallback mode ([#226](https://github.com/googleapis/nodejs-analytics-data/issues/226)) ([e9f6e72](https://github.com/googleapis/nodejs-analytics-data/commit/e9f6e722506bcbcf6ec2119511c16d033121c6f2))
+* change import long to require ([#227](https://github.com/googleapis/nodejs-analytics-data/issues/227)) ([007dfad](https://github.com/googleapis/nodejs-analytics-data/commit/007dfadd590e9c957a978ce4e46b9e72eb78e090))
+* remove pip install statements ([#1546](https://github.com/googleapis/nodejs-analytics-data/issues/1546)) ([#229](https://github.com/googleapis/nodejs-analytics-data/issues/229)) ([d2e5aba](https://github.com/googleapis/nodejs-analytics-data/commit/d2e5aba8edb12337fd5c04916bd75fee1389c0d3))
+
 ## [3.0.0](https://github.com/googleapis/nodejs-analytics-data/compare/v2.8.0...v3.0.0) (2022-06-27)
 
 
