@@ -28,7 +28,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -301,7 +300,8 @@ export class RegistrationServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -2055,7 +2055,7 @@ export class RegistrationServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listNamespaces.createStream(
-      this.innerApiCalls.listNamespaces as gax.GaxCall,
+      this.innerApiCalls.listNamespaces as GaxCall,
       request,
       callSettings
     );
@@ -2143,7 +2143,7 @@ export class RegistrationServiceClient {
     this.initialize();
     return this.descriptors.page.listNamespaces.asyncIterate(
       this.innerApiCalls['listNamespaces'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.servicedirectory.v1beta1.INamespace>;
   }
@@ -2372,7 +2372,7 @@ export class RegistrationServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listServices.createStream(
-      this.innerApiCalls.listServices as gax.GaxCall,
+      this.innerApiCalls.listServices as GaxCall,
       request,
       callSettings
     );
@@ -2464,7 +2464,7 @@ export class RegistrationServiceClient {
     this.initialize();
     return this.descriptors.page.listServices.asyncIterate(
       this.innerApiCalls['listServices'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.servicedirectory.v1beta1.IService>;
   }
@@ -2699,7 +2699,7 @@ export class RegistrationServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listEndpoints.createStream(
-      this.innerApiCalls.listEndpoints as gax.GaxCall,
+      this.innerApiCalls.listEndpoints as GaxCall,
       request,
       callSettings
     );
@@ -2794,7 +2794,7 @@ export class RegistrationServiceClient {
     this.initialize();
     return this.descriptors.page.listEndpoints.asyncIterate(
       this.innerApiCalls['listEndpoints'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.servicedirectory.v1beta1.IEndpoint>;
   }
