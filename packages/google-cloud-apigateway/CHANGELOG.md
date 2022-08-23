@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.1.1](https://github.com/googleapis/nodejs-api-gateway/compare/v2.1.0...v2.1.1) (2022-08-23)
+
+
+### Bug Fixes
+
+* better support for fallback mode ([#123](https://github.com/googleapis/nodejs-api-gateway/issues/123)) ([a5cf1d1](https://github.com/googleapis/nodejs-api-gateway/commit/a5cf1d1322bd1f7c70e995b15ce81f54ad5b10de))
+* change import long to require ([#124](https://github.com/googleapis/nodejs-api-gateway/issues/124)) ([6edc9af](https://github.com/googleapis/nodejs-api-gateway/commit/6edc9af8b60cf5bf6494dbc9560ffe1962c268b3))
+* remove pip install statements ([#1546](https://github.com/googleapis/nodejs-api-gateway/issues/1546)) ([#126](https://github.com/googleapis/nodejs-api-gateway/issues/126)) ([bde7a85](https://github.com/googleapis/nodejs-api-gateway/commit/bde7a858a9fdb90614a0a5996c525214053e6cb7))
+
 ## [2.1.0](https://github.com/googleapis/nodejs-api-gateway/compare/v2.0.0...v2.1.0) (2022-06-29)
 
 
