@@ -34,7 +34,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -386,7 +385,8 @@ export class FunctionServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -998,7 +998,7 @@ export class FunctionServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createFunction,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.functions.v2beta.Function,
@@ -1139,7 +1139,7 @@ export class FunctionServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateFunction,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.functions.v2beta.Function,
@@ -1278,7 +1278,7 @@ export class FunctionServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteFunction,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -1452,7 +1452,7 @@ export class FunctionServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listFunctions.createStream(
-      this.innerApiCalls.listFunctions as gax.GaxCall,
+      this.innerApiCalls.listFunctions as GaxCall,
       request,
       callSettings
     );
@@ -1515,7 +1515,7 @@ export class FunctionServiceClient {
     this.initialize();
     return this.descriptors.page.listFunctions.asyncIterate(
       this.innerApiCalls['listFunctions'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.functions.v2beta.IFunction>;
   }
