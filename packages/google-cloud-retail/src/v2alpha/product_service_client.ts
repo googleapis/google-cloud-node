@@ -32,7 +32,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -417,7 +416,8 @@ export class ProductServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -1106,7 +1106,7 @@ export class ProductServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.purgeProducts,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.retail.v2alpha.PurgeProductsResponse,
@@ -1291,7 +1291,7 @@ export class ProductServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.importProducts,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.retail.v2alpha.ImportProductsResponse,
@@ -1546,7 +1546,7 @@ export class ProductServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.setInventory,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.retail.v2alpha.SetInventoryResponse,
@@ -1751,7 +1751,7 @@ export class ProductServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.addFulfillmentPlaces,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.retail.v2alpha.AddFulfillmentPlacesResponse,
@@ -1955,7 +1955,7 @@ export class ProductServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.removeFulfillmentPlaces,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.retail.v2alpha.RemoveFulfillmentPlacesResponse,
@@ -2150,7 +2150,7 @@ export class ProductServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.addLocalInventories,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.retail.v2alpha.AddLocalInventoriesResponse,
@@ -2330,7 +2330,7 @@ export class ProductServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.removeLocalInventories,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.retail.v2alpha.RemoveLocalInventoriesResponse,
@@ -2628,7 +2628,7 @@ export class ProductServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listProducts.createStream(
-      this.innerApiCalls.listProducts as gax.GaxCall,
+      this.innerApiCalls.listProducts as GaxCall,
       request,
       callSettings
     );
@@ -2753,7 +2753,7 @@ export class ProductServiceClient {
     this.initialize();
     return this.descriptors.page.listProducts.asyncIterate(
       this.innerApiCalls['listProducts'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.retail.v2alpha.IProduct>;
   }

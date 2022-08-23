@@ -321,7 +321,8 @@ export class UserEventServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -737,7 +738,7 @@ export class UserEventServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.purgeUserEvents,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.retail.v2.PurgeUserEventsResponse,
@@ -885,7 +886,7 @@ export class UserEventServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.importUserEvents,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.retail.v2.ImportUserEventsResponse,
@@ -1035,7 +1036,7 @@ export class UserEventServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.rejoinUserEvents,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.retail.v2.RejoinUserEventsResponse,
