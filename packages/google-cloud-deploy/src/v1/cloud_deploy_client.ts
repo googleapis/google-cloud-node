@@ -30,7 +30,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -495,7 +494,8 @@ export class CloudDeployClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -1230,7 +1230,7 @@ export class CloudDeployClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createDeliveryPipeline,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.deploy.v1.DeliveryPipeline,
@@ -1397,7 +1397,7 @@ export class CloudDeployClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateDeliveryPipeline,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.deploy.v1.DeliveryPipeline,
@@ -1567,7 +1567,7 @@ export class CloudDeployClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteDeliveryPipeline,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -1727,7 +1727,7 @@ export class CloudDeployClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createTarget,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.deploy.v1.Target,
@@ -1890,7 +1890,7 @@ export class CloudDeployClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateTarget,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.deploy.v1.Target,
@@ -2052,7 +2052,7 @@ export class CloudDeployClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteTarget,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -2212,7 +2212,7 @@ export class CloudDeployClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createRelease,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.deploy.v1.Release,
@@ -2372,7 +2372,7 @@ export class CloudDeployClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createRollout,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.deploy.v1.Rollout,
@@ -2542,7 +2542,7 @@ export class CloudDeployClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listDeliveryPipelines.createStream(
-      this.innerApiCalls.listDeliveryPipelines as gax.GaxCall,
+      this.innerApiCalls.listDeliveryPipelines as GaxCall,
       request,
       callSettings
     );
@@ -2603,7 +2603,7 @@ export class CloudDeployClient {
     this.initialize();
     return this.descriptors.page.listDeliveryPipelines.asyncIterate(
       this.innerApiCalls['listDeliveryPipelines'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.deploy.v1.IDeliveryPipeline>;
   }
@@ -2760,7 +2760,7 @@ export class CloudDeployClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listTargets.createStream(
-      this.innerApiCalls.listTargets as gax.GaxCall,
+      this.innerApiCalls.listTargets as GaxCall,
       request,
       callSettings
     );
@@ -2820,7 +2820,7 @@ export class CloudDeployClient {
     this.initialize();
     return this.descriptors.page.listTargets.asyncIterate(
       this.innerApiCalls['listTargets'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.deploy.v1.ITarget>;
   }
@@ -2977,7 +2977,7 @@ export class CloudDeployClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listReleases.createStream(
-      this.innerApiCalls.listReleases as gax.GaxCall,
+      this.innerApiCalls.listReleases as GaxCall,
       request,
       callSettings
     );
@@ -3036,7 +3036,7 @@ export class CloudDeployClient {
     this.initialize();
     return this.descriptors.page.listReleases.asyncIterate(
       this.innerApiCalls['listReleases'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.deploy.v1.IRelease>;
   }
@@ -3193,7 +3193,7 @@ export class CloudDeployClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listRollouts.createStream(
-      this.innerApiCalls.listRollouts as gax.GaxCall,
+      this.innerApiCalls.listRollouts as GaxCall,
       request,
       callSettings
     );
@@ -3252,7 +3252,7 @@ export class CloudDeployClient {
     this.initialize();
     return this.descriptors.page.listRollouts.asyncIterate(
       this.innerApiCalls['listRollouts'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.deploy.v1.IRollout>;
   }
