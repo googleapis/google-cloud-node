@@ -30,7 +30,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -469,7 +468,8 @@ export class SecurityCenterClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -3277,7 +3277,7 @@ export class SecurityCenterClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.bulkMuteFindings,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.securitycenter.v1.BulkMuteFindingsResponse,
@@ -3420,7 +3420,7 @@ export class SecurityCenterClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.runAssetDiscovery,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.securitycenter.v1.RunAssetDiscoveryResponse,
@@ -3805,7 +3805,7 @@ export class SecurityCenterClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.groupAssets.createStream(
-      this.innerApiCalls.groupAssets as gax.GaxCall,
+      this.innerApiCalls.groupAssets as GaxCall,
       request,
       callSettings
     );
@@ -3973,7 +3973,7 @@ export class SecurityCenterClient {
     this.initialize();
     return this.descriptors.page.groupAssets.asyncIterate(
       this.innerApiCalls['groupAssets'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.securitycenter.v1.IGroupResult>;
   }
@@ -4366,7 +4366,7 @@ export class SecurityCenterClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.groupFindings.createStream(
-      this.innerApiCalls.groupFindings as gax.GaxCall,
+      this.innerApiCalls.groupFindings as GaxCall,
       request,
       callSettings
     );
@@ -4537,7 +4537,7 @@ export class SecurityCenterClient {
     this.initialize();
     return this.descriptors.page.groupFindings.asyncIterate(
       this.innerApiCalls['groupFindings'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.securitycenter.v1.IGroupResult>;
   }
@@ -4926,7 +4926,7 @@ export class SecurityCenterClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listAssets.createStream(
-      this.innerApiCalls.listAssets as gax.GaxCall,
+      this.innerApiCalls.listAssets as GaxCall,
       request,
       callSettings
     );
@@ -5098,7 +5098,7 @@ export class SecurityCenterClient {
     this.initialize();
     return this.descriptors.page.listAssets.asyncIterate(
       this.innerApiCalls['listAssets'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.securitycenter.v1.ListAssetsResponse.IListAssetsResult>;
   }
@@ -5500,7 +5500,7 @@ export class SecurityCenterClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listFindings.createStream(
-      this.innerApiCalls.listFindings as gax.GaxCall,
+      this.innerApiCalls.listFindings as GaxCall,
       request,
       callSettings
     );
@@ -5677,7 +5677,7 @@ export class SecurityCenterClient {
     this.initialize();
     return this.descriptors.page.listFindings.asyncIterate(
       this.innerApiCalls['listFindings'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.securitycenter.v1.ListFindingsResponse.IListFindingsResult>;
   }
@@ -5836,7 +5836,7 @@ export class SecurityCenterClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listMuteConfigs.createStream(
-      this.innerApiCalls.listMuteConfigs as gax.GaxCall,
+      this.innerApiCalls.listMuteConfigs as GaxCall,
       request,
       callSettings
     );
@@ -5893,7 +5893,7 @@ export class SecurityCenterClient {
     this.initialize();
     return this.descriptors.page.listMuteConfigs.asyncIterate(
       this.innerApiCalls['listMuteConfigs'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.securitycenter.v1.IMuteConfig>;
   }
@@ -6046,7 +6046,7 @@ export class SecurityCenterClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listNotificationConfigs.createStream(
-      this.innerApiCalls.listNotificationConfigs as gax.GaxCall,
+      this.innerApiCalls.listNotificationConfigs as GaxCall,
       request,
       callSettings
     );
@@ -6098,7 +6098,7 @@ export class SecurityCenterClient {
     this.initialize();
     return this.descriptors.page.listNotificationConfigs.asyncIterate(
       this.innerApiCalls['listNotificationConfigs'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.securitycenter.v1.INotificationConfig>;
   }
@@ -6249,7 +6249,7 @@ export class SecurityCenterClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listSources.createStream(
-      this.innerApiCalls.listSources as gax.GaxCall,
+      this.innerApiCalls.listSources as GaxCall,
       request,
       callSettings
     );
@@ -6302,7 +6302,7 @@ export class SecurityCenterClient {
     this.initialize();
     return this.descriptors.page.listSources.asyncIterate(
       this.innerApiCalls['listSources'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.securitycenter.v1.ISource>;
   }
@@ -6463,7 +6463,7 @@ export class SecurityCenterClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listBigQueryExports.createStream(
-      this.innerApiCalls.listBigQueryExports as gax.GaxCall,
+      this.innerApiCalls.listBigQueryExports as GaxCall,
       request,
       callSettings
     );
@@ -6519,7 +6519,7 @@ export class SecurityCenterClient {
     this.initialize();
     return this.descriptors.page.listBigQueryExports.asyncIterate(
       this.innerApiCalls['listBigQueryExports'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.securitycenter.v1.IBigQueryExport>;
   }
