@@ -32,7 +32,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -416,7 +415,8 @@ export class FlowsClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -1255,7 +1255,7 @@ export class FlowsClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.trainFlow,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -1419,7 +1419,7 @@ export class FlowsClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.importFlow,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.dialogflow.cx.v3.ImportFlowResponse,
@@ -1582,7 +1582,7 @@ export class FlowsClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.exportFlow,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.dialogflow.cx.v3.ExportFlowResponse,
@@ -1758,7 +1758,7 @@ export class FlowsClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listFlows.createStream(
-      this.innerApiCalls.listFlows as gax.GaxCall,
+      this.innerApiCalls.listFlows as GaxCall,
       request,
       callSettings
     );
@@ -1822,7 +1822,7 @@ export class FlowsClient {
     this.initialize();
     return this.descriptors.page.listFlows.asyncIterate(
       this.innerApiCalls['listFlows'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.dialogflow.cx.v3.IFlow>;
   }

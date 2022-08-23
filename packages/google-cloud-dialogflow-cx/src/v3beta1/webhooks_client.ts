@@ -31,7 +31,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -40,7 +39,7 @@ import jsonProtos = require('../../protos/protos.json');
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
 import * as gapicConfig from './webhooks_client_config.json';
-import {operationsProtos} from 'google-gax';
+
 const version = require('../../../package.json').version;
 
 /**
@@ -382,7 +381,8 @@ export class WebhooksClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -991,7 +991,7 @@ export class WebhooksClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listWebhooks.createStream(
-      this.innerApiCalls.listWebhooks as gax.GaxCall,
+      this.innerApiCalls.listWebhooks as GaxCall,
       request,
       callSettings
     );
@@ -1041,7 +1041,7 @@ export class WebhooksClient {
     this.initialize();
     return this.descriptors.page.listWebhooks.asyncIterate(
       this.innerApiCalls['listWebhooks'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.dialogflow.cx.v3beta1.IWebhook>;
   }

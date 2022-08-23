@@ -32,7 +32,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -436,7 +435,8 @@ export class EnvironmentsClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -835,7 +835,7 @@ export class EnvironmentsClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createEnvironment,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.dialogflow.cx.v3.Environment,
@@ -982,7 +982,7 @@ export class EnvironmentsClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateEnvironment,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.dialogflow.cx.v3.Environment,
@@ -1127,7 +1127,7 @@ export class EnvironmentsClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.runContinuousTest,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.dialogflow.cx.v3.RunContinuousTestResponse,
@@ -1277,7 +1277,7 @@ export class EnvironmentsClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deployFlow,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.dialogflow.cx.v3.DeployFlowResponse,
@@ -1425,7 +1425,7 @@ export class EnvironmentsClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listEnvironments.createStream(
-      this.innerApiCalls.listEnvironments as gax.GaxCall,
+      this.innerApiCalls.listEnvironments as GaxCall,
       request,
       callSettings
     );
@@ -1475,7 +1475,7 @@ export class EnvironmentsClient {
     this.initialize();
     return this.descriptors.page.listEnvironments.asyncIterate(
       this.innerApiCalls['listEnvironments'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.dialogflow.cx.v3.IEnvironment>;
   }
@@ -1626,7 +1626,7 @@ export class EnvironmentsClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.lookupEnvironmentHistory.createStream(
-      this.innerApiCalls.lookupEnvironmentHistory as gax.GaxCall,
+      this.innerApiCalls.lookupEnvironmentHistory as GaxCall,
       request,
       callSettings
     );
@@ -1677,7 +1677,7 @@ export class EnvironmentsClient {
     this.initialize();
     return this.descriptors.page.lookupEnvironmentHistory.asyncIterate(
       this.innerApiCalls['lookupEnvironmentHistory'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.dialogflow.cx.v3.IEnvironment>;
   }
@@ -1828,7 +1828,7 @@ export class EnvironmentsClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listContinuousTestResults.createStream(
-      this.innerApiCalls.listContinuousTestResults as gax.GaxCall,
+      this.innerApiCalls.listContinuousTestResults as GaxCall,
       request,
       callSettings
     );
@@ -1879,7 +1879,7 @@ export class EnvironmentsClient {
     this.initialize();
     return this.descriptors.page.listContinuousTestResults.asyncIterate(
       this.innerApiCalls['listContinuousTestResults'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.dialogflow.cx.v3.IContinuousTestResult>;
   }

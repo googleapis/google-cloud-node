@@ -32,7 +32,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -437,7 +436,8 @@ export class TestCasesClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -1239,7 +1239,7 @@ export class TestCasesClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.runTestCase,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.dialogflow.cx.v3beta1.RunTestCaseResponse,
@@ -1391,7 +1391,7 @@ export class TestCasesClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.batchRunTestCases,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.dialogflow.cx.v3beta1.BatchRunTestCasesResponse,
@@ -1550,7 +1550,7 @@ export class TestCasesClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.importTestCases,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.dialogflow.cx.v3beta1.ImportTestCasesResponse,
@@ -1721,7 +1721,7 @@ export class TestCasesClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.exportTestCases,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.dialogflow.cx.v3beta1.ExportTestCasesResponse,
@@ -1875,7 +1875,7 @@ export class TestCasesClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listTestCases.createStream(
-      this.innerApiCalls.listTestCases as gax.GaxCall,
+      this.innerApiCalls.listTestCases as GaxCall,
       request,
       callSettings
     );
@@ -1928,7 +1928,7 @@ export class TestCasesClient {
     this.initialize();
     return this.descriptors.page.listTestCases.asyncIterate(
       this.innerApiCalls['listTestCases'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.dialogflow.cx.v3beta1.ITestCase>;
   }
@@ -2127,7 +2127,7 @@ export class TestCasesClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listTestCaseResults.createStream(
-      this.innerApiCalls.listTestCaseResults as gax.GaxCall,
+      this.innerApiCalls.listTestCaseResults as GaxCall,
       request,
       callSettings
     );
@@ -2204,7 +2204,7 @@ export class TestCasesClient {
     this.initialize();
     return this.descriptors.page.listTestCaseResults.asyncIterate(
       this.innerApiCalls['listTestCaseResults'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.dialogflow.cx.v3beta1.ITestCaseResult>;
   }
