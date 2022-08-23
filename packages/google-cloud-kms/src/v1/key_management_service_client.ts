@@ -30,7 +30,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -323,7 +322,8 @@ export class KeyManagementServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -2946,7 +2946,7 @@ export class KeyManagementServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listKeyRings.createStream(
-      this.innerApiCalls.listKeyRings as gax.GaxCall,
+      this.innerApiCalls.listKeyRings as GaxCall,
       request,
       callSettings
     );
@@ -3013,7 +3013,7 @@ export class KeyManagementServiceClient {
     this.initialize();
     return this.descriptors.page.listKeyRings.asyncIterate(
       this.innerApiCalls['listKeyRings'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.kms.v1.IKeyRing>;
   }
@@ -3186,7 +3186,7 @@ export class KeyManagementServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listCryptoKeys.createStream(
-      this.innerApiCalls.listCryptoKeys as gax.GaxCall,
+      this.innerApiCalls.listCryptoKeys as GaxCall,
       request,
       callSettings
     );
@@ -3254,7 +3254,7 @@ export class KeyManagementServiceClient {
     this.initialize();
     return this.descriptors.page.listCryptoKeys.asyncIterate(
       this.innerApiCalls['listCryptoKeys'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.kms.v1.ICryptoKey>;
   }
@@ -3437,7 +3437,7 @@ export class KeyManagementServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listCryptoKeyVersions.createStream(
-      this.innerApiCalls.listCryptoKeyVersions as gax.GaxCall,
+      this.innerApiCalls.listCryptoKeyVersions as GaxCall,
       request,
       callSettings
     );
@@ -3506,7 +3506,7 @@ export class KeyManagementServiceClient {
     this.initialize();
     return this.descriptors.page.listCryptoKeyVersions.asyncIterate(
       this.innerApiCalls['listCryptoKeyVersions'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.kms.v1.ICryptoKeyVersion>;
   }
@@ -3675,7 +3675,7 @@ export class KeyManagementServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listImportJobs.createStream(
-      this.innerApiCalls.listImportJobs as gax.GaxCall,
+      this.innerApiCalls.listImportJobs as GaxCall,
       request,
       callSettings
     );
@@ -3741,7 +3741,7 @@ export class KeyManagementServiceClient {
     this.initialize();
     return this.descriptors.page.listImportJobs.asyncIterate(
       this.innerApiCalls['listImportJobs'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.kms.v1.IImportJob>;
   }
