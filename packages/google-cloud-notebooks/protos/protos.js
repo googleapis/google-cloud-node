@@ -238,27 +238,34 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
-                                case 2:
-                                    message.displayName = reader.string();
-                                    break;
-                                case 3:
-                                    message.description = reader.string();
-                                    break;
-                                case 6:
-                                    message.vmImage = $root.google.cloud.notebooks.v1.VmImage.decode(reader, reader.uint32());
-                                    break;
-                                case 7:
-                                    message.containerImage = $root.google.cloud.notebooks.v1.ContainerImage.decode(reader, reader.uint32());
-                                    break;
-                                case 8:
-                                    message.postStartupScript = reader.string();
-                                    break;
-                                case 9:
-                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.displayName = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.vmImage = $root.google.cloud.notebooks.v1.VmImage.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.containerImage = $root.google.cloud.notebooks.v1.ContainerImage.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.postStartupScript = reader.string();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -425,6 +432,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for Environment
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.Environment
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Environment.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.Environment";
+                        };
+    
                         return Environment;
                     })();
     
@@ -556,15 +578,18 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.project = reader.string();
-                                    break;
-                                case 2:
-                                    message.imageName = reader.string();
-                                    break;
-                                case 3:
-                                    message.imageFamily = reader.string();
-                                    break;
+                                case 1: {
+                                        message.project = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.imageName = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.imageFamily = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -681,6 +706,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for VmImage
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.VmImage
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        VmImage.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.VmImage";
+                        };
+    
                         return VmImage;
                     })();
     
@@ -787,12 +827,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.repository = reader.string();
-                                    break;
-                                case 2:
-                                    message.tag = reader.string();
-                                    break;
+                                case 1: {
+                                        message.repository = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.tag = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -889,6 +931,21 @@
                          */
                         ContainerImage.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ContainerImage
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.ContainerImage
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ContainerImage.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.ContainerImage";
                         };
     
                         return ContainerImage;
@@ -1010,34 +1067,37 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.reportTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 2:
-                                    message.type = reader.int32();
-                                    break;
-                                case 3:
-                                    if (message.details === $util.emptyObject)
-                                        message.details = {};
-                                    var end2 = reader.uint32() + reader.pos;
-                                    key = "";
-                                    value = "";
-                                    while (reader.pos < end2) {
-                                        var tag2 = reader.uint32();
-                                        switch (tag2 >>> 3) {
-                                        case 1:
-                                            key = reader.string();
-                                            break;
-                                        case 2:
-                                            value = reader.string();
-                                            break;
-                                        default:
-                                            reader.skipType(tag2 & 7);
-                                            break;
-                                        }
+                                case 1: {
+                                        message.reportTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
                                     }
-                                    message.details[key] = value;
-                                    break;
+                                case 2: {
+                                        message.type = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (message.details === $util.emptyObject)
+                                            message.details = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.details[key] = value;
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -1190,6 +1250,21 @@
                          */
                         Event.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Event
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.Event
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Event.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.Event";
                         };
     
                         /**
@@ -1477,70 +1552,85 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.scaleTier = reader.int32();
-                                    break;
-                                case 2:
-                                    message.masterType = reader.string();
-                                    break;
-                                case 3:
-                                    message.acceleratorConfig = $root.google.cloud.notebooks.v1.ExecutionTemplate.SchedulerAcceleratorConfig.decode(reader, reader.uint32());
-                                    break;
-                                case 4:
-                                    if (message.labels === $util.emptyObject)
-                                        message.labels = {};
-                                    var end2 = reader.uint32() + reader.pos;
-                                    key = "";
-                                    value = "";
-                                    while (reader.pos < end2) {
-                                        var tag2 = reader.uint32();
-                                        switch (tag2 >>> 3) {
-                                        case 1:
-                                            key = reader.string();
-                                            break;
-                                        case 2:
-                                            value = reader.string();
-                                            break;
-                                        default:
-                                            reader.skipType(tag2 & 7);
-                                            break;
-                                        }
+                                case 1: {
+                                        message.scaleTier = reader.int32();
+                                        break;
                                     }
-                                    message.labels[key] = value;
-                                    break;
-                                case 5:
-                                    message.inputNotebookFile = reader.string();
-                                    break;
-                                case 6:
-                                    message.containerImageUri = reader.string();
-                                    break;
-                                case 7:
-                                    message.outputNotebookFolder = reader.string();
-                                    break;
-                                case 8:
-                                    message.paramsYamlFile = reader.string();
-                                    break;
-                                case 9:
-                                    message.parameters = reader.string();
-                                    break;
-                                case 10:
-                                    message.serviceAccount = reader.string();
-                                    break;
-                                case 11:
-                                    message.jobType = reader.int32();
-                                    break;
-                                case 12:
-                                    message.dataprocParameters = $root.google.cloud.notebooks.v1.ExecutionTemplate.DataprocParameters.decode(reader, reader.uint32());
-                                    break;
-                                case 13:
-                                    message.vertexAiParameters = $root.google.cloud.notebooks.v1.ExecutionTemplate.VertexAIParameters.decode(reader, reader.uint32());
-                                    break;
-                                case 14:
-                                    message.kernelSpec = reader.string();
-                                    break;
-                                case 15:
-                                    message.tensorboard = reader.string();
-                                    break;
+                                case 2: {
+                                        message.masterType = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.acceleratorConfig = $root.google.cloud.notebooks.v1.ExecutionTemplate.SchedulerAcceleratorConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        if (message.labels === $util.emptyObject)
+                                            message.labels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.labels[key] = value;
+                                        break;
+                                    }
+                                case 5: {
+                                        message.inputNotebookFile = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.containerImageUri = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.outputNotebookFolder = reader.string();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.paramsYamlFile = reader.string();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.parameters = reader.string();
+                                        break;
+                                    }
+                                case 10: {
+                                        message.serviceAccount = reader.string();
+                                        break;
+                                    }
+                                case 11: {
+                                        message.jobType = reader.int32();
+                                        break;
+                                    }
+                                case 12: {
+                                        message.dataprocParameters = $root.google.cloud.notebooks.v1.ExecutionTemplate.DataprocParameters.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 13: {
+                                        message.vertexAiParameters = $root.google.cloud.notebooks.v1.ExecutionTemplate.VertexAIParameters.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 14: {
+                                        message.kernelSpec = reader.string();
+                                        break;
+                                    }
+                                case 15: {
+                                        message.tensorboard = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -1843,6 +1933,21 @@
                         };
     
                         /**
+                         * Gets the default type url for ExecutionTemplate
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.ExecutionTemplate
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ExecutionTemplate.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.ExecutionTemplate";
+                        };
+    
+                        /**
                          * ScaleTier enum.
                          * @name google.cloud.notebooks.v1.ExecutionTemplate.ScaleTier
                          * @enum {number}
@@ -1997,12 +2102,14 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.type = reader.int32();
-                                        break;
-                                    case 2:
-                                        message.coreCount = reader.int64();
-                                        break;
+                                    case 1: {
+                                            message.type = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.coreCount = reader.int64();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -2163,6 +2270,21 @@
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                             };
     
+                            /**
+                             * Gets the default type url for SchedulerAcceleratorConfig
+                             * @function getTypeUrl
+                             * @memberof google.cloud.notebooks.v1.ExecutionTemplate.SchedulerAcceleratorConfig
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SchedulerAcceleratorConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.notebooks.v1.ExecutionTemplate.SchedulerAcceleratorConfig";
+                            };
+    
                             return SchedulerAcceleratorConfig;
                         })();
     
@@ -2274,9 +2396,10 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.cluster = reader.string();
-                                        break;
+                                    case 1: {
+                                            message.cluster = reader.string();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -2364,6 +2487,21 @@
                              */
                             DataprocParameters.prototype.toJSON = function toJSON() {
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for DataprocParameters
+                             * @function getTypeUrl
+                             * @memberof google.cloud.notebooks.v1.ExecutionTemplate.DataprocParameters
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            DataprocParameters.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.notebooks.v1.ExecutionTemplate.DataprocParameters";
                             };
     
                             return DataprocParameters;
@@ -2474,31 +2612,33 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.network = reader.string();
-                                        break;
-                                    case 2:
-                                        if (message.env === $util.emptyObject)
-                                            message.env = {};
-                                        var end2 = reader.uint32() + reader.pos;
-                                        key = "";
-                                        value = "";
-                                        while (reader.pos < end2) {
-                                            var tag2 = reader.uint32();
-                                            switch (tag2 >>> 3) {
-                                            case 1:
-                                                key = reader.string();
-                                                break;
-                                            case 2:
-                                                value = reader.string();
-                                                break;
-                                            default:
-                                                reader.skipType(tag2 & 7);
-                                                break;
-                                            }
+                                    case 1: {
+                                            message.network = reader.string();
+                                            break;
                                         }
-                                        message.env[key] = value;
-                                        break;
+                                    case 2: {
+                                            if (message.env === $util.emptyObject)
+                                                message.env = {};
+                                            var end2 = reader.uint32() + reader.pos;
+                                            key = "";
+                                            value = "";
+                                            while (reader.pos < end2) {
+                                                var tag2 = reader.uint32();
+                                                switch (tag2 >>> 3) {
+                                                case 1:
+                                                    key = reader.string();
+                                                    break;
+                                                case 2:
+                                                    value = reader.string();
+                                                    break;
+                                                default:
+                                                    reader.skipType(tag2 & 7);
+                                                    break;
+                                                }
+                                            }
+                                            message.env[key] = value;
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -2609,6 +2749,21 @@
                              */
                             VertexAIParameters.prototype.toJSON = function toJSON() {
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for VertexAIParameters
+                             * @function getTypeUrl
+                             * @memberof google.cloud.notebooks.v1.ExecutionTemplate.VertexAIParameters
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            VertexAIParameters.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.notebooks.v1.ExecutionTemplate.VertexAIParameters";
                             };
     
                             return VertexAIParameters;
@@ -2797,33 +2952,42 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.executionTemplate = $root.google.cloud.notebooks.v1.ExecutionTemplate.decode(reader, reader.uint32());
-                                    break;
-                                case 2:
-                                    message.name = reader.string();
-                                    break;
-                                case 3:
-                                    message.displayName = reader.string();
-                                    break;
-                                case 4:
-                                    message.description = reader.string();
-                                    break;
-                                case 5:
-                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 6:
-                                    message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 7:
-                                    message.state = reader.int32();
-                                    break;
-                                case 8:
-                                    message.outputNotebookFile = reader.string();
-                                    break;
-                                case 9:
-                                    message.jobUri = reader.string();
-                                    break;
+                                case 1: {
+                                        message.executionTemplate = $root.google.cloud.notebooks.v1.ExecutionTemplate.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.displayName = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.outputNotebookFile = reader.string();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.jobUri = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -3047,6 +3211,21 @@
                         };
     
                         /**
+                         * Gets the default type url for Execution
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.Execution
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Execution.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.Execution";
+                        };
+    
+                        /**
                          * State enum.
                          * @name google.cloud.notebooks.v1.Execution.State
                          * @enum {number}
@@ -3195,17 +3374,20 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.consumeReservationType = reader.int32();
-                                    break;
-                                case 2:
-                                    message.key = reader.string();
-                                    break;
-                                case 3:
-                                    if (!(message.values && message.values.length))
-                                        message.values = [];
-                                    message.values.push(reader.string());
-                                    break;
+                                case 1: {
+                                        message.consumeReservationType = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.key = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.values && message.values.length))
+                                            message.values = [];
+                                        message.values.push(reader.string());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -3346,6 +3528,21 @@
                          */
                         ReservationAffinity.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ReservationAffinity
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.ReservationAffinity
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ReservationAffinity.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.ReservationAffinity";
                         };
     
                         /**
@@ -3874,162 +4071,198 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
-                                case 2:
-                                    message.vmImage = $root.google.cloud.notebooks.v1.VmImage.decode(reader, reader.uint32());
-                                    break;
-                                case 3:
-                                    message.containerImage = $root.google.cloud.notebooks.v1.ContainerImage.decode(reader, reader.uint32());
-                                    break;
-                                case 4:
-                                    message.postStartupScript = reader.string();
-                                    break;
-                                case 5:
-                                    message.proxyUri = reader.string();
-                                    break;
-                                case 6:
-                                    if (!(message.instanceOwners && message.instanceOwners.length))
-                                        message.instanceOwners = [];
-                                    message.instanceOwners.push(reader.string());
-                                    break;
-                                case 7:
-                                    message.serviceAccount = reader.string();
-                                    break;
-                                case 31:
-                                    if (!(message.serviceAccountScopes && message.serviceAccountScopes.length))
-                                        message.serviceAccountScopes = [];
-                                    message.serviceAccountScopes.push(reader.string());
-                                    break;
-                                case 8:
-                                    message.machineType = reader.string();
-                                    break;
-                                case 9:
-                                    message.acceleratorConfig = $root.google.cloud.notebooks.v1.Instance.AcceleratorConfig.decode(reader, reader.uint32());
-                                    break;
-                                case 10:
-                                    message.state = reader.int32();
-                                    break;
-                                case 11:
-                                    message.installGpuDriver = reader.bool();
-                                    break;
-                                case 12:
-                                    message.customGpuDriverPath = reader.string();
-                                    break;
-                                case 13:
-                                    message.bootDiskType = reader.int32();
-                                    break;
-                                case 14:
-                                    message.bootDiskSizeGb = reader.int64();
-                                    break;
-                                case 25:
-                                    message.dataDiskType = reader.int32();
-                                    break;
-                                case 26:
-                                    message.dataDiskSizeGb = reader.int64();
-                                    break;
-                                case 27:
-                                    message.noRemoveDataDisk = reader.bool();
-                                    break;
-                                case 15:
-                                    message.diskEncryption = reader.int32();
-                                    break;
-                                case 16:
-                                    message.kmsKey = reader.string();
-                                    break;
-                                case 28:
-                                    if (!(message.disks && message.disks.length))
-                                        message.disks = [];
-                                    message.disks.push($root.google.cloud.notebooks.v1.Instance.Disk.decode(reader, reader.uint32()));
-                                    break;
-                                case 30:
-                                    message.shieldedInstanceConfig = $root.google.cloud.notebooks.v1.Instance.ShieldedInstanceConfig.decode(reader, reader.uint32());
-                                    break;
-                                case 17:
-                                    message.noPublicIp = reader.bool();
-                                    break;
-                                case 18:
-                                    message.noProxyAccess = reader.bool();
-                                    break;
-                                case 19:
-                                    message.network = reader.string();
-                                    break;
-                                case 20:
-                                    message.subnet = reader.string();
-                                    break;
-                                case 21:
-                                    if (message.labels === $util.emptyObject)
-                                        message.labels = {};
-                                    var end2 = reader.uint32() + reader.pos;
-                                    key = "";
-                                    value = "";
-                                    while (reader.pos < end2) {
-                                        var tag2 = reader.uint32();
-                                        switch (tag2 >>> 3) {
-                                        case 1:
-                                            key = reader.string();
-                                            break;
-                                        case 2:
-                                            value = reader.string();
-                                            break;
-                                        default:
-                                            reader.skipType(tag2 & 7);
-                                            break;
-                                        }
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
                                     }
-                                    message.labels[key] = value;
-                                    break;
-                                case 22:
-                                    if (message.metadata === $util.emptyObject)
-                                        message.metadata = {};
-                                    var end2 = reader.uint32() + reader.pos;
-                                    key = "";
-                                    value = "";
-                                    while (reader.pos < end2) {
-                                        var tag2 = reader.uint32();
-                                        switch (tag2 >>> 3) {
-                                        case 1:
-                                            key = reader.string();
-                                            break;
-                                        case 2:
-                                            value = reader.string();
-                                            break;
-                                        default:
-                                            reader.skipType(tag2 & 7);
-                                            break;
-                                        }
+                                case 2: {
+                                        message.vmImage = $root.google.cloud.notebooks.v1.VmImage.decode(reader, reader.uint32());
+                                        break;
                                     }
-                                    message.metadata[key] = value;
-                                    break;
-                                case 32:
-                                    if (!(message.tags && message.tags.length))
-                                        message.tags = [];
-                                    message.tags.push(reader.string());
-                                    break;
-                                case 29:
-                                    if (!(message.upgradeHistory && message.upgradeHistory.length))
-                                        message.upgradeHistory = [];
-                                    message.upgradeHistory.push($root.google.cloud.notebooks.v1.Instance.UpgradeHistoryEntry.decode(reader, reader.uint32()));
-                                    break;
-                                case 33:
-                                    message.nicType = reader.int32();
-                                    break;
-                                case 34:
-                                    message.reservationAffinity = $root.google.cloud.notebooks.v1.ReservationAffinity.decode(reader, reader.uint32());
-                                    break;
-                                case 36:
-                                    message.creator = reader.string();
-                                    break;
-                                case 39:
-                                    message.canIpForward = reader.bool();
-                                    break;
-                                case 23:
-                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 24:
-                                    message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
+                                case 3: {
+                                        message.containerImage = $root.google.cloud.notebooks.v1.ContainerImage.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.postStartupScript = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.proxyUri = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        if (!(message.instanceOwners && message.instanceOwners.length))
+                                            message.instanceOwners = [];
+                                        message.instanceOwners.push(reader.string());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.serviceAccount = reader.string();
+                                        break;
+                                    }
+                                case 31: {
+                                        if (!(message.serviceAccountScopes && message.serviceAccountScopes.length))
+                                            message.serviceAccountScopes = [];
+                                        message.serviceAccountScopes.push(reader.string());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.machineType = reader.string();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.acceleratorConfig = $root.google.cloud.notebooks.v1.Instance.AcceleratorConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 10: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 11: {
+                                        message.installGpuDriver = reader.bool();
+                                        break;
+                                    }
+                                case 12: {
+                                        message.customGpuDriverPath = reader.string();
+                                        break;
+                                    }
+                                case 13: {
+                                        message.bootDiskType = reader.int32();
+                                        break;
+                                    }
+                                case 14: {
+                                        message.bootDiskSizeGb = reader.int64();
+                                        break;
+                                    }
+                                case 25: {
+                                        message.dataDiskType = reader.int32();
+                                        break;
+                                    }
+                                case 26: {
+                                        message.dataDiskSizeGb = reader.int64();
+                                        break;
+                                    }
+                                case 27: {
+                                        message.noRemoveDataDisk = reader.bool();
+                                        break;
+                                    }
+                                case 15: {
+                                        message.diskEncryption = reader.int32();
+                                        break;
+                                    }
+                                case 16: {
+                                        message.kmsKey = reader.string();
+                                        break;
+                                    }
+                                case 28: {
+                                        if (!(message.disks && message.disks.length))
+                                            message.disks = [];
+                                        message.disks.push($root.google.cloud.notebooks.v1.Instance.Disk.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 30: {
+                                        message.shieldedInstanceConfig = $root.google.cloud.notebooks.v1.Instance.ShieldedInstanceConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 17: {
+                                        message.noPublicIp = reader.bool();
+                                        break;
+                                    }
+                                case 18: {
+                                        message.noProxyAccess = reader.bool();
+                                        break;
+                                    }
+                                case 19: {
+                                        message.network = reader.string();
+                                        break;
+                                    }
+                                case 20: {
+                                        message.subnet = reader.string();
+                                        break;
+                                    }
+                                case 21: {
+                                        if (message.labels === $util.emptyObject)
+                                            message.labels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.labels[key] = value;
+                                        break;
+                                    }
+                                case 22: {
+                                        if (message.metadata === $util.emptyObject)
+                                            message.metadata = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.metadata[key] = value;
+                                        break;
+                                    }
+                                case 32: {
+                                        if (!(message.tags && message.tags.length))
+                                            message.tags = [];
+                                        message.tags.push(reader.string());
+                                        break;
+                                    }
+                                case 29: {
+                                        if (!(message.upgradeHistory && message.upgradeHistory.length))
+                                            message.upgradeHistory = [];
+                                        message.upgradeHistory.push($root.google.cloud.notebooks.v1.Instance.UpgradeHistoryEntry.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 33: {
+                                        message.nicType = reader.int32();
+                                        break;
+                                    }
+                                case 34: {
+                                        message.reservationAffinity = $root.google.cloud.notebooks.v1.ReservationAffinity.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 36: {
+                                        message.creator = reader.string();
+                                        break;
+                                    }
+                                case 39: {
+                                        message.canIpForward = reader.bool();
+                                        break;
+                                    }
+                                case 23: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 24: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -4733,6 +4966,21 @@
                         };
     
                         /**
+                         * Gets the default type url for Instance
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.Instance
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Instance.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.Instance";
+                        };
+    
+                        /**
                          * AcceleratorType enum.
                          * @name google.cloud.notebooks.v1.Instance.AcceleratorType
                          * @enum {number}
@@ -4869,12 +5117,14 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.type = reader.int32();
-                                        break;
-                                    case 2:
-                                        message.coreCount = reader.int64();
-                                        break;
+                                    case 1: {
+                                            message.type = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.coreCount = reader.int64();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -5048,6 +5298,21 @@
                              */
                             AcceleratorConfig.prototype.toJSON = function toJSON() {
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for AcceleratorConfig
+                             * @function getTypeUrl
+                             * @memberof google.cloud.notebooks.v1.Instance.AcceleratorConfig
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            AcceleratorConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.notebooks.v1.Instance.AcceleratorConfig";
                             };
     
                             return AcceleratorConfig;
@@ -5340,46 +5605,58 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.autoDelete = reader.bool();
-                                        break;
-                                    case 2:
-                                        message.boot = reader.bool();
-                                        break;
-                                    case 3:
-                                        message.deviceName = reader.string();
-                                        break;
-                                    case 4:
-                                        message.diskSizeGb = reader.int64();
-                                        break;
-                                    case 5:
-                                        if (!(message.guestOsFeatures && message.guestOsFeatures.length))
-                                            message.guestOsFeatures = [];
-                                        message.guestOsFeatures.push($root.google.cloud.notebooks.v1.Instance.Disk.GuestOsFeature.decode(reader, reader.uint32()));
-                                        break;
-                                    case 6:
-                                        message.index = reader.int64();
-                                        break;
-                                    case 7:
-                                        message["interface"] = reader.string();
-                                        break;
-                                    case 8:
-                                        message.kind = reader.string();
-                                        break;
-                                    case 9:
-                                        if (!(message.licenses && message.licenses.length))
-                                            message.licenses = [];
-                                        message.licenses.push(reader.string());
-                                        break;
-                                    case 10:
-                                        message.mode = reader.string();
-                                        break;
-                                    case 11:
-                                        message.source = reader.string();
-                                        break;
-                                    case 12:
-                                        message.type = reader.string();
-                                        break;
+                                    case 1: {
+                                            message.autoDelete = reader.bool();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.boot = reader.bool();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.deviceName = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.diskSizeGb = reader.int64();
+                                            break;
+                                        }
+                                    case 5: {
+                                            if (!(message.guestOsFeatures && message.guestOsFeatures.length))
+                                                message.guestOsFeatures = [];
+                                            message.guestOsFeatures.push($root.google.cloud.notebooks.v1.Instance.Disk.GuestOsFeature.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.index = reader.int64();
+                                            break;
+                                        }
+                                    case 7: {
+                                            message["interface"] = reader.string();
+                                            break;
+                                        }
+                                    case 8: {
+                                            message.kind = reader.string();
+                                            break;
+                                        }
+                                    case 9: {
+                                            if (!(message.licenses && message.licenses.length))
+                                                message.licenses = [];
+                                            message.licenses.push(reader.string());
+                                            break;
+                                        }
+                                    case 10: {
+                                            message.mode = reader.string();
+                                            break;
+                                        }
+                                    case 11: {
+                                            message.source = reader.string();
+                                            break;
+                                        }
+                                    case 12: {
+                                            message.type = reader.string();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -5617,6 +5894,21 @@
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                             };
     
+                            /**
+                             * Gets the default type url for Disk
+                             * @function getTypeUrl
+                             * @memberof google.cloud.notebooks.v1.Instance.Disk
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Disk.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.notebooks.v1.Instance.Disk";
+                            };
+    
                             Disk.GuestOsFeature = (function() {
     
                                 /**
@@ -5709,9 +6001,10 @@
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
                                         switch (tag >>> 3) {
-                                        case 1:
-                                            message.type = reader.string();
-                                            break;
+                                        case 1: {
+                                                message.type = reader.string();
+                                                break;
+                                            }
                                         default:
                                             reader.skipType(tag & 7);
                                             break;
@@ -5799,6 +6092,21 @@
                                  */
                                 GuestOsFeature.prototype.toJSON = function toJSON() {
                                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for GuestOsFeature
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.notebooks.v1.Instance.Disk.GuestOsFeature
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                GuestOsFeature.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.notebooks.v1.Instance.Disk.GuestOsFeature";
                                 };
     
                                 return GuestOsFeature;
@@ -5921,15 +6229,18 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.enableSecureBoot = reader.bool();
-                                        break;
-                                    case 2:
-                                        message.enableVtpm = reader.bool();
-                                        break;
-                                    case 3:
-                                        message.enableIntegrityMonitoring = reader.bool();
-                                        break;
+                                    case 1: {
+                                            message.enableSecureBoot = reader.bool();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.enableVtpm = reader.bool();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.enableIntegrityMonitoring = reader.bool();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -6034,6 +6345,21 @@
                              */
                             ShieldedInstanceConfig.prototype.toJSON = function toJSON() {
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ShieldedInstanceConfig
+                             * @function getTypeUrl
+                             * @memberof google.cloud.notebooks.v1.Instance.ShieldedInstanceConfig
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ShieldedInstanceConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.notebooks.v1.Instance.ShieldedInstanceConfig";
                             };
     
                             return ShieldedInstanceConfig;
@@ -6230,36 +6556,46 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.snapshot = reader.string();
-                                        break;
-                                    case 2:
-                                        message.vmImage = reader.string();
-                                        break;
-                                    case 3:
-                                        message.containerImage = reader.string();
-                                        break;
-                                    case 4:
-                                        message.framework = reader.string();
-                                        break;
-                                    case 5:
-                                        message.version = reader.string();
-                                        break;
-                                    case 6:
-                                        message.state = reader.int32();
-                                        break;
-                                    case 7:
-                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                        break;
-                                    case 8:
-                                        message.targetImage = reader.string();
-                                        break;
-                                    case 9:
-                                        message.action = reader.int32();
-                                        break;
-                                    case 10:
-                                        message.targetVersion = reader.string();
-                                        break;
+                                    case 1: {
+                                            message.snapshot = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.vmImage = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.containerImage = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.framework = reader.string();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.version = reader.string();
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.state = reader.int32();
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 8: {
+                                            message.targetImage = reader.string();
+                                            break;
+                                        }
+                                    case 9: {
+                                            message.action = reader.int32();
+                                            break;
+                                        }
+                                    case 10: {
+                                            message.targetVersion = reader.string();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -6469,6 +6805,21 @@
                             };
     
                             /**
+                             * Gets the default type url for UpgradeHistoryEntry
+                             * @function getTypeUrl
+                             * @memberof google.cloud.notebooks.v1.Instance.UpgradeHistoryEntry
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            UpgradeHistoryEntry.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.notebooks.v1.Instance.UpgradeHistoryEntry";
+                            };
+    
+                            /**
                              * State enum.
                              * @name google.cloud.notebooks.v1.Instance.UpgradeHistoryEntry.State
                              * @enum {number}
@@ -6627,12 +6978,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.notebookUpgradeSchedule = reader.string();
-                                    break;
-                                case 2:
-                                    message.enableHealthMonitoring = reader.bool();
-                                    break;
+                                case 1: {
+                                        message.notebookUpgradeSchedule = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.enableHealthMonitoring = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -6731,6 +7084,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for InstanceConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.InstanceConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        InstanceConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.InstanceConfig";
+                        };
+    
                         return InstanceConfig;
                     })();
     
@@ -6767,7 +7135,7 @@
                         };
     
                         /**
-                         * Callback as used by {@link google.cloud.notebooks.v1.ManagedNotebookService#listRuntimes}.
+                         * Callback as used by {@link google.cloud.notebooks.v1.ManagedNotebookService|listRuntimes}.
                          * @memberof google.cloud.notebooks.v1.ManagedNotebookService
                          * @typedef ListRuntimesCallback
                          * @type {function}
@@ -6800,7 +7168,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.notebooks.v1.ManagedNotebookService#getRuntime}.
+                         * Callback as used by {@link google.cloud.notebooks.v1.ManagedNotebookService|getRuntime}.
                          * @memberof google.cloud.notebooks.v1.ManagedNotebookService
                          * @typedef GetRuntimeCallback
                          * @type {function}
@@ -6833,7 +7201,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.notebooks.v1.ManagedNotebookService#createRuntime}.
+                         * Callback as used by {@link google.cloud.notebooks.v1.ManagedNotebookService|createRuntime}.
                          * @memberof google.cloud.notebooks.v1.ManagedNotebookService
                          * @typedef CreateRuntimeCallback
                          * @type {function}
@@ -6866,7 +7234,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.notebooks.v1.ManagedNotebookService#deleteRuntime}.
+                         * Callback as used by {@link google.cloud.notebooks.v1.ManagedNotebookService|deleteRuntime}.
                          * @memberof google.cloud.notebooks.v1.ManagedNotebookService
                          * @typedef DeleteRuntimeCallback
                          * @type {function}
@@ -6899,7 +7267,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.notebooks.v1.ManagedNotebookService#startRuntime}.
+                         * Callback as used by {@link google.cloud.notebooks.v1.ManagedNotebookService|startRuntime}.
                          * @memberof google.cloud.notebooks.v1.ManagedNotebookService
                          * @typedef StartRuntimeCallback
                          * @type {function}
@@ -6932,7 +7300,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.notebooks.v1.ManagedNotebookService#stopRuntime}.
+                         * Callback as used by {@link google.cloud.notebooks.v1.ManagedNotebookService|stopRuntime}.
                          * @memberof google.cloud.notebooks.v1.ManagedNotebookService
                          * @typedef StopRuntimeCallback
                          * @type {function}
@@ -6965,7 +7333,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.notebooks.v1.ManagedNotebookService#switchRuntime}.
+                         * Callback as used by {@link google.cloud.notebooks.v1.ManagedNotebookService|switchRuntime}.
                          * @memberof google.cloud.notebooks.v1.ManagedNotebookService
                          * @typedef SwitchRuntimeCallback
                          * @type {function}
@@ -6998,7 +7366,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.notebooks.v1.ManagedNotebookService#resetRuntime}.
+                         * Callback as used by {@link google.cloud.notebooks.v1.ManagedNotebookService|resetRuntime}.
                          * @memberof google.cloud.notebooks.v1.ManagedNotebookService
                          * @typedef ResetRuntimeCallback
                          * @type {function}
@@ -7031,7 +7399,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.notebooks.v1.ManagedNotebookService#reportRuntimeEvent}.
+                         * Callback as used by {@link google.cloud.notebooks.v1.ManagedNotebookService|reportRuntimeEvent}.
                          * @memberof google.cloud.notebooks.v1.ManagedNotebookService
                          * @typedef ReportRuntimeEventCallback
                          * @type {function}
@@ -7064,7 +7432,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.notebooks.v1.ManagedNotebookService#refreshRuntimeTokenInternal}.
+                         * Callback as used by {@link google.cloud.notebooks.v1.ManagedNotebookService|refreshRuntimeTokenInternal}.
                          * @memberof google.cloud.notebooks.v1.ManagedNotebookService
                          * @typedef RefreshRuntimeTokenInternalCallback
                          * @type {function}
@@ -7213,15 +7581,18 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.parent = reader.string();
-                                    break;
-                                case 2:
-                                    message.pageSize = reader.int32();
-                                    break;
-                                case 3:
-                                    message.pageToken = reader.string();
-                                    break;
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -7326,6 +7697,21 @@
                          */
                         ListRuntimesRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListRuntimesRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.ListRuntimesRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListRuntimesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.ListRuntimesRequest";
                         };
     
                         return ListRuntimesRequest;
@@ -7449,19 +7835,22 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    if (!(message.runtimes && message.runtimes.length))
-                                        message.runtimes = [];
-                                    message.runtimes.push($root.google.cloud.notebooks.v1.Runtime.decode(reader, reader.uint32()));
-                                    break;
-                                case 2:
-                                    message.nextPageToken = reader.string();
-                                    break;
-                                case 3:
-                                    if (!(message.unreachable && message.unreachable.length))
-                                        message.unreachable = [];
-                                    message.unreachable.push(reader.string());
-                                    break;
+                                case 1: {
+                                        if (!(message.runtimes && message.runtimes.length))
+                                            message.runtimes = [];
+                                        message.runtimes.push($root.google.cloud.notebooks.v1.Runtime.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -7598,6 +7987,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for ListRuntimesResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.ListRuntimesResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListRuntimesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.ListRuntimesResponse";
+                        };
+    
                         return ListRuntimesResponse;
                     })();
     
@@ -7693,9 +8097,10 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -7783,6 +8188,21 @@
                          */
                         GetRuntimeRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetRuntimeRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.GetRuntimeRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetRuntimeRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.GetRuntimeRequest";
                         };
     
                         return GetRuntimeRequest;
@@ -7913,18 +8333,22 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.parent = reader.string();
-                                    break;
-                                case 2:
-                                    message.runtimeId = reader.string();
-                                    break;
-                                case 3:
-                                    message.runtime = $root.google.cloud.notebooks.v1.Runtime.decode(reader, reader.uint32());
-                                    break;
-                                case 4:
-                                    message.requestId = reader.string();
-                                    break;
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.runtimeId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.runtime = $root.google.cloud.notebooks.v1.Runtime.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -8044,6 +8468,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for CreateRuntimeRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.CreateRuntimeRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateRuntimeRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.CreateRuntimeRequest";
+                        };
+    
                         return CreateRuntimeRequest;
                     })();
     
@@ -8150,12 +8589,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
-                                case 2:
-                                    message.requestId = reader.string();
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -8252,6 +8693,21 @@
                          */
                         DeleteRuntimeRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteRuntimeRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.DeleteRuntimeRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteRuntimeRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.DeleteRuntimeRequest";
                         };
     
                         return DeleteRuntimeRequest;
@@ -8360,12 +8816,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
-                                case 2:
-                                    message.requestId = reader.string();
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -8462,6 +8920,21 @@
                          */
                         StartRuntimeRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for StartRuntimeRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.StartRuntimeRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        StartRuntimeRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.StartRuntimeRequest";
                         };
     
                         return StartRuntimeRequest;
@@ -8570,12 +9043,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
-                                case 2:
-                                    message.requestId = reader.string();
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -8672,6 +9147,21 @@
                          */
                         StopRuntimeRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for StopRuntimeRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.StopRuntimeRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        StopRuntimeRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.StopRuntimeRequest";
                         };
     
                         return StopRuntimeRequest;
@@ -8802,18 +9292,22 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
-                                case 2:
-                                    message.machineType = reader.string();
-                                    break;
-                                case 3:
-                                    message.acceleratorConfig = $root.google.cloud.notebooks.v1.RuntimeAcceleratorConfig.decode(reader, reader.uint32());
-                                    break;
-                                case 4:
-                                    message.requestId = reader.string();
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.machineType = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.acceleratorConfig = $root.google.cloud.notebooks.v1.RuntimeAcceleratorConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -8933,6 +9427,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for SwitchRuntimeRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.SwitchRuntimeRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SwitchRuntimeRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.SwitchRuntimeRequest";
+                        };
+    
                         return SwitchRuntimeRequest;
                     })();
     
@@ -9039,12 +9548,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
-                                case 2:
-                                    message.requestId = reader.string();
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -9141,6 +9652,21 @@
                          */
                         ResetRuntimeRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ResetRuntimeRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.ResetRuntimeRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ResetRuntimeRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.ResetRuntimeRequest";
                         };
     
                         return ResetRuntimeRequest;
@@ -9260,15 +9786,18 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
-                                case 2:
-                                    message.vmId = reader.string();
-                                    break;
-                                case 3:
-                                    message.event = $root.google.cloud.notebooks.v1.Event.decode(reader, reader.uint32());
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.vmId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.event = $root.google.cloud.notebooks.v1.Event.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -9380,6 +9909,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for ReportRuntimeEventRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.ReportRuntimeEventRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ReportRuntimeEventRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.ReportRuntimeEventRequest";
+                        };
+    
                         return ReportRuntimeEventRequest;
                     })();
     
@@ -9486,12 +10030,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
-                                case 2:
-                                    message.vmId = reader.string();
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.vmId = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -9588,6 +10134,21 @@
                          */
                         RefreshRuntimeTokenInternalRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RefreshRuntimeTokenInternalRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.RefreshRuntimeTokenInternalRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RefreshRuntimeTokenInternalRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.RefreshRuntimeTokenInternalRequest";
                         };
     
                         return RefreshRuntimeTokenInternalRequest;
@@ -9696,12 +10257,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.accessToken = reader.string();
-                                    break;
-                                case 2:
-                                    message.expireTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
+                                case 1: {
+                                        message.accessToken = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.expireTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -9803,6 +10366,21 @@
                          */
                         RefreshRuntimeTokenInternalResponse.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RefreshRuntimeTokenInternalResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.RefreshRuntimeTokenInternalResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RefreshRuntimeTokenInternalResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.RefreshRuntimeTokenInternalResponse";
                         };
     
                         return RefreshRuntimeTokenInternalResponse;
@@ -10002,33 +10580,42 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
-                                case 2:
-                                    message.virtualMachine = $root.google.cloud.notebooks.v1.VirtualMachine.decode(reader, reader.uint32());
-                                    break;
-                                case 3:
-                                    message.state = reader.int32();
-                                    break;
-                                case 4:
-                                    message.healthState = reader.int32();
-                                    break;
-                                case 5:
-                                    message.accessConfig = $root.google.cloud.notebooks.v1.RuntimeAccessConfig.decode(reader, reader.uint32());
-                                    break;
-                                case 6:
-                                    message.softwareConfig = $root.google.cloud.notebooks.v1.RuntimeSoftwareConfig.decode(reader, reader.uint32());
-                                    break;
-                                case 7:
-                                    message.metrics = $root.google.cloud.notebooks.v1.RuntimeMetrics.decode(reader, reader.uint32());
-                                    break;
-                                case 20:
-                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 21:
-                                    message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.virtualMachine = $root.google.cloud.notebooks.v1.VirtualMachine.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.healthState = reader.int32();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.accessConfig = $root.google.cloud.notebooks.v1.RuntimeAccessConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.softwareConfig = $root.google.cloud.notebooks.v1.RuntimeSoftwareConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.metrics = $root.google.cloud.notebooks.v1.RuntimeMetrics.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 20: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 21: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -10296,6 +10883,21 @@
                         };
     
                         /**
+                         * Gets the default type url for Runtime
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.Runtime
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Runtime.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.Runtime";
+                        };
+    
+                        /**
                          * State enum.
                          * @name google.cloud.notebooks.v1.Runtime.State
                          * @enum {number}
@@ -10449,12 +11051,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.type = reader.int32();
-                                    break;
-                                case 2:
-                                    message.coreCount = reader.int64();
-                                    break;
+                                case 1: {
+                                        message.type = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.coreCount = reader.int64();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -10631,6 +11235,21 @@
                         };
     
                         /**
+                         * Gets the default type url for RuntimeAcceleratorConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.RuntimeAcceleratorConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RuntimeAcceleratorConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.RuntimeAcceleratorConfig";
+                        };
+    
+                        /**
                          * AcceleratorType enum.
                          * @name google.cloud.notebooks.v1.RuntimeAcceleratorConfig.AcceleratorType
                          * @enum {number}
@@ -10759,9 +11378,10 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.kmsKey = reader.string();
-                                    break;
+                                case 1: {
+                                        message.kmsKey = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -10849,6 +11469,21 @@
                          */
                         EncryptionConfig.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for EncryptionConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.EncryptionConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        EncryptionConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.EncryptionConfig";
                         };
     
                         return EncryptionConfig;
@@ -11071,46 +11706,58 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.autoDelete = reader.bool();
-                                    break;
-                                case 2:
-                                    message.boot = reader.bool();
-                                    break;
-                                case 3:
-                                    message.deviceName = reader.string();
-                                    break;
-                                case 4:
-                                    if (!(message.guestOsFeatures && message.guestOsFeatures.length))
-                                        message.guestOsFeatures = [];
-                                    message.guestOsFeatures.push($root.google.cloud.notebooks.v1.LocalDisk.RuntimeGuestOsFeature.decode(reader, reader.uint32()));
-                                    break;
-                                case 5:
-                                    message.index = reader.int32();
-                                    break;
-                                case 6:
-                                    message.initializeParams = $root.google.cloud.notebooks.v1.LocalDiskInitializeParams.decode(reader, reader.uint32());
-                                    break;
-                                case 7:
-                                    message["interface"] = reader.string();
-                                    break;
-                                case 8:
-                                    message.kind = reader.string();
-                                    break;
-                                case 9:
-                                    if (!(message.licenses && message.licenses.length))
-                                        message.licenses = [];
-                                    message.licenses.push(reader.string());
-                                    break;
-                                case 10:
-                                    message.mode = reader.string();
-                                    break;
-                                case 11:
-                                    message.source = reader.string();
-                                    break;
-                                case 12:
-                                    message.type = reader.string();
-                                    break;
+                                case 1: {
+                                        message.autoDelete = reader.bool();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.boot = reader.bool();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.deviceName = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        if (!(message.guestOsFeatures && message.guestOsFeatures.length))
+                                            message.guestOsFeatures = [];
+                                        message.guestOsFeatures.push($root.google.cloud.notebooks.v1.LocalDisk.RuntimeGuestOsFeature.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 5: {
+                                        message.index = reader.int32();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.initializeParams = $root.google.cloud.notebooks.v1.LocalDiskInitializeParams.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message["interface"] = reader.string();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.kind = reader.string();
+                                        break;
+                                    }
+                                case 9: {
+                                        if (!(message.licenses && message.licenses.length))
+                                            message.licenses = [];
+                                        message.licenses.push(reader.string());
+                                        break;
+                                    }
+                                case 10: {
+                                        message.mode = reader.string();
+                                        break;
+                                    }
+                                case 11: {
+                                        message.source = reader.string();
+                                        break;
+                                    }
+                                case 12: {
+                                        message.type = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -11325,6 +11972,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for LocalDisk
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.LocalDisk
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        LocalDisk.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.LocalDisk";
+                        };
+    
                         LocalDisk.RuntimeGuestOsFeature = (function() {
     
                             /**
@@ -11417,9 +12079,10 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.type = reader.string();
-                                        break;
+                                    case 1: {
+                                            message.type = reader.string();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -11507,6 +12170,21 @@
                              */
                             RuntimeGuestOsFeature.prototype.toJSON = function toJSON() {
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for RuntimeGuestOsFeature
+                             * @function getTypeUrl
+                             * @memberof google.cloud.notebooks.v1.LocalDisk.RuntimeGuestOsFeature
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            RuntimeGuestOsFeature.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.notebooks.v1.LocalDisk.RuntimeGuestOsFeature";
                             };
     
                             return RuntimeGuestOsFeature;
@@ -11653,40 +12331,45 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.description = reader.string();
-                                    break;
-                                case 2:
-                                    message.diskName = reader.string();
-                                    break;
-                                case 3:
-                                    message.diskSizeGb = reader.int64();
-                                    break;
-                                case 4:
-                                    message.diskType = reader.int32();
-                                    break;
-                                case 5:
-                                    if (message.labels === $util.emptyObject)
-                                        message.labels = {};
-                                    var end2 = reader.uint32() + reader.pos;
-                                    key = "";
-                                    value = "";
-                                    while (reader.pos < end2) {
-                                        var tag2 = reader.uint32();
-                                        switch (tag2 >>> 3) {
-                                        case 1:
-                                            key = reader.string();
-                                            break;
-                                        case 2:
-                                            value = reader.string();
-                                            break;
-                                        default:
-                                            reader.skipType(tag2 & 7);
-                                            break;
-                                        }
+                                case 1: {
+                                        message.description = reader.string();
+                                        break;
                                     }
-                                    message.labels[key] = value;
-                                    break;
+                                case 2: {
+                                        message.diskName = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.diskSizeGb = reader.int64();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.diskType = reader.int32();
+                                        break;
+                                    }
+                                case 5: {
+                                        if (message.labels === $util.emptyObject)
+                                            message.labels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.labels[key] = value;
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -11867,6 +12550,21 @@
                         };
     
                         /**
+                         * Gets the default type url for LocalDiskInitializeParams
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.LocalDiskInitializeParams
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        LocalDiskInitializeParams.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.LocalDiskInitializeParams";
+                        };
+    
+                        /**
                          * DiskType enum.
                          * @name google.cloud.notebooks.v1.LocalDiskInitializeParams.DiskType
                          * @enum {number}
@@ -12003,15 +12701,18 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.accessType = reader.int32();
-                                    break;
-                                case 2:
-                                    message.runtimeOwner = reader.string();
-                                    break;
-                                case 3:
-                                    message.proxyUri = reader.string();
-                                    break;
+                                case 1: {
+                                        message.accessType = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.runtimeOwner = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.proxyUri = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -12134,6 +12835,21 @@
                          */
                         RuntimeAccessConfig.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RuntimeAccessConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.RuntimeAccessConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RuntimeAccessConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.RuntimeAccessConfig";
                         };
     
                         /**
@@ -12373,35 +13089,44 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.notebookUpgradeSchedule = reader.string();
-                                    break;
-                                case 2:
-                                    message.enableHealthMonitoring = reader.bool();
-                                    break;
-                                case 3:
-                                    message.idleShutdown = reader.bool();
-                                    break;
-                                case 4:
-                                    message.idleShutdownTimeout = reader.int32();
-                                    break;
-                                case 5:
-                                    message.installGpuDriver = reader.bool();
-                                    break;
-                                case 6:
-                                    message.customGpuDriverPath = reader.string();
-                                    break;
-                                case 7:
-                                    message.postStartupScript = reader.string();
-                                    break;
-                                case 8:
-                                    if (!(message.kernels && message.kernels.length))
-                                        message.kernels = [];
-                                    message.kernels.push($root.google.cloud.notebooks.v1.ContainerImage.decode(reader, reader.uint32()));
-                                    break;
-                                case 9:
-                                    message.upgradeable = reader.bool();
-                                    break;
+                                case 1: {
+                                        message.notebookUpgradeSchedule = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.enableHealthMonitoring = reader.bool();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.idleShutdown = reader.bool();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.idleShutdownTimeout = reader.int32();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.installGpuDriver = reader.bool();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.customGpuDriverPath = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.postStartupScript = reader.string();
+                                        break;
+                                    }
+                                case 8: {
+                                        if (!(message.kernels && message.kernels.length))
+                                            message.kernels = [];
+                                        message.kernels.push($root.google.cloud.notebooks.v1.ContainerImage.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 9: {
+                                        message.upgradeable = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -12587,6 +13312,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for RuntimeSoftwareConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.RuntimeSoftwareConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RuntimeSoftwareConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.RuntimeSoftwareConfig";
+                        };
+    
                         return RuntimeSoftwareConfig;
                     })();
     
@@ -12684,28 +13424,29 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    if (message.systemMetrics === $util.emptyObject)
-                                        message.systemMetrics = {};
-                                    var end2 = reader.uint32() + reader.pos;
-                                    key = "";
-                                    value = "";
-                                    while (reader.pos < end2) {
-                                        var tag2 = reader.uint32();
-                                        switch (tag2 >>> 3) {
-                                        case 1:
-                                            key = reader.string();
-                                            break;
-                                        case 2:
-                                            value = reader.string();
-                                            break;
-                                        default:
-                                            reader.skipType(tag2 & 7);
-                                            break;
+                                case 1: {
+                                        if (message.systemMetrics === $util.emptyObject)
+                                            message.systemMetrics = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
                                         }
+                                        message.systemMetrics[key] = value;
+                                        break;
                                     }
-                                    message.systemMetrics[key] = value;
-                                    break;
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -12807,6 +13548,21 @@
                          */
                         RuntimeMetrics.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RuntimeMetrics
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.RuntimeMetrics
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RuntimeMetrics.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.RuntimeMetrics";
                         };
     
                         return RuntimeMetrics;
@@ -12926,15 +13682,18 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.enableSecureBoot = reader.bool();
-                                    break;
-                                case 2:
-                                    message.enableVtpm = reader.bool();
-                                    break;
-                                case 3:
-                                    message.enableIntegrityMonitoring = reader.bool();
-                                    break;
+                                case 1: {
+                                        message.enableSecureBoot = reader.bool();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.enableVtpm = reader.bool();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.enableIntegrityMonitoring = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -13039,6 +13798,21 @@
                          */
                         RuntimeShieldedInstanceConfig.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RuntimeShieldedInstanceConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.RuntimeShieldedInstanceConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RuntimeShieldedInstanceConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.RuntimeShieldedInstanceConfig";
                         };
     
                         return RuntimeShieldedInstanceConfig;
@@ -13158,15 +13932,18 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.instanceName = reader.string();
-                                    break;
-                                case 2:
-                                    message.instanceId = reader.string();
-                                    break;
-                                case 3:
-                                    message.virtualMachineConfig = $root.google.cloud.notebooks.v1.VirtualMachineConfig.decode(reader, reader.uint32());
-                                    break;
+                                case 1: {
+                                        message.instanceName = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.instanceId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.virtualMachineConfig = $root.google.cloud.notebooks.v1.VirtualMachineConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -13276,6 +14053,21 @@
                          */
                         VirtualMachine.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for VirtualMachine
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.VirtualMachine
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        VirtualMachine.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.VirtualMachine";
                         };
     
                         return VirtualMachine;
@@ -13559,118 +14351,135 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.zone = reader.string();
-                                    break;
-                                case 2:
-                                    message.machineType = reader.string();
-                                    break;
-                                case 3:
-                                    if (!(message.containerImages && message.containerImages.length))
-                                        message.containerImages = [];
-                                    message.containerImages.push($root.google.cloud.notebooks.v1.ContainerImage.decode(reader, reader.uint32()));
-                                    break;
-                                case 4:
-                                    message.dataDisk = $root.google.cloud.notebooks.v1.LocalDisk.decode(reader, reader.uint32());
-                                    break;
-                                case 5:
-                                    message.encryptionConfig = $root.google.cloud.notebooks.v1.EncryptionConfig.decode(reader, reader.uint32());
-                                    break;
-                                case 6:
-                                    message.shieldedInstanceConfig = $root.google.cloud.notebooks.v1.RuntimeShieldedInstanceConfig.decode(reader, reader.uint32());
-                                    break;
-                                case 7:
-                                    message.acceleratorConfig = $root.google.cloud.notebooks.v1.RuntimeAcceleratorConfig.decode(reader, reader.uint32());
-                                    break;
-                                case 8:
-                                    message.network = reader.string();
-                                    break;
-                                case 9:
-                                    message.subnet = reader.string();
-                                    break;
-                                case 10:
-                                    message.internalIpOnly = reader.bool();
-                                    break;
-                                case 13:
-                                    if (!(message.tags && message.tags.length))
-                                        message.tags = [];
-                                    message.tags.push(reader.string());
-                                    break;
-                                case 14:
-                                    if (message.guestAttributes === $util.emptyObject)
-                                        message.guestAttributes = {};
-                                    var end2 = reader.uint32() + reader.pos;
-                                    key = "";
-                                    value = "";
-                                    while (reader.pos < end2) {
-                                        var tag2 = reader.uint32();
-                                        switch (tag2 >>> 3) {
-                                        case 1:
-                                            key = reader.string();
-                                            break;
-                                        case 2:
-                                            value = reader.string();
-                                            break;
-                                        default:
-                                            reader.skipType(tag2 & 7);
-                                            break;
-                                        }
+                                case 1: {
+                                        message.zone = reader.string();
+                                        break;
                                     }
-                                    message.guestAttributes[key] = value;
-                                    break;
-                                case 15:
-                                    if (message.metadata === $util.emptyObject)
-                                        message.metadata = {};
-                                    var end2 = reader.uint32() + reader.pos;
-                                    key = "";
-                                    value = "";
-                                    while (reader.pos < end2) {
-                                        var tag2 = reader.uint32();
-                                        switch (tag2 >>> 3) {
-                                        case 1:
-                                            key = reader.string();
-                                            break;
-                                        case 2:
-                                            value = reader.string();
-                                            break;
-                                        default:
-                                            reader.skipType(tag2 & 7);
-                                            break;
-                                        }
+                                case 2: {
+                                        message.machineType = reader.string();
+                                        break;
                                     }
-                                    message.metadata[key] = value;
-                                    break;
-                                case 16:
-                                    if (message.labels === $util.emptyObject)
-                                        message.labels = {};
-                                    var end2 = reader.uint32() + reader.pos;
-                                    key = "";
-                                    value = "";
-                                    while (reader.pos < end2) {
-                                        var tag2 = reader.uint32();
-                                        switch (tag2 >>> 3) {
-                                        case 1:
-                                            key = reader.string();
-                                            break;
-                                        case 2:
-                                            value = reader.string();
-                                            break;
-                                        default:
-                                            reader.skipType(tag2 & 7);
-                                            break;
-                                        }
+                                case 3: {
+                                        if (!(message.containerImages && message.containerImages.length))
+                                            message.containerImages = [];
+                                        message.containerImages.push($root.google.cloud.notebooks.v1.ContainerImage.decode(reader, reader.uint32()));
+                                        break;
                                     }
-                                    message.labels[key] = value;
-                                    break;
-                                case 17:
-                                    message.nicType = reader.int32();
-                                    break;
-                                case 18:
-                                    message.reservedIpRange = reader.string();
-                                    break;
-                                case 19:
-                                    message.bootImage = $root.google.cloud.notebooks.v1.VirtualMachineConfig.BootImage.decode(reader, reader.uint32());
-                                    break;
+                                case 4: {
+                                        message.dataDisk = $root.google.cloud.notebooks.v1.LocalDisk.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.encryptionConfig = $root.google.cloud.notebooks.v1.EncryptionConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.shieldedInstanceConfig = $root.google.cloud.notebooks.v1.RuntimeShieldedInstanceConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.acceleratorConfig = $root.google.cloud.notebooks.v1.RuntimeAcceleratorConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.network = reader.string();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.subnet = reader.string();
+                                        break;
+                                    }
+                                case 10: {
+                                        message.internalIpOnly = reader.bool();
+                                        break;
+                                    }
+                                case 13: {
+                                        if (!(message.tags && message.tags.length))
+                                            message.tags = [];
+                                        message.tags.push(reader.string());
+                                        break;
+                                    }
+                                case 14: {
+                                        if (message.guestAttributes === $util.emptyObject)
+                                            message.guestAttributes = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.guestAttributes[key] = value;
+                                        break;
+                                    }
+                                case 15: {
+                                        if (message.metadata === $util.emptyObject)
+                                            message.metadata = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.metadata[key] = value;
+                                        break;
+                                    }
+                                case 16: {
+                                        if (message.labels === $util.emptyObject)
+                                            message.labels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.labels[key] = value;
+                                        break;
+                                    }
+                                case 17: {
+                                        message.nicType = reader.int32();
+                                        break;
+                                    }
+                                case 18: {
+                                        message.reservedIpRange = reader.string();
+                                        break;
+                                    }
+                                case 19: {
+                                        message.bootImage = $root.google.cloud.notebooks.v1.VirtualMachineConfig.BootImage.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -14006,6 +14815,21 @@
                         };
     
                         /**
+                         * Gets the default type url for VirtualMachineConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.VirtualMachineConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        VirtualMachineConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.VirtualMachineConfig";
+                        };
+    
+                        /**
                          * NicType enum.
                          * @name google.cloud.notebooks.v1.VirtualMachineConfig.NicType
                          * @enum {number}
@@ -14176,6 +15000,21 @@
                              */
                             BootImage.prototype.toJSON = function toJSON() {
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for BootImage
+                             * @function getTypeUrl
+                             * @memberof google.cloud.notebooks.v1.VirtualMachineConfig.BootImage
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            BootImage.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.notebooks.v1.VirtualMachineConfig.BootImage";
                             };
     
                             return BootImage;
@@ -14377,38 +15216,48 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
-                                case 2:
-                                    message.displayName = reader.string();
-                                    break;
-                                case 3:
-                                    message.description = reader.string();
-                                    break;
-                                case 4:
-                                    message.state = reader.int32();
-                                    break;
-                                case 5:
-                                    message.cronSchedule = reader.string();
-                                    break;
-                                case 6:
-                                    message.timeZone = reader.string();
-                                    break;
-                                case 7:
-                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 8:
-                                    message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 9:
-                                    message.executionTemplate = $root.google.cloud.notebooks.v1.ExecutionTemplate.decode(reader, reader.uint32());
-                                    break;
-                                case 10:
-                                    if (!(message.recentExecutions && message.recentExecutions.length))
-                                        message.recentExecutions = [];
-                                    message.recentExecutions.push($root.google.cloud.notebooks.v1.Execution.decode(reader, reader.uint32()));
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.displayName = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.cronSchedule = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.timeZone = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 9: {
+                                        message.executionTemplate = $root.google.cloud.notebooks.v1.ExecutionTemplate.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 10: {
+                                        if (!(message.recentExecutions && message.recentExecutions.length))
+                                            message.recentExecutions = [];
+                                        message.recentExecutions.push($root.google.cloud.notebooks.v1.Execution.decode(reader, reader.uint32()));
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -14643,6 +15492,21 @@
                         };
     
                         /**
+                         * Gets the default type url for Schedule
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.Schedule
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Schedule.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.Schedule";
+                        };
+    
+                        /**
                          * State enum.
                          * @name google.cloud.notebooks.v1.Schedule.State
                          * @enum {number}
@@ -14702,7 +15566,7 @@
                         };
     
                         /**
-                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService#listInstances}.
+                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService|listInstances}.
                          * @memberof google.cloud.notebooks.v1.NotebookService
                          * @typedef ListInstancesCallback
                          * @type {function}
@@ -14735,7 +15599,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService#getInstance}.
+                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService|getInstance}.
                          * @memberof google.cloud.notebooks.v1.NotebookService
                          * @typedef GetInstanceCallback
                          * @type {function}
@@ -14768,7 +15632,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService#createInstance}.
+                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService|createInstance}.
                          * @memberof google.cloud.notebooks.v1.NotebookService
                          * @typedef CreateInstanceCallback
                          * @type {function}
@@ -14801,7 +15665,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService#registerInstance}.
+                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService|registerInstance}.
                          * @memberof google.cloud.notebooks.v1.NotebookService
                          * @typedef RegisterInstanceCallback
                          * @type {function}
@@ -14834,7 +15698,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService#setInstanceAccelerator}.
+                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService|setInstanceAccelerator}.
                          * @memberof google.cloud.notebooks.v1.NotebookService
                          * @typedef SetInstanceAcceleratorCallback
                          * @type {function}
@@ -14867,7 +15731,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService#setInstanceMachineType}.
+                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService|setInstanceMachineType}.
                          * @memberof google.cloud.notebooks.v1.NotebookService
                          * @typedef SetInstanceMachineTypeCallback
                          * @type {function}
@@ -14900,7 +15764,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService#updateInstanceConfig}.
+                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService|updateInstanceConfig}.
                          * @memberof google.cloud.notebooks.v1.NotebookService
                          * @typedef UpdateInstanceConfigCallback
                          * @type {function}
@@ -14933,7 +15797,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService#updateShieldedInstanceConfig}.
+                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService|updateShieldedInstanceConfig}.
                          * @memberof google.cloud.notebooks.v1.NotebookService
                          * @typedef UpdateShieldedInstanceConfigCallback
                          * @type {function}
@@ -14966,7 +15830,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService#setInstanceLabels}.
+                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService|setInstanceLabels}.
                          * @memberof google.cloud.notebooks.v1.NotebookService
                          * @typedef SetInstanceLabelsCallback
                          * @type {function}
@@ -14999,7 +15863,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService#updateInstanceMetadataItems}.
+                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService|updateInstanceMetadataItems}.
                          * @memberof google.cloud.notebooks.v1.NotebookService
                          * @typedef UpdateInstanceMetadataItemsCallback
                          * @type {function}
@@ -15032,7 +15896,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService#deleteInstance}.
+                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService|deleteInstance}.
                          * @memberof google.cloud.notebooks.v1.NotebookService
                          * @typedef DeleteInstanceCallback
                          * @type {function}
@@ -15065,7 +15929,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService#startInstance}.
+                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService|startInstance}.
                          * @memberof google.cloud.notebooks.v1.NotebookService
                          * @typedef StartInstanceCallback
                          * @type {function}
@@ -15098,7 +15962,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService#stopInstance}.
+                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService|stopInstance}.
                          * @memberof google.cloud.notebooks.v1.NotebookService
                          * @typedef StopInstanceCallback
                          * @type {function}
@@ -15131,7 +15995,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService#resetInstance}.
+                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService|resetInstance}.
                          * @memberof google.cloud.notebooks.v1.NotebookService
                          * @typedef ResetInstanceCallback
                          * @type {function}
@@ -15164,7 +16028,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService#reportInstanceInfo}.
+                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService|reportInstanceInfo}.
                          * @memberof google.cloud.notebooks.v1.NotebookService
                          * @typedef ReportInstanceInfoCallback
                          * @type {function}
@@ -15197,7 +16061,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService#isInstanceUpgradeable}.
+                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService|isInstanceUpgradeable}.
                          * @memberof google.cloud.notebooks.v1.NotebookService
                          * @typedef IsInstanceUpgradeableCallback
                          * @type {function}
@@ -15230,7 +16094,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService#getInstanceHealth}.
+                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService|getInstanceHealth}.
                          * @memberof google.cloud.notebooks.v1.NotebookService
                          * @typedef GetInstanceHealthCallback
                          * @type {function}
@@ -15263,7 +16127,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService#upgradeInstance}.
+                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService|upgradeInstance}.
                          * @memberof google.cloud.notebooks.v1.NotebookService
                          * @typedef UpgradeInstanceCallback
                          * @type {function}
@@ -15296,7 +16160,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService#rollbackInstance}.
+                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService|rollbackInstance}.
                          * @memberof google.cloud.notebooks.v1.NotebookService
                          * @typedef RollbackInstanceCallback
                          * @type {function}
@@ -15329,7 +16193,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService#upgradeInstanceInternal}.
+                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService|upgradeInstanceInternal}.
                          * @memberof google.cloud.notebooks.v1.NotebookService
                          * @typedef UpgradeInstanceInternalCallback
                          * @type {function}
@@ -15362,7 +16226,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService#listEnvironments}.
+                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService|listEnvironments}.
                          * @memberof google.cloud.notebooks.v1.NotebookService
                          * @typedef ListEnvironmentsCallback
                          * @type {function}
@@ -15395,7 +16259,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService#getEnvironment}.
+                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService|getEnvironment}.
                          * @memberof google.cloud.notebooks.v1.NotebookService
                          * @typedef GetEnvironmentCallback
                          * @type {function}
@@ -15428,7 +16292,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService#createEnvironment}.
+                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService|createEnvironment}.
                          * @memberof google.cloud.notebooks.v1.NotebookService
                          * @typedef CreateEnvironmentCallback
                          * @type {function}
@@ -15461,7 +16325,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService#deleteEnvironment}.
+                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService|deleteEnvironment}.
                          * @memberof google.cloud.notebooks.v1.NotebookService
                          * @typedef DeleteEnvironmentCallback
                          * @type {function}
@@ -15494,7 +16358,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService#listSchedules}.
+                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService|listSchedules}.
                          * @memberof google.cloud.notebooks.v1.NotebookService
                          * @typedef ListSchedulesCallback
                          * @type {function}
@@ -15527,7 +16391,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService#getSchedule}.
+                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService|getSchedule}.
                          * @memberof google.cloud.notebooks.v1.NotebookService
                          * @typedef GetScheduleCallback
                          * @type {function}
@@ -15560,7 +16424,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService#deleteSchedule}.
+                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService|deleteSchedule}.
                          * @memberof google.cloud.notebooks.v1.NotebookService
                          * @typedef DeleteScheduleCallback
                          * @type {function}
@@ -15593,7 +16457,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService#createSchedule}.
+                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService|createSchedule}.
                          * @memberof google.cloud.notebooks.v1.NotebookService
                          * @typedef CreateScheduleCallback
                          * @type {function}
@@ -15626,7 +16490,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService#triggerSchedule}.
+                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService|triggerSchedule}.
                          * @memberof google.cloud.notebooks.v1.NotebookService
                          * @typedef TriggerScheduleCallback
                          * @type {function}
@@ -15659,7 +16523,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService#listExecutions}.
+                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService|listExecutions}.
                          * @memberof google.cloud.notebooks.v1.NotebookService
                          * @typedef ListExecutionsCallback
                          * @type {function}
@@ -15692,7 +16556,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService#getExecution}.
+                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService|getExecution}.
                          * @memberof google.cloud.notebooks.v1.NotebookService
                          * @typedef GetExecutionCallback
                          * @type {function}
@@ -15725,7 +16589,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService#deleteExecution}.
+                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService|deleteExecution}.
                          * @memberof google.cloud.notebooks.v1.NotebookService
                          * @typedef DeleteExecutionCallback
                          * @type {function}
@@ -15758,7 +16622,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService#createExecution}.
+                         * Callback as used by {@link google.cloud.notebooks.v1.NotebookService|createExecution}.
                          * @memberof google.cloud.notebooks.v1.NotebookService
                          * @typedef CreateExecutionCallback
                          * @type {function}
@@ -15962,30 +16826,38 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 2:
-                                    message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 3:
-                                    message.target = reader.string();
-                                    break;
-                                case 4:
-                                    message.verb = reader.string();
-                                    break;
-                                case 5:
-                                    message.statusMessage = reader.string();
-                                    break;
-                                case 6:
-                                    message.requestedCancellation = reader.bool();
-                                    break;
-                                case 7:
-                                    message.apiVersion = reader.string();
-                                    break;
-                                case 8:
-                                    message.endpoint = reader.string();
-                                    break;
+                                case 1: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.target = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.verb = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.statusMessage = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.requestedCancellation = reader.bool();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.apiVersion = reader.string();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.endpoint = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -16142,6 +17014,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for OperationMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.OperationMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        OperationMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.OperationMetadata";
+                        };
+    
                         return OperationMetadata;
                     })();
     
@@ -16259,15 +17146,18 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.parent = reader.string();
-                                    break;
-                                case 2:
-                                    message.pageSize = reader.int32();
-                                    break;
-                                case 3:
-                                    message.pageToken = reader.string();
-                                    break;
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -16372,6 +17262,21 @@
                          */
                         ListInstancesRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListInstancesRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.ListInstancesRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListInstancesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.ListInstancesRequest";
                         };
     
                         return ListInstancesRequest;
@@ -16495,19 +17400,22 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    if (!(message.instances && message.instances.length))
-                                        message.instances = [];
-                                    message.instances.push($root.google.cloud.notebooks.v1.Instance.decode(reader, reader.uint32()));
-                                    break;
-                                case 2:
-                                    message.nextPageToken = reader.string();
-                                    break;
-                                case 3:
-                                    if (!(message.unreachable && message.unreachable.length))
-                                        message.unreachable = [];
-                                    message.unreachable.push(reader.string());
-                                    break;
+                                case 1: {
+                                        if (!(message.instances && message.instances.length))
+                                            message.instances = [];
+                                        message.instances.push($root.google.cloud.notebooks.v1.Instance.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -16644,6 +17552,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for ListInstancesResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.ListInstancesResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListInstancesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.ListInstancesResponse";
+                        };
+    
                         return ListInstancesResponse;
                     })();
     
@@ -16739,9 +17662,10 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -16829,6 +17753,21 @@
                          */
                         GetInstanceRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetInstanceRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.GetInstanceRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetInstanceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.GetInstanceRequest";
                         };
     
                         return GetInstanceRequest;
@@ -16948,15 +17887,18 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.parent = reader.string();
-                                    break;
-                                case 2:
-                                    message.instanceId = reader.string();
-                                    break;
-                                case 3:
-                                    message.instance = $root.google.cloud.notebooks.v1.Instance.decode(reader, reader.uint32());
-                                    break;
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.instanceId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.instance = $root.google.cloud.notebooks.v1.Instance.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -17068,6 +18010,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for CreateInstanceRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.CreateInstanceRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateInstanceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.CreateInstanceRequest";
+                        };
+    
                         return CreateInstanceRequest;
                     })();
     
@@ -17174,12 +18131,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.parent = reader.string();
-                                    break;
-                                case 2:
-                                    message.instanceId = reader.string();
-                                    break;
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.instanceId = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -17276,6 +18235,21 @@
                          */
                         RegisterInstanceRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RegisterInstanceRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.RegisterInstanceRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RegisterInstanceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.RegisterInstanceRequest";
                         };
     
                         return RegisterInstanceRequest;
@@ -17395,15 +18369,18 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
-                                case 2:
-                                    message.type = reader.int32();
-                                    break;
-                                case 3:
-                                    message.coreCount = reader.int64();
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.type = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.coreCount = reader.int64();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -17587,6 +18564,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for SetInstanceAcceleratorRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.SetInstanceAcceleratorRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SetInstanceAcceleratorRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.SetInstanceAcceleratorRequest";
+                        };
+    
                         return SetInstanceAcceleratorRequest;
                     })();
     
@@ -17693,12 +18685,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
-                                case 2:
-                                    message.machineType = reader.string();
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.machineType = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -17795,6 +18789,21 @@
                          */
                         SetInstanceMachineTypeRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SetInstanceMachineTypeRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.SetInstanceMachineTypeRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SetInstanceMachineTypeRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.SetInstanceMachineTypeRequest";
                         };
     
                         return SetInstanceMachineTypeRequest;
@@ -17903,12 +18912,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
-                                case 2:
-                                    message.config = $root.google.cloud.notebooks.v1.InstanceConfig.decode(reader, reader.uint32());
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.config = $root.google.cloud.notebooks.v1.InstanceConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -18010,6 +19021,21 @@
                          */
                         UpdateInstanceConfigRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateInstanceConfigRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.UpdateInstanceConfigRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateInstanceConfigRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.UpdateInstanceConfigRequest";
                         };
     
                         return UpdateInstanceConfigRequest;
@@ -18120,31 +19146,33 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
-                                case 2:
-                                    if (message.labels === $util.emptyObject)
-                                        message.labels = {};
-                                    var end2 = reader.uint32() + reader.pos;
-                                    key = "";
-                                    value = "";
-                                    while (reader.pos < end2) {
-                                        var tag2 = reader.uint32();
-                                        switch (tag2 >>> 3) {
-                                        case 1:
-                                            key = reader.string();
-                                            break;
-                                        case 2:
-                                            value = reader.string();
-                                            break;
-                                        default:
-                                            reader.skipType(tag2 & 7);
-                                            break;
-                                        }
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
                                     }
-                                    message.labels[key] = value;
-                                    break;
+                                case 2: {
+                                        if (message.labels === $util.emptyObject)
+                                            message.labels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.labels[key] = value;
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -18257,6 +19285,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for SetInstanceLabelsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.SetInstanceLabelsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SetInstanceLabelsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.SetInstanceLabelsRequest";
+                        };
+    
                         return SetInstanceLabelsRequest;
                     })();
     
@@ -18365,31 +19408,33 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
-                                case 2:
-                                    if (message.items === $util.emptyObject)
-                                        message.items = {};
-                                    var end2 = reader.uint32() + reader.pos;
-                                    key = "";
-                                    value = "";
-                                    while (reader.pos < end2) {
-                                        var tag2 = reader.uint32();
-                                        switch (tag2 >>> 3) {
-                                        case 1:
-                                            key = reader.string();
-                                            break;
-                                        case 2:
-                                            value = reader.string();
-                                            break;
-                                        default:
-                                            reader.skipType(tag2 & 7);
-                                            break;
-                                        }
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
                                     }
-                                    message.items[key] = value;
-                                    break;
+                                case 2: {
+                                        if (message.items === $util.emptyObject)
+                                            message.items = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.items[key] = value;
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -18502,6 +19547,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for UpdateInstanceMetadataItemsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.UpdateInstanceMetadataItemsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateInstanceMetadataItemsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.UpdateInstanceMetadataItemsRequest";
+                        };
+    
                         return UpdateInstanceMetadataItemsRequest;
                     })();
     
@@ -18599,28 +19659,29 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    if (message.items === $util.emptyObject)
-                                        message.items = {};
-                                    var end2 = reader.uint32() + reader.pos;
-                                    key = "";
-                                    value = "";
-                                    while (reader.pos < end2) {
-                                        var tag2 = reader.uint32();
-                                        switch (tag2 >>> 3) {
-                                        case 1:
-                                            key = reader.string();
-                                            break;
-                                        case 2:
-                                            value = reader.string();
-                                            break;
-                                        default:
-                                            reader.skipType(tag2 & 7);
-                                            break;
+                                case 1: {
+                                        if (message.items === $util.emptyObject)
+                                            message.items = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
                                         }
+                                        message.items[key] = value;
+                                        break;
                                     }
-                                    message.items[key] = value;
-                                    break;
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -18722,6 +19783,21 @@
                          */
                         UpdateInstanceMetadataItemsResponse.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateInstanceMetadataItemsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.UpdateInstanceMetadataItemsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateInstanceMetadataItemsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.UpdateInstanceMetadataItemsResponse";
                         };
     
                         return UpdateInstanceMetadataItemsResponse;
@@ -18830,12 +19906,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
-                                case 2:
-                                    message.shieldedInstanceConfig = $root.google.cloud.notebooks.v1.Instance.ShieldedInstanceConfig.decode(reader, reader.uint32());
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.shieldedInstanceConfig = $root.google.cloud.notebooks.v1.Instance.ShieldedInstanceConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -18939,6 +20017,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for UpdateShieldedInstanceConfigRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.UpdateShieldedInstanceConfigRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateShieldedInstanceConfigRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.UpdateShieldedInstanceConfigRequest";
+                        };
+    
                         return UpdateShieldedInstanceConfigRequest;
                     })();
     
@@ -19034,9 +20127,10 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -19124,6 +20218,21 @@
                          */
                         DeleteInstanceRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteInstanceRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.DeleteInstanceRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteInstanceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.DeleteInstanceRequest";
                         };
     
                         return DeleteInstanceRequest;
@@ -19221,9 +20330,10 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -19311,6 +20421,21 @@
                          */
                         StartInstanceRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for StartInstanceRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.StartInstanceRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        StartInstanceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.StartInstanceRequest";
                         };
     
                         return StartInstanceRequest;
@@ -19408,9 +20533,10 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -19498,6 +20624,21 @@
                          */
                         StopInstanceRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for StopInstanceRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.StopInstanceRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        StopInstanceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.StopInstanceRequest";
                         };
     
                         return StopInstanceRequest;
@@ -19595,9 +20736,10 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -19685,6 +20827,21 @@
                          */
                         ResetInstanceRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ResetInstanceRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.ResetInstanceRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ResetInstanceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.ResetInstanceRequest";
                         };
     
                         return ResetInstanceRequest;
@@ -19806,34 +20963,37 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
-                                case 2:
-                                    message.vmId = reader.string();
-                                    break;
-                                case 3:
-                                    if (message.metadata === $util.emptyObject)
-                                        message.metadata = {};
-                                    var end2 = reader.uint32() + reader.pos;
-                                    key = "";
-                                    value = "";
-                                    while (reader.pos < end2) {
-                                        var tag2 = reader.uint32();
-                                        switch (tag2 >>> 3) {
-                                        case 1:
-                                            key = reader.string();
-                                            break;
-                                        case 2:
-                                            value = reader.string();
-                                            break;
-                                        default:
-                                            reader.skipType(tag2 & 7);
-                                            break;
-                                        }
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
                                     }
-                                    message.metadata[key] = value;
-                                    break;
+                                case 2: {
+                                        message.vmId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (message.metadata === $util.emptyObject)
+                                            message.metadata = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.metadata[key] = value;
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -19955,6 +21115,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for ReportInstanceInfoRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.ReportInstanceInfoRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ReportInstanceInfoRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.ReportInstanceInfoRequest";
+                        };
+    
                         return ReportInstanceInfoRequest;
                     })();
     
@@ -20061,12 +21236,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.notebookInstance = reader.string();
-                                    break;
-                                case 2:
-                                    message.type = reader.int32();
-                                    break;
+                                case 1: {
+                                        message.notebookInstance = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.type = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -20191,6 +21368,21 @@
                          */
                         IsInstanceUpgradeableRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for IsInstanceUpgradeableRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.IsInstanceUpgradeableRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        IsInstanceUpgradeableRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.IsInstanceUpgradeableRequest";
                         };
     
                         return IsInstanceUpgradeableRequest;
@@ -20321,18 +21513,22 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.upgradeable = reader.bool();
-                                    break;
-                                case 2:
-                                    message.upgradeVersion = reader.string();
-                                    break;
-                                case 3:
-                                    message.upgradeInfo = reader.string();
-                                    break;
-                                case 4:
-                                    message.upgradeImage = reader.string();
-                                    break;
+                                case 1: {
+                                        message.upgradeable = reader.bool();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.upgradeVersion = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.upgradeInfo = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.upgradeImage = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -20447,6 +21643,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for IsInstanceUpgradeableResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.IsInstanceUpgradeableResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        IsInstanceUpgradeableResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.IsInstanceUpgradeableResponse";
+                        };
+    
                         return IsInstanceUpgradeableResponse;
                     })();
     
@@ -20542,9 +21753,10 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -20632,6 +21844,21 @@
                          */
                         GetInstanceHealthRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetInstanceHealthRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.GetInstanceHealthRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetInstanceHealthRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.GetInstanceHealthRequest";
                         };
     
                         return GetInstanceHealthRequest;
@@ -20742,31 +21969,33 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.healthState = reader.int32();
-                                    break;
-                                case 2:
-                                    if (message.healthInfo === $util.emptyObject)
-                                        message.healthInfo = {};
-                                    var end2 = reader.uint32() + reader.pos;
-                                    key = "";
-                                    value = "";
-                                    while (reader.pos < end2) {
-                                        var tag2 = reader.uint32();
-                                        switch (tag2 >>> 3) {
-                                        case 1:
-                                            key = reader.string();
-                                            break;
-                                        case 2:
-                                            value = reader.string();
-                                            break;
-                                        default:
-                                            reader.skipType(tag2 & 7);
-                                            break;
-                                        }
+                                case 1: {
+                                        message.healthState = reader.int32();
+                                        break;
                                     }
-                                    message.healthInfo[key] = value;
-                                    break;
+                                case 2: {
+                                        if (message.healthInfo === $util.emptyObject)
+                                            message.healthInfo = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.healthInfo[key] = value;
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -20908,6 +22137,21 @@
                         };
     
                         /**
+                         * Gets the default type url for GetInstanceHealthResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.GetInstanceHealthResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetInstanceHealthResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.GetInstanceHealthResponse";
+                        };
+    
+                        /**
                          * HealthState enum.
                          * @name google.cloud.notebooks.v1.GetInstanceHealthResponse.HealthState
                          * @enum {number}
@@ -21033,12 +22277,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
-                                case 2:
-                                    message.type = reader.int32();
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.type = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -21165,6 +22411,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for UpgradeInstanceRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.UpgradeInstanceRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpgradeInstanceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.UpgradeInstanceRequest";
+                        };
+    
                         return UpgradeInstanceRequest;
                     })();
     
@@ -21271,12 +22532,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
-                                case 2:
-                                    message.targetSnapshot = reader.string();
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.targetSnapshot = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -21373,6 +22636,21 @@
                          */
                         RollbackInstanceRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RollbackInstanceRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.RollbackInstanceRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RollbackInstanceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.RollbackInstanceRequest";
                         };
     
                         return RollbackInstanceRequest;
@@ -21492,15 +22770,18 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
-                                case 2:
-                                    message.vmId = reader.string();
-                                    break;
-                                case 3:
-                                    message.type = reader.int32();
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.vmId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.type = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -21635,6 +22916,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for UpgradeInstanceInternalRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.UpgradeInstanceInternalRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpgradeInstanceInternalRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.UpgradeInstanceInternalRequest";
+                        };
+    
                         return UpgradeInstanceInternalRequest;
                     })();
     
@@ -21752,15 +23048,18 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.parent = reader.string();
-                                    break;
-                                case 2:
-                                    message.pageSize = reader.int32();
-                                    break;
-                                case 3:
-                                    message.pageToken = reader.string();
-                                    break;
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -21865,6 +23164,21 @@
                          */
                         ListEnvironmentsRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListEnvironmentsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.ListEnvironmentsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListEnvironmentsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.ListEnvironmentsRequest";
                         };
     
                         return ListEnvironmentsRequest;
@@ -21988,19 +23302,22 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    if (!(message.environments && message.environments.length))
-                                        message.environments = [];
-                                    message.environments.push($root.google.cloud.notebooks.v1.Environment.decode(reader, reader.uint32()));
-                                    break;
-                                case 2:
-                                    message.nextPageToken = reader.string();
-                                    break;
-                                case 3:
-                                    if (!(message.unreachable && message.unreachable.length))
-                                        message.unreachable = [];
-                                    message.unreachable.push(reader.string());
-                                    break;
+                                case 1: {
+                                        if (!(message.environments && message.environments.length))
+                                            message.environments = [];
+                                        message.environments.push($root.google.cloud.notebooks.v1.Environment.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -22137,6 +23454,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for ListEnvironmentsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.ListEnvironmentsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListEnvironmentsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.ListEnvironmentsResponse";
+                        };
+    
                         return ListEnvironmentsResponse;
                     })();
     
@@ -22232,9 +23564,10 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -22322,6 +23655,21 @@
                          */
                         GetEnvironmentRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetEnvironmentRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.GetEnvironmentRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetEnvironmentRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.GetEnvironmentRequest";
                         };
     
                         return GetEnvironmentRequest;
@@ -22441,15 +23789,18 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.parent = reader.string();
-                                    break;
-                                case 2:
-                                    message.environmentId = reader.string();
-                                    break;
-                                case 3:
-                                    message.environment = $root.google.cloud.notebooks.v1.Environment.decode(reader, reader.uint32());
-                                    break;
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.environmentId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.environment = $root.google.cloud.notebooks.v1.Environment.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -22561,6 +23912,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for CreateEnvironmentRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.CreateEnvironmentRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateEnvironmentRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.CreateEnvironmentRequest";
+                        };
+    
                         return CreateEnvironmentRequest;
                     })();
     
@@ -22656,9 +24022,10 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -22746,6 +24113,21 @@
                          */
                         DeleteEnvironmentRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteEnvironmentRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.DeleteEnvironmentRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteEnvironmentRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.DeleteEnvironmentRequest";
                         };
     
                         return DeleteEnvironmentRequest;
@@ -22887,21 +24269,26 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.parent = reader.string();
-                                    break;
-                                case 2:
-                                    message.pageSize = reader.int32();
-                                    break;
-                                case 3:
-                                    message.pageToken = reader.string();
-                                    break;
-                                case 4:
-                                    message.filter = reader.string();
-                                    break;
-                                case 5:
-                                    message.orderBy = reader.string();
-                                    break;
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -23022,6 +24409,21 @@
                          */
                         ListSchedulesRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListSchedulesRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.ListSchedulesRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListSchedulesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.ListSchedulesRequest";
                         };
     
                         return ListSchedulesRequest;
@@ -23145,19 +24547,22 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    if (!(message.schedules && message.schedules.length))
-                                        message.schedules = [];
-                                    message.schedules.push($root.google.cloud.notebooks.v1.Schedule.decode(reader, reader.uint32()));
-                                    break;
-                                case 2:
-                                    message.nextPageToken = reader.string();
-                                    break;
-                                case 3:
-                                    if (!(message.unreachable && message.unreachable.length))
-                                        message.unreachable = [];
-                                    message.unreachable.push(reader.string());
-                                    break;
+                                case 1: {
+                                        if (!(message.schedules && message.schedules.length))
+                                            message.schedules = [];
+                                        message.schedules.push($root.google.cloud.notebooks.v1.Schedule.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -23294,6 +24699,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for ListSchedulesResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.ListSchedulesResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListSchedulesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.ListSchedulesResponse";
+                        };
+    
                         return ListSchedulesResponse;
                     })();
     
@@ -23389,9 +24809,10 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -23479,6 +24900,21 @@
                          */
                         GetScheduleRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetScheduleRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.GetScheduleRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetScheduleRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.GetScheduleRequest";
                         };
     
                         return GetScheduleRequest;
@@ -23576,9 +25012,10 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -23666,6 +25103,21 @@
                          */
                         DeleteScheduleRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteScheduleRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.DeleteScheduleRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteScheduleRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.DeleteScheduleRequest";
                         };
     
                         return DeleteScheduleRequest;
@@ -23785,15 +25237,18 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.parent = reader.string();
-                                    break;
-                                case 2:
-                                    message.scheduleId = reader.string();
-                                    break;
-                                case 3:
-                                    message.schedule = $root.google.cloud.notebooks.v1.Schedule.decode(reader, reader.uint32());
-                                    break;
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.scheduleId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.schedule = $root.google.cloud.notebooks.v1.Schedule.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -23905,6 +25360,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for CreateScheduleRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.CreateScheduleRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateScheduleRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.CreateScheduleRequest";
+                        };
+    
                         return CreateScheduleRequest;
                     })();
     
@@ -24000,9 +25470,10 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -24090,6 +25561,21 @@
                          */
                         TriggerScheduleRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for TriggerScheduleRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.TriggerScheduleRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        TriggerScheduleRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.TriggerScheduleRequest";
                         };
     
                         return TriggerScheduleRequest;
@@ -24231,21 +25717,26 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.parent = reader.string();
-                                    break;
-                                case 2:
-                                    message.pageSize = reader.int32();
-                                    break;
-                                case 3:
-                                    message.pageToken = reader.string();
-                                    break;
-                                case 4:
-                                    message.filter = reader.string();
-                                    break;
-                                case 5:
-                                    message.orderBy = reader.string();
-                                    break;
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -24366,6 +25857,21 @@
                          */
                         ListExecutionsRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListExecutionsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.ListExecutionsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListExecutionsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.ListExecutionsRequest";
                         };
     
                         return ListExecutionsRequest;
@@ -24489,19 +25995,22 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    if (!(message.executions && message.executions.length))
-                                        message.executions = [];
-                                    message.executions.push($root.google.cloud.notebooks.v1.Execution.decode(reader, reader.uint32()));
-                                    break;
-                                case 2:
-                                    message.nextPageToken = reader.string();
-                                    break;
-                                case 3:
-                                    if (!(message.unreachable && message.unreachable.length))
-                                        message.unreachable = [];
-                                    message.unreachable.push(reader.string());
-                                    break;
+                                case 1: {
+                                        if (!(message.executions && message.executions.length))
+                                            message.executions = [];
+                                        message.executions.push($root.google.cloud.notebooks.v1.Execution.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -24638,6 +26147,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for ListExecutionsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.ListExecutionsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListExecutionsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.ListExecutionsResponse";
+                        };
+    
                         return ListExecutionsResponse;
                     })();
     
@@ -24733,9 +26257,10 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -24823,6 +26348,21 @@
                          */
                         GetExecutionRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetExecutionRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.GetExecutionRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetExecutionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.GetExecutionRequest";
                         };
     
                         return GetExecutionRequest;
@@ -24920,9 +26460,10 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -25010,6 +26551,21 @@
                          */
                         DeleteExecutionRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteExecutionRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.DeleteExecutionRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteExecutionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.DeleteExecutionRequest";
                         };
     
                         return DeleteExecutionRequest;
@@ -25129,15 +26685,18 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.parent = reader.string();
-                                    break;
-                                case 2:
-                                    message.executionId = reader.string();
-                                    break;
-                                case 3:
-                                    message.execution = $root.google.cloud.notebooks.v1.Execution.decode(reader, reader.uint32());
-                                    break;
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.executionId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.execution = $root.google.cloud.notebooks.v1.Execution.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -25247,6 +26806,21 @@
                          */
                         CreateExecutionRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateExecutionRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1.CreateExecutionRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateExecutionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1.CreateExecutionRequest";
                         };
     
                         return CreateExecutionRequest;
@@ -25456,27 +27030,34 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
-                                case 2:
-                                    message.displayName = reader.string();
-                                    break;
-                                case 3:
-                                    message.description = reader.string();
-                                    break;
-                                case 6:
-                                    message.vmImage = $root.google.cloud.notebooks.v1beta1.VmImage.decode(reader, reader.uint32());
-                                    break;
-                                case 7:
-                                    message.containerImage = $root.google.cloud.notebooks.v1beta1.ContainerImage.decode(reader, reader.uint32());
-                                    break;
-                                case 8:
-                                    message.postStartupScript = reader.string();
-                                    break;
-                                case 9:
-                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.displayName = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.vmImage = $root.google.cloud.notebooks.v1beta1.VmImage.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.containerImage = $root.google.cloud.notebooks.v1beta1.ContainerImage.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.postStartupScript = reader.string();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -25643,6 +27224,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for Environment
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1beta1.Environment
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Environment.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1beta1.Environment";
+                        };
+    
                         return Environment;
                     })();
     
@@ -25774,15 +27370,18 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.project = reader.string();
-                                    break;
-                                case 2:
-                                    message.imageName = reader.string();
-                                    break;
-                                case 3:
-                                    message.imageFamily = reader.string();
-                                    break;
+                                case 1: {
+                                        message.project = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.imageName = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.imageFamily = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -25899,6 +27498,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for VmImage
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1beta1.VmImage
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        VmImage.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1beta1.VmImage";
+                        };
+    
                         return VmImage;
                     })();
     
@@ -26005,12 +27619,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.repository = reader.string();
-                                    break;
-                                case 2:
-                                    message.tag = reader.string();
-                                    break;
+                                case 1: {
+                                        message.repository = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.tag = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -26107,6 +27723,21 @@
                          */
                         ContainerImage.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ContainerImage
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1beta1.ContainerImage
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ContainerImage.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1beta1.ContainerImage";
                         };
     
                         return ContainerImage;
@@ -26510,127 +28141,154 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
-                                case 2:
-                                    message.vmImage = $root.google.cloud.notebooks.v1beta1.VmImage.decode(reader, reader.uint32());
-                                    break;
-                                case 3:
-                                    message.containerImage = $root.google.cloud.notebooks.v1beta1.ContainerImage.decode(reader, reader.uint32());
-                                    break;
-                                case 4:
-                                    message.postStartupScript = reader.string();
-                                    break;
-                                case 5:
-                                    message.proxyUri = reader.string();
-                                    break;
-                                case 6:
-                                    if (!(message.instanceOwners && message.instanceOwners.length))
-                                        message.instanceOwners = [];
-                                    message.instanceOwners.push(reader.string());
-                                    break;
-                                case 7:
-                                    message.serviceAccount = reader.string();
-                                    break;
-                                case 8:
-                                    message.machineType = reader.string();
-                                    break;
-                                case 9:
-                                    message.acceleratorConfig = $root.google.cloud.notebooks.v1beta1.Instance.AcceleratorConfig.decode(reader, reader.uint32());
-                                    break;
-                                case 10:
-                                    message.state = reader.int32();
-                                    break;
-                                case 11:
-                                    message.installGpuDriver = reader.bool();
-                                    break;
-                                case 12:
-                                    message.customGpuDriverPath = reader.string();
-                                    break;
-                                case 13:
-                                    message.bootDiskType = reader.int32();
-                                    break;
-                                case 14:
-                                    message.bootDiskSizeGb = reader.int64();
-                                    break;
-                                case 25:
-                                    message.dataDiskType = reader.int32();
-                                    break;
-                                case 26:
-                                    message.dataDiskSizeGb = reader.int64();
-                                    break;
-                                case 27:
-                                    message.noRemoveDataDisk = reader.bool();
-                                    break;
-                                case 15:
-                                    message.diskEncryption = reader.int32();
-                                    break;
-                                case 16:
-                                    message.kmsKey = reader.string();
-                                    break;
-                                case 17:
-                                    message.noPublicIp = reader.bool();
-                                    break;
-                                case 18:
-                                    message.noProxyAccess = reader.bool();
-                                    break;
-                                case 19:
-                                    message.network = reader.string();
-                                    break;
-                                case 20:
-                                    message.subnet = reader.string();
-                                    break;
-                                case 21:
-                                    if (message.labels === $util.emptyObject)
-                                        message.labels = {};
-                                    var end2 = reader.uint32() + reader.pos;
-                                    key = "";
-                                    value = "";
-                                    while (reader.pos < end2) {
-                                        var tag2 = reader.uint32();
-                                        switch (tag2 >>> 3) {
-                                        case 1:
-                                            key = reader.string();
-                                            break;
-                                        case 2:
-                                            value = reader.string();
-                                            break;
-                                        default:
-                                            reader.skipType(tag2 & 7);
-                                            break;
-                                        }
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
                                     }
-                                    message.labels[key] = value;
-                                    break;
-                                case 22:
-                                    if (message.metadata === $util.emptyObject)
-                                        message.metadata = {};
-                                    var end2 = reader.uint32() + reader.pos;
-                                    key = "";
-                                    value = "";
-                                    while (reader.pos < end2) {
-                                        var tag2 = reader.uint32();
-                                        switch (tag2 >>> 3) {
-                                        case 1:
-                                            key = reader.string();
-                                            break;
-                                        case 2:
-                                            value = reader.string();
-                                            break;
-                                        default:
-                                            reader.skipType(tag2 & 7);
-                                            break;
-                                        }
+                                case 2: {
+                                        message.vmImage = $root.google.cloud.notebooks.v1beta1.VmImage.decode(reader, reader.uint32());
+                                        break;
                                     }
-                                    message.metadata[key] = value;
-                                    break;
-                                case 23:
-                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 24:
-                                    message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
+                                case 3: {
+                                        message.containerImage = $root.google.cloud.notebooks.v1beta1.ContainerImage.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.postStartupScript = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.proxyUri = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        if (!(message.instanceOwners && message.instanceOwners.length))
+                                            message.instanceOwners = [];
+                                        message.instanceOwners.push(reader.string());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.serviceAccount = reader.string();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.machineType = reader.string();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.acceleratorConfig = $root.google.cloud.notebooks.v1beta1.Instance.AcceleratorConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 10: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 11: {
+                                        message.installGpuDriver = reader.bool();
+                                        break;
+                                    }
+                                case 12: {
+                                        message.customGpuDriverPath = reader.string();
+                                        break;
+                                    }
+                                case 13: {
+                                        message.bootDiskType = reader.int32();
+                                        break;
+                                    }
+                                case 14: {
+                                        message.bootDiskSizeGb = reader.int64();
+                                        break;
+                                    }
+                                case 25: {
+                                        message.dataDiskType = reader.int32();
+                                        break;
+                                    }
+                                case 26: {
+                                        message.dataDiskSizeGb = reader.int64();
+                                        break;
+                                    }
+                                case 27: {
+                                        message.noRemoveDataDisk = reader.bool();
+                                        break;
+                                    }
+                                case 15: {
+                                        message.diskEncryption = reader.int32();
+                                        break;
+                                    }
+                                case 16: {
+                                        message.kmsKey = reader.string();
+                                        break;
+                                    }
+                                case 17: {
+                                        message.noPublicIp = reader.bool();
+                                        break;
+                                    }
+                                case 18: {
+                                        message.noProxyAccess = reader.bool();
+                                        break;
+                                    }
+                                case 19: {
+                                        message.network = reader.string();
+                                        break;
+                                    }
+                                case 20: {
+                                        message.subnet = reader.string();
+                                        break;
+                                    }
+                                case 21: {
+                                        if (message.labels === $util.emptyObject)
+                                            message.labels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.labels[key] = value;
+                                        break;
+                                    }
+                                case 22: {
+                                        if (message.metadata === $util.emptyObject)
+                                            message.metadata = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.metadata[key] = value;
+                                        break;
+                                    }
+                                case 23: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 24: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -27154,6 +28812,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for Instance
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1beta1.Instance
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Instance.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1beta1.Instance";
+                        };
+    
                         Instance.AcceleratorConfig = (function() {
     
                             /**
@@ -27257,12 +28930,14 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.type = reader.int32();
-                                        break;
-                                    case 2:
-                                        message.coreCount = reader.int64();
-                                        break;
+                                    case 1: {
+                                            message.type = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.coreCount = reader.int64();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -27433,6 +29108,21 @@
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                             };
     
+                            /**
+                             * Gets the default type url for AcceleratorConfig
+                             * @function getTypeUrl
+                             * @memberof google.cloud.notebooks.v1beta1.Instance.AcceleratorConfig
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            AcceleratorConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.notebooks.v1beta1.Instance.AcceleratorConfig";
+                            };
+    
                             return AcceleratorConfig;
                         })();
     
@@ -27568,7 +29258,7 @@
                         };
     
                         /**
-                         * Callback as used by {@link google.cloud.notebooks.v1beta1.NotebookService#listInstances}.
+                         * Callback as used by {@link google.cloud.notebooks.v1beta1.NotebookService|listInstances}.
                          * @memberof google.cloud.notebooks.v1beta1.NotebookService
                          * @typedef ListInstancesCallback
                          * @type {function}
@@ -27601,7 +29291,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.notebooks.v1beta1.NotebookService#getInstance}.
+                         * Callback as used by {@link google.cloud.notebooks.v1beta1.NotebookService|getInstance}.
                          * @memberof google.cloud.notebooks.v1beta1.NotebookService
                          * @typedef GetInstanceCallback
                          * @type {function}
@@ -27634,7 +29324,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.notebooks.v1beta1.NotebookService#createInstance}.
+                         * Callback as used by {@link google.cloud.notebooks.v1beta1.NotebookService|createInstance}.
                          * @memberof google.cloud.notebooks.v1beta1.NotebookService
                          * @typedef CreateInstanceCallback
                          * @type {function}
@@ -27667,7 +29357,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.notebooks.v1beta1.NotebookService#registerInstance}.
+                         * Callback as used by {@link google.cloud.notebooks.v1beta1.NotebookService|registerInstance}.
                          * @memberof google.cloud.notebooks.v1beta1.NotebookService
                          * @typedef RegisterInstanceCallback
                          * @type {function}
@@ -27700,7 +29390,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.notebooks.v1beta1.NotebookService#setInstanceAccelerator}.
+                         * Callback as used by {@link google.cloud.notebooks.v1beta1.NotebookService|setInstanceAccelerator}.
                          * @memberof google.cloud.notebooks.v1beta1.NotebookService
                          * @typedef SetInstanceAcceleratorCallback
                          * @type {function}
@@ -27733,7 +29423,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.notebooks.v1beta1.NotebookService#setInstanceMachineType}.
+                         * Callback as used by {@link google.cloud.notebooks.v1beta1.NotebookService|setInstanceMachineType}.
                          * @memberof google.cloud.notebooks.v1beta1.NotebookService
                          * @typedef SetInstanceMachineTypeCallback
                          * @type {function}
@@ -27766,7 +29456,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.notebooks.v1beta1.NotebookService#setInstanceLabels}.
+                         * Callback as used by {@link google.cloud.notebooks.v1beta1.NotebookService|setInstanceLabels}.
                          * @memberof google.cloud.notebooks.v1beta1.NotebookService
                          * @typedef SetInstanceLabelsCallback
                          * @type {function}
@@ -27799,7 +29489,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.notebooks.v1beta1.NotebookService#deleteInstance}.
+                         * Callback as used by {@link google.cloud.notebooks.v1beta1.NotebookService|deleteInstance}.
                          * @memberof google.cloud.notebooks.v1beta1.NotebookService
                          * @typedef DeleteInstanceCallback
                          * @type {function}
@@ -27832,7 +29522,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.notebooks.v1beta1.NotebookService#startInstance}.
+                         * Callback as used by {@link google.cloud.notebooks.v1beta1.NotebookService|startInstance}.
                          * @memberof google.cloud.notebooks.v1beta1.NotebookService
                          * @typedef StartInstanceCallback
                          * @type {function}
@@ -27865,7 +29555,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.notebooks.v1beta1.NotebookService#stopInstance}.
+                         * Callback as used by {@link google.cloud.notebooks.v1beta1.NotebookService|stopInstance}.
                          * @memberof google.cloud.notebooks.v1beta1.NotebookService
                          * @typedef StopInstanceCallback
                          * @type {function}
@@ -27898,7 +29588,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.notebooks.v1beta1.NotebookService#resetInstance}.
+                         * Callback as used by {@link google.cloud.notebooks.v1beta1.NotebookService|resetInstance}.
                          * @memberof google.cloud.notebooks.v1beta1.NotebookService
                          * @typedef ResetInstanceCallback
                          * @type {function}
@@ -27931,7 +29621,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.notebooks.v1beta1.NotebookService#reportInstanceInfo}.
+                         * Callback as used by {@link google.cloud.notebooks.v1beta1.NotebookService|reportInstanceInfo}.
                          * @memberof google.cloud.notebooks.v1beta1.NotebookService
                          * @typedef ReportInstanceInfoCallback
                          * @type {function}
@@ -27964,7 +29654,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.notebooks.v1beta1.NotebookService#isInstanceUpgradeable}.
+                         * Callback as used by {@link google.cloud.notebooks.v1beta1.NotebookService|isInstanceUpgradeable}.
                          * @memberof google.cloud.notebooks.v1beta1.NotebookService
                          * @typedef IsInstanceUpgradeableCallback
                          * @type {function}
@@ -27997,7 +29687,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.notebooks.v1beta1.NotebookService#upgradeInstance}.
+                         * Callback as used by {@link google.cloud.notebooks.v1beta1.NotebookService|upgradeInstance}.
                          * @memberof google.cloud.notebooks.v1beta1.NotebookService
                          * @typedef UpgradeInstanceCallback
                          * @type {function}
@@ -28030,7 +29720,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.notebooks.v1beta1.NotebookService#upgradeInstanceInternal}.
+                         * Callback as used by {@link google.cloud.notebooks.v1beta1.NotebookService|upgradeInstanceInternal}.
                          * @memberof google.cloud.notebooks.v1beta1.NotebookService
                          * @typedef UpgradeInstanceInternalCallback
                          * @type {function}
@@ -28063,7 +29753,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.notebooks.v1beta1.NotebookService#listEnvironments}.
+                         * Callback as used by {@link google.cloud.notebooks.v1beta1.NotebookService|listEnvironments}.
                          * @memberof google.cloud.notebooks.v1beta1.NotebookService
                          * @typedef ListEnvironmentsCallback
                          * @type {function}
@@ -28096,7 +29786,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.notebooks.v1beta1.NotebookService#getEnvironment}.
+                         * Callback as used by {@link google.cloud.notebooks.v1beta1.NotebookService|getEnvironment}.
                          * @memberof google.cloud.notebooks.v1beta1.NotebookService
                          * @typedef GetEnvironmentCallback
                          * @type {function}
@@ -28129,7 +29819,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.notebooks.v1beta1.NotebookService#createEnvironment}.
+                         * Callback as used by {@link google.cloud.notebooks.v1beta1.NotebookService|createEnvironment}.
                          * @memberof google.cloud.notebooks.v1beta1.NotebookService
                          * @typedef CreateEnvironmentCallback
                          * @type {function}
@@ -28162,7 +29852,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.notebooks.v1beta1.NotebookService#deleteEnvironment}.
+                         * Callback as used by {@link google.cloud.notebooks.v1beta1.NotebookService|deleteEnvironment}.
                          * @memberof google.cloud.notebooks.v1beta1.NotebookService
                          * @typedef DeleteEnvironmentCallback
                          * @type {function}
@@ -28366,30 +30056,38 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 2:
-                                    message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 3:
-                                    message.target = reader.string();
-                                    break;
-                                case 4:
-                                    message.verb = reader.string();
-                                    break;
-                                case 5:
-                                    message.statusMessage = reader.string();
-                                    break;
-                                case 6:
-                                    message.requestedCancellation = reader.bool();
-                                    break;
-                                case 7:
-                                    message.apiVersion = reader.string();
-                                    break;
-                                case 8:
-                                    message.endpoint = reader.string();
-                                    break;
+                                case 1: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.target = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.verb = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.statusMessage = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.requestedCancellation = reader.bool();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.apiVersion = reader.string();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.endpoint = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -28546,6 +30244,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for OperationMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1beta1.OperationMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        OperationMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1beta1.OperationMetadata";
+                        };
+    
                         return OperationMetadata;
                     })();
     
@@ -28663,15 +30376,18 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.parent = reader.string();
-                                    break;
-                                case 2:
-                                    message.pageSize = reader.int32();
-                                    break;
-                                case 3:
-                                    message.pageToken = reader.string();
-                                    break;
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -28776,6 +30492,21 @@
                          */
                         ListInstancesRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListInstancesRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1beta1.ListInstancesRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListInstancesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1beta1.ListInstancesRequest";
                         };
     
                         return ListInstancesRequest;
@@ -28899,19 +30630,22 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    if (!(message.instances && message.instances.length))
-                                        message.instances = [];
-                                    message.instances.push($root.google.cloud.notebooks.v1beta1.Instance.decode(reader, reader.uint32()));
-                                    break;
-                                case 2:
-                                    message.nextPageToken = reader.string();
-                                    break;
-                                case 3:
-                                    if (!(message.unreachable && message.unreachable.length))
-                                        message.unreachable = [];
-                                    message.unreachable.push(reader.string());
-                                    break;
+                                case 1: {
+                                        if (!(message.instances && message.instances.length))
+                                            message.instances = [];
+                                        message.instances.push($root.google.cloud.notebooks.v1beta1.Instance.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -29048,6 +30782,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for ListInstancesResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1beta1.ListInstancesResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListInstancesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1beta1.ListInstancesResponse";
+                        };
+    
                         return ListInstancesResponse;
                     })();
     
@@ -29143,9 +30892,10 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -29233,6 +30983,21 @@
                          */
                         GetInstanceRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetInstanceRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1beta1.GetInstanceRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetInstanceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1beta1.GetInstanceRequest";
                         };
     
                         return GetInstanceRequest;
@@ -29352,15 +31117,18 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.parent = reader.string();
-                                    break;
-                                case 2:
-                                    message.instanceId = reader.string();
-                                    break;
-                                case 3:
-                                    message.instance = $root.google.cloud.notebooks.v1beta1.Instance.decode(reader, reader.uint32());
-                                    break;
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.instanceId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.instance = $root.google.cloud.notebooks.v1beta1.Instance.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -29472,6 +31240,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for CreateInstanceRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1beta1.CreateInstanceRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateInstanceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1beta1.CreateInstanceRequest";
+                        };
+    
                         return CreateInstanceRequest;
                     })();
     
@@ -29578,12 +31361,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.parent = reader.string();
-                                    break;
-                                case 2:
-                                    message.instanceId = reader.string();
-                                    break;
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.instanceId = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -29680,6 +31465,21 @@
                          */
                         RegisterInstanceRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RegisterInstanceRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1beta1.RegisterInstanceRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RegisterInstanceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1beta1.RegisterInstanceRequest";
                         };
     
                         return RegisterInstanceRequest;
@@ -29799,15 +31599,18 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
-                                case 2:
-                                    message.type = reader.int32();
-                                    break;
-                                case 3:
-                                    message.coreCount = reader.int64();
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.type = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.coreCount = reader.int64();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -29986,6 +31789,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for SetInstanceAcceleratorRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1beta1.SetInstanceAcceleratorRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SetInstanceAcceleratorRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1beta1.SetInstanceAcceleratorRequest";
+                        };
+    
                         return SetInstanceAcceleratorRequest;
                     })();
     
@@ -30092,12 +31910,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
-                                case 2:
-                                    message.machineType = reader.string();
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.machineType = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -30194,6 +32014,21 @@
                          */
                         SetInstanceMachineTypeRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SetInstanceMachineTypeRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1beta1.SetInstanceMachineTypeRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SetInstanceMachineTypeRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1beta1.SetInstanceMachineTypeRequest";
                         };
     
                         return SetInstanceMachineTypeRequest;
@@ -30304,31 +32139,33 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
-                                case 2:
-                                    if (message.labels === $util.emptyObject)
-                                        message.labels = {};
-                                    var end2 = reader.uint32() + reader.pos;
-                                    key = "";
-                                    value = "";
-                                    while (reader.pos < end2) {
-                                        var tag2 = reader.uint32();
-                                        switch (tag2 >>> 3) {
-                                        case 1:
-                                            key = reader.string();
-                                            break;
-                                        case 2:
-                                            value = reader.string();
-                                            break;
-                                        default:
-                                            reader.skipType(tag2 & 7);
-                                            break;
-                                        }
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
                                     }
-                                    message.labels[key] = value;
-                                    break;
+                                case 2: {
+                                        if (message.labels === $util.emptyObject)
+                                            message.labels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.labels[key] = value;
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -30441,6 +32278,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for SetInstanceLabelsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1beta1.SetInstanceLabelsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SetInstanceLabelsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1beta1.SetInstanceLabelsRequest";
+                        };
+    
                         return SetInstanceLabelsRequest;
                     })();
     
@@ -30536,9 +32388,10 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -30626,6 +32479,21 @@
                          */
                         DeleteInstanceRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteInstanceRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1beta1.DeleteInstanceRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteInstanceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1beta1.DeleteInstanceRequest";
                         };
     
                         return DeleteInstanceRequest;
@@ -30723,9 +32591,10 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -30813,6 +32682,21 @@
                          */
                         StartInstanceRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for StartInstanceRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1beta1.StartInstanceRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        StartInstanceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1beta1.StartInstanceRequest";
                         };
     
                         return StartInstanceRequest;
@@ -30910,9 +32794,10 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -31000,6 +32885,21 @@
                          */
                         StopInstanceRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for StopInstanceRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1beta1.StopInstanceRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        StopInstanceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1beta1.StopInstanceRequest";
                         };
     
                         return StopInstanceRequest;
@@ -31097,9 +32997,10 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -31187,6 +33088,21 @@
                          */
                         ResetInstanceRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ResetInstanceRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1beta1.ResetInstanceRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ResetInstanceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1beta1.ResetInstanceRequest";
                         };
     
                         return ResetInstanceRequest;
@@ -31308,34 +33224,37 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
-                                case 2:
-                                    message.vmId = reader.string();
-                                    break;
-                                case 3:
-                                    if (message.metadata === $util.emptyObject)
-                                        message.metadata = {};
-                                    var end2 = reader.uint32() + reader.pos;
-                                    key = "";
-                                    value = "";
-                                    while (reader.pos < end2) {
-                                        var tag2 = reader.uint32();
-                                        switch (tag2 >>> 3) {
-                                        case 1:
-                                            key = reader.string();
-                                            break;
-                                        case 2:
-                                            value = reader.string();
-                                            break;
-                                        default:
-                                            reader.skipType(tag2 & 7);
-                                            break;
-                                        }
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
                                     }
-                                    message.metadata[key] = value;
-                                    break;
+                                case 2: {
+                                        message.vmId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (message.metadata === $util.emptyObject)
+                                            message.metadata = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.metadata[key] = value;
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -31457,6 +33376,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for ReportInstanceInfoRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1beta1.ReportInstanceInfoRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ReportInstanceInfoRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1beta1.ReportInstanceInfoRequest";
+                        };
+    
                         return ReportInstanceInfoRequest;
                     })();
     
@@ -31552,9 +33486,10 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.notebookInstance = reader.string();
-                                    break;
+                                case 1: {
+                                        message.notebookInstance = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -31642,6 +33577,21 @@
                          */
                         IsInstanceUpgradeableRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for IsInstanceUpgradeableRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1beta1.IsInstanceUpgradeableRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        IsInstanceUpgradeableRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1beta1.IsInstanceUpgradeableRequest";
                         };
     
                         return IsInstanceUpgradeableRequest;
@@ -31761,15 +33711,18 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.upgradeable = reader.bool();
-                                    break;
-                                case 2:
-                                    message.upgradeVersion = reader.string();
-                                    break;
-                                case 3:
-                                    message.upgradeInfo = reader.string();
-                                    break;
+                                case 1: {
+                                        message.upgradeable = reader.bool();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.upgradeVersion = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.upgradeInfo = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -31876,6 +33829,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for IsInstanceUpgradeableResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1beta1.IsInstanceUpgradeableResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        IsInstanceUpgradeableResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1beta1.IsInstanceUpgradeableResponse";
+                        };
+    
                         return IsInstanceUpgradeableResponse;
                     })();
     
@@ -31971,9 +33939,10 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -32061,6 +34030,21 @@
                          */
                         UpgradeInstanceRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpgradeInstanceRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1beta1.UpgradeInstanceRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpgradeInstanceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1beta1.UpgradeInstanceRequest";
                         };
     
                         return UpgradeInstanceRequest;
@@ -32169,12 +34153,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
-                                case 2:
-                                    message.vmId = reader.string();
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.vmId = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -32271,6 +34257,21 @@
                          */
                         UpgradeInstanceInternalRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpgradeInstanceInternalRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1beta1.UpgradeInstanceInternalRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpgradeInstanceInternalRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1beta1.UpgradeInstanceInternalRequest";
                         };
     
                         return UpgradeInstanceInternalRequest;
@@ -32390,15 +34391,18 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.parent = reader.string();
-                                    break;
-                                case 2:
-                                    message.pageSize = reader.int32();
-                                    break;
-                                case 3:
-                                    message.pageToken = reader.string();
-                                    break;
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -32503,6 +34507,21 @@
                          */
                         ListEnvironmentsRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListEnvironmentsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1beta1.ListEnvironmentsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListEnvironmentsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1beta1.ListEnvironmentsRequest";
                         };
     
                         return ListEnvironmentsRequest;
@@ -32626,19 +34645,22 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    if (!(message.environments && message.environments.length))
-                                        message.environments = [];
-                                    message.environments.push($root.google.cloud.notebooks.v1beta1.Environment.decode(reader, reader.uint32()));
-                                    break;
-                                case 2:
-                                    message.nextPageToken = reader.string();
-                                    break;
-                                case 3:
-                                    if (!(message.unreachable && message.unreachable.length))
-                                        message.unreachable = [];
-                                    message.unreachable.push(reader.string());
-                                    break;
+                                case 1: {
+                                        if (!(message.environments && message.environments.length))
+                                            message.environments = [];
+                                        message.environments.push($root.google.cloud.notebooks.v1beta1.Environment.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -32775,6 +34797,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for ListEnvironmentsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1beta1.ListEnvironmentsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListEnvironmentsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1beta1.ListEnvironmentsResponse";
+                        };
+    
                         return ListEnvironmentsResponse;
                     })();
     
@@ -32870,9 +34907,10 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -32960,6 +34998,21 @@
                          */
                         GetEnvironmentRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetEnvironmentRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1beta1.GetEnvironmentRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetEnvironmentRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1beta1.GetEnvironmentRequest";
                         };
     
                         return GetEnvironmentRequest;
@@ -33079,15 +35132,18 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.parent = reader.string();
-                                    break;
-                                case 2:
-                                    message.environmentId = reader.string();
-                                    break;
-                                case 3:
-                                    message.environment = $root.google.cloud.notebooks.v1beta1.Environment.decode(reader, reader.uint32());
-                                    break;
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.environmentId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.environment = $root.google.cloud.notebooks.v1beta1.Environment.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -33199,6 +35255,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for CreateEnvironmentRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1beta1.CreateEnvironmentRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateEnvironmentRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1beta1.CreateEnvironmentRequest";
+                        };
+    
                         return CreateEnvironmentRequest;
                     })();
     
@@ -33294,9 +35365,10 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -33384,6 +35456,21 @@
                          */
                         DeleteEnvironmentRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteEnvironmentRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.notebooks.v1beta1.DeleteEnvironmentRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteEnvironmentRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.notebooks.v1beta1.DeleteEnvironmentRequest";
                         };
     
                         return DeleteEnvironmentRequest;
@@ -33598,36 +35685,43 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.type = reader.string();
-                            break;
-                        case 2:
-                            if (!(message.pattern && message.pattern.length))
-                                message.pattern = [];
-                            message.pattern.push(reader.string());
-                            break;
-                        case 3:
-                            message.nameField = reader.string();
-                            break;
-                        case 4:
-                            message.history = reader.int32();
-                            break;
-                        case 5:
-                            message.plural = reader.string();
-                            break;
-                        case 6:
-                            message.singular = reader.string();
-                            break;
-                        case 10:
-                            if (!(message.style && message.style.length))
-                                message.style = [];
-                            if ((tag & 7) === 2) {
-                                var end2 = reader.uint32() + reader.pos;
-                                while (reader.pos < end2)
+                        case 1: {
+                                message.type = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                if (!(message.pattern && message.pattern.length))
+                                    message.pattern = [];
+                                message.pattern.push(reader.string());
+                                break;
+                            }
+                        case 3: {
+                                message.nameField = reader.string();
+                                break;
+                            }
+                        case 4: {
+                                message.history = reader.int32();
+                                break;
+                            }
+                        case 5: {
+                                message.plural = reader.string();
+                                break;
+                            }
+                        case 6: {
+                                message.singular = reader.string();
+                                break;
+                            }
+                        case 10: {
+                                if (!(message.style && message.style.length))
+                                    message.style = [];
+                                if ((tag & 7) === 2) {
+                                    var end2 = reader.uint32() + reader.pos;
+                                    while (reader.pos < end2)
+                                        message.style.push(reader.int32());
+                                } else
                                     message.style.push(reader.int32());
-                            } else
-                                message.style.push(reader.int32());
-                            break;
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -33826,6 +35920,21 @@
                 };
     
                 /**
+                 * Gets the default type url for ResourceDescriptor
+                 * @function getTypeUrl
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ResourceDescriptor.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.ResourceDescriptor";
+                };
+    
+                /**
                  * History enum.
                  * @name google.api.ResourceDescriptor.History
                  * @enum {number}
@@ -33961,12 +36070,14 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.type = reader.string();
-                            break;
-                        case 2:
-                            message.childType = reader.string();
-                            break;
+                        case 1: {
+                                message.type = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.childType = reader.string();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -34063,6 +36174,21 @@
                  */
                 ResourceReference.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for ResourceReference
+                 * @function getTypeUrl
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ResourceReference.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.ResourceReference";
                 };
     
                 return ResourceReference;
@@ -34173,14 +36299,16 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            if (!(message.rules && message.rules.length))
-                                message.rules = [];
-                            message.rules.push($root.google.api.HttpRule.decode(reader, reader.uint32()));
-                            break;
-                        case 2:
-                            message.fullyDecodeReservedExpansion = reader.bool();
-                            break;
+                        case 1: {
+                                if (!(message.rules && message.rules.length))
+                                    message.rules = [];
+                                message.rules.push($root.google.api.HttpRule.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 2: {
+                                message.fullyDecodeReservedExpansion = reader.bool();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -34294,6 +36422,21 @@
                  */
                 Http.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Http
+                 * @function getTypeUrl
+                 * @memberof google.api.Http
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Http.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.Http";
                 };
     
                 return Http;
@@ -34506,38 +36649,48 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.selector = reader.string();
-                            break;
-                        case 2:
-                            message.get = reader.string();
-                            break;
-                        case 3:
-                            message.put = reader.string();
-                            break;
-                        case 4:
-                            message.post = reader.string();
-                            break;
-                        case 5:
-                            message["delete"] = reader.string();
-                            break;
-                        case 6:
-                            message.patch = reader.string();
-                            break;
-                        case 8:
-                            message.custom = $root.google.api.CustomHttpPattern.decode(reader, reader.uint32());
-                            break;
-                        case 7:
-                            message.body = reader.string();
-                            break;
-                        case 12:
-                            message.responseBody = reader.string();
-                            break;
-                        case 11:
-                            if (!(message.additionalBindings && message.additionalBindings.length))
-                                message.additionalBindings = [];
-                            message.additionalBindings.push($root.google.api.HttpRule.decode(reader, reader.uint32()));
-                            break;
+                        case 1: {
+                                message.selector = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.get = reader.string();
+                                break;
+                            }
+                        case 3: {
+                                message.put = reader.string();
+                                break;
+                            }
+                        case 4: {
+                                message.post = reader.string();
+                                break;
+                            }
+                        case 5: {
+                                message["delete"] = reader.string();
+                                break;
+                            }
+                        case 6: {
+                                message.patch = reader.string();
+                                break;
+                            }
+                        case 8: {
+                                message.custom = $root.google.api.CustomHttpPattern.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 7: {
+                                message.body = reader.string();
+                                break;
+                            }
+                        case 12: {
+                                message.responseBody = reader.string();
+                                break;
+                            }
+                        case 11: {
+                                if (!(message.additionalBindings && message.additionalBindings.length))
+                                    message.additionalBindings = [];
+                                message.additionalBindings.push($root.google.api.HttpRule.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -34759,6 +36912,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for HttpRule
+                 * @function getTypeUrl
+                 * @memberof google.api.HttpRule
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                HttpRule.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.HttpRule";
+                };
+    
                 return HttpRule;
             })();
     
@@ -34865,12 +37033,14 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.kind = reader.string();
-                            break;
-                        case 2:
-                            message.path = reader.string();
-                            break;
+                        case 1: {
+                                message.kind = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.path = reader.string();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -34967,6 +37137,21 @@
                  */
                 CustomHttpPattern.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for CustomHttpPattern
+                 * @function getTypeUrl
+                 * @memberof google.api.CustomHttpPattern
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                CustomHttpPattern.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.CustomHttpPattern";
                 };
     
                 return CustomHttpPattern;
@@ -35078,11 +37263,12 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            if (!(message.file && message.file.length))
-                                message.file = [];
-                            message.file.push($root.google.protobuf.FileDescriptorProto.decode(reader, reader.uint32()));
-                            break;
+                        case 1: {
+                                if (!(message.file && message.file.length))
+                                    message.file = [];
+                                message.file.push($root.google.protobuf.FileDescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -35189,6 +37375,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for FileDescriptorSet
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.FileDescriptorSet
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FileDescriptorSet.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.FileDescriptorSet";
+                };
+    
                 return FileDescriptorSet;
             })();
     
@@ -35210,6 +37411,7 @@
                  * @property {google.protobuf.IFileOptions|null} [options] FileDescriptorProto options
                  * @property {google.protobuf.ISourceCodeInfo|null} [sourceCodeInfo] FileDescriptorProto sourceCodeInfo
                  * @property {string|null} [syntax] FileDescriptorProto syntax
+                 * @property {string|null} [edition] FileDescriptorProto edition
                  */
     
                 /**
@@ -35331,6 +37533,14 @@
                 FileDescriptorProto.prototype.syntax = "";
     
                 /**
+                 * FileDescriptorProto edition.
+                 * @member {string} edition
+                 * @memberof google.protobuf.FileDescriptorProto
+                 * @instance
+                 */
+                FileDescriptorProto.prototype.edition = "";
+    
+                /**
                  * Creates a new FileDescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.FileDescriptorProto
@@ -35385,6 +37595,8 @@
                             writer.uint32(/* id 11, wireType 0 =*/88).int32(message.weakDependency[i]);
                     if (message.syntax != null && Object.hasOwnProperty.call(message, "syntax"))
                         writer.uint32(/* id 12, wireType 2 =*/98).string(message.syntax);
+                    if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
+                        writer.uint32(/* id 13, wireType 2 =*/106).string(message.edition);
                     return writer;
                 };
     
@@ -35419,66 +37631,82 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 2:
-                            message["package"] = reader.string();
-                            break;
-                        case 3:
-                            if (!(message.dependency && message.dependency.length))
-                                message.dependency = [];
-                            message.dependency.push(reader.string());
-                            break;
-                        case 10:
-                            if (!(message.publicDependency && message.publicDependency.length))
-                                message.publicDependency = [];
-                            if ((tag & 7) === 2) {
-                                var end2 = reader.uint32() + reader.pos;
-                                while (reader.pos < end2)
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message["package"] = reader.string();
+                                break;
+                            }
+                        case 3: {
+                                if (!(message.dependency && message.dependency.length))
+                                    message.dependency = [];
+                                message.dependency.push(reader.string());
+                                break;
+                            }
+                        case 10: {
+                                if (!(message.publicDependency && message.publicDependency.length))
+                                    message.publicDependency = [];
+                                if ((tag & 7) === 2) {
+                                    var end2 = reader.uint32() + reader.pos;
+                                    while (reader.pos < end2)
+                                        message.publicDependency.push(reader.int32());
+                                } else
                                     message.publicDependency.push(reader.int32());
-                            } else
-                                message.publicDependency.push(reader.int32());
-                            break;
-                        case 11:
-                            if (!(message.weakDependency && message.weakDependency.length))
-                                message.weakDependency = [];
-                            if ((tag & 7) === 2) {
-                                var end2 = reader.uint32() + reader.pos;
-                                while (reader.pos < end2)
+                                break;
+                            }
+                        case 11: {
+                                if (!(message.weakDependency && message.weakDependency.length))
+                                    message.weakDependency = [];
+                                if ((tag & 7) === 2) {
+                                    var end2 = reader.uint32() + reader.pos;
+                                    while (reader.pos < end2)
+                                        message.weakDependency.push(reader.int32());
+                                } else
                                     message.weakDependency.push(reader.int32());
-                            } else
-                                message.weakDependency.push(reader.int32());
-                            break;
-                        case 4:
-                            if (!(message.messageType && message.messageType.length))
-                                message.messageType = [];
-                            message.messageType.push($root.google.protobuf.DescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 5:
-                            if (!(message.enumType && message.enumType.length))
-                                message.enumType = [];
-                            message.enumType.push($root.google.protobuf.EnumDescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 6:
-                            if (!(message.service && message.service.length))
-                                message.service = [];
-                            message.service.push($root.google.protobuf.ServiceDescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 7:
-                            if (!(message.extension && message.extension.length))
-                                message.extension = [];
-                            message.extension.push($root.google.protobuf.FieldDescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 8:
-                            message.options = $root.google.protobuf.FileOptions.decode(reader, reader.uint32());
-                            break;
-                        case 9:
-                            message.sourceCodeInfo = $root.google.protobuf.SourceCodeInfo.decode(reader, reader.uint32());
-                            break;
-                        case 12:
-                            message.syntax = reader.string();
-                            break;
+                                break;
+                            }
+                        case 4: {
+                                if (!(message.messageType && message.messageType.length))
+                                    message.messageType = [];
+                                message.messageType.push($root.google.protobuf.DescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 5: {
+                                if (!(message.enumType && message.enumType.length))
+                                    message.enumType = [];
+                                message.enumType.push($root.google.protobuf.EnumDescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 6: {
+                                if (!(message.service && message.service.length))
+                                    message.service = [];
+                                message.service.push($root.google.protobuf.ServiceDescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 7: {
+                                if (!(message.extension && message.extension.length))
+                                    message.extension = [];
+                                message.extension.push($root.google.protobuf.FieldDescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 8: {
+                                message.options = $root.google.protobuf.FileOptions.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 9: {
+                                message.sourceCodeInfo = $root.google.protobuf.SourceCodeInfo.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 12: {
+                                message.syntax = reader.string();
+                                break;
+                            }
+                        case 13: {
+                                message.edition = reader.string();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -35590,6 +37818,9 @@
                     if (message.syntax != null && message.hasOwnProperty("syntax"))
                         if (!$util.isString(message.syntax))
                             return "syntax: string expected";
+                    if (message.edition != null && message.hasOwnProperty("edition"))
+                        if (!$util.isString(message.edition))
+                            return "edition: string expected";
                     return null;
                 };
     
@@ -35682,6 +37913,8 @@
                     }
                     if (object.syntax != null)
                         message.syntax = String(object.syntax);
+                    if (object.edition != null)
+                        message.edition = String(object.edition);
                     return message;
                 };
     
@@ -35713,6 +37946,7 @@
                         object.options = null;
                         object.sourceCodeInfo = null;
                         object.syntax = "";
+                        object.edition = "";
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -35759,6 +37993,8 @@
                     }
                     if (message.syntax != null && message.hasOwnProperty("syntax"))
                         object.syntax = message.syntax;
+                    if (message.edition != null && message.hasOwnProperty("edition"))
+                        object.edition = message.edition;
                     return object;
                 };
     
@@ -35771,6 +38007,21 @@
                  */
                 FileDescriptorProto.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for FileDescriptorProto
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.FileDescriptorProto
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FileDescriptorProto.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.FileDescriptorProto";
                 };
     
                 return FileDescriptorProto;
@@ -35983,52 +38234,62 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 2:
-                            if (!(message.field && message.field.length))
-                                message.field = [];
-                            message.field.push($root.google.protobuf.FieldDescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 6:
-                            if (!(message.extension && message.extension.length))
-                                message.extension = [];
-                            message.extension.push($root.google.protobuf.FieldDescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 3:
-                            if (!(message.nestedType && message.nestedType.length))
-                                message.nestedType = [];
-                            message.nestedType.push($root.google.protobuf.DescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 4:
-                            if (!(message.enumType && message.enumType.length))
-                                message.enumType = [];
-                            message.enumType.push($root.google.protobuf.EnumDescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 5:
-                            if (!(message.extensionRange && message.extensionRange.length))
-                                message.extensionRange = [];
-                            message.extensionRange.push($root.google.protobuf.DescriptorProto.ExtensionRange.decode(reader, reader.uint32()));
-                            break;
-                        case 8:
-                            if (!(message.oneofDecl && message.oneofDecl.length))
-                                message.oneofDecl = [];
-                            message.oneofDecl.push($root.google.protobuf.OneofDescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 7:
-                            message.options = $root.google.protobuf.MessageOptions.decode(reader, reader.uint32());
-                            break;
-                        case 9:
-                            if (!(message.reservedRange && message.reservedRange.length))
-                                message.reservedRange = [];
-                            message.reservedRange.push($root.google.protobuf.DescriptorProto.ReservedRange.decode(reader, reader.uint32()));
-                            break;
-                        case 10:
-                            if (!(message.reservedName && message.reservedName.length))
-                                message.reservedName = [];
-                            message.reservedName.push(reader.string());
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                if (!(message.field && message.field.length))
+                                    message.field = [];
+                                message.field.push($root.google.protobuf.FieldDescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 6: {
+                                if (!(message.extension && message.extension.length))
+                                    message.extension = [];
+                                message.extension.push($root.google.protobuf.FieldDescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 3: {
+                                if (!(message.nestedType && message.nestedType.length))
+                                    message.nestedType = [];
+                                message.nestedType.push($root.google.protobuf.DescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 4: {
+                                if (!(message.enumType && message.enumType.length))
+                                    message.enumType = [];
+                                message.enumType.push($root.google.protobuf.EnumDescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 5: {
+                                if (!(message.extensionRange && message.extensionRange.length))
+                                    message.extensionRange = [];
+                                message.extensionRange.push($root.google.protobuf.DescriptorProto.ExtensionRange.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 8: {
+                                if (!(message.oneofDecl && message.oneofDecl.length))
+                                    message.oneofDecl = [];
+                                message.oneofDecl.push($root.google.protobuf.OneofDescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 7: {
+                                message.options = $root.google.protobuf.MessageOptions.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 9: {
+                                if (!(message.reservedRange && message.reservedRange.length))
+                                    message.reservedRange = [];
+                                message.reservedRange.push($root.google.protobuf.DescriptorProto.ReservedRange.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 10: {
+                                if (!(message.reservedName && message.reservedName.length))
+                                    message.reservedName = [];
+                                message.reservedName.push(reader.string());
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -36329,6 +38590,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for DescriptorProto
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.DescriptorProto
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                DescriptorProto.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.DescriptorProto";
+                };
+    
                 DescriptorProto.ExtensionRange = (function() {
     
                     /**
@@ -36443,15 +38719,18 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.start = reader.int32();
-                                break;
-                            case 2:
-                                message.end = reader.int32();
-                                break;
-                            case 3:
-                                message.options = $root.google.protobuf.ExtensionRangeOptions.decode(reader, reader.uint32());
-                                break;
+                            case 1: {
+                                    message.start = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    message.end = reader.int32();
+                                    break;
+                                }
+                            case 3: {
+                                    message.options = $root.google.protobuf.ExtensionRangeOptions.decode(reader, reader.uint32());
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -36563,6 +38842,21 @@
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
+                    /**
+                     * Gets the default type url for ExtensionRange
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.DescriptorProto.ExtensionRange
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ExtensionRange.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.DescriptorProto.ExtensionRange";
+                    };
+    
                     return ExtensionRange;
                 })();
     
@@ -36669,12 +38963,14 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.start = reader.int32();
-                                break;
-                            case 2:
-                                message.end = reader.int32();
-                                break;
+                            case 1: {
+                                    message.start = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    message.end = reader.int32();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -36771,6 +39067,21 @@
                      */
                     ReservedRange.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ReservedRange
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.DescriptorProto.ReservedRange
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ReservedRange.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.DescriptorProto.ReservedRange";
                     };
     
                     return ReservedRange;
@@ -36873,11 +39184,12 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 999:
-                            if (!(message.uninterpretedOption && message.uninterpretedOption.length))
-                                message.uninterpretedOption = [];
-                            message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
-                            break;
+                        case 999: {
+                                if (!(message.uninterpretedOption && message.uninterpretedOption.length))
+                                    message.uninterpretedOption = [];
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -36982,6 +39294,21 @@
                  */
                 ExtensionRangeOptions.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for ExtensionRangeOptions
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.ExtensionRangeOptions
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ExtensionRangeOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.ExtensionRangeOptions";
                 };
     
                 return ExtensionRangeOptions;
@@ -37189,39 +39516,50 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 3:
-                            message.number = reader.int32();
-                            break;
-                        case 4:
-                            message.label = reader.int32();
-                            break;
-                        case 5:
-                            message.type = reader.int32();
-                            break;
-                        case 6:
-                            message.typeName = reader.string();
-                            break;
-                        case 2:
-                            message.extendee = reader.string();
-                            break;
-                        case 7:
-                            message.defaultValue = reader.string();
-                            break;
-                        case 9:
-                            message.oneofIndex = reader.int32();
-                            break;
-                        case 10:
-                            message.jsonName = reader.string();
-                            break;
-                        case 8:
-                            message.options = $root.google.protobuf.FieldOptions.decode(reader, reader.uint32());
-                            break;
-                        case 17:
-                            message.proto3Optional = reader.bool();
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 3: {
+                                message.number = reader.int32();
+                                break;
+                            }
+                        case 4: {
+                                message.label = reader.int32();
+                                break;
+                            }
+                        case 5: {
+                                message.type = reader.int32();
+                                break;
+                            }
+                        case 6: {
+                                message.typeName = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.extendee = reader.string();
+                                break;
+                            }
+                        case 7: {
+                                message.defaultValue = reader.string();
+                                break;
+                            }
+                        case 9: {
+                                message.oneofIndex = reader.int32();
+                                break;
+                            }
+                        case 10: {
+                                message.jsonName = reader.string();
+                                break;
+                            }
+                        case 8: {
+                                message.options = $root.google.protobuf.FieldOptions.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 17: {
+                                message.proto3Optional = reader.bool();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -37509,6 +39847,21 @@
                 };
     
                 /**
+                 * Gets the default type url for FieldDescriptorProto
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.FieldDescriptorProto
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FieldDescriptorProto.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.FieldDescriptorProto";
+                };
+    
+                /**
                  * Type enum.
                  * @name google.protobuf.FieldDescriptorProto.Type
                  * @enum {number}
@@ -37676,12 +40029,14 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 2:
-                            message.options = $root.google.protobuf.OneofOptions.decode(reader, reader.uint32());
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.options = $root.google.protobuf.OneofOptions.decode(reader, reader.uint32());
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -37783,6 +40138,21 @@
                  */
                 OneofDescriptorProto.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for OneofDescriptorProto
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.OneofDescriptorProto
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                OneofDescriptorProto.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.OneofDescriptorProto";
                 };
     
                 return OneofDescriptorProto;
@@ -37930,27 +40300,32 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 2:
-                            if (!(message.value && message.value.length))
-                                message.value = [];
-                            message.value.push($root.google.protobuf.EnumValueDescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 3:
-                            message.options = $root.google.protobuf.EnumOptions.decode(reader, reader.uint32());
-                            break;
-                        case 4:
-                            if (!(message.reservedRange && message.reservedRange.length))
-                                message.reservedRange = [];
-                            message.reservedRange.push($root.google.protobuf.EnumDescriptorProto.EnumReservedRange.decode(reader, reader.uint32()));
-                            break;
-                        case 5:
-                            if (!(message.reservedName && message.reservedName.length))
-                                message.reservedName = [];
-                            message.reservedName.push(reader.string());
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                if (!(message.value && message.value.length))
+                                    message.value = [];
+                                message.value.push($root.google.protobuf.EnumValueDescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 3: {
+                                message.options = $root.google.protobuf.EnumOptions.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 4: {
+                                if (!(message.reservedRange && message.reservedRange.length))
+                                    message.reservedRange = [];
+                                message.reservedRange.push($root.google.protobuf.EnumDescriptorProto.EnumReservedRange.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 5: {
+                                if (!(message.reservedName && message.reservedName.length))
+                                    message.reservedName = [];
+                                message.reservedName.push(reader.string());
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -38126,6 +40501,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for EnumDescriptorProto
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.EnumDescriptorProto
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                EnumDescriptorProto.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.EnumDescriptorProto";
+                };
+    
                 EnumDescriptorProto.EnumReservedRange = (function() {
     
                     /**
@@ -38229,12 +40619,14 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.start = reader.int32();
-                                break;
-                            case 2:
-                                message.end = reader.int32();
-                                break;
+                            case 1: {
+                                    message.start = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    message.end = reader.int32();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -38331,6 +40723,21 @@
                      */
                     EnumReservedRange.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for EnumReservedRange
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.EnumDescriptorProto.EnumReservedRange
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    EnumReservedRange.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.EnumDescriptorProto.EnumReservedRange";
                     };
     
                     return EnumReservedRange;
@@ -38453,15 +40860,18 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 2:
-                            message.number = reader.int32();
-                            break;
-                        case 3:
-                            message.options = $root.google.protobuf.EnumValueOptions.decode(reader, reader.uint32());
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.number = reader.int32();
+                                break;
+                            }
+                        case 3: {
+                                message.options = $root.google.protobuf.EnumValueOptions.decode(reader, reader.uint32());
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -38571,6 +40981,21 @@
                  */
                 EnumValueDescriptorProto.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for EnumValueDescriptorProto
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.EnumValueDescriptorProto
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                EnumValueDescriptorProto.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.EnumValueDescriptorProto";
                 };
     
                 return EnumValueDescriptorProto;
@@ -38692,17 +41117,20 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 2:
-                            if (!(message.method && message.method.length))
-                                message.method = [];
-                            message.method.push($root.google.protobuf.MethodDescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 3:
-                            message.options = $root.google.protobuf.ServiceOptions.decode(reader, reader.uint32());
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                if (!(message.method && message.method.length))
+                                    message.method = [];
+                                message.method.push($root.google.protobuf.MethodDescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 3: {
+                                message.options = $root.google.protobuf.ServiceOptions.decode(reader, reader.uint32());
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -38830,6 +41258,21 @@
                  */
                 ServiceDescriptorProto.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for ServiceDescriptorProto
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.ServiceDescriptorProto
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ServiceDescriptorProto.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.ServiceDescriptorProto";
                 };
     
                 return ServiceDescriptorProto;
@@ -38982,24 +41425,30 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 2:
-                            message.inputType = reader.string();
-                            break;
-                        case 3:
-                            message.outputType = reader.string();
-                            break;
-                        case 4:
-                            message.options = $root.google.protobuf.MethodOptions.decode(reader, reader.uint32());
-                            break;
-                        case 5:
-                            message.clientStreaming = reader.bool();
-                            break;
-                        case 6:
-                            message.serverStreaming = reader.bool();
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.inputType = reader.string();
+                                break;
+                            }
+                        case 3: {
+                                message.outputType = reader.string();
+                                break;
+                            }
+                        case 4: {
+                                message.options = $root.google.protobuf.MethodOptions.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 5: {
+                                message.clientStreaming = reader.bool();
+                                break;
+                            }
+                        case 6: {
+                                message.serverStreaming = reader.bool();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -39133,6 +41582,21 @@
                  */
                 MethodDescriptorProto.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for MethodDescriptorProto
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.MethodDescriptorProto
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                MethodDescriptorProto.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.MethodDescriptorProto";
                 };
     
                 return MethodDescriptorProto;
@@ -39465,76 +41929,98 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.javaPackage = reader.string();
-                            break;
-                        case 8:
-                            message.javaOuterClassname = reader.string();
-                            break;
-                        case 10:
-                            message.javaMultipleFiles = reader.bool();
-                            break;
-                        case 20:
-                            message.javaGenerateEqualsAndHash = reader.bool();
-                            break;
-                        case 27:
-                            message.javaStringCheckUtf8 = reader.bool();
-                            break;
-                        case 9:
-                            message.optimizeFor = reader.int32();
-                            break;
-                        case 11:
-                            message.goPackage = reader.string();
-                            break;
-                        case 16:
-                            message.ccGenericServices = reader.bool();
-                            break;
-                        case 17:
-                            message.javaGenericServices = reader.bool();
-                            break;
-                        case 18:
-                            message.pyGenericServices = reader.bool();
-                            break;
-                        case 42:
-                            message.phpGenericServices = reader.bool();
-                            break;
-                        case 23:
-                            message.deprecated = reader.bool();
-                            break;
-                        case 31:
-                            message.ccEnableArenas = reader.bool();
-                            break;
-                        case 36:
-                            message.objcClassPrefix = reader.string();
-                            break;
-                        case 37:
-                            message.csharpNamespace = reader.string();
-                            break;
-                        case 39:
-                            message.swiftPrefix = reader.string();
-                            break;
-                        case 40:
-                            message.phpClassPrefix = reader.string();
-                            break;
-                        case 41:
-                            message.phpNamespace = reader.string();
-                            break;
-                        case 44:
-                            message.phpMetadataNamespace = reader.string();
-                            break;
-                        case 45:
-                            message.rubyPackage = reader.string();
-                            break;
-                        case 999:
-                            if (!(message.uninterpretedOption && message.uninterpretedOption.length))
-                                message.uninterpretedOption = [];
-                            message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
-                            break;
-                        case 1053:
-                            if (!(message[".google.api.resourceDefinition"] && message[".google.api.resourceDefinition"].length))
-                                message[".google.api.resourceDefinition"] = [];
-                            message[".google.api.resourceDefinition"].push($root.google.api.ResourceDescriptor.decode(reader, reader.uint32()));
-                            break;
+                        case 1: {
+                                message.javaPackage = reader.string();
+                                break;
+                            }
+                        case 8: {
+                                message.javaOuterClassname = reader.string();
+                                break;
+                            }
+                        case 10: {
+                                message.javaMultipleFiles = reader.bool();
+                                break;
+                            }
+                        case 20: {
+                                message.javaGenerateEqualsAndHash = reader.bool();
+                                break;
+                            }
+                        case 27: {
+                                message.javaStringCheckUtf8 = reader.bool();
+                                break;
+                            }
+                        case 9: {
+                                message.optimizeFor = reader.int32();
+                                break;
+                            }
+                        case 11: {
+                                message.goPackage = reader.string();
+                                break;
+                            }
+                        case 16: {
+                                message.ccGenericServices = reader.bool();
+                                break;
+                            }
+                        case 17: {
+                                message.javaGenericServices = reader.bool();
+                                break;
+                            }
+                        case 18: {
+                                message.pyGenericServices = reader.bool();
+                                break;
+                            }
+                        case 42: {
+                                message.phpGenericServices = reader.bool();
+                                break;
+                            }
+                        case 23: {
+                                message.deprecated = reader.bool();
+                                break;
+                            }
+                        case 31: {
+                                message.ccEnableArenas = reader.bool();
+                                break;
+                            }
+                        case 36: {
+                                message.objcClassPrefix = reader.string();
+                                break;
+                            }
+                        case 37: {
+                                message.csharpNamespace = reader.string();
+                                break;
+                            }
+                        case 39: {
+                                message.swiftPrefix = reader.string();
+                                break;
+                            }
+                        case 40: {
+                                message.phpClassPrefix = reader.string();
+                                break;
+                            }
+                        case 41: {
+                                message.phpNamespace = reader.string();
+                                break;
+                            }
+                        case 44: {
+                                message.phpMetadataNamespace = reader.string();
+                                break;
+                            }
+                        case 45: {
+                                message.rubyPackage = reader.string();
+                                break;
+                            }
+                        case 999: {
+                                if (!(message.uninterpretedOption && message.uninterpretedOption.length))
+                                    message.uninterpretedOption = [];
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 1053: {
+                                if (!(message[".google.api.resourceDefinition"] && message[".google.api.resourceDefinition"].length))
+                                    message[".google.api.resourceDefinition"] = [];
+                                message[".google.api.resourceDefinition"].push($root.google.api.ResourceDescriptor.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -39848,6 +42334,21 @@
                 };
     
                 /**
+                 * Gets the default type url for FileOptions
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.FileOptions
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FileOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.FileOptions";
+                };
+    
+                /**
                  * OptimizeMode enum.
                  * @name google.protobuf.FileOptions.OptimizeMode
                  * @enum {number}
@@ -40015,26 +42516,32 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.messageSetWireFormat = reader.bool();
-                            break;
-                        case 2:
-                            message.noStandardDescriptorAccessor = reader.bool();
-                            break;
-                        case 3:
-                            message.deprecated = reader.bool();
-                            break;
-                        case 7:
-                            message.mapEntry = reader.bool();
-                            break;
-                        case 999:
-                            if (!(message.uninterpretedOption && message.uninterpretedOption.length))
-                                message.uninterpretedOption = [];
-                            message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
-                            break;
-                        case 1053:
-                            message[".google.api.resource"] = $root.google.api.ResourceDescriptor.decode(reader, reader.uint32());
-                            break;
+                        case 1: {
+                                message.messageSetWireFormat = reader.bool();
+                                break;
+                            }
+                        case 2: {
+                                message.noStandardDescriptorAccessor = reader.bool();
+                                break;
+                            }
+                        case 3: {
+                                message.deprecated = reader.bool();
+                                break;
+                            }
+                        case 7: {
+                                message.mapEntry = reader.bool();
+                                break;
+                            }
+                        case 999: {
+                                if (!(message.uninterpretedOption && message.uninterpretedOption.length))
+                                    message.uninterpretedOption = [];
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 1053: {
+                                message[".google.api.resource"] = $root.google.api.ResourceDescriptor.decode(reader, reader.uint32());
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -40188,6 +42695,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for MessageOptions
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.MessageOptions
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                MessageOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.MessageOptions";
+                };
+    
                 return MessageOptions;
             })();
     
@@ -40201,6 +42723,7 @@
                  * @property {boolean|null} [packed] FieldOptions packed
                  * @property {google.protobuf.FieldOptions.JSType|null} [jstype] FieldOptions jstype
                  * @property {boolean|null} [lazy] FieldOptions lazy
+                 * @property {boolean|null} [unverifiedLazy] FieldOptions unverifiedLazy
                  * @property {boolean|null} [deprecated] FieldOptions deprecated
                  * @property {boolean|null} [weak] FieldOptions weak
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
@@ -40256,6 +42779,14 @@
                  * @instance
                  */
                 FieldOptions.prototype.lazy = false;
+    
+                /**
+                 * FieldOptions unverifiedLazy.
+                 * @member {boolean} unverifiedLazy
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype.unverifiedLazy = false;
     
                 /**
                  * FieldOptions deprecated.
@@ -40333,6 +42864,8 @@
                         writer.uint32(/* id 6, wireType 0 =*/48).int32(message.jstype);
                     if (message.weak != null && Object.hasOwnProperty.call(message, "weak"))
                         writer.uint32(/* id 10, wireType 0 =*/80).bool(message.weak);
+                    if (message.unverifiedLazy != null && Object.hasOwnProperty.call(message, "unverifiedLazy"))
+                        writer.uint32(/* id 15, wireType 0 =*/120).bool(message.unverifiedLazy);
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -40378,42 +42911,55 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.ctype = reader.int32();
-                            break;
-                        case 2:
-                            message.packed = reader.bool();
-                            break;
-                        case 6:
-                            message.jstype = reader.int32();
-                            break;
-                        case 5:
-                            message.lazy = reader.bool();
-                            break;
-                        case 3:
-                            message.deprecated = reader.bool();
-                            break;
-                        case 10:
-                            message.weak = reader.bool();
-                            break;
-                        case 999:
-                            if (!(message.uninterpretedOption && message.uninterpretedOption.length))
-                                message.uninterpretedOption = [];
-                            message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
-                            break;
-                        case 1052:
-                            if (!(message[".google.api.fieldBehavior"] && message[".google.api.fieldBehavior"].length))
-                                message[".google.api.fieldBehavior"] = [];
-                            if ((tag & 7) === 2) {
-                                var end2 = reader.uint32() + reader.pos;
-                                while (reader.pos < end2)
+                        case 1: {
+                                message.ctype = reader.int32();
+                                break;
+                            }
+                        case 2: {
+                                message.packed = reader.bool();
+                                break;
+                            }
+                        case 6: {
+                                message.jstype = reader.int32();
+                                break;
+                            }
+                        case 5: {
+                                message.lazy = reader.bool();
+                                break;
+                            }
+                        case 15: {
+                                message.unverifiedLazy = reader.bool();
+                                break;
+                            }
+                        case 3: {
+                                message.deprecated = reader.bool();
+                                break;
+                            }
+                        case 10: {
+                                message.weak = reader.bool();
+                                break;
+                            }
+                        case 999: {
+                                if (!(message.uninterpretedOption && message.uninterpretedOption.length))
+                                    message.uninterpretedOption = [];
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 1052: {
+                                if (!(message[".google.api.fieldBehavior"] && message[".google.api.fieldBehavior"].length))
+                                    message[".google.api.fieldBehavior"] = [];
+                                if ((tag & 7) === 2) {
+                                    var end2 = reader.uint32() + reader.pos;
+                                    while (reader.pos < end2)
+                                        message[".google.api.fieldBehavior"].push(reader.int32());
+                                } else
                                     message[".google.api.fieldBehavior"].push(reader.int32());
-                            } else
-                                message[".google.api.fieldBehavior"].push(reader.int32());
-                            break;
-                        case 1055:
-                            message[".google.api.resourceReference"] = $root.google.api.ResourceReference.decode(reader, reader.uint32());
-                            break;
+                                break;
+                            }
+                        case 1055: {
+                                message[".google.api.resourceReference"] = $root.google.api.ResourceReference.decode(reader, reader.uint32());
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -40473,6 +43019,9 @@
                     if (message.lazy != null && message.hasOwnProperty("lazy"))
                         if (typeof message.lazy !== "boolean")
                             return "lazy: boolean expected";
+                    if (message.unverifiedLazy != null && message.hasOwnProperty("unverifiedLazy"))
+                        if (typeof message.unverifiedLazy !== "boolean")
+                            return "unverifiedLazy: boolean expected";
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         if (typeof message.deprecated !== "boolean")
                             return "deprecated: boolean expected";
@@ -40558,6 +43107,8 @@
                     }
                     if (object.lazy != null)
                         message.lazy = Boolean(object.lazy);
+                    if (object.unverifiedLazy != null)
+                        message.unverifiedLazy = Boolean(object.unverifiedLazy);
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
                     if (object.weak != null)
@@ -40645,6 +43196,7 @@
                         object.lazy = false;
                         object.jstype = options.enums === String ? "JS_NORMAL" : 0;
                         object.weak = false;
+                        object.unverifiedLazy = false;
                         object[".google.api.resourceReference"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
@@ -40659,6 +43211,8 @@
                         object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
                     if (message.weak != null && message.hasOwnProperty("weak"))
                         object.weak = message.weak;
+                    if (message.unverifiedLazy != null && message.hasOwnProperty("unverifiedLazy"))
+                        object.unverifiedLazy = message.unverifiedLazy;
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -40683,6 +43237,21 @@
                  */
                 FieldOptions.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for FieldOptions
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.FieldOptions
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FieldOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.FieldOptions";
                 };
     
                 /**
@@ -40814,11 +43383,12 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 999:
-                            if (!(message.uninterpretedOption && message.uninterpretedOption.length))
-                                message.uninterpretedOption = [];
-                            message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
-                            break;
+                        case 999: {
+                                if (!(message.uninterpretedOption && message.uninterpretedOption.length))
+                                    message.uninterpretedOption = [];
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -40923,6 +43493,21 @@
                  */
                 OneofOptions.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for OneofOptions
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.OneofOptions
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                OneofOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.OneofOptions";
                 };
     
                 return OneofOptions;
@@ -41044,17 +43629,20 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 2:
-                            message.allowAlias = reader.bool();
-                            break;
-                        case 3:
-                            message.deprecated = reader.bool();
-                            break;
-                        case 999:
-                            if (!(message.uninterpretedOption && message.uninterpretedOption.length))
-                                message.uninterpretedOption = [];
-                            message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
-                            break;
+                        case 2: {
+                                message.allowAlias = reader.bool();
+                                break;
+                            }
+                        case 3: {
+                                message.deprecated = reader.bool();
+                                break;
+                            }
+                        case 999: {
+                                if (!(message.uninterpretedOption && message.uninterpretedOption.length))
+                                    message.uninterpretedOption = [];
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -41179,6 +43767,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for EnumOptions
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.EnumOptions
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                EnumOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.EnumOptions";
+                };
+    
                 return EnumOptions;
             })();
     
@@ -41287,14 +43890,16 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.deprecated = reader.bool();
-                            break;
-                        case 999:
-                            if (!(message.uninterpretedOption && message.uninterpretedOption.length))
-                                message.uninterpretedOption = [];
-                            message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
-                            break;
+                        case 1: {
+                                message.deprecated = reader.bool();
+                                break;
+                            }
+                        case 999: {
+                                if (!(message.uninterpretedOption && message.uninterpretedOption.length))
+                                    message.uninterpretedOption = [];
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -41408,6 +44013,21 @@
                  */
                 EnumValueOptions.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for EnumValueOptions
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.EnumValueOptions
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                EnumValueOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.EnumValueOptions";
                 };
     
                 return EnumValueOptions;
@@ -41540,20 +44160,24 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 33:
-                            message.deprecated = reader.bool();
-                            break;
-                        case 999:
-                            if (!(message.uninterpretedOption && message.uninterpretedOption.length))
-                                message.uninterpretedOption = [];
-                            message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
-                            break;
-                        case 1049:
-                            message[".google.api.defaultHost"] = reader.string();
-                            break;
-                        case 1050:
-                            message[".google.api.oauthScopes"] = reader.string();
-                            break;
+                        case 33: {
+                                message.deprecated = reader.bool();
+                                break;
+                            }
+                        case 999: {
+                                if (!(message.uninterpretedOption && message.uninterpretedOption.length))
+                                    message.uninterpretedOption = [];
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 1049: {
+                                message[".google.api.defaultHost"] = reader.string();
+                                break;
+                            }
+                        case 1050: {
+                                message[".google.api.oauthScopes"] = reader.string();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -41684,6 +44308,21 @@
                  */
                 ServiceOptions.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for ServiceOptions
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.ServiceOptions
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ServiceOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.ServiceOptions";
                 };
     
                 return ServiceOptions;
@@ -41840,28 +44479,34 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 33:
-                            message.deprecated = reader.bool();
-                            break;
-                        case 34:
-                            message.idempotencyLevel = reader.int32();
-                            break;
-                        case 999:
-                            if (!(message.uninterpretedOption && message.uninterpretedOption.length))
-                                message.uninterpretedOption = [];
-                            message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
-                            break;
-                        case 72295728:
-                            message[".google.api.http"] = $root.google.api.HttpRule.decode(reader, reader.uint32());
-                            break;
-                        case 1051:
-                            if (!(message[".google.api.methodSignature"] && message[".google.api.methodSignature"].length))
-                                message[".google.api.methodSignature"] = [];
-                            message[".google.api.methodSignature"].push(reader.string());
-                            break;
-                        case 1049:
-                            message[".google.longrunning.operationInfo"] = $root.google.longrunning.OperationInfo.decode(reader, reader.uint32());
-                            break;
+                        case 33: {
+                                message.deprecated = reader.bool();
+                                break;
+                            }
+                        case 34: {
+                                message.idempotencyLevel = reader.int32();
+                                break;
+                            }
+                        case 999: {
+                                if (!(message.uninterpretedOption && message.uninterpretedOption.length))
+                                    message.uninterpretedOption = [];
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 72295728: {
+                                message[".google.api.http"] = $root.google.api.HttpRule.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 1051: {
+                                if (!(message[".google.api.methodSignature"] && message[".google.api.methodSignature"].length))
+                                    message[".google.api.methodSignature"] = [];
+                                message[".google.api.methodSignature"].push(reader.string());
+                                break;
+                            }
+                        case 1049: {
+                                message[".google.longrunning.operationInfo"] = $root.google.longrunning.OperationInfo.decode(reader, reader.uint32());
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -42052,6 +44697,21 @@
                 };
     
                 /**
+                 * Gets the default type url for MethodOptions
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.MethodOptions
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                MethodOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.MethodOptions";
+                };
+    
+                /**
                  * IdempotencyLevel enum.
                  * @name google.protobuf.MethodOptions.IdempotencyLevel
                  * @enum {number}
@@ -42230,29 +44890,36 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 2:
-                            if (!(message.name && message.name.length))
-                                message.name = [];
-                            message.name.push($root.google.protobuf.UninterpretedOption.NamePart.decode(reader, reader.uint32()));
-                            break;
-                        case 3:
-                            message.identifierValue = reader.string();
-                            break;
-                        case 4:
-                            message.positiveIntValue = reader.uint64();
-                            break;
-                        case 5:
-                            message.negativeIntValue = reader.int64();
-                            break;
-                        case 6:
-                            message.doubleValue = reader.double();
-                            break;
-                        case 7:
-                            message.stringValue = reader.bytes();
-                            break;
-                        case 8:
-                            message.aggregateValue = reader.string();
-                            break;
+                        case 2: {
+                                if (!(message.name && message.name.length))
+                                    message.name = [];
+                                message.name.push($root.google.protobuf.UninterpretedOption.NamePart.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 3: {
+                                message.identifierValue = reader.string();
+                                break;
+                            }
+                        case 4: {
+                                message.positiveIntValue = reader.uint64();
+                                break;
+                            }
+                        case 5: {
+                                message.negativeIntValue = reader.int64();
+                                break;
+                            }
+                        case 6: {
+                                message.doubleValue = reader.double();
+                                break;
+                            }
+                        case 7: {
+                                message.stringValue = reader.bytes();
+                                break;
+                            }
+                        case 8: {
+                                message.aggregateValue = reader.string();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -42365,7 +45032,7 @@
                     if (object.stringValue != null)
                         if (typeof object.stringValue === "string")
                             $util.base64.decode(object.stringValue, message.stringValue = $util.newBuffer($util.base64.length(object.stringValue)), 0);
-                        else if (object.stringValue.length)
+                        else if (object.stringValue.length >= 0)
                             message.stringValue = object.stringValue;
                     if (object.aggregateValue != null)
                         message.aggregateValue = String(object.aggregateValue);
@@ -42444,6 +45111,21 @@
                  */
                 UninterpretedOption.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for UninterpretedOption
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.UninterpretedOption
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                UninterpretedOption.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.UninterpretedOption";
                 };
     
                 UninterpretedOption.NamePart = (function() {
@@ -42547,12 +45229,14 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.namePart = reader.string();
-                                break;
-                            case 2:
-                                message.isExtension = reader.bool();
-                                break;
+                            case 1: {
+                                    message.namePart = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.isExtension = reader.bool();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -42651,6 +45335,21 @@
                      */
                     NamePart.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for NamePart
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.UninterpretedOption.NamePart
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    NamePart.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.UninterpretedOption.NamePart";
                     };
     
                     return NamePart;
@@ -42753,11 +45452,12 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            if (!(message.location && message.location.length))
-                                message.location = [];
-                            message.location.push($root.google.protobuf.SourceCodeInfo.Location.decode(reader, reader.uint32()));
-                            break;
+                        case 1: {
+                                if (!(message.location && message.location.length))
+                                    message.location = [];
+                                message.location.push($root.google.protobuf.SourceCodeInfo.Location.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -42862,6 +45562,21 @@
                  */
                 SourceCodeInfo.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for SourceCodeInfo
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.SourceCodeInfo
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                SourceCodeInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.SourceCodeInfo";
                 };
     
                 SourceCodeInfo.Location = (function() {
@@ -43012,37 +45727,42 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                if (!(message.path && message.path.length))
-                                    message.path = [];
-                                if ((tag & 7) === 2) {
-                                    var end2 = reader.uint32() + reader.pos;
-                                    while (reader.pos < end2)
+                            case 1: {
+                                    if (!(message.path && message.path.length))
+                                        message.path = [];
+                                    if ((tag & 7) === 2) {
+                                        var end2 = reader.uint32() + reader.pos;
+                                        while (reader.pos < end2)
+                                            message.path.push(reader.int32());
+                                    } else
                                         message.path.push(reader.int32());
-                                } else
-                                    message.path.push(reader.int32());
-                                break;
-                            case 2:
-                                if (!(message.span && message.span.length))
-                                    message.span = [];
-                                if ((tag & 7) === 2) {
-                                    var end2 = reader.uint32() + reader.pos;
-                                    while (reader.pos < end2)
+                                    break;
+                                }
+                            case 2: {
+                                    if (!(message.span && message.span.length))
+                                        message.span = [];
+                                    if ((tag & 7) === 2) {
+                                        var end2 = reader.uint32() + reader.pos;
+                                        while (reader.pos < end2)
+                                            message.span.push(reader.int32());
+                                    } else
                                         message.span.push(reader.int32());
-                                } else
-                                    message.span.push(reader.int32());
-                                break;
-                            case 3:
-                                message.leadingComments = reader.string();
-                                break;
-                            case 4:
-                                message.trailingComments = reader.string();
-                                break;
-                            case 6:
-                                if (!(message.leadingDetachedComments && message.leadingDetachedComments.length))
-                                    message.leadingDetachedComments = [];
-                                message.leadingDetachedComments.push(reader.string());
-                                break;
+                                    break;
+                                }
+                            case 3: {
+                                    message.leadingComments = reader.string();
+                                    break;
+                                }
+                            case 4: {
+                                    message.trailingComments = reader.string();
+                                    break;
+                                }
+                            case 6: {
+                                    if (!(message.leadingDetachedComments && message.leadingDetachedComments.length))
+                                        message.leadingDetachedComments = [];
+                                    message.leadingDetachedComments.push(reader.string());
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -43203,6 +45923,21 @@
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
+                    /**
+                     * Gets the default type url for Location
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.SourceCodeInfo.Location
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    Location.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.SourceCodeInfo.Location";
+                    };
+    
                     return Location;
                 })();
     
@@ -43303,11 +46038,12 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            if (!(message.annotation && message.annotation.length))
-                                message.annotation = [];
-                            message.annotation.push($root.google.protobuf.GeneratedCodeInfo.Annotation.decode(reader, reader.uint32()));
-                            break;
+                        case 1: {
+                                if (!(message.annotation && message.annotation.length))
+                                    message.annotation = [];
+                                message.annotation.push($root.google.protobuf.GeneratedCodeInfo.Annotation.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -43414,6 +46150,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for GeneratedCodeInfo
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.GeneratedCodeInfo
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                GeneratedCodeInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.GeneratedCodeInfo";
+                };
+    
                 GeneratedCodeInfo.Annotation = (function() {
     
                     /**
@@ -43424,6 +46175,7 @@
                      * @property {string|null} [sourceFile] Annotation sourceFile
                      * @property {number|null} [begin] Annotation begin
                      * @property {number|null} [end] Annotation end
+                     * @property {google.protobuf.GeneratedCodeInfo.Annotation.Semantic|null} [semantic] Annotation semantic
                      */
     
                     /**
@@ -43475,6 +46227,14 @@
                     Annotation.prototype.end = 0;
     
                     /**
+                     * Annotation semantic.
+                     * @member {google.protobuf.GeneratedCodeInfo.Annotation.Semantic} semantic
+                     * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                     * @instance
+                     */
+                    Annotation.prototype.semantic = 0;
+    
+                    /**
                      * Creates a new Annotation instance using the specified properties.
                      * @function create
                      * @memberof google.protobuf.GeneratedCodeInfo.Annotation
@@ -43510,6 +46270,8 @@
                             writer.uint32(/* id 3, wireType 0 =*/24).int32(message.begin);
                         if (message.end != null && Object.hasOwnProperty.call(message, "end"))
                             writer.uint32(/* id 4, wireType 0 =*/32).int32(message.end);
+                        if (message.semantic != null && Object.hasOwnProperty.call(message, "semantic"))
+                            writer.uint32(/* id 5, wireType 0 =*/40).int32(message.semantic);
                         return writer;
                     };
     
@@ -43544,25 +46306,33 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                if (!(message.path && message.path.length))
-                                    message.path = [];
-                                if ((tag & 7) === 2) {
-                                    var end2 = reader.uint32() + reader.pos;
-                                    while (reader.pos < end2)
+                            case 1: {
+                                    if (!(message.path && message.path.length))
+                                        message.path = [];
+                                    if ((tag & 7) === 2) {
+                                        var end2 = reader.uint32() + reader.pos;
+                                        while (reader.pos < end2)
+                                            message.path.push(reader.int32());
+                                    } else
                                         message.path.push(reader.int32());
-                                } else
-                                    message.path.push(reader.int32());
-                                break;
-                            case 2:
-                                message.sourceFile = reader.string();
-                                break;
-                            case 3:
-                                message.begin = reader.int32();
-                                break;
-                            case 4:
-                                message.end = reader.int32();
-                                break;
+                                    break;
+                                }
+                            case 2: {
+                                    message.sourceFile = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.begin = reader.int32();
+                                    break;
+                                }
+                            case 4: {
+                                    message.end = reader.int32();
+                                    break;
+                                }
+                            case 5: {
+                                    message.semantic = reader.int32();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -43614,6 +46384,15 @@
                         if (message.end != null && message.hasOwnProperty("end"))
                             if (!$util.isInteger(message.end))
                                 return "end: integer expected";
+                        if (message.semantic != null && message.hasOwnProperty("semantic"))
+                            switch (message.semantic) {
+                            default:
+                                return "semantic: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            }
                         return null;
                     };
     
@@ -43642,6 +46421,20 @@
                             message.begin = object.begin | 0;
                         if (object.end != null)
                             message.end = object.end | 0;
+                        switch (object.semantic) {
+                        case "NONE":
+                        case 0:
+                            message.semantic = 0;
+                            break;
+                        case "SET":
+                        case 1:
+                            message.semantic = 1;
+                            break;
+                        case "ALIAS":
+                        case 2:
+                            message.semantic = 2;
+                            break;
+                        }
                         return message;
                     };
     
@@ -43664,6 +46457,7 @@
                             object.sourceFile = "";
                             object.begin = 0;
                             object.end = 0;
+                            object.semantic = options.enums === String ? "NONE" : 0;
                         }
                         if (message.path && message.path.length) {
                             object.path = [];
@@ -43676,6 +46470,8 @@
                             object.begin = message.begin;
                         if (message.end != null && message.hasOwnProperty("end"))
                             object.end = message.end;
+                        if (message.semantic != null && message.hasOwnProperty("semantic"))
+                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
                         return object;
                     };
     
@@ -43689,6 +46485,37 @@
                     Annotation.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
+    
+                    /**
+                     * Gets the default type url for Annotation
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    Annotation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.GeneratedCodeInfo.Annotation";
+                    };
+    
+                    /**
+                     * Semantic enum.
+                     * @name google.protobuf.GeneratedCodeInfo.Annotation.Semantic
+                     * @enum {number}
+                     * @property {number} NONE=0 NONE value
+                     * @property {number} SET=1 SET value
+                     * @property {number} ALIAS=2 ALIAS value
+                     */
+                    Annotation.Semantic = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "NONE"] = 0;
+                        values[valuesById[1] = "SET"] = 1;
+                        values[valuesById[2] = "ALIAS"] = 2;
+                        return values;
+                    })();
     
                     return Annotation;
                 })();
@@ -43799,12 +46626,14 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.seconds = reader.int64();
-                            break;
-                        case 2:
-                            message.nanos = reader.int32();
-                            break;
+                        case 1: {
+                                message.seconds = reader.int64();
+                                break;
+                            }
+                        case 2: {
+                                message.nanos = reader.int32();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -43917,6 +46746,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for Timestamp
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Timestamp.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Timestamp";
+                };
+    
                 return Timestamp;
             })();
     
@@ -44023,12 +46867,14 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.type_url = reader.string();
-                            break;
-                        case 2:
-                            message.value = reader.bytes();
-                            break;
+                        case 1: {
+                                message.type_url = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.value = reader.bytes();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -44090,7 +46936,7 @@
                     if (object.value != null)
                         if (typeof object.value === "string")
                             $util.base64.decode(object.value, message.value = $util.newBuffer($util.base64.length(object.value)), 0);
-                        else if (object.value.length)
+                        else if (object.value.length >= 0)
                             message.value = object.value;
                     return message;
                 };
@@ -44134,6 +46980,21 @@
                  */
                 Any.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Any
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Any.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Any";
                 };
     
                 return Any;
@@ -44242,12 +47103,14 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.seconds = reader.int64();
-                            break;
-                        case 2:
-                            message.nanos = reader.int32();
-                            break;
+                        case 1: {
+                                message.seconds = reader.int64();
+                                break;
+                            }
+                        case 2: {
+                                message.nanos = reader.int32();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -44358,6 +47221,21 @@
                  */
                 Duration.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Duration
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Duration
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Duration.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Duration";
                 };
     
                 return Duration;
@@ -44520,6 +47398,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for Empty
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Empty.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Empty";
+                };
+    
                 return Empty;
             })();
     
@@ -44568,7 +47461,7 @@
                 };
     
                 /**
-                 * Callback as used by {@link google.longrunning.Operations#listOperations}.
+                 * Callback as used by {@link google.longrunning.Operations|listOperations}.
                  * @memberof google.longrunning.Operations
                  * @typedef ListOperationsCallback
                  * @type {function}
@@ -44601,7 +47494,7 @@
                  */
     
                 /**
-                 * Callback as used by {@link google.longrunning.Operations#getOperation}.
+                 * Callback as used by {@link google.longrunning.Operations|getOperation}.
                  * @memberof google.longrunning.Operations
                  * @typedef GetOperationCallback
                  * @type {function}
@@ -44634,7 +47527,7 @@
                  */
     
                 /**
-                 * Callback as used by {@link google.longrunning.Operations#deleteOperation}.
+                 * Callback as used by {@link google.longrunning.Operations|deleteOperation}.
                  * @memberof google.longrunning.Operations
                  * @typedef DeleteOperationCallback
                  * @type {function}
@@ -44667,7 +47560,7 @@
                  */
     
                 /**
-                 * Callback as used by {@link google.longrunning.Operations#cancelOperation}.
+                 * Callback as used by {@link google.longrunning.Operations|cancelOperation}.
                  * @memberof google.longrunning.Operations
                  * @typedef CancelOperationCallback
                  * @type {function}
@@ -44700,7 +47593,7 @@
                  */
     
                 /**
-                 * Callback as used by {@link google.longrunning.Operations#waitOperation}.
+                 * Callback as used by {@link google.longrunning.Operations|waitOperation}.
                  * @memberof google.longrunning.Operations
                  * @typedef WaitOperationCallback
                  * @type {function}
@@ -44885,21 +47778,26 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 2:
-                            message.metadata = $root.google.protobuf.Any.decode(reader, reader.uint32());
-                            break;
-                        case 3:
-                            message.done = reader.bool();
-                            break;
-                        case 4:
-                            message.error = $root.google.rpc.Status.decode(reader, reader.uint32());
-                            break;
-                        case 5:
-                            message.response = $root.google.protobuf.Any.decode(reader, reader.uint32());
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.metadata = $root.google.protobuf.Any.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 3: {
+                                message.done = reader.bool();
+                                break;
+                            }
+                        case 4: {
+                                message.error = $root.google.rpc.Status.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 5: {
+                                message.response = $root.google.protobuf.Any.decode(reader, reader.uint32());
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -45050,6 +47948,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for Operation
+                 * @function getTypeUrl
+                 * @memberof google.longrunning.Operation
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Operation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.longrunning.Operation";
+                };
+    
                 return Operation;
             })();
     
@@ -45145,9 +48058,10 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -45235,6 +48149,21 @@
                  */
                 GetOperationRequest.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for GetOperationRequest
+                 * @function getTypeUrl
+                 * @memberof google.longrunning.GetOperationRequest
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                GetOperationRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.longrunning.GetOperationRequest";
                 };
     
                 return GetOperationRequest;
@@ -45365,18 +48294,22 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 4:
-                            message.name = reader.string();
-                            break;
-                        case 1:
-                            message.filter = reader.string();
-                            break;
-                        case 2:
-                            message.pageSize = reader.int32();
-                            break;
-                        case 3:
-                            message.pageToken = reader.string();
-                            break;
+                        case 4: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 1: {
+                                message.filter = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.pageSize = reader.int32();
+                                break;
+                            }
+                        case 3: {
+                                message.pageToken = reader.string();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -45491,6 +48424,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for ListOperationsRequest
+                 * @function getTypeUrl
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ListOperationsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.longrunning.ListOperationsRequest";
+                };
+    
                 return ListOperationsRequest;
             })();
     
@@ -45599,14 +48547,16 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            if (!(message.operations && message.operations.length))
-                                message.operations = [];
-                            message.operations.push($root.google.longrunning.Operation.decode(reader, reader.uint32()));
-                            break;
-                        case 2:
-                            message.nextPageToken = reader.string();
-                            break;
+                        case 1: {
+                                if (!(message.operations && message.operations.length))
+                                    message.operations = [];
+                                message.operations.push($root.google.longrunning.Operation.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 2: {
+                                message.nextPageToken = reader.string();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -45722,6 +48672,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for ListOperationsResponse
+                 * @function getTypeUrl
+                 * @memberof google.longrunning.ListOperationsResponse
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ListOperationsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.longrunning.ListOperationsResponse";
+                };
+    
                 return ListOperationsResponse;
             })();
     
@@ -45817,9 +48782,10 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -45907,6 +48873,21 @@
                  */
                 CancelOperationRequest.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for CancelOperationRequest
+                 * @function getTypeUrl
+                 * @memberof google.longrunning.CancelOperationRequest
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                CancelOperationRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.longrunning.CancelOperationRequest";
                 };
     
                 return CancelOperationRequest;
@@ -46004,9 +48985,10 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -46094,6 +49076,21 @@
                  */
                 DeleteOperationRequest.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for DeleteOperationRequest
+                 * @function getTypeUrl
+                 * @memberof google.longrunning.DeleteOperationRequest
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                DeleteOperationRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.longrunning.DeleteOperationRequest";
                 };
     
                 return DeleteOperationRequest;
@@ -46202,12 +49199,14 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 2:
-                            message.timeout = $root.google.protobuf.Duration.decode(reader, reader.uint32());
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.timeout = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -46309,6 +49308,21 @@
                  */
                 WaitOperationRequest.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for WaitOperationRequest
+                 * @function getTypeUrl
+                 * @memberof google.longrunning.WaitOperationRequest
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                WaitOperationRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.longrunning.WaitOperationRequest";
                 };
     
                 return WaitOperationRequest;
@@ -46417,12 +49431,14 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.responseType = reader.string();
-                            break;
-                        case 2:
-                            message.metadataType = reader.string();
-                            break;
+                        case 1: {
+                                message.responseType = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.metadataType = reader.string();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -46519,6 +49535,21 @@
                  */
                 OperationInfo.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for OperationInfo
+                 * @function getTypeUrl
+                 * @memberof google.longrunning.OperationInfo
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                OperationInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.longrunning.OperationInfo";
                 };
     
                 return OperationInfo;
@@ -46652,17 +49683,20 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.code = reader.int32();
-                            break;
-                        case 2:
-                            message.message = reader.string();
-                            break;
-                        case 3:
-                            if (!(message.details && message.details.length))
-                                message.details = [];
-                            message.details.push($root.google.protobuf.Any.decode(reader, reader.uint32()));
-                            break;
+                        case 1: {
+                                message.code = reader.int32();
+                                break;
+                            }
+                        case 2: {
+                                message.message = reader.string();
+                                break;
+                            }
+                        case 3: {
+                                if (!(message.details && message.details.length))
+                                    message.details = [];
+                                message.details.push($root.google.protobuf.Any.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -46785,6 +49819,21 @@
                  */
                 Status.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Status
+                 * @function getTypeUrl
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Status.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.rpc.Status";
                 };
     
                 return Status;
