@@ -28,7 +28,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -280,7 +279,8 @@ export class CloudTasksClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -1928,7 +1928,7 @@ export class CloudTasksClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listQueues.createStream(
-      this.innerApiCalls.listQueues as gax.GaxCall,
+      this.innerApiCalls.listQueues as GaxCall,
       request,
       callSettings
     );
@@ -2002,7 +2002,7 @@ export class CloudTasksClient {
     this.initialize();
     return this.descriptors.page.listQueues.asyncIterate(
       this.innerApiCalls['listQueues'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.tasks.v2.IQueue>;
   }
@@ -2201,7 +2201,7 @@ export class CloudTasksClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listTasks.createStream(
-      this.innerApiCalls.listTasks as gax.GaxCall,
+      this.innerApiCalls.listTasks as GaxCall,
       request,
       callSettings
     );
@@ -2278,7 +2278,7 @@ export class CloudTasksClient {
     this.initialize();
     return this.descriptors.page.listTasks.asyncIterate(
       this.innerApiCalls['listTasks'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.tasks.v2.ITask>;
   }
