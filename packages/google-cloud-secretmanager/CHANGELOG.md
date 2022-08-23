@@ -1,5 +1,18 @@
 # Changelog
 
+## [4.1.0](https://github.com/googleapis/nodejs-secret-manager/compare/v4.0.1...v4.1.0) (2022-08-23)
+
+
+### Features
+
+* add code samples for secret manager access by alias ([#373](https://github.com/googleapis/nodejs-secret-manager/issues/373)) ([afe8dbe](https://github.com/googleapis/nodejs-secret-manager/commit/afe8dbe289396bd2b57425f7e78a44f38281fac6))
+
+
+### Bug Fixes
+
+* better support for fallback mode ([#392](https://github.com/googleapis/nodejs-secret-manager/issues/392)) ([2a3374a](https://github.com/googleapis/nodejs-secret-manager/commit/2a3374acb91c5054d737edff4017432a7dbb04f3))
+* change import long to require ([#394](https://github.com/googleapis/nodejs-secret-manager/issues/394)) ([d0b73ed](https://github.com/googleapis/nodejs-secret-manager/commit/d0b73eddf039449a2761e92639b061bab21742d1))
+
 ## [4.0.1](https://github.com/googleapis/nodejs-secret-manager/compare/v4.0.0...v4.0.1) (2022-06-30)
 
 
