@@ -28,7 +28,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -285,7 +284,8 @@ export class SecretManagerServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -1774,7 +1774,7 @@ export class SecretManagerServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listSecrets.createStream(
-      this.innerApiCalls.listSecrets as gax.GaxCall,
+      this.innerApiCalls.listSecrets as GaxCall,
       request,
       callSettings
     );
@@ -1832,7 +1832,7 @@ export class SecretManagerServiceClient {
     this.initialize();
     return this.descriptors.page.listSecrets.asyncIterate(
       this.innerApiCalls['listSecrets'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.secretmanager.v1.ISecret>;
   }
@@ -1996,7 +1996,7 @@ export class SecretManagerServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listSecretVersions.createStream(
-      this.innerApiCalls.listSecretVersions as gax.GaxCall,
+      this.innerApiCalls.listSecretVersions as GaxCall,
       request,
       callSettings
     );
@@ -2055,7 +2055,7 @@ export class SecretManagerServiceClient {
     this.initialize();
     return this.descriptors.page.listSecretVersions.asyncIterate(
       this.innerApiCalls['listSecretVersions'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.secretmanager.v1.ISecretVersion>;
   }
