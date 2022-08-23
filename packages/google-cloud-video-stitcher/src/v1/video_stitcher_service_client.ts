@@ -28,7 +28,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -318,7 +317,8 @@ export class VideoStitcherServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -1961,7 +1961,7 @@ export class VideoStitcherServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listCdnKeys.createStream(
-      this.innerApiCalls.listCdnKeys as gax.GaxCall,
+      this.innerApiCalls.listCdnKeys as GaxCall,
       request,
       callSettings
     );
@@ -2015,7 +2015,7 @@ export class VideoStitcherServiceClient {
     this.initialize();
     return this.descriptors.page.listCdnKeys.asyncIterate(
       this.innerApiCalls['listCdnKeys'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.video.stitcher.v1.ICdnKey>;
   }
@@ -2159,7 +2159,7 @@ export class VideoStitcherServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listVodStitchDetails.createStream(
-      this.innerApiCalls.listVodStitchDetails as gax.GaxCall,
+      this.innerApiCalls.listVodStitchDetails as GaxCall,
       request,
       callSettings
     );
@@ -2208,7 +2208,7 @@ export class VideoStitcherServiceClient {
     this.initialize();
     return this.descriptors.page.listVodStitchDetails.asyncIterate(
       this.innerApiCalls['listVodStitchDetails'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.video.stitcher.v1.IVodStitchDetail>;
   }
@@ -2351,7 +2351,7 @@ export class VideoStitcherServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listVodAdTagDetails.createStream(
-      this.innerApiCalls.listVodAdTagDetails as gax.GaxCall,
+      this.innerApiCalls.listVodAdTagDetails as GaxCall,
       request,
       callSettings
     );
@@ -2400,7 +2400,7 @@ export class VideoStitcherServiceClient {
     this.initialize();
     return this.descriptors.page.listVodAdTagDetails.asyncIterate(
       this.innerApiCalls['listVodAdTagDetails'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.video.stitcher.v1.IVodAdTagDetail>;
   }
@@ -2543,7 +2543,7 @@ export class VideoStitcherServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listLiveAdTagDetails.createStream(
-      this.innerApiCalls.listLiveAdTagDetails as gax.GaxCall,
+      this.innerApiCalls.listLiveAdTagDetails as GaxCall,
       request,
       callSettings
     );
@@ -2592,7 +2592,7 @@ export class VideoStitcherServiceClient {
     this.initialize();
     return this.descriptors.page.listLiveAdTagDetails.asyncIterate(
       this.innerApiCalls['listLiveAdTagDetails'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.video.stitcher.v1.ILiveAdTagDetail>;
   }
@@ -2743,7 +2743,7 @@ export class VideoStitcherServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listSlates.createStream(
-      this.innerApiCalls.listSlates as gax.GaxCall,
+      this.innerApiCalls.listSlates as GaxCall,
       request,
       callSettings
     );
@@ -2796,7 +2796,7 @@ export class VideoStitcherServiceClient {
     this.initialize();
     return this.descriptors.page.listSlates.asyncIterate(
       this.innerApiCalls['listSlates'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.video.stitcher.v1.ISlate>;
   }
