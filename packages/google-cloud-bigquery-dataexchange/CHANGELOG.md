@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.2.1](https://github.com/googleapis/nodejs-bigquery-data-exchange/compare/v0.2.0...v0.2.1) (2022-08-23)
+
+
+### Bug Fixes
+
+* better support for fallback mode ([#19](https://github.com/googleapis/nodejs-bigquery-data-exchange/issues/19)) ([de4f51f](https://github.com/googleapis/nodejs-bigquery-data-exchange/commit/de4f51ff6e053732c5e190b96f9e68e88603048c))
+* change import long to require ([#20](https://github.com/googleapis/nodejs-bigquery-data-exchange/issues/20)) ([7a9eb42](https://github.com/googleapis/nodejs-bigquery-data-exchange/commit/7a9eb42279f185d95003df7c713666e84ec94c65))
+* remove pip install statements ([#1546](https://github.com/googleapis/nodejs-bigquery-data-exchange/issues/1546)) ([#22](https://github.com/googleapis/nodejs-bigquery-data-exchange/issues/22)) ([34013d3](https://github.com/googleapis/nodejs-bigquery-data-exchange/commit/34013d3984966bb6922475d98047e21e104f6547))
+
 ## [0.2.0](https://github.com/googleapis/nodejs-bigquery-data-exchange/compare/v0.1.0...v0.2.0) (2022-07-04)
 
 
