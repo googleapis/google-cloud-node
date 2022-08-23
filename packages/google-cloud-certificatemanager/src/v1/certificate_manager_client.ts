@@ -32,7 +32,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -533,7 +532,8 @@ export class CertificateManagerClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -1127,7 +1127,7 @@ export class CertificateManagerClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createCertificate,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.certificatemanager.v1.Certificate,
@@ -1268,7 +1268,7 @@ export class CertificateManagerClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateCertificate,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.certificatemanager.v1.Certificate,
@@ -1406,7 +1406,7 @@ export class CertificateManagerClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteCertificate,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -1548,7 +1548,7 @@ export class CertificateManagerClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createCertificateMap,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.certificatemanager.v1.CertificateMap,
@@ -1689,7 +1689,7 @@ export class CertificateManagerClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateCertificateMap,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.certificatemanager.v1.CertificateMap,
@@ -1829,7 +1829,7 @@ export class CertificateManagerClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteCertificateMap,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -1975,7 +1975,7 @@ export class CertificateManagerClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createCertificateMapEntry,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.certificatemanager.v1.CertificateMapEntry,
@@ -2120,7 +2120,7 @@ export class CertificateManagerClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateCertificateMapEntry,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.certificatemanager.v1.CertificateMapEntry,
@@ -2262,7 +2262,7 @@ export class CertificateManagerClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteCertificateMapEntry,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -2408,7 +2408,7 @@ export class CertificateManagerClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createDnsAuthorization,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.certificatemanager.v1.DnsAuthorization,
@@ -2553,7 +2553,7 @@ export class CertificateManagerClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateDnsAuthorization,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.certificatemanager.v1.DnsAuthorization,
@@ -2695,7 +2695,7 @@ export class CertificateManagerClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteDnsAuthorization,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -2857,7 +2857,7 @@ export class CertificateManagerClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listCertificates.createStream(
-      this.innerApiCalls.listCertificates as gax.GaxCall,
+      this.innerApiCalls.listCertificates as GaxCall,
       request,
       callSettings
     );
@@ -2914,7 +2914,7 @@ export class CertificateManagerClient {
     this.initialize();
     return this.descriptors.page.listCertificates.asyncIterate(
       this.innerApiCalls['listCertificates'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.certificatemanager.v1.ICertificate>;
   }
@@ -3073,7 +3073,7 @@ export class CertificateManagerClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listCertificateMaps.createStream(
-      this.innerApiCalls.listCertificateMaps as gax.GaxCall,
+      this.innerApiCalls.listCertificateMaps as GaxCall,
       request,
       callSettings
     );
@@ -3130,7 +3130,7 @@ export class CertificateManagerClient {
     this.initialize();
     return this.descriptors.page.listCertificateMaps.asyncIterate(
       this.innerApiCalls['listCertificateMaps'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.certificatemanager.v1.ICertificateMap>;
   }
@@ -3303,7 +3303,7 @@ export class CertificateManagerClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listCertificateMapEntries.createStream(
-      this.innerApiCalls.listCertificateMapEntries as gax.GaxCall,
+      this.innerApiCalls.listCertificateMapEntries as GaxCall,
       request,
       callSettings
     );
@@ -3365,7 +3365,7 @@ export class CertificateManagerClient {
     this.initialize();
     return this.descriptors.page.listCertificateMapEntries.asyncIterate(
       this.innerApiCalls['listCertificateMapEntries'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.certificatemanager.v1.ICertificateMapEntry>;
   }
@@ -3524,7 +3524,7 @@ export class CertificateManagerClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listDnsAuthorizations.createStream(
-      this.innerApiCalls.listDnsAuthorizations as gax.GaxCall,
+      this.innerApiCalls.listDnsAuthorizations as GaxCall,
       request,
       callSettings
     );
@@ -3581,7 +3581,7 @@ export class CertificateManagerClient {
     this.initialize();
     return this.descriptors.page.listDnsAuthorizations.asyncIterate(
       this.innerApiCalls['listDnsAuthorizations'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.certificatemanager.v1.IDnsAuthorization>;
   }
