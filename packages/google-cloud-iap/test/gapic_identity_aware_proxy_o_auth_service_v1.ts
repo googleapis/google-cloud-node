@@ -113,124 +113,126 @@ function stubAsyncIterationCall<ResponseType>(
 }
 
 describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
-  it('has servicePath', () => {
-    const servicePath =
-      identityawareproxyoauthserviceModule.v1
-        .IdentityAwareProxyOAuthServiceClient.servicePath;
-    assert(servicePath);
-  });
-
-  it('has apiEndpoint', () => {
-    const apiEndpoint =
-      identityawareproxyoauthserviceModule.v1
-        .IdentityAwareProxyOAuthServiceClient.apiEndpoint;
-    assert(apiEndpoint);
-  });
-
-  it('has port', () => {
-    const port =
-      identityawareproxyoauthserviceModule.v1
-        .IdentityAwareProxyOAuthServiceClient.port;
-    assert(port);
-    assert(typeof port === 'number');
-  });
-
-  it('should create a client with no option', () => {
-    const client =
-      new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient();
-    assert(client);
-  });
-
-  it('should create a client with gRPC fallback', () => {
-    const client =
-      new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient(
-        {
-          fallback: true,
-        }
-      );
-    assert(client);
-  });
-
-  it('has initialize method and supports deferred initialization', async () => {
-    const client =
-      new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-    assert.strictEqual(client.identityAwareProxyOAuthServiceStub, undefined);
-    await client.initialize();
-    assert(client.identityAwareProxyOAuthServiceStub);
-  });
-
-  it('has close method for the initialized client', done => {
-    const client =
-      new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-    client.initialize();
-    assert(client.identityAwareProxyOAuthServiceStub);
-    client.close().then(() => {
-      done();
+  describe('Common methods', () => {
+    it('has servicePath', () => {
+      const servicePath =
+        identityawareproxyoauthserviceModule.v1
+          .IdentityAwareProxyOAuthServiceClient.servicePath;
+      assert(servicePath);
     });
-  });
 
-  it('has close method for the non-initialized client', done => {
-    const client =
-      new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-    assert.strictEqual(client.identityAwareProxyOAuthServiceStub, undefined);
-    client.close().then(() => {
-      done();
+    it('has apiEndpoint', () => {
+      const apiEndpoint =
+        identityawareproxyoauthserviceModule.v1
+          .IdentityAwareProxyOAuthServiceClient.apiEndpoint;
+      assert(apiEndpoint);
     });
-  });
 
-  it('has getProjectId method', async () => {
-    const fakeProjectId = 'fake-project-id';
-    const client =
-      new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-    client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-    const result = await client.getProjectId();
-    assert.strictEqual(result, fakeProjectId);
-    assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-  });
+    it('has port', () => {
+      const port =
+        identityawareproxyoauthserviceModule.v1
+          .IdentityAwareProxyOAuthServiceClient.port;
+      assert(port);
+      assert(typeof port === 'number');
+    });
 
-  it('has getProjectId method with callback', async () => {
-    const fakeProjectId = 'fake-project-id';
-    const client =
-      new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-    client.auth.getProjectId = sinon
-      .stub()
-      .callsArgWith(0, null, fakeProjectId);
-    const promise = new Promise((resolve, reject) => {
-      client.getProjectId((err?: Error | null, projectId?: string | null) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(projectId);
-        }
+    it('should create a client with no option', () => {
+      const client =
+        new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient();
+      assert(client);
+    });
+
+    it('should create a client with gRPC fallback', () => {
+      const client =
+        new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient(
+          {
+            fallback: true,
+          }
+        );
+      assert(client);
+    });
+
+    it('has initialize method and supports deferred initialization', async () => {
+      const client =
+        new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      assert.strictEqual(client.identityAwareProxyOAuthServiceStub, undefined);
+      await client.initialize();
+      assert(client.identityAwareProxyOAuthServiceStub);
+    });
+
+    it('has close method for the initialized client', done => {
+      const client =
+        new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      assert(client.identityAwareProxyOAuthServiceStub);
+      client.close().then(() => {
+        done();
       });
     });
-    const result = await promise;
-    assert.strictEqual(result, fakeProjectId);
+
+    it('has close method for the non-initialized client', done => {
+      const client =
+        new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      assert.strictEqual(client.identityAwareProxyOAuthServiceStub, undefined);
+      client.close().then(() => {
+        done();
+      });
+    });
+
+    it('has getProjectId method', async () => {
+      const fakeProjectId = 'fake-project-id';
+      const client =
+        new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+      const result = await client.getProjectId();
+      assert.strictEqual(result, fakeProjectId);
+      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+    });
+
+    it('has getProjectId method with callback', async () => {
+      const fakeProjectId = 'fake-project-id';
+      const client =
+        new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.auth.getProjectId = sinon
+        .stub()
+        .callsArgWith(0, null, fakeProjectId);
+      const promise = new Promise((resolve, reject) => {
+        client.getProjectId((err?: Error | null, projectId?: string | null) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(projectId);
+          }
+        });
+      });
+      const result = await promise;
+      assert.strictEqual(result, fakeProjectId);
+    });
   });
 
   describe('listBrands', () => {
