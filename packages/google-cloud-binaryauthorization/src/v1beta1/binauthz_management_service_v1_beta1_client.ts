@@ -28,7 +28,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -273,7 +272,8 @@ export class BinauthzManagementServiceV1Beta1Client {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -1093,7 +1093,7 @@ export class BinauthzManagementServiceV1Beta1Client {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listAttestors.createStream(
-      this.innerApiCalls.listAttestors as gax.GaxCall,
+      this.innerApiCalls.listAttestors as GaxCall,
       request,
       callSettings
     );
@@ -1145,7 +1145,7 @@ export class BinauthzManagementServiceV1Beta1Client {
     this.initialize();
     return this.descriptors.page.listAttestors.asyncIterate(
       this.innerApiCalls['listAttestors'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.binaryauthorization.v1beta1.IAttestor>;
   }
