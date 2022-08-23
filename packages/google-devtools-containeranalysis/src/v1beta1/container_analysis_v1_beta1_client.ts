@@ -28,7 +28,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -272,7 +271,8 @@ export class ContainerAnalysisV1Beta1Client {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -967,7 +967,7 @@ export class ContainerAnalysisV1Beta1Client {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listScanConfigs.createStream(
-      this.innerApiCalls.listScanConfigs as gax.GaxCall,
+      this.innerApiCalls.listScanConfigs as GaxCall,
       request,
       callSettings
     );
@@ -1018,7 +1018,7 @@ export class ContainerAnalysisV1Beta1Client {
     this.initialize();
     return this.descriptors.page.listScanConfigs.asyncIterate(
       this.innerApiCalls['listScanConfigs'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.devtools.containeranalysis.v1beta1.IScanConfig>;
   }

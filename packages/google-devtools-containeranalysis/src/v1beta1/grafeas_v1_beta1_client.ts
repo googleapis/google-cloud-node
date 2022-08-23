@@ -28,7 +28,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -287,7 +286,8 @@ export class GrafeasV1Beta1Client {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -1540,7 +1540,7 @@ export class GrafeasV1Beta1Client {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listOccurrences.createStream(
-      this.innerApiCalls.listOccurrences as gax.GaxCall,
+      this.innerApiCalls.listOccurrences as GaxCall,
       request,
       callSettings
     );
@@ -1591,7 +1591,7 @@ export class GrafeasV1Beta1Client {
     this.initialize();
     return this.descriptors.page.listOccurrences.asyncIterate(
       this.innerApiCalls['listOccurrences'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.grafeas.v1beta1.IOccurrence>;
   }
@@ -1730,7 +1730,7 @@ export class GrafeasV1Beta1Client {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listNotes.createStream(
-      this.innerApiCalls.listNotes as gax.GaxCall,
+      this.innerApiCalls.listNotes as GaxCall,
       request,
       callSettings
     );
@@ -1781,7 +1781,7 @@ export class GrafeasV1Beta1Client {
     this.initialize();
     return this.descriptors.page.listNotes.asyncIterate(
       this.innerApiCalls['listNotes'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.grafeas.v1beta1.INote>;
   }
@@ -1924,7 +1924,7 @@ export class GrafeasV1Beta1Client {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listNoteOccurrences.createStream(
-      this.innerApiCalls.listNoteOccurrences as gax.GaxCall,
+      this.innerApiCalls.listNoteOccurrences as GaxCall,
       request,
       callSettings
     );
@@ -1975,7 +1975,7 @@ export class GrafeasV1Beta1Client {
     this.initialize();
     return this.descriptors.page.listNoteOccurrences.asyncIterate(
       this.innerApiCalls['listNoteOccurrences'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.grafeas.v1beta1.IOccurrence>;
   }
