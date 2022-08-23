@@ -28,7 +28,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -289,7 +288,8 @@ export class WebSecurityScannerClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -1392,7 +1392,7 @@ export class WebSecurityScannerClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listScanConfigs.createStream(
-      this.innerApiCalls.listScanConfigs as gax.GaxCall,
+      this.innerApiCalls.listScanConfigs as GaxCall,
       request,
       callSettings
     );
@@ -1445,7 +1445,7 @@ export class WebSecurityScannerClient {
     this.initialize();
     return this.descriptors.page.listScanConfigs.asyncIterate(
       this.innerApiCalls['listScanConfigs'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.websecurityscanner.v1alpha.IScanConfig>;
   }
@@ -1597,7 +1597,7 @@ export class WebSecurityScannerClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listScanRuns.createStream(
-      this.innerApiCalls.listScanRuns as gax.GaxCall,
+      this.innerApiCalls.listScanRuns as GaxCall,
       request,
       callSettings
     );
@@ -1650,7 +1650,7 @@ export class WebSecurityScannerClient {
     this.initialize();
     return this.descriptors.page.listScanRuns.asyncIterate(
       this.innerApiCalls['listScanRuns'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.websecurityscanner.v1alpha.IScanRun>;
   }
@@ -1803,7 +1803,7 @@ export class WebSecurityScannerClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listCrawledUrls.createStream(
-      this.innerApiCalls.listCrawledUrls as gax.GaxCall,
+      this.innerApiCalls.listCrawledUrls as GaxCall,
       request,
       callSettings
     );
@@ -1857,7 +1857,7 @@ export class WebSecurityScannerClient {
     this.initialize();
     return this.descriptors.page.listCrawledUrls.asyncIterate(
       this.innerApiCalls['listCrawledUrls'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.websecurityscanner.v1alpha.ICrawledUrl>;
   }
@@ -2020,7 +2020,7 @@ export class WebSecurityScannerClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listFindings.createStream(
-      this.innerApiCalls.listFindings as gax.GaxCall,
+      this.innerApiCalls.listFindings as GaxCall,
       request,
       callSettings
     );
@@ -2079,7 +2079,7 @@ export class WebSecurityScannerClient {
     this.initialize();
     return this.descriptors.page.listFindings.asyncIterate(
       this.innerApiCalls['listFindings'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.websecurityscanner.v1alpha.IFinding>;
   }
