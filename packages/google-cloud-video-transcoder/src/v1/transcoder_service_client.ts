@@ -28,7 +28,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -274,7 +273,8 @@ export class TranscoderServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -1069,7 +1069,7 @@ export class TranscoderServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listJobs.createStream(
-      this.innerApiCalls.listJobs as gax.GaxCall,
+      this.innerApiCalls.listJobs as GaxCall,
       request,
       callSettings
     );
@@ -1124,7 +1124,7 @@ export class TranscoderServiceClient {
     this.initialize();
     return this.descriptors.page.listJobs.asyncIterate(
       this.innerApiCalls['listJobs'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.video.transcoder.v1.IJob>;
   }
@@ -1281,7 +1281,7 @@ export class TranscoderServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listJobTemplates.createStream(
-      this.innerApiCalls.listJobTemplates as gax.GaxCall,
+      this.innerApiCalls.listJobTemplates as GaxCall,
       request,
       callSettings
     );
@@ -1337,7 +1337,7 @@ export class TranscoderServiceClient {
     this.initialize();
     return this.descriptors.page.listJobTemplates.asyncIterate(
       this.innerApiCalls['listJobTemplates'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.video.transcoder.v1.IJobTemplate>;
   }
