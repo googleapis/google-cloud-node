@@ -21,7 +21,7 @@
 'use strict';
 
 function main(name) {
-  // [START networksecurity_v1beta1_generated_NetworkSecurity_DeleteAuthorizationPolicy_async]
+  // [START networksecurity_v1_generated_NetworkSecurity_DeleteAuthorizationPolicy_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,13 +29,13 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. A name of the AuthorizationPolicy to delete. Must be in the
-   *  format `projects/{project}/locations/{location}/authorizationPolicies/*`.
+   *  Required. A name of the AuthorizationPolicy to delete. Must be in the format
+   *  `projects/{project}/locations/{location}/authorizationPolicies/*`.
    */
   // const name = 'abc123'
 
   // Imports the Networksecurity library
-  const {NetworkSecurityClient} = require('@google-cloud/network-security').v1beta1;
+  const {NetworkSecurityClient} = require('@google-cloud/networksecurity').v1;
 
   // Instantiates a client
   const networksecurityClient = new NetworkSecurityClient();
@@ -53,7 +53,7 @@ function main(name) {
   }
 
   callDeleteAuthorizationPolicy();
-  // [END networksecurity_v1beta1_generated_NetworkSecurity_DeleteAuthorizationPolicy_async]
+  // [END networksecurity_v1_generated_NetworkSecurity_DeleteAuthorizationPolicy_async]
 }
 
 process.on('unhandledRejection', err => {

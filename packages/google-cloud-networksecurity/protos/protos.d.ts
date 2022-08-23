@@ -23,6 +23,3479 @@ export namespace google {
         /** Namespace networksecurity. */
         namespace networksecurity {
 
+            /** Namespace v1. */
+            namespace v1 {
+
+                /** Properties of an AuthorizationPolicy. */
+                interface IAuthorizationPolicy {
+
+                    /** AuthorizationPolicy name */
+                    name?: (string|null);
+
+                    /** AuthorizationPolicy description */
+                    description?: (string|null);
+
+                    /** AuthorizationPolicy createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AuthorizationPolicy updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AuthorizationPolicy labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** AuthorizationPolicy action */
+                    action?: (google.cloud.networksecurity.v1.AuthorizationPolicy.Action|keyof typeof google.cloud.networksecurity.v1.AuthorizationPolicy.Action|null);
+
+                    /** AuthorizationPolicy rules */
+                    rules?: (google.cloud.networksecurity.v1.AuthorizationPolicy.IRule[]|null);
+                }
+
+                /** Represents an AuthorizationPolicy. */
+                class AuthorizationPolicy implements IAuthorizationPolicy {
+
+                    /**
+                     * Constructs a new AuthorizationPolicy.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networksecurity.v1.IAuthorizationPolicy);
+
+                    /** AuthorizationPolicy name. */
+                    public name: string;
+
+                    /** AuthorizationPolicy description. */
+                    public description: string;
+
+                    /** AuthorizationPolicy createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AuthorizationPolicy updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AuthorizationPolicy labels. */
+                    public labels: { [k: string]: string };
+
+                    /** AuthorizationPolicy action. */
+                    public action: (google.cloud.networksecurity.v1.AuthorizationPolicy.Action|keyof typeof google.cloud.networksecurity.v1.AuthorizationPolicy.Action);
+
+                    /** AuthorizationPolicy rules. */
+                    public rules: google.cloud.networksecurity.v1.AuthorizationPolicy.IRule[];
+
+                    /**
+                     * Creates a new AuthorizationPolicy instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AuthorizationPolicy instance
+                     */
+                    public static create(properties?: google.cloud.networksecurity.v1.IAuthorizationPolicy): google.cloud.networksecurity.v1.AuthorizationPolicy;
+
+                    /**
+                     * Encodes the specified AuthorizationPolicy message. Does not implicitly {@link google.cloud.networksecurity.v1.AuthorizationPolicy.verify|verify} messages.
+                     * @param message AuthorizationPolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networksecurity.v1.IAuthorizationPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AuthorizationPolicy message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.AuthorizationPolicy.verify|verify} messages.
+                     * @param message AuthorizationPolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networksecurity.v1.IAuthorizationPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AuthorizationPolicy message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AuthorizationPolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networksecurity.v1.AuthorizationPolicy;
+
+                    /**
+                     * Decodes an AuthorizationPolicy message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AuthorizationPolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networksecurity.v1.AuthorizationPolicy;
+
+                    /**
+                     * Verifies an AuthorizationPolicy message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AuthorizationPolicy message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AuthorizationPolicy
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networksecurity.v1.AuthorizationPolicy;
+
+                    /**
+                     * Creates a plain object from an AuthorizationPolicy message. Also converts values to other types if specified.
+                     * @param message AuthorizationPolicy
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networksecurity.v1.AuthorizationPolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AuthorizationPolicy to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace AuthorizationPolicy {
+
+                    /** Properties of a Rule. */
+                    interface IRule {
+
+                        /** Rule sources */
+                        sources?: (google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.ISource[]|null);
+
+                        /** Rule destinations */
+                        destinations?: (google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.IDestination[]|null);
+                    }
+
+                    /** Represents a Rule. */
+                    class Rule implements IRule {
+
+                        /**
+                         * Constructs a new Rule.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.networksecurity.v1.AuthorizationPolicy.IRule);
+
+                        /** Rule sources. */
+                        public sources: google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.ISource[];
+
+                        /** Rule destinations. */
+                        public destinations: google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.IDestination[];
+
+                        /**
+                         * Creates a new Rule instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Rule instance
+                         */
+                        public static create(properties?: google.cloud.networksecurity.v1.AuthorizationPolicy.IRule): google.cloud.networksecurity.v1.AuthorizationPolicy.Rule;
+
+                        /**
+                         * Encodes the specified Rule message. Does not implicitly {@link google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.verify|verify} messages.
+                         * @param message Rule message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.networksecurity.v1.AuthorizationPolicy.IRule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Rule message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.verify|verify} messages.
+                         * @param message Rule message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.networksecurity.v1.AuthorizationPolicy.IRule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Rule message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Rule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networksecurity.v1.AuthorizationPolicy.Rule;
+
+                        /**
+                         * Decodes a Rule message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Rule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networksecurity.v1.AuthorizationPolicy.Rule;
+
+                        /**
+                         * Verifies a Rule message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Rule message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Rule
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.networksecurity.v1.AuthorizationPolicy.Rule;
+
+                        /**
+                         * Creates a plain object from a Rule message. Also converts values to other types if specified.
+                         * @param message Rule
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.networksecurity.v1.AuthorizationPolicy.Rule, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Rule to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace Rule {
+
+                        /** Properties of a Source. */
+                        interface ISource {
+
+                            /** Source principals */
+                            principals?: (string[]|null);
+
+                            /** Source ipBlocks */
+                            ipBlocks?: (string[]|null);
+                        }
+
+                        /** Represents a Source. */
+                        class Source implements ISource {
+
+                            /**
+                             * Constructs a new Source.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.ISource);
+
+                            /** Source principals. */
+                            public principals: string[];
+
+                            /** Source ipBlocks. */
+                            public ipBlocks: string[];
+
+                            /**
+                             * Creates a new Source instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Source instance
+                             */
+                            public static create(properties?: google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.ISource): google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Source;
+
+                            /**
+                             * Encodes the specified Source message. Does not implicitly {@link google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Source.verify|verify} messages.
+                             * @param message Source message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.ISource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Source message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Source.verify|verify} messages.
+                             * @param message Source message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.ISource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a Source message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Source
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Source;
+
+                            /**
+                             * Decodes a Source message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Source
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Source;
+
+                            /**
+                             * Verifies a Source message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a Source message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Source
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Source;
+
+                            /**
+                             * Creates a plain object from a Source message. Also converts values to other types if specified.
+                             * @param message Source
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Source, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Source to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
+
+                        /** Properties of a Destination. */
+                        interface IDestination {
+
+                            /** Destination hosts */
+                            hosts?: (string[]|null);
+
+                            /** Destination ports */
+                            ports?: (number[]|null);
+
+                            /** Destination methods */
+                            methods?: (string[]|null);
+
+                            /** Destination httpHeaderMatch */
+                            httpHeaderMatch?: (google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination.IHttpHeaderMatch|null);
+                        }
+
+                        /** Represents a Destination. */
+                        class Destination implements IDestination {
+
+                            /**
+                             * Constructs a new Destination.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.IDestination);
+
+                            /** Destination hosts. */
+                            public hosts: string[];
+
+                            /** Destination ports. */
+                            public ports: number[];
+
+                            /** Destination methods. */
+                            public methods: string[];
+
+                            /** Destination httpHeaderMatch. */
+                            public httpHeaderMatch?: (google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination.IHttpHeaderMatch|null);
+
+                            /**
+                             * Creates a new Destination instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Destination instance
+                             */
+                            public static create(properties?: google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.IDestination): google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination;
+
+                            /**
+                             * Encodes the specified Destination message. Does not implicitly {@link google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination.verify|verify} messages.
+                             * @param message Destination message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.IDestination, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Destination message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination.verify|verify} messages.
+                             * @param message Destination message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.IDestination, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a Destination message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Destination
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination;
+
+                            /**
+                             * Decodes a Destination message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Destination
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination;
+
+                            /**
+                             * Verifies a Destination message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a Destination message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Destination
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination;
+
+                            /**
+                             * Creates a plain object from a Destination message. Also converts values to other types if specified.
+                             * @param message Destination
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Destination to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
+
+                        namespace Destination {
+
+                            /** Properties of a HttpHeaderMatch. */
+                            interface IHttpHeaderMatch {
+
+                                /** HttpHeaderMatch regexMatch */
+                                regexMatch?: (string|null);
+
+                                /** HttpHeaderMatch headerName */
+                                headerName?: (string|null);
+                            }
+
+                            /** Represents a HttpHeaderMatch. */
+                            class HttpHeaderMatch implements IHttpHeaderMatch {
+
+                                /**
+                                 * Constructs a new HttpHeaderMatch.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination.IHttpHeaderMatch);
+
+                                /** HttpHeaderMatch regexMatch. */
+                                public regexMatch?: (string|null);
+
+                                /** HttpHeaderMatch headerName. */
+                                public headerName: string;
+
+                                /** HttpHeaderMatch type. */
+                                public type?: "regexMatch";
+
+                                /**
+                                 * Creates a new HttpHeaderMatch instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns HttpHeaderMatch instance
+                                 */
+                                public static create(properties?: google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination.IHttpHeaderMatch): google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination.HttpHeaderMatch;
+
+                                /**
+                                 * Encodes the specified HttpHeaderMatch message. Does not implicitly {@link google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination.HttpHeaderMatch.verify|verify} messages.
+                                 * @param message HttpHeaderMatch message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination.IHttpHeaderMatch, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified HttpHeaderMatch message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination.HttpHeaderMatch.verify|verify} messages.
+                                 * @param message HttpHeaderMatch message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination.IHttpHeaderMatch, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a HttpHeaderMatch message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns HttpHeaderMatch
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination.HttpHeaderMatch;
+
+                                /**
+                                 * Decodes a HttpHeaderMatch message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns HttpHeaderMatch
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination.HttpHeaderMatch;
+
+                                /**
+                                 * Verifies a HttpHeaderMatch message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a HttpHeaderMatch message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns HttpHeaderMatch
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination.HttpHeaderMatch;
+
+                                /**
+                                 * Creates a plain object from a HttpHeaderMatch message. Also converts values to other types if specified.
+                                 * @param message HttpHeaderMatch
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination.HttpHeaderMatch, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this HttpHeaderMatch to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+                            }
+                        }
+                    }
+
+                    /** Action enum. */
+                    enum Action {
+                        ACTION_UNSPECIFIED = 0,
+                        ALLOW = 1,
+                        DENY = 2
+                    }
+                }
+
+                /** Properties of a ListAuthorizationPoliciesRequest. */
+                interface IListAuthorizationPoliciesRequest {
+
+                    /** ListAuthorizationPoliciesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListAuthorizationPoliciesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListAuthorizationPoliciesRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListAuthorizationPoliciesRequest. */
+                class ListAuthorizationPoliciesRequest implements IListAuthorizationPoliciesRequest {
+
+                    /**
+                     * Constructs a new ListAuthorizationPoliciesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networksecurity.v1.IListAuthorizationPoliciesRequest);
+
+                    /** ListAuthorizationPoliciesRequest parent. */
+                    public parent: string;
+
+                    /** ListAuthorizationPoliciesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListAuthorizationPoliciesRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListAuthorizationPoliciesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAuthorizationPoliciesRequest instance
+                     */
+                    public static create(properties?: google.cloud.networksecurity.v1.IListAuthorizationPoliciesRequest): google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest;
+
+                    /**
+                     * Encodes the specified ListAuthorizationPoliciesRequest message. Does not implicitly {@link google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest.verify|verify} messages.
+                     * @param message ListAuthorizationPoliciesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networksecurity.v1.IListAuthorizationPoliciesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAuthorizationPoliciesRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest.verify|verify} messages.
+                     * @param message ListAuthorizationPoliciesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networksecurity.v1.IListAuthorizationPoliciesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAuthorizationPoliciesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAuthorizationPoliciesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest;
+
+                    /**
+                     * Decodes a ListAuthorizationPoliciesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAuthorizationPoliciesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest;
+
+                    /**
+                     * Verifies a ListAuthorizationPoliciesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAuthorizationPoliciesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAuthorizationPoliciesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest;
+
+                    /**
+                     * Creates a plain object from a ListAuthorizationPoliciesRequest message. Also converts values to other types if specified.
+                     * @param message ListAuthorizationPoliciesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAuthorizationPoliciesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListAuthorizationPoliciesResponse. */
+                interface IListAuthorizationPoliciesResponse {
+
+                    /** ListAuthorizationPoliciesResponse authorizationPolicies */
+                    authorizationPolicies?: (google.cloud.networksecurity.v1.IAuthorizationPolicy[]|null);
+
+                    /** ListAuthorizationPoliciesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListAuthorizationPoliciesResponse. */
+                class ListAuthorizationPoliciesResponse implements IListAuthorizationPoliciesResponse {
+
+                    /**
+                     * Constructs a new ListAuthorizationPoliciesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networksecurity.v1.IListAuthorizationPoliciesResponse);
+
+                    /** ListAuthorizationPoliciesResponse authorizationPolicies. */
+                    public authorizationPolicies: google.cloud.networksecurity.v1.IAuthorizationPolicy[];
+
+                    /** ListAuthorizationPoliciesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListAuthorizationPoliciesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAuthorizationPoliciesResponse instance
+                     */
+                    public static create(properties?: google.cloud.networksecurity.v1.IListAuthorizationPoliciesResponse): google.cloud.networksecurity.v1.ListAuthorizationPoliciesResponse;
+
+                    /**
+                     * Encodes the specified ListAuthorizationPoliciesResponse message. Does not implicitly {@link google.cloud.networksecurity.v1.ListAuthorizationPoliciesResponse.verify|verify} messages.
+                     * @param message ListAuthorizationPoliciesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networksecurity.v1.IListAuthorizationPoliciesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAuthorizationPoliciesResponse message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.ListAuthorizationPoliciesResponse.verify|verify} messages.
+                     * @param message ListAuthorizationPoliciesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networksecurity.v1.IListAuthorizationPoliciesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAuthorizationPoliciesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAuthorizationPoliciesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networksecurity.v1.ListAuthorizationPoliciesResponse;
+
+                    /**
+                     * Decodes a ListAuthorizationPoliciesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAuthorizationPoliciesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networksecurity.v1.ListAuthorizationPoliciesResponse;
+
+                    /**
+                     * Verifies a ListAuthorizationPoliciesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAuthorizationPoliciesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAuthorizationPoliciesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networksecurity.v1.ListAuthorizationPoliciesResponse;
+
+                    /**
+                     * Creates a plain object from a ListAuthorizationPoliciesResponse message. Also converts values to other types if specified.
+                     * @param message ListAuthorizationPoliciesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networksecurity.v1.ListAuthorizationPoliciesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAuthorizationPoliciesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GetAuthorizationPolicyRequest. */
+                interface IGetAuthorizationPolicyRequest {
+
+                    /** GetAuthorizationPolicyRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetAuthorizationPolicyRequest. */
+                class GetAuthorizationPolicyRequest implements IGetAuthorizationPolicyRequest {
+
+                    /**
+                     * Constructs a new GetAuthorizationPolicyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networksecurity.v1.IGetAuthorizationPolicyRequest);
+
+                    /** GetAuthorizationPolicyRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetAuthorizationPolicyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetAuthorizationPolicyRequest instance
+                     */
+                    public static create(properties?: google.cloud.networksecurity.v1.IGetAuthorizationPolicyRequest): google.cloud.networksecurity.v1.GetAuthorizationPolicyRequest;
+
+                    /**
+                     * Encodes the specified GetAuthorizationPolicyRequest message. Does not implicitly {@link google.cloud.networksecurity.v1.GetAuthorizationPolicyRequest.verify|verify} messages.
+                     * @param message GetAuthorizationPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networksecurity.v1.IGetAuthorizationPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetAuthorizationPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.GetAuthorizationPolicyRequest.verify|verify} messages.
+                     * @param message GetAuthorizationPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networksecurity.v1.IGetAuthorizationPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetAuthorizationPolicyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetAuthorizationPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networksecurity.v1.GetAuthorizationPolicyRequest;
+
+                    /**
+                     * Decodes a GetAuthorizationPolicyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetAuthorizationPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networksecurity.v1.GetAuthorizationPolicyRequest;
+
+                    /**
+                     * Verifies a GetAuthorizationPolicyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetAuthorizationPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetAuthorizationPolicyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networksecurity.v1.GetAuthorizationPolicyRequest;
+
+                    /**
+                     * Creates a plain object from a GetAuthorizationPolicyRequest message. Also converts values to other types if specified.
+                     * @param message GetAuthorizationPolicyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networksecurity.v1.GetAuthorizationPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetAuthorizationPolicyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a CreateAuthorizationPolicyRequest. */
+                interface ICreateAuthorizationPolicyRequest {
+
+                    /** CreateAuthorizationPolicyRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateAuthorizationPolicyRequest authorizationPolicyId */
+                    authorizationPolicyId?: (string|null);
+
+                    /** CreateAuthorizationPolicyRequest authorizationPolicy */
+                    authorizationPolicy?: (google.cloud.networksecurity.v1.IAuthorizationPolicy|null);
+                }
+
+                /** Represents a CreateAuthorizationPolicyRequest. */
+                class CreateAuthorizationPolicyRequest implements ICreateAuthorizationPolicyRequest {
+
+                    /**
+                     * Constructs a new CreateAuthorizationPolicyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networksecurity.v1.ICreateAuthorizationPolicyRequest);
+
+                    /** CreateAuthorizationPolicyRequest parent. */
+                    public parent: string;
+
+                    /** CreateAuthorizationPolicyRequest authorizationPolicyId. */
+                    public authorizationPolicyId: string;
+
+                    /** CreateAuthorizationPolicyRequest authorizationPolicy. */
+                    public authorizationPolicy?: (google.cloud.networksecurity.v1.IAuthorizationPolicy|null);
+
+                    /**
+                     * Creates a new CreateAuthorizationPolicyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateAuthorizationPolicyRequest instance
+                     */
+                    public static create(properties?: google.cloud.networksecurity.v1.ICreateAuthorizationPolicyRequest): google.cloud.networksecurity.v1.CreateAuthorizationPolicyRequest;
+
+                    /**
+                     * Encodes the specified CreateAuthorizationPolicyRequest message. Does not implicitly {@link google.cloud.networksecurity.v1.CreateAuthorizationPolicyRequest.verify|verify} messages.
+                     * @param message CreateAuthorizationPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networksecurity.v1.ICreateAuthorizationPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateAuthorizationPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.CreateAuthorizationPolicyRequest.verify|verify} messages.
+                     * @param message CreateAuthorizationPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networksecurity.v1.ICreateAuthorizationPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateAuthorizationPolicyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateAuthorizationPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networksecurity.v1.CreateAuthorizationPolicyRequest;
+
+                    /**
+                     * Decodes a CreateAuthorizationPolicyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateAuthorizationPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networksecurity.v1.CreateAuthorizationPolicyRequest;
+
+                    /**
+                     * Verifies a CreateAuthorizationPolicyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateAuthorizationPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateAuthorizationPolicyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networksecurity.v1.CreateAuthorizationPolicyRequest;
+
+                    /**
+                     * Creates a plain object from a CreateAuthorizationPolicyRequest message. Also converts values to other types if specified.
+                     * @param message CreateAuthorizationPolicyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networksecurity.v1.CreateAuthorizationPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateAuthorizationPolicyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an UpdateAuthorizationPolicyRequest. */
+                interface IUpdateAuthorizationPolicyRequest {
+
+                    /** UpdateAuthorizationPolicyRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateAuthorizationPolicyRequest authorizationPolicy */
+                    authorizationPolicy?: (google.cloud.networksecurity.v1.IAuthorizationPolicy|null);
+                }
+
+                /** Represents an UpdateAuthorizationPolicyRequest. */
+                class UpdateAuthorizationPolicyRequest implements IUpdateAuthorizationPolicyRequest {
+
+                    /**
+                     * Constructs a new UpdateAuthorizationPolicyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networksecurity.v1.IUpdateAuthorizationPolicyRequest);
+
+                    /** UpdateAuthorizationPolicyRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateAuthorizationPolicyRequest authorizationPolicy. */
+                    public authorizationPolicy?: (google.cloud.networksecurity.v1.IAuthorizationPolicy|null);
+
+                    /**
+                     * Creates a new UpdateAuthorizationPolicyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateAuthorizationPolicyRequest instance
+                     */
+                    public static create(properties?: google.cloud.networksecurity.v1.IUpdateAuthorizationPolicyRequest): google.cloud.networksecurity.v1.UpdateAuthorizationPolicyRequest;
+
+                    /**
+                     * Encodes the specified UpdateAuthorizationPolicyRequest message. Does not implicitly {@link google.cloud.networksecurity.v1.UpdateAuthorizationPolicyRequest.verify|verify} messages.
+                     * @param message UpdateAuthorizationPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networksecurity.v1.IUpdateAuthorizationPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateAuthorizationPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.UpdateAuthorizationPolicyRequest.verify|verify} messages.
+                     * @param message UpdateAuthorizationPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networksecurity.v1.IUpdateAuthorizationPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateAuthorizationPolicyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateAuthorizationPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networksecurity.v1.UpdateAuthorizationPolicyRequest;
+
+                    /**
+                     * Decodes an UpdateAuthorizationPolicyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateAuthorizationPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networksecurity.v1.UpdateAuthorizationPolicyRequest;
+
+                    /**
+                     * Verifies an UpdateAuthorizationPolicyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateAuthorizationPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateAuthorizationPolicyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networksecurity.v1.UpdateAuthorizationPolicyRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateAuthorizationPolicyRequest message. Also converts values to other types if specified.
+                     * @param message UpdateAuthorizationPolicyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networksecurity.v1.UpdateAuthorizationPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateAuthorizationPolicyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DeleteAuthorizationPolicyRequest. */
+                interface IDeleteAuthorizationPolicyRequest {
+
+                    /** DeleteAuthorizationPolicyRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteAuthorizationPolicyRequest. */
+                class DeleteAuthorizationPolicyRequest implements IDeleteAuthorizationPolicyRequest {
+
+                    /**
+                     * Constructs a new DeleteAuthorizationPolicyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networksecurity.v1.IDeleteAuthorizationPolicyRequest);
+
+                    /** DeleteAuthorizationPolicyRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteAuthorizationPolicyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteAuthorizationPolicyRequest instance
+                     */
+                    public static create(properties?: google.cloud.networksecurity.v1.IDeleteAuthorizationPolicyRequest): google.cloud.networksecurity.v1.DeleteAuthorizationPolicyRequest;
+
+                    /**
+                     * Encodes the specified DeleteAuthorizationPolicyRequest message. Does not implicitly {@link google.cloud.networksecurity.v1.DeleteAuthorizationPolicyRequest.verify|verify} messages.
+                     * @param message DeleteAuthorizationPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networksecurity.v1.IDeleteAuthorizationPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteAuthorizationPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.DeleteAuthorizationPolicyRequest.verify|verify} messages.
+                     * @param message DeleteAuthorizationPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networksecurity.v1.IDeleteAuthorizationPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteAuthorizationPolicyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteAuthorizationPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networksecurity.v1.DeleteAuthorizationPolicyRequest;
+
+                    /**
+                     * Decodes a DeleteAuthorizationPolicyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteAuthorizationPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networksecurity.v1.DeleteAuthorizationPolicyRequest;
+
+                    /**
+                     * Verifies a DeleteAuthorizationPolicyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteAuthorizationPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteAuthorizationPolicyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networksecurity.v1.DeleteAuthorizationPolicyRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteAuthorizationPolicyRequest message. Also converts values to other types if specified.
+                     * @param message DeleteAuthorizationPolicyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networksecurity.v1.DeleteAuthorizationPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteAuthorizationPolicyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ClientTlsPolicy. */
+                interface IClientTlsPolicy {
+
+                    /** ClientTlsPolicy name */
+                    name?: (string|null);
+
+                    /** ClientTlsPolicy description */
+                    description?: (string|null);
+
+                    /** ClientTlsPolicy createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ClientTlsPolicy updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ClientTlsPolicy labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** ClientTlsPolicy sni */
+                    sni?: (string|null);
+
+                    /** ClientTlsPolicy clientCertificate */
+                    clientCertificate?: (google.cloud.networksecurity.v1.ICertificateProvider|null);
+
+                    /** ClientTlsPolicy serverValidationCa */
+                    serverValidationCa?: (google.cloud.networksecurity.v1.IValidationCA[]|null);
+                }
+
+                /** Represents a ClientTlsPolicy. */
+                class ClientTlsPolicy implements IClientTlsPolicy {
+
+                    /**
+                     * Constructs a new ClientTlsPolicy.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networksecurity.v1.IClientTlsPolicy);
+
+                    /** ClientTlsPolicy name. */
+                    public name: string;
+
+                    /** ClientTlsPolicy description. */
+                    public description: string;
+
+                    /** ClientTlsPolicy createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ClientTlsPolicy updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ClientTlsPolicy labels. */
+                    public labels: { [k: string]: string };
+
+                    /** ClientTlsPolicy sni. */
+                    public sni: string;
+
+                    /** ClientTlsPolicy clientCertificate. */
+                    public clientCertificate?: (google.cloud.networksecurity.v1.ICertificateProvider|null);
+
+                    /** ClientTlsPolicy serverValidationCa. */
+                    public serverValidationCa: google.cloud.networksecurity.v1.IValidationCA[];
+
+                    /**
+                     * Creates a new ClientTlsPolicy instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ClientTlsPolicy instance
+                     */
+                    public static create(properties?: google.cloud.networksecurity.v1.IClientTlsPolicy): google.cloud.networksecurity.v1.ClientTlsPolicy;
+
+                    /**
+                     * Encodes the specified ClientTlsPolicy message. Does not implicitly {@link google.cloud.networksecurity.v1.ClientTlsPolicy.verify|verify} messages.
+                     * @param message ClientTlsPolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networksecurity.v1.IClientTlsPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ClientTlsPolicy message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.ClientTlsPolicy.verify|verify} messages.
+                     * @param message ClientTlsPolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networksecurity.v1.IClientTlsPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ClientTlsPolicy message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ClientTlsPolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networksecurity.v1.ClientTlsPolicy;
+
+                    /**
+                     * Decodes a ClientTlsPolicy message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ClientTlsPolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networksecurity.v1.ClientTlsPolicy;
+
+                    /**
+                     * Verifies a ClientTlsPolicy message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ClientTlsPolicy message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ClientTlsPolicy
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networksecurity.v1.ClientTlsPolicy;
+
+                    /**
+                     * Creates a plain object from a ClientTlsPolicy message. Also converts values to other types if specified.
+                     * @param message ClientTlsPolicy
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networksecurity.v1.ClientTlsPolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ClientTlsPolicy to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListClientTlsPoliciesRequest. */
+                interface IListClientTlsPoliciesRequest {
+
+                    /** ListClientTlsPoliciesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListClientTlsPoliciesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListClientTlsPoliciesRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListClientTlsPoliciesRequest. */
+                class ListClientTlsPoliciesRequest implements IListClientTlsPoliciesRequest {
+
+                    /**
+                     * Constructs a new ListClientTlsPoliciesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networksecurity.v1.IListClientTlsPoliciesRequest);
+
+                    /** ListClientTlsPoliciesRequest parent. */
+                    public parent: string;
+
+                    /** ListClientTlsPoliciesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListClientTlsPoliciesRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListClientTlsPoliciesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListClientTlsPoliciesRequest instance
+                     */
+                    public static create(properties?: google.cloud.networksecurity.v1.IListClientTlsPoliciesRequest): google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest;
+
+                    /**
+                     * Encodes the specified ListClientTlsPoliciesRequest message. Does not implicitly {@link google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest.verify|verify} messages.
+                     * @param message ListClientTlsPoliciesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networksecurity.v1.IListClientTlsPoliciesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListClientTlsPoliciesRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest.verify|verify} messages.
+                     * @param message ListClientTlsPoliciesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networksecurity.v1.IListClientTlsPoliciesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListClientTlsPoliciesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListClientTlsPoliciesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest;
+
+                    /**
+                     * Decodes a ListClientTlsPoliciesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListClientTlsPoliciesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest;
+
+                    /**
+                     * Verifies a ListClientTlsPoliciesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListClientTlsPoliciesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListClientTlsPoliciesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest;
+
+                    /**
+                     * Creates a plain object from a ListClientTlsPoliciesRequest message. Also converts values to other types if specified.
+                     * @param message ListClientTlsPoliciesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListClientTlsPoliciesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListClientTlsPoliciesResponse. */
+                interface IListClientTlsPoliciesResponse {
+
+                    /** ListClientTlsPoliciesResponse clientTlsPolicies */
+                    clientTlsPolicies?: (google.cloud.networksecurity.v1.IClientTlsPolicy[]|null);
+
+                    /** ListClientTlsPoliciesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListClientTlsPoliciesResponse. */
+                class ListClientTlsPoliciesResponse implements IListClientTlsPoliciesResponse {
+
+                    /**
+                     * Constructs a new ListClientTlsPoliciesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networksecurity.v1.IListClientTlsPoliciesResponse);
+
+                    /** ListClientTlsPoliciesResponse clientTlsPolicies. */
+                    public clientTlsPolicies: google.cloud.networksecurity.v1.IClientTlsPolicy[];
+
+                    /** ListClientTlsPoliciesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListClientTlsPoliciesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListClientTlsPoliciesResponse instance
+                     */
+                    public static create(properties?: google.cloud.networksecurity.v1.IListClientTlsPoliciesResponse): google.cloud.networksecurity.v1.ListClientTlsPoliciesResponse;
+
+                    /**
+                     * Encodes the specified ListClientTlsPoliciesResponse message. Does not implicitly {@link google.cloud.networksecurity.v1.ListClientTlsPoliciesResponse.verify|verify} messages.
+                     * @param message ListClientTlsPoliciesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networksecurity.v1.IListClientTlsPoliciesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListClientTlsPoliciesResponse message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.ListClientTlsPoliciesResponse.verify|verify} messages.
+                     * @param message ListClientTlsPoliciesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networksecurity.v1.IListClientTlsPoliciesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListClientTlsPoliciesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListClientTlsPoliciesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networksecurity.v1.ListClientTlsPoliciesResponse;
+
+                    /**
+                     * Decodes a ListClientTlsPoliciesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListClientTlsPoliciesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networksecurity.v1.ListClientTlsPoliciesResponse;
+
+                    /**
+                     * Verifies a ListClientTlsPoliciesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListClientTlsPoliciesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListClientTlsPoliciesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networksecurity.v1.ListClientTlsPoliciesResponse;
+
+                    /**
+                     * Creates a plain object from a ListClientTlsPoliciesResponse message. Also converts values to other types if specified.
+                     * @param message ListClientTlsPoliciesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networksecurity.v1.ListClientTlsPoliciesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListClientTlsPoliciesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GetClientTlsPolicyRequest. */
+                interface IGetClientTlsPolicyRequest {
+
+                    /** GetClientTlsPolicyRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetClientTlsPolicyRequest. */
+                class GetClientTlsPolicyRequest implements IGetClientTlsPolicyRequest {
+
+                    /**
+                     * Constructs a new GetClientTlsPolicyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networksecurity.v1.IGetClientTlsPolicyRequest);
+
+                    /** GetClientTlsPolicyRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetClientTlsPolicyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetClientTlsPolicyRequest instance
+                     */
+                    public static create(properties?: google.cloud.networksecurity.v1.IGetClientTlsPolicyRequest): google.cloud.networksecurity.v1.GetClientTlsPolicyRequest;
+
+                    /**
+                     * Encodes the specified GetClientTlsPolicyRequest message. Does not implicitly {@link google.cloud.networksecurity.v1.GetClientTlsPolicyRequest.verify|verify} messages.
+                     * @param message GetClientTlsPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networksecurity.v1.IGetClientTlsPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetClientTlsPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.GetClientTlsPolicyRequest.verify|verify} messages.
+                     * @param message GetClientTlsPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networksecurity.v1.IGetClientTlsPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetClientTlsPolicyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetClientTlsPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networksecurity.v1.GetClientTlsPolicyRequest;
+
+                    /**
+                     * Decodes a GetClientTlsPolicyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetClientTlsPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networksecurity.v1.GetClientTlsPolicyRequest;
+
+                    /**
+                     * Verifies a GetClientTlsPolicyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetClientTlsPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetClientTlsPolicyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networksecurity.v1.GetClientTlsPolicyRequest;
+
+                    /**
+                     * Creates a plain object from a GetClientTlsPolicyRequest message. Also converts values to other types if specified.
+                     * @param message GetClientTlsPolicyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networksecurity.v1.GetClientTlsPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetClientTlsPolicyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a CreateClientTlsPolicyRequest. */
+                interface ICreateClientTlsPolicyRequest {
+
+                    /** CreateClientTlsPolicyRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateClientTlsPolicyRequest clientTlsPolicyId */
+                    clientTlsPolicyId?: (string|null);
+
+                    /** CreateClientTlsPolicyRequest clientTlsPolicy */
+                    clientTlsPolicy?: (google.cloud.networksecurity.v1.IClientTlsPolicy|null);
+                }
+
+                /** Represents a CreateClientTlsPolicyRequest. */
+                class CreateClientTlsPolicyRequest implements ICreateClientTlsPolicyRequest {
+
+                    /**
+                     * Constructs a new CreateClientTlsPolicyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networksecurity.v1.ICreateClientTlsPolicyRequest);
+
+                    /** CreateClientTlsPolicyRequest parent. */
+                    public parent: string;
+
+                    /** CreateClientTlsPolicyRequest clientTlsPolicyId. */
+                    public clientTlsPolicyId: string;
+
+                    /** CreateClientTlsPolicyRequest clientTlsPolicy. */
+                    public clientTlsPolicy?: (google.cloud.networksecurity.v1.IClientTlsPolicy|null);
+
+                    /**
+                     * Creates a new CreateClientTlsPolicyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateClientTlsPolicyRequest instance
+                     */
+                    public static create(properties?: google.cloud.networksecurity.v1.ICreateClientTlsPolicyRequest): google.cloud.networksecurity.v1.CreateClientTlsPolicyRequest;
+
+                    /**
+                     * Encodes the specified CreateClientTlsPolicyRequest message. Does not implicitly {@link google.cloud.networksecurity.v1.CreateClientTlsPolicyRequest.verify|verify} messages.
+                     * @param message CreateClientTlsPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networksecurity.v1.ICreateClientTlsPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateClientTlsPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.CreateClientTlsPolicyRequest.verify|verify} messages.
+                     * @param message CreateClientTlsPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networksecurity.v1.ICreateClientTlsPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateClientTlsPolicyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateClientTlsPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networksecurity.v1.CreateClientTlsPolicyRequest;
+
+                    /**
+                     * Decodes a CreateClientTlsPolicyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateClientTlsPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networksecurity.v1.CreateClientTlsPolicyRequest;
+
+                    /**
+                     * Verifies a CreateClientTlsPolicyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateClientTlsPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateClientTlsPolicyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networksecurity.v1.CreateClientTlsPolicyRequest;
+
+                    /**
+                     * Creates a plain object from a CreateClientTlsPolicyRequest message. Also converts values to other types if specified.
+                     * @param message CreateClientTlsPolicyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networksecurity.v1.CreateClientTlsPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateClientTlsPolicyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an UpdateClientTlsPolicyRequest. */
+                interface IUpdateClientTlsPolicyRequest {
+
+                    /** UpdateClientTlsPolicyRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateClientTlsPolicyRequest clientTlsPolicy */
+                    clientTlsPolicy?: (google.cloud.networksecurity.v1.IClientTlsPolicy|null);
+                }
+
+                /** Represents an UpdateClientTlsPolicyRequest. */
+                class UpdateClientTlsPolicyRequest implements IUpdateClientTlsPolicyRequest {
+
+                    /**
+                     * Constructs a new UpdateClientTlsPolicyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networksecurity.v1.IUpdateClientTlsPolicyRequest);
+
+                    /** UpdateClientTlsPolicyRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateClientTlsPolicyRequest clientTlsPolicy. */
+                    public clientTlsPolicy?: (google.cloud.networksecurity.v1.IClientTlsPolicy|null);
+
+                    /**
+                     * Creates a new UpdateClientTlsPolicyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateClientTlsPolicyRequest instance
+                     */
+                    public static create(properties?: google.cloud.networksecurity.v1.IUpdateClientTlsPolicyRequest): google.cloud.networksecurity.v1.UpdateClientTlsPolicyRequest;
+
+                    /**
+                     * Encodes the specified UpdateClientTlsPolicyRequest message. Does not implicitly {@link google.cloud.networksecurity.v1.UpdateClientTlsPolicyRequest.verify|verify} messages.
+                     * @param message UpdateClientTlsPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networksecurity.v1.IUpdateClientTlsPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateClientTlsPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.UpdateClientTlsPolicyRequest.verify|verify} messages.
+                     * @param message UpdateClientTlsPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networksecurity.v1.IUpdateClientTlsPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateClientTlsPolicyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateClientTlsPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networksecurity.v1.UpdateClientTlsPolicyRequest;
+
+                    /**
+                     * Decodes an UpdateClientTlsPolicyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateClientTlsPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networksecurity.v1.UpdateClientTlsPolicyRequest;
+
+                    /**
+                     * Verifies an UpdateClientTlsPolicyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateClientTlsPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateClientTlsPolicyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networksecurity.v1.UpdateClientTlsPolicyRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateClientTlsPolicyRequest message. Also converts values to other types if specified.
+                     * @param message UpdateClientTlsPolicyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networksecurity.v1.UpdateClientTlsPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateClientTlsPolicyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DeleteClientTlsPolicyRequest. */
+                interface IDeleteClientTlsPolicyRequest {
+
+                    /** DeleteClientTlsPolicyRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteClientTlsPolicyRequest. */
+                class DeleteClientTlsPolicyRequest implements IDeleteClientTlsPolicyRequest {
+
+                    /**
+                     * Constructs a new DeleteClientTlsPolicyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networksecurity.v1.IDeleteClientTlsPolicyRequest);
+
+                    /** DeleteClientTlsPolicyRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteClientTlsPolicyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteClientTlsPolicyRequest instance
+                     */
+                    public static create(properties?: google.cloud.networksecurity.v1.IDeleteClientTlsPolicyRequest): google.cloud.networksecurity.v1.DeleteClientTlsPolicyRequest;
+
+                    /**
+                     * Encodes the specified DeleteClientTlsPolicyRequest message. Does not implicitly {@link google.cloud.networksecurity.v1.DeleteClientTlsPolicyRequest.verify|verify} messages.
+                     * @param message DeleteClientTlsPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networksecurity.v1.IDeleteClientTlsPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteClientTlsPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.DeleteClientTlsPolicyRequest.verify|verify} messages.
+                     * @param message DeleteClientTlsPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networksecurity.v1.IDeleteClientTlsPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteClientTlsPolicyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteClientTlsPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networksecurity.v1.DeleteClientTlsPolicyRequest;
+
+                    /**
+                     * Decodes a DeleteClientTlsPolicyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteClientTlsPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networksecurity.v1.DeleteClientTlsPolicyRequest;
+
+                    /**
+                     * Verifies a DeleteClientTlsPolicyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteClientTlsPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteClientTlsPolicyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networksecurity.v1.DeleteClientTlsPolicyRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteClientTlsPolicyRequest message. Also converts values to other types if specified.
+                     * @param message DeleteClientTlsPolicyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networksecurity.v1.DeleteClientTlsPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteClientTlsPolicyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GrpcEndpoint. */
+                interface IGrpcEndpoint {
+
+                    /** GrpcEndpoint targetUri */
+                    targetUri?: (string|null);
+                }
+
+                /** Represents a GrpcEndpoint. */
+                class GrpcEndpoint implements IGrpcEndpoint {
+
+                    /**
+                     * Constructs a new GrpcEndpoint.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networksecurity.v1.IGrpcEndpoint);
+
+                    /** GrpcEndpoint targetUri. */
+                    public targetUri: string;
+
+                    /**
+                     * Creates a new GrpcEndpoint instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GrpcEndpoint instance
+                     */
+                    public static create(properties?: google.cloud.networksecurity.v1.IGrpcEndpoint): google.cloud.networksecurity.v1.GrpcEndpoint;
+
+                    /**
+                     * Encodes the specified GrpcEndpoint message. Does not implicitly {@link google.cloud.networksecurity.v1.GrpcEndpoint.verify|verify} messages.
+                     * @param message GrpcEndpoint message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networksecurity.v1.IGrpcEndpoint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GrpcEndpoint message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.GrpcEndpoint.verify|verify} messages.
+                     * @param message GrpcEndpoint message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networksecurity.v1.IGrpcEndpoint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GrpcEndpoint message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GrpcEndpoint
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networksecurity.v1.GrpcEndpoint;
+
+                    /**
+                     * Decodes a GrpcEndpoint message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GrpcEndpoint
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networksecurity.v1.GrpcEndpoint;
+
+                    /**
+                     * Verifies a GrpcEndpoint message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GrpcEndpoint message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GrpcEndpoint
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networksecurity.v1.GrpcEndpoint;
+
+                    /**
+                     * Creates a plain object from a GrpcEndpoint message. Also converts values to other types if specified.
+                     * @param message GrpcEndpoint
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networksecurity.v1.GrpcEndpoint, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GrpcEndpoint to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ValidationCA. */
+                interface IValidationCA {
+
+                    /** ValidationCA grpcEndpoint */
+                    grpcEndpoint?: (google.cloud.networksecurity.v1.IGrpcEndpoint|null);
+
+                    /** ValidationCA certificateProviderInstance */
+                    certificateProviderInstance?: (google.cloud.networksecurity.v1.ICertificateProviderInstance|null);
+                }
+
+                /** Represents a ValidationCA. */
+                class ValidationCA implements IValidationCA {
+
+                    /**
+                     * Constructs a new ValidationCA.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networksecurity.v1.IValidationCA);
+
+                    /** ValidationCA grpcEndpoint. */
+                    public grpcEndpoint?: (google.cloud.networksecurity.v1.IGrpcEndpoint|null);
+
+                    /** ValidationCA certificateProviderInstance. */
+                    public certificateProviderInstance?: (google.cloud.networksecurity.v1.ICertificateProviderInstance|null);
+
+                    /** ValidationCA type. */
+                    public type?: ("grpcEndpoint"|"certificateProviderInstance");
+
+                    /**
+                     * Creates a new ValidationCA instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ValidationCA instance
+                     */
+                    public static create(properties?: google.cloud.networksecurity.v1.IValidationCA): google.cloud.networksecurity.v1.ValidationCA;
+
+                    /**
+                     * Encodes the specified ValidationCA message. Does not implicitly {@link google.cloud.networksecurity.v1.ValidationCA.verify|verify} messages.
+                     * @param message ValidationCA message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networksecurity.v1.IValidationCA, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ValidationCA message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.ValidationCA.verify|verify} messages.
+                     * @param message ValidationCA message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networksecurity.v1.IValidationCA, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ValidationCA message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ValidationCA
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networksecurity.v1.ValidationCA;
+
+                    /**
+                     * Decodes a ValidationCA message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ValidationCA
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networksecurity.v1.ValidationCA;
+
+                    /**
+                     * Verifies a ValidationCA message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ValidationCA message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ValidationCA
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networksecurity.v1.ValidationCA;
+
+                    /**
+                     * Creates a plain object from a ValidationCA message. Also converts values to other types if specified.
+                     * @param message ValidationCA
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networksecurity.v1.ValidationCA, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ValidationCA to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a CertificateProviderInstance. */
+                interface ICertificateProviderInstance {
+
+                    /** CertificateProviderInstance pluginInstance */
+                    pluginInstance?: (string|null);
+                }
+
+                /** Represents a CertificateProviderInstance. */
+                class CertificateProviderInstance implements ICertificateProviderInstance {
+
+                    /**
+                     * Constructs a new CertificateProviderInstance.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networksecurity.v1.ICertificateProviderInstance);
+
+                    /** CertificateProviderInstance pluginInstance. */
+                    public pluginInstance: string;
+
+                    /**
+                     * Creates a new CertificateProviderInstance instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CertificateProviderInstance instance
+                     */
+                    public static create(properties?: google.cloud.networksecurity.v1.ICertificateProviderInstance): google.cloud.networksecurity.v1.CertificateProviderInstance;
+
+                    /**
+                     * Encodes the specified CertificateProviderInstance message. Does not implicitly {@link google.cloud.networksecurity.v1.CertificateProviderInstance.verify|verify} messages.
+                     * @param message CertificateProviderInstance message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networksecurity.v1.ICertificateProviderInstance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CertificateProviderInstance message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.CertificateProviderInstance.verify|verify} messages.
+                     * @param message CertificateProviderInstance message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networksecurity.v1.ICertificateProviderInstance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CertificateProviderInstance message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CertificateProviderInstance
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networksecurity.v1.CertificateProviderInstance;
+
+                    /**
+                     * Decodes a CertificateProviderInstance message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CertificateProviderInstance
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networksecurity.v1.CertificateProviderInstance;
+
+                    /**
+                     * Verifies a CertificateProviderInstance message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CertificateProviderInstance message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CertificateProviderInstance
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networksecurity.v1.CertificateProviderInstance;
+
+                    /**
+                     * Creates a plain object from a CertificateProviderInstance message. Also converts values to other types if specified.
+                     * @param message CertificateProviderInstance
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networksecurity.v1.CertificateProviderInstance, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CertificateProviderInstance to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a CertificateProvider. */
+                interface ICertificateProvider {
+
+                    /** CertificateProvider grpcEndpoint */
+                    grpcEndpoint?: (google.cloud.networksecurity.v1.IGrpcEndpoint|null);
+
+                    /** CertificateProvider certificateProviderInstance */
+                    certificateProviderInstance?: (google.cloud.networksecurity.v1.ICertificateProviderInstance|null);
+                }
+
+                /** Represents a CertificateProvider. */
+                class CertificateProvider implements ICertificateProvider {
+
+                    /**
+                     * Constructs a new CertificateProvider.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networksecurity.v1.ICertificateProvider);
+
+                    /** CertificateProvider grpcEndpoint. */
+                    public grpcEndpoint?: (google.cloud.networksecurity.v1.IGrpcEndpoint|null);
+
+                    /** CertificateProvider certificateProviderInstance. */
+                    public certificateProviderInstance?: (google.cloud.networksecurity.v1.ICertificateProviderInstance|null);
+
+                    /** CertificateProvider type. */
+                    public type?: ("grpcEndpoint"|"certificateProviderInstance");
+
+                    /**
+                     * Creates a new CertificateProvider instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CertificateProvider instance
+                     */
+                    public static create(properties?: google.cloud.networksecurity.v1.ICertificateProvider): google.cloud.networksecurity.v1.CertificateProvider;
+
+                    /**
+                     * Encodes the specified CertificateProvider message. Does not implicitly {@link google.cloud.networksecurity.v1.CertificateProvider.verify|verify} messages.
+                     * @param message CertificateProvider message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networksecurity.v1.ICertificateProvider, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CertificateProvider message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.CertificateProvider.verify|verify} messages.
+                     * @param message CertificateProvider message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networksecurity.v1.ICertificateProvider, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CertificateProvider message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CertificateProvider
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networksecurity.v1.CertificateProvider;
+
+                    /**
+                     * Decodes a CertificateProvider message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CertificateProvider
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networksecurity.v1.CertificateProvider;
+
+                    /**
+                     * Verifies a CertificateProvider message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CertificateProvider message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CertificateProvider
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networksecurity.v1.CertificateProvider;
+
+                    /**
+                     * Creates a plain object from a CertificateProvider message. Also converts values to other types if specified.
+                     * @param message CertificateProvider
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networksecurity.v1.CertificateProvider, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CertificateProvider to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an OperationMetadata. */
+                interface IOperationMetadata {
+
+                    /** OperationMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OperationMetadata endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OperationMetadata target */
+                    target?: (string|null);
+
+                    /** OperationMetadata verb */
+                    verb?: (string|null);
+
+                    /** OperationMetadata statusMessage */
+                    statusMessage?: (string|null);
+
+                    /** OperationMetadata requestedCancellation */
+                    requestedCancellation?: (boolean|null);
+
+                    /** OperationMetadata apiVersion */
+                    apiVersion?: (string|null);
+                }
+
+                /** Represents an OperationMetadata. */
+                class OperationMetadata implements IOperationMetadata {
+
+                    /**
+                     * Constructs a new OperationMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networksecurity.v1.IOperationMetadata);
+
+                    /** OperationMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OperationMetadata endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OperationMetadata target. */
+                    public target: string;
+
+                    /** OperationMetadata verb. */
+                    public verb: string;
+
+                    /** OperationMetadata statusMessage. */
+                    public statusMessage: string;
+
+                    /** OperationMetadata requestedCancellation. */
+                    public requestedCancellation: boolean;
+
+                    /** OperationMetadata apiVersion. */
+                    public apiVersion: string;
+
+                    /**
+                     * Creates a new OperationMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OperationMetadata instance
+                     */
+                    public static create(properties?: google.cloud.networksecurity.v1.IOperationMetadata): google.cloud.networksecurity.v1.OperationMetadata;
+
+                    /**
+                     * Encodes the specified OperationMetadata message. Does not implicitly {@link google.cloud.networksecurity.v1.OperationMetadata.verify|verify} messages.
+                     * @param message OperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networksecurity.v1.IOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OperationMetadata message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.OperationMetadata.verify|verify} messages.
+                     * @param message OperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networksecurity.v1.IOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OperationMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networksecurity.v1.OperationMetadata;
+
+                    /**
+                     * Decodes an OperationMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networksecurity.v1.OperationMetadata;
+
+                    /**
+                     * Verifies an OperationMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OperationMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OperationMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networksecurity.v1.OperationMetadata;
+
+                    /**
+                     * Creates a plain object from an OperationMetadata message. Also converts values to other types if specified.
+                     * @param message OperationMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networksecurity.v1.OperationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OperationMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Represents a NetworkSecurity */
+                class NetworkSecurity extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new NetworkSecurity service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new NetworkSecurity service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): NetworkSecurity;
+
+                    /**
+                     * Calls ListAuthorizationPolicies.
+                     * @param request ListAuthorizationPoliciesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListAuthorizationPoliciesResponse
+                     */
+                    public listAuthorizationPolicies(request: google.cloud.networksecurity.v1.IListAuthorizationPoliciesRequest, callback: google.cloud.networksecurity.v1.NetworkSecurity.ListAuthorizationPoliciesCallback): void;
+
+                    /**
+                     * Calls ListAuthorizationPolicies.
+                     * @param request ListAuthorizationPoliciesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listAuthorizationPolicies(request: google.cloud.networksecurity.v1.IListAuthorizationPoliciesRequest): Promise<google.cloud.networksecurity.v1.ListAuthorizationPoliciesResponse>;
+
+                    /**
+                     * Calls GetAuthorizationPolicy.
+                     * @param request GetAuthorizationPolicyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and AuthorizationPolicy
+                     */
+                    public getAuthorizationPolicy(request: google.cloud.networksecurity.v1.IGetAuthorizationPolicyRequest, callback: google.cloud.networksecurity.v1.NetworkSecurity.GetAuthorizationPolicyCallback): void;
+
+                    /**
+                     * Calls GetAuthorizationPolicy.
+                     * @param request GetAuthorizationPolicyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getAuthorizationPolicy(request: google.cloud.networksecurity.v1.IGetAuthorizationPolicyRequest): Promise<google.cloud.networksecurity.v1.AuthorizationPolicy>;
+
+                    /**
+                     * Calls CreateAuthorizationPolicy.
+                     * @param request CreateAuthorizationPolicyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createAuthorizationPolicy(request: google.cloud.networksecurity.v1.ICreateAuthorizationPolicyRequest, callback: google.cloud.networksecurity.v1.NetworkSecurity.CreateAuthorizationPolicyCallback): void;
+
+                    /**
+                     * Calls CreateAuthorizationPolicy.
+                     * @param request CreateAuthorizationPolicyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createAuthorizationPolicy(request: google.cloud.networksecurity.v1.ICreateAuthorizationPolicyRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateAuthorizationPolicy.
+                     * @param request UpdateAuthorizationPolicyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateAuthorizationPolicy(request: google.cloud.networksecurity.v1.IUpdateAuthorizationPolicyRequest, callback: google.cloud.networksecurity.v1.NetworkSecurity.UpdateAuthorizationPolicyCallback): void;
+
+                    /**
+                     * Calls UpdateAuthorizationPolicy.
+                     * @param request UpdateAuthorizationPolicyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateAuthorizationPolicy(request: google.cloud.networksecurity.v1.IUpdateAuthorizationPolicyRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteAuthorizationPolicy.
+                     * @param request DeleteAuthorizationPolicyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteAuthorizationPolicy(request: google.cloud.networksecurity.v1.IDeleteAuthorizationPolicyRequest, callback: google.cloud.networksecurity.v1.NetworkSecurity.DeleteAuthorizationPolicyCallback): void;
+
+                    /**
+                     * Calls DeleteAuthorizationPolicy.
+                     * @param request DeleteAuthorizationPolicyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteAuthorizationPolicy(request: google.cloud.networksecurity.v1.IDeleteAuthorizationPolicyRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListServerTlsPolicies.
+                     * @param request ListServerTlsPoliciesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListServerTlsPoliciesResponse
+                     */
+                    public listServerTlsPolicies(request: google.cloud.networksecurity.v1.IListServerTlsPoliciesRequest, callback: google.cloud.networksecurity.v1.NetworkSecurity.ListServerTlsPoliciesCallback): void;
+
+                    /**
+                     * Calls ListServerTlsPolicies.
+                     * @param request ListServerTlsPoliciesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listServerTlsPolicies(request: google.cloud.networksecurity.v1.IListServerTlsPoliciesRequest): Promise<google.cloud.networksecurity.v1.ListServerTlsPoliciesResponse>;
+
+                    /**
+                     * Calls GetServerTlsPolicy.
+                     * @param request GetServerTlsPolicyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ServerTlsPolicy
+                     */
+                    public getServerTlsPolicy(request: google.cloud.networksecurity.v1.IGetServerTlsPolicyRequest, callback: google.cloud.networksecurity.v1.NetworkSecurity.GetServerTlsPolicyCallback): void;
+
+                    /**
+                     * Calls GetServerTlsPolicy.
+                     * @param request GetServerTlsPolicyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getServerTlsPolicy(request: google.cloud.networksecurity.v1.IGetServerTlsPolicyRequest): Promise<google.cloud.networksecurity.v1.ServerTlsPolicy>;
+
+                    /**
+                     * Calls CreateServerTlsPolicy.
+                     * @param request CreateServerTlsPolicyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createServerTlsPolicy(request: google.cloud.networksecurity.v1.ICreateServerTlsPolicyRequest, callback: google.cloud.networksecurity.v1.NetworkSecurity.CreateServerTlsPolicyCallback): void;
+
+                    /**
+                     * Calls CreateServerTlsPolicy.
+                     * @param request CreateServerTlsPolicyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createServerTlsPolicy(request: google.cloud.networksecurity.v1.ICreateServerTlsPolicyRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateServerTlsPolicy.
+                     * @param request UpdateServerTlsPolicyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateServerTlsPolicy(request: google.cloud.networksecurity.v1.IUpdateServerTlsPolicyRequest, callback: google.cloud.networksecurity.v1.NetworkSecurity.UpdateServerTlsPolicyCallback): void;
+
+                    /**
+                     * Calls UpdateServerTlsPolicy.
+                     * @param request UpdateServerTlsPolicyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateServerTlsPolicy(request: google.cloud.networksecurity.v1.IUpdateServerTlsPolicyRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteServerTlsPolicy.
+                     * @param request DeleteServerTlsPolicyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteServerTlsPolicy(request: google.cloud.networksecurity.v1.IDeleteServerTlsPolicyRequest, callback: google.cloud.networksecurity.v1.NetworkSecurity.DeleteServerTlsPolicyCallback): void;
+
+                    /**
+                     * Calls DeleteServerTlsPolicy.
+                     * @param request DeleteServerTlsPolicyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteServerTlsPolicy(request: google.cloud.networksecurity.v1.IDeleteServerTlsPolicyRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListClientTlsPolicies.
+                     * @param request ListClientTlsPoliciesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListClientTlsPoliciesResponse
+                     */
+                    public listClientTlsPolicies(request: google.cloud.networksecurity.v1.IListClientTlsPoliciesRequest, callback: google.cloud.networksecurity.v1.NetworkSecurity.ListClientTlsPoliciesCallback): void;
+
+                    /**
+                     * Calls ListClientTlsPolicies.
+                     * @param request ListClientTlsPoliciesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listClientTlsPolicies(request: google.cloud.networksecurity.v1.IListClientTlsPoliciesRequest): Promise<google.cloud.networksecurity.v1.ListClientTlsPoliciesResponse>;
+
+                    /**
+                     * Calls GetClientTlsPolicy.
+                     * @param request GetClientTlsPolicyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ClientTlsPolicy
+                     */
+                    public getClientTlsPolicy(request: google.cloud.networksecurity.v1.IGetClientTlsPolicyRequest, callback: google.cloud.networksecurity.v1.NetworkSecurity.GetClientTlsPolicyCallback): void;
+
+                    /**
+                     * Calls GetClientTlsPolicy.
+                     * @param request GetClientTlsPolicyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getClientTlsPolicy(request: google.cloud.networksecurity.v1.IGetClientTlsPolicyRequest): Promise<google.cloud.networksecurity.v1.ClientTlsPolicy>;
+
+                    /**
+                     * Calls CreateClientTlsPolicy.
+                     * @param request CreateClientTlsPolicyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createClientTlsPolicy(request: google.cloud.networksecurity.v1.ICreateClientTlsPolicyRequest, callback: google.cloud.networksecurity.v1.NetworkSecurity.CreateClientTlsPolicyCallback): void;
+
+                    /**
+                     * Calls CreateClientTlsPolicy.
+                     * @param request CreateClientTlsPolicyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createClientTlsPolicy(request: google.cloud.networksecurity.v1.ICreateClientTlsPolicyRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateClientTlsPolicy.
+                     * @param request UpdateClientTlsPolicyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateClientTlsPolicy(request: google.cloud.networksecurity.v1.IUpdateClientTlsPolicyRequest, callback: google.cloud.networksecurity.v1.NetworkSecurity.UpdateClientTlsPolicyCallback): void;
+
+                    /**
+                     * Calls UpdateClientTlsPolicy.
+                     * @param request UpdateClientTlsPolicyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateClientTlsPolicy(request: google.cloud.networksecurity.v1.IUpdateClientTlsPolicyRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteClientTlsPolicy.
+                     * @param request DeleteClientTlsPolicyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteClientTlsPolicy(request: google.cloud.networksecurity.v1.IDeleteClientTlsPolicyRequest, callback: google.cloud.networksecurity.v1.NetworkSecurity.DeleteClientTlsPolicyCallback): void;
+
+                    /**
+                     * Calls DeleteClientTlsPolicy.
+                     * @param request DeleteClientTlsPolicyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteClientTlsPolicy(request: google.cloud.networksecurity.v1.IDeleteClientTlsPolicyRequest): Promise<google.longrunning.Operation>;
+                }
+
+                namespace NetworkSecurity {
+
+                    /**
+                     * Callback as used by {@link google.cloud.networksecurity.v1.NetworkSecurity#listAuthorizationPolicies}.
+                     * @param error Error, if any
+                     * @param [response] ListAuthorizationPoliciesResponse
+                     */
+                    type ListAuthorizationPoliciesCallback = (error: (Error|null), response?: google.cloud.networksecurity.v1.ListAuthorizationPoliciesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networksecurity.v1.NetworkSecurity#getAuthorizationPolicy}.
+                     * @param error Error, if any
+                     * @param [response] AuthorizationPolicy
+                     */
+                    type GetAuthorizationPolicyCallback = (error: (Error|null), response?: google.cloud.networksecurity.v1.AuthorizationPolicy) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networksecurity.v1.NetworkSecurity#createAuthorizationPolicy}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateAuthorizationPolicyCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networksecurity.v1.NetworkSecurity#updateAuthorizationPolicy}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateAuthorizationPolicyCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networksecurity.v1.NetworkSecurity#deleteAuthorizationPolicy}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteAuthorizationPolicyCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networksecurity.v1.NetworkSecurity#listServerTlsPolicies}.
+                     * @param error Error, if any
+                     * @param [response] ListServerTlsPoliciesResponse
+                     */
+                    type ListServerTlsPoliciesCallback = (error: (Error|null), response?: google.cloud.networksecurity.v1.ListServerTlsPoliciesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networksecurity.v1.NetworkSecurity#getServerTlsPolicy}.
+                     * @param error Error, if any
+                     * @param [response] ServerTlsPolicy
+                     */
+                    type GetServerTlsPolicyCallback = (error: (Error|null), response?: google.cloud.networksecurity.v1.ServerTlsPolicy) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networksecurity.v1.NetworkSecurity#createServerTlsPolicy}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateServerTlsPolicyCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networksecurity.v1.NetworkSecurity#updateServerTlsPolicy}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateServerTlsPolicyCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networksecurity.v1.NetworkSecurity#deleteServerTlsPolicy}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteServerTlsPolicyCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networksecurity.v1.NetworkSecurity#listClientTlsPolicies}.
+                     * @param error Error, if any
+                     * @param [response] ListClientTlsPoliciesResponse
+                     */
+                    type ListClientTlsPoliciesCallback = (error: (Error|null), response?: google.cloud.networksecurity.v1.ListClientTlsPoliciesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networksecurity.v1.NetworkSecurity#getClientTlsPolicy}.
+                     * @param error Error, if any
+                     * @param [response] ClientTlsPolicy
+                     */
+                    type GetClientTlsPolicyCallback = (error: (Error|null), response?: google.cloud.networksecurity.v1.ClientTlsPolicy) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networksecurity.v1.NetworkSecurity#createClientTlsPolicy}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateClientTlsPolicyCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networksecurity.v1.NetworkSecurity#updateClientTlsPolicy}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateClientTlsPolicyCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networksecurity.v1.NetworkSecurity#deleteClientTlsPolicy}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteClientTlsPolicyCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+                }
+
+                /** Properties of a ServerTlsPolicy. */
+                interface IServerTlsPolicy {
+
+                    /** ServerTlsPolicy name */
+                    name?: (string|null);
+
+                    /** ServerTlsPolicy description */
+                    description?: (string|null);
+
+                    /** ServerTlsPolicy createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ServerTlsPolicy updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ServerTlsPolicy labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** ServerTlsPolicy allowOpen */
+                    allowOpen?: (boolean|null);
+
+                    /** ServerTlsPolicy serverCertificate */
+                    serverCertificate?: (google.cloud.networksecurity.v1.ICertificateProvider|null);
+
+                    /** ServerTlsPolicy mtlsPolicy */
+                    mtlsPolicy?: (google.cloud.networksecurity.v1.ServerTlsPolicy.IMTLSPolicy|null);
+                }
+
+                /** Represents a ServerTlsPolicy. */
+                class ServerTlsPolicy implements IServerTlsPolicy {
+
+                    /**
+                     * Constructs a new ServerTlsPolicy.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networksecurity.v1.IServerTlsPolicy);
+
+                    /** ServerTlsPolicy name. */
+                    public name: string;
+
+                    /** ServerTlsPolicy description. */
+                    public description: string;
+
+                    /** ServerTlsPolicy createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ServerTlsPolicy updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ServerTlsPolicy labels. */
+                    public labels: { [k: string]: string };
+
+                    /** ServerTlsPolicy allowOpen. */
+                    public allowOpen: boolean;
+
+                    /** ServerTlsPolicy serverCertificate. */
+                    public serverCertificate?: (google.cloud.networksecurity.v1.ICertificateProvider|null);
+
+                    /** ServerTlsPolicy mtlsPolicy. */
+                    public mtlsPolicy?: (google.cloud.networksecurity.v1.ServerTlsPolicy.IMTLSPolicy|null);
+
+                    /**
+                     * Creates a new ServerTlsPolicy instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ServerTlsPolicy instance
+                     */
+                    public static create(properties?: google.cloud.networksecurity.v1.IServerTlsPolicy): google.cloud.networksecurity.v1.ServerTlsPolicy;
+
+                    /**
+                     * Encodes the specified ServerTlsPolicy message. Does not implicitly {@link google.cloud.networksecurity.v1.ServerTlsPolicy.verify|verify} messages.
+                     * @param message ServerTlsPolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networksecurity.v1.IServerTlsPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ServerTlsPolicy message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.ServerTlsPolicy.verify|verify} messages.
+                     * @param message ServerTlsPolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networksecurity.v1.IServerTlsPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ServerTlsPolicy message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ServerTlsPolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networksecurity.v1.ServerTlsPolicy;
+
+                    /**
+                     * Decodes a ServerTlsPolicy message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ServerTlsPolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networksecurity.v1.ServerTlsPolicy;
+
+                    /**
+                     * Verifies a ServerTlsPolicy message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ServerTlsPolicy message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ServerTlsPolicy
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networksecurity.v1.ServerTlsPolicy;
+
+                    /**
+                     * Creates a plain object from a ServerTlsPolicy message. Also converts values to other types if specified.
+                     * @param message ServerTlsPolicy
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networksecurity.v1.ServerTlsPolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ServerTlsPolicy to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace ServerTlsPolicy {
+
+                    /** Properties of a MTLSPolicy. */
+                    interface IMTLSPolicy {
+
+                        /** MTLSPolicy clientValidationCa */
+                        clientValidationCa?: (google.cloud.networksecurity.v1.IValidationCA[]|null);
+                    }
+
+                    /** Represents a MTLSPolicy. */
+                    class MTLSPolicy implements IMTLSPolicy {
+
+                        /**
+                         * Constructs a new MTLSPolicy.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.networksecurity.v1.ServerTlsPolicy.IMTLSPolicy);
+
+                        /** MTLSPolicy clientValidationCa. */
+                        public clientValidationCa: google.cloud.networksecurity.v1.IValidationCA[];
+
+                        /**
+                         * Creates a new MTLSPolicy instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns MTLSPolicy instance
+                         */
+                        public static create(properties?: google.cloud.networksecurity.v1.ServerTlsPolicy.IMTLSPolicy): google.cloud.networksecurity.v1.ServerTlsPolicy.MTLSPolicy;
+
+                        /**
+                         * Encodes the specified MTLSPolicy message. Does not implicitly {@link google.cloud.networksecurity.v1.ServerTlsPolicy.MTLSPolicy.verify|verify} messages.
+                         * @param message MTLSPolicy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.networksecurity.v1.ServerTlsPolicy.IMTLSPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified MTLSPolicy message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.ServerTlsPolicy.MTLSPolicy.verify|verify} messages.
+                         * @param message MTLSPolicy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.networksecurity.v1.ServerTlsPolicy.IMTLSPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a MTLSPolicy message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns MTLSPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networksecurity.v1.ServerTlsPolicy.MTLSPolicy;
+
+                        /**
+                         * Decodes a MTLSPolicy message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns MTLSPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networksecurity.v1.ServerTlsPolicy.MTLSPolicy;
+
+                        /**
+                         * Verifies a MTLSPolicy message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a MTLSPolicy message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns MTLSPolicy
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.networksecurity.v1.ServerTlsPolicy.MTLSPolicy;
+
+                        /**
+                         * Creates a plain object from a MTLSPolicy message. Also converts values to other types if specified.
+                         * @param message MTLSPolicy
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.networksecurity.v1.ServerTlsPolicy.MTLSPolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this MTLSPolicy to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+                }
+
+                /** Properties of a ListServerTlsPoliciesRequest. */
+                interface IListServerTlsPoliciesRequest {
+
+                    /** ListServerTlsPoliciesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListServerTlsPoliciesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListServerTlsPoliciesRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListServerTlsPoliciesRequest. */
+                class ListServerTlsPoliciesRequest implements IListServerTlsPoliciesRequest {
+
+                    /**
+                     * Constructs a new ListServerTlsPoliciesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networksecurity.v1.IListServerTlsPoliciesRequest);
+
+                    /** ListServerTlsPoliciesRequest parent. */
+                    public parent: string;
+
+                    /** ListServerTlsPoliciesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListServerTlsPoliciesRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListServerTlsPoliciesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListServerTlsPoliciesRequest instance
+                     */
+                    public static create(properties?: google.cloud.networksecurity.v1.IListServerTlsPoliciesRequest): google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest;
+
+                    /**
+                     * Encodes the specified ListServerTlsPoliciesRequest message. Does not implicitly {@link google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest.verify|verify} messages.
+                     * @param message ListServerTlsPoliciesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networksecurity.v1.IListServerTlsPoliciesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListServerTlsPoliciesRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest.verify|verify} messages.
+                     * @param message ListServerTlsPoliciesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networksecurity.v1.IListServerTlsPoliciesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListServerTlsPoliciesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListServerTlsPoliciesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest;
+
+                    /**
+                     * Decodes a ListServerTlsPoliciesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListServerTlsPoliciesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest;
+
+                    /**
+                     * Verifies a ListServerTlsPoliciesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListServerTlsPoliciesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListServerTlsPoliciesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest;
+
+                    /**
+                     * Creates a plain object from a ListServerTlsPoliciesRequest message. Also converts values to other types if specified.
+                     * @param message ListServerTlsPoliciesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListServerTlsPoliciesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListServerTlsPoliciesResponse. */
+                interface IListServerTlsPoliciesResponse {
+
+                    /** ListServerTlsPoliciesResponse serverTlsPolicies */
+                    serverTlsPolicies?: (google.cloud.networksecurity.v1.IServerTlsPolicy[]|null);
+
+                    /** ListServerTlsPoliciesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListServerTlsPoliciesResponse. */
+                class ListServerTlsPoliciesResponse implements IListServerTlsPoliciesResponse {
+
+                    /**
+                     * Constructs a new ListServerTlsPoliciesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networksecurity.v1.IListServerTlsPoliciesResponse);
+
+                    /** ListServerTlsPoliciesResponse serverTlsPolicies. */
+                    public serverTlsPolicies: google.cloud.networksecurity.v1.IServerTlsPolicy[];
+
+                    /** ListServerTlsPoliciesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListServerTlsPoliciesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListServerTlsPoliciesResponse instance
+                     */
+                    public static create(properties?: google.cloud.networksecurity.v1.IListServerTlsPoliciesResponse): google.cloud.networksecurity.v1.ListServerTlsPoliciesResponse;
+
+                    /**
+                     * Encodes the specified ListServerTlsPoliciesResponse message. Does not implicitly {@link google.cloud.networksecurity.v1.ListServerTlsPoliciesResponse.verify|verify} messages.
+                     * @param message ListServerTlsPoliciesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networksecurity.v1.IListServerTlsPoliciesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListServerTlsPoliciesResponse message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.ListServerTlsPoliciesResponse.verify|verify} messages.
+                     * @param message ListServerTlsPoliciesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networksecurity.v1.IListServerTlsPoliciesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListServerTlsPoliciesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListServerTlsPoliciesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networksecurity.v1.ListServerTlsPoliciesResponse;
+
+                    /**
+                     * Decodes a ListServerTlsPoliciesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListServerTlsPoliciesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networksecurity.v1.ListServerTlsPoliciesResponse;
+
+                    /**
+                     * Verifies a ListServerTlsPoliciesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListServerTlsPoliciesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListServerTlsPoliciesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networksecurity.v1.ListServerTlsPoliciesResponse;
+
+                    /**
+                     * Creates a plain object from a ListServerTlsPoliciesResponse message. Also converts values to other types if specified.
+                     * @param message ListServerTlsPoliciesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networksecurity.v1.ListServerTlsPoliciesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListServerTlsPoliciesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GetServerTlsPolicyRequest. */
+                interface IGetServerTlsPolicyRequest {
+
+                    /** GetServerTlsPolicyRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetServerTlsPolicyRequest. */
+                class GetServerTlsPolicyRequest implements IGetServerTlsPolicyRequest {
+
+                    /**
+                     * Constructs a new GetServerTlsPolicyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networksecurity.v1.IGetServerTlsPolicyRequest);
+
+                    /** GetServerTlsPolicyRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetServerTlsPolicyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetServerTlsPolicyRequest instance
+                     */
+                    public static create(properties?: google.cloud.networksecurity.v1.IGetServerTlsPolicyRequest): google.cloud.networksecurity.v1.GetServerTlsPolicyRequest;
+
+                    /**
+                     * Encodes the specified GetServerTlsPolicyRequest message. Does not implicitly {@link google.cloud.networksecurity.v1.GetServerTlsPolicyRequest.verify|verify} messages.
+                     * @param message GetServerTlsPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networksecurity.v1.IGetServerTlsPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetServerTlsPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.GetServerTlsPolicyRequest.verify|verify} messages.
+                     * @param message GetServerTlsPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networksecurity.v1.IGetServerTlsPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetServerTlsPolicyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetServerTlsPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networksecurity.v1.GetServerTlsPolicyRequest;
+
+                    /**
+                     * Decodes a GetServerTlsPolicyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetServerTlsPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networksecurity.v1.GetServerTlsPolicyRequest;
+
+                    /**
+                     * Verifies a GetServerTlsPolicyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetServerTlsPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetServerTlsPolicyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networksecurity.v1.GetServerTlsPolicyRequest;
+
+                    /**
+                     * Creates a plain object from a GetServerTlsPolicyRequest message. Also converts values to other types if specified.
+                     * @param message GetServerTlsPolicyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networksecurity.v1.GetServerTlsPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetServerTlsPolicyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a CreateServerTlsPolicyRequest. */
+                interface ICreateServerTlsPolicyRequest {
+
+                    /** CreateServerTlsPolicyRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateServerTlsPolicyRequest serverTlsPolicyId */
+                    serverTlsPolicyId?: (string|null);
+
+                    /** CreateServerTlsPolicyRequest serverTlsPolicy */
+                    serverTlsPolicy?: (google.cloud.networksecurity.v1.IServerTlsPolicy|null);
+                }
+
+                /** Represents a CreateServerTlsPolicyRequest. */
+                class CreateServerTlsPolicyRequest implements ICreateServerTlsPolicyRequest {
+
+                    /**
+                     * Constructs a new CreateServerTlsPolicyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networksecurity.v1.ICreateServerTlsPolicyRequest);
+
+                    /** CreateServerTlsPolicyRequest parent. */
+                    public parent: string;
+
+                    /** CreateServerTlsPolicyRequest serverTlsPolicyId. */
+                    public serverTlsPolicyId: string;
+
+                    /** CreateServerTlsPolicyRequest serverTlsPolicy. */
+                    public serverTlsPolicy?: (google.cloud.networksecurity.v1.IServerTlsPolicy|null);
+
+                    /**
+                     * Creates a new CreateServerTlsPolicyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateServerTlsPolicyRequest instance
+                     */
+                    public static create(properties?: google.cloud.networksecurity.v1.ICreateServerTlsPolicyRequest): google.cloud.networksecurity.v1.CreateServerTlsPolicyRequest;
+
+                    /**
+                     * Encodes the specified CreateServerTlsPolicyRequest message. Does not implicitly {@link google.cloud.networksecurity.v1.CreateServerTlsPolicyRequest.verify|verify} messages.
+                     * @param message CreateServerTlsPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networksecurity.v1.ICreateServerTlsPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateServerTlsPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.CreateServerTlsPolicyRequest.verify|verify} messages.
+                     * @param message CreateServerTlsPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networksecurity.v1.ICreateServerTlsPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateServerTlsPolicyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateServerTlsPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networksecurity.v1.CreateServerTlsPolicyRequest;
+
+                    /**
+                     * Decodes a CreateServerTlsPolicyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateServerTlsPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networksecurity.v1.CreateServerTlsPolicyRequest;
+
+                    /**
+                     * Verifies a CreateServerTlsPolicyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateServerTlsPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateServerTlsPolicyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networksecurity.v1.CreateServerTlsPolicyRequest;
+
+                    /**
+                     * Creates a plain object from a CreateServerTlsPolicyRequest message. Also converts values to other types if specified.
+                     * @param message CreateServerTlsPolicyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networksecurity.v1.CreateServerTlsPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateServerTlsPolicyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an UpdateServerTlsPolicyRequest. */
+                interface IUpdateServerTlsPolicyRequest {
+
+                    /** UpdateServerTlsPolicyRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateServerTlsPolicyRequest serverTlsPolicy */
+                    serverTlsPolicy?: (google.cloud.networksecurity.v1.IServerTlsPolicy|null);
+                }
+
+                /** Represents an UpdateServerTlsPolicyRequest. */
+                class UpdateServerTlsPolicyRequest implements IUpdateServerTlsPolicyRequest {
+
+                    /**
+                     * Constructs a new UpdateServerTlsPolicyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networksecurity.v1.IUpdateServerTlsPolicyRequest);
+
+                    /** UpdateServerTlsPolicyRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateServerTlsPolicyRequest serverTlsPolicy. */
+                    public serverTlsPolicy?: (google.cloud.networksecurity.v1.IServerTlsPolicy|null);
+
+                    /**
+                     * Creates a new UpdateServerTlsPolicyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateServerTlsPolicyRequest instance
+                     */
+                    public static create(properties?: google.cloud.networksecurity.v1.IUpdateServerTlsPolicyRequest): google.cloud.networksecurity.v1.UpdateServerTlsPolicyRequest;
+
+                    /**
+                     * Encodes the specified UpdateServerTlsPolicyRequest message. Does not implicitly {@link google.cloud.networksecurity.v1.UpdateServerTlsPolicyRequest.verify|verify} messages.
+                     * @param message UpdateServerTlsPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networksecurity.v1.IUpdateServerTlsPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateServerTlsPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.UpdateServerTlsPolicyRequest.verify|verify} messages.
+                     * @param message UpdateServerTlsPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networksecurity.v1.IUpdateServerTlsPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateServerTlsPolicyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateServerTlsPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networksecurity.v1.UpdateServerTlsPolicyRequest;
+
+                    /**
+                     * Decodes an UpdateServerTlsPolicyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateServerTlsPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networksecurity.v1.UpdateServerTlsPolicyRequest;
+
+                    /**
+                     * Verifies an UpdateServerTlsPolicyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateServerTlsPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateServerTlsPolicyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networksecurity.v1.UpdateServerTlsPolicyRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateServerTlsPolicyRequest message. Also converts values to other types if specified.
+                     * @param message UpdateServerTlsPolicyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networksecurity.v1.UpdateServerTlsPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateServerTlsPolicyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DeleteServerTlsPolicyRequest. */
+                interface IDeleteServerTlsPolicyRequest {
+
+                    /** DeleteServerTlsPolicyRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteServerTlsPolicyRequest. */
+                class DeleteServerTlsPolicyRequest implements IDeleteServerTlsPolicyRequest {
+
+                    /**
+                     * Constructs a new DeleteServerTlsPolicyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networksecurity.v1.IDeleteServerTlsPolicyRequest);
+
+                    /** DeleteServerTlsPolicyRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteServerTlsPolicyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteServerTlsPolicyRequest instance
+                     */
+                    public static create(properties?: google.cloud.networksecurity.v1.IDeleteServerTlsPolicyRequest): google.cloud.networksecurity.v1.DeleteServerTlsPolicyRequest;
+
+                    /**
+                     * Encodes the specified DeleteServerTlsPolicyRequest message. Does not implicitly {@link google.cloud.networksecurity.v1.DeleteServerTlsPolicyRequest.verify|verify} messages.
+                     * @param message DeleteServerTlsPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networksecurity.v1.IDeleteServerTlsPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteServerTlsPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.DeleteServerTlsPolicyRequest.verify|verify} messages.
+                     * @param message DeleteServerTlsPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networksecurity.v1.IDeleteServerTlsPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteServerTlsPolicyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteServerTlsPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networksecurity.v1.DeleteServerTlsPolicyRequest;
+
+                    /**
+                     * Decodes a DeleteServerTlsPolicyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteServerTlsPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networksecurity.v1.DeleteServerTlsPolicyRequest;
+
+                    /**
+                     * Verifies a DeleteServerTlsPolicyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteServerTlsPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteServerTlsPolicyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networksecurity.v1.DeleteServerTlsPolicyRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteServerTlsPolicyRequest message. Also converts values to other types if specified.
+                     * @param message DeleteServerTlsPolicyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networksecurity.v1.DeleteServerTlsPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteServerTlsPolicyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+            }
+
             /** Namespace v1beta1. */
             namespace v1beta1 {
 

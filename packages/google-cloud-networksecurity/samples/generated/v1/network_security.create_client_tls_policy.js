@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START networksecurity_v1beta1_generated_NetworkSecurity_DeleteAuthorizationPolicy_async]
+function main(parent, clientTlsPolicyId, clientTlsPolicy) {
+  // [START networksecurity_v1_generated_NetworkSecurity_CreateClientTlsPolicy_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,31 +29,43 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. A name of the AuthorizationPolicy to delete. Must be in the
-   *  format `projects/{project}/locations/{location}/authorizationPolicies/*`.
+   *  Required. The parent resource of the ClientTlsPolicy. Must be in
+   *  the format `projects/* /locations/{location}`.
    */
-  // const name = 'abc123'
+  // const parent = 'abc123'
+  /**
+   *  Required. Short name of the ClientTlsPolicy resource to be created. This value should
+   *  be 1-63 characters long, containing only letters, numbers, hyphens, and
+   *  underscores, and should not start with a number. E.g. "client_mtls_policy".
+   */
+  // const clientTlsPolicyId = 'abc123'
+  /**
+   *  Required. ClientTlsPolicy resource to be created.
+   */
+  // const clientTlsPolicy = {}
 
   // Imports the Networksecurity library
-  const {NetworkSecurityClient} = require('@google-cloud/network-security').v1beta1;
+  const {NetworkSecurityClient} = require('@google-cloud/networksecurity').v1;
 
   // Instantiates a client
   const networksecurityClient = new NetworkSecurityClient();
 
-  async function callDeleteAuthorizationPolicy() {
+  async function callCreateClientTlsPolicy() {
     // Construct request
     const request = {
-      name,
+      parent,
+      clientTlsPolicyId,
+      clientTlsPolicy,
     };
 
     // Run request
-    const [operation] = await networksecurityClient.deleteAuthorizationPolicy(request);
+    const [operation] = await networksecurityClient.createClientTlsPolicy(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callDeleteAuthorizationPolicy();
-  // [END networksecurity_v1beta1_generated_NetworkSecurity_DeleteAuthorizationPolicy_async]
+  callCreateClientTlsPolicy();
+  // [END networksecurity_v1_generated_NetworkSecurity_CreateClientTlsPolicy_async]
 }
 
 process.on('unhandledRejection', err => {

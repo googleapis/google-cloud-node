@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START networksecurity_v1beta1_generated_NetworkSecurity_DeleteAuthorizationPolicy_async]
+function main(clientTlsPolicy) {
+  // [START networksecurity_v1_generated_NetworkSecurity_UpdateClientTlsPolicy_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,31 +29,39 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. A name of the AuthorizationPolicy to delete. Must be in the
-   *  format `projects/{project}/locations/{location}/authorizationPolicies/*`.
+   *  Optional. Field mask is used to specify the fields to be overwritten in the
+   *  ClientTlsPolicy resource by the update.  The fields
+   *  specified in the update_mask are relative to the resource, not
+   *  the full request. A field will be overwritten if it is in the
+   *  mask. If the user does not provide a mask then all fields will be
+   *  overwritten.
    */
-  // const name = 'abc123'
+  // const updateMask = {}
+  /**
+   *  Required. Updated ClientTlsPolicy resource.
+   */
+  // const clientTlsPolicy = {}
 
   // Imports the Networksecurity library
-  const {NetworkSecurityClient} = require('@google-cloud/network-security').v1beta1;
+  const {NetworkSecurityClient} = require('@google-cloud/networksecurity').v1;
 
   // Instantiates a client
   const networksecurityClient = new NetworkSecurityClient();
 
-  async function callDeleteAuthorizationPolicy() {
+  async function callUpdateClientTlsPolicy() {
     // Construct request
     const request = {
-      name,
+      clientTlsPolicy,
     };
 
     // Run request
-    const [operation] = await networksecurityClient.deleteAuthorizationPolicy(request);
+    const [operation] = await networksecurityClient.updateClientTlsPolicy(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callDeleteAuthorizationPolicy();
-  // [END networksecurity_v1beta1_generated_NetworkSecurity_DeleteAuthorizationPolicy_async]
+  callUpdateClientTlsPolicy();
+  // [END networksecurity_v1_generated_NetworkSecurity_UpdateClientTlsPolicy_async]
 }
 
 process.on('unhandledRejection', err => {

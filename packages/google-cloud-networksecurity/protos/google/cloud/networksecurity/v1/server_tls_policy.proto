@@ -1,4 +1,4 @@
-// Copyright 2021 Google LLC
+// Copyright 2022 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,21 +14,21 @@
 
 syntax = "proto3";
 
-package google.cloud.networksecurity.v1beta1;
+package google.cloud.networksecurity.v1;
 
 import "google/api/field_behavior.proto";
 import "google/api/resource.proto";
-import "google/cloud/networksecurity/v1beta1/tls.proto";
+import "google/cloud/networksecurity/v1/tls.proto";
 import "google/protobuf/field_mask.proto";
 import "google/protobuf/timestamp.proto";
 
-option csharp_namespace = "Google.Cloud.NetworkSecurity.V1Beta1";
-option go_package = "google.golang.org/genproto/googleapis/cloud/networksecurity/v1beta1;networksecurity";
+option csharp_namespace = "Google.Cloud.NetworkSecurity.V1";
+option go_package = "google.golang.org/genproto/googleapis/cloud/networksecurity/v1;networksecurity";
 option java_multiple_files = true;
 option java_outer_classname = "ServerTlsPolicyProto";
-option java_package = "com.google.cloud.networksecurity.v1beta1";
-option php_namespace = "Google\\Cloud\\NetworkSecurity\\V1beta1";
-option ruby_package = "Google::Cloud::NetworkSecurity::V1beta1";
+option java_package = "com.google.cloud.networksecurity.v1";
+option php_namespace = "Google\\Cloud\\NetworkSecurity\\V1";
+option ruby_package = "Google::Cloud::NetworkSecurity::V1";
 
 // ServerTlsPolicy is a resource that specifies how a server should authenticate
 // incoming requests. This resource itself does not affect configuration unless
@@ -55,12 +55,10 @@ message ServerTlsPolicy {
   string description = 2;
 
   // Output only. The timestamp when the resource was created.
-  google.protobuf.Timestamp create_time = 3
-      [(google.api.field_behavior) = OUTPUT_ONLY];
+  google.protobuf.Timestamp create_time = 3 [(google.api.field_behavior) = OUTPUT_ONLY];
 
   // Output only. The timestamp when the resource was updated.
-  google.protobuf.Timestamp update_time = 4
-      [(google.api.field_behavior) = OUTPUT_ONLY];
+  google.protobuf.Timestamp update_time = 4 [(google.api.field_behavior) = OUTPUT_ONLY];
 
   // Set of label tags associated with the resource.
   map<string, string> labels = 5;
@@ -147,15 +145,13 @@ message CreateServerTlsPolicyRequest {
     }
   ];
 
-  // Required. Short name of the ServerTlsPolicy resource to be created. This
-  // value should be 1-63 characters long, containing only letters, numbers,
-  // hyphens, and underscores, and should not start with a number. E.g.
-  // "server_mtls_policy".
+  // Required. Short name of the ServerTlsPolicy resource to be created. This value should
+  // be 1-63 characters long, containing only letters, numbers, hyphens, and
+  // underscores, and should not start with a number. E.g. "server_mtls_policy".
   string server_tls_policy_id = 2 [(google.api.field_behavior) = REQUIRED];
 
   // Required. ServerTlsPolicy resource to be created.
-  ServerTlsPolicy server_tls_policy = 3
-      [(google.api.field_behavior) = REQUIRED];
+  ServerTlsPolicy server_tls_policy = 3 [(google.api.field_behavior) = REQUIRED];
 }
 
 // Request used by UpdateServerTlsPolicy method.
@@ -166,12 +162,10 @@ message UpdateServerTlsPolicyRequest {
   // the full request. A field will be overwritten if it is in the
   // mask. If the user does not provide a mask then all fields will be
   // overwritten.
-  google.protobuf.FieldMask update_mask = 1
-      [(google.api.field_behavior) = OPTIONAL];
+  google.protobuf.FieldMask update_mask = 1 [(google.api.field_behavior) = OPTIONAL];
 
   // Required. Updated ServerTlsPolicy resource.
-  ServerTlsPolicy server_tls_policy = 2
-      [(google.api.field_behavior) = REQUIRED];
+  ServerTlsPolicy server_tls_policy = 2 [(google.api.field_behavior) = REQUIRED];
 }
 
 // Request used by the DeleteServerTlsPolicy method.

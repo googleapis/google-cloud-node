@@ -5,14 +5,14 @@
         "language": "TYPESCRIPT",
         "apis": [
             {
-                "id": "google.cloud.networksecurity.v1beta1",
-                "version": "v1beta1"
+                "id": "google.cloud.networksecurity.v1",
+                "version": "v1"
             }
         ]
     },
     "snippets": [
         {
-            "regionTag": "networksecurity_v1beta1_generated_NetworkSecurity_ListAuthorizationPolicies_async",
+            "regionTag": "networksecurity_v1_generated_NetworkSecurity_ListAuthorizationPolicies_async",
             "title": "NetworkSecurity listAuthorizationPolicies Sample",
             "origin": "API_DEFINITION",
             "description": " Lists AuthorizationPolicies in a given project and location.",
@@ -28,7 +28,7 @@
             ],
             "clientMethod": {
                 "shortName": "ListAuthorizationPolicies",
-                "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity.ListAuthorizationPolicies",
+                "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.ListAuthorizationPolicies",
                 "async": true,
                 "parameters": [
                     {
@@ -44,23 +44,23 @@
                         "type": "TYPE_STRING"
                     }
                 ],
-                "resultType": ".google.cloud.networksecurity.v1beta1.ListAuthorizationPoliciesResponse",
+                "resultType": ".google.cloud.networksecurity.v1.ListAuthorizationPoliciesResponse",
                 "client": {
                     "shortName": "NetworkSecurityClient",
-                    "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurityClient"
+                    "fullName": "google.cloud.networksecurity.v1.NetworkSecurityClient"
                 },
                 "method": {
                     "shortName": "ListAuthorizationPolicies",
-                    "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity.ListAuthorizationPolicies",
+                    "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.ListAuthorizationPolicies",
                     "service": {
                         "shortName": "NetworkSecurity",
-                        "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity"
+                        "fullName": "google.cloud.networksecurity.v1.NetworkSecurity"
                     }
                 }
             }
         },
         {
-            "regionTag": "networksecurity_v1beta1_generated_NetworkSecurity_GetAuthorizationPolicy_async",
+            "regionTag": "networksecurity_v1_generated_NetworkSecurity_GetAuthorizationPolicy_async",
             "title": "NetworkSecurity getAuthorizationPolicy Sample",
             "origin": "API_DEFINITION",
             "description": " Gets details of a single AuthorizationPolicy.",
@@ -76,7 +76,7 @@
             ],
             "clientMethod": {
                 "shortName": "GetAuthorizationPolicy",
-                "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity.GetAuthorizationPolicy",
+                "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.GetAuthorizationPolicy",
                 "async": true,
                 "parameters": [
                     {
@@ -84,23 +84,23 @@
                         "type": "TYPE_STRING"
                     }
                 ],
-                "resultType": ".google.cloud.networksecurity.v1beta1.AuthorizationPolicy",
+                "resultType": ".google.cloud.networksecurity.v1.AuthorizationPolicy",
                 "client": {
                     "shortName": "NetworkSecurityClient",
-                    "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurityClient"
+                    "fullName": "google.cloud.networksecurity.v1.NetworkSecurityClient"
                 },
                 "method": {
                     "shortName": "GetAuthorizationPolicy",
-                    "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity.GetAuthorizationPolicy",
+                    "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.GetAuthorizationPolicy",
                     "service": {
                         "shortName": "NetworkSecurity",
-                        "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity"
+                        "fullName": "google.cloud.networksecurity.v1.NetworkSecurity"
                     }
                 }
             }
         },
         {
-            "regionTag": "networksecurity_v1beta1_generated_NetworkSecurity_CreateAuthorizationPolicy_async",
+            "regionTag": "networksecurity_v1_generated_NetworkSecurity_CreateAuthorizationPolicy_async",
             "title": "NetworkSecurity createAuthorizationPolicy Sample",
             "origin": "API_DEFINITION",
             "description": " Creates a new AuthorizationPolicy in a given project and location.",
@@ -116,7 +116,7 @@
             ],
             "clientMethod": {
                 "shortName": "CreateAuthorizationPolicy",
-                "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity.CreateAuthorizationPolicy",
+                "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.CreateAuthorizationPolicy",
                 "async": true,
                 "parameters": [
                     {
@@ -129,26 +129,26 @@
                     },
                     {
                         "name": "authorization_policy",
-                        "type": ".google.cloud.networksecurity.v1beta1.AuthorizationPolicy"
+                        "type": ".google.cloud.networksecurity.v1.AuthorizationPolicy"
                     }
                 ],
                 "resultType": ".google.longrunning.Operation",
                 "client": {
                     "shortName": "NetworkSecurityClient",
-                    "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurityClient"
+                    "fullName": "google.cloud.networksecurity.v1.NetworkSecurityClient"
                 },
                 "method": {
                     "shortName": "CreateAuthorizationPolicy",
-                    "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity.CreateAuthorizationPolicy",
+                    "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.CreateAuthorizationPolicy",
                     "service": {
                         "shortName": "NetworkSecurity",
-                        "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity"
+                        "fullName": "google.cloud.networksecurity.v1.NetworkSecurity"
                     }
                 }
             }
         },
         {
-            "regionTag": "networksecurity_v1beta1_generated_NetworkSecurity_UpdateAuthorizationPolicy_async",
+            "regionTag": "networksecurity_v1_generated_NetworkSecurity_UpdateAuthorizationPolicy_async",
             "title": "NetworkSecurity updateAuthorizationPolicy Sample",
             "origin": "API_DEFINITION",
             "description": " Updates the parameters of a single AuthorizationPolicy.",
@@ -164,7 +164,7 @@
             ],
             "clientMethod": {
                 "shortName": "UpdateAuthorizationPolicy",
-                "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity.UpdateAuthorizationPolicy",
+                "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.UpdateAuthorizationPolicy",
                 "async": true,
                 "parameters": [
                     {
@@ -173,26 +173,26 @@
                     },
                     {
                         "name": "authorization_policy",
-                        "type": ".google.cloud.networksecurity.v1beta1.AuthorizationPolicy"
+                        "type": ".google.cloud.networksecurity.v1.AuthorizationPolicy"
                     }
                 ],
                 "resultType": ".google.longrunning.Operation",
                 "client": {
                     "shortName": "NetworkSecurityClient",
-                    "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurityClient"
+                    "fullName": "google.cloud.networksecurity.v1.NetworkSecurityClient"
                 },
                 "method": {
                     "shortName": "UpdateAuthorizationPolicy",
-                    "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity.UpdateAuthorizationPolicy",
+                    "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.UpdateAuthorizationPolicy",
                     "service": {
                         "shortName": "NetworkSecurity",
-                        "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity"
+                        "fullName": "google.cloud.networksecurity.v1.NetworkSecurity"
                     }
                 }
             }
         },
         {
-            "regionTag": "networksecurity_v1beta1_generated_NetworkSecurity_DeleteAuthorizationPolicy_async",
+            "regionTag": "networksecurity_v1_generated_NetworkSecurity_DeleteAuthorizationPolicy_async",
             "title": "NetworkSecurity deleteAuthorizationPolicy Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes a single AuthorizationPolicy.",
@@ -208,7 +208,7 @@
             ],
             "clientMethod": {
                 "shortName": "DeleteAuthorizationPolicy",
-                "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity.DeleteAuthorizationPolicy",
+                "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.DeleteAuthorizationPolicy",
                 "async": true,
                 "parameters": [
                     {
@@ -219,20 +219,20 @@
                 "resultType": ".google.longrunning.Operation",
                 "client": {
                     "shortName": "NetworkSecurityClient",
-                    "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurityClient"
+                    "fullName": "google.cloud.networksecurity.v1.NetworkSecurityClient"
                 },
                 "method": {
                     "shortName": "DeleteAuthorizationPolicy",
-                    "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity.DeleteAuthorizationPolicy",
+                    "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.DeleteAuthorizationPolicy",
                     "service": {
                         "shortName": "NetworkSecurity",
-                        "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity"
+                        "fullName": "google.cloud.networksecurity.v1.NetworkSecurity"
                     }
                 }
             }
         },
         {
-            "regionTag": "networksecurity_v1beta1_generated_NetworkSecurity_ListServerTlsPolicies_async",
+            "regionTag": "networksecurity_v1_generated_NetworkSecurity_ListServerTlsPolicies_async",
             "title": "NetworkSecurity listServerTlsPolicies Sample",
             "origin": "API_DEFINITION",
             "description": " Lists ServerTlsPolicies in a given project and location.",
@@ -248,7 +248,7 @@
             ],
             "clientMethod": {
                 "shortName": "ListServerTlsPolicies",
-                "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity.ListServerTlsPolicies",
+                "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.ListServerTlsPolicies",
                 "async": true,
                 "parameters": [
                     {
@@ -264,23 +264,23 @@
                         "type": "TYPE_STRING"
                     }
                 ],
-                "resultType": ".google.cloud.networksecurity.v1beta1.ListServerTlsPoliciesResponse",
+                "resultType": ".google.cloud.networksecurity.v1.ListServerTlsPoliciesResponse",
                 "client": {
                     "shortName": "NetworkSecurityClient",
-                    "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurityClient"
+                    "fullName": "google.cloud.networksecurity.v1.NetworkSecurityClient"
                 },
                 "method": {
                     "shortName": "ListServerTlsPolicies",
-                    "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity.ListServerTlsPolicies",
+                    "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.ListServerTlsPolicies",
                     "service": {
                         "shortName": "NetworkSecurity",
-                        "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity"
+                        "fullName": "google.cloud.networksecurity.v1.NetworkSecurity"
                     }
                 }
             }
         },
         {
-            "regionTag": "networksecurity_v1beta1_generated_NetworkSecurity_GetServerTlsPolicy_async",
+            "regionTag": "networksecurity_v1_generated_NetworkSecurity_GetServerTlsPolicy_async",
             "title": "NetworkSecurity getServerTlsPolicy Sample",
             "origin": "API_DEFINITION",
             "description": " Gets details of a single ServerTlsPolicy.",
@@ -296,7 +296,7 @@
             ],
             "clientMethod": {
                 "shortName": "GetServerTlsPolicy",
-                "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity.GetServerTlsPolicy",
+                "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.GetServerTlsPolicy",
                 "async": true,
                 "parameters": [
                     {
@@ -304,23 +304,23 @@
                         "type": "TYPE_STRING"
                     }
                 ],
-                "resultType": ".google.cloud.networksecurity.v1beta1.ServerTlsPolicy",
+                "resultType": ".google.cloud.networksecurity.v1.ServerTlsPolicy",
                 "client": {
                     "shortName": "NetworkSecurityClient",
-                    "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurityClient"
+                    "fullName": "google.cloud.networksecurity.v1.NetworkSecurityClient"
                 },
                 "method": {
                     "shortName": "GetServerTlsPolicy",
-                    "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity.GetServerTlsPolicy",
+                    "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.GetServerTlsPolicy",
                     "service": {
                         "shortName": "NetworkSecurity",
-                        "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity"
+                        "fullName": "google.cloud.networksecurity.v1.NetworkSecurity"
                     }
                 }
             }
         },
         {
-            "regionTag": "networksecurity_v1beta1_generated_NetworkSecurity_CreateServerTlsPolicy_async",
+            "regionTag": "networksecurity_v1_generated_NetworkSecurity_CreateServerTlsPolicy_async",
             "title": "NetworkSecurity createServerTlsPolicy Sample",
             "origin": "API_DEFINITION",
             "description": " Creates a new ServerTlsPolicy in a given project and location.",
@@ -330,13 +330,13 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 68,
+                    "end": 67,
                     "type": "FULL"
                 }
             ],
             "clientMethod": {
                 "shortName": "CreateServerTlsPolicy",
-                "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity.CreateServerTlsPolicy",
+                "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.CreateServerTlsPolicy",
                 "async": true,
                 "parameters": [
                     {
@@ -349,26 +349,26 @@
                     },
                     {
                         "name": "server_tls_policy",
-                        "type": ".google.cloud.networksecurity.v1beta1.ServerTlsPolicy"
+                        "type": ".google.cloud.networksecurity.v1.ServerTlsPolicy"
                     }
                 ],
                 "resultType": ".google.longrunning.Operation",
                 "client": {
                     "shortName": "NetworkSecurityClient",
-                    "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurityClient"
+                    "fullName": "google.cloud.networksecurity.v1.NetworkSecurityClient"
                 },
                 "method": {
                     "shortName": "CreateServerTlsPolicy",
-                    "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity.CreateServerTlsPolicy",
+                    "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.CreateServerTlsPolicy",
                     "service": {
                         "shortName": "NetworkSecurity",
-                        "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity"
+                        "fullName": "google.cloud.networksecurity.v1.NetworkSecurity"
                     }
                 }
             }
         },
         {
-            "regionTag": "networksecurity_v1beta1_generated_NetworkSecurity_UpdateServerTlsPolicy_async",
+            "regionTag": "networksecurity_v1_generated_NetworkSecurity_UpdateServerTlsPolicy_async",
             "title": "NetworkSecurity updateServerTlsPolicy Sample",
             "origin": "API_DEFINITION",
             "description": " Updates the parameters of a single ServerTlsPolicy.",
@@ -384,7 +384,7 @@
             ],
             "clientMethod": {
                 "shortName": "UpdateServerTlsPolicy",
-                "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity.UpdateServerTlsPolicy",
+                "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.UpdateServerTlsPolicy",
                 "async": true,
                 "parameters": [
                     {
@@ -393,26 +393,26 @@
                     },
                     {
                         "name": "server_tls_policy",
-                        "type": ".google.cloud.networksecurity.v1beta1.ServerTlsPolicy"
+                        "type": ".google.cloud.networksecurity.v1.ServerTlsPolicy"
                     }
                 ],
                 "resultType": ".google.longrunning.Operation",
                 "client": {
                     "shortName": "NetworkSecurityClient",
-                    "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurityClient"
+                    "fullName": "google.cloud.networksecurity.v1.NetworkSecurityClient"
                 },
                 "method": {
                     "shortName": "UpdateServerTlsPolicy",
-                    "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity.UpdateServerTlsPolicy",
+                    "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.UpdateServerTlsPolicy",
                     "service": {
                         "shortName": "NetworkSecurity",
-                        "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity"
+                        "fullName": "google.cloud.networksecurity.v1.NetworkSecurity"
                     }
                 }
             }
         },
         {
-            "regionTag": "networksecurity_v1beta1_generated_NetworkSecurity_DeleteServerTlsPolicy_async",
+            "regionTag": "networksecurity_v1_generated_NetworkSecurity_DeleteServerTlsPolicy_async",
             "title": "NetworkSecurity deleteServerTlsPolicy Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes a single ServerTlsPolicy.",
@@ -428,7 +428,7 @@
             ],
             "clientMethod": {
                 "shortName": "DeleteServerTlsPolicy",
-                "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity.DeleteServerTlsPolicy",
+                "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.DeleteServerTlsPolicy",
                 "async": true,
                 "parameters": [
                     {
@@ -439,20 +439,20 @@
                 "resultType": ".google.longrunning.Operation",
                 "client": {
                     "shortName": "NetworkSecurityClient",
-                    "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurityClient"
+                    "fullName": "google.cloud.networksecurity.v1.NetworkSecurityClient"
                 },
                 "method": {
                     "shortName": "DeleteServerTlsPolicy",
-                    "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity.DeleteServerTlsPolicy",
+                    "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.DeleteServerTlsPolicy",
                     "service": {
                         "shortName": "NetworkSecurity",
-                        "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity"
+                        "fullName": "google.cloud.networksecurity.v1.NetworkSecurity"
                     }
                 }
             }
         },
         {
-            "regionTag": "networksecurity_v1beta1_generated_NetworkSecurity_ListClientTlsPolicies_async",
+            "regionTag": "networksecurity_v1_generated_NetworkSecurity_ListClientTlsPolicies_async",
             "title": "NetworkSecurity listClientTlsPolicies Sample",
             "origin": "API_DEFINITION",
             "description": " Lists ClientTlsPolicies in a given project and location.",
@@ -468,7 +468,7 @@
             ],
             "clientMethod": {
                 "shortName": "ListClientTlsPolicies",
-                "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity.ListClientTlsPolicies",
+                "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.ListClientTlsPolicies",
                 "async": true,
                 "parameters": [
                     {
@@ -484,23 +484,23 @@
                         "type": "TYPE_STRING"
                     }
                 ],
-                "resultType": ".google.cloud.networksecurity.v1beta1.ListClientTlsPoliciesResponse",
+                "resultType": ".google.cloud.networksecurity.v1.ListClientTlsPoliciesResponse",
                 "client": {
                     "shortName": "NetworkSecurityClient",
-                    "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurityClient"
+                    "fullName": "google.cloud.networksecurity.v1.NetworkSecurityClient"
                 },
                 "method": {
                     "shortName": "ListClientTlsPolicies",
-                    "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity.ListClientTlsPolicies",
+                    "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.ListClientTlsPolicies",
                     "service": {
                         "shortName": "NetworkSecurity",
-                        "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity"
+                        "fullName": "google.cloud.networksecurity.v1.NetworkSecurity"
                     }
                 }
             }
         },
         {
-            "regionTag": "networksecurity_v1beta1_generated_NetworkSecurity_GetClientTlsPolicy_async",
+            "regionTag": "networksecurity_v1_generated_NetworkSecurity_GetClientTlsPolicy_async",
             "title": "NetworkSecurity getClientTlsPolicy Sample",
             "origin": "API_DEFINITION",
             "description": " Gets details of a single ClientTlsPolicy.",
@@ -516,7 +516,7 @@
             ],
             "clientMethod": {
                 "shortName": "GetClientTlsPolicy",
-                "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity.GetClientTlsPolicy",
+                "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.GetClientTlsPolicy",
                 "async": true,
                 "parameters": [
                     {
@@ -524,23 +524,23 @@
                         "type": "TYPE_STRING"
                     }
                 ],
-                "resultType": ".google.cloud.networksecurity.v1beta1.ClientTlsPolicy",
+                "resultType": ".google.cloud.networksecurity.v1.ClientTlsPolicy",
                 "client": {
                     "shortName": "NetworkSecurityClient",
-                    "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurityClient"
+                    "fullName": "google.cloud.networksecurity.v1.NetworkSecurityClient"
                 },
                 "method": {
                     "shortName": "GetClientTlsPolicy",
-                    "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity.GetClientTlsPolicy",
+                    "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.GetClientTlsPolicy",
                     "service": {
                         "shortName": "NetworkSecurity",
-                        "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity"
+                        "fullName": "google.cloud.networksecurity.v1.NetworkSecurity"
                     }
                 }
             }
         },
         {
-            "regionTag": "networksecurity_v1beta1_generated_NetworkSecurity_CreateClientTlsPolicy_async",
+            "regionTag": "networksecurity_v1_generated_NetworkSecurity_CreateClientTlsPolicy_async",
             "title": "NetworkSecurity createClientTlsPolicy Sample",
             "origin": "API_DEFINITION",
             "description": " Creates a new ClientTlsPolicy in a given project and location.",
@@ -550,13 +550,13 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 68,
+                    "end": 67,
                     "type": "FULL"
                 }
             ],
             "clientMethod": {
                 "shortName": "CreateClientTlsPolicy",
-                "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity.CreateClientTlsPolicy",
+                "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.CreateClientTlsPolicy",
                 "async": true,
                 "parameters": [
                     {
@@ -569,26 +569,26 @@
                     },
                     {
                         "name": "client_tls_policy",
-                        "type": ".google.cloud.networksecurity.v1beta1.ClientTlsPolicy"
+                        "type": ".google.cloud.networksecurity.v1.ClientTlsPolicy"
                     }
                 ],
                 "resultType": ".google.longrunning.Operation",
                 "client": {
                     "shortName": "NetworkSecurityClient",
-                    "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurityClient"
+                    "fullName": "google.cloud.networksecurity.v1.NetworkSecurityClient"
                 },
                 "method": {
                     "shortName": "CreateClientTlsPolicy",
-                    "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity.CreateClientTlsPolicy",
+                    "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.CreateClientTlsPolicy",
                     "service": {
                         "shortName": "NetworkSecurity",
-                        "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity"
+                        "fullName": "google.cloud.networksecurity.v1.NetworkSecurity"
                     }
                 }
             }
         },
         {
-            "regionTag": "networksecurity_v1beta1_generated_NetworkSecurity_UpdateClientTlsPolicy_async",
+            "regionTag": "networksecurity_v1_generated_NetworkSecurity_UpdateClientTlsPolicy_async",
             "title": "NetworkSecurity updateClientTlsPolicy Sample",
             "origin": "API_DEFINITION",
             "description": " Updates the parameters of a single ClientTlsPolicy.",
@@ -604,7 +604,7 @@
             ],
             "clientMethod": {
                 "shortName": "UpdateClientTlsPolicy",
-                "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity.UpdateClientTlsPolicy",
+                "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.UpdateClientTlsPolicy",
                 "async": true,
                 "parameters": [
                     {
@@ -613,26 +613,26 @@
                     },
                     {
                         "name": "client_tls_policy",
-                        "type": ".google.cloud.networksecurity.v1beta1.ClientTlsPolicy"
+                        "type": ".google.cloud.networksecurity.v1.ClientTlsPolicy"
                     }
                 ],
                 "resultType": ".google.longrunning.Operation",
                 "client": {
                     "shortName": "NetworkSecurityClient",
-                    "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurityClient"
+                    "fullName": "google.cloud.networksecurity.v1.NetworkSecurityClient"
                 },
                 "method": {
                     "shortName": "UpdateClientTlsPolicy",
-                    "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity.UpdateClientTlsPolicy",
+                    "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.UpdateClientTlsPolicy",
                     "service": {
                         "shortName": "NetworkSecurity",
-                        "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity"
+                        "fullName": "google.cloud.networksecurity.v1.NetworkSecurity"
                     }
                 }
             }
         },
         {
-            "regionTag": "networksecurity_v1beta1_generated_NetworkSecurity_DeleteClientTlsPolicy_async",
+            "regionTag": "networksecurity_v1_generated_NetworkSecurity_DeleteClientTlsPolicy_async",
             "title": "NetworkSecurity deleteClientTlsPolicy Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes a single ClientTlsPolicy.",
@@ -648,7 +648,7 @@
             ],
             "clientMethod": {
                 "shortName": "DeleteClientTlsPolicy",
-                "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity.DeleteClientTlsPolicy",
+                "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.DeleteClientTlsPolicy",
                 "async": true,
                 "parameters": [
                     {
@@ -659,14 +659,14 @@
                 "resultType": ".google.longrunning.Operation",
                 "client": {
                     "shortName": "NetworkSecurityClient",
-                    "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurityClient"
+                    "fullName": "google.cloud.networksecurity.v1.NetworkSecurityClient"
                 },
                 "method": {
                     "shortName": "DeleteClientTlsPolicy",
-                    "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity.DeleteClientTlsPolicy",
+                    "fullName": "google.cloud.networksecurity.v1.NetworkSecurity.DeleteClientTlsPolicy",
                     "service": {
                         "shortName": "NetworkSecurity",
-                        "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity"
+                        "fullName": "google.cloud.networksecurity.v1.NetworkSecurity"
                     }
                 }
             }

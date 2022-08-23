@@ -150,40 +150,40 @@ function stubAsyncIterationCall<ResponseType>(
   return sinon.stub().returns(asyncIterable);
 }
 
-describe('v1beta1.NetworkSecurityClient', () => {
+describe('v1.NetworkSecurityClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
       const servicePath =
-        networksecurityModule.v1beta1.NetworkSecurityClient.servicePath;
+        networksecurityModule.v1.NetworkSecurityClient.servicePath;
       assert(servicePath);
     });
 
     it('has apiEndpoint', () => {
       const apiEndpoint =
-        networksecurityModule.v1beta1.NetworkSecurityClient.apiEndpoint;
+        networksecurityModule.v1.NetworkSecurityClient.apiEndpoint;
       assert(apiEndpoint);
     });
 
     it('has port', () => {
-      const port = networksecurityModule.v1beta1.NetworkSecurityClient.port;
+      const port = networksecurityModule.v1.NetworkSecurityClient.port;
       assert(port);
       assert(typeof port === 'number');
     });
 
     it('should create a client with no option', () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient();
+      const client = new networksecurityModule.v1.NetworkSecurityClient();
       assert(client);
     });
 
     it('should create a client with gRPC fallback', () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         fallback: true,
       });
       assert(client);
     });
 
     it('has initialize method and supports deferred initialization', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -193,7 +193,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('has close method for the initialized client', done => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -205,7 +205,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('has close method for the non-initialized client', done => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -217,7 +217,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
 
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -229,7 +229,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
 
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -252,13 +252,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
 
   describe('getAuthorizationPolicy', () => {
     it('invokes getAuthorizationPolicy without error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.GetAuthorizationPolicyRequest()
+        new protos.google.cloud.networksecurity.v1.GetAuthorizationPolicyRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -270,7 +270,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.AuthorizationPolicy()
+        new protos.google.cloud.networksecurity.v1.AuthorizationPolicy()
       );
       client.innerApiCalls.getAuthorizationPolicy =
         stubSimpleCall(expectedResponse);
@@ -284,13 +284,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes getAuthorizationPolicy without error using callback', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.GetAuthorizationPolicyRequest()
+        new protos.google.cloud.networksecurity.v1.GetAuthorizationPolicyRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -302,7 +302,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.AuthorizationPolicy()
+        new protos.google.cloud.networksecurity.v1.AuthorizationPolicy()
       );
       client.innerApiCalls.getAuthorizationPolicy =
         stubSimpleCallWithCallback(expectedResponse);
@@ -311,7 +311,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.networksecurity.v1beta1.IAuthorizationPolicy | null
+            result?: protos.google.cloud.networksecurity.v1.IAuthorizationPolicy | null
           ) => {
             if (err) {
               reject(err);
@@ -331,13 +331,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes getAuthorizationPolicy with error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.GetAuthorizationPolicyRequest()
+        new protos.google.cloud.networksecurity.v1.GetAuthorizationPolicyRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -365,13 +365,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes getAuthorizationPolicy with closed client', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.GetAuthorizationPolicyRequest()
+        new protos.google.cloud.networksecurity.v1.GetAuthorizationPolicyRequest()
       );
       request.name = '';
       const expectedError = new Error('The client has already been closed.');
@@ -385,13 +385,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
 
   describe('getServerTlsPolicy', () => {
     it('invokes getServerTlsPolicy without error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.GetServerTlsPolicyRequest()
+        new protos.google.cloud.networksecurity.v1.GetServerTlsPolicyRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -403,7 +403,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.ServerTlsPolicy()
+        new protos.google.cloud.networksecurity.v1.ServerTlsPolicy()
       );
       client.innerApiCalls.getServerTlsPolicy =
         stubSimpleCall(expectedResponse);
@@ -417,13 +417,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes getServerTlsPolicy without error using callback', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.GetServerTlsPolicyRequest()
+        new protos.google.cloud.networksecurity.v1.GetServerTlsPolicyRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -435,7 +435,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.ServerTlsPolicy()
+        new protos.google.cloud.networksecurity.v1.ServerTlsPolicy()
       );
       client.innerApiCalls.getServerTlsPolicy =
         stubSimpleCallWithCallback(expectedResponse);
@@ -444,7 +444,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.networksecurity.v1beta1.IServerTlsPolicy | null
+            result?: protos.google.cloud.networksecurity.v1.IServerTlsPolicy | null
           ) => {
             if (err) {
               reject(err);
@@ -464,13 +464,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes getServerTlsPolicy with error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.GetServerTlsPolicyRequest()
+        new protos.google.cloud.networksecurity.v1.GetServerTlsPolicyRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -495,13 +495,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes getServerTlsPolicy with closed client', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.GetServerTlsPolicyRequest()
+        new protos.google.cloud.networksecurity.v1.GetServerTlsPolicyRequest()
       );
       request.name = '';
       const expectedError = new Error('The client has already been closed.');
@@ -512,13 +512,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
 
   describe('getClientTlsPolicy', () => {
     it('invokes getClientTlsPolicy without error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.GetClientTlsPolicyRequest()
+        new protos.google.cloud.networksecurity.v1.GetClientTlsPolicyRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -530,7 +530,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.ClientTlsPolicy()
+        new protos.google.cloud.networksecurity.v1.ClientTlsPolicy()
       );
       client.innerApiCalls.getClientTlsPolicy =
         stubSimpleCall(expectedResponse);
@@ -544,13 +544,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes getClientTlsPolicy without error using callback', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.GetClientTlsPolicyRequest()
+        new protos.google.cloud.networksecurity.v1.GetClientTlsPolicyRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -562,7 +562,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.ClientTlsPolicy()
+        new protos.google.cloud.networksecurity.v1.ClientTlsPolicy()
       );
       client.innerApiCalls.getClientTlsPolicy =
         stubSimpleCallWithCallback(expectedResponse);
@@ -571,7 +571,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.networksecurity.v1beta1.IClientTlsPolicy | null
+            result?: protos.google.cloud.networksecurity.v1.IClientTlsPolicy | null
           ) => {
             if (err) {
               reject(err);
@@ -591,13 +591,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes getClientTlsPolicy with error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.GetClientTlsPolicyRequest()
+        new protos.google.cloud.networksecurity.v1.GetClientTlsPolicyRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -622,13 +622,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes getClientTlsPolicy with closed client', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.GetClientTlsPolicyRequest()
+        new protos.google.cloud.networksecurity.v1.GetClientTlsPolicyRequest()
       );
       request.name = '';
       const expectedError = new Error('The client has already been closed.');
@@ -639,13 +639,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
 
   describe('createAuthorizationPolicy', () => {
     it('invokes createAuthorizationPolicy without error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.CreateAuthorizationPolicyRequest()
+        new protos.google.cloud.networksecurity.v1.CreateAuthorizationPolicyRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -672,13 +672,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes createAuthorizationPolicy without error using callback', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.CreateAuthorizationPolicyRequest()
+        new protos.google.cloud.networksecurity.v1.CreateAuthorizationPolicyRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -700,8 +700,8 @@ describe('v1beta1.NetworkSecurityClient', () => {
           (
             err?: Error | null,
             result?: LROperation<
-              protos.google.cloud.networksecurity.v1beta1.IAuthorizationPolicy,
-              protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+              protos.google.cloud.networksecurity.v1.IAuthorizationPolicy,
+              protos.google.cloud.networksecurity.v1.IOperationMetadata
             > | null
           ) => {
             if (err) {
@@ -713,8 +713,8 @@ describe('v1beta1.NetworkSecurityClient', () => {
         );
       });
       const operation = (await promise) as LROperation<
-        protos.google.cloud.networksecurity.v1beta1.IAuthorizationPolicy,
-        protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+        protos.google.cloud.networksecurity.v1.IAuthorizationPolicy,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -726,13 +726,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes createAuthorizationPolicy with call error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.CreateAuthorizationPolicyRequest()
+        new protos.google.cloud.networksecurity.v1.CreateAuthorizationPolicyRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -760,13 +760,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes createAuthorizationPolicy with LRO error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.CreateAuthorizationPolicyRequest()
+        new protos.google.cloud.networksecurity.v1.CreateAuthorizationPolicyRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -793,7 +793,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes checkCreateAuthorizationPolicyProgress without error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -816,7 +816,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes checkCreateAuthorizationPolicyProgress with error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -837,13 +837,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
 
   describe('updateAuthorizationPolicy', () => {
     it('invokes updateAuthorizationPolicy without error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.UpdateAuthorizationPolicyRequest()
+        new protos.google.cloud.networksecurity.v1.UpdateAuthorizationPolicyRequest()
       );
       request.authorizationPolicy = {};
       request.authorizationPolicy.name = '';
@@ -871,13 +871,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes updateAuthorizationPolicy without error using callback', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.UpdateAuthorizationPolicyRequest()
+        new protos.google.cloud.networksecurity.v1.UpdateAuthorizationPolicyRequest()
       );
       request.authorizationPolicy = {};
       request.authorizationPolicy.name = '';
@@ -900,8 +900,8 @@ describe('v1beta1.NetworkSecurityClient', () => {
           (
             err?: Error | null,
             result?: LROperation<
-              protos.google.cloud.networksecurity.v1beta1.IAuthorizationPolicy,
-              protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+              protos.google.cloud.networksecurity.v1.IAuthorizationPolicy,
+              protos.google.cloud.networksecurity.v1.IOperationMetadata
             > | null
           ) => {
             if (err) {
@@ -913,8 +913,8 @@ describe('v1beta1.NetworkSecurityClient', () => {
         );
       });
       const operation = (await promise) as LROperation<
-        protos.google.cloud.networksecurity.v1beta1.IAuthorizationPolicy,
-        protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+        protos.google.cloud.networksecurity.v1.IAuthorizationPolicy,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -926,13 +926,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes updateAuthorizationPolicy with call error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.UpdateAuthorizationPolicyRequest()
+        new protos.google.cloud.networksecurity.v1.UpdateAuthorizationPolicyRequest()
       );
       request.authorizationPolicy = {};
       request.authorizationPolicy.name = '';
@@ -961,13 +961,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes updateAuthorizationPolicy with LRO error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.UpdateAuthorizationPolicyRequest()
+        new protos.google.cloud.networksecurity.v1.UpdateAuthorizationPolicyRequest()
       );
       request.authorizationPolicy = {};
       request.authorizationPolicy.name = '';
@@ -995,7 +995,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes checkUpdateAuthorizationPolicyProgress without error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1018,7 +1018,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes checkUpdateAuthorizationPolicyProgress with error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1039,13 +1039,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
 
   describe('deleteAuthorizationPolicy', () => {
     it('invokes deleteAuthorizationPolicy without error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.DeleteAuthorizationPolicyRequest()
+        new protos.google.cloud.networksecurity.v1.DeleteAuthorizationPolicyRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -1072,13 +1072,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes deleteAuthorizationPolicy without error using callback', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.DeleteAuthorizationPolicyRequest()
+        new protos.google.cloud.networksecurity.v1.DeleteAuthorizationPolicyRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -1101,7 +1101,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
             err?: Error | null,
             result?: LROperation<
               protos.google.protobuf.IEmpty,
-              protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+              protos.google.cloud.networksecurity.v1.IOperationMetadata
             > | null
           ) => {
             if (err) {
@@ -1114,7 +1114,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
       });
       const operation = (await promise) as LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -1126,13 +1126,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes deleteAuthorizationPolicy with call error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.DeleteAuthorizationPolicyRequest()
+        new protos.google.cloud.networksecurity.v1.DeleteAuthorizationPolicyRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -1160,13 +1160,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes deleteAuthorizationPolicy with LRO error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.DeleteAuthorizationPolicyRequest()
+        new protos.google.cloud.networksecurity.v1.DeleteAuthorizationPolicyRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -1193,7 +1193,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes checkDeleteAuthorizationPolicyProgress without error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1216,7 +1216,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes checkDeleteAuthorizationPolicyProgress with error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1237,13 +1237,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
 
   describe('createServerTlsPolicy', () => {
     it('invokes createServerTlsPolicy without error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.CreateServerTlsPolicyRequest()
+        new protos.google.cloud.networksecurity.v1.CreateServerTlsPolicyRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -1270,13 +1270,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes createServerTlsPolicy without error using callback', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.CreateServerTlsPolicyRequest()
+        new protos.google.cloud.networksecurity.v1.CreateServerTlsPolicyRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -1298,8 +1298,8 @@ describe('v1beta1.NetworkSecurityClient', () => {
           (
             err?: Error | null,
             result?: LROperation<
-              protos.google.cloud.networksecurity.v1beta1.IServerTlsPolicy,
-              protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+              protos.google.cloud.networksecurity.v1.IServerTlsPolicy,
+              protos.google.cloud.networksecurity.v1.IOperationMetadata
             > | null
           ) => {
             if (err) {
@@ -1311,8 +1311,8 @@ describe('v1beta1.NetworkSecurityClient', () => {
         );
       });
       const operation = (await promise) as LROperation<
-        protos.google.cloud.networksecurity.v1beta1.IServerTlsPolicy,
-        protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+        protos.google.cloud.networksecurity.v1.IServerTlsPolicy,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -1324,13 +1324,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes createServerTlsPolicy with call error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.CreateServerTlsPolicyRequest()
+        new protos.google.cloud.networksecurity.v1.CreateServerTlsPolicyRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -1358,13 +1358,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes createServerTlsPolicy with LRO error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.CreateServerTlsPolicyRequest()
+        new protos.google.cloud.networksecurity.v1.CreateServerTlsPolicyRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -1391,7 +1391,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes checkCreateServerTlsPolicyProgress without error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1413,7 +1413,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes checkCreateServerTlsPolicyProgress with error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1434,13 +1434,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
 
   describe('updateServerTlsPolicy', () => {
     it('invokes updateServerTlsPolicy without error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.UpdateServerTlsPolicyRequest()
+        new protos.google.cloud.networksecurity.v1.UpdateServerTlsPolicyRequest()
       );
       request.serverTlsPolicy = {};
       request.serverTlsPolicy.name = '';
@@ -1468,13 +1468,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes updateServerTlsPolicy without error using callback', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.UpdateServerTlsPolicyRequest()
+        new protos.google.cloud.networksecurity.v1.UpdateServerTlsPolicyRequest()
       );
       request.serverTlsPolicy = {};
       request.serverTlsPolicy.name = '';
@@ -1497,8 +1497,8 @@ describe('v1beta1.NetworkSecurityClient', () => {
           (
             err?: Error | null,
             result?: LROperation<
-              protos.google.cloud.networksecurity.v1beta1.IServerTlsPolicy,
-              protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+              protos.google.cloud.networksecurity.v1.IServerTlsPolicy,
+              protos.google.cloud.networksecurity.v1.IOperationMetadata
             > | null
           ) => {
             if (err) {
@@ -1510,8 +1510,8 @@ describe('v1beta1.NetworkSecurityClient', () => {
         );
       });
       const operation = (await promise) as LROperation<
-        protos.google.cloud.networksecurity.v1beta1.IServerTlsPolicy,
-        protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+        protos.google.cloud.networksecurity.v1.IServerTlsPolicy,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -1523,13 +1523,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes updateServerTlsPolicy with call error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.UpdateServerTlsPolicyRequest()
+        new protos.google.cloud.networksecurity.v1.UpdateServerTlsPolicyRequest()
       );
       request.serverTlsPolicy = {};
       request.serverTlsPolicy.name = '';
@@ -1558,13 +1558,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes updateServerTlsPolicy with LRO error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.UpdateServerTlsPolicyRequest()
+        new protos.google.cloud.networksecurity.v1.UpdateServerTlsPolicyRequest()
       );
       request.serverTlsPolicy = {};
       request.serverTlsPolicy.name = '';
@@ -1592,7 +1592,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes checkUpdateServerTlsPolicyProgress without error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1614,7 +1614,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes checkUpdateServerTlsPolicyProgress with error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1635,13 +1635,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
 
   describe('deleteServerTlsPolicy', () => {
     it('invokes deleteServerTlsPolicy without error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.DeleteServerTlsPolicyRequest()
+        new protos.google.cloud.networksecurity.v1.DeleteServerTlsPolicyRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -1668,13 +1668,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes deleteServerTlsPolicy without error using callback', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.DeleteServerTlsPolicyRequest()
+        new protos.google.cloud.networksecurity.v1.DeleteServerTlsPolicyRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -1697,7 +1697,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
             err?: Error | null,
             result?: LROperation<
               protos.google.protobuf.IEmpty,
-              protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+              protos.google.cloud.networksecurity.v1.IOperationMetadata
             > | null
           ) => {
             if (err) {
@@ -1710,7 +1710,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
       });
       const operation = (await promise) as LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -1722,13 +1722,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes deleteServerTlsPolicy with call error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.DeleteServerTlsPolicyRequest()
+        new protos.google.cloud.networksecurity.v1.DeleteServerTlsPolicyRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -1756,13 +1756,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes deleteServerTlsPolicy with LRO error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.DeleteServerTlsPolicyRequest()
+        new protos.google.cloud.networksecurity.v1.DeleteServerTlsPolicyRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -1789,7 +1789,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes checkDeleteServerTlsPolicyProgress without error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1811,7 +1811,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes checkDeleteServerTlsPolicyProgress with error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1832,13 +1832,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
 
   describe('createClientTlsPolicy', () => {
     it('invokes createClientTlsPolicy without error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.CreateClientTlsPolicyRequest()
+        new protos.google.cloud.networksecurity.v1.CreateClientTlsPolicyRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -1865,13 +1865,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes createClientTlsPolicy without error using callback', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.CreateClientTlsPolicyRequest()
+        new protos.google.cloud.networksecurity.v1.CreateClientTlsPolicyRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -1893,8 +1893,8 @@ describe('v1beta1.NetworkSecurityClient', () => {
           (
             err?: Error | null,
             result?: LROperation<
-              protos.google.cloud.networksecurity.v1beta1.IClientTlsPolicy,
-              protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+              protos.google.cloud.networksecurity.v1.IClientTlsPolicy,
+              protos.google.cloud.networksecurity.v1.IOperationMetadata
             > | null
           ) => {
             if (err) {
@@ -1906,8 +1906,8 @@ describe('v1beta1.NetworkSecurityClient', () => {
         );
       });
       const operation = (await promise) as LROperation<
-        protos.google.cloud.networksecurity.v1beta1.IClientTlsPolicy,
-        protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+        protos.google.cloud.networksecurity.v1.IClientTlsPolicy,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -1919,13 +1919,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes createClientTlsPolicy with call error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.CreateClientTlsPolicyRequest()
+        new protos.google.cloud.networksecurity.v1.CreateClientTlsPolicyRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -1953,13 +1953,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes createClientTlsPolicy with LRO error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.CreateClientTlsPolicyRequest()
+        new protos.google.cloud.networksecurity.v1.CreateClientTlsPolicyRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -1986,7 +1986,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes checkCreateClientTlsPolicyProgress without error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2008,7 +2008,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes checkCreateClientTlsPolicyProgress with error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2029,13 +2029,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
 
   describe('updateClientTlsPolicy', () => {
     it('invokes updateClientTlsPolicy without error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.UpdateClientTlsPolicyRequest()
+        new protos.google.cloud.networksecurity.v1.UpdateClientTlsPolicyRequest()
       );
       request.clientTlsPolicy = {};
       request.clientTlsPolicy.name = '';
@@ -2063,13 +2063,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes updateClientTlsPolicy without error using callback', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.UpdateClientTlsPolicyRequest()
+        new protos.google.cloud.networksecurity.v1.UpdateClientTlsPolicyRequest()
       );
       request.clientTlsPolicy = {};
       request.clientTlsPolicy.name = '';
@@ -2092,8 +2092,8 @@ describe('v1beta1.NetworkSecurityClient', () => {
           (
             err?: Error | null,
             result?: LROperation<
-              protos.google.cloud.networksecurity.v1beta1.IClientTlsPolicy,
-              protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+              protos.google.cloud.networksecurity.v1.IClientTlsPolicy,
+              protos.google.cloud.networksecurity.v1.IOperationMetadata
             > | null
           ) => {
             if (err) {
@@ -2105,8 +2105,8 @@ describe('v1beta1.NetworkSecurityClient', () => {
         );
       });
       const operation = (await promise) as LROperation<
-        protos.google.cloud.networksecurity.v1beta1.IClientTlsPolicy,
-        protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+        protos.google.cloud.networksecurity.v1.IClientTlsPolicy,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -2118,13 +2118,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes updateClientTlsPolicy with call error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.UpdateClientTlsPolicyRequest()
+        new protos.google.cloud.networksecurity.v1.UpdateClientTlsPolicyRequest()
       );
       request.clientTlsPolicy = {};
       request.clientTlsPolicy.name = '';
@@ -2153,13 +2153,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes updateClientTlsPolicy with LRO error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.UpdateClientTlsPolicyRequest()
+        new protos.google.cloud.networksecurity.v1.UpdateClientTlsPolicyRequest()
       );
       request.clientTlsPolicy = {};
       request.clientTlsPolicy.name = '';
@@ -2187,7 +2187,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes checkUpdateClientTlsPolicyProgress without error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2209,7 +2209,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes checkUpdateClientTlsPolicyProgress with error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2230,13 +2230,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
 
   describe('deleteClientTlsPolicy', () => {
     it('invokes deleteClientTlsPolicy without error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.DeleteClientTlsPolicyRequest()
+        new protos.google.cloud.networksecurity.v1.DeleteClientTlsPolicyRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -2263,13 +2263,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes deleteClientTlsPolicy without error using callback', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.DeleteClientTlsPolicyRequest()
+        new protos.google.cloud.networksecurity.v1.DeleteClientTlsPolicyRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -2292,7 +2292,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
             err?: Error | null,
             result?: LROperation<
               protos.google.protobuf.IEmpty,
-              protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+              protos.google.cloud.networksecurity.v1.IOperationMetadata
             > | null
           ) => {
             if (err) {
@@ -2305,7 +2305,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
       });
       const operation = (await promise) as LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -2317,13 +2317,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes deleteClientTlsPolicy with call error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.DeleteClientTlsPolicyRequest()
+        new protos.google.cloud.networksecurity.v1.DeleteClientTlsPolicyRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -2351,13 +2351,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes deleteClientTlsPolicy with LRO error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.DeleteClientTlsPolicyRequest()
+        new protos.google.cloud.networksecurity.v1.DeleteClientTlsPolicyRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -2384,7 +2384,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes checkDeleteClientTlsPolicyProgress without error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2406,7 +2406,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes checkDeleteClientTlsPolicyProgress with error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2427,13 +2427,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
 
   describe('listAuthorizationPolicies', () => {
     it('invokes listAuthorizationPolicies without error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.ListAuthorizationPoliciesRequest()
+        new protos.google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -2446,13 +2446,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
       };
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.networksecurity.v1beta1.AuthorizationPolicy()
+          new protos.google.cloud.networksecurity.v1.AuthorizationPolicy()
         ),
         generateSampleMessage(
-          new protos.google.cloud.networksecurity.v1beta1.AuthorizationPolicy()
+          new protos.google.cloud.networksecurity.v1.AuthorizationPolicy()
         ),
         generateSampleMessage(
-          new protos.google.cloud.networksecurity.v1beta1.AuthorizationPolicy()
+          new protos.google.cloud.networksecurity.v1.AuthorizationPolicy()
         ),
       ];
       client.innerApiCalls.listAuthorizationPolicies =
@@ -2467,13 +2467,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes listAuthorizationPolicies without error using callback', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.ListAuthorizationPoliciesRequest()
+        new protos.google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -2486,13 +2486,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
       };
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.networksecurity.v1beta1.AuthorizationPolicy()
+          new protos.google.cloud.networksecurity.v1.AuthorizationPolicy()
         ),
         generateSampleMessage(
-          new protos.google.cloud.networksecurity.v1beta1.AuthorizationPolicy()
+          new protos.google.cloud.networksecurity.v1.AuthorizationPolicy()
         ),
         generateSampleMessage(
-          new protos.google.cloud.networksecurity.v1beta1.AuthorizationPolicy()
+          new protos.google.cloud.networksecurity.v1.AuthorizationPolicy()
         ),
       ];
       client.innerApiCalls.listAuthorizationPolicies =
@@ -2503,7 +2503,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.networksecurity.v1beta1.IAuthorizationPolicy[]
+              | protos.google.cloud.networksecurity.v1.IAuthorizationPolicy[]
               | null
           ) => {
             if (err) {
@@ -2524,13 +2524,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes listAuthorizationPolicies with error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.ListAuthorizationPoliciesRequest()
+        new protos.google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -2558,37 +2558,37 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes listAuthorizationPoliciesStream without error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.ListAuthorizationPoliciesRequest()
+        new protos.google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.networksecurity.v1beta1.AuthorizationPolicy()
+          new protos.google.cloud.networksecurity.v1.AuthorizationPolicy()
         ),
         generateSampleMessage(
-          new protos.google.cloud.networksecurity.v1beta1.AuthorizationPolicy()
+          new protos.google.cloud.networksecurity.v1.AuthorizationPolicy()
         ),
         generateSampleMessage(
-          new protos.google.cloud.networksecurity.v1beta1.AuthorizationPolicy()
+          new protos.google.cloud.networksecurity.v1.AuthorizationPolicy()
         ),
       ];
       client.descriptors.page.listAuthorizationPolicies.createStream =
         stubPageStreamingCall(expectedResponse);
       const stream = client.listAuthorizationPoliciesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.networksecurity.v1beta1.AuthorizationPolicy[] =
+        const responses: protos.google.cloud.networksecurity.v1.AuthorizationPolicy[] =
           [];
         stream.on(
           'data',
           (
-            response: protos.google.cloud.networksecurity.v1beta1.AuthorizationPolicy
+            response: protos.google.cloud.networksecurity.v1.AuthorizationPolicy
           ) => {
             responses.push(response);
           }
@@ -2620,13 +2620,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes listAuthorizationPoliciesStream with error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.ListAuthorizationPoliciesRequest()
+        new protos.google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -2635,12 +2635,12 @@ describe('v1beta1.NetworkSecurityClient', () => {
         stubPageStreamingCall(undefined, expectedError);
       const stream = client.listAuthorizationPoliciesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.networksecurity.v1beta1.AuthorizationPolicy[] =
+        const responses: protos.google.cloud.networksecurity.v1.AuthorizationPolicy[] =
           [];
         stream.on(
           'data',
           (
-            response: protos.google.cloud.networksecurity.v1beta1.AuthorizationPolicy
+            response: protos.google.cloud.networksecurity.v1.AuthorizationPolicy
           ) => {
             responses.push(response);
           }
@@ -2671,30 +2671,30 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('uses async iteration with listAuthorizationPolicies without error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.ListAuthorizationPoliciesRequest()
+        new protos.google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.networksecurity.v1beta1.AuthorizationPolicy()
+          new protos.google.cloud.networksecurity.v1.AuthorizationPolicy()
         ),
         generateSampleMessage(
-          new protos.google.cloud.networksecurity.v1beta1.AuthorizationPolicy()
+          new protos.google.cloud.networksecurity.v1.AuthorizationPolicy()
         ),
         generateSampleMessage(
-          new protos.google.cloud.networksecurity.v1beta1.AuthorizationPolicy()
+          new protos.google.cloud.networksecurity.v1.AuthorizationPolicy()
         ),
       ];
       client.descriptors.page.listAuthorizationPolicies.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.networksecurity.v1beta1.IAuthorizationPolicy[] =
+      const responses: protos.google.cloud.networksecurity.v1.IAuthorizationPolicy[] =
         [];
       const iterable = client.listAuthorizationPoliciesAsync(request);
       for await (const resource of iterable) {
@@ -2718,13 +2718,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('uses async iteration with listAuthorizationPolicies with error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.ListAuthorizationPoliciesRequest()
+        new protos.google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -2733,7 +2733,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listAuthorizationPoliciesAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.networksecurity.v1beta1.IAuthorizationPolicy[] =
+        const responses: protos.google.cloud.networksecurity.v1.IAuthorizationPolicy[] =
           [];
         for await (const resource of iterable) {
           responses.push(resource!);
@@ -2758,13 +2758,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
 
   describe('listServerTlsPolicies', () => {
     it('invokes listServerTlsPolicies without error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.ListServerTlsPoliciesRequest()
+        new protos.google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -2777,13 +2777,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
       };
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.networksecurity.v1beta1.ServerTlsPolicy()
+          new protos.google.cloud.networksecurity.v1.ServerTlsPolicy()
         ),
         generateSampleMessage(
-          new protos.google.cloud.networksecurity.v1beta1.ServerTlsPolicy()
+          new protos.google.cloud.networksecurity.v1.ServerTlsPolicy()
         ),
         generateSampleMessage(
-          new protos.google.cloud.networksecurity.v1beta1.ServerTlsPolicy()
+          new protos.google.cloud.networksecurity.v1.ServerTlsPolicy()
         ),
       ];
       client.innerApiCalls.listServerTlsPolicies =
@@ -2798,13 +2798,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes listServerTlsPolicies without error using callback', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.ListServerTlsPoliciesRequest()
+        new protos.google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -2817,13 +2817,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
       };
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.networksecurity.v1beta1.ServerTlsPolicy()
+          new protos.google.cloud.networksecurity.v1.ServerTlsPolicy()
         ),
         generateSampleMessage(
-          new protos.google.cloud.networksecurity.v1beta1.ServerTlsPolicy()
+          new protos.google.cloud.networksecurity.v1.ServerTlsPolicy()
         ),
         generateSampleMessage(
-          new protos.google.cloud.networksecurity.v1beta1.ServerTlsPolicy()
+          new protos.google.cloud.networksecurity.v1.ServerTlsPolicy()
         ),
       ];
       client.innerApiCalls.listServerTlsPolicies =
@@ -2834,7 +2834,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.networksecurity.v1beta1.IServerTlsPolicy[]
+              | protos.google.cloud.networksecurity.v1.IServerTlsPolicy[]
               | null
           ) => {
             if (err) {
@@ -2855,13 +2855,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes listServerTlsPolicies with error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.ListServerTlsPoliciesRequest()
+        new protos.google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -2889,37 +2889,37 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes listServerTlsPoliciesStream without error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.ListServerTlsPoliciesRequest()
+        new protos.google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.networksecurity.v1beta1.ServerTlsPolicy()
+          new protos.google.cloud.networksecurity.v1.ServerTlsPolicy()
         ),
         generateSampleMessage(
-          new protos.google.cloud.networksecurity.v1beta1.ServerTlsPolicy()
+          new protos.google.cloud.networksecurity.v1.ServerTlsPolicy()
         ),
         generateSampleMessage(
-          new protos.google.cloud.networksecurity.v1beta1.ServerTlsPolicy()
+          new protos.google.cloud.networksecurity.v1.ServerTlsPolicy()
         ),
       ];
       client.descriptors.page.listServerTlsPolicies.createStream =
         stubPageStreamingCall(expectedResponse);
       const stream = client.listServerTlsPoliciesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.networksecurity.v1beta1.ServerTlsPolicy[] =
+        const responses: protos.google.cloud.networksecurity.v1.ServerTlsPolicy[] =
           [];
         stream.on(
           'data',
           (
-            response: protos.google.cloud.networksecurity.v1beta1.ServerTlsPolicy
+            response: protos.google.cloud.networksecurity.v1.ServerTlsPolicy
           ) => {
             responses.push(response);
           }
@@ -2951,13 +2951,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes listServerTlsPoliciesStream with error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.ListServerTlsPoliciesRequest()
+        new protos.google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -2966,12 +2966,12 @@ describe('v1beta1.NetworkSecurityClient', () => {
         stubPageStreamingCall(undefined, expectedError);
       const stream = client.listServerTlsPoliciesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.networksecurity.v1beta1.ServerTlsPolicy[] =
+        const responses: protos.google.cloud.networksecurity.v1.ServerTlsPolicy[] =
           [];
         stream.on(
           'data',
           (
-            response: protos.google.cloud.networksecurity.v1beta1.ServerTlsPolicy
+            response: protos.google.cloud.networksecurity.v1.ServerTlsPolicy
           ) => {
             responses.push(response);
           }
@@ -3002,30 +3002,30 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('uses async iteration with listServerTlsPolicies without error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.ListServerTlsPoliciesRequest()
+        new protos.google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.networksecurity.v1beta1.ServerTlsPolicy()
+          new protos.google.cloud.networksecurity.v1.ServerTlsPolicy()
         ),
         generateSampleMessage(
-          new protos.google.cloud.networksecurity.v1beta1.ServerTlsPolicy()
+          new protos.google.cloud.networksecurity.v1.ServerTlsPolicy()
         ),
         generateSampleMessage(
-          new protos.google.cloud.networksecurity.v1beta1.ServerTlsPolicy()
+          new protos.google.cloud.networksecurity.v1.ServerTlsPolicy()
         ),
       ];
       client.descriptors.page.listServerTlsPolicies.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.networksecurity.v1beta1.IServerTlsPolicy[] =
+      const responses: protos.google.cloud.networksecurity.v1.IServerTlsPolicy[] =
         [];
       const iterable = client.listServerTlsPoliciesAsync(request);
       for await (const resource of iterable) {
@@ -3049,13 +3049,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('uses async iteration with listServerTlsPolicies with error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.ListServerTlsPoliciesRequest()
+        new protos.google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -3064,7 +3064,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listServerTlsPoliciesAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.networksecurity.v1beta1.IServerTlsPolicy[] =
+        const responses: protos.google.cloud.networksecurity.v1.IServerTlsPolicy[] =
           [];
         for await (const resource of iterable) {
           responses.push(resource!);
@@ -3089,13 +3089,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
 
   describe('listClientTlsPolicies', () => {
     it('invokes listClientTlsPolicies without error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.ListClientTlsPoliciesRequest()
+        new protos.google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -3108,13 +3108,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
       };
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.networksecurity.v1beta1.ClientTlsPolicy()
+          new protos.google.cloud.networksecurity.v1.ClientTlsPolicy()
         ),
         generateSampleMessage(
-          new protos.google.cloud.networksecurity.v1beta1.ClientTlsPolicy()
+          new protos.google.cloud.networksecurity.v1.ClientTlsPolicy()
         ),
         generateSampleMessage(
-          new protos.google.cloud.networksecurity.v1beta1.ClientTlsPolicy()
+          new protos.google.cloud.networksecurity.v1.ClientTlsPolicy()
         ),
       ];
       client.innerApiCalls.listClientTlsPolicies =
@@ -3129,13 +3129,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes listClientTlsPolicies without error using callback', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.ListClientTlsPoliciesRequest()
+        new protos.google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -3148,13 +3148,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
       };
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.networksecurity.v1beta1.ClientTlsPolicy()
+          new protos.google.cloud.networksecurity.v1.ClientTlsPolicy()
         ),
         generateSampleMessage(
-          new protos.google.cloud.networksecurity.v1beta1.ClientTlsPolicy()
+          new protos.google.cloud.networksecurity.v1.ClientTlsPolicy()
         ),
         generateSampleMessage(
-          new protos.google.cloud.networksecurity.v1beta1.ClientTlsPolicy()
+          new protos.google.cloud.networksecurity.v1.ClientTlsPolicy()
         ),
       ];
       client.innerApiCalls.listClientTlsPolicies =
@@ -3165,7 +3165,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.networksecurity.v1beta1.IClientTlsPolicy[]
+              | protos.google.cloud.networksecurity.v1.IClientTlsPolicy[]
               | null
           ) => {
             if (err) {
@@ -3186,13 +3186,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes listClientTlsPolicies with error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.ListClientTlsPoliciesRequest()
+        new protos.google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -3220,37 +3220,37 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes listClientTlsPoliciesStream without error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.ListClientTlsPoliciesRequest()
+        new protos.google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.networksecurity.v1beta1.ClientTlsPolicy()
+          new protos.google.cloud.networksecurity.v1.ClientTlsPolicy()
         ),
         generateSampleMessage(
-          new protos.google.cloud.networksecurity.v1beta1.ClientTlsPolicy()
+          new protos.google.cloud.networksecurity.v1.ClientTlsPolicy()
         ),
         generateSampleMessage(
-          new protos.google.cloud.networksecurity.v1beta1.ClientTlsPolicy()
+          new protos.google.cloud.networksecurity.v1.ClientTlsPolicy()
         ),
       ];
       client.descriptors.page.listClientTlsPolicies.createStream =
         stubPageStreamingCall(expectedResponse);
       const stream = client.listClientTlsPoliciesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.networksecurity.v1beta1.ClientTlsPolicy[] =
+        const responses: protos.google.cloud.networksecurity.v1.ClientTlsPolicy[] =
           [];
         stream.on(
           'data',
           (
-            response: protos.google.cloud.networksecurity.v1beta1.ClientTlsPolicy
+            response: protos.google.cloud.networksecurity.v1.ClientTlsPolicy
           ) => {
             responses.push(response);
           }
@@ -3282,13 +3282,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('invokes listClientTlsPoliciesStream with error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.ListClientTlsPoliciesRequest()
+        new protos.google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -3297,12 +3297,12 @@ describe('v1beta1.NetworkSecurityClient', () => {
         stubPageStreamingCall(undefined, expectedError);
       const stream = client.listClientTlsPoliciesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.networksecurity.v1beta1.ClientTlsPolicy[] =
+        const responses: protos.google.cloud.networksecurity.v1.ClientTlsPolicy[] =
           [];
         stream.on(
           'data',
           (
-            response: protos.google.cloud.networksecurity.v1beta1.ClientTlsPolicy
+            response: protos.google.cloud.networksecurity.v1.ClientTlsPolicy
           ) => {
             responses.push(response);
           }
@@ -3333,30 +3333,30 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('uses async iteration with listClientTlsPolicies without error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.ListClientTlsPoliciesRequest()
+        new protos.google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.networksecurity.v1beta1.ClientTlsPolicy()
+          new protos.google.cloud.networksecurity.v1.ClientTlsPolicy()
         ),
         generateSampleMessage(
-          new protos.google.cloud.networksecurity.v1beta1.ClientTlsPolicy()
+          new protos.google.cloud.networksecurity.v1.ClientTlsPolicy()
         ),
         generateSampleMessage(
-          new protos.google.cloud.networksecurity.v1beta1.ClientTlsPolicy()
+          new protos.google.cloud.networksecurity.v1.ClientTlsPolicy()
         ),
       ];
       client.descriptors.page.listClientTlsPolicies.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.networksecurity.v1beta1.IClientTlsPolicy[] =
+      const responses: protos.google.cloud.networksecurity.v1.IClientTlsPolicy[] =
         [];
       const iterable = client.listClientTlsPoliciesAsync(request);
       for await (const resource of iterable) {
@@ -3380,13 +3380,13 @@ describe('v1beta1.NetworkSecurityClient', () => {
     });
 
     it('uses async iteration with listClientTlsPolicies with error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networksecurity.v1beta1.ListClientTlsPoliciesRequest()
+        new protos.google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -3395,7 +3395,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listClientTlsPoliciesAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.networksecurity.v1beta1.IClientTlsPolicy[] =
+        const responses: protos.google.cloud.networksecurity.v1.IClientTlsPolicy[] =
           [];
         for await (const resource of iterable) {
           responses.push(resource!);
@@ -3419,7 +3419,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
   });
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3449,7 +3449,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
       );
     });
     it('invokes getIamPolicy without error using callback', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3493,7 +3493,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
       assert((client.iamClient.getIamPolicy as SinonStub).getCall(0));
     });
     it('invokes getIamPolicy with error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3525,7 +3525,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
   });
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3555,7 +3555,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
       );
     });
     it('invokes setIamPolicy without error using callback', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3599,7 +3599,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
       assert((client.iamClient.setIamPolicy as SinonStub).getCall(0));
     });
     it('invokes setIamPolicy with error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3631,7 +3631,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
   });
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3664,7 +3664,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
       );
     });
     it('invokes testIamPermissions without error using callback', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3708,7 +3708,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
       assert((client.iamClient.testIamPermissions as SinonStub).getCall(0));
     });
     it('invokes testIamPermissions with error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3743,7 +3743,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3773,7 +3773,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
       );
     });
     it('invokes getLocation without error using callback', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3817,7 +3817,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
       assert((client.locationsClient.getLocation as SinonStub).getCall(0));
     });
     it('invokes getLocation with error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3852,7 +3852,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
   });
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3897,7 +3897,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
       );
     });
     it('uses async iteration with listLocations with error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3935,7 +3935,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
   });
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3956,7 +3956,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
       );
     });
     it('invokes getOperation without error using callback', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3990,7 +3990,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
     it('invokes getOperation with error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -4014,7 +4014,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
   });
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -4036,7 +4036,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
       );
     });
     it('invokes cancelOperation without error using callback', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -4070,7 +4070,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
       assert((client.operationsClient.cancelOperation as SinonStub).getCall(0));
     });
     it('invokes cancelOperation with error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -4094,7 +4094,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
   });
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -4116,7 +4116,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
       );
     });
     it('invokes deleteOperation without error using callback', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -4150,7 +4150,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
       assert((client.operationsClient.deleteOperation as SinonStub).getCall(0));
     });
     it('invokes deleteOperation with error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -4174,7 +4174,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
   });
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -4210,7 +4210,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
       );
     });
     it('uses async iteration with listOperations with error', async () => {
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -4247,7 +4247,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
         location: 'locationValue',
         authorization_policy: 'authorizationPolicyValue',
       };
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -4325,7 +4325,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
         location: 'locationValue',
         client_tls_policy: 'clientTlsPolicyValue',
       };
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -4390,7 +4390,7 @@ describe('v1beta1.NetworkSecurityClient', () => {
         location: 'locationValue',
         server_tls_policy: 'serverTlsPolicyValue',
       };
-      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      const client = new networksecurityModule.v1.NetworkSecurityClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });

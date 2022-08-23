@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START networksecurity_v1beta1_generated_NetworkSecurity_DeleteAuthorizationPolicy_async]
+function main(parent) {
+  // [START networksecurity_v1_generated_NetworkSecurity_ListAuthorizationPolicies_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,31 +29,44 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. A name of the AuthorizationPolicy to delete. Must be in the
-   *  format `projects/{project}/locations/{location}/authorizationPolicies/*`.
+   *  Required. The project and location from which the AuthorizationPolicies
+   *  should be listed, specified in the format
+   *  `projects/{project}/locations/{location}`.
    */
-  // const name = 'abc123'
+  // const parent = 'abc123'
+  /**
+   *  Maximum number of AuthorizationPolicies to return per call.
+   */
+  // const pageSize = 1234
+  /**
+   *  The value returned by the last
+   *  `ListAuthorizationPoliciesResponse` Indicates that this is a
+   *  continuation of a prior `ListAuthorizationPolicies` call, and
+   *  that the system should return the next page of data.
+   */
+  // const pageToken = 'abc123'
 
   // Imports the Networksecurity library
-  const {NetworkSecurityClient} = require('@google-cloud/network-security').v1beta1;
+  const {NetworkSecurityClient} = require('@google-cloud/networksecurity').v1;
 
   // Instantiates a client
   const networksecurityClient = new NetworkSecurityClient();
 
-  async function callDeleteAuthorizationPolicy() {
+  async function callListAuthorizationPolicies() {
     // Construct request
     const request = {
-      name,
+      parent,
     };
 
     // Run request
-    const [operation] = await networksecurityClient.deleteAuthorizationPolicy(request);
-    const [response] = await operation.promise();
-    console.log(response);
+    const iterable = await networksecurityClient.listAuthorizationPoliciesAsync(request);
+    for await (const response of iterable) {
+        console.log(response);
+    }
   }
 
-  callDeleteAuthorizationPolicy();
-  // [END networksecurity_v1beta1_generated_NetworkSecurity_DeleteAuthorizationPolicy_async]
+  callListAuthorizationPolicies();
+  // [END networksecurity_v1_generated_NetworkSecurity_ListAuthorizationPolicies_async]
 }
 
 process.on('unhandledRejection', err => {

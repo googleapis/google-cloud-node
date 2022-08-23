@@ -38,7 +38,7 @@ import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
  * Client JSON configuration object, loaded from
- * `src/v1beta1/network_security_client_config.json`.
+ * `src/v1/network_security_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
 import * as gapicConfig from './network_security_client_config.json';
@@ -50,7 +50,7 @@ const version = require('../../../package.json').version;
  *  authorization policies. Refer to per API resource documentation for more
  *  information.
  * @class
- * @memberof v1beta1
+ * @memberof v1
  */
 export class NetworkSecurityClient {
   private _terminated = false;
@@ -221,70 +221,70 @@ export class NetworkSecurityClient {
       lroOptions.httpRules = [
         {
           selector: 'google.cloud.location.Locations.GetLocation',
-          get: '/v1beta1/{name=projects/*/locations/*}',
+          get: '/v1/{name=projects/*/locations/*}',
         },
         {
           selector: 'google.cloud.location.Locations.ListLocations',
-          get: '/v1beta1/{name=projects/*}/locations',
+          get: '/v1/{name=projects/*}/locations',
         },
         {
           selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',
-          get: '/v1beta1/{resource=projects/*/locations/*/authorizationPolicies/*}:getIamPolicy',
+          get: '/v1/{resource=projects/*/locations/*/authorizationPolicies/*}:getIamPolicy',
           additional_bindings: [
             {
-              get: '/v1beta1/{resource=projects/*/locations/*/serverTlsPolicies/*}:getIamPolicy',
+              get: '/v1/{resource=projects/*/locations/*/serverTlsPolicies/*}:getIamPolicy',
             },
             {
-              get: '/v1beta1/{resource=projects/*/locations/*/clientTlsPolicies/*}:getIamPolicy',
+              get: '/v1/{resource=projects/*/locations/*/clientTlsPolicies/*}:getIamPolicy',
             },
           ],
         },
         {
           selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',
-          post: '/v1beta1/{resource=projects/*/locations/*/authorizationPolicies/*}:setIamPolicy',
+          post: '/v1/{resource=projects/*/locations/*/authorizationPolicies/*}:setIamPolicy',
           body: '*',
           additional_bindings: [
             {
-              post: '/v1beta1/{resource=projects/*/locations/*/serverTlsPolicies/*}:setIamPolicy',
+              post: '/v1/{resource=projects/*/locations/*/serverTlsPolicies/*}:setIamPolicy',
               body: '*',
             },
             {
-              post: '/v1beta1/{resource=projects/*/locations/*/clientTlsPolicies/*}:setIamPolicy',
+              post: '/v1/{resource=projects/*/locations/*/clientTlsPolicies/*}:setIamPolicy',
               body: '*',
             },
           ],
         },
         {
           selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',
-          post: '/v1beta1/{resource=projects/*/locations/*/authorizationPolicies/*}:testIamPermissions',
+          post: '/v1/{resource=projects/*/locations/*/authorizationPolicies/*}:testIamPermissions',
           body: '*',
           additional_bindings: [
             {
-              post: '/v1beta1/{resource=projects/*/locations/*/serverTlsPolicies/*}:testIamPermissions',
+              post: '/v1/{resource=projects/*/locations/*/serverTlsPolicies/*}:testIamPermissions',
               body: '*',
             },
             {
-              post: '/v1beta1/{resource=projects/*/locations/*/clientTlsPolicies/*}:testIamPermissions',
+              post: '/v1/{resource=projects/*/locations/*/clientTlsPolicies/*}:testIamPermissions',
               body: '*',
             },
           ],
         },
         {
           selector: 'google.longrunning.Operations.CancelOperation',
-          post: '/v1beta1/{name=projects/*/locations/*/operations/*}:cancel',
+          post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',
           body: '*',
         },
         {
           selector: 'google.longrunning.Operations.DeleteOperation',
-          delete: '/v1beta1/{name=projects/*/locations/*/operations/*}',
+          delete: '/v1/{name=projects/*/locations/*/operations/*}',
         },
         {
           selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v1beta1/{name=projects/*/locations/*/operations/*}',
+          get: '/v1/{name=projects/*/locations/*/operations/*}',
         },
         {
           selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v1beta1/{name=projects/*/locations/*}/operations',
+          get: '/v1/{name=projects/*/locations/*}/operations',
         },
       ];
     }
@@ -292,58 +292,58 @@ export class NetworkSecurityClient {
       .lro(lroOptions)
       .operationsClient(opts);
     const createAuthorizationPolicyResponse = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1beta1.AuthorizationPolicy'
+      '.google.cloud.networksecurity.v1.AuthorizationPolicy'
     ) as gax.protobuf.Type;
     const createAuthorizationPolicyMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1beta1.OperationMetadata'
+      '.google.cloud.networksecurity.v1.OperationMetadata'
     ) as gax.protobuf.Type;
     const updateAuthorizationPolicyResponse = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1beta1.AuthorizationPolicy'
+      '.google.cloud.networksecurity.v1.AuthorizationPolicy'
     ) as gax.protobuf.Type;
     const updateAuthorizationPolicyMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1beta1.OperationMetadata'
+      '.google.cloud.networksecurity.v1.OperationMetadata'
     ) as gax.protobuf.Type;
     const deleteAuthorizationPolicyResponse = protoFilesRoot.lookup(
       '.google.protobuf.Empty'
     ) as gax.protobuf.Type;
     const deleteAuthorizationPolicyMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1beta1.OperationMetadata'
+      '.google.cloud.networksecurity.v1.OperationMetadata'
     ) as gax.protobuf.Type;
     const createServerTlsPolicyResponse = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1beta1.ServerTlsPolicy'
+      '.google.cloud.networksecurity.v1.ServerTlsPolicy'
     ) as gax.protobuf.Type;
     const createServerTlsPolicyMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1beta1.OperationMetadata'
+      '.google.cloud.networksecurity.v1.OperationMetadata'
     ) as gax.protobuf.Type;
     const updateServerTlsPolicyResponse = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1beta1.ServerTlsPolicy'
+      '.google.cloud.networksecurity.v1.ServerTlsPolicy'
     ) as gax.protobuf.Type;
     const updateServerTlsPolicyMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1beta1.OperationMetadata'
+      '.google.cloud.networksecurity.v1.OperationMetadata'
     ) as gax.protobuf.Type;
     const deleteServerTlsPolicyResponse = protoFilesRoot.lookup(
       '.google.protobuf.Empty'
     ) as gax.protobuf.Type;
     const deleteServerTlsPolicyMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1beta1.OperationMetadata'
+      '.google.cloud.networksecurity.v1.OperationMetadata'
     ) as gax.protobuf.Type;
     const createClientTlsPolicyResponse = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1beta1.ClientTlsPolicy'
+      '.google.cloud.networksecurity.v1.ClientTlsPolicy'
     ) as gax.protobuf.Type;
     const createClientTlsPolicyMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1beta1.OperationMetadata'
+      '.google.cloud.networksecurity.v1.OperationMetadata'
     ) as gax.protobuf.Type;
     const updateClientTlsPolicyResponse = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1beta1.ClientTlsPolicy'
+      '.google.cloud.networksecurity.v1.ClientTlsPolicy'
     ) as gax.protobuf.Type;
     const updateClientTlsPolicyMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1beta1.OperationMetadata'
+      '.google.cloud.networksecurity.v1.OperationMetadata'
     ) as gax.protobuf.Type;
     const deleteClientTlsPolicyResponse = protoFilesRoot.lookup(
       '.google.protobuf.Empty'
     ) as gax.protobuf.Type;
     const deleteClientTlsPolicyMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1beta1.OperationMetadata'
+      '.google.cloud.networksecurity.v1.OperationMetadata'
     ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
@@ -420,7 +420,7 @@ export class NetworkSecurityClient {
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.networksecurity.v1beta1.NetworkSecurity',
+      'google.cloud.networksecurity.v1.NetworkSecurity',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
       {'x-goog-api-client': clientHeader.join(' ')}
@@ -453,15 +453,14 @@ export class NetworkSecurityClient {
     }
 
     // Put together the "service stub" for
-    // google.cloud.networksecurity.v1beta1.NetworkSecurity.
+    // google.cloud.networksecurity.v1.NetworkSecurity.
     this.networkSecurityStub = this._gaxGrpc.createStub(
       this._opts.fallback
         ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.networksecurity.v1beta1.NetworkSecurity'
+            'google.cloud.networksecurity.v1.NetworkSecurity'
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.networksecurity.v1beta1
-            .NetworkSecurity,
+          (this._protos as any).google.cloud.networksecurity.v1.NetworkSecurity,
       this._opts,
       this._providedCustomServicePath
     ) as Promise<{[method: string]: Function}>;
@@ -581,70 +580,70 @@ export class NetworkSecurityClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [AuthorizationPolicy]{@link google.cloud.networksecurity.v1beta1.AuthorizationPolicy}.
+   *   The first element of the array is an object representing [AuthorizationPolicy]{@link google.cloud.networksecurity.v1.AuthorizationPolicy}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/network_security.get_authorization_policy.js</caption>
-   * region_tag:networksecurity_v1beta1_generated_NetworkSecurity_GetAuthorizationPolicy_async
+   * @example <caption>include:samples/generated/v1/network_security.get_authorization_policy.js</caption>
+   * region_tag:networksecurity_v1_generated_NetworkSecurity_GetAuthorizationPolicy_async
    */
   getAuthorizationPolicy(
-    request?: protos.google.cloud.networksecurity.v1beta1.IGetAuthorizationPolicyRequest,
+    request?: protos.google.cloud.networksecurity.v1.IGetAuthorizationPolicyRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.networksecurity.v1beta1.IAuthorizationPolicy,
+      protos.google.cloud.networksecurity.v1.IAuthorizationPolicy,
       (
-        | protos.google.cloud.networksecurity.v1beta1.IGetAuthorizationPolicyRequest
+        | protos.google.cloud.networksecurity.v1.IGetAuthorizationPolicyRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   getAuthorizationPolicy(
-    request: protos.google.cloud.networksecurity.v1beta1.IGetAuthorizationPolicyRequest,
+    request: protos.google.cloud.networksecurity.v1.IGetAuthorizationPolicyRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.cloud.networksecurity.v1beta1.IAuthorizationPolicy,
-      | protos.google.cloud.networksecurity.v1beta1.IGetAuthorizationPolicyRequest
+      protos.google.cloud.networksecurity.v1.IAuthorizationPolicy,
+      | protos.google.cloud.networksecurity.v1.IGetAuthorizationPolicyRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
   getAuthorizationPolicy(
-    request: protos.google.cloud.networksecurity.v1beta1.IGetAuthorizationPolicyRequest,
+    request: protos.google.cloud.networksecurity.v1.IGetAuthorizationPolicyRequest,
     callback: Callback<
-      protos.google.cloud.networksecurity.v1beta1.IAuthorizationPolicy,
-      | protos.google.cloud.networksecurity.v1beta1.IGetAuthorizationPolicyRequest
+      protos.google.cloud.networksecurity.v1.IAuthorizationPolicy,
+      | protos.google.cloud.networksecurity.v1.IGetAuthorizationPolicyRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
   getAuthorizationPolicy(
-    request?: protos.google.cloud.networksecurity.v1beta1.IGetAuthorizationPolicyRequest,
+    request?: protos.google.cloud.networksecurity.v1.IGetAuthorizationPolicyRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.cloud.networksecurity.v1beta1.IAuthorizationPolicy,
-          | protos.google.cloud.networksecurity.v1beta1.IGetAuthorizationPolicyRequest
+          protos.google.cloud.networksecurity.v1.IAuthorizationPolicy,
+          | protos.google.cloud.networksecurity.v1.IGetAuthorizationPolicyRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.cloud.networksecurity.v1beta1.IAuthorizationPolicy,
-      | protos.google.cloud.networksecurity.v1beta1.IGetAuthorizationPolicyRequest
+      protos.google.cloud.networksecurity.v1.IAuthorizationPolicy,
+      | protos.google.cloud.networksecurity.v1.IGetAuthorizationPolicyRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.cloud.networksecurity.v1beta1.IAuthorizationPolicy,
+      protos.google.cloud.networksecurity.v1.IAuthorizationPolicy,
       (
-        | protos.google.cloud.networksecurity.v1beta1.IGetAuthorizationPolicyRequest
+        | protos.google.cloud.networksecurity.v1.IGetAuthorizationPolicyRequest
         | undefined
       ),
       {} | undefined
@@ -683,70 +682,70 @@ export class NetworkSecurityClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ServerTlsPolicy]{@link google.cloud.networksecurity.v1beta1.ServerTlsPolicy}.
+   *   The first element of the array is an object representing [ServerTlsPolicy]{@link google.cloud.networksecurity.v1.ServerTlsPolicy}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/network_security.get_server_tls_policy.js</caption>
-   * region_tag:networksecurity_v1beta1_generated_NetworkSecurity_GetServerTlsPolicy_async
+   * @example <caption>include:samples/generated/v1/network_security.get_server_tls_policy.js</caption>
+   * region_tag:networksecurity_v1_generated_NetworkSecurity_GetServerTlsPolicy_async
    */
   getServerTlsPolicy(
-    request?: protos.google.cloud.networksecurity.v1beta1.IGetServerTlsPolicyRequest,
+    request?: protos.google.cloud.networksecurity.v1.IGetServerTlsPolicyRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.networksecurity.v1beta1.IServerTlsPolicy,
+      protos.google.cloud.networksecurity.v1.IServerTlsPolicy,
       (
-        | protos.google.cloud.networksecurity.v1beta1.IGetServerTlsPolicyRequest
+        | protos.google.cloud.networksecurity.v1.IGetServerTlsPolicyRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   getServerTlsPolicy(
-    request: protos.google.cloud.networksecurity.v1beta1.IGetServerTlsPolicyRequest,
+    request: protos.google.cloud.networksecurity.v1.IGetServerTlsPolicyRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.cloud.networksecurity.v1beta1.IServerTlsPolicy,
-      | protos.google.cloud.networksecurity.v1beta1.IGetServerTlsPolicyRequest
+      protos.google.cloud.networksecurity.v1.IServerTlsPolicy,
+      | protos.google.cloud.networksecurity.v1.IGetServerTlsPolicyRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
   getServerTlsPolicy(
-    request: protos.google.cloud.networksecurity.v1beta1.IGetServerTlsPolicyRequest,
+    request: protos.google.cloud.networksecurity.v1.IGetServerTlsPolicyRequest,
     callback: Callback<
-      protos.google.cloud.networksecurity.v1beta1.IServerTlsPolicy,
-      | protos.google.cloud.networksecurity.v1beta1.IGetServerTlsPolicyRequest
+      protos.google.cloud.networksecurity.v1.IServerTlsPolicy,
+      | protos.google.cloud.networksecurity.v1.IGetServerTlsPolicyRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
   getServerTlsPolicy(
-    request?: protos.google.cloud.networksecurity.v1beta1.IGetServerTlsPolicyRequest,
+    request?: protos.google.cloud.networksecurity.v1.IGetServerTlsPolicyRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.cloud.networksecurity.v1beta1.IServerTlsPolicy,
-          | protos.google.cloud.networksecurity.v1beta1.IGetServerTlsPolicyRequest
+          protos.google.cloud.networksecurity.v1.IServerTlsPolicy,
+          | protos.google.cloud.networksecurity.v1.IGetServerTlsPolicyRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.cloud.networksecurity.v1beta1.IServerTlsPolicy,
-      | protos.google.cloud.networksecurity.v1beta1.IGetServerTlsPolicyRequest
+      protos.google.cloud.networksecurity.v1.IServerTlsPolicy,
+      | protos.google.cloud.networksecurity.v1.IGetServerTlsPolicyRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.cloud.networksecurity.v1beta1.IServerTlsPolicy,
+      protos.google.cloud.networksecurity.v1.IServerTlsPolicy,
       (
-        | protos.google.cloud.networksecurity.v1beta1.IGetServerTlsPolicyRequest
+        | protos.google.cloud.networksecurity.v1.IGetServerTlsPolicyRequest
         | undefined
       ),
       {} | undefined
@@ -781,70 +780,70 @@ export class NetworkSecurityClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ClientTlsPolicy]{@link google.cloud.networksecurity.v1beta1.ClientTlsPolicy}.
+   *   The first element of the array is an object representing [ClientTlsPolicy]{@link google.cloud.networksecurity.v1.ClientTlsPolicy}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/network_security.get_client_tls_policy.js</caption>
-   * region_tag:networksecurity_v1beta1_generated_NetworkSecurity_GetClientTlsPolicy_async
+   * @example <caption>include:samples/generated/v1/network_security.get_client_tls_policy.js</caption>
+   * region_tag:networksecurity_v1_generated_NetworkSecurity_GetClientTlsPolicy_async
    */
   getClientTlsPolicy(
-    request?: protos.google.cloud.networksecurity.v1beta1.IGetClientTlsPolicyRequest,
+    request?: protos.google.cloud.networksecurity.v1.IGetClientTlsPolicyRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.networksecurity.v1beta1.IClientTlsPolicy,
+      protos.google.cloud.networksecurity.v1.IClientTlsPolicy,
       (
-        | protos.google.cloud.networksecurity.v1beta1.IGetClientTlsPolicyRequest
+        | protos.google.cloud.networksecurity.v1.IGetClientTlsPolicyRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   getClientTlsPolicy(
-    request: protos.google.cloud.networksecurity.v1beta1.IGetClientTlsPolicyRequest,
+    request: protos.google.cloud.networksecurity.v1.IGetClientTlsPolicyRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.cloud.networksecurity.v1beta1.IClientTlsPolicy,
-      | protos.google.cloud.networksecurity.v1beta1.IGetClientTlsPolicyRequest
+      protos.google.cloud.networksecurity.v1.IClientTlsPolicy,
+      | protos.google.cloud.networksecurity.v1.IGetClientTlsPolicyRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
   getClientTlsPolicy(
-    request: protos.google.cloud.networksecurity.v1beta1.IGetClientTlsPolicyRequest,
+    request: protos.google.cloud.networksecurity.v1.IGetClientTlsPolicyRequest,
     callback: Callback<
-      protos.google.cloud.networksecurity.v1beta1.IClientTlsPolicy,
-      | protos.google.cloud.networksecurity.v1beta1.IGetClientTlsPolicyRequest
+      protos.google.cloud.networksecurity.v1.IClientTlsPolicy,
+      | protos.google.cloud.networksecurity.v1.IGetClientTlsPolicyRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
   getClientTlsPolicy(
-    request?: protos.google.cloud.networksecurity.v1beta1.IGetClientTlsPolicyRequest,
+    request?: protos.google.cloud.networksecurity.v1.IGetClientTlsPolicyRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.cloud.networksecurity.v1beta1.IClientTlsPolicy,
-          | protos.google.cloud.networksecurity.v1beta1.IGetClientTlsPolicyRequest
+          protos.google.cloud.networksecurity.v1.IClientTlsPolicy,
+          | protos.google.cloud.networksecurity.v1.IGetClientTlsPolicyRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.cloud.networksecurity.v1beta1.IClientTlsPolicy,
-      | protos.google.cloud.networksecurity.v1beta1.IGetClientTlsPolicyRequest
+      protos.google.cloud.networksecurity.v1.IClientTlsPolicy,
+      | protos.google.cloud.networksecurity.v1.IGetClientTlsPolicyRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.cloud.networksecurity.v1beta1.IClientTlsPolicy,
+      protos.google.cloud.networksecurity.v1.IClientTlsPolicy,
       (
-        | protos.google.cloud.networksecurity.v1beta1.IGetClientTlsPolicyRequest
+        | protos.google.cloud.networksecurity.v1.IGetClientTlsPolicyRequest
         | undefined
       ),
       {} | undefined
@@ -882,7 +881,7 @@ export class NetworkSecurityClient {
    *   This value should be 1-63 characters long, containing only
    *   letters, numbers, hyphens, and underscores, and should not start
    *   with a number. E.g. "authz_policy".
-   * @param {google.cloud.networksecurity.v1beta1.AuthorizationPolicy} request.authorizationPolicy
+   * @param {google.cloud.networksecurity.v1.AuthorizationPolicy} request.authorizationPolicy
    *   Required. AuthorizationPolicy resource to be created.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -893,61 +892,61 @@ export class NetworkSecurityClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/network_security.create_authorization_policy.js</caption>
-   * region_tag:networksecurity_v1beta1_generated_NetworkSecurity_CreateAuthorizationPolicy_async
+   * @example <caption>include:samples/generated/v1/network_security.create_authorization_policy.js</caption>
+   * region_tag:networksecurity_v1_generated_NetworkSecurity_CreateAuthorizationPolicy_async
    */
   createAuthorizationPolicy(
-    request?: protos.google.cloud.networksecurity.v1beta1.ICreateAuthorizationPolicyRequest,
+    request?: protos.google.cloud.networksecurity.v1.ICreateAuthorizationPolicyRequest,
     options?: CallOptions
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.networksecurity.v1beta1.IAuthorizationPolicy,
-        protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+        protos.google.cloud.networksecurity.v1.IAuthorizationPolicy,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   >;
   createAuthorizationPolicy(
-    request: protos.google.cloud.networksecurity.v1beta1.ICreateAuthorizationPolicyRequest,
+    request: protos.google.cloud.networksecurity.v1.ICreateAuthorizationPolicyRequest,
     options: CallOptions,
     callback: Callback<
       LROperation<
-        protos.google.cloud.networksecurity.v1beta1.IAuthorizationPolicy,
-        protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+        protos.google.cloud.networksecurity.v1.IAuthorizationPolicy,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
   createAuthorizationPolicy(
-    request: protos.google.cloud.networksecurity.v1beta1.ICreateAuthorizationPolicyRequest,
+    request: protos.google.cloud.networksecurity.v1.ICreateAuthorizationPolicyRequest,
     callback: Callback<
       LROperation<
-        protos.google.cloud.networksecurity.v1beta1.IAuthorizationPolicy,
-        protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+        protos.google.cloud.networksecurity.v1.IAuthorizationPolicy,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
   createAuthorizationPolicy(
-    request?: protos.google.cloud.networksecurity.v1beta1.ICreateAuthorizationPolicyRequest,
+    request?: protos.google.cloud.networksecurity.v1.ICreateAuthorizationPolicyRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
           LROperation<
-            protos.google.cloud.networksecurity.v1beta1.IAuthorizationPolicy,
-            protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+            protos.google.cloud.networksecurity.v1.IAuthorizationPolicy,
+            protos.google.cloud.networksecurity.v1.IOperationMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
       LROperation<
-        protos.google.cloud.networksecurity.v1beta1.IAuthorizationPolicy,
-        protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+        protos.google.cloud.networksecurity.v1.IAuthorizationPolicy,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -955,8 +954,8 @@ export class NetworkSecurityClient {
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.networksecurity.v1beta1.IAuthorizationPolicy,
-        protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+        protos.google.cloud.networksecurity.v1.IAuthorizationPolicy,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined
@@ -993,15 +992,15 @@ export class NetworkSecurityClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/network_security.create_authorization_policy.js</caption>
-   * region_tag:networksecurity_v1beta1_generated_NetworkSecurity_CreateAuthorizationPolicy_async
+   * @example <caption>include:samples/generated/v1/network_security.create_authorization_policy.js</caption>
+   * region_tag:networksecurity_v1_generated_NetworkSecurity_CreateAuthorizationPolicy_async
    */
   async checkCreateAuthorizationPolicyProgress(
     name: string
   ): Promise<
     LROperation<
-      protos.google.cloud.networksecurity.v1beta1.AuthorizationPolicy,
-      protos.google.cloud.networksecurity.v1beta1.OperationMetadata
+      protos.google.cloud.networksecurity.v1.AuthorizationPolicy,
+      protos.google.cloud.networksecurity.v1.OperationMetadata
     >
   > {
     const request = new operationsProtos.google.longrunning.GetOperationRequest(
@@ -1014,8 +1013,8 @@ export class NetworkSecurityClient {
       this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
-      protos.google.cloud.networksecurity.v1beta1.AuthorizationPolicy,
-      protos.google.cloud.networksecurity.v1beta1.OperationMetadata
+      protos.google.cloud.networksecurity.v1.AuthorizationPolicy,
+      protos.google.cloud.networksecurity.v1.OperationMetadata
     >;
   }
   /**
@@ -1029,7 +1028,7 @@ export class NetworkSecurityClient {
    *   The fields specified in the update_mask are relative to the resource, not
    *   the full request. A field will be overwritten if it is in the mask. If the
    *   user does not provide a mask then all fields will be overwritten.
-   * @param {google.cloud.networksecurity.v1beta1.AuthorizationPolicy} request.authorizationPolicy
+   * @param {google.cloud.networksecurity.v1.AuthorizationPolicy} request.authorizationPolicy
    *   Required. Updated AuthorizationPolicy resource.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1040,61 +1039,61 @@ export class NetworkSecurityClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/network_security.update_authorization_policy.js</caption>
-   * region_tag:networksecurity_v1beta1_generated_NetworkSecurity_UpdateAuthorizationPolicy_async
+   * @example <caption>include:samples/generated/v1/network_security.update_authorization_policy.js</caption>
+   * region_tag:networksecurity_v1_generated_NetworkSecurity_UpdateAuthorizationPolicy_async
    */
   updateAuthorizationPolicy(
-    request?: protos.google.cloud.networksecurity.v1beta1.IUpdateAuthorizationPolicyRequest,
+    request?: protos.google.cloud.networksecurity.v1.IUpdateAuthorizationPolicyRequest,
     options?: CallOptions
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.networksecurity.v1beta1.IAuthorizationPolicy,
-        protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+        protos.google.cloud.networksecurity.v1.IAuthorizationPolicy,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   >;
   updateAuthorizationPolicy(
-    request: protos.google.cloud.networksecurity.v1beta1.IUpdateAuthorizationPolicyRequest,
+    request: protos.google.cloud.networksecurity.v1.IUpdateAuthorizationPolicyRequest,
     options: CallOptions,
     callback: Callback<
       LROperation<
-        protos.google.cloud.networksecurity.v1beta1.IAuthorizationPolicy,
-        protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+        protos.google.cloud.networksecurity.v1.IAuthorizationPolicy,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
   updateAuthorizationPolicy(
-    request: protos.google.cloud.networksecurity.v1beta1.IUpdateAuthorizationPolicyRequest,
+    request: protos.google.cloud.networksecurity.v1.IUpdateAuthorizationPolicyRequest,
     callback: Callback<
       LROperation<
-        protos.google.cloud.networksecurity.v1beta1.IAuthorizationPolicy,
-        protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+        protos.google.cloud.networksecurity.v1.IAuthorizationPolicy,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
   updateAuthorizationPolicy(
-    request?: protos.google.cloud.networksecurity.v1beta1.IUpdateAuthorizationPolicyRequest,
+    request?: protos.google.cloud.networksecurity.v1.IUpdateAuthorizationPolicyRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
           LROperation<
-            protos.google.cloud.networksecurity.v1beta1.IAuthorizationPolicy,
-            protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+            protos.google.cloud.networksecurity.v1.IAuthorizationPolicy,
+            protos.google.cloud.networksecurity.v1.IOperationMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
       LROperation<
-        protos.google.cloud.networksecurity.v1beta1.IAuthorizationPolicy,
-        protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+        protos.google.cloud.networksecurity.v1.IAuthorizationPolicy,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -1102,8 +1101,8 @@ export class NetworkSecurityClient {
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.networksecurity.v1beta1.IAuthorizationPolicy,
-        protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+        protos.google.cloud.networksecurity.v1.IAuthorizationPolicy,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined
@@ -1140,15 +1139,15 @@ export class NetworkSecurityClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/network_security.update_authorization_policy.js</caption>
-   * region_tag:networksecurity_v1beta1_generated_NetworkSecurity_UpdateAuthorizationPolicy_async
+   * @example <caption>include:samples/generated/v1/network_security.update_authorization_policy.js</caption>
+   * region_tag:networksecurity_v1_generated_NetworkSecurity_UpdateAuthorizationPolicy_async
    */
   async checkUpdateAuthorizationPolicyProgress(
     name: string
   ): Promise<
     LROperation<
-      protos.google.cloud.networksecurity.v1beta1.AuthorizationPolicy,
-      protos.google.cloud.networksecurity.v1beta1.OperationMetadata
+      protos.google.cloud.networksecurity.v1.AuthorizationPolicy,
+      protos.google.cloud.networksecurity.v1.OperationMetadata
     >
   > {
     const request = new operationsProtos.google.longrunning.GetOperationRequest(
@@ -1161,8 +1160,8 @@ export class NetworkSecurityClient {
       this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
-      protos.google.cloud.networksecurity.v1beta1.AuthorizationPolicy,
-      protos.google.cloud.networksecurity.v1beta1.OperationMetadata
+      protos.google.cloud.networksecurity.v1.AuthorizationPolicy,
+      protos.google.cloud.networksecurity.v1.OperationMetadata
     >;
   }
   /**
@@ -1171,8 +1170,8 @@ export class NetworkSecurityClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. A name of the AuthorizationPolicy to delete. Must be in the
-   *   format `projects/{project}/locations/{location}/authorizationPolicies/*`.
+   *   Required. A name of the AuthorizationPolicy to delete. Must be in the format
+   *   `projects/{project}/locations/{location}/authorizationPolicies/*`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1182,53 +1181,53 @@ export class NetworkSecurityClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/network_security.delete_authorization_policy.js</caption>
-   * region_tag:networksecurity_v1beta1_generated_NetworkSecurity_DeleteAuthorizationPolicy_async
+   * @example <caption>include:samples/generated/v1/network_security.delete_authorization_policy.js</caption>
+   * region_tag:networksecurity_v1_generated_NetworkSecurity_DeleteAuthorizationPolicy_async
    */
   deleteAuthorizationPolicy(
-    request?: protos.google.cloud.networksecurity.v1beta1.IDeleteAuthorizationPolicyRequest,
+    request?: protos.google.cloud.networksecurity.v1.IDeleteAuthorizationPolicyRequest,
     options?: CallOptions
   ): Promise<
     [
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   >;
   deleteAuthorizationPolicy(
-    request: protos.google.cloud.networksecurity.v1beta1.IDeleteAuthorizationPolicyRequest,
+    request: protos.google.cloud.networksecurity.v1.IDeleteAuthorizationPolicyRequest,
     options: CallOptions,
     callback: Callback<
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
   deleteAuthorizationPolicy(
-    request: protos.google.cloud.networksecurity.v1beta1.IDeleteAuthorizationPolicyRequest,
+    request: protos.google.cloud.networksecurity.v1.IDeleteAuthorizationPolicyRequest,
     callback: Callback<
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
   deleteAuthorizationPolicy(
-    request?: protos.google.cloud.networksecurity.v1beta1.IDeleteAuthorizationPolicyRequest,
+    request?: protos.google.cloud.networksecurity.v1.IDeleteAuthorizationPolicyRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
           LROperation<
             protos.google.protobuf.IEmpty,
-            protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+            protos.google.cloud.networksecurity.v1.IOperationMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
           {} | null | undefined
@@ -1236,7 +1235,7 @@ export class NetworkSecurityClient {
     callback?: Callback<
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -1245,7 +1244,7 @@ export class NetworkSecurityClient {
     [
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined
@@ -1282,15 +1281,15 @@ export class NetworkSecurityClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/network_security.delete_authorization_policy.js</caption>
-   * region_tag:networksecurity_v1beta1_generated_NetworkSecurity_DeleteAuthorizationPolicy_async
+   * @example <caption>include:samples/generated/v1/network_security.delete_authorization_policy.js</caption>
+   * region_tag:networksecurity_v1_generated_NetworkSecurity_DeleteAuthorizationPolicy_async
    */
   async checkDeleteAuthorizationPolicyProgress(
     name: string
   ): Promise<
     LROperation<
       protos.google.protobuf.Empty,
-      protos.google.cloud.networksecurity.v1beta1.OperationMetadata
+      protos.google.cloud.networksecurity.v1.OperationMetadata
     >
   > {
     const request = new operationsProtos.google.longrunning.GetOperationRequest(
@@ -1304,7 +1303,7 @@ export class NetworkSecurityClient {
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
-      protos.google.cloud.networksecurity.v1beta1.OperationMetadata
+      protos.google.cloud.networksecurity.v1.OperationMetadata
     >;
   }
   /**
@@ -1316,11 +1315,10 @@ export class NetworkSecurityClient {
    *   Required. The parent resource of the ServerTlsPolicy. Must be in
    *   the format `projects/* /locations/{location}`.
    * @param {string} request.serverTlsPolicyId
-   *   Required. Short name of the ServerTlsPolicy resource to be created. This
-   *   value should be 1-63 characters long, containing only letters, numbers,
-   *   hyphens, and underscores, and should not start with a number. E.g.
-   *   "server_mtls_policy".
-   * @param {google.cloud.networksecurity.v1beta1.ServerTlsPolicy} request.serverTlsPolicy
+   *   Required. Short name of the ServerTlsPolicy resource to be created. This value should
+   *   be 1-63 characters long, containing only letters, numbers, hyphens, and
+   *   underscores, and should not start with a number. E.g. "server_mtls_policy".
+   * @param {google.cloud.networksecurity.v1.ServerTlsPolicy} request.serverTlsPolicy
    *   Required. ServerTlsPolicy resource to be created.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1331,61 +1329,61 @@ export class NetworkSecurityClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/network_security.create_server_tls_policy.js</caption>
-   * region_tag:networksecurity_v1beta1_generated_NetworkSecurity_CreateServerTlsPolicy_async
+   * @example <caption>include:samples/generated/v1/network_security.create_server_tls_policy.js</caption>
+   * region_tag:networksecurity_v1_generated_NetworkSecurity_CreateServerTlsPolicy_async
    */
   createServerTlsPolicy(
-    request?: protos.google.cloud.networksecurity.v1beta1.ICreateServerTlsPolicyRequest,
+    request?: protos.google.cloud.networksecurity.v1.ICreateServerTlsPolicyRequest,
     options?: CallOptions
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.networksecurity.v1beta1.IServerTlsPolicy,
-        protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+        protos.google.cloud.networksecurity.v1.IServerTlsPolicy,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   >;
   createServerTlsPolicy(
-    request: protos.google.cloud.networksecurity.v1beta1.ICreateServerTlsPolicyRequest,
+    request: protos.google.cloud.networksecurity.v1.ICreateServerTlsPolicyRequest,
     options: CallOptions,
     callback: Callback<
       LROperation<
-        protos.google.cloud.networksecurity.v1beta1.IServerTlsPolicy,
-        protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+        protos.google.cloud.networksecurity.v1.IServerTlsPolicy,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
   createServerTlsPolicy(
-    request: protos.google.cloud.networksecurity.v1beta1.ICreateServerTlsPolicyRequest,
+    request: protos.google.cloud.networksecurity.v1.ICreateServerTlsPolicyRequest,
     callback: Callback<
       LROperation<
-        protos.google.cloud.networksecurity.v1beta1.IServerTlsPolicy,
-        protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+        protos.google.cloud.networksecurity.v1.IServerTlsPolicy,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
   createServerTlsPolicy(
-    request?: protos.google.cloud.networksecurity.v1beta1.ICreateServerTlsPolicyRequest,
+    request?: protos.google.cloud.networksecurity.v1.ICreateServerTlsPolicyRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
           LROperation<
-            protos.google.cloud.networksecurity.v1beta1.IServerTlsPolicy,
-            protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+            protos.google.cloud.networksecurity.v1.IServerTlsPolicy,
+            protos.google.cloud.networksecurity.v1.IOperationMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
       LROperation<
-        protos.google.cloud.networksecurity.v1beta1.IServerTlsPolicy,
-        protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+        protos.google.cloud.networksecurity.v1.IServerTlsPolicy,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -1393,8 +1391,8 @@ export class NetworkSecurityClient {
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.networksecurity.v1beta1.IServerTlsPolicy,
-        protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+        protos.google.cloud.networksecurity.v1.IServerTlsPolicy,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined
@@ -1427,15 +1425,15 @@ export class NetworkSecurityClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/network_security.create_server_tls_policy.js</caption>
-   * region_tag:networksecurity_v1beta1_generated_NetworkSecurity_CreateServerTlsPolicy_async
+   * @example <caption>include:samples/generated/v1/network_security.create_server_tls_policy.js</caption>
+   * region_tag:networksecurity_v1_generated_NetworkSecurity_CreateServerTlsPolicy_async
    */
   async checkCreateServerTlsPolicyProgress(
     name: string
   ): Promise<
     LROperation<
-      protos.google.cloud.networksecurity.v1beta1.ServerTlsPolicy,
-      protos.google.cloud.networksecurity.v1beta1.OperationMetadata
+      protos.google.cloud.networksecurity.v1.ServerTlsPolicy,
+      protos.google.cloud.networksecurity.v1.OperationMetadata
     >
   > {
     const request = new operationsProtos.google.longrunning.GetOperationRequest(
@@ -1448,8 +1446,8 @@ export class NetworkSecurityClient {
       this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
-      protos.google.cloud.networksecurity.v1beta1.ServerTlsPolicy,
-      protos.google.cloud.networksecurity.v1beta1.OperationMetadata
+      protos.google.cloud.networksecurity.v1.ServerTlsPolicy,
+      protos.google.cloud.networksecurity.v1.OperationMetadata
     >;
   }
   /**
@@ -1464,7 +1462,7 @@ export class NetworkSecurityClient {
    *   the full request. A field will be overwritten if it is in the
    *   mask. If the user does not provide a mask then all fields will be
    *   overwritten.
-   * @param {google.cloud.networksecurity.v1beta1.ServerTlsPolicy} request.serverTlsPolicy
+   * @param {google.cloud.networksecurity.v1.ServerTlsPolicy} request.serverTlsPolicy
    *   Required. Updated ServerTlsPolicy resource.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1475,61 +1473,61 @@ export class NetworkSecurityClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/network_security.update_server_tls_policy.js</caption>
-   * region_tag:networksecurity_v1beta1_generated_NetworkSecurity_UpdateServerTlsPolicy_async
+   * @example <caption>include:samples/generated/v1/network_security.update_server_tls_policy.js</caption>
+   * region_tag:networksecurity_v1_generated_NetworkSecurity_UpdateServerTlsPolicy_async
    */
   updateServerTlsPolicy(
-    request?: protos.google.cloud.networksecurity.v1beta1.IUpdateServerTlsPolicyRequest,
+    request?: protos.google.cloud.networksecurity.v1.IUpdateServerTlsPolicyRequest,
     options?: CallOptions
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.networksecurity.v1beta1.IServerTlsPolicy,
-        protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+        protos.google.cloud.networksecurity.v1.IServerTlsPolicy,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   >;
   updateServerTlsPolicy(
-    request: protos.google.cloud.networksecurity.v1beta1.IUpdateServerTlsPolicyRequest,
+    request: protos.google.cloud.networksecurity.v1.IUpdateServerTlsPolicyRequest,
     options: CallOptions,
     callback: Callback<
       LROperation<
-        protos.google.cloud.networksecurity.v1beta1.IServerTlsPolicy,
-        protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+        protos.google.cloud.networksecurity.v1.IServerTlsPolicy,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
   updateServerTlsPolicy(
-    request: protos.google.cloud.networksecurity.v1beta1.IUpdateServerTlsPolicyRequest,
+    request: protos.google.cloud.networksecurity.v1.IUpdateServerTlsPolicyRequest,
     callback: Callback<
       LROperation<
-        protos.google.cloud.networksecurity.v1beta1.IServerTlsPolicy,
-        protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+        protos.google.cloud.networksecurity.v1.IServerTlsPolicy,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
   updateServerTlsPolicy(
-    request?: protos.google.cloud.networksecurity.v1beta1.IUpdateServerTlsPolicyRequest,
+    request?: protos.google.cloud.networksecurity.v1.IUpdateServerTlsPolicyRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
           LROperation<
-            protos.google.cloud.networksecurity.v1beta1.IServerTlsPolicy,
-            protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+            protos.google.cloud.networksecurity.v1.IServerTlsPolicy,
+            protos.google.cloud.networksecurity.v1.IOperationMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
       LROperation<
-        protos.google.cloud.networksecurity.v1beta1.IServerTlsPolicy,
-        protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+        protos.google.cloud.networksecurity.v1.IServerTlsPolicy,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -1537,8 +1535,8 @@ export class NetworkSecurityClient {
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.networksecurity.v1beta1.IServerTlsPolicy,
-        protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+        protos.google.cloud.networksecurity.v1.IServerTlsPolicy,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined
@@ -1571,15 +1569,15 @@ export class NetworkSecurityClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/network_security.update_server_tls_policy.js</caption>
-   * region_tag:networksecurity_v1beta1_generated_NetworkSecurity_UpdateServerTlsPolicy_async
+   * @example <caption>include:samples/generated/v1/network_security.update_server_tls_policy.js</caption>
+   * region_tag:networksecurity_v1_generated_NetworkSecurity_UpdateServerTlsPolicy_async
    */
   async checkUpdateServerTlsPolicyProgress(
     name: string
   ): Promise<
     LROperation<
-      protos.google.cloud.networksecurity.v1beta1.ServerTlsPolicy,
-      protos.google.cloud.networksecurity.v1beta1.OperationMetadata
+      protos.google.cloud.networksecurity.v1.ServerTlsPolicy,
+      protos.google.cloud.networksecurity.v1.OperationMetadata
     >
   > {
     const request = new operationsProtos.google.longrunning.GetOperationRequest(
@@ -1592,8 +1590,8 @@ export class NetworkSecurityClient {
       this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
-      protos.google.cloud.networksecurity.v1beta1.ServerTlsPolicy,
-      protos.google.cloud.networksecurity.v1beta1.OperationMetadata
+      protos.google.cloud.networksecurity.v1.ServerTlsPolicy,
+      protos.google.cloud.networksecurity.v1.OperationMetadata
     >;
   }
   /**
@@ -1613,53 +1611,53 @@ export class NetworkSecurityClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/network_security.delete_server_tls_policy.js</caption>
-   * region_tag:networksecurity_v1beta1_generated_NetworkSecurity_DeleteServerTlsPolicy_async
+   * @example <caption>include:samples/generated/v1/network_security.delete_server_tls_policy.js</caption>
+   * region_tag:networksecurity_v1_generated_NetworkSecurity_DeleteServerTlsPolicy_async
    */
   deleteServerTlsPolicy(
-    request?: protos.google.cloud.networksecurity.v1beta1.IDeleteServerTlsPolicyRequest,
+    request?: protos.google.cloud.networksecurity.v1.IDeleteServerTlsPolicyRequest,
     options?: CallOptions
   ): Promise<
     [
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   >;
   deleteServerTlsPolicy(
-    request: protos.google.cloud.networksecurity.v1beta1.IDeleteServerTlsPolicyRequest,
+    request: protos.google.cloud.networksecurity.v1.IDeleteServerTlsPolicyRequest,
     options: CallOptions,
     callback: Callback<
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
   deleteServerTlsPolicy(
-    request: protos.google.cloud.networksecurity.v1beta1.IDeleteServerTlsPolicyRequest,
+    request: protos.google.cloud.networksecurity.v1.IDeleteServerTlsPolicyRequest,
     callback: Callback<
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
   deleteServerTlsPolicy(
-    request?: protos.google.cloud.networksecurity.v1beta1.IDeleteServerTlsPolicyRequest,
+    request?: protos.google.cloud.networksecurity.v1.IDeleteServerTlsPolicyRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
           LROperation<
             protos.google.protobuf.IEmpty,
-            protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+            protos.google.cloud.networksecurity.v1.IOperationMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
           {} | null | undefined
@@ -1667,7 +1665,7 @@ export class NetworkSecurityClient {
     callback?: Callback<
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -1676,7 +1674,7 @@ export class NetworkSecurityClient {
     [
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined
@@ -1709,15 +1707,15 @@ export class NetworkSecurityClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/network_security.delete_server_tls_policy.js</caption>
-   * region_tag:networksecurity_v1beta1_generated_NetworkSecurity_DeleteServerTlsPolicy_async
+   * @example <caption>include:samples/generated/v1/network_security.delete_server_tls_policy.js</caption>
+   * region_tag:networksecurity_v1_generated_NetworkSecurity_DeleteServerTlsPolicy_async
    */
   async checkDeleteServerTlsPolicyProgress(
     name: string
   ): Promise<
     LROperation<
       protos.google.protobuf.Empty,
-      protos.google.cloud.networksecurity.v1beta1.OperationMetadata
+      protos.google.cloud.networksecurity.v1.OperationMetadata
     >
   > {
     const request = new operationsProtos.google.longrunning.GetOperationRequest(
@@ -1731,7 +1729,7 @@ export class NetworkSecurityClient {
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
-      protos.google.cloud.networksecurity.v1beta1.OperationMetadata
+      protos.google.cloud.networksecurity.v1.OperationMetadata
     >;
   }
   /**
@@ -1743,11 +1741,10 @@ export class NetworkSecurityClient {
    *   Required. The parent resource of the ClientTlsPolicy. Must be in
    *   the format `projects/* /locations/{location}`.
    * @param {string} request.clientTlsPolicyId
-   *   Required. Short name of the ClientTlsPolicy resource to be created. This
-   *   value should be 1-63 characters long, containing only letters, numbers,
-   *   hyphens, and underscores, and should not start with a number. E.g.
-   *   "client_mtls_policy".
-   * @param {google.cloud.networksecurity.v1beta1.ClientTlsPolicy} request.clientTlsPolicy
+   *   Required. Short name of the ClientTlsPolicy resource to be created. This value should
+   *   be 1-63 characters long, containing only letters, numbers, hyphens, and
+   *   underscores, and should not start with a number. E.g. "client_mtls_policy".
+   * @param {google.cloud.networksecurity.v1.ClientTlsPolicy} request.clientTlsPolicy
    *   Required. ClientTlsPolicy resource to be created.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1758,61 +1755,61 @@ export class NetworkSecurityClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/network_security.create_client_tls_policy.js</caption>
-   * region_tag:networksecurity_v1beta1_generated_NetworkSecurity_CreateClientTlsPolicy_async
+   * @example <caption>include:samples/generated/v1/network_security.create_client_tls_policy.js</caption>
+   * region_tag:networksecurity_v1_generated_NetworkSecurity_CreateClientTlsPolicy_async
    */
   createClientTlsPolicy(
-    request?: protos.google.cloud.networksecurity.v1beta1.ICreateClientTlsPolicyRequest,
+    request?: protos.google.cloud.networksecurity.v1.ICreateClientTlsPolicyRequest,
     options?: CallOptions
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.networksecurity.v1beta1.IClientTlsPolicy,
-        protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+        protos.google.cloud.networksecurity.v1.IClientTlsPolicy,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   >;
   createClientTlsPolicy(
-    request: protos.google.cloud.networksecurity.v1beta1.ICreateClientTlsPolicyRequest,
+    request: protos.google.cloud.networksecurity.v1.ICreateClientTlsPolicyRequest,
     options: CallOptions,
     callback: Callback<
       LROperation<
-        protos.google.cloud.networksecurity.v1beta1.IClientTlsPolicy,
-        protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+        protos.google.cloud.networksecurity.v1.IClientTlsPolicy,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
   createClientTlsPolicy(
-    request: protos.google.cloud.networksecurity.v1beta1.ICreateClientTlsPolicyRequest,
+    request: protos.google.cloud.networksecurity.v1.ICreateClientTlsPolicyRequest,
     callback: Callback<
       LROperation<
-        protos.google.cloud.networksecurity.v1beta1.IClientTlsPolicy,
-        protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+        protos.google.cloud.networksecurity.v1.IClientTlsPolicy,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
   createClientTlsPolicy(
-    request?: protos.google.cloud.networksecurity.v1beta1.ICreateClientTlsPolicyRequest,
+    request?: protos.google.cloud.networksecurity.v1.ICreateClientTlsPolicyRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
           LROperation<
-            protos.google.cloud.networksecurity.v1beta1.IClientTlsPolicy,
-            protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+            protos.google.cloud.networksecurity.v1.IClientTlsPolicy,
+            protos.google.cloud.networksecurity.v1.IOperationMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
       LROperation<
-        protos.google.cloud.networksecurity.v1beta1.IClientTlsPolicy,
-        protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+        protos.google.cloud.networksecurity.v1.IClientTlsPolicy,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -1820,8 +1817,8 @@ export class NetworkSecurityClient {
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.networksecurity.v1beta1.IClientTlsPolicy,
-        protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+        protos.google.cloud.networksecurity.v1.IClientTlsPolicy,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined
@@ -1854,15 +1851,15 @@ export class NetworkSecurityClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/network_security.create_client_tls_policy.js</caption>
-   * region_tag:networksecurity_v1beta1_generated_NetworkSecurity_CreateClientTlsPolicy_async
+   * @example <caption>include:samples/generated/v1/network_security.create_client_tls_policy.js</caption>
+   * region_tag:networksecurity_v1_generated_NetworkSecurity_CreateClientTlsPolicy_async
    */
   async checkCreateClientTlsPolicyProgress(
     name: string
   ): Promise<
     LROperation<
-      protos.google.cloud.networksecurity.v1beta1.ClientTlsPolicy,
-      protos.google.cloud.networksecurity.v1beta1.OperationMetadata
+      protos.google.cloud.networksecurity.v1.ClientTlsPolicy,
+      protos.google.cloud.networksecurity.v1.OperationMetadata
     >
   > {
     const request = new operationsProtos.google.longrunning.GetOperationRequest(
@@ -1875,8 +1872,8 @@ export class NetworkSecurityClient {
       this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
-      protos.google.cloud.networksecurity.v1beta1.ClientTlsPolicy,
-      protos.google.cloud.networksecurity.v1beta1.OperationMetadata
+      protos.google.cloud.networksecurity.v1.ClientTlsPolicy,
+      protos.google.cloud.networksecurity.v1.OperationMetadata
     >;
   }
   /**
@@ -1891,7 +1888,7 @@ export class NetworkSecurityClient {
    *   the full request. A field will be overwritten if it is in the
    *   mask. If the user does not provide a mask then all fields will be
    *   overwritten.
-   * @param {google.cloud.networksecurity.v1beta1.ClientTlsPolicy} request.clientTlsPolicy
+   * @param {google.cloud.networksecurity.v1.ClientTlsPolicy} request.clientTlsPolicy
    *   Required. Updated ClientTlsPolicy resource.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1902,61 +1899,61 @@ export class NetworkSecurityClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/network_security.update_client_tls_policy.js</caption>
-   * region_tag:networksecurity_v1beta1_generated_NetworkSecurity_UpdateClientTlsPolicy_async
+   * @example <caption>include:samples/generated/v1/network_security.update_client_tls_policy.js</caption>
+   * region_tag:networksecurity_v1_generated_NetworkSecurity_UpdateClientTlsPolicy_async
    */
   updateClientTlsPolicy(
-    request?: protos.google.cloud.networksecurity.v1beta1.IUpdateClientTlsPolicyRequest,
+    request?: protos.google.cloud.networksecurity.v1.IUpdateClientTlsPolicyRequest,
     options?: CallOptions
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.networksecurity.v1beta1.IClientTlsPolicy,
-        protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+        protos.google.cloud.networksecurity.v1.IClientTlsPolicy,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   >;
   updateClientTlsPolicy(
-    request: protos.google.cloud.networksecurity.v1beta1.IUpdateClientTlsPolicyRequest,
+    request: protos.google.cloud.networksecurity.v1.IUpdateClientTlsPolicyRequest,
     options: CallOptions,
     callback: Callback<
       LROperation<
-        protos.google.cloud.networksecurity.v1beta1.IClientTlsPolicy,
-        protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+        protos.google.cloud.networksecurity.v1.IClientTlsPolicy,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
   updateClientTlsPolicy(
-    request: protos.google.cloud.networksecurity.v1beta1.IUpdateClientTlsPolicyRequest,
+    request: protos.google.cloud.networksecurity.v1.IUpdateClientTlsPolicyRequest,
     callback: Callback<
       LROperation<
-        protos.google.cloud.networksecurity.v1beta1.IClientTlsPolicy,
-        protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+        protos.google.cloud.networksecurity.v1.IClientTlsPolicy,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
   updateClientTlsPolicy(
-    request?: protos.google.cloud.networksecurity.v1beta1.IUpdateClientTlsPolicyRequest,
+    request?: protos.google.cloud.networksecurity.v1.IUpdateClientTlsPolicyRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
           LROperation<
-            protos.google.cloud.networksecurity.v1beta1.IClientTlsPolicy,
-            protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+            protos.google.cloud.networksecurity.v1.IClientTlsPolicy,
+            protos.google.cloud.networksecurity.v1.IOperationMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
       LROperation<
-        protos.google.cloud.networksecurity.v1beta1.IClientTlsPolicy,
-        protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+        protos.google.cloud.networksecurity.v1.IClientTlsPolicy,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -1964,8 +1961,8 @@ export class NetworkSecurityClient {
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.networksecurity.v1beta1.IClientTlsPolicy,
-        protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+        protos.google.cloud.networksecurity.v1.IClientTlsPolicy,
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined
@@ -1998,15 +1995,15 @@ export class NetworkSecurityClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/network_security.update_client_tls_policy.js</caption>
-   * region_tag:networksecurity_v1beta1_generated_NetworkSecurity_UpdateClientTlsPolicy_async
+   * @example <caption>include:samples/generated/v1/network_security.update_client_tls_policy.js</caption>
+   * region_tag:networksecurity_v1_generated_NetworkSecurity_UpdateClientTlsPolicy_async
    */
   async checkUpdateClientTlsPolicyProgress(
     name: string
   ): Promise<
     LROperation<
-      protos.google.cloud.networksecurity.v1beta1.ClientTlsPolicy,
-      protos.google.cloud.networksecurity.v1beta1.OperationMetadata
+      protos.google.cloud.networksecurity.v1.ClientTlsPolicy,
+      protos.google.cloud.networksecurity.v1.OperationMetadata
     >
   > {
     const request = new operationsProtos.google.longrunning.GetOperationRequest(
@@ -2019,8 +2016,8 @@ export class NetworkSecurityClient {
       this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
-      protos.google.cloud.networksecurity.v1beta1.ClientTlsPolicy,
-      protos.google.cloud.networksecurity.v1beta1.OperationMetadata
+      protos.google.cloud.networksecurity.v1.ClientTlsPolicy,
+      protos.google.cloud.networksecurity.v1.OperationMetadata
     >;
   }
   /**
@@ -2040,53 +2037,53 @@ export class NetworkSecurityClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/network_security.delete_client_tls_policy.js</caption>
-   * region_tag:networksecurity_v1beta1_generated_NetworkSecurity_DeleteClientTlsPolicy_async
+   * @example <caption>include:samples/generated/v1/network_security.delete_client_tls_policy.js</caption>
+   * region_tag:networksecurity_v1_generated_NetworkSecurity_DeleteClientTlsPolicy_async
    */
   deleteClientTlsPolicy(
-    request?: protos.google.cloud.networksecurity.v1beta1.IDeleteClientTlsPolicyRequest,
+    request?: protos.google.cloud.networksecurity.v1.IDeleteClientTlsPolicyRequest,
     options?: CallOptions
   ): Promise<
     [
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   >;
   deleteClientTlsPolicy(
-    request: protos.google.cloud.networksecurity.v1beta1.IDeleteClientTlsPolicyRequest,
+    request: protos.google.cloud.networksecurity.v1.IDeleteClientTlsPolicyRequest,
     options: CallOptions,
     callback: Callback<
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
   deleteClientTlsPolicy(
-    request: protos.google.cloud.networksecurity.v1beta1.IDeleteClientTlsPolicyRequest,
+    request: protos.google.cloud.networksecurity.v1.IDeleteClientTlsPolicyRequest,
     callback: Callback<
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
   deleteClientTlsPolicy(
-    request?: protos.google.cloud.networksecurity.v1beta1.IDeleteClientTlsPolicyRequest,
+    request?: protos.google.cloud.networksecurity.v1.IDeleteClientTlsPolicyRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
           LROperation<
             protos.google.protobuf.IEmpty,
-            protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+            protos.google.cloud.networksecurity.v1.IOperationMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
           {} | null | undefined
@@ -2094,7 +2091,7 @@ export class NetworkSecurityClient {
     callback?: Callback<
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -2103,7 +2100,7 @@ export class NetworkSecurityClient {
     [
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
+        protos.google.cloud.networksecurity.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined
@@ -2136,15 +2133,15 @@ export class NetworkSecurityClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/network_security.delete_client_tls_policy.js</caption>
-   * region_tag:networksecurity_v1beta1_generated_NetworkSecurity_DeleteClientTlsPolicy_async
+   * @example <caption>include:samples/generated/v1/network_security.delete_client_tls_policy.js</caption>
+   * region_tag:networksecurity_v1_generated_NetworkSecurity_DeleteClientTlsPolicy_async
    */
   async checkDeleteClientTlsPolicyProgress(
     name: string
   ): Promise<
     LROperation<
       protos.google.protobuf.Empty,
-      protos.google.cloud.networksecurity.v1beta1.OperationMetadata
+      protos.google.cloud.networksecurity.v1.OperationMetadata
     >
   > {
     const request = new operationsProtos.google.longrunning.GetOperationRequest(
@@ -2158,7 +2155,7 @@ export class NetworkSecurityClient {
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
-      protos.google.cloud.networksecurity.v1beta1.OperationMetadata
+      protos.google.cloud.networksecurity.v1.OperationMetadata
     >;
   }
   /**
@@ -2180,7 +2177,7 @@ export class NetworkSecurityClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [AuthorizationPolicy]{@link google.cloud.networksecurity.v1beta1.AuthorizationPolicy}.
+   *   The first element of the array is Array of [AuthorizationPolicy]{@link google.cloud.networksecurity.v1.AuthorizationPolicy}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -2191,59 +2188,59 @@ export class NetworkSecurityClient {
    *   for more details and examples.
    */
   listAuthorizationPolicies(
-    request?: protos.google.cloud.networksecurity.v1beta1.IListAuthorizationPoliciesRequest,
+    request?: protos.google.cloud.networksecurity.v1.IListAuthorizationPoliciesRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.networksecurity.v1beta1.IAuthorizationPolicy[],
-      protos.google.cloud.networksecurity.v1beta1.IListAuthorizationPoliciesRequest | null,
-      protos.google.cloud.networksecurity.v1beta1.IListAuthorizationPoliciesResponse
+      protos.google.cloud.networksecurity.v1.IAuthorizationPolicy[],
+      protos.google.cloud.networksecurity.v1.IListAuthorizationPoliciesRequest | null,
+      protos.google.cloud.networksecurity.v1.IListAuthorizationPoliciesResponse
     ]
   >;
   listAuthorizationPolicies(
-    request: protos.google.cloud.networksecurity.v1beta1.IListAuthorizationPoliciesRequest,
+    request: protos.google.cloud.networksecurity.v1.IListAuthorizationPoliciesRequest,
     options: CallOptions,
     callback: PaginationCallback<
-      protos.google.cloud.networksecurity.v1beta1.IListAuthorizationPoliciesRequest,
-      | protos.google.cloud.networksecurity.v1beta1.IListAuthorizationPoliciesResponse
+      protos.google.cloud.networksecurity.v1.IListAuthorizationPoliciesRequest,
+      | protos.google.cloud.networksecurity.v1.IListAuthorizationPoliciesResponse
       | null
       | undefined,
-      protos.google.cloud.networksecurity.v1beta1.IAuthorizationPolicy
+      protos.google.cloud.networksecurity.v1.IAuthorizationPolicy
     >
   ): void;
   listAuthorizationPolicies(
-    request: protos.google.cloud.networksecurity.v1beta1.IListAuthorizationPoliciesRequest,
+    request: protos.google.cloud.networksecurity.v1.IListAuthorizationPoliciesRequest,
     callback: PaginationCallback<
-      protos.google.cloud.networksecurity.v1beta1.IListAuthorizationPoliciesRequest,
-      | protos.google.cloud.networksecurity.v1beta1.IListAuthorizationPoliciesResponse
+      protos.google.cloud.networksecurity.v1.IListAuthorizationPoliciesRequest,
+      | protos.google.cloud.networksecurity.v1.IListAuthorizationPoliciesResponse
       | null
       | undefined,
-      protos.google.cloud.networksecurity.v1beta1.IAuthorizationPolicy
+      protos.google.cloud.networksecurity.v1.IAuthorizationPolicy
     >
   ): void;
   listAuthorizationPolicies(
-    request?: protos.google.cloud.networksecurity.v1beta1.IListAuthorizationPoliciesRequest,
+    request?: protos.google.cloud.networksecurity.v1.IListAuthorizationPoliciesRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
-          protos.google.cloud.networksecurity.v1beta1.IListAuthorizationPoliciesRequest,
-          | protos.google.cloud.networksecurity.v1beta1.IListAuthorizationPoliciesResponse
+          protos.google.cloud.networksecurity.v1.IListAuthorizationPoliciesRequest,
+          | protos.google.cloud.networksecurity.v1.IListAuthorizationPoliciesResponse
           | null
           | undefined,
-          protos.google.cloud.networksecurity.v1beta1.IAuthorizationPolicy
+          protos.google.cloud.networksecurity.v1.IAuthorizationPolicy
         >,
     callback?: PaginationCallback<
-      protos.google.cloud.networksecurity.v1beta1.IListAuthorizationPoliciesRequest,
-      | protos.google.cloud.networksecurity.v1beta1.IListAuthorizationPoliciesResponse
+      protos.google.cloud.networksecurity.v1.IListAuthorizationPoliciesRequest,
+      | protos.google.cloud.networksecurity.v1.IListAuthorizationPoliciesResponse
       | null
       | undefined,
-      protos.google.cloud.networksecurity.v1beta1.IAuthorizationPolicy
+      protos.google.cloud.networksecurity.v1.IAuthorizationPolicy
     >
   ): Promise<
     [
-      protos.google.cloud.networksecurity.v1beta1.IAuthorizationPolicy[],
-      protos.google.cloud.networksecurity.v1beta1.IListAuthorizationPoliciesRequest | null,
-      protos.google.cloud.networksecurity.v1beta1.IListAuthorizationPoliciesResponse
+      protos.google.cloud.networksecurity.v1.IAuthorizationPolicy[],
+      protos.google.cloud.networksecurity.v1.IListAuthorizationPoliciesRequest | null,
+      protos.google.cloud.networksecurity.v1.IListAuthorizationPoliciesResponse
     ]
   > | void {
     request = request || {};
@@ -2287,7 +2284,7 @@ export class NetworkSecurityClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [AuthorizationPolicy]{@link google.cloud.networksecurity.v1beta1.AuthorizationPolicy} on 'data' event.
+   *   An object stream which emits an object representing [AuthorizationPolicy]{@link google.cloud.networksecurity.v1.AuthorizationPolicy} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listAuthorizationPoliciesAsync()`
@@ -2297,7 +2294,7 @@ export class NetworkSecurityClient {
    *   for more details and examples.
    */
   listAuthorizationPoliciesStream(
-    request?: protos.google.cloud.networksecurity.v1beta1.IListAuthorizationPoliciesRequest,
+    request?: protos.google.cloud.networksecurity.v1.IListAuthorizationPoliciesRequest,
     options?: CallOptions
   ): Transform {
     request = request || {};
@@ -2340,18 +2337,18 @@ export class NetworkSecurityClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [AuthorizationPolicy]{@link google.cloud.networksecurity.v1beta1.AuthorizationPolicy}. The API will be called under the hood as needed, once per the page,
+   *   [AuthorizationPolicy]{@link google.cloud.networksecurity.v1.AuthorizationPolicy}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/network_security.list_authorization_policies.js</caption>
-   * region_tag:networksecurity_v1beta1_generated_NetworkSecurity_ListAuthorizationPolicies_async
+   * @example <caption>include:samples/generated/v1/network_security.list_authorization_policies.js</caption>
+   * region_tag:networksecurity_v1_generated_NetworkSecurity_ListAuthorizationPolicies_async
    */
   listAuthorizationPoliciesAsync(
-    request?: protos.google.cloud.networksecurity.v1beta1.IListAuthorizationPoliciesRequest,
+    request?: protos.google.cloud.networksecurity.v1.IListAuthorizationPoliciesRequest,
     options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.networksecurity.v1beta1.IAuthorizationPolicy> {
+  ): AsyncIterable<protos.google.cloud.networksecurity.v1.IAuthorizationPolicy> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2367,7 +2364,7 @@ export class NetworkSecurityClient {
       this.innerApiCalls['listAuthorizationPolicies'] as GaxCall,
       request as {},
       callSettings
-    ) as AsyncIterable<protos.google.cloud.networksecurity.v1beta1.IAuthorizationPolicy>;
+    ) as AsyncIterable<protos.google.cloud.networksecurity.v1.IAuthorizationPolicy>;
   }
   /**
    * Lists ServerTlsPolicies in a given project and location.
@@ -2387,7 +2384,7 @@ export class NetworkSecurityClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [ServerTlsPolicy]{@link google.cloud.networksecurity.v1beta1.ServerTlsPolicy}.
+   *   The first element of the array is Array of [ServerTlsPolicy]{@link google.cloud.networksecurity.v1.ServerTlsPolicy}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -2398,59 +2395,59 @@ export class NetworkSecurityClient {
    *   for more details and examples.
    */
   listServerTlsPolicies(
-    request?: protos.google.cloud.networksecurity.v1beta1.IListServerTlsPoliciesRequest,
+    request?: protos.google.cloud.networksecurity.v1.IListServerTlsPoliciesRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.networksecurity.v1beta1.IServerTlsPolicy[],
-      protos.google.cloud.networksecurity.v1beta1.IListServerTlsPoliciesRequest | null,
-      protos.google.cloud.networksecurity.v1beta1.IListServerTlsPoliciesResponse
+      protos.google.cloud.networksecurity.v1.IServerTlsPolicy[],
+      protos.google.cloud.networksecurity.v1.IListServerTlsPoliciesRequest | null,
+      protos.google.cloud.networksecurity.v1.IListServerTlsPoliciesResponse
     ]
   >;
   listServerTlsPolicies(
-    request: protos.google.cloud.networksecurity.v1beta1.IListServerTlsPoliciesRequest,
+    request: protos.google.cloud.networksecurity.v1.IListServerTlsPoliciesRequest,
     options: CallOptions,
     callback: PaginationCallback<
-      protos.google.cloud.networksecurity.v1beta1.IListServerTlsPoliciesRequest,
-      | protos.google.cloud.networksecurity.v1beta1.IListServerTlsPoliciesResponse
+      protos.google.cloud.networksecurity.v1.IListServerTlsPoliciesRequest,
+      | protos.google.cloud.networksecurity.v1.IListServerTlsPoliciesResponse
       | null
       | undefined,
-      protos.google.cloud.networksecurity.v1beta1.IServerTlsPolicy
+      protos.google.cloud.networksecurity.v1.IServerTlsPolicy
     >
   ): void;
   listServerTlsPolicies(
-    request: protos.google.cloud.networksecurity.v1beta1.IListServerTlsPoliciesRequest,
+    request: protos.google.cloud.networksecurity.v1.IListServerTlsPoliciesRequest,
     callback: PaginationCallback<
-      protos.google.cloud.networksecurity.v1beta1.IListServerTlsPoliciesRequest,
-      | protos.google.cloud.networksecurity.v1beta1.IListServerTlsPoliciesResponse
+      protos.google.cloud.networksecurity.v1.IListServerTlsPoliciesRequest,
+      | protos.google.cloud.networksecurity.v1.IListServerTlsPoliciesResponse
       | null
       | undefined,
-      protos.google.cloud.networksecurity.v1beta1.IServerTlsPolicy
+      protos.google.cloud.networksecurity.v1.IServerTlsPolicy
     >
   ): void;
   listServerTlsPolicies(
-    request?: protos.google.cloud.networksecurity.v1beta1.IListServerTlsPoliciesRequest,
+    request?: protos.google.cloud.networksecurity.v1.IListServerTlsPoliciesRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
-          protos.google.cloud.networksecurity.v1beta1.IListServerTlsPoliciesRequest,
-          | protos.google.cloud.networksecurity.v1beta1.IListServerTlsPoliciesResponse
+          protos.google.cloud.networksecurity.v1.IListServerTlsPoliciesRequest,
+          | protos.google.cloud.networksecurity.v1.IListServerTlsPoliciesResponse
           | null
           | undefined,
-          protos.google.cloud.networksecurity.v1beta1.IServerTlsPolicy
+          protos.google.cloud.networksecurity.v1.IServerTlsPolicy
         >,
     callback?: PaginationCallback<
-      protos.google.cloud.networksecurity.v1beta1.IListServerTlsPoliciesRequest,
-      | protos.google.cloud.networksecurity.v1beta1.IListServerTlsPoliciesResponse
+      protos.google.cloud.networksecurity.v1.IListServerTlsPoliciesRequest,
+      | protos.google.cloud.networksecurity.v1.IListServerTlsPoliciesResponse
       | null
       | undefined,
-      protos.google.cloud.networksecurity.v1beta1.IServerTlsPolicy
+      protos.google.cloud.networksecurity.v1.IServerTlsPolicy
     >
   ): Promise<
     [
-      protos.google.cloud.networksecurity.v1beta1.IServerTlsPolicy[],
-      protos.google.cloud.networksecurity.v1beta1.IListServerTlsPoliciesRequest | null,
-      protos.google.cloud.networksecurity.v1beta1.IListServerTlsPoliciesResponse
+      protos.google.cloud.networksecurity.v1.IServerTlsPolicy[],
+      protos.google.cloud.networksecurity.v1.IListServerTlsPoliciesRequest | null,
+      protos.google.cloud.networksecurity.v1.IListServerTlsPoliciesResponse
     ]
   > | void {
     request = request || {};
@@ -2489,7 +2486,7 @@ export class NetworkSecurityClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [ServerTlsPolicy]{@link google.cloud.networksecurity.v1beta1.ServerTlsPolicy} on 'data' event.
+   *   An object stream which emits an object representing [ServerTlsPolicy]{@link google.cloud.networksecurity.v1.ServerTlsPolicy} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listServerTlsPoliciesAsync()`
@@ -2499,7 +2496,7 @@ export class NetworkSecurityClient {
    *   for more details and examples.
    */
   listServerTlsPoliciesStream(
-    request?: protos.google.cloud.networksecurity.v1beta1.IListServerTlsPoliciesRequest,
+    request?: protos.google.cloud.networksecurity.v1.IListServerTlsPoliciesRequest,
     options?: CallOptions
   ): Transform {
     request = request || {};
@@ -2541,18 +2538,18 @@ export class NetworkSecurityClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [ServerTlsPolicy]{@link google.cloud.networksecurity.v1beta1.ServerTlsPolicy}. The API will be called under the hood as needed, once per the page,
+   *   [ServerTlsPolicy]{@link google.cloud.networksecurity.v1.ServerTlsPolicy}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/network_security.list_server_tls_policies.js</caption>
-   * region_tag:networksecurity_v1beta1_generated_NetworkSecurity_ListServerTlsPolicies_async
+   * @example <caption>include:samples/generated/v1/network_security.list_server_tls_policies.js</caption>
+   * region_tag:networksecurity_v1_generated_NetworkSecurity_ListServerTlsPolicies_async
    */
   listServerTlsPoliciesAsync(
-    request?: protos.google.cloud.networksecurity.v1beta1.IListServerTlsPoliciesRequest,
+    request?: protos.google.cloud.networksecurity.v1.IListServerTlsPoliciesRequest,
     options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.networksecurity.v1beta1.IServerTlsPolicy> {
+  ): AsyncIterable<protos.google.cloud.networksecurity.v1.IServerTlsPolicy> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2568,7 +2565,7 @@ export class NetworkSecurityClient {
       this.innerApiCalls['listServerTlsPolicies'] as GaxCall,
       request as {},
       callSettings
-    ) as AsyncIterable<protos.google.cloud.networksecurity.v1beta1.IServerTlsPolicy>;
+    ) as AsyncIterable<protos.google.cloud.networksecurity.v1.IServerTlsPolicy>;
   }
   /**
    * Lists ClientTlsPolicies in a given project and location.
@@ -2588,7 +2585,7 @@ export class NetworkSecurityClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [ClientTlsPolicy]{@link google.cloud.networksecurity.v1beta1.ClientTlsPolicy}.
+   *   The first element of the array is Array of [ClientTlsPolicy]{@link google.cloud.networksecurity.v1.ClientTlsPolicy}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -2599,59 +2596,59 @@ export class NetworkSecurityClient {
    *   for more details and examples.
    */
   listClientTlsPolicies(
-    request?: protos.google.cloud.networksecurity.v1beta1.IListClientTlsPoliciesRequest,
+    request?: protos.google.cloud.networksecurity.v1.IListClientTlsPoliciesRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.networksecurity.v1beta1.IClientTlsPolicy[],
-      protos.google.cloud.networksecurity.v1beta1.IListClientTlsPoliciesRequest | null,
-      protos.google.cloud.networksecurity.v1beta1.IListClientTlsPoliciesResponse
+      protos.google.cloud.networksecurity.v1.IClientTlsPolicy[],
+      protos.google.cloud.networksecurity.v1.IListClientTlsPoliciesRequest | null,
+      protos.google.cloud.networksecurity.v1.IListClientTlsPoliciesResponse
     ]
   >;
   listClientTlsPolicies(
-    request: protos.google.cloud.networksecurity.v1beta1.IListClientTlsPoliciesRequest,
+    request: protos.google.cloud.networksecurity.v1.IListClientTlsPoliciesRequest,
     options: CallOptions,
     callback: PaginationCallback<
-      protos.google.cloud.networksecurity.v1beta1.IListClientTlsPoliciesRequest,
-      | protos.google.cloud.networksecurity.v1beta1.IListClientTlsPoliciesResponse
+      protos.google.cloud.networksecurity.v1.IListClientTlsPoliciesRequest,
+      | protos.google.cloud.networksecurity.v1.IListClientTlsPoliciesResponse
       | null
       | undefined,
-      protos.google.cloud.networksecurity.v1beta1.IClientTlsPolicy
+      protos.google.cloud.networksecurity.v1.IClientTlsPolicy
     >
   ): void;
   listClientTlsPolicies(
-    request: protos.google.cloud.networksecurity.v1beta1.IListClientTlsPoliciesRequest,
+    request: protos.google.cloud.networksecurity.v1.IListClientTlsPoliciesRequest,
     callback: PaginationCallback<
-      protos.google.cloud.networksecurity.v1beta1.IListClientTlsPoliciesRequest,
-      | protos.google.cloud.networksecurity.v1beta1.IListClientTlsPoliciesResponse
+      protos.google.cloud.networksecurity.v1.IListClientTlsPoliciesRequest,
+      | protos.google.cloud.networksecurity.v1.IListClientTlsPoliciesResponse
       | null
       | undefined,
-      protos.google.cloud.networksecurity.v1beta1.IClientTlsPolicy
+      protos.google.cloud.networksecurity.v1.IClientTlsPolicy
     >
   ): void;
   listClientTlsPolicies(
-    request?: protos.google.cloud.networksecurity.v1beta1.IListClientTlsPoliciesRequest,
+    request?: protos.google.cloud.networksecurity.v1.IListClientTlsPoliciesRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
-          protos.google.cloud.networksecurity.v1beta1.IListClientTlsPoliciesRequest,
-          | protos.google.cloud.networksecurity.v1beta1.IListClientTlsPoliciesResponse
+          protos.google.cloud.networksecurity.v1.IListClientTlsPoliciesRequest,
+          | protos.google.cloud.networksecurity.v1.IListClientTlsPoliciesResponse
           | null
           | undefined,
-          protos.google.cloud.networksecurity.v1beta1.IClientTlsPolicy
+          protos.google.cloud.networksecurity.v1.IClientTlsPolicy
         >,
     callback?: PaginationCallback<
-      protos.google.cloud.networksecurity.v1beta1.IListClientTlsPoliciesRequest,
-      | protos.google.cloud.networksecurity.v1beta1.IListClientTlsPoliciesResponse
+      protos.google.cloud.networksecurity.v1.IListClientTlsPoliciesRequest,
+      | protos.google.cloud.networksecurity.v1.IListClientTlsPoliciesResponse
       | null
       | undefined,
-      protos.google.cloud.networksecurity.v1beta1.IClientTlsPolicy
+      protos.google.cloud.networksecurity.v1.IClientTlsPolicy
     >
   ): Promise<
     [
-      protos.google.cloud.networksecurity.v1beta1.IClientTlsPolicy[],
-      protos.google.cloud.networksecurity.v1beta1.IListClientTlsPoliciesRequest | null,
-      protos.google.cloud.networksecurity.v1beta1.IListClientTlsPoliciesResponse
+      protos.google.cloud.networksecurity.v1.IClientTlsPolicy[],
+      protos.google.cloud.networksecurity.v1.IListClientTlsPoliciesRequest | null,
+      protos.google.cloud.networksecurity.v1.IListClientTlsPoliciesResponse
     ]
   > | void {
     request = request || {};
@@ -2690,7 +2687,7 @@ export class NetworkSecurityClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [ClientTlsPolicy]{@link google.cloud.networksecurity.v1beta1.ClientTlsPolicy} on 'data' event.
+   *   An object stream which emits an object representing [ClientTlsPolicy]{@link google.cloud.networksecurity.v1.ClientTlsPolicy} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listClientTlsPoliciesAsync()`
@@ -2700,7 +2697,7 @@ export class NetworkSecurityClient {
    *   for more details and examples.
    */
   listClientTlsPoliciesStream(
-    request?: protos.google.cloud.networksecurity.v1beta1.IListClientTlsPoliciesRequest,
+    request?: protos.google.cloud.networksecurity.v1.IListClientTlsPoliciesRequest,
     options?: CallOptions
   ): Transform {
     request = request || {};
@@ -2742,18 +2739,18 @@ export class NetworkSecurityClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [ClientTlsPolicy]{@link google.cloud.networksecurity.v1beta1.ClientTlsPolicy}. The API will be called under the hood as needed, once per the page,
+   *   [ClientTlsPolicy]{@link google.cloud.networksecurity.v1.ClientTlsPolicy}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/network_security.list_client_tls_policies.js</caption>
-   * region_tag:networksecurity_v1beta1_generated_NetworkSecurity_ListClientTlsPolicies_async
+   * @example <caption>include:samples/generated/v1/network_security.list_client_tls_policies.js</caption>
+   * region_tag:networksecurity_v1_generated_NetworkSecurity_ListClientTlsPolicies_async
    */
   listClientTlsPoliciesAsync(
-    request?: protos.google.cloud.networksecurity.v1beta1.IListClientTlsPoliciesRequest,
+    request?: protos.google.cloud.networksecurity.v1.IListClientTlsPoliciesRequest,
     options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.networksecurity.v1beta1.IClientTlsPolicy> {
+  ): AsyncIterable<protos.google.cloud.networksecurity.v1.IClientTlsPolicy> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2769,7 +2766,7 @@ export class NetworkSecurityClient {
       this.innerApiCalls['listClientTlsPolicies'] as GaxCall,
       request as {},
       callSettings
-    ) as AsyncIterable<protos.google.cloud.networksecurity.v1beta1.IClientTlsPolicy>;
+    ) as AsyncIterable<protos.google.cloud.networksecurity.v1.IClientTlsPolicy>;
   }
   /**
    * Gets the access control policy for a resource. Returns an empty policy

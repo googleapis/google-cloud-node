@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START networksecurity_v1beta1_generated_NetworkSecurity_DeleteAuthorizationPolicy_async]
+function main(parent) {
+  // [START networksecurity_v1_generated_NetworkSecurity_ListServerTlsPolicies_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,31 +29,43 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. A name of the AuthorizationPolicy to delete. Must be in the
-   *  format `projects/{project}/locations/{location}/authorizationPolicies/*`.
+   *  Required. The project and location from which the ServerTlsPolicies should
+   *  be listed, specified in the format `projects/* /locations/{location}`.
    */
-  // const name = 'abc123'
+  // const parent = 'abc123'
+  /**
+   *  Maximum number of ServerTlsPolicies to return per call.
+   */
+  // const pageSize = 1234
+  /**
+   *  The value returned by the last `ListServerTlsPoliciesResponse`
+   *  Indicates that this is a continuation of a prior
+   *  `ListServerTlsPolicies` call, and that the system
+   *  should return the next page of data.
+   */
+  // const pageToken = 'abc123'
 
   // Imports the Networksecurity library
-  const {NetworkSecurityClient} = require('@google-cloud/network-security').v1beta1;
+  const {NetworkSecurityClient} = require('@google-cloud/networksecurity').v1;
 
   // Instantiates a client
   const networksecurityClient = new NetworkSecurityClient();
 
-  async function callDeleteAuthorizationPolicy() {
+  async function callListServerTlsPolicies() {
     // Construct request
     const request = {
-      name,
+      parent,
     };
 
     // Run request
-    const [operation] = await networksecurityClient.deleteAuthorizationPolicy(request);
-    const [response] = await operation.promise();
-    console.log(response);
+    const iterable = await networksecurityClient.listServerTlsPoliciesAsync(request);
+    for await (const response of iterable) {
+        console.log(response);
+    }
   }
 
-  callDeleteAuthorizationPolicy();
-  // [END networksecurity_v1beta1_generated_NetworkSecurity_DeleteAuthorizationPolicy_async]
+  callListServerTlsPolicies();
+  // [END networksecurity_v1_generated_NetworkSecurity_ListServerTlsPolicies_async]
 }
 
 process.on('unhandledRejection', err => {

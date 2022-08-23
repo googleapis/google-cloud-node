@@ -23,6 +23,9 @@
 function main(parent, clientTlsPolicyId, clientTlsPolicy) {
   // [START networksecurity_v1beta1_generated_NetworkSecurity_CreateClientTlsPolicy_async]
   /**
+   * This snippet has been automatically generated and should be regarded as a code template only.
+   * It will require modifications to work.
+   * It may require correct/in-range values for request initialization.
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
@@ -31,9 +34,10 @@ function main(parent, clientTlsPolicyId, clientTlsPolicy) {
    */
   // const parent = 'abc123'
   /**
-   *  Required. Short name of the ClientTlsPolicy resource to be created. This value should
-   *  be 1-63 characters long, containing only letters, numbers, hyphens, and
-   *  underscores, and should not start with a number. E.g. "client_mtls_policy".
+   *  Required. Short name of the ClientTlsPolicy resource to be created. This
+   *  value should be 1-63 characters long, containing only letters, numbers,
+   *  hyphens, and underscores, and should not start with a number. E.g.
+   *  "client_mtls_policy".
    */
   // const clientTlsPolicyId = 'abc123'
   /**

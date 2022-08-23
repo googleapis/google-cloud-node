@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START networksecurity_v1beta1_generated_NetworkSecurity_DeleteAuthorizationPolicy_async]
+function main(parent, authorizationPolicyId, authorizationPolicy) {
+  // [START networksecurity_v1_generated_NetworkSecurity_CreateAuthorizationPolicy_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,31 +29,44 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. A name of the AuthorizationPolicy to delete. Must be in the
-   *  format `projects/{project}/locations/{location}/authorizationPolicies/*`.
+   *  Required. The parent resource of the AuthorizationPolicy. Must be in the
+   *  format `projects/{project}/locations/{location}`.
    */
-  // const name = 'abc123'
+  // const parent = 'abc123'
+  /**
+   *  Required. Short name of the AuthorizationPolicy resource to be created.
+   *  This value should be 1-63 characters long, containing only
+   *  letters, numbers, hyphens, and underscores, and should not start
+   *  with a number. E.g. "authz_policy".
+   */
+  // const authorizationPolicyId = 'abc123'
+  /**
+   *  Required. AuthorizationPolicy resource to be created.
+   */
+  // const authorizationPolicy = {}
 
   // Imports the Networksecurity library
-  const {NetworkSecurityClient} = require('@google-cloud/network-security').v1beta1;
+  const {NetworkSecurityClient} = require('@google-cloud/networksecurity').v1;
 
   // Instantiates a client
   const networksecurityClient = new NetworkSecurityClient();
 
-  async function callDeleteAuthorizationPolicy() {
+  async function callCreateAuthorizationPolicy() {
     // Construct request
     const request = {
-      name,
+      parent,
+      authorizationPolicyId,
+      authorizationPolicy,
     };
 
     // Run request
-    const [operation] = await networksecurityClient.deleteAuthorizationPolicy(request);
+    const [operation] = await networksecurityClient.createAuthorizationPolicy(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callDeleteAuthorizationPolicy();
-  // [END networksecurity_v1beta1_generated_NetworkSecurity_DeleteAuthorizationPolicy_async]
+  callCreateAuthorizationPolicy();
+  // [END networksecurity_v1_generated_NetworkSecurity_CreateAuthorizationPolicy_async]
 }
 
 process.on('unhandledRejection', err => {

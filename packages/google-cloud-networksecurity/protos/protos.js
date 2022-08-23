@@ -57,6 +57,8105 @@
                  */
                 var networksecurity = {};
     
+                networksecurity.v1 = (function() {
+    
+                    /**
+                     * Namespace v1.
+                     * @memberof google.cloud.networksecurity
+                     * @namespace
+                     */
+                    var v1 = {};
+    
+                    v1.AuthorizationPolicy = (function() {
+    
+                        /**
+                         * Properties of an AuthorizationPolicy.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @interface IAuthorizationPolicy
+                         * @property {string|null} [name] AuthorizationPolicy name
+                         * @property {string|null} [description] AuthorizationPolicy description
+                         * @property {google.protobuf.ITimestamp|null} [createTime] AuthorizationPolicy createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] AuthorizationPolicy updateTime
+                         * @property {Object.<string,string>|null} [labels] AuthorizationPolicy labels
+                         * @property {google.cloud.networksecurity.v1.AuthorizationPolicy.Action|null} [action] AuthorizationPolicy action
+                         * @property {Array.<google.cloud.networksecurity.v1.AuthorizationPolicy.IRule>|null} [rules] AuthorizationPolicy rules
+                         */
+    
+                        /**
+                         * Constructs a new AuthorizationPolicy.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @classdesc Represents an AuthorizationPolicy.
+                         * @implements IAuthorizationPolicy
+                         * @constructor
+                         * @param {google.cloud.networksecurity.v1.IAuthorizationPolicy=} [properties] Properties to set
+                         */
+                        function AuthorizationPolicy(properties) {
+                            this.labels = {};
+                            this.rules = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AuthorizationPolicy name.
+                         * @member {string} name
+                         * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy
+                         * @instance
+                         */
+                        AuthorizationPolicy.prototype.name = "";
+    
+                        /**
+                         * AuthorizationPolicy description.
+                         * @member {string} description
+                         * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy
+                         * @instance
+                         */
+                        AuthorizationPolicy.prototype.description = "";
+    
+                        /**
+                         * AuthorizationPolicy createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy
+                         * @instance
+                         */
+                        AuthorizationPolicy.prototype.createTime = null;
+    
+                        /**
+                         * AuthorizationPolicy updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy
+                         * @instance
+                         */
+                        AuthorizationPolicy.prototype.updateTime = null;
+    
+                        /**
+                         * AuthorizationPolicy labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy
+                         * @instance
+                         */
+                        AuthorizationPolicy.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * AuthorizationPolicy action.
+                         * @member {google.cloud.networksecurity.v1.AuthorizationPolicy.Action} action
+                         * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy
+                         * @instance
+                         */
+                        AuthorizationPolicy.prototype.action = 0;
+    
+                        /**
+                         * AuthorizationPolicy rules.
+                         * @member {Array.<google.cloud.networksecurity.v1.AuthorizationPolicy.IRule>} rules
+                         * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy
+                         * @instance
+                         */
+                        AuthorizationPolicy.prototype.rules = $util.emptyArray;
+    
+                        /**
+                         * Creates a new AuthorizationPolicy instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IAuthorizationPolicy=} [properties] Properties to set
+                         * @returns {google.cloud.networksecurity.v1.AuthorizationPolicy} AuthorizationPolicy instance
+                         */
+                        AuthorizationPolicy.create = function create(properties) {
+                            return new AuthorizationPolicy(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AuthorizationPolicy message. Does not implicitly {@link google.cloud.networksecurity.v1.AuthorizationPolicy.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IAuthorizationPolicy} message AuthorizationPolicy message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AuthorizationPolicy.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.description);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 5, wireType 2 =*/42).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.action != null && Object.hasOwnProperty.call(message, "action"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.action);
+                            if (message.rules != null && message.rules.length)
+                                for (var i = 0; i < message.rules.length; ++i)
+                                    $root.google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.encode(message.rules[i], writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AuthorizationPolicy message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.AuthorizationPolicy.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IAuthorizationPolicy} message AuthorizationPolicy message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AuthorizationPolicy.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AuthorizationPolicy message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networksecurity.v1.AuthorizationPolicy} AuthorizationPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AuthorizationPolicy.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networksecurity.v1.AuthorizationPolicy(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.description = reader.string();
+                                    break;
+                                case 3:
+                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 4:
+                                    message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 5:
+                                    if (message.labels === $util.emptyObject)
+                                        message.labels = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.labels[key] = value;
+                                    break;
+                                case 6:
+                                    message.action = reader.int32();
+                                    break;
+                                case 7:
+                                    if (!(message.rules && message.rules.length))
+                                        message.rules = [];
+                                    message.rules.push($root.google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.decode(reader, reader.uint32()));
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AuthorizationPolicy message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networksecurity.v1.AuthorizationPolicy} AuthorizationPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AuthorizationPolicy.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AuthorizationPolicy message.
+                         * @function verify
+                         * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AuthorizationPolicy.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            if (message.action != null && message.hasOwnProperty("action"))
+                                switch (message.action) {
+                                default:
+                                    return "action: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.rules != null && message.hasOwnProperty("rules")) {
+                                if (!Array.isArray(message.rules))
+                                    return "rules: array expected";
+                                for (var i = 0; i < message.rules.length; ++i) {
+                                    var error = $root.google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.verify(message.rules[i]);
+                                    if (error)
+                                        return "rules." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AuthorizationPolicy message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networksecurity.v1.AuthorizationPolicy} AuthorizationPolicy
+                         */
+                        AuthorizationPolicy.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networksecurity.v1.AuthorizationPolicy)
+                                return object;
+                            var message = new $root.google.cloud.networksecurity.v1.AuthorizationPolicy();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.networksecurity.v1.AuthorizationPolicy.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.networksecurity.v1.AuthorizationPolicy.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.cloud.networksecurity.v1.AuthorizationPolicy.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            switch (object.action) {
+                            case "ACTION_UNSPECIFIED":
+                            case 0:
+                                message.action = 0;
+                                break;
+                            case "ALLOW":
+                            case 1:
+                                message.action = 1;
+                                break;
+                            case "DENY":
+                            case 2:
+                                message.action = 2;
+                                break;
+                            }
+                            if (object.rules) {
+                                if (!Array.isArray(object.rules))
+                                    throw TypeError(".google.cloud.networksecurity.v1.AuthorizationPolicy.rules: array expected");
+                                message.rules = [];
+                                for (var i = 0; i < object.rules.length; ++i) {
+                                    if (typeof object.rules[i] !== "object")
+                                        throw TypeError(".google.cloud.networksecurity.v1.AuthorizationPolicy.rules: object expected");
+                                    message.rules[i] = $root.google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.fromObject(object.rules[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AuthorizationPolicy message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.AuthorizationPolicy} message AuthorizationPolicy
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AuthorizationPolicy.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.rules = [];
+                            if (options.objects || options.defaults)
+                                object.labels = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.description = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.action = options.enums === String ? "ACTION_UNSPECIFIED" : 0;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            if (message.action != null && message.hasOwnProperty("action"))
+                                object.action = options.enums === String ? $root.google.cloud.networksecurity.v1.AuthorizationPolicy.Action[message.action] : message.action;
+                            if (message.rules && message.rules.length) {
+                                object.rules = [];
+                                for (var j = 0; j < message.rules.length; ++j)
+                                    object.rules[j] = $root.google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.toObject(message.rules[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AuthorizationPolicy to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AuthorizationPolicy.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        AuthorizationPolicy.Rule = (function() {
+    
+                            /**
+                             * Properties of a Rule.
+                             * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy
+                             * @interface IRule
+                             * @property {Array.<google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.ISource>|null} [sources] Rule sources
+                             * @property {Array.<google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.IDestination>|null} [destinations] Rule destinations
+                             */
+    
+                            /**
+                             * Constructs a new Rule.
+                             * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy
+                             * @classdesc Represents a Rule.
+                             * @implements IRule
+                             * @constructor
+                             * @param {google.cloud.networksecurity.v1.AuthorizationPolicy.IRule=} [properties] Properties to set
+                             */
+                            function Rule(properties) {
+                                this.sources = [];
+                                this.destinations = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Rule sources.
+                             * @member {Array.<google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.ISource>} sources
+                             * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy.Rule
+                             * @instance
+                             */
+                            Rule.prototype.sources = $util.emptyArray;
+    
+                            /**
+                             * Rule destinations.
+                             * @member {Array.<google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.IDestination>} destinations
+                             * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy.Rule
+                             * @instance
+                             */
+                            Rule.prototype.destinations = $util.emptyArray;
+    
+                            /**
+                             * Creates a new Rule instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy.Rule
+                             * @static
+                             * @param {google.cloud.networksecurity.v1.AuthorizationPolicy.IRule=} [properties] Properties to set
+                             * @returns {google.cloud.networksecurity.v1.AuthorizationPolicy.Rule} Rule instance
+                             */
+                            Rule.create = function create(properties) {
+                                return new Rule(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Rule message. Does not implicitly {@link google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy.Rule
+                             * @static
+                             * @param {google.cloud.networksecurity.v1.AuthorizationPolicy.IRule} message Rule message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Rule.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.sources != null && message.sources.length)
+                                    for (var i = 0; i < message.sources.length; ++i)
+                                        $root.google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Source.encode(message.sources[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.destinations != null && message.destinations.length)
+                                    for (var i = 0; i < message.destinations.length; ++i)
+                                        $root.google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination.encode(message.destinations[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Rule message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy.Rule
+                             * @static
+                             * @param {google.cloud.networksecurity.v1.AuthorizationPolicy.IRule} message Rule message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Rule.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Rule message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy.Rule
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.networksecurity.v1.AuthorizationPolicy.Rule} Rule
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Rule.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networksecurity.v1.AuthorizationPolicy.Rule();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        if (!(message.sources && message.sources.length))
+                                            message.sources = [];
+                                        message.sources.push($root.google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Source.decode(reader, reader.uint32()));
+                                        break;
+                                    case 2:
+                                        if (!(message.destinations && message.destinations.length))
+                                            message.destinations = [];
+                                        message.destinations.push($root.google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination.decode(reader, reader.uint32()));
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Rule message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy.Rule
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.networksecurity.v1.AuthorizationPolicy.Rule} Rule
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Rule.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Rule message.
+                             * @function verify
+                             * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy.Rule
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Rule.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.sources != null && message.hasOwnProperty("sources")) {
+                                    if (!Array.isArray(message.sources))
+                                        return "sources: array expected";
+                                    for (var i = 0; i < message.sources.length; ++i) {
+                                        var error = $root.google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Source.verify(message.sources[i]);
+                                        if (error)
+                                            return "sources." + error;
+                                    }
+                                }
+                                if (message.destinations != null && message.hasOwnProperty("destinations")) {
+                                    if (!Array.isArray(message.destinations))
+                                        return "destinations: array expected";
+                                    for (var i = 0; i < message.destinations.length; ++i) {
+                                        var error = $root.google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination.verify(message.destinations[i]);
+                                        if (error)
+                                            return "destinations." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Rule message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy.Rule
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.networksecurity.v1.AuthorizationPolicy.Rule} Rule
+                             */
+                            Rule.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.networksecurity.v1.AuthorizationPolicy.Rule)
+                                    return object;
+                                var message = new $root.google.cloud.networksecurity.v1.AuthorizationPolicy.Rule();
+                                if (object.sources) {
+                                    if (!Array.isArray(object.sources))
+                                        throw TypeError(".google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.sources: array expected");
+                                    message.sources = [];
+                                    for (var i = 0; i < object.sources.length; ++i) {
+                                        if (typeof object.sources[i] !== "object")
+                                            throw TypeError(".google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.sources: object expected");
+                                        message.sources[i] = $root.google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Source.fromObject(object.sources[i]);
+                                    }
+                                }
+                                if (object.destinations) {
+                                    if (!Array.isArray(object.destinations))
+                                        throw TypeError(".google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.destinations: array expected");
+                                    message.destinations = [];
+                                    for (var i = 0; i < object.destinations.length; ++i) {
+                                        if (typeof object.destinations[i] !== "object")
+                                            throw TypeError(".google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.destinations: object expected");
+                                        message.destinations[i] = $root.google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination.fromObject(object.destinations[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Rule message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy.Rule
+                             * @static
+                             * @param {google.cloud.networksecurity.v1.AuthorizationPolicy.Rule} message Rule
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Rule.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults) {
+                                    object.sources = [];
+                                    object.destinations = [];
+                                }
+                                if (message.sources && message.sources.length) {
+                                    object.sources = [];
+                                    for (var j = 0; j < message.sources.length; ++j)
+                                        object.sources[j] = $root.google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Source.toObject(message.sources[j], options);
+                                }
+                                if (message.destinations && message.destinations.length) {
+                                    object.destinations = [];
+                                    for (var j = 0; j < message.destinations.length; ++j)
+                                        object.destinations[j] = $root.google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination.toObject(message.destinations[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Rule to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy.Rule
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Rule.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            Rule.Source = (function() {
+    
+                                /**
+                                 * Properties of a Source.
+                                 * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy.Rule
+                                 * @interface ISource
+                                 * @property {Array.<string>|null} [principals] Source principals
+                                 * @property {Array.<string>|null} [ipBlocks] Source ipBlocks
+                                 */
+    
+                                /**
+                                 * Constructs a new Source.
+                                 * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy.Rule
+                                 * @classdesc Represents a Source.
+                                 * @implements ISource
+                                 * @constructor
+                                 * @param {google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.ISource=} [properties] Properties to set
+                                 */
+                                function Source(properties) {
+                                    this.principals = [];
+                                    this.ipBlocks = [];
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Source principals.
+                                 * @member {Array.<string>} principals
+                                 * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Source
+                                 * @instance
+                                 */
+                                Source.prototype.principals = $util.emptyArray;
+    
+                                /**
+                                 * Source ipBlocks.
+                                 * @member {Array.<string>} ipBlocks
+                                 * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Source
+                                 * @instance
+                                 */
+                                Source.prototype.ipBlocks = $util.emptyArray;
+    
+                                /**
+                                 * Creates a new Source instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Source
+                                 * @static
+                                 * @param {google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.ISource=} [properties] Properties to set
+                                 * @returns {google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Source} Source instance
+                                 */
+                                Source.create = function create(properties) {
+                                    return new Source(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified Source message. Does not implicitly {@link google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Source.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Source
+                                 * @static
+                                 * @param {google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.ISource} message Source message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Source.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.principals != null && message.principals.length)
+                                        for (var i = 0; i < message.principals.length; ++i)
+                                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.principals[i]);
+                                    if (message.ipBlocks != null && message.ipBlocks.length)
+                                        for (var i = 0; i < message.ipBlocks.length; ++i)
+                                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.ipBlocks[i]);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified Source message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Source.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Source
+                                 * @static
+                                 * @param {google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.ISource} message Source message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Source.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a Source message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Source
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Source} Source
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Source.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Source();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1:
+                                            if (!(message.principals && message.principals.length))
+                                                message.principals = [];
+                                            message.principals.push(reader.string());
+                                            break;
+                                        case 2:
+                                            if (!(message.ipBlocks && message.ipBlocks.length))
+                                                message.ipBlocks = [];
+                                            message.ipBlocks.push(reader.string());
+                                            break;
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a Source message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Source
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Source} Source
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Source.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a Source message.
+                                 * @function verify
+                                 * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Source
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                Source.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.principals != null && message.hasOwnProperty("principals")) {
+                                        if (!Array.isArray(message.principals))
+                                            return "principals: array expected";
+                                        for (var i = 0; i < message.principals.length; ++i)
+                                            if (!$util.isString(message.principals[i]))
+                                                return "principals: string[] expected";
+                                    }
+                                    if (message.ipBlocks != null && message.hasOwnProperty("ipBlocks")) {
+                                        if (!Array.isArray(message.ipBlocks))
+                                            return "ipBlocks: array expected";
+                                        for (var i = 0; i < message.ipBlocks.length; ++i)
+                                            if (!$util.isString(message.ipBlocks[i]))
+                                                return "ipBlocks: string[] expected";
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a Source message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Source
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Source} Source
+                                 */
+                                Source.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Source)
+                                        return object;
+                                    var message = new $root.google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Source();
+                                    if (object.principals) {
+                                        if (!Array.isArray(object.principals))
+                                            throw TypeError(".google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Source.principals: array expected");
+                                        message.principals = [];
+                                        for (var i = 0; i < object.principals.length; ++i)
+                                            message.principals[i] = String(object.principals[i]);
+                                    }
+                                    if (object.ipBlocks) {
+                                        if (!Array.isArray(object.ipBlocks))
+                                            throw TypeError(".google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Source.ipBlocks: array expected");
+                                        message.ipBlocks = [];
+                                        for (var i = 0; i < object.ipBlocks.length; ++i)
+                                            message.ipBlocks[i] = String(object.ipBlocks[i]);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a Source message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Source
+                                 * @static
+                                 * @param {google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Source} message Source
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                Source.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.arrays || options.defaults) {
+                                        object.principals = [];
+                                        object.ipBlocks = [];
+                                    }
+                                    if (message.principals && message.principals.length) {
+                                        object.principals = [];
+                                        for (var j = 0; j < message.principals.length; ++j)
+                                            object.principals[j] = message.principals[j];
+                                    }
+                                    if (message.ipBlocks && message.ipBlocks.length) {
+                                        object.ipBlocks = [];
+                                        for (var j = 0; j < message.ipBlocks.length; ++j)
+                                            object.ipBlocks[j] = message.ipBlocks[j];
+                                    }
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this Source to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Source
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                Source.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                return Source;
+                            })();
+    
+                            Rule.Destination = (function() {
+    
+                                /**
+                                 * Properties of a Destination.
+                                 * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy.Rule
+                                 * @interface IDestination
+                                 * @property {Array.<string>|null} [hosts] Destination hosts
+                                 * @property {Array.<number>|null} [ports] Destination ports
+                                 * @property {Array.<string>|null} [methods] Destination methods
+                                 * @property {google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination.IHttpHeaderMatch|null} [httpHeaderMatch] Destination httpHeaderMatch
+                                 */
+    
+                                /**
+                                 * Constructs a new Destination.
+                                 * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy.Rule
+                                 * @classdesc Represents a Destination.
+                                 * @implements IDestination
+                                 * @constructor
+                                 * @param {google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.IDestination=} [properties] Properties to set
+                                 */
+                                function Destination(properties) {
+                                    this.hosts = [];
+                                    this.ports = [];
+                                    this.methods = [];
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Destination hosts.
+                                 * @member {Array.<string>} hosts
+                                 * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination
+                                 * @instance
+                                 */
+                                Destination.prototype.hosts = $util.emptyArray;
+    
+                                /**
+                                 * Destination ports.
+                                 * @member {Array.<number>} ports
+                                 * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination
+                                 * @instance
+                                 */
+                                Destination.prototype.ports = $util.emptyArray;
+    
+                                /**
+                                 * Destination methods.
+                                 * @member {Array.<string>} methods
+                                 * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination
+                                 * @instance
+                                 */
+                                Destination.prototype.methods = $util.emptyArray;
+    
+                                /**
+                                 * Destination httpHeaderMatch.
+                                 * @member {google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination.IHttpHeaderMatch|null|undefined} httpHeaderMatch
+                                 * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination
+                                 * @instance
+                                 */
+                                Destination.prototype.httpHeaderMatch = null;
+    
+                                /**
+                                 * Creates a new Destination instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination
+                                 * @static
+                                 * @param {google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.IDestination=} [properties] Properties to set
+                                 * @returns {google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination} Destination instance
+                                 */
+                                Destination.create = function create(properties) {
+                                    return new Destination(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified Destination message. Does not implicitly {@link google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination
+                                 * @static
+                                 * @param {google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.IDestination} message Destination message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Destination.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.hosts != null && message.hosts.length)
+                                        for (var i = 0; i < message.hosts.length; ++i)
+                                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.hosts[i]);
+                                    if (message.ports != null && message.ports.length) {
+                                        writer.uint32(/* id 2, wireType 2 =*/18).fork();
+                                        for (var i = 0; i < message.ports.length; ++i)
+                                            writer.uint32(message.ports[i]);
+                                        writer.ldelim();
+                                    }
+                                    if (message.methods != null && message.methods.length)
+                                        for (var i = 0; i < message.methods.length; ++i)
+                                            writer.uint32(/* id 4, wireType 2 =*/34).string(message.methods[i]);
+                                    if (message.httpHeaderMatch != null && Object.hasOwnProperty.call(message, "httpHeaderMatch"))
+                                        $root.google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination.HttpHeaderMatch.encode(message.httpHeaderMatch, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified Destination message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination
+                                 * @static
+                                 * @param {google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.IDestination} message Destination message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Destination.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a Destination message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination} Destination
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Destination.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1:
+                                            if (!(message.hosts && message.hosts.length))
+                                                message.hosts = [];
+                                            message.hosts.push(reader.string());
+                                            break;
+                                        case 2:
+                                            if (!(message.ports && message.ports.length))
+                                                message.ports = [];
+                                            if ((tag & 7) === 2) {
+                                                var end2 = reader.uint32() + reader.pos;
+                                                while (reader.pos < end2)
+                                                    message.ports.push(reader.uint32());
+                                            } else
+                                                message.ports.push(reader.uint32());
+                                            break;
+                                        case 4:
+                                            if (!(message.methods && message.methods.length))
+                                                message.methods = [];
+                                            message.methods.push(reader.string());
+                                            break;
+                                        case 5:
+                                            message.httpHeaderMatch = $root.google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination.HttpHeaderMatch.decode(reader, reader.uint32());
+                                            break;
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a Destination message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination} Destination
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Destination.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a Destination message.
+                                 * @function verify
+                                 * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                Destination.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.hosts != null && message.hasOwnProperty("hosts")) {
+                                        if (!Array.isArray(message.hosts))
+                                            return "hosts: array expected";
+                                        for (var i = 0; i < message.hosts.length; ++i)
+                                            if (!$util.isString(message.hosts[i]))
+                                                return "hosts: string[] expected";
+                                    }
+                                    if (message.ports != null && message.hasOwnProperty("ports")) {
+                                        if (!Array.isArray(message.ports))
+                                            return "ports: array expected";
+                                        for (var i = 0; i < message.ports.length; ++i)
+                                            if (!$util.isInteger(message.ports[i]))
+                                                return "ports: integer[] expected";
+                                    }
+                                    if (message.methods != null && message.hasOwnProperty("methods")) {
+                                        if (!Array.isArray(message.methods))
+                                            return "methods: array expected";
+                                        for (var i = 0; i < message.methods.length; ++i)
+                                            if (!$util.isString(message.methods[i]))
+                                                return "methods: string[] expected";
+                                    }
+                                    if (message.httpHeaderMatch != null && message.hasOwnProperty("httpHeaderMatch")) {
+                                        var error = $root.google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination.HttpHeaderMatch.verify(message.httpHeaderMatch);
+                                        if (error)
+                                            return "httpHeaderMatch." + error;
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a Destination message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination} Destination
+                                 */
+                                Destination.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination)
+                                        return object;
+                                    var message = new $root.google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination();
+                                    if (object.hosts) {
+                                        if (!Array.isArray(object.hosts))
+                                            throw TypeError(".google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination.hosts: array expected");
+                                        message.hosts = [];
+                                        for (var i = 0; i < object.hosts.length; ++i)
+                                            message.hosts[i] = String(object.hosts[i]);
+                                    }
+                                    if (object.ports) {
+                                        if (!Array.isArray(object.ports))
+                                            throw TypeError(".google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination.ports: array expected");
+                                        message.ports = [];
+                                        for (var i = 0; i < object.ports.length; ++i)
+                                            message.ports[i] = object.ports[i] >>> 0;
+                                    }
+                                    if (object.methods) {
+                                        if (!Array.isArray(object.methods))
+                                            throw TypeError(".google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination.methods: array expected");
+                                        message.methods = [];
+                                        for (var i = 0; i < object.methods.length; ++i)
+                                            message.methods[i] = String(object.methods[i]);
+                                    }
+                                    if (object.httpHeaderMatch != null) {
+                                        if (typeof object.httpHeaderMatch !== "object")
+                                            throw TypeError(".google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination.httpHeaderMatch: object expected");
+                                        message.httpHeaderMatch = $root.google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination.HttpHeaderMatch.fromObject(object.httpHeaderMatch);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a Destination message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination
+                                 * @static
+                                 * @param {google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination} message Destination
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                Destination.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.arrays || options.defaults) {
+                                        object.hosts = [];
+                                        object.ports = [];
+                                        object.methods = [];
+                                    }
+                                    if (options.defaults)
+                                        object.httpHeaderMatch = null;
+                                    if (message.hosts && message.hosts.length) {
+                                        object.hosts = [];
+                                        for (var j = 0; j < message.hosts.length; ++j)
+                                            object.hosts[j] = message.hosts[j];
+                                    }
+                                    if (message.ports && message.ports.length) {
+                                        object.ports = [];
+                                        for (var j = 0; j < message.ports.length; ++j)
+                                            object.ports[j] = message.ports[j];
+                                    }
+                                    if (message.methods && message.methods.length) {
+                                        object.methods = [];
+                                        for (var j = 0; j < message.methods.length; ++j)
+                                            object.methods[j] = message.methods[j];
+                                    }
+                                    if (message.httpHeaderMatch != null && message.hasOwnProperty("httpHeaderMatch"))
+                                        object.httpHeaderMatch = $root.google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination.HttpHeaderMatch.toObject(message.httpHeaderMatch, options);
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this Destination to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                Destination.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                Destination.HttpHeaderMatch = (function() {
+    
+                                    /**
+                                     * Properties of a HttpHeaderMatch.
+                                     * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination
+                                     * @interface IHttpHeaderMatch
+                                     * @property {string|null} [regexMatch] HttpHeaderMatch regexMatch
+                                     * @property {string|null} [headerName] HttpHeaderMatch headerName
+                                     */
+    
+                                    /**
+                                     * Constructs a new HttpHeaderMatch.
+                                     * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination
+                                     * @classdesc Represents a HttpHeaderMatch.
+                                     * @implements IHttpHeaderMatch
+                                     * @constructor
+                                     * @param {google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination.IHttpHeaderMatch=} [properties] Properties to set
+                                     */
+                                    function HttpHeaderMatch(properties) {
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * HttpHeaderMatch regexMatch.
+                                     * @member {string|null|undefined} regexMatch
+                                     * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination.HttpHeaderMatch
+                                     * @instance
+                                     */
+                                    HttpHeaderMatch.prototype.regexMatch = null;
+    
+                                    /**
+                                     * HttpHeaderMatch headerName.
+                                     * @member {string} headerName
+                                     * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination.HttpHeaderMatch
+                                     * @instance
+                                     */
+                                    HttpHeaderMatch.prototype.headerName = "";
+    
+                                    // OneOf field names bound to virtual getters and setters
+                                    var $oneOfFields;
+    
+                                    /**
+                                     * HttpHeaderMatch type.
+                                     * @member {"regexMatch"|undefined} type
+                                     * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination.HttpHeaderMatch
+                                     * @instance
+                                     */
+                                    Object.defineProperty(HttpHeaderMatch.prototype, "type", {
+                                        get: $util.oneOfGetter($oneOfFields = ["regexMatch"]),
+                                        set: $util.oneOfSetter($oneOfFields)
+                                    });
+    
+                                    /**
+                                     * Creates a new HttpHeaderMatch instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination.HttpHeaderMatch
+                                     * @static
+                                     * @param {google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination.IHttpHeaderMatch=} [properties] Properties to set
+                                     * @returns {google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination.HttpHeaderMatch} HttpHeaderMatch instance
+                                     */
+                                    HttpHeaderMatch.create = function create(properties) {
+                                        return new HttpHeaderMatch(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified HttpHeaderMatch message. Does not implicitly {@link google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination.HttpHeaderMatch.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination.HttpHeaderMatch
+                                     * @static
+                                     * @param {google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination.IHttpHeaderMatch} message HttpHeaderMatch message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    HttpHeaderMatch.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.headerName != null && Object.hasOwnProperty.call(message, "headerName"))
+                                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.headerName);
+                                        if (message.regexMatch != null && Object.hasOwnProperty.call(message, "regexMatch"))
+                                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.regexMatch);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified HttpHeaderMatch message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination.HttpHeaderMatch.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination.HttpHeaderMatch
+                                     * @static
+                                     * @param {google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination.IHttpHeaderMatch} message HttpHeaderMatch message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    HttpHeaderMatch.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a HttpHeaderMatch message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination.HttpHeaderMatch
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination.HttpHeaderMatch} HttpHeaderMatch
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    HttpHeaderMatch.decode = function decode(reader, length) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination.HttpHeaderMatch();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            switch (tag >>> 3) {
+                                            case 2:
+                                                message.regexMatch = reader.string();
+                                                break;
+                                            case 1:
+                                                message.headerName = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a HttpHeaderMatch message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination.HttpHeaderMatch
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination.HttpHeaderMatch} HttpHeaderMatch
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    HttpHeaderMatch.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a HttpHeaderMatch message.
+                                     * @function verify
+                                     * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination.HttpHeaderMatch
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    HttpHeaderMatch.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        var properties = {};
+                                        if (message.regexMatch != null && message.hasOwnProperty("regexMatch")) {
+                                            properties.type = 1;
+                                            if (!$util.isString(message.regexMatch))
+                                                return "regexMatch: string expected";
+                                        }
+                                        if (message.headerName != null && message.hasOwnProperty("headerName"))
+                                            if (!$util.isString(message.headerName))
+                                                return "headerName: string expected";
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a HttpHeaderMatch message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination.HttpHeaderMatch
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination.HttpHeaderMatch} HttpHeaderMatch
+                                     */
+                                    HttpHeaderMatch.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination.HttpHeaderMatch)
+                                            return object;
+                                        var message = new $root.google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination.HttpHeaderMatch();
+                                        if (object.regexMatch != null)
+                                            message.regexMatch = String(object.regexMatch);
+                                        if (object.headerName != null)
+                                            message.headerName = String(object.headerName);
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a HttpHeaderMatch message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination.HttpHeaderMatch
+                                     * @static
+                                     * @param {google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination.HttpHeaderMatch} message HttpHeaderMatch
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    HttpHeaderMatch.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.defaults)
+                                            object.headerName = "";
+                                        if (message.headerName != null && message.hasOwnProperty("headerName"))
+                                            object.headerName = message.headerName;
+                                        if (message.regexMatch != null && message.hasOwnProperty("regexMatch")) {
+                                            object.regexMatch = message.regexMatch;
+                                            if (options.oneofs)
+                                                object.type = "regexMatch";
+                                        }
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this HttpHeaderMatch to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination.HttpHeaderMatch
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    HttpHeaderMatch.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    return HttpHeaderMatch;
+                                })();
+    
+                                return Destination;
+                            })();
+    
+                            return Rule;
+                        })();
+    
+                        /**
+                         * Action enum.
+                         * @name google.cloud.networksecurity.v1.AuthorizationPolicy.Action
+                         * @enum {number}
+                         * @property {number} ACTION_UNSPECIFIED=0 ACTION_UNSPECIFIED value
+                         * @property {number} ALLOW=1 ALLOW value
+                         * @property {number} DENY=2 DENY value
+                         */
+                        AuthorizationPolicy.Action = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "ACTION_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "ALLOW"] = 1;
+                            values[valuesById[2] = "DENY"] = 2;
+                            return values;
+                        })();
+    
+                        return AuthorizationPolicy;
+                    })();
+    
+                    v1.ListAuthorizationPoliciesRequest = (function() {
+    
+                        /**
+                         * Properties of a ListAuthorizationPoliciesRequest.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @interface IListAuthorizationPoliciesRequest
+                         * @property {string|null} [parent] ListAuthorizationPoliciesRequest parent
+                         * @property {number|null} [pageSize] ListAuthorizationPoliciesRequest pageSize
+                         * @property {string|null} [pageToken] ListAuthorizationPoliciesRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListAuthorizationPoliciesRequest.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @classdesc Represents a ListAuthorizationPoliciesRequest.
+                         * @implements IListAuthorizationPoliciesRequest
+                         * @constructor
+                         * @param {google.cloud.networksecurity.v1.IListAuthorizationPoliciesRequest=} [properties] Properties to set
+                         */
+                        function ListAuthorizationPoliciesRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListAuthorizationPoliciesRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest
+                         * @instance
+                         */
+                        ListAuthorizationPoliciesRequest.prototype.parent = "";
+    
+                        /**
+                         * ListAuthorizationPoliciesRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest
+                         * @instance
+                         */
+                        ListAuthorizationPoliciesRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListAuthorizationPoliciesRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest
+                         * @instance
+                         */
+                        ListAuthorizationPoliciesRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListAuthorizationPoliciesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IListAuthorizationPoliciesRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest} ListAuthorizationPoliciesRequest instance
+                         */
+                        ListAuthorizationPoliciesRequest.create = function create(properties) {
+                            return new ListAuthorizationPoliciesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListAuthorizationPoliciesRequest message. Does not implicitly {@link google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IListAuthorizationPoliciesRequest} message ListAuthorizationPoliciesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAuthorizationPoliciesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListAuthorizationPoliciesRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IListAuthorizationPoliciesRequest} message ListAuthorizationPoliciesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAuthorizationPoliciesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListAuthorizationPoliciesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest} ListAuthorizationPoliciesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAuthorizationPoliciesRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.pageSize = reader.int32();
+                                    break;
+                                case 3:
+                                    message.pageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListAuthorizationPoliciesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest} ListAuthorizationPoliciesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAuthorizationPoliciesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListAuthorizationPoliciesRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListAuthorizationPoliciesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListAuthorizationPoliciesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest} ListAuthorizationPoliciesRequest
+                         */
+                        ListAuthorizationPoliciesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest)
+                                return object;
+                            var message = new $root.google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListAuthorizationPoliciesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest} message ListAuthorizationPoliciesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListAuthorizationPoliciesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListAuthorizationPoliciesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListAuthorizationPoliciesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListAuthorizationPoliciesRequest;
+                    })();
+    
+                    v1.ListAuthorizationPoliciesResponse = (function() {
+    
+                        /**
+                         * Properties of a ListAuthorizationPoliciesResponse.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @interface IListAuthorizationPoliciesResponse
+                         * @property {Array.<google.cloud.networksecurity.v1.IAuthorizationPolicy>|null} [authorizationPolicies] ListAuthorizationPoliciesResponse authorizationPolicies
+                         * @property {string|null} [nextPageToken] ListAuthorizationPoliciesResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListAuthorizationPoliciesResponse.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @classdesc Represents a ListAuthorizationPoliciesResponse.
+                         * @implements IListAuthorizationPoliciesResponse
+                         * @constructor
+                         * @param {google.cloud.networksecurity.v1.IListAuthorizationPoliciesResponse=} [properties] Properties to set
+                         */
+                        function ListAuthorizationPoliciesResponse(properties) {
+                            this.authorizationPolicies = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListAuthorizationPoliciesResponse authorizationPolicies.
+                         * @member {Array.<google.cloud.networksecurity.v1.IAuthorizationPolicy>} authorizationPolicies
+                         * @memberof google.cloud.networksecurity.v1.ListAuthorizationPoliciesResponse
+                         * @instance
+                         */
+                        ListAuthorizationPoliciesResponse.prototype.authorizationPolicies = $util.emptyArray;
+    
+                        /**
+                         * ListAuthorizationPoliciesResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.networksecurity.v1.ListAuthorizationPoliciesResponse
+                         * @instance
+                         */
+                        ListAuthorizationPoliciesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListAuthorizationPoliciesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networksecurity.v1.ListAuthorizationPoliciesResponse
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IListAuthorizationPoliciesResponse=} [properties] Properties to set
+                         * @returns {google.cloud.networksecurity.v1.ListAuthorizationPoliciesResponse} ListAuthorizationPoliciesResponse instance
+                         */
+                        ListAuthorizationPoliciesResponse.create = function create(properties) {
+                            return new ListAuthorizationPoliciesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListAuthorizationPoliciesResponse message. Does not implicitly {@link google.cloud.networksecurity.v1.ListAuthorizationPoliciesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networksecurity.v1.ListAuthorizationPoliciesResponse
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IListAuthorizationPoliciesResponse} message ListAuthorizationPoliciesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAuthorizationPoliciesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.authorizationPolicies != null && message.authorizationPolicies.length)
+                                for (var i = 0; i < message.authorizationPolicies.length; ++i)
+                                    $root.google.cloud.networksecurity.v1.AuthorizationPolicy.encode(message.authorizationPolicies[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListAuthorizationPoliciesResponse message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.ListAuthorizationPoliciesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.ListAuthorizationPoliciesResponse
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IListAuthorizationPoliciesResponse} message ListAuthorizationPoliciesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAuthorizationPoliciesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListAuthorizationPoliciesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networksecurity.v1.ListAuthorizationPoliciesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networksecurity.v1.ListAuthorizationPoliciesResponse} ListAuthorizationPoliciesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAuthorizationPoliciesResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networksecurity.v1.ListAuthorizationPoliciesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.authorizationPolicies && message.authorizationPolicies.length))
+                                        message.authorizationPolicies = [];
+                                    message.authorizationPolicies.push($root.google.cloud.networksecurity.v1.AuthorizationPolicy.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListAuthorizationPoliciesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.ListAuthorizationPoliciesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networksecurity.v1.ListAuthorizationPoliciesResponse} ListAuthorizationPoliciesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAuthorizationPoliciesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListAuthorizationPoliciesResponse message.
+                         * @function verify
+                         * @memberof google.cloud.networksecurity.v1.ListAuthorizationPoliciesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListAuthorizationPoliciesResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.authorizationPolicies != null && message.hasOwnProperty("authorizationPolicies")) {
+                                if (!Array.isArray(message.authorizationPolicies))
+                                    return "authorizationPolicies: array expected";
+                                for (var i = 0; i < message.authorizationPolicies.length; ++i) {
+                                    var error = $root.google.cloud.networksecurity.v1.AuthorizationPolicy.verify(message.authorizationPolicies[i]);
+                                    if (error)
+                                        return "authorizationPolicies." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListAuthorizationPoliciesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networksecurity.v1.ListAuthorizationPoliciesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networksecurity.v1.ListAuthorizationPoliciesResponse} ListAuthorizationPoliciesResponse
+                         */
+                        ListAuthorizationPoliciesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networksecurity.v1.ListAuthorizationPoliciesResponse)
+                                return object;
+                            var message = new $root.google.cloud.networksecurity.v1.ListAuthorizationPoliciesResponse();
+                            if (object.authorizationPolicies) {
+                                if (!Array.isArray(object.authorizationPolicies))
+                                    throw TypeError(".google.cloud.networksecurity.v1.ListAuthorizationPoliciesResponse.authorizationPolicies: array expected");
+                                message.authorizationPolicies = [];
+                                for (var i = 0; i < object.authorizationPolicies.length; ++i) {
+                                    if (typeof object.authorizationPolicies[i] !== "object")
+                                        throw TypeError(".google.cloud.networksecurity.v1.ListAuthorizationPoliciesResponse.authorizationPolicies: object expected");
+                                    message.authorizationPolicies[i] = $root.google.cloud.networksecurity.v1.AuthorizationPolicy.fromObject(object.authorizationPolicies[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListAuthorizationPoliciesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networksecurity.v1.ListAuthorizationPoliciesResponse
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.ListAuthorizationPoliciesResponse} message ListAuthorizationPoliciesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListAuthorizationPoliciesResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.authorizationPolicies = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.authorizationPolicies && message.authorizationPolicies.length) {
+                                object.authorizationPolicies = [];
+                                for (var j = 0; j < message.authorizationPolicies.length; ++j)
+                                    object.authorizationPolicies[j] = $root.google.cloud.networksecurity.v1.AuthorizationPolicy.toObject(message.authorizationPolicies[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListAuthorizationPoliciesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networksecurity.v1.ListAuthorizationPoliciesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListAuthorizationPoliciesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListAuthorizationPoliciesResponse;
+                    })();
+    
+                    v1.GetAuthorizationPolicyRequest = (function() {
+    
+                        /**
+                         * Properties of a GetAuthorizationPolicyRequest.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @interface IGetAuthorizationPolicyRequest
+                         * @property {string|null} [name] GetAuthorizationPolicyRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetAuthorizationPolicyRequest.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @classdesc Represents a GetAuthorizationPolicyRequest.
+                         * @implements IGetAuthorizationPolicyRequest
+                         * @constructor
+                         * @param {google.cloud.networksecurity.v1.IGetAuthorizationPolicyRequest=} [properties] Properties to set
+                         */
+                        function GetAuthorizationPolicyRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetAuthorizationPolicyRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.networksecurity.v1.GetAuthorizationPolicyRequest
+                         * @instance
+                         */
+                        GetAuthorizationPolicyRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetAuthorizationPolicyRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networksecurity.v1.GetAuthorizationPolicyRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IGetAuthorizationPolicyRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networksecurity.v1.GetAuthorizationPolicyRequest} GetAuthorizationPolicyRequest instance
+                         */
+                        GetAuthorizationPolicyRequest.create = function create(properties) {
+                            return new GetAuthorizationPolicyRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetAuthorizationPolicyRequest message. Does not implicitly {@link google.cloud.networksecurity.v1.GetAuthorizationPolicyRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networksecurity.v1.GetAuthorizationPolicyRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IGetAuthorizationPolicyRequest} message GetAuthorizationPolicyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetAuthorizationPolicyRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetAuthorizationPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.GetAuthorizationPolicyRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.GetAuthorizationPolicyRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IGetAuthorizationPolicyRequest} message GetAuthorizationPolicyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetAuthorizationPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetAuthorizationPolicyRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networksecurity.v1.GetAuthorizationPolicyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networksecurity.v1.GetAuthorizationPolicyRequest} GetAuthorizationPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetAuthorizationPolicyRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networksecurity.v1.GetAuthorizationPolicyRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetAuthorizationPolicyRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.GetAuthorizationPolicyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networksecurity.v1.GetAuthorizationPolicyRequest} GetAuthorizationPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetAuthorizationPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetAuthorizationPolicyRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networksecurity.v1.GetAuthorizationPolicyRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetAuthorizationPolicyRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetAuthorizationPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networksecurity.v1.GetAuthorizationPolicyRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networksecurity.v1.GetAuthorizationPolicyRequest} GetAuthorizationPolicyRequest
+                         */
+                        GetAuthorizationPolicyRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networksecurity.v1.GetAuthorizationPolicyRequest)
+                                return object;
+                            var message = new $root.google.cloud.networksecurity.v1.GetAuthorizationPolicyRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetAuthorizationPolicyRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networksecurity.v1.GetAuthorizationPolicyRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.GetAuthorizationPolicyRequest} message GetAuthorizationPolicyRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetAuthorizationPolicyRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetAuthorizationPolicyRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networksecurity.v1.GetAuthorizationPolicyRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetAuthorizationPolicyRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GetAuthorizationPolicyRequest;
+                    })();
+    
+                    v1.CreateAuthorizationPolicyRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateAuthorizationPolicyRequest.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @interface ICreateAuthorizationPolicyRequest
+                         * @property {string|null} [parent] CreateAuthorizationPolicyRequest parent
+                         * @property {string|null} [authorizationPolicyId] CreateAuthorizationPolicyRequest authorizationPolicyId
+                         * @property {google.cloud.networksecurity.v1.IAuthorizationPolicy|null} [authorizationPolicy] CreateAuthorizationPolicyRequest authorizationPolicy
+                         */
+    
+                        /**
+                         * Constructs a new CreateAuthorizationPolicyRequest.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @classdesc Represents a CreateAuthorizationPolicyRequest.
+                         * @implements ICreateAuthorizationPolicyRequest
+                         * @constructor
+                         * @param {google.cloud.networksecurity.v1.ICreateAuthorizationPolicyRequest=} [properties] Properties to set
+                         */
+                        function CreateAuthorizationPolicyRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateAuthorizationPolicyRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.networksecurity.v1.CreateAuthorizationPolicyRequest
+                         * @instance
+                         */
+                        CreateAuthorizationPolicyRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateAuthorizationPolicyRequest authorizationPolicyId.
+                         * @member {string} authorizationPolicyId
+                         * @memberof google.cloud.networksecurity.v1.CreateAuthorizationPolicyRequest
+                         * @instance
+                         */
+                        CreateAuthorizationPolicyRequest.prototype.authorizationPolicyId = "";
+    
+                        /**
+                         * CreateAuthorizationPolicyRequest authorizationPolicy.
+                         * @member {google.cloud.networksecurity.v1.IAuthorizationPolicy|null|undefined} authorizationPolicy
+                         * @memberof google.cloud.networksecurity.v1.CreateAuthorizationPolicyRequest
+                         * @instance
+                         */
+                        CreateAuthorizationPolicyRequest.prototype.authorizationPolicy = null;
+    
+                        /**
+                         * Creates a new CreateAuthorizationPolicyRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networksecurity.v1.CreateAuthorizationPolicyRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.ICreateAuthorizationPolicyRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networksecurity.v1.CreateAuthorizationPolicyRequest} CreateAuthorizationPolicyRequest instance
+                         */
+                        CreateAuthorizationPolicyRequest.create = function create(properties) {
+                            return new CreateAuthorizationPolicyRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateAuthorizationPolicyRequest message. Does not implicitly {@link google.cloud.networksecurity.v1.CreateAuthorizationPolicyRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networksecurity.v1.CreateAuthorizationPolicyRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.ICreateAuthorizationPolicyRequest} message CreateAuthorizationPolicyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateAuthorizationPolicyRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.authorizationPolicyId != null && Object.hasOwnProperty.call(message, "authorizationPolicyId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.authorizationPolicyId);
+                            if (message.authorizationPolicy != null && Object.hasOwnProperty.call(message, "authorizationPolicy"))
+                                $root.google.cloud.networksecurity.v1.AuthorizationPolicy.encode(message.authorizationPolicy, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateAuthorizationPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.CreateAuthorizationPolicyRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.CreateAuthorizationPolicyRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.ICreateAuthorizationPolicyRequest} message CreateAuthorizationPolicyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateAuthorizationPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateAuthorizationPolicyRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networksecurity.v1.CreateAuthorizationPolicyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networksecurity.v1.CreateAuthorizationPolicyRequest} CreateAuthorizationPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateAuthorizationPolicyRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networksecurity.v1.CreateAuthorizationPolicyRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.authorizationPolicyId = reader.string();
+                                    break;
+                                case 3:
+                                    message.authorizationPolicy = $root.google.cloud.networksecurity.v1.AuthorizationPolicy.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateAuthorizationPolicyRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.CreateAuthorizationPolicyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networksecurity.v1.CreateAuthorizationPolicyRequest} CreateAuthorizationPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateAuthorizationPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateAuthorizationPolicyRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networksecurity.v1.CreateAuthorizationPolicyRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateAuthorizationPolicyRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.authorizationPolicyId != null && message.hasOwnProperty("authorizationPolicyId"))
+                                if (!$util.isString(message.authorizationPolicyId))
+                                    return "authorizationPolicyId: string expected";
+                            if (message.authorizationPolicy != null && message.hasOwnProperty("authorizationPolicy")) {
+                                var error = $root.google.cloud.networksecurity.v1.AuthorizationPolicy.verify(message.authorizationPolicy);
+                                if (error)
+                                    return "authorizationPolicy." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateAuthorizationPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networksecurity.v1.CreateAuthorizationPolicyRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networksecurity.v1.CreateAuthorizationPolicyRequest} CreateAuthorizationPolicyRequest
+                         */
+                        CreateAuthorizationPolicyRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networksecurity.v1.CreateAuthorizationPolicyRequest)
+                                return object;
+                            var message = new $root.google.cloud.networksecurity.v1.CreateAuthorizationPolicyRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.authorizationPolicyId != null)
+                                message.authorizationPolicyId = String(object.authorizationPolicyId);
+                            if (object.authorizationPolicy != null) {
+                                if (typeof object.authorizationPolicy !== "object")
+                                    throw TypeError(".google.cloud.networksecurity.v1.CreateAuthorizationPolicyRequest.authorizationPolicy: object expected");
+                                message.authorizationPolicy = $root.google.cloud.networksecurity.v1.AuthorizationPolicy.fromObject(object.authorizationPolicy);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateAuthorizationPolicyRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networksecurity.v1.CreateAuthorizationPolicyRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.CreateAuthorizationPolicyRequest} message CreateAuthorizationPolicyRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateAuthorizationPolicyRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.authorizationPolicyId = "";
+                                object.authorizationPolicy = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.authorizationPolicyId != null && message.hasOwnProperty("authorizationPolicyId"))
+                                object.authorizationPolicyId = message.authorizationPolicyId;
+                            if (message.authorizationPolicy != null && message.hasOwnProperty("authorizationPolicy"))
+                                object.authorizationPolicy = $root.google.cloud.networksecurity.v1.AuthorizationPolicy.toObject(message.authorizationPolicy, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateAuthorizationPolicyRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networksecurity.v1.CreateAuthorizationPolicyRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateAuthorizationPolicyRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return CreateAuthorizationPolicyRequest;
+                    })();
+    
+                    v1.UpdateAuthorizationPolicyRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateAuthorizationPolicyRequest.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @interface IUpdateAuthorizationPolicyRequest
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateAuthorizationPolicyRequest updateMask
+                         * @property {google.cloud.networksecurity.v1.IAuthorizationPolicy|null} [authorizationPolicy] UpdateAuthorizationPolicyRequest authorizationPolicy
+                         */
+    
+                        /**
+                         * Constructs a new UpdateAuthorizationPolicyRequest.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @classdesc Represents an UpdateAuthorizationPolicyRequest.
+                         * @implements IUpdateAuthorizationPolicyRequest
+                         * @constructor
+                         * @param {google.cloud.networksecurity.v1.IUpdateAuthorizationPolicyRequest=} [properties] Properties to set
+                         */
+                        function UpdateAuthorizationPolicyRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateAuthorizationPolicyRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.networksecurity.v1.UpdateAuthorizationPolicyRequest
+                         * @instance
+                         */
+                        UpdateAuthorizationPolicyRequest.prototype.updateMask = null;
+    
+                        /**
+                         * UpdateAuthorizationPolicyRequest authorizationPolicy.
+                         * @member {google.cloud.networksecurity.v1.IAuthorizationPolicy|null|undefined} authorizationPolicy
+                         * @memberof google.cloud.networksecurity.v1.UpdateAuthorizationPolicyRequest
+                         * @instance
+                         */
+                        UpdateAuthorizationPolicyRequest.prototype.authorizationPolicy = null;
+    
+                        /**
+                         * Creates a new UpdateAuthorizationPolicyRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networksecurity.v1.UpdateAuthorizationPolicyRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IUpdateAuthorizationPolicyRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networksecurity.v1.UpdateAuthorizationPolicyRequest} UpdateAuthorizationPolicyRequest instance
+                         */
+                        UpdateAuthorizationPolicyRequest.create = function create(properties) {
+                            return new UpdateAuthorizationPolicyRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateAuthorizationPolicyRequest message. Does not implicitly {@link google.cloud.networksecurity.v1.UpdateAuthorizationPolicyRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networksecurity.v1.UpdateAuthorizationPolicyRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IUpdateAuthorizationPolicyRequest} message UpdateAuthorizationPolicyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateAuthorizationPolicyRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.authorizationPolicy != null && Object.hasOwnProperty.call(message, "authorizationPolicy"))
+                                $root.google.cloud.networksecurity.v1.AuthorizationPolicy.encode(message.authorizationPolicy, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateAuthorizationPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.UpdateAuthorizationPolicyRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.UpdateAuthorizationPolicyRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IUpdateAuthorizationPolicyRequest} message UpdateAuthorizationPolicyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateAuthorizationPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateAuthorizationPolicyRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networksecurity.v1.UpdateAuthorizationPolicyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networksecurity.v1.UpdateAuthorizationPolicyRequest} UpdateAuthorizationPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateAuthorizationPolicyRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networksecurity.v1.UpdateAuthorizationPolicyRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.authorizationPolicy = $root.google.cloud.networksecurity.v1.AuthorizationPolicy.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateAuthorizationPolicyRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.UpdateAuthorizationPolicyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networksecurity.v1.UpdateAuthorizationPolicyRequest} UpdateAuthorizationPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateAuthorizationPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateAuthorizationPolicyRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networksecurity.v1.UpdateAuthorizationPolicyRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateAuthorizationPolicyRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            if (message.authorizationPolicy != null && message.hasOwnProperty("authorizationPolicy")) {
+                                var error = $root.google.cloud.networksecurity.v1.AuthorizationPolicy.verify(message.authorizationPolicy);
+                                if (error)
+                                    return "authorizationPolicy." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateAuthorizationPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networksecurity.v1.UpdateAuthorizationPolicyRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networksecurity.v1.UpdateAuthorizationPolicyRequest} UpdateAuthorizationPolicyRequest
+                         */
+                        UpdateAuthorizationPolicyRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networksecurity.v1.UpdateAuthorizationPolicyRequest)
+                                return object;
+                            var message = new $root.google.cloud.networksecurity.v1.UpdateAuthorizationPolicyRequest();
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.networksecurity.v1.UpdateAuthorizationPolicyRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            if (object.authorizationPolicy != null) {
+                                if (typeof object.authorizationPolicy !== "object")
+                                    throw TypeError(".google.cloud.networksecurity.v1.UpdateAuthorizationPolicyRequest.authorizationPolicy: object expected");
+                                message.authorizationPolicy = $root.google.cloud.networksecurity.v1.AuthorizationPolicy.fromObject(object.authorizationPolicy);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateAuthorizationPolicyRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networksecurity.v1.UpdateAuthorizationPolicyRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.UpdateAuthorizationPolicyRequest} message UpdateAuthorizationPolicyRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateAuthorizationPolicyRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.updateMask = null;
+                                object.authorizationPolicy = null;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            if (message.authorizationPolicy != null && message.hasOwnProperty("authorizationPolicy"))
+                                object.authorizationPolicy = $root.google.cloud.networksecurity.v1.AuthorizationPolicy.toObject(message.authorizationPolicy, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateAuthorizationPolicyRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networksecurity.v1.UpdateAuthorizationPolicyRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateAuthorizationPolicyRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return UpdateAuthorizationPolicyRequest;
+                    })();
+    
+                    v1.DeleteAuthorizationPolicyRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteAuthorizationPolicyRequest.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @interface IDeleteAuthorizationPolicyRequest
+                         * @property {string|null} [name] DeleteAuthorizationPolicyRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteAuthorizationPolicyRequest.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @classdesc Represents a DeleteAuthorizationPolicyRequest.
+                         * @implements IDeleteAuthorizationPolicyRequest
+                         * @constructor
+                         * @param {google.cloud.networksecurity.v1.IDeleteAuthorizationPolicyRequest=} [properties] Properties to set
+                         */
+                        function DeleteAuthorizationPolicyRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteAuthorizationPolicyRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.networksecurity.v1.DeleteAuthorizationPolicyRequest
+                         * @instance
+                         */
+                        DeleteAuthorizationPolicyRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteAuthorizationPolicyRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networksecurity.v1.DeleteAuthorizationPolicyRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IDeleteAuthorizationPolicyRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networksecurity.v1.DeleteAuthorizationPolicyRequest} DeleteAuthorizationPolicyRequest instance
+                         */
+                        DeleteAuthorizationPolicyRequest.create = function create(properties) {
+                            return new DeleteAuthorizationPolicyRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteAuthorizationPolicyRequest message. Does not implicitly {@link google.cloud.networksecurity.v1.DeleteAuthorizationPolicyRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networksecurity.v1.DeleteAuthorizationPolicyRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IDeleteAuthorizationPolicyRequest} message DeleteAuthorizationPolicyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteAuthorizationPolicyRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteAuthorizationPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.DeleteAuthorizationPolicyRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.DeleteAuthorizationPolicyRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IDeleteAuthorizationPolicyRequest} message DeleteAuthorizationPolicyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteAuthorizationPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteAuthorizationPolicyRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networksecurity.v1.DeleteAuthorizationPolicyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networksecurity.v1.DeleteAuthorizationPolicyRequest} DeleteAuthorizationPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteAuthorizationPolicyRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networksecurity.v1.DeleteAuthorizationPolicyRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteAuthorizationPolicyRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.DeleteAuthorizationPolicyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networksecurity.v1.DeleteAuthorizationPolicyRequest} DeleteAuthorizationPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteAuthorizationPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteAuthorizationPolicyRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networksecurity.v1.DeleteAuthorizationPolicyRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteAuthorizationPolicyRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteAuthorizationPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networksecurity.v1.DeleteAuthorizationPolicyRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networksecurity.v1.DeleteAuthorizationPolicyRequest} DeleteAuthorizationPolicyRequest
+                         */
+                        DeleteAuthorizationPolicyRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networksecurity.v1.DeleteAuthorizationPolicyRequest)
+                                return object;
+                            var message = new $root.google.cloud.networksecurity.v1.DeleteAuthorizationPolicyRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteAuthorizationPolicyRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networksecurity.v1.DeleteAuthorizationPolicyRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.DeleteAuthorizationPolicyRequest} message DeleteAuthorizationPolicyRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteAuthorizationPolicyRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteAuthorizationPolicyRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networksecurity.v1.DeleteAuthorizationPolicyRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteAuthorizationPolicyRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DeleteAuthorizationPolicyRequest;
+                    })();
+    
+                    v1.ClientTlsPolicy = (function() {
+    
+                        /**
+                         * Properties of a ClientTlsPolicy.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @interface IClientTlsPolicy
+                         * @property {string|null} [name] ClientTlsPolicy name
+                         * @property {string|null} [description] ClientTlsPolicy description
+                         * @property {google.protobuf.ITimestamp|null} [createTime] ClientTlsPolicy createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] ClientTlsPolicy updateTime
+                         * @property {Object.<string,string>|null} [labels] ClientTlsPolicy labels
+                         * @property {string|null} [sni] ClientTlsPolicy sni
+                         * @property {google.cloud.networksecurity.v1.ICertificateProvider|null} [clientCertificate] ClientTlsPolicy clientCertificate
+                         * @property {Array.<google.cloud.networksecurity.v1.IValidationCA>|null} [serverValidationCa] ClientTlsPolicy serverValidationCa
+                         */
+    
+                        /**
+                         * Constructs a new ClientTlsPolicy.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @classdesc Represents a ClientTlsPolicy.
+                         * @implements IClientTlsPolicy
+                         * @constructor
+                         * @param {google.cloud.networksecurity.v1.IClientTlsPolicy=} [properties] Properties to set
+                         */
+                        function ClientTlsPolicy(properties) {
+                            this.labels = {};
+                            this.serverValidationCa = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ClientTlsPolicy name.
+                         * @member {string} name
+                         * @memberof google.cloud.networksecurity.v1.ClientTlsPolicy
+                         * @instance
+                         */
+                        ClientTlsPolicy.prototype.name = "";
+    
+                        /**
+                         * ClientTlsPolicy description.
+                         * @member {string} description
+                         * @memberof google.cloud.networksecurity.v1.ClientTlsPolicy
+                         * @instance
+                         */
+                        ClientTlsPolicy.prototype.description = "";
+    
+                        /**
+                         * ClientTlsPolicy createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.networksecurity.v1.ClientTlsPolicy
+                         * @instance
+                         */
+                        ClientTlsPolicy.prototype.createTime = null;
+    
+                        /**
+                         * ClientTlsPolicy updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.networksecurity.v1.ClientTlsPolicy
+                         * @instance
+                         */
+                        ClientTlsPolicy.prototype.updateTime = null;
+    
+                        /**
+                         * ClientTlsPolicy labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.cloud.networksecurity.v1.ClientTlsPolicy
+                         * @instance
+                         */
+                        ClientTlsPolicy.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * ClientTlsPolicy sni.
+                         * @member {string} sni
+                         * @memberof google.cloud.networksecurity.v1.ClientTlsPolicy
+                         * @instance
+                         */
+                        ClientTlsPolicy.prototype.sni = "";
+    
+                        /**
+                         * ClientTlsPolicy clientCertificate.
+                         * @member {google.cloud.networksecurity.v1.ICertificateProvider|null|undefined} clientCertificate
+                         * @memberof google.cloud.networksecurity.v1.ClientTlsPolicy
+                         * @instance
+                         */
+                        ClientTlsPolicy.prototype.clientCertificate = null;
+    
+                        /**
+                         * ClientTlsPolicy serverValidationCa.
+                         * @member {Array.<google.cloud.networksecurity.v1.IValidationCA>} serverValidationCa
+                         * @memberof google.cloud.networksecurity.v1.ClientTlsPolicy
+                         * @instance
+                         */
+                        ClientTlsPolicy.prototype.serverValidationCa = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ClientTlsPolicy instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networksecurity.v1.ClientTlsPolicy
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IClientTlsPolicy=} [properties] Properties to set
+                         * @returns {google.cloud.networksecurity.v1.ClientTlsPolicy} ClientTlsPolicy instance
+                         */
+                        ClientTlsPolicy.create = function create(properties) {
+                            return new ClientTlsPolicy(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ClientTlsPolicy message. Does not implicitly {@link google.cloud.networksecurity.v1.ClientTlsPolicy.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networksecurity.v1.ClientTlsPolicy
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IClientTlsPolicy} message ClientTlsPolicy message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ClientTlsPolicy.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.description);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 5, wireType 2 =*/42).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.sni != null && Object.hasOwnProperty.call(message, "sni"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.sni);
+                            if (message.clientCertificate != null && Object.hasOwnProperty.call(message, "clientCertificate"))
+                                $root.google.cloud.networksecurity.v1.CertificateProvider.encode(message.clientCertificate, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.serverValidationCa != null && message.serverValidationCa.length)
+                                for (var i = 0; i < message.serverValidationCa.length; ++i)
+                                    $root.google.cloud.networksecurity.v1.ValidationCA.encode(message.serverValidationCa[i], writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ClientTlsPolicy message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.ClientTlsPolicy.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.ClientTlsPolicy
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IClientTlsPolicy} message ClientTlsPolicy message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ClientTlsPolicy.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ClientTlsPolicy message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networksecurity.v1.ClientTlsPolicy
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networksecurity.v1.ClientTlsPolicy} ClientTlsPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ClientTlsPolicy.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networksecurity.v1.ClientTlsPolicy(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.description = reader.string();
+                                    break;
+                                case 3:
+                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 4:
+                                    message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 5:
+                                    if (message.labels === $util.emptyObject)
+                                        message.labels = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.labels[key] = value;
+                                    break;
+                                case 6:
+                                    message.sni = reader.string();
+                                    break;
+                                case 7:
+                                    message.clientCertificate = $root.google.cloud.networksecurity.v1.CertificateProvider.decode(reader, reader.uint32());
+                                    break;
+                                case 8:
+                                    if (!(message.serverValidationCa && message.serverValidationCa.length))
+                                        message.serverValidationCa = [];
+                                    message.serverValidationCa.push($root.google.cloud.networksecurity.v1.ValidationCA.decode(reader, reader.uint32()));
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ClientTlsPolicy message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.ClientTlsPolicy
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networksecurity.v1.ClientTlsPolicy} ClientTlsPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ClientTlsPolicy.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ClientTlsPolicy message.
+                         * @function verify
+                         * @memberof google.cloud.networksecurity.v1.ClientTlsPolicy
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ClientTlsPolicy.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            if (message.sni != null && message.hasOwnProperty("sni"))
+                                if (!$util.isString(message.sni))
+                                    return "sni: string expected";
+                            if (message.clientCertificate != null && message.hasOwnProperty("clientCertificate")) {
+                                var error = $root.google.cloud.networksecurity.v1.CertificateProvider.verify(message.clientCertificate);
+                                if (error)
+                                    return "clientCertificate." + error;
+                            }
+                            if (message.serverValidationCa != null && message.hasOwnProperty("serverValidationCa")) {
+                                if (!Array.isArray(message.serverValidationCa))
+                                    return "serverValidationCa: array expected";
+                                for (var i = 0; i < message.serverValidationCa.length; ++i) {
+                                    var error = $root.google.cloud.networksecurity.v1.ValidationCA.verify(message.serverValidationCa[i]);
+                                    if (error)
+                                        return "serverValidationCa." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ClientTlsPolicy message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networksecurity.v1.ClientTlsPolicy
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networksecurity.v1.ClientTlsPolicy} ClientTlsPolicy
+                         */
+                        ClientTlsPolicy.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networksecurity.v1.ClientTlsPolicy)
+                                return object;
+                            var message = new $root.google.cloud.networksecurity.v1.ClientTlsPolicy();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.networksecurity.v1.ClientTlsPolicy.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.networksecurity.v1.ClientTlsPolicy.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.cloud.networksecurity.v1.ClientTlsPolicy.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            if (object.sni != null)
+                                message.sni = String(object.sni);
+                            if (object.clientCertificate != null) {
+                                if (typeof object.clientCertificate !== "object")
+                                    throw TypeError(".google.cloud.networksecurity.v1.ClientTlsPolicy.clientCertificate: object expected");
+                                message.clientCertificate = $root.google.cloud.networksecurity.v1.CertificateProvider.fromObject(object.clientCertificate);
+                            }
+                            if (object.serverValidationCa) {
+                                if (!Array.isArray(object.serverValidationCa))
+                                    throw TypeError(".google.cloud.networksecurity.v1.ClientTlsPolicy.serverValidationCa: array expected");
+                                message.serverValidationCa = [];
+                                for (var i = 0; i < object.serverValidationCa.length; ++i) {
+                                    if (typeof object.serverValidationCa[i] !== "object")
+                                        throw TypeError(".google.cloud.networksecurity.v1.ClientTlsPolicy.serverValidationCa: object expected");
+                                    message.serverValidationCa[i] = $root.google.cloud.networksecurity.v1.ValidationCA.fromObject(object.serverValidationCa[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ClientTlsPolicy message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networksecurity.v1.ClientTlsPolicy
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.ClientTlsPolicy} message ClientTlsPolicy
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ClientTlsPolicy.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.serverValidationCa = [];
+                            if (options.objects || options.defaults)
+                                object.labels = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.description = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.sni = "";
+                                object.clientCertificate = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            if (message.sni != null && message.hasOwnProperty("sni"))
+                                object.sni = message.sni;
+                            if (message.clientCertificate != null && message.hasOwnProperty("clientCertificate"))
+                                object.clientCertificate = $root.google.cloud.networksecurity.v1.CertificateProvider.toObject(message.clientCertificate, options);
+                            if (message.serverValidationCa && message.serverValidationCa.length) {
+                                object.serverValidationCa = [];
+                                for (var j = 0; j < message.serverValidationCa.length; ++j)
+                                    object.serverValidationCa[j] = $root.google.cloud.networksecurity.v1.ValidationCA.toObject(message.serverValidationCa[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ClientTlsPolicy to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networksecurity.v1.ClientTlsPolicy
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ClientTlsPolicy.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ClientTlsPolicy;
+                    })();
+    
+                    v1.ListClientTlsPoliciesRequest = (function() {
+    
+                        /**
+                         * Properties of a ListClientTlsPoliciesRequest.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @interface IListClientTlsPoliciesRequest
+                         * @property {string|null} [parent] ListClientTlsPoliciesRequest parent
+                         * @property {number|null} [pageSize] ListClientTlsPoliciesRequest pageSize
+                         * @property {string|null} [pageToken] ListClientTlsPoliciesRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListClientTlsPoliciesRequest.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @classdesc Represents a ListClientTlsPoliciesRequest.
+                         * @implements IListClientTlsPoliciesRequest
+                         * @constructor
+                         * @param {google.cloud.networksecurity.v1.IListClientTlsPoliciesRequest=} [properties] Properties to set
+                         */
+                        function ListClientTlsPoliciesRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListClientTlsPoliciesRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest
+                         * @instance
+                         */
+                        ListClientTlsPoliciesRequest.prototype.parent = "";
+    
+                        /**
+                         * ListClientTlsPoliciesRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest
+                         * @instance
+                         */
+                        ListClientTlsPoliciesRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListClientTlsPoliciesRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest
+                         * @instance
+                         */
+                        ListClientTlsPoliciesRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListClientTlsPoliciesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IListClientTlsPoliciesRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest} ListClientTlsPoliciesRequest instance
+                         */
+                        ListClientTlsPoliciesRequest.create = function create(properties) {
+                            return new ListClientTlsPoliciesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListClientTlsPoliciesRequest message. Does not implicitly {@link google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IListClientTlsPoliciesRequest} message ListClientTlsPoliciesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListClientTlsPoliciesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListClientTlsPoliciesRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IListClientTlsPoliciesRequest} message ListClientTlsPoliciesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListClientTlsPoliciesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListClientTlsPoliciesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest} ListClientTlsPoliciesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListClientTlsPoliciesRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.pageSize = reader.int32();
+                                    break;
+                                case 3:
+                                    message.pageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListClientTlsPoliciesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest} ListClientTlsPoliciesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListClientTlsPoliciesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListClientTlsPoliciesRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListClientTlsPoliciesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListClientTlsPoliciesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest} ListClientTlsPoliciesRequest
+                         */
+                        ListClientTlsPoliciesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest)
+                                return object;
+                            var message = new $root.google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListClientTlsPoliciesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest} message ListClientTlsPoliciesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListClientTlsPoliciesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListClientTlsPoliciesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListClientTlsPoliciesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListClientTlsPoliciesRequest;
+                    })();
+    
+                    v1.ListClientTlsPoliciesResponse = (function() {
+    
+                        /**
+                         * Properties of a ListClientTlsPoliciesResponse.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @interface IListClientTlsPoliciesResponse
+                         * @property {Array.<google.cloud.networksecurity.v1.IClientTlsPolicy>|null} [clientTlsPolicies] ListClientTlsPoliciesResponse clientTlsPolicies
+                         * @property {string|null} [nextPageToken] ListClientTlsPoliciesResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListClientTlsPoliciesResponse.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @classdesc Represents a ListClientTlsPoliciesResponse.
+                         * @implements IListClientTlsPoliciesResponse
+                         * @constructor
+                         * @param {google.cloud.networksecurity.v1.IListClientTlsPoliciesResponse=} [properties] Properties to set
+                         */
+                        function ListClientTlsPoliciesResponse(properties) {
+                            this.clientTlsPolicies = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListClientTlsPoliciesResponse clientTlsPolicies.
+                         * @member {Array.<google.cloud.networksecurity.v1.IClientTlsPolicy>} clientTlsPolicies
+                         * @memberof google.cloud.networksecurity.v1.ListClientTlsPoliciesResponse
+                         * @instance
+                         */
+                        ListClientTlsPoliciesResponse.prototype.clientTlsPolicies = $util.emptyArray;
+    
+                        /**
+                         * ListClientTlsPoliciesResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.networksecurity.v1.ListClientTlsPoliciesResponse
+                         * @instance
+                         */
+                        ListClientTlsPoliciesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListClientTlsPoliciesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networksecurity.v1.ListClientTlsPoliciesResponse
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IListClientTlsPoliciesResponse=} [properties] Properties to set
+                         * @returns {google.cloud.networksecurity.v1.ListClientTlsPoliciesResponse} ListClientTlsPoliciesResponse instance
+                         */
+                        ListClientTlsPoliciesResponse.create = function create(properties) {
+                            return new ListClientTlsPoliciesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListClientTlsPoliciesResponse message. Does not implicitly {@link google.cloud.networksecurity.v1.ListClientTlsPoliciesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networksecurity.v1.ListClientTlsPoliciesResponse
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IListClientTlsPoliciesResponse} message ListClientTlsPoliciesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListClientTlsPoliciesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.clientTlsPolicies != null && message.clientTlsPolicies.length)
+                                for (var i = 0; i < message.clientTlsPolicies.length; ++i)
+                                    $root.google.cloud.networksecurity.v1.ClientTlsPolicy.encode(message.clientTlsPolicies[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListClientTlsPoliciesResponse message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.ListClientTlsPoliciesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.ListClientTlsPoliciesResponse
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IListClientTlsPoliciesResponse} message ListClientTlsPoliciesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListClientTlsPoliciesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListClientTlsPoliciesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networksecurity.v1.ListClientTlsPoliciesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networksecurity.v1.ListClientTlsPoliciesResponse} ListClientTlsPoliciesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListClientTlsPoliciesResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networksecurity.v1.ListClientTlsPoliciesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.clientTlsPolicies && message.clientTlsPolicies.length))
+                                        message.clientTlsPolicies = [];
+                                    message.clientTlsPolicies.push($root.google.cloud.networksecurity.v1.ClientTlsPolicy.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListClientTlsPoliciesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.ListClientTlsPoliciesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networksecurity.v1.ListClientTlsPoliciesResponse} ListClientTlsPoliciesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListClientTlsPoliciesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListClientTlsPoliciesResponse message.
+                         * @function verify
+                         * @memberof google.cloud.networksecurity.v1.ListClientTlsPoliciesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListClientTlsPoliciesResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.clientTlsPolicies != null && message.hasOwnProperty("clientTlsPolicies")) {
+                                if (!Array.isArray(message.clientTlsPolicies))
+                                    return "clientTlsPolicies: array expected";
+                                for (var i = 0; i < message.clientTlsPolicies.length; ++i) {
+                                    var error = $root.google.cloud.networksecurity.v1.ClientTlsPolicy.verify(message.clientTlsPolicies[i]);
+                                    if (error)
+                                        return "clientTlsPolicies." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListClientTlsPoliciesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networksecurity.v1.ListClientTlsPoliciesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networksecurity.v1.ListClientTlsPoliciesResponse} ListClientTlsPoliciesResponse
+                         */
+                        ListClientTlsPoliciesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networksecurity.v1.ListClientTlsPoliciesResponse)
+                                return object;
+                            var message = new $root.google.cloud.networksecurity.v1.ListClientTlsPoliciesResponse();
+                            if (object.clientTlsPolicies) {
+                                if (!Array.isArray(object.clientTlsPolicies))
+                                    throw TypeError(".google.cloud.networksecurity.v1.ListClientTlsPoliciesResponse.clientTlsPolicies: array expected");
+                                message.clientTlsPolicies = [];
+                                for (var i = 0; i < object.clientTlsPolicies.length; ++i) {
+                                    if (typeof object.clientTlsPolicies[i] !== "object")
+                                        throw TypeError(".google.cloud.networksecurity.v1.ListClientTlsPoliciesResponse.clientTlsPolicies: object expected");
+                                    message.clientTlsPolicies[i] = $root.google.cloud.networksecurity.v1.ClientTlsPolicy.fromObject(object.clientTlsPolicies[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListClientTlsPoliciesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networksecurity.v1.ListClientTlsPoliciesResponse
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.ListClientTlsPoliciesResponse} message ListClientTlsPoliciesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListClientTlsPoliciesResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.clientTlsPolicies = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.clientTlsPolicies && message.clientTlsPolicies.length) {
+                                object.clientTlsPolicies = [];
+                                for (var j = 0; j < message.clientTlsPolicies.length; ++j)
+                                    object.clientTlsPolicies[j] = $root.google.cloud.networksecurity.v1.ClientTlsPolicy.toObject(message.clientTlsPolicies[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListClientTlsPoliciesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networksecurity.v1.ListClientTlsPoliciesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListClientTlsPoliciesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListClientTlsPoliciesResponse;
+                    })();
+    
+                    v1.GetClientTlsPolicyRequest = (function() {
+    
+                        /**
+                         * Properties of a GetClientTlsPolicyRequest.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @interface IGetClientTlsPolicyRequest
+                         * @property {string|null} [name] GetClientTlsPolicyRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetClientTlsPolicyRequest.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @classdesc Represents a GetClientTlsPolicyRequest.
+                         * @implements IGetClientTlsPolicyRequest
+                         * @constructor
+                         * @param {google.cloud.networksecurity.v1.IGetClientTlsPolicyRequest=} [properties] Properties to set
+                         */
+                        function GetClientTlsPolicyRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetClientTlsPolicyRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.networksecurity.v1.GetClientTlsPolicyRequest
+                         * @instance
+                         */
+                        GetClientTlsPolicyRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetClientTlsPolicyRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networksecurity.v1.GetClientTlsPolicyRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IGetClientTlsPolicyRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networksecurity.v1.GetClientTlsPolicyRequest} GetClientTlsPolicyRequest instance
+                         */
+                        GetClientTlsPolicyRequest.create = function create(properties) {
+                            return new GetClientTlsPolicyRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetClientTlsPolicyRequest message. Does not implicitly {@link google.cloud.networksecurity.v1.GetClientTlsPolicyRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networksecurity.v1.GetClientTlsPolicyRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IGetClientTlsPolicyRequest} message GetClientTlsPolicyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetClientTlsPolicyRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetClientTlsPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.GetClientTlsPolicyRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.GetClientTlsPolicyRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IGetClientTlsPolicyRequest} message GetClientTlsPolicyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetClientTlsPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetClientTlsPolicyRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networksecurity.v1.GetClientTlsPolicyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networksecurity.v1.GetClientTlsPolicyRequest} GetClientTlsPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetClientTlsPolicyRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networksecurity.v1.GetClientTlsPolicyRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetClientTlsPolicyRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.GetClientTlsPolicyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networksecurity.v1.GetClientTlsPolicyRequest} GetClientTlsPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetClientTlsPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetClientTlsPolicyRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networksecurity.v1.GetClientTlsPolicyRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetClientTlsPolicyRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetClientTlsPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networksecurity.v1.GetClientTlsPolicyRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networksecurity.v1.GetClientTlsPolicyRequest} GetClientTlsPolicyRequest
+                         */
+                        GetClientTlsPolicyRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networksecurity.v1.GetClientTlsPolicyRequest)
+                                return object;
+                            var message = new $root.google.cloud.networksecurity.v1.GetClientTlsPolicyRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetClientTlsPolicyRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networksecurity.v1.GetClientTlsPolicyRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.GetClientTlsPolicyRequest} message GetClientTlsPolicyRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetClientTlsPolicyRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetClientTlsPolicyRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networksecurity.v1.GetClientTlsPolicyRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetClientTlsPolicyRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GetClientTlsPolicyRequest;
+                    })();
+    
+                    v1.CreateClientTlsPolicyRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateClientTlsPolicyRequest.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @interface ICreateClientTlsPolicyRequest
+                         * @property {string|null} [parent] CreateClientTlsPolicyRequest parent
+                         * @property {string|null} [clientTlsPolicyId] CreateClientTlsPolicyRequest clientTlsPolicyId
+                         * @property {google.cloud.networksecurity.v1.IClientTlsPolicy|null} [clientTlsPolicy] CreateClientTlsPolicyRequest clientTlsPolicy
+                         */
+    
+                        /**
+                         * Constructs a new CreateClientTlsPolicyRequest.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @classdesc Represents a CreateClientTlsPolicyRequest.
+                         * @implements ICreateClientTlsPolicyRequest
+                         * @constructor
+                         * @param {google.cloud.networksecurity.v1.ICreateClientTlsPolicyRequest=} [properties] Properties to set
+                         */
+                        function CreateClientTlsPolicyRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateClientTlsPolicyRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.networksecurity.v1.CreateClientTlsPolicyRequest
+                         * @instance
+                         */
+                        CreateClientTlsPolicyRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateClientTlsPolicyRequest clientTlsPolicyId.
+                         * @member {string} clientTlsPolicyId
+                         * @memberof google.cloud.networksecurity.v1.CreateClientTlsPolicyRequest
+                         * @instance
+                         */
+                        CreateClientTlsPolicyRequest.prototype.clientTlsPolicyId = "";
+    
+                        /**
+                         * CreateClientTlsPolicyRequest clientTlsPolicy.
+                         * @member {google.cloud.networksecurity.v1.IClientTlsPolicy|null|undefined} clientTlsPolicy
+                         * @memberof google.cloud.networksecurity.v1.CreateClientTlsPolicyRequest
+                         * @instance
+                         */
+                        CreateClientTlsPolicyRequest.prototype.clientTlsPolicy = null;
+    
+                        /**
+                         * Creates a new CreateClientTlsPolicyRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networksecurity.v1.CreateClientTlsPolicyRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.ICreateClientTlsPolicyRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networksecurity.v1.CreateClientTlsPolicyRequest} CreateClientTlsPolicyRequest instance
+                         */
+                        CreateClientTlsPolicyRequest.create = function create(properties) {
+                            return new CreateClientTlsPolicyRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateClientTlsPolicyRequest message. Does not implicitly {@link google.cloud.networksecurity.v1.CreateClientTlsPolicyRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networksecurity.v1.CreateClientTlsPolicyRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.ICreateClientTlsPolicyRequest} message CreateClientTlsPolicyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateClientTlsPolicyRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.clientTlsPolicyId != null && Object.hasOwnProperty.call(message, "clientTlsPolicyId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.clientTlsPolicyId);
+                            if (message.clientTlsPolicy != null && Object.hasOwnProperty.call(message, "clientTlsPolicy"))
+                                $root.google.cloud.networksecurity.v1.ClientTlsPolicy.encode(message.clientTlsPolicy, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateClientTlsPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.CreateClientTlsPolicyRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.CreateClientTlsPolicyRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.ICreateClientTlsPolicyRequest} message CreateClientTlsPolicyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateClientTlsPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateClientTlsPolicyRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networksecurity.v1.CreateClientTlsPolicyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networksecurity.v1.CreateClientTlsPolicyRequest} CreateClientTlsPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateClientTlsPolicyRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networksecurity.v1.CreateClientTlsPolicyRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.clientTlsPolicyId = reader.string();
+                                    break;
+                                case 3:
+                                    message.clientTlsPolicy = $root.google.cloud.networksecurity.v1.ClientTlsPolicy.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateClientTlsPolicyRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.CreateClientTlsPolicyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networksecurity.v1.CreateClientTlsPolicyRequest} CreateClientTlsPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateClientTlsPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateClientTlsPolicyRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networksecurity.v1.CreateClientTlsPolicyRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateClientTlsPolicyRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.clientTlsPolicyId != null && message.hasOwnProperty("clientTlsPolicyId"))
+                                if (!$util.isString(message.clientTlsPolicyId))
+                                    return "clientTlsPolicyId: string expected";
+                            if (message.clientTlsPolicy != null && message.hasOwnProperty("clientTlsPolicy")) {
+                                var error = $root.google.cloud.networksecurity.v1.ClientTlsPolicy.verify(message.clientTlsPolicy);
+                                if (error)
+                                    return "clientTlsPolicy." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateClientTlsPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networksecurity.v1.CreateClientTlsPolicyRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networksecurity.v1.CreateClientTlsPolicyRequest} CreateClientTlsPolicyRequest
+                         */
+                        CreateClientTlsPolicyRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networksecurity.v1.CreateClientTlsPolicyRequest)
+                                return object;
+                            var message = new $root.google.cloud.networksecurity.v1.CreateClientTlsPolicyRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.clientTlsPolicyId != null)
+                                message.clientTlsPolicyId = String(object.clientTlsPolicyId);
+                            if (object.clientTlsPolicy != null) {
+                                if (typeof object.clientTlsPolicy !== "object")
+                                    throw TypeError(".google.cloud.networksecurity.v1.CreateClientTlsPolicyRequest.clientTlsPolicy: object expected");
+                                message.clientTlsPolicy = $root.google.cloud.networksecurity.v1.ClientTlsPolicy.fromObject(object.clientTlsPolicy);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateClientTlsPolicyRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networksecurity.v1.CreateClientTlsPolicyRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.CreateClientTlsPolicyRequest} message CreateClientTlsPolicyRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateClientTlsPolicyRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.clientTlsPolicyId = "";
+                                object.clientTlsPolicy = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.clientTlsPolicyId != null && message.hasOwnProperty("clientTlsPolicyId"))
+                                object.clientTlsPolicyId = message.clientTlsPolicyId;
+                            if (message.clientTlsPolicy != null && message.hasOwnProperty("clientTlsPolicy"))
+                                object.clientTlsPolicy = $root.google.cloud.networksecurity.v1.ClientTlsPolicy.toObject(message.clientTlsPolicy, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateClientTlsPolicyRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networksecurity.v1.CreateClientTlsPolicyRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateClientTlsPolicyRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return CreateClientTlsPolicyRequest;
+                    })();
+    
+                    v1.UpdateClientTlsPolicyRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateClientTlsPolicyRequest.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @interface IUpdateClientTlsPolicyRequest
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateClientTlsPolicyRequest updateMask
+                         * @property {google.cloud.networksecurity.v1.IClientTlsPolicy|null} [clientTlsPolicy] UpdateClientTlsPolicyRequest clientTlsPolicy
+                         */
+    
+                        /**
+                         * Constructs a new UpdateClientTlsPolicyRequest.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @classdesc Represents an UpdateClientTlsPolicyRequest.
+                         * @implements IUpdateClientTlsPolicyRequest
+                         * @constructor
+                         * @param {google.cloud.networksecurity.v1.IUpdateClientTlsPolicyRequest=} [properties] Properties to set
+                         */
+                        function UpdateClientTlsPolicyRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateClientTlsPolicyRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.networksecurity.v1.UpdateClientTlsPolicyRequest
+                         * @instance
+                         */
+                        UpdateClientTlsPolicyRequest.prototype.updateMask = null;
+    
+                        /**
+                         * UpdateClientTlsPolicyRequest clientTlsPolicy.
+                         * @member {google.cloud.networksecurity.v1.IClientTlsPolicy|null|undefined} clientTlsPolicy
+                         * @memberof google.cloud.networksecurity.v1.UpdateClientTlsPolicyRequest
+                         * @instance
+                         */
+                        UpdateClientTlsPolicyRequest.prototype.clientTlsPolicy = null;
+    
+                        /**
+                         * Creates a new UpdateClientTlsPolicyRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networksecurity.v1.UpdateClientTlsPolicyRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IUpdateClientTlsPolicyRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networksecurity.v1.UpdateClientTlsPolicyRequest} UpdateClientTlsPolicyRequest instance
+                         */
+                        UpdateClientTlsPolicyRequest.create = function create(properties) {
+                            return new UpdateClientTlsPolicyRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateClientTlsPolicyRequest message. Does not implicitly {@link google.cloud.networksecurity.v1.UpdateClientTlsPolicyRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networksecurity.v1.UpdateClientTlsPolicyRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IUpdateClientTlsPolicyRequest} message UpdateClientTlsPolicyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateClientTlsPolicyRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.clientTlsPolicy != null && Object.hasOwnProperty.call(message, "clientTlsPolicy"))
+                                $root.google.cloud.networksecurity.v1.ClientTlsPolicy.encode(message.clientTlsPolicy, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateClientTlsPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.UpdateClientTlsPolicyRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.UpdateClientTlsPolicyRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IUpdateClientTlsPolicyRequest} message UpdateClientTlsPolicyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateClientTlsPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateClientTlsPolicyRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networksecurity.v1.UpdateClientTlsPolicyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networksecurity.v1.UpdateClientTlsPolicyRequest} UpdateClientTlsPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateClientTlsPolicyRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networksecurity.v1.UpdateClientTlsPolicyRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.clientTlsPolicy = $root.google.cloud.networksecurity.v1.ClientTlsPolicy.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateClientTlsPolicyRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.UpdateClientTlsPolicyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networksecurity.v1.UpdateClientTlsPolicyRequest} UpdateClientTlsPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateClientTlsPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateClientTlsPolicyRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networksecurity.v1.UpdateClientTlsPolicyRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateClientTlsPolicyRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            if (message.clientTlsPolicy != null && message.hasOwnProperty("clientTlsPolicy")) {
+                                var error = $root.google.cloud.networksecurity.v1.ClientTlsPolicy.verify(message.clientTlsPolicy);
+                                if (error)
+                                    return "clientTlsPolicy." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateClientTlsPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networksecurity.v1.UpdateClientTlsPolicyRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networksecurity.v1.UpdateClientTlsPolicyRequest} UpdateClientTlsPolicyRequest
+                         */
+                        UpdateClientTlsPolicyRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networksecurity.v1.UpdateClientTlsPolicyRequest)
+                                return object;
+                            var message = new $root.google.cloud.networksecurity.v1.UpdateClientTlsPolicyRequest();
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.networksecurity.v1.UpdateClientTlsPolicyRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            if (object.clientTlsPolicy != null) {
+                                if (typeof object.clientTlsPolicy !== "object")
+                                    throw TypeError(".google.cloud.networksecurity.v1.UpdateClientTlsPolicyRequest.clientTlsPolicy: object expected");
+                                message.clientTlsPolicy = $root.google.cloud.networksecurity.v1.ClientTlsPolicy.fromObject(object.clientTlsPolicy);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateClientTlsPolicyRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networksecurity.v1.UpdateClientTlsPolicyRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.UpdateClientTlsPolicyRequest} message UpdateClientTlsPolicyRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateClientTlsPolicyRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.updateMask = null;
+                                object.clientTlsPolicy = null;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            if (message.clientTlsPolicy != null && message.hasOwnProperty("clientTlsPolicy"))
+                                object.clientTlsPolicy = $root.google.cloud.networksecurity.v1.ClientTlsPolicy.toObject(message.clientTlsPolicy, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateClientTlsPolicyRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networksecurity.v1.UpdateClientTlsPolicyRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateClientTlsPolicyRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return UpdateClientTlsPolicyRequest;
+                    })();
+    
+                    v1.DeleteClientTlsPolicyRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteClientTlsPolicyRequest.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @interface IDeleteClientTlsPolicyRequest
+                         * @property {string|null} [name] DeleteClientTlsPolicyRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteClientTlsPolicyRequest.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @classdesc Represents a DeleteClientTlsPolicyRequest.
+                         * @implements IDeleteClientTlsPolicyRequest
+                         * @constructor
+                         * @param {google.cloud.networksecurity.v1.IDeleteClientTlsPolicyRequest=} [properties] Properties to set
+                         */
+                        function DeleteClientTlsPolicyRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteClientTlsPolicyRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.networksecurity.v1.DeleteClientTlsPolicyRequest
+                         * @instance
+                         */
+                        DeleteClientTlsPolicyRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteClientTlsPolicyRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networksecurity.v1.DeleteClientTlsPolicyRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IDeleteClientTlsPolicyRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networksecurity.v1.DeleteClientTlsPolicyRequest} DeleteClientTlsPolicyRequest instance
+                         */
+                        DeleteClientTlsPolicyRequest.create = function create(properties) {
+                            return new DeleteClientTlsPolicyRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteClientTlsPolicyRequest message. Does not implicitly {@link google.cloud.networksecurity.v1.DeleteClientTlsPolicyRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networksecurity.v1.DeleteClientTlsPolicyRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IDeleteClientTlsPolicyRequest} message DeleteClientTlsPolicyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteClientTlsPolicyRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteClientTlsPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.DeleteClientTlsPolicyRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.DeleteClientTlsPolicyRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IDeleteClientTlsPolicyRequest} message DeleteClientTlsPolicyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteClientTlsPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteClientTlsPolicyRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networksecurity.v1.DeleteClientTlsPolicyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networksecurity.v1.DeleteClientTlsPolicyRequest} DeleteClientTlsPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteClientTlsPolicyRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networksecurity.v1.DeleteClientTlsPolicyRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteClientTlsPolicyRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.DeleteClientTlsPolicyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networksecurity.v1.DeleteClientTlsPolicyRequest} DeleteClientTlsPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteClientTlsPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteClientTlsPolicyRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networksecurity.v1.DeleteClientTlsPolicyRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteClientTlsPolicyRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteClientTlsPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networksecurity.v1.DeleteClientTlsPolicyRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networksecurity.v1.DeleteClientTlsPolicyRequest} DeleteClientTlsPolicyRequest
+                         */
+                        DeleteClientTlsPolicyRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networksecurity.v1.DeleteClientTlsPolicyRequest)
+                                return object;
+                            var message = new $root.google.cloud.networksecurity.v1.DeleteClientTlsPolicyRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteClientTlsPolicyRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networksecurity.v1.DeleteClientTlsPolicyRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.DeleteClientTlsPolicyRequest} message DeleteClientTlsPolicyRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteClientTlsPolicyRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteClientTlsPolicyRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networksecurity.v1.DeleteClientTlsPolicyRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteClientTlsPolicyRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DeleteClientTlsPolicyRequest;
+                    })();
+    
+                    v1.GrpcEndpoint = (function() {
+    
+                        /**
+                         * Properties of a GrpcEndpoint.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @interface IGrpcEndpoint
+                         * @property {string|null} [targetUri] GrpcEndpoint targetUri
+                         */
+    
+                        /**
+                         * Constructs a new GrpcEndpoint.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @classdesc Represents a GrpcEndpoint.
+                         * @implements IGrpcEndpoint
+                         * @constructor
+                         * @param {google.cloud.networksecurity.v1.IGrpcEndpoint=} [properties] Properties to set
+                         */
+                        function GrpcEndpoint(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GrpcEndpoint targetUri.
+                         * @member {string} targetUri
+                         * @memberof google.cloud.networksecurity.v1.GrpcEndpoint
+                         * @instance
+                         */
+                        GrpcEndpoint.prototype.targetUri = "";
+    
+                        /**
+                         * Creates a new GrpcEndpoint instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networksecurity.v1.GrpcEndpoint
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IGrpcEndpoint=} [properties] Properties to set
+                         * @returns {google.cloud.networksecurity.v1.GrpcEndpoint} GrpcEndpoint instance
+                         */
+                        GrpcEndpoint.create = function create(properties) {
+                            return new GrpcEndpoint(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GrpcEndpoint message. Does not implicitly {@link google.cloud.networksecurity.v1.GrpcEndpoint.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networksecurity.v1.GrpcEndpoint
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IGrpcEndpoint} message GrpcEndpoint message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GrpcEndpoint.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.targetUri != null && Object.hasOwnProperty.call(message, "targetUri"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.targetUri);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GrpcEndpoint message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.GrpcEndpoint.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.GrpcEndpoint
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IGrpcEndpoint} message GrpcEndpoint message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GrpcEndpoint.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GrpcEndpoint message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networksecurity.v1.GrpcEndpoint
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networksecurity.v1.GrpcEndpoint} GrpcEndpoint
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GrpcEndpoint.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networksecurity.v1.GrpcEndpoint();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.targetUri = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GrpcEndpoint message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.GrpcEndpoint
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networksecurity.v1.GrpcEndpoint} GrpcEndpoint
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GrpcEndpoint.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GrpcEndpoint message.
+                         * @function verify
+                         * @memberof google.cloud.networksecurity.v1.GrpcEndpoint
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GrpcEndpoint.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.targetUri != null && message.hasOwnProperty("targetUri"))
+                                if (!$util.isString(message.targetUri))
+                                    return "targetUri: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GrpcEndpoint message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networksecurity.v1.GrpcEndpoint
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networksecurity.v1.GrpcEndpoint} GrpcEndpoint
+                         */
+                        GrpcEndpoint.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networksecurity.v1.GrpcEndpoint)
+                                return object;
+                            var message = new $root.google.cloud.networksecurity.v1.GrpcEndpoint();
+                            if (object.targetUri != null)
+                                message.targetUri = String(object.targetUri);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GrpcEndpoint message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networksecurity.v1.GrpcEndpoint
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.GrpcEndpoint} message GrpcEndpoint
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GrpcEndpoint.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.targetUri = "";
+                            if (message.targetUri != null && message.hasOwnProperty("targetUri"))
+                                object.targetUri = message.targetUri;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GrpcEndpoint to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networksecurity.v1.GrpcEndpoint
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GrpcEndpoint.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GrpcEndpoint;
+                    })();
+    
+                    v1.ValidationCA = (function() {
+    
+                        /**
+                         * Properties of a ValidationCA.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @interface IValidationCA
+                         * @property {google.cloud.networksecurity.v1.IGrpcEndpoint|null} [grpcEndpoint] ValidationCA grpcEndpoint
+                         * @property {google.cloud.networksecurity.v1.ICertificateProviderInstance|null} [certificateProviderInstance] ValidationCA certificateProviderInstance
+                         */
+    
+                        /**
+                         * Constructs a new ValidationCA.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @classdesc Represents a ValidationCA.
+                         * @implements IValidationCA
+                         * @constructor
+                         * @param {google.cloud.networksecurity.v1.IValidationCA=} [properties] Properties to set
+                         */
+                        function ValidationCA(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ValidationCA grpcEndpoint.
+                         * @member {google.cloud.networksecurity.v1.IGrpcEndpoint|null|undefined} grpcEndpoint
+                         * @memberof google.cloud.networksecurity.v1.ValidationCA
+                         * @instance
+                         */
+                        ValidationCA.prototype.grpcEndpoint = null;
+    
+                        /**
+                         * ValidationCA certificateProviderInstance.
+                         * @member {google.cloud.networksecurity.v1.ICertificateProviderInstance|null|undefined} certificateProviderInstance
+                         * @memberof google.cloud.networksecurity.v1.ValidationCA
+                         * @instance
+                         */
+                        ValidationCA.prototype.certificateProviderInstance = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * ValidationCA type.
+                         * @member {"grpcEndpoint"|"certificateProviderInstance"|undefined} type
+                         * @memberof google.cloud.networksecurity.v1.ValidationCA
+                         * @instance
+                         */
+                        Object.defineProperty(ValidationCA.prototype, "type", {
+                            get: $util.oneOfGetter($oneOfFields = ["grpcEndpoint", "certificateProviderInstance"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new ValidationCA instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networksecurity.v1.ValidationCA
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IValidationCA=} [properties] Properties to set
+                         * @returns {google.cloud.networksecurity.v1.ValidationCA} ValidationCA instance
+                         */
+                        ValidationCA.create = function create(properties) {
+                            return new ValidationCA(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ValidationCA message. Does not implicitly {@link google.cloud.networksecurity.v1.ValidationCA.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networksecurity.v1.ValidationCA
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IValidationCA} message ValidationCA message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ValidationCA.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.grpcEndpoint != null && Object.hasOwnProperty.call(message, "grpcEndpoint"))
+                                $root.google.cloud.networksecurity.v1.GrpcEndpoint.encode(message.grpcEndpoint, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.certificateProviderInstance != null && Object.hasOwnProperty.call(message, "certificateProviderInstance"))
+                                $root.google.cloud.networksecurity.v1.CertificateProviderInstance.encode(message.certificateProviderInstance, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ValidationCA message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.ValidationCA.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.ValidationCA
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IValidationCA} message ValidationCA message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ValidationCA.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ValidationCA message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networksecurity.v1.ValidationCA
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networksecurity.v1.ValidationCA} ValidationCA
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ValidationCA.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networksecurity.v1.ValidationCA();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 2:
+                                    message.grpcEndpoint = $root.google.cloud.networksecurity.v1.GrpcEndpoint.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.certificateProviderInstance = $root.google.cloud.networksecurity.v1.CertificateProviderInstance.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ValidationCA message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.ValidationCA
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networksecurity.v1.ValidationCA} ValidationCA
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ValidationCA.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ValidationCA message.
+                         * @function verify
+                         * @memberof google.cloud.networksecurity.v1.ValidationCA
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ValidationCA.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.grpcEndpoint != null && message.hasOwnProperty("grpcEndpoint")) {
+                                properties.type = 1;
+                                {
+                                    var error = $root.google.cloud.networksecurity.v1.GrpcEndpoint.verify(message.grpcEndpoint);
+                                    if (error)
+                                        return "grpcEndpoint." + error;
+                                }
+                            }
+                            if (message.certificateProviderInstance != null && message.hasOwnProperty("certificateProviderInstance")) {
+                                if (properties.type === 1)
+                                    return "type: multiple values";
+                                properties.type = 1;
+                                {
+                                    var error = $root.google.cloud.networksecurity.v1.CertificateProviderInstance.verify(message.certificateProviderInstance);
+                                    if (error)
+                                        return "certificateProviderInstance." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ValidationCA message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networksecurity.v1.ValidationCA
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networksecurity.v1.ValidationCA} ValidationCA
+                         */
+                        ValidationCA.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networksecurity.v1.ValidationCA)
+                                return object;
+                            var message = new $root.google.cloud.networksecurity.v1.ValidationCA();
+                            if (object.grpcEndpoint != null) {
+                                if (typeof object.grpcEndpoint !== "object")
+                                    throw TypeError(".google.cloud.networksecurity.v1.ValidationCA.grpcEndpoint: object expected");
+                                message.grpcEndpoint = $root.google.cloud.networksecurity.v1.GrpcEndpoint.fromObject(object.grpcEndpoint);
+                            }
+                            if (object.certificateProviderInstance != null) {
+                                if (typeof object.certificateProviderInstance !== "object")
+                                    throw TypeError(".google.cloud.networksecurity.v1.ValidationCA.certificateProviderInstance: object expected");
+                                message.certificateProviderInstance = $root.google.cloud.networksecurity.v1.CertificateProviderInstance.fromObject(object.certificateProviderInstance);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ValidationCA message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networksecurity.v1.ValidationCA
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.ValidationCA} message ValidationCA
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ValidationCA.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.grpcEndpoint != null && message.hasOwnProperty("grpcEndpoint")) {
+                                object.grpcEndpoint = $root.google.cloud.networksecurity.v1.GrpcEndpoint.toObject(message.grpcEndpoint, options);
+                                if (options.oneofs)
+                                    object.type = "grpcEndpoint";
+                            }
+                            if (message.certificateProviderInstance != null && message.hasOwnProperty("certificateProviderInstance")) {
+                                object.certificateProviderInstance = $root.google.cloud.networksecurity.v1.CertificateProviderInstance.toObject(message.certificateProviderInstance, options);
+                                if (options.oneofs)
+                                    object.type = "certificateProviderInstance";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ValidationCA to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networksecurity.v1.ValidationCA
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ValidationCA.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ValidationCA;
+                    })();
+    
+                    v1.CertificateProviderInstance = (function() {
+    
+                        /**
+                         * Properties of a CertificateProviderInstance.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @interface ICertificateProviderInstance
+                         * @property {string|null} [pluginInstance] CertificateProviderInstance pluginInstance
+                         */
+    
+                        /**
+                         * Constructs a new CertificateProviderInstance.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @classdesc Represents a CertificateProviderInstance.
+                         * @implements ICertificateProviderInstance
+                         * @constructor
+                         * @param {google.cloud.networksecurity.v1.ICertificateProviderInstance=} [properties] Properties to set
+                         */
+                        function CertificateProviderInstance(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CertificateProviderInstance pluginInstance.
+                         * @member {string} pluginInstance
+                         * @memberof google.cloud.networksecurity.v1.CertificateProviderInstance
+                         * @instance
+                         */
+                        CertificateProviderInstance.prototype.pluginInstance = "";
+    
+                        /**
+                         * Creates a new CertificateProviderInstance instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networksecurity.v1.CertificateProviderInstance
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.ICertificateProviderInstance=} [properties] Properties to set
+                         * @returns {google.cloud.networksecurity.v1.CertificateProviderInstance} CertificateProviderInstance instance
+                         */
+                        CertificateProviderInstance.create = function create(properties) {
+                            return new CertificateProviderInstance(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CertificateProviderInstance message. Does not implicitly {@link google.cloud.networksecurity.v1.CertificateProviderInstance.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networksecurity.v1.CertificateProviderInstance
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.ICertificateProviderInstance} message CertificateProviderInstance message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CertificateProviderInstance.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.pluginInstance != null && Object.hasOwnProperty.call(message, "pluginInstance"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.pluginInstance);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CertificateProviderInstance message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.CertificateProviderInstance.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.CertificateProviderInstance
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.ICertificateProviderInstance} message CertificateProviderInstance message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CertificateProviderInstance.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CertificateProviderInstance message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networksecurity.v1.CertificateProviderInstance
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networksecurity.v1.CertificateProviderInstance} CertificateProviderInstance
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CertificateProviderInstance.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networksecurity.v1.CertificateProviderInstance();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.pluginInstance = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CertificateProviderInstance message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.CertificateProviderInstance
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networksecurity.v1.CertificateProviderInstance} CertificateProviderInstance
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CertificateProviderInstance.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CertificateProviderInstance message.
+                         * @function verify
+                         * @memberof google.cloud.networksecurity.v1.CertificateProviderInstance
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CertificateProviderInstance.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.pluginInstance != null && message.hasOwnProperty("pluginInstance"))
+                                if (!$util.isString(message.pluginInstance))
+                                    return "pluginInstance: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CertificateProviderInstance message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networksecurity.v1.CertificateProviderInstance
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networksecurity.v1.CertificateProviderInstance} CertificateProviderInstance
+                         */
+                        CertificateProviderInstance.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networksecurity.v1.CertificateProviderInstance)
+                                return object;
+                            var message = new $root.google.cloud.networksecurity.v1.CertificateProviderInstance();
+                            if (object.pluginInstance != null)
+                                message.pluginInstance = String(object.pluginInstance);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CertificateProviderInstance message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networksecurity.v1.CertificateProviderInstance
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.CertificateProviderInstance} message CertificateProviderInstance
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CertificateProviderInstance.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.pluginInstance = "";
+                            if (message.pluginInstance != null && message.hasOwnProperty("pluginInstance"))
+                                object.pluginInstance = message.pluginInstance;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CertificateProviderInstance to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networksecurity.v1.CertificateProviderInstance
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CertificateProviderInstance.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return CertificateProviderInstance;
+                    })();
+    
+                    v1.CertificateProvider = (function() {
+    
+                        /**
+                         * Properties of a CertificateProvider.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @interface ICertificateProvider
+                         * @property {google.cloud.networksecurity.v1.IGrpcEndpoint|null} [grpcEndpoint] CertificateProvider grpcEndpoint
+                         * @property {google.cloud.networksecurity.v1.ICertificateProviderInstance|null} [certificateProviderInstance] CertificateProvider certificateProviderInstance
+                         */
+    
+                        /**
+                         * Constructs a new CertificateProvider.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @classdesc Represents a CertificateProvider.
+                         * @implements ICertificateProvider
+                         * @constructor
+                         * @param {google.cloud.networksecurity.v1.ICertificateProvider=} [properties] Properties to set
+                         */
+                        function CertificateProvider(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CertificateProvider grpcEndpoint.
+                         * @member {google.cloud.networksecurity.v1.IGrpcEndpoint|null|undefined} grpcEndpoint
+                         * @memberof google.cloud.networksecurity.v1.CertificateProvider
+                         * @instance
+                         */
+                        CertificateProvider.prototype.grpcEndpoint = null;
+    
+                        /**
+                         * CertificateProvider certificateProviderInstance.
+                         * @member {google.cloud.networksecurity.v1.ICertificateProviderInstance|null|undefined} certificateProviderInstance
+                         * @memberof google.cloud.networksecurity.v1.CertificateProvider
+                         * @instance
+                         */
+                        CertificateProvider.prototype.certificateProviderInstance = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * CertificateProvider type.
+                         * @member {"grpcEndpoint"|"certificateProviderInstance"|undefined} type
+                         * @memberof google.cloud.networksecurity.v1.CertificateProvider
+                         * @instance
+                         */
+                        Object.defineProperty(CertificateProvider.prototype, "type", {
+                            get: $util.oneOfGetter($oneOfFields = ["grpcEndpoint", "certificateProviderInstance"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new CertificateProvider instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networksecurity.v1.CertificateProvider
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.ICertificateProvider=} [properties] Properties to set
+                         * @returns {google.cloud.networksecurity.v1.CertificateProvider} CertificateProvider instance
+                         */
+                        CertificateProvider.create = function create(properties) {
+                            return new CertificateProvider(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CertificateProvider message. Does not implicitly {@link google.cloud.networksecurity.v1.CertificateProvider.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networksecurity.v1.CertificateProvider
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.ICertificateProvider} message CertificateProvider message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CertificateProvider.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.grpcEndpoint != null && Object.hasOwnProperty.call(message, "grpcEndpoint"))
+                                $root.google.cloud.networksecurity.v1.GrpcEndpoint.encode(message.grpcEndpoint, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.certificateProviderInstance != null && Object.hasOwnProperty.call(message, "certificateProviderInstance"))
+                                $root.google.cloud.networksecurity.v1.CertificateProviderInstance.encode(message.certificateProviderInstance, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CertificateProvider message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.CertificateProvider.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.CertificateProvider
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.ICertificateProvider} message CertificateProvider message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CertificateProvider.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CertificateProvider message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networksecurity.v1.CertificateProvider
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networksecurity.v1.CertificateProvider} CertificateProvider
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CertificateProvider.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networksecurity.v1.CertificateProvider();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 2:
+                                    message.grpcEndpoint = $root.google.cloud.networksecurity.v1.GrpcEndpoint.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.certificateProviderInstance = $root.google.cloud.networksecurity.v1.CertificateProviderInstance.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CertificateProvider message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.CertificateProvider
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networksecurity.v1.CertificateProvider} CertificateProvider
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CertificateProvider.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CertificateProvider message.
+                         * @function verify
+                         * @memberof google.cloud.networksecurity.v1.CertificateProvider
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CertificateProvider.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.grpcEndpoint != null && message.hasOwnProperty("grpcEndpoint")) {
+                                properties.type = 1;
+                                {
+                                    var error = $root.google.cloud.networksecurity.v1.GrpcEndpoint.verify(message.grpcEndpoint);
+                                    if (error)
+                                        return "grpcEndpoint." + error;
+                                }
+                            }
+                            if (message.certificateProviderInstance != null && message.hasOwnProperty("certificateProviderInstance")) {
+                                if (properties.type === 1)
+                                    return "type: multiple values";
+                                properties.type = 1;
+                                {
+                                    var error = $root.google.cloud.networksecurity.v1.CertificateProviderInstance.verify(message.certificateProviderInstance);
+                                    if (error)
+                                        return "certificateProviderInstance." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CertificateProvider message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networksecurity.v1.CertificateProvider
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networksecurity.v1.CertificateProvider} CertificateProvider
+                         */
+                        CertificateProvider.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networksecurity.v1.CertificateProvider)
+                                return object;
+                            var message = new $root.google.cloud.networksecurity.v1.CertificateProvider();
+                            if (object.grpcEndpoint != null) {
+                                if (typeof object.grpcEndpoint !== "object")
+                                    throw TypeError(".google.cloud.networksecurity.v1.CertificateProvider.grpcEndpoint: object expected");
+                                message.grpcEndpoint = $root.google.cloud.networksecurity.v1.GrpcEndpoint.fromObject(object.grpcEndpoint);
+                            }
+                            if (object.certificateProviderInstance != null) {
+                                if (typeof object.certificateProviderInstance !== "object")
+                                    throw TypeError(".google.cloud.networksecurity.v1.CertificateProvider.certificateProviderInstance: object expected");
+                                message.certificateProviderInstance = $root.google.cloud.networksecurity.v1.CertificateProviderInstance.fromObject(object.certificateProviderInstance);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CertificateProvider message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networksecurity.v1.CertificateProvider
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.CertificateProvider} message CertificateProvider
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CertificateProvider.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.grpcEndpoint != null && message.hasOwnProperty("grpcEndpoint")) {
+                                object.grpcEndpoint = $root.google.cloud.networksecurity.v1.GrpcEndpoint.toObject(message.grpcEndpoint, options);
+                                if (options.oneofs)
+                                    object.type = "grpcEndpoint";
+                            }
+                            if (message.certificateProviderInstance != null && message.hasOwnProperty("certificateProviderInstance")) {
+                                object.certificateProviderInstance = $root.google.cloud.networksecurity.v1.CertificateProviderInstance.toObject(message.certificateProviderInstance, options);
+                                if (options.oneofs)
+                                    object.type = "certificateProviderInstance";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CertificateProvider to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networksecurity.v1.CertificateProvider
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CertificateProvider.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return CertificateProvider;
+                    })();
+    
+                    v1.OperationMetadata = (function() {
+    
+                        /**
+                         * Properties of an OperationMetadata.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @interface IOperationMetadata
+                         * @property {google.protobuf.ITimestamp|null} [createTime] OperationMetadata createTime
+                         * @property {google.protobuf.ITimestamp|null} [endTime] OperationMetadata endTime
+                         * @property {string|null} [target] OperationMetadata target
+                         * @property {string|null} [verb] OperationMetadata verb
+                         * @property {string|null} [statusMessage] OperationMetadata statusMessage
+                         * @property {boolean|null} [requestedCancellation] OperationMetadata requestedCancellation
+                         * @property {string|null} [apiVersion] OperationMetadata apiVersion
+                         */
+    
+                        /**
+                         * Constructs a new OperationMetadata.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @classdesc Represents an OperationMetadata.
+                         * @implements IOperationMetadata
+                         * @constructor
+                         * @param {google.cloud.networksecurity.v1.IOperationMetadata=} [properties] Properties to set
+                         */
+                        function OperationMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * OperationMetadata createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.networksecurity.v1.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.createTime = null;
+    
+                        /**
+                         * OperationMetadata endTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} endTime
+                         * @memberof google.cloud.networksecurity.v1.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.endTime = null;
+    
+                        /**
+                         * OperationMetadata target.
+                         * @member {string} target
+                         * @memberof google.cloud.networksecurity.v1.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.target = "";
+    
+                        /**
+                         * OperationMetadata verb.
+                         * @member {string} verb
+                         * @memberof google.cloud.networksecurity.v1.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.verb = "";
+    
+                        /**
+                         * OperationMetadata statusMessage.
+                         * @member {string} statusMessage
+                         * @memberof google.cloud.networksecurity.v1.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.statusMessage = "";
+    
+                        /**
+                         * OperationMetadata requestedCancellation.
+                         * @member {boolean} requestedCancellation
+                         * @memberof google.cloud.networksecurity.v1.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.requestedCancellation = false;
+    
+                        /**
+                         * OperationMetadata apiVersion.
+                         * @member {string} apiVersion
+                         * @memberof google.cloud.networksecurity.v1.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.apiVersion = "";
+    
+                        /**
+                         * Creates a new OperationMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networksecurity.v1.OperationMetadata
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IOperationMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.networksecurity.v1.OperationMetadata} OperationMetadata instance
+                         */
+                        OperationMetadata.create = function create(properties) {
+                            return new OperationMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified OperationMetadata message. Does not implicitly {@link google.cloud.networksecurity.v1.OperationMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networksecurity.v1.OperationMetadata
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IOperationMetadata} message OperationMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OperationMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
+                                $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.target != null && Object.hasOwnProperty.call(message, "target"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.target);
+                            if (message.verb != null && Object.hasOwnProperty.call(message, "verb"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.verb);
+                            if (message.statusMessage != null && Object.hasOwnProperty.call(message, "statusMessage"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.statusMessage);
+                            if (message.requestedCancellation != null && Object.hasOwnProperty.call(message, "requestedCancellation"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.requestedCancellation);
+                            if (message.apiVersion != null && Object.hasOwnProperty.call(message, "apiVersion"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.apiVersion);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified OperationMetadata message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.OperationMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.OperationMetadata
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IOperationMetadata} message OperationMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OperationMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an OperationMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networksecurity.v1.OperationMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networksecurity.v1.OperationMetadata} OperationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OperationMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networksecurity.v1.OperationMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.target = reader.string();
+                                    break;
+                                case 4:
+                                    message.verb = reader.string();
+                                    break;
+                                case 5:
+                                    message.statusMessage = reader.string();
+                                    break;
+                                case 6:
+                                    message.requestedCancellation = reader.bool();
+                                    break;
+                                case 7:
+                                    message.apiVersion = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an OperationMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.OperationMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networksecurity.v1.OperationMetadata} OperationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OperationMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an OperationMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.networksecurity.v1.OperationMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        OperationMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.endTime != null && message.hasOwnProperty("endTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.endTime);
+                                if (error)
+                                    return "endTime." + error;
+                            }
+                            if (message.target != null && message.hasOwnProperty("target"))
+                                if (!$util.isString(message.target))
+                                    return "target: string expected";
+                            if (message.verb != null && message.hasOwnProperty("verb"))
+                                if (!$util.isString(message.verb))
+                                    return "verb: string expected";
+                            if (message.statusMessage != null && message.hasOwnProperty("statusMessage"))
+                                if (!$util.isString(message.statusMessage))
+                                    return "statusMessage: string expected";
+                            if (message.requestedCancellation != null && message.hasOwnProperty("requestedCancellation"))
+                                if (typeof message.requestedCancellation !== "boolean")
+                                    return "requestedCancellation: boolean expected";
+                            if (message.apiVersion != null && message.hasOwnProperty("apiVersion"))
+                                if (!$util.isString(message.apiVersion))
+                                    return "apiVersion: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an OperationMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networksecurity.v1.OperationMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networksecurity.v1.OperationMetadata} OperationMetadata
+                         */
+                        OperationMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networksecurity.v1.OperationMetadata)
+                                return object;
+                            var message = new $root.google.cloud.networksecurity.v1.OperationMetadata();
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.networksecurity.v1.OperationMetadata.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.endTime != null) {
+                                if (typeof object.endTime !== "object")
+                                    throw TypeError(".google.cloud.networksecurity.v1.OperationMetadata.endTime: object expected");
+                                message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
+                            }
+                            if (object.target != null)
+                                message.target = String(object.target);
+                            if (object.verb != null)
+                                message.verb = String(object.verb);
+                            if (object.statusMessage != null)
+                                message.statusMessage = String(object.statusMessage);
+                            if (object.requestedCancellation != null)
+                                message.requestedCancellation = Boolean(object.requestedCancellation);
+                            if (object.apiVersion != null)
+                                message.apiVersion = String(object.apiVersion);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an OperationMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networksecurity.v1.OperationMetadata
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.OperationMetadata} message OperationMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        OperationMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.createTime = null;
+                                object.endTime = null;
+                                object.target = "";
+                                object.verb = "";
+                                object.statusMessage = "";
+                                object.requestedCancellation = false;
+                                object.apiVersion = "";
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.endTime != null && message.hasOwnProperty("endTime"))
+                                object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
+                            if (message.target != null && message.hasOwnProperty("target"))
+                                object.target = message.target;
+                            if (message.verb != null && message.hasOwnProperty("verb"))
+                                object.verb = message.verb;
+                            if (message.statusMessage != null && message.hasOwnProperty("statusMessage"))
+                                object.statusMessage = message.statusMessage;
+                            if (message.requestedCancellation != null && message.hasOwnProperty("requestedCancellation"))
+                                object.requestedCancellation = message.requestedCancellation;
+                            if (message.apiVersion != null && message.hasOwnProperty("apiVersion"))
+                                object.apiVersion = message.apiVersion;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this OperationMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networksecurity.v1.OperationMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        OperationMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return OperationMetadata;
+                    })();
+    
+                    v1.NetworkSecurity = (function() {
+    
+                        /**
+                         * Constructs a new NetworkSecurity service.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @classdesc Represents a NetworkSecurity
+                         * @extends $protobuf.rpc.Service
+                         * @constructor
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        function NetworkSecurity(rpcImpl, requestDelimited, responseDelimited) {
+                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                        }
+    
+                        (NetworkSecurity.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = NetworkSecurity;
+    
+                        /**
+                         * Creates new NetworkSecurity service using the specified rpc implementation.
+                         * @function create
+                         * @memberof google.cloud.networksecurity.v1.NetworkSecurity
+                         * @static
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         * @returns {NetworkSecurity} RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        NetworkSecurity.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                            return new this(rpcImpl, requestDelimited, responseDelimited);
+                        };
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networksecurity.v1.NetworkSecurity#listAuthorizationPolicies}.
+                         * @memberof google.cloud.networksecurity.v1.NetworkSecurity
+                         * @typedef ListAuthorizationPoliciesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networksecurity.v1.ListAuthorizationPoliciesResponse} [response] ListAuthorizationPoliciesResponse
+                         */
+    
+                        /**
+                         * Calls ListAuthorizationPolicies.
+                         * @function listAuthorizationPolicies
+                         * @memberof google.cloud.networksecurity.v1.NetworkSecurity
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IListAuthorizationPoliciesRequest} request ListAuthorizationPoliciesRequest message or plain object
+                         * @param {google.cloud.networksecurity.v1.NetworkSecurity.ListAuthorizationPoliciesCallback} callback Node-style callback called with the error, if any, and ListAuthorizationPoliciesResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetworkSecurity.prototype.listAuthorizationPolicies = function listAuthorizationPolicies(request, callback) {
+                            return this.rpcCall(listAuthorizationPolicies, $root.google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest, $root.google.cloud.networksecurity.v1.ListAuthorizationPoliciesResponse, request, callback);
+                        }, "name", { value: "ListAuthorizationPolicies" });
+    
+                        /**
+                         * Calls ListAuthorizationPolicies.
+                         * @function listAuthorizationPolicies
+                         * @memberof google.cloud.networksecurity.v1.NetworkSecurity
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IListAuthorizationPoliciesRequest} request ListAuthorizationPoliciesRequest message or plain object
+                         * @returns {Promise<google.cloud.networksecurity.v1.ListAuthorizationPoliciesResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networksecurity.v1.NetworkSecurity#getAuthorizationPolicy}.
+                         * @memberof google.cloud.networksecurity.v1.NetworkSecurity
+                         * @typedef GetAuthorizationPolicyCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networksecurity.v1.AuthorizationPolicy} [response] AuthorizationPolicy
+                         */
+    
+                        /**
+                         * Calls GetAuthorizationPolicy.
+                         * @function getAuthorizationPolicy
+                         * @memberof google.cloud.networksecurity.v1.NetworkSecurity
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IGetAuthorizationPolicyRequest} request GetAuthorizationPolicyRequest message or plain object
+                         * @param {google.cloud.networksecurity.v1.NetworkSecurity.GetAuthorizationPolicyCallback} callback Node-style callback called with the error, if any, and AuthorizationPolicy
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetworkSecurity.prototype.getAuthorizationPolicy = function getAuthorizationPolicy(request, callback) {
+                            return this.rpcCall(getAuthorizationPolicy, $root.google.cloud.networksecurity.v1.GetAuthorizationPolicyRequest, $root.google.cloud.networksecurity.v1.AuthorizationPolicy, request, callback);
+                        }, "name", { value: "GetAuthorizationPolicy" });
+    
+                        /**
+                         * Calls GetAuthorizationPolicy.
+                         * @function getAuthorizationPolicy
+                         * @memberof google.cloud.networksecurity.v1.NetworkSecurity
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IGetAuthorizationPolicyRequest} request GetAuthorizationPolicyRequest message or plain object
+                         * @returns {Promise<google.cloud.networksecurity.v1.AuthorizationPolicy>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networksecurity.v1.NetworkSecurity#createAuthorizationPolicy}.
+                         * @memberof google.cloud.networksecurity.v1.NetworkSecurity
+                         * @typedef CreateAuthorizationPolicyCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateAuthorizationPolicy.
+                         * @function createAuthorizationPolicy
+                         * @memberof google.cloud.networksecurity.v1.NetworkSecurity
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.ICreateAuthorizationPolicyRequest} request CreateAuthorizationPolicyRequest message or plain object
+                         * @param {google.cloud.networksecurity.v1.NetworkSecurity.CreateAuthorizationPolicyCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetworkSecurity.prototype.createAuthorizationPolicy = function createAuthorizationPolicy(request, callback) {
+                            return this.rpcCall(createAuthorizationPolicy, $root.google.cloud.networksecurity.v1.CreateAuthorizationPolicyRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateAuthorizationPolicy" });
+    
+                        /**
+                         * Calls CreateAuthorizationPolicy.
+                         * @function createAuthorizationPolicy
+                         * @memberof google.cloud.networksecurity.v1.NetworkSecurity
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.ICreateAuthorizationPolicyRequest} request CreateAuthorizationPolicyRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networksecurity.v1.NetworkSecurity#updateAuthorizationPolicy}.
+                         * @memberof google.cloud.networksecurity.v1.NetworkSecurity
+                         * @typedef UpdateAuthorizationPolicyCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UpdateAuthorizationPolicy.
+                         * @function updateAuthorizationPolicy
+                         * @memberof google.cloud.networksecurity.v1.NetworkSecurity
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IUpdateAuthorizationPolicyRequest} request UpdateAuthorizationPolicyRequest message or plain object
+                         * @param {google.cloud.networksecurity.v1.NetworkSecurity.UpdateAuthorizationPolicyCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetworkSecurity.prototype.updateAuthorizationPolicy = function updateAuthorizationPolicy(request, callback) {
+                            return this.rpcCall(updateAuthorizationPolicy, $root.google.cloud.networksecurity.v1.UpdateAuthorizationPolicyRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UpdateAuthorizationPolicy" });
+    
+                        /**
+                         * Calls UpdateAuthorizationPolicy.
+                         * @function updateAuthorizationPolicy
+                         * @memberof google.cloud.networksecurity.v1.NetworkSecurity
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IUpdateAuthorizationPolicyRequest} request UpdateAuthorizationPolicyRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networksecurity.v1.NetworkSecurity#deleteAuthorizationPolicy}.
+                         * @memberof google.cloud.networksecurity.v1.NetworkSecurity
+                         * @typedef DeleteAuthorizationPolicyCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteAuthorizationPolicy.
+                         * @function deleteAuthorizationPolicy
+                         * @memberof google.cloud.networksecurity.v1.NetworkSecurity
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IDeleteAuthorizationPolicyRequest} request DeleteAuthorizationPolicyRequest message or plain object
+                         * @param {google.cloud.networksecurity.v1.NetworkSecurity.DeleteAuthorizationPolicyCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetworkSecurity.prototype.deleteAuthorizationPolicy = function deleteAuthorizationPolicy(request, callback) {
+                            return this.rpcCall(deleteAuthorizationPolicy, $root.google.cloud.networksecurity.v1.DeleteAuthorizationPolicyRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteAuthorizationPolicy" });
+    
+                        /**
+                         * Calls DeleteAuthorizationPolicy.
+                         * @function deleteAuthorizationPolicy
+                         * @memberof google.cloud.networksecurity.v1.NetworkSecurity
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IDeleteAuthorizationPolicyRequest} request DeleteAuthorizationPolicyRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networksecurity.v1.NetworkSecurity#listServerTlsPolicies}.
+                         * @memberof google.cloud.networksecurity.v1.NetworkSecurity
+                         * @typedef ListServerTlsPoliciesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networksecurity.v1.ListServerTlsPoliciesResponse} [response] ListServerTlsPoliciesResponse
+                         */
+    
+                        /**
+                         * Calls ListServerTlsPolicies.
+                         * @function listServerTlsPolicies
+                         * @memberof google.cloud.networksecurity.v1.NetworkSecurity
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IListServerTlsPoliciesRequest} request ListServerTlsPoliciesRequest message or plain object
+                         * @param {google.cloud.networksecurity.v1.NetworkSecurity.ListServerTlsPoliciesCallback} callback Node-style callback called with the error, if any, and ListServerTlsPoliciesResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetworkSecurity.prototype.listServerTlsPolicies = function listServerTlsPolicies(request, callback) {
+                            return this.rpcCall(listServerTlsPolicies, $root.google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest, $root.google.cloud.networksecurity.v1.ListServerTlsPoliciesResponse, request, callback);
+                        }, "name", { value: "ListServerTlsPolicies" });
+    
+                        /**
+                         * Calls ListServerTlsPolicies.
+                         * @function listServerTlsPolicies
+                         * @memberof google.cloud.networksecurity.v1.NetworkSecurity
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IListServerTlsPoliciesRequest} request ListServerTlsPoliciesRequest message or plain object
+                         * @returns {Promise<google.cloud.networksecurity.v1.ListServerTlsPoliciesResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networksecurity.v1.NetworkSecurity#getServerTlsPolicy}.
+                         * @memberof google.cloud.networksecurity.v1.NetworkSecurity
+                         * @typedef GetServerTlsPolicyCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networksecurity.v1.ServerTlsPolicy} [response] ServerTlsPolicy
+                         */
+    
+                        /**
+                         * Calls GetServerTlsPolicy.
+                         * @function getServerTlsPolicy
+                         * @memberof google.cloud.networksecurity.v1.NetworkSecurity
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IGetServerTlsPolicyRequest} request GetServerTlsPolicyRequest message or plain object
+                         * @param {google.cloud.networksecurity.v1.NetworkSecurity.GetServerTlsPolicyCallback} callback Node-style callback called with the error, if any, and ServerTlsPolicy
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetworkSecurity.prototype.getServerTlsPolicy = function getServerTlsPolicy(request, callback) {
+                            return this.rpcCall(getServerTlsPolicy, $root.google.cloud.networksecurity.v1.GetServerTlsPolicyRequest, $root.google.cloud.networksecurity.v1.ServerTlsPolicy, request, callback);
+                        }, "name", { value: "GetServerTlsPolicy" });
+    
+                        /**
+                         * Calls GetServerTlsPolicy.
+                         * @function getServerTlsPolicy
+                         * @memberof google.cloud.networksecurity.v1.NetworkSecurity
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IGetServerTlsPolicyRequest} request GetServerTlsPolicyRequest message or plain object
+                         * @returns {Promise<google.cloud.networksecurity.v1.ServerTlsPolicy>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networksecurity.v1.NetworkSecurity#createServerTlsPolicy}.
+                         * @memberof google.cloud.networksecurity.v1.NetworkSecurity
+                         * @typedef CreateServerTlsPolicyCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateServerTlsPolicy.
+                         * @function createServerTlsPolicy
+                         * @memberof google.cloud.networksecurity.v1.NetworkSecurity
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.ICreateServerTlsPolicyRequest} request CreateServerTlsPolicyRequest message or plain object
+                         * @param {google.cloud.networksecurity.v1.NetworkSecurity.CreateServerTlsPolicyCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetworkSecurity.prototype.createServerTlsPolicy = function createServerTlsPolicy(request, callback) {
+                            return this.rpcCall(createServerTlsPolicy, $root.google.cloud.networksecurity.v1.CreateServerTlsPolicyRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateServerTlsPolicy" });
+    
+                        /**
+                         * Calls CreateServerTlsPolicy.
+                         * @function createServerTlsPolicy
+                         * @memberof google.cloud.networksecurity.v1.NetworkSecurity
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.ICreateServerTlsPolicyRequest} request CreateServerTlsPolicyRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networksecurity.v1.NetworkSecurity#updateServerTlsPolicy}.
+                         * @memberof google.cloud.networksecurity.v1.NetworkSecurity
+                         * @typedef UpdateServerTlsPolicyCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UpdateServerTlsPolicy.
+                         * @function updateServerTlsPolicy
+                         * @memberof google.cloud.networksecurity.v1.NetworkSecurity
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IUpdateServerTlsPolicyRequest} request UpdateServerTlsPolicyRequest message or plain object
+                         * @param {google.cloud.networksecurity.v1.NetworkSecurity.UpdateServerTlsPolicyCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetworkSecurity.prototype.updateServerTlsPolicy = function updateServerTlsPolicy(request, callback) {
+                            return this.rpcCall(updateServerTlsPolicy, $root.google.cloud.networksecurity.v1.UpdateServerTlsPolicyRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UpdateServerTlsPolicy" });
+    
+                        /**
+                         * Calls UpdateServerTlsPolicy.
+                         * @function updateServerTlsPolicy
+                         * @memberof google.cloud.networksecurity.v1.NetworkSecurity
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IUpdateServerTlsPolicyRequest} request UpdateServerTlsPolicyRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networksecurity.v1.NetworkSecurity#deleteServerTlsPolicy}.
+                         * @memberof google.cloud.networksecurity.v1.NetworkSecurity
+                         * @typedef DeleteServerTlsPolicyCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteServerTlsPolicy.
+                         * @function deleteServerTlsPolicy
+                         * @memberof google.cloud.networksecurity.v1.NetworkSecurity
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IDeleteServerTlsPolicyRequest} request DeleteServerTlsPolicyRequest message or plain object
+                         * @param {google.cloud.networksecurity.v1.NetworkSecurity.DeleteServerTlsPolicyCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetworkSecurity.prototype.deleteServerTlsPolicy = function deleteServerTlsPolicy(request, callback) {
+                            return this.rpcCall(deleteServerTlsPolicy, $root.google.cloud.networksecurity.v1.DeleteServerTlsPolicyRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteServerTlsPolicy" });
+    
+                        /**
+                         * Calls DeleteServerTlsPolicy.
+                         * @function deleteServerTlsPolicy
+                         * @memberof google.cloud.networksecurity.v1.NetworkSecurity
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IDeleteServerTlsPolicyRequest} request DeleteServerTlsPolicyRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networksecurity.v1.NetworkSecurity#listClientTlsPolicies}.
+                         * @memberof google.cloud.networksecurity.v1.NetworkSecurity
+                         * @typedef ListClientTlsPoliciesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networksecurity.v1.ListClientTlsPoliciesResponse} [response] ListClientTlsPoliciesResponse
+                         */
+    
+                        /**
+                         * Calls ListClientTlsPolicies.
+                         * @function listClientTlsPolicies
+                         * @memberof google.cloud.networksecurity.v1.NetworkSecurity
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IListClientTlsPoliciesRequest} request ListClientTlsPoliciesRequest message or plain object
+                         * @param {google.cloud.networksecurity.v1.NetworkSecurity.ListClientTlsPoliciesCallback} callback Node-style callback called with the error, if any, and ListClientTlsPoliciesResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetworkSecurity.prototype.listClientTlsPolicies = function listClientTlsPolicies(request, callback) {
+                            return this.rpcCall(listClientTlsPolicies, $root.google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest, $root.google.cloud.networksecurity.v1.ListClientTlsPoliciesResponse, request, callback);
+                        }, "name", { value: "ListClientTlsPolicies" });
+    
+                        /**
+                         * Calls ListClientTlsPolicies.
+                         * @function listClientTlsPolicies
+                         * @memberof google.cloud.networksecurity.v1.NetworkSecurity
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IListClientTlsPoliciesRequest} request ListClientTlsPoliciesRequest message or plain object
+                         * @returns {Promise<google.cloud.networksecurity.v1.ListClientTlsPoliciesResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networksecurity.v1.NetworkSecurity#getClientTlsPolicy}.
+                         * @memberof google.cloud.networksecurity.v1.NetworkSecurity
+                         * @typedef GetClientTlsPolicyCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networksecurity.v1.ClientTlsPolicy} [response] ClientTlsPolicy
+                         */
+    
+                        /**
+                         * Calls GetClientTlsPolicy.
+                         * @function getClientTlsPolicy
+                         * @memberof google.cloud.networksecurity.v1.NetworkSecurity
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IGetClientTlsPolicyRequest} request GetClientTlsPolicyRequest message or plain object
+                         * @param {google.cloud.networksecurity.v1.NetworkSecurity.GetClientTlsPolicyCallback} callback Node-style callback called with the error, if any, and ClientTlsPolicy
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetworkSecurity.prototype.getClientTlsPolicy = function getClientTlsPolicy(request, callback) {
+                            return this.rpcCall(getClientTlsPolicy, $root.google.cloud.networksecurity.v1.GetClientTlsPolicyRequest, $root.google.cloud.networksecurity.v1.ClientTlsPolicy, request, callback);
+                        }, "name", { value: "GetClientTlsPolicy" });
+    
+                        /**
+                         * Calls GetClientTlsPolicy.
+                         * @function getClientTlsPolicy
+                         * @memberof google.cloud.networksecurity.v1.NetworkSecurity
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IGetClientTlsPolicyRequest} request GetClientTlsPolicyRequest message or plain object
+                         * @returns {Promise<google.cloud.networksecurity.v1.ClientTlsPolicy>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networksecurity.v1.NetworkSecurity#createClientTlsPolicy}.
+                         * @memberof google.cloud.networksecurity.v1.NetworkSecurity
+                         * @typedef CreateClientTlsPolicyCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateClientTlsPolicy.
+                         * @function createClientTlsPolicy
+                         * @memberof google.cloud.networksecurity.v1.NetworkSecurity
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.ICreateClientTlsPolicyRequest} request CreateClientTlsPolicyRequest message or plain object
+                         * @param {google.cloud.networksecurity.v1.NetworkSecurity.CreateClientTlsPolicyCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetworkSecurity.prototype.createClientTlsPolicy = function createClientTlsPolicy(request, callback) {
+                            return this.rpcCall(createClientTlsPolicy, $root.google.cloud.networksecurity.v1.CreateClientTlsPolicyRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateClientTlsPolicy" });
+    
+                        /**
+                         * Calls CreateClientTlsPolicy.
+                         * @function createClientTlsPolicy
+                         * @memberof google.cloud.networksecurity.v1.NetworkSecurity
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.ICreateClientTlsPolicyRequest} request CreateClientTlsPolicyRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networksecurity.v1.NetworkSecurity#updateClientTlsPolicy}.
+                         * @memberof google.cloud.networksecurity.v1.NetworkSecurity
+                         * @typedef UpdateClientTlsPolicyCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UpdateClientTlsPolicy.
+                         * @function updateClientTlsPolicy
+                         * @memberof google.cloud.networksecurity.v1.NetworkSecurity
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IUpdateClientTlsPolicyRequest} request UpdateClientTlsPolicyRequest message or plain object
+                         * @param {google.cloud.networksecurity.v1.NetworkSecurity.UpdateClientTlsPolicyCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetworkSecurity.prototype.updateClientTlsPolicy = function updateClientTlsPolicy(request, callback) {
+                            return this.rpcCall(updateClientTlsPolicy, $root.google.cloud.networksecurity.v1.UpdateClientTlsPolicyRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UpdateClientTlsPolicy" });
+    
+                        /**
+                         * Calls UpdateClientTlsPolicy.
+                         * @function updateClientTlsPolicy
+                         * @memberof google.cloud.networksecurity.v1.NetworkSecurity
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IUpdateClientTlsPolicyRequest} request UpdateClientTlsPolicyRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networksecurity.v1.NetworkSecurity#deleteClientTlsPolicy}.
+                         * @memberof google.cloud.networksecurity.v1.NetworkSecurity
+                         * @typedef DeleteClientTlsPolicyCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteClientTlsPolicy.
+                         * @function deleteClientTlsPolicy
+                         * @memberof google.cloud.networksecurity.v1.NetworkSecurity
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IDeleteClientTlsPolicyRequest} request DeleteClientTlsPolicyRequest message or plain object
+                         * @param {google.cloud.networksecurity.v1.NetworkSecurity.DeleteClientTlsPolicyCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetworkSecurity.prototype.deleteClientTlsPolicy = function deleteClientTlsPolicy(request, callback) {
+                            return this.rpcCall(deleteClientTlsPolicy, $root.google.cloud.networksecurity.v1.DeleteClientTlsPolicyRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteClientTlsPolicy" });
+    
+                        /**
+                         * Calls DeleteClientTlsPolicy.
+                         * @function deleteClientTlsPolicy
+                         * @memberof google.cloud.networksecurity.v1.NetworkSecurity
+                         * @instance
+                         * @param {google.cloud.networksecurity.v1.IDeleteClientTlsPolicyRequest} request DeleteClientTlsPolicyRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        return NetworkSecurity;
+                    })();
+    
+                    v1.ServerTlsPolicy = (function() {
+    
+                        /**
+                         * Properties of a ServerTlsPolicy.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @interface IServerTlsPolicy
+                         * @property {string|null} [name] ServerTlsPolicy name
+                         * @property {string|null} [description] ServerTlsPolicy description
+                         * @property {google.protobuf.ITimestamp|null} [createTime] ServerTlsPolicy createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] ServerTlsPolicy updateTime
+                         * @property {Object.<string,string>|null} [labels] ServerTlsPolicy labels
+                         * @property {boolean|null} [allowOpen] ServerTlsPolicy allowOpen
+                         * @property {google.cloud.networksecurity.v1.ICertificateProvider|null} [serverCertificate] ServerTlsPolicy serverCertificate
+                         * @property {google.cloud.networksecurity.v1.ServerTlsPolicy.IMTLSPolicy|null} [mtlsPolicy] ServerTlsPolicy mtlsPolicy
+                         */
+    
+                        /**
+                         * Constructs a new ServerTlsPolicy.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @classdesc Represents a ServerTlsPolicy.
+                         * @implements IServerTlsPolicy
+                         * @constructor
+                         * @param {google.cloud.networksecurity.v1.IServerTlsPolicy=} [properties] Properties to set
+                         */
+                        function ServerTlsPolicy(properties) {
+                            this.labels = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ServerTlsPolicy name.
+                         * @member {string} name
+                         * @memberof google.cloud.networksecurity.v1.ServerTlsPolicy
+                         * @instance
+                         */
+                        ServerTlsPolicy.prototype.name = "";
+    
+                        /**
+                         * ServerTlsPolicy description.
+                         * @member {string} description
+                         * @memberof google.cloud.networksecurity.v1.ServerTlsPolicy
+                         * @instance
+                         */
+                        ServerTlsPolicy.prototype.description = "";
+    
+                        /**
+                         * ServerTlsPolicy createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.networksecurity.v1.ServerTlsPolicy
+                         * @instance
+                         */
+                        ServerTlsPolicy.prototype.createTime = null;
+    
+                        /**
+                         * ServerTlsPolicy updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.networksecurity.v1.ServerTlsPolicy
+                         * @instance
+                         */
+                        ServerTlsPolicy.prototype.updateTime = null;
+    
+                        /**
+                         * ServerTlsPolicy labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.cloud.networksecurity.v1.ServerTlsPolicy
+                         * @instance
+                         */
+                        ServerTlsPolicy.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * ServerTlsPolicy allowOpen.
+                         * @member {boolean} allowOpen
+                         * @memberof google.cloud.networksecurity.v1.ServerTlsPolicy
+                         * @instance
+                         */
+                        ServerTlsPolicy.prototype.allowOpen = false;
+    
+                        /**
+                         * ServerTlsPolicy serverCertificate.
+                         * @member {google.cloud.networksecurity.v1.ICertificateProvider|null|undefined} serverCertificate
+                         * @memberof google.cloud.networksecurity.v1.ServerTlsPolicy
+                         * @instance
+                         */
+                        ServerTlsPolicy.prototype.serverCertificate = null;
+    
+                        /**
+                         * ServerTlsPolicy mtlsPolicy.
+                         * @member {google.cloud.networksecurity.v1.ServerTlsPolicy.IMTLSPolicy|null|undefined} mtlsPolicy
+                         * @memberof google.cloud.networksecurity.v1.ServerTlsPolicy
+                         * @instance
+                         */
+                        ServerTlsPolicy.prototype.mtlsPolicy = null;
+    
+                        /**
+                         * Creates a new ServerTlsPolicy instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networksecurity.v1.ServerTlsPolicy
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IServerTlsPolicy=} [properties] Properties to set
+                         * @returns {google.cloud.networksecurity.v1.ServerTlsPolicy} ServerTlsPolicy instance
+                         */
+                        ServerTlsPolicy.create = function create(properties) {
+                            return new ServerTlsPolicy(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ServerTlsPolicy message. Does not implicitly {@link google.cloud.networksecurity.v1.ServerTlsPolicy.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networksecurity.v1.ServerTlsPolicy
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IServerTlsPolicy} message ServerTlsPolicy message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ServerTlsPolicy.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.description);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 5, wireType 2 =*/42).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.allowOpen != null && Object.hasOwnProperty.call(message, "allowOpen"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.allowOpen);
+                            if (message.serverCertificate != null && Object.hasOwnProperty.call(message, "serverCertificate"))
+                                $root.google.cloud.networksecurity.v1.CertificateProvider.encode(message.serverCertificate, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.mtlsPolicy != null && Object.hasOwnProperty.call(message, "mtlsPolicy"))
+                                $root.google.cloud.networksecurity.v1.ServerTlsPolicy.MTLSPolicy.encode(message.mtlsPolicy, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ServerTlsPolicy message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.ServerTlsPolicy.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.ServerTlsPolicy
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IServerTlsPolicy} message ServerTlsPolicy message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ServerTlsPolicy.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ServerTlsPolicy message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networksecurity.v1.ServerTlsPolicy
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networksecurity.v1.ServerTlsPolicy} ServerTlsPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ServerTlsPolicy.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networksecurity.v1.ServerTlsPolicy(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.description = reader.string();
+                                    break;
+                                case 3:
+                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 4:
+                                    message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 5:
+                                    if (message.labels === $util.emptyObject)
+                                        message.labels = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.labels[key] = value;
+                                    break;
+                                case 6:
+                                    message.allowOpen = reader.bool();
+                                    break;
+                                case 7:
+                                    message.serverCertificate = $root.google.cloud.networksecurity.v1.CertificateProvider.decode(reader, reader.uint32());
+                                    break;
+                                case 8:
+                                    message.mtlsPolicy = $root.google.cloud.networksecurity.v1.ServerTlsPolicy.MTLSPolicy.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ServerTlsPolicy message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.ServerTlsPolicy
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networksecurity.v1.ServerTlsPolicy} ServerTlsPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ServerTlsPolicy.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ServerTlsPolicy message.
+                         * @function verify
+                         * @memberof google.cloud.networksecurity.v1.ServerTlsPolicy
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ServerTlsPolicy.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            if (message.allowOpen != null && message.hasOwnProperty("allowOpen"))
+                                if (typeof message.allowOpen !== "boolean")
+                                    return "allowOpen: boolean expected";
+                            if (message.serverCertificate != null && message.hasOwnProperty("serverCertificate")) {
+                                var error = $root.google.cloud.networksecurity.v1.CertificateProvider.verify(message.serverCertificate);
+                                if (error)
+                                    return "serverCertificate." + error;
+                            }
+                            if (message.mtlsPolicy != null && message.hasOwnProperty("mtlsPolicy")) {
+                                var error = $root.google.cloud.networksecurity.v1.ServerTlsPolicy.MTLSPolicy.verify(message.mtlsPolicy);
+                                if (error)
+                                    return "mtlsPolicy." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ServerTlsPolicy message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networksecurity.v1.ServerTlsPolicy
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networksecurity.v1.ServerTlsPolicy} ServerTlsPolicy
+                         */
+                        ServerTlsPolicy.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networksecurity.v1.ServerTlsPolicy)
+                                return object;
+                            var message = new $root.google.cloud.networksecurity.v1.ServerTlsPolicy();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.networksecurity.v1.ServerTlsPolicy.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.networksecurity.v1.ServerTlsPolicy.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.cloud.networksecurity.v1.ServerTlsPolicy.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            if (object.allowOpen != null)
+                                message.allowOpen = Boolean(object.allowOpen);
+                            if (object.serverCertificate != null) {
+                                if (typeof object.serverCertificate !== "object")
+                                    throw TypeError(".google.cloud.networksecurity.v1.ServerTlsPolicy.serverCertificate: object expected");
+                                message.serverCertificate = $root.google.cloud.networksecurity.v1.CertificateProvider.fromObject(object.serverCertificate);
+                            }
+                            if (object.mtlsPolicy != null) {
+                                if (typeof object.mtlsPolicy !== "object")
+                                    throw TypeError(".google.cloud.networksecurity.v1.ServerTlsPolicy.mtlsPolicy: object expected");
+                                message.mtlsPolicy = $root.google.cloud.networksecurity.v1.ServerTlsPolicy.MTLSPolicy.fromObject(object.mtlsPolicy);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ServerTlsPolicy message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networksecurity.v1.ServerTlsPolicy
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.ServerTlsPolicy} message ServerTlsPolicy
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ServerTlsPolicy.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.labels = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.description = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.allowOpen = false;
+                                object.serverCertificate = null;
+                                object.mtlsPolicy = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            if (message.allowOpen != null && message.hasOwnProperty("allowOpen"))
+                                object.allowOpen = message.allowOpen;
+                            if (message.serverCertificate != null && message.hasOwnProperty("serverCertificate"))
+                                object.serverCertificate = $root.google.cloud.networksecurity.v1.CertificateProvider.toObject(message.serverCertificate, options);
+                            if (message.mtlsPolicy != null && message.hasOwnProperty("mtlsPolicy"))
+                                object.mtlsPolicy = $root.google.cloud.networksecurity.v1.ServerTlsPolicy.MTLSPolicy.toObject(message.mtlsPolicy, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ServerTlsPolicy to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networksecurity.v1.ServerTlsPolicy
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ServerTlsPolicy.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        ServerTlsPolicy.MTLSPolicy = (function() {
+    
+                            /**
+                             * Properties of a MTLSPolicy.
+                             * @memberof google.cloud.networksecurity.v1.ServerTlsPolicy
+                             * @interface IMTLSPolicy
+                             * @property {Array.<google.cloud.networksecurity.v1.IValidationCA>|null} [clientValidationCa] MTLSPolicy clientValidationCa
+                             */
+    
+                            /**
+                             * Constructs a new MTLSPolicy.
+                             * @memberof google.cloud.networksecurity.v1.ServerTlsPolicy
+                             * @classdesc Represents a MTLSPolicy.
+                             * @implements IMTLSPolicy
+                             * @constructor
+                             * @param {google.cloud.networksecurity.v1.ServerTlsPolicy.IMTLSPolicy=} [properties] Properties to set
+                             */
+                            function MTLSPolicy(properties) {
+                                this.clientValidationCa = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * MTLSPolicy clientValidationCa.
+                             * @member {Array.<google.cloud.networksecurity.v1.IValidationCA>} clientValidationCa
+                             * @memberof google.cloud.networksecurity.v1.ServerTlsPolicy.MTLSPolicy
+                             * @instance
+                             */
+                            MTLSPolicy.prototype.clientValidationCa = $util.emptyArray;
+    
+                            /**
+                             * Creates a new MTLSPolicy instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.networksecurity.v1.ServerTlsPolicy.MTLSPolicy
+                             * @static
+                             * @param {google.cloud.networksecurity.v1.ServerTlsPolicy.IMTLSPolicy=} [properties] Properties to set
+                             * @returns {google.cloud.networksecurity.v1.ServerTlsPolicy.MTLSPolicy} MTLSPolicy instance
+                             */
+                            MTLSPolicy.create = function create(properties) {
+                                return new MTLSPolicy(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified MTLSPolicy message. Does not implicitly {@link google.cloud.networksecurity.v1.ServerTlsPolicy.MTLSPolicy.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.networksecurity.v1.ServerTlsPolicy.MTLSPolicy
+                             * @static
+                             * @param {google.cloud.networksecurity.v1.ServerTlsPolicy.IMTLSPolicy} message MTLSPolicy message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            MTLSPolicy.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.clientValidationCa != null && message.clientValidationCa.length)
+                                    for (var i = 0; i < message.clientValidationCa.length; ++i)
+                                        $root.google.cloud.networksecurity.v1.ValidationCA.encode(message.clientValidationCa[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified MTLSPolicy message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.ServerTlsPolicy.MTLSPolicy.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.networksecurity.v1.ServerTlsPolicy.MTLSPolicy
+                             * @static
+                             * @param {google.cloud.networksecurity.v1.ServerTlsPolicy.IMTLSPolicy} message MTLSPolicy message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            MTLSPolicy.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a MTLSPolicy message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.networksecurity.v1.ServerTlsPolicy.MTLSPolicy
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.networksecurity.v1.ServerTlsPolicy.MTLSPolicy} MTLSPolicy
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            MTLSPolicy.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networksecurity.v1.ServerTlsPolicy.MTLSPolicy();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        if (!(message.clientValidationCa && message.clientValidationCa.length))
+                                            message.clientValidationCa = [];
+                                        message.clientValidationCa.push($root.google.cloud.networksecurity.v1.ValidationCA.decode(reader, reader.uint32()));
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a MTLSPolicy message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.networksecurity.v1.ServerTlsPolicy.MTLSPolicy
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.networksecurity.v1.ServerTlsPolicy.MTLSPolicy} MTLSPolicy
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            MTLSPolicy.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a MTLSPolicy message.
+                             * @function verify
+                             * @memberof google.cloud.networksecurity.v1.ServerTlsPolicy.MTLSPolicy
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            MTLSPolicy.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.clientValidationCa != null && message.hasOwnProperty("clientValidationCa")) {
+                                    if (!Array.isArray(message.clientValidationCa))
+                                        return "clientValidationCa: array expected";
+                                    for (var i = 0; i < message.clientValidationCa.length; ++i) {
+                                        var error = $root.google.cloud.networksecurity.v1.ValidationCA.verify(message.clientValidationCa[i]);
+                                        if (error)
+                                            return "clientValidationCa." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a MTLSPolicy message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.networksecurity.v1.ServerTlsPolicy.MTLSPolicy
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.networksecurity.v1.ServerTlsPolicy.MTLSPolicy} MTLSPolicy
+                             */
+                            MTLSPolicy.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.networksecurity.v1.ServerTlsPolicy.MTLSPolicy)
+                                    return object;
+                                var message = new $root.google.cloud.networksecurity.v1.ServerTlsPolicy.MTLSPolicy();
+                                if (object.clientValidationCa) {
+                                    if (!Array.isArray(object.clientValidationCa))
+                                        throw TypeError(".google.cloud.networksecurity.v1.ServerTlsPolicy.MTLSPolicy.clientValidationCa: array expected");
+                                    message.clientValidationCa = [];
+                                    for (var i = 0; i < object.clientValidationCa.length; ++i) {
+                                        if (typeof object.clientValidationCa[i] !== "object")
+                                            throw TypeError(".google.cloud.networksecurity.v1.ServerTlsPolicy.MTLSPolicy.clientValidationCa: object expected");
+                                        message.clientValidationCa[i] = $root.google.cloud.networksecurity.v1.ValidationCA.fromObject(object.clientValidationCa[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a MTLSPolicy message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.networksecurity.v1.ServerTlsPolicy.MTLSPolicy
+                             * @static
+                             * @param {google.cloud.networksecurity.v1.ServerTlsPolicy.MTLSPolicy} message MTLSPolicy
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            MTLSPolicy.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.clientValidationCa = [];
+                                if (message.clientValidationCa && message.clientValidationCa.length) {
+                                    object.clientValidationCa = [];
+                                    for (var j = 0; j < message.clientValidationCa.length; ++j)
+                                        object.clientValidationCa[j] = $root.google.cloud.networksecurity.v1.ValidationCA.toObject(message.clientValidationCa[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this MTLSPolicy to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.networksecurity.v1.ServerTlsPolicy.MTLSPolicy
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            MTLSPolicy.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return MTLSPolicy;
+                        })();
+    
+                        return ServerTlsPolicy;
+                    })();
+    
+                    v1.ListServerTlsPoliciesRequest = (function() {
+    
+                        /**
+                         * Properties of a ListServerTlsPoliciesRequest.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @interface IListServerTlsPoliciesRequest
+                         * @property {string|null} [parent] ListServerTlsPoliciesRequest parent
+                         * @property {number|null} [pageSize] ListServerTlsPoliciesRequest pageSize
+                         * @property {string|null} [pageToken] ListServerTlsPoliciesRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListServerTlsPoliciesRequest.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @classdesc Represents a ListServerTlsPoliciesRequest.
+                         * @implements IListServerTlsPoliciesRequest
+                         * @constructor
+                         * @param {google.cloud.networksecurity.v1.IListServerTlsPoliciesRequest=} [properties] Properties to set
+                         */
+                        function ListServerTlsPoliciesRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListServerTlsPoliciesRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest
+                         * @instance
+                         */
+                        ListServerTlsPoliciesRequest.prototype.parent = "";
+    
+                        /**
+                         * ListServerTlsPoliciesRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest
+                         * @instance
+                         */
+                        ListServerTlsPoliciesRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListServerTlsPoliciesRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest
+                         * @instance
+                         */
+                        ListServerTlsPoliciesRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListServerTlsPoliciesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IListServerTlsPoliciesRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest} ListServerTlsPoliciesRequest instance
+                         */
+                        ListServerTlsPoliciesRequest.create = function create(properties) {
+                            return new ListServerTlsPoliciesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListServerTlsPoliciesRequest message. Does not implicitly {@link google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IListServerTlsPoliciesRequest} message ListServerTlsPoliciesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListServerTlsPoliciesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListServerTlsPoliciesRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IListServerTlsPoliciesRequest} message ListServerTlsPoliciesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListServerTlsPoliciesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListServerTlsPoliciesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest} ListServerTlsPoliciesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListServerTlsPoliciesRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.pageSize = reader.int32();
+                                    break;
+                                case 3:
+                                    message.pageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListServerTlsPoliciesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest} ListServerTlsPoliciesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListServerTlsPoliciesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListServerTlsPoliciesRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListServerTlsPoliciesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListServerTlsPoliciesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest} ListServerTlsPoliciesRequest
+                         */
+                        ListServerTlsPoliciesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest)
+                                return object;
+                            var message = new $root.google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListServerTlsPoliciesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest} message ListServerTlsPoliciesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListServerTlsPoliciesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListServerTlsPoliciesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListServerTlsPoliciesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListServerTlsPoliciesRequest;
+                    })();
+    
+                    v1.ListServerTlsPoliciesResponse = (function() {
+    
+                        /**
+                         * Properties of a ListServerTlsPoliciesResponse.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @interface IListServerTlsPoliciesResponse
+                         * @property {Array.<google.cloud.networksecurity.v1.IServerTlsPolicy>|null} [serverTlsPolicies] ListServerTlsPoliciesResponse serverTlsPolicies
+                         * @property {string|null} [nextPageToken] ListServerTlsPoliciesResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListServerTlsPoliciesResponse.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @classdesc Represents a ListServerTlsPoliciesResponse.
+                         * @implements IListServerTlsPoliciesResponse
+                         * @constructor
+                         * @param {google.cloud.networksecurity.v1.IListServerTlsPoliciesResponse=} [properties] Properties to set
+                         */
+                        function ListServerTlsPoliciesResponse(properties) {
+                            this.serverTlsPolicies = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListServerTlsPoliciesResponse serverTlsPolicies.
+                         * @member {Array.<google.cloud.networksecurity.v1.IServerTlsPolicy>} serverTlsPolicies
+                         * @memberof google.cloud.networksecurity.v1.ListServerTlsPoliciesResponse
+                         * @instance
+                         */
+                        ListServerTlsPoliciesResponse.prototype.serverTlsPolicies = $util.emptyArray;
+    
+                        /**
+                         * ListServerTlsPoliciesResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.networksecurity.v1.ListServerTlsPoliciesResponse
+                         * @instance
+                         */
+                        ListServerTlsPoliciesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListServerTlsPoliciesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networksecurity.v1.ListServerTlsPoliciesResponse
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IListServerTlsPoliciesResponse=} [properties] Properties to set
+                         * @returns {google.cloud.networksecurity.v1.ListServerTlsPoliciesResponse} ListServerTlsPoliciesResponse instance
+                         */
+                        ListServerTlsPoliciesResponse.create = function create(properties) {
+                            return new ListServerTlsPoliciesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListServerTlsPoliciesResponse message. Does not implicitly {@link google.cloud.networksecurity.v1.ListServerTlsPoliciesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networksecurity.v1.ListServerTlsPoliciesResponse
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IListServerTlsPoliciesResponse} message ListServerTlsPoliciesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListServerTlsPoliciesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.serverTlsPolicies != null && message.serverTlsPolicies.length)
+                                for (var i = 0; i < message.serverTlsPolicies.length; ++i)
+                                    $root.google.cloud.networksecurity.v1.ServerTlsPolicy.encode(message.serverTlsPolicies[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListServerTlsPoliciesResponse message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.ListServerTlsPoliciesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.ListServerTlsPoliciesResponse
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IListServerTlsPoliciesResponse} message ListServerTlsPoliciesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListServerTlsPoliciesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListServerTlsPoliciesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networksecurity.v1.ListServerTlsPoliciesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networksecurity.v1.ListServerTlsPoliciesResponse} ListServerTlsPoliciesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListServerTlsPoliciesResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networksecurity.v1.ListServerTlsPoliciesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.serverTlsPolicies && message.serverTlsPolicies.length))
+                                        message.serverTlsPolicies = [];
+                                    message.serverTlsPolicies.push($root.google.cloud.networksecurity.v1.ServerTlsPolicy.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListServerTlsPoliciesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.ListServerTlsPoliciesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networksecurity.v1.ListServerTlsPoliciesResponse} ListServerTlsPoliciesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListServerTlsPoliciesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListServerTlsPoliciesResponse message.
+                         * @function verify
+                         * @memberof google.cloud.networksecurity.v1.ListServerTlsPoliciesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListServerTlsPoliciesResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.serverTlsPolicies != null && message.hasOwnProperty("serverTlsPolicies")) {
+                                if (!Array.isArray(message.serverTlsPolicies))
+                                    return "serverTlsPolicies: array expected";
+                                for (var i = 0; i < message.serverTlsPolicies.length; ++i) {
+                                    var error = $root.google.cloud.networksecurity.v1.ServerTlsPolicy.verify(message.serverTlsPolicies[i]);
+                                    if (error)
+                                        return "serverTlsPolicies." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListServerTlsPoliciesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networksecurity.v1.ListServerTlsPoliciesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networksecurity.v1.ListServerTlsPoliciesResponse} ListServerTlsPoliciesResponse
+                         */
+                        ListServerTlsPoliciesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networksecurity.v1.ListServerTlsPoliciesResponse)
+                                return object;
+                            var message = new $root.google.cloud.networksecurity.v1.ListServerTlsPoliciesResponse();
+                            if (object.serverTlsPolicies) {
+                                if (!Array.isArray(object.serverTlsPolicies))
+                                    throw TypeError(".google.cloud.networksecurity.v1.ListServerTlsPoliciesResponse.serverTlsPolicies: array expected");
+                                message.serverTlsPolicies = [];
+                                for (var i = 0; i < object.serverTlsPolicies.length; ++i) {
+                                    if (typeof object.serverTlsPolicies[i] !== "object")
+                                        throw TypeError(".google.cloud.networksecurity.v1.ListServerTlsPoliciesResponse.serverTlsPolicies: object expected");
+                                    message.serverTlsPolicies[i] = $root.google.cloud.networksecurity.v1.ServerTlsPolicy.fromObject(object.serverTlsPolicies[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListServerTlsPoliciesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networksecurity.v1.ListServerTlsPoliciesResponse
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.ListServerTlsPoliciesResponse} message ListServerTlsPoliciesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListServerTlsPoliciesResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.serverTlsPolicies = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.serverTlsPolicies && message.serverTlsPolicies.length) {
+                                object.serverTlsPolicies = [];
+                                for (var j = 0; j < message.serverTlsPolicies.length; ++j)
+                                    object.serverTlsPolicies[j] = $root.google.cloud.networksecurity.v1.ServerTlsPolicy.toObject(message.serverTlsPolicies[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListServerTlsPoliciesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networksecurity.v1.ListServerTlsPoliciesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListServerTlsPoliciesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListServerTlsPoliciesResponse;
+                    })();
+    
+                    v1.GetServerTlsPolicyRequest = (function() {
+    
+                        /**
+                         * Properties of a GetServerTlsPolicyRequest.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @interface IGetServerTlsPolicyRequest
+                         * @property {string|null} [name] GetServerTlsPolicyRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetServerTlsPolicyRequest.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @classdesc Represents a GetServerTlsPolicyRequest.
+                         * @implements IGetServerTlsPolicyRequest
+                         * @constructor
+                         * @param {google.cloud.networksecurity.v1.IGetServerTlsPolicyRequest=} [properties] Properties to set
+                         */
+                        function GetServerTlsPolicyRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetServerTlsPolicyRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.networksecurity.v1.GetServerTlsPolicyRequest
+                         * @instance
+                         */
+                        GetServerTlsPolicyRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetServerTlsPolicyRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networksecurity.v1.GetServerTlsPolicyRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IGetServerTlsPolicyRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networksecurity.v1.GetServerTlsPolicyRequest} GetServerTlsPolicyRequest instance
+                         */
+                        GetServerTlsPolicyRequest.create = function create(properties) {
+                            return new GetServerTlsPolicyRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetServerTlsPolicyRequest message. Does not implicitly {@link google.cloud.networksecurity.v1.GetServerTlsPolicyRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networksecurity.v1.GetServerTlsPolicyRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IGetServerTlsPolicyRequest} message GetServerTlsPolicyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetServerTlsPolicyRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetServerTlsPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.GetServerTlsPolicyRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.GetServerTlsPolicyRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IGetServerTlsPolicyRequest} message GetServerTlsPolicyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetServerTlsPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetServerTlsPolicyRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networksecurity.v1.GetServerTlsPolicyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networksecurity.v1.GetServerTlsPolicyRequest} GetServerTlsPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetServerTlsPolicyRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networksecurity.v1.GetServerTlsPolicyRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetServerTlsPolicyRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.GetServerTlsPolicyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networksecurity.v1.GetServerTlsPolicyRequest} GetServerTlsPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetServerTlsPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetServerTlsPolicyRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networksecurity.v1.GetServerTlsPolicyRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetServerTlsPolicyRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetServerTlsPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networksecurity.v1.GetServerTlsPolicyRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networksecurity.v1.GetServerTlsPolicyRequest} GetServerTlsPolicyRequest
+                         */
+                        GetServerTlsPolicyRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networksecurity.v1.GetServerTlsPolicyRequest)
+                                return object;
+                            var message = new $root.google.cloud.networksecurity.v1.GetServerTlsPolicyRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetServerTlsPolicyRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networksecurity.v1.GetServerTlsPolicyRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.GetServerTlsPolicyRequest} message GetServerTlsPolicyRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetServerTlsPolicyRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetServerTlsPolicyRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networksecurity.v1.GetServerTlsPolicyRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetServerTlsPolicyRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GetServerTlsPolicyRequest;
+                    })();
+    
+                    v1.CreateServerTlsPolicyRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateServerTlsPolicyRequest.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @interface ICreateServerTlsPolicyRequest
+                         * @property {string|null} [parent] CreateServerTlsPolicyRequest parent
+                         * @property {string|null} [serverTlsPolicyId] CreateServerTlsPolicyRequest serverTlsPolicyId
+                         * @property {google.cloud.networksecurity.v1.IServerTlsPolicy|null} [serverTlsPolicy] CreateServerTlsPolicyRequest serverTlsPolicy
+                         */
+    
+                        /**
+                         * Constructs a new CreateServerTlsPolicyRequest.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @classdesc Represents a CreateServerTlsPolicyRequest.
+                         * @implements ICreateServerTlsPolicyRequest
+                         * @constructor
+                         * @param {google.cloud.networksecurity.v1.ICreateServerTlsPolicyRequest=} [properties] Properties to set
+                         */
+                        function CreateServerTlsPolicyRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateServerTlsPolicyRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.networksecurity.v1.CreateServerTlsPolicyRequest
+                         * @instance
+                         */
+                        CreateServerTlsPolicyRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateServerTlsPolicyRequest serverTlsPolicyId.
+                         * @member {string} serverTlsPolicyId
+                         * @memberof google.cloud.networksecurity.v1.CreateServerTlsPolicyRequest
+                         * @instance
+                         */
+                        CreateServerTlsPolicyRequest.prototype.serverTlsPolicyId = "";
+    
+                        /**
+                         * CreateServerTlsPolicyRequest serverTlsPolicy.
+                         * @member {google.cloud.networksecurity.v1.IServerTlsPolicy|null|undefined} serverTlsPolicy
+                         * @memberof google.cloud.networksecurity.v1.CreateServerTlsPolicyRequest
+                         * @instance
+                         */
+                        CreateServerTlsPolicyRequest.prototype.serverTlsPolicy = null;
+    
+                        /**
+                         * Creates a new CreateServerTlsPolicyRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networksecurity.v1.CreateServerTlsPolicyRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.ICreateServerTlsPolicyRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networksecurity.v1.CreateServerTlsPolicyRequest} CreateServerTlsPolicyRequest instance
+                         */
+                        CreateServerTlsPolicyRequest.create = function create(properties) {
+                            return new CreateServerTlsPolicyRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateServerTlsPolicyRequest message. Does not implicitly {@link google.cloud.networksecurity.v1.CreateServerTlsPolicyRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networksecurity.v1.CreateServerTlsPolicyRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.ICreateServerTlsPolicyRequest} message CreateServerTlsPolicyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateServerTlsPolicyRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.serverTlsPolicyId != null && Object.hasOwnProperty.call(message, "serverTlsPolicyId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.serverTlsPolicyId);
+                            if (message.serverTlsPolicy != null && Object.hasOwnProperty.call(message, "serverTlsPolicy"))
+                                $root.google.cloud.networksecurity.v1.ServerTlsPolicy.encode(message.serverTlsPolicy, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateServerTlsPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.CreateServerTlsPolicyRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.CreateServerTlsPolicyRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.ICreateServerTlsPolicyRequest} message CreateServerTlsPolicyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateServerTlsPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateServerTlsPolicyRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networksecurity.v1.CreateServerTlsPolicyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networksecurity.v1.CreateServerTlsPolicyRequest} CreateServerTlsPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateServerTlsPolicyRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networksecurity.v1.CreateServerTlsPolicyRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.serverTlsPolicyId = reader.string();
+                                    break;
+                                case 3:
+                                    message.serverTlsPolicy = $root.google.cloud.networksecurity.v1.ServerTlsPolicy.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateServerTlsPolicyRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.CreateServerTlsPolicyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networksecurity.v1.CreateServerTlsPolicyRequest} CreateServerTlsPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateServerTlsPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateServerTlsPolicyRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networksecurity.v1.CreateServerTlsPolicyRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateServerTlsPolicyRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.serverTlsPolicyId != null && message.hasOwnProperty("serverTlsPolicyId"))
+                                if (!$util.isString(message.serverTlsPolicyId))
+                                    return "serverTlsPolicyId: string expected";
+                            if (message.serverTlsPolicy != null && message.hasOwnProperty("serverTlsPolicy")) {
+                                var error = $root.google.cloud.networksecurity.v1.ServerTlsPolicy.verify(message.serverTlsPolicy);
+                                if (error)
+                                    return "serverTlsPolicy." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateServerTlsPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networksecurity.v1.CreateServerTlsPolicyRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networksecurity.v1.CreateServerTlsPolicyRequest} CreateServerTlsPolicyRequest
+                         */
+                        CreateServerTlsPolicyRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networksecurity.v1.CreateServerTlsPolicyRequest)
+                                return object;
+                            var message = new $root.google.cloud.networksecurity.v1.CreateServerTlsPolicyRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.serverTlsPolicyId != null)
+                                message.serverTlsPolicyId = String(object.serverTlsPolicyId);
+                            if (object.serverTlsPolicy != null) {
+                                if (typeof object.serverTlsPolicy !== "object")
+                                    throw TypeError(".google.cloud.networksecurity.v1.CreateServerTlsPolicyRequest.serverTlsPolicy: object expected");
+                                message.serverTlsPolicy = $root.google.cloud.networksecurity.v1.ServerTlsPolicy.fromObject(object.serverTlsPolicy);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateServerTlsPolicyRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networksecurity.v1.CreateServerTlsPolicyRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.CreateServerTlsPolicyRequest} message CreateServerTlsPolicyRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateServerTlsPolicyRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.serverTlsPolicyId = "";
+                                object.serverTlsPolicy = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.serverTlsPolicyId != null && message.hasOwnProperty("serverTlsPolicyId"))
+                                object.serverTlsPolicyId = message.serverTlsPolicyId;
+                            if (message.serverTlsPolicy != null && message.hasOwnProperty("serverTlsPolicy"))
+                                object.serverTlsPolicy = $root.google.cloud.networksecurity.v1.ServerTlsPolicy.toObject(message.serverTlsPolicy, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateServerTlsPolicyRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networksecurity.v1.CreateServerTlsPolicyRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateServerTlsPolicyRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return CreateServerTlsPolicyRequest;
+                    })();
+    
+                    v1.UpdateServerTlsPolicyRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateServerTlsPolicyRequest.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @interface IUpdateServerTlsPolicyRequest
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateServerTlsPolicyRequest updateMask
+                         * @property {google.cloud.networksecurity.v1.IServerTlsPolicy|null} [serverTlsPolicy] UpdateServerTlsPolicyRequest serverTlsPolicy
+                         */
+    
+                        /**
+                         * Constructs a new UpdateServerTlsPolicyRequest.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @classdesc Represents an UpdateServerTlsPolicyRequest.
+                         * @implements IUpdateServerTlsPolicyRequest
+                         * @constructor
+                         * @param {google.cloud.networksecurity.v1.IUpdateServerTlsPolicyRequest=} [properties] Properties to set
+                         */
+                        function UpdateServerTlsPolicyRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateServerTlsPolicyRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.networksecurity.v1.UpdateServerTlsPolicyRequest
+                         * @instance
+                         */
+                        UpdateServerTlsPolicyRequest.prototype.updateMask = null;
+    
+                        /**
+                         * UpdateServerTlsPolicyRequest serverTlsPolicy.
+                         * @member {google.cloud.networksecurity.v1.IServerTlsPolicy|null|undefined} serverTlsPolicy
+                         * @memberof google.cloud.networksecurity.v1.UpdateServerTlsPolicyRequest
+                         * @instance
+                         */
+                        UpdateServerTlsPolicyRequest.prototype.serverTlsPolicy = null;
+    
+                        /**
+                         * Creates a new UpdateServerTlsPolicyRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networksecurity.v1.UpdateServerTlsPolicyRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IUpdateServerTlsPolicyRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networksecurity.v1.UpdateServerTlsPolicyRequest} UpdateServerTlsPolicyRequest instance
+                         */
+                        UpdateServerTlsPolicyRequest.create = function create(properties) {
+                            return new UpdateServerTlsPolicyRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateServerTlsPolicyRequest message. Does not implicitly {@link google.cloud.networksecurity.v1.UpdateServerTlsPolicyRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networksecurity.v1.UpdateServerTlsPolicyRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IUpdateServerTlsPolicyRequest} message UpdateServerTlsPolicyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateServerTlsPolicyRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.serverTlsPolicy != null && Object.hasOwnProperty.call(message, "serverTlsPolicy"))
+                                $root.google.cloud.networksecurity.v1.ServerTlsPolicy.encode(message.serverTlsPolicy, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateServerTlsPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.UpdateServerTlsPolicyRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.UpdateServerTlsPolicyRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IUpdateServerTlsPolicyRequest} message UpdateServerTlsPolicyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateServerTlsPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateServerTlsPolicyRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networksecurity.v1.UpdateServerTlsPolicyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networksecurity.v1.UpdateServerTlsPolicyRequest} UpdateServerTlsPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateServerTlsPolicyRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networksecurity.v1.UpdateServerTlsPolicyRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.serverTlsPolicy = $root.google.cloud.networksecurity.v1.ServerTlsPolicy.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateServerTlsPolicyRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.UpdateServerTlsPolicyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networksecurity.v1.UpdateServerTlsPolicyRequest} UpdateServerTlsPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateServerTlsPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateServerTlsPolicyRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networksecurity.v1.UpdateServerTlsPolicyRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateServerTlsPolicyRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            if (message.serverTlsPolicy != null && message.hasOwnProperty("serverTlsPolicy")) {
+                                var error = $root.google.cloud.networksecurity.v1.ServerTlsPolicy.verify(message.serverTlsPolicy);
+                                if (error)
+                                    return "serverTlsPolicy." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateServerTlsPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networksecurity.v1.UpdateServerTlsPolicyRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networksecurity.v1.UpdateServerTlsPolicyRequest} UpdateServerTlsPolicyRequest
+                         */
+                        UpdateServerTlsPolicyRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networksecurity.v1.UpdateServerTlsPolicyRequest)
+                                return object;
+                            var message = new $root.google.cloud.networksecurity.v1.UpdateServerTlsPolicyRequest();
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.networksecurity.v1.UpdateServerTlsPolicyRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            if (object.serverTlsPolicy != null) {
+                                if (typeof object.serverTlsPolicy !== "object")
+                                    throw TypeError(".google.cloud.networksecurity.v1.UpdateServerTlsPolicyRequest.serverTlsPolicy: object expected");
+                                message.serverTlsPolicy = $root.google.cloud.networksecurity.v1.ServerTlsPolicy.fromObject(object.serverTlsPolicy);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateServerTlsPolicyRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networksecurity.v1.UpdateServerTlsPolicyRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.UpdateServerTlsPolicyRequest} message UpdateServerTlsPolicyRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateServerTlsPolicyRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.updateMask = null;
+                                object.serverTlsPolicy = null;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            if (message.serverTlsPolicy != null && message.hasOwnProperty("serverTlsPolicy"))
+                                object.serverTlsPolicy = $root.google.cloud.networksecurity.v1.ServerTlsPolicy.toObject(message.serverTlsPolicy, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateServerTlsPolicyRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networksecurity.v1.UpdateServerTlsPolicyRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateServerTlsPolicyRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return UpdateServerTlsPolicyRequest;
+                    })();
+    
+                    v1.DeleteServerTlsPolicyRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteServerTlsPolicyRequest.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @interface IDeleteServerTlsPolicyRequest
+                         * @property {string|null} [name] DeleteServerTlsPolicyRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteServerTlsPolicyRequest.
+                         * @memberof google.cloud.networksecurity.v1
+                         * @classdesc Represents a DeleteServerTlsPolicyRequest.
+                         * @implements IDeleteServerTlsPolicyRequest
+                         * @constructor
+                         * @param {google.cloud.networksecurity.v1.IDeleteServerTlsPolicyRequest=} [properties] Properties to set
+                         */
+                        function DeleteServerTlsPolicyRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteServerTlsPolicyRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.networksecurity.v1.DeleteServerTlsPolicyRequest
+                         * @instance
+                         */
+                        DeleteServerTlsPolicyRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteServerTlsPolicyRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networksecurity.v1.DeleteServerTlsPolicyRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IDeleteServerTlsPolicyRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networksecurity.v1.DeleteServerTlsPolicyRequest} DeleteServerTlsPolicyRequest instance
+                         */
+                        DeleteServerTlsPolicyRequest.create = function create(properties) {
+                            return new DeleteServerTlsPolicyRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteServerTlsPolicyRequest message. Does not implicitly {@link google.cloud.networksecurity.v1.DeleteServerTlsPolicyRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networksecurity.v1.DeleteServerTlsPolicyRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IDeleteServerTlsPolicyRequest} message DeleteServerTlsPolicyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteServerTlsPolicyRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteServerTlsPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1.DeleteServerTlsPolicyRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.DeleteServerTlsPolicyRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.IDeleteServerTlsPolicyRequest} message DeleteServerTlsPolicyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteServerTlsPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteServerTlsPolicyRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networksecurity.v1.DeleteServerTlsPolicyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networksecurity.v1.DeleteServerTlsPolicyRequest} DeleteServerTlsPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteServerTlsPolicyRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networksecurity.v1.DeleteServerTlsPolicyRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteServerTlsPolicyRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networksecurity.v1.DeleteServerTlsPolicyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networksecurity.v1.DeleteServerTlsPolicyRequest} DeleteServerTlsPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteServerTlsPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteServerTlsPolicyRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networksecurity.v1.DeleteServerTlsPolicyRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteServerTlsPolicyRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteServerTlsPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networksecurity.v1.DeleteServerTlsPolicyRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networksecurity.v1.DeleteServerTlsPolicyRequest} DeleteServerTlsPolicyRequest
+                         */
+                        DeleteServerTlsPolicyRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networksecurity.v1.DeleteServerTlsPolicyRequest)
+                                return object;
+                            var message = new $root.google.cloud.networksecurity.v1.DeleteServerTlsPolicyRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteServerTlsPolicyRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networksecurity.v1.DeleteServerTlsPolicyRequest
+                         * @static
+                         * @param {google.cloud.networksecurity.v1.DeleteServerTlsPolicyRequest} message DeleteServerTlsPolicyRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteServerTlsPolicyRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteServerTlsPolicyRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networksecurity.v1.DeleteServerTlsPolicyRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteServerTlsPolicyRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DeleteServerTlsPolicyRequest;
+                    })();
+    
+                    return v1;
+                })();
+    
                 networksecurity.v1beta1 = (function() {
     
                     /**
