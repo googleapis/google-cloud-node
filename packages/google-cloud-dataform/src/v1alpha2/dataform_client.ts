@@ -32,7 +32,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -337,7 +336,8 @@ export class DataformClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -3376,7 +3376,7 @@ export class DataformClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listRepositories.createStream(
-      this.innerApiCalls.listRepositories as gax.GaxCall,
+      this.innerApiCalls.listRepositories as GaxCall,
       request,
       callSettings
     );
@@ -3437,7 +3437,7 @@ export class DataformClient {
     this.initialize();
     return this.descriptors.page.listRepositories.asyncIterate(
       this.innerApiCalls['listRepositories'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.dataform.v1alpha2.IRepository>;
   }
@@ -3604,7 +3604,7 @@ export class DataformClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listWorkspaces.createStream(
-      this.innerApiCalls.listWorkspaces as gax.GaxCall,
+      this.innerApiCalls.listWorkspaces as GaxCall,
       request,
       callSettings
     );
@@ -3665,7 +3665,7 @@ export class DataformClient {
     this.initialize();
     return this.descriptors.page.listWorkspaces.asyncIterate(
       this.innerApiCalls['listWorkspaces'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.dataform.v1alpha2.IWorkspace>;
   }
@@ -3830,7 +3830,7 @@ export class DataformClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.queryDirectoryContents.createStream(
-      this.innerApiCalls.queryDirectoryContents as gax.GaxCall,
+      this.innerApiCalls.queryDirectoryContents as GaxCall,
       request,
       callSettings
     );
@@ -3888,7 +3888,7 @@ export class DataformClient {
     this.initialize();
     return this.descriptors.page.queryDirectoryContents.asyncIterate(
       this.innerApiCalls['queryDirectoryContents'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.dataform.v1alpha2.QueryDirectoryContentsResponse.IDirectoryEntry>;
   }
@@ -4047,7 +4047,7 @@ export class DataformClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listCompilationResults.createStream(
-      this.innerApiCalls.listCompilationResults as gax.GaxCall,
+      this.innerApiCalls.listCompilationResults as GaxCall,
       request,
       callSettings
     );
@@ -4102,7 +4102,7 @@ export class DataformClient {
     this.initialize();
     return this.descriptors.page.listCompilationResults.asyncIterate(
       this.innerApiCalls['listCompilationResults'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.dataform.v1alpha2.ICompilationResult>;
   }
@@ -4267,7 +4267,7 @@ export class DataformClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.queryCompilationResultActions.createStream(
-      this.innerApiCalls.queryCompilationResultActions as gax.GaxCall,
+      this.innerApiCalls.queryCompilationResultActions as GaxCall,
       request,
       callSettings
     );
@@ -4325,7 +4325,7 @@ export class DataformClient {
     this.initialize();
     return this.descriptors.page.queryCompilationResultActions.asyncIterate(
       this.innerApiCalls['queryCompilationResultActions'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.dataform.v1alpha2.ICompilationResultAction>;
   }
@@ -4484,7 +4484,7 @@ export class DataformClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listWorkflowInvocations.createStream(
-      this.innerApiCalls.listWorkflowInvocations as gax.GaxCall,
+      this.innerApiCalls.listWorkflowInvocations as GaxCall,
       request,
       callSettings
     );
@@ -4539,7 +4539,7 @@ export class DataformClient {
     this.initialize();
     return this.descriptors.page.listWorkflowInvocations.asyncIterate(
       this.innerApiCalls['listWorkflowInvocations'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.dataform.v1alpha2.IWorkflowInvocation>;
   }
@@ -4699,7 +4699,7 @@ export class DataformClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.queryWorkflowInvocationActions.createStream(
-      this.innerApiCalls.queryWorkflowInvocationActions as gax.GaxCall,
+      this.innerApiCalls.queryWorkflowInvocationActions as GaxCall,
       request,
       callSettings
     );
@@ -4755,7 +4755,7 @@ export class DataformClient {
     this.initialize();
     return this.descriptors.page.queryWorkflowInvocationActions.asyncIterate(
       this.innerApiCalls['queryWorkflowInvocationActions'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.dataform.v1alpha2.IWorkflowInvocationAction>;
   }
