@@ -28,7 +28,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -294,7 +293,8 @@ export class RecaptchaEnterpriseServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -1274,7 +1274,7 @@ export class RecaptchaEnterpriseServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listKeys.createStream(
-      this.innerApiCalls.listKeys as gax.GaxCall,
+      this.innerApiCalls.listKeys as GaxCall,
       request,
       callSettings
     );
@@ -1325,7 +1325,7 @@ export class RecaptchaEnterpriseServiceClient {
     this.initialize();
     return this.descriptors.page.listKeys.asyncIterate(
       this.innerApiCalls['listKeys'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.recaptchaenterprise.v1.IKey>;
   }
@@ -1486,7 +1486,7 @@ export class RecaptchaEnterpriseServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listRelatedAccountGroups.createStream(
-      this.innerApiCalls.listRelatedAccountGroups as gax.GaxCall,
+      this.innerApiCalls.listRelatedAccountGroups as GaxCall,
       request,
       callSettings
     );
@@ -1542,7 +1542,7 @@ export class RecaptchaEnterpriseServiceClient {
     this.initialize();
     return this.descriptors.page.listRelatedAccountGroups.asyncIterate(
       this.innerApiCalls['listRelatedAccountGroups'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroup>;
   }
@@ -1706,7 +1706,7 @@ export class RecaptchaEnterpriseServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listRelatedAccountGroupMemberships.createStream(
-      this.innerApiCalls.listRelatedAccountGroupMemberships as gax.GaxCall,
+      this.innerApiCalls.listRelatedAccountGroupMemberships as GaxCall,
       request,
       callSettings
     );
@@ -1764,7 +1764,7 @@ export class RecaptchaEnterpriseServiceClient {
     this.initialize();
     return this.descriptors.page.listRelatedAccountGroupMemberships.asyncIterate(
       this.innerApiCalls['listRelatedAccountGroupMemberships'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership>;
   }
@@ -1936,7 +1936,7 @@ export class RecaptchaEnterpriseServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.searchRelatedAccountGroupMemberships.createStream(
-      this.innerApiCalls.searchRelatedAccountGroupMemberships as gax.GaxCall,
+      this.innerApiCalls.searchRelatedAccountGroupMemberships as GaxCall,
       request,
       callSettings
     );
@@ -1998,7 +1998,7 @@ export class RecaptchaEnterpriseServiceClient {
     this.initialize();
     return this.descriptors.page.searchRelatedAccountGroupMemberships.asyncIterate(
       this.innerApiCalls['searchRelatedAccountGroupMemberships'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership>;
   }
