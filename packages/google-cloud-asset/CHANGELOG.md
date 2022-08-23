@@ -4,6 +4,21 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+## [4.2.0](https://github.com/googleapis/nodejs-asset/compare/v4.1.0...v4.2.0) (2022-08-23)
+
+
+### Features
+
+* Add client library support for AssetService v1 BatchGetEffectiveIamPolicies API ([201d2b8](https://github.com/googleapis/nodejs-asset/commit/201d2b8431b1c04ed1b6fd90dc22ec943474aed8))
+* Add client library support for AssetService v1 BatchGetEffectiveIamPolicies API ([201d2b8](https://github.com/googleapis/nodejs-asset/commit/201d2b8431b1c04ed1b6fd90dc22ec943474aed8))
+* Release of query system ([201d2b8](https://github.com/googleapis/nodejs-asset/commit/201d2b8431b1c04ed1b6fd90dc22ec943474aed8))
+
+
+### Bug Fixes
+
+* better support for fallback mode ([#646](https://github.com/googleapis/nodejs-asset/issues/646)) ([716c50e](https://github.com/googleapis/nodejs-asset/commit/716c50e0f0552419855d3fffd85a1d0a4fbdfe31))
+* remove pip install statements ([#649](https://github.com/googleapis/nodejs-asset/issues/649)) ([981571d](https://github.com/googleapis/nodejs-asset/commit/981571dd4c85437a437a60596d401568b8c4debe))
+
 ## [4.1.0](https://github.com/googleapis/nodejs-asset/compare/v4.0.0...v4.1.0) (2022-06-29)
 
 
