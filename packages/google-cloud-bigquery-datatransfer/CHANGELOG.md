@@ -4,6 +4,15 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/bigquery-data-transfer?activeTab=versions
 
+## [3.1.1](https://github.com/googleapis/nodejs-bigquery-data-transfer/compare/v3.1.0...v3.1.1) (2022-08-23)
+
+
+### Bug Fixes
+
+* better support for fallback mode ([#558](https://github.com/googleapis/nodejs-bigquery-data-transfer/issues/558)) ([14faf3b](https://github.com/googleapis/nodejs-bigquery-data-transfer/commit/14faf3bc851177c76550d042aa3da8fe47b55328))
+* change import long to require ([#559](https://github.com/googleapis/nodejs-bigquery-data-transfer/issues/559)) ([128b219](https://github.com/googleapis/nodejs-bigquery-data-transfer/commit/128b219fcf94bac10a1a4dc76c32dc525d92038e))
+* remove pip install statements ([#1546](https://github.com/googleapis/nodejs-bigquery-data-transfer/issues/1546)) ([#562](https://github.com/googleapis/nodejs-bigquery-data-transfer/issues/562)) ([f6e41bd](https://github.com/googleapis/nodejs-bigquery-data-transfer/commit/f6e41bd6dd4e4de8ebea1d6aca71264d05c9926b))
+
 ## [3.1.0](https://github.com/googleapis/nodejs-bigquery-data-transfer/compare/v3.0.0...v3.1.0) (2022-06-29)
 
 
