@@ -30,7 +30,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -321,7 +320,8 @@ export class StorageTransferServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -1527,7 +1527,7 @@ export class StorageTransferServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.runTransferJob,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -1685,7 +1685,7 @@ export class StorageTransferServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listTransferJobs.createStream(
-      this.innerApiCalls.listTransferJobs as gax.GaxCall,
+      this.innerApiCalls.listTransferJobs as GaxCall,
       request,
       callSettings
     );
@@ -1740,7 +1740,7 @@ export class StorageTransferServiceClient {
     this.initialize();
     return this.descriptors.page.listTransferJobs.asyncIterate(
       this.innerApiCalls['listTransferJobs'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.storagetransfer.v1.ITransferJob>;
   }
@@ -1899,7 +1899,7 @@ export class StorageTransferServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listAgentPools.createStream(
-      this.innerApiCalls.listAgentPools as gax.GaxCall,
+      this.innerApiCalls.listAgentPools as GaxCall,
       request,
       callSettings
     );
@@ -1956,7 +1956,7 @@ export class StorageTransferServiceClient {
     this.initialize();
     return this.descriptors.page.listAgentPools.asyncIterate(
       this.innerApiCalls['listAgentPools'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.storagetransfer.v1.IAgentPool>;
   }
