@@ -1701,6 +1701,7 @@
                              * @property {string|null} [description] Connection description
                              * @property {google.cloud.bigquery.connection.v1.ICloudSqlProperties|null} [cloudSql] Connection cloudSql
                              * @property {google.cloud.bigquery.connection.v1.IAwsProperties|null} [aws] Connection aws
+                             * @property {google.cloud.bigquery.connection.v1.IAzureProperties|null} [azure] Connection azure
                              * @property {google.cloud.bigquery.connection.v1.ICloudSpannerProperties|null} [cloudSpanner] Connection cloudSpanner
                              * @property {google.cloud.bigquery.connection.v1.ICloudResourceProperties|null} [cloudResource] Connection cloudResource
                              * @property {number|Long|null} [creationTime] Connection creationTime
@@ -1764,6 +1765,14 @@
                             Connection.prototype.aws = null;
     
                             /**
+                             * Connection azure.
+                             * @member {google.cloud.bigquery.connection.v1.IAzureProperties|null|undefined} azure
+                             * @memberof google.cloud.bigquery.connection.v1.Connection
+                             * @instance
+                             */
+                            Connection.prototype.azure = null;
+    
+                            /**
                              * Connection cloudSpanner.
                              * @member {google.cloud.bigquery.connection.v1.ICloudSpannerProperties|null|undefined} cloudSpanner
                              * @memberof google.cloud.bigquery.connection.v1.Connection
@@ -1808,12 +1817,12 @@
     
                             /**
                              * Connection properties.
-                             * @member {"cloudSql"|"aws"|"cloudSpanner"|"cloudResource"|undefined} properties
+                             * @member {"cloudSql"|"aws"|"azure"|"cloudSpanner"|"cloudResource"|undefined} properties
                              * @memberof google.cloud.bigquery.connection.v1.Connection
                              * @instance
                              */
                             Object.defineProperty(Connection.prototype, "properties", {
-                                get: $util.oneOfGetter($oneOfFields = ["cloudSql", "aws", "cloudSpanner", "cloudResource"]),
+                                get: $util.oneOfGetter($oneOfFields = ["cloudSql", "aws", "azure", "cloudSpanner", "cloudResource"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
@@ -1857,6 +1866,8 @@
                                     writer.uint32(/* id 7, wireType 0 =*/56).bool(message.hasCredential);
                                 if (message.aws != null && Object.hasOwnProperty.call(message, "aws"))
                                     $root.google.cloud.bigquery.connection.v1.AwsProperties.encode(message.aws, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                                if (message.azure != null && Object.hasOwnProperty.call(message, "azure"))
+                                    $root.google.cloud.bigquery.connection.v1.AzureProperties.encode(message.azure, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                                 if (message.cloudSpanner != null && Object.hasOwnProperty.call(message, "cloudSpanner"))
                                     $root.google.cloud.bigquery.connection.v1.CloudSpannerProperties.encode(message.cloudSpanner, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
                                 if (message.cloudResource != null && Object.hasOwnProperty.call(message, "cloudResource"))
@@ -1909,6 +1920,9 @@
                                         break;
                                     case 8:
                                         message.aws = $root.google.cloud.bigquery.connection.v1.AwsProperties.decode(reader, reader.uint32());
+                                        break;
+                                    case 11:
+                                        message.azure = $root.google.cloud.bigquery.connection.v1.AzureProperties.decode(reader, reader.uint32());
                                         break;
                                     case 21:
                                         message.cloudSpanner = $root.google.cloud.bigquery.connection.v1.CloudSpannerProperties.decode(reader, reader.uint32());
@@ -1988,6 +2002,16 @@
                                             return "aws." + error;
                                     }
                                 }
+                                if (message.azure != null && message.hasOwnProperty("azure")) {
+                                    if (properties.properties === 1)
+                                        return "properties: multiple values";
+                                    properties.properties = 1;
+                                    {
+                                        var error = $root.google.cloud.bigquery.connection.v1.AzureProperties.verify(message.azure);
+                                        if (error)
+                                            return "azure." + error;
+                                    }
+                                }
                                 if (message.cloudSpanner != null && message.hasOwnProperty("cloudSpanner")) {
                                     if (properties.properties === 1)
                                         return "properties: multiple values";
@@ -2047,6 +2071,11 @@
                                     if (typeof object.aws !== "object")
                                         throw TypeError(".google.cloud.bigquery.connection.v1.Connection.aws: object expected");
                                     message.aws = $root.google.cloud.bigquery.connection.v1.AwsProperties.fromObject(object.aws);
+                                }
+                                if (object.azure != null) {
+                                    if (typeof object.azure !== "object")
+                                        throw TypeError(".google.cloud.bigquery.connection.v1.Connection.azure: object expected");
+                                    message.azure = $root.google.cloud.bigquery.connection.v1.AzureProperties.fromObject(object.azure);
                                 }
                                 if (object.cloudSpanner != null) {
                                     if (typeof object.cloudSpanner !== "object")
@@ -2138,6 +2167,11 @@
                                     if (options.oneofs)
                                         object.properties = "aws";
                                 }
+                                if (message.azure != null && message.hasOwnProperty("azure")) {
+                                    object.azure = $root.google.cloud.bigquery.connection.v1.AzureProperties.toObject(message.azure, options);
+                                    if (options.oneofs)
+                                        object.properties = "azure";
+                                }
                                 if (message.cloudSpanner != null && message.hasOwnProperty("cloudSpanner")) {
                                     object.cloudSpanner = $root.google.cloud.bigquery.connection.v1.CloudSpannerProperties.toObject(message.cloudSpanner, options);
                                     if (options.oneofs)
@@ -2175,6 +2209,7 @@
                              * @property {string|null} [database] CloudSqlProperties database
                              * @property {google.cloud.bigquery.connection.v1.CloudSqlProperties.DatabaseType|null} [type] CloudSqlProperties type
                              * @property {google.cloud.bigquery.connection.v1.ICloudSqlCredential|null} [credential] CloudSqlProperties credential
+                             * @property {string|null} [serviceAccountId] CloudSqlProperties serviceAccountId
                              */
     
                             /**
@@ -2225,6 +2260,14 @@
                             CloudSqlProperties.prototype.credential = null;
     
                             /**
+                             * CloudSqlProperties serviceAccountId.
+                             * @member {string} serviceAccountId
+                             * @memberof google.cloud.bigquery.connection.v1.CloudSqlProperties
+                             * @instance
+                             */
+                            CloudSqlProperties.prototype.serviceAccountId = "";
+    
+                            /**
                              * Creates a new CloudSqlProperties instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.bigquery.connection.v1.CloudSqlProperties
@@ -2256,6 +2299,8 @@
                                     writer.uint32(/* id 3, wireType 0 =*/24).int32(message.type);
                                 if (message.credential != null && Object.hasOwnProperty.call(message, "credential"))
                                     $root.google.cloud.bigquery.connection.v1.CloudSqlCredential.encode(message.credential, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                if (message.serviceAccountId != null && Object.hasOwnProperty.call(message, "serviceAccountId"))
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.serviceAccountId);
                                 return writer;
                             };
     
@@ -2301,6 +2346,9 @@
                                         break;
                                     case 4:
                                         message.credential = $root.google.cloud.bigquery.connection.v1.CloudSqlCredential.decode(reader, reader.uint32());
+                                        break;
+                                    case 5:
+                                        message.serviceAccountId = reader.string();
                                         break;
                                     default:
                                         reader.skipType(tag & 7);
@@ -2357,6 +2405,9 @@
                                     if (error)
                                         return "credential." + error;
                                 }
+                                if (message.serviceAccountId != null && message.hasOwnProperty("serviceAccountId"))
+                                    if (!$util.isString(message.serviceAccountId))
+                                        return "serviceAccountId: string expected";
                                 return null;
                             };
     
@@ -2395,6 +2446,8 @@
                                         throw TypeError(".google.cloud.bigquery.connection.v1.CloudSqlProperties.credential: object expected");
                                     message.credential = $root.google.cloud.bigquery.connection.v1.CloudSqlCredential.fromObject(object.credential);
                                 }
+                                if (object.serviceAccountId != null)
+                                    message.serviceAccountId = String(object.serviceAccountId);
                                 return message;
                             };
     
@@ -2416,6 +2469,7 @@
                                     object.database = "";
                                     object.type = options.enums === String ? "DATABASE_TYPE_UNSPECIFIED" : 0;
                                     object.credential = null;
+                                    object.serviceAccountId = "";
                                 }
                                 if (message.instanceId != null && message.hasOwnProperty("instanceId"))
                                     object.instanceId = message.instanceId;
@@ -2425,6 +2479,8 @@
                                     object.type = options.enums === String ? $root.google.cloud.bigquery.connection.v1.CloudSqlProperties.DatabaseType[message.type] : message.type;
                                 if (message.credential != null && message.hasOwnProperty("credential"))
                                     object.credential = $root.google.cloud.bigquery.connection.v1.CloudSqlCredential.toObject(message.credential, options);
+                                if (message.serviceAccountId != null && message.hasOwnProperty("serviceAccountId"))
+                                    object.serviceAccountId = message.serviceAccountId;
                                 return object;
                             };
     
@@ -3563,6 +3619,326 @@
                             };
     
                             return AwsAccessRole;
+                        })();
+    
+                        v1.AzureProperties = (function() {
+    
+                            /**
+                             * Properties of an AzureProperties.
+                             * @memberof google.cloud.bigquery.connection.v1
+                             * @interface IAzureProperties
+                             * @property {string|null} [application] AzureProperties application
+                             * @property {string|null} [clientId] AzureProperties clientId
+                             * @property {string|null} [objectId] AzureProperties objectId
+                             * @property {string|null} [customerTenantId] AzureProperties customerTenantId
+                             * @property {string|null} [redirectUri] AzureProperties redirectUri
+                             * @property {string|null} [federatedApplicationClientId] AzureProperties federatedApplicationClientId
+                             * @property {string|null} [identity] AzureProperties identity
+                             */
+    
+                            /**
+                             * Constructs a new AzureProperties.
+                             * @memberof google.cloud.bigquery.connection.v1
+                             * @classdesc Represents an AzureProperties.
+                             * @implements IAzureProperties
+                             * @constructor
+                             * @param {google.cloud.bigquery.connection.v1.IAzureProperties=} [properties] Properties to set
+                             */
+                            function AzureProperties(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * AzureProperties application.
+                             * @member {string} application
+                             * @memberof google.cloud.bigquery.connection.v1.AzureProperties
+                             * @instance
+                             */
+                            AzureProperties.prototype.application = "";
+    
+                            /**
+                             * AzureProperties clientId.
+                             * @member {string} clientId
+                             * @memberof google.cloud.bigquery.connection.v1.AzureProperties
+                             * @instance
+                             */
+                            AzureProperties.prototype.clientId = "";
+    
+                            /**
+                             * AzureProperties objectId.
+                             * @member {string} objectId
+                             * @memberof google.cloud.bigquery.connection.v1.AzureProperties
+                             * @instance
+                             */
+                            AzureProperties.prototype.objectId = "";
+    
+                            /**
+                             * AzureProperties customerTenantId.
+                             * @member {string} customerTenantId
+                             * @memberof google.cloud.bigquery.connection.v1.AzureProperties
+                             * @instance
+                             */
+                            AzureProperties.prototype.customerTenantId = "";
+    
+                            /**
+                             * AzureProperties redirectUri.
+                             * @member {string} redirectUri
+                             * @memberof google.cloud.bigquery.connection.v1.AzureProperties
+                             * @instance
+                             */
+                            AzureProperties.prototype.redirectUri = "";
+    
+                            /**
+                             * AzureProperties federatedApplicationClientId.
+                             * @member {string} federatedApplicationClientId
+                             * @memberof google.cloud.bigquery.connection.v1.AzureProperties
+                             * @instance
+                             */
+                            AzureProperties.prototype.federatedApplicationClientId = "";
+    
+                            /**
+                             * AzureProperties identity.
+                             * @member {string} identity
+                             * @memberof google.cloud.bigquery.connection.v1.AzureProperties
+                             * @instance
+                             */
+                            AzureProperties.prototype.identity = "";
+    
+                            /**
+                             * Creates a new AzureProperties instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.connection.v1.AzureProperties
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1.IAzureProperties=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.connection.v1.AzureProperties} AzureProperties instance
+                             */
+                            AzureProperties.create = function create(properties) {
+                                return new AzureProperties(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified AzureProperties message. Does not implicitly {@link google.cloud.bigquery.connection.v1.AzureProperties.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.connection.v1.AzureProperties
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1.IAzureProperties} message AzureProperties message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AzureProperties.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.application != null && Object.hasOwnProperty.call(message, "application"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.application);
+                                if (message.clientId != null && Object.hasOwnProperty.call(message, "clientId"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.clientId);
+                                if (message.objectId != null && Object.hasOwnProperty.call(message, "objectId"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.objectId);
+                                if (message.customerTenantId != null && Object.hasOwnProperty.call(message, "customerTenantId"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.customerTenantId);
+                                if (message.redirectUri != null && Object.hasOwnProperty.call(message, "redirectUri"))
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.redirectUri);
+                                if (message.federatedApplicationClientId != null && Object.hasOwnProperty.call(message, "federatedApplicationClientId"))
+                                    writer.uint32(/* id 6, wireType 2 =*/50).string(message.federatedApplicationClientId);
+                                if (message.identity != null && Object.hasOwnProperty.call(message, "identity"))
+                                    writer.uint32(/* id 7, wireType 2 =*/58).string(message.identity);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified AzureProperties message, length delimited. Does not implicitly {@link google.cloud.bigquery.connection.v1.AzureProperties.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.connection.v1.AzureProperties
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1.IAzureProperties} message AzureProperties message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AzureProperties.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an AzureProperties message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.connection.v1.AzureProperties
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.connection.v1.AzureProperties} AzureProperties
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AzureProperties.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.connection.v1.AzureProperties();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.application = reader.string();
+                                        break;
+                                    case 2:
+                                        message.clientId = reader.string();
+                                        break;
+                                    case 3:
+                                        message.objectId = reader.string();
+                                        break;
+                                    case 4:
+                                        message.customerTenantId = reader.string();
+                                        break;
+                                    case 5:
+                                        message.redirectUri = reader.string();
+                                        break;
+                                    case 6:
+                                        message.federatedApplicationClientId = reader.string();
+                                        break;
+                                    case 7:
+                                        message.identity = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an AzureProperties message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.connection.v1.AzureProperties
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.connection.v1.AzureProperties} AzureProperties
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AzureProperties.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an AzureProperties message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.connection.v1.AzureProperties
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            AzureProperties.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.application != null && message.hasOwnProperty("application"))
+                                    if (!$util.isString(message.application))
+                                        return "application: string expected";
+                                if (message.clientId != null && message.hasOwnProperty("clientId"))
+                                    if (!$util.isString(message.clientId))
+                                        return "clientId: string expected";
+                                if (message.objectId != null && message.hasOwnProperty("objectId"))
+                                    if (!$util.isString(message.objectId))
+                                        return "objectId: string expected";
+                                if (message.customerTenantId != null && message.hasOwnProperty("customerTenantId"))
+                                    if (!$util.isString(message.customerTenantId))
+                                        return "customerTenantId: string expected";
+                                if (message.redirectUri != null && message.hasOwnProperty("redirectUri"))
+                                    if (!$util.isString(message.redirectUri))
+                                        return "redirectUri: string expected";
+                                if (message.federatedApplicationClientId != null && message.hasOwnProperty("federatedApplicationClientId"))
+                                    if (!$util.isString(message.federatedApplicationClientId))
+                                        return "federatedApplicationClientId: string expected";
+                                if (message.identity != null && message.hasOwnProperty("identity"))
+                                    if (!$util.isString(message.identity))
+                                        return "identity: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an AzureProperties message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.connection.v1.AzureProperties
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.connection.v1.AzureProperties} AzureProperties
+                             */
+                            AzureProperties.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.connection.v1.AzureProperties)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.connection.v1.AzureProperties();
+                                if (object.application != null)
+                                    message.application = String(object.application);
+                                if (object.clientId != null)
+                                    message.clientId = String(object.clientId);
+                                if (object.objectId != null)
+                                    message.objectId = String(object.objectId);
+                                if (object.customerTenantId != null)
+                                    message.customerTenantId = String(object.customerTenantId);
+                                if (object.redirectUri != null)
+                                    message.redirectUri = String(object.redirectUri);
+                                if (object.federatedApplicationClientId != null)
+                                    message.federatedApplicationClientId = String(object.federatedApplicationClientId);
+                                if (object.identity != null)
+                                    message.identity = String(object.identity);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an AzureProperties message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.connection.v1.AzureProperties
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1.AzureProperties} message AzureProperties
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            AzureProperties.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.application = "";
+                                    object.clientId = "";
+                                    object.objectId = "";
+                                    object.customerTenantId = "";
+                                    object.redirectUri = "";
+                                    object.federatedApplicationClientId = "";
+                                    object.identity = "";
+                                }
+                                if (message.application != null && message.hasOwnProperty("application"))
+                                    object.application = message.application;
+                                if (message.clientId != null && message.hasOwnProperty("clientId"))
+                                    object.clientId = message.clientId;
+                                if (message.objectId != null && message.hasOwnProperty("objectId"))
+                                    object.objectId = message.objectId;
+                                if (message.customerTenantId != null && message.hasOwnProperty("customerTenantId"))
+                                    object.customerTenantId = message.customerTenantId;
+                                if (message.redirectUri != null && message.hasOwnProperty("redirectUri"))
+                                    object.redirectUri = message.redirectUri;
+                                if (message.federatedApplicationClientId != null && message.hasOwnProperty("federatedApplicationClientId"))
+                                    object.federatedApplicationClientId = message.federatedApplicationClientId;
+                                if (message.identity != null && message.hasOwnProperty("identity"))
+                                    object.identity = message.identity;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this AzureProperties to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.connection.v1.AzureProperties
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            AzureProperties.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return AzureProperties;
                         })();
     
                         v1.CloudResourceProperties = (function() {

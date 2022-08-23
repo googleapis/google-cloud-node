@@ -301,6 +301,7 @@
                               "oneof": [
                                 "cloudSql",
                                 "aws",
+                                "azure",
                                 "cloudSpanner",
                                 "cloudResource"
                               ]
@@ -326,6 +327,10 @@
                             "aws": {
                               "type": "AwsProperties",
                               "id": 8
+                            },
+                            "azure": {
+                              "type": "AzureProperties",
+                              "id": 11
                             },
                             "cloudSpanner": {
                               "type": "CloudSpannerProperties",
@@ -378,6 +383,13 @@
                               "options": {
                                 "(google.api.field_behavior)": "INPUT_ONLY"
                               }
+                            },
+                            "serviceAccountId": {
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           },
                           "nested": {
@@ -426,7 +438,10 @@
                           "fields": {
                             "crossAccountRole": {
                               "type": "AwsCrossAccountRole",
-                              "id": 2
+                              "id": 2,
+                              "options": {
+                                "deprecated": true
+                              }
                             },
                             "accessRole": {
                               "type": "AwsAccessRole",
@@ -465,6 +480,50 @@
                             "identity": {
                               "type": "string",
                               "id": 2
+                            }
+                          }
+                        },
+                        "AzureProperties": {
+                          "fields": {
+                            "application": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "clientId": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "objectId": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "customerTenantId": {
+                              "type": "string",
+                              "id": 4
+                            },
+                            "redirectUri": {
+                              "type": "string",
+                              "id": 5
+                            },
+                            "federatedApplicationClientId": {
+                              "type": "string",
+                              "id": 6
+                            },
+                            "identity": {
+                              "type": "string",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           }
                         },

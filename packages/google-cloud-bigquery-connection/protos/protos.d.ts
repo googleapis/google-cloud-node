@@ -821,6 +821,9 @@ export namespace google {
                         /** Connection aws */
                         aws?: (google.cloud.bigquery.connection.v1.IAwsProperties|null);
 
+                        /** Connection azure */
+                        azure?: (google.cloud.bigquery.connection.v1.IAzureProperties|null);
+
                         /** Connection cloudSpanner */
                         cloudSpanner?: (google.cloud.bigquery.connection.v1.ICloudSpannerProperties|null);
 
@@ -861,6 +864,9 @@ export namespace google {
                         /** Connection aws. */
                         public aws?: (google.cloud.bigquery.connection.v1.IAwsProperties|null);
 
+                        /** Connection azure. */
+                        public azure?: (google.cloud.bigquery.connection.v1.IAzureProperties|null);
+
                         /** Connection cloudSpanner. */
                         public cloudSpanner?: (google.cloud.bigquery.connection.v1.ICloudSpannerProperties|null);
 
@@ -877,7 +883,7 @@ export namespace google {
                         public hasCredential: boolean;
 
                         /** Connection properties. */
-                        public properties?: ("cloudSql"|"aws"|"cloudSpanner"|"cloudResource");
+                        public properties?: ("cloudSql"|"aws"|"azure"|"cloudSpanner"|"cloudResource");
 
                         /**
                          * Creates a new Connection instance using the specified properties.
@@ -964,6 +970,9 @@ export namespace google {
 
                         /** CloudSqlProperties credential */
                         credential?: (google.cloud.bigquery.connection.v1.ICloudSqlCredential|null);
+
+                        /** CloudSqlProperties serviceAccountId */
+                        serviceAccountId?: (string|null);
                     }
 
                     /** Represents a CloudSqlProperties. */
@@ -986,6 +995,9 @@ export namespace google {
 
                         /** CloudSqlProperties credential. */
                         public credential?: (google.cloud.bigquery.connection.v1.ICloudSqlCredential|null);
+
+                        /** CloudSqlProperties serviceAccountId. */
+                        public serviceAccountId: string;
 
                         /**
                          * Creates a new CloudSqlProperties instance using the specified properties.
@@ -1552,6 +1564,132 @@ export namespace google {
 
                         /**
                          * Converts this AwsAccessRole to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of an AzureProperties. */
+                    interface IAzureProperties {
+
+                        /** AzureProperties application */
+                        application?: (string|null);
+
+                        /** AzureProperties clientId */
+                        clientId?: (string|null);
+
+                        /** AzureProperties objectId */
+                        objectId?: (string|null);
+
+                        /** AzureProperties customerTenantId */
+                        customerTenantId?: (string|null);
+
+                        /** AzureProperties redirectUri */
+                        redirectUri?: (string|null);
+
+                        /** AzureProperties federatedApplicationClientId */
+                        federatedApplicationClientId?: (string|null);
+
+                        /** AzureProperties identity */
+                        identity?: (string|null);
+                    }
+
+                    /** Represents an AzureProperties. */
+                    class AzureProperties implements IAzureProperties {
+
+                        /**
+                         * Constructs a new AzureProperties.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.connection.v1.IAzureProperties);
+
+                        /** AzureProperties application. */
+                        public application: string;
+
+                        /** AzureProperties clientId. */
+                        public clientId: string;
+
+                        /** AzureProperties objectId. */
+                        public objectId: string;
+
+                        /** AzureProperties customerTenantId. */
+                        public customerTenantId: string;
+
+                        /** AzureProperties redirectUri. */
+                        public redirectUri: string;
+
+                        /** AzureProperties federatedApplicationClientId. */
+                        public federatedApplicationClientId: string;
+
+                        /** AzureProperties identity. */
+                        public identity: string;
+
+                        /**
+                         * Creates a new AzureProperties instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AzureProperties instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.connection.v1.IAzureProperties): google.cloud.bigquery.connection.v1.AzureProperties;
+
+                        /**
+                         * Encodes the specified AzureProperties message. Does not implicitly {@link google.cloud.bigquery.connection.v1.AzureProperties.verify|verify} messages.
+                         * @param message AzureProperties message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.connection.v1.IAzureProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AzureProperties message, length delimited. Does not implicitly {@link google.cloud.bigquery.connection.v1.AzureProperties.verify|verify} messages.
+                         * @param message AzureProperties message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.connection.v1.IAzureProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AzureProperties message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AzureProperties
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.connection.v1.AzureProperties;
+
+                        /**
+                         * Decodes an AzureProperties message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AzureProperties
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.connection.v1.AzureProperties;
+
+                        /**
+                         * Verifies an AzureProperties message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AzureProperties message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AzureProperties
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.connection.v1.AzureProperties;
+
+                        /**
+                         * Creates a plain object from an AzureProperties message. Also converts values to other types if specified.
+                         * @param message AzureProperties
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.connection.v1.AzureProperties, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AzureProperties to JSON.
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };

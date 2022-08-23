@@ -28,7 +28,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -261,7 +260,8 @@ export class ConnectionServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -1149,7 +1149,7 @@ export class ConnectionServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listConnections.createStream(
-      this.innerApiCalls.listConnections as gax.GaxCall,
+      this.innerApiCalls.listConnections as GaxCall,
       request,
       callSettings
     );
@@ -1198,7 +1198,7 @@ export class ConnectionServiceClient {
     this.initialize();
     return this.descriptors.page.listConnections.asyncIterate(
       this.innerApiCalls['listConnections'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.bigquery.connection.v1.IConnection>;
   }
