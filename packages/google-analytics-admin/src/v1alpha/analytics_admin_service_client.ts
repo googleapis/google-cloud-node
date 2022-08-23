@@ -28,7 +28,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -173,6 +172,12 @@ export class AnalyticsAdminServiceClient {
       accountUserLinkPathTemplate: new this._gaxModule.PathTemplate(
         'accounts/{account}/userLinks/{user_link}'
       ),
+      attributionSettingsPathTemplate: new this._gaxModule.PathTemplate(
+        'properties/{property}/attributionSettings'
+      ),
+      audiencePathTemplate: new this._gaxModule.PathTemplate(
+        'properties/{property}/audiences/{audience}'
+      ),
       conversionEventPathTemplate: new this._gaxModule.PathTemplate(
         'properties/{property}/conversionEvents/{conversion_event}'
       ),
@@ -302,6 +307,11 @@ export class AnalyticsAdminServiceClient {
         'nextPageToken',
         'dataStreams'
       ),
+      listAudiences: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'audiences'
+      ),
     };
 
     // Put together the default options sent with requests.
@@ -426,6 +436,14 @@ export class AnalyticsAdminServiceClient {
       'updateDataStream',
       'listDataStreams',
       'getDataStream',
+      'getAudience',
+      'listAudiences',
+      'createAudience',
+      'updateAudience',
+      'archiveAudience',
+      'getAttributionSettings',
+      'updateAttributionSettings',
+      'runAccessReport',
     ];
     for (const methodName of analyticsAdminServiceStubMethods) {
       const callPromise = this.analyticsAdminServiceStub.then(
@@ -446,7 +464,8 @@ export class AnalyticsAdminServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -6141,6 +6160,748 @@ export class AnalyticsAdminServiceClient {
     this.initialize();
     return this.innerApiCalls.getDataStream(request, options, callback);
   }
+  /**
+   * Lookup for a single Audience.
+   * Audiences created before 2020 may not be supported.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the Audience to get.
+   *   Example format: properties/1234/audiences/5678
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Audience]{@link google.analytics.admin.v1alpha.Audience}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.get_audience.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetAudience_async
+   */
+  getAudience(
+    request?: protos.google.analytics.admin.v1alpha.IGetAudienceRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IAudience,
+      protos.google.analytics.admin.v1alpha.IGetAudienceRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  getAudience(
+    request: protos.google.analytics.admin.v1alpha.IGetAudienceRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IAudience,
+      | protos.google.analytics.admin.v1alpha.IGetAudienceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getAudience(
+    request: protos.google.analytics.admin.v1alpha.IGetAudienceRequest,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IAudience,
+      | protos.google.analytics.admin.v1alpha.IGetAudienceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getAudience(
+    request?: protos.google.analytics.admin.v1alpha.IGetAudienceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IAudience,
+          | protos.google.analytics.admin.v1alpha.IGetAudienceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.admin.v1alpha.IAudience,
+      | protos.google.analytics.admin.v1alpha.IGetAudienceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IAudience,
+      protos.google.analytics.admin.v1alpha.IGetAudienceRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getAudience(request, options, callback);
+  }
+  /**
+   * Creates an Audience.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Example format: properties/1234
+   * @param {google.analytics.admin.v1alpha.Audience} request.audience
+   *   Required. The audience to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Audience]{@link google.analytics.admin.v1alpha.Audience}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.create_audience.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateAudience_async
+   */
+  createAudience(
+    request?: protos.google.analytics.admin.v1alpha.ICreateAudienceRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IAudience,
+      protos.google.analytics.admin.v1alpha.ICreateAudienceRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  createAudience(
+    request: protos.google.analytics.admin.v1alpha.ICreateAudienceRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IAudience,
+      | protos.google.analytics.admin.v1alpha.ICreateAudienceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createAudience(
+    request: protos.google.analytics.admin.v1alpha.ICreateAudienceRequest,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IAudience,
+      | protos.google.analytics.admin.v1alpha.ICreateAudienceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createAudience(
+    request?: protos.google.analytics.admin.v1alpha.ICreateAudienceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IAudience,
+          | protos.google.analytics.admin.v1alpha.ICreateAudienceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.admin.v1alpha.IAudience,
+      | protos.google.analytics.admin.v1alpha.ICreateAudienceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IAudience,
+      protos.google.analytics.admin.v1alpha.ICreateAudienceRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createAudience(request, options, callback);
+  }
+  /**
+   * Updates an Audience on a property.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.analytics.admin.v1alpha.Audience} request.audience
+   *   Required. The audience to update.
+   *   The audience's `name` field is used to identify the audience to be updated.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The list of fields to be updated. Field names must be in snake case
+   *   (e.g., "field_to_update"). Omitted fields will not be updated. To replace
+   *   the entire entity, use one path with the string "*" to match all fields.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Audience]{@link google.analytics.admin.v1alpha.Audience}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.update_audience.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateAudience_async
+   */
+  updateAudience(
+    request?: protos.google.analytics.admin.v1alpha.IUpdateAudienceRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IAudience,
+      protos.google.analytics.admin.v1alpha.IUpdateAudienceRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  updateAudience(
+    request: protos.google.analytics.admin.v1alpha.IUpdateAudienceRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IAudience,
+      | protos.google.analytics.admin.v1alpha.IUpdateAudienceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateAudience(
+    request: protos.google.analytics.admin.v1alpha.IUpdateAudienceRequest,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IAudience,
+      | protos.google.analytics.admin.v1alpha.IUpdateAudienceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateAudience(
+    request?: protos.google.analytics.admin.v1alpha.IUpdateAudienceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IAudience,
+          | protos.google.analytics.admin.v1alpha.IUpdateAudienceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.admin.v1alpha.IAudience,
+      | protos.google.analytics.admin.v1alpha.IUpdateAudienceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IAudience,
+      protos.google.analytics.admin.v1alpha.IUpdateAudienceRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        'audience.name': request.audience!.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateAudience(request, options, callback);
+  }
+  /**
+   * Archives an Audience on a property.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Example format: properties/1234/audiences/5678
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.archive_audience.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_ArchiveAudience_async
+   */
+  archiveAudience(
+    request?: protos.google.analytics.admin.v1alpha.IArchiveAudienceRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.analytics.admin.v1alpha.IArchiveAudienceRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  archiveAudience(
+    request: protos.google.analytics.admin.v1alpha.IArchiveAudienceRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.analytics.admin.v1alpha.IArchiveAudienceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  archiveAudience(
+    request: protos.google.analytics.admin.v1alpha.IArchiveAudienceRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.analytics.admin.v1alpha.IArchiveAudienceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  archiveAudience(
+    request?: protos.google.analytics.admin.v1alpha.IArchiveAudienceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.analytics.admin.v1alpha.IArchiveAudienceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.analytics.admin.v1alpha.IArchiveAudienceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.analytics.admin.v1alpha.IArchiveAudienceRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.archiveAudience(request, options, callback);
+  }
+  /**
+   * Lookup for a AttributionSettings singleton.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the attribution settings to retrieve.
+   *   Format: properties/{property}/attributionSettings
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [AttributionSettings]{@link google.analytics.admin.v1alpha.AttributionSettings}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.get_attribution_settings.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetAttributionSettings_async
+   */
+  getAttributionSettings(
+    request?: protos.google.analytics.admin.v1alpha.IGetAttributionSettingsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IAttributionSettings,
+      (
+        | protos.google.analytics.admin.v1alpha.IGetAttributionSettingsRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  getAttributionSettings(
+    request: protos.google.analytics.admin.v1alpha.IGetAttributionSettingsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IAttributionSettings,
+      | protos.google.analytics.admin.v1alpha.IGetAttributionSettingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getAttributionSettings(
+    request: protos.google.analytics.admin.v1alpha.IGetAttributionSettingsRequest,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IAttributionSettings,
+      | protos.google.analytics.admin.v1alpha.IGetAttributionSettingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getAttributionSettings(
+    request?: protos.google.analytics.admin.v1alpha.IGetAttributionSettingsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IAttributionSettings,
+          | protos.google.analytics.admin.v1alpha.IGetAttributionSettingsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.admin.v1alpha.IAttributionSettings,
+      | protos.google.analytics.admin.v1alpha.IGetAttributionSettingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IAttributionSettings,
+      (
+        | protos.google.analytics.admin.v1alpha.IGetAttributionSettingsRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getAttributionSettings(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Updates attribution settings on a property.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.analytics.admin.v1alpha.AttributionSettings} request.attributionSettings
+   *   Required. The attribution settings to update.
+   *   The `name` field is used to identify the settings to be updated.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The list of fields to be updated. Field names must be in snake case
+   *   (e.g., "field_to_update"). Omitted fields will not be updated. To replace
+   *   the entire entity, use one path with the string "*" to match all fields.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [AttributionSettings]{@link google.analytics.admin.v1alpha.AttributionSettings}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.update_attribution_settings.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateAttributionSettings_async
+   */
+  updateAttributionSettings(
+    request?: protos.google.analytics.admin.v1alpha.IUpdateAttributionSettingsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IAttributionSettings,
+      (
+        | protos.google.analytics.admin.v1alpha.IUpdateAttributionSettingsRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  updateAttributionSettings(
+    request: protos.google.analytics.admin.v1alpha.IUpdateAttributionSettingsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IAttributionSettings,
+      | protos.google.analytics.admin.v1alpha.IUpdateAttributionSettingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateAttributionSettings(
+    request: protos.google.analytics.admin.v1alpha.IUpdateAttributionSettingsRequest,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IAttributionSettings,
+      | protos.google.analytics.admin.v1alpha.IUpdateAttributionSettingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateAttributionSettings(
+    request?: protos.google.analytics.admin.v1alpha.IUpdateAttributionSettingsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IAttributionSettings,
+          | protos.google.analytics.admin.v1alpha.IUpdateAttributionSettingsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.admin.v1alpha.IAttributionSettings,
+      | protos.google.analytics.admin.v1alpha.IUpdateAttributionSettingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IAttributionSettings,
+      (
+        | protos.google.analytics.admin.v1alpha.IUpdateAttributionSettingsRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        'attribution_settings.name': request.attributionSettings!.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateAttributionSettings(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Returns a customized report of data access records. The report provides
+   * records of each time a user reads Google Analytics reporting data. Access
+   * records are retained for up to 2 years.
+   *
+   * Data Access Reports can be requested for a property. The property must be
+   * in Google Analytics 360. This method is only available to Administrators.
+   *
+   * These data access records include GA4 UI Reporting, GA4 UI Explorations,
+   * GA4 Data API, and other products like Firebase & Admob that can retrieve
+   * data from Google Analytics through a linkage. These records don't include
+   * property configuration changes like adding a stream or changing a
+   * property's time zone. For configuration change history, see
+   * [searchChangeHistoryEvents](https://developers.google.com/analytics/devguides/config/admin/v1/rest/v1alpha/accounts/searchChangeHistoryEvents).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.entity
+   *   The Data Access Report is requested for this property.
+   *   For example if "123" is your GA4 property ID, then entity should be
+   *   "properties/123".
+   * @param {number[]} request.dimensions
+   *   The dimensions requested and displayed in the response. Requests are
+   *   allowed up to 9 dimensions.
+   * @param {number[]} request.metrics
+   *   The metrics requested and displayed in the response. Requests are allowed
+   *   up to 10 metrics.
+   * @param {number[]} request.dateRanges
+   *   Date ranges of access records to read. If multiple date ranges are
+   *   requested, each response row will contain a zero based date range index. If
+   *   two date ranges overlap, the access records for the overlapping days is
+   *   included in the response rows for both date ranges. Requests are allowed up
+   *   to 2 date ranges.
+   * @param {google.analytics.admin.v1alpha.AccessFilterExpression} request.dimensionFilter
+   *   Dimension filters allow you to restrict report response to specific
+   *   dimension values which match the filter. For example, filtering on access
+   *   records of a single user. To learn more, see [Fundamentals of Dimension
+   *   Filters](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#dimension_filters)
+   *   for examples. Metrics cannot be used in this filter.
+   * @param {google.analytics.admin.v1alpha.AccessFilterExpression} request.metricFilter
+   *   Metric filters allow you to restrict report response to specific metric
+   *   values which match the filter. Metric filters are applied after aggregating
+   *   the report's rows, similar to SQL having-clause. Dimensions cannot be used
+   *   in this filter.
+   * @param {number} request.offset
+   *   The row count of the start row. The first row is counted as row 0. If
+   *   offset is unspecified, it is treated as 0. If offset is zero, then this
+   *   method will return the first page of results with `limit` entries.
+   *
+   *   To learn more about this pagination parameter, see
+   *   [Pagination](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#pagination).
+   * @param {number} request.limit
+   *   The number of rows to return. If unspecified, 10,000 rows are returned. The
+   *   API returns a maximum of 100,000 rows per request, no matter how many you
+   *   ask for. `limit` must be positive.
+   *
+   *   The API may return fewer rows than the requested `limit`, if there aren't
+   *   as many remaining rows as the `limit`. For instance, there are fewer than
+   *   300 possible values for the dimension `country`, so when reporting on only
+   *   `country`, you can't get more than 300 rows, even if you set `limit` to a
+   *   higher value.
+   *
+   *   To learn more about this pagination parameter, see
+   *   [Pagination](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#pagination).
+   * @param {string} request.timeZone
+   *   This request's time zone if specified. If unspecified, the property's time
+   *   zone is used. The request's time zone is used to interpret the start & end
+   *   dates of the report.
+   *
+   *   Formatted as strings from the IANA Time Zone database
+   *   (https://www.iana.org/time-zones); for example "America/New_York" or
+   *   "Asia/Tokyo".
+   * @param {number[]} request.orderBys
+   *   Specifies how rows are ordered in the response.
+   * @param {boolean} request.returnEntityQuota
+   *   Toggles whether to return the current state of this Analytics Property's
+   *   quota. Quota is returned in [AccessQuota](#AccessQuota).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [RunAccessReportResponse]{@link google.analytics.admin.v1alpha.RunAccessReportResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.run_access_report.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_RunAccessReport_async
+   */
+  runAccessReport(
+    request?: protos.google.analytics.admin.v1alpha.IRunAccessReportRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IRunAccessReportResponse,
+      protos.google.analytics.admin.v1alpha.IRunAccessReportRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  runAccessReport(
+    request: protos.google.analytics.admin.v1alpha.IRunAccessReportRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IRunAccessReportResponse,
+      | protos.google.analytics.admin.v1alpha.IRunAccessReportRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  runAccessReport(
+    request: protos.google.analytics.admin.v1alpha.IRunAccessReportRequest,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IRunAccessReportResponse,
+      | protos.google.analytics.admin.v1alpha.IRunAccessReportRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  runAccessReport(
+    request?: protos.google.analytics.admin.v1alpha.IRunAccessReportRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IRunAccessReportResponse,
+          | protos.google.analytics.admin.v1alpha.IRunAccessReportRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.admin.v1alpha.IRunAccessReportResponse,
+      | protos.google.analytics.admin.v1alpha.IRunAccessReportRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IRunAccessReportResponse,
+      protos.google.analytics.admin.v1alpha.IRunAccessReportRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        entity: request.entity || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.runAccessReport(request, options, callback);
+  }
 
   /**
    * Returns all accounts accessible by the caller.
@@ -6291,7 +7052,7 @@ export class AnalyticsAdminServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listAccounts.createStream(
-      this.innerApiCalls.listAccounts as gax.GaxCall,
+      this.innerApiCalls.listAccounts as GaxCall,
       request,
       callSettings
     );
@@ -6343,7 +7104,7 @@ export class AnalyticsAdminServiceClient {
     this.initialize();
     return this.descriptors.page.listAccounts.asyncIterate(
       this.innerApiCalls['listAccounts'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.analytics.admin.v1alpha.IAccount>;
   }
@@ -6484,7 +7245,7 @@ export class AnalyticsAdminServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listAccountSummaries.createStream(
-      this.innerApiCalls.listAccountSummaries as gax.GaxCall,
+      this.innerApiCalls.listAccountSummaries as GaxCall,
       request,
       callSettings
     );
@@ -6532,7 +7293,7 @@ export class AnalyticsAdminServiceClient {
     this.initialize();
     return this.descriptors.page.listAccountSummaries.asyncIterate(
       this.innerApiCalls['listAccountSummaries'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.analytics.admin.v1alpha.IAccountSummary>;
   }
@@ -6720,7 +7481,7 @@ export class AnalyticsAdminServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listProperties.createStream(
-      this.innerApiCalls.listProperties as gax.GaxCall,
+      this.innerApiCalls.listProperties as GaxCall,
       request,
       callSettings
     );
@@ -6789,7 +7550,7 @@ export class AnalyticsAdminServiceClient {
     this.initialize();
     return this.descriptors.page.listProperties.asyncIterate(
       this.innerApiCalls['listProperties'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.analytics.admin.v1alpha.IProperty>;
   }
@@ -6942,7 +7703,7 @@ export class AnalyticsAdminServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listUserLinks.createStream(
-      this.innerApiCalls.listUserLinks as gax.GaxCall,
+      this.innerApiCalls.listUserLinks as GaxCall,
       request,
       callSettings
     );
@@ -6996,7 +7757,7 @@ export class AnalyticsAdminServiceClient {
     this.initialize();
     return this.descriptors.page.listUserLinks.asyncIterate(
       this.innerApiCalls['listUserLinks'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.analytics.admin.v1alpha.IUserLink>;
   }
@@ -7157,7 +7918,7 @@ export class AnalyticsAdminServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.auditUserLinks.createStream(
-      this.innerApiCalls.auditUserLinks as gax.GaxCall,
+      this.innerApiCalls.auditUserLinks as GaxCall,
       request,
       callSettings
     );
@@ -7211,7 +7972,7 @@ export class AnalyticsAdminServiceClient {
     this.initialize();
     return this.descriptors.page.auditUserLinks.asyncIterate(
       this.innerApiCalls['auditUserLinks'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.analytics.admin.v1alpha.IAuditUserLink>;
   }
@@ -7367,7 +8128,7 @@ export class AnalyticsAdminServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listFirebaseLinks.createStream(
-      this.innerApiCalls.listFirebaseLinks as gax.GaxCall,
+      this.innerApiCalls.listFirebaseLinks as GaxCall,
       request,
       callSettings
     );
@@ -7422,7 +8183,7 @@ export class AnalyticsAdminServiceClient {
     this.initialize();
     return this.descriptors.page.listFirebaseLinks.asyncIterate(
       this.innerApiCalls['listFirebaseLinks'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.analytics.admin.v1alpha.IFirebaseLink>;
   }
@@ -7575,7 +8336,7 @@ export class AnalyticsAdminServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listGoogleAdsLinks.createStream(
-      this.innerApiCalls.listGoogleAdsLinks as gax.GaxCall,
+      this.innerApiCalls.listGoogleAdsLinks as GaxCall,
       request,
       callSettings
     );
@@ -7629,7 +8390,7 @@ export class AnalyticsAdminServiceClient {
     this.initialize();
     return this.descriptors.page.listGoogleAdsLinks.asyncIterate(
       this.innerApiCalls['listGoogleAdsLinks'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.analytics.admin.v1alpha.IGoogleAdsLink>;
   }
@@ -7790,7 +8551,7 @@ export class AnalyticsAdminServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listMeasurementProtocolSecrets.createStream(
-      this.innerApiCalls.listMeasurementProtocolSecrets as gax.GaxCall,
+      this.innerApiCalls.listMeasurementProtocolSecrets as GaxCall,
       request,
       callSettings
     );
@@ -7846,7 +8607,7 @@ export class AnalyticsAdminServiceClient {
     this.initialize();
     return this.descriptors.page.listMeasurementProtocolSecrets.asyncIterate(
       this.innerApiCalls['listMeasurementProtocolSecrets'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.analytics.admin.v1alpha.IMeasurementProtocolSecret>;
   }
@@ -8034,7 +8795,7 @@ export class AnalyticsAdminServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.searchChangeHistoryEvents.createStream(
-      this.innerApiCalls.searchChangeHistoryEvents as gax.GaxCall,
+      this.innerApiCalls.searchChangeHistoryEvents as GaxCall,
       request,
       callSettings
     );
@@ -8103,7 +8864,7 @@ export class AnalyticsAdminServiceClient {
     this.initialize();
     return this.descriptors.page.searchChangeHistoryEvents.asyncIterate(
       this.innerApiCalls['searchChangeHistoryEvents'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.analytics.admin.v1alpha.IChangeHistoryEvent>;
   }
@@ -8258,7 +9019,7 @@ export class AnalyticsAdminServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listConversionEvents.createStream(
-      this.innerApiCalls.listConversionEvents as gax.GaxCall,
+      this.innerApiCalls.listConversionEvents as GaxCall,
       request,
       callSettings
     );
@@ -8312,7 +9073,7 @@ export class AnalyticsAdminServiceClient {
     this.initialize();
     return this.descriptors.page.listConversionEvents.asyncIterate(
       this.innerApiCalls['listConversionEvents'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.analytics.admin.v1alpha.IConversionEvent>;
   }
@@ -8472,7 +9233,7 @@ export class AnalyticsAdminServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listDisplayVideo360AdvertiserLinks.createStream(
-      this.innerApiCalls.listDisplayVideo360AdvertiserLinks as gax.GaxCall,
+      this.innerApiCalls.listDisplayVideo360AdvertiserLinks as GaxCall,
       request,
       callSettings
     );
@@ -8528,7 +9289,7 @@ export class AnalyticsAdminServiceClient {
     this.initialize();
     return this.descriptors.page.listDisplayVideo360AdvertiserLinks.asyncIterate(
       this.innerApiCalls['listDisplayVideo360AdvertiserLinks'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLink>;
   }
@@ -8690,8 +9451,7 @@ export class AnalyticsAdminServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listDisplayVideo360AdvertiserLinkProposals.createStream(
-      this.innerApiCalls
-        .listDisplayVideo360AdvertiserLinkProposals as gax.GaxCall,
+      this.innerApiCalls.listDisplayVideo360AdvertiserLinkProposals as GaxCall,
       request,
       callSettings
     );
@@ -8750,7 +9510,7 @@ export class AnalyticsAdminServiceClient {
       this.innerApiCalls[
         'listDisplayVideo360AdvertiserLinkProposals'
       ] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLinkProposal>;
   }
@@ -8903,7 +9663,7 @@ export class AnalyticsAdminServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listCustomDimensions.createStream(
-      this.innerApiCalls.listCustomDimensions as gax.GaxCall,
+      this.innerApiCalls.listCustomDimensions as GaxCall,
       request,
       callSettings
     );
@@ -8957,7 +9717,7 @@ export class AnalyticsAdminServiceClient {
     this.initialize();
     return this.descriptors.page.listCustomDimensions.asyncIterate(
       this.innerApiCalls['listCustomDimensions'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.analytics.admin.v1alpha.ICustomDimension>;
   }
@@ -9110,7 +9870,7 @@ export class AnalyticsAdminServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listCustomMetrics.createStream(
-      this.innerApiCalls.listCustomMetrics as gax.GaxCall,
+      this.innerApiCalls.listCustomMetrics as GaxCall,
       request,
       callSettings
     );
@@ -9164,7 +9924,7 @@ export class AnalyticsAdminServiceClient {
     this.initialize();
     return this.descriptors.page.listCustomMetrics.asyncIterate(
       this.innerApiCalls['listCustomMetrics'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.analytics.admin.v1alpha.ICustomMetric>;
   }
@@ -9317,7 +10077,7 @@ export class AnalyticsAdminServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listDataStreams.createStream(
-      this.innerApiCalls.listDataStreams as gax.GaxCall,
+      this.innerApiCalls.listDataStreams as GaxCall,
       request,
       callSettings
     );
@@ -9371,9 +10131,217 @@ export class AnalyticsAdminServiceClient {
     this.initialize();
     return this.descriptors.page.listDataStreams.asyncIterate(
       this.innerApiCalls['listDataStreams'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.analytics.admin.v1alpha.IDataStream>;
+  }
+  /**
+   * Lists Audiences on a property.
+   * Audiences created before 2020 may not be supported.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Example format: properties/1234
+   * @param {number} request.pageSize
+   *   The maximum number of resources to return.
+   *   If unspecified, at most 50 resources will be returned.
+   *   The maximum value is 200 (higher values will be coerced to the maximum).
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListAudiences` call. Provide this
+   *   to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListAudiences` must
+   *   match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [Audience]{@link google.analytics.admin.v1alpha.Audience}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listAudiencesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listAudiences(
+    request?: protos.google.analytics.admin.v1alpha.IListAudiencesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IAudience[],
+      protos.google.analytics.admin.v1alpha.IListAudiencesRequest | null,
+      protos.google.analytics.admin.v1alpha.IListAudiencesResponse
+    ]
+  >;
+  listAudiences(
+    request: protos.google.analytics.admin.v1alpha.IListAudiencesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.analytics.admin.v1alpha.IListAudiencesRequest,
+      | protos.google.analytics.admin.v1alpha.IListAudiencesResponse
+      | null
+      | undefined,
+      protos.google.analytics.admin.v1alpha.IAudience
+    >
+  ): void;
+  listAudiences(
+    request: protos.google.analytics.admin.v1alpha.IListAudiencesRequest,
+    callback: PaginationCallback<
+      protos.google.analytics.admin.v1alpha.IListAudiencesRequest,
+      | protos.google.analytics.admin.v1alpha.IListAudiencesResponse
+      | null
+      | undefined,
+      protos.google.analytics.admin.v1alpha.IAudience
+    >
+  ): void;
+  listAudiences(
+    request?: protos.google.analytics.admin.v1alpha.IListAudiencesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.analytics.admin.v1alpha.IListAudiencesRequest,
+          | protos.google.analytics.admin.v1alpha.IListAudiencesResponse
+          | null
+          | undefined,
+          protos.google.analytics.admin.v1alpha.IAudience
+        >,
+    callback?: PaginationCallback<
+      protos.google.analytics.admin.v1alpha.IListAudiencesRequest,
+      | protos.google.analytics.admin.v1alpha.IListAudiencesResponse
+      | null
+      | undefined,
+      protos.google.analytics.admin.v1alpha.IAudience
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IAudience[],
+      protos.google.analytics.admin.v1alpha.IListAudiencesRequest | null,
+      protos.google.analytics.admin.v1alpha.IListAudiencesResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listAudiences(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Example format: properties/1234
+   * @param {number} request.pageSize
+   *   The maximum number of resources to return.
+   *   If unspecified, at most 50 resources will be returned.
+   *   The maximum value is 200 (higher values will be coerced to the maximum).
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListAudiences` call. Provide this
+   *   to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListAudiences` must
+   *   match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [Audience]{@link google.analytics.admin.v1alpha.Audience} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listAudiencesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listAudiencesStream(
+    request?: protos.google.analytics.admin.v1alpha.IListAudiencesRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    const defaultCallSettings = this._defaults['listAudiences'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listAudiences.createStream(
+      this.innerApiCalls.listAudiences as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listAudiences`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Example format: properties/1234
+   * @param {number} request.pageSize
+   *   The maximum number of resources to return.
+   *   If unspecified, at most 50 resources will be returned.
+   *   The maximum value is 200 (higher values will be coerced to the maximum).
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListAudiences` call. Provide this
+   *   to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListAudiences` must
+   *   match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [Audience]{@link google.analytics.admin.v1alpha.Audience}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.list_audiences.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListAudiences_async
+   */
+  listAudiencesAsync(
+    request?: protos.google.analytics.admin.v1alpha.IListAudiencesRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.analytics.admin.v1alpha.IAudience> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    const defaultCallSettings = this._defaults['listAudiences'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listAudiences.asyncIterate(
+      this.innerApiCalls['listAudiences'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.analytics.admin.v1alpha.IAudience>;
   }
   // --------------------
   // -- Path templates --
@@ -9465,6 +10433,67 @@ export class AnalyticsAdminServiceClient {
     return this.pathTemplates.accountUserLinkPathTemplate.match(
       accountUserLinkName
     ).user_link;
+  }
+
+  /**
+   * Return a fully-qualified attributionSettings resource name string.
+   *
+   * @param {string} property
+   * @returns {string} Resource name string.
+   */
+  attributionSettingsPath(property: string) {
+    return this.pathTemplates.attributionSettingsPathTemplate.render({
+      property: property,
+    });
+  }
+
+  /**
+   * Parse the property from AttributionSettings resource.
+   *
+   * @param {string} attributionSettingsName
+   *   A fully-qualified path representing AttributionSettings resource.
+   * @returns {string} A string representing the property.
+   */
+  matchPropertyFromAttributionSettingsName(attributionSettingsName: string) {
+    return this.pathTemplates.attributionSettingsPathTemplate.match(
+      attributionSettingsName
+    ).property;
+  }
+
+  /**
+   * Return a fully-qualified audience resource name string.
+   *
+   * @param {string} property
+   * @param {string} audience
+   * @returns {string} Resource name string.
+   */
+  audiencePath(property: string, audience: string) {
+    return this.pathTemplates.audiencePathTemplate.render({
+      property: property,
+      audience: audience,
+    });
+  }
+
+  /**
+   * Parse the property from Audience resource.
+   *
+   * @param {string} audienceName
+   *   A fully-qualified path representing Audience resource.
+   * @returns {string} A string representing the property.
+   */
+  matchPropertyFromAudienceName(audienceName: string) {
+    return this.pathTemplates.audiencePathTemplate.match(audienceName).property;
+  }
+
+  /**
+   * Parse the audience from Audience resource.
+   *
+   * @param {string} audienceName
+   *   A fully-qualified path representing Audience resource.
+   * @returns {string} A string representing the audience.
+   */
+  matchAudienceFromAudienceName(audienceName: string) {
+    return this.pathTemplates.audiencePathTemplate.match(audienceName).audience;
   }
 
   /**

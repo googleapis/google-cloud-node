@@ -28,7 +28,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -381,7 +380,8 @@ export class AnalyticsAdminServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -4168,7 +4168,7 @@ export class AnalyticsAdminServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listAccounts.createStream(
-      this.innerApiCalls.listAccounts as gax.GaxCall,
+      this.innerApiCalls.listAccounts as GaxCall,
       request,
       callSettings
     );
@@ -4220,7 +4220,7 @@ export class AnalyticsAdminServiceClient {
     this.initialize();
     return this.descriptors.page.listAccounts.asyncIterate(
       this.innerApiCalls['listAccounts'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.analytics.admin.v1beta.IAccount>;
   }
@@ -4361,7 +4361,7 @@ export class AnalyticsAdminServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listAccountSummaries.createStream(
-      this.innerApiCalls.listAccountSummaries as gax.GaxCall,
+      this.innerApiCalls.listAccountSummaries as GaxCall,
       request,
       callSettings
     );
@@ -4409,7 +4409,7 @@ export class AnalyticsAdminServiceClient {
     this.initialize();
     return this.descriptors.page.listAccountSummaries.asyncIterate(
       this.innerApiCalls['listAccountSummaries'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.analytics.admin.v1beta.IAccountSummary>;
   }
@@ -4597,7 +4597,7 @@ export class AnalyticsAdminServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listProperties.createStream(
-      this.innerApiCalls.listProperties as gax.GaxCall,
+      this.innerApiCalls.listProperties as GaxCall,
       request,
       callSettings
     );
@@ -4666,7 +4666,7 @@ export class AnalyticsAdminServiceClient {
     this.initialize();
     return this.descriptors.page.listProperties.asyncIterate(
       this.innerApiCalls['listProperties'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.analytics.admin.v1beta.IProperty>;
   }
@@ -4822,7 +4822,7 @@ export class AnalyticsAdminServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listFirebaseLinks.createStream(
-      this.innerApiCalls.listFirebaseLinks as gax.GaxCall,
+      this.innerApiCalls.listFirebaseLinks as GaxCall,
       request,
       callSettings
     );
@@ -4877,7 +4877,7 @@ export class AnalyticsAdminServiceClient {
     this.initialize();
     return this.descriptors.page.listFirebaseLinks.asyncIterate(
       this.innerApiCalls['listFirebaseLinks'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.analytics.admin.v1beta.IFirebaseLink>;
   }
@@ -5030,7 +5030,7 @@ export class AnalyticsAdminServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listGoogleAdsLinks.createStream(
-      this.innerApiCalls.listGoogleAdsLinks as gax.GaxCall,
+      this.innerApiCalls.listGoogleAdsLinks as GaxCall,
       request,
       callSettings
     );
@@ -5084,7 +5084,7 @@ export class AnalyticsAdminServiceClient {
     this.initialize();
     return this.descriptors.page.listGoogleAdsLinks.asyncIterate(
       this.innerApiCalls['listGoogleAdsLinks'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.analytics.admin.v1beta.IGoogleAdsLink>;
   }
@@ -5245,7 +5245,7 @@ export class AnalyticsAdminServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listMeasurementProtocolSecrets.createStream(
-      this.innerApiCalls.listMeasurementProtocolSecrets as gax.GaxCall,
+      this.innerApiCalls.listMeasurementProtocolSecrets as GaxCall,
       request,
       callSettings
     );
@@ -5301,7 +5301,7 @@ export class AnalyticsAdminServiceClient {
     this.initialize();
     return this.descriptors.page.listMeasurementProtocolSecrets.asyncIterate(
       this.innerApiCalls['listMeasurementProtocolSecrets'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.analytics.admin.v1beta.IMeasurementProtocolSecret>;
   }
@@ -5489,7 +5489,7 @@ export class AnalyticsAdminServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.searchChangeHistoryEvents.createStream(
-      this.innerApiCalls.searchChangeHistoryEvents as gax.GaxCall,
+      this.innerApiCalls.searchChangeHistoryEvents as GaxCall,
       request,
       callSettings
     );
@@ -5558,7 +5558,7 @@ export class AnalyticsAdminServiceClient {
     this.initialize();
     return this.descriptors.page.searchChangeHistoryEvents.asyncIterate(
       this.innerApiCalls['searchChangeHistoryEvents'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.analytics.admin.v1beta.IChangeHistoryEvent>;
   }
@@ -5713,7 +5713,7 @@ export class AnalyticsAdminServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listConversionEvents.createStream(
-      this.innerApiCalls.listConversionEvents as gax.GaxCall,
+      this.innerApiCalls.listConversionEvents as GaxCall,
       request,
       callSettings
     );
@@ -5767,7 +5767,7 @@ export class AnalyticsAdminServiceClient {
     this.initialize();
     return this.descriptors.page.listConversionEvents.asyncIterate(
       this.innerApiCalls['listConversionEvents'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.analytics.admin.v1beta.IConversionEvent>;
   }
@@ -5920,7 +5920,7 @@ export class AnalyticsAdminServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listCustomDimensions.createStream(
-      this.innerApiCalls.listCustomDimensions as gax.GaxCall,
+      this.innerApiCalls.listCustomDimensions as GaxCall,
       request,
       callSettings
     );
@@ -5974,7 +5974,7 @@ export class AnalyticsAdminServiceClient {
     this.initialize();
     return this.descriptors.page.listCustomDimensions.asyncIterate(
       this.innerApiCalls['listCustomDimensions'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.analytics.admin.v1beta.ICustomDimension>;
   }
@@ -6127,7 +6127,7 @@ export class AnalyticsAdminServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listCustomMetrics.createStream(
-      this.innerApiCalls.listCustomMetrics as gax.GaxCall,
+      this.innerApiCalls.listCustomMetrics as GaxCall,
       request,
       callSettings
     );
@@ -6181,7 +6181,7 @@ export class AnalyticsAdminServiceClient {
     this.initialize();
     return this.descriptors.page.listCustomMetrics.asyncIterate(
       this.innerApiCalls['listCustomMetrics'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.analytics.admin.v1beta.ICustomMetric>;
   }
@@ -6334,7 +6334,7 @@ export class AnalyticsAdminServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listDataStreams.createStream(
-      this.innerApiCalls.listDataStreams as gax.GaxCall,
+      this.innerApiCalls.listDataStreams as GaxCall,
       request,
       callSettings
     );
@@ -6388,7 +6388,7 @@ export class AnalyticsAdminServiceClient {
     this.initialize();
     return this.descriptors.page.listDataStreams.asyncIterate(
       this.innerApiCalls['listDataStreams'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.analytics.admin.v1beta.IDataStream>;
   }

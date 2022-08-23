@@ -14,6 +14,339 @@
                     "java_package": "com.google.analytics.admin.v1alpha"
                   },
                   "nested": {
+                    "AccessDimension": {
+                      "fields": {
+                        "dimensionName": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "AccessMetric": {
+                      "fields": {
+                        "metricName": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "AccessDateRange": {
+                      "fields": {
+                        "startDate": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "endDate": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "AccessFilterExpression": {
+                      "oneofs": {
+                        "oneExpression": {
+                          "oneof": [
+                            "andGroup",
+                            "orGroup",
+                            "notExpression",
+                            "accessFilter"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "andGroup": {
+                          "type": "AccessFilterExpressionList",
+                          "id": 1
+                        },
+                        "orGroup": {
+                          "type": "AccessFilterExpressionList",
+                          "id": 2
+                        },
+                        "notExpression": {
+                          "type": "AccessFilterExpression",
+                          "id": 3
+                        },
+                        "accessFilter": {
+                          "type": "AccessFilter",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "AccessFilterExpressionList": {
+                      "fields": {
+                        "expressions": {
+                          "rule": "repeated",
+                          "type": "AccessFilterExpression",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "AccessFilter": {
+                      "oneofs": {
+                        "oneFilter": {
+                          "oneof": [
+                            "stringFilter",
+                            "inListFilter",
+                            "numericFilter",
+                            "betweenFilter"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "stringFilter": {
+                          "type": "AccessStringFilter",
+                          "id": 2
+                        },
+                        "inListFilter": {
+                          "type": "AccessInListFilter",
+                          "id": 3
+                        },
+                        "numericFilter": {
+                          "type": "AccessNumericFilter",
+                          "id": 4
+                        },
+                        "betweenFilter": {
+                          "type": "AccessBetweenFilter",
+                          "id": 5
+                        },
+                        "fieldName": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "AccessStringFilter": {
+                      "fields": {
+                        "matchType": {
+                          "type": "MatchType",
+                          "id": 1
+                        },
+                        "value": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "caseSensitive": {
+                          "type": "bool",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "MatchType": {
+                          "values": {
+                            "MATCH_TYPE_UNSPECIFIED": 0,
+                            "EXACT": 1,
+                            "BEGINS_WITH": 2,
+                            "ENDS_WITH": 3,
+                            "CONTAINS": 4,
+                            "FULL_REGEXP": 5,
+                            "PARTIAL_REGEXP": 6
+                          }
+                        }
+                      }
+                    },
+                    "AccessInListFilter": {
+                      "fields": {
+                        "values": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1
+                        },
+                        "caseSensitive": {
+                          "type": "bool",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "AccessNumericFilter": {
+                      "fields": {
+                        "operation": {
+                          "type": "Operation",
+                          "id": 1
+                        },
+                        "value": {
+                          "type": "NumericValue",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "Operation": {
+                          "values": {
+                            "OPERATION_UNSPECIFIED": 0,
+                            "EQUAL": 1,
+                            "LESS_THAN": 2,
+                            "LESS_THAN_OR_EQUAL": 3,
+                            "GREATER_THAN": 4,
+                            "GREATER_THAN_OR_EQUAL": 5
+                          }
+                        }
+                      }
+                    },
+                    "AccessBetweenFilter": {
+                      "fields": {
+                        "fromValue": {
+                          "type": "NumericValue",
+                          "id": 1
+                        },
+                        "toValue": {
+                          "type": "NumericValue",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "NumericValue": {
+                      "oneofs": {
+                        "oneValue": {
+                          "oneof": [
+                            "int64Value",
+                            "doubleValue"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "int64Value": {
+                          "type": "int64",
+                          "id": 1
+                        },
+                        "doubleValue": {
+                          "type": "double",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "AccessOrderBy": {
+                      "oneofs": {
+                        "oneOrderBy": {
+                          "oneof": [
+                            "metric",
+                            "dimension"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "metric": {
+                          "type": "MetricOrderBy",
+                          "id": 1
+                        },
+                        "dimension": {
+                          "type": "DimensionOrderBy",
+                          "id": 2
+                        },
+                        "desc": {
+                          "type": "bool",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "MetricOrderBy": {
+                          "fields": {
+                            "metricName": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "DimensionOrderBy": {
+                          "fields": {
+                            "dimensionName": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "orderType": {
+                              "type": "OrderType",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "OrderType": {
+                              "values": {
+                                "ORDER_TYPE_UNSPECIFIED": 0,
+                                "ALPHANUMERIC": 1,
+                                "CASE_INSENSITIVE_ALPHANUMERIC": 2,
+                                "NUMERIC": 3
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "AccessDimensionHeader": {
+                      "fields": {
+                        "dimensionName": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "AccessMetricHeader": {
+                      "fields": {
+                        "metricName": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "AccessRow": {
+                      "fields": {
+                        "dimensionValues": {
+                          "rule": "repeated",
+                          "type": "AccessDimensionValue",
+                          "id": 1
+                        },
+                        "metricValues": {
+                          "rule": "repeated",
+                          "type": "AccessMetricValue",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "AccessDimensionValue": {
+                      "fields": {
+                        "value": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "AccessMetricValue": {
+                      "fields": {
+                        "value": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "AccessQuota": {
+                      "fields": {
+                        "tokensPerDay": {
+                          "type": "AccessQuotaStatus",
+                          "id": 1
+                        },
+                        "tokensPerHour": {
+                          "type": "AccessQuotaStatus",
+                          "id": 2
+                        },
+                        "concurrentRequests": {
+                          "type": "AccessQuotaStatus",
+                          "id": 3
+                        },
+                        "serverErrorsPerProjectPerHour": {
+                          "type": "AccessQuotaStatus",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "AccessQuotaStatus": {
+                      "fields": {
+                        "consumed": {
+                          "type": "int32",
+                          "id": 1
+                        },
+                        "remaining": {
+                          "type": "int32",
+                          "id": 2
+                        }
+                      }
+                    },
                     "AnalyticsAdminService": {
                       "options": {
                         "(google.api.default_host)": "analyticsadmin.googleapis.com",
@@ -1363,6 +1696,231 @@
                               "(google.api.method_signature)": "name"
                             }
                           ]
+                        },
+                        "GetAudience": {
+                          "requestType": "GetAudienceRequest",
+                          "responseType": "Audience",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{name=properties/*/audiences/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{name=properties/*/audiences/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListAudiences": {
+                          "requestType": "ListAudiencesRequest",
+                          "responseType": "ListAudiencesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{parent=properties/*}/audiences",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{parent=properties/*}/audiences"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "CreateAudience": {
+                          "requestType": "CreateAudienceRequest",
+                          "responseType": "Audience",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/{parent=properties/*}/audiences",
+                            "(google.api.http).body": "audience",
+                            "(google.api.method_signature)": "parent,audience"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{parent=properties/*}/audiences",
+                                "body": "audience"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,audience"
+                            }
+                          ]
+                        },
+                        "UpdateAudience": {
+                          "requestType": "UpdateAudienceRequest",
+                          "responseType": "Audience",
+                          "options": {
+                            "(google.api.http).patch": "/v1alpha/{audience.name=properties/*/audiences/*}",
+                            "(google.api.http).body": "audience",
+                            "(google.api.method_signature)": "audience,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1alpha/{audience.name=properties/*/audiences/*}",
+                                "body": "audience"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "audience,update_mask"
+                            }
+                          ]
+                        },
+                        "ArchiveAudience": {
+                          "requestType": "ArchiveAudienceRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/{name=properties/*/audiences/*}:archive",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{name=properties/*/audiences/*}:archive",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
+                        "GetAttributionSettings": {
+                          "requestType": "GetAttributionSettingsRequest",
+                          "responseType": "AttributionSettings",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{name=properties/*/attributionSettings}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{name=properties/*/attributionSettings}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "UpdateAttributionSettings": {
+                          "requestType": "UpdateAttributionSettingsRequest",
+                          "responseType": "AttributionSettings",
+                          "options": {
+                            "(google.api.http).patch": "/v1alpha/{attribution_settings.name=properties/*/attributionSettings}",
+                            "(google.api.http).body": "attribution_settings",
+                            "(google.api.method_signature)": "attribution_settings,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1alpha/{attribution_settings.name=properties/*/attributionSettings}",
+                                "body": "attribution_settings"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "attribution_settings,update_mask"
+                            }
+                          ]
+                        },
+                        "RunAccessReport": {
+                          "requestType": "RunAccessReportRequest",
+                          "responseType": "RunAccessReportResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/{entity=properties/*}:runAccessReport",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{entity=properties/*}:runAccessReport",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "RunAccessReportRequest": {
+                      "fields": {
+                        "entity": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "dimensions": {
+                          "rule": "repeated",
+                          "type": "AccessDimension",
+                          "id": 2
+                        },
+                        "metrics": {
+                          "rule": "repeated",
+                          "type": "AccessMetric",
+                          "id": 3
+                        },
+                        "dateRanges": {
+                          "rule": "repeated",
+                          "type": "AccessDateRange",
+                          "id": 4
+                        },
+                        "dimensionFilter": {
+                          "type": "AccessFilterExpression",
+                          "id": 5
+                        },
+                        "metricFilter": {
+                          "type": "AccessFilterExpression",
+                          "id": 6
+                        },
+                        "offset": {
+                          "type": "int64",
+                          "id": 7
+                        },
+                        "limit": {
+                          "type": "int64",
+                          "id": 8
+                        },
+                        "timeZone": {
+                          "type": "string",
+                          "id": 9
+                        },
+                        "orderBys": {
+                          "rule": "repeated",
+                          "type": "AccessOrderBy",
+                          "id": 10
+                        },
+                        "returnEntityQuota": {
+                          "type": "bool",
+                          "id": 11
+                        }
+                      }
+                    },
+                    "RunAccessReportResponse": {
+                      "fields": {
+                        "dimensionHeaders": {
+                          "rule": "repeated",
+                          "type": "AccessDimensionHeader",
+                          "id": 1
+                        },
+                        "metricHeaders": {
+                          "rule": "repeated",
+                          "type": "AccessMetricHeader",
+                          "id": 2
+                        },
+                        "rows": {
+                          "rule": "repeated",
+                          "type": "AccessRow",
+                          "id": 3
+                        },
+                        "rowCount": {
+                          "type": "int32",
+                          "id": 4
+                        },
+                        "quota": {
+                          "type": "AccessQuota",
+                          "id": 5
                         }
                       }
                     },
@@ -2786,6 +3344,593 @@
                         }
                       }
                     },
+                    "GetAudienceRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/Audience"
+                          }
+                        }
+                      }
+                    },
+                    "ListAudiencesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "analyticsadmin.googleapis.com/Audience"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListAudiencesResponse": {
+                      "fields": {
+                        "audiences": {
+                          "rule": "repeated",
+                          "type": "Audience",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "CreateAudienceRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "analyticsadmin.googleapis.com/Audience"
+                          }
+                        },
+                        "audience": {
+                          "type": "Audience",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateAudienceRequest": {
+                      "fields": {
+                        "audience": {
+                          "type": "Audience",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ArchiveAudienceRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "analyticsadmin.googleapis.com/Audience"
+                          }
+                        }
+                      }
+                    },
+                    "GetAttributionSettingsRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/AttributionSettings"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateAttributionSettingsRequest": {
+                      "fields": {
+                        "attributionSettings": {
+                          "type": "AttributionSettings",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "AudienceFilterScope": {
+                      "values": {
+                        "AUDIENCE_FILTER_SCOPE_UNSPECIFIED": 0,
+                        "AUDIENCE_FILTER_SCOPE_WITHIN_SAME_EVENT": 1,
+                        "AUDIENCE_FILTER_SCOPE_WITHIN_SAME_SESSION": 2,
+                        "AUDIENCE_FILTER_SCOPE_ACROSS_ALL_SESSIONS": 3
+                      }
+                    },
+                    "AudienceDimensionOrMetricFilter": {
+                      "oneofs": {
+                        "oneFilter": {
+                          "oneof": [
+                            "stringFilter",
+                            "inListFilter",
+                            "numericFilter",
+                            "betweenFilter"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "stringFilter": {
+                          "type": "StringFilter",
+                          "id": 2
+                        },
+                        "inListFilter": {
+                          "type": "InListFilter",
+                          "id": 3
+                        },
+                        "numericFilter": {
+                          "type": "NumericFilter",
+                          "id": 4
+                        },
+                        "betweenFilter": {
+                          "type": "BetweenFilter",
+                          "id": 5
+                        },
+                        "fieldName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "atAnyPointInTime": {
+                          "type": "bool",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "inAnyNDayPeriod": {
+                          "type": "int32",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "StringFilter": {
+                          "fields": {
+                            "matchType": {
+                              "type": "MatchType",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "value": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "caseSensitive": {
+                              "type": "bool",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "MatchType": {
+                              "values": {
+                                "MATCH_TYPE_UNSPECIFIED": 0,
+                                "EXACT": 1,
+                                "BEGINS_WITH": 2,
+                                "ENDS_WITH": 3,
+                                "CONTAINS": 4,
+                                "FULL_REGEXP": 5,
+                                "PARTIAL_REGEXP": 6
+                              }
+                            }
+                          }
+                        },
+                        "InListFilter": {
+                          "fields": {
+                            "values": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "caseSensitive": {
+                              "type": "bool",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "NumericValue": {
+                          "oneofs": {
+                            "oneValue": {
+                              "oneof": [
+                                "int64Value",
+                                "doubleValue"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "int64Value": {
+                              "type": "int64",
+                              "id": 1
+                            },
+                            "doubleValue": {
+                              "type": "double",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "NumericFilter": {
+                          "fields": {
+                            "operation": {
+                              "type": "Operation",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "value": {
+                              "type": "NumericValue",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "Operation": {
+                              "values": {
+                                "OPERATION_UNSPECIFIED": 0,
+                                "EQUAL": 1,
+                                "LESS_THAN": 2,
+                                "LESS_THAN_OR_EQUAL": 3,
+                                "GREATER_THAN": 4,
+                                "GREATER_THAN_OR_EQUAL": 5
+                              }
+                            }
+                          }
+                        },
+                        "BetweenFilter": {
+                          "fields": {
+                            "fromValue": {
+                              "type": "NumericValue",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "toValue": {
+                              "type": "NumericValue",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "AudienceEventFilter": {
+                      "fields": {
+                        "eventName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "eventParameterFilterExpression": {
+                          "type": "AudienceFilterExpression",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "AudienceFilterExpression": {
+                      "oneofs": {
+                        "expr": {
+                          "oneof": [
+                            "andGroup",
+                            "orGroup",
+                            "notExpression",
+                            "dimensionOrMetricFilter",
+                            "eventFilter"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "andGroup": {
+                          "type": "AudienceFilterExpressionList",
+                          "id": 1
+                        },
+                        "orGroup": {
+                          "type": "AudienceFilterExpressionList",
+                          "id": 2
+                        },
+                        "notExpression": {
+                          "type": "AudienceFilterExpression",
+                          "id": 3
+                        },
+                        "dimensionOrMetricFilter": {
+                          "type": "AudienceDimensionOrMetricFilter",
+                          "id": 4
+                        },
+                        "eventFilter": {
+                          "type": "AudienceEventFilter",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "AudienceFilterExpressionList": {
+                      "fields": {
+                        "filterExpressions": {
+                          "rule": "repeated",
+                          "type": "AudienceFilterExpression",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "AudienceSimpleFilter": {
+                      "fields": {
+                        "scope": {
+                          "type": "AudienceFilterScope",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "filterExpression": {
+                          "type": "AudienceFilterExpression",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        }
+                      }
+                    },
+                    "AudienceSequenceFilter": {
+                      "fields": {
+                        "scope": {
+                          "type": "AudienceFilterScope",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "sequenceMaximumDuration": {
+                          "type": "google.protobuf.Duration",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "sequenceSteps": {
+                          "rule": "repeated",
+                          "type": "AudienceSequenceStep",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "AudienceSequenceStep": {
+                          "fields": {
+                            "scope": {
+                              "type": "AudienceFilterScope",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "IMMUTABLE"
+                              }
+                            },
+                            "immediatelyFollows": {
+                              "type": "bool",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "constraintDuration": {
+                              "type": "google.protobuf.Duration",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "filterExpression": {
+                              "type": "AudienceFilterExpression",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "IMMUTABLE"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "AudienceFilterClause": {
+                      "oneofs": {
+                        "filter": {
+                          "oneof": [
+                            "simpleFilter",
+                            "sequenceFilter"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "simpleFilter": {
+                          "type": "AudienceSimpleFilter",
+                          "id": 2
+                        },
+                        "sequenceFilter": {
+                          "type": "AudienceSequenceFilter",
+                          "id": 3
+                        },
+                        "clauseType": {
+                          "type": "AudienceClauseType",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "AudienceClauseType": {
+                          "values": {
+                            "AUDIENCE_CLAUSE_TYPE_UNSPECIFIED": 0,
+                            "INCLUDE": 1,
+                            "EXCLUDE": 2
+                          }
+                        }
+                      }
+                    },
+                    "AudienceEventTrigger": {
+                      "fields": {
+                        "eventName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "logCondition": {
+                          "type": "LogCondition",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "LogCondition": {
+                          "values": {
+                            "LOG_CONDITION_UNSPECIFIED": 0,
+                            "AUDIENCE_JOINED": 1,
+                            "AUDIENCE_MEMBERSHIP_RENEWED": 2
+                          }
+                        }
+                      }
+                    },
+                    "Audience": {
+                      "options": {
+                        "(google.api.resource).type": "analyticsadmin.googleapis.com/Audience",
+                        "(google.api.resource).pattern": "properties/{property}/audiences/{audience}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "membershipDurationDays": {
+                          "type": "int32",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "adsPersonalizationEnabled": {
+                          "type": "bool",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "eventTrigger": {
+                          "type": "AudienceEventTrigger",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "exclusionDurationMode": {
+                          "type": "AudienceExclusionDurationMode",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "filterClauses": {
+                          "rule": "repeated",
+                          "type": "AudienceFilterClause",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "UNORDERED_LIST"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "AudienceExclusionDurationMode": {
+                          "values": {
+                            "AUDIENCE_EXCLUSION_DURATION_MODE_UNSPECIFIED": 0,
+                            "EXCLUDE_TEMPORARILY": 1,
+                            "EXCLUDE_PERMANENTLY": 2
+                          }
+                        }
+                      }
+                    },
                     "IndustryCategory": {
                       "values": {
                         "INDUSTRY_CATEGORY_UNSPECIFIED": 0,
@@ -2855,7 +4000,9 @@
                         "DATA_RETENTION_SETTINGS": 13,
                         "DISPLAY_VIDEO_360_ADVERTISER_LINK": 14,
                         "DISPLAY_VIDEO_360_ADVERTISER_LINK_PROPOSAL": 15,
-                        "DATA_STREAM": 18
+                        "SEARCH_ADS_360_LINK": 16,
+                        "DATA_STREAM": 18,
+                        "ATTRIBUTION_SETTINGS": 20
                       }
                     },
                     "GoogleSignalsState": {
@@ -2888,6 +4035,14 @@
                         "DECLINED": 4,
                         "EXPIRED": 5,
                         "OBSOLETE": 6
+                      }
+                    },
+                    "PropertyType": {
+                      "values": {
+                        "PROPERTY_TYPE_UNSPECIFIED": 0,
+                        "PROPERTY_TYPE_ORDINARY": 1,
+                        "PROPERTY_TYPE_SUBPROPERTY": 2,
+                        "PROPERTY_TYPE_ROLLUP": 3
                       }
                     },
                     "Account": {
@@ -2948,6 +4103,13 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "propertyType": {
+                          "type": "PropertyType",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
                           }
                         },
                         "createTime": {
@@ -3385,6 +4547,14 @@
                         "displayName": {
                           "type": "string",
                           "id": 2
+                        },
+                        "propertyType": {
+                          "type": "PropertyType",
+                          "id": 3
+                        },
+                        "parent": {
+                          "type": "string",
+                          "id": 4
                         }
                       }
                     },
@@ -3482,7 +4652,8 @@
                                 "customDimension",
                                 "customMetric",
                                 "dataRetentionSettings",
-                                "dataStream"
+                                "dataStream",
+                                "attributionSettings"
                               ]
                             }
                           },
@@ -3538,6 +4709,10 @@
                             "dataStream": {
                               "type": "DataStream",
                               "id": 18
+                            },
+                            "attributionSettings": {
+                              "type": "AttributionSettings",
+                              "id": 20
                             }
                           }
                         }
@@ -3926,6 +5101,71 @@
                             "TWENTY_SIX_MONTHS": 4,
                             "THIRTY_EIGHT_MONTHS": 5,
                             "FIFTY_MONTHS": 6
+                          }
+                        }
+                      }
+                    },
+                    "AttributionSettings": {
+                      "options": {
+                        "(google.api.resource).type": "analyticsadmin.googleapis.com/AttributionSettings",
+                        "(google.api.resource).pattern": "properties/{property}/attributionSettings"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "acquisitionConversionEventLookbackWindow": {
+                          "type": "AcquisitionConversionEventLookbackWindow",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "otherConversionEventLookbackWindow": {
+                          "type": "OtherConversionEventLookbackWindow",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "reportingAttributionModel": {
+                          "type": "ReportingAttributionModel",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "AcquisitionConversionEventLookbackWindow": {
+                          "values": {
+                            "ACQUISITION_CONVERSION_EVENT_LOOKBACK_WINDOW_UNSPECIFIED": 0,
+                            "ACQUISITION_CONVERSION_EVENT_LOOKBACK_WINDOW_7_DAYS": 1,
+                            "ACQUISITION_CONVERSION_EVENT_LOOKBACK_WINDOW_30_DAYS": 2
+                          }
+                        },
+                        "OtherConversionEventLookbackWindow": {
+                          "values": {
+                            "OTHER_CONVERSION_EVENT_LOOKBACK_WINDOW_UNSPECIFIED": 0,
+                            "OTHER_CONVERSION_EVENT_LOOKBACK_WINDOW_30_DAYS": 1,
+                            "OTHER_CONVERSION_EVENT_LOOKBACK_WINDOW_60_DAYS": 2,
+                            "OTHER_CONVERSION_EVENT_LOOKBACK_WINDOW_90_DAYS": 3
+                          }
+                        },
+                        "ReportingAttributionModel": {
+                          "values": {
+                            "REPORTING_ATTRIBUTION_MODEL_UNSPECIFIED": 0,
+                            "CROSS_CHANNEL_DATA_DRIVEN": 1,
+                            "CROSS_CHANNEL_LAST_CLICK": 2,
+                            "CROSS_CHANNEL_FIRST_CLICK": 3,
+                            "CROSS_CHANNEL_LINEAR": 4,
+                            "CROSS_CHANNEL_POSITION_BASED": 5,
+                            "CROSS_CHANNEL_TIME_DECAY": 6,
+                            "ADS_PREFERRED_LAST_CLICK": 7
                           }
                         }
                       }
@@ -7745,6 +8985,18 @@
                       "id": 4
                     }
                   }
+                }
+              }
+            },
+            "Duration": {
+              "fields": {
+                "seconds": {
+                  "type": "int64",
+                  "id": 1
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 2
                 }
               }
             },

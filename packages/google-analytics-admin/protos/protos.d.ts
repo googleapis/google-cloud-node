@@ -26,6 +26,2081 @@ export namespace google {
             /** Namespace v1alpha. */
             namespace v1alpha {
 
+                /** Properties of an AccessDimension. */
+                interface IAccessDimension {
+
+                    /** AccessDimension dimensionName */
+                    dimensionName?: (string|null);
+                }
+
+                /** Represents an AccessDimension. */
+                class AccessDimension implements IAccessDimension {
+
+                    /**
+                     * Constructs a new AccessDimension.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IAccessDimension);
+
+                    /** AccessDimension dimensionName. */
+                    public dimensionName: string;
+
+                    /**
+                     * Creates a new AccessDimension instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AccessDimension instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IAccessDimension): google.analytics.admin.v1alpha.AccessDimension;
+
+                    /**
+                     * Encodes the specified AccessDimension message. Does not implicitly {@link google.analytics.admin.v1alpha.AccessDimension.verify|verify} messages.
+                     * @param message AccessDimension message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IAccessDimension, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AccessDimension message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.AccessDimension.verify|verify} messages.
+                     * @param message AccessDimension message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IAccessDimension, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AccessDimension message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AccessDimension
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.AccessDimension;
+
+                    /**
+                     * Decodes an AccessDimension message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AccessDimension
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.AccessDimension;
+
+                    /**
+                     * Verifies an AccessDimension message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AccessDimension message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AccessDimension
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.AccessDimension;
+
+                    /**
+                     * Creates a plain object from an AccessDimension message. Also converts values to other types if specified.
+                     * @param message AccessDimension
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.AccessDimension, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AccessDimension to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an AccessMetric. */
+                interface IAccessMetric {
+
+                    /** AccessMetric metricName */
+                    metricName?: (string|null);
+                }
+
+                /** Represents an AccessMetric. */
+                class AccessMetric implements IAccessMetric {
+
+                    /**
+                     * Constructs a new AccessMetric.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IAccessMetric);
+
+                    /** AccessMetric metricName. */
+                    public metricName: string;
+
+                    /**
+                     * Creates a new AccessMetric instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AccessMetric instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IAccessMetric): google.analytics.admin.v1alpha.AccessMetric;
+
+                    /**
+                     * Encodes the specified AccessMetric message. Does not implicitly {@link google.analytics.admin.v1alpha.AccessMetric.verify|verify} messages.
+                     * @param message AccessMetric message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IAccessMetric, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AccessMetric message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.AccessMetric.verify|verify} messages.
+                     * @param message AccessMetric message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IAccessMetric, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AccessMetric message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AccessMetric
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.AccessMetric;
+
+                    /**
+                     * Decodes an AccessMetric message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AccessMetric
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.AccessMetric;
+
+                    /**
+                     * Verifies an AccessMetric message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AccessMetric message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AccessMetric
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.AccessMetric;
+
+                    /**
+                     * Creates a plain object from an AccessMetric message. Also converts values to other types if specified.
+                     * @param message AccessMetric
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.AccessMetric, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AccessMetric to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an AccessDateRange. */
+                interface IAccessDateRange {
+
+                    /** AccessDateRange startDate */
+                    startDate?: (string|null);
+
+                    /** AccessDateRange endDate */
+                    endDate?: (string|null);
+                }
+
+                /** Represents an AccessDateRange. */
+                class AccessDateRange implements IAccessDateRange {
+
+                    /**
+                     * Constructs a new AccessDateRange.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IAccessDateRange);
+
+                    /** AccessDateRange startDate. */
+                    public startDate: string;
+
+                    /** AccessDateRange endDate. */
+                    public endDate: string;
+
+                    /**
+                     * Creates a new AccessDateRange instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AccessDateRange instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IAccessDateRange): google.analytics.admin.v1alpha.AccessDateRange;
+
+                    /**
+                     * Encodes the specified AccessDateRange message. Does not implicitly {@link google.analytics.admin.v1alpha.AccessDateRange.verify|verify} messages.
+                     * @param message AccessDateRange message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IAccessDateRange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AccessDateRange message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.AccessDateRange.verify|verify} messages.
+                     * @param message AccessDateRange message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IAccessDateRange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AccessDateRange message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AccessDateRange
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.AccessDateRange;
+
+                    /**
+                     * Decodes an AccessDateRange message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AccessDateRange
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.AccessDateRange;
+
+                    /**
+                     * Verifies an AccessDateRange message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AccessDateRange message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AccessDateRange
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.AccessDateRange;
+
+                    /**
+                     * Creates a plain object from an AccessDateRange message. Also converts values to other types if specified.
+                     * @param message AccessDateRange
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.AccessDateRange, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AccessDateRange to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an AccessFilterExpression. */
+                interface IAccessFilterExpression {
+
+                    /** AccessFilterExpression andGroup */
+                    andGroup?: (google.analytics.admin.v1alpha.IAccessFilterExpressionList|null);
+
+                    /** AccessFilterExpression orGroup */
+                    orGroup?: (google.analytics.admin.v1alpha.IAccessFilterExpressionList|null);
+
+                    /** AccessFilterExpression notExpression */
+                    notExpression?: (google.analytics.admin.v1alpha.IAccessFilterExpression|null);
+
+                    /** AccessFilterExpression accessFilter */
+                    accessFilter?: (google.analytics.admin.v1alpha.IAccessFilter|null);
+                }
+
+                /** Represents an AccessFilterExpression. */
+                class AccessFilterExpression implements IAccessFilterExpression {
+
+                    /**
+                     * Constructs a new AccessFilterExpression.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IAccessFilterExpression);
+
+                    /** AccessFilterExpression andGroup. */
+                    public andGroup?: (google.analytics.admin.v1alpha.IAccessFilterExpressionList|null);
+
+                    /** AccessFilterExpression orGroup. */
+                    public orGroup?: (google.analytics.admin.v1alpha.IAccessFilterExpressionList|null);
+
+                    /** AccessFilterExpression notExpression. */
+                    public notExpression?: (google.analytics.admin.v1alpha.IAccessFilterExpression|null);
+
+                    /** AccessFilterExpression accessFilter. */
+                    public accessFilter?: (google.analytics.admin.v1alpha.IAccessFilter|null);
+
+                    /** AccessFilterExpression oneExpression. */
+                    public oneExpression?: ("andGroup"|"orGroup"|"notExpression"|"accessFilter");
+
+                    /**
+                     * Creates a new AccessFilterExpression instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AccessFilterExpression instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IAccessFilterExpression): google.analytics.admin.v1alpha.AccessFilterExpression;
+
+                    /**
+                     * Encodes the specified AccessFilterExpression message. Does not implicitly {@link google.analytics.admin.v1alpha.AccessFilterExpression.verify|verify} messages.
+                     * @param message AccessFilterExpression message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IAccessFilterExpression, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AccessFilterExpression message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.AccessFilterExpression.verify|verify} messages.
+                     * @param message AccessFilterExpression message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IAccessFilterExpression, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AccessFilterExpression message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AccessFilterExpression
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.AccessFilterExpression;
+
+                    /**
+                     * Decodes an AccessFilterExpression message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AccessFilterExpression
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.AccessFilterExpression;
+
+                    /**
+                     * Verifies an AccessFilterExpression message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AccessFilterExpression message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AccessFilterExpression
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.AccessFilterExpression;
+
+                    /**
+                     * Creates a plain object from an AccessFilterExpression message. Also converts values to other types if specified.
+                     * @param message AccessFilterExpression
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.AccessFilterExpression, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AccessFilterExpression to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an AccessFilterExpressionList. */
+                interface IAccessFilterExpressionList {
+
+                    /** AccessFilterExpressionList expressions */
+                    expressions?: (google.analytics.admin.v1alpha.IAccessFilterExpression[]|null);
+                }
+
+                /** Represents an AccessFilterExpressionList. */
+                class AccessFilterExpressionList implements IAccessFilterExpressionList {
+
+                    /**
+                     * Constructs a new AccessFilterExpressionList.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IAccessFilterExpressionList);
+
+                    /** AccessFilterExpressionList expressions. */
+                    public expressions: google.analytics.admin.v1alpha.IAccessFilterExpression[];
+
+                    /**
+                     * Creates a new AccessFilterExpressionList instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AccessFilterExpressionList instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IAccessFilterExpressionList): google.analytics.admin.v1alpha.AccessFilterExpressionList;
+
+                    /**
+                     * Encodes the specified AccessFilterExpressionList message. Does not implicitly {@link google.analytics.admin.v1alpha.AccessFilterExpressionList.verify|verify} messages.
+                     * @param message AccessFilterExpressionList message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IAccessFilterExpressionList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AccessFilterExpressionList message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.AccessFilterExpressionList.verify|verify} messages.
+                     * @param message AccessFilterExpressionList message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IAccessFilterExpressionList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AccessFilterExpressionList message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AccessFilterExpressionList
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.AccessFilterExpressionList;
+
+                    /**
+                     * Decodes an AccessFilterExpressionList message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AccessFilterExpressionList
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.AccessFilterExpressionList;
+
+                    /**
+                     * Verifies an AccessFilterExpressionList message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AccessFilterExpressionList message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AccessFilterExpressionList
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.AccessFilterExpressionList;
+
+                    /**
+                     * Creates a plain object from an AccessFilterExpressionList message. Also converts values to other types if specified.
+                     * @param message AccessFilterExpressionList
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.AccessFilterExpressionList, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AccessFilterExpressionList to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an AccessFilter. */
+                interface IAccessFilter {
+
+                    /** AccessFilter stringFilter */
+                    stringFilter?: (google.analytics.admin.v1alpha.IAccessStringFilter|null);
+
+                    /** AccessFilter inListFilter */
+                    inListFilter?: (google.analytics.admin.v1alpha.IAccessInListFilter|null);
+
+                    /** AccessFilter numericFilter */
+                    numericFilter?: (google.analytics.admin.v1alpha.IAccessNumericFilter|null);
+
+                    /** AccessFilter betweenFilter */
+                    betweenFilter?: (google.analytics.admin.v1alpha.IAccessBetweenFilter|null);
+
+                    /** AccessFilter fieldName */
+                    fieldName?: (string|null);
+                }
+
+                /** Represents an AccessFilter. */
+                class AccessFilter implements IAccessFilter {
+
+                    /**
+                     * Constructs a new AccessFilter.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IAccessFilter);
+
+                    /** AccessFilter stringFilter. */
+                    public stringFilter?: (google.analytics.admin.v1alpha.IAccessStringFilter|null);
+
+                    /** AccessFilter inListFilter. */
+                    public inListFilter?: (google.analytics.admin.v1alpha.IAccessInListFilter|null);
+
+                    /** AccessFilter numericFilter. */
+                    public numericFilter?: (google.analytics.admin.v1alpha.IAccessNumericFilter|null);
+
+                    /** AccessFilter betweenFilter. */
+                    public betweenFilter?: (google.analytics.admin.v1alpha.IAccessBetweenFilter|null);
+
+                    /** AccessFilter fieldName. */
+                    public fieldName: string;
+
+                    /** AccessFilter oneFilter. */
+                    public oneFilter?: ("stringFilter"|"inListFilter"|"numericFilter"|"betweenFilter");
+
+                    /**
+                     * Creates a new AccessFilter instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AccessFilter instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IAccessFilter): google.analytics.admin.v1alpha.AccessFilter;
+
+                    /**
+                     * Encodes the specified AccessFilter message. Does not implicitly {@link google.analytics.admin.v1alpha.AccessFilter.verify|verify} messages.
+                     * @param message AccessFilter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IAccessFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AccessFilter message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.AccessFilter.verify|verify} messages.
+                     * @param message AccessFilter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IAccessFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AccessFilter message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AccessFilter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.AccessFilter;
+
+                    /**
+                     * Decodes an AccessFilter message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AccessFilter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.AccessFilter;
+
+                    /**
+                     * Verifies an AccessFilter message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AccessFilter message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AccessFilter
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.AccessFilter;
+
+                    /**
+                     * Creates a plain object from an AccessFilter message. Also converts values to other types if specified.
+                     * @param message AccessFilter
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.AccessFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AccessFilter to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an AccessStringFilter. */
+                interface IAccessStringFilter {
+
+                    /** AccessStringFilter matchType */
+                    matchType?: (google.analytics.admin.v1alpha.AccessStringFilter.MatchType|keyof typeof google.analytics.admin.v1alpha.AccessStringFilter.MatchType|null);
+
+                    /** AccessStringFilter value */
+                    value?: (string|null);
+
+                    /** AccessStringFilter caseSensitive */
+                    caseSensitive?: (boolean|null);
+                }
+
+                /** Represents an AccessStringFilter. */
+                class AccessStringFilter implements IAccessStringFilter {
+
+                    /**
+                     * Constructs a new AccessStringFilter.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IAccessStringFilter);
+
+                    /** AccessStringFilter matchType. */
+                    public matchType: (google.analytics.admin.v1alpha.AccessStringFilter.MatchType|keyof typeof google.analytics.admin.v1alpha.AccessStringFilter.MatchType);
+
+                    /** AccessStringFilter value. */
+                    public value: string;
+
+                    /** AccessStringFilter caseSensitive. */
+                    public caseSensitive: boolean;
+
+                    /**
+                     * Creates a new AccessStringFilter instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AccessStringFilter instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IAccessStringFilter): google.analytics.admin.v1alpha.AccessStringFilter;
+
+                    /**
+                     * Encodes the specified AccessStringFilter message. Does not implicitly {@link google.analytics.admin.v1alpha.AccessStringFilter.verify|verify} messages.
+                     * @param message AccessStringFilter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IAccessStringFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AccessStringFilter message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.AccessStringFilter.verify|verify} messages.
+                     * @param message AccessStringFilter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IAccessStringFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AccessStringFilter message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AccessStringFilter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.AccessStringFilter;
+
+                    /**
+                     * Decodes an AccessStringFilter message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AccessStringFilter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.AccessStringFilter;
+
+                    /**
+                     * Verifies an AccessStringFilter message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AccessStringFilter message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AccessStringFilter
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.AccessStringFilter;
+
+                    /**
+                     * Creates a plain object from an AccessStringFilter message. Also converts values to other types if specified.
+                     * @param message AccessStringFilter
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.AccessStringFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AccessStringFilter to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace AccessStringFilter {
+
+                    /** MatchType enum. */
+                    enum MatchType {
+                        MATCH_TYPE_UNSPECIFIED = 0,
+                        EXACT = 1,
+                        BEGINS_WITH = 2,
+                        ENDS_WITH = 3,
+                        CONTAINS = 4,
+                        FULL_REGEXP = 5,
+                        PARTIAL_REGEXP = 6
+                    }
+                }
+
+                /** Properties of an AccessInListFilter. */
+                interface IAccessInListFilter {
+
+                    /** AccessInListFilter values */
+                    values?: (string[]|null);
+
+                    /** AccessInListFilter caseSensitive */
+                    caseSensitive?: (boolean|null);
+                }
+
+                /** Represents an AccessInListFilter. */
+                class AccessInListFilter implements IAccessInListFilter {
+
+                    /**
+                     * Constructs a new AccessInListFilter.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IAccessInListFilter);
+
+                    /** AccessInListFilter values. */
+                    public values: string[];
+
+                    /** AccessInListFilter caseSensitive. */
+                    public caseSensitive: boolean;
+
+                    /**
+                     * Creates a new AccessInListFilter instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AccessInListFilter instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IAccessInListFilter): google.analytics.admin.v1alpha.AccessInListFilter;
+
+                    /**
+                     * Encodes the specified AccessInListFilter message. Does not implicitly {@link google.analytics.admin.v1alpha.AccessInListFilter.verify|verify} messages.
+                     * @param message AccessInListFilter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IAccessInListFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AccessInListFilter message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.AccessInListFilter.verify|verify} messages.
+                     * @param message AccessInListFilter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IAccessInListFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AccessInListFilter message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AccessInListFilter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.AccessInListFilter;
+
+                    /**
+                     * Decodes an AccessInListFilter message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AccessInListFilter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.AccessInListFilter;
+
+                    /**
+                     * Verifies an AccessInListFilter message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AccessInListFilter message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AccessInListFilter
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.AccessInListFilter;
+
+                    /**
+                     * Creates a plain object from an AccessInListFilter message. Also converts values to other types if specified.
+                     * @param message AccessInListFilter
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.AccessInListFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AccessInListFilter to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an AccessNumericFilter. */
+                interface IAccessNumericFilter {
+
+                    /** AccessNumericFilter operation */
+                    operation?: (google.analytics.admin.v1alpha.AccessNumericFilter.Operation|keyof typeof google.analytics.admin.v1alpha.AccessNumericFilter.Operation|null);
+
+                    /** AccessNumericFilter value */
+                    value?: (google.analytics.admin.v1alpha.INumericValue|null);
+                }
+
+                /** Represents an AccessNumericFilter. */
+                class AccessNumericFilter implements IAccessNumericFilter {
+
+                    /**
+                     * Constructs a new AccessNumericFilter.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IAccessNumericFilter);
+
+                    /** AccessNumericFilter operation. */
+                    public operation: (google.analytics.admin.v1alpha.AccessNumericFilter.Operation|keyof typeof google.analytics.admin.v1alpha.AccessNumericFilter.Operation);
+
+                    /** AccessNumericFilter value. */
+                    public value?: (google.analytics.admin.v1alpha.INumericValue|null);
+
+                    /**
+                     * Creates a new AccessNumericFilter instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AccessNumericFilter instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IAccessNumericFilter): google.analytics.admin.v1alpha.AccessNumericFilter;
+
+                    /**
+                     * Encodes the specified AccessNumericFilter message. Does not implicitly {@link google.analytics.admin.v1alpha.AccessNumericFilter.verify|verify} messages.
+                     * @param message AccessNumericFilter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IAccessNumericFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AccessNumericFilter message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.AccessNumericFilter.verify|verify} messages.
+                     * @param message AccessNumericFilter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IAccessNumericFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AccessNumericFilter message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AccessNumericFilter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.AccessNumericFilter;
+
+                    /**
+                     * Decodes an AccessNumericFilter message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AccessNumericFilter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.AccessNumericFilter;
+
+                    /**
+                     * Verifies an AccessNumericFilter message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AccessNumericFilter message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AccessNumericFilter
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.AccessNumericFilter;
+
+                    /**
+                     * Creates a plain object from an AccessNumericFilter message. Also converts values to other types if specified.
+                     * @param message AccessNumericFilter
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.AccessNumericFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AccessNumericFilter to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace AccessNumericFilter {
+
+                    /** Operation enum. */
+                    enum Operation {
+                        OPERATION_UNSPECIFIED = 0,
+                        EQUAL = 1,
+                        LESS_THAN = 2,
+                        LESS_THAN_OR_EQUAL = 3,
+                        GREATER_THAN = 4,
+                        GREATER_THAN_OR_EQUAL = 5
+                    }
+                }
+
+                /** Properties of an AccessBetweenFilter. */
+                interface IAccessBetweenFilter {
+
+                    /** AccessBetweenFilter fromValue */
+                    fromValue?: (google.analytics.admin.v1alpha.INumericValue|null);
+
+                    /** AccessBetweenFilter toValue */
+                    toValue?: (google.analytics.admin.v1alpha.INumericValue|null);
+                }
+
+                /** Represents an AccessBetweenFilter. */
+                class AccessBetweenFilter implements IAccessBetweenFilter {
+
+                    /**
+                     * Constructs a new AccessBetweenFilter.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IAccessBetweenFilter);
+
+                    /** AccessBetweenFilter fromValue. */
+                    public fromValue?: (google.analytics.admin.v1alpha.INumericValue|null);
+
+                    /** AccessBetweenFilter toValue. */
+                    public toValue?: (google.analytics.admin.v1alpha.INumericValue|null);
+
+                    /**
+                     * Creates a new AccessBetweenFilter instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AccessBetweenFilter instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IAccessBetweenFilter): google.analytics.admin.v1alpha.AccessBetweenFilter;
+
+                    /**
+                     * Encodes the specified AccessBetweenFilter message. Does not implicitly {@link google.analytics.admin.v1alpha.AccessBetweenFilter.verify|verify} messages.
+                     * @param message AccessBetweenFilter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IAccessBetweenFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AccessBetweenFilter message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.AccessBetweenFilter.verify|verify} messages.
+                     * @param message AccessBetweenFilter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IAccessBetweenFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AccessBetweenFilter message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AccessBetweenFilter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.AccessBetweenFilter;
+
+                    /**
+                     * Decodes an AccessBetweenFilter message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AccessBetweenFilter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.AccessBetweenFilter;
+
+                    /**
+                     * Verifies an AccessBetweenFilter message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AccessBetweenFilter message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AccessBetweenFilter
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.AccessBetweenFilter;
+
+                    /**
+                     * Creates a plain object from an AccessBetweenFilter message. Also converts values to other types if specified.
+                     * @param message AccessBetweenFilter
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.AccessBetweenFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AccessBetweenFilter to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a NumericValue. */
+                interface INumericValue {
+
+                    /** NumericValue int64Value */
+                    int64Value?: (number|Long|string|null);
+
+                    /** NumericValue doubleValue */
+                    doubleValue?: (number|null);
+                }
+
+                /** Represents a NumericValue. */
+                class NumericValue implements INumericValue {
+
+                    /**
+                     * Constructs a new NumericValue.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.INumericValue);
+
+                    /** NumericValue int64Value. */
+                    public int64Value?: (number|Long|string|null);
+
+                    /** NumericValue doubleValue. */
+                    public doubleValue?: (number|null);
+
+                    /** NumericValue oneValue. */
+                    public oneValue?: ("int64Value"|"doubleValue");
+
+                    /**
+                     * Creates a new NumericValue instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns NumericValue instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.INumericValue): google.analytics.admin.v1alpha.NumericValue;
+
+                    /**
+                     * Encodes the specified NumericValue message. Does not implicitly {@link google.analytics.admin.v1alpha.NumericValue.verify|verify} messages.
+                     * @param message NumericValue message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.INumericValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified NumericValue message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.NumericValue.verify|verify} messages.
+                     * @param message NumericValue message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.INumericValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a NumericValue message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns NumericValue
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.NumericValue;
+
+                    /**
+                     * Decodes a NumericValue message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns NumericValue
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.NumericValue;
+
+                    /**
+                     * Verifies a NumericValue message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a NumericValue message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns NumericValue
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.NumericValue;
+
+                    /**
+                     * Creates a plain object from a NumericValue message. Also converts values to other types if specified.
+                     * @param message NumericValue
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.NumericValue, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this NumericValue to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an AccessOrderBy. */
+                interface IAccessOrderBy {
+
+                    /** AccessOrderBy metric */
+                    metric?: (google.analytics.admin.v1alpha.AccessOrderBy.IMetricOrderBy|null);
+
+                    /** AccessOrderBy dimension */
+                    dimension?: (google.analytics.admin.v1alpha.AccessOrderBy.IDimensionOrderBy|null);
+
+                    /** AccessOrderBy desc */
+                    desc?: (boolean|null);
+                }
+
+                /** Represents an AccessOrderBy. */
+                class AccessOrderBy implements IAccessOrderBy {
+
+                    /**
+                     * Constructs a new AccessOrderBy.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IAccessOrderBy);
+
+                    /** AccessOrderBy metric. */
+                    public metric?: (google.analytics.admin.v1alpha.AccessOrderBy.IMetricOrderBy|null);
+
+                    /** AccessOrderBy dimension. */
+                    public dimension?: (google.analytics.admin.v1alpha.AccessOrderBy.IDimensionOrderBy|null);
+
+                    /** AccessOrderBy desc. */
+                    public desc: boolean;
+
+                    /** AccessOrderBy oneOrderBy. */
+                    public oneOrderBy?: ("metric"|"dimension");
+
+                    /**
+                     * Creates a new AccessOrderBy instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AccessOrderBy instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IAccessOrderBy): google.analytics.admin.v1alpha.AccessOrderBy;
+
+                    /**
+                     * Encodes the specified AccessOrderBy message. Does not implicitly {@link google.analytics.admin.v1alpha.AccessOrderBy.verify|verify} messages.
+                     * @param message AccessOrderBy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IAccessOrderBy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AccessOrderBy message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.AccessOrderBy.verify|verify} messages.
+                     * @param message AccessOrderBy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IAccessOrderBy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AccessOrderBy message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AccessOrderBy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.AccessOrderBy;
+
+                    /**
+                     * Decodes an AccessOrderBy message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AccessOrderBy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.AccessOrderBy;
+
+                    /**
+                     * Verifies an AccessOrderBy message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AccessOrderBy message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AccessOrderBy
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.AccessOrderBy;
+
+                    /**
+                     * Creates a plain object from an AccessOrderBy message. Also converts values to other types if specified.
+                     * @param message AccessOrderBy
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.AccessOrderBy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AccessOrderBy to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace AccessOrderBy {
+
+                    /** Properties of a MetricOrderBy. */
+                    interface IMetricOrderBy {
+
+                        /** MetricOrderBy metricName */
+                        metricName?: (string|null);
+                    }
+
+                    /** Represents a MetricOrderBy. */
+                    class MetricOrderBy implements IMetricOrderBy {
+
+                        /**
+                         * Constructs a new MetricOrderBy.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.analytics.admin.v1alpha.AccessOrderBy.IMetricOrderBy);
+
+                        /** MetricOrderBy metricName. */
+                        public metricName: string;
+
+                        /**
+                         * Creates a new MetricOrderBy instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns MetricOrderBy instance
+                         */
+                        public static create(properties?: google.analytics.admin.v1alpha.AccessOrderBy.IMetricOrderBy): google.analytics.admin.v1alpha.AccessOrderBy.MetricOrderBy;
+
+                        /**
+                         * Encodes the specified MetricOrderBy message. Does not implicitly {@link google.analytics.admin.v1alpha.AccessOrderBy.MetricOrderBy.verify|verify} messages.
+                         * @param message MetricOrderBy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.analytics.admin.v1alpha.AccessOrderBy.IMetricOrderBy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified MetricOrderBy message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.AccessOrderBy.MetricOrderBy.verify|verify} messages.
+                         * @param message MetricOrderBy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.analytics.admin.v1alpha.AccessOrderBy.IMetricOrderBy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a MetricOrderBy message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns MetricOrderBy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.AccessOrderBy.MetricOrderBy;
+
+                        /**
+                         * Decodes a MetricOrderBy message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns MetricOrderBy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.AccessOrderBy.MetricOrderBy;
+
+                        /**
+                         * Verifies a MetricOrderBy message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a MetricOrderBy message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns MetricOrderBy
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.AccessOrderBy.MetricOrderBy;
+
+                        /**
+                         * Creates a plain object from a MetricOrderBy message. Also converts values to other types if specified.
+                         * @param message MetricOrderBy
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.analytics.admin.v1alpha.AccessOrderBy.MetricOrderBy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this MetricOrderBy to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a DimensionOrderBy. */
+                    interface IDimensionOrderBy {
+
+                        /** DimensionOrderBy dimensionName */
+                        dimensionName?: (string|null);
+
+                        /** DimensionOrderBy orderType */
+                        orderType?: (google.analytics.admin.v1alpha.AccessOrderBy.DimensionOrderBy.OrderType|keyof typeof google.analytics.admin.v1alpha.AccessOrderBy.DimensionOrderBy.OrderType|null);
+                    }
+
+                    /** Represents a DimensionOrderBy. */
+                    class DimensionOrderBy implements IDimensionOrderBy {
+
+                        /**
+                         * Constructs a new DimensionOrderBy.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.analytics.admin.v1alpha.AccessOrderBy.IDimensionOrderBy);
+
+                        /** DimensionOrderBy dimensionName. */
+                        public dimensionName: string;
+
+                        /** DimensionOrderBy orderType. */
+                        public orderType: (google.analytics.admin.v1alpha.AccessOrderBy.DimensionOrderBy.OrderType|keyof typeof google.analytics.admin.v1alpha.AccessOrderBy.DimensionOrderBy.OrderType);
+
+                        /**
+                         * Creates a new DimensionOrderBy instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DimensionOrderBy instance
+                         */
+                        public static create(properties?: google.analytics.admin.v1alpha.AccessOrderBy.IDimensionOrderBy): google.analytics.admin.v1alpha.AccessOrderBy.DimensionOrderBy;
+
+                        /**
+                         * Encodes the specified DimensionOrderBy message. Does not implicitly {@link google.analytics.admin.v1alpha.AccessOrderBy.DimensionOrderBy.verify|verify} messages.
+                         * @param message DimensionOrderBy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.analytics.admin.v1alpha.AccessOrderBy.IDimensionOrderBy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DimensionOrderBy message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.AccessOrderBy.DimensionOrderBy.verify|verify} messages.
+                         * @param message DimensionOrderBy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.analytics.admin.v1alpha.AccessOrderBy.IDimensionOrderBy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DimensionOrderBy message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DimensionOrderBy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.AccessOrderBy.DimensionOrderBy;
+
+                        /**
+                         * Decodes a DimensionOrderBy message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DimensionOrderBy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.AccessOrderBy.DimensionOrderBy;
+
+                        /**
+                         * Verifies a DimensionOrderBy message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DimensionOrderBy message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DimensionOrderBy
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.AccessOrderBy.DimensionOrderBy;
+
+                        /**
+                         * Creates a plain object from a DimensionOrderBy message. Also converts values to other types if specified.
+                         * @param message DimensionOrderBy
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.analytics.admin.v1alpha.AccessOrderBy.DimensionOrderBy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DimensionOrderBy to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace DimensionOrderBy {
+
+                        /** OrderType enum. */
+                        enum OrderType {
+                            ORDER_TYPE_UNSPECIFIED = 0,
+                            ALPHANUMERIC = 1,
+                            CASE_INSENSITIVE_ALPHANUMERIC = 2,
+                            NUMERIC = 3
+                        }
+                    }
+                }
+
+                /** Properties of an AccessDimensionHeader. */
+                interface IAccessDimensionHeader {
+
+                    /** AccessDimensionHeader dimensionName */
+                    dimensionName?: (string|null);
+                }
+
+                /** Represents an AccessDimensionHeader. */
+                class AccessDimensionHeader implements IAccessDimensionHeader {
+
+                    /**
+                     * Constructs a new AccessDimensionHeader.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IAccessDimensionHeader);
+
+                    /** AccessDimensionHeader dimensionName. */
+                    public dimensionName: string;
+
+                    /**
+                     * Creates a new AccessDimensionHeader instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AccessDimensionHeader instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IAccessDimensionHeader): google.analytics.admin.v1alpha.AccessDimensionHeader;
+
+                    /**
+                     * Encodes the specified AccessDimensionHeader message. Does not implicitly {@link google.analytics.admin.v1alpha.AccessDimensionHeader.verify|verify} messages.
+                     * @param message AccessDimensionHeader message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IAccessDimensionHeader, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AccessDimensionHeader message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.AccessDimensionHeader.verify|verify} messages.
+                     * @param message AccessDimensionHeader message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IAccessDimensionHeader, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AccessDimensionHeader message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AccessDimensionHeader
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.AccessDimensionHeader;
+
+                    /**
+                     * Decodes an AccessDimensionHeader message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AccessDimensionHeader
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.AccessDimensionHeader;
+
+                    /**
+                     * Verifies an AccessDimensionHeader message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AccessDimensionHeader message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AccessDimensionHeader
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.AccessDimensionHeader;
+
+                    /**
+                     * Creates a plain object from an AccessDimensionHeader message. Also converts values to other types if specified.
+                     * @param message AccessDimensionHeader
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.AccessDimensionHeader, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AccessDimensionHeader to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an AccessMetricHeader. */
+                interface IAccessMetricHeader {
+
+                    /** AccessMetricHeader metricName */
+                    metricName?: (string|null);
+                }
+
+                /** Represents an AccessMetricHeader. */
+                class AccessMetricHeader implements IAccessMetricHeader {
+
+                    /**
+                     * Constructs a new AccessMetricHeader.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IAccessMetricHeader);
+
+                    /** AccessMetricHeader metricName. */
+                    public metricName: string;
+
+                    /**
+                     * Creates a new AccessMetricHeader instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AccessMetricHeader instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IAccessMetricHeader): google.analytics.admin.v1alpha.AccessMetricHeader;
+
+                    /**
+                     * Encodes the specified AccessMetricHeader message. Does not implicitly {@link google.analytics.admin.v1alpha.AccessMetricHeader.verify|verify} messages.
+                     * @param message AccessMetricHeader message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IAccessMetricHeader, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AccessMetricHeader message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.AccessMetricHeader.verify|verify} messages.
+                     * @param message AccessMetricHeader message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IAccessMetricHeader, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AccessMetricHeader message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AccessMetricHeader
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.AccessMetricHeader;
+
+                    /**
+                     * Decodes an AccessMetricHeader message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AccessMetricHeader
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.AccessMetricHeader;
+
+                    /**
+                     * Verifies an AccessMetricHeader message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AccessMetricHeader message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AccessMetricHeader
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.AccessMetricHeader;
+
+                    /**
+                     * Creates a plain object from an AccessMetricHeader message. Also converts values to other types if specified.
+                     * @param message AccessMetricHeader
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.AccessMetricHeader, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AccessMetricHeader to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an AccessRow. */
+                interface IAccessRow {
+
+                    /** AccessRow dimensionValues */
+                    dimensionValues?: (google.analytics.admin.v1alpha.IAccessDimensionValue[]|null);
+
+                    /** AccessRow metricValues */
+                    metricValues?: (google.analytics.admin.v1alpha.IAccessMetricValue[]|null);
+                }
+
+                /** Represents an AccessRow. */
+                class AccessRow implements IAccessRow {
+
+                    /**
+                     * Constructs a new AccessRow.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IAccessRow);
+
+                    /** AccessRow dimensionValues. */
+                    public dimensionValues: google.analytics.admin.v1alpha.IAccessDimensionValue[];
+
+                    /** AccessRow metricValues. */
+                    public metricValues: google.analytics.admin.v1alpha.IAccessMetricValue[];
+
+                    /**
+                     * Creates a new AccessRow instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AccessRow instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IAccessRow): google.analytics.admin.v1alpha.AccessRow;
+
+                    /**
+                     * Encodes the specified AccessRow message. Does not implicitly {@link google.analytics.admin.v1alpha.AccessRow.verify|verify} messages.
+                     * @param message AccessRow message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IAccessRow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AccessRow message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.AccessRow.verify|verify} messages.
+                     * @param message AccessRow message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IAccessRow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AccessRow message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AccessRow
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.AccessRow;
+
+                    /**
+                     * Decodes an AccessRow message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AccessRow
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.AccessRow;
+
+                    /**
+                     * Verifies an AccessRow message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AccessRow message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AccessRow
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.AccessRow;
+
+                    /**
+                     * Creates a plain object from an AccessRow message. Also converts values to other types if specified.
+                     * @param message AccessRow
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.AccessRow, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AccessRow to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an AccessDimensionValue. */
+                interface IAccessDimensionValue {
+
+                    /** AccessDimensionValue value */
+                    value?: (string|null);
+                }
+
+                /** Represents an AccessDimensionValue. */
+                class AccessDimensionValue implements IAccessDimensionValue {
+
+                    /**
+                     * Constructs a new AccessDimensionValue.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IAccessDimensionValue);
+
+                    /** AccessDimensionValue value. */
+                    public value: string;
+
+                    /**
+                     * Creates a new AccessDimensionValue instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AccessDimensionValue instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IAccessDimensionValue): google.analytics.admin.v1alpha.AccessDimensionValue;
+
+                    /**
+                     * Encodes the specified AccessDimensionValue message. Does not implicitly {@link google.analytics.admin.v1alpha.AccessDimensionValue.verify|verify} messages.
+                     * @param message AccessDimensionValue message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IAccessDimensionValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AccessDimensionValue message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.AccessDimensionValue.verify|verify} messages.
+                     * @param message AccessDimensionValue message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IAccessDimensionValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AccessDimensionValue message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AccessDimensionValue
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.AccessDimensionValue;
+
+                    /**
+                     * Decodes an AccessDimensionValue message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AccessDimensionValue
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.AccessDimensionValue;
+
+                    /**
+                     * Verifies an AccessDimensionValue message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AccessDimensionValue message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AccessDimensionValue
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.AccessDimensionValue;
+
+                    /**
+                     * Creates a plain object from an AccessDimensionValue message. Also converts values to other types if specified.
+                     * @param message AccessDimensionValue
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.AccessDimensionValue, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AccessDimensionValue to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an AccessMetricValue. */
+                interface IAccessMetricValue {
+
+                    /** AccessMetricValue value */
+                    value?: (string|null);
+                }
+
+                /** Represents an AccessMetricValue. */
+                class AccessMetricValue implements IAccessMetricValue {
+
+                    /**
+                     * Constructs a new AccessMetricValue.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IAccessMetricValue);
+
+                    /** AccessMetricValue value. */
+                    public value: string;
+
+                    /**
+                     * Creates a new AccessMetricValue instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AccessMetricValue instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IAccessMetricValue): google.analytics.admin.v1alpha.AccessMetricValue;
+
+                    /**
+                     * Encodes the specified AccessMetricValue message. Does not implicitly {@link google.analytics.admin.v1alpha.AccessMetricValue.verify|verify} messages.
+                     * @param message AccessMetricValue message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IAccessMetricValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AccessMetricValue message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.AccessMetricValue.verify|verify} messages.
+                     * @param message AccessMetricValue message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IAccessMetricValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AccessMetricValue message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AccessMetricValue
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.AccessMetricValue;
+
+                    /**
+                     * Decodes an AccessMetricValue message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AccessMetricValue
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.AccessMetricValue;
+
+                    /**
+                     * Verifies an AccessMetricValue message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AccessMetricValue message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AccessMetricValue
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.AccessMetricValue;
+
+                    /**
+                     * Creates a plain object from an AccessMetricValue message. Also converts values to other types if specified.
+                     * @param message AccessMetricValue
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.AccessMetricValue, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AccessMetricValue to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an AccessQuota. */
+                interface IAccessQuota {
+
+                    /** AccessQuota tokensPerDay */
+                    tokensPerDay?: (google.analytics.admin.v1alpha.IAccessQuotaStatus|null);
+
+                    /** AccessQuota tokensPerHour */
+                    tokensPerHour?: (google.analytics.admin.v1alpha.IAccessQuotaStatus|null);
+
+                    /** AccessQuota concurrentRequests */
+                    concurrentRequests?: (google.analytics.admin.v1alpha.IAccessQuotaStatus|null);
+
+                    /** AccessQuota serverErrorsPerProjectPerHour */
+                    serverErrorsPerProjectPerHour?: (google.analytics.admin.v1alpha.IAccessQuotaStatus|null);
+                }
+
+                /** Represents an AccessQuota. */
+                class AccessQuota implements IAccessQuota {
+
+                    /**
+                     * Constructs a new AccessQuota.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IAccessQuota);
+
+                    /** AccessQuota tokensPerDay. */
+                    public tokensPerDay?: (google.analytics.admin.v1alpha.IAccessQuotaStatus|null);
+
+                    /** AccessQuota tokensPerHour. */
+                    public tokensPerHour?: (google.analytics.admin.v1alpha.IAccessQuotaStatus|null);
+
+                    /** AccessQuota concurrentRequests. */
+                    public concurrentRequests?: (google.analytics.admin.v1alpha.IAccessQuotaStatus|null);
+
+                    /** AccessQuota serverErrorsPerProjectPerHour. */
+                    public serverErrorsPerProjectPerHour?: (google.analytics.admin.v1alpha.IAccessQuotaStatus|null);
+
+                    /**
+                     * Creates a new AccessQuota instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AccessQuota instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IAccessQuota): google.analytics.admin.v1alpha.AccessQuota;
+
+                    /**
+                     * Encodes the specified AccessQuota message. Does not implicitly {@link google.analytics.admin.v1alpha.AccessQuota.verify|verify} messages.
+                     * @param message AccessQuota message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IAccessQuota, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AccessQuota message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.AccessQuota.verify|verify} messages.
+                     * @param message AccessQuota message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IAccessQuota, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AccessQuota message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AccessQuota
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.AccessQuota;
+
+                    /**
+                     * Decodes an AccessQuota message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AccessQuota
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.AccessQuota;
+
+                    /**
+                     * Verifies an AccessQuota message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AccessQuota message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AccessQuota
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.AccessQuota;
+
+                    /**
+                     * Creates a plain object from an AccessQuota message. Also converts values to other types if specified.
+                     * @param message AccessQuota
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.AccessQuota, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AccessQuota to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an AccessQuotaStatus. */
+                interface IAccessQuotaStatus {
+
+                    /** AccessQuotaStatus consumed */
+                    consumed?: (number|null);
+
+                    /** AccessQuotaStatus remaining */
+                    remaining?: (number|null);
+                }
+
+                /** Represents an AccessQuotaStatus. */
+                class AccessQuotaStatus implements IAccessQuotaStatus {
+
+                    /**
+                     * Constructs a new AccessQuotaStatus.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IAccessQuotaStatus);
+
+                    /** AccessQuotaStatus consumed. */
+                    public consumed: number;
+
+                    /** AccessQuotaStatus remaining. */
+                    public remaining: number;
+
+                    /**
+                     * Creates a new AccessQuotaStatus instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AccessQuotaStatus instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IAccessQuotaStatus): google.analytics.admin.v1alpha.AccessQuotaStatus;
+
+                    /**
+                     * Encodes the specified AccessQuotaStatus message. Does not implicitly {@link google.analytics.admin.v1alpha.AccessQuotaStatus.verify|verify} messages.
+                     * @param message AccessQuotaStatus message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IAccessQuotaStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AccessQuotaStatus message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.AccessQuotaStatus.verify|verify} messages.
+                     * @param message AccessQuotaStatus message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IAccessQuotaStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AccessQuotaStatus message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AccessQuotaStatus
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.AccessQuotaStatus;
+
+                    /**
+                     * Decodes an AccessQuotaStatus message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AccessQuotaStatus
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.AccessQuotaStatus;
+
+                    /**
+                     * Verifies an AccessQuotaStatus message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AccessQuotaStatus message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AccessQuotaStatus
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.AccessQuotaStatus;
+
+                    /**
+                     * Creates a plain object from an AccessQuotaStatus message. Also converts values to other types if specified.
+                     * @param message AccessQuotaStatus
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.AccessQuotaStatus, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AccessQuotaStatus to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Represents an AnalyticsAdminService */
                 class AnalyticsAdminService extends $protobuf.rpc.Service {
 
@@ -1039,6 +3114,118 @@ export namespace google {
                      * @returns Promise
                      */
                     public getDataStream(request: google.analytics.admin.v1alpha.IGetDataStreamRequest): Promise<google.analytics.admin.v1alpha.DataStream>;
+
+                    /**
+                     * Calls GetAudience.
+                     * @param request GetAudienceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Audience
+                     */
+                    public getAudience(request: google.analytics.admin.v1alpha.IGetAudienceRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.GetAudienceCallback): void;
+
+                    /**
+                     * Calls GetAudience.
+                     * @param request GetAudienceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getAudience(request: google.analytics.admin.v1alpha.IGetAudienceRequest): Promise<google.analytics.admin.v1alpha.Audience>;
+
+                    /**
+                     * Calls ListAudiences.
+                     * @param request ListAudiencesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListAudiencesResponse
+                     */
+                    public listAudiences(request: google.analytics.admin.v1alpha.IListAudiencesRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.ListAudiencesCallback): void;
+
+                    /**
+                     * Calls ListAudiences.
+                     * @param request ListAudiencesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listAudiences(request: google.analytics.admin.v1alpha.IListAudiencesRequest): Promise<google.analytics.admin.v1alpha.ListAudiencesResponse>;
+
+                    /**
+                     * Calls CreateAudience.
+                     * @param request CreateAudienceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Audience
+                     */
+                    public createAudience(request: google.analytics.admin.v1alpha.ICreateAudienceRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.CreateAudienceCallback): void;
+
+                    /**
+                     * Calls CreateAudience.
+                     * @param request CreateAudienceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createAudience(request: google.analytics.admin.v1alpha.ICreateAudienceRequest): Promise<google.analytics.admin.v1alpha.Audience>;
+
+                    /**
+                     * Calls UpdateAudience.
+                     * @param request UpdateAudienceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Audience
+                     */
+                    public updateAudience(request: google.analytics.admin.v1alpha.IUpdateAudienceRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.UpdateAudienceCallback): void;
+
+                    /**
+                     * Calls UpdateAudience.
+                     * @param request UpdateAudienceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateAudience(request: google.analytics.admin.v1alpha.IUpdateAudienceRequest): Promise<google.analytics.admin.v1alpha.Audience>;
+
+                    /**
+                     * Calls ArchiveAudience.
+                     * @param request ArchiveAudienceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public archiveAudience(request: google.analytics.admin.v1alpha.IArchiveAudienceRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.ArchiveAudienceCallback): void;
+
+                    /**
+                     * Calls ArchiveAudience.
+                     * @param request ArchiveAudienceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public archiveAudience(request: google.analytics.admin.v1alpha.IArchiveAudienceRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls GetAttributionSettings.
+                     * @param request GetAttributionSettingsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and AttributionSettings
+                     */
+                    public getAttributionSettings(request: google.analytics.admin.v1alpha.IGetAttributionSettingsRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.GetAttributionSettingsCallback): void;
+
+                    /**
+                     * Calls GetAttributionSettings.
+                     * @param request GetAttributionSettingsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getAttributionSettings(request: google.analytics.admin.v1alpha.IGetAttributionSettingsRequest): Promise<google.analytics.admin.v1alpha.AttributionSettings>;
+
+                    /**
+                     * Calls UpdateAttributionSettings.
+                     * @param request UpdateAttributionSettingsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and AttributionSettings
+                     */
+                    public updateAttributionSettings(request: google.analytics.admin.v1alpha.IUpdateAttributionSettingsRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.UpdateAttributionSettingsCallback): void;
+
+                    /**
+                     * Calls UpdateAttributionSettings.
+                     * @param request UpdateAttributionSettingsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateAttributionSettings(request: google.analytics.admin.v1alpha.IUpdateAttributionSettingsRequest): Promise<google.analytics.admin.v1alpha.AttributionSettings>;
+
+                    /**
+                     * Calls RunAccessReport.
+                     * @param request RunAccessReportRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and RunAccessReportResponse
+                     */
+                    public runAccessReport(request: google.analytics.admin.v1alpha.IRunAccessReportRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.RunAccessReportCallback): void;
+
+                    /**
+                     * Calls RunAccessReport.
+                     * @param request RunAccessReportRequest message or plain object
+                     * @returns Promise
+                     */
+                    public runAccessReport(request: google.analytics.admin.v1alpha.IRunAccessReportRequest): Promise<google.analytics.admin.v1alpha.RunAccessReportResponse>;
                 }
 
                 namespace AnalyticsAdminService {
@@ -1539,6 +3726,326 @@ export namespace google {
                      * @param [response] DataStream
                      */
                     type GetDataStreamCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.DataStream) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#getAudience}.
+                     * @param error Error, if any
+                     * @param [response] Audience
+                     */
+                    type GetAudienceCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.Audience) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#listAudiences}.
+                     * @param error Error, if any
+                     * @param [response] ListAudiencesResponse
+                     */
+                    type ListAudiencesCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.ListAudiencesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#createAudience}.
+                     * @param error Error, if any
+                     * @param [response] Audience
+                     */
+                    type CreateAudienceCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.Audience) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#updateAudience}.
+                     * @param error Error, if any
+                     * @param [response] Audience
+                     */
+                    type UpdateAudienceCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.Audience) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#archiveAudience}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type ArchiveAudienceCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#getAttributionSettings}.
+                     * @param error Error, if any
+                     * @param [response] AttributionSettings
+                     */
+                    type GetAttributionSettingsCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.AttributionSettings) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#updateAttributionSettings}.
+                     * @param error Error, if any
+                     * @param [response] AttributionSettings
+                     */
+                    type UpdateAttributionSettingsCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.AttributionSettings) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#runAccessReport}.
+                     * @param error Error, if any
+                     * @param [response] RunAccessReportResponse
+                     */
+                    type RunAccessReportCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.RunAccessReportResponse) => void;
+                }
+
+                /** Properties of a RunAccessReportRequest. */
+                interface IRunAccessReportRequest {
+
+                    /** RunAccessReportRequest entity */
+                    entity?: (string|null);
+
+                    /** RunAccessReportRequest dimensions */
+                    dimensions?: (google.analytics.admin.v1alpha.IAccessDimension[]|null);
+
+                    /** RunAccessReportRequest metrics */
+                    metrics?: (google.analytics.admin.v1alpha.IAccessMetric[]|null);
+
+                    /** RunAccessReportRequest dateRanges */
+                    dateRanges?: (google.analytics.admin.v1alpha.IAccessDateRange[]|null);
+
+                    /** RunAccessReportRequest dimensionFilter */
+                    dimensionFilter?: (google.analytics.admin.v1alpha.IAccessFilterExpression|null);
+
+                    /** RunAccessReportRequest metricFilter */
+                    metricFilter?: (google.analytics.admin.v1alpha.IAccessFilterExpression|null);
+
+                    /** RunAccessReportRequest offset */
+                    offset?: (number|Long|string|null);
+
+                    /** RunAccessReportRequest limit */
+                    limit?: (number|Long|string|null);
+
+                    /** RunAccessReportRequest timeZone */
+                    timeZone?: (string|null);
+
+                    /** RunAccessReportRequest orderBys */
+                    orderBys?: (google.analytics.admin.v1alpha.IAccessOrderBy[]|null);
+
+                    /** RunAccessReportRequest returnEntityQuota */
+                    returnEntityQuota?: (boolean|null);
+                }
+
+                /** Represents a RunAccessReportRequest. */
+                class RunAccessReportRequest implements IRunAccessReportRequest {
+
+                    /**
+                     * Constructs a new RunAccessReportRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IRunAccessReportRequest);
+
+                    /** RunAccessReportRequest entity. */
+                    public entity: string;
+
+                    /** RunAccessReportRequest dimensions. */
+                    public dimensions: google.analytics.admin.v1alpha.IAccessDimension[];
+
+                    /** RunAccessReportRequest metrics. */
+                    public metrics: google.analytics.admin.v1alpha.IAccessMetric[];
+
+                    /** RunAccessReportRequest dateRanges. */
+                    public dateRanges: google.analytics.admin.v1alpha.IAccessDateRange[];
+
+                    /** RunAccessReportRequest dimensionFilter. */
+                    public dimensionFilter?: (google.analytics.admin.v1alpha.IAccessFilterExpression|null);
+
+                    /** RunAccessReportRequest metricFilter. */
+                    public metricFilter?: (google.analytics.admin.v1alpha.IAccessFilterExpression|null);
+
+                    /** RunAccessReportRequest offset. */
+                    public offset: (number|Long|string);
+
+                    /** RunAccessReportRequest limit. */
+                    public limit: (number|Long|string);
+
+                    /** RunAccessReportRequest timeZone. */
+                    public timeZone: string;
+
+                    /** RunAccessReportRequest orderBys. */
+                    public orderBys: google.analytics.admin.v1alpha.IAccessOrderBy[];
+
+                    /** RunAccessReportRequest returnEntityQuota. */
+                    public returnEntityQuota: boolean;
+
+                    /**
+                     * Creates a new RunAccessReportRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RunAccessReportRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IRunAccessReportRequest): google.analytics.admin.v1alpha.RunAccessReportRequest;
+
+                    /**
+                     * Encodes the specified RunAccessReportRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.RunAccessReportRequest.verify|verify} messages.
+                     * @param message RunAccessReportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IRunAccessReportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RunAccessReportRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.RunAccessReportRequest.verify|verify} messages.
+                     * @param message RunAccessReportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IRunAccessReportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RunAccessReportRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RunAccessReportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.RunAccessReportRequest;
+
+                    /**
+                     * Decodes a RunAccessReportRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RunAccessReportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.RunAccessReportRequest;
+
+                    /**
+                     * Verifies a RunAccessReportRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RunAccessReportRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RunAccessReportRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.RunAccessReportRequest;
+
+                    /**
+                     * Creates a plain object from a RunAccessReportRequest message. Also converts values to other types if specified.
+                     * @param message RunAccessReportRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.RunAccessReportRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RunAccessReportRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a RunAccessReportResponse. */
+                interface IRunAccessReportResponse {
+
+                    /** RunAccessReportResponse dimensionHeaders */
+                    dimensionHeaders?: (google.analytics.admin.v1alpha.IAccessDimensionHeader[]|null);
+
+                    /** RunAccessReportResponse metricHeaders */
+                    metricHeaders?: (google.analytics.admin.v1alpha.IAccessMetricHeader[]|null);
+
+                    /** RunAccessReportResponse rows */
+                    rows?: (google.analytics.admin.v1alpha.IAccessRow[]|null);
+
+                    /** RunAccessReportResponse rowCount */
+                    rowCount?: (number|null);
+
+                    /** RunAccessReportResponse quota */
+                    quota?: (google.analytics.admin.v1alpha.IAccessQuota|null);
+                }
+
+                /** Represents a RunAccessReportResponse. */
+                class RunAccessReportResponse implements IRunAccessReportResponse {
+
+                    /**
+                     * Constructs a new RunAccessReportResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IRunAccessReportResponse);
+
+                    /** RunAccessReportResponse dimensionHeaders. */
+                    public dimensionHeaders: google.analytics.admin.v1alpha.IAccessDimensionHeader[];
+
+                    /** RunAccessReportResponse metricHeaders. */
+                    public metricHeaders: google.analytics.admin.v1alpha.IAccessMetricHeader[];
+
+                    /** RunAccessReportResponse rows. */
+                    public rows: google.analytics.admin.v1alpha.IAccessRow[];
+
+                    /** RunAccessReportResponse rowCount. */
+                    public rowCount: number;
+
+                    /** RunAccessReportResponse quota. */
+                    public quota?: (google.analytics.admin.v1alpha.IAccessQuota|null);
+
+                    /**
+                     * Creates a new RunAccessReportResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RunAccessReportResponse instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IRunAccessReportResponse): google.analytics.admin.v1alpha.RunAccessReportResponse;
+
+                    /**
+                     * Encodes the specified RunAccessReportResponse message. Does not implicitly {@link google.analytics.admin.v1alpha.RunAccessReportResponse.verify|verify} messages.
+                     * @param message RunAccessReportResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IRunAccessReportResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RunAccessReportResponse message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.RunAccessReportResponse.verify|verify} messages.
+                     * @param message RunAccessReportResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IRunAccessReportResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RunAccessReportResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RunAccessReportResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.RunAccessReportResponse;
+
+                    /**
+                     * Decodes a RunAccessReportResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RunAccessReportResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.RunAccessReportResponse;
+
+                    /**
+                     * Verifies a RunAccessReportResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RunAccessReportResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RunAccessReportResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.RunAccessReportResponse;
+
+                    /**
+                     * Creates a plain object from a RunAccessReportResponse message. Also converts values to other types if specified.
+                     * @param message RunAccessReportResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.RunAccessReportResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RunAccessReportResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
                 }
 
                 /** Properties of a GetAccountRequest. */
@@ -10289,6 +12796,2393 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** Properties of a GetAudienceRequest. */
+                interface IGetAudienceRequest {
+
+                    /** GetAudienceRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetAudienceRequest. */
+                class GetAudienceRequest implements IGetAudienceRequest {
+
+                    /**
+                     * Constructs a new GetAudienceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IGetAudienceRequest);
+
+                    /** GetAudienceRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetAudienceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetAudienceRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IGetAudienceRequest): google.analytics.admin.v1alpha.GetAudienceRequest;
+
+                    /**
+                     * Encodes the specified GetAudienceRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.GetAudienceRequest.verify|verify} messages.
+                     * @param message GetAudienceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IGetAudienceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetAudienceRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.GetAudienceRequest.verify|verify} messages.
+                     * @param message GetAudienceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IGetAudienceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetAudienceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetAudienceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.GetAudienceRequest;
+
+                    /**
+                     * Decodes a GetAudienceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetAudienceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.GetAudienceRequest;
+
+                    /**
+                     * Verifies a GetAudienceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetAudienceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetAudienceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.GetAudienceRequest;
+
+                    /**
+                     * Creates a plain object from a GetAudienceRequest message. Also converts values to other types if specified.
+                     * @param message GetAudienceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.GetAudienceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetAudienceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListAudiencesRequest. */
+                interface IListAudiencesRequest {
+
+                    /** ListAudiencesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListAudiencesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListAudiencesRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListAudiencesRequest. */
+                class ListAudiencesRequest implements IListAudiencesRequest {
+
+                    /**
+                     * Constructs a new ListAudiencesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IListAudiencesRequest);
+
+                    /** ListAudiencesRequest parent. */
+                    public parent: string;
+
+                    /** ListAudiencesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListAudiencesRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListAudiencesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAudiencesRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IListAudiencesRequest): google.analytics.admin.v1alpha.ListAudiencesRequest;
+
+                    /**
+                     * Encodes the specified ListAudiencesRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.ListAudiencesRequest.verify|verify} messages.
+                     * @param message ListAudiencesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IListAudiencesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAudiencesRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.ListAudiencesRequest.verify|verify} messages.
+                     * @param message ListAudiencesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IListAudiencesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAudiencesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAudiencesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.ListAudiencesRequest;
+
+                    /**
+                     * Decodes a ListAudiencesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAudiencesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.ListAudiencesRequest;
+
+                    /**
+                     * Verifies a ListAudiencesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAudiencesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAudiencesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.ListAudiencesRequest;
+
+                    /**
+                     * Creates a plain object from a ListAudiencesRequest message. Also converts values to other types if specified.
+                     * @param message ListAudiencesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.ListAudiencesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAudiencesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListAudiencesResponse. */
+                interface IListAudiencesResponse {
+
+                    /** ListAudiencesResponse audiences */
+                    audiences?: (google.analytics.admin.v1alpha.IAudience[]|null);
+
+                    /** ListAudiencesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListAudiencesResponse. */
+                class ListAudiencesResponse implements IListAudiencesResponse {
+
+                    /**
+                     * Constructs a new ListAudiencesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IListAudiencesResponse);
+
+                    /** ListAudiencesResponse audiences. */
+                    public audiences: google.analytics.admin.v1alpha.IAudience[];
+
+                    /** ListAudiencesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListAudiencesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAudiencesResponse instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IListAudiencesResponse): google.analytics.admin.v1alpha.ListAudiencesResponse;
+
+                    /**
+                     * Encodes the specified ListAudiencesResponse message. Does not implicitly {@link google.analytics.admin.v1alpha.ListAudiencesResponse.verify|verify} messages.
+                     * @param message ListAudiencesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IListAudiencesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAudiencesResponse message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.ListAudiencesResponse.verify|verify} messages.
+                     * @param message ListAudiencesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IListAudiencesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAudiencesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAudiencesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.ListAudiencesResponse;
+
+                    /**
+                     * Decodes a ListAudiencesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAudiencesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.ListAudiencesResponse;
+
+                    /**
+                     * Verifies a ListAudiencesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAudiencesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAudiencesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.ListAudiencesResponse;
+
+                    /**
+                     * Creates a plain object from a ListAudiencesResponse message. Also converts values to other types if specified.
+                     * @param message ListAudiencesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.ListAudiencesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAudiencesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a CreateAudienceRequest. */
+                interface ICreateAudienceRequest {
+
+                    /** CreateAudienceRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateAudienceRequest audience */
+                    audience?: (google.analytics.admin.v1alpha.IAudience|null);
+                }
+
+                /** Represents a CreateAudienceRequest. */
+                class CreateAudienceRequest implements ICreateAudienceRequest {
+
+                    /**
+                     * Constructs a new CreateAudienceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.ICreateAudienceRequest);
+
+                    /** CreateAudienceRequest parent. */
+                    public parent: string;
+
+                    /** CreateAudienceRequest audience. */
+                    public audience?: (google.analytics.admin.v1alpha.IAudience|null);
+
+                    /**
+                     * Creates a new CreateAudienceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateAudienceRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.ICreateAudienceRequest): google.analytics.admin.v1alpha.CreateAudienceRequest;
+
+                    /**
+                     * Encodes the specified CreateAudienceRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.CreateAudienceRequest.verify|verify} messages.
+                     * @param message CreateAudienceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.ICreateAudienceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateAudienceRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.CreateAudienceRequest.verify|verify} messages.
+                     * @param message CreateAudienceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.ICreateAudienceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateAudienceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateAudienceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.CreateAudienceRequest;
+
+                    /**
+                     * Decodes a CreateAudienceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateAudienceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.CreateAudienceRequest;
+
+                    /**
+                     * Verifies a CreateAudienceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateAudienceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateAudienceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.CreateAudienceRequest;
+
+                    /**
+                     * Creates a plain object from a CreateAudienceRequest message. Also converts values to other types if specified.
+                     * @param message CreateAudienceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.CreateAudienceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateAudienceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an UpdateAudienceRequest. */
+                interface IUpdateAudienceRequest {
+
+                    /** UpdateAudienceRequest audience */
+                    audience?: (google.analytics.admin.v1alpha.IAudience|null);
+
+                    /** UpdateAudienceRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateAudienceRequest. */
+                class UpdateAudienceRequest implements IUpdateAudienceRequest {
+
+                    /**
+                     * Constructs a new UpdateAudienceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IUpdateAudienceRequest);
+
+                    /** UpdateAudienceRequest audience. */
+                    public audience?: (google.analytics.admin.v1alpha.IAudience|null);
+
+                    /** UpdateAudienceRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateAudienceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateAudienceRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IUpdateAudienceRequest): google.analytics.admin.v1alpha.UpdateAudienceRequest;
+
+                    /**
+                     * Encodes the specified UpdateAudienceRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.UpdateAudienceRequest.verify|verify} messages.
+                     * @param message UpdateAudienceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IUpdateAudienceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateAudienceRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.UpdateAudienceRequest.verify|verify} messages.
+                     * @param message UpdateAudienceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IUpdateAudienceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateAudienceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateAudienceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.UpdateAudienceRequest;
+
+                    /**
+                     * Decodes an UpdateAudienceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateAudienceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.UpdateAudienceRequest;
+
+                    /**
+                     * Verifies an UpdateAudienceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateAudienceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateAudienceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.UpdateAudienceRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateAudienceRequest message. Also converts values to other types if specified.
+                     * @param message UpdateAudienceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.UpdateAudienceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateAudienceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an ArchiveAudienceRequest. */
+                interface IArchiveAudienceRequest {
+
+                    /** ArchiveAudienceRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents an ArchiveAudienceRequest. */
+                class ArchiveAudienceRequest implements IArchiveAudienceRequest {
+
+                    /**
+                     * Constructs a new ArchiveAudienceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IArchiveAudienceRequest);
+
+                    /** ArchiveAudienceRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new ArchiveAudienceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ArchiveAudienceRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IArchiveAudienceRequest): google.analytics.admin.v1alpha.ArchiveAudienceRequest;
+
+                    /**
+                     * Encodes the specified ArchiveAudienceRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.ArchiveAudienceRequest.verify|verify} messages.
+                     * @param message ArchiveAudienceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IArchiveAudienceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ArchiveAudienceRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.ArchiveAudienceRequest.verify|verify} messages.
+                     * @param message ArchiveAudienceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IArchiveAudienceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ArchiveAudienceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ArchiveAudienceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.ArchiveAudienceRequest;
+
+                    /**
+                     * Decodes an ArchiveAudienceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ArchiveAudienceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.ArchiveAudienceRequest;
+
+                    /**
+                     * Verifies an ArchiveAudienceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ArchiveAudienceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ArchiveAudienceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.ArchiveAudienceRequest;
+
+                    /**
+                     * Creates a plain object from an ArchiveAudienceRequest message. Also converts values to other types if specified.
+                     * @param message ArchiveAudienceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.ArchiveAudienceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ArchiveAudienceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GetAttributionSettingsRequest. */
+                interface IGetAttributionSettingsRequest {
+
+                    /** GetAttributionSettingsRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetAttributionSettingsRequest. */
+                class GetAttributionSettingsRequest implements IGetAttributionSettingsRequest {
+
+                    /**
+                     * Constructs a new GetAttributionSettingsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IGetAttributionSettingsRequest);
+
+                    /** GetAttributionSettingsRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetAttributionSettingsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetAttributionSettingsRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IGetAttributionSettingsRequest): google.analytics.admin.v1alpha.GetAttributionSettingsRequest;
+
+                    /**
+                     * Encodes the specified GetAttributionSettingsRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.GetAttributionSettingsRequest.verify|verify} messages.
+                     * @param message GetAttributionSettingsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IGetAttributionSettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetAttributionSettingsRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.GetAttributionSettingsRequest.verify|verify} messages.
+                     * @param message GetAttributionSettingsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IGetAttributionSettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetAttributionSettingsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetAttributionSettingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.GetAttributionSettingsRequest;
+
+                    /**
+                     * Decodes a GetAttributionSettingsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetAttributionSettingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.GetAttributionSettingsRequest;
+
+                    /**
+                     * Verifies a GetAttributionSettingsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetAttributionSettingsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetAttributionSettingsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.GetAttributionSettingsRequest;
+
+                    /**
+                     * Creates a plain object from a GetAttributionSettingsRequest message. Also converts values to other types if specified.
+                     * @param message GetAttributionSettingsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.GetAttributionSettingsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetAttributionSettingsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an UpdateAttributionSettingsRequest. */
+                interface IUpdateAttributionSettingsRequest {
+
+                    /** UpdateAttributionSettingsRequest attributionSettings */
+                    attributionSettings?: (google.analytics.admin.v1alpha.IAttributionSettings|null);
+
+                    /** UpdateAttributionSettingsRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateAttributionSettingsRequest. */
+                class UpdateAttributionSettingsRequest implements IUpdateAttributionSettingsRequest {
+
+                    /**
+                     * Constructs a new UpdateAttributionSettingsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IUpdateAttributionSettingsRequest);
+
+                    /** UpdateAttributionSettingsRequest attributionSettings. */
+                    public attributionSettings?: (google.analytics.admin.v1alpha.IAttributionSettings|null);
+
+                    /** UpdateAttributionSettingsRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateAttributionSettingsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateAttributionSettingsRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IUpdateAttributionSettingsRequest): google.analytics.admin.v1alpha.UpdateAttributionSettingsRequest;
+
+                    /**
+                     * Encodes the specified UpdateAttributionSettingsRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.UpdateAttributionSettingsRequest.verify|verify} messages.
+                     * @param message UpdateAttributionSettingsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IUpdateAttributionSettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateAttributionSettingsRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.UpdateAttributionSettingsRequest.verify|verify} messages.
+                     * @param message UpdateAttributionSettingsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IUpdateAttributionSettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateAttributionSettingsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateAttributionSettingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.UpdateAttributionSettingsRequest;
+
+                    /**
+                     * Decodes an UpdateAttributionSettingsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateAttributionSettingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.UpdateAttributionSettingsRequest;
+
+                    /**
+                     * Verifies an UpdateAttributionSettingsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateAttributionSettingsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateAttributionSettingsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.UpdateAttributionSettingsRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateAttributionSettingsRequest message. Also converts values to other types if specified.
+                     * @param message UpdateAttributionSettingsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.UpdateAttributionSettingsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateAttributionSettingsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** AudienceFilterScope enum. */
+                enum AudienceFilterScope {
+                    AUDIENCE_FILTER_SCOPE_UNSPECIFIED = 0,
+                    AUDIENCE_FILTER_SCOPE_WITHIN_SAME_EVENT = 1,
+                    AUDIENCE_FILTER_SCOPE_WITHIN_SAME_SESSION = 2,
+                    AUDIENCE_FILTER_SCOPE_ACROSS_ALL_SESSIONS = 3
+                }
+
+                /** Properties of an AudienceDimensionOrMetricFilter. */
+                interface IAudienceDimensionOrMetricFilter {
+
+                    /** AudienceDimensionOrMetricFilter stringFilter */
+                    stringFilter?: (google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.IStringFilter|null);
+
+                    /** AudienceDimensionOrMetricFilter inListFilter */
+                    inListFilter?: (google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.IInListFilter|null);
+
+                    /** AudienceDimensionOrMetricFilter numericFilter */
+                    numericFilter?: (google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.INumericFilter|null);
+
+                    /** AudienceDimensionOrMetricFilter betweenFilter */
+                    betweenFilter?: (google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.IBetweenFilter|null);
+
+                    /** AudienceDimensionOrMetricFilter fieldName */
+                    fieldName?: (string|null);
+
+                    /** AudienceDimensionOrMetricFilter atAnyPointInTime */
+                    atAnyPointInTime?: (boolean|null);
+
+                    /** AudienceDimensionOrMetricFilter inAnyNDayPeriod */
+                    inAnyNDayPeriod?: (number|null);
+                }
+
+                /** Represents an AudienceDimensionOrMetricFilter. */
+                class AudienceDimensionOrMetricFilter implements IAudienceDimensionOrMetricFilter {
+
+                    /**
+                     * Constructs a new AudienceDimensionOrMetricFilter.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IAudienceDimensionOrMetricFilter);
+
+                    /** AudienceDimensionOrMetricFilter stringFilter. */
+                    public stringFilter?: (google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.IStringFilter|null);
+
+                    /** AudienceDimensionOrMetricFilter inListFilter. */
+                    public inListFilter?: (google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.IInListFilter|null);
+
+                    /** AudienceDimensionOrMetricFilter numericFilter. */
+                    public numericFilter?: (google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.INumericFilter|null);
+
+                    /** AudienceDimensionOrMetricFilter betweenFilter. */
+                    public betweenFilter?: (google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.IBetweenFilter|null);
+
+                    /** AudienceDimensionOrMetricFilter fieldName. */
+                    public fieldName: string;
+
+                    /** AudienceDimensionOrMetricFilter atAnyPointInTime. */
+                    public atAnyPointInTime: boolean;
+
+                    /** AudienceDimensionOrMetricFilter inAnyNDayPeriod. */
+                    public inAnyNDayPeriod: number;
+
+                    /** AudienceDimensionOrMetricFilter oneFilter. */
+                    public oneFilter?: ("stringFilter"|"inListFilter"|"numericFilter"|"betweenFilter");
+
+                    /**
+                     * Creates a new AudienceDimensionOrMetricFilter instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AudienceDimensionOrMetricFilter instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IAudienceDimensionOrMetricFilter): google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter;
+
+                    /**
+                     * Encodes the specified AudienceDimensionOrMetricFilter message. Does not implicitly {@link google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.verify|verify} messages.
+                     * @param message AudienceDimensionOrMetricFilter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IAudienceDimensionOrMetricFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AudienceDimensionOrMetricFilter message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.verify|verify} messages.
+                     * @param message AudienceDimensionOrMetricFilter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IAudienceDimensionOrMetricFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AudienceDimensionOrMetricFilter message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AudienceDimensionOrMetricFilter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter;
+
+                    /**
+                     * Decodes an AudienceDimensionOrMetricFilter message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AudienceDimensionOrMetricFilter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter;
+
+                    /**
+                     * Verifies an AudienceDimensionOrMetricFilter message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AudienceDimensionOrMetricFilter message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AudienceDimensionOrMetricFilter
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter;
+
+                    /**
+                     * Creates a plain object from an AudienceDimensionOrMetricFilter message. Also converts values to other types if specified.
+                     * @param message AudienceDimensionOrMetricFilter
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AudienceDimensionOrMetricFilter to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace AudienceDimensionOrMetricFilter {
+
+                    /** Properties of a StringFilter. */
+                    interface IStringFilter {
+
+                        /** StringFilter matchType */
+                        matchType?: (google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.StringFilter.MatchType|keyof typeof google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.StringFilter.MatchType|null);
+
+                        /** StringFilter value */
+                        value?: (string|null);
+
+                        /** StringFilter caseSensitive */
+                        caseSensitive?: (boolean|null);
+                    }
+
+                    /** Represents a StringFilter. */
+                    class StringFilter implements IStringFilter {
+
+                        /**
+                         * Constructs a new StringFilter.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.IStringFilter);
+
+                        /** StringFilter matchType. */
+                        public matchType: (google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.StringFilter.MatchType|keyof typeof google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.StringFilter.MatchType);
+
+                        /** StringFilter value. */
+                        public value: string;
+
+                        /** StringFilter caseSensitive. */
+                        public caseSensitive: boolean;
+
+                        /**
+                         * Creates a new StringFilter instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns StringFilter instance
+                         */
+                        public static create(properties?: google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.IStringFilter): google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.StringFilter;
+
+                        /**
+                         * Encodes the specified StringFilter message. Does not implicitly {@link google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.StringFilter.verify|verify} messages.
+                         * @param message StringFilter message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.IStringFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified StringFilter message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.StringFilter.verify|verify} messages.
+                         * @param message StringFilter message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.IStringFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a StringFilter message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns StringFilter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.StringFilter;
+
+                        /**
+                         * Decodes a StringFilter message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns StringFilter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.StringFilter;
+
+                        /**
+                         * Verifies a StringFilter message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a StringFilter message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns StringFilter
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.StringFilter;
+
+                        /**
+                         * Creates a plain object from a StringFilter message. Also converts values to other types if specified.
+                         * @param message StringFilter
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.StringFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this StringFilter to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace StringFilter {
+
+                        /** MatchType enum. */
+                        enum MatchType {
+                            MATCH_TYPE_UNSPECIFIED = 0,
+                            EXACT = 1,
+                            BEGINS_WITH = 2,
+                            ENDS_WITH = 3,
+                            CONTAINS = 4,
+                            FULL_REGEXP = 5,
+                            PARTIAL_REGEXP = 6
+                        }
+                    }
+
+                    /** Properties of an InListFilter. */
+                    interface IInListFilter {
+
+                        /** InListFilter values */
+                        values?: (string[]|null);
+
+                        /** InListFilter caseSensitive */
+                        caseSensitive?: (boolean|null);
+                    }
+
+                    /** Represents an InListFilter. */
+                    class InListFilter implements IInListFilter {
+
+                        /**
+                         * Constructs a new InListFilter.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.IInListFilter);
+
+                        /** InListFilter values. */
+                        public values: string[];
+
+                        /** InListFilter caseSensitive. */
+                        public caseSensitive: boolean;
+
+                        /**
+                         * Creates a new InListFilter instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns InListFilter instance
+                         */
+                        public static create(properties?: google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.IInListFilter): google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.InListFilter;
+
+                        /**
+                         * Encodes the specified InListFilter message. Does not implicitly {@link google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.InListFilter.verify|verify} messages.
+                         * @param message InListFilter message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.IInListFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified InListFilter message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.InListFilter.verify|verify} messages.
+                         * @param message InListFilter message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.IInListFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an InListFilter message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns InListFilter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.InListFilter;
+
+                        /**
+                         * Decodes an InListFilter message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns InListFilter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.InListFilter;
+
+                        /**
+                         * Verifies an InListFilter message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an InListFilter message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns InListFilter
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.InListFilter;
+
+                        /**
+                         * Creates a plain object from an InListFilter message. Also converts values to other types if specified.
+                         * @param message InListFilter
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.InListFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this InListFilter to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a NumericValue. */
+                    interface INumericValue {
+
+                        /** NumericValue int64Value */
+                        int64Value?: (number|Long|string|null);
+
+                        /** NumericValue doubleValue */
+                        doubleValue?: (number|null);
+                    }
+
+                    /** Represents a NumericValue. */
+                    class NumericValue implements INumericValue {
+
+                        /**
+                         * Constructs a new NumericValue.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.INumericValue);
+
+                        /** NumericValue int64Value. */
+                        public int64Value?: (number|Long|string|null);
+
+                        /** NumericValue doubleValue. */
+                        public doubleValue?: (number|null);
+
+                        /** NumericValue oneValue. */
+                        public oneValue?: ("int64Value"|"doubleValue");
+
+                        /**
+                         * Creates a new NumericValue instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns NumericValue instance
+                         */
+                        public static create(properties?: google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.INumericValue): google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.NumericValue;
+
+                        /**
+                         * Encodes the specified NumericValue message. Does not implicitly {@link google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.NumericValue.verify|verify} messages.
+                         * @param message NumericValue message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.INumericValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified NumericValue message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.NumericValue.verify|verify} messages.
+                         * @param message NumericValue message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.INumericValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a NumericValue message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns NumericValue
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.NumericValue;
+
+                        /**
+                         * Decodes a NumericValue message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns NumericValue
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.NumericValue;
+
+                        /**
+                         * Verifies a NumericValue message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a NumericValue message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns NumericValue
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.NumericValue;
+
+                        /**
+                         * Creates a plain object from a NumericValue message. Also converts values to other types if specified.
+                         * @param message NumericValue
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.NumericValue, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this NumericValue to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a NumericFilter. */
+                    interface INumericFilter {
+
+                        /** NumericFilter operation */
+                        operation?: (google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.NumericFilter.Operation|keyof typeof google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.NumericFilter.Operation|null);
+
+                        /** NumericFilter value */
+                        value?: (google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.INumericValue|null);
+                    }
+
+                    /** Represents a NumericFilter. */
+                    class NumericFilter implements INumericFilter {
+
+                        /**
+                         * Constructs a new NumericFilter.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.INumericFilter);
+
+                        /** NumericFilter operation. */
+                        public operation: (google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.NumericFilter.Operation|keyof typeof google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.NumericFilter.Operation);
+
+                        /** NumericFilter value. */
+                        public value?: (google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.INumericValue|null);
+
+                        /**
+                         * Creates a new NumericFilter instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns NumericFilter instance
+                         */
+                        public static create(properties?: google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.INumericFilter): google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.NumericFilter;
+
+                        /**
+                         * Encodes the specified NumericFilter message. Does not implicitly {@link google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.NumericFilter.verify|verify} messages.
+                         * @param message NumericFilter message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.INumericFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified NumericFilter message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.NumericFilter.verify|verify} messages.
+                         * @param message NumericFilter message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.INumericFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a NumericFilter message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns NumericFilter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.NumericFilter;
+
+                        /**
+                         * Decodes a NumericFilter message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns NumericFilter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.NumericFilter;
+
+                        /**
+                         * Verifies a NumericFilter message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a NumericFilter message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns NumericFilter
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.NumericFilter;
+
+                        /**
+                         * Creates a plain object from a NumericFilter message. Also converts values to other types if specified.
+                         * @param message NumericFilter
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.NumericFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this NumericFilter to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace NumericFilter {
+
+                        /** Operation enum. */
+                        enum Operation {
+                            OPERATION_UNSPECIFIED = 0,
+                            EQUAL = 1,
+                            LESS_THAN = 2,
+                            LESS_THAN_OR_EQUAL = 3,
+                            GREATER_THAN = 4,
+                            GREATER_THAN_OR_EQUAL = 5
+                        }
+                    }
+
+                    /** Properties of a BetweenFilter. */
+                    interface IBetweenFilter {
+
+                        /** BetweenFilter fromValue */
+                        fromValue?: (google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.INumericValue|null);
+
+                        /** BetweenFilter toValue */
+                        toValue?: (google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.INumericValue|null);
+                    }
+
+                    /** Represents a BetweenFilter. */
+                    class BetweenFilter implements IBetweenFilter {
+
+                        /**
+                         * Constructs a new BetweenFilter.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.IBetweenFilter);
+
+                        /** BetweenFilter fromValue. */
+                        public fromValue?: (google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.INumericValue|null);
+
+                        /** BetweenFilter toValue. */
+                        public toValue?: (google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.INumericValue|null);
+
+                        /**
+                         * Creates a new BetweenFilter instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns BetweenFilter instance
+                         */
+                        public static create(properties?: google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.IBetweenFilter): google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.BetweenFilter;
+
+                        /**
+                         * Encodes the specified BetweenFilter message. Does not implicitly {@link google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.BetweenFilter.verify|verify} messages.
+                         * @param message BetweenFilter message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.IBetweenFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified BetweenFilter message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.BetweenFilter.verify|verify} messages.
+                         * @param message BetweenFilter message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.IBetweenFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a BetweenFilter message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns BetweenFilter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.BetweenFilter;
+
+                        /**
+                         * Decodes a BetweenFilter message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns BetweenFilter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.BetweenFilter;
+
+                        /**
+                         * Verifies a BetweenFilter message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a BetweenFilter message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns BetweenFilter
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.BetweenFilter;
+
+                        /**
+                         * Creates a plain object from a BetweenFilter message. Also converts values to other types if specified.
+                         * @param message BetweenFilter
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.BetweenFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this BetweenFilter to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+                }
+
+                /** Properties of an AudienceEventFilter. */
+                interface IAudienceEventFilter {
+
+                    /** AudienceEventFilter eventName */
+                    eventName?: (string|null);
+
+                    /** AudienceEventFilter eventParameterFilterExpression */
+                    eventParameterFilterExpression?: (google.analytics.admin.v1alpha.IAudienceFilterExpression|null);
+                }
+
+                /** Represents an AudienceEventFilter. */
+                class AudienceEventFilter implements IAudienceEventFilter {
+
+                    /**
+                     * Constructs a new AudienceEventFilter.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IAudienceEventFilter);
+
+                    /** AudienceEventFilter eventName. */
+                    public eventName: string;
+
+                    /** AudienceEventFilter eventParameterFilterExpression. */
+                    public eventParameterFilterExpression?: (google.analytics.admin.v1alpha.IAudienceFilterExpression|null);
+
+                    /**
+                     * Creates a new AudienceEventFilter instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AudienceEventFilter instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IAudienceEventFilter): google.analytics.admin.v1alpha.AudienceEventFilter;
+
+                    /**
+                     * Encodes the specified AudienceEventFilter message. Does not implicitly {@link google.analytics.admin.v1alpha.AudienceEventFilter.verify|verify} messages.
+                     * @param message AudienceEventFilter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IAudienceEventFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AudienceEventFilter message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.AudienceEventFilter.verify|verify} messages.
+                     * @param message AudienceEventFilter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IAudienceEventFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AudienceEventFilter message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AudienceEventFilter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.AudienceEventFilter;
+
+                    /**
+                     * Decodes an AudienceEventFilter message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AudienceEventFilter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.AudienceEventFilter;
+
+                    /**
+                     * Verifies an AudienceEventFilter message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AudienceEventFilter message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AudienceEventFilter
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.AudienceEventFilter;
+
+                    /**
+                     * Creates a plain object from an AudienceEventFilter message. Also converts values to other types if specified.
+                     * @param message AudienceEventFilter
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.AudienceEventFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AudienceEventFilter to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an AudienceFilterExpression. */
+                interface IAudienceFilterExpression {
+
+                    /** AudienceFilterExpression andGroup */
+                    andGroup?: (google.analytics.admin.v1alpha.IAudienceFilterExpressionList|null);
+
+                    /** AudienceFilterExpression orGroup */
+                    orGroup?: (google.analytics.admin.v1alpha.IAudienceFilterExpressionList|null);
+
+                    /** AudienceFilterExpression notExpression */
+                    notExpression?: (google.analytics.admin.v1alpha.IAudienceFilterExpression|null);
+
+                    /** AudienceFilterExpression dimensionOrMetricFilter */
+                    dimensionOrMetricFilter?: (google.analytics.admin.v1alpha.IAudienceDimensionOrMetricFilter|null);
+
+                    /** AudienceFilterExpression eventFilter */
+                    eventFilter?: (google.analytics.admin.v1alpha.IAudienceEventFilter|null);
+                }
+
+                /** Represents an AudienceFilterExpression. */
+                class AudienceFilterExpression implements IAudienceFilterExpression {
+
+                    /**
+                     * Constructs a new AudienceFilterExpression.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IAudienceFilterExpression);
+
+                    /** AudienceFilterExpression andGroup. */
+                    public andGroup?: (google.analytics.admin.v1alpha.IAudienceFilterExpressionList|null);
+
+                    /** AudienceFilterExpression orGroup. */
+                    public orGroup?: (google.analytics.admin.v1alpha.IAudienceFilterExpressionList|null);
+
+                    /** AudienceFilterExpression notExpression. */
+                    public notExpression?: (google.analytics.admin.v1alpha.IAudienceFilterExpression|null);
+
+                    /** AudienceFilterExpression dimensionOrMetricFilter. */
+                    public dimensionOrMetricFilter?: (google.analytics.admin.v1alpha.IAudienceDimensionOrMetricFilter|null);
+
+                    /** AudienceFilterExpression eventFilter. */
+                    public eventFilter?: (google.analytics.admin.v1alpha.IAudienceEventFilter|null);
+
+                    /** AudienceFilterExpression expr. */
+                    public expr?: ("andGroup"|"orGroup"|"notExpression"|"dimensionOrMetricFilter"|"eventFilter");
+
+                    /**
+                     * Creates a new AudienceFilterExpression instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AudienceFilterExpression instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IAudienceFilterExpression): google.analytics.admin.v1alpha.AudienceFilterExpression;
+
+                    /**
+                     * Encodes the specified AudienceFilterExpression message. Does not implicitly {@link google.analytics.admin.v1alpha.AudienceFilterExpression.verify|verify} messages.
+                     * @param message AudienceFilterExpression message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IAudienceFilterExpression, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AudienceFilterExpression message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.AudienceFilterExpression.verify|verify} messages.
+                     * @param message AudienceFilterExpression message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IAudienceFilterExpression, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AudienceFilterExpression message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AudienceFilterExpression
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.AudienceFilterExpression;
+
+                    /**
+                     * Decodes an AudienceFilterExpression message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AudienceFilterExpression
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.AudienceFilterExpression;
+
+                    /**
+                     * Verifies an AudienceFilterExpression message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AudienceFilterExpression message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AudienceFilterExpression
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.AudienceFilterExpression;
+
+                    /**
+                     * Creates a plain object from an AudienceFilterExpression message. Also converts values to other types if specified.
+                     * @param message AudienceFilterExpression
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.AudienceFilterExpression, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AudienceFilterExpression to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an AudienceFilterExpressionList. */
+                interface IAudienceFilterExpressionList {
+
+                    /** AudienceFilterExpressionList filterExpressions */
+                    filterExpressions?: (google.analytics.admin.v1alpha.IAudienceFilterExpression[]|null);
+                }
+
+                /** Represents an AudienceFilterExpressionList. */
+                class AudienceFilterExpressionList implements IAudienceFilterExpressionList {
+
+                    /**
+                     * Constructs a new AudienceFilterExpressionList.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IAudienceFilterExpressionList);
+
+                    /** AudienceFilterExpressionList filterExpressions. */
+                    public filterExpressions: google.analytics.admin.v1alpha.IAudienceFilterExpression[];
+
+                    /**
+                     * Creates a new AudienceFilterExpressionList instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AudienceFilterExpressionList instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IAudienceFilterExpressionList): google.analytics.admin.v1alpha.AudienceFilterExpressionList;
+
+                    /**
+                     * Encodes the specified AudienceFilterExpressionList message. Does not implicitly {@link google.analytics.admin.v1alpha.AudienceFilterExpressionList.verify|verify} messages.
+                     * @param message AudienceFilterExpressionList message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IAudienceFilterExpressionList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AudienceFilterExpressionList message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.AudienceFilterExpressionList.verify|verify} messages.
+                     * @param message AudienceFilterExpressionList message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IAudienceFilterExpressionList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AudienceFilterExpressionList message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AudienceFilterExpressionList
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.AudienceFilterExpressionList;
+
+                    /**
+                     * Decodes an AudienceFilterExpressionList message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AudienceFilterExpressionList
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.AudienceFilterExpressionList;
+
+                    /**
+                     * Verifies an AudienceFilterExpressionList message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AudienceFilterExpressionList message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AudienceFilterExpressionList
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.AudienceFilterExpressionList;
+
+                    /**
+                     * Creates a plain object from an AudienceFilterExpressionList message. Also converts values to other types if specified.
+                     * @param message AudienceFilterExpressionList
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.AudienceFilterExpressionList, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AudienceFilterExpressionList to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an AudienceSimpleFilter. */
+                interface IAudienceSimpleFilter {
+
+                    /** AudienceSimpleFilter scope */
+                    scope?: (google.analytics.admin.v1alpha.AudienceFilterScope|keyof typeof google.analytics.admin.v1alpha.AudienceFilterScope|null);
+
+                    /** AudienceSimpleFilter filterExpression */
+                    filterExpression?: (google.analytics.admin.v1alpha.IAudienceFilterExpression|null);
+                }
+
+                /** Represents an AudienceSimpleFilter. */
+                class AudienceSimpleFilter implements IAudienceSimpleFilter {
+
+                    /**
+                     * Constructs a new AudienceSimpleFilter.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IAudienceSimpleFilter);
+
+                    /** AudienceSimpleFilter scope. */
+                    public scope: (google.analytics.admin.v1alpha.AudienceFilterScope|keyof typeof google.analytics.admin.v1alpha.AudienceFilterScope);
+
+                    /** AudienceSimpleFilter filterExpression. */
+                    public filterExpression?: (google.analytics.admin.v1alpha.IAudienceFilterExpression|null);
+
+                    /**
+                     * Creates a new AudienceSimpleFilter instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AudienceSimpleFilter instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IAudienceSimpleFilter): google.analytics.admin.v1alpha.AudienceSimpleFilter;
+
+                    /**
+                     * Encodes the specified AudienceSimpleFilter message. Does not implicitly {@link google.analytics.admin.v1alpha.AudienceSimpleFilter.verify|verify} messages.
+                     * @param message AudienceSimpleFilter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IAudienceSimpleFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AudienceSimpleFilter message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.AudienceSimpleFilter.verify|verify} messages.
+                     * @param message AudienceSimpleFilter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IAudienceSimpleFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AudienceSimpleFilter message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AudienceSimpleFilter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.AudienceSimpleFilter;
+
+                    /**
+                     * Decodes an AudienceSimpleFilter message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AudienceSimpleFilter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.AudienceSimpleFilter;
+
+                    /**
+                     * Verifies an AudienceSimpleFilter message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AudienceSimpleFilter message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AudienceSimpleFilter
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.AudienceSimpleFilter;
+
+                    /**
+                     * Creates a plain object from an AudienceSimpleFilter message. Also converts values to other types if specified.
+                     * @param message AudienceSimpleFilter
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.AudienceSimpleFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AudienceSimpleFilter to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an AudienceSequenceFilter. */
+                interface IAudienceSequenceFilter {
+
+                    /** AudienceSequenceFilter scope */
+                    scope?: (google.analytics.admin.v1alpha.AudienceFilterScope|keyof typeof google.analytics.admin.v1alpha.AudienceFilterScope|null);
+
+                    /** AudienceSequenceFilter sequenceMaximumDuration */
+                    sequenceMaximumDuration?: (google.protobuf.IDuration|null);
+
+                    /** AudienceSequenceFilter sequenceSteps */
+                    sequenceSteps?: (google.analytics.admin.v1alpha.AudienceSequenceFilter.IAudienceSequenceStep[]|null);
+                }
+
+                /** Represents an AudienceSequenceFilter. */
+                class AudienceSequenceFilter implements IAudienceSequenceFilter {
+
+                    /**
+                     * Constructs a new AudienceSequenceFilter.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IAudienceSequenceFilter);
+
+                    /** AudienceSequenceFilter scope. */
+                    public scope: (google.analytics.admin.v1alpha.AudienceFilterScope|keyof typeof google.analytics.admin.v1alpha.AudienceFilterScope);
+
+                    /** AudienceSequenceFilter sequenceMaximumDuration. */
+                    public sequenceMaximumDuration?: (google.protobuf.IDuration|null);
+
+                    /** AudienceSequenceFilter sequenceSteps. */
+                    public sequenceSteps: google.analytics.admin.v1alpha.AudienceSequenceFilter.IAudienceSequenceStep[];
+
+                    /**
+                     * Creates a new AudienceSequenceFilter instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AudienceSequenceFilter instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IAudienceSequenceFilter): google.analytics.admin.v1alpha.AudienceSequenceFilter;
+
+                    /**
+                     * Encodes the specified AudienceSequenceFilter message. Does not implicitly {@link google.analytics.admin.v1alpha.AudienceSequenceFilter.verify|verify} messages.
+                     * @param message AudienceSequenceFilter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IAudienceSequenceFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AudienceSequenceFilter message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.AudienceSequenceFilter.verify|verify} messages.
+                     * @param message AudienceSequenceFilter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IAudienceSequenceFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AudienceSequenceFilter message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AudienceSequenceFilter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.AudienceSequenceFilter;
+
+                    /**
+                     * Decodes an AudienceSequenceFilter message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AudienceSequenceFilter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.AudienceSequenceFilter;
+
+                    /**
+                     * Verifies an AudienceSequenceFilter message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AudienceSequenceFilter message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AudienceSequenceFilter
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.AudienceSequenceFilter;
+
+                    /**
+                     * Creates a plain object from an AudienceSequenceFilter message. Also converts values to other types if specified.
+                     * @param message AudienceSequenceFilter
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.AudienceSequenceFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AudienceSequenceFilter to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace AudienceSequenceFilter {
+
+                    /** Properties of an AudienceSequenceStep. */
+                    interface IAudienceSequenceStep {
+
+                        /** AudienceSequenceStep scope */
+                        scope?: (google.analytics.admin.v1alpha.AudienceFilterScope|keyof typeof google.analytics.admin.v1alpha.AudienceFilterScope|null);
+
+                        /** AudienceSequenceStep immediatelyFollows */
+                        immediatelyFollows?: (boolean|null);
+
+                        /** AudienceSequenceStep constraintDuration */
+                        constraintDuration?: (google.protobuf.IDuration|null);
+
+                        /** AudienceSequenceStep filterExpression */
+                        filterExpression?: (google.analytics.admin.v1alpha.IAudienceFilterExpression|null);
+                    }
+
+                    /** Represents an AudienceSequenceStep. */
+                    class AudienceSequenceStep implements IAudienceSequenceStep {
+
+                        /**
+                         * Constructs a new AudienceSequenceStep.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.analytics.admin.v1alpha.AudienceSequenceFilter.IAudienceSequenceStep);
+
+                        /** AudienceSequenceStep scope. */
+                        public scope: (google.analytics.admin.v1alpha.AudienceFilterScope|keyof typeof google.analytics.admin.v1alpha.AudienceFilterScope);
+
+                        /** AudienceSequenceStep immediatelyFollows. */
+                        public immediatelyFollows: boolean;
+
+                        /** AudienceSequenceStep constraintDuration. */
+                        public constraintDuration?: (google.protobuf.IDuration|null);
+
+                        /** AudienceSequenceStep filterExpression. */
+                        public filterExpression?: (google.analytics.admin.v1alpha.IAudienceFilterExpression|null);
+
+                        /**
+                         * Creates a new AudienceSequenceStep instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AudienceSequenceStep instance
+                         */
+                        public static create(properties?: google.analytics.admin.v1alpha.AudienceSequenceFilter.IAudienceSequenceStep): google.analytics.admin.v1alpha.AudienceSequenceFilter.AudienceSequenceStep;
+
+                        /**
+                         * Encodes the specified AudienceSequenceStep message. Does not implicitly {@link google.analytics.admin.v1alpha.AudienceSequenceFilter.AudienceSequenceStep.verify|verify} messages.
+                         * @param message AudienceSequenceStep message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.analytics.admin.v1alpha.AudienceSequenceFilter.IAudienceSequenceStep, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AudienceSequenceStep message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.AudienceSequenceFilter.AudienceSequenceStep.verify|verify} messages.
+                         * @param message AudienceSequenceStep message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.analytics.admin.v1alpha.AudienceSequenceFilter.IAudienceSequenceStep, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AudienceSequenceStep message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AudienceSequenceStep
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.AudienceSequenceFilter.AudienceSequenceStep;
+
+                        /**
+                         * Decodes an AudienceSequenceStep message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AudienceSequenceStep
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.AudienceSequenceFilter.AudienceSequenceStep;
+
+                        /**
+                         * Verifies an AudienceSequenceStep message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AudienceSequenceStep message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AudienceSequenceStep
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.AudienceSequenceFilter.AudienceSequenceStep;
+
+                        /**
+                         * Creates a plain object from an AudienceSequenceStep message. Also converts values to other types if specified.
+                         * @param message AudienceSequenceStep
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.analytics.admin.v1alpha.AudienceSequenceFilter.AudienceSequenceStep, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AudienceSequenceStep to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+                }
+
+                /** Properties of an AudienceFilterClause. */
+                interface IAudienceFilterClause {
+
+                    /** AudienceFilterClause simpleFilter */
+                    simpleFilter?: (google.analytics.admin.v1alpha.IAudienceSimpleFilter|null);
+
+                    /** AudienceFilterClause sequenceFilter */
+                    sequenceFilter?: (google.analytics.admin.v1alpha.IAudienceSequenceFilter|null);
+
+                    /** AudienceFilterClause clauseType */
+                    clauseType?: (google.analytics.admin.v1alpha.AudienceFilterClause.AudienceClauseType|keyof typeof google.analytics.admin.v1alpha.AudienceFilterClause.AudienceClauseType|null);
+                }
+
+                /** Represents an AudienceFilterClause. */
+                class AudienceFilterClause implements IAudienceFilterClause {
+
+                    /**
+                     * Constructs a new AudienceFilterClause.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IAudienceFilterClause);
+
+                    /** AudienceFilterClause simpleFilter. */
+                    public simpleFilter?: (google.analytics.admin.v1alpha.IAudienceSimpleFilter|null);
+
+                    /** AudienceFilterClause sequenceFilter. */
+                    public sequenceFilter?: (google.analytics.admin.v1alpha.IAudienceSequenceFilter|null);
+
+                    /** AudienceFilterClause clauseType. */
+                    public clauseType: (google.analytics.admin.v1alpha.AudienceFilterClause.AudienceClauseType|keyof typeof google.analytics.admin.v1alpha.AudienceFilterClause.AudienceClauseType);
+
+                    /** AudienceFilterClause filter. */
+                    public filter?: ("simpleFilter"|"sequenceFilter");
+
+                    /**
+                     * Creates a new AudienceFilterClause instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AudienceFilterClause instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IAudienceFilterClause): google.analytics.admin.v1alpha.AudienceFilterClause;
+
+                    /**
+                     * Encodes the specified AudienceFilterClause message. Does not implicitly {@link google.analytics.admin.v1alpha.AudienceFilterClause.verify|verify} messages.
+                     * @param message AudienceFilterClause message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IAudienceFilterClause, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AudienceFilterClause message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.AudienceFilterClause.verify|verify} messages.
+                     * @param message AudienceFilterClause message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IAudienceFilterClause, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AudienceFilterClause message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AudienceFilterClause
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.AudienceFilterClause;
+
+                    /**
+                     * Decodes an AudienceFilterClause message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AudienceFilterClause
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.AudienceFilterClause;
+
+                    /**
+                     * Verifies an AudienceFilterClause message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AudienceFilterClause message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AudienceFilterClause
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.AudienceFilterClause;
+
+                    /**
+                     * Creates a plain object from an AudienceFilterClause message. Also converts values to other types if specified.
+                     * @param message AudienceFilterClause
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.AudienceFilterClause, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AudienceFilterClause to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace AudienceFilterClause {
+
+                    /** AudienceClauseType enum. */
+                    enum AudienceClauseType {
+                        AUDIENCE_CLAUSE_TYPE_UNSPECIFIED = 0,
+                        INCLUDE = 1,
+                        EXCLUDE = 2
+                    }
+                }
+
+                /** Properties of an AudienceEventTrigger. */
+                interface IAudienceEventTrigger {
+
+                    /** AudienceEventTrigger eventName */
+                    eventName?: (string|null);
+
+                    /** AudienceEventTrigger logCondition */
+                    logCondition?: (google.analytics.admin.v1alpha.AudienceEventTrigger.LogCondition|keyof typeof google.analytics.admin.v1alpha.AudienceEventTrigger.LogCondition|null);
+                }
+
+                /** Represents an AudienceEventTrigger. */
+                class AudienceEventTrigger implements IAudienceEventTrigger {
+
+                    /**
+                     * Constructs a new AudienceEventTrigger.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IAudienceEventTrigger);
+
+                    /** AudienceEventTrigger eventName. */
+                    public eventName: string;
+
+                    /** AudienceEventTrigger logCondition. */
+                    public logCondition: (google.analytics.admin.v1alpha.AudienceEventTrigger.LogCondition|keyof typeof google.analytics.admin.v1alpha.AudienceEventTrigger.LogCondition);
+
+                    /**
+                     * Creates a new AudienceEventTrigger instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AudienceEventTrigger instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IAudienceEventTrigger): google.analytics.admin.v1alpha.AudienceEventTrigger;
+
+                    /**
+                     * Encodes the specified AudienceEventTrigger message. Does not implicitly {@link google.analytics.admin.v1alpha.AudienceEventTrigger.verify|verify} messages.
+                     * @param message AudienceEventTrigger message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IAudienceEventTrigger, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AudienceEventTrigger message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.AudienceEventTrigger.verify|verify} messages.
+                     * @param message AudienceEventTrigger message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IAudienceEventTrigger, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AudienceEventTrigger message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AudienceEventTrigger
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.AudienceEventTrigger;
+
+                    /**
+                     * Decodes an AudienceEventTrigger message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AudienceEventTrigger
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.AudienceEventTrigger;
+
+                    /**
+                     * Verifies an AudienceEventTrigger message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AudienceEventTrigger message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AudienceEventTrigger
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.AudienceEventTrigger;
+
+                    /**
+                     * Creates a plain object from an AudienceEventTrigger message. Also converts values to other types if specified.
+                     * @param message AudienceEventTrigger
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.AudienceEventTrigger, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AudienceEventTrigger to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace AudienceEventTrigger {
+
+                    /** LogCondition enum. */
+                    enum LogCondition {
+                        LOG_CONDITION_UNSPECIFIED = 0,
+                        AUDIENCE_JOINED = 1,
+                        AUDIENCE_MEMBERSHIP_RENEWED = 2
+                    }
+                }
+
+                /** Properties of an Audience. */
+                interface IAudience {
+
+                    /** Audience name */
+                    name?: (string|null);
+
+                    /** Audience displayName */
+                    displayName?: (string|null);
+
+                    /** Audience description */
+                    description?: (string|null);
+
+                    /** Audience membershipDurationDays */
+                    membershipDurationDays?: (number|null);
+
+                    /** Audience adsPersonalizationEnabled */
+                    adsPersonalizationEnabled?: (boolean|null);
+
+                    /** Audience eventTrigger */
+                    eventTrigger?: (google.analytics.admin.v1alpha.IAudienceEventTrigger|null);
+
+                    /** Audience exclusionDurationMode */
+                    exclusionDurationMode?: (google.analytics.admin.v1alpha.Audience.AudienceExclusionDurationMode|keyof typeof google.analytics.admin.v1alpha.Audience.AudienceExclusionDurationMode|null);
+
+                    /** Audience filterClauses */
+                    filterClauses?: (google.analytics.admin.v1alpha.IAudienceFilterClause[]|null);
+                }
+
+                /** Represents an Audience. */
+                class Audience implements IAudience {
+
+                    /**
+                     * Constructs a new Audience.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IAudience);
+
+                    /** Audience name. */
+                    public name: string;
+
+                    /** Audience displayName. */
+                    public displayName: string;
+
+                    /** Audience description. */
+                    public description: string;
+
+                    /** Audience membershipDurationDays. */
+                    public membershipDurationDays: number;
+
+                    /** Audience adsPersonalizationEnabled. */
+                    public adsPersonalizationEnabled: boolean;
+
+                    /** Audience eventTrigger. */
+                    public eventTrigger?: (google.analytics.admin.v1alpha.IAudienceEventTrigger|null);
+
+                    /** Audience exclusionDurationMode. */
+                    public exclusionDurationMode: (google.analytics.admin.v1alpha.Audience.AudienceExclusionDurationMode|keyof typeof google.analytics.admin.v1alpha.Audience.AudienceExclusionDurationMode);
+
+                    /** Audience filterClauses. */
+                    public filterClauses: google.analytics.admin.v1alpha.IAudienceFilterClause[];
+
+                    /**
+                     * Creates a new Audience instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Audience instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IAudience): google.analytics.admin.v1alpha.Audience;
+
+                    /**
+                     * Encodes the specified Audience message. Does not implicitly {@link google.analytics.admin.v1alpha.Audience.verify|verify} messages.
+                     * @param message Audience message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IAudience, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Audience message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.Audience.verify|verify} messages.
+                     * @param message Audience message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IAudience, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an Audience message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Audience
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.Audience;
+
+                    /**
+                     * Decodes an Audience message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Audience
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.Audience;
+
+                    /**
+                     * Verifies an Audience message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an Audience message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Audience
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.Audience;
+
+                    /**
+                     * Creates a plain object from an Audience message. Also converts values to other types if specified.
+                     * @param message Audience
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.Audience, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Audience to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace Audience {
+
+                    /** AudienceExclusionDurationMode enum. */
+                    enum AudienceExclusionDurationMode {
+                        AUDIENCE_EXCLUSION_DURATION_MODE_UNSPECIFIED = 0,
+                        EXCLUDE_TEMPORARILY = 1,
+                        EXCLUDE_PERMANENTLY = 2
+                    }
+                }
+
                 /** IndustryCategory enum. */
                 enum IndustryCategory {
                     INDUSTRY_CATEGORY_UNSPECIFIED = 0,
@@ -10358,7 +15252,9 @@ export namespace google {
                     DATA_RETENTION_SETTINGS = 13,
                     DISPLAY_VIDEO_360_ADVERTISER_LINK = 14,
                     DISPLAY_VIDEO_360_ADVERTISER_LINK_PROPOSAL = 15,
-                    DATA_STREAM = 18
+                    SEARCH_ADS_360_LINK = 16,
+                    DATA_STREAM = 18,
+                    ATTRIBUTION_SETTINGS = 20
                 }
 
                 /** GoogleSignalsState enum. */
@@ -10391,6 +15287,14 @@ export namespace google {
                     DECLINED = 4,
                     EXPIRED = 5,
                     OBSOLETE = 6
+                }
+
+                /** PropertyType enum. */
+                enum PropertyType {
+                    PROPERTY_TYPE_UNSPECIFIED = 0,
+                    PROPERTY_TYPE_ORDINARY = 1,
+                    PROPERTY_TYPE_SUBPROPERTY = 2,
+                    PROPERTY_TYPE_ROLLUP = 3
                 }
 
                 /** Properties of an Account. */
@@ -10519,6 +15423,9 @@ export namespace google {
                     /** Property name */
                     name?: (string|null);
 
+                    /** Property propertyType */
+                    propertyType?: (google.analytics.admin.v1alpha.PropertyType|keyof typeof google.analytics.admin.v1alpha.PropertyType|null);
+
                     /** Property createTime */
                     createTime?: (google.protobuf.ITimestamp|null);
 
@@ -10564,6 +15471,9 @@ export namespace google {
 
                     /** Property name. */
                     public name: string;
+
+                    /** Property propertyType. */
+                    public propertyType: (google.analytics.admin.v1alpha.PropertyType|keyof typeof google.analytics.admin.v1alpha.PropertyType);
 
                     /** Property createTime. */
                     public createTime?: (google.protobuf.ITimestamp|null);
@@ -11879,6 +16789,12 @@ export namespace google {
 
                     /** PropertySummary displayName */
                     displayName?: (string|null);
+
+                    /** PropertySummary propertyType */
+                    propertyType?: (google.analytics.admin.v1alpha.PropertyType|keyof typeof google.analytics.admin.v1alpha.PropertyType|null);
+
+                    /** PropertySummary parent */
+                    parent?: (string|null);
                 }
 
                 /** Represents a PropertySummary. */
@@ -11895,6 +16811,12 @@ export namespace google {
 
                     /** PropertySummary displayName. */
                     public displayName: string;
+
+                    /** PropertySummary propertyType. */
+                    public propertyType: (google.analytics.admin.v1alpha.PropertyType|keyof typeof google.analytics.admin.v1alpha.PropertyType);
+
+                    /** PropertySummary parent. */
+                    public parent: string;
 
                     /**
                      * Creates a new PropertySummary instance using the specified properties.
@@ -12340,6 +17262,9 @@ export namespace google {
 
                         /** ChangeHistoryResource dataStream */
                         dataStream?: (google.analytics.admin.v1alpha.IDataStream|null);
+
+                        /** ChangeHistoryResource attributionSettings */
+                        attributionSettings?: (google.analytics.admin.v1alpha.IAttributionSettings|null);
                     }
 
                     /** Represents a ChangeHistoryResource. */
@@ -12390,8 +17315,11 @@ export namespace google {
                         /** ChangeHistoryResource dataStream. */
                         public dataStream?: (google.analytics.admin.v1alpha.IDataStream|null);
 
+                        /** ChangeHistoryResource attributionSettings. */
+                        public attributionSettings?: (google.analytics.admin.v1alpha.IAttributionSettings|null);
+
                         /** ChangeHistoryResource resource. */
-                        public resource?: ("account"|"property"|"firebaseLink"|"googleAdsLink"|"googleSignalsSettings"|"displayVideo_360AdvertiserLink"|"displayVideo_360AdvertiserLinkProposal"|"conversionEvent"|"measurementProtocolSecret"|"customDimension"|"customMetric"|"dataRetentionSettings"|"dataStream");
+                        public resource?: ("account"|"property"|"firebaseLink"|"googleAdsLink"|"googleSignalsSettings"|"displayVideo_360AdvertiserLink"|"displayVideo_360AdvertiserLinkProposal"|"conversionEvent"|"measurementProtocolSecret"|"customDimension"|"customMetric"|"dataRetentionSettings"|"dataStream"|"attributionSettings");
 
                         /**
                          * Creates a new ChangeHistoryResource instance using the specified properties.
@@ -13434,6 +18362,144 @@ export namespace google {
                         TWENTY_SIX_MONTHS = 4,
                         THIRTY_EIGHT_MONTHS = 5,
                         FIFTY_MONTHS = 6
+                    }
+                }
+
+                /** Properties of an AttributionSettings. */
+                interface IAttributionSettings {
+
+                    /** AttributionSettings name */
+                    name?: (string|null);
+
+                    /** AttributionSettings acquisitionConversionEventLookbackWindow */
+                    acquisitionConversionEventLookbackWindow?: (google.analytics.admin.v1alpha.AttributionSettings.AcquisitionConversionEventLookbackWindow|keyof typeof google.analytics.admin.v1alpha.AttributionSettings.AcquisitionConversionEventLookbackWindow|null);
+
+                    /** AttributionSettings otherConversionEventLookbackWindow */
+                    otherConversionEventLookbackWindow?: (google.analytics.admin.v1alpha.AttributionSettings.OtherConversionEventLookbackWindow|keyof typeof google.analytics.admin.v1alpha.AttributionSettings.OtherConversionEventLookbackWindow|null);
+
+                    /** AttributionSettings reportingAttributionModel */
+                    reportingAttributionModel?: (google.analytics.admin.v1alpha.AttributionSettings.ReportingAttributionModel|keyof typeof google.analytics.admin.v1alpha.AttributionSettings.ReportingAttributionModel|null);
+                }
+
+                /** Represents an AttributionSettings. */
+                class AttributionSettings implements IAttributionSettings {
+
+                    /**
+                     * Constructs a new AttributionSettings.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IAttributionSettings);
+
+                    /** AttributionSettings name. */
+                    public name: string;
+
+                    /** AttributionSettings acquisitionConversionEventLookbackWindow. */
+                    public acquisitionConversionEventLookbackWindow: (google.analytics.admin.v1alpha.AttributionSettings.AcquisitionConversionEventLookbackWindow|keyof typeof google.analytics.admin.v1alpha.AttributionSettings.AcquisitionConversionEventLookbackWindow);
+
+                    /** AttributionSettings otherConversionEventLookbackWindow. */
+                    public otherConversionEventLookbackWindow: (google.analytics.admin.v1alpha.AttributionSettings.OtherConversionEventLookbackWindow|keyof typeof google.analytics.admin.v1alpha.AttributionSettings.OtherConversionEventLookbackWindow);
+
+                    /** AttributionSettings reportingAttributionModel. */
+                    public reportingAttributionModel: (google.analytics.admin.v1alpha.AttributionSettings.ReportingAttributionModel|keyof typeof google.analytics.admin.v1alpha.AttributionSettings.ReportingAttributionModel);
+
+                    /**
+                     * Creates a new AttributionSettings instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AttributionSettings instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IAttributionSettings): google.analytics.admin.v1alpha.AttributionSettings;
+
+                    /**
+                     * Encodes the specified AttributionSettings message. Does not implicitly {@link google.analytics.admin.v1alpha.AttributionSettings.verify|verify} messages.
+                     * @param message AttributionSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IAttributionSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AttributionSettings message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.AttributionSettings.verify|verify} messages.
+                     * @param message AttributionSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IAttributionSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AttributionSettings message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AttributionSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.AttributionSettings;
+
+                    /**
+                     * Decodes an AttributionSettings message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AttributionSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.AttributionSettings;
+
+                    /**
+                     * Verifies an AttributionSettings message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AttributionSettings message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AttributionSettings
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.AttributionSettings;
+
+                    /**
+                     * Creates a plain object from an AttributionSettings message. Also converts values to other types if specified.
+                     * @param message AttributionSettings
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.AttributionSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AttributionSettings to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace AttributionSettings {
+
+                    /** AcquisitionConversionEventLookbackWindow enum. */
+                    enum AcquisitionConversionEventLookbackWindow {
+                        ACQUISITION_CONVERSION_EVENT_LOOKBACK_WINDOW_UNSPECIFIED = 0,
+                        ACQUISITION_CONVERSION_EVENT_LOOKBACK_WINDOW_7_DAYS = 1,
+                        ACQUISITION_CONVERSION_EVENT_LOOKBACK_WINDOW_30_DAYS = 2
+                    }
+
+                    /** OtherConversionEventLookbackWindow enum. */
+                    enum OtherConversionEventLookbackWindow {
+                        OTHER_CONVERSION_EVENT_LOOKBACK_WINDOW_UNSPECIFIED = 0,
+                        OTHER_CONVERSION_EVENT_LOOKBACK_WINDOW_30_DAYS = 1,
+                        OTHER_CONVERSION_EVENT_LOOKBACK_WINDOW_60_DAYS = 2,
+                        OTHER_CONVERSION_EVENT_LOOKBACK_WINDOW_90_DAYS = 3
+                    }
+
+                    /** ReportingAttributionModel enum. */
+                    enum ReportingAttributionModel {
+                        REPORTING_ATTRIBUTION_MODEL_UNSPECIFIED = 0,
+                        CROSS_CHANNEL_DATA_DRIVEN = 1,
+                        CROSS_CHANNEL_LAST_CLICK = 2,
+                        CROSS_CHANNEL_FIRST_CLICK = 3,
+                        CROSS_CHANNEL_LINEAR = 4,
+                        CROSS_CHANNEL_POSITION_BASED = 5,
+                        CROSS_CHANNEL_TIME_DECAY = 6,
+                        ADS_PREFERRED_LAST_CLICK = 7
                     }
                 }
             }
@@ -26254,6 +31320,102 @@ export namespace google {
                  */
                 public toJSON(): { [k: string]: any };
             }
+        }
+
+        /** Properties of a Duration. */
+        interface IDuration {
+
+            /** Duration seconds */
+            seconds?: (number|Long|string|null);
+
+            /** Duration nanos */
+            nanos?: (number|null);
+        }
+
+        /** Represents a Duration. */
+        class Duration implements IDuration {
+
+            /**
+             * Constructs a new Duration.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IDuration);
+
+            /** Duration seconds. */
+            public seconds: (number|Long|string);
+
+            /** Duration nanos. */
+            public nanos: number;
+
+            /**
+             * Creates a new Duration instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Duration instance
+             */
+            public static create(properties?: google.protobuf.IDuration): google.protobuf.Duration;
+
+            /**
+             * Encodes the specified Duration message. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
+             * @param message Duration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IDuration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Duration message, length delimited. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
+             * @param message Duration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IDuration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Duration message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Duration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Duration;
+
+            /**
+             * Decodes a Duration message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Duration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Duration;
+
+            /**
+             * Verifies a Duration message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Duration message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Duration
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Duration;
+
+            /**
+             * Creates a plain object from a Duration message. Also converts values to other types if specified.
+             * @param message Duration
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Duration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Duration to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
         }
 
         /** Properties of a Timestamp. */
