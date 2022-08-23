@@ -30,7 +30,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -719,7 +718,8 @@ export class VmMigrationClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -1762,7 +1762,7 @@ export class VmMigrationClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createSource,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.vmmigration.v1.Source,
@@ -1919,7 +1919,7 @@ export class VmMigrationClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateSource,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.vmmigration.v1.Source,
@@ -2070,7 +2070,7 @@ export class VmMigrationClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteSource,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -2234,7 +2234,7 @@ export class VmMigrationClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createUtilizationReport,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.vmmigration.v1.UtilizationReport,
@@ -2389,7 +2389,7 @@ export class VmMigrationClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteUtilizationReport,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -2551,7 +2551,7 @@ export class VmMigrationClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createDatacenterConnector,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.vmmigration.v1.DatacenterConnector,
@@ -2706,7 +2706,7 @@ export class VmMigrationClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteDatacenterConnector,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -2858,7 +2858,7 @@ export class VmMigrationClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.upgradeAppliance,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.vmmigration.v1.UpgradeApplianceResponse,
@@ -3013,7 +3013,7 @@ export class VmMigrationClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createMigratingVm,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.vmmigration.v1.MigratingVm,
@@ -3170,7 +3170,7 @@ export class VmMigrationClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateMigratingVm,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.vmmigration.v1.MigratingVm,
@@ -3307,7 +3307,7 @@ export class VmMigrationClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteMigratingVm,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -3445,7 +3445,7 @@ export class VmMigrationClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.startMigration,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.vmmigration.v1.StartMigrationResponse,
@@ -3585,7 +3585,7 @@ export class VmMigrationClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.resumeMigration,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.vmmigration.v1.ResumeMigrationResponse,
@@ -3724,7 +3724,7 @@ export class VmMigrationClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.pauseMigration,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.vmmigration.v1.PauseMigrationResponse,
@@ -3862,7 +3862,7 @@ export class VmMigrationClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.finalizeMigration,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.vmmigration.v1.FinalizeMigrationResponse,
@@ -4017,7 +4017,7 @@ export class VmMigrationClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createCloneJob,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.vmmigration.v1.CloneJob,
@@ -4154,7 +4154,7 @@ export class VmMigrationClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.cancelCloneJob,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.vmmigration.v1.CancelCloneJobResponse,
@@ -4311,7 +4311,7 @@ export class VmMigrationClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createCutoverJob,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.vmmigration.v1.CutoverJob,
@@ -4448,7 +4448,7 @@ export class VmMigrationClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.cancelCutoverJob,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.vmmigration.v1.CancelCutoverJobResponse,
@@ -4603,7 +4603,7 @@ export class VmMigrationClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createGroup,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.vmmigration.v1.Group,
@@ -4760,7 +4760,7 @@ export class VmMigrationClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateGroup,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.vmmigration.v1.Group,
@@ -4911,7 +4911,7 @@ export class VmMigrationClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteGroup,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -5050,7 +5050,7 @@ export class VmMigrationClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.addGroupMigration,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.vmmigration.v1.AddGroupMigrationResponse,
@@ -5189,7 +5189,7 @@ export class VmMigrationClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.removeGroupMigration,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.vmmigration.v1.RemoveGroupMigrationResponse,
@@ -5347,7 +5347,7 @@ export class VmMigrationClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createTargetProject,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.vmmigration.v1.TargetProject,
@@ -5507,7 +5507,7 @@ export class VmMigrationClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateTargetProject,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.vmmigration.v1.TargetProject,
@@ -5661,7 +5661,7 @@ export class VmMigrationClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteTargetProject,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -5827,7 +5827,7 @@ export class VmMigrationClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listSources.createStream(
-      this.innerApiCalls.listSources as gax.GaxCall,
+      this.innerApiCalls.listSources as GaxCall,
       request,
       callSettings
     );
@@ -5886,7 +5886,7 @@ export class VmMigrationClient {
     this.initialize();
     return this.descriptors.page.listSources.asyncIterate(
       this.innerApiCalls['listSources'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.vmmigration.v1.ISource>;
   }
@@ -6059,7 +6059,7 @@ export class VmMigrationClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listUtilizationReports.createStream(
-      this.innerApiCalls.listUtilizationReports as gax.GaxCall,
+      this.innerApiCalls.listUtilizationReports as GaxCall,
       request,
       callSettings
     );
@@ -6121,7 +6121,7 @@ export class VmMigrationClient {
     this.initialize();
     return this.descriptors.page.listUtilizationReports.asyncIterate(
       this.innerApiCalls['listUtilizationReports'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.vmmigration.v1.IUtilizationReport>;
   }
@@ -6290,7 +6290,7 @@ export class VmMigrationClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listDatacenterConnectors.createStream(
-      this.innerApiCalls.listDatacenterConnectors as gax.GaxCall,
+      this.innerApiCalls.listDatacenterConnectors as GaxCall,
       request,
       callSettings
     );
@@ -6350,7 +6350,7 @@ export class VmMigrationClient {
     this.initialize();
     return this.descriptors.page.listDatacenterConnectors.asyncIterate(
       this.innerApiCalls['listDatacenterConnectors'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.vmmigration.v1.IDatacenterConnector>;
   }
@@ -6517,7 +6517,7 @@ export class VmMigrationClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listMigratingVms.createStream(
-      this.innerApiCalls.listMigratingVms as gax.GaxCall,
+      this.innerApiCalls.listMigratingVms as GaxCall,
       request,
       callSettings
     );
@@ -6578,7 +6578,7 @@ export class VmMigrationClient {
     this.initialize();
     return this.descriptors.page.listMigratingVms.asyncIterate(
       this.innerApiCalls['listMigratingVms'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.vmmigration.v1.IMigratingVm>;
   }
@@ -6741,7 +6741,7 @@ export class VmMigrationClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listCloneJobs.createStream(
-      this.innerApiCalls.listCloneJobs as gax.GaxCall,
+      this.innerApiCalls.listCloneJobs as GaxCall,
       request,
       callSettings
     );
@@ -6800,7 +6800,7 @@ export class VmMigrationClient {
     this.initialize();
     return this.descriptors.page.listCloneJobs.asyncIterate(
       this.innerApiCalls['listCloneJobs'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.vmmigration.v1.ICloneJob>;
   }
@@ -6963,7 +6963,7 @@ export class VmMigrationClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listCutoverJobs.createStream(
-      this.innerApiCalls.listCutoverJobs as gax.GaxCall,
+      this.innerApiCalls.listCutoverJobs as GaxCall,
       request,
       callSettings
     );
@@ -7022,7 +7022,7 @@ export class VmMigrationClient {
     this.initialize();
     return this.descriptors.page.listCutoverJobs.asyncIterate(
       this.innerApiCalls['listCutoverJobs'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.vmmigration.v1.ICutoverJob>;
   }
@@ -7179,7 +7179,7 @@ export class VmMigrationClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listGroups.createStream(
-      this.innerApiCalls.listGroups as gax.GaxCall,
+      this.innerApiCalls.listGroups as GaxCall,
       request,
       callSettings
     );
@@ -7238,7 +7238,7 @@ export class VmMigrationClient {
     this.initialize();
     return this.descriptors.page.listGroups.asyncIterate(
       this.innerApiCalls['listGroups'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.vmmigration.v1.IGroup>;
   }
@@ -7404,7 +7404,7 @@ export class VmMigrationClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listTargetProjects.createStream(
-      this.innerApiCalls.listTargetProjects as gax.GaxCall,
+      this.innerApiCalls.listTargetProjects as GaxCall,
       request,
       callSettings
     );
@@ -7463,7 +7463,7 @@ export class VmMigrationClient {
     this.initialize();
     return this.descriptors.page.listTargetProjects.asyncIterate(
       this.innerApiCalls['listTargetProjects'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.vmmigration.v1.ITargetProject>;
   }
