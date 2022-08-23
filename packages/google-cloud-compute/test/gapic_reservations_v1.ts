@@ -126,99 +126,101 @@ describe('v1.ReservationsClient', () => {
   afterEach(() => {
     sinon.restore();
   });
-  it('has servicePath', () => {
-    const servicePath = reservationsModule.v1.ReservationsClient.servicePath;
-    assert(servicePath);
-  });
-
-  it('has apiEndpoint', () => {
-    const apiEndpoint = reservationsModule.v1.ReservationsClient.apiEndpoint;
-    assert(apiEndpoint);
-  });
-
-  it('has port', () => {
-    const port = reservationsModule.v1.ReservationsClient.port;
-    assert(port);
-    assert(typeof port === 'number');
-  });
-
-  it('should create a client with no option', () => {
-    const client = new reservationsModule.v1.ReservationsClient();
-    assert(client);
-  });
-
-  it('should create a client with gRPC fallback', () => {
-    const client = new reservationsModule.v1.ReservationsClient({
-      fallback: true,
+  describe('Common methods', () => {
+    it('has servicePath', () => {
+      const servicePath = reservationsModule.v1.ReservationsClient.servicePath;
+      assert(servicePath);
     });
-    assert(client);
-  });
 
-  it('has initialize method and supports deferred initialization', async () => {
-    const client = new reservationsModule.v1.ReservationsClient({
-      auth: googleAuth,
-      projectId: 'bogus',
+    it('has apiEndpoint', () => {
+      const apiEndpoint = reservationsModule.v1.ReservationsClient.apiEndpoint;
+      assert(apiEndpoint);
     });
-    assert.strictEqual(client.reservationsStub, undefined);
-    await client.initialize();
-    assert(client.reservationsStub);
-  });
 
-  it('has close method for the initialized client', done => {
-    const client = new reservationsModule.v1.ReservationsClient({
-      auth: googleAuth,
-      projectId: 'bogus',
+    it('has port', () => {
+      const port = reservationsModule.v1.ReservationsClient.port;
+      assert(port);
+      assert(typeof port === 'number');
     });
-    client.initialize();
-    assert(client.reservationsStub);
-    client.close().then(() => {
-      done();
-    });
-  });
 
-  it('has close method for the non-initialized client', done => {
-    const client = new reservationsModule.v1.ReservationsClient({
-      auth: googleAuth,
-      projectId: 'bogus',
+    it('should create a client with no option', () => {
+      const client = new reservationsModule.v1.ReservationsClient();
+      assert(client);
     });
-    assert.strictEqual(client.reservationsStub, undefined);
-    client.close().then(() => {
-      done();
-    });
-  });
 
-  it('has getProjectId method', async () => {
-    const fakeProjectId = 'fake-project-id';
-    const client = new reservationsModule.v1.ReservationsClient({
-      auth: googleAuth,
-      projectId: 'bogus',
+    it('should create a client with gRPC fallback', () => {
+      const client = new reservationsModule.v1.ReservationsClient({
+        fallback: true,
+      });
+      assert(client);
     });
-    client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-    const result = await client.getProjectId();
-    assert.strictEqual(result, fakeProjectId);
-    assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-  });
 
-  it('has getProjectId method with callback', async () => {
-    const fakeProjectId = 'fake-project-id';
-    const client = new reservationsModule.v1.ReservationsClient({
-      auth: googleAuth,
-      projectId: 'bogus',
+    it('has initialize method and supports deferred initialization', async () => {
+      const client = new reservationsModule.v1.ReservationsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      assert.strictEqual(client.reservationsStub, undefined);
+      await client.initialize();
+      assert(client.reservationsStub);
     });
-    client.auth.getProjectId = sinon
-      .stub()
-      .callsArgWith(0, null, fakeProjectId);
-    const promise = new Promise((resolve, reject) => {
-      client.getProjectId((err?: Error | null, projectId?: string | null) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(projectId);
-        }
+
+    it('has close method for the initialized client', done => {
+      const client = new reservationsModule.v1.ReservationsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      assert(client.reservationsStub);
+      client.close().then(() => {
+        done();
       });
     });
-    const result = await promise;
-    assert.strictEqual(result, fakeProjectId);
+
+    it('has close method for the non-initialized client', done => {
+      const client = new reservationsModule.v1.ReservationsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      assert.strictEqual(client.reservationsStub, undefined);
+      client.close().then(() => {
+        done();
+      });
+    });
+
+    it('has getProjectId method', async () => {
+      const fakeProjectId = 'fake-project-id';
+      const client = new reservationsModule.v1.ReservationsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+      const result = await client.getProjectId();
+      assert.strictEqual(result, fakeProjectId);
+      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+    });
+
+    it('has getProjectId method with callback', async () => {
+      const fakeProjectId = 'fake-project-id';
+      const client = new reservationsModule.v1.ReservationsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.auth.getProjectId = sinon
+        .stub()
+        .callsArgWith(0, null, fakeProjectId);
+      const promise = new Promise((resolve, reject) => {
+        client.getProjectId((err?: Error | null, projectId?: string | null) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(projectId);
+          }
+        });
+      });
+      const result = await promise;
+      assert.strictEqual(result, fakeProjectId);
+    });
   });
 
   describe('delete', () => {

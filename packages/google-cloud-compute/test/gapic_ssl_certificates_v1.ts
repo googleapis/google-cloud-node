@@ -126,101 +126,103 @@ describe('v1.SslCertificatesClient', () => {
   afterEach(() => {
     sinon.restore();
   });
-  it('has servicePath', () => {
-    const servicePath =
-      sslcertificatesModule.v1.SslCertificatesClient.servicePath;
-    assert(servicePath);
-  });
-
-  it('has apiEndpoint', () => {
-    const apiEndpoint =
-      sslcertificatesModule.v1.SslCertificatesClient.apiEndpoint;
-    assert(apiEndpoint);
-  });
-
-  it('has port', () => {
-    const port = sslcertificatesModule.v1.SslCertificatesClient.port;
-    assert(port);
-    assert(typeof port === 'number');
-  });
-
-  it('should create a client with no option', () => {
-    const client = new sslcertificatesModule.v1.SslCertificatesClient();
-    assert(client);
-  });
-
-  it('should create a client with gRPC fallback', () => {
-    const client = new sslcertificatesModule.v1.SslCertificatesClient({
-      fallback: true,
+  describe('Common methods', () => {
+    it('has servicePath', () => {
+      const servicePath =
+        sslcertificatesModule.v1.SslCertificatesClient.servicePath;
+      assert(servicePath);
     });
-    assert(client);
-  });
 
-  it('has initialize method and supports deferred initialization', async () => {
-    const client = new sslcertificatesModule.v1.SslCertificatesClient({
-      auth: googleAuth,
-      projectId: 'bogus',
+    it('has apiEndpoint', () => {
+      const apiEndpoint =
+        sslcertificatesModule.v1.SslCertificatesClient.apiEndpoint;
+      assert(apiEndpoint);
     });
-    assert.strictEqual(client.sslCertificatesStub, undefined);
-    await client.initialize();
-    assert(client.sslCertificatesStub);
-  });
 
-  it('has close method for the initialized client', done => {
-    const client = new sslcertificatesModule.v1.SslCertificatesClient({
-      auth: googleAuth,
-      projectId: 'bogus',
+    it('has port', () => {
+      const port = sslcertificatesModule.v1.SslCertificatesClient.port;
+      assert(port);
+      assert(typeof port === 'number');
     });
-    client.initialize();
-    assert(client.sslCertificatesStub);
-    client.close().then(() => {
-      done();
-    });
-  });
 
-  it('has close method for the non-initialized client', done => {
-    const client = new sslcertificatesModule.v1.SslCertificatesClient({
-      auth: googleAuth,
-      projectId: 'bogus',
+    it('should create a client with no option', () => {
+      const client = new sslcertificatesModule.v1.SslCertificatesClient();
+      assert(client);
     });
-    assert.strictEqual(client.sslCertificatesStub, undefined);
-    client.close().then(() => {
-      done();
-    });
-  });
 
-  it('has getProjectId method', async () => {
-    const fakeProjectId = 'fake-project-id';
-    const client = new sslcertificatesModule.v1.SslCertificatesClient({
-      auth: googleAuth,
-      projectId: 'bogus',
+    it('should create a client with gRPC fallback', () => {
+      const client = new sslcertificatesModule.v1.SslCertificatesClient({
+        fallback: true,
+      });
+      assert(client);
     });
-    client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-    const result = await client.getProjectId();
-    assert.strictEqual(result, fakeProjectId);
-    assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-  });
 
-  it('has getProjectId method with callback', async () => {
-    const fakeProjectId = 'fake-project-id';
-    const client = new sslcertificatesModule.v1.SslCertificatesClient({
-      auth: googleAuth,
-      projectId: 'bogus',
+    it('has initialize method and supports deferred initialization', async () => {
+      const client = new sslcertificatesModule.v1.SslCertificatesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      assert.strictEqual(client.sslCertificatesStub, undefined);
+      await client.initialize();
+      assert(client.sslCertificatesStub);
     });
-    client.auth.getProjectId = sinon
-      .stub()
-      .callsArgWith(0, null, fakeProjectId);
-    const promise = new Promise((resolve, reject) => {
-      client.getProjectId((err?: Error | null, projectId?: string | null) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(projectId);
-        }
+
+    it('has close method for the initialized client', done => {
+      const client = new sslcertificatesModule.v1.SslCertificatesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      assert(client.sslCertificatesStub);
+      client.close().then(() => {
+        done();
       });
     });
-    const result = await promise;
-    assert.strictEqual(result, fakeProjectId);
+
+    it('has close method for the non-initialized client', done => {
+      const client = new sslcertificatesModule.v1.SslCertificatesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      assert.strictEqual(client.sslCertificatesStub, undefined);
+      client.close().then(() => {
+        done();
+      });
+    });
+
+    it('has getProjectId method', async () => {
+      const fakeProjectId = 'fake-project-id';
+      const client = new sslcertificatesModule.v1.SslCertificatesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+      const result = await client.getProjectId();
+      assert.strictEqual(result, fakeProjectId);
+      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+    });
+
+    it('has getProjectId method with callback', async () => {
+      const fakeProjectId = 'fake-project-id';
+      const client = new sslcertificatesModule.v1.SslCertificatesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.auth.getProjectId = sinon
+        .stub()
+        .callsArgWith(0, null, fakeProjectId);
+      const promise = new Promise((resolve, reject) => {
+        client.getProjectId((err?: Error | null, projectId?: string | null) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(projectId);
+          }
+        });
+      });
+      const result = await promise;
+      assert.strictEqual(result, fakeProjectId);
+    });
   });
 
   describe('delete', () => {

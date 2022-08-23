@@ -29,7 +29,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -263,7 +262,8 @@ export class RoutersClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -1133,7 +1133,7 @@ export class RoutersClient {
     this.initialize();
     return this.descriptors.page.aggregatedList.asyncIterate(
       this.innerApiCalls['aggregatedList'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<
       [string, protos.google.cloud.compute.v1.IRoutersScopedList]
@@ -1300,7 +1300,7 @@ export class RoutersClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.getNatMappingInfo.createStream(
-      this.innerApiCalls.getNatMappingInfo as gax.GaxCall,
+      this.innerApiCalls.getNatMappingInfo as GaxCall,
       request,
       callSettings
     );
@@ -1360,7 +1360,7 @@ export class RoutersClient {
     this.initialize();
     return this.descriptors.page.getNatMappingInfo.asyncIterate(
       this.innerApiCalls['getNatMappingInfo'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.compute.v1.IVmEndpointNatMappings>;
   }
@@ -1511,7 +1511,7 @@ export class RoutersClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.list.createStream(
-      this.innerApiCalls.list as gax.GaxCall,
+      this.innerApiCalls.list as GaxCall,
       request,
       callSettings
     );
@@ -1568,7 +1568,7 @@ export class RoutersClient {
     this.initialize();
     return this.descriptors.page.list.asyncIterate(
       this.innerApiCalls['list'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.compute.v1.IRouter>;
   }

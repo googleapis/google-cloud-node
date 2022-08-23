@@ -126,124 +126,126 @@ describe('v1.GlobalOrganizationOperationsClient', () => {
   afterEach(() => {
     sinon.restore();
   });
-  it('has servicePath', () => {
-    const servicePath =
-      globalorganizationoperationsModule.v1.GlobalOrganizationOperationsClient
-        .servicePath;
-    assert(servicePath);
-  });
-
-  it('has apiEndpoint', () => {
-    const apiEndpoint =
-      globalorganizationoperationsModule.v1.GlobalOrganizationOperationsClient
-        .apiEndpoint;
-    assert(apiEndpoint);
-  });
-
-  it('has port', () => {
-    const port =
-      globalorganizationoperationsModule.v1.GlobalOrganizationOperationsClient
-        .port;
-    assert(port);
-    assert(typeof port === 'number');
-  });
-
-  it('should create a client with no option', () => {
-    const client =
-      new globalorganizationoperationsModule.v1.GlobalOrganizationOperationsClient();
-    assert(client);
-  });
-
-  it('should create a client with gRPC fallback', () => {
-    const client =
-      new globalorganizationoperationsModule.v1.GlobalOrganizationOperationsClient(
-        {
-          fallback: true,
-        }
-      );
-    assert(client);
-  });
-
-  it('has initialize method and supports deferred initialization', async () => {
-    const client =
-      new globalorganizationoperationsModule.v1.GlobalOrganizationOperationsClient(
-        {
-          auth: googleAuth,
-          projectId: 'bogus',
-        }
-      );
-    assert.strictEqual(client.globalOrganizationOperationsStub, undefined);
-    await client.initialize();
-    assert(client.globalOrganizationOperationsStub);
-  });
-
-  it('has close method for the initialized client', done => {
-    const client =
-      new globalorganizationoperationsModule.v1.GlobalOrganizationOperationsClient(
-        {
-          auth: googleAuth,
-          projectId: 'bogus',
-        }
-      );
-    client.initialize();
-    assert(client.globalOrganizationOperationsStub);
-    client.close().then(() => {
-      done();
+  describe('Common methods', () => {
+    it('has servicePath', () => {
+      const servicePath =
+        globalorganizationoperationsModule.v1.GlobalOrganizationOperationsClient
+          .servicePath;
+      assert(servicePath);
     });
-  });
 
-  it('has close method for the non-initialized client', done => {
-    const client =
-      new globalorganizationoperationsModule.v1.GlobalOrganizationOperationsClient(
-        {
-          auth: googleAuth,
-          projectId: 'bogus',
-        }
-      );
-    assert.strictEqual(client.globalOrganizationOperationsStub, undefined);
-    client.close().then(() => {
-      done();
+    it('has apiEndpoint', () => {
+      const apiEndpoint =
+        globalorganizationoperationsModule.v1.GlobalOrganizationOperationsClient
+          .apiEndpoint;
+      assert(apiEndpoint);
     });
-  });
 
-  it('has getProjectId method', async () => {
-    const fakeProjectId = 'fake-project-id';
-    const client =
-      new globalorganizationoperationsModule.v1.GlobalOrganizationOperationsClient(
-        {
-          auth: googleAuth,
-          projectId: 'bogus',
-        }
-      );
-    client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-    const result = await client.getProjectId();
-    assert.strictEqual(result, fakeProjectId);
-    assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-  });
+    it('has port', () => {
+      const port =
+        globalorganizationoperationsModule.v1.GlobalOrganizationOperationsClient
+          .port;
+      assert(port);
+      assert(typeof port === 'number');
+    });
 
-  it('has getProjectId method with callback', async () => {
-    const fakeProjectId = 'fake-project-id';
-    const client =
-      new globalorganizationoperationsModule.v1.GlobalOrganizationOperationsClient(
-        {
-          auth: googleAuth,
-          projectId: 'bogus',
-        }
-      );
-    client.auth.getProjectId = sinon
-      .stub()
-      .callsArgWith(0, null, fakeProjectId);
-    const promise = new Promise((resolve, reject) => {
-      client.getProjectId((err?: Error | null, projectId?: string | null) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(projectId);
-        }
+    it('should create a client with no option', () => {
+      const client =
+        new globalorganizationoperationsModule.v1.GlobalOrganizationOperationsClient();
+      assert(client);
+    });
+
+    it('should create a client with gRPC fallback', () => {
+      const client =
+        new globalorganizationoperationsModule.v1.GlobalOrganizationOperationsClient(
+          {
+            fallback: true,
+          }
+        );
+      assert(client);
+    });
+
+    it('has initialize method and supports deferred initialization', async () => {
+      const client =
+        new globalorganizationoperationsModule.v1.GlobalOrganizationOperationsClient(
+          {
+            auth: googleAuth,
+            projectId: 'bogus',
+          }
+        );
+      assert.strictEqual(client.globalOrganizationOperationsStub, undefined);
+      await client.initialize();
+      assert(client.globalOrganizationOperationsStub);
+    });
+
+    it('has close method for the initialized client', done => {
+      const client =
+        new globalorganizationoperationsModule.v1.GlobalOrganizationOperationsClient(
+          {
+            auth: googleAuth,
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      assert(client.globalOrganizationOperationsStub);
+      client.close().then(() => {
+        done();
       });
     });
-    const result = await promise;
-    assert.strictEqual(result, fakeProjectId);
+
+    it('has close method for the non-initialized client', done => {
+      const client =
+        new globalorganizationoperationsModule.v1.GlobalOrganizationOperationsClient(
+          {
+            auth: googleAuth,
+            projectId: 'bogus',
+          }
+        );
+      assert.strictEqual(client.globalOrganizationOperationsStub, undefined);
+      client.close().then(() => {
+        done();
+      });
+    });
+
+    it('has getProjectId method', async () => {
+      const fakeProjectId = 'fake-project-id';
+      const client =
+        new globalorganizationoperationsModule.v1.GlobalOrganizationOperationsClient(
+          {
+            auth: googleAuth,
+            projectId: 'bogus',
+          }
+        );
+      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+      const result = await client.getProjectId();
+      assert.strictEqual(result, fakeProjectId);
+      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+    });
+
+    it('has getProjectId method with callback', async () => {
+      const fakeProjectId = 'fake-project-id';
+      const client =
+        new globalorganizationoperationsModule.v1.GlobalOrganizationOperationsClient(
+          {
+            auth: googleAuth,
+            projectId: 'bogus',
+          }
+        );
+      client.auth.getProjectId = sinon
+        .stub()
+        .callsArgWith(0, null, fakeProjectId);
+      const promise = new Promise((resolve, reject) => {
+        client.getProjectId((err?: Error | null, projectId?: string | null) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(projectId);
+          }
+        });
+      });
+      const result = await promise;
+      assert.strictEqual(result, fakeProjectId);
+    });
   });
 
   describe('delete', () => {

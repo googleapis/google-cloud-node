@@ -29,7 +29,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -298,7 +297,8 @@ export class InstancesClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -746,7 +746,7 @@ export class InstancesClient {
       );
   }
   /**
-   * Creates multiple instances. Count specifies the number of instances to create.
+   * Creates multiple instances. Count specifies the number of instances to create. For more information, see About bulk creation of VMs.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -5416,7 +5416,7 @@ export class InstancesClient {
     this.initialize();
     return this.descriptors.page.aggregatedList.asyncIterate(
       this.innerApiCalls['aggregatedList'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<
       [string, protos.google.cloud.compute.v1.IInstancesScopedList]
@@ -5569,7 +5569,7 @@ export class InstancesClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.list.createStream(
-      this.innerApiCalls.list as gax.GaxCall,
+      this.innerApiCalls.list as GaxCall,
       request,
       callSettings
     );
@@ -5626,7 +5626,7 @@ export class InstancesClient {
     this.initialize();
     return this.descriptors.page.list.asyncIterate(
       this.innerApiCalls['list'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.compute.v1.IInstance>;
   }
@@ -5785,7 +5785,7 @@ export class InstancesClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listReferrers.createStream(
-      this.innerApiCalls.listReferrers as gax.GaxCall,
+      this.innerApiCalls.listReferrers as GaxCall,
       request,
       callSettings
     );
@@ -5845,7 +5845,7 @@ export class InstancesClient {
     this.initialize();
     return this.descriptors.page.listReferrers.asyncIterate(
       this.innerApiCalls['listReferrers'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.compute.v1.IReference>;
   }

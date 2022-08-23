@@ -29,7 +29,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -279,7 +278,8 @@ export class RegionInstanceGroupManagersClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -2358,7 +2358,7 @@ export class RegionInstanceGroupManagersClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.list.createStream(
-      this.innerApiCalls.list as gax.GaxCall,
+      this.innerApiCalls.list as GaxCall,
       request,
       callSettings
     );
@@ -2415,7 +2415,7 @@ export class RegionInstanceGroupManagersClient {
     this.initialize();
     return this.descriptors.page.list.asyncIterate(
       this.innerApiCalls['list'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.compute.v1.IInstanceGroupManager>;
   }
@@ -2580,7 +2580,7 @@ export class RegionInstanceGroupManagersClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listErrors.createStream(
-      this.innerApiCalls.listErrors as gax.GaxCall,
+      this.innerApiCalls.listErrors as GaxCall,
       request,
       callSettings
     );
@@ -2640,12 +2640,12 @@ export class RegionInstanceGroupManagersClient {
     this.initialize();
     return this.descriptors.page.listErrors.asyncIterate(
       this.innerApiCalls['listErrors'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.compute.v1.IInstanceManagedByIgmError>;
   }
   /**
-   * Lists the instances in the managed instance group and instances that are scheduled to be created. The list includes any current actions that the group has scheduled for its instances. The orderBy query parameter is not supported.
+   * Lists the instances in the managed instance group and instances that are scheduled to be created. The list includes any current actions that the group has scheduled for its instances. The orderBy query parameter is not supported. The `pageToken` query parameter is supported only in the alpha and beta API and only if the group's `listManagedInstancesResults` field is set to `PAGINATED`.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2805,7 +2805,7 @@ export class RegionInstanceGroupManagersClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listManagedInstances.createStream(
-      this.innerApiCalls.listManagedInstances as gax.GaxCall,
+      this.innerApiCalls.listManagedInstances as GaxCall,
       request,
       callSettings
     );
@@ -2865,7 +2865,7 @@ export class RegionInstanceGroupManagersClient {
     this.initialize();
     return this.descriptors.page.listManagedInstances.asyncIterate(
       this.innerApiCalls['listManagedInstances'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.compute.v1.IManagedInstance>;
   }
@@ -3034,7 +3034,7 @@ export class RegionInstanceGroupManagersClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listPerInstanceConfigs.createStream(
-      this.innerApiCalls.listPerInstanceConfigs as gax.GaxCall,
+      this.innerApiCalls.listPerInstanceConfigs as GaxCall,
       request,
       callSettings
     );
@@ -3094,7 +3094,7 @@ export class RegionInstanceGroupManagersClient {
     this.initialize();
     return this.descriptors.page.listPerInstanceConfigs.asyncIterate(
       this.innerApiCalls['listPerInstanceConfigs'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.compute.v1.IPerInstanceConfig>;
   }

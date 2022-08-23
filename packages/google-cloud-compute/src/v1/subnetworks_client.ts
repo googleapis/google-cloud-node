@@ -29,7 +29,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -265,7 +264,8 @@ export class SubnetworksClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -1398,7 +1398,7 @@ export class SubnetworksClient {
     this.initialize();
     return this.descriptors.page.aggregatedList.asyncIterate(
       this.innerApiCalls['aggregatedList'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<
       [string, protos.google.cloud.compute.v1.ISubnetworksScopedList]
@@ -1551,7 +1551,7 @@ export class SubnetworksClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.list.createStream(
-      this.innerApiCalls.list as gax.GaxCall,
+      this.innerApiCalls.list as GaxCall,
       request,
       callSettings
     );
@@ -1608,7 +1608,7 @@ export class SubnetworksClient {
     this.initialize();
     return this.descriptors.page.list.asyncIterate(
       this.innerApiCalls['list'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.compute.v1.ISubnetwork>;
   }
@@ -1761,7 +1761,7 @@ export class SubnetworksClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listUsable.createStream(
-      this.innerApiCalls.listUsable as gax.GaxCall,
+      this.innerApiCalls.listUsable as GaxCall,
       request,
       callSettings
     );
@@ -1815,7 +1815,7 @@ export class SubnetworksClient {
     this.initialize();
     return this.descriptors.page.listUsable.asyncIterate(
       this.innerApiCalls['listUsable'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.compute.v1.IUsableSubnetwork>;
   }

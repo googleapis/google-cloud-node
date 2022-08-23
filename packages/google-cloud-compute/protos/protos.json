@@ -5487,6 +5487,11 @@
                     },
                     "AttachedDisk": {
                       "oneofs": {
+                        "_architecture": {
+                          "oneof": [
+                            "architecture"
+                          ]
+                        },
                         "_autoDelete": {
                           "oneof": [
                             "autoDelete"
@@ -5554,6 +5559,13 @@
                         }
                       },
                       "fields": {
+                        "architecture": {
+                          "type": "string",
+                          "id": 302803283,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "autoDelete": {
                           "type": "bool",
                           "id": 464761403,
@@ -5657,6 +5669,14 @@
                         }
                       },
                       "nested": {
+                        "Architecture": {
+                          "values": {
+                            "UNDEFINED_ARCHITECTURE": 0,
+                            "ARCHITECTURE_UNSPECIFIED": 394750507,
+                            "ARM64": 62547450,
+                            "X86_64": 425300551
+                          }
+                        },
                         "Interface": {
                           "values": {
                             "UNDEFINED_INTERFACE": 0,
@@ -5682,6 +5702,11 @@
                     },
                     "AttachedDiskInitializeParams": {
                       "oneofs": {
+                        "_architecture": {
+                          "oneof": [
+                            "architecture"
+                          ]
+                        },
                         "_description": {
                           "oneof": [
                             "description"
@@ -5734,6 +5759,13 @@
                         }
                       },
                       "fields": {
+                        "architecture": {
+                          "type": "string",
+                          "id": 302803283,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "description": {
                           "type": "string",
                           "id": 422937596,
@@ -5821,6 +5853,14 @@
                         }
                       },
                       "nested": {
+                        "Architecture": {
+                          "values": {
+                            "UNDEFINED_ARCHITECTURE": 0,
+                            "ARCHITECTURE_UNSPECIFIED": 394750507,
+                            "ARM64": 62547450,
+                            "X86_64": 425300551
+                          }
+                        },
                         "OnUpdateAction": {
                           "values": {
                             "UNDEFINED_ON_UPDATE_ACTION": 0,
@@ -9598,6 +9638,7 @@
                           "values": {
                             "UNDEFINED_STATUS": 0,
                             "ACTIVE": 314733318,
+                            "CANCELLED": 41957681,
                             "CREATING": 455564985,
                             "EXPIRED": 482489093,
                             "NOT_YET_ACTIVE": 20607337
@@ -13697,6 +13738,11 @@
                     },
                     "Disk": {
                       "oneofs": {
+                        "_architecture": {
+                          "oneof": [
+                            "architecture"
+                          ]
+                        },
                         "_creationTimestamp": {
                           "oneof": [
                             "creationTimestamp"
@@ -13844,6 +13890,13 @@
                         }
                       },
                       "fields": {
+                        "architecture": {
+                          "type": "string",
+                          "id": 302803283,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "creationTimestamp": {
                           "type": "string",
                           "id": 30525366,
@@ -14084,6 +14137,14 @@
                         }
                       },
                       "nested": {
+                        "Architecture": {
+                          "values": {
+                            "UNDEFINED_ARCHITECTURE": 0,
+                            "ARCHITECTURE_UNSPECIFIED": 394750507,
+                            "ARM64": 62547450,
+                            "X86_64": 425300551
+                          }
+                        },
                         "Status": {
                           "values": {
                             "UNDEFINED_STATUS": 0,
@@ -14875,6 +14936,83 @@
                         }
                       }
                     },
+                    "ErrorDetails": {
+                      "oneofs": {
+                        "_errorInfo": {
+                          "oneof": [
+                            "errorInfo"
+                          ]
+                        },
+                        "_help": {
+                          "oneof": [
+                            "help"
+                          ]
+                        },
+                        "_localizedMessage": {
+                          "oneof": [
+                            "localizedMessage"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "errorInfo": {
+                          "type": "ErrorInfo",
+                          "id": 25251973,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "help": {
+                          "type": "Help",
+                          "id": 3198785,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "localizedMessage": {
+                          "type": "LocalizedMessage",
+                          "id": 404537155,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "ErrorInfo": {
+                      "oneofs": {
+                        "_domain": {
+                          "oneof": [
+                            "domain"
+                          ]
+                        },
+                        "_reason": {
+                          "oneof": [
+                            "reason"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "domain": {
+                          "type": "string",
+                          "id": 284415172,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "metadatas": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 8514340
+                        },
+                        "reason": {
+                          "type": "string",
+                          "id": 138777156,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "Errors": {
                       "oneofs": {
                         "_code": {
@@ -14900,6 +15038,11 @@
                           "options": {
                             "proto3_optional": true
                           }
+                        },
+                        "errorDetails": {
+                          "rule": "repeated",
+                          "type": "ErrorDetails",
+                          "id": 274653963
                         },
                         "location": {
                           "type": "string",
@@ -16731,6 +16874,7 @@
                             "UNDEFINED_PSC_CONNECTION_STATUS": 0,
                             "ACCEPTED": 246714279,
                             "CLOSED": 380163436,
+                            "NEEDS_ATTENTION": 344491452,
                             "PENDING": 35394935,
                             "REJECTED": 174130302,
                             "STATUS_UNSPECIFIED": 42133066
@@ -21758,6 +21902,45 @@
                         }
                       }
                     },
+                    "Help": {
+                      "fields": {
+                        "links": {
+                          "rule": "repeated",
+                          "type": "HelpLink",
+                          "id": 102977465
+                        }
+                      }
+                    },
+                    "HelpLink": {
+                      "oneofs": {
+                        "_description": {
+                          "oneof": [
+                            "description"
+                          ]
+                        },
+                        "_url": {
+                          "oneof": [
+                            "url"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "description": {
+                          "type": "string",
+                          "id": 422937596,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "url": {
+                          "type": "string",
+                          "id": 116079,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "HostRule": {
                       "oneofs": {
                         "_description": {
@@ -22479,6 +22662,11 @@
                     },
                     "Image": {
                       "oneofs": {
+                        "_architecture": {
+                          "oneof": [
+                            "architecture"
+                          ]
+                        },
                         "_archiveSizeBytes": {
                           "oneof": [
                             "archiveSizeBytes"
@@ -22611,6 +22799,13 @@
                         }
                       },
                       "fields": {
+                        "architecture": {
+                          "type": "string",
+                          "id": 302803283,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "archiveSizeBytes": {
                           "type": "int64",
                           "id": 381093450,
@@ -22820,6 +23015,14 @@
                         }
                       },
                       "nested": {
+                        "Architecture": {
+                          "values": {
+                            "UNDEFINED_ARCHITECTURE": 0,
+                            "ARCHITECTURE_UNSPECIFIED": 394750507,
+                            "ARM64": 62547450,
+                            "X86_64": 425300551
+                          }
+                        },
                         "SourceType": {
                           "values": {
                             "UNDEFINED_SOURCE_TYPE": 0,
@@ -25699,6 +25902,11 @@
                             "id"
                           ]
                         },
+                        "_keyRevocationActionType": {
+                          "oneof": [
+                            "keyRevocationActionType"
+                          ]
+                        },
                         "_kind": {
                           "oneof": [
                             "kind"
@@ -25913,6 +26121,13 @@
                             "proto3_optional": true
                           }
                         },
+                        "keyRevocationActionType": {
+                          "type": "string",
+                          "id": 235941474,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "kind": {
                           "type": "string",
                           "id": 3292052,
@@ -26110,6 +26325,14 @@
                         }
                       },
                       "nested": {
+                        "KeyRevocationActionType": {
+                          "values": {
+                            "UNDEFINED_KEY_REVOCATION_ACTION_TYPE": 0,
+                            "KEY_REVOCATION_ACTION_TYPE_UNSPECIFIED": 467110106,
+                            "NONE": 2402104,
+                            "STOP": 2555906
+                          }
+                        },
                         "PrivateIpv6GoogleAccess": {
                           "values": {
                             "UNDEFINED_PRIVATE_IPV6_GOOGLE_ACCESS": 0,
@@ -28156,6 +28379,11 @@
                             "description"
                           ]
                         },
+                        "_keyRevocationActionType": {
+                          "oneof": [
+                            "keyRevocationActionType"
+                          ]
+                        },
                         "_machineType": {
                           "oneof": [
                             "machineType"
@@ -28240,6 +28468,13 @@
                           "rule": "repeated",
                           "type": "AcceleratorConfig",
                           "id": 463595119
+                        },
+                        "keyRevocationActionType": {
+                          "type": "string",
+                          "id": 235941474,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         },
                         "labels": {
                           "keyType": "string",
@@ -28331,6 +28566,14 @@
                         }
                       },
                       "nested": {
+                        "KeyRevocationActionType": {
+                          "values": {
+                            "UNDEFINED_KEY_REVOCATION_ACTION_TYPE": 0,
+                            "KEY_REVOCATION_ACTION_TYPE_UNSPECIFIED": 467110106,
+                            "NONE": 2402104,
+                            "STOP": 2555906
+                          }
+                        },
                         "PrivateIpv6GoogleAccess": {
                           "values": {
                             "UNDEFINED_PRIVATE_IPV6_GOOGLE_ACCESS": 0,
@@ -38851,6 +39094,36 @@
                         }
                       }
                     },
+                    "LocalizedMessage": {
+                      "oneofs": {
+                        "_locale": {
+                          "oneof": [
+                            "locale"
+                          ]
+                        },
+                        "_message": {
+                          "oneof": [
+                            "message"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "locale": {
+                          "type": "string",
+                          "id": 513150554,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "id": 418054151,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "LocationPolicy": {
                       "oneofs": {
                         "_targetShape": {
@@ -38886,6 +39159,11 @@
                     },
                     "LocationPolicyLocation": {
                       "oneofs": {
+                        "_constraints": {
+                          "oneof": [
+                            "constraints"
+                          ]
+                        },
                         "_preference": {
                           "oneof": [
                             "preference"
@@ -38893,6 +39171,13 @@
                         }
                       },
                       "fields": {
+                        "constraints": {
+                          "type": "LocationPolicyLocationConstraints",
+                          "id": 3909174,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "preference": {
                           "type": "string",
                           "id": 150781147,
@@ -38908,6 +39193,24 @@
                             "ALLOW": 62368553,
                             "DENY": 2094604,
                             "PREFERENCE_UNSPECIFIED": 496219571
+                          }
+                        }
+                      }
+                    },
+                    "LocationPolicyLocationConstraints": {
+                      "oneofs": {
+                        "_maxCount": {
+                          "oneof": [
+                            "maxCount"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "maxCount": {
+                          "type": "int32",
+                          "id": 287620724,
+                          "options": {
+                            "proto3_optional": true
                           }
                         }
                       }
@@ -40196,6 +40499,11 @@
                             "enableUlaInternalIpv6"
                           ]
                         },
+                        "_firewallPolicy": {
+                          "oneof": [
+                            "firewallPolicy"
+                          ]
+                        },
                         "_gatewayIPv4": {
                           "oneof": [
                             "gatewayIPv4"
@@ -40279,6 +40587,13 @@
                         "enableUlaInternalIpv6": {
                           "type": "bool",
                           "id": 423757720,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "firewallPolicy": {
+                          "type": "string",
+                          "id": 498173265,
                           "options": {
                             "proto3_optional": true
                           }
@@ -54290,6 +54605,11 @@
                     },
                     "SavedDisk": {
                       "oneofs": {
+                        "_architecture": {
+                          "oneof": [
+                            "architecture"
+                          ]
+                        },
                         "_kind": {
                           "oneof": [
                             "kind"
@@ -54312,6 +54632,13 @@
                         }
                       },
                       "fields": {
+                        "architecture": {
+                          "type": "string",
+                          "id": 302803283,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "kind": {
                           "type": "string",
                           "id": 3292052,
@@ -54342,6 +54669,14 @@
                         }
                       },
                       "nested": {
+                        "Architecture": {
+                          "values": {
+                            "UNDEFINED_ARCHITECTURE": 0,
+                            "ARCHITECTURE_UNSPECIFIED": 394750507,
+                            "ARM64": 62547450,
+                            "X86_64": 425300551
+                          }
+                        },
                         "StorageBytesStatus": {
                           "values": {
                             "UNDEFINED_STORAGE_BYTES_STATUS": 0,
@@ -56048,6 +56383,7 @@
                             "UNDEFINED_STATUS": 0,
                             "ACCEPTED": 246714279,
                             "CLOSED": 380163436,
+                            "NEEDS_ATTENTION": 344491452,
                             "PENDING": 35394935,
                             "REJECTED": 174130302,
                             "STATUS_UNSPECIFIED": 42133066
@@ -59160,6 +59496,11 @@
                     },
                     "Snapshot": {
                       "oneofs": {
+                        "_architecture": {
+                          "oneof": [
+                            "architecture"
+                          ]
+                        },
                         "_autoCreated": {
                           "oneof": [
                             "autoCreated"
@@ -59168,6 +59509,11 @@
                         "_chainName": {
                           "oneof": [
                             "chainName"
+                          ]
+                        },
+                        "_creationSizeBytes": {
+                          "oneof": [
+                            "creationSizeBytes"
                           ]
                         },
                         "_creationTimestamp": {
@@ -59230,6 +59576,11 @@
                             "snapshotEncryptionKey"
                           ]
                         },
+                        "_snapshotType": {
+                          "oneof": [
+                            "snapshotType"
+                          ]
+                        },
                         "_sourceDisk": {
                           "oneof": [
                             "sourceDisk"
@@ -59243,6 +59594,16 @@
                         "_sourceDiskId": {
                           "oneof": [
                             "sourceDiskId"
+                          ]
+                        },
+                        "_sourceSnapshotSchedulePolicy": {
+                          "oneof": [
+                            "sourceSnapshotSchedulePolicy"
+                          ]
+                        },
+                        "_sourceSnapshotSchedulePolicyId": {
+                          "oneof": [
+                            "sourceSnapshotSchedulePolicyId"
                           ]
                         },
                         "_status": {
@@ -59262,6 +59623,13 @@
                         }
                       },
                       "fields": {
+                        "architecture": {
+                          "type": "string",
+                          "id": 302803283,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "autoCreated": {
                           "type": "bool",
                           "id": 463922264,
@@ -59272,6 +59640,13 @@
                         "chainName": {
                           "type": "string",
                           "id": 68644169,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "creationSizeBytes": {
+                          "type": "int64",
+                          "id": 125400077,
                           "options": {
                             "proto3_optional": true
                           }
@@ -59375,6 +59750,13 @@
                             "proto3_optional": true
                           }
                         },
+                        "snapshotType": {
+                          "type": "string",
+                          "id": 124349653,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "sourceDisk": {
                           "type": "string",
                           "id": 451753793,
@@ -59392,6 +59774,20 @@
                         "sourceDiskId": {
                           "type": "string",
                           "id": 454190809,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "sourceSnapshotSchedulePolicy": {
+                          "type": "string",
+                          "id": 235756291,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "sourceSnapshotSchedulePolicyId": {
+                          "type": "string",
+                          "id": 70489047,
                           "options": {
                             "proto3_optional": true
                           }
@@ -59424,6 +59820,21 @@
                         }
                       },
                       "nested": {
+                        "Architecture": {
+                          "values": {
+                            "UNDEFINED_ARCHITECTURE": 0,
+                            "ARCHITECTURE_UNSPECIFIED": 394750507,
+                            "ARM64": 62547450,
+                            "X86_64": 425300551
+                          }
+                        },
+                        "SnapshotType": {
+                          "values": {
+                            "UNDEFINED_SNAPSHOT_TYPE": 0,
+                            "ARCHIVE": 506752162,
+                            "STANDARD": 484642493
+                          }
+                        },
                         "Status": {
                           "values": {
                             "UNDEFINED_STATUS": 0,
@@ -59570,6 +59981,11 @@
                             "description"
                           ]
                         },
+                        "_keyRevocationActionType": {
+                          "oneof": [
+                            "keyRevocationActionType"
+                          ]
+                        },
                         "_machineType": {
                           "oneof": [
                             "machineType"
@@ -59628,6 +60044,13 @@
                           "type": "AcceleratorConfig",
                           "id": 463595119
                         },
+                        "keyRevocationActionType": {
+                          "type": "string",
+                          "id": 235941474,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "labels": {
                           "keyType": "string",
                           "type": "string",
@@ -59676,6 +60099,16 @@
                           "id": 3552281,
                           "options": {
                             "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "KeyRevocationActionType": {
+                          "values": {
+                            "UNDEFINED_KEY_REVOCATION_ACTION_TYPE": 0,
+                            "KEY_REVOCATION_ACTION_TYPE_UNSPECIFIED": 467110106,
+                            "NONE": 2402104,
+                            "STOP": 2555906
                           }
                         }
                       }
@@ -66703,6 +67136,11 @@
                             "proto3_optional": true
                           }
                         },
+                        "ruleMappings": {
+                          "rule": "repeated",
+                          "type": "VmEndpointNatMappingsInterfaceNatMappingsNatRuleMappings",
+                          "id": 486192968
+                        },
                         "sourceAliasIpRange": {
                           "type": "string",
                           "id": 440340952,
@@ -66713,6 +67151,58 @@
                         "sourceVirtualIp": {
                           "type": "string",
                           "id": 149836159,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "VmEndpointNatMappingsInterfaceNatMappingsNatRuleMappings": {
+                      "oneofs": {
+                        "_numTotalDrainNatPorts": {
+                          "oneof": [
+                            "numTotalDrainNatPorts"
+                          ]
+                        },
+                        "_numTotalNatPorts": {
+                          "oneof": [
+                            "numTotalNatPorts"
+                          ]
+                        },
+                        "_ruleNumber": {
+                          "oneof": [
+                            "ruleNumber"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "drainNatIpPortRanges": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 395440577
+                        },
+                        "natIpPortRanges": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 531830810
+                        },
+                        "numTotalDrainNatPorts": {
+                          "type": "int32",
+                          "id": 335532793,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "numTotalNatPorts": {
+                          "type": "int32",
+                          "id": 299904384,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "ruleNumber": {
+                          "type": "int32",
+                          "id": 535211500,
                           "options": {
                             "proto3_optional": true
                           }
@@ -67914,6 +68404,7 @@
                             "EXTERNAL_API_WARNING": 175546307,
                             "FIELD_VALUE_OVERRIDEN": 329669423,
                             "INJECTED_KERNELS_DEPRECATED": 417377419,
+                            "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB": 401542606,
                             "LARGE_DEPLOYMENT_WARNING": 481440678,
                             "MISSING_TYPE_DEPENDENCY": 344505463,
                             "NEXT_HOP_ADDRESS_NOT_ASSIGNED": 324964999,
@@ -67982,6 +68473,7 @@
                             "EXTERNAL_API_WARNING": 175546307,
                             "FIELD_VALUE_OVERRIDEN": 329669423,
                             "INJECTED_KERNELS_DEPRECATED": 417377419,
+                            "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB": 401542606,
                             "LARGE_DEPLOYMENT_WARNING": 481440678,
                             "MISSING_TYPE_DEPENDENCY": 344505463,
                             "NEXT_HOP_ADDRESS_NOT_ASSIGNED": 324964999,

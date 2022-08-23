@@ -126,99 +126,101 @@ describe('v1.DisksClient', () => {
   afterEach(() => {
     sinon.restore();
   });
-  it('has servicePath', () => {
-    const servicePath = disksModule.v1.DisksClient.servicePath;
-    assert(servicePath);
-  });
-
-  it('has apiEndpoint', () => {
-    const apiEndpoint = disksModule.v1.DisksClient.apiEndpoint;
-    assert(apiEndpoint);
-  });
-
-  it('has port', () => {
-    const port = disksModule.v1.DisksClient.port;
-    assert(port);
-    assert(typeof port === 'number');
-  });
-
-  it('should create a client with no option', () => {
-    const client = new disksModule.v1.DisksClient();
-    assert(client);
-  });
-
-  it('should create a client with gRPC fallback', () => {
-    const client = new disksModule.v1.DisksClient({
-      fallback: true,
+  describe('Common methods', () => {
+    it('has servicePath', () => {
+      const servicePath = disksModule.v1.DisksClient.servicePath;
+      assert(servicePath);
     });
-    assert(client);
-  });
 
-  it('has initialize method and supports deferred initialization', async () => {
-    const client = new disksModule.v1.DisksClient({
-      auth: googleAuth,
-      projectId: 'bogus',
+    it('has apiEndpoint', () => {
+      const apiEndpoint = disksModule.v1.DisksClient.apiEndpoint;
+      assert(apiEndpoint);
     });
-    assert.strictEqual(client.disksStub, undefined);
-    await client.initialize();
-    assert(client.disksStub);
-  });
 
-  it('has close method for the initialized client', done => {
-    const client = new disksModule.v1.DisksClient({
-      auth: googleAuth,
-      projectId: 'bogus',
+    it('has port', () => {
+      const port = disksModule.v1.DisksClient.port;
+      assert(port);
+      assert(typeof port === 'number');
     });
-    client.initialize();
-    assert(client.disksStub);
-    client.close().then(() => {
-      done();
-    });
-  });
 
-  it('has close method for the non-initialized client', done => {
-    const client = new disksModule.v1.DisksClient({
-      auth: googleAuth,
-      projectId: 'bogus',
+    it('should create a client with no option', () => {
+      const client = new disksModule.v1.DisksClient();
+      assert(client);
     });
-    assert.strictEqual(client.disksStub, undefined);
-    client.close().then(() => {
-      done();
-    });
-  });
 
-  it('has getProjectId method', async () => {
-    const fakeProjectId = 'fake-project-id';
-    const client = new disksModule.v1.DisksClient({
-      auth: googleAuth,
-      projectId: 'bogus',
+    it('should create a client with gRPC fallback', () => {
+      const client = new disksModule.v1.DisksClient({
+        fallback: true,
+      });
+      assert(client);
     });
-    client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-    const result = await client.getProjectId();
-    assert.strictEqual(result, fakeProjectId);
-    assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-  });
 
-  it('has getProjectId method with callback', async () => {
-    const fakeProjectId = 'fake-project-id';
-    const client = new disksModule.v1.DisksClient({
-      auth: googleAuth,
-      projectId: 'bogus',
+    it('has initialize method and supports deferred initialization', async () => {
+      const client = new disksModule.v1.DisksClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      assert.strictEqual(client.disksStub, undefined);
+      await client.initialize();
+      assert(client.disksStub);
     });
-    client.auth.getProjectId = sinon
-      .stub()
-      .callsArgWith(0, null, fakeProjectId);
-    const promise = new Promise((resolve, reject) => {
-      client.getProjectId((err?: Error | null, projectId?: string | null) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(projectId);
-        }
+
+    it('has close method for the initialized client', done => {
+      const client = new disksModule.v1.DisksClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      assert(client.disksStub);
+      client.close().then(() => {
+        done();
       });
     });
-    const result = await promise;
-    assert.strictEqual(result, fakeProjectId);
+
+    it('has close method for the non-initialized client', done => {
+      const client = new disksModule.v1.DisksClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      assert.strictEqual(client.disksStub, undefined);
+      client.close().then(() => {
+        done();
+      });
+    });
+
+    it('has getProjectId method', async () => {
+      const fakeProjectId = 'fake-project-id';
+      const client = new disksModule.v1.DisksClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+      const result = await client.getProjectId();
+      assert.strictEqual(result, fakeProjectId);
+      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+    });
+
+    it('has getProjectId method with callback', async () => {
+      const fakeProjectId = 'fake-project-id';
+      const client = new disksModule.v1.DisksClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.auth.getProjectId = sinon
+        .stub()
+        .callsArgWith(0, null, fakeProjectId);
+      const promise = new Promise((resolve, reject) => {
+        client.getProjectId((err?: Error | null, projectId?: string | null) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(projectId);
+          }
+        });
+      });
+      const result = await promise;
+      assert.strictEqual(result, fakeProjectId);
+    });
   });
 
   describe('addResourcePolicies', () => {
