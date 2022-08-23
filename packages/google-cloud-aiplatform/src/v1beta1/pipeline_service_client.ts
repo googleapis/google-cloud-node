@@ -34,7 +34,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -1432,7 +1431,8 @@ export class PipelineServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -2255,7 +2255,7 @@ export class PipelineServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteTrainingPipeline,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -2394,7 +2394,7 @@ export class PipelineServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deletePipelineJob,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -2586,7 +2586,7 @@ export class PipelineServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listTrainingPipelines.createStream(
-      this.innerApiCalls.listTrainingPipelines as gax.GaxCall,
+      this.innerApiCalls.listTrainingPipelines as GaxCall,
       request,
       callSettings
     );
@@ -2658,7 +2658,7 @@ export class PipelineServiceClient {
     this.initialize();
     return this.descriptors.page.listTrainingPipelines.asyncIterate(
       this.innerApiCalls['listTrainingPipelines'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.ITrainingPipeline>;
   }
@@ -2905,7 +2905,7 @@ export class PipelineServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listPipelineJobs.createStream(
-      this.innerApiCalls.listPipelineJobs as gax.GaxCall,
+      this.innerApiCalls.listPipelineJobs as GaxCall,
       request,
       callSettings
     );
@@ -3006,7 +3006,7 @@ export class PipelineServiceClient {
     this.initialize();
     return this.descriptors.page.listPipelineJobs.asyncIterate(
       this.innerApiCalls['listPipelineJobs'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IPipelineJob>;
   }

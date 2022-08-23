@@ -34,7 +34,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -1439,7 +1438,8 @@ export class VizierServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -2697,7 +2697,7 @@ export class VizierServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.suggestTrials,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.aiplatform.v1beta1.SuggestTrialsResponse,
@@ -2843,7 +2843,7 @@ export class VizierServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.checkTrialEarlyStoppingState,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.aiplatform.v1beta1.CheckTrialEarlyStoppingStateResponse,
@@ -2993,7 +2993,7 @@ export class VizierServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listStudies.createStream(
-      this.innerApiCalls.listStudies as gax.GaxCall,
+      this.innerApiCalls.listStudies as GaxCall,
       request,
       callSettings
     );
@@ -3044,7 +3044,7 @@ export class VizierServiceClient {
     this.initialize();
     return this.descriptors.page.listStudies.asyncIterate(
       this.innerApiCalls['listStudies'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IStudy>;
   }
@@ -3191,7 +3191,7 @@ export class VizierServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listTrials.createStream(
-      this.innerApiCalls.listTrials as gax.GaxCall,
+      this.innerApiCalls.listTrials as GaxCall,
       request,
       callSettings
     );
@@ -3242,7 +3242,7 @@ export class VizierServiceClient {
     this.initialize();
     return this.descriptors.page.listTrials.asyncIterate(
       this.innerApiCalls['listTrials'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.ITrial>;
   }

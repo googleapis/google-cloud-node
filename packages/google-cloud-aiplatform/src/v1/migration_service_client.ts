@@ -34,7 +34,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -1337,7 +1336,8 @@ export class MigrationServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -1536,7 +1536,7 @@ export class MigrationServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.batchMigrateResources,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.aiplatform.v1.BatchMigrateResourcesResponse,
@@ -1722,7 +1722,7 @@ export class MigrationServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.searchMigratableResources.createStream(
-      this.innerApiCalls.searchMigratableResources as gax.GaxCall,
+      this.innerApiCalls.searchMigratableResources as GaxCall,
       request,
       callSettings
     );
@@ -1788,7 +1788,7 @@ export class MigrationServiceClient {
     this.initialize();
     return this.descriptors.page.searchMigratableResources.asyncIterate(
       this.innerApiCalls['searchMigratableResources'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1.IMigratableResource>;
   }

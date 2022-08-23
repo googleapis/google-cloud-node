@@ -151,101 +151,116 @@ function stubAsyncIterationCall<ResponseType>(
 }
 
 describe('v1.FeaturestoreServiceClient', () => {
-  it('has servicePath', () => {
-    const servicePath =
-      featurestoreserviceModule.v1.FeaturestoreServiceClient.servicePath;
-    assert(servicePath);
-  });
-
-  it('has apiEndpoint', () => {
-    const apiEndpoint =
-      featurestoreserviceModule.v1.FeaturestoreServiceClient.apiEndpoint;
-    assert(apiEndpoint);
-  });
-
-  it('has port', () => {
-    const port = featurestoreserviceModule.v1.FeaturestoreServiceClient.port;
-    assert(port);
-    assert(typeof port === 'number');
-  });
-
-  it('should create a client with no option', () => {
-    const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient();
-    assert(client);
-  });
-
-  it('should create a client with gRPC fallback', () => {
-    const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient({
-      fallback: true,
+  describe('Common methods', () => {
+    it('has servicePath', () => {
+      const servicePath =
+        featurestoreserviceModule.v1.FeaturestoreServiceClient.servicePath;
+      assert(servicePath);
     });
-    assert(client);
-  });
 
-  it('has initialize method and supports deferred initialization', async () => {
-    const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient({
-      credentials: {client_email: 'bogus', private_key: 'bogus'},
-      projectId: 'bogus',
+    it('has apiEndpoint', () => {
+      const apiEndpoint =
+        featurestoreserviceModule.v1.FeaturestoreServiceClient.apiEndpoint;
+      assert(apiEndpoint);
     });
-    assert.strictEqual(client.featurestoreServiceStub, undefined);
-    await client.initialize();
-    assert(client.featurestoreServiceStub);
-  });
 
-  it('has close method for the initialized client', done => {
-    const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient({
-      credentials: {client_email: 'bogus', private_key: 'bogus'},
-      projectId: 'bogus',
+    it('has port', () => {
+      const port = featurestoreserviceModule.v1.FeaturestoreServiceClient.port;
+      assert(port);
+      assert(typeof port === 'number');
     });
-    client.initialize();
-    assert(client.featurestoreServiceStub);
-    client.close().then(() => {
-      done();
-    });
-  });
 
-  it('has close method for the non-initialized client', done => {
-    const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient({
-      credentials: {client_email: 'bogus', private_key: 'bogus'},
-      projectId: 'bogus',
+    it('should create a client with no option', () => {
+      const client =
+        new featurestoreserviceModule.v1.FeaturestoreServiceClient();
+      assert(client);
     });
-    assert.strictEqual(client.featurestoreServiceStub, undefined);
-    client.close().then(() => {
-      done();
-    });
-  });
 
-  it('has getProjectId method', async () => {
-    const fakeProjectId = 'fake-project-id';
-    const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient({
-      credentials: {client_email: 'bogus', private_key: 'bogus'},
-      projectId: 'bogus',
-    });
-    client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-    const result = await client.getProjectId();
-    assert.strictEqual(result, fakeProjectId);
-    assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-  });
-
-  it('has getProjectId method with callback', async () => {
-    const fakeProjectId = 'fake-project-id';
-    const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient({
-      credentials: {client_email: 'bogus', private_key: 'bogus'},
-      projectId: 'bogus',
-    });
-    client.auth.getProjectId = sinon
-      .stub()
-      .callsArgWith(0, null, fakeProjectId);
-    const promise = new Promise((resolve, reject) => {
-      client.getProjectId((err?: Error | null, projectId?: string | null) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(projectId);
+    it('should create a client with gRPC fallback', () => {
+      const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
+        {
+          fallback: true,
         }
+      );
+      assert(client);
+    });
+
+    it('has initialize method and supports deferred initialization', async () => {
+      const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      assert.strictEqual(client.featurestoreServiceStub, undefined);
+      await client.initialize();
+      assert(client.featurestoreServiceStub);
+    });
+
+    it('has close method for the initialized client', done => {
+      const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      assert(client.featurestoreServiceStub);
+      client.close().then(() => {
+        done();
       });
     });
-    const result = await promise;
-    assert.strictEqual(result, fakeProjectId);
+
+    it('has close method for the non-initialized client', done => {
+      const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      assert.strictEqual(client.featurestoreServiceStub, undefined);
+      client.close().then(() => {
+        done();
+      });
+    });
+
+    it('has getProjectId method', async () => {
+      const fakeProjectId = 'fake-project-id';
+      const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+      const result = await client.getProjectId();
+      assert.strictEqual(result, fakeProjectId);
+      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+    });
+
+    it('has getProjectId method with callback', async () => {
+      const fakeProjectId = 'fake-project-id';
+      const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.auth.getProjectId = sinon
+        .stub()
+        .callsArgWith(0, null, fakeProjectId);
+      const promise = new Promise((resolve, reject) => {
+        client.getProjectId((err?: Error | null, projectId?: string | null) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(projectId);
+          }
+        });
+      });
+      const result = await promise;
+      assert.strictEqual(result, fakeProjectId);
+    });
   });
 
   describe('getFeaturestore', () => {

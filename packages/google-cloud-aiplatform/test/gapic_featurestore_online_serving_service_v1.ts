@@ -27,7 +27,6 @@ import {PassThrough} from 'stream';
 
 import {
   protobuf,
-  LROperation,
   operationsProtos,
   IamProtos,
   LocationProtos,
@@ -102,124 +101,132 @@ function stubAsyncIterationCall<ResponseType>(
 }
 
 describe('v1.FeaturestoreOnlineServingServiceClient', () => {
-  it('has servicePath', () => {
-    const servicePath =
-      featurestoreonlineservingserviceModule.v1
-        .FeaturestoreOnlineServingServiceClient.servicePath;
-    assert(servicePath);
-  });
-
-  it('has apiEndpoint', () => {
-    const apiEndpoint =
-      featurestoreonlineservingserviceModule.v1
-        .FeaturestoreOnlineServingServiceClient.apiEndpoint;
-    assert(apiEndpoint);
-  });
-
-  it('has port', () => {
-    const port =
-      featurestoreonlineservingserviceModule.v1
-        .FeaturestoreOnlineServingServiceClient.port;
-    assert(port);
-    assert(typeof port === 'number');
-  });
-
-  it('should create a client with no option', () => {
-    const client =
-      new featurestoreonlineservingserviceModule.v1.FeaturestoreOnlineServingServiceClient();
-    assert(client);
-  });
-
-  it('should create a client with gRPC fallback', () => {
-    const client =
-      new featurestoreonlineservingserviceModule.v1.FeaturestoreOnlineServingServiceClient(
-        {
-          fallback: true,
-        }
-      );
-    assert(client);
-  });
-
-  it('has initialize method and supports deferred initialization', async () => {
-    const client =
-      new featurestoreonlineservingserviceModule.v1.FeaturestoreOnlineServingServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-    assert.strictEqual(client.featurestoreOnlineServingServiceStub, undefined);
-    await client.initialize();
-    assert(client.featurestoreOnlineServingServiceStub);
-  });
-
-  it('has close method for the initialized client', done => {
-    const client =
-      new featurestoreonlineservingserviceModule.v1.FeaturestoreOnlineServingServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-    client.initialize();
-    assert(client.featurestoreOnlineServingServiceStub);
-    client.close().then(() => {
-      done();
+  describe('Common methods', () => {
+    it('has servicePath', () => {
+      const servicePath =
+        featurestoreonlineservingserviceModule.v1
+          .FeaturestoreOnlineServingServiceClient.servicePath;
+      assert(servicePath);
     });
-  });
 
-  it('has close method for the non-initialized client', done => {
-    const client =
-      new featurestoreonlineservingserviceModule.v1.FeaturestoreOnlineServingServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-    assert.strictEqual(client.featurestoreOnlineServingServiceStub, undefined);
-    client.close().then(() => {
-      done();
+    it('has apiEndpoint', () => {
+      const apiEndpoint =
+        featurestoreonlineservingserviceModule.v1
+          .FeaturestoreOnlineServingServiceClient.apiEndpoint;
+      assert(apiEndpoint);
     });
-  });
 
-  it('has getProjectId method', async () => {
-    const fakeProjectId = 'fake-project-id';
-    const client =
-      new featurestoreonlineservingserviceModule.v1.FeaturestoreOnlineServingServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-    client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-    const result = await client.getProjectId();
-    assert.strictEqual(result, fakeProjectId);
-    assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-  });
+    it('has port', () => {
+      const port =
+        featurestoreonlineservingserviceModule.v1
+          .FeaturestoreOnlineServingServiceClient.port;
+      assert(port);
+      assert(typeof port === 'number');
+    });
 
-  it('has getProjectId method with callback', async () => {
-    const fakeProjectId = 'fake-project-id';
-    const client =
-      new featurestoreonlineservingserviceModule.v1.FeaturestoreOnlineServingServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
+    it('should create a client with no option', () => {
+      const client =
+        new featurestoreonlineservingserviceModule.v1.FeaturestoreOnlineServingServiceClient();
+      assert(client);
+    });
+
+    it('should create a client with gRPC fallback', () => {
+      const client =
+        new featurestoreonlineservingserviceModule.v1.FeaturestoreOnlineServingServiceClient(
+          {
+            fallback: true,
+          }
+        );
+      assert(client);
+    });
+
+    it('has initialize method and supports deferred initialization', async () => {
+      const client =
+        new featurestoreonlineservingserviceModule.v1.FeaturestoreOnlineServingServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      assert.strictEqual(
+        client.featurestoreOnlineServingServiceStub,
+        undefined
       );
-    client.auth.getProjectId = sinon
-      .stub()
-      .callsArgWith(0, null, fakeProjectId);
-    const promise = new Promise((resolve, reject) => {
-      client.getProjectId((err?: Error | null, projectId?: string | null) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(projectId);
-        }
+      await client.initialize();
+      assert(client.featurestoreOnlineServingServiceStub);
+    });
+
+    it('has close method for the initialized client', done => {
+      const client =
+        new featurestoreonlineservingserviceModule.v1.FeaturestoreOnlineServingServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      assert(client.featurestoreOnlineServingServiceStub);
+      client.close().then(() => {
+        done();
       });
     });
-    const result = await promise;
-    assert.strictEqual(result, fakeProjectId);
+
+    it('has close method for the non-initialized client', done => {
+      const client =
+        new featurestoreonlineservingserviceModule.v1.FeaturestoreOnlineServingServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      assert.strictEqual(
+        client.featurestoreOnlineServingServiceStub,
+        undefined
+      );
+      client.close().then(() => {
+        done();
+      });
+    });
+
+    it('has getProjectId method', async () => {
+      const fakeProjectId = 'fake-project-id';
+      const client =
+        new featurestoreonlineservingserviceModule.v1.FeaturestoreOnlineServingServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+      const result = await client.getProjectId();
+      assert.strictEqual(result, fakeProjectId);
+      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+    });
+
+    it('has getProjectId method with callback', async () => {
+      const fakeProjectId = 'fake-project-id';
+      const client =
+        new featurestoreonlineservingserviceModule.v1.FeaturestoreOnlineServingServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.auth.getProjectId = sinon
+        .stub()
+        .callsArgWith(0, null, fakeProjectId);
+      const promise = new Promise((resolve, reject) => {
+        client.getProjectId((err?: Error | null, projectId?: string | null) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(projectId);
+          }
+        });
+      });
+      const result = await promise;
+      assert.strictEqual(result, fakeProjectId);
+    });
   });
 
   describe('readFeatureValues', () => {

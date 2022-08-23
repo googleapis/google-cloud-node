@@ -34,7 +34,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -1553,7 +1552,8 @@ export class FeaturestoreServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -2269,7 +2269,7 @@ export class FeaturestoreServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createFeaturestore,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.aiplatform.v1beta1.Featurestore,
@@ -2423,7 +2423,7 @@ export class FeaturestoreServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateFeaturestore,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.aiplatform.v1beta1.Featurestore,
@@ -2567,7 +2567,7 @@ export class FeaturestoreServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteFeaturestore,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -2716,7 +2716,7 @@ export class FeaturestoreServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createEntityType,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.aiplatform.v1beta1.EntityType,
@@ -2859,7 +2859,7 @@ export class FeaturestoreServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteEntityType,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -3008,7 +3008,7 @@ export class FeaturestoreServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createFeature,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.aiplatform.v1beta1.Feature,
@@ -3152,7 +3152,7 @@ export class FeaturestoreServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.batchCreateFeatures,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.aiplatform.v1beta1.BatchCreateFeaturesResponse,
@@ -3291,7 +3291,7 @@ export class FeaturestoreServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteFeature,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -3478,7 +3478,7 @@ export class FeaturestoreServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.importFeatureValues,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.aiplatform.v1beta1.ImportFeatureValuesResponse,
@@ -3669,7 +3669,7 @@ export class FeaturestoreServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.batchReadFeatureValues,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.aiplatform.v1beta1.BatchReadFeatureValuesResponse,
@@ -3820,7 +3820,7 @@ export class FeaturestoreServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.exportFeatureValues,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.aiplatform.v1beta1.ExportFeatureValuesResponse,
@@ -4046,7 +4046,7 @@ export class FeaturestoreServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listFeaturestores.createStream(
-      this.innerApiCalls.listFeaturestores as gax.GaxCall,
+      this.innerApiCalls.listFeaturestores as GaxCall,
       request,
       callSettings
     );
@@ -4135,7 +4135,7 @@ export class FeaturestoreServiceClient {
     this.initialize();
     return this.descriptors.page.listFeaturestores.asyncIterate(
       this.innerApiCalls['listFeaturestores'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IFeaturestore>;
   }
@@ -4358,7 +4358,7 @@ export class FeaturestoreServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listEntityTypes.createStream(
-      this.innerApiCalls.listEntityTypes as gax.GaxCall,
+      this.innerApiCalls.listEntityTypes as GaxCall,
       request,
       callSettings
     );
@@ -4447,7 +4447,7 @@ export class FeaturestoreServiceClient {
     this.initialize();
     return this.descriptors.page.listEntityTypes.asyncIterate(
       this.innerApiCalls['listEntityTypes'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IEntityType>;
   }
@@ -4684,7 +4684,7 @@ export class FeaturestoreServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listFeatures.createStream(
-      this.innerApiCalls.listFeatures as gax.GaxCall,
+      this.innerApiCalls.listFeatures as GaxCall,
       request,
       callSettings
     );
@@ -4780,7 +4780,7 @@ export class FeaturestoreServiceClient {
     this.initialize();
     return this.descriptors.page.listFeatures.asyncIterate(
       this.innerApiCalls['listFeatures'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IFeature>;
   }
@@ -5063,7 +5063,7 @@ export class FeaturestoreServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.searchFeatures.createStream(
-      this.innerApiCalls.searchFeatures as gax.GaxCall,
+      this.innerApiCalls.searchFeatures as GaxCall,
       request,
       callSettings
     );
@@ -5182,7 +5182,7 @@ export class FeaturestoreServiceClient {
     this.initialize();
     return this.descriptors.page.searchFeatures.asyncIterate(
       this.innerApiCalls['searchFeatures'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IFeature>;
   }

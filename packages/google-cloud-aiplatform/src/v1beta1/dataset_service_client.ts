@@ -34,7 +34,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -1460,7 +1459,8 @@ export class DatasetServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -1949,7 +1949,7 @@ export class DatasetServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createDataset,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.aiplatform.v1beta1.Dataset,
@@ -2088,7 +2088,7 @@ export class DatasetServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteDataset,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -2230,7 +2230,7 @@ export class DatasetServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.importData,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.aiplatform.v1beta1.ImportDataResponse,
@@ -2371,7 +2371,7 @@ export class DatasetServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.exportData,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.aiplatform.v1beta1.ExportDataResponse,
@@ -2567,7 +2567,7 @@ export class DatasetServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listDatasets.createStream(
-      this.innerApiCalls.listDatasets as gax.GaxCall,
+      this.innerApiCalls.listDatasets as GaxCall,
       request,
       callSettings
     );
@@ -2641,7 +2641,7 @@ export class DatasetServiceClient {
     this.initialize();
     return this.descriptors.page.listDatasets.asyncIterate(
       this.innerApiCalls['listDatasets'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IDataset>;
   }
@@ -2800,7 +2800,7 @@ export class DatasetServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listDataItems.createStream(
-      this.innerApiCalls.listDataItems as gax.GaxCall,
+      this.innerApiCalls.listDataItems as GaxCall,
       request,
       callSettings
     );
@@ -2857,7 +2857,7 @@ export class DatasetServiceClient {
     this.initialize();
     return this.descriptors.page.listDataItems.asyncIterate(
       this.innerApiCalls['listDataItems'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IDataItem>;
   }
@@ -3016,7 +3016,7 @@ export class DatasetServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listSavedQueries.createStream(
-      this.innerApiCalls.listSavedQueries as gax.GaxCall,
+      this.innerApiCalls.listSavedQueries as GaxCall,
       request,
       callSettings
     );
@@ -3073,7 +3073,7 @@ export class DatasetServiceClient {
     this.initialize();
     return this.descriptors.page.listSavedQueries.asyncIterate(
       this.innerApiCalls['listSavedQueries'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.ISavedQuery>;
   }
@@ -3232,7 +3232,7 @@ export class DatasetServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listAnnotations.createStream(
-      this.innerApiCalls.listAnnotations as gax.GaxCall,
+      this.innerApiCalls.listAnnotations as GaxCall,
       request,
       callSettings
     );
@@ -3289,7 +3289,7 @@ export class DatasetServiceClient {
     this.initialize();
     return this.descriptors.page.listAnnotations.asyncIterate(
       this.innerApiCalls['listAnnotations'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IAnnotation>;
   }

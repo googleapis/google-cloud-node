@@ -34,7 +34,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -1461,7 +1460,8 @@ export class JobServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -3285,7 +3285,7 @@ export class JobServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteCustomJob,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -3424,7 +3424,7 @@ export class JobServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteDataLabelingJob,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -3567,7 +3567,7 @@ export class JobServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteHyperparameterTuningJob,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -3711,7 +3711,7 @@ export class JobServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteBatchPredictionJob,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -3882,7 +3882,7 @@ export class JobServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateModelDeploymentMonitoringJob,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob,
@@ -4025,7 +4025,7 @@ export class JobServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteModelDeploymentMonitoringJob,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -4213,7 +4213,7 @@ export class JobServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listCustomJobs.createStream(
-      this.innerApiCalls.listCustomJobs as gax.GaxCall,
+      this.innerApiCalls.listCustomJobs as GaxCall,
       request,
       callSettings
     );
@@ -4283,7 +4283,7 @@ export class JobServiceClient {
     this.initialize();
     return this.descriptors.page.listCustomJobs.asyncIterate(
       this.innerApiCalls['listCustomJobs'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1.ICustomJob>;
   }
@@ -4476,7 +4476,7 @@ export class JobServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listDataLabelingJobs.createStream(
-      this.innerApiCalls.listDataLabelingJobs as gax.GaxCall,
+      this.innerApiCalls.listDataLabelingJobs as GaxCall,
       request,
       callSettings
     );
@@ -4550,7 +4550,7 @@ export class JobServiceClient {
     this.initialize();
     return this.descriptors.page.listDataLabelingJobs.asyncIterate(
       this.innerApiCalls['listDataLabelingJobs'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1.IDataLabelingJob>;
   }
@@ -4739,7 +4739,7 @@ export class JobServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listHyperparameterTuningJobs.createStream(
-      this.innerApiCalls.listHyperparameterTuningJobs as gax.GaxCall,
+      this.innerApiCalls.listHyperparameterTuningJobs as GaxCall,
       request,
       callSettings
     );
@@ -4809,7 +4809,7 @@ export class JobServiceClient {
     this.initialize();
     return this.descriptors.page.listHyperparameterTuningJobs.asyncIterate(
       this.innerApiCalls['listHyperparameterTuningJobs'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1.IHyperparameterTuningJob>;
   }
@@ -5000,7 +5000,7 @@ export class JobServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listBatchPredictionJobs.createStream(
-      this.innerApiCalls.listBatchPredictionJobs as gax.GaxCall,
+      this.innerApiCalls.listBatchPredictionJobs as GaxCall,
       request,
       callSettings
     );
@@ -5071,7 +5071,7 @@ export class JobServiceClient {
     this.initialize();
     return this.descriptors.page.listBatchPredictionJobs.asyncIterate(
       this.innerApiCalls['listBatchPredictionJobs'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1.IBatchPredictionJob>;
   }
@@ -5260,7 +5260,7 @@ export class JobServiceClient {
     this.initialize();
     return this.descriptors.page.searchModelDeploymentMonitoringStatsAnomalies.createStream(
       this.innerApiCalls
-        .searchModelDeploymentMonitoringStatsAnomalies as gax.GaxCall,
+        .searchModelDeploymentMonitoringStatsAnomalies as GaxCall,
       request,
       callSettings
     );
@@ -5332,7 +5332,7 @@ export class JobServiceClient {
       this.innerApiCalls[
         'searchModelDeploymentMonitoringStatsAnomalies'
       ] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1.IModelMonitoringStatsAnomalies>;
   }
@@ -5516,7 +5516,7 @@ export class JobServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listModelDeploymentMonitoringJobs.createStream(
-      this.innerApiCalls.listModelDeploymentMonitoringJobs as gax.GaxCall,
+      this.innerApiCalls.listModelDeploymentMonitoringJobs as GaxCall,
       request,
       callSettings
     );
@@ -5584,7 +5584,7 @@ export class JobServiceClient {
     this.initialize();
     return this.descriptors.page.listModelDeploymentMonitoringJobs.asyncIterate(
       this.innerApiCalls['listModelDeploymentMonitoringJobs'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob>;
   }

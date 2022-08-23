@@ -34,7 +34,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -1395,7 +1394,8 @@ export class ModelServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -2307,7 +2307,7 @@ export class ModelServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.uploadModel,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.aiplatform.v1.UploadModelResponse,
@@ -2449,7 +2449,7 @@ export class ModelServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteModel,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -2593,7 +2593,7 @@ export class ModelServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteModelVersion,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -2736,7 +2736,7 @@ export class ModelServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.exportModel,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.aiplatform.v1.ExportModelResponse,
@@ -2940,7 +2940,7 @@ export class ModelServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listModels.createStream(
-      this.innerApiCalls.listModels as gax.GaxCall,
+      this.innerApiCalls.listModels as GaxCall,
       request,
       callSettings
     );
@@ -3021,7 +3021,7 @@ export class ModelServiceClient {
     this.initialize();
     return this.descriptors.page.listModels.asyncIterate(
       this.innerApiCalls['listModels'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1.IModel>;
   }
@@ -3196,7 +3196,7 @@ export class ModelServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listModelVersions.createStream(
-      this.innerApiCalls.listModelVersions as gax.GaxCall,
+      this.innerApiCalls.listModelVersions as GaxCall,
       request,
       callSettings
     );
@@ -3261,7 +3261,7 @@ export class ModelServiceClient {
     this.initialize();
     return this.descriptors.page.listModelVersions.asyncIterate(
       this.innerApiCalls['listModelVersions'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1.IModel>;
   }
@@ -3418,7 +3418,7 @@ export class ModelServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listModelEvaluations.createStream(
-      this.innerApiCalls.listModelEvaluations as gax.GaxCall,
+      this.innerApiCalls.listModelEvaluations as GaxCall,
       request,
       callSettings
     );
@@ -3474,7 +3474,7 @@ export class ModelServiceClient {
     this.initialize();
     return this.descriptors.page.listModelEvaluations.asyncIterate(
       this.innerApiCalls['listModelEvaluations'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1.IModelEvaluation>;
   }
@@ -3641,7 +3641,7 @@ export class ModelServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listModelEvaluationSlices.createStream(
-      this.innerApiCalls.listModelEvaluationSlices as gax.GaxCall,
+      this.innerApiCalls.listModelEvaluationSlices as GaxCall,
       request,
       callSettings
     );
@@ -3700,7 +3700,7 @@ export class ModelServiceClient {
     this.initialize();
     return this.descriptors.page.listModelEvaluationSlices.asyncIterate(
       this.innerApiCalls['listModelEvaluationSlices'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1.IModelEvaluationSlice>;
   }

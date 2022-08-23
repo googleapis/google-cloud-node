@@ -34,7 +34,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -1384,7 +1383,8 @@ export class IndexEndpointServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -1766,7 +1766,7 @@ export class IndexEndpointServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createIndexEndpoint,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.aiplatform.v1.IndexEndpoint,
@@ -1905,7 +1905,7 @@ export class IndexEndpointServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteIndexEndpoint,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -2048,7 +2048,7 @@ export class IndexEndpointServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deployIndex,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.aiplatform.v1.DeployIndexResponse,
@@ -2190,7 +2190,7 @@ export class IndexEndpointServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.undeployIndex,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.aiplatform.v1.UndeployIndexResponse,
@@ -2333,7 +2333,7 @@ export class IndexEndpointServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.mutateDeployedIndex,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.aiplatform.v1.MutateDeployedIndexResponse,
@@ -2527,7 +2527,7 @@ export class IndexEndpointServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listIndexEndpoints.createStream(
-      this.innerApiCalls.listIndexEndpoints as gax.GaxCall,
+      this.innerApiCalls.listIndexEndpoints as GaxCall,
       request,
       callSettings
     );
@@ -2600,7 +2600,7 @@ export class IndexEndpointServiceClient {
     this.initialize();
     return this.descriptors.page.listIndexEndpoints.asyncIterate(
       this.innerApiCalls['listIndexEndpoints'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1.IIndexEndpoint>;
   }

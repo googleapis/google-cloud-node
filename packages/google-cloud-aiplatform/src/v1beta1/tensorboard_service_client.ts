@@ -35,7 +35,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import {PassThrough} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
@@ -1537,7 +1536,8 @@ export class TensorboardServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -3491,7 +3491,7 @@ export class TensorboardServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createTensorboard,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.aiplatform.v1beta1.Tensorboard,
@@ -3637,7 +3637,7 @@ export class TensorboardServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateTensorboard,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.aiplatform.v1beta1.Tensorboard,
@@ -3776,7 +3776,7 @@ export class TensorboardServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteTensorboard,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -3919,7 +3919,7 @@ export class TensorboardServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteTensorboardExperiment,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -4058,7 +4058,7 @@ export class TensorboardServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteTensorboardRun,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -4201,7 +4201,7 @@ export class TensorboardServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteTensorboardTimeSeries,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -4379,7 +4379,7 @@ export class TensorboardServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listTensorboards.createStream(
-      this.innerApiCalls.listTensorboards as gax.GaxCall,
+      this.innerApiCalls.listTensorboards as GaxCall,
       request,
       callSettings
     );
@@ -4444,7 +4444,7 @@ export class TensorboardServiceClient {
     this.initialize();
     return this.descriptors.page.listTensorboards.asyncIterate(
       this.innerApiCalls['listTensorboards'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.ITensorboard>;
   }
@@ -4623,7 +4623,7 @@ export class TensorboardServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listTensorboardExperiments.createStream(
-      this.innerApiCalls.listTensorboardExperiments as gax.GaxCall,
+      this.innerApiCalls.listTensorboardExperiments as GaxCall,
       request,
       callSettings
     );
@@ -4688,7 +4688,7 @@ export class TensorboardServiceClient {
     this.initialize();
     return this.descriptors.page.listTensorboardExperiments.asyncIterate(
       this.innerApiCalls['listTensorboardExperiments'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.ITensorboardExperiment>;
   }
@@ -4863,7 +4863,7 @@ export class TensorboardServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listTensorboardRuns.createStream(
-      this.innerApiCalls.listTensorboardRuns as gax.GaxCall,
+      this.innerApiCalls.listTensorboardRuns as GaxCall,
       request,
       callSettings
     );
@@ -4928,7 +4928,7 @@ export class TensorboardServiceClient {
     this.initialize();
     return this.descriptors.page.listTensorboardRuns.asyncIterate(
       this.innerApiCalls['listTensorboardRuns'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.ITensorboardRun>;
   }
@@ -5107,7 +5107,7 @@ export class TensorboardServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listTensorboardTimeSeries.createStream(
-      this.innerApiCalls.listTensorboardTimeSeries as gax.GaxCall,
+      this.innerApiCalls.listTensorboardTimeSeries as GaxCall,
       request,
       callSettings
     );
@@ -5172,7 +5172,7 @@ export class TensorboardServiceClient {
     this.initialize();
     return this.descriptors.page.listTensorboardTimeSeries.asyncIterate(
       this.innerApiCalls['listTensorboardTimeSeries'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.ITensorboardTimeSeries>;
   }
@@ -5351,7 +5351,7 @@ export class TensorboardServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.exportTensorboardTimeSeriesData.createStream(
-      this.innerApiCalls.exportTensorboardTimeSeriesData as gax.GaxCall,
+      this.innerApiCalls.exportTensorboardTimeSeriesData as GaxCall,
       request,
       callSettings
     );
@@ -5416,7 +5416,7 @@ export class TensorboardServiceClient {
     this.initialize();
     return this.descriptors.page.exportTensorboardTimeSeriesData.asyncIterate(
       this.innerApiCalls['exportTensorboardTimeSeriesData'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.ITimeSeriesDataPoint>;
   }

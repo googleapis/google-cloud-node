@@ -34,7 +34,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -1434,7 +1433,8 @@ export class DeploymentResourcePoolServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -1744,7 +1744,7 @@ export class DeploymentResourcePoolServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createDeploymentResourcePool,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.aiplatform.v1beta1.DeploymentResourcePool,
@@ -1887,7 +1887,7 @@ export class DeploymentResourcePoolServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteDeploymentResourcePool,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -2049,7 +2049,7 @@ export class DeploymentResourcePoolServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listDeploymentResourcePools.createStream(
-      this.innerApiCalls.listDeploymentResourcePools as gax.GaxCall,
+      this.innerApiCalls.listDeploymentResourcePools as GaxCall,
       request,
       callSettings
     );
@@ -2104,7 +2104,7 @@ export class DeploymentResourcePoolServiceClient {
     this.initialize();
     return this.descriptors.page.listDeploymentResourcePools.asyncIterate(
       this.innerApiCalls['listDeploymentResourcePools'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IDeploymentResourcePool>;
   }
@@ -2261,7 +2261,7 @@ export class DeploymentResourcePoolServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.queryDeployedModels.createStream(
-      this.innerApiCalls.queryDeployedModels as gax.GaxCall,
+      this.innerApiCalls.queryDeployedModels as GaxCall,
       request,
       callSettings
     );
@@ -2317,7 +2317,7 @@ export class DeploymentResourcePoolServiceClient {
     this.initialize();
     return this.descriptors.page.queryDeployedModels.asyncIterate(
       this.innerApiCalls['queryDeployedModels'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IDeployedModel>;
   }

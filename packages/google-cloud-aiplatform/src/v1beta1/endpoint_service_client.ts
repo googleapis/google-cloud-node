@@ -34,7 +34,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -1440,7 +1439,8 @@ export class EndpointServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -1831,7 +1831,7 @@ export class EndpointServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createEndpoint,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.aiplatform.v1beta1.Endpoint,
@@ -1970,7 +1970,7 @@ export class EndpointServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteEndpoint,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -2126,7 +2126,7 @@ export class EndpointServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deployModel,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.aiplatform.v1beta1.DeployModelResponse,
@@ -2276,7 +2276,7 @@ export class EndpointServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.undeployModel,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.aiplatform.v1beta1.UndeployModelResponse,
@@ -2464,7 +2464,7 @@ export class EndpointServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listEndpoints.createStream(
-      this.innerApiCalls.listEndpoints as gax.GaxCall,
+      this.innerApiCalls.listEndpoints as GaxCall,
       request,
       callSettings
     );
@@ -2534,7 +2534,7 @@ export class EndpointServiceClient {
     this.initialize();
     return this.descriptors.page.listEndpoints.asyncIterate(
       this.innerApiCalls['listEndpoints'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IEndpoint>;
   }

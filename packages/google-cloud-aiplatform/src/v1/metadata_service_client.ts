@@ -34,7 +34,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -1463,7 +1462,8 @@ export class MetadataServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -3511,7 +3511,7 @@ export class MetadataServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createMetadataStore,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.aiplatform.v1.MetadataStore,
@@ -3653,7 +3653,7 @@ export class MetadataServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteMetadataStore,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -3796,7 +3796,7 @@ export class MetadataServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteArtifact,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -3942,7 +3942,7 @@ export class MetadataServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.purgeArtifacts,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.aiplatform.v1.PurgeArtifactsResponse,
@@ -4088,7 +4088,7 @@ export class MetadataServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteContext,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -4234,7 +4234,7 @@ export class MetadataServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.purgeContexts,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.aiplatform.v1.PurgeContextsResponse,
@@ -4377,7 +4377,7 @@ export class MetadataServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteExecution,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -4523,7 +4523,7 @@ export class MetadataServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.purgeExecutions,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.aiplatform.v1.PurgeExecutionsResponse,
@@ -4687,7 +4687,7 @@ export class MetadataServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listMetadataStores.createStream(
-      this.innerApiCalls.listMetadataStores as gax.GaxCall,
+      this.innerApiCalls.listMetadataStores as GaxCall,
       request,
       callSettings
     );
@@ -4745,7 +4745,7 @@ export class MetadataServiceClient {
     this.initialize();
     return this.descriptors.page.listMetadataStores.asyncIterate(
       this.innerApiCalls['listMetadataStores'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1.IMetadataStore>;
   }
@@ -4958,7 +4958,7 @@ export class MetadataServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listArtifacts.createStream(
-      this.innerApiCalls.listArtifacts as gax.GaxCall,
+      this.innerApiCalls.listArtifacts as GaxCall,
       request,
       callSettings
     );
@@ -5042,7 +5042,7 @@ export class MetadataServiceClient {
     this.initialize();
     return this.descriptors.page.listArtifacts.asyncIterate(
       this.innerApiCalls['listArtifacts'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1.IArtifact>;
   }
@@ -5263,7 +5263,7 @@ export class MetadataServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listContexts.createStream(
-      this.innerApiCalls.listContexts as gax.GaxCall,
+      this.innerApiCalls.listContexts as GaxCall,
       request,
       callSettings
     );
@@ -5351,7 +5351,7 @@ export class MetadataServiceClient {
     this.initialize();
     return this.descriptors.page.listContexts.asyncIterate(
       this.innerApiCalls['listContexts'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1.IContext>;
   }
@@ -5562,7 +5562,7 @@ export class MetadataServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listExecutions.createStream(
-      this.innerApiCalls.listExecutions as gax.GaxCall,
+      this.innerApiCalls.listExecutions as GaxCall,
       request,
       callSettings
     );
@@ -5645,7 +5645,7 @@ export class MetadataServiceClient {
     this.initialize();
     return this.descriptors.page.listExecutions.asyncIterate(
       this.innerApiCalls['listExecutions'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1.IExecution>;
   }
@@ -5810,7 +5810,7 @@ export class MetadataServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listMetadataSchemas.createStream(
-      this.innerApiCalls.listMetadataSchemas as gax.GaxCall,
+      this.innerApiCalls.listMetadataSchemas as GaxCall,
       request,
       callSettings
     );
@@ -5870,7 +5870,7 @@ export class MetadataServiceClient {
     this.initialize();
     return this.descriptors.page.listMetadataSchemas.asyncIterate(
       this.innerApiCalls['listMetadataSchemas'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1.IMetadataSchema>;
   }
