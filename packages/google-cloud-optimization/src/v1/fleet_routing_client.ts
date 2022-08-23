@@ -280,7 +280,8 @@ export class FleetRoutingClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -759,7 +760,7 @@ export class FleetRoutingClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.batchOptimizeTours,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.optimization.v1.BatchOptimizeToursResponse,
