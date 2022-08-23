@@ -30,7 +30,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -506,7 +505,8 @@ export class DataMigrationServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -995,7 +995,7 @@ export class DataMigrationServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createMigrationJob,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.clouddms.v1.MigrationJob,
@@ -1143,7 +1143,7 @@ export class DataMigrationServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateMigrationJob,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.clouddms.v1.MigrationJob,
@@ -1292,7 +1292,7 @@ export class DataMigrationServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteMigrationJob,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -1429,7 +1429,7 @@ export class DataMigrationServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.startMigrationJob,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.clouddms.v1.MigrationJob,
@@ -1566,7 +1566,7 @@ export class DataMigrationServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.stopMigrationJob,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.clouddms.v1.MigrationJob,
@@ -1704,7 +1704,7 @@ export class DataMigrationServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.resumeMigrationJob,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.clouddms.v1.MigrationJob,
@@ -1842,7 +1842,7 @@ export class DataMigrationServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.promoteMigrationJob,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.clouddms.v1.MigrationJob,
@@ -1980,7 +1980,7 @@ export class DataMigrationServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.verifyMigrationJob,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.clouddms.v1.MigrationJob,
@@ -2119,7 +2119,7 @@ export class DataMigrationServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.restartMigrationJob,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.clouddms.v1.MigrationJob,
@@ -2272,7 +2272,7 @@ export class DataMigrationServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createConnectionProfile,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.clouddms.v1.ConnectionProfile,
@@ -2424,7 +2424,7 @@ export class DataMigrationServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateConnectionProfile,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.clouddms.v1.ConnectionProfile,
@@ -2578,7 +2578,7 @@ export class DataMigrationServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteConnectionProfile,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -2762,7 +2762,7 @@ export class DataMigrationServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listMigrationJobs.createStream(
-      this.innerApiCalls.listMigrationJobs as gax.GaxCall,
+      this.innerApiCalls.listMigrationJobs as GaxCall,
       request,
       callSettings
     );
@@ -2830,7 +2830,7 @@ export class DataMigrationServiceClient {
     this.initialize();
     return this.descriptors.page.listMigrationJobs.asyncIterate(
       this.innerApiCalls['listMigrationJobs'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.clouddms.v1.IMigrationJob>;
   }
@@ -3013,7 +3013,7 @@ export class DataMigrationServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listConnectionProfiles.createStream(
-      this.innerApiCalls.listConnectionProfiles as gax.GaxCall,
+      this.innerApiCalls.listConnectionProfiles as GaxCall,
       request,
       callSettings
     );
@@ -3080,7 +3080,7 @@ export class DataMigrationServiceClient {
     this.initialize();
     return this.descriptors.page.listConnectionProfiles.asyncIterate(
       this.innerApiCalls['listConnectionProfiles'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.clouddms.v1.IConnectionProfile>;
   }
