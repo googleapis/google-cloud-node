@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.0.1](https://github.com/googleapis/nodejs-bigquery-connection/compare/v2.0.0...v2.0.1) (2022-08-23)
+
+
+### Bug Fixes
+
+* better support for fallback mode ([#187](https://github.com/googleapis/nodejs-bigquery-connection/issues/187)) ([e4dec92](https://github.com/googleapis/nodejs-bigquery-connection/commit/e4dec92bf2dacdedca084095283bab2393f295ed))
+* **docs:** document fallback rest option ([#183](https://github.com/googleapis/nodejs-bigquery-connection/issues/183)) ([777accf](https://github.com/googleapis/nodejs-bigquery-connection/commit/777accfa5875cbe8e6e20ec33f96140cf179532a))
+* update google-gax and remove obsolete deps ([#1545](https://github.com/googleapis/nodejs-bigquery-connection/issues/1545)) ([#188](https://github.com/googleapis/nodejs-bigquery-connection/issues/188)) ([e829fc6](https://github.com/googleapis/nodejs-bigquery-connection/commit/e829fc63f6c492ae78b35cc16c3a224021cf2bb2))
+
 ## [2.0.0](https://github.com/googleapis/nodejs-bigquery-connection/compare/v1.5.1...v2.0.0) (2022-06-09)
 
 
