@@ -30,7 +30,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -414,7 +413,8 @@ export class TpuClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -1073,7 +1073,7 @@ export class TpuClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createNode,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.tpu.v2alpha1.Node,
@@ -1210,7 +1210,7 @@ export class TpuClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteNode,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.tpu.v2alpha1.Node,
@@ -1347,7 +1347,7 @@ export class TpuClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.stopNode,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.tpu.v2alpha1.Node,
@@ -1484,7 +1484,7 @@ export class TpuClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.startNode,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.tpu.v2alpha1.Node,
@@ -1624,7 +1624,7 @@ export class TpuClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateNode,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.tpu.v2alpha1.Node,
@@ -1762,7 +1762,7 @@ export class TpuClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listNodes.createStream(
-      this.innerApiCalls.listNodes as gax.GaxCall,
+      this.innerApiCalls.listNodes as GaxCall,
       request,
       callSettings
     );
@@ -1810,7 +1810,7 @@ export class TpuClient {
     this.initialize();
     return this.descriptors.page.listNodes.asyncIterate(
       this.innerApiCalls['listNodes'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.tpu.v2alpha1.INode>;
   }
@@ -1959,7 +1959,7 @@ export class TpuClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listAcceleratorTypes.createStream(
-      this.innerApiCalls.listAcceleratorTypes as gax.GaxCall,
+      this.innerApiCalls.listAcceleratorTypes as GaxCall,
       request,
       callSettings
     );
@@ -2011,7 +2011,7 @@ export class TpuClient {
     this.initialize();
     return this.descriptors.page.listAcceleratorTypes.asyncIterate(
       this.innerApiCalls['listAcceleratorTypes'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.tpu.v2alpha1.IAcceleratorType>;
   }
@@ -2160,7 +2160,7 @@ export class TpuClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listRuntimeVersions.createStream(
-      this.innerApiCalls.listRuntimeVersions as gax.GaxCall,
+      this.innerApiCalls.listRuntimeVersions as GaxCall,
       request,
       callSettings
     );
@@ -2212,7 +2212,7 @@ export class TpuClient {
     this.initialize();
     return this.descriptors.page.listRuntimeVersions.asyncIterate(
       this.innerApiCalls['listRuntimeVersions'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.tpu.v2alpha1.IRuntimeVersion>;
   }
