@@ -30,7 +30,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -497,7 +496,8 @@ export class DatastreamClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -1206,7 +1206,7 @@ export class DatastreamClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createConnectionProfile,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.datastream.v1alpha1.ConnectionProfile,
@@ -1367,7 +1367,7 @@ export class DatastreamClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateConnectionProfile,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.datastream.v1alpha1.ConnectionProfile,
@@ -1522,7 +1522,7 @@ export class DatastreamClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteConnectionProfile,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -1682,7 +1682,7 @@ export class DatastreamClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createStream,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.datastream.v1alpha1.Stream,
@@ -1844,7 +1844,7 @@ export class DatastreamClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateStream,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.datastream.v1alpha1.Stream,
@@ -1995,7 +1995,7 @@ export class DatastreamClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteStream,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -2132,7 +2132,7 @@ export class DatastreamClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.fetchErrors,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.datastream.v1alpha1.FetchErrorsResponse,
@@ -2291,7 +2291,7 @@ export class DatastreamClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createPrivateConnection,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.datastream.v1alpha1.PrivateConnection,
@@ -2449,7 +2449,7 @@ export class DatastreamClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deletePrivateConnection,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -2605,7 +2605,7 @@ export class DatastreamClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createRoute,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.datastream.v1alpha1.Route,
@@ -2756,7 +2756,7 @@ export class DatastreamClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteRoute,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -2925,7 +2925,7 @@ export class DatastreamClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listConnectionProfiles.createStream(
-      this.innerApiCalls.listConnectionProfiles as gax.GaxCall,
+      this.innerApiCalls.listConnectionProfiles as GaxCall,
       request,
       callSettings
     );
@@ -2983,7 +2983,7 @@ export class DatastreamClient {
     this.initialize();
     return this.descriptors.page.listConnectionProfiles.asyncIterate(
       this.innerApiCalls['listConnectionProfiles'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.datastream.v1alpha1.IConnectionProfile>;
   }
@@ -3144,7 +3144,7 @@ export class DatastreamClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listStreams.createStream(
-      this.innerApiCalls.listStreams as gax.GaxCall,
+      this.innerApiCalls.listStreams as GaxCall,
       request,
       callSettings
     );
@@ -3202,7 +3202,7 @@ export class DatastreamClient {
     this.initialize();
     return this.descriptors.page.listStreams.asyncIterate(
       this.innerApiCalls['listStreams'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.datastream.v1alpha1.IStream>;
   }
@@ -3349,7 +3349,7 @@ export class DatastreamClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.fetchStaticIps.createStream(
-      this.innerApiCalls.fetchStaticIps as gax.GaxCall,
+      this.innerApiCalls.fetchStaticIps as GaxCall,
       request,
       callSettings
     );
@@ -3399,7 +3399,7 @@ export class DatastreamClient {
     this.initialize();
     return this.descriptors.page.fetchStaticIps.asyncIterate(
       this.innerApiCalls['fetchStaticIps'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<string>;
   }
@@ -3569,7 +3569,7 @@ export class DatastreamClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listPrivateConnections.createStream(
-      this.innerApiCalls.listPrivateConnections as gax.GaxCall,
+      this.innerApiCalls.listPrivateConnections as GaxCall,
       request,
       callSettings
     );
@@ -3629,7 +3629,7 @@ export class DatastreamClient {
     this.initialize();
     return this.descriptors.page.listPrivateConnections.asyncIterate(
       this.innerApiCalls['listPrivateConnections'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.datastream.v1alpha1.IPrivateConnection>;
   }
@@ -3795,7 +3795,7 @@ export class DatastreamClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listRoutes.createStream(
-      this.innerApiCalls.listRoutes as gax.GaxCall,
+      this.innerApiCalls.listRoutes as GaxCall,
       request,
       callSettings
     );
@@ -3855,7 +3855,7 @@ export class DatastreamClient {
     this.initialize();
     return this.descriptors.page.listRoutes.asyncIterate(
       this.innerApiCalls['listRoutes'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.datastream.v1alpha1.IRoute>;
   }
