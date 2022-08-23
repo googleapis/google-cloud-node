@@ -1,5 +1,14 @@
 # Changelog
 
+## [3.4.1](https://github.com/googleapis/nodejs-assured-workloads/compare/v3.4.0...v3.4.1) (2022-08-23)
+
+
+### Bug Fixes
+
+* better support for fallback mode ([#181](https://github.com/googleapis/nodejs-assured-workloads/issues/181)) ([98e8596](https://github.com/googleapis/nodejs-assured-workloads/commit/98e8596c9bda01cf384c07f157e823ee41f28acd))
+* change import long to require ([#182](https://github.com/googleapis/nodejs-assured-workloads/issues/182)) ([8a77a07](https://github.com/googleapis/nodejs-assured-workloads/commit/8a77a076dc8585ad1b98cb3058fde15b225ed22f))
+* remove pip install statements ([#1546](https://github.com/googleapis/nodejs-assured-workloads/issues/1546)) ([#184](https://github.com/googleapis/nodejs-assured-workloads/issues/184)) ([796b8c2](https://github.com/googleapis/nodejs-assured-workloads/commit/796b8c2fb5a8010a2db974eaef5b2d34f2e402bc))
+
 ## [3.4.0](https://github.com/googleapis/nodejs-assured-workloads/compare/v3.3.0...v3.4.0) (2022-07-29)
 
 
