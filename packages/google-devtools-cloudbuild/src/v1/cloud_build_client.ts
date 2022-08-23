@@ -30,7 +30,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -438,7 +437,8 @@ export class CloudBuildClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -1451,7 +1451,7 @@ export class CloudBuildClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createBuild,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.devtools.cloudbuild.v1.Build,
@@ -1621,7 +1621,7 @@ export class CloudBuildClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.retryBuild,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.devtools.cloudbuild.v1.Build,
@@ -1766,7 +1766,7 @@ export class CloudBuildClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.approveBuild,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.devtools.cloudbuild.v1.Build,
@@ -1912,7 +1912,7 @@ export class CloudBuildClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.runBuildTrigger,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.devtools.cloudbuild.v1.Build,
@@ -2061,7 +2061,7 @@ export class CloudBuildClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createWorkerPool,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.devtools.cloudbuild.v1.WorkerPool,
@@ -2209,7 +2209,7 @@ export class CloudBuildClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteWorkerPool,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -2354,7 +2354,7 @@ export class CloudBuildClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateWorkerPool,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.devtools.cloudbuild.v1.WorkerPool,
@@ -2529,7 +2529,7 @@ export class CloudBuildClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listBuilds.createStream(
-      this.innerApiCalls.listBuilds as gax.GaxCall,
+      this.innerApiCalls.listBuilds as GaxCall,
       request,
       callSettings
     );
@@ -2591,7 +2591,7 @@ export class CloudBuildClient {
     this.initialize();
     return this.descriptors.page.listBuilds.asyncIterate(
       this.innerApiCalls['listBuilds'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.devtools.cloudbuild.v1.IBuild>;
   }
@@ -2742,7 +2742,7 @@ export class CloudBuildClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listBuildTriggers.createStream(
-      this.innerApiCalls.listBuildTriggers as gax.GaxCall,
+      this.innerApiCalls.listBuildTriggers as GaxCall,
       request,
       callSettings
     );
@@ -2794,7 +2794,7 @@ export class CloudBuildClient {
     this.initialize();
     return this.descriptors.page.listBuildTriggers.asyncIterate(
       this.innerApiCalls['listBuildTriggers'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.devtools.cloudbuild.v1.IBuildTrigger>;
   }
@@ -2941,7 +2941,7 @@ export class CloudBuildClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listWorkerPools.createStream(
-      this.innerApiCalls.listWorkerPools as gax.GaxCall,
+      this.innerApiCalls.listWorkerPools as GaxCall,
       request,
       callSettings
     );
@@ -2992,7 +2992,7 @@ export class CloudBuildClient {
     this.initialize();
     return this.descriptors.page.listWorkerPools.asyncIterate(
       this.innerApiCalls['listWorkerPools'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.devtools.cloudbuild.v1.IWorkerPool>;
   }
