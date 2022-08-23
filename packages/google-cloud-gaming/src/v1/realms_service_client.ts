@@ -30,7 +30,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -366,7 +365,8 @@ export class RealmsServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -746,7 +746,7 @@ export class RealmsServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createRealm,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.gaming.v1.Realm,
@@ -884,7 +884,7 @@ export class RealmsServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteRealm,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -1026,7 +1026,7 @@ export class RealmsServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateRealm,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.gaming.v1.Realm,
@@ -1184,7 +1184,7 @@ export class RealmsServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listRealms.createStream(
-      this.innerApiCalls.listRealms as gax.GaxCall,
+      this.innerApiCalls.listRealms as GaxCall,
       request,
       callSettings
     );
@@ -1243,7 +1243,7 @@ export class RealmsServiceClient {
     this.initialize();
     return this.descriptors.page.listRealms.asyncIterate(
       this.innerApiCalls['listRealms'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.gaming.v1.IRealm>;
   }

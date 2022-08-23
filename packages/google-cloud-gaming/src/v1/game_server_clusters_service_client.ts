@@ -30,7 +30,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -382,7 +381,8 @@ export class GameServerClustersServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -1007,7 +1007,7 @@ export class GameServerClustersServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createGameServerCluster,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.gaming.v1.GameServerCluster,
@@ -1149,7 +1149,7 @@ export class GameServerClustersServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteGameServerCluster,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -1295,7 +1295,7 @@ export class GameServerClustersServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateGameServerCluster,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.gaming.v1.GameServerCluster,
@@ -1477,7 +1477,7 @@ export class GameServerClustersServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listGameServerClusters.createStream(
-      this.innerApiCalls.listGameServerClusters as gax.GaxCall,
+      this.innerApiCalls.listGameServerClusters as GaxCall,
       request,
       callSettings
     );
@@ -1542,7 +1542,7 @@ export class GameServerClustersServiceClient {
     this.initialize();
     return this.descriptors.page.listGameServerClusters.asyncIterate(
       this.innerApiCalls['listGameServerClusters'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.gaming.v1.IGameServerCluster>;
   }

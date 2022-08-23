@@ -30,7 +30,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -377,7 +376,8 @@ export class GameServerDeploymentsServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -1001,7 +1001,7 @@ export class GameServerDeploymentsServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createGameServerDeployment,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.gaming.v1beta.GameServerDeployment,
@@ -1144,7 +1144,7 @@ export class GameServerDeploymentsServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteGameServerDeployment,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -1293,7 +1293,7 @@ export class GameServerDeploymentsServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateGameServerDeployment,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.gaming.v1beta.GameServerDeployment,
@@ -1447,7 +1447,7 @@ export class GameServerDeploymentsServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateGameServerDeploymentRollout,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.gaming.v1beta.GameServerDeployment,
@@ -1617,7 +1617,7 @@ export class GameServerDeploymentsServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listGameServerDeployments.createStream(
-      this.innerApiCalls.listGameServerDeployments as gax.GaxCall,
+      this.innerApiCalls.listGameServerDeployments as GaxCall,
       request,
       callSettings
     );
@@ -1676,7 +1676,7 @@ export class GameServerDeploymentsServiceClient {
     this.initialize();
     return this.descriptors.page.listGameServerDeployments.asyncIterate(
       this.innerApiCalls['listGameServerDeployments'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.gaming.v1beta.IGameServerDeployment>;
   }
