@@ -30,7 +30,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -331,7 +330,8 @@ export class TagKeysClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -907,7 +907,7 @@ export class TagKeysClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createTagKey,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.resourcemanager.v3.TagKey,
@@ -1054,7 +1054,7 @@ export class TagKeysClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateTagKey,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.resourcemanager.v3.TagKey,
@@ -1200,7 +1200,7 @@ export class TagKeysClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteTagKey,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.resourcemanager.v3.TagKey,
@@ -1344,7 +1344,7 @@ export class TagKeysClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listTagKeys.createStream(
-      this.innerApiCalls.listTagKeys as gax.GaxCall,
+      this.innerApiCalls.listTagKeys as GaxCall,
       request,
       callSettings
     );
@@ -1392,7 +1392,7 @@ export class TagKeysClient {
     this.initialize();
     return this.descriptors.page.listTagKeys.asyncIterate(
       this.innerApiCalls['listTagKeys'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.resourcemanager.v3.ITagKey>;
   }

@@ -30,7 +30,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -361,7 +360,8 @@ export class ProjectsClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -975,7 +975,7 @@ export class ProjectsClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createProject,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.resourcemanager.v3.Project,
@@ -1119,7 +1119,7 @@ export class ProjectsClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateProject,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.resourcemanager.v3.Project,
@@ -1270,7 +1270,7 @@ export class ProjectsClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.moveProject,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.resourcemanager.v3.Project,
@@ -1438,7 +1438,7 @@ export class ProjectsClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteProject,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.resourcemanager.v3.Project,
@@ -1585,7 +1585,7 @@ export class ProjectsClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.undeleteProject,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.resourcemanager.v3.Project,
@@ -1746,7 +1746,7 @@ export class ProjectsClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listProjects.createStream(
-      this.innerApiCalls.listProjects as gax.GaxCall,
+      this.innerApiCalls.listProjects as GaxCall,
       request,
       callSettings
     );
@@ -1800,7 +1800,7 @@ export class ProjectsClient {
     this.initialize();
     return this.descriptors.page.listProjects.asyncIterate(
       this.innerApiCalls['listProjects'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.resourcemanager.v3.IProject>;
   }
@@ -2026,7 +2026,7 @@ export class ProjectsClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.searchProjects.createStream(
-      this.innerApiCalls.searchProjects as gax.GaxCall,
+      this.innerApiCalls.searchProjects as GaxCall,
       request,
       callSettings
     );
@@ -2112,7 +2112,7 @@ export class ProjectsClient {
     this.initialize();
     return this.descriptors.page.searchProjects.asyncIterate(
       this.innerApiCalls['searchProjects'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.resourcemanager.v3.IProject>;
   }

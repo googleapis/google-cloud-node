@@ -30,7 +30,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -363,7 +362,8 @@ export class FoldersClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -961,7 +961,7 @@ export class FoldersClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createFolder,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.resourcemanager.v3.Folder,
@@ -1116,7 +1116,7 @@ export class FoldersClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateFolder,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.resourcemanager.v3.Folder,
@@ -1274,7 +1274,7 @@ export class FoldersClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.moveFolder,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.resourcemanager.v3.Folder,
@@ -1420,7 +1420,7 @@ export class FoldersClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteFolder,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.resourcemanager.v3.Folder,
@@ -1566,7 +1566,7 @@ export class FoldersClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.undeleteFolder,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.resourcemanager.v3.Folder,
@@ -1728,7 +1728,7 @@ export class FoldersClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listFolders.createStream(
-      this.innerApiCalls.listFolders as gax.GaxCall,
+      this.innerApiCalls.listFolders as GaxCall,
       request,
       callSettings
     );
@@ -1782,7 +1782,7 @@ export class FoldersClient {
     this.initialize();
     return this.descriptors.page.listFolders.asyncIterate(
       this.innerApiCalls['listFolders'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.resourcemanager.v3.IFolder>;
   }
@@ -1984,7 +1984,7 @@ export class FoldersClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.searchFolders.createStream(
-      this.innerApiCalls.searchFolders as gax.GaxCall,
+      this.innerApiCalls.searchFolders as GaxCall,
       request,
       callSettings
     );
@@ -2060,7 +2060,7 @@ export class FoldersClient {
     this.initialize();
     return this.descriptors.page.searchFolders.asyncIterate(
       this.innerApiCalls['searchFolders'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.resourcemanager.v3.IFolder>;
   }
