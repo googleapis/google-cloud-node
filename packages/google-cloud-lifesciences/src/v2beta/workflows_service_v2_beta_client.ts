@@ -281,7 +281,8 @@ export class WorkflowsServiceV2BetaClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -504,7 +505,7 @@ export class WorkflowsServiceV2BetaClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.runPipeline,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.lifesciences.v2beta.RunPipelineResponse,
