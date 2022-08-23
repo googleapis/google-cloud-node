@@ -28,7 +28,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -279,7 +278,8 @@ export class DeviceManagerClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -2101,7 +2101,7 @@ export class DeviceManagerClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listDeviceRegistries.createStream(
-      this.innerApiCalls.listDeviceRegistries as gax.GaxCall,
+      this.innerApiCalls.listDeviceRegistries as GaxCall,
       request,
       callSettings
     );
@@ -2155,7 +2155,7 @@ export class DeviceManagerClient {
     this.initialize();
     return this.descriptors.page.listDeviceRegistries.asyncIterate(
       this.innerApiCalls['listDeviceRegistries'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.iot.v1.IDeviceRegistry>;
   }
@@ -2326,7 +2326,7 @@ export class DeviceManagerClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listDevices.createStream(
-      this.innerApiCalls.listDevices as gax.GaxCall,
+      this.innerApiCalls.listDevices as GaxCall,
       request,
       callSettings
     );
@@ -2393,7 +2393,7 @@ export class DeviceManagerClient {
     this.initialize();
     return this.descriptors.page.listDevices.asyncIterate(
       this.innerApiCalls['listDevices'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.iot.v1.IDevice>;
   }
