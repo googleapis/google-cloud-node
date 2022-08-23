@@ -30,7 +30,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -329,7 +328,8 @@ export class VersionsClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -617,7 +617,7 @@ export class VersionsClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createVersion,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.appengine.v1.Version,
@@ -795,7 +795,7 @@ export class VersionsClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateVersion,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.appengine.v1.Version,
@@ -933,7 +933,7 @@ export class VersionsClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteVersion,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -1075,7 +1075,7 @@ export class VersionsClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listVersions.createStream(
-      this.innerApiCalls.listVersions as gax.GaxCall,
+      this.innerApiCalls.listVersions as GaxCall,
       request,
       callSettings
     );
@@ -1126,7 +1126,7 @@ export class VersionsClient {
     this.initialize();
     return this.descriptors.page.listVersions.asyncIterate(
       this.innerApiCalls['listVersions'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.appengine.v1.IVersion>;
   }

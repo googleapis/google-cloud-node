@@ -28,7 +28,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -264,7 +263,8 @@ export class FirewallClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -931,7 +931,7 @@ export class FirewallClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listIngressRules.createStream(
-      this.innerApiCalls.listIngressRules as gax.GaxCall,
+      this.innerApiCalls.listIngressRules as GaxCall,
       request,
       callSettings
     );
@@ -984,7 +984,7 @@ export class FirewallClient {
     this.initialize();
     return this.descriptors.page.listIngressRules.asyncIterate(
       this.innerApiCalls['listIngressRules'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.appengine.v1.IFirewallRule>;
   }

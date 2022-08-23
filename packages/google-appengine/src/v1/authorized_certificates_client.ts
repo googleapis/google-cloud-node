@@ -28,7 +28,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -256,7 +255,8 @@ export class AuthorizedCertificatesClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -883,7 +883,7 @@ export class AuthorizedCertificatesClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listAuthorizedCertificates.createStream(
-      this.innerApiCalls.listAuthorizedCertificates as gax.GaxCall,
+      this.innerApiCalls.listAuthorizedCertificates as GaxCall,
       request,
       callSettings
     );
@@ -933,7 +933,7 @@ export class AuthorizedCertificatesClient {
     this.initialize();
     return this.descriptors.page.listAuthorizedCertificates.asyncIterate(
       this.innerApiCalls['listAuthorizedCertificates'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.appengine.v1.IAuthorizedCertificate>;
   }

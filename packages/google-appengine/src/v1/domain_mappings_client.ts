@@ -30,7 +30,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -329,7 +328,8 @@ export class DomainMappingsClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -619,7 +619,7 @@ export class DomainMappingsClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createDomainMapping,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.appengine.v1.DomainMapping,
@@ -765,7 +765,7 @@ export class DomainMappingsClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateDomainMapping,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.appengine.v1.DomainMapping,
@@ -905,7 +905,7 @@ export class DomainMappingsClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteDomainMapping,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -1043,7 +1043,7 @@ export class DomainMappingsClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listDomainMappings.createStream(
-      this.innerApiCalls.listDomainMappings as gax.GaxCall,
+      this.innerApiCalls.listDomainMappings as GaxCall,
       request,
       callSettings
     );
@@ -1091,7 +1091,7 @@ export class DomainMappingsClient {
     this.initialize();
     return this.descriptors.page.listDomainMappings.asyncIterate(
       this.innerApiCalls['listDomainMappings'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.appengine.v1.IDomainMapping>;
   }
