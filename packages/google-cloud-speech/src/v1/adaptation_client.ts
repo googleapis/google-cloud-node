@@ -28,7 +28,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -273,7 +272,8 @@ export class AdaptationClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -1273,7 +1273,7 @@ export class AdaptationClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listPhraseSet.createStream(
-      this.innerApiCalls.listPhraseSet as gax.GaxCall,
+      this.innerApiCalls.listPhraseSet as GaxCall,
       request,
       callSettings
     );
@@ -1336,7 +1336,7 @@ export class AdaptationClient {
     this.initialize();
     return this.descriptors.page.listPhraseSet.asyncIterate(
       this.innerApiCalls['listPhraseSet'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.speech.v1.IPhraseSet>;
   }
@@ -1507,7 +1507,7 @@ export class AdaptationClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listCustomClasses.createStream(
-      this.innerApiCalls.listCustomClasses as gax.GaxCall,
+      this.innerApiCalls.listCustomClasses as GaxCall,
       request,
       callSettings
     );
@@ -1570,7 +1570,7 @@ export class AdaptationClient {
     this.initialize();
     return this.descriptors.page.listCustomClasses.asyncIterate(
       this.innerApiCalls['listCustomClasses'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.speech.v1.ICustomClass>;
   }

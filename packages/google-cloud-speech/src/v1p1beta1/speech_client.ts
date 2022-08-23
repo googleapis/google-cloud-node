@@ -306,7 +306,8 @@ export class SpeechClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -611,7 +612,7 @@ export class SpeechClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.longRunningRecognize,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.speech.v1p1beta1.LongRunningRecognizeResponse,
