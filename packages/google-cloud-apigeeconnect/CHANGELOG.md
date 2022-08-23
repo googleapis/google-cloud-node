@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.1.1](https://github.com/googleapis/nodejs-apigee-connect/compare/v2.1.0...v2.1.1) (2022-08-23)
+
+
+### Bug Fixes
+
+* better support for fallback mode ([#94](https://github.com/googleapis/nodejs-apigee-connect/issues/94)) ([269d5e0](https://github.com/googleapis/nodejs-apigee-connect/commit/269d5e0616b640262bf5e907ec083928e5c242be))
+* change import long to require ([#95](https://github.com/googleapis/nodejs-apigee-connect/issues/95)) ([4757aac](https://github.com/googleapis/nodejs-apigee-connect/commit/4757aacfdd505985c5228e0498495814e6436ef2))
+* remove pip install statements ([#1546](https://github.com/googleapis/nodejs-apigee-connect/issues/1546)) ([#97](https://github.com/googleapis/nodejs-apigee-connect/issues/97)) ([43c6667](https://github.com/googleapis/nodejs-apigee-connect/commit/43c66675c0ec0dcb3e208c5b11d0ee7b8b43f0ee))
+
 ## [2.1.0](https://github.com/googleapis/nodejs-apigee-connect/compare/v2.0.0...v2.1.0) (2022-06-29)
 
 
