@@ -28,7 +28,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -320,7 +319,8 @@ export class ReservationServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -2241,7 +2241,7 @@ export class ReservationServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listReservations.createStream(
-      this.innerApiCalls.listReservations as gax.GaxCall,
+      this.innerApiCalls.listReservations as GaxCall,
       request,
       callSettings
     );
@@ -2290,7 +2290,7 @@ export class ReservationServiceClient {
     this.initialize();
     return this.descriptors.page.listReservations.asyncIterate(
       this.innerApiCalls['listReservations'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.bigquery.reservation.v1.IReservation>;
   }
@@ -2437,7 +2437,7 @@ export class ReservationServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listCapacityCommitments.createStream(
-      this.innerApiCalls.listCapacityCommitments as gax.GaxCall,
+      this.innerApiCalls.listCapacityCommitments as GaxCall,
       request,
       callSettings
     );
@@ -2486,7 +2486,7 @@ export class ReservationServiceClient {
     this.initialize();
     return this.descriptors.page.listCapacityCommitments.asyncIterate(
       this.innerApiCalls['listCapacityCommitments'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment>;
   }
@@ -2659,7 +2659,7 @@ export class ReservationServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listAssignments.createStream(
-      this.innerApiCalls.listAssignments as gax.GaxCall,
+      this.innerApiCalls.listAssignments as GaxCall,
       request,
       callSettings
     );
@@ -2713,7 +2713,7 @@ export class ReservationServiceClient {
     this.initialize();
     return this.descriptors.page.listAssignments.asyncIterate(
       this.innerApiCalls['listAssignments'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.bigquery.reservation.v1.IAssignment>;
   }
@@ -2908,7 +2908,7 @@ export class ReservationServiceClient {
       'DeprecationWarning'
     );
     return this.descriptors.page.searchAssignments.createStream(
-      this.innerApiCalls.searchAssignments as gax.GaxCall,
+      this.innerApiCalls.searchAssignments as GaxCall,
       request,
       callSettings
     );
@@ -2972,7 +2972,7 @@ export class ReservationServiceClient {
     );
     return this.descriptors.page.searchAssignments.asyncIterate(
       this.innerApiCalls['searchAssignments'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.bigquery.reservation.v1.IAssignment>;
   }
@@ -3152,7 +3152,7 @@ export class ReservationServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.searchAllAssignments.createStream(
-      this.innerApiCalls.searchAllAssignments as gax.GaxCall,
+      this.innerApiCalls.searchAllAssignments as GaxCall,
       request,
       callSettings
     );
@@ -3210,7 +3210,7 @@ export class ReservationServiceClient {
     this.initialize();
     return this.descriptors.page.searchAllAssignments.asyncIterate(
       this.innerApiCalls['searchAllAssignments'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.bigquery.reservation.v1.IAssignment>;
   }
