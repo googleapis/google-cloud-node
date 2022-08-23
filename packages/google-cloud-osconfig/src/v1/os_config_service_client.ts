@@ -28,7 +28,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -289,7 +288,8 @@ export class OsConfigServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -1341,7 +1341,7 @@ export class OsConfigServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listPatchJobs.createStream(
-      this.innerApiCalls.listPatchJobs as gax.GaxCall,
+      this.innerApiCalls.listPatchJobs as GaxCall,
       request,
       callSettings
     );
@@ -1394,7 +1394,7 @@ export class OsConfigServiceClient {
     this.initialize();
     return this.descriptors.page.listPatchJobs.asyncIterate(
       this.innerApiCalls['listPatchJobs'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.osconfig.v1.IPatchJob>;
   }
@@ -1551,7 +1551,7 @@ export class OsConfigServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listPatchJobInstanceDetails.createStream(
-      this.innerApiCalls.listPatchJobInstanceDetails as gax.GaxCall,
+      this.innerApiCalls.listPatchJobInstanceDetails as GaxCall,
       request,
       callSettings
     );
@@ -1605,7 +1605,7 @@ export class OsConfigServiceClient {
     this.initialize();
     return this.descriptors.page.listPatchJobInstanceDetails.asyncIterate(
       this.innerApiCalls['listPatchJobInstanceDetails'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.osconfig.v1.IPatchJobInstanceDetails>;
   }
@@ -1752,7 +1752,7 @@ export class OsConfigServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listPatchDeployments.createStream(
-      this.innerApiCalls.listPatchDeployments as gax.GaxCall,
+      this.innerApiCalls.listPatchDeployments as GaxCall,
       request,
       callSettings
     );
@@ -1803,7 +1803,7 @@ export class OsConfigServiceClient {
     this.initialize();
     return this.descriptors.page.listPatchDeployments.asyncIterate(
       this.innerApiCalls['listPatchDeployments'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.osconfig.v1.IPatchDeployment>;
   }

@@ -30,7 +30,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -379,7 +378,8 @@ export class OsConfigZonalServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -1009,7 +1009,7 @@ export class OsConfigZonalServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createOSPolicyAssignment,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.osconfig.v1.OSPolicyAssignment,
@@ -1161,7 +1161,7 @@ export class OsConfigZonalServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateOSPolicyAssignment,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.osconfig.v1.OSPolicyAssignment,
@@ -1313,7 +1313,7 @@ export class OsConfigZonalServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteOSPolicyAssignment,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -1467,7 +1467,7 @@ export class OsConfigZonalServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listOSPolicyAssignments.createStream(
-      this.innerApiCalls.listOsPolicyAssignments as gax.GaxCall,
+      this.innerApiCalls.listOsPolicyAssignments as GaxCall,
       request,
       callSettings
     );
@@ -1517,7 +1517,7 @@ export class OsConfigZonalServiceClient {
     this.initialize();
     return this.descriptors.page.listOSPolicyAssignments.asyncIterate(
       this.innerApiCalls['listOsPolicyAssignments'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.osconfig.v1.IOSPolicyAssignment>;
   }
@@ -1667,7 +1667,7 @@ export class OsConfigZonalServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listOSPolicyAssignmentRevisions.createStream(
-      this.innerApiCalls.listOsPolicyAssignmentRevisions as gax.GaxCall,
+      this.innerApiCalls.listOsPolicyAssignmentRevisions as GaxCall,
       request,
       callSettings
     );
@@ -1718,7 +1718,7 @@ export class OsConfigZonalServiceClient {
     this.initialize();
     return this.descriptors.page.listOSPolicyAssignmentRevisions.asyncIterate(
       this.innerApiCalls['listOsPolicyAssignmentRevisions'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.osconfig.v1.IOSPolicyAssignment>;
   }
@@ -1914,7 +1914,7 @@ export class OsConfigZonalServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listOSPolicyAssignmentReports.createStream(
-      this.innerApiCalls.listOsPolicyAssignmentReports as gax.GaxCall,
+      this.innerApiCalls.listOsPolicyAssignmentReports as GaxCall,
       request,
       callSettings
     );
@@ -1987,7 +1987,7 @@ export class OsConfigZonalServiceClient {
     this.initialize();
     return this.descriptors.page.listOSPolicyAssignmentReports.asyncIterate(
       this.innerApiCalls['listOsPolicyAssignmentReports'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.osconfig.v1.IOSPolicyAssignmentReport>;
   }
@@ -2152,7 +2152,7 @@ export class OsConfigZonalServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listInventories.createStream(
-      this.innerApiCalls.listInventories as gax.GaxCall,
+      this.innerApiCalls.listInventories as GaxCall,
       request,
       callSettings
     );
@@ -2212,7 +2212,7 @@ export class OsConfigZonalServiceClient {
     this.initialize();
     return this.descriptors.page.listInventories.asyncIterate(
       this.innerApiCalls['listInventories'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.osconfig.v1.IInventory>;
   }
@@ -2375,7 +2375,7 @@ export class OsConfigZonalServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listVulnerabilityReports.createStream(
-      this.innerApiCalls.listVulnerabilityReports as gax.GaxCall,
+      this.innerApiCalls.listVulnerabilityReports as GaxCall,
       request,
       callSettings
     );
@@ -2432,7 +2432,7 @@ export class OsConfigZonalServiceClient {
     this.initialize();
     return this.descriptors.page.listVulnerabilityReports.asyncIterate(
       this.innerApiCalls['listVulnerabilityReports'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.osconfig.v1.IVulnerabilityReport>;
   }
