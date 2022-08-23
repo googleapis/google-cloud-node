@@ -1,5 +1,19 @@
 # Changelog
 
+## [3.1.0](https://github.com/googleapis/nodejs-bigquery-storage/compare/v3.0.0...v3.1.0) (2022-08-23)
+
+
+### Features
+
+* allow users to set Apache Avro output format options through avro_serialization_options param in TableReadOptions message ([#284](https://github.com/googleapis/nodejs-bigquery-storage/issues/284)) ([99b8afc](https://github.com/googleapis/nodejs-bigquery-storage/commit/99b8afc3fb2aa1d47151b90924eab2016432034f))
+
+
+### Bug Fixes
+
+* better support for fallback mode ([#287](https://github.com/googleapis/nodejs-bigquery-storage/issues/287)) ([08b0bb2](https://github.com/googleapis/nodejs-bigquery-storage/commit/08b0bb2c300ce49a65121805ea674e9c56726a87))
+* change import long to require ([#289](https://github.com/googleapis/nodejs-bigquery-storage/issues/289)) ([63a3dc2](https://github.com/googleapis/nodejs-bigquery-storage/commit/63a3dc2bcbac775e8c41dd19248ef3cd4829c21f))
+* remove pip install statements ([#1546](https://github.com/googleapis/nodejs-bigquery-storage/issues/1546)) ([#290](https://github.com/googleapis/nodejs-bigquery-storage/issues/290)) ([1436388](https://github.com/googleapis/nodejs-bigquery-storage/commit/143638862040327e89c74c87a7018e2342576a95))
+
 ## [3.0.0](https://github.com/googleapis/nodejs-bigquery-storage/compare/v2.8.0...v3.0.0) (2022-06-29)
 
 
