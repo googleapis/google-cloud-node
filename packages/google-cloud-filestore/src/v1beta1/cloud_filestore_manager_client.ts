@@ -30,7 +30,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -425,7 +424,8 @@ export class CloudFilestoreManagerClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -815,7 +815,7 @@ export class CloudFilestoreManagerClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createInstance,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.filestore.v1beta1.Instance,
@@ -960,7 +960,7 @@ export class CloudFilestoreManagerClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateInstance,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.filestore.v1beta1.Instance,
@@ -1111,7 +1111,7 @@ export class CloudFilestoreManagerClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.restoreInstance,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.filestore.v1beta1.Instance,
@@ -1249,7 +1249,7 @@ export class CloudFilestoreManagerClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteInstance,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -1396,7 +1396,7 @@ export class CloudFilestoreManagerClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createBackup,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.filestore.v1beta1.Backup,
@@ -1534,7 +1534,7 @@ export class CloudFilestoreManagerClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteBackup,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -1674,7 +1674,7 @@ export class CloudFilestoreManagerClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateBackup,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.filestore.v1beta1.Backup,
@@ -1837,7 +1837,7 @@ export class CloudFilestoreManagerClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listInstances.createStream(
-      this.innerApiCalls.listInstances as gax.GaxCall,
+      this.innerApiCalls.listInstances as GaxCall,
       request,
       callSettings
     );
@@ -1894,7 +1894,7 @@ export class CloudFilestoreManagerClient {
     this.initialize();
     return this.descriptors.page.listInstances.asyncIterate(
       this.innerApiCalls['listInstances'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.filestore.v1beta1.IInstance>;
   }
@@ -2056,7 +2056,7 @@ export class CloudFilestoreManagerClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listBackups.createStream(
-      this.innerApiCalls.listBackups as gax.GaxCall,
+      this.innerApiCalls.listBackups as GaxCall,
       request,
       callSettings
     );
@@ -2114,7 +2114,7 @@ export class CloudFilestoreManagerClient {
     this.initialize();
     return this.descriptors.page.listBackups.asyncIterate(
       this.innerApiCalls['listBackups'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.filestore.v1beta1.IBackup>;
   }
