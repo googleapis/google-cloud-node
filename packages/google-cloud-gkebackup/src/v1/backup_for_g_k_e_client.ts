@@ -30,7 +30,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -575,7 +574,8 @@ export class BackupForGKEClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -1312,7 +1312,7 @@ export class BackupForGKEClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createBackupPlan,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.gkebackup.v1.BackupPlan,
@@ -1460,7 +1460,7 @@ export class BackupForGKEClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateBackupPlan,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.gkebackup.v1.BackupPlan,
@@ -1602,7 +1602,7 @@ export class BackupForGKEClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteBackupPlan,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -1751,7 +1751,7 @@ export class BackupForGKEClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createBackup,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.gkebackup.v1.Backup,
@@ -1898,7 +1898,7 @@ export class BackupForGKEClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateBackup,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.gkebackup.v1.Backup,
@@ -2044,7 +2044,7 @@ export class BackupForGKEClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteBackup,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -2193,7 +2193,7 @@ export class BackupForGKEClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createRestorePlan,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.gkebackup.v1.RestorePlan,
@@ -2340,7 +2340,7 @@ export class BackupForGKEClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateRestorePlan,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.gkebackup.v1.RestorePlan,
@@ -2486,7 +2486,7 @@ export class BackupForGKEClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteRestorePlan,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -2635,7 +2635,7 @@ export class BackupForGKEClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createRestore,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.gkebackup.v1.Restore,
@@ -2782,7 +2782,7 @@ export class BackupForGKEClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateRestore,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.gkebackup.v1.Restore,
@@ -2928,7 +2928,7 @@ export class BackupForGKEClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteRestore,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -3102,7 +3102,7 @@ export class BackupForGKEClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listBackupPlans.createStream(
-      this.innerApiCalls.listBackupPlans as gax.GaxCall,
+      this.innerApiCalls.listBackupPlans as GaxCall,
       request,
       callSettings
     );
@@ -3165,7 +3165,7 @@ export class BackupForGKEClient {
     this.initialize();
     return this.descriptors.page.listBackupPlans.asyncIterate(
       this.innerApiCalls['listBackupPlans'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.gkebackup.v1.IBackupPlan>;
   }
@@ -3330,7 +3330,7 @@ export class BackupForGKEClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listBackups.createStream(
-      this.innerApiCalls.listBackups as gax.GaxCall,
+      this.innerApiCalls.listBackups as GaxCall,
       request,
       callSettings
     );
@@ -3393,7 +3393,7 @@ export class BackupForGKEClient {
     this.initialize();
     return this.descriptors.page.listBackups.asyncIterate(
       this.innerApiCalls['listBackups'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.gkebackup.v1.IBackup>;
   }
@@ -3564,7 +3564,7 @@ export class BackupForGKEClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listVolumeBackups.createStream(
-      this.innerApiCalls.listVolumeBackups as gax.GaxCall,
+      this.innerApiCalls.listVolumeBackups as GaxCall,
       request,
       callSettings
     );
@@ -3627,7 +3627,7 @@ export class BackupForGKEClient {
     this.initialize();
     return this.descriptors.page.listVolumeBackups.asyncIterate(
       this.innerApiCalls['listVolumeBackups'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.gkebackup.v1.IVolumeBackup>;
   }
@@ -3798,7 +3798,7 @@ export class BackupForGKEClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listRestorePlans.createStream(
-      this.innerApiCalls.listRestorePlans as gax.GaxCall,
+      this.innerApiCalls.listRestorePlans as GaxCall,
       request,
       callSettings
     );
@@ -3861,7 +3861,7 @@ export class BackupForGKEClient {
     this.initialize();
     return this.descriptors.page.listRestorePlans.asyncIterate(
       this.innerApiCalls['listRestorePlans'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.gkebackup.v1.IRestorePlan>;
   }
@@ -4026,7 +4026,7 @@ export class BackupForGKEClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listRestores.createStream(
-      this.innerApiCalls.listRestores as gax.GaxCall,
+      this.innerApiCalls.listRestores as GaxCall,
       request,
       callSettings
     );
@@ -4089,7 +4089,7 @@ export class BackupForGKEClient {
     this.initialize();
     return this.descriptors.page.listRestores.asyncIterate(
       this.innerApiCalls['listRestores'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.gkebackup.v1.IRestore>;
   }
@@ -4260,7 +4260,7 @@ export class BackupForGKEClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listVolumeRestores.createStream(
-      this.innerApiCalls.listVolumeRestores as gax.GaxCall,
+      this.innerApiCalls.listVolumeRestores as GaxCall,
       request,
       callSettings
     );
@@ -4323,7 +4323,7 @@ export class BackupForGKEClient {
     this.initialize();
     return this.descriptors.page.listVolumeRestores.asyncIterate(
       this.innerApiCalls['listVolumeRestores'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.gkebackup.v1.IVolumeRestore>;
   }
