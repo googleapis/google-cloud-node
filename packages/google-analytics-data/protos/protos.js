@@ -151,12 +151,14 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.seconds = reader.int64();
-                            break;
-                        case 2:
-                            message.nanos = reader.int32();
-                            break;
+                        case 1: {
+                                message.seconds = reader.int64();
+                                break;
+                            }
+                        case 2: {
+                                message.nanos = reader.int32();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -269,6 +271,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for Duration
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Duration
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Duration.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Duration";
+                };
+    
                 return Duration;
             })();
     
@@ -366,11 +383,12 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            if (!(message.file && message.file.length))
-                                message.file = [];
-                            message.file.push($root.google.protobuf.FileDescriptorProto.decode(reader, reader.uint32()));
-                            break;
+                        case 1: {
+                                if (!(message.file && message.file.length))
+                                    message.file = [];
+                                message.file.push($root.google.protobuf.FileDescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -477,6 +495,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for FileDescriptorSet
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.FileDescriptorSet
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FileDescriptorSet.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.FileDescriptorSet";
+                };
+    
                 return FileDescriptorSet;
             })();
     
@@ -498,6 +531,7 @@
                  * @property {google.protobuf.IFileOptions|null} [options] FileDescriptorProto options
                  * @property {google.protobuf.ISourceCodeInfo|null} [sourceCodeInfo] FileDescriptorProto sourceCodeInfo
                  * @property {string|null} [syntax] FileDescriptorProto syntax
+                 * @property {string|null} [edition] FileDescriptorProto edition
                  */
     
                 /**
@@ -619,6 +653,14 @@
                 FileDescriptorProto.prototype.syntax = "";
     
                 /**
+                 * FileDescriptorProto edition.
+                 * @member {string} edition
+                 * @memberof google.protobuf.FileDescriptorProto
+                 * @instance
+                 */
+                FileDescriptorProto.prototype.edition = "";
+    
+                /**
                  * Creates a new FileDescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.FileDescriptorProto
@@ -673,6 +715,8 @@
                             writer.uint32(/* id 11, wireType 0 =*/88).int32(message.weakDependency[i]);
                     if (message.syntax != null && Object.hasOwnProperty.call(message, "syntax"))
                         writer.uint32(/* id 12, wireType 2 =*/98).string(message.syntax);
+                    if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
+                        writer.uint32(/* id 13, wireType 2 =*/106).string(message.edition);
                     return writer;
                 };
     
@@ -707,66 +751,82 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 2:
-                            message["package"] = reader.string();
-                            break;
-                        case 3:
-                            if (!(message.dependency && message.dependency.length))
-                                message.dependency = [];
-                            message.dependency.push(reader.string());
-                            break;
-                        case 10:
-                            if (!(message.publicDependency && message.publicDependency.length))
-                                message.publicDependency = [];
-                            if ((tag & 7) === 2) {
-                                var end2 = reader.uint32() + reader.pos;
-                                while (reader.pos < end2)
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message["package"] = reader.string();
+                                break;
+                            }
+                        case 3: {
+                                if (!(message.dependency && message.dependency.length))
+                                    message.dependency = [];
+                                message.dependency.push(reader.string());
+                                break;
+                            }
+                        case 10: {
+                                if (!(message.publicDependency && message.publicDependency.length))
+                                    message.publicDependency = [];
+                                if ((tag & 7) === 2) {
+                                    var end2 = reader.uint32() + reader.pos;
+                                    while (reader.pos < end2)
+                                        message.publicDependency.push(reader.int32());
+                                } else
                                     message.publicDependency.push(reader.int32());
-                            } else
-                                message.publicDependency.push(reader.int32());
-                            break;
-                        case 11:
-                            if (!(message.weakDependency && message.weakDependency.length))
-                                message.weakDependency = [];
-                            if ((tag & 7) === 2) {
-                                var end2 = reader.uint32() + reader.pos;
-                                while (reader.pos < end2)
+                                break;
+                            }
+                        case 11: {
+                                if (!(message.weakDependency && message.weakDependency.length))
+                                    message.weakDependency = [];
+                                if ((tag & 7) === 2) {
+                                    var end2 = reader.uint32() + reader.pos;
+                                    while (reader.pos < end2)
+                                        message.weakDependency.push(reader.int32());
+                                } else
                                     message.weakDependency.push(reader.int32());
-                            } else
-                                message.weakDependency.push(reader.int32());
-                            break;
-                        case 4:
-                            if (!(message.messageType && message.messageType.length))
-                                message.messageType = [];
-                            message.messageType.push($root.google.protobuf.DescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 5:
-                            if (!(message.enumType && message.enumType.length))
-                                message.enumType = [];
-                            message.enumType.push($root.google.protobuf.EnumDescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 6:
-                            if (!(message.service && message.service.length))
-                                message.service = [];
-                            message.service.push($root.google.protobuf.ServiceDescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 7:
-                            if (!(message.extension && message.extension.length))
-                                message.extension = [];
-                            message.extension.push($root.google.protobuf.FieldDescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 8:
-                            message.options = $root.google.protobuf.FileOptions.decode(reader, reader.uint32());
-                            break;
-                        case 9:
-                            message.sourceCodeInfo = $root.google.protobuf.SourceCodeInfo.decode(reader, reader.uint32());
-                            break;
-                        case 12:
-                            message.syntax = reader.string();
-                            break;
+                                break;
+                            }
+                        case 4: {
+                                if (!(message.messageType && message.messageType.length))
+                                    message.messageType = [];
+                                message.messageType.push($root.google.protobuf.DescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 5: {
+                                if (!(message.enumType && message.enumType.length))
+                                    message.enumType = [];
+                                message.enumType.push($root.google.protobuf.EnumDescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 6: {
+                                if (!(message.service && message.service.length))
+                                    message.service = [];
+                                message.service.push($root.google.protobuf.ServiceDescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 7: {
+                                if (!(message.extension && message.extension.length))
+                                    message.extension = [];
+                                message.extension.push($root.google.protobuf.FieldDescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 8: {
+                                message.options = $root.google.protobuf.FileOptions.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 9: {
+                                message.sourceCodeInfo = $root.google.protobuf.SourceCodeInfo.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 12: {
+                                message.syntax = reader.string();
+                                break;
+                            }
+                        case 13: {
+                                message.edition = reader.string();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -878,6 +938,9 @@
                     if (message.syntax != null && message.hasOwnProperty("syntax"))
                         if (!$util.isString(message.syntax))
                             return "syntax: string expected";
+                    if (message.edition != null && message.hasOwnProperty("edition"))
+                        if (!$util.isString(message.edition))
+                            return "edition: string expected";
                     return null;
                 };
     
@@ -970,6 +1033,8 @@
                     }
                     if (object.syntax != null)
                         message.syntax = String(object.syntax);
+                    if (object.edition != null)
+                        message.edition = String(object.edition);
                     return message;
                 };
     
@@ -1001,6 +1066,7 @@
                         object.options = null;
                         object.sourceCodeInfo = null;
                         object.syntax = "";
+                        object.edition = "";
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -1047,6 +1113,8 @@
                     }
                     if (message.syntax != null && message.hasOwnProperty("syntax"))
                         object.syntax = message.syntax;
+                    if (message.edition != null && message.hasOwnProperty("edition"))
+                        object.edition = message.edition;
                     return object;
                 };
     
@@ -1059,6 +1127,21 @@
                  */
                 FileDescriptorProto.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for FileDescriptorProto
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.FileDescriptorProto
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FileDescriptorProto.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.FileDescriptorProto";
                 };
     
                 return FileDescriptorProto;
@@ -1271,52 +1354,62 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 2:
-                            if (!(message.field && message.field.length))
-                                message.field = [];
-                            message.field.push($root.google.protobuf.FieldDescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 6:
-                            if (!(message.extension && message.extension.length))
-                                message.extension = [];
-                            message.extension.push($root.google.protobuf.FieldDescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 3:
-                            if (!(message.nestedType && message.nestedType.length))
-                                message.nestedType = [];
-                            message.nestedType.push($root.google.protobuf.DescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 4:
-                            if (!(message.enumType && message.enumType.length))
-                                message.enumType = [];
-                            message.enumType.push($root.google.protobuf.EnumDescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 5:
-                            if (!(message.extensionRange && message.extensionRange.length))
-                                message.extensionRange = [];
-                            message.extensionRange.push($root.google.protobuf.DescriptorProto.ExtensionRange.decode(reader, reader.uint32()));
-                            break;
-                        case 8:
-                            if (!(message.oneofDecl && message.oneofDecl.length))
-                                message.oneofDecl = [];
-                            message.oneofDecl.push($root.google.protobuf.OneofDescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 7:
-                            message.options = $root.google.protobuf.MessageOptions.decode(reader, reader.uint32());
-                            break;
-                        case 9:
-                            if (!(message.reservedRange && message.reservedRange.length))
-                                message.reservedRange = [];
-                            message.reservedRange.push($root.google.protobuf.DescriptorProto.ReservedRange.decode(reader, reader.uint32()));
-                            break;
-                        case 10:
-                            if (!(message.reservedName && message.reservedName.length))
-                                message.reservedName = [];
-                            message.reservedName.push(reader.string());
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                if (!(message.field && message.field.length))
+                                    message.field = [];
+                                message.field.push($root.google.protobuf.FieldDescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 6: {
+                                if (!(message.extension && message.extension.length))
+                                    message.extension = [];
+                                message.extension.push($root.google.protobuf.FieldDescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 3: {
+                                if (!(message.nestedType && message.nestedType.length))
+                                    message.nestedType = [];
+                                message.nestedType.push($root.google.protobuf.DescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 4: {
+                                if (!(message.enumType && message.enumType.length))
+                                    message.enumType = [];
+                                message.enumType.push($root.google.protobuf.EnumDescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 5: {
+                                if (!(message.extensionRange && message.extensionRange.length))
+                                    message.extensionRange = [];
+                                message.extensionRange.push($root.google.protobuf.DescriptorProto.ExtensionRange.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 8: {
+                                if (!(message.oneofDecl && message.oneofDecl.length))
+                                    message.oneofDecl = [];
+                                message.oneofDecl.push($root.google.protobuf.OneofDescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 7: {
+                                message.options = $root.google.protobuf.MessageOptions.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 9: {
+                                if (!(message.reservedRange && message.reservedRange.length))
+                                    message.reservedRange = [];
+                                message.reservedRange.push($root.google.protobuf.DescriptorProto.ReservedRange.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 10: {
+                                if (!(message.reservedName && message.reservedName.length))
+                                    message.reservedName = [];
+                                message.reservedName.push(reader.string());
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -1617,6 +1710,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for DescriptorProto
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.DescriptorProto
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                DescriptorProto.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.DescriptorProto";
+                };
+    
                 DescriptorProto.ExtensionRange = (function() {
     
                     /**
@@ -1731,15 +1839,18 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.start = reader.int32();
-                                break;
-                            case 2:
-                                message.end = reader.int32();
-                                break;
-                            case 3:
-                                message.options = $root.google.protobuf.ExtensionRangeOptions.decode(reader, reader.uint32());
-                                break;
+                            case 1: {
+                                    message.start = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    message.end = reader.int32();
+                                    break;
+                                }
+                            case 3: {
+                                    message.options = $root.google.protobuf.ExtensionRangeOptions.decode(reader, reader.uint32());
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -1851,6 +1962,21 @@
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
+                    /**
+                     * Gets the default type url for ExtensionRange
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.DescriptorProto.ExtensionRange
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ExtensionRange.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.DescriptorProto.ExtensionRange";
+                    };
+    
                     return ExtensionRange;
                 })();
     
@@ -1957,12 +2083,14 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.start = reader.int32();
-                                break;
-                            case 2:
-                                message.end = reader.int32();
-                                break;
+                            case 1: {
+                                    message.start = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    message.end = reader.int32();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -2059,6 +2187,21 @@
                      */
                     ReservedRange.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ReservedRange
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.DescriptorProto.ReservedRange
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ReservedRange.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.DescriptorProto.ReservedRange";
                     };
     
                     return ReservedRange;
@@ -2161,11 +2304,12 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 999:
-                            if (!(message.uninterpretedOption && message.uninterpretedOption.length))
-                                message.uninterpretedOption = [];
-                            message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
-                            break;
+                        case 999: {
+                                if (!(message.uninterpretedOption && message.uninterpretedOption.length))
+                                    message.uninterpretedOption = [];
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -2270,6 +2414,21 @@
                  */
                 ExtensionRangeOptions.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for ExtensionRangeOptions
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.ExtensionRangeOptions
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ExtensionRangeOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.ExtensionRangeOptions";
                 };
     
                 return ExtensionRangeOptions;
@@ -2477,39 +2636,50 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 3:
-                            message.number = reader.int32();
-                            break;
-                        case 4:
-                            message.label = reader.int32();
-                            break;
-                        case 5:
-                            message.type = reader.int32();
-                            break;
-                        case 6:
-                            message.typeName = reader.string();
-                            break;
-                        case 2:
-                            message.extendee = reader.string();
-                            break;
-                        case 7:
-                            message.defaultValue = reader.string();
-                            break;
-                        case 9:
-                            message.oneofIndex = reader.int32();
-                            break;
-                        case 10:
-                            message.jsonName = reader.string();
-                            break;
-                        case 8:
-                            message.options = $root.google.protobuf.FieldOptions.decode(reader, reader.uint32());
-                            break;
-                        case 17:
-                            message.proto3Optional = reader.bool();
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 3: {
+                                message.number = reader.int32();
+                                break;
+                            }
+                        case 4: {
+                                message.label = reader.int32();
+                                break;
+                            }
+                        case 5: {
+                                message.type = reader.int32();
+                                break;
+                            }
+                        case 6: {
+                                message.typeName = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.extendee = reader.string();
+                                break;
+                            }
+                        case 7: {
+                                message.defaultValue = reader.string();
+                                break;
+                            }
+                        case 9: {
+                                message.oneofIndex = reader.int32();
+                                break;
+                            }
+                        case 10: {
+                                message.jsonName = reader.string();
+                                break;
+                            }
+                        case 8: {
+                                message.options = $root.google.protobuf.FieldOptions.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 17: {
+                                message.proto3Optional = reader.bool();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -2797,6 +2967,21 @@
                 };
     
                 /**
+                 * Gets the default type url for FieldDescriptorProto
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.FieldDescriptorProto
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FieldDescriptorProto.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.FieldDescriptorProto";
+                };
+    
+                /**
                  * Type enum.
                  * @name google.protobuf.FieldDescriptorProto.Type
                  * @enum {number}
@@ -2964,12 +3149,14 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 2:
-                            message.options = $root.google.protobuf.OneofOptions.decode(reader, reader.uint32());
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.options = $root.google.protobuf.OneofOptions.decode(reader, reader.uint32());
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -3071,6 +3258,21 @@
                  */
                 OneofDescriptorProto.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for OneofDescriptorProto
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.OneofDescriptorProto
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                OneofDescriptorProto.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.OneofDescriptorProto";
                 };
     
                 return OneofDescriptorProto;
@@ -3218,27 +3420,32 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 2:
-                            if (!(message.value && message.value.length))
-                                message.value = [];
-                            message.value.push($root.google.protobuf.EnumValueDescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 3:
-                            message.options = $root.google.protobuf.EnumOptions.decode(reader, reader.uint32());
-                            break;
-                        case 4:
-                            if (!(message.reservedRange && message.reservedRange.length))
-                                message.reservedRange = [];
-                            message.reservedRange.push($root.google.protobuf.EnumDescriptorProto.EnumReservedRange.decode(reader, reader.uint32()));
-                            break;
-                        case 5:
-                            if (!(message.reservedName && message.reservedName.length))
-                                message.reservedName = [];
-                            message.reservedName.push(reader.string());
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                if (!(message.value && message.value.length))
+                                    message.value = [];
+                                message.value.push($root.google.protobuf.EnumValueDescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 3: {
+                                message.options = $root.google.protobuf.EnumOptions.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 4: {
+                                if (!(message.reservedRange && message.reservedRange.length))
+                                    message.reservedRange = [];
+                                message.reservedRange.push($root.google.protobuf.EnumDescriptorProto.EnumReservedRange.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 5: {
+                                if (!(message.reservedName && message.reservedName.length))
+                                    message.reservedName = [];
+                                message.reservedName.push(reader.string());
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -3414,6 +3621,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for EnumDescriptorProto
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.EnumDescriptorProto
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                EnumDescriptorProto.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.EnumDescriptorProto";
+                };
+    
                 EnumDescriptorProto.EnumReservedRange = (function() {
     
                     /**
@@ -3517,12 +3739,14 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.start = reader.int32();
-                                break;
-                            case 2:
-                                message.end = reader.int32();
-                                break;
+                            case 1: {
+                                    message.start = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    message.end = reader.int32();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -3619,6 +3843,21 @@
                      */
                     EnumReservedRange.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for EnumReservedRange
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.EnumDescriptorProto.EnumReservedRange
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    EnumReservedRange.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.EnumDescriptorProto.EnumReservedRange";
                     };
     
                     return EnumReservedRange;
@@ -3741,15 +3980,18 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 2:
-                            message.number = reader.int32();
-                            break;
-                        case 3:
-                            message.options = $root.google.protobuf.EnumValueOptions.decode(reader, reader.uint32());
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.number = reader.int32();
+                                break;
+                            }
+                        case 3: {
+                                message.options = $root.google.protobuf.EnumValueOptions.decode(reader, reader.uint32());
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -3859,6 +4101,21 @@
                  */
                 EnumValueDescriptorProto.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for EnumValueDescriptorProto
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.EnumValueDescriptorProto
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                EnumValueDescriptorProto.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.EnumValueDescriptorProto";
                 };
     
                 return EnumValueDescriptorProto;
@@ -3980,17 +4237,20 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 2:
-                            if (!(message.method && message.method.length))
-                                message.method = [];
-                            message.method.push($root.google.protobuf.MethodDescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 3:
-                            message.options = $root.google.protobuf.ServiceOptions.decode(reader, reader.uint32());
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                if (!(message.method && message.method.length))
+                                    message.method = [];
+                                message.method.push($root.google.protobuf.MethodDescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 3: {
+                                message.options = $root.google.protobuf.ServiceOptions.decode(reader, reader.uint32());
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -4118,6 +4378,21 @@
                  */
                 ServiceDescriptorProto.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for ServiceDescriptorProto
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.ServiceDescriptorProto
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ServiceDescriptorProto.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.ServiceDescriptorProto";
                 };
     
                 return ServiceDescriptorProto;
@@ -4270,24 +4545,30 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 2:
-                            message.inputType = reader.string();
-                            break;
-                        case 3:
-                            message.outputType = reader.string();
-                            break;
-                        case 4:
-                            message.options = $root.google.protobuf.MethodOptions.decode(reader, reader.uint32());
-                            break;
-                        case 5:
-                            message.clientStreaming = reader.bool();
-                            break;
-                        case 6:
-                            message.serverStreaming = reader.bool();
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.inputType = reader.string();
+                                break;
+                            }
+                        case 3: {
+                                message.outputType = reader.string();
+                                break;
+                            }
+                        case 4: {
+                                message.options = $root.google.protobuf.MethodOptions.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 5: {
+                                message.clientStreaming = reader.bool();
+                                break;
+                            }
+                        case 6: {
+                                message.serverStreaming = reader.bool();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -4421,6 +4702,21 @@
                  */
                 MethodDescriptorProto.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for MethodDescriptorProto
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.MethodDescriptorProto
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                MethodDescriptorProto.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.MethodDescriptorProto";
                 };
     
                 return MethodDescriptorProto;
@@ -4753,76 +5049,98 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.javaPackage = reader.string();
-                            break;
-                        case 8:
-                            message.javaOuterClassname = reader.string();
-                            break;
-                        case 10:
-                            message.javaMultipleFiles = reader.bool();
-                            break;
-                        case 20:
-                            message.javaGenerateEqualsAndHash = reader.bool();
-                            break;
-                        case 27:
-                            message.javaStringCheckUtf8 = reader.bool();
-                            break;
-                        case 9:
-                            message.optimizeFor = reader.int32();
-                            break;
-                        case 11:
-                            message.goPackage = reader.string();
-                            break;
-                        case 16:
-                            message.ccGenericServices = reader.bool();
-                            break;
-                        case 17:
-                            message.javaGenericServices = reader.bool();
-                            break;
-                        case 18:
-                            message.pyGenericServices = reader.bool();
-                            break;
-                        case 42:
-                            message.phpGenericServices = reader.bool();
-                            break;
-                        case 23:
-                            message.deprecated = reader.bool();
-                            break;
-                        case 31:
-                            message.ccEnableArenas = reader.bool();
-                            break;
-                        case 36:
-                            message.objcClassPrefix = reader.string();
-                            break;
-                        case 37:
-                            message.csharpNamespace = reader.string();
-                            break;
-                        case 39:
-                            message.swiftPrefix = reader.string();
-                            break;
-                        case 40:
-                            message.phpClassPrefix = reader.string();
-                            break;
-                        case 41:
-                            message.phpNamespace = reader.string();
-                            break;
-                        case 44:
-                            message.phpMetadataNamespace = reader.string();
-                            break;
-                        case 45:
-                            message.rubyPackage = reader.string();
-                            break;
-                        case 999:
-                            if (!(message.uninterpretedOption && message.uninterpretedOption.length))
-                                message.uninterpretedOption = [];
-                            message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
-                            break;
-                        case 1053:
-                            if (!(message[".google.api.resourceDefinition"] && message[".google.api.resourceDefinition"].length))
-                                message[".google.api.resourceDefinition"] = [];
-                            message[".google.api.resourceDefinition"].push($root.google.api.ResourceDescriptor.decode(reader, reader.uint32()));
-                            break;
+                        case 1: {
+                                message.javaPackage = reader.string();
+                                break;
+                            }
+                        case 8: {
+                                message.javaOuterClassname = reader.string();
+                                break;
+                            }
+                        case 10: {
+                                message.javaMultipleFiles = reader.bool();
+                                break;
+                            }
+                        case 20: {
+                                message.javaGenerateEqualsAndHash = reader.bool();
+                                break;
+                            }
+                        case 27: {
+                                message.javaStringCheckUtf8 = reader.bool();
+                                break;
+                            }
+                        case 9: {
+                                message.optimizeFor = reader.int32();
+                                break;
+                            }
+                        case 11: {
+                                message.goPackage = reader.string();
+                                break;
+                            }
+                        case 16: {
+                                message.ccGenericServices = reader.bool();
+                                break;
+                            }
+                        case 17: {
+                                message.javaGenericServices = reader.bool();
+                                break;
+                            }
+                        case 18: {
+                                message.pyGenericServices = reader.bool();
+                                break;
+                            }
+                        case 42: {
+                                message.phpGenericServices = reader.bool();
+                                break;
+                            }
+                        case 23: {
+                                message.deprecated = reader.bool();
+                                break;
+                            }
+                        case 31: {
+                                message.ccEnableArenas = reader.bool();
+                                break;
+                            }
+                        case 36: {
+                                message.objcClassPrefix = reader.string();
+                                break;
+                            }
+                        case 37: {
+                                message.csharpNamespace = reader.string();
+                                break;
+                            }
+                        case 39: {
+                                message.swiftPrefix = reader.string();
+                                break;
+                            }
+                        case 40: {
+                                message.phpClassPrefix = reader.string();
+                                break;
+                            }
+                        case 41: {
+                                message.phpNamespace = reader.string();
+                                break;
+                            }
+                        case 44: {
+                                message.phpMetadataNamespace = reader.string();
+                                break;
+                            }
+                        case 45: {
+                                message.rubyPackage = reader.string();
+                                break;
+                            }
+                        case 999: {
+                                if (!(message.uninterpretedOption && message.uninterpretedOption.length))
+                                    message.uninterpretedOption = [];
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 1053: {
+                                if (!(message[".google.api.resourceDefinition"] && message[".google.api.resourceDefinition"].length))
+                                    message[".google.api.resourceDefinition"] = [];
+                                message[".google.api.resourceDefinition"].push($root.google.api.ResourceDescriptor.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -5136,6 +5454,21 @@
                 };
     
                 /**
+                 * Gets the default type url for FileOptions
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.FileOptions
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FileOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.FileOptions";
+                };
+    
+                /**
                  * OptimizeMode enum.
                  * @name google.protobuf.FileOptions.OptimizeMode
                  * @enum {number}
@@ -5303,26 +5636,32 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.messageSetWireFormat = reader.bool();
-                            break;
-                        case 2:
-                            message.noStandardDescriptorAccessor = reader.bool();
-                            break;
-                        case 3:
-                            message.deprecated = reader.bool();
-                            break;
-                        case 7:
-                            message.mapEntry = reader.bool();
-                            break;
-                        case 999:
-                            if (!(message.uninterpretedOption && message.uninterpretedOption.length))
-                                message.uninterpretedOption = [];
-                            message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
-                            break;
-                        case 1053:
-                            message[".google.api.resource"] = $root.google.api.ResourceDescriptor.decode(reader, reader.uint32());
-                            break;
+                        case 1: {
+                                message.messageSetWireFormat = reader.bool();
+                                break;
+                            }
+                        case 2: {
+                                message.noStandardDescriptorAccessor = reader.bool();
+                                break;
+                            }
+                        case 3: {
+                                message.deprecated = reader.bool();
+                                break;
+                            }
+                        case 7: {
+                                message.mapEntry = reader.bool();
+                                break;
+                            }
+                        case 999: {
+                                if (!(message.uninterpretedOption && message.uninterpretedOption.length))
+                                    message.uninterpretedOption = [];
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 1053: {
+                                message[".google.api.resource"] = $root.google.api.ResourceDescriptor.decode(reader, reader.uint32());
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -5476,6 +5815,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for MessageOptions
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.MessageOptions
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                MessageOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.MessageOptions";
+                };
+    
                 return MessageOptions;
             })();
     
@@ -5489,6 +5843,7 @@
                  * @property {boolean|null} [packed] FieldOptions packed
                  * @property {google.protobuf.FieldOptions.JSType|null} [jstype] FieldOptions jstype
                  * @property {boolean|null} [lazy] FieldOptions lazy
+                 * @property {boolean|null} [unverifiedLazy] FieldOptions unverifiedLazy
                  * @property {boolean|null} [deprecated] FieldOptions deprecated
                  * @property {boolean|null} [weak] FieldOptions weak
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
@@ -5544,6 +5899,14 @@
                  * @instance
                  */
                 FieldOptions.prototype.lazy = false;
+    
+                /**
+                 * FieldOptions unverifiedLazy.
+                 * @member {boolean} unverifiedLazy
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype.unverifiedLazy = false;
     
                 /**
                  * FieldOptions deprecated.
@@ -5621,6 +5984,8 @@
                         writer.uint32(/* id 6, wireType 0 =*/48).int32(message.jstype);
                     if (message.weak != null && Object.hasOwnProperty.call(message, "weak"))
                         writer.uint32(/* id 10, wireType 0 =*/80).bool(message.weak);
+                    if (message.unverifiedLazy != null && Object.hasOwnProperty.call(message, "unverifiedLazy"))
+                        writer.uint32(/* id 15, wireType 0 =*/120).bool(message.unverifiedLazy);
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -5666,42 +6031,55 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.ctype = reader.int32();
-                            break;
-                        case 2:
-                            message.packed = reader.bool();
-                            break;
-                        case 6:
-                            message.jstype = reader.int32();
-                            break;
-                        case 5:
-                            message.lazy = reader.bool();
-                            break;
-                        case 3:
-                            message.deprecated = reader.bool();
-                            break;
-                        case 10:
-                            message.weak = reader.bool();
-                            break;
-                        case 999:
-                            if (!(message.uninterpretedOption && message.uninterpretedOption.length))
-                                message.uninterpretedOption = [];
-                            message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
-                            break;
-                        case 1052:
-                            if (!(message[".google.api.fieldBehavior"] && message[".google.api.fieldBehavior"].length))
-                                message[".google.api.fieldBehavior"] = [];
-                            if ((tag & 7) === 2) {
-                                var end2 = reader.uint32() + reader.pos;
-                                while (reader.pos < end2)
+                        case 1: {
+                                message.ctype = reader.int32();
+                                break;
+                            }
+                        case 2: {
+                                message.packed = reader.bool();
+                                break;
+                            }
+                        case 6: {
+                                message.jstype = reader.int32();
+                                break;
+                            }
+                        case 5: {
+                                message.lazy = reader.bool();
+                                break;
+                            }
+                        case 15: {
+                                message.unverifiedLazy = reader.bool();
+                                break;
+                            }
+                        case 3: {
+                                message.deprecated = reader.bool();
+                                break;
+                            }
+                        case 10: {
+                                message.weak = reader.bool();
+                                break;
+                            }
+                        case 999: {
+                                if (!(message.uninterpretedOption && message.uninterpretedOption.length))
+                                    message.uninterpretedOption = [];
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 1052: {
+                                if (!(message[".google.api.fieldBehavior"] && message[".google.api.fieldBehavior"].length))
+                                    message[".google.api.fieldBehavior"] = [];
+                                if ((tag & 7) === 2) {
+                                    var end2 = reader.uint32() + reader.pos;
+                                    while (reader.pos < end2)
+                                        message[".google.api.fieldBehavior"].push(reader.int32());
+                                } else
                                     message[".google.api.fieldBehavior"].push(reader.int32());
-                            } else
-                                message[".google.api.fieldBehavior"].push(reader.int32());
-                            break;
-                        case 1055:
-                            message[".google.api.resourceReference"] = $root.google.api.ResourceReference.decode(reader, reader.uint32());
-                            break;
+                                break;
+                            }
+                        case 1055: {
+                                message[".google.api.resourceReference"] = $root.google.api.ResourceReference.decode(reader, reader.uint32());
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -5761,6 +6139,9 @@
                     if (message.lazy != null && message.hasOwnProperty("lazy"))
                         if (typeof message.lazy !== "boolean")
                             return "lazy: boolean expected";
+                    if (message.unverifiedLazy != null && message.hasOwnProperty("unverifiedLazy"))
+                        if (typeof message.unverifiedLazy !== "boolean")
+                            return "unverifiedLazy: boolean expected";
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         if (typeof message.deprecated !== "boolean")
                             return "deprecated: boolean expected";
@@ -5846,6 +6227,8 @@
                     }
                     if (object.lazy != null)
                         message.lazy = Boolean(object.lazy);
+                    if (object.unverifiedLazy != null)
+                        message.unverifiedLazy = Boolean(object.unverifiedLazy);
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
                     if (object.weak != null)
@@ -5933,6 +6316,7 @@
                         object.lazy = false;
                         object.jstype = options.enums === String ? "JS_NORMAL" : 0;
                         object.weak = false;
+                        object.unverifiedLazy = false;
                         object[".google.api.resourceReference"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
@@ -5947,6 +6331,8 @@
                         object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
                     if (message.weak != null && message.hasOwnProperty("weak"))
                         object.weak = message.weak;
+                    if (message.unverifiedLazy != null && message.hasOwnProperty("unverifiedLazy"))
+                        object.unverifiedLazy = message.unverifiedLazy;
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -5971,6 +6357,21 @@
                  */
                 FieldOptions.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for FieldOptions
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.FieldOptions
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FieldOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.FieldOptions";
                 };
     
                 /**
@@ -6102,11 +6503,12 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 999:
-                            if (!(message.uninterpretedOption && message.uninterpretedOption.length))
-                                message.uninterpretedOption = [];
-                            message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
-                            break;
+                        case 999: {
+                                if (!(message.uninterpretedOption && message.uninterpretedOption.length))
+                                    message.uninterpretedOption = [];
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -6211,6 +6613,21 @@
                  */
                 OneofOptions.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for OneofOptions
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.OneofOptions
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                OneofOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.OneofOptions";
                 };
     
                 return OneofOptions;
@@ -6332,17 +6749,20 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 2:
-                            message.allowAlias = reader.bool();
-                            break;
-                        case 3:
-                            message.deprecated = reader.bool();
-                            break;
-                        case 999:
-                            if (!(message.uninterpretedOption && message.uninterpretedOption.length))
-                                message.uninterpretedOption = [];
-                            message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
-                            break;
+                        case 2: {
+                                message.allowAlias = reader.bool();
+                                break;
+                            }
+                        case 3: {
+                                message.deprecated = reader.bool();
+                                break;
+                            }
+                        case 999: {
+                                if (!(message.uninterpretedOption && message.uninterpretedOption.length))
+                                    message.uninterpretedOption = [];
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -6467,6 +6887,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for EnumOptions
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.EnumOptions
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                EnumOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.EnumOptions";
+                };
+    
                 return EnumOptions;
             })();
     
@@ -6575,14 +7010,16 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.deprecated = reader.bool();
-                            break;
-                        case 999:
-                            if (!(message.uninterpretedOption && message.uninterpretedOption.length))
-                                message.uninterpretedOption = [];
-                            message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
-                            break;
+                        case 1: {
+                                message.deprecated = reader.bool();
+                                break;
+                            }
+                        case 999: {
+                                if (!(message.uninterpretedOption && message.uninterpretedOption.length))
+                                    message.uninterpretedOption = [];
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -6696,6 +7133,21 @@
                  */
                 EnumValueOptions.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for EnumValueOptions
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.EnumValueOptions
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                EnumValueOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.EnumValueOptions";
                 };
     
                 return EnumValueOptions;
@@ -6828,20 +7280,24 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 33:
-                            message.deprecated = reader.bool();
-                            break;
-                        case 999:
-                            if (!(message.uninterpretedOption && message.uninterpretedOption.length))
-                                message.uninterpretedOption = [];
-                            message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
-                            break;
-                        case 1049:
-                            message[".google.api.defaultHost"] = reader.string();
-                            break;
-                        case 1050:
-                            message[".google.api.oauthScopes"] = reader.string();
-                            break;
+                        case 33: {
+                                message.deprecated = reader.bool();
+                                break;
+                            }
+                        case 999: {
+                                if (!(message.uninterpretedOption && message.uninterpretedOption.length))
+                                    message.uninterpretedOption = [];
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 1049: {
+                                message[".google.api.defaultHost"] = reader.string();
+                                break;
+                            }
+                        case 1050: {
+                                message[".google.api.oauthScopes"] = reader.string();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -6972,6 +7428,21 @@
                  */
                 ServiceOptions.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for ServiceOptions
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.ServiceOptions
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ServiceOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.ServiceOptions";
                 };
     
                 return ServiceOptions;
@@ -7117,25 +7588,30 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 33:
-                            message.deprecated = reader.bool();
-                            break;
-                        case 34:
-                            message.idempotencyLevel = reader.int32();
-                            break;
-                        case 999:
-                            if (!(message.uninterpretedOption && message.uninterpretedOption.length))
-                                message.uninterpretedOption = [];
-                            message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
-                            break;
-                        case 72295728:
-                            message[".google.api.http"] = $root.google.api.HttpRule.decode(reader, reader.uint32());
-                            break;
-                        case 1051:
-                            if (!(message[".google.api.methodSignature"] && message[".google.api.methodSignature"].length))
-                                message[".google.api.methodSignature"] = [];
-                            message[".google.api.methodSignature"].push(reader.string());
-                            break;
+                        case 33: {
+                                message.deprecated = reader.bool();
+                                break;
+                            }
+                        case 34: {
+                                message.idempotencyLevel = reader.int32();
+                                break;
+                            }
+                        case 999: {
+                                if (!(message.uninterpretedOption && message.uninterpretedOption.length))
+                                    message.uninterpretedOption = [];
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 72295728: {
+                                message[".google.api.http"] = $root.google.api.HttpRule.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 1051: {
+                                if (!(message[".google.api.methodSignature"] && message[".google.api.methodSignature"].length))
+                                    message[".google.api.methodSignature"] = [];
+                                message[".google.api.methodSignature"].push(reader.string());
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -7310,6 +7786,21 @@
                  */
                 MethodOptions.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for MethodOptions
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.MethodOptions
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                MethodOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.MethodOptions";
                 };
     
                 /**
@@ -7491,29 +7982,36 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 2:
-                            if (!(message.name && message.name.length))
-                                message.name = [];
-                            message.name.push($root.google.protobuf.UninterpretedOption.NamePart.decode(reader, reader.uint32()));
-                            break;
-                        case 3:
-                            message.identifierValue = reader.string();
-                            break;
-                        case 4:
-                            message.positiveIntValue = reader.uint64();
-                            break;
-                        case 5:
-                            message.negativeIntValue = reader.int64();
-                            break;
-                        case 6:
-                            message.doubleValue = reader.double();
-                            break;
-                        case 7:
-                            message.stringValue = reader.bytes();
-                            break;
-                        case 8:
-                            message.aggregateValue = reader.string();
-                            break;
+                        case 2: {
+                                if (!(message.name && message.name.length))
+                                    message.name = [];
+                                message.name.push($root.google.protobuf.UninterpretedOption.NamePart.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 3: {
+                                message.identifierValue = reader.string();
+                                break;
+                            }
+                        case 4: {
+                                message.positiveIntValue = reader.uint64();
+                                break;
+                            }
+                        case 5: {
+                                message.negativeIntValue = reader.int64();
+                                break;
+                            }
+                        case 6: {
+                                message.doubleValue = reader.double();
+                                break;
+                            }
+                        case 7: {
+                                message.stringValue = reader.bytes();
+                                break;
+                            }
+                        case 8: {
+                                message.aggregateValue = reader.string();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -7626,7 +8124,7 @@
                     if (object.stringValue != null)
                         if (typeof object.stringValue === "string")
                             $util.base64.decode(object.stringValue, message.stringValue = $util.newBuffer($util.base64.length(object.stringValue)), 0);
-                        else if (object.stringValue.length)
+                        else if (object.stringValue.length >= 0)
                             message.stringValue = object.stringValue;
                     if (object.aggregateValue != null)
                         message.aggregateValue = String(object.aggregateValue);
@@ -7705,6 +8203,21 @@
                  */
                 UninterpretedOption.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for UninterpretedOption
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.UninterpretedOption
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                UninterpretedOption.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.UninterpretedOption";
                 };
     
                 UninterpretedOption.NamePart = (function() {
@@ -7808,12 +8321,14 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.namePart = reader.string();
-                                break;
-                            case 2:
-                                message.isExtension = reader.bool();
-                                break;
+                            case 1: {
+                                    message.namePart = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.isExtension = reader.bool();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -7912,6 +8427,21 @@
                      */
                     NamePart.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for NamePart
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.UninterpretedOption.NamePart
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    NamePart.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.UninterpretedOption.NamePart";
                     };
     
                     return NamePart;
@@ -8014,11 +8544,12 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            if (!(message.location && message.location.length))
-                                message.location = [];
-                            message.location.push($root.google.protobuf.SourceCodeInfo.Location.decode(reader, reader.uint32()));
-                            break;
+                        case 1: {
+                                if (!(message.location && message.location.length))
+                                    message.location = [];
+                                message.location.push($root.google.protobuf.SourceCodeInfo.Location.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -8123,6 +8654,21 @@
                  */
                 SourceCodeInfo.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for SourceCodeInfo
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.SourceCodeInfo
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                SourceCodeInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.SourceCodeInfo";
                 };
     
                 SourceCodeInfo.Location = (function() {
@@ -8273,37 +8819,42 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                if (!(message.path && message.path.length))
-                                    message.path = [];
-                                if ((tag & 7) === 2) {
-                                    var end2 = reader.uint32() + reader.pos;
-                                    while (reader.pos < end2)
+                            case 1: {
+                                    if (!(message.path && message.path.length))
+                                        message.path = [];
+                                    if ((tag & 7) === 2) {
+                                        var end2 = reader.uint32() + reader.pos;
+                                        while (reader.pos < end2)
+                                            message.path.push(reader.int32());
+                                    } else
                                         message.path.push(reader.int32());
-                                } else
-                                    message.path.push(reader.int32());
-                                break;
-                            case 2:
-                                if (!(message.span && message.span.length))
-                                    message.span = [];
-                                if ((tag & 7) === 2) {
-                                    var end2 = reader.uint32() + reader.pos;
-                                    while (reader.pos < end2)
+                                    break;
+                                }
+                            case 2: {
+                                    if (!(message.span && message.span.length))
+                                        message.span = [];
+                                    if ((tag & 7) === 2) {
+                                        var end2 = reader.uint32() + reader.pos;
+                                        while (reader.pos < end2)
+                                            message.span.push(reader.int32());
+                                    } else
                                         message.span.push(reader.int32());
-                                } else
-                                    message.span.push(reader.int32());
-                                break;
-                            case 3:
-                                message.leadingComments = reader.string();
-                                break;
-                            case 4:
-                                message.trailingComments = reader.string();
-                                break;
-                            case 6:
-                                if (!(message.leadingDetachedComments && message.leadingDetachedComments.length))
-                                    message.leadingDetachedComments = [];
-                                message.leadingDetachedComments.push(reader.string());
-                                break;
+                                    break;
+                                }
+                            case 3: {
+                                    message.leadingComments = reader.string();
+                                    break;
+                                }
+                            case 4: {
+                                    message.trailingComments = reader.string();
+                                    break;
+                                }
+                            case 6: {
+                                    if (!(message.leadingDetachedComments && message.leadingDetachedComments.length))
+                                        message.leadingDetachedComments = [];
+                                    message.leadingDetachedComments.push(reader.string());
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -8464,6 +9015,21 @@
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
+                    /**
+                     * Gets the default type url for Location
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.SourceCodeInfo.Location
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    Location.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.SourceCodeInfo.Location";
+                    };
+    
                     return Location;
                 })();
     
@@ -8564,11 +9130,12 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            if (!(message.annotation && message.annotation.length))
-                                message.annotation = [];
-                            message.annotation.push($root.google.protobuf.GeneratedCodeInfo.Annotation.decode(reader, reader.uint32()));
-                            break;
+                        case 1: {
+                                if (!(message.annotation && message.annotation.length))
+                                    message.annotation = [];
+                                message.annotation.push($root.google.protobuf.GeneratedCodeInfo.Annotation.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -8675,6 +9242,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for GeneratedCodeInfo
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.GeneratedCodeInfo
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                GeneratedCodeInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.GeneratedCodeInfo";
+                };
+    
                 GeneratedCodeInfo.Annotation = (function() {
     
                     /**
@@ -8685,6 +9267,7 @@
                      * @property {string|null} [sourceFile] Annotation sourceFile
                      * @property {number|null} [begin] Annotation begin
                      * @property {number|null} [end] Annotation end
+                     * @property {google.protobuf.GeneratedCodeInfo.Annotation.Semantic|null} [semantic] Annotation semantic
                      */
     
                     /**
@@ -8736,6 +9319,14 @@
                     Annotation.prototype.end = 0;
     
                     /**
+                     * Annotation semantic.
+                     * @member {google.protobuf.GeneratedCodeInfo.Annotation.Semantic} semantic
+                     * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                     * @instance
+                     */
+                    Annotation.prototype.semantic = 0;
+    
+                    /**
                      * Creates a new Annotation instance using the specified properties.
                      * @function create
                      * @memberof google.protobuf.GeneratedCodeInfo.Annotation
@@ -8771,6 +9362,8 @@
                             writer.uint32(/* id 3, wireType 0 =*/24).int32(message.begin);
                         if (message.end != null && Object.hasOwnProperty.call(message, "end"))
                             writer.uint32(/* id 4, wireType 0 =*/32).int32(message.end);
+                        if (message.semantic != null && Object.hasOwnProperty.call(message, "semantic"))
+                            writer.uint32(/* id 5, wireType 0 =*/40).int32(message.semantic);
                         return writer;
                     };
     
@@ -8805,25 +9398,33 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                if (!(message.path && message.path.length))
-                                    message.path = [];
-                                if ((tag & 7) === 2) {
-                                    var end2 = reader.uint32() + reader.pos;
-                                    while (reader.pos < end2)
+                            case 1: {
+                                    if (!(message.path && message.path.length))
+                                        message.path = [];
+                                    if ((tag & 7) === 2) {
+                                        var end2 = reader.uint32() + reader.pos;
+                                        while (reader.pos < end2)
+                                            message.path.push(reader.int32());
+                                    } else
                                         message.path.push(reader.int32());
-                                } else
-                                    message.path.push(reader.int32());
-                                break;
-                            case 2:
-                                message.sourceFile = reader.string();
-                                break;
-                            case 3:
-                                message.begin = reader.int32();
-                                break;
-                            case 4:
-                                message.end = reader.int32();
-                                break;
+                                    break;
+                                }
+                            case 2: {
+                                    message.sourceFile = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.begin = reader.int32();
+                                    break;
+                                }
+                            case 4: {
+                                    message.end = reader.int32();
+                                    break;
+                                }
+                            case 5: {
+                                    message.semantic = reader.int32();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -8875,6 +9476,15 @@
                         if (message.end != null && message.hasOwnProperty("end"))
                             if (!$util.isInteger(message.end))
                                 return "end: integer expected";
+                        if (message.semantic != null && message.hasOwnProperty("semantic"))
+                            switch (message.semantic) {
+                            default:
+                                return "semantic: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            }
                         return null;
                     };
     
@@ -8903,6 +9513,20 @@
                             message.begin = object.begin | 0;
                         if (object.end != null)
                             message.end = object.end | 0;
+                        switch (object.semantic) {
+                        case "NONE":
+                        case 0:
+                            message.semantic = 0;
+                            break;
+                        case "SET":
+                        case 1:
+                            message.semantic = 1;
+                            break;
+                        case "ALIAS":
+                        case 2:
+                            message.semantic = 2;
+                            break;
+                        }
                         return message;
                     };
     
@@ -8925,6 +9549,7 @@
                             object.sourceFile = "";
                             object.begin = 0;
                             object.end = 0;
+                            object.semantic = options.enums === String ? "NONE" : 0;
                         }
                         if (message.path && message.path.length) {
                             object.path = [];
@@ -8937,6 +9562,8 @@
                             object.begin = message.begin;
                         if (message.end != null && message.hasOwnProperty("end"))
                             object.end = message.end;
+                        if (message.semantic != null && message.hasOwnProperty("semantic"))
+                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
                         return object;
                     };
     
@@ -8950,6 +9577,37 @@
                     Annotation.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
+    
+                    /**
+                     * Gets the default type url for Annotation
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    Annotation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.GeneratedCodeInfo.Annotation";
+                    };
+    
+                    /**
+                     * Semantic enum.
+                     * @name google.protobuf.GeneratedCodeInfo.Annotation.Semantic
+                     * @enum {number}
+                     * @property {number} NONE=0 NONE value
+                     * @property {number} SET=1 SET value
+                     * @property {number} ALIAS=2 ALIAS value
+                     */
+                    Annotation.Semantic = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "NONE"] = 0;
+                        values[valuesById[1] = "SET"] = 1;
+                        values[valuesById[2] = "ALIAS"] = 2;
+                        return values;
+                    })();
     
                     return Annotation;
                 })();
@@ -9020,7 +9678,7 @@
                         };
     
                         /**
-                         * Callback as used by {@link google.analytics.data.v1alpha.AlphaAnalyticsData#runFunnelReport}.
+                         * Callback as used by {@link google.analytics.data.v1alpha.AlphaAnalyticsData|runFunnelReport}.
                          * @memberof google.analytics.data.v1alpha.AlphaAnalyticsData
                          * @typedef RunFunnelReportCallback
                          * @type {function}
@@ -9250,40 +9908,50 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.property = reader.string();
-                                    break;
-                                case 2:
-                                    if (!(message.dateRanges && message.dateRanges.length))
-                                        message.dateRanges = [];
-                                    message.dateRanges.push($root.google.analytics.data.v1alpha.DateRange.decode(reader, reader.uint32()));
-                                    break;
-                                case 3:
-                                    message.funnel = $root.google.analytics.data.v1alpha.Funnel.decode(reader, reader.uint32());
-                                    break;
-                                case 4:
-                                    message.funnelBreakdown = $root.google.analytics.data.v1alpha.FunnelBreakdown.decode(reader, reader.uint32());
-                                    break;
-                                case 5:
-                                    message.funnelNextAction = $root.google.analytics.data.v1alpha.FunnelNextAction.decode(reader, reader.uint32());
-                                    break;
-                                case 6:
-                                    message.funnelVisualizationType = reader.int32();
-                                    break;
-                                case 7:
-                                    if (!(message.segments && message.segments.length))
-                                        message.segments = [];
-                                    message.segments.push($root.google.analytics.data.v1alpha.Segment.decode(reader, reader.uint32()));
-                                    break;
-                                case 9:
-                                    message.limit = reader.int64();
-                                    break;
-                                case 10:
-                                    message.dimensionFilter = $root.google.analytics.data.v1alpha.FilterExpression.decode(reader, reader.uint32());
-                                    break;
-                                case 12:
-                                    message.returnPropertyQuota = reader.bool();
-                                    break;
+                                case 1: {
+                                        message.property = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.dateRanges && message.dateRanges.length))
+                                            message.dateRanges = [];
+                                        message.dateRanges.push($root.google.analytics.data.v1alpha.DateRange.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 3: {
+                                        message.funnel = $root.google.analytics.data.v1alpha.Funnel.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.funnelBreakdown = $root.google.analytics.data.v1alpha.FunnelBreakdown.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.funnelNextAction = $root.google.analytics.data.v1alpha.FunnelNextAction.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.funnelVisualizationType = reader.int32();
+                                        break;
+                                    }
+                                case 7: {
+                                        if (!(message.segments && message.segments.length))
+                                            message.segments = [];
+                                        message.segments.push($root.google.analytics.data.v1alpha.Segment.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 9: {
+                                        message.limit = reader.int64();
+                                        break;
+                                    }
+                                case 10: {
+                                        message.dimensionFilter = $root.google.analytics.data.v1alpha.FilterExpression.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 12: {
+                                        message.returnPropertyQuota = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -9535,6 +10203,21 @@
                         };
     
                         /**
+                         * Gets the default type url for RunFunnelReportRequest
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.RunFunnelReportRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RunFunnelReportRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.RunFunnelReportRequest";
+                        };
+    
+                        /**
                          * FunnelVisualizationType enum.
                          * @name google.analytics.data.v1alpha.RunFunnelReportRequest.FunnelVisualizationType
                          * @enum {number}
@@ -9678,18 +10361,22 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.funnelTable = $root.google.analytics.data.v1alpha.FunnelSubReport.decode(reader, reader.uint32());
-                                    break;
-                                case 2:
-                                    message.funnelVisualization = $root.google.analytics.data.v1alpha.FunnelSubReport.decode(reader, reader.uint32());
-                                    break;
-                                case 3:
-                                    message.propertyQuota = $root.google.analytics.data.v1alpha.PropertyQuota.decode(reader, reader.uint32());
-                                    break;
-                                case 4:
-                                    message.kind = reader.string();
-                                    break;
+                                case 1: {
+                                        message.funnelTable = $root.google.analytics.data.v1alpha.FunnelSubReport.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.funnelVisualization = $root.google.analytics.data.v1alpha.FunnelSubReport.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.propertyQuota = $root.google.analytics.data.v1alpha.PropertyQuota.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.kind = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -9819,6 +10506,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for RunFunnelReportResponse
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.RunFunnelReportResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RunFunnelReportResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.RunFunnelReportResponse";
+                        };
+    
                         return RunFunnelReportResponse;
                     })();
     
@@ -9936,15 +10638,18 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.startDate = reader.string();
-                                    break;
-                                case 2:
-                                    message.endDate = reader.string();
-                                    break;
-                                case 3:
-                                    message.name = reader.string();
-                                    break;
+                                case 1: {
+                                        message.startDate = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.endDate = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -10049,6 +10754,21 @@
                          */
                         DateRange.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DateRange
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.DateRange
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DateRange.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.DateRange";
                         };
     
                         return DateRange;
@@ -10157,12 +10877,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
-                                case 2:
-                                    message.dimensionExpression = $root.google.analytics.data.v1alpha.DimensionExpression.decode(reader, reader.uint32());
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.dimensionExpression = $root.google.analytics.data.v1alpha.DimensionExpression.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -10264,6 +10986,21 @@
                          */
                         Dimension.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Dimension
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.Dimension
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Dimension.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.Dimension";
                         };
     
                         return Dimension;
@@ -10397,15 +11134,18 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 4:
-                                    message.lowerCase = $root.google.analytics.data.v1alpha.DimensionExpression.CaseExpression.decode(reader, reader.uint32());
-                                    break;
-                                case 5:
-                                    message.upperCase = $root.google.analytics.data.v1alpha.DimensionExpression.CaseExpression.decode(reader, reader.uint32());
-                                    break;
-                                case 6:
-                                    message.concatenate = $root.google.analytics.data.v1alpha.DimensionExpression.ConcatenateExpression.decode(reader, reader.uint32());
-                                    break;
+                                case 4: {
+                                        message.lowerCase = $root.google.analytics.data.v1alpha.DimensionExpression.CaseExpression.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.upperCase = $root.google.analytics.data.v1alpha.DimensionExpression.CaseExpression.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.concatenate = $root.google.analytics.data.v1alpha.DimensionExpression.ConcatenateExpression.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -10545,6 +11285,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for DimensionExpression
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.DimensionExpression
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DimensionExpression.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.DimensionExpression";
+                        };
+    
                         DimensionExpression.CaseExpression = (function() {
     
                             /**
@@ -10637,9 +11392,10 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.dimensionName = reader.string();
-                                        break;
+                                    case 1: {
+                                            message.dimensionName = reader.string();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -10727,6 +11483,21 @@
                              */
                             CaseExpression.prototype.toJSON = function toJSON() {
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for CaseExpression
+                             * @function getTypeUrl
+                             * @memberof google.analytics.data.v1alpha.DimensionExpression.CaseExpression
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            CaseExpression.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.analytics.data.v1alpha.DimensionExpression.CaseExpression";
                             };
     
                             return CaseExpression;
@@ -10837,14 +11608,16 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        if (!(message.dimensionNames && message.dimensionNames.length))
-                                            message.dimensionNames = [];
-                                        message.dimensionNames.push(reader.string());
-                                        break;
-                                    case 2:
-                                        message.delimiter = reader.string();
-                                        break;
+                                    case 1: {
+                                            if (!(message.dimensionNames && message.dimensionNames.length))
+                                                message.dimensionNames = [];
+                                            message.dimensionNames.push(reader.string());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.delimiter = reader.string();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -10953,6 +11726,21 @@
                              */
                             ConcatenateExpression.prototype.toJSON = function toJSON() {
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ConcatenateExpression
+                             * @function getTypeUrl
+                             * @memberof google.analytics.data.v1alpha.DimensionExpression.ConcatenateExpression
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ConcatenateExpression.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.analytics.data.v1alpha.DimensionExpression.ConcatenateExpression";
                             };
     
                             return ConcatenateExpression;
@@ -11100,18 +11888,22 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.andGroup = $root.google.analytics.data.v1alpha.FilterExpressionList.decode(reader, reader.uint32());
-                                    break;
-                                case 2:
-                                    message.orGroup = $root.google.analytics.data.v1alpha.FilterExpressionList.decode(reader, reader.uint32());
-                                    break;
-                                case 3:
-                                    message.notExpression = $root.google.analytics.data.v1alpha.FilterExpression.decode(reader, reader.uint32());
-                                    break;
-                                case 4:
-                                    message.filter = $root.google.analytics.data.v1alpha.Filter.decode(reader, reader.uint32());
-                                    break;
+                                case 1: {
+                                        message.andGroup = $root.google.analytics.data.v1alpha.FilterExpressionList.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.orGroup = $root.google.analytics.data.v1alpha.FilterExpressionList.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.notExpression = $root.google.analytics.data.v1alpha.FilterExpression.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = $root.google.analytics.data.v1alpha.Filter.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -11271,6 +12063,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for FilterExpression
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.FilterExpression
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        FilterExpression.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.FilterExpression";
+                        };
+    
                         return FilterExpression;
                     })();
     
@@ -11368,11 +12175,12 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    if (!(message.expressions && message.expressions.length))
-                                        message.expressions = [];
-                                    message.expressions.push($root.google.analytics.data.v1alpha.FilterExpression.decode(reader, reader.uint32()));
-                                    break;
+                                case 1: {
+                                        if (!(message.expressions && message.expressions.length))
+                                            message.expressions = [];
+                                        message.expressions.push($root.google.analytics.data.v1alpha.FilterExpression.decode(reader, reader.uint32()));
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -11477,6 +12285,21 @@
                          */
                         FilterExpressionList.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for FilterExpressionList
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.FilterExpressionList
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        FilterExpressionList.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.FilterExpressionList";
                         };
     
                         return FilterExpressionList;
@@ -11632,21 +12455,26 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.fieldName = reader.string();
-                                    break;
-                                case 2:
-                                    message.stringFilter = $root.google.analytics.data.v1alpha.StringFilter.decode(reader, reader.uint32());
-                                    break;
-                                case 3:
-                                    message.inListFilter = $root.google.analytics.data.v1alpha.InListFilter.decode(reader, reader.uint32());
-                                    break;
-                                case 4:
-                                    message.numericFilter = $root.google.analytics.data.v1alpha.NumericFilter.decode(reader, reader.uint32());
-                                    break;
-                                case 5:
-                                    message.betweenFilter = $root.google.analytics.data.v1alpha.BetweenFilter.decode(reader, reader.uint32());
-                                    break;
+                                case 1: {
+                                        message.fieldName = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.stringFilter = $root.google.analytics.data.v1alpha.StringFilter.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.inListFilter = $root.google.analytics.data.v1alpha.InListFilter.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.numericFilter = $root.google.analytics.data.v1alpha.NumericFilter.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.betweenFilter = $root.google.analytics.data.v1alpha.BetweenFilter.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -11815,6 +12643,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for Filter
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.Filter
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Filter.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.Filter";
+                        };
+    
                         return Filter;
                     })();
     
@@ -11932,15 +12775,18 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.matchType = reader.int32();
-                                    break;
-                                case 2:
-                                    message.value = reader.string();
-                                    break;
-                                case 3:
-                                    message.caseSensitive = reader.bool();
-                                    break;
+                                case 1: {
+                                        message.matchType = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.value = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.caseSensitive = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -12086,6 +12932,21 @@
                         };
     
                         /**
+                         * Gets the default type url for StringFilter
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.StringFilter
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        StringFilter.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.StringFilter";
+                        };
+    
+                        /**
                          * MatchType enum.
                          * @name google.analytics.data.v1alpha.StringFilter.MatchType
                          * @enum {number}
@@ -12217,14 +13078,16 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    if (!(message.values && message.values.length))
-                                        message.values = [];
-                                    message.values.push(reader.string());
-                                    break;
-                                case 2:
-                                    message.caseSensitive = reader.bool();
-                                    break;
+                                case 1: {
+                                        if (!(message.values && message.values.length))
+                                            message.values = [];
+                                        message.values.push(reader.string());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.caseSensitive = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -12335,6 +13198,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for InListFilter
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.InListFilter
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        InListFilter.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.InListFilter";
+                        };
+    
                         return InListFilter;
                     })();
     
@@ -12441,12 +13319,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.operation = reader.int32();
-                                    break;
-                                case 2:
-                                    message.value = $root.google.analytics.data.v1alpha.NumericValue.decode(reader, reader.uint32());
-                                    break;
+                                case 1: {
+                                        message.operation = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.value = $root.google.analytics.data.v1alpha.NumericValue.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -12584,6 +13464,21 @@
                         };
     
                         /**
+                         * Gets the default type url for NumericFilter
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.NumericFilter
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        NumericFilter.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.NumericFilter";
+                        };
+    
+                        /**
                          * Operation enum.
                          * @name google.analytics.data.v1alpha.NumericFilter.Operation
                          * @enum {number}
@@ -12711,12 +13606,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.fromValue = $root.google.analytics.data.v1alpha.NumericValue.decode(reader, reader.uint32());
-                                    break;
-                                case 2:
-                                    message.toValue = $root.google.analytics.data.v1alpha.NumericValue.decode(reader, reader.uint32());
-                                    break;
+                                case 1: {
+                                        message.fromValue = $root.google.analytics.data.v1alpha.NumericValue.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.toValue = $root.google.analytics.data.v1alpha.NumericValue.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -12823,6 +13720,21 @@
                          */
                         BetweenFilter.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BetweenFilter
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.BetweenFilter
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BetweenFilter.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.BetweenFilter";
                         };
     
                         return BetweenFilter;
@@ -12945,12 +13857,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.int64Value = reader.int64();
-                                    break;
-                                case 2:
-                                    message.doubleValue = reader.double();
-                                    break;
+                                case 1: {
+                                        message.int64Value = reader.int64();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.doubleValue = reader.double();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -13068,6 +13982,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for NumericValue
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.NumericValue
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        NumericValue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.NumericValue";
+                        };
+    
                         return NumericValue;
                     })();
     
@@ -13163,9 +14092,10 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -13253,6 +14183,21 @@
                          */
                         DimensionHeader.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DimensionHeader
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.DimensionHeader
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DimensionHeader.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.DimensionHeader";
                         };
     
                         return DimensionHeader;
@@ -13361,12 +14306,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
-                                case 2:
-                                    message.type = reader.int32();
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.type = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -13533,6 +14480,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for MetricHeader
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.MetricHeader
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MetricHeader.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.MetricHeader";
+                        };
+    
                         return MetricHeader;
                     })();
     
@@ -13643,16 +14605,18 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    if (!(message.dimensionValues && message.dimensionValues.length))
-                                        message.dimensionValues = [];
-                                    message.dimensionValues.push($root.google.analytics.data.v1alpha.DimensionValue.decode(reader, reader.uint32()));
-                                    break;
-                                case 2:
-                                    if (!(message.metricValues && message.metricValues.length))
-                                        message.metricValues = [];
-                                    message.metricValues.push($root.google.analytics.data.v1alpha.MetricValue.decode(reader, reader.uint32()));
-                                    break;
+                                case 1: {
+                                        if (!(message.dimensionValues && message.dimensionValues.length))
+                                            message.dimensionValues = [];
+                                        message.dimensionValues.push($root.google.analytics.data.v1alpha.DimensionValue.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.metricValues && message.metricValues.length))
+                                            message.metricValues = [];
+                                        message.metricValues.push($root.google.analytics.data.v1alpha.MetricValue.decode(reader, reader.uint32()));
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -13785,6 +14749,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for Row
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.Row
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Row.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.Row";
+                        };
+    
                         return Row;
                     })();
     
@@ -13894,9 +14873,10 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.value = reader.string();
-                                    break;
+                                case 1: {
+                                        message.value = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -13988,6 +14968,21 @@
                          */
                         DimensionValue.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DimensionValue
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.DimensionValue
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DimensionValue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.DimensionValue";
                         };
     
                         return DimensionValue;
@@ -14099,9 +15094,10 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 4:
-                                    message.value = reader.string();
-                                    break;
+                                case 4: {
+                                        message.value = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -14193,6 +15189,21 @@
                          */
                         MetricValue.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for MetricValue
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.MetricValue
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MetricValue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.MetricValue";
                         };
     
                         return MetricValue;
@@ -14334,21 +15345,26 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.tokensPerDay = $root.google.analytics.data.v1alpha.QuotaStatus.decode(reader, reader.uint32());
-                                    break;
-                                case 2:
-                                    message.tokensPerHour = $root.google.analytics.data.v1alpha.QuotaStatus.decode(reader, reader.uint32());
-                                    break;
-                                case 3:
-                                    message.concurrentRequests = $root.google.analytics.data.v1alpha.QuotaStatus.decode(reader, reader.uint32());
-                                    break;
-                                case 4:
-                                    message.serverErrorsPerProjectPerHour = $root.google.analytics.data.v1alpha.QuotaStatus.decode(reader, reader.uint32());
-                                    break;
-                                case 5:
-                                    message.potentiallyThresholdedRequestsPerHour = $root.google.analytics.data.v1alpha.QuotaStatus.decode(reader, reader.uint32());
-                                    break;
+                                case 1: {
+                                        message.tokensPerDay = $root.google.analytics.data.v1alpha.QuotaStatus.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.tokensPerHour = $root.google.analytics.data.v1alpha.QuotaStatus.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.concurrentRequests = $root.google.analytics.data.v1alpha.QuotaStatus.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.serverErrorsPerProjectPerHour = $root.google.analytics.data.v1alpha.QuotaStatus.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.potentiallyThresholdedRequestsPerHour = $root.google.analytics.data.v1alpha.QuotaStatus.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -14496,6 +15512,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for PropertyQuota
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.PropertyQuota
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        PropertyQuota.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.PropertyQuota";
+                        };
+    
                         return PropertyQuota;
                     })();
     
@@ -14602,12 +15633,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.consumed = reader.int32();
-                                    break;
-                                case 2:
-                                    message.remaining = reader.int32();
-                                    break;
+                                case 1: {
+                                        message.consumed = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.remaining = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -14704,6 +15737,21 @@
                          */
                         QuotaStatus.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for QuotaStatus
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.QuotaStatus
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        QuotaStatus.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.QuotaStatus";
                         };
     
                         return QuotaStatus;
@@ -14826,12 +15874,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.breakdownDimension = $root.google.analytics.data.v1alpha.Dimension.decode(reader, reader.uint32());
-                                    break;
-                                case 2:
-                                    message.limit = reader.int64();
-                                    break;
+                                case 1: {
+                                        message.breakdownDimension = $root.google.analytics.data.v1alpha.Dimension.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.limit = reader.int64();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -14947,6 +15997,21 @@
                          */
                         FunnelBreakdown.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for FunnelBreakdown
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.FunnelBreakdown
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        FunnelBreakdown.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.FunnelBreakdown";
                         };
     
                         return FunnelBreakdown;
@@ -15069,12 +16134,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.nextActionDimension = $root.google.analytics.data.v1alpha.Dimension.decode(reader, reader.uint32());
-                                    break;
-                                case 2:
-                                    message.limit = reader.int64();
-                                    break;
+                                case 1: {
+                                        message.nextActionDimension = $root.google.analytics.data.v1alpha.Dimension.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.limit = reader.int64();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -15192,6 +16259,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for FunnelNextAction
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.FunnelNextAction
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        FunnelNextAction.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.FunnelNextAction";
+                        };
+    
                         return FunnelNextAction;
                     })();
     
@@ -15300,14 +16382,16 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.isOpenFunnel = reader.bool();
-                                    break;
-                                case 2:
-                                    if (!(message.steps && message.steps.length))
-                                        message.steps = [];
-                                    message.steps.push($root.google.analytics.data.v1alpha.FunnelStep.decode(reader, reader.uint32()));
-                                    break;
+                                case 1: {
+                                        message.isOpenFunnel = reader.bool();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.steps && message.steps.length))
+                                            message.steps = [];
+                                        message.steps.push($root.google.analytics.data.v1alpha.FunnelStep.decode(reader, reader.uint32()));
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -15421,6 +16505,21 @@
                          */
                         Funnel.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Funnel
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.Funnel
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Funnel.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.Funnel";
                         };
     
                         return Funnel;
@@ -15565,18 +16664,22 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
-                                case 2:
-                                    message.isDirectlyFollowedBy = reader.bool();
-                                    break;
-                                case 3:
-                                    message.withinDurationFromPriorStep = $root.google.protobuf.Duration.decode(reader, reader.uint32());
-                                    break;
-                                case 4:
-                                    message.filterExpression = $root.google.analytics.data.v1alpha.FunnelFilterExpression.decode(reader, reader.uint32());
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.isDirectlyFollowedBy = reader.bool();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.withinDurationFromPriorStep = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filterExpression = $root.google.analytics.data.v1alpha.FunnelFilterExpression.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -15705,6 +16808,21 @@
                          */
                         FunnelStep.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for FunnelStep
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.FunnelStep
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        FunnelStep.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.FunnelStep";
                         };
     
                         return FunnelStep;
@@ -15841,24 +16959,28 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    if (!(message.dimensionHeaders && message.dimensionHeaders.length))
-                                        message.dimensionHeaders = [];
-                                    message.dimensionHeaders.push($root.google.analytics.data.v1alpha.DimensionHeader.decode(reader, reader.uint32()));
-                                    break;
-                                case 2:
-                                    if (!(message.metricHeaders && message.metricHeaders.length))
-                                        message.metricHeaders = [];
-                                    message.metricHeaders.push($root.google.analytics.data.v1alpha.MetricHeader.decode(reader, reader.uint32()));
-                                    break;
-                                case 3:
-                                    if (!(message.rows && message.rows.length))
-                                        message.rows = [];
-                                    message.rows.push($root.google.analytics.data.v1alpha.Row.decode(reader, reader.uint32()));
-                                    break;
-                                case 4:
-                                    message.metadata = $root.google.analytics.data.v1alpha.FunnelResponseMetadata.decode(reader, reader.uint32());
-                                    break;
+                                case 1: {
+                                        if (!(message.dimensionHeaders && message.dimensionHeaders.length))
+                                            message.dimensionHeaders = [];
+                                        message.dimensionHeaders.push($root.google.analytics.data.v1alpha.DimensionHeader.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.metricHeaders && message.metricHeaders.length))
+                                            message.metricHeaders = [];
+                                        message.metricHeaders.push($root.google.analytics.data.v1alpha.MetricHeader.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.rows && message.rows.length))
+                                            message.rows = [];
+                                        message.rows.push($root.google.analytics.data.v1alpha.Row.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 4: {
+                                        message.metadata = $root.google.analytics.data.v1alpha.FunnelResponseMetadata.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -16030,6 +17152,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for FunnelSubReport
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.FunnelSubReport
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        FunnelSubReport.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.FunnelSubReport";
+                        };
+    
                         return FunnelSubReport;
                     })();
     
@@ -16136,12 +17273,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.userInclusionCriteria = $root.google.analytics.data.v1alpha.UserSegmentCriteria.decode(reader, reader.uint32());
-                                    break;
-                                case 2:
-                                    message.exclusion = $root.google.analytics.data.v1alpha.UserSegmentExclusion.decode(reader, reader.uint32());
-                                    break;
+                                case 1: {
+                                        message.userInclusionCriteria = $root.google.analytics.data.v1alpha.UserSegmentCriteria.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.exclusion = $root.google.analytics.data.v1alpha.UserSegmentExclusion.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -16248,6 +17387,21 @@
                          */
                         UserSegment.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UserSegment
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.UserSegment
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UserSegment.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.UserSegment";
                         };
     
                         return UserSegment;
@@ -16360,16 +17514,18 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    if (!(message.andConditionGroups && message.andConditionGroups.length))
-                                        message.andConditionGroups = [];
-                                    message.andConditionGroups.push($root.google.analytics.data.v1alpha.UserSegmentConditionGroup.decode(reader, reader.uint32()));
-                                    break;
-                                case 2:
-                                    if (!(message.andSequenceGroups && message.andSequenceGroups.length))
-                                        message.andSequenceGroups = [];
-                                    message.andSequenceGroups.push($root.google.analytics.data.v1alpha.UserSegmentSequenceGroup.decode(reader, reader.uint32()));
-                                    break;
+                                case 1: {
+                                        if (!(message.andConditionGroups && message.andConditionGroups.length))
+                                            message.andConditionGroups = [];
+                                        message.andConditionGroups.push($root.google.analytics.data.v1alpha.UserSegmentConditionGroup.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.andSequenceGroups && message.andSequenceGroups.length))
+                                            message.andSequenceGroups = [];
+                                        message.andSequenceGroups.push($root.google.analytics.data.v1alpha.UserSegmentSequenceGroup.decode(reader, reader.uint32()));
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -16502,6 +17658,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for UserSegmentCriteria
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.UserSegmentCriteria
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UserSegmentCriteria.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.UserSegmentCriteria";
+                        };
+    
                         return UserSegmentCriteria;
                     })();
     
@@ -16626,12 +17797,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.conditionScoping = reader.int32();
-                                    break;
-                                case 2:
-                                    message.segmentFilterExpression = $root.google.analytics.data.v1alpha.SegmentFilterExpression.decode(reader, reader.uint32());
-                                    break;
+                                case 1: {
+                                        message.conditionScoping = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.segmentFilterExpression = $root.google.analytics.data.v1alpha.SegmentFilterExpression.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -16758,6 +17931,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for UserSegmentConditionGroup
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.UserSegmentConditionGroup
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UserSegmentConditionGroup.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.UserSegmentConditionGroup";
+                        };
+    
                         return UserSegmentConditionGroup;
                     })();
     
@@ -16877,17 +18065,20 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.sequenceScoping = reader.int32();
-                                    break;
-                                case 2:
-                                    message.sequenceMaximumDuration = $root.google.protobuf.Duration.decode(reader, reader.uint32());
-                                    break;
-                                case 3:
-                                    if (!(message.userSequenceSteps && message.userSequenceSteps.length))
-                                        message.userSequenceSteps = [];
-                                    message.userSequenceSteps.push($root.google.analytics.data.v1alpha.UserSequenceStep.decode(reader, reader.uint32()));
-                                    break;
+                                case 1: {
+                                        message.sequenceScoping = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.sequenceMaximumDuration = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.userSequenceSteps && message.userSequenceSteps.length))
+                                            message.userSequenceSteps = [];
+                                        message.userSequenceSteps.push($root.google.analytics.data.v1alpha.UserSequenceStep.decode(reader, reader.uint32()));
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -17040,6 +18231,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for UserSegmentSequenceGroup
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.UserSegmentSequenceGroup
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UserSegmentSequenceGroup.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.UserSegmentSequenceGroup";
+                        };
+    
                         return UserSegmentSequenceGroup;
                     })();
     
@@ -17157,15 +18363,18 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.isDirectlyFollowedBy = reader.bool();
-                                    break;
-                                case 2:
-                                    message.stepScoping = reader.int32();
-                                    break;
-                                case 3:
-                                    message.segmentFilterExpression = $root.google.analytics.data.v1alpha.SegmentFilterExpression.decode(reader, reader.uint32());
-                                    break;
+                                case 1: {
+                                        message.isDirectlyFollowedBy = reader.bool();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.stepScoping = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.segmentFilterExpression = $root.google.analytics.data.v1alpha.SegmentFilterExpression.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -17300,6 +18509,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for UserSequenceStep
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.UserSequenceStep
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UserSequenceStep.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.UserSequenceStep";
+                        };
+    
                         return UserSequenceStep;
                     })();
     
@@ -17406,12 +18630,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.userExclusionDuration = reader.int32();
-                                    break;
-                                case 2:
-                                    message.userExclusionCriteria = $root.google.analytics.data.v1alpha.UserSegmentCriteria.decode(reader, reader.uint32());
-                                    break;
+                                case 1: {
+                                        message.userExclusionDuration = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.userExclusionCriteria = $root.google.analytics.data.v1alpha.UserSegmentCriteria.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -17531,6 +18757,21 @@
                          */
                         UserSegmentExclusion.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UserSegmentExclusion
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.UserSegmentExclusion
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UserSegmentExclusion.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.UserSegmentExclusion";
                         };
     
                         return UserSegmentExclusion;
@@ -17655,12 +18896,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.sessionInclusionCriteria = $root.google.analytics.data.v1alpha.SessionSegmentCriteria.decode(reader, reader.uint32());
-                                    break;
-                                case 2:
-                                    message.exclusion = $root.google.analytics.data.v1alpha.SessionSegmentExclusion.decode(reader, reader.uint32());
-                                    break;
+                                case 1: {
+                                        message.sessionInclusionCriteria = $root.google.analytics.data.v1alpha.SessionSegmentCriteria.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.exclusion = $root.google.analytics.data.v1alpha.SessionSegmentExclusion.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -17769,6 +19012,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for SessionSegment
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.SessionSegment
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SessionSegment.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.SessionSegment";
+                        };
+    
                         return SessionSegment;
                     })();
     
@@ -17866,11 +19124,12 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    if (!(message.andConditionGroups && message.andConditionGroups.length))
-                                        message.andConditionGroups = [];
-                                    message.andConditionGroups.push($root.google.analytics.data.v1alpha.SessionSegmentConditionGroup.decode(reader, reader.uint32()));
-                                    break;
+                                case 1: {
+                                        if (!(message.andConditionGroups && message.andConditionGroups.length))
+                                            message.andConditionGroups = [];
+                                        message.andConditionGroups.push($root.google.analytics.data.v1alpha.SessionSegmentConditionGroup.decode(reader, reader.uint32()));
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -17975,6 +19234,21 @@
                          */
                         SessionSegmentCriteria.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SessionSegmentCriteria
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.SessionSegmentCriteria
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SessionSegmentCriteria.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.SessionSegmentCriteria";
                         };
     
                         return SessionSegmentCriteria;
@@ -18099,12 +19373,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.conditionScoping = reader.int32();
-                                    break;
-                                case 2:
-                                    message.segmentFilterExpression = $root.google.analytics.data.v1alpha.SegmentFilterExpression.decode(reader, reader.uint32());
-                                    break;
+                                case 1: {
+                                        message.conditionScoping = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.segmentFilterExpression = $root.google.analytics.data.v1alpha.SegmentFilterExpression.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -18226,6 +19502,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for SessionSegmentConditionGroup
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.SessionSegmentConditionGroup
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SessionSegmentConditionGroup.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.SessionSegmentConditionGroup";
+                        };
+    
                         return SessionSegmentConditionGroup;
                     })();
     
@@ -18332,12 +19623,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.sessionExclusionDuration = reader.int32();
-                                    break;
-                                case 2:
-                                    message.sessionExclusionCriteria = $root.google.analytics.data.v1alpha.SessionSegmentCriteria.decode(reader, reader.uint32());
-                                    break;
+                                case 1: {
+                                        message.sessionExclusionDuration = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.sessionExclusionCriteria = $root.google.analytics.data.v1alpha.SessionSegmentCriteria.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -18457,6 +19750,21 @@
                          */
                         SessionSegmentExclusion.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SessionSegmentExclusion
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.SessionSegmentExclusion
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SessionSegmentExclusion.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.SessionSegmentExclusion";
                         };
     
                         return SessionSegmentExclusion;
@@ -18581,12 +19889,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.eventInclusionCriteria = $root.google.analytics.data.v1alpha.EventSegmentCriteria.decode(reader, reader.uint32());
-                                    break;
-                                case 2:
-                                    message.exclusion = $root.google.analytics.data.v1alpha.EventSegmentExclusion.decode(reader, reader.uint32());
-                                    break;
+                                case 1: {
+                                        message.eventInclusionCriteria = $root.google.analytics.data.v1alpha.EventSegmentCriteria.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.exclusion = $root.google.analytics.data.v1alpha.EventSegmentExclusion.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -18695,6 +20005,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for EventSegment
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.EventSegment
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        EventSegment.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.EventSegment";
+                        };
+    
                         return EventSegment;
                     })();
     
@@ -18792,11 +20117,12 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    if (!(message.andConditionGroups && message.andConditionGroups.length))
-                                        message.andConditionGroups = [];
-                                    message.andConditionGroups.push($root.google.analytics.data.v1alpha.EventSegmentConditionGroup.decode(reader, reader.uint32()));
-                                    break;
+                                case 1: {
+                                        if (!(message.andConditionGroups && message.andConditionGroups.length))
+                                            message.andConditionGroups = [];
+                                        message.andConditionGroups.push($root.google.analytics.data.v1alpha.EventSegmentConditionGroup.decode(reader, reader.uint32()));
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -18901,6 +20227,21 @@
                          */
                         EventSegmentCriteria.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for EventSegmentCriteria
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.EventSegmentCriteria
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        EventSegmentCriteria.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.EventSegmentCriteria";
                         };
     
                         return EventSegmentCriteria;
@@ -19023,12 +20364,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.conditionScoping = reader.int32();
-                                    break;
-                                case 2:
-                                    message.segmentFilterExpression = $root.google.analytics.data.v1alpha.SegmentFilterExpression.decode(reader, reader.uint32());
-                                    break;
+                                case 1: {
+                                        message.conditionScoping = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.segmentFilterExpression = $root.google.analytics.data.v1alpha.SegmentFilterExpression.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -19145,6 +20488,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for EventSegmentConditionGroup
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.EventSegmentConditionGroup
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        EventSegmentConditionGroup.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.EventSegmentConditionGroup";
+                        };
+    
                         return EventSegmentConditionGroup;
                     })();
     
@@ -19251,12 +20609,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.eventExclusionDuration = reader.int32();
-                                    break;
-                                case 2:
-                                    message.eventExclusionCriteria = $root.google.analytics.data.v1alpha.EventSegmentCriteria.decode(reader, reader.uint32());
-                                    break;
+                                case 1: {
+                                        message.eventExclusionDuration = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.eventExclusionCriteria = $root.google.analytics.data.v1alpha.EventSegmentCriteria.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -19371,6 +20731,21 @@
                          */
                         EventSegmentExclusion.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for EventSegmentExclusion
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.EventSegmentExclusion
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        EventSegmentExclusion.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.EventSegmentExclusion";
                         };
     
                         return EventSegmentExclusion;
@@ -19529,18 +20904,22 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
-                                case 2:
-                                    message.userSegment = $root.google.analytics.data.v1alpha.UserSegment.decode(reader, reader.uint32());
-                                    break;
-                                case 3:
-                                    message.sessionSegment = $root.google.analytics.data.v1alpha.SessionSegment.decode(reader, reader.uint32());
-                                    break;
-                                case 4:
-                                    message.eventSegment = $root.google.analytics.data.v1alpha.EventSegment.decode(reader, reader.uint32());
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.userSegment = $root.google.analytics.data.v1alpha.UserSegment.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.sessionSegment = $root.google.analytics.data.v1alpha.SessionSegment.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.eventSegment = $root.google.analytics.data.v1alpha.EventSegment.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -19687,6 +21066,21 @@
                          */
                         Segment.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Segment
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.Segment
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Segment.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.Segment";
                         };
     
                         return Segment;
@@ -19842,21 +21236,26 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.andGroup = $root.google.analytics.data.v1alpha.SegmentFilterExpressionList.decode(reader, reader.uint32());
-                                    break;
-                                case 2:
-                                    message.orGroup = $root.google.analytics.data.v1alpha.SegmentFilterExpressionList.decode(reader, reader.uint32());
-                                    break;
-                                case 3:
-                                    message.notExpression = $root.google.analytics.data.v1alpha.SegmentFilterExpression.decode(reader, reader.uint32());
-                                    break;
-                                case 4:
-                                    message.segmentFilter = $root.google.analytics.data.v1alpha.SegmentFilter.decode(reader, reader.uint32());
-                                    break;
-                                case 5:
-                                    message.segmentEventFilter = $root.google.analytics.data.v1alpha.SegmentEventFilter.decode(reader, reader.uint32());
-                                    break;
+                                case 1: {
+                                        message.andGroup = $root.google.analytics.data.v1alpha.SegmentFilterExpressionList.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.orGroup = $root.google.analytics.data.v1alpha.SegmentFilterExpressionList.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.notExpression = $root.google.analytics.data.v1alpha.SegmentFilterExpression.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.segmentFilter = $root.google.analytics.data.v1alpha.SegmentFilter.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.segmentEventFilter = $root.google.analytics.data.v1alpha.SegmentEventFilter.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -20036,6 +21435,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for SegmentFilterExpression
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.SegmentFilterExpression
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SegmentFilterExpression.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.SegmentFilterExpression";
+                        };
+    
                         return SegmentFilterExpression;
                     })();
     
@@ -20133,11 +21547,12 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    if (!(message.expressions && message.expressions.length))
-                                        message.expressions = [];
-                                    message.expressions.push($root.google.analytics.data.v1alpha.SegmentFilterExpression.decode(reader, reader.uint32()));
-                                    break;
+                                case 1: {
+                                        if (!(message.expressions && message.expressions.length))
+                                            message.expressions = [];
+                                        message.expressions.push($root.google.analytics.data.v1alpha.SegmentFilterExpression.decode(reader, reader.uint32()));
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -20242,6 +21657,21 @@
                          */
                         SegmentFilterExpressionList.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SegmentFilterExpressionList
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.SegmentFilterExpressionList
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SegmentFilterExpressionList.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.SegmentFilterExpressionList";
                         };
     
                         return SegmentFilterExpressionList;
@@ -20408,24 +21838,30 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.fieldName = reader.string();
-                                    break;
-                                case 4:
-                                    message.stringFilter = $root.google.analytics.data.v1alpha.StringFilter.decode(reader, reader.uint32());
-                                    break;
-                                case 5:
-                                    message.inListFilter = $root.google.analytics.data.v1alpha.InListFilter.decode(reader, reader.uint32());
-                                    break;
-                                case 6:
-                                    message.numericFilter = $root.google.analytics.data.v1alpha.NumericFilter.decode(reader, reader.uint32());
-                                    break;
-                                case 7:
-                                    message.betweenFilter = $root.google.analytics.data.v1alpha.BetweenFilter.decode(reader, reader.uint32());
-                                    break;
-                                case 8:
-                                    message.filterScoping = $root.google.analytics.data.v1alpha.SegmentFilterScoping.decode(reader, reader.uint32());
-                                    break;
+                                case 1: {
+                                        message.fieldName = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.stringFilter = $root.google.analytics.data.v1alpha.StringFilter.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.inListFilter = $root.google.analytics.data.v1alpha.InListFilter.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.numericFilter = $root.google.analytics.data.v1alpha.NumericFilter.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.betweenFilter = $root.google.analytics.data.v1alpha.BetweenFilter.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.filterScoping = $root.google.analytics.data.v1alpha.SegmentFilterScoping.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -20608,6 +22044,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for SegmentFilter
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.SegmentFilter
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SegmentFilter.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.SegmentFilter";
+                        };
+    
                         return SegmentFilter;
                     })();
     
@@ -20717,9 +22168,10 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.atAnyPointInTime = reader.bool();
-                                    break;
+                                case 1: {
+                                        message.atAnyPointInTime = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -20811,6 +22263,21 @@
                          */
                         SegmentFilterScoping.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SegmentFilterScoping
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.SegmentFilterScoping
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SegmentFilterScoping.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.SegmentFilterScoping";
                         };
     
                         return SegmentFilterScoping;
@@ -20944,12 +22411,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.eventName = reader.string();
-                                    break;
-                                case 2:
-                                    message.segmentParameterFilterExpression = $root.google.analytics.data.v1alpha.SegmentParameterFilterExpression.decode(reader, reader.uint32());
-                                    break;
+                                case 1: {
+                                        message.eventName = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.segmentParameterFilterExpression = $root.google.analytics.data.v1alpha.SegmentParameterFilterExpression.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -21059,6 +22528,21 @@
                          */
                         SegmentEventFilter.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SegmentEventFilter
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.SegmentEventFilter
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SegmentEventFilter.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.SegmentEventFilter";
                         };
     
                         return SegmentEventFilter;
@@ -21203,18 +22687,22 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.andGroup = $root.google.analytics.data.v1alpha.SegmentParameterFilterExpressionList.decode(reader, reader.uint32());
-                                    break;
-                                case 2:
-                                    message.orGroup = $root.google.analytics.data.v1alpha.SegmentParameterFilterExpressionList.decode(reader, reader.uint32());
-                                    break;
-                                case 3:
-                                    message.notExpression = $root.google.analytics.data.v1alpha.SegmentParameterFilterExpression.decode(reader, reader.uint32());
-                                    break;
-                                case 4:
-                                    message.segmentParameterFilter = $root.google.analytics.data.v1alpha.SegmentParameterFilter.decode(reader, reader.uint32());
-                                    break;
+                                case 1: {
+                                        message.andGroup = $root.google.analytics.data.v1alpha.SegmentParameterFilterExpressionList.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.orGroup = $root.google.analytics.data.v1alpha.SegmentParameterFilterExpressionList.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.notExpression = $root.google.analytics.data.v1alpha.SegmentParameterFilterExpression.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.segmentParameterFilter = $root.google.analytics.data.v1alpha.SegmentParameterFilter.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -21374,6 +22862,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for SegmentParameterFilterExpression
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.SegmentParameterFilterExpression
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SegmentParameterFilterExpression.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.SegmentParameterFilterExpression";
+                        };
+    
                         return SegmentParameterFilterExpression;
                     })();
     
@@ -21471,11 +22974,12 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    if (!(message.expressions && message.expressions.length))
-                                        message.expressions = [];
-                                    message.expressions.push($root.google.analytics.data.v1alpha.SegmentParameterFilterExpression.decode(reader, reader.uint32()));
-                                    break;
+                                case 1: {
+                                        if (!(message.expressions && message.expressions.length))
+                                            message.expressions = [];
+                                        message.expressions.push($root.google.analytics.data.v1alpha.SegmentParameterFilterExpression.decode(reader, reader.uint32()));
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -21580,6 +23084,21 @@
                          */
                         SegmentParameterFilterExpressionList.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SegmentParameterFilterExpressionList
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.SegmentParameterFilterExpressionList
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SegmentParameterFilterExpressionList.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.SegmentParameterFilterExpressionList";
                         };
     
                         return SegmentParameterFilterExpressionList;
@@ -21768,27 +23287,34 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.eventParameterName = reader.string();
-                                    break;
-                                case 2:
-                                    message.itemParameterName = reader.string();
-                                    break;
-                                case 4:
-                                    message.stringFilter = $root.google.analytics.data.v1alpha.StringFilter.decode(reader, reader.uint32());
-                                    break;
-                                case 5:
-                                    message.inListFilter = $root.google.analytics.data.v1alpha.InListFilter.decode(reader, reader.uint32());
-                                    break;
-                                case 6:
-                                    message.numericFilter = $root.google.analytics.data.v1alpha.NumericFilter.decode(reader, reader.uint32());
-                                    break;
-                                case 7:
-                                    message.betweenFilter = $root.google.analytics.data.v1alpha.BetweenFilter.decode(reader, reader.uint32());
-                                    break;
-                                case 8:
-                                    message.filterScoping = $root.google.analytics.data.v1alpha.SegmentParameterFilterScoping.decode(reader, reader.uint32());
-                                    break;
+                                case 1: {
+                                        message.eventParameterName = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.itemParameterName = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.stringFilter = $root.google.analytics.data.v1alpha.StringFilter.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.inListFilter = $root.google.analytics.data.v1alpha.InListFilter.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.numericFilter = $root.google.analytics.data.v1alpha.NumericFilter.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.betweenFilter = $root.google.analytics.data.v1alpha.BetweenFilter.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.filterScoping = $root.google.analytics.data.v1alpha.SegmentParameterFilterScoping.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -21988,6 +23514,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for SegmentParameterFilter
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.SegmentParameterFilter
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SegmentParameterFilter.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.SegmentParameterFilter";
+                        };
+    
                         return SegmentParameterFilter;
                     })();
     
@@ -22097,9 +23638,10 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.inAnyNDayPeriod = reader.int64();
-                                    break;
+                                case 1: {
+                                        message.inAnyNDayPeriod = reader.int64();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -22201,6 +23743,21 @@
                          */
                         SegmentParameterFilterScoping.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SegmentParameterFilterScoping
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.SegmentParameterFilterScoping
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SegmentParameterFilterScoping.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.SegmentParameterFilterScoping";
                         };
     
                         return SegmentParameterFilterScoping;
@@ -22356,21 +23913,26 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.andGroup = $root.google.analytics.data.v1alpha.FunnelFilterExpressionList.decode(reader, reader.uint32());
-                                    break;
-                                case 2:
-                                    message.orGroup = $root.google.analytics.data.v1alpha.FunnelFilterExpressionList.decode(reader, reader.uint32());
-                                    break;
-                                case 3:
-                                    message.notExpression = $root.google.analytics.data.v1alpha.FunnelFilterExpression.decode(reader, reader.uint32());
-                                    break;
-                                case 4:
-                                    message.funnelFieldFilter = $root.google.analytics.data.v1alpha.FunnelFieldFilter.decode(reader, reader.uint32());
-                                    break;
-                                case 5:
-                                    message.funnelEventFilter = $root.google.analytics.data.v1alpha.FunnelEventFilter.decode(reader, reader.uint32());
-                                    break;
+                                case 1: {
+                                        message.andGroup = $root.google.analytics.data.v1alpha.FunnelFilterExpressionList.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.orGroup = $root.google.analytics.data.v1alpha.FunnelFilterExpressionList.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.notExpression = $root.google.analytics.data.v1alpha.FunnelFilterExpression.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.funnelFieldFilter = $root.google.analytics.data.v1alpha.FunnelFieldFilter.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.funnelEventFilter = $root.google.analytics.data.v1alpha.FunnelEventFilter.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -22550,6 +24112,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for FunnelFilterExpression
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.FunnelFilterExpression
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        FunnelFilterExpression.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.FunnelFilterExpression";
+                        };
+    
                         return FunnelFilterExpression;
                     })();
     
@@ -22647,11 +24224,12 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    if (!(message.expressions && message.expressions.length))
-                                        message.expressions = [];
-                                    message.expressions.push($root.google.analytics.data.v1alpha.FunnelFilterExpression.decode(reader, reader.uint32()));
-                                    break;
+                                case 1: {
+                                        if (!(message.expressions && message.expressions.length))
+                                            message.expressions = [];
+                                        message.expressions.push($root.google.analytics.data.v1alpha.FunnelFilterExpression.decode(reader, reader.uint32()));
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -22756,6 +24334,21 @@
                          */
                         FunnelFilterExpressionList.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for FunnelFilterExpressionList
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.FunnelFilterExpressionList
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        FunnelFilterExpressionList.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.FunnelFilterExpressionList";
                         };
     
                         return FunnelFilterExpressionList;
@@ -22911,21 +24504,26 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.fieldName = reader.string();
-                                    break;
-                                case 4:
-                                    message.stringFilter = $root.google.analytics.data.v1alpha.StringFilter.decode(reader, reader.uint32());
-                                    break;
-                                case 5:
-                                    message.inListFilter = $root.google.analytics.data.v1alpha.InListFilter.decode(reader, reader.uint32());
-                                    break;
-                                case 6:
-                                    message.numericFilter = $root.google.analytics.data.v1alpha.NumericFilter.decode(reader, reader.uint32());
-                                    break;
-                                case 7:
-                                    message.betweenFilter = $root.google.analytics.data.v1alpha.BetweenFilter.decode(reader, reader.uint32());
-                                    break;
+                                case 1: {
+                                        message.fieldName = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.stringFilter = $root.google.analytics.data.v1alpha.StringFilter.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.inListFilter = $root.google.analytics.data.v1alpha.InListFilter.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.numericFilter = $root.google.analytics.data.v1alpha.NumericFilter.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.betweenFilter = $root.google.analytics.data.v1alpha.BetweenFilter.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -23094,6 +24692,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for FunnelFieldFilter
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.FunnelFieldFilter
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        FunnelFieldFilter.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.FunnelFieldFilter";
+                        };
+    
                         return FunnelFieldFilter;
                     })();
     
@@ -23225,12 +24838,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.eventName = reader.string();
-                                    break;
-                                case 2:
-                                    message.funnelParameterFilterExpression = $root.google.analytics.data.v1alpha.FunnelParameterFilterExpression.decode(reader, reader.uint32());
-                                    break;
+                                case 1: {
+                                        message.eventName = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.funnelParameterFilterExpression = $root.google.analytics.data.v1alpha.FunnelParameterFilterExpression.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -23340,6 +24955,21 @@
                          */
                         FunnelEventFilter.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for FunnelEventFilter
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.FunnelEventFilter
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        FunnelEventFilter.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.FunnelEventFilter";
                         };
     
                         return FunnelEventFilter;
@@ -23484,18 +25114,22 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.andGroup = $root.google.analytics.data.v1alpha.FunnelParameterFilterExpressionList.decode(reader, reader.uint32());
-                                    break;
-                                case 2:
-                                    message.orGroup = $root.google.analytics.data.v1alpha.FunnelParameterFilterExpressionList.decode(reader, reader.uint32());
-                                    break;
-                                case 3:
-                                    message.notExpression = $root.google.analytics.data.v1alpha.FunnelParameterFilterExpression.decode(reader, reader.uint32());
-                                    break;
-                                case 4:
-                                    message.funnelParameterFilter = $root.google.analytics.data.v1alpha.FunnelParameterFilter.decode(reader, reader.uint32());
-                                    break;
+                                case 1: {
+                                        message.andGroup = $root.google.analytics.data.v1alpha.FunnelParameterFilterExpressionList.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.orGroup = $root.google.analytics.data.v1alpha.FunnelParameterFilterExpressionList.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.notExpression = $root.google.analytics.data.v1alpha.FunnelParameterFilterExpression.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.funnelParameterFilter = $root.google.analytics.data.v1alpha.FunnelParameterFilter.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -23655,6 +25289,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for FunnelParameterFilterExpression
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.FunnelParameterFilterExpression
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        FunnelParameterFilterExpression.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.FunnelParameterFilterExpression";
+                        };
+    
                         return FunnelParameterFilterExpression;
                     })();
     
@@ -23752,11 +25401,12 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    if (!(message.expressions && message.expressions.length))
-                                        message.expressions = [];
-                                    message.expressions.push($root.google.analytics.data.v1alpha.FunnelParameterFilterExpression.decode(reader, reader.uint32()));
-                                    break;
+                                case 1: {
+                                        if (!(message.expressions && message.expressions.length))
+                                            message.expressions = [];
+                                        message.expressions.push($root.google.analytics.data.v1alpha.FunnelParameterFilterExpression.decode(reader, reader.uint32()));
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -23861,6 +25511,21 @@
                          */
                         FunnelParameterFilterExpressionList.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for FunnelParameterFilterExpressionList
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.FunnelParameterFilterExpressionList
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        FunnelParameterFilterExpressionList.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.FunnelParameterFilterExpressionList";
                         };
     
                         return FunnelParameterFilterExpressionList;
@@ -24038,24 +25703,30 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.eventParameterName = reader.string();
-                                    break;
-                                case 2:
-                                    message.itemParameterName = reader.string();
-                                    break;
-                                case 4:
-                                    message.stringFilter = $root.google.analytics.data.v1alpha.StringFilter.decode(reader, reader.uint32());
-                                    break;
-                                case 5:
-                                    message.inListFilter = $root.google.analytics.data.v1alpha.InListFilter.decode(reader, reader.uint32());
-                                    break;
-                                case 6:
-                                    message.numericFilter = $root.google.analytics.data.v1alpha.NumericFilter.decode(reader, reader.uint32());
-                                    break;
-                                case 7:
-                                    message.betweenFilter = $root.google.analytics.data.v1alpha.BetweenFilter.decode(reader, reader.uint32());
-                                    break;
+                                case 1: {
+                                        message.eventParameterName = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.itemParameterName = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.stringFilter = $root.google.analytics.data.v1alpha.StringFilter.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.inListFilter = $root.google.analytics.data.v1alpha.InListFilter.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.numericFilter = $root.google.analytics.data.v1alpha.NumericFilter.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.betweenFilter = $root.google.analytics.data.v1alpha.BetweenFilter.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -24241,6 +25912,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for FunnelParameterFilter
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.FunnelParameterFilter
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        FunnelParameterFilter.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.FunnelParameterFilter";
+                        };
+    
                         return FunnelParameterFilter;
                     })();
     
@@ -24338,11 +26024,12 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    if (!(message.samplingMetadatas && message.samplingMetadatas.length))
-                                        message.samplingMetadatas = [];
-                                    message.samplingMetadatas.push($root.google.analytics.data.v1alpha.SamplingMetadata.decode(reader, reader.uint32()));
-                                    break;
+                                case 1: {
+                                        if (!(message.samplingMetadatas && message.samplingMetadatas.length))
+                                            message.samplingMetadatas = [];
+                                        message.samplingMetadatas.push($root.google.analytics.data.v1alpha.SamplingMetadata.decode(reader, reader.uint32()));
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -24447,6 +26134,21 @@
                          */
                         FunnelResponseMetadata.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for FunnelResponseMetadata
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.FunnelResponseMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        FunnelResponseMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.FunnelResponseMetadata";
                         };
     
                         return FunnelResponseMetadata;
@@ -24555,12 +26257,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.samplesReadCount = reader.int64();
-                                    break;
-                                case 2:
-                                    message.samplingSpaceSize = reader.int64();
-                                    break;
+                                case 1: {
+                                        message.samplesReadCount = reader.int64();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.samplingSpaceSize = reader.int64();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -24687,6 +26391,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for SamplingMetadata
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.SamplingMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SamplingMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.SamplingMetadata";
+                        };
+    
                         return SamplingMetadata;
                     })();
     
@@ -24771,7 +26490,7 @@
                         };
     
                         /**
-                         * Callback as used by {@link google.analytics.data.v1beta.BetaAnalyticsData#runReport}.
+                         * Callback as used by {@link google.analytics.data.v1beta.BetaAnalyticsData|runReport}.
                          * @memberof google.analytics.data.v1beta.BetaAnalyticsData
                          * @typedef RunReportCallback
                          * @type {function}
@@ -24804,7 +26523,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.analytics.data.v1beta.BetaAnalyticsData#runPivotReport}.
+                         * Callback as used by {@link google.analytics.data.v1beta.BetaAnalyticsData|runPivotReport}.
                          * @memberof google.analytics.data.v1beta.BetaAnalyticsData
                          * @typedef RunPivotReportCallback
                          * @type {function}
@@ -24837,7 +26556,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.analytics.data.v1beta.BetaAnalyticsData#batchRunReports}.
+                         * Callback as used by {@link google.analytics.data.v1beta.BetaAnalyticsData|batchRunReports}.
                          * @memberof google.analytics.data.v1beta.BetaAnalyticsData
                          * @typedef BatchRunReportsCallback
                          * @type {function}
@@ -24870,7 +26589,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.analytics.data.v1beta.BetaAnalyticsData#batchRunPivotReports}.
+                         * Callback as used by {@link google.analytics.data.v1beta.BetaAnalyticsData|batchRunPivotReports}.
                          * @memberof google.analytics.data.v1beta.BetaAnalyticsData
                          * @typedef BatchRunPivotReportsCallback
                          * @type {function}
@@ -24903,7 +26622,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.analytics.data.v1beta.BetaAnalyticsData#getMetadata}.
+                         * Callback as used by {@link google.analytics.data.v1beta.BetaAnalyticsData|getMetadata}.
                          * @memberof google.analytics.data.v1beta.BetaAnalyticsData
                          * @typedef GetMetadataCallback
                          * @type {function}
@@ -24936,7 +26655,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.analytics.data.v1beta.BetaAnalyticsData#runRealtimeReport}.
+                         * Callback as used by {@link google.analytics.data.v1beta.BetaAnalyticsData|runRealtimeReport}.
                          * @memberof google.analytics.data.v1beta.BetaAnalyticsData
                          * @typedef RunRealtimeReportCallback
                          * @type {function}
@@ -24969,7 +26688,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.analytics.data.v1beta.BetaAnalyticsData#checkCompatibility}.
+                         * Callback as used by {@link google.analytics.data.v1beta.BetaAnalyticsData|checkCompatibility}.
                          * @memberof google.analytics.data.v1beta.BetaAnalyticsData
                          * @typedef CheckCompatibilityCallback
                          * @type {function}
@@ -25155,28 +26874,34 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.property = reader.string();
-                                    break;
-                                case 2:
-                                    if (!(message.dimensions && message.dimensions.length))
-                                        message.dimensions = [];
-                                    message.dimensions.push($root.google.analytics.data.v1beta.Dimension.decode(reader, reader.uint32()));
-                                    break;
-                                case 3:
-                                    if (!(message.metrics && message.metrics.length))
-                                        message.metrics = [];
-                                    message.metrics.push($root.google.analytics.data.v1beta.Metric.decode(reader, reader.uint32()));
-                                    break;
-                                case 4:
-                                    message.dimensionFilter = $root.google.analytics.data.v1beta.FilterExpression.decode(reader, reader.uint32());
-                                    break;
-                                case 5:
-                                    message.metricFilter = $root.google.analytics.data.v1beta.FilterExpression.decode(reader, reader.uint32());
-                                    break;
-                                case 6:
-                                    message.compatibilityFilter = reader.int32();
-                                    break;
+                                case 1: {
+                                        message.property = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.dimensions && message.dimensions.length))
+                                            message.dimensions = [];
+                                        message.dimensions.push($root.google.analytics.data.v1beta.Dimension.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.metrics && message.metrics.length))
+                                            message.metrics = [];
+                                        message.metrics.push($root.google.analytics.data.v1beta.Metric.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 4: {
+                                        message.dimensionFilter = $root.google.analytics.data.v1beta.FilterExpression.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.metricFilter = $root.google.analytics.data.v1beta.FilterExpression.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.compatibilityFilter = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -25371,6 +27096,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for CheckCompatibilityRequest
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1beta.CheckCompatibilityRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CheckCompatibilityRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1beta.CheckCompatibilityRequest";
+                        };
+    
                         return CheckCompatibilityRequest;
                     })();
     
@@ -25481,16 +27221,18 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    if (!(message.dimensionCompatibilities && message.dimensionCompatibilities.length))
-                                        message.dimensionCompatibilities = [];
-                                    message.dimensionCompatibilities.push($root.google.analytics.data.v1beta.DimensionCompatibility.decode(reader, reader.uint32()));
-                                    break;
-                                case 2:
-                                    if (!(message.metricCompatibilities && message.metricCompatibilities.length))
-                                        message.metricCompatibilities = [];
-                                    message.metricCompatibilities.push($root.google.analytics.data.v1beta.MetricCompatibility.decode(reader, reader.uint32()));
-                                    break;
+                                case 1: {
+                                        if (!(message.dimensionCompatibilities && message.dimensionCompatibilities.length))
+                                            message.dimensionCompatibilities = [];
+                                        message.dimensionCompatibilities.push($root.google.analytics.data.v1beta.DimensionCompatibility.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.metricCompatibilities && message.metricCompatibilities.length))
+                                            message.metricCompatibilities = [];
+                                        message.metricCompatibilities.push($root.google.analytics.data.v1beta.MetricCompatibility.decode(reader, reader.uint32()));
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -25623,6 +27365,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for CheckCompatibilityResponse
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1beta.CheckCompatibilityResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CheckCompatibilityResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1beta.CheckCompatibilityResponse";
+                        };
+    
                         return CheckCompatibilityResponse;
                     })();
     
@@ -25744,19 +27501,22 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 3:
-                                    message.name = reader.string();
-                                    break;
-                                case 1:
-                                    if (!(message.dimensions && message.dimensions.length))
-                                        message.dimensions = [];
-                                    message.dimensions.push($root.google.analytics.data.v1beta.DimensionMetadata.decode(reader, reader.uint32()));
-                                    break;
-                                case 2:
-                                    if (!(message.metrics && message.metrics.length))
-                                        message.metrics = [];
-                                    message.metrics.push($root.google.analytics.data.v1beta.MetricMetadata.decode(reader, reader.uint32()));
-                                    break;
+                                case 3: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 1: {
+                                        if (!(message.dimensions && message.dimensions.length))
+                                            message.dimensions = [];
+                                        message.dimensions.push($root.google.analytics.data.v1beta.DimensionMetadata.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.metrics && message.metrics.length))
+                                            message.metrics = [];
+                                        message.metrics.push($root.google.analytics.data.v1beta.MetricMetadata.decode(reader, reader.uint32()));
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -25896,6 +27656,21 @@
                          */
                         Metadata.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Metadata
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1beta.Metadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Metadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1beta.Metadata";
                         };
     
                         return Metadata;
@@ -26149,63 +27924,77 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.property = reader.string();
-                                    break;
-                                case 2:
-                                    if (!(message.dimensions && message.dimensions.length))
-                                        message.dimensions = [];
-                                    message.dimensions.push($root.google.analytics.data.v1beta.Dimension.decode(reader, reader.uint32()));
-                                    break;
-                                case 3:
-                                    if (!(message.metrics && message.metrics.length))
-                                        message.metrics = [];
-                                    message.metrics.push($root.google.analytics.data.v1beta.Metric.decode(reader, reader.uint32()));
-                                    break;
-                                case 4:
-                                    if (!(message.dateRanges && message.dateRanges.length))
-                                        message.dateRanges = [];
-                                    message.dateRanges.push($root.google.analytics.data.v1beta.DateRange.decode(reader, reader.uint32()));
-                                    break;
-                                case 5:
-                                    message.dimensionFilter = $root.google.analytics.data.v1beta.FilterExpression.decode(reader, reader.uint32());
-                                    break;
-                                case 6:
-                                    message.metricFilter = $root.google.analytics.data.v1beta.FilterExpression.decode(reader, reader.uint32());
-                                    break;
-                                case 7:
-                                    message.offset = reader.int64();
-                                    break;
-                                case 8:
-                                    message.limit = reader.int64();
-                                    break;
-                                case 9:
-                                    if (!(message.metricAggregations && message.metricAggregations.length))
-                                        message.metricAggregations = [];
-                                    if ((tag & 7) === 2) {
-                                        var end2 = reader.uint32() + reader.pos;
-                                        while (reader.pos < end2)
+                                case 1: {
+                                        message.property = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.dimensions && message.dimensions.length))
+                                            message.dimensions = [];
+                                        message.dimensions.push($root.google.analytics.data.v1beta.Dimension.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.metrics && message.metrics.length))
+                                            message.metrics = [];
+                                        message.metrics.push($root.google.analytics.data.v1beta.Metric.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 4: {
+                                        if (!(message.dateRanges && message.dateRanges.length))
+                                            message.dateRanges = [];
+                                        message.dateRanges.push($root.google.analytics.data.v1beta.DateRange.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 5: {
+                                        message.dimensionFilter = $root.google.analytics.data.v1beta.FilterExpression.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.metricFilter = $root.google.analytics.data.v1beta.FilterExpression.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.offset = reader.int64();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.limit = reader.int64();
+                                        break;
+                                    }
+                                case 9: {
+                                        if (!(message.metricAggregations && message.metricAggregations.length))
+                                            message.metricAggregations = [];
+                                        if ((tag & 7) === 2) {
+                                            var end2 = reader.uint32() + reader.pos;
+                                            while (reader.pos < end2)
+                                                message.metricAggregations.push(reader.int32());
+                                        } else
                                             message.metricAggregations.push(reader.int32());
-                                    } else
-                                        message.metricAggregations.push(reader.int32());
-                                    break;
-                                case 10:
-                                    if (!(message.orderBys && message.orderBys.length))
-                                        message.orderBys = [];
-                                    message.orderBys.push($root.google.analytics.data.v1beta.OrderBy.decode(reader, reader.uint32()));
-                                    break;
-                                case 11:
-                                    message.currencyCode = reader.string();
-                                    break;
-                                case 12:
-                                    message.cohortSpec = $root.google.analytics.data.v1beta.CohortSpec.decode(reader, reader.uint32());
-                                    break;
-                                case 13:
-                                    message.keepEmptyRows = reader.bool();
-                                    break;
-                                case 14:
-                                    message.returnPropertyQuota = reader.bool();
-                                    break;
+                                        break;
+                                    }
+                                case 10: {
+                                        if (!(message.orderBys && message.orderBys.length))
+                                            message.orderBys = [];
+                                        message.orderBys.push($root.google.analytics.data.v1beta.OrderBy.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 11: {
+                                        message.currencyCode = reader.string();
+                                        break;
+                                    }
+                                case 12: {
+                                        message.cohortSpec = $root.google.analytics.data.v1beta.CohortSpec.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 13: {
+                                        message.keepEmptyRows = reader.bool();
+                                        break;
+                                    }
+                                case 14: {
+                                        message.returnPropertyQuota = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -26555,6 +28344,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for RunReportRequest
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1beta.RunReportRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RunReportRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1beta.RunReportRequest";
+                        };
+    
                         return RunReportRequest;
                     })();
     
@@ -26761,48 +28565,58 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    if (!(message.dimensionHeaders && message.dimensionHeaders.length))
-                                        message.dimensionHeaders = [];
-                                    message.dimensionHeaders.push($root.google.analytics.data.v1beta.DimensionHeader.decode(reader, reader.uint32()));
-                                    break;
-                                case 2:
-                                    if (!(message.metricHeaders && message.metricHeaders.length))
-                                        message.metricHeaders = [];
-                                    message.metricHeaders.push($root.google.analytics.data.v1beta.MetricHeader.decode(reader, reader.uint32()));
-                                    break;
-                                case 3:
-                                    if (!(message.rows && message.rows.length))
-                                        message.rows = [];
-                                    message.rows.push($root.google.analytics.data.v1beta.Row.decode(reader, reader.uint32()));
-                                    break;
-                                case 4:
-                                    if (!(message.totals && message.totals.length))
-                                        message.totals = [];
-                                    message.totals.push($root.google.analytics.data.v1beta.Row.decode(reader, reader.uint32()));
-                                    break;
-                                case 5:
-                                    if (!(message.maximums && message.maximums.length))
-                                        message.maximums = [];
-                                    message.maximums.push($root.google.analytics.data.v1beta.Row.decode(reader, reader.uint32()));
-                                    break;
-                                case 6:
-                                    if (!(message.minimums && message.minimums.length))
-                                        message.minimums = [];
-                                    message.minimums.push($root.google.analytics.data.v1beta.Row.decode(reader, reader.uint32()));
-                                    break;
-                                case 7:
-                                    message.rowCount = reader.int32();
-                                    break;
-                                case 8:
-                                    message.metadata = $root.google.analytics.data.v1beta.ResponseMetaData.decode(reader, reader.uint32());
-                                    break;
-                                case 9:
-                                    message.propertyQuota = $root.google.analytics.data.v1beta.PropertyQuota.decode(reader, reader.uint32());
-                                    break;
-                                case 10:
-                                    message.kind = reader.string();
-                                    break;
+                                case 1: {
+                                        if (!(message.dimensionHeaders && message.dimensionHeaders.length))
+                                            message.dimensionHeaders = [];
+                                        message.dimensionHeaders.push($root.google.analytics.data.v1beta.DimensionHeader.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.metricHeaders && message.metricHeaders.length))
+                                            message.metricHeaders = [];
+                                        message.metricHeaders.push($root.google.analytics.data.v1beta.MetricHeader.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.rows && message.rows.length))
+                                            message.rows = [];
+                                        message.rows.push($root.google.analytics.data.v1beta.Row.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 4: {
+                                        if (!(message.totals && message.totals.length))
+                                            message.totals = [];
+                                        message.totals.push($root.google.analytics.data.v1beta.Row.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 5: {
+                                        if (!(message.maximums && message.maximums.length))
+                                            message.maximums = [];
+                                        message.maximums.push($root.google.analytics.data.v1beta.Row.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 6: {
+                                        if (!(message.minimums && message.minimums.length))
+                                            message.minimums = [];
+                                        message.minimums.push($root.google.analytics.data.v1beta.Row.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 7: {
+                                        message.rowCount = reader.int32();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.metadata = $root.google.analytics.data.v1beta.ResponseMetaData.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 9: {
+                                        message.propertyQuota = $root.google.analytics.data.v1beta.PropertyQuota.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 10: {
+                                        message.kind = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -27079,6 +28893,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for RunReportResponse
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1beta.RunReportResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RunReportResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1beta.RunReportResponse";
+                        };
+    
                         return RunReportResponse;
                     })();
     
@@ -27292,47 +29121,58 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.property = reader.string();
-                                    break;
-                                case 2:
-                                    if (!(message.dimensions && message.dimensions.length))
-                                        message.dimensions = [];
-                                    message.dimensions.push($root.google.analytics.data.v1beta.Dimension.decode(reader, reader.uint32()));
-                                    break;
-                                case 3:
-                                    if (!(message.metrics && message.metrics.length))
-                                        message.metrics = [];
-                                    message.metrics.push($root.google.analytics.data.v1beta.Metric.decode(reader, reader.uint32()));
-                                    break;
-                                case 4:
-                                    if (!(message.dateRanges && message.dateRanges.length))
-                                        message.dateRanges = [];
-                                    message.dateRanges.push($root.google.analytics.data.v1beta.DateRange.decode(reader, reader.uint32()));
-                                    break;
-                                case 5:
-                                    if (!(message.pivots && message.pivots.length))
-                                        message.pivots = [];
-                                    message.pivots.push($root.google.analytics.data.v1beta.Pivot.decode(reader, reader.uint32()));
-                                    break;
-                                case 6:
-                                    message.dimensionFilter = $root.google.analytics.data.v1beta.FilterExpression.decode(reader, reader.uint32());
-                                    break;
-                                case 7:
-                                    message.metricFilter = $root.google.analytics.data.v1beta.FilterExpression.decode(reader, reader.uint32());
-                                    break;
-                                case 8:
-                                    message.currencyCode = reader.string();
-                                    break;
-                                case 9:
-                                    message.cohortSpec = $root.google.analytics.data.v1beta.CohortSpec.decode(reader, reader.uint32());
-                                    break;
-                                case 10:
-                                    message.keepEmptyRows = reader.bool();
-                                    break;
-                                case 11:
-                                    message.returnPropertyQuota = reader.bool();
-                                    break;
+                                case 1: {
+                                        message.property = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.dimensions && message.dimensions.length))
+                                            message.dimensions = [];
+                                        message.dimensions.push($root.google.analytics.data.v1beta.Dimension.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.metrics && message.metrics.length))
+                                            message.metrics = [];
+                                        message.metrics.push($root.google.analytics.data.v1beta.Metric.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 4: {
+                                        if (!(message.dateRanges && message.dateRanges.length))
+                                            message.dateRanges = [];
+                                        message.dateRanges.push($root.google.analytics.data.v1beta.DateRange.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 5: {
+                                        if (!(message.pivots && message.pivots.length))
+                                            message.pivots = [];
+                                        message.pivots.push($root.google.analytics.data.v1beta.Pivot.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 6: {
+                                        message.dimensionFilter = $root.google.analytics.data.v1beta.FilterExpression.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.metricFilter = $root.google.analytics.data.v1beta.FilterExpression.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.currencyCode = reader.string();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.cohortSpec = $root.google.analytics.data.v1beta.CohortSpec.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 10: {
+                                        message.keepEmptyRows = reader.bool();
+                                        break;
+                                    }
+                                case 11: {
+                                        message.returnPropertyQuota = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -27588,6 +29428,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for RunPivotReportRequest
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1beta.RunPivotReportRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RunPivotReportRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1beta.RunPivotReportRequest";
+                        };
+    
                         return RunPivotReportRequest;
                     })();
     
@@ -27770,40 +29625,48 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    if (!(message.pivotHeaders && message.pivotHeaders.length))
-                                        message.pivotHeaders = [];
-                                    message.pivotHeaders.push($root.google.analytics.data.v1beta.PivotHeader.decode(reader, reader.uint32()));
-                                    break;
-                                case 2:
-                                    if (!(message.dimensionHeaders && message.dimensionHeaders.length))
-                                        message.dimensionHeaders = [];
-                                    message.dimensionHeaders.push($root.google.analytics.data.v1beta.DimensionHeader.decode(reader, reader.uint32()));
-                                    break;
-                                case 3:
-                                    if (!(message.metricHeaders && message.metricHeaders.length))
-                                        message.metricHeaders = [];
-                                    message.metricHeaders.push($root.google.analytics.data.v1beta.MetricHeader.decode(reader, reader.uint32()));
-                                    break;
-                                case 4:
-                                    if (!(message.rows && message.rows.length))
-                                        message.rows = [];
-                                    message.rows.push($root.google.analytics.data.v1beta.Row.decode(reader, reader.uint32()));
-                                    break;
-                                case 5:
-                                    if (!(message.aggregates && message.aggregates.length))
-                                        message.aggregates = [];
-                                    message.aggregates.push($root.google.analytics.data.v1beta.Row.decode(reader, reader.uint32()));
-                                    break;
-                                case 6:
-                                    message.metadata = $root.google.analytics.data.v1beta.ResponseMetaData.decode(reader, reader.uint32());
-                                    break;
-                                case 7:
-                                    message.propertyQuota = $root.google.analytics.data.v1beta.PropertyQuota.decode(reader, reader.uint32());
-                                    break;
-                                case 8:
-                                    message.kind = reader.string();
-                                    break;
+                                case 1: {
+                                        if (!(message.pivotHeaders && message.pivotHeaders.length))
+                                            message.pivotHeaders = [];
+                                        message.pivotHeaders.push($root.google.analytics.data.v1beta.PivotHeader.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.dimensionHeaders && message.dimensionHeaders.length))
+                                            message.dimensionHeaders = [];
+                                        message.dimensionHeaders.push($root.google.analytics.data.v1beta.DimensionHeader.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.metricHeaders && message.metricHeaders.length))
+                                            message.metricHeaders = [];
+                                        message.metricHeaders.push($root.google.analytics.data.v1beta.MetricHeader.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 4: {
+                                        if (!(message.rows && message.rows.length))
+                                            message.rows = [];
+                                        message.rows.push($root.google.analytics.data.v1beta.Row.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 5: {
+                                        if (!(message.aggregates && message.aggregates.length))
+                                            message.aggregates = [];
+                                        message.aggregates.push($root.google.analytics.data.v1beta.Row.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 6: {
+                                        message.metadata = $root.google.analytics.data.v1beta.ResponseMetaData.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.propertyQuota = $root.google.analytics.data.v1beta.PropertyQuota.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.kind = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -28047,6 +29910,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for RunPivotReportResponse
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1beta.RunPivotReportResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RunPivotReportResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1beta.RunPivotReportResponse";
+                        };
+    
                         return RunPivotReportResponse;
                     })();
     
@@ -28155,14 +30033,16 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.property = reader.string();
-                                    break;
-                                case 2:
-                                    if (!(message.requests && message.requests.length))
-                                        message.requests = [];
-                                    message.requests.push($root.google.analytics.data.v1beta.RunReportRequest.decode(reader, reader.uint32()));
-                                    break;
+                                case 1: {
+                                        message.property = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.requests && message.requests.length))
+                                            message.requests = [];
+                                        message.requests.push($root.google.analytics.data.v1beta.RunReportRequest.decode(reader, reader.uint32()));
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -28278,6 +30158,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for BatchRunReportsRequest
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1beta.BatchRunReportsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BatchRunReportsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1beta.BatchRunReportsRequest";
+                        };
+    
                         return BatchRunReportsRequest;
                     })();
     
@@ -28386,14 +30281,16 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    if (!(message.reports && message.reports.length))
-                                        message.reports = [];
-                                    message.reports.push($root.google.analytics.data.v1beta.RunReportResponse.decode(reader, reader.uint32()));
-                                    break;
-                                case 2:
-                                    message.kind = reader.string();
-                                    break;
+                                case 1: {
+                                        if (!(message.reports && message.reports.length))
+                                            message.reports = [];
+                                        message.reports.push($root.google.analytics.data.v1beta.RunReportResponse.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.kind = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -28509,6 +30406,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for BatchRunReportsResponse
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1beta.BatchRunReportsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BatchRunReportsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1beta.BatchRunReportsResponse";
+                        };
+    
                         return BatchRunReportsResponse;
                     })();
     
@@ -28617,14 +30529,16 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.property = reader.string();
-                                    break;
-                                case 2:
-                                    if (!(message.requests && message.requests.length))
-                                        message.requests = [];
-                                    message.requests.push($root.google.analytics.data.v1beta.RunPivotReportRequest.decode(reader, reader.uint32()));
-                                    break;
+                                case 1: {
+                                        message.property = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.requests && message.requests.length))
+                                            message.requests = [];
+                                        message.requests.push($root.google.analytics.data.v1beta.RunPivotReportRequest.decode(reader, reader.uint32()));
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -28740,6 +30654,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for BatchRunPivotReportsRequest
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1beta.BatchRunPivotReportsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BatchRunPivotReportsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1beta.BatchRunPivotReportsRequest";
+                        };
+    
                         return BatchRunPivotReportsRequest;
                     })();
     
@@ -28848,14 +30777,16 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    if (!(message.pivotReports && message.pivotReports.length))
-                                        message.pivotReports = [];
-                                    message.pivotReports.push($root.google.analytics.data.v1beta.RunPivotReportResponse.decode(reader, reader.uint32()));
-                                    break;
-                                case 2:
-                                    message.kind = reader.string();
-                                    break;
+                                case 1: {
+                                        if (!(message.pivotReports && message.pivotReports.length))
+                                            message.pivotReports = [];
+                                        message.pivotReports.push($root.google.analytics.data.v1beta.RunPivotReportResponse.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.kind = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -28971,6 +30902,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for BatchRunPivotReportsResponse
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1beta.BatchRunPivotReportsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BatchRunPivotReportsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1beta.BatchRunPivotReportsResponse";
+                        };
+    
                         return BatchRunPivotReportsResponse;
                     })();
     
@@ -29066,9 +31012,10 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -29156,6 +31103,21 @@
                          */
                         GetMetadataRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetMetadataRequest
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1beta.GetMetadataRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetMetadataRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1beta.GetMetadataRequest";
                         };
     
                         return GetMetadataRequest;
@@ -29365,51 +31327,61 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.property = reader.string();
-                                    break;
-                                case 2:
-                                    if (!(message.dimensions && message.dimensions.length))
-                                        message.dimensions = [];
-                                    message.dimensions.push($root.google.analytics.data.v1beta.Dimension.decode(reader, reader.uint32()));
-                                    break;
-                                case 3:
-                                    if (!(message.metrics && message.metrics.length))
-                                        message.metrics = [];
-                                    message.metrics.push($root.google.analytics.data.v1beta.Metric.decode(reader, reader.uint32()));
-                                    break;
-                                case 4:
-                                    message.dimensionFilter = $root.google.analytics.data.v1beta.FilterExpression.decode(reader, reader.uint32());
-                                    break;
-                                case 5:
-                                    message.metricFilter = $root.google.analytics.data.v1beta.FilterExpression.decode(reader, reader.uint32());
-                                    break;
-                                case 6:
-                                    message.limit = reader.int64();
-                                    break;
-                                case 7:
-                                    if (!(message.metricAggregations && message.metricAggregations.length))
-                                        message.metricAggregations = [];
-                                    if ((tag & 7) === 2) {
-                                        var end2 = reader.uint32() + reader.pos;
-                                        while (reader.pos < end2)
+                                case 1: {
+                                        message.property = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.dimensions && message.dimensions.length))
+                                            message.dimensions = [];
+                                        message.dimensions.push($root.google.analytics.data.v1beta.Dimension.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.metrics && message.metrics.length))
+                                            message.metrics = [];
+                                        message.metrics.push($root.google.analytics.data.v1beta.Metric.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 4: {
+                                        message.dimensionFilter = $root.google.analytics.data.v1beta.FilterExpression.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.metricFilter = $root.google.analytics.data.v1beta.FilterExpression.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.limit = reader.int64();
+                                        break;
+                                    }
+                                case 7: {
+                                        if (!(message.metricAggregations && message.metricAggregations.length))
+                                            message.metricAggregations = [];
+                                        if ((tag & 7) === 2) {
+                                            var end2 = reader.uint32() + reader.pos;
+                                            while (reader.pos < end2)
+                                                message.metricAggregations.push(reader.int32());
+                                        } else
                                             message.metricAggregations.push(reader.int32());
-                                    } else
-                                        message.metricAggregations.push(reader.int32());
-                                    break;
-                                case 8:
-                                    if (!(message.orderBys && message.orderBys.length))
-                                        message.orderBys = [];
-                                    message.orderBys.push($root.google.analytics.data.v1beta.OrderBy.decode(reader, reader.uint32()));
-                                    break;
-                                case 9:
-                                    message.returnPropertyQuota = reader.bool();
-                                    break;
-                                case 10:
-                                    if (!(message.minuteRanges && message.minuteRanges.length))
-                                        message.minuteRanges = [];
-                                    message.minuteRanges.push($root.google.analytics.data.v1beta.MinuteRange.decode(reader, reader.uint32()));
-                                    break;
+                                        break;
+                                    }
+                                case 8: {
+                                        if (!(message.orderBys && message.orderBys.length))
+                                            message.orderBys = [];
+                                        message.orderBys.push($root.google.analytics.data.v1beta.OrderBy.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 9: {
+                                        message.returnPropertyQuota = reader.bool();
+                                        break;
+                                    }
+                                case 10: {
+                                        if (!(message.minuteRanges && message.minuteRanges.length))
+                                            message.minuteRanges = [];
+                                        message.minuteRanges.push($root.google.analytics.data.v1beta.MinuteRange.decode(reader, reader.uint32()));
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -29708,6 +31680,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for RunRealtimeReportRequest
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1beta.RunRealtimeReportRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RunRealtimeReportRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1beta.RunRealtimeReportRequest";
+                        };
+    
                         return RunRealtimeReportRequest;
                     })();
     
@@ -29903,45 +31890,54 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    if (!(message.dimensionHeaders && message.dimensionHeaders.length))
-                                        message.dimensionHeaders = [];
-                                    message.dimensionHeaders.push($root.google.analytics.data.v1beta.DimensionHeader.decode(reader, reader.uint32()));
-                                    break;
-                                case 2:
-                                    if (!(message.metricHeaders && message.metricHeaders.length))
-                                        message.metricHeaders = [];
-                                    message.metricHeaders.push($root.google.analytics.data.v1beta.MetricHeader.decode(reader, reader.uint32()));
-                                    break;
-                                case 3:
-                                    if (!(message.rows && message.rows.length))
-                                        message.rows = [];
-                                    message.rows.push($root.google.analytics.data.v1beta.Row.decode(reader, reader.uint32()));
-                                    break;
-                                case 4:
-                                    if (!(message.totals && message.totals.length))
-                                        message.totals = [];
-                                    message.totals.push($root.google.analytics.data.v1beta.Row.decode(reader, reader.uint32()));
-                                    break;
-                                case 5:
-                                    if (!(message.maximums && message.maximums.length))
-                                        message.maximums = [];
-                                    message.maximums.push($root.google.analytics.data.v1beta.Row.decode(reader, reader.uint32()));
-                                    break;
-                                case 6:
-                                    if (!(message.minimums && message.minimums.length))
-                                        message.minimums = [];
-                                    message.minimums.push($root.google.analytics.data.v1beta.Row.decode(reader, reader.uint32()));
-                                    break;
-                                case 7:
-                                    message.rowCount = reader.int32();
-                                    break;
-                                case 8:
-                                    message.propertyQuota = $root.google.analytics.data.v1beta.PropertyQuota.decode(reader, reader.uint32());
-                                    break;
-                                case 9:
-                                    message.kind = reader.string();
-                                    break;
+                                case 1: {
+                                        if (!(message.dimensionHeaders && message.dimensionHeaders.length))
+                                            message.dimensionHeaders = [];
+                                        message.dimensionHeaders.push($root.google.analytics.data.v1beta.DimensionHeader.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.metricHeaders && message.metricHeaders.length))
+                                            message.metricHeaders = [];
+                                        message.metricHeaders.push($root.google.analytics.data.v1beta.MetricHeader.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.rows && message.rows.length))
+                                            message.rows = [];
+                                        message.rows.push($root.google.analytics.data.v1beta.Row.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 4: {
+                                        if (!(message.totals && message.totals.length))
+                                            message.totals = [];
+                                        message.totals.push($root.google.analytics.data.v1beta.Row.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 5: {
+                                        if (!(message.maximums && message.maximums.length))
+                                            message.maximums = [];
+                                        message.maximums.push($root.google.analytics.data.v1beta.Row.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 6: {
+                                        if (!(message.minimums && message.minimums.length))
+                                            message.minimums = [];
+                                        message.minimums.push($root.google.analytics.data.v1beta.Row.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 7: {
+                                        message.rowCount = reader.int32();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.propertyQuota = $root.google.analytics.data.v1beta.PropertyQuota.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 9: {
+                                        message.kind = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -30205,6 +32201,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for RunRealtimeReportResponse
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1beta.RunRealtimeReportResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RunRealtimeReportResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1beta.RunRealtimeReportResponse";
+                        };
+    
                         return RunRealtimeReportResponse;
                     })();
     
@@ -30322,15 +32333,18 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.startDate = reader.string();
-                                    break;
-                                case 2:
-                                    message.endDate = reader.string();
-                                    break;
-                                case 3:
-                                    message.name = reader.string();
-                                    break;
+                                case 1: {
+                                        message.startDate = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.endDate = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -30435,6 +32449,21 @@
                          */
                         DateRange.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DateRange
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1beta.DateRange
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DateRange.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1beta.DateRange";
                         };
     
                         return DateRange;
@@ -30579,15 +32608,18 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.startMinutesAgo = reader.int32();
-                                    break;
-                                case 2:
-                                    message.endMinutesAgo = reader.int32();
-                                    break;
-                                case 3:
-                                    message.name = reader.string();
-                                    break;
+                                case 1: {
+                                        message.startMinutesAgo = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.endMinutesAgo = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -30702,6 +32734,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for MinuteRange
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1beta.MinuteRange
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MinuteRange.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1beta.MinuteRange";
+                        };
+    
                         return MinuteRange;
                     })();
     
@@ -30808,12 +32855,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
-                                case 2:
-                                    message.dimensionExpression = $root.google.analytics.data.v1beta.DimensionExpression.decode(reader, reader.uint32());
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.dimensionExpression = $root.google.analytics.data.v1beta.DimensionExpression.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -30915,6 +32964,21 @@
                          */
                         Dimension.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Dimension
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1beta.Dimension
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Dimension.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1beta.Dimension";
                         };
     
                         return Dimension;
@@ -31048,15 +33112,18 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 4:
-                                    message.lowerCase = $root.google.analytics.data.v1beta.DimensionExpression.CaseExpression.decode(reader, reader.uint32());
-                                    break;
-                                case 5:
-                                    message.upperCase = $root.google.analytics.data.v1beta.DimensionExpression.CaseExpression.decode(reader, reader.uint32());
-                                    break;
-                                case 6:
-                                    message.concatenate = $root.google.analytics.data.v1beta.DimensionExpression.ConcatenateExpression.decode(reader, reader.uint32());
-                                    break;
+                                case 4: {
+                                        message.lowerCase = $root.google.analytics.data.v1beta.DimensionExpression.CaseExpression.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.upperCase = $root.google.analytics.data.v1beta.DimensionExpression.CaseExpression.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.concatenate = $root.google.analytics.data.v1beta.DimensionExpression.ConcatenateExpression.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -31196,6 +33263,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for DimensionExpression
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1beta.DimensionExpression
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DimensionExpression.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1beta.DimensionExpression";
+                        };
+    
                         DimensionExpression.CaseExpression = (function() {
     
                             /**
@@ -31288,9 +33370,10 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.dimensionName = reader.string();
-                                        break;
+                                    case 1: {
+                                            message.dimensionName = reader.string();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -31378,6 +33461,21 @@
                              */
                             CaseExpression.prototype.toJSON = function toJSON() {
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for CaseExpression
+                             * @function getTypeUrl
+                             * @memberof google.analytics.data.v1beta.DimensionExpression.CaseExpression
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            CaseExpression.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.analytics.data.v1beta.DimensionExpression.CaseExpression";
                             };
     
                             return CaseExpression;
@@ -31488,14 +33586,16 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        if (!(message.dimensionNames && message.dimensionNames.length))
-                                            message.dimensionNames = [];
-                                        message.dimensionNames.push(reader.string());
-                                        break;
-                                    case 2:
-                                        message.delimiter = reader.string();
-                                        break;
+                                    case 1: {
+                                            if (!(message.dimensionNames && message.dimensionNames.length))
+                                                message.dimensionNames = [];
+                                            message.dimensionNames.push(reader.string());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.delimiter = reader.string();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -31604,6 +33704,21 @@
                              */
                             ConcatenateExpression.prototype.toJSON = function toJSON() {
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ConcatenateExpression
+                             * @function getTypeUrl
+                             * @memberof google.analytics.data.v1beta.DimensionExpression.ConcatenateExpression
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ConcatenateExpression.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.analytics.data.v1beta.DimensionExpression.ConcatenateExpression";
                             };
     
                             return ConcatenateExpression;
@@ -31726,15 +33841,18 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
-                                case 2:
-                                    message.expression = reader.string();
-                                    break;
-                                case 3:
-                                    message.invisible = reader.bool();
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.expression = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.invisible = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -31839,6 +33957,21 @@
                          */
                         Metric.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Metric
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1beta.Metric
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Metric.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1beta.Metric";
                         };
     
                         return Metric;
@@ -31983,18 +34116,22 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.andGroup = $root.google.analytics.data.v1beta.FilterExpressionList.decode(reader, reader.uint32());
-                                    break;
-                                case 2:
-                                    message.orGroup = $root.google.analytics.data.v1beta.FilterExpressionList.decode(reader, reader.uint32());
-                                    break;
-                                case 3:
-                                    message.notExpression = $root.google.analytics.data.v1beta.FilterExpression.decode(reader, reader.uint32());
-                                    break;
-                                case 4:
-                                    message.filter = $root.google.analytics.data.v1beta.Filter.decode(reader, reader.uint32());
-                                    break;
+                                case 1: {
+                                        message.andGroup = $root.google.analytics.data.v1beta.FilterExpressionList.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.orGroup = $root.google.analytics.data.v1beta.FilterExpressionList.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.notExpression = $root.google.analytics.data.v1beta.FilterExpression.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = $root.google.analytics.data.v1beta.Filter.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -32154,6 +34291,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for FilterExpression
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1beta.FilterExpression
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        FilterExpression.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1beta.FilterExpression";
+                        };
+    
                         return FilterExpression;
                     })();
     
@@ -32251,11 +34403,12 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    if (!(message.expressions && message.expressions.length))
-                                        message.expressions = [];
-                                    message.expressions.push($root.google.analytics.data.v1beta.FilterExpression.decode(reader, reader.uint32()));
-                                    break;
+                                case 1: {
+                                        if (!(message.expressions && message.expressions.length))
+                                            message.expressions = [];
+                                        message.expressions.push($root.google.analytics.data.v1beta.FilterExpression.decode(reader, reader.uint32()));
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -32360,6 +34513,21 @@
                          */
                         FilterExpressionList.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for FilterExpressionList
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1beta.FilterExpressionList
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        FilterExpressionList.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1beta.FilterExpressionList";
                         };
     
                         return FilterExpressionList;
@@ -32515,21 +34683,26 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.fieldName = reader.string();
-                                    break;
-                                case 3:
-                                    message.stringFilter = $root.google.analytics.data.v1beta.Filter.StringFilter.decode(reader, reader.uint32());
-                                    break;
-                                case 4:
-                                    message.inListFilter = $root.google.analytics.data.v1beta.Filter.InListFilter.decode(reader, reader.uint32());
-                                    break;
-                                case 5:
-                                    message.numericFilter = $root.google.analytics.data.v1beta.Filter.NumericFilter.decode(reader, reader.uint32());
-                                    break;
-                                case 6:
-                                    message.betweenFilter = $root.google.analytics.data.v1beta.Filter.BetweenFilter.decode(reader, reader.uint32());
-                                    break;
+                                case 1: {
+                                        message.fieldName = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.stringFilter = $root.google.analytics.data.v1beta.Filter.StringFilter.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.inListFilter = $root.google.analytics.data.v1beta.Filter.InListFilter.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.numericFilter = $root.google.analytics.data.v1beta.Filter.NumericFilter.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.betweenFilter = $root.google.analytics.data.v1beta.Filter.BetweenFilter.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -32698,6 +34871,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for Filter
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1beta.Filter
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Filter.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1beta.Filter";
+                        };
+    
                         Filter.StringFilter = (function() {
     
                             /**
@@ -32812,15 +35000,18 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.matchType = reader.int32();
-                                        break;
-                                    case 2:
-                                        message.value = reader.string();
-                                        break;
-                                    case 3:
-                                        message.caseSensitive = reader.bool();
-                                        break;
+                                    case 1: {
+                                            message.matchType = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.value = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.caseSensitive = reader.bool();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -32966,6 +35157,21 @@
                             };
     
                             /**
+                             * Gets the default type url for StringFilter
+                             * @function getTypeUrl
+                             * @memberof google.analytics.data.v1beta.Filter.StringFilter
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            StringFilter.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.analytics.data.v1beta.Filter.StringFilter";
+                            };
+    
+                            /**
                              * MatchType enum.
                              * @name google.analytics.data.v1beta.Filter.StringFilter.MatchType
                              * @enum {number}
@@ -33097,14 +35303,16 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        if (!(message.values && message.values.length))
-                                            message.values = [];
-                                        message.values.push(reader.string());
-                                        break;
-                                    case 2:
-                                        message.caseSensitive = reader.bool();
-                                        break;
+                                    case 1: {
+                                            if (!(message.values && message.values.length))
+                                                message.values = [];
+                                            message.values.push(reader.string());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.caseSensitive = reader.bool();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -33215,6 +35423,21 @@
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                             };
     
+                            /**
+                             * Gets the default type url for InListFilter
+                             * @function getTypeUrl
+                             * @memberof google.analytics.data.v1beta.Filter.InListFilter
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            InListFilter.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.analytics.data.v1beta.Filter.InListFilter";
+                            };
+    
                             return InListFilter;
                         })();
     
@@ -33321,12 +35544,14 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.operation = reader.int32();
-                                        break;
-                                    case 2:
-                                        message.value = $root.google.analytics.data.v1beta.NumericValue.decode(reader, reader.uint32());
-                                        break;
+                                    case 1: {
+                                            message.operation = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.value = $root.google.analytics.data.v1beta.NumericValue.decode(reader, reader.uint32());
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -33464,6 +35689,21 @@
                             };
     
                             /**
+                             * Gets the default type url for NumericFilter
+                             * @function getTypeUrl
+                             * @memberof google.analytics.data.v1beta.Filter.NumericFilter
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            NumericFilter.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.analytics.data.v1beta.Filter.NumericFilter";
+                            };
+    
+                            /**
                              * Operation enum.
                              * @name google.analytics.data.v1beta.Filter.NumericFilter.Operation
                              * @enum {number}
@@ -33591,12 +35831,14 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.fromValue = $root.google.analytics.data.v1beta.NumericValue.decode(reader, reader.uint32());
-                                        break;
-                                    case 2:
-                                        message.toValue = $root.google.analytics.data.v1beta.NumericValue.decode(reader, reader.uint32());
-                                        break;
+                                    case 1: {
+                                            message.fromValue = $root.google.analytics.data.v1beta.NumericValue.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.toValue = $root.google.analytics.data.v1beta.NumericValue.decode(reader, reader.uint32());
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -33703,6 +35945,21 @@
                              */
                             BetweenFilter.prototype.toJSON = function toJSON() {
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for BetweenFilter
+                             * @function getTypeUrl
+                             * @memberof google.analytics.data.v1beta.Filter.BetweenFilter
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            BetweenFilter.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.analytics.data.v1beta.Filter.BetweenFilter";
                             };
     
                             return BetweenFilter;
@@ -33850,18 +36107,22 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.metric = $root.google.analytics.data.v1beta.OrderBy.MetricOrderBy.decode(reader, reader.uint32());
-                                    break;
-                                case 2:
-                                    message.dimension = $root.google.analytics.data.v1beta.OrderBy.DimensionOrderBy.decode(reader, reader.uint32());
-                                    break;
-                                case 3:
-                                    message.pivot = $root.google.analytics.data.v1beta.OrderBy.PivotOrderBy.decode(reader, reader.uint32());
-                                    break;
-                                case 4:
-                                    message.desc = reader.bool();
-                                    break;
+                                case 1: {
+                                        message.metric = $root.google.analytics.data.v1beta.OrderBy.MetricOrderBy.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.dimension = $root.google.analytics.data.v1beta.OrderBy.DimensionOrderBy.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pivot = $root.google.analytics.data.v1beta.OrderBy.PivotOrderBy.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.desc = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -34010,6 +36271,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for OrderBy
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1beta.OrderBy
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        OrderBy.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1beta.OrderBy";
+                        };
+    
                         OrderBy.MetricOrderBy = (function() {
     
                             /**
@@ -34102,9 +36378,10 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.metricName = reader.string();
-                                        break;
+                                    case 1: {
+                                            message.metricName = reader.string();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -34192,6 +36469,21 @@
                              */
                             MetricOrderBy.prototype.toJSON = function toJSON() {
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for MetricOrderBy
+                             * @function getTypeUrl
+                             * @memberof google.analytics.data.v1beta.OrderBy.MetricOrderBy
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            MetricOrderBy.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.analytics.data.v1beta.OrderBy.MetricOrderBy";
                             };
     
                             return MetricOrderBy;
@@ -34300,12 +36592,14 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.dimensionName = reader.string();
-                                        break;
-                                    case 2:
-                                        message.orderType = reader.int32();
-                                        break;
+                                    case 1: {
+                                            message.dimensionName = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.orderType = reader.int32();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -34425,6 +36719,21 @@
                              */
                             DimensionOrderBy.prototype.toJSON = function toJSON() {
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for DimensionOrderBy
+                             * @function getTypeUrl
+                             * @memberof google.analytics.data.v1beta.OrderBy.DimensionOrderBy
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            DimensionOrderBy.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.analytics.data.v1beta.OrderBy.DimensionOrderBy";
                             };
     
                             /**
@@ -34553,14 +36862,16 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.metricName = reader.string();
-                                        break;
-                                    case 2:
-                                        if (!(message.pivotSelections && message.pivotSelections.length))
-                                            message.pivotSelections = [];
-                                        message.pivotSelections.push($root.google.analytics.data.v1beta.OrderBy.PivotOrderBy.PivotSelection.decode(reader, reader.uint32()));
-                                        break;
+                                    case 1: {
+                                            message.metricName = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            if (!(message.pivotSelections && message.pivotSelections.length))
+                                                message.pivotSelections = [];
+                                            message.pivotSelections.push($root.google.analytics.data.v1beta.OrderBy.PivotOrderBy.PivotSelection.decode(reader, reader.uint32()));
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -34676,6 +36987,21 @@
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                             };
     
+                            /**
+                             * Gets the default type url for PivotOrderBy
+                             * @function getTypeUrl
+                             * @memberof google.analytics.data.v1beta.OrderBy.PivotOrderBy
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            PivotOrderBy.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.analytics.data.v1beta.OrderBy.PivotOrderBy";
+                            };
+    
                             PivotOrderBy.PivotSelection = (function() {
     
                                 /**
@@ -34779,12 +37105,14 @@
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
                                         switch (tag >>> 3) {
-                                        case 1:
-                                            message.dimensionName = reader.string();
-                                            break;
-                                        case 2:
-                                            message.dimensionValue = reader.string();
-                                            break;
+                                        case 1: {
+                                                message.dimensionName = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.dimensionValue = reader.string();
+                                                break;
+                                            }
                                         default:
                                             reader.skipType(tag & 7);
                                             break;
@@ -34881,6 +37209,21 @@
                                  */
                                 PivotSelection.prototype.toJSON = function toJSON() {
                                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for PivotSelection
+                                 * @function getTypeUrl
+                                 * @memberof google.analytics.data.v1beta.OrderBy.PivotOrderBy.PivotSelection
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                PivotSelection.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.analytics.data.v1beta.OrderBy.PivotOrderBy.PivotSelection";
                                 };
     
                                 return PivotSelection;
@@ -35037,32 +37380,37 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    if (!(message.fieldNames && message.fieldNames.length))
-                                        message.fieldNames = [];
-                                    message.fieldNames.push(reader.string());
-                                    break;
-                                case 2:
-                                    if (!(message.orderBys && message.orderBys.length))
-                                        message.orderBys = [];
-                                    message.orderBys.push($root.google.analytics.data.v1beta.OrderBy.decode(reader, reader.uint32()));
-                                    break;
-                                case 3:
-                                    message.offset = reader.int64();
-                                    break;
-                                case 4:
-                                    message.limit = reader.int64();
-                                    break;
-                                case 5:
-                                    if (!(message.metricAggregations && message.metricAggregations.length))
-                                        message.metricAggregations = [];
-                                    if ((tag & 7) === 2) {
-                                        var end2 = reader.uint32() + reader.pos;
-                                        while (reader.pos < end2)
+                                case 1: {
+                                        if (!(message.fieldNames && message.fieldNames.length))
+                                            message.fieldNames = [];
+                                        message.fieldNames.push(reader.string());
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.orderBys && message.orderBys.length))
+                                            message.orderBys = [];
+                                        message.orderBys.push($root.google.analytics.data.v1beta.OrderBy.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 3: {
+                                        message.offset = reader.int64();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.limit = reader.int64();
+                                        break;
+                                    }
+                                case 5: {
+                                        if (!(message.metricAggregations && message.metricAggregations.length))
+                                            message.metricAggregations = [];
+                                        if ((tag & 7) === 2) {
+                                            var end2 = reader.uint32() + reader.pos;
+                                            while (reader.pos < end2)
+                                                message.metricAggregations.push(reader.int32());
+                                        } else
                                             message.metricAggregations.push(reader.int32());
-                                    } else
-                                        message.metricAggregations.push(reader.int32());
-                                    break;
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -35286,6 +37634,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for Pivot
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1beta.Pivot
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Pivot.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1beta.Pivot";
+                        };
+    
                         return Pivot;
                     })();
     
@@ -35405,17 +37768,20 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    if (!(message.cohorts && message.cohorts.length))
-                                        message.cohorts = [];
-                                    message.cohorts.push($root.google.analytics.data.v1beta.Cohort.decode(reader, reader.uint32()));
-                                    break;
-                                case 2:
-                                    message.cohortsRange = $root.google.analytics.data.v1beta.CohortsRange.decode(reader, reader.uint32());
-                                    break;
-                                case 3:
-                                    message.cohortReportSettings = $root.google.analytics.data.v1beta.CohortReportSettings.decode(reader, reader.uint32());
-                                    break;
+                                case 1: {
+                                        if (!(message.cohorts && message.cohorts.length))
+                                            message.cohorts = [];
+                                        message.cohorts.push($root.google.analytics.data.v1beta.Cohort.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.cohortsRange = $root.google.analytics.data.v1beta.CohortsRange.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.cohortReportSettings = $root.google.analytics.data.v1beta.CohortReportSettings.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -35550,6 +37916,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for CohortSpec
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1beta.CohortSpec
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CohortSpec.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1beta.CohortSpec";
+                        };
+    
                         return CohortSpec;
                     })();
     
@@ -35667,15 +38048,18 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
-                                case 2:
-                                    message.dimension = reader.string();
-                                    break;
-                                case 3:
-                                    message.dateRange = $root.google.analytics.data.v1beta.DateRange.decode(reader, reader.uint32());
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.dimension = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.dateRange = $root.google.analytics.data.v1beta.DateRange.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -35785,6 +38169,21 @@
                          */
                         Cohort.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Cohort
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1beta.Cohort
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Cohort.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1beta.Cohort";
                         };
     
                         return Cohort;
@@ -35904,15 +38303,18 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.granularity = reader.int32();
-                                    break;
-                                case 2:
-                                    message.startOffset = reader.int32();
-                                    break;
-                                case 3:
-                                    message.endOffset = reader.int32();
-                                    break;
+                                case 1: {
+                                        message.granularity = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.startOffset = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.endOffset = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -36043,6 +38445,21 @@
                         };
     
                         /**
+                         * Gets the default type url for CohortsRange
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1beta.CohortsRange
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CohortsRange.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1beta.CohortsRange";
+                        };
+    
+                        /**
                          * Granularity enum.
                          * @name google.analytics.data.v1beta.CohortsRange.Granularity
                          * @enum {number}
@@ -36155,9 +38572,10 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.accumulate = reader.bool();
-                                    break;
+                                case 1: {
+                                        message.accumulate = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -36245,6 +38663,21 @@
                          */
                         CohortReportSettings.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CohortReportSettings
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1beta.CohortReportSettings
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CohortReportSettings.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1beta.CohortReportSettings";
                         };
     
                         return CohortReportSettings;
@@ -36433,21 +38866,26 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 3:
-                                    message.dataLossFromOtherRow = reader.bool();
-                                    break;
-                                case 4:
-                                    message.schemaRestrictionResponse = $root.google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.decode(reader, reader.uint32());
-                                    break;
-                                case 5:
-                                    message.currencyCode = reader.string();
-                                    break;
-                                case 6:
-                                    message.timeZone = reader.string();
-                                    break;
-                                case 7:
-                                    message.emptyReason = reader.string();
-                                    break;
+                                case 3: {
+                                        message.dataLossFromOtherRow = reader.bool();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.schemaRestrictionResponse = $root.google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.currencyCode = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.timeZone = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.emptyReason = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -36592,6 +39030,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for ResponseMetaData
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1beta.ResponseMetaData
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ResponseMetaData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1beta.ResponseMetaData";
+                        };
+    
                         ResponseMetaData.SchemaRestrictionResponse = (function() {
     
                             /**
@@ -36686,11 +39139,12 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        if (!(message.activeMetricRestrictions && message.activeMetricRestrictions.length))
-                                            message.activeMetricRestrictions = [];
-                                        message.activeMetricRestrictions.push($root.google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.ActiveMetricRestriction.decode(reader, reader.uint32()));
-                                        break;
+                                    case 1: {
+                                            if (!(message.activeMetricRestrictions && message.activeMetricRestrictions.length))
+                                                message.activeMetricRestrictions = [];
+                                            message.activeMetricRestrictions.push($root.google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.ActiveMetricRestriction.decode(reader, reader.uint32()));
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -36795,6 +39249,21 @@
                              */
                             SchemaRestrictionResponse.prototype.toJSON = function toJSON() {
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SchemaRestrictionResponse
+                             * @function getTypeUrl
+                             * @memberof google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SchemaRestrictionResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse";
                             };
     
                             SchemaRestrictionResponse.ActiveMetricRestriction = (function() {
@@ -36919,19 +39388,21 @@
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
                                         switch (tag >>> 3) {
-                                        case 1:
-                                            message.metricName = reader.string();
-                                            break;
-                                        case 2:
-                                            if (!(message.restrictedMetricTypes && message.restrictedMetricTypes.length))
-                                                message.restrictedMetricTypes = [];
-                                            if ((tag & 7) === 2) {
-                                                var end2 = reader.uint32() + reader.pos;
-                                                while (reader.pos < end2)
+                                        case 1: {
+                                                message.metricName = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                if (!(message.restrictedMetricTypes && message.restrictedMetricTypes.length))
+                                                    message.restrictedMetricTypes = [];
+                                                if ((tag & 7) === 2) {
+                                                    var end2 = reader.uint32() + reader.pos;
+                                                    while (reader.pos < end2)
+                                                        message.restrictedMetricTypes.push(reader.int32());
+                                                } else
                                                     message.restrictedMetricTypes.push(reader.int32());
-                                            } else
-                                                message.restrictedMetricTypes.push(reader.int32());
-                                            break;
+                                                break;
+                                            }
                                         default:
                                             reader.skipType(tag & 7);
                                             break;
@@ -37066,6 +39537,21 @@
                                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                                 };
     
+                                /**
+                                 * Gets the default type url for ActiveMetricRestriction
+                                 * @function getTypeUrl
+                                 * @memberof google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.ActiveMetricRestriction
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                ActiveMetricRestriction.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.ActiveMetricRestriction";
+                                };
+    
                                 return ActiveMetricRestriction;
                             })();
     
@@ -37167,9 +39653,10 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -37257,6 +39744,21 @@
                          */
                         DimensionHeader.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DimensionHeader
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1beta.DimensionHeader
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DimensionHeader.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1beta.DimensionHeader";
                         };
     
                         return DimensionHeader;
@@ -37365,12 +39867,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
-                                case 2:
-                                    message.type = reader.int32();
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.type = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -37537,6 +40041,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for MetricHeader
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1beta.MetricHeader
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MetricHeader.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1beta.MetricHeader";
+                        };
+    
                         return MetricHeader;
                     })();
     
@@ -37645,14 +40164,16 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    if (!(message.pivotDimensionHeaders && message.pivotDimensionHeaders.length))
-                                        message.pivotDimensionHeaders = [];
-                                    message.pivotDimensionHeaders.push($root.google.analytics.data.v1beta.PivotDimensionHeader.decode(reader, reader.uint32()));
-                                    break;
-                                case 2:
-                                    message.rowCount = reader.int32();
-                                    break;
+                                case 1: {
+                                        if (!(message.pivotDimensionHeaders && message.pivotDimensionHeaders.length))
+                                            message.pivotDimensionHeaders = [];
+                                        message.pivotDimensionHeaders.push($root.google.analytics.data.v1beta.PivotDimensionHeader.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.rowCount = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -37768,6 +40289,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for PivotHeader
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1beta.PivotHeader
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        PivotHeader.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1beta.PivotHeader";
+                        };
+    
                         return PivotHeader;
                     })();
     
@@ -37865,11 +40401,12 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    if (!(message.dimensionValues && message.dimensionValues.length))
-                                        message.dimensionValues = [];
-                                    message.dimensionValues.push($root.google.analytics.data.v1beta.DimensionValue.decode(reader, reader.uint32()));
-                                    break;
+                                case 1: {
+                                        if (!(message.dimensionValues && message.dimensionValues.length))
+                                            message.dimensionValues = [];
+                                        message.dimensionValues.push($root.google.analytics.data.v1beta.DimensionValue.decode(reader, reader.uint32()));
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -37974,6 +40511,21 @@
                          */
                         PivotDimensionHeader.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for PivotDimensionHeader
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1beta.PivotDimensionHeader
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        PivotDimensionHeader.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1beta.PivotDimensionHeader";
                         };
     
                         return PivotDimensionHeader;
@@ -38086,16 +40638,18 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    if (!(message.dimensionValues && message.dimensionValues.length))
-                                        message.dimensionValues = [];
-                                    message.dimensionValues.push($root.google.analytics.data.v1beta.DimensionValue.decode(reader, reader.uint32()));
-                                    break;
-                                case 2:
-                                    if (!(message.metricValues && message.metricValues.length))
-                                        message.metricValues = [];
-                                    message.metricValues.push($root.google.analytics.data.v1beta.MetricValue.decode(reader, reader.uint32()));
-                                    break;
+                                case 1: {
+                                        if (!(message.dimensionValues && message.dimensionValues.length))
+                                            message.dimensionValues = [];
+                                        message.dimensionValues.push($root.google.analytics.data.v1beta.DimensionValue.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.metricValues && message.metricValues.length))
+                                            message.metricValues = [];
+                                        message.metricValues.push($root.google.analytics.data.v1beta.MetricValue.decode(reader, reader.uint32()));
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -38228,6 +40782,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for Row
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1beta.Row
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Row.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1beta.Row";
+                        };
+    
                         return Row;
                     })();
     
@@ -38337,9 +40906,10 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.value = reader.string();
-                                    break;
+                                case 1: {
+                                        message.value = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -38431,6 +41001,21 @@
                          */
                         DimensionValue.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DimensionValue
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1beta.DimensionValue
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DimensionValue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1beta.DimensionValue";
                         };
     
                         return DimensionValue;
@@ -38542,9 +41127,10 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 4:
-                                    message.value = reader.string();
-                                    break;
+                                case 4: {
+                                        message.value = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -38636,6 +41222,21 @@
                          */
                         MetricValue.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for MetricValue
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1beta.MetricValue
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MetricValue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1beta.MetricValue";
                         };
     
                         return MetricValue;
@@ -38758,12 +41359,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.int64Value = reader.int64();
-                                    break;
-                                case 2:
-                                    message.doubleValue = reader.double();
-                                    break;
+                                case 1: {
+                                        message.int64Value = reader.int64();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.doubleValue = reader.double();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -38879,6 +41482,21 @@
                          */
                         NumericValue.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for NumericValue
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1beta.NumericValue
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        NumericValue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1beta.NumericValue";
                         };
     
                         return NumericValue;
@@ -39020,21 +41638,26 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.tokensPerDay = $root.google.analytics.data.v1beta.QuotaStatus.decode(reader, reader.uint32());
-                                    break;
-                                case 2:
-                                    message.tokensPerHour = $root.google.analytics.data.v1beta.QuotaStatus.decode(reader, reader.uint32());
-                                    break;
-                                case 3:
-                                    message.concurrentRequests = $root.google.analytics.data.v1beta.QuotaStatus.decode(reader, reader.uint32());
-                                    break;
-                                case 4:
-                                    message.serverErrorsPerProjectPerHour = $root.google.analytics.data.v1beta.QuotaStatus.decode(reader, reader.uint32());
-                                    break;
-                                case 5:
-                                    message.potentiallyThresholdedRequestsPerHour = $root.google.analytics.data.v1beta.QuotaStatus.decode(reader, reader.uint32());
-                                    break;
+                                case 1: {
+                                        message.tokensPerDay = $root.google.analytics.data.v1beta.QuotaStatus.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.tokensPerHour = $root.google.analytics.data.v1beta.QuotaStatus.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.concurrentRequests = $root.google.analytics.data.v1beta.QuotaStatus.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.serverErrorsPerProjectPerHour = $root.google.analytics.data.v1beta.QuotaStatus.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.potentiallyThresholdedRequestsPerHour = $root.google.analytics.data.v1beta.QuotaStatus.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -39182,6 +41805,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for PropertyQuota
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1beta.PropertyQuota
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        PropertyQuota.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1beta.PropertyQuota";
+                        };
+    
                         return PropertyQuota;
                     })();
     
@@ -39288,12 +41926,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.consumed = reader.int32();
-                                    break;
-                                case 2:
-                                    message.remaining = reader.int32();
-                                    break;
+                                case 1: {
+                                        message.consumed = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.remaining = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -39390,6 +42030,21 @@
                          */
                         QuotaStatus.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for QuotaStatus
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1beta.QuotaStatus
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        QuotaStatus.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1beta.QuotaStatus";
                         };
     
                         return QuotaStatus;
@@ -39544,26 +42199,32 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.apiName = reader.string();
-                                    break;
-                                case 2:
-                                    message.uiName = reader.string();
-                                    break;
-                                case 3:
-                                    message.description = reader.string();
-                                    break;
-                                case 4:
-                                    if (!(message.deprecatedApiNames && message.deprecatedApiNames.length))
-                                        message.deprecatedApiNames = [];
-                                    message.deprecatedApiNames.push(reader.string());
-                                    break;
-                                case 5:
-                                    message.customDefinition = reader.bool();
-                                    break;
-                                case 7:
-                                    message.category = reader.string();
-                                    break;
+                                case 1: {
+                                        message.apiName = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.uiName = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        if (!(message.deprecatedApiNames && message.deprecatedApiNames.length))
+                                            message.deprecatedApiNames = [];
+                                        message.deprecatedApiNames.push(reader.string());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.customDefinition = reader.bool();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.category = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -39705,6 +42366,21 @@
                          */
                         DimensionMetadata.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DimensionMetadata
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1beta.DimensionMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DimensionMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1beta.DimensionMetadata";
                         };
     
                         return DimensionMetadata;
@@ -39897,42 +42573,51 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.apiName = reader.string();
-                                    break;
-                                case 2:
-                                    message.uiName = reader.string();
-                                    break;
-                                case 3:
-                                    message.description = reader.string();
-                                    break;
-                                case 4:
-                                    if (!(message.deprecatedApiNames && message.deprecatedApiNames.length))
-                                        message.deprecatedApiNames = [];
-                                    message.deprecatedApiNames.push(reader.string());
-                                    break;
-                                case 5:
-                                    message.type = reader.int32();
-                                    break;
-                                case 6:
-                                    message.expression = reader.string();
-                                    break;
-                                case 7:
-                                    message.customDefinition = reader.bool();
-                                    break;
-                                case 8:
-                                    if (!(message.blockedReasons && message.blockedReasons.length))
-                                        message.blockedReasons = [];
-                                    if ((tag & 7) === 2) {
-                                        var end2 = reader.uint32() + reader.pos;
-                                        while (reader.pos < end2)
+                                case 1: {
+                                        message.apiName = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.uiName = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        if (!(message.deprecatedApiNames && message.deprecatedApiNames.length))
+                                            message.deprecatedApiNames = [];
+                                        message.deprecatedApiNames.push(reader.string());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.type = reader.int32();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.expression = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.customDefinition = reader.bool();
+                                        break;
+                                    }
+                                case 8: {
+                                        if (!(message.blockedReasons && message.blockedReasons.length))
+                                            message.blockedReasons = [];
+                                        if ((tag & 7) === 2) {
+                                            var end2 = reader.uint32() + reader.pos;
+                                            while (reader.pos < end2)
+                                                message.blockedReasons.push(reader.int32());
+                                        } else
                                             message.blockedReasons.push(reader.int32());
-                                    } else
-                                        message.blockedReasons.push(reader.int32());
-                                    break;
-                                case 10:
-                                    message.category = reader.string();
-                                    break;
+                                        break;
+                                    }
+                                case 10: {
+                                        message.category = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -40202,6 +42887,21 @@
                         };
     
                         /**
+                         * Gets the default type url for MetricMetadata
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1beta.MetricMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MetricMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1beta.MetricMetadata";
+                        };
+    
+                        /**
                          * BlockedReason enum.
                          * @name google.analytics.data.v1beta.MetricMetadata.BlockedReason
                          * @enum {number}
@@ -40348,12 +43048,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.dimensionMetadata = $root.google.analytics.data.v1beta.DimensionMetadata.decode(reader, reader.uint32());
-                                    break;
-                                case 2:
-                                    message.compatibility = reader.int32();
-                                    break;
+                                case 1: {
+                                        message.dimensionMetadata = $root.google.analytics.data.v1beta.DimensionMetadata.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.compatibility = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -40481,6 +43183,21 @@
                          */
                         DimensionCompatibility.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DimensionCompatibility
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1beta.DimensionCompatibility
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DimensionCompatibility.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1beta.DimensionCompatibility";
                         };
     
                         return DimensionCompatibility;
@@ -40614,12 +43331,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.metricMetadata = $root.google.analytics.data.v1beta.MetricMetadata.decode(reader, reader.uint32());
-                                    break;
-                                case 2:
-                                    message.compatibility = reader.int32();
-                                    break;
+                                case 1: {
+                                        message.metricMetadata = $root.google.analytics.data.v1beta.MetricMetadata.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.compatibility = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -40747,6 +43466,21 @@
                          */
                         MetricCompatibility.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for MetricCompatibility
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1beta.MetricCompatibility
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MetricCompatibility.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1beta.MetricCompatibility";
                         };
     
                         return MetricCompatibility;
@@ -40963,14 +43697,16 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            if (!(message.rules && message.rules.length))
-                                message.rules = [];
-                            message.rules.push($root.google.api.HttpRule.decode(reader, reader.uint32()));
-                            break;
-                        case 2:
-                            message.fullyDecodeReservedExpansion = reader.bool();
-                            break;
+                        case 1: {
+                                if (!(message.rules && message.rules.length))
+                                    message.rules = [];
+                                message.rules.push($root.google.api.HttpRule.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 2: {
+                                message.fullyDecodeReservedExpansion = reader.bool();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -41084,6 +43820,21 @@
                  */
                 Http.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Http
+                 * @function getTypeUrl
+                 * @memberof google.api.Http
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Http.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.Http";
                 };
     
                 return Http;
@@ -41296,38 +44047,48 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.selector = reader.string();
-                            break;
-                        case 2:
-                            message.get = reader.string();
-                            break;
-                        case 3:
-                            message.put = reader.string();
-                            break;
-                        case 4:
-                            message.post = reader.string();
-                            break;
-                        case 5:
-                            message["delete"] = reader.string();
-                            break;
-                        case 6:
-                            message.patch = reader.string();
-                            break;
-                        case 8:
-                            message.custom = $root.google.api.CustomHttpPattern.decode(reader, reader.uint32());
-                            break;
-                        case 7:
-                            message.body = reader.string();
-                            break;
-                        case 12:
-                            message.responseBody = reader.string();
-                            break;
-                        case 11:
-                            if (!(message.additionalBindings && message.additionalBindings.length))
-                                message.additionalBindings = [];
-                            message.additionalBindings.push($root.google.api.HttpRule.decode(reader, reader.uint32()));
-                            break;
+                        case 1: {
+                                message.selector = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.get = reader.string();
+                                break;
+                            }
+                        case 3: {
+                                message.put = reader.string();
+                                break;
+                            }
+                        case 4: {
+                                message.post = reader.string();
+                                break;
+                            }
+                        case 5: {
+                                message["delete"] = reader.string();
+                                break;
+                            }
+                        case 6: {
+                                message.patch = reader.string();
+                                break;
+                            }
+                        case 8: {
+                                message.custom = $root.google.api.CustomHttpPattern.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 7: {
+                                message.body = reader.string();
+                                break;
+                            }
+                        case 12: {
+                                message.responseBody = reader.string();
+                                break;
+                            }
+                        case 11: {
+                                if (!(message.additionalBindings && message.additionalBindings.length))
+                                    message.additionalBindings = [];
+                                message.additionalBindings.push($root.google.api.HttpRule.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -41549,6 +44310,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for HttpRule
+                 * @function getTypeUrl
+                 * @memberof google.api.HttpRule
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                HttpRule.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.HttpRule";
+                };
+    
                 return HttpRule;
             })();
     
@@ -41655,12 +44431,14 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.kind = reader.string();
-                            break;
-                        case 2:
-                            message.path = reader.string();
-                            break;
+                        case 1: {
+                                message.kind = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.path = reader.string();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -41757,6 +44535,21 @@
                  */
                 CustomHttpPattern.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for CustomHttpPattern
+                 * @function getTypeUrl
+                 * @memberof google.api.CustomHttpPattern
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                CustomHttpPattern.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.CustomHttpPattern";
                 };
     
                 return CustomHttpPattern;
@@ -41953,36 +44746,43 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.type = reader.string();
-                            break;
-                        case 2:
-                            if (!(message.pattern && message.pattern.length))
-                                message.pattern = [];
-                            message.pattern.push(reader.string());
-                            break;
-                        case 3:
-                            message.nameField = reader.string();
-                            break;
-                        case 4:
-                            message.history = reader.int32();
-                            break;
-                        case 5:
-                            message.plural = reader.string();
-                            break;
-                        case 6:
-                            message.singular = reader.string();
-                            break;
-                        case 10:
-                            if (!(message.style && message.style.length))
-                                message.style = [];
-                            if ((tag & 7) === 2) {
-                                var end2 = reader.uint32() + reader.pos;
-                                while (reader.pos < end2)
+                        case 1: {
+                                message.type = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                if (!(message.pattern && message.pattern.length))
+                                    message.pattern = [];
+                                message.pattern.push(reader.string());
+                                break;
+                            }
+                        case 3: {
+                                message.nameField = reader.string();
+                                break;
+                            }
+                        case 4: {
+                                message.history = reader.int32();
+                                break;
+                            }
+                        case 5: {
+                                message.plural = reader.string();
+                                break;
+                            }
+                        case 6: {
+                                message.singular = reader.string();
+                                break;
+                            }
+                        case 10: {
+                                if (!(message.style && message.style.length))
+                                    message.style = [];
+                                if ((tag & 7) === 2) {
+                                    var end2 = reader.uint32() + reader.pos;
+                                    while (reader.pos < end2)
+                                        message.style.push(reader.int32());
+                                } else
                                     message.style.push(reader.int32());
-                            } else
-                                message.style.push(reader.int32());
-                            break;
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -42181,6 +44981,21 @@
                 };
     
                 /**
+                 * Gets the default type url for ResourceDescriptor
+                 * @function getTypeUrl
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ResourceDescriptor.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.ResourceDescriptor";
+                };
+    
+                /**
                  * History enum.
                  * @name google.api.ResourceDescriptor.History
                  * @enum {number}
@@ -42316,12 +45131,14 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.type = reader.string();
-                            break;
-                        case 2:
-                            message.childType = reader.string();
-                            break;
+                        case 1: {
+                                message.type = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.childType = reader.string();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -42418,6 +45235,21 @@
                  */
                 ResourceReference.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for ResourceReference
+                 * @function getTypeUrl
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ResourceReference.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.ResourceReference";
                 };
     
                 return ResourceReference;
