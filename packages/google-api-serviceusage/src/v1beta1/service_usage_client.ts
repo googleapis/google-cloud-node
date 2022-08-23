@@ -30,7 +30,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -459,7 +458,8 @@ export class ServiceUsageClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -989,7 +989,7 @@ export class ServiceUsageClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.enableService,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -1152,7 +1152,7 @@ export class ServiceUsageClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.disableService,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -1326,7 +1326,7 @@ export class ServiceUsageClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.batchEnableServices,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -1483,7 +1483,7 @@ export class ServiceUsageClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createAdminOverride,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.api.serviceusage.v1beta1.QuotaOverride,
@@ -1638,7 +1638,7 @@ export class ServiceUsageClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateAdminOverride,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.api.serviceusage.v1beta1.QuotaOverride,
@@ -1787,7 +1787,7 @@ export class ServiceUsageClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteAdminOverride,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -1940,7 +1940,7 @@ export class ServiceUsageClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.importAdminOverrides,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.api.serviceusage.v1beta1.ImportAdminOverridesResponse,
@@ -2100,7 +2100,7 @@ export class ServiceUsageClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createConsumerOverride,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.api.serviceusage.v1beta1.QuotaOverride,
@@ -2259,7 +2259,7 @@ export class ServiceUsageClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateConsumerOverride,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.api.serviceusage.v1beta1.QuotaOverride,
@@ -2412,7 +2412,7 @@ export class ServiceUsageClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteConsumerOverride,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -2569,7 +2569,7 @@ export class ServiceUsageClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.importConsumerOverrides,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.api.serviceusage.v1beta1.ImportConsumerOverridesResponse,
@@ -2716,7 +2716,7 @@ export class ServiceUsageClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.generateServiceIdentity,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.api.serviceusage.v1beta1.ServiceIdentity,
@@ -2898,7 +2898,7 @@ export class ServiceUsageClient {
       'DeprecationWarning'
     );
     return this.descriptors.page.listServices.createStream(
-      this.innerApiCalls.listServices as gax.GaxCall,
+      this.innerApiCalls.listServices as GaxCall,
       request,
       callSettings
     );
@@ -2962,7 +2962,7 @@ export class ServiceUsageClient {
     );
     return this.descriptors.page.listServices.asyncIterate(
       this.innerApiCalls['listServices'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.api.serviceusage.v1beta1.IService>;
   }
@@ -3127,7 +3127,7 @@ export class ServiceUsageClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listConsumerQuotaMetrics.createStream(
-      this.innerApiCalls.listConsumerQuotaMetrics as gax.GaxCall,
+      this.innerApiCalls.listConsumerQuotaMetrics as GaxCall,
       request,
       callSettings
     );
@@ -3183,7 +3183,7 @@ export class ServiceUsageClient {
     this.initialize();
     return this.descriptors.page.listConsumerQuotaMetrics.asyncIterate(
       this.innerApiCalls['listConsumerQuotaMetrics'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.api.serviceusage.v1beta1.IConsumerQuotaMetric>;
   }
@@ -3334,7 +3334,7 @@ export class ServiceUsageClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listAdminOverrides.createStream(
-      this.innerApiCalls.listAdminOverrides as gax.GaxCall,
+      this.innerApiCalls.listAdminOverrides as GaxCall,
       request,
       callSettings
     );
@@ -3387,7 +3387,7 @@ export class ServiceUsageClient {
     this.initialize();
     return this.descriptors.page.listAdminOverrides.asyncIterate(
       this.innerApiCalls['listAdminOverrides'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.api.serviceusage.v1beta1.IQuotaOverride>;
   }
@@ -3538,7 +3538,7 @@ export class ServiceUsageClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listConsumerOverrides.createStream(
-      this.innerApiCalls.listConsumerOverrides as gax.GaxCall,
+      this.innerApiCalls.listConsumerOverrides as GaxCall,
       request,
       callSettings
     );
@@ -3591,7 +3591,7 @@ export class ServiceUsageClient {
     this.initialize();
     return this.descriptors.page.listConsumerOverrides.asyncIterate(
       this.innerApiCalls['listConsumerOverrides'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.api.serviceusage.v1beta1.IQuotaOverride>;
   }
