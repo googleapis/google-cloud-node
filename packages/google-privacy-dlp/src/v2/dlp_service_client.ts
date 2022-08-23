@@ -28,7 +28,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -375,7 +374,8 @@ export class DlpServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -3609,7 +3609,7 @@ export class DlpServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listInspectTemplates.createStream(
-      this.innerApiCalls.listInspectTemplates as gax.GaxCall,
+      this.innerApiCalls.listInspectTemplates as GaxCall,
       request,
       callSettings
     );
@@ -3694,7 +3694,7 @@ export class DlpServiceClient {
     this.initialize();
     return this.descriptors.page.listInspectTemplates.asyncIterate(
       this.innerApiCalls['listInspectTemplates'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.privacy.dlp.v2.IInspectTemplate>;
   }
@@ -3915,7 +3915,7 @@ export class DlpServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listDeidentifyTemplates.createStream(
-      this.innerApiCalls.listDeidentifyTemplates as gax.GaxCall,
+      this.innerApiCalls.listDeidentifyTemplates as GaxCall,
       request,
       callSettings
     );
@@ -4000,7 +4000,7 @@ export class DlpServiceClient {
     this.initialize();
     return this.descriptors.page.listDeidentifyTemplates.asyncIterate(
       this.innerApiCalls['listDeidentifyTemplates'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.privacy.dlp.v2.IDeidentifyTemplate>;
   }
@@ -4260,7 +4260,7 @@ export class DlpServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listJobTriggers.createStream(
-      this.innerApiCalls.listJobTriggers as gax.GaxCall,
+      this.innerApiCalls.listJobTriggers as GaxCall,
       request,
       callSettings
     );
@@ -4370,7 +4370,7 @@ export class DlpServiceClient {
     this.initialize();
     return this.descriptors.page.listJobTriggers.asyncIterate(
       this.innerApiCalls['listJobTriggers'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.privacy.dlp.v2.IJobTrigger>;
   }
@@ -4629,7 +4629,7 @@ export class DlpServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listDlpJobs.createStream(
-      this.innerApiCalls.listDlpJobs as gax.GaxCall,
+      this.innerApiCalls.listDlpJobs as GaxCall,
       request,
       callSettings
     );
@@ -4739,7 +4739,7 @@ export class DlpServiceClient {
     this.initialize();
     return this.descriptors.page.listDlpJobs.asyncIterate(
       this.innerApiCalls['listDlpJobs'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.privacy.dlp.v2.IDlpJob>;
   }
@@ -4958,7 +4958,7 @@ export class DlpServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listStoredInfoTypes.createStream(
-      this.innerApiCalls.listStoredInfoTypes as gax.GaxCall,
+      this.innerApiCalls.listStoredInfoTypes as GaxCall,
       request,
       callSettings
     );
@@ -5044,7 +5044,7 @@ export class DlpServiceClient {
     this.initialize();
     return this.descriptors.page.listStoredInfoTypes.asyncIterate(
       this.innerApiCalls['listStoredInfoTypes'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.privacy.dlp.v2.IStoredInfoType>;
   }
