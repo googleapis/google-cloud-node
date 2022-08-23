@@ -30,7 +30,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -443,7 +442,8 @@ export class HubServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -837,7 +837,7 @@ export class HubServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createHub,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.networkconnectivity.v1.Hub,
@@ -995,7 +995,7 @@ export class HubServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateHub,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.networkconnectivity.v1.Hub,
@@ -1147,7 +1147,7 @@ export class HubServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteHub,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -1303,7 +1303,7 @@ export class HubServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createSpoke,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.networkconnectivity.v1.Spoke,
@@ -1461,7 +1461,7 @@ export class HubServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateSpoke,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.networkconnectivity.v1.Spoke,
@@ -1613,7 +1613,7 @@ export class HubServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteSpoke,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -1765,7 +1765,7 @@ export class HubServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listHubs.createStream(
-      this.innerApiCalls.listHubs as gax.GaxCall,
+      this.innerApiCalls.listHubs as GaxCall,
       request,
       callSettings
     );
@@ -1817,7 +1817,7 @@ export class HubServiceClient {
     this.initialize();
     return this.descriptors.page.listHubs.asyncIterate(
       this.innerApiCalls['listHubs'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.networkconnectivity.v1.IHub>;
   }
@@ -1966,7 +1966,7 @@ export class HubServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listSpokes.createStream(
-      this.innerApiCalls.listSpokes as gax.GaxCall,
+      this.innerApiCalls.listSpokes as GaxCall,
       request,
       callSettings
     );
@@ -2018,7 +2018,7 @@ export class HubServiceClient {
     this.initialize();
     return this.descriptors.page.listSpokes.asyncIterate(
       this.innerApiCalls['listSpokes'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.networkconnectivity.v1.ISpoke>;
   }
