@@ -30,7 +30,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -456,7 +455,8 @@ export class DataLabelingServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -2553,7 +2553,7 @@ export class DataLabelingServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.importData,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.datalabeling.v1beta1.ImportDataOperationResponse,
@@ -2704,7 +2704,7 @@ export class DataLabelingServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.exportData,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.datalabeling.v1beta1.ExportDataOperationResponse,
@@ -2863,7 +2863,7 @@ export class DataLabelingServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.labelImage,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.datalabeling.v1beta1.AnnotatedDataset,
@@ -3022,7 +3022,7 @@ export class DataLabelingServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.labelVideo,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.datalabeling.v1beta1.AnnotatedDataset,
@@ -3173,7 +3173,7 @@ export class DataLabelingServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.labelText,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.datalabeling.v1beta1.AnnotatedDataset,
@@ -3313,7 +3313,7 @@ export class DataLabelingServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createInstruction,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.datalabeling.v1beta1.Instruction,
@@ -3473,7 +3473,7 @@ export class DataLabelingServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listDatasets.createStream(
-      this.innerApiCalls.listDatasets as gax.GaxCall,
+      this.innerApiCalls.listDatasets as GaxCall,
       request,
       callSettings
     );
@@ -3529,7 +3529,7 @@ export class DataLabelingServiceClient {
     this.initialize();
     return this.descriptors.page.listDatasets.asyncIterate(
       this.innerApiCalls['listDatasets'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.datalabeling.v1beta1.IDataset>;
   }
@@ -3687,7 +3687,7 @@ export class DataLabelingServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listDataItems.createStream(
-      this.innerApiCalls.listDataItems as gax.GaxCall,
+      this.innerApiCalls.listDataItems as GaxCall,
       request,
       callSettings
     );
@@ -3743,7 +3743,7 @@ export class DataLabelingServiceClient {
     this.initialize();
     return this.descriptors.page.listDataItems.asyncIterate(
       this.innerApiCalls['listDataItems'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.datalabeling.v1beta1.IDataItem>;
   }
@@ -3900,7 +3900,7 @@ export class DataLabelingServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listAnnotatedDatasets.createStream(
-      this.innerApiCalls.listAnnotatedDatasets as gax.GaxCall,
+      this.innerApiCalls.listAnnotatedDatasets as GaxCall,
       request,
       callSettings
     );
@@ -3956,7 +3956,7 @@ export class DataLabelingServiceClient {
     this.initialize();
     return this.descriptors.page.listAnnotatedDatasets.asyncIterate(
       this.innerApiCalls['listAnnotatedDatasets'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset>;
   }
@@ -4117,7 +4117,7 @@ export class DataLabelingServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listExamples.createStream(
-      this.innerApiCalls.listExamples as gax.GaxCall,
+      this.innerApiCalls.listExamples as GaxCall,
       request,
       callSettings
     );
@@ -4175,7 +4175,7 @@ export class DataLabelingServiceClient {
     this.initialize();
     return this.descriptors.page.listExamples.asyncIterate(
       this.innerApiCalls['listExamples'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.datalabeling.v1beta1.IExample>;
   }
@@ -4336,7 +4336,7 @@ export class DataLabelingServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listAnnotationSpecSets.createStream(
-      this.innerApiCalls.listAnnotationSpecSets as gax.GaxCall,
+      this.innerApiCalls.listAnnotationSpecSets as GaxCall,
       request,
       callSettings
     );
@@ -4392,7 +4392,7 @@ export class DataLabelingServiceClient {
     this.initialize();
     return this.descriptors.page.listAnnotationSpecSets.asyncIterate(
       this.innerApiCalls['listAnnotationSpecSets'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet>;
   }
@@ -4549,7 +4549,7 @@ export class DataLabelingServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listInstructions.createStream(
-      this.innerApiCalls.listInstructions as gax.GaxCall,
+      this.innerApiCalls.listInstructions as GaxCall,
       request,
       callSettings
     );
@@ -4605,7 +4605,7 @@ export class DataLabelingServiceClient {
     this.initialize();
     return this.descriptors.page.listInstructions.asyncIterate(
       this.innerApiCalls['listInstructions'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.datalabeling.v1beta1.IInstruction>;
   }
@@ -4826,7 +4826,7 @@ export class DataLabelingServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.searchEvaluations.createStream(
-      this.innerApiCalls.searchEvaluations as gax.GaxCall,
+      this.innerApiCalls.searchEvaluations as GaxCall,
       request,
       callSettings
     );
@@ -4914,7 +4914,7 @@ export class DataLabelingServiceClient {
     this.initialize();
     return this.descriptors.page.searchEvaluations.asyncIterate(
       this.innerApiCalls['searchEvaluations'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.datalabeling.v1beta1.IEvaluation>;
   }
@@ -5081,7 +5081,7 @@ export class DataLabelingServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.searchExampleComparisons.createStream(
-      this.innerApiCalls.searchExampleComparisons as gax.GaxCall,
+      this.innerApiCalls.searchExampleComparisons as GaxCall,
       request,
       callSettings
     );
@@ -5139,7 +5139,7 @@ export class DataLabelingServiceClient {
     this.initialize();
     return this.descriptors.page.searchExampleComparisons.asyncIterate(
       this.innerApiCalls['searchExampleComparisons'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsResponse.IExampleComparison>;
   }
@@ -5311,7 +5311,7 @@ export class DataLabelingServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listEvaluationJobs.createStream(
-      this.innerApiCalls.listEvaluationJobs as gax.GaxCall,
+      this.innerApiCalls.listEvaluationJobs as GaxCall,
       request,
       callSettings
     );
@@ -5374,7 +5374,7 @@ export class DataLabelingServiceClient {
     this.initialize();
     return this.descriptors.page.listEvaluationJobs.asyncIterate(
       this.innerApiCalls['listEvaluationJobs'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.datalabeling.v1beta1.IEvaluationJob>;
   }
