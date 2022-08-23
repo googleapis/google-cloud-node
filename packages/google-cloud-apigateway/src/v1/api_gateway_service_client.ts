@@ -30,7 +30,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -470,7 +469,8 @@ export class ApiGatewayServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -928,7 +928,7 @@ export class ApiGatewayServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createGateway,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.apigateway.v1.Gateway,
@@ -1071,7 +1071,7 @@ export class ApiGatewayServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateGateway,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.apigateway.v1.Gateway,
@@ -1209,7 +1209,7 @@ export class ApiGatewayServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteGateway,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -1352,7 +1352,7 @@ export class ApiGatewayServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createApi,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.apigateway.v1.Api,
@@ -1495,7 +1495,7 @@ export class ApiGatewayServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateApi,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.apigateway.v1.Api,
@@ -1633,7 +1633,7 @@ export class ApiGatewayServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteApi,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -1776,7 +1776,7 @@ export class ApiGatewayServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createApiConfig,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.apigateway.v1.ApiConfig,
@@ -1919,7 +1919,7 @@ export class ApiGatewayServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateApiConfig,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.apigateway.v1.ApiConfig,
@@ -2057,7 +2057,7 @@ export class ApiGatewayServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteApiConfig,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -2211,7 +2211,7 @@ export class ApiGatewayServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listGateways.createStream(
-      this.innerApiCalls.listGateways as gax.GaxCall,
+      this.innerApiCalls.listGateways as GaxCall,
       request,
       callSettings
     );
@@ -2264,7 +2264,7 @@ export class ApiGatewayServiceClient {
     this.initialize();
     return this.descriptors.page.listGateways.asyncIterate(
       this.innerApiCalls['listGateways'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.apigateway.v1.IGateway>;
   }
@@ -2409,7 +2409,7 @@ export class ApiGatewayServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listApis.createStream(
-      this.innerApiCalls.listApis as gax.GaxCall,
+      this.innerApiCalls.listApis as GaxCall,
       request,
       callSettings
     );
@@ -2462,7 +2462,7 @@ export class ApiGatewayServiceClient {
     this.initialize();
     return this.descriptors.page.listApis.asyncIterate(
       this.innerApiCalls['listApis'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.apigateway.v1.IApi>;
   }
@@ -2613,7 +2613,7 @@ export class ApiGatewayServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listApiConfigs.createStream(
-      this.innerApiCalls.listApiConfigs as gax.GaxCall,
+      this.innerApiCalls.listApiConfigs as GaxCall,
       request,
       callSettings
     );
@@ -2666,7 +2666,7 @@ export class ApiGatewayServiceClient {
     this.initialize();
     return this.descriptors.page.listApiConfigs.asyncIterate(
       this.innerApiCalls['listApiConfigs'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.apigateway.v1.IApiConfig>;
   }
