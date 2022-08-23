@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import * as Long from "long";
+import Long = require("long");
 import {protobuf as $protobuf} from "google-gax";
 /** Namespace google. */
 export namespace google {
@@ -126,6 +126,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CrawledUrl
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a Finding. */
@@ -312,6 +319,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Finding
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 namespace Finding {
@@ -420,6 +434,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Form
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of an OutdatedLibrary. */
@@ -522,6 +543,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OutdatedLibrary
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ViolatingResource. */
@@ -618,6 +646,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ViolatingResource
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a VulnerableParameters. */
@@ -708,6 +743,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for VulnerableParameters
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a VulnerableHeaders. */
@@ -804,6 +846,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for VulnerableHeaders
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 namespace VulnerableHeaders {
@@ -902,6 +951,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Header
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
                 }
 
@@ -1011,6 +1067,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Xss
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 namespace Xss {
@@ -1130,6 +1193,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FindingTypeStats
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ScanConfig. */
@@ -1286,6 +1356,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ScanConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 namespace ScanConfig {
@@ -1393,6 +1470,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Authentication
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     namespace Authentication {
@@ -1491,6 +1575,13 @@ export namespace google {
                              * @returns JSON object
                              */
                             public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for GoogleAccount
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
 
                         /** Properties of a CustomAccount. */
@@ -1593,6 +1684,13 @@ export namespace google {
                              * @returns JSON object
                              */
                             public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for CustomAccount
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
 
                         /** Properties of an IapCredential. */
@@ -1686,6 +1784,13 @@ export namespace google {
                              * @returns JSON object
                              */
                             public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for IapCredential
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
 
                         namespace IapCredential {
@@ -1778,6 +1883,13 @@ export namespace google {
                                  * @returns JSON object
                                  */
                                 public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for IapTestServiceAccountInfo
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
                             }
                         }
                     }
@@ -1876,6 +1988,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Schedule
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** UserAgent enum. */
@@ -1995,6 +2114,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ScanConfigError
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 namespace ScanConfigError {
@@ -2194,6 +2320,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ScanRun
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 namespace ScanRun {
@@ -2315,6 +2448,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ScanRunErrorTrace
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 namespace ScanRunErrorTrace {
@@ -2419,6 +2559,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ScanRunWarningTrace
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 namespace ScanRunWarningTrace {
@@ -2639,91 +2786,91 @@ export namespace google {
                 namespace WebSecurityScanner {
 
                     /**
-                     * Callback as used by {@link google.cloud.websecurityscanner.v1.WebSecurityScanner#createScanConfig}.
+                     * Callback as used by {@link google.cloud.websecurityscanner.v1.WebSecurityScanner|createScanConfig}.
                      * @param error Error, if any
                      * @param [response] ScanConfig
                      */
                     type CreateScanConfigCallback = (error: (Error|null), response?: google.cloud.websecurityscanner.v1.ScanConfig) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.websecurityscanner.v1.WebSecurityScanner#deleteScanConfig}.
+                     * Callback as used by {@link google.cloud.websecurityscanner.v1.WebSecurityScanner|deleteScanConfig}.
                      * @param error Error, if any
                      * @param [response] Empty
                      */
                     type DeleteScanConfigCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.websecurityscanner.v1.WebSecurityScanner#getScanConfig}.
+                     * Callback as used by {@link google.cloud.websecurityscanner.v1.WebSecurityScanner|getScanConfig}.
                      * @param error Error, if any
                      * @param [response] ScanConfig
                      */
                     type GetScanConfigCallback = (error: (Error|null), response?: google.cloud.websecurityscanner.v1.ScanConfig) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.websecurityscanner.v1.WebSecurityScanner#listScanConfigs}.
+                     * Callback as used by {@link google.cloud.websecurityscanner.v1.WebSecurityScanner|listScanConfigs}.
                      * @param error Error, if any
                      * @param [response] ListScanConfigsResponse
                      */
                     type ListScanConfigsCallback = (error: (Error|null), response?: google.cloud.websecurityscanner.v1.ListScanConfigsResponse) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.websecurityscanner.v1.WebSecurityScanner#updateScanConfig}.
+                     * Callback as used by {@link google.cloud.websecurityscanner.v1.WebSecurityScanner|updateScanConfig}.
                      * @param error Error, if any
                      * @param [response] ScanConfig
                      */
                     type UpdateScanConfigCallback = (error: (Error|null), response?: google.cloud.websecurityscanner.v1.ScanConfig) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.websecurityscanner.v1.WebSecurityScanner#startScanRun}.
+                     * Callback as used by {@link google.cloud.websecurityscanner.v1.WebSecurityScanner|startScanRun}.
                      * @param error Error, if any
                      * @param [response] ScanRun
                      */
                     type StartScanRunCallback = (error: (Error|null), response?: google.cloud.websecurityscanner.v1.ScanRun) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.websecurityscanner.v1.WebSecurityScanner#getScanRun}.
+                     * Callback as used by {@link google.cloud.websecurityscanner.v1.WebSecurityScanner|getScanRun}.
                      * @param error Error, if any
                      * @param [response] ScanRun
                      */
                     type GetScanRunCallback = (error: (Error|null), response?: google.cloud.websecurityscanner.v1.ScanRun) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.websecurityscanner.v1.WebSecurityScanner#listScanRuns}.
+                     * Callback as used by {@link google.cloud.websecurityscanner.v1.WebSecurityScanner|listScanRuns}.
                      * @param error Error, if any
                      * @param [response] ListScanRunsResponse
                      */
                     type ListScanRunsCallback = (error: (Error|null), response?: google.cloud.websecurityscanner.v1.ListScanRunsResponse) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.websecurityscanner.v1.WebSecurityScanner#stopScanRun}.
+                     * Callback as used by {@link google.cloud.websecurityscanner.v1.WebSecurityScanner|stopScanRun}.
                      * @param error Error, if any
                      * @param [response] ScanRun
                      */
                     type StopScanRunCallback = (error: (Error|null), response?: google.cloud.websecurityscanner.v1.ScanRun) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.websecurityscanner.v1.WebSecurityScanner#listCrawledUrls}.
+                     * Callback as used by {@link google.cloud.websecurityscanner.v1.WebSecurityScanner|listCrawledUrls}.
                      * @param error Error, if any
                      * @param [response] ListCrawledUrlsResponse
                      */
                     type ListCrawledUrlsCallback = (error: (Error|null), response?: google.cloud.websecurityscanner.v1.ListCrawledUrlsResponse) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.websecurityscanner.v1.WebSecurityScanner#getFinding}.
+                     * Callback as used by {@link google.cloud.websecurityscanner.v1.WebSecurityScanner|getFinding}.
                      * @param error Error, if any
                      * @param [response] Finding
                      */
                     type GetFindingCallback = (error: (Error|null), response?: google.cloud.websecurityscanner.v1.Finding) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.websecurityscanner.v1.WebSecurityScanner#listFindings}.
+                     * Callback as used by {@link google.cloud.websecurityscanner.v1.WebSecurityScanner|listFindings}.
                      * @param error Error, if any
                      * @param [response] ListFindingsResponse
                      */
                     type ListFindingsCallback = (error: (Error|null), response?: google.cloud.websecurityscanner.v1.ListFindingsResponse) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.websecurityscanner.v1.WebSecurityScanner#listFindingTypeStats}.
+                     * Callback as used by {@link google.cloud.websecurityscanner.v1.WebSecurityScanner|listFindingTypeStats}.
                      * @param error Error, if any
                      * @param [response] ListFindingTypeStatsResponse
                      */
@@ -2824,6 +2971,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateScanConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a DeleteScanConfigRequest. */
@@ -2914,6 +3068,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteScanConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a GetScanConfigRequest. */
@@ -3004,6 +3165,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetScanConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ListScanConfigsRequest. */
@@ -3106,6 +3274,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListScanConfigsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of an UpdateScanConfigRequest. */
@@ -3202,6 +3377,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateScanConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ListScanConfigsResponse. */
@@ -3298,6 +3480,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListScanConfigsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a StartScanRunRequest. */
@@ -3388,6 +3577,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for StartScanRunRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a GetScanRunRequest. */
@@ -3478,6 +3674,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetScanRunRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ListScanRunsRequest. */
@@ -3580,6 +3783,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListScanRunsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ListScanRunsResponse. */
@@ -3676,6 +3886,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListScanRunsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a StopScanRunRequest. */
@@ -3766,6 +3983,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for StopScanRunRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ListCrawledUrlsRequest. */
@@ -3868,6 +4092,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListCrawledUrlsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ListCrawledUrlsResponse. */
@@ -3964,6 +4195,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListCrawledUrlsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a GetFindingRequest. */
@@ -4054,6 +4292,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetFindingRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ListFindingsRequest. */
@@ -4162,6 +4407,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListFindingsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ListFindingsResponse. */
@@ -4258,6 +4510,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListFindingsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ListFindingTypeStatsRequest. */
@@ -4348,6 +4607,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListFindingTypeStatsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ListFindingTypeStatsResponse. */
@@ -4438,6 +4704,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListFindingTypeStatsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
             }
 
@@ -4544,6 +4817,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CrawledUrl
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a Finding. */
@@ -4718,6 +4998,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Finding
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 namespace Finding {
@@ -4839,6 +5126,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OutdatedLibrary
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ViolatingResource. */
@@ -4935,6 +5229,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ViolatingResource
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a VulnerableParameters. */
@@ -5025,6 +5326,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for VulnerableParameters
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a VulnerableHeaders. */
@@ -5121,6 +5429,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for VulnerableHeaders
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 namespace VulnerableHeaders {
@@ -5219,6 +5534,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Header
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
                 }
 
@@ -5316,6 +5638,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Xss
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a FindingTypeStats. */
@@ -5412,6 +5741,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FindingTypeStats
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ScanConfig. */
@@ -5556,6 +5892,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ScanConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 namespace ScanConfig {
@@ -5657,6 +6000,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Authentication
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     namespace Authentication {
@@ -5755,6 +6105,13 @@ export namespace google {
                              * @returns JSON object
                              */
                             public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for GoogleAccount
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
 
                         /** Properties of a CustomAccount. */
@@ -5857,6 +6214,13 @@ export namespace google {
                              * @returns JSON object
                              */
                             public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for CustomAccount
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
                     }
 
@@ -5954,6 +6318,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Schedule
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** UserAgent enum. */
@@ -6108,6 +6479,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ScanRun
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 namespace ScanRun {
@@ -6335,91 +6713,91 @@ export namespace google {
                 namespace WebSecurityScanner {
 
                     /**
-                     * Callback as used by {@link google.cloud.websecurityscanner.v1alpha.WebSecurityScanner#createScanConfig}.
+                     * Callback as used by {@link google.cloud.websecurityscanner.v1alpha.WebSecurityScanner|createScanConfig}.
                      * @param error Error, if any
                      * @param [response] ScanConfig
                      */
                     type CreateScanConfigCallback = (error: (Error|null), response?: google.cloud.websecurityscanner.v1alpha.ScanConfig) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.websecurityscanner.v1alpha.WebSecurityScanner#deleteScanConfig}.
+                     * Callback as used by {@link google.cloud.websecurityscanner.v1alpha.WebSecurityScanner|deleteScanConfig}.
                      * @param error Error, if any
                      * @param [response] Empty
                      */
                     type DeleteScanConfigCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.websecurityscanner.v1alpha.WebSecurityScanner#getScanConfig}.
+                     * Callback as used by {@link google.cloud.websecurityscanner.v1alpha.WebSecurityScanner|getScanConfig}.
                      * @param error Error, if any
                      * @param [response] ScanConfig
                      */
                     type GetScanConfigCallback = (error: (Error|null), response?: google.cloud.websecurityscanner.v1alpha.ScanConfig) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.websecurityscanner.v1alpha.WebSecurityScanner#listScanConfigs}.
+                     * Callback as used by {@link google.cloud.websecurityscanner.v1alpha.WebSecurityScanner|listScanConfigs}.
                      * @param error Error, if any
                      * @param [response] ListScanConfigsResponse
                      */
                     type ListScanConfigsCallback = (error: (Error|null), response?: google.cloud.websecurityscanner.v1alpha.ListScanConfigsResponse) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.websecurityscanner.v1alpha.WebSecurityScanner#updateScanConfig}.
+                     * Callback as used by {@link google.cloud.websecurityscanner.v1alpha.WebSecurityScanner|updateScanConfig}.
                      * @param error Error, if any
                      * @param [response] ScanConfig
                      */
                     type UpdateScanConfigCallback = (error: (Error|null), response?: google.cloud.websecurityscanner.v1alpha.ScanConfig) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.websecurityscanner.v1alpha.WebSecurityScanner#startScanRun}.
+                     * Callback as used by {@link google.cloud.websecurityscanner.v1alpha.WebSecurityScanner|startScanRun}.
                      * @param error Error, if any
                      * @param [response] ScanRun
                      */
                     type StartScanRunCallback = (error: (Error|null), response?: google.cloud.websecurityscanner.v1alpha.ScanRun) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.websecurityscanner.v1alpha.WebSecurityScanner#getScanRun}.
+                     * Callback as used by {@link google.cloud.websecurityscanner.v1alpha.WebSecurityScanner|getScanRun}.
                      * @param error Error, if any
                      * @param [response] ScanRun
                      */
                     type GetScanRunCallback = (error: (Error|null), response?: google.cloud.websecurityscanner.v1alpha.ScanRun) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.websecurityscanner.v1alpha.WebSecurityScanner#listScanRuns}.
+                     * Callback as used by {@link google.cloud.websecurityscanner.v1alpha.WebSecurityScanner|listScanRuns}.
                      * @param error Error, if any
                      * @param [response] ListScanRunsResponse
                      */
                     type ListScanRunsCallback = (error: (Error|null), response?: google.cloud.websecurityscanner.v1alpha.ListScanRunsResponse) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.websecurityscanner.v1alpha.WebSecurityScanner#stopScanRun}.
+                     * Callback as used by {@link google.cloud.websecurityscanner.v1alpha.WebSecurityScanner|stopScanRun}.
                      * @param error Error, if any
                      * @param [response] ScanRun
                      */
                     type StopScanRunCallback = (error: (Error|null), response?: google.cloud.websecurityscanner.v1alpha.ScanRun) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.websecurityscanner.v1alpha.WebSecurityScanner#listCrawledUrls}.
+                     * Callback as used by {@link google.cloud.websecurityscanner.v1alpha.WebSecurityScanner|listCrawledUrls}.
                      * @param error Error, if any
                      * @param [response] ListCrawledUrlsResponse
                      */
                     type ListCrawledUrlsCallback = (error: (Error|null), response?: google.cloud.websecurityscanner.v1alpha.ListCrawledUrlsResponse) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.websecurityscanner.v1alpha.WebSecurityScanner#getFinding}.
+                     * Callback as used by {@link google.cloud.websecurityscanner.v1alpha.WebSecurityScanner|getFinding}.
                      * @param error Error, if any
                      * @param [response] Finding
                      */
                     type GetFindingCallback = (error: (Error|null), response?: google.cloud.websecurityscanner.v1alpha.Finding) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.websecurityscanner.v1alpha.WebSecurityScanner#listFindings}.
+                     * Callback as used by {@link google.cloud.websecurityscanner.v1alpha.WebSecurityScanner|listFindings}.
                      * @param error Error, if any
                      * @param [response] ListFindingsResponse
                      */
                     type ListFindingsCallback = (error: (Error|null), response?: google.cloud.websecurityscanner.v1alpha.ListFindingsResponse) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.websecurityscanner.v1alpha.WebSecurityScanner#listFindingTypeStats}.
+                     * Callback as used by {@link google.cloud.websecurityscanner.v1alpha.WebSecurityScanner|listFindingTypeStats}.
                      * @param error Error, if any
                      * @param [response] ListFindingTypeStatsResponse
                      */
@@ -6520,6 +6898,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateScanConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a DeleteScanConfigRequest. */
@@ -6610,6 +6995,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteScanConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a GetScanConfigRequest. */
@@ -6700,6 +7092,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetScanConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ListScanConfigsRequest. */
@@ -6802,6 +7201,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListScanConfigsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of an UpdateScanConfigRequest. */
@@ -6898,6 +7304,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateScanConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ListScanConfigsResponse. */
@@ -6994,6 +7407,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListScanConfigsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a StartScanRunRequest. */
@@ -7084,6 +7504,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for StartScanRunRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a GetScanRunRequest. */
@@ -7174,6 +7601,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetScanRunRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ListScanRunsRequest. */
@@ -7276,6 +7710,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListScanRunsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ListScanRunsResponse. */
@@ -7372,6 +7813,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListScanRunsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a StopScanRunRequest. */
@@ -7462,6 +7910,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for StopScanRunRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ListCrawledUrlsRequest. */
@@ -7564,6 +8019,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListCrawledUrlsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ListCrawledUrlsResponse. */
@@ -7660,6 +8122,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListCrawledUrlsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a GetFindingRequest. */
@@ -7750,6 +8219,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetFindingRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ListFindingsRequest. */
@@ -7858,6 +8334,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListFindingsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ListFindingsResponse. */
@@ -7954,6 +8437,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListFindingsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ListFindingTypeStatsRequest. */
@@ -8044,6 +8534,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListFindingTypeStatsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ListFindingTypeStatsResponse. */
@@ -8134,6 +8631,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListFindingTypeStatsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
             }
 
@@ -8240,6 +8744,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CrawledUrl
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a Finding. */
@@ -8420,6 +8931,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Finding
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a Form. */
@@ -8516,6 +9034,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Form
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of an OutdatedLibrary. */
@@ -8618,6 +9143,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OutdatedLibrary
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ViolatingResource. */
@@ -8714,6 +9246,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ViolatingResource
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a VulnerableParameters. */
@@ -8804,6 +9343,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for VulnerableParameters
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a VulnerableHeaders. */
@@ -8900,6 +9446,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for VulnerableHeaders
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 namespace VulnerableHeaders {
@@ -8998,6 +9551,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Header
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
                 }
 
@@ -9095,6 +9655,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Xss
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a FindingTypeStats. */
@@ -9191,6 +9758,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FindingTypeStats
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ScanConfig. */
@@ -9347,6 +9921,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ScanConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 namespace ScanConfig {
@@ -9448,6 +10029,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Authentication
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     namespace Authentication {
@@ -9546,6 +10134,13 @@ export namespace google {
                              * @returns JSON object
                              */
                             public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for GoogleAccount
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
 
                         /** Properties of a CustomAccount. */
@@ -9648,6 +10243,13 @@ export namespace google {
                              * @returns JSON object
                              */
                             public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for CustomAccount
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
                     }
 
@@ -9745,6 +10347,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Schedule
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** UserAgent enum. */
@@ -9925,6 +10534,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ScanRun
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 namespace ScanRun {
@@ -10046,6 +10662,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ScanRunErrorTrace
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 namespace ScanRunErrorTrace {
@@ -10156,6 +10779,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ScanConfigError
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 namespace ScanConfigError {
@@ -10295,6 +10925,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ScanRunWarningTrace
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 namespace ScanRunWarningTrace {
@@ -10515,91 +11152,91 @@ export namespace google {
                 namespace WebSecurityScanner {
 
                     /**
-                     * Callback as used by {@link google.cloud.websecurityscanner.v1beta.WebSecurityScanner#createScanConfig}.
+                     * Callback as used by {@link google.cloud.websecurityscanner.v1beta.WebSecurityScanner|createScanConfig}.
                      * @param error Error, if any
                      * @param [response] ScanConfig
                      */
                     type CreateScanConfigCallback = (error: (Error|null), response?: google.cloud.websecurityscanner.v1beta.ScanConfig) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.websecurityscanner.v1beta.WebSecurityScanner#deleteScanConfig}.
+                     * Callback as used by {@link google.cloud.websecurityscanner.v1beta.WebSecurityScanner|deleteScanConfig}.
                      * @param error Error, if any
                      * @param [response] Empty
                      */
                     type DeleteScanConfigCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.websecurityscanner.v1beta.WebSecurityScanner#getScanConfig}.
+                     * Callback as used by {@link google.cloud.websecurityscanner.v1beta.WebSecurityScanner|getScanConfig}.
                      * @param error Error, if any
                      * @param [response] ScanConfig
                      */
                     type GetScanConfigCallback = (error: (Error|null), response?: google.cloud.websecurityscanner.v1beta.ScanConfig) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.websecurityscanner.v1beta.WebSecurityScanner#listScanConfigs}.
+                     * Callback as used by {@link google.cloud.websecurityscanner.v1beta.WebSecurityScanner|listScanConfigs}.
                      * @param error Error, if any
                      * @param [response] ListScanConfigsResponse
                      */
                     type ListScanConfigsCallback = (error: (Error|null), response?: google.cloud.websecurityscanner.v1beta.ListScanConfigsResponse) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.websecurityscanner.v1beta.WebSecurityScanner#updateScanConfig}.
+                     * Callback as used by {@link google.cloud.websecurityscanner.v1beta.WebSecurityScanner|updateScanConfig}.
                      * @param error Error, if any
                      * @param [response] ScanConfig
                      */
                     type UpdateScanConfigCallback = (error: (Error|null), response?: google.cloud.websecurityscanner.v1beta.ScanConfig) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.websecurityscanner.v1beta.WebSecurityScanner#startScanRun}.
+                     * Callback as used by {@link google.cloud.websecurityscanner.v1beta.WebSecurityScanner|startScanRun}.
                      * @param error Error, if any
                      * @param [response] ScanRun
                      */
                     type StartScanRunCallback = (error: (Error|null), response?: google.cloud.websecurityscanner.v1beta.ScanRun) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.websecurityscanner.v1beta.WebSecurityScanner#getScanRun}.
+                     * Callback as used by {@link google.cloud.websecurityscanner.v1beta.WebSecurityScanner|getScanRun}.
                      * @param error Error, if any
                      * @param [response] ScanRun
                      */
                     type GetScanRunCallback = (error: (Error|null), response?: google.cloud.websecurityscanner.v1beta.ScanRun) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.websecurityscanner.v1beta.WebSecurityScanner#listScanRuns}.
+                     * Callback as used by {@link google.cloud.websecurityscanner.v1beta.WebSecurityScanner|listScanRuns}.
                      * @param error Error, if any
                      * @param [response] ListScanRunsResponse
                      */
                     type ListScanRunsCallback = (error: (Error|null), response?: google.cloud.websecurityscanner.v1beta.ListScanRunsResponse) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.websecurityscanner.v1beta.WebSecurityScanner#stopScanRun}.
+                     * Callback as used by {@link google.cloud.websecurityscanner.v1beta.WebSecurityScanner|stopScanRun}.
                      * @param error Error, if any
                      * @param [response] ScanRun
                      */
                     type StopScanRunCallback = (error: (Error|null), response?: google.cloud.websecurityscanner.v1beta.ScanRun) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.websecurityscanner.v1beta.WebSecurityScanner#listCrawledUrls}.
+                     * Callback as used by {@link google.cloud.websecurityscanner.v1beta.WebSecurityScanner|listCrawledUrls}.
                      * @param error Error, if any
                      * @param [response] ListCrawledUrlsResponse
                      */
                     type ListCrawledUrlsCallback = (error: (Error|null), response?: google.cloud.websecurityscanner.v1beta.ListCrawledUrlsResponse) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.websecurityscanner.v1beta.WebSecurityScanner#getFinding}.
+                     * Callback as used by {@link google.cloud.websecurityscanner.v1beta.WebSecurityScanner|getFinding}.
                      * @param error Error, if any
                      * @param [response] Finding
                      */
                     type GetFindingCallback = (error: (Error|null), response?: google.cloud.websecurityscanner.v1beta.Finding) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.websecurityscanner.v1beta.WebSecurityScanner#listFindings}.
+                     * Callback as used by {@link google.cloud.websecurityscanner.v1beta.WebSecurityScanner|listFindings}.
                      * @param error Error, if any
                      * @param [response] ListFindingsResponse
                      */
                     type ListFindingsCallback = (error: (Error|null), response?: google.cloud.websecurityscanner.v1beta.ListFindingsResponse) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.websecurityscanner.v1beta.WebSecurityScanner#listFindingTypeStats}.
+                     * Callback as used by {@link google.cloud.websecurityscanner.v1beta.WebSecurityScanner|listFindingTypeStats}.
                      * @param error Error, if any
                      * @param [response] ListFindingTypeStatsResponse
                      */
@@ -10700,6 +11337,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateScanConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a DeleteScanConfigRequest. */
@@ -10790,6 +11434,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteScanConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a GetScanConfigRequest. */
@@ -10880,6 +11531,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetScanConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ListScanConfigsRequest. */
@@ -10982,6 +11640,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListScanConfigsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of an UpdateScanConfigRequest. */
@@ -11078,6 +11743,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateScanConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ListScanConfigsResponse. */
@@ -11174,6 +11846,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListScanConfigsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a StartScanRunRequest. */
@@ -11264,6 +11943,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for StartScanRunRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a GetScanRunRequest. */
@@ -11354,6 +12040,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetScanRunRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ListScanRunsRequest. */
@@ -11456,6 +12149,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListScanRunsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ListScanRunsResponse. */
@@ -11552,6 +12252,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListScanRunsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a StopScanRunRequest. */
@@ -11642,6 +12349,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for StopScanRunRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ListCrawledUrlsRequest. */
@@ -11744,6 +12458,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListCrawledUrlsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ListCrawledUrlsResponse. */
@@ -11840,6 +12561,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListCrawledUrlsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a GetFindingRequest. */
@@ -11930,6 +12658,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetFindingRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ListFindingsRequest. */
@@ -12038,6 +12773,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListFindingsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ListFindingsResponse. */
@@ -12134,6 +12876,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListFindingsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ListFindingTypeStatsRequest. */
@@ -12224,6 +12973,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListFindingTypeStatsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ListFindingTypeStatsResponse. */
@@ -12314,6 +13070,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListFindingTypeStatsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
             }
         }
@@ -12458,6 +13221,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ResourceDescriptor
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         namespace ResourceDescriptor {
@@ -12570,6 +13340,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ResourceReference
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a Http. */
@@ -12666,6 +13443,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Http
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a HttpRule. */
@@ -12813,6 +13597,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for HttpRule
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a CustomHttpPattern. */
@@ -12909,6 +13700,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for CustomHttpPattern
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
     }
 
@@ -13003,6 +13801,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FileDescriptorSet
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a FileDescriptorProto. */
@@ -13043,6 +13848,9 @@ export namespace google {
 
             /** FileDescriptorProto syntax */
             syntax?: (string|null);
+
+            /** FileDescriptorProto edition */
+            edition?: (string|null);
         }
 
         /** Represents a FileDescriptorProto. */
@@ -13089,6 +13897,9 @@ export namespace google {
 
             /** FileDescriptorProto syntax. */
             public syntax: string;
+
+            /** FileDescriptorProto edition. */
+            public edition: string;
 
             /**
              * Creates a new FileDescriptorProto instance using the specified properties.
@@ -13159,6 +13970,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FileDescriptorProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a DescriptorProto. */
@@ -13303,6 +14121,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for DescriptorProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         namespace DescriptorProto {
@@ -13407,6 +14232,13 @@ export namespace google {
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ExtensionRange
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
             }
 
             /** Properties of a ReservedRange. */
@@ -13503,6 +14335,13 @@ export namespace google {
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ReservedRange
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
             }
         }
 
@@ -13594,6 +14433,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ExtensionRangeOptions
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a FieldDescriptorProto. */
@@ -13744,6 +14590,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FieldDescriptorProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         namespace FieldDescriptorProto {
@@ -13872,6 +14725,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for OneofDescriptorProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of an EnumDescriptorProto. */
@@ -13986,6 +14846,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for EnumDescriptorProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         namespace EnumDescriptorProto {
@@ -14084,6 +14951,13 @@ export namespace google {
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for EnumReservedRange
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
             }
         }
 
@@ -14187,6 +15061,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for EnumValueDescriptorProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a ServiceDescriptorProto. */
@@ -14289,6 +15170,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ServiceDescriptorProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a MethodDescriptorProto. */
@@ -14409,6 +15297,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for MethodDescriptorProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a FileOptions. */
@@ -14622,6 +15517,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FileOptions
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         namespace FileOptions {
@@ -14749,6 +15651,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for MessageOptions
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a FieldOptions. */
@@ -14765,6 +15674,9 @@ export namespace google {
 
             /** FieldOptions lazy */
             lazy?: (boolean|null);
+
+            /** FieldOptions unverifiedLazy */
+            unverifiedLazy?: (boolean|null);
 
             /** FieldOptions deprecated */
             deprecated?: (boolean|null);
@@ -14802,6 +15714,9 @@ export namespace google {
 
             /** FieldOptions lazy. */
             public lazy: boolean;
+
+            /** FieldOptions unverifiedLazy. */
+            public unverifiedLazy: boolean;
 
             /** FieldOptions deprecated. */
             public deprecated: boolean;
@@ -14881,6 +15796,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FieldOptions
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         namespace FieldOptions {
@@ -14988,6 +15910,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for OneofOptions
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of an EnumOptions. */
@@ -15090,6 +16019,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for EnumOptions
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of an EnumValueOptions. */
@@ -15186,6 +16122,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for EnumValueOptions
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a ServiceOptions. */
@@ -15288,6 +16231,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ServiceOptions
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a MethodOptions. */
@@ -15396,6 +16346,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for MethodOptions
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         namespace MethodOptions {
@@ -15532,6 +16489,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for UninterpretedOption
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         namespace UninterpretedOption {
@@ -15630,6 +16594,13 @@ export namespace google {
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for NamePart
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
             }
         }
 
@@ -15721,6 +16692,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for SourceCodeInfo
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         namespace SourceCodeInfo {
@@ -15837,6 +16815,13 @@ export namespace google {
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for Location
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
             }
         }
 
@@ -15928,6 +16913,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for GeneratedCodeInfo
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         namespace GeneratedCodeInfo {
@@ -15946,6 +16938,9 @@ export namespace google {
 
                 /** Annotation end */
                 end?: (number|null);
+
+                /** Annotation semantic */
+                semantic?: (google.protobuf.GeneratedCodeInfo.Annotation.Semantic|keyof typeof google.protobuf.GeneratedCodeInfo.Annotation.Semantic|null);
             }
 
             /** Represents an Annotation. */
@@ -15968,6 +16963,9 @@ export namespace google {
 
                 /** Annotation end. */
                 public end: number;
+
+                /** Annotation semantic. */
+                public semantic: (google.protobuf.GeneratedCodeInfo.Annotation.Semantic|keyof typeof google.protobuf.GeneratedCodeInfo.Annotation.Semantic);
 
                 /**
                  * Creates a new Annotation instance using the specified properties.
@@ -16038,6 +17036,23 @@ export namespace google {
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for Annotation
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace Annotation {
+
+                /** Semantic enum. */
+                enum Semantic {
+                    NONE = 0,
+                    SET = 1,
+                    ALIAS = 2
+                }
             }
         }
 
@@ -16135,6 +17150,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Timestamp
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of an Empty. */
@@ -16219,6 +17241,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Empty
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a FieldMask. */
@@ -16309,6 +17338,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FieldMask
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
     }
 }
