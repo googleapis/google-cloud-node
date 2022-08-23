@@ -34,7 +34,7 @@ import jsonProtos = require('../../protos/protos.json');
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
 import * as gapicConfig from './datastore_client_config.json';
-import {operationsProtos} from 'google-gax';
+
 const version = require('../../../package.json').version;
 
 /**
@@ -274,7 +274,8 @@ export class DatastoreClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;

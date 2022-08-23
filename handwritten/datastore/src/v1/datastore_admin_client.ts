@@ -30,7 +30,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -391,7 +390,8 @@ export class DatastoreAdminClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -703,7 +703,7 @@ export class DatastoreAdminClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.exportEntities,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.datastore.admin.v1.ExportEntitiesResponse,
@@ -865,7 +865,7 @@ export class DatastoreAdminClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.importEntities,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -1018,7 +1018,7 @@ export class DatastoreAdminClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createIndex,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.datastore.admin.v1.Index,
@@ -1167,7 +1167,7 @@ export class DatastoreAdminClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteIndex,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.datastore.admin.v1.Index,
@@ -1311,7 +1311,7 @@ export class DatastoreAdminClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listIndexes.createStream(
-      this.innerApiCalls.listIndexes as gax.GaxCall,
+      this.innerApiCalls.listIndexes as GaxCall,
       request,
       callSettings
     );
@@ -1361,7 +1361,7 @@ export class DatastoreAdminClient {
     this.initialize();
     return this.descriptors.page.listIndexes.asyncIterate(
       this.innerApiCalls['listIndexes'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.datastore.admin.v1.IIndex>;
   }
