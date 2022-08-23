@@ -28,7 +28,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -293,7 +292,8 @@ export class PolicyTagManagerClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -1556,7 +1556,7 @@ export class PolicyTagManagerClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listTaxonomies.createStream(
-      this.innerApiCalls.listTaxonomies as gax.GaxCall,
+      this.innerApiCalls.listTaxonomies as GaxCall,
       request,
       callSettings
     );
@@ -1606,7 +1606,7 @@ export class PolicyTagManagerClient {
     this.initialize();
     return this.descriptors.page.listTaxonomies.asyncIterate(
       this.innerApiCalls['listTaxonomies'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.datacatalog.v1beta1.ITaxonomy>;
   }
@@ -1751,7 +1751,7 @@ export class PolicyTagManagerClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listPolicyTags.createStream(
-      this.innerApiCalls.listPolicyTags as gax.GaxCall,
+      this.innerApiCalls.listPolicyTags as GaxCall,
       request,
       callSettings
     );
@@ -1801,7 +1801,7 @@ export class PolicyTagManagerClient {
     this.initialize();
     return this.descriptors.page.listPolicyTags.asyncIterate(
       this.innerApiCalls['listPolicyTags'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.datacatalog.v1beta1.IPolicyTag>;
   }

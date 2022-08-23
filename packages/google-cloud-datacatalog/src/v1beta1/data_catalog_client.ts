@@ -28,7 +28,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -316,7 +315,8 @@ export class DataCatalogClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -3019,7 +3019,7 @@ export class DataCatalogClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.searchCatalog.createStream(
-      this.innerApiCalls.searchCatalog as gax.GaxCall,
+      this.innerApiCalls.searchCatalog as GaxCall,
       request,
       callSettings
     );
@@ -3094,7 +3094,7 @@ export class DataCatalogClient {
     this.initialize();
     return this.descriptors.page.searchCatalog.asyncIterate(
       this.innerApiCalls['searchCatalog'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.datacatalog.v1beta1.ISearchCatalogResult>;
   }
@@ -3245,7 +3245,7 @@ export class DataCatalogClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listEntryGroups.createStream(
-      this.innerApiCalls.listEntryGroups as gax.GaxCall,
+      this.innerApiCalls.listEntryGroups as GaxCall,
       request,
       callSettings
     );
@@ -3298,7 +3298,7 @@ export class DataCatalogClient {
     this.initialize();
     return this.descriptors.page.listEntryGroups.asyncIterate(
       this.innerApiCalls['listEntryGroups'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.datacatalog.v1beta1.IEntryGroup>;
   }
@@ -3459,7 +3459,7 @@ export class DataCatalogClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listEntries.createStream(
-      this.innerApiCalls.listEntries as gax.GaxCall,
+      this.innerApiCalls.listEntries as GaxCall,
       request,
       callSettings
     );
@@ -3517,7 +3517,7 @@ export class DataCatalogClient {
     this.initialize();
     return this.descriptors.page.listEntries.asyncIterate(
       this.innerApiCalls['listEntries'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.datacatalog.v1beta1.IEntry>;
   }
@@ -3674,7 +3674,7 @@ export class DataCatalogClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listTags.createStream(
-      this.innerApiCalls.listTags as gax.GaxCall,
+      this.innerApiCalls.listTags as GaxCall,
       request,
       callSettings
     );
@@ -3730,7 +3730,7 @@ export class DataCatalogClient {
     this.initialize();
     return this.descriptors.page.listTags.asyncIterate(
       this.innerApiCalls['listTags'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.datacatalog.v1beta1.ITag>;
   }
