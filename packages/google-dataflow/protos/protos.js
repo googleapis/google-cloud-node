@@ -331,63 +331,80 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.tempStoragePrefix = reader.string();
-                                break;
-                            case 2:
-                                message.clusterManagerApiService = reader.string();
-                                break;
-                            case 3:
-                                if (!(message.experiments && message.experiments.length))
-                                    message.experiments = [];
-                                message.experiments.push(reader.string());
-                                break;
-                            case 16:
-                                if (!(message.serviceOptions && message.serviceOptions.length))
-                                    message.serviceOptions = [];
-                                message.serviceOptions.push(reader.string());
-                                break;
-                            case 12:
-                                message.serviceKmsKeyName = reader.string();
-                                break;
-                            case 4:
-                                if (!(message.workerPools && message.workerPools.length))
-                                    message.workerPools = [];
-                                message.workerPools.push($root.google.dataflow.v1beta3.WorkerPool.decode(reader, reader.uint32()));
-                                break;
-                            case 5:
-                                message.userAgent = $root.google.protobuf.Struct.decode(reader, reader.uint32());
-                                break;
-                            case 6:
-                                message.version = $root.google.protobuf.Struct.decode(reader, reader.uint32());
-                                break;
-                            case 7:
-                                message.dataset = reader.string();
-                                break;
-                            case 8:
-                                message.sdkPipelineOptions = $root.google.protobuf.Struct.decode(reader, reader.uint32());
-                                break;
-                            case 9:
-                                message.internalExperiments = $root.google.protobuf.Any.decode(reader, reader.uint32());
-                                break;
-                            case 10:
-                                message.serviceAccountEmail = reader.string();
-                                break;
-                            case 11:
-                                message.flexResourceSchedulingGoal = reader.int32();
-                                break;
-                            case 13:
-                                message.workerRegion = reader.string();
-                                break;
-                            case 14:
-                                message.workerZone = reader.string();
-                                break;
-                            case 15:
-                                message.shuffleMode = reader.int32();
-                                break;
-                            case 17:
-                                message.debugOptions = $root.google.dataflow.v1beta3.DebugOptions.decode(reader, reader.uint32());
-                                break;
+                            case 1: {
+                                    message.tempStoragePrefix = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.clusterManagerApiService = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    if (!(message.experiments && message.experiments.length))
+                                        message.experiments = [];
+                                    message.experiments.push(reader.string());
+                                    break;
+                                }
+                            case 16: {
+                                    if (!(message.serviceOptions && message.serviceOptions.length))
+                                        message.serviceOptions = [];
+                                    message.serviceOptions.push(reader.string());
+                                    break;
+                                }
+                            case 12: {
+                                    message.serviceKmsKeyName = reader.string();
+                                    break;
+                                }
+                            case 4: {
+                                    if (!(message.workerPools && message.workerPools.length))
+                                        message.workerPools = [];
+                                    message.workerPools.push($root.google.dataflow.v1beta3.WorkerPool.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 5: {
+                                    message.userAgent = $root.google.protobuf.Struct.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 6: {
+                                    message.version = $root.google.protobuf.Struct.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 7: {
+                                    message.dataset = reader.string();
+                                    break;
+                                }
+                            case 8: {
+                                    message.sdkPipelineOptions = $root.google.protobuf.Struct.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 9: {
+                                    message.internalExperiments = $root.google.protobuf.Any.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 10: {
+                                    message.serviceAccountEmail = reader.string();
+                                    break;
+                                }
+                            case 11: {
+                                    message.flexResourceSchedulingGoal = reader.int32();
+                                    break;
+                                }
+                            case 13: {
+                                    message.workerRegion = reader.string();
+                                    break;
+                                }
+                            case 14: {
+                                    message.workerZone = reader.string();
+                                    break;
+                                }
+                            case 15: {
+                                    message.shuffleMode = reader.int32();
+                                    break;
+                                }
+                            case 17: {
+                                    message.debugOptions = $root.google.dataflow.v1beta3.DebugOptions.decode(reader, reader.uint32());
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -710,6 +727,21 @@
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
+                    /**
+                     * Gets the default type url for Environment
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.Environment
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    Environment.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.Environment";
+                    };
+    
                     return Environment;
                 })();
     
@@ -816,12 +848,14 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.name = reader.string();
-                                break;
-                            case 2:
-                                message.location = reader.string();
-                                break;
+                            case 1: {
+                                    message.name = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.location = reader.string();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -918,6 +952,21 @@
                      */
                     Package.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for Package
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.Package
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    Package.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.Package";
                     };
     
                     return Package;
@@ -1069,15 +1118,18 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.sizeGb = reader.int32();
-                                break;
-                            case 2:
-                                message.diskType = reader.string();
-                                break;
-                            case 3:
-                                message.mountPoint = reader.string();
-                                break;
+                            case 1: {
+                                    message.sizeGb = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    message.diskType = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.mountPoint = reader.string();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -1182,6 +1234,21 @@
                      */
                     Disk.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for Disk
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.Disk
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    Disk.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.Disk";
                     };
     
                     return Disk;
@@ -1334,24 +1401,30 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.baseUrl = reader.string();
-                                break;
-                            case 2:
-                                message.reportingEnabled = reader.bool();
-                                break;
-                            case 3:
-                                message.servicePath = reader.string();
-                                break;
-                            case 4:
-                                message.shuffleServicePath = reader.string();
-                                break;
-                            case 5:
-                                message.workerId = reader.string();
-                                break;
-                            case 6:
-                                message.tempStoragePrefix = reader.string();
-                                break;
+                            case 1: {
+                                    message.baseUrl = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.reportingEnabled = reader.bool();
+                                    break;
+                                }
+                            case 3: {
+                                    message.servicePath = reader.string();
+                                    break;
+                                }
+                            case 4: {
+                                    message.shuffleServicePath = reader.string();
+                                    break;
+                                }
+                            case 5: {
+                                    message.workerId = reader.string();
+                                    break;
+                                }
+                            case 6: {
+                                    message.tempStoragePrefix = reader.string();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -1480,6 +1553,21 @@
                      */
                     WorkerSettings.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for WorkerSettings
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.WorkerSettings
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    WorkerSettings.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.WorkerSettings";
                     };
     
                     return WorkerSettings;
@@ -1777,65 +1865,84 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.taskUser = reader.string();
-                                break;
-                            case 2:
-                                message.taskGroup = reader.string();
-                                break;
-                            case 3:
-                                if (!(message.oauthScopes && message.oauthScopes.length))
-                                    message.oauthScopes = [];
-                                message.oauthScopes.push(reader.string());
-                                break;
-                            case 4:
-                                message.baseUrl = reader.string();
-                                break;
-                            case 5:
-                                message.dataflowApiVersion = reader.string();
-                                break;
-                            case 6:
-                                message.parallelWorkerSettings = $root.google.dataflow.v1beta3.WorkerSettings.decode(reader, reader.uint32());
-                                break;
-                            case 7:
-                                message.baseTaskDir = reader.string();
-                                break;
-                            case 8:
-                                message.continueOnException = reader.bool();
-                                break;
-                            case 9:
-                                message.logToSerialconsole = reader.bool();
-                                break;
-                            case 10:
-                                message.alsologtostderr = reader.bool();
-                                break;
-                            case 11:
-                                message.logUploadLocation = reader.string();
-                                break;
-                            case 12:
-                                message.logDir = reader.string();
-                                break;
-                            case 13:
-                                message.tempStoragePrefix = reader.string();
-                                break;
-                            case 14:
-                                message.harnessCommand = reader.string();
-                                break;
-                            case 15:
-                                message.workflowFileName = reader.string();
-                                break;
-                            case 16:
-                                message.commandlinesFileName = reader.string();
-                                break;
-                            case 17:
-                                message.vmId = reader.string();
-                                break;
-                            case 18:
-                                message.languageHint = reader.string();
-                                break;
-                            case 19:
-                                message.streamingWorkerMainClass = reader.string();
-                                break;
+                            case 1: {
+                                    message.taskUser = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.taskGroup = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    if (!(message.oauthScopes && message.oauthScopes.length))
+                                        message.oauthScopes = [];
+                                    message.oauthScopes.push(reader.string());
+                                    break;
+                                }
+                            case 4: {
+                                    message.baseUrl = reader.string();
+                                    break;
+                                }
+                            case 5: {
+                                    message.dataflowApiVersion = reader.string();
+                                    break;
+                                }
+                            case 6: {
+                                    message.parallelWorkerSettings = $root.google.dataflow.v1beta3.WorkerSettings.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 7: {
+                                    message.baseTaskDir = reader.string();
+                                    break;
+                                }
+                            case 8: {
+                                    message.continueOnException = reader.bool();
+                                    break;
+                                }
+                            case 9: {
+                                    message.logToSerialconsole = reader.bool();
+                                    break;
+                                }
+                            case 10: {
+                                    message.alsologtostderr = reader.bool();
+                                    break;
+                                }
+                            case 11: {
+                                    message.logUploadLocation = reader.string();
+                                    break;
+                                }
+                            case 12: {
+                                    message.logDir = reader.string();
+                                    break;
+                                }
+                            case 13: {
+                                    message.tempStoragePrefix = reader.string();
+                                    break;
+                                }
+                            case 14: {
+                                    message.harnessCommand = reader.string();
+                                    break;
+                                }
+                            case 15: {
+                                    message.workflowFileName = reader.string();
+                                    break;
+                                }
+                            case 16: {
+                                    message.commandlinesFileName = reader.string();
+                                    break;
+                                }
+                            case 17: {
+                                    message.vmId = reader.string();
+                                    break;
+                                }
+                            case 18: {
+                                    message.languageHint = reader.string();
+                                    break;
+                                }
+                            case 19: {
+                                    message.streamingWorkerMainClass = reader.string();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -2088,6 +2195,21 @@
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
+                    /**
+                     * Gets the default type url for TaskRunnerSettings
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.TaskRunnerSettings
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    TaskRunnerSettings.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.TaskRunnerSettings";
+                    };
+    
                     return TaskRunnerSettings;
                 })();
     
@@ -2246,12 +2368,14 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.algorithm = reader.int32();
-                                break;
-                            case 2:
-                                message.maxNumWorkers = reader.int32();
-                                break;
+                            case 1: {
+                                    message.algorithm = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    message.maxNumWorkers = reader.int32();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -2366,6 +2490,21 @@
                      */
                     AutoscalingSettings.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for AutoscalingSettings
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.AutoscalingSettings
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    AutoscalingSettings.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.AutoscalingSettings";
                     };
     
                     return AutoscalingSettings;
@@ -2514,20 +2653,24 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.containerImage = reader.string();
-                                break;
-                            case 2:
-                                message.useSingleCorePerContainer = reader.bool();
-                                break;
-                            case 3:
-                                message.environmentId = reader.string();
-                                break;
-                            case 4:
-                                if (!(message.capabilities && message.capabilities.length))
-                                    message.capabilities = [];
-                                message.capabilities.push(reader.string());
-                                break;
+                            case 1: {
+                                    message.containerImage = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.useSingleCorePerContainer = reader.bool();
+                                    break;
+                                }
+                            case 3: {
+                                    message.environmentId = reader.string();
+                                    break;
+                                }
+                            case 4: {
+                                    if (!(message.capabilities && message.capabilities.length))
+                                        message.capabilities = [];
+                                    message.capabilities.push(reader.string());
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -2653,6 +2796,21 @@
                      */
                     SdkHarnessContainerImage.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for SdkHarnessContainerImage
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.SdkHarnessContainerImage
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    SdkHarnessContainerImage.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.SdkHarnessContainerImage";
                     };
     
                     return SdkHarnessContainerImage;
@@ -2989,97 +3147,119 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.kind = reader.string();
-                                break;
-                            case 2:
-                                message.numWorkers = reader.int32();
-                                break;
-                            case 3:
-                                if (!(message.packages && message.packages.length))
-                                    message.packages = [];
-                                message.packages.push($root.google.dataflow.v1beta3.Package.decode(reader, reader.uint32()));
-                                break;
-                            case 4:
-                                message.defaultPackageSet = reader.int32();
-                                break;
-                            case 5:
-                                message.machineType = reader.string();
-                                break;
-                            case 6:
-                                message.teardownPolicy = reader.int32();
-                                break;
-                            case 7:
-                                message.diskSizeGb = reader.int32();
-                                break;
-                            case 16:
-                                message.diskType = reader.string();
-                                break;
-                            case 8:
-                                message.diskSourceImage = reader.string();
-                                break;
-                            case 9:
-                                message.zone = reader.string();
-                                break;
-                            case 10:
-                                message.taskrunnerSettings = $root.google.dataflow.v1beta3.TaskRunnerSettings.decode(reader, reader.uint32());
-                                break;
-                            case 11:
-                                message.onHostMaintenance = reader.string();
-                                break;
-                            case 12:
-                                if (!(message.dataDisks && message.dataDisks.length))
-                                    message.dataDisks = [];
-                                message.dataDisks.push($root.google.dataflow.v1beta3.Disk.decode(reader, reader.uint32()));
-                                break;
-                            case 13:
-                                if (message.metadata === $util.emptyObject)
-                                    message.metadata = {};
-                                var end2 = reader.uint32() + reader.pos;
-                                key = "";
-                                value = "";
-                                while (reader.pos < end2) {
-                                    var tag2 = reader.uint32();
-                                    switch (tag2 >>> 3) {
-                                    case 1:
-                                        key = reader.string();
-                                        break;
-                                    case 2:
-                                        value = reader.string();
-                                        break;
-                                    default:
-                                        reader.skipType(tag2 & 7);
-                                        break;
-                                    }
+                            case 1: {
+                                    message.kind = reader.string();
+                                    break;
                                 }
-                                message.metadata[key] = value;
-                                break;
-                            case 14:
-                                message.autoscalingSettings = $root.google.dataflow.v1beta3.AutoscalingSettings.decode(reader, reader.uint32());
-                                break;
-                            case 15:
-                                message.poolArgs = $root.google.protobuf.Any.decode(reader, reader.uint32());
-                                break;
-                            case 17:
-                                message.network = reader.string();
-                                break;
-                            case 19:
-                                message.subnetwork = reader.string();
-                                break;
-                            case 18:
-                                message.workerHarnessContainerImage = reader.string();
-                                break;
-                            case 20:
-                                message.numThreadsPerWorker = reader.int32();
-                                break;
-                            case 21:
-                                message.ipConfiguration = reader.int32();
-                                break;
-                            case 22:
-                                if (!(message.sdkHarnessContainerImages && message.sdkHarnessContainerImages.length))
-                                    message.sdkHarnessContainerImages = [];
-                                message.sdkHarnessContainerImages.push($root.google.dataflow.v1beta3.SdkHarnessContainerImage.decode(reader, reader.uint32()));
-                                break;
+                            case 2: {
+                                    message.numWorkers = reader.int32();
+                                    break;
+                                }
+                            case 3: {
+                                    if (!(message.packages && message.packages.length))
+                                        message.packages = [];
+                                    message.packages.push($root.google.dataflow.v1beta3.Package.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 4: {
+                                    message.defaultPackageSet = reader.int32();
+                                    break;
+                                }
+                            case 5: {
+                                    message.machineType = reader.string();
+                                    break;
+                                }
+                            case 6: {
+                                    message.teardownPolicy = reader.int32();
+                                    break;
+                                }
+                            case 7: {
+                                    message.diskSizeGb = reader.int32();
+                                    break;
+                                }
+                            case 16: {
+                                    message.diskType = reader.string();
+                                    break;
+                                }
+                            case 8: {
+                                    message.diskSourceImage = reader.string();
+                                    break;
+                                }
+                            case 9: {
+                                    message.zone = reader.string();
+                                    break;
+                                }
+                            case 10: {
+                                    message.taskrunnerSettings = $root.google.dataflow.v1beta3.TaskRunnerSettings.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 11: {
+                                    message.onHostMaintenance = reader.string();
+                                    break;
+                                }
+                            case 12: {
+                                    if (!(message.dataDisks && message.dataDisks.length))
+                                        message.dataDisks = [];
+                                    message.dataDisks.push($root.google.dataflow.v1beta3.Disk.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 13: {
+                                    if (message.metadata === $util.emptyObject)
+                                        message.metadata = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.metadata[key] = value;
+                                    break;
+                                }
+                            case 14: {
+                                    message.autoscalingSettings = $root.google.dataflow.v1beta3.AutoscalingSettings.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 15: {
+                                    message.poolArgs = $root.google.protobuf.Any.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 17: {
+                                    message.network = reader.string();
+                                    break;
+                                }
+                            case 19: {
+                                    message.subnetwork = reader.string();
+                                    break;
+                                }
+                            case 18: {
+                                    message.workerHarnessContainerImage = reader.string();
+                                    break;
+                                }
+                            case 20: {
+                                    message.numThreadsPerWorker = reader.int32();
+                                    break;
+                                }
+                            case 21: {
+                                    message.ipConfiguration = reader.int32();
+                                    break;
+                                }
+                            case 22: {
+                                    if (!(message.sdkHarnessContainerImages && message.sdkHarnessContainerImages.length))
+                                        message.sdkHarnessContainerImages = [];
+                                    message.sdkHarnessContainerImages.push($root.google.dataflow.v1beta3.SdkHarnessContainerImage.decode(reader, reader.uint32()));
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -3485,6 +3665,21 @@
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
+                    /**
+                     * Gets the default type url for WorkerPool
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.WorkerPool
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    WorkerPool.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.WorkerPool";
+                    };
+    
                     return WorkerPool;
                 })();
     
@@ -3596,9 +3791,10 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.enableHotKeyLogging = reader.bool();
-                                break;
+                            case 1: {
+                                    message.enableHotKeyLogging = reader.bool();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -3688,6 +3884,21 @@
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
+                    /**
+                     * Gets the default type url for DebugOptions
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.DebugOptions
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    DebugOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.DebugOptions";
+                    };
+    
                     return DebugOptions;
                 })();
     
@@ -3724,7 +3935,7 @@
                     };
     
                     /**
-                     * Callback as used by {@link google.dataflow.v1beta3.JobsV1Beta3#createJob}.
+                     * Callback as used by {@link google.dataflow.v1beta3.JobsV1Beta3|createJob}.
                      * @memberof google.dataflow.v1beta3.JobsV1Beta3
                      * @typedef CreateJobCallback
                      * @type {function}
@@ -3757,7 +3968,7 @@
                      */
     
                     /**
-                     * Callback as used by {@link google.dataflow.v1beta3.JobsV1Beta3#getJob}.
+                     * Callback as used by {@link google.dataflow.v1beta3.JobsV1Beta3|getJob}.
                      * @memberof google.dataflow.v1beta3.JobsV1Beta3
                      * @typedef GetJobCallback
                      * @type {function}
@@ -3790,7 +4001,7 @@
                      */
     
                     /**
-                     * Callback as used by {@link google.dataflow.v1beta3.JobsV1Beta3#updateJob}.
+                     * Callback as used by {@link google.dataflow.v1beta3.JobsV1Beta3|updateJob}.
                      * @memberof google.dataflow.v1beta3.JobsV1Beta3
                      * @typedef UpdateJobCallback
                      * @type {function}
@@ -3823,7 +4034,7 @@
                      */
     
                     /**
-                     * Callback as used by {@link google.dataflow.v1beta3.JobsV1Beta3#listJobs}.
+                     * Callback as used by {@link google.dataflow.v1beta3.JobsV1Beta3|listJobs}.
                      * @memberof google.dataflow.v1beta3.JobsV1Beta3
                      * @typedef ListJobsCallback
                      * @type {function}
@@ -3856,7 +4067,7 @@
                      */
     
                     /**
-                     * Callback as used by {@link google.dataflow.v1beta3.JobsV1Beta3#aggregatedListJobs}.
+                     * Callback as used by {@link google.dataflow.v1beta3.JobsV1Beta3|aggregatedListJobs}.
                      * @memberof google.dataflow.v1beta3.JobsV1Beta3
                      * @typedef AggregatedListJobsCallback
                      * @type {function}
@@ -3889,7 +4100,7 @@
                      */
     
                     /**
-                     * Callback as used by {@link google.dataflow.v1beta3.JobsV1Beta3#checkActiveJobs}.
+                     * Callback as used by {@link google.dataflow.v1beta3.JobsV1Beta3|checkActiveJobs}.
                      * @memberof google.dataflow.v1beta3.JobsV1Beta3
                      * @typedef CheckActiveJobsCallback
                      * @type {function}
@@ -3922,7 +4133,7 @@
                      */
     
                     /**
-                     * Callback as used by {@link google.dataflow.v1beta3.JobsV1Beta3#snapshotJob}.
+                     * Callback as used by {@link google.dataflow.v1beta3.JobsV1Beta3|snapshotJob}.
                      * @memberof google.dataflow.v1beta3.JobsV1Beta3
                      * @typedef SnapshotJobCallback
                      * @type {function}
@@ -4323,125 +4534,150 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.id = reader.string();
-                                break;
-                            case 2:
-                                message.projectId = reader.string();
-                                break;
-                            case 3:
-                                message.name = reader.string();
-                                break;
-                            case 4:
-                                message.type = reader.int32();
-                                break;
-                            case 5:
-                                message.environment = $root.google.dataflow.v1beta3.Environment.decode(reader, reader.uint32());
-                                break;
-                            case 6:
-                                if (!(message.steps && message.steps.length))
-                                    message.steps = [];
-                                message.steps.push($root.google.dataflow.v1beta3.Step.decode(reader, reader.uint32()));
-                                break;
-                            case 24:
-                                message.stepsLocation = reader.string();
-                                break;
-                            case 7:
-                                message.currentState = reader.int32();
-                                break;
-                            case 8:
-                                message.currentStateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                break;
-                            case 9:
-                                message.requestedState = reader.int32();
-                                break;
-                            case 10:
-                                message.executionInfo = $root.google.dataflow.v1beta3.JobExecutionInfo.decode(reader, reader.uint32());
-                                break;
-                            case 11:
-                                message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                break;
-                            case 12:
-                                message.replaceJobId = reader.string();
-                                break;
-                            case 13:
-                                if (message.transformNameMapping === $util.emptyObject)
-                                    message.transformNameMapping = {};
-                                var end2 = reader.uint32() + reader.pos;
-                                key = "";
-                                value = "";
-                                while (reader.pos < end2) {
-                                    var tag2 = reader.uint32();
-                                    switch (tag2 >>> 3) {
-                                    case 1:
-                                        key = reader.string();
-                                        break;
-                                    case 2:
-                                        value = reader.string();
-                                        break;
-                                    default:
-                                        reader.skipType(tag2 & 7);
-                                        break;
-                                    }
+                            case 1: {
+                                    message.id = reader.string();
+                                    break;
                                 }
-                                message.transformNameMapping[key] = value;
-                                break;
-                            case 14:
-                                message.clientRequestId = reader.string();
-                                break;
-                            case 15:
-                                message.replacedByJobId = reader.string();
-                                break;
-                            case 16:
-                                if (!(message.tempFiles && message.tempFiles.length))
-                                    message.tempFiles = [];
-                                message.tempFiles.push(reader.string());
-                                break;
-                            case 17:
-                                if (message.labels === $util.emptyObject)
-                                    message.labels = {};
-                                var end2 = reader.uint32() + reader.pos;
-                                key = "";
-                                value = "";
-                                while (reader.pos < end2) {
-                                    var tag2 = reader.uint32();
-                                    switch (tag2 >>> 3) {
-                                    case 1:
-                                        key = reader.string();
-                                        break;
-                                    case 2:
-                                        value = reader.string();
-                                        break;
-                                    default:
-                                        reader.skipType(tag2 & 7);
-                                        break;
-                                    }
+                            case 2: {
+                                    message.projectId = reader.string();
+                                    break;
                                 }
-                                message.labels[key] = value;
-                                break;
-                            case 18:
-                                message.location = reader.string();
-                                break;
-                            case 19:
-                                message.pipelineDescription = $root.google.dataflow.v1beta3.PipelineDescription.decode(reader, reader.uint32());
-                                break;
-                            case 20:
-                                if (!(message.stageStates && message.stageStates.length))
-                                    message.stageStates = [];
-                                message.stageStates.push($root.google.dataflow.v1beta3.ExecutionStageState.decode(reader, reader.uint32()));
-                                break;
-                            case 21:
-                                message.jobMetadata = $root.google.dataflow.v1beta3.JobMetadata.decode(reader, reader.uint32());
-                                break;
-                            case 22:
-                                message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                break;
-                            case 23:
-                                message.createdFromSnapshotId = reader.string();
-                                break;
-                            case 25:
-                                message.satisfiesPzs = reader.bool();
-                                break;
+                            case 3: {
+                                    message.name = reader.string();
+                                    break;
+                                }
+                            case 4: {
+                                    message.type = reader.int32();
+                                    break;
+                                }
+                            case 5: {
+                                    message.environment = $root.google.dataflow.v1beta3.Environment.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 6: {
+                                    if (!(message.steps && message.steps.length))
+                                        message.steps = [];
+                                    message.steps.push($root.google.dataflow.v1beta3.Step.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 24: {
+                                    message.stepsLocation = reader.string();
+                                    break;
+                                }
+                            case 7: {
+                                    message.currentState = reader.int32();
+                                    break;
+                                }
+                            case 8: {
+                                    message.currentStateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 9: {
+                                    message.requestedState = reader.int32();
+                                    break;
+                                }
+                            case 10: {
+                                    message.executionInfo = $root.google.dataflow.v1beta3.JobExecutionInfo.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 11: {
+                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 12: {
+                                    message.replaceJobId = reader.string();
+                                    break;
+                                }
+                            case 13: {
+                                    if (message.transformNameMapping === $util.emptyObject)
+                                        message.transformNameMapping = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.transformNameMapping[key] = value;
+                                    break;
+                                }
+                            case 14: {
+                                    message.clientRequestId = reader.string();
+                                    break;
+                                }
+                            case 15: {
+                                    message.replacedByJobId = reader.string();
+                                    break;
+                                }
+                            case 16: {
+                                    if (!(message.tempFiles && message.tempFiles.length))
+                                        message.tempFiles = [];
+                                    message.tempFiles.push(reader.string());
+                                    break;
+                                }
+                            case 17: {
+                                    if (message.labels === $util.emptyObject)
+                                        message.labels = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.labels[key] = value;
+                                    break;
+                                }
+                            case 18: {
+                                    message.location = reader.string();
+                                    break;
+                                }
+                            case 19: {
+                                    message.pipelineDescription = $root.google.dataflow.v1beta3.PipelineDescription.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 20: {
+                                    if (!(message.stageStates && message.stageStates.length))
+                                        message.stageStates = [];
+                                    message.stageStates.push($root.google.dataflow.v1beta3.ExecutionStageState.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 21: {
+                                    message.jobMetadata = $root.google.dataflow.v1beta3.JobMetadata.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 22: {
+                                    message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 23: {
+                                    message.createdFromSnapshotId = reader.string();
+                                    break;
+                                }
+                            case 25: {
+                                    message.satisfiesPzs = reader.bool();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -4990,6 +5226,21 @@
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
+                    /**
+                     * Gets the default type url for Job
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.Job
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    Job.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.Job";
+                    };
+    
                     return Job;
                 })();
     
@@ -5096,12 +5347,14 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.namespace = reader.string();
-                                break;
-                            case 2:
-                                message.projectId = reader.string();
-                                break;
+                            case 1: {
+                                    message.namespace = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.projectId = reader.string();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -5198,6 +5451,21 @@
                      */
                     DatastoreIODetails.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for DatastoreIODetails
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.DatastoreIODetails
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    DatastoreIODetails.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.DatastoreIODetails";
                     };
     
                     return DatastoreIODetails;
@@ -5306,12 +5574,14 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.topic = reader.string();
-                                break;
-                            case 2:
-                                message.subscription = reader.string();
-                                break;
+                            case 1: {
+                                    message.topic = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.subscription = reader.string();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -5410,6 +5680,21 @@
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
+                    /**
+                     * Gets the default type url for PubSubIODetails
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.PubSubIODetails
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    PubSubIODetails.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.PubSubIODetails";
+                    };
+    
                     return PubSubIODetails;
                 })();
     
@@ -5505,9 +5790,10 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.filePattern = reader.string();
-                                break;
+                            case 1: {
+                                    message.filePattern = reader.string();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -5595,6 +5881,21 @@
                      */
                     FileIODetails.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for FileIODetails
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.FileIODetails
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    FileIODetails.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.FileIODetails";
                     };
     
                     return FileIODetails;
@@ -5714,15 +6015,18 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.projectId = reader.string();
-                                break;
-                            case 2:
-                                message.instanceId = reader.string();
-                                break;
-                            case 3:
-                                message.tableId = reader.string();
-                                break;
+                            case 1: {
+                                    message.projectId = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.instanceId = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.tableId = reader.string();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -5827,6 +6131,21 @@
                      */
                     BigTableIODetails.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for BigTableIODetails
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.BigTableIODetails
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    BigTableIODetails.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.BigTableIODetails";
                     };
     
                     return BigTableIODetails;
@@ -5957,18 +6276,22 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.table = reader.string();
-                                break;
-                            case 2:
-                                message.dataset = reader.string();
-                                break;
-                            case 3:
-                                message.projectId = reader.string();
-                                break;
-                            case 4:
-                                message.query = reader.string();
-                                break;
+                            case 1: {
+                                    message.table = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.dataset = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.projectId = reader.string();
+                                    break;
+                                }
+                            case 4: {
+                                    message.query = reader.string();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -6081,6 +6404,21 @@
                      */
                     BigQueryIODetails.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for BigQueryIODetails
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.BigQueryIODetails
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    BigQueryIODetails.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.BigQueryIODetails";
                     };
     
                     return BigQueryIODetails;
@@ -6200,15 +6538,18 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.projectId = reader.string();
-                                break;
-                            case 2:
-                                message.instanceId = reader.string();
-                                break;
-                            case 3:
-                                message.databaseId = reader.string();
-                                break;
+                            case 1: {
+                                    message.projectId = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.instanceId = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.databaseId = reader.string();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -6313,6 +6654,21 @@
                      */
                     SpannerIODetails.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for SpannerIODetails
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.SpannerIODetails
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    SpannerIODetails.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.SpannerIODetails";
                     };
     
                     return SpannerIODetails;
@@ -6432,15 +6788,18 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.version = reader.string();
-                                break;
-                            case 2:
-                                message.versionDisplayName = reader.string();
-                                break;
-                            case 3:
-                                message.sdkSupportStatus = reader.int32();
-                                break;
+                            case 1: {
+                                    message.version = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.versionDisplayName = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.sdkSupportStatus = reader.int32();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -6573,6 +6932,21 @@
                      */
                     SdkVersion.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for SdkVersion
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.SdkVersion
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    SdkVersion.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.SdkVersion";
                     };
     
                     /**
@@ -6768,39 +7142,46 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.sdkVersion = $root.google.dataflow.v1beta3.SdkVersion.decode(reader, reader.uint32());
-                                break;
-                            case 2:
-                                if (!(message.spannerDetails && message.spannerDetails.length))
-                                    message.spannerDetails = [];
-                                message.spannerDetails.push($root.google.dataflow.v1beta3.SpannerIODetails.decode(reader, reader.uint32()));
-                                break;
-                            case 3:
-                                if (!(message.bigqueryDetails && message.bigqueryDetails.length))
-                                    message.bigqueryDetails = [];
-                                message.bigqueryDetails.push($root.google.dataflow.v1beta3.BigQueryIODetails.decode(reader, reader.uint32()));
-                                break;
-                            case 4:
-                                if (!(message.bigTableDetails && message.bigTableDetails.length))
-                                    message.bigTableDetails = [];
-                                message.bigTableDetails.push($root.google.dataflow.v1beta3.BigTableIODetails.decode(reader, reader.uint32()));
-                                break;
-                            case 5:
-                                if (!(message.pubsubDetails && message.pubsubDetails.length))
-                                    message.pubsubDetails = [];
-                                message.pubsubDetails.push($root.google.dataflow.v1beta3.PubSubIODetails.decode(reader, reader.uint32()));
-                                break;
-                            case 6:
-                                if (!(message.fileDetails && message.fileDetails.length))
-                                    message.fileDetails = [];
-                                message.fileDetails.push($root.google.dataflow.v1beta3.FileIODetails.decode(reader, reader.uint32()));
-                                break;
-                            case 7:
-                                if (!(message.datastoreDetails && message.datastoreDetails.length))
-                                    message.datastoreDetails = [];
-                                message.datastoreDetails.push($root.google.dataflow.v1beta3.DatastoreIODetails.decode(reader, reader.uint32()));
-                                break;
+                            case 1: {
+                                    message.sdkVersion = $root.google.dataflow.v1beta3.SdkVersion.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 2: {
+                                    if (!(message.spannerDetails && message.spannerDetails.length))
+                                        message.spannerDetails = [];
+                                    message.spannerDetails.push($root.google.dataflow.v1beta3.SpannerIODetails.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 3: {
+                                    if (!(message.bigqueryDetails && message.bigqueryDetails.length))
+                                        message.bigqueryDetails = [];
+                                    message.bigqueryDetails.push($root.google.dataflow.v1beta3.BigQueryIODetails.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 4: {
+                                    if (!(message.bigTableDetails && message.bigTableDetails.length))
+                                        message.bigTableDetails = [];
+                                    message.bigTableDetails.push($root.google.dataflow.v1beta3.BigTableIODetails.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 5: {
+                                    if (!(message.pubsubDetails && message.pubsubDetails.length))
+                                        message.pubsubDetails = [];
+                                    message.pubsubDetails.push($root.google.dataflow.v1beta3.PubSubIODetails.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 6: {
+                                    if (!(message.fileDetails && message.fileDetails.length))
+                                        message.fileDetails = [];
+                                    message.fileDetails.push($root.google.dataflow.v1beta3.FileIODetails.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 7: {
+                                    if (!(message.datastoreDetails && message.datastoreDetails.length))
+                                        message.datastoreDetails = [];
+                                    message.datastoreDetails.push($root.google.dataflow.v1beta3.DatastoreIODetails.decode(reader, reader.uint32()));
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -7047,6 +7428,21 @@
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
+                    /**
+                     * Gets the default type url for JobMetadata
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.JobMetadata
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    JobMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.JobMetadata";
+                    };
+    
                     return JobMetadata;
                 })();
     
@@ -7164,15 +7560,18 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.executionStageName = reader.string();
-                                break;
-                            case 2:
-                                message.executionStageState = reader.int32();
-                                break;
-                            case 3:
-                                message.currentStateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                break;
+                            case 1: {
+                                    message.executionStageName = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.executionStageState = reader.int32();
+                                    break;
+                                }
+                            case 3: {
+                                    message.currentStateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -7352,6 +7751,21 @@
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
+                    /**
+                     * Gets the default type url for ExecutionStageState
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.ExecutionStageState
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ExecutionStageState.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.ExecutionStageState";
+                    };
+    
                     return ExecutionStageState;
                 })();
     
@@ -7475,21 +7889,24 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                if (!(message.originalPipelineTransform && message.originalPipelineTransform.length))
-                                    message.originalPipelineTransform = [];
-                                message.originalPipelineTransform.push($root.google.dataflow.v1beta3.TransformSummary.decode(reader, reader.uint32()));
-                                break;
-                            case 2:
-                                if (!(message.executionPipelineStage && message.executionPipelineStage.length))
-                                    message.executionPipelineStage = [];
-                                message.executionPipelineStage.push($root.google.dataflow.v1beta3.ExecutionStageSummary.decode(reader, reader.uint32()));
-                                break;
-                            case 3:
-                                if (!(message.displayData && message.displayData.length))
-                                    message.displayData = [];
-                                message.displayData.push($root.google.dataflow.v1beta3.DisplayData.decode(reader, reader.uint32()));
-                                break;
+                            case 1: {
+                                    if (!(message.originalPipelineTransform && message.originalPipelineTransform.length))
+                                        message.originalPipelineTransform = [];
+                                    message.originalPipelineTransform.push($root.google.dataflow.v1beta3.TransformSummary.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 2: {
+                                    if (!(message.executionPipelineStage && message.executionPipelineStage.length))
+                                        message.executionPipelineStage = [];
+                                    message.executionPipelineStage.push($root.google.dataflow.v1beta3.ExecutionStageSummary.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 3: {
+                                    if (!(message.displayData && message.displayData.length))
+                                        message.displayData = [];
+                                    message.displayData.push($root.google.dataflow.v1beta3.DisplayData.decode(reader, reader.uint32()));
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -7645,6 +8062,21 @@
                      */
                     PipelineDescription.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for PipelineDescription
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.PipelineDescription
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    PipelineDescription.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.PipelineDescription";
                     };
     
                     return PipelineDescription;
@@ -7831,30 +8263,36 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.kind = reader.int32();
-                                break;
-                            case 2:
-                                message.id = reader.string();
-                                break;
-                            case 3:
-                                message.name = reader.string();
-                                break;
-                            case 4:
-                                if (!(message.displayData && message.displayData.length))
-                                    message.displayData = [];
-                                message.displayData.push($root.google.dataflow.v1beta3.DisplayData.decode(reader, reader.uint32()));
-                                break;
-                            case 5:
-                                if (!(message.outputCollectionName && message.outputCollectionName.length))
-                                    message.outputCollectionName = [];
-                                message.outputCollectionName.push(reader.string());
-                                break;
-                            case 6:
-                                if (!(message.inputCollectionName && message.inputCollectionName.length))
-                                    message.inputCollectionName = [];
-                                message.inputCollectionName.push(reader.string());
-                                break;
+                            case 1: {
+                                    message.kind = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    message.id = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.name = reader.string();
+                                    break;
+                                }
+                            case 4: {
+                                    if (!(message.displayData && message.displayData.length))
+                                        message.displayData = [];
+                                    message.displayData.push($root.google.dataflow.v1beta3.DisplayData.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 5: {
+                                    if (!(message.outputCollectionName && message.outputCollectionName.length))
+                                        message.outputCollectionName = [];
+                                    message.outputCollectionName.push(reader.string());
+                                    break;
+                                }
+                            case 6: {
+                                    if (!(message.inputCollectionName && message.inputCollectionName.length))
+                                        message.inputCollectionName = [];
+                                    message.inputCollectionName.push(reader.string());
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -8076,6 +8514,21 @@
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
+                    /**
+                     * Gets the default type url for TransformSummary
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.TransformSummary
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    TransformSummary.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.TransformSummary";
+                    };
+    
                     return TransformSummary;
                 })();
     
@@ -8258,40 +8711,48 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.name = reader.string();
-                                break;
-                            case 2:
-                                message.id = reader.string();
-                                break;
-                            case 3:
-                                message.kind = reader.int32();
-                                break;
-                            case 4:
-                                if (!(message.inputSource && message.inputSource.length))
-                                    message.inputSource = [];
-                                message.inputSource.push($root.google.dataflow.v1beta3.ExecutionStageSummary.StageSource.decode(reader, reader.uint32()));
-                                break;
-                            case 5:
-                                if (!(message.outputSource && message.outputSource.length))
-                                    message.outputSource = [];
-                                message.outputSource.push($root.google.dataflow.v1beta3.ExecutionStageSummary.StageSource.decode(reader, reader.uint32()));
-                                break;
-                            case 8:
-                                if (!(message.prerequisiteStage && message.prerequisiteStage.length))
-                                    message.prerequisiteStage = [];
-                                message.prerequisiteStage.push(reader.string());
-                                break;
-                            case 6:
-                                if (!(message.componentTransform && message.componentTransform.length))
-                                    message.componentTransform = [];
-                                message.componentTransform.push($root.google.dataflow.v1beta3.ExecutionStageSummary.ComponentTransform.decode(reader, reader.uint32()));
-                                break;
-                            case 7:
-                                if (!(message.componentSource && message.componentSource.length))
-                                    message.componentSource = [];
-                                message.componentSource.push($root.google.dataflow.v1beta3.ExecutionStageSummary.ComponentSource.decode(reader, reader.uint32()));
-                                break;
+                            case 1: {
+                                    message.name = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.id = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.kind = reader.int32();
+                                    break;
+                                }
+                            case 4: {
+                                    if (!(message.inputSource && message.inputSource.length))
+                                        message.inputSource = [];
+                                    message.inputSource.push($root.google.dataflow.v1beta3.ExecutionStageSummary.StageSource.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 5: {
+                                    if (!(message.outputSource && message.outputSource.length))
+                                        message.outputSource = [];
+                                    message.outputSource.push($root.google.dataflow.v1beta3.ExecutionStageSummary.StageSource.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 8: {
+                                    if (!(message.prerequisiteStage && message.prerequisiteStage.length))
+                                        message.prerequisiteStage = [];
+                                    message.prerequisiteStage.push(reader.string());
+                                    break;
+                                }
+                            case 6: {
+                                    if (!(message.componentTransform && message.componentTransform.length))
+                                        message.componentTransform = [];
+                                    message.componentTransform.push($root.google.dataflow.v1beta3.ExecutionStageSummary.ComponentTransform.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 7: {
+                                    if (!(message.componentSource && message.componentSource.length))
+                                        message.componentSource = [];
+                                    message.componentSource.push($root.google.dataflow.v1beta3.ExecutionStageSummary.ComponentSource.decode(reader, reader.uint32()));
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -8568,6 +9029,21 @@
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
+                    /**
+                     * Gets the default type url for ExecutionStageSummary
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.ExecutionStageSummary
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ExecutionStageSummary.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.ExecutionStageSummary";
+                    };
+    
                     ExecutionStageSummary.StageSource = (function() {
     
                         /**
@@ -8693,18 +9169,22 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.userName = reader.string();
-                                    break;
-                                case 2:
-                                    message.name = reader.string();
-                                    break;
-                                case 3:
-                                    message.originalTransformOrCollection = reader.string();
-                                    break;
-                                case 4:
-                                    message.sizeBytes = reader.int64();
-                                    break;
+                                case 1: {
+                                        message.userName = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.originalTransformOrCollection = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.sizeBytes = reader.int64();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -8833,6 +9313,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for StageSource
+                         * @function getTypeUrl
+                         * @memberof google.dataflow.v1beta3.ExecutionStageSummary.StageSource
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        StageSource.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.dataflow.v1beta3.ExecutionStageSummary.StageSource";
+                        };
+    
                         return StageSource;
                     })();
     
@@ -8950,15 +9445,18 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.userName = reader.string();
-                                    break;
-                                case 2:
-                                    message.name = reader.string();
-                                    break;
-                                case 3:
-                                    message.originalTransform = reader.string();
-                                    break;
+                                case 1: {
+                                        message.userName = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.originalTransform = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -9063,6 +9561,21 @@
                          */
                         ComponentTransform.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ComponentTransform
+                         * @function getTypeUrl
+                         * @memberof google.dataflow.v1beta3.ExecutionStageSummary.ComponentTransform
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ComponentTransform.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.dataflow.v1beta3.ExecutionStageSummary.ComponentTransform";
                         };
     
                         return ComponentTransform;
@@ -9182,15 +9695,18 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.userName = reader.string();
-                                    break;
-                                case 2:
-                                    message.name = reader.string();
-                                    break;
-                                case 3:
-                                    message.originalTransformOrCollection = reader.string();
-                                    break;
+                                case 1: {
+                                        message.userName = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.originalTransformOrCollection = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -9295,6 +9811,21 @@
                          */
                         ComponentSource.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ComponentSource
+                         * @function getTypeUrl
+                         * @memberof google.dataflow.v1beta3.ExecutionStageSummary.ComponentSource
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ComponentSource.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.dataflow.v1beta3.ExecutionStageSummary.ComponentSource";
                         };
     
                         return ComponentSource;
@@ -9530,42 +10061,54 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.key = reader.string();
-                                break;
-                            case 2:
-                                message.namespace = reader.string();
-                                break;
-                            case 4:
-                                message.strValue = reader.string();
-                                break;
-                            case 5:
-                                message.int64Value = reader.int64();
-                                break;
-                            case 6:
-                                message.floatValue = reader.float();
-                                break;
-                            case 7:
-                                message.javaClassValue = reader.string();
-                                break;
-                            case 8:
-                                message.timestampValue = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                break;
-                            case 9:
-                                message.durationValue = $root.google.protobuf.Duration.decode(reader, reader.uint32());
-                                break;
-                            case 10:
-                                message.boolValue = reader.bool();
-                                break;
-                            case 11:
-                                message.shortStrValue = reader.string();
-                                break;
-                            case 12:
-                                message.url = reader.string();
-                                break;
-                            case 13:
-                                message.label = reader.string();
-                                break;
+                            case 1: {
+                                    message.key = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.namespace = reader.string();
+                                    break;
+                                }
+                            case 4: {
+                                    message.strValue = reader.string();
+                                    break;
+                                }
+                            case 5: {
+                                    message.int64Value = reader.int64();
+                                    break;
+                                }
+                            case 6: {
+                                    message.floatValue = reader.float();
+                                    break;
+                                }
+                            case 7: {
+                                    message.javaClassValue = reader.string();
+                                    break;
+                                }
+                            case 8: {
+                                    message.timestampValue = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 9: {
+                                    message.durationValue = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 10: {
+                                    message.boolValue = reader.bool();
+                                    break;
+                                }
+                            case 11: {
+                                    message.shortStrValue = reader.string();
+                                    break;
+                                }
+                            case 12: {
+                                    message.url = reader.string();
+                                    break;
+                                }
+                            case 13: {
+                                    message.label = reader.string();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -9807,6 +10350,21 @@
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
+                    /**
+                     * Gets the default type url for DisplayData
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.DisplayData
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    DisplayData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.DisplayData";
+                    };
+    
                     return DisplayData;
                 })();
     
@@ -9924,15 +10482,18 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.kind = reader.string();
-                                break;
-                            case 2:
-                                message.name = reader.string();
-                                break;
-                            case 3:
-                                message.properties = $root.google.protobuf.Struct.decode(reader, reader.uint32());
-                                break;
+                            case 1: {
+                                    message.kind = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.name = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.properties = $root.google.protobuf.Struct.decode(reader, reader.uint32());
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -10042,6 +10603,21 @@
                      */
                     Step.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for Step
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.Step
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    Step.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.Step";
                     };
     
                     return Step;
@@ -10179,28 +10755,29 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                if (message.stages === $util.emptyObject)
-                                    message.stages = {};
-                                var end2 = reader.uint32() + reader.pos;
-                                key = "";
-                                value = null;
-                                while (reader.pos < end2) {
-                                    var tag2 = reader.uint32();
-                                    switch (tag2 >>> 3) {
-                                    case 1:
-                                        key = reader.string();
-                                        break;
-                                    case 2:
-                                        value = $root.google.dataflow.v1beta3.JobExecutionStageInfo.decode(reader, reader.uint32());
-                                        break;
-                                    default:
-                                        reader.skipType(tag2 & 7);
-                                        break;
+                            case 1: {
+                                    if (message.stages === $util.emptyObject)
+                                        message.stages = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = null;
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = $root.google.dataflow.v1beta3.JobExecutionStageInfo.decode(reader, reader.uint32());
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
                                     }
+                                    message.stages[key] = value;
+                                    break;
                                 }
-                                message.stages[key] = value;
-                                break;
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -10309,6 +10886,21 @@
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
+                    /**
+                     * Gets the default type url for JobExecutionInfo
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.JobExecutionInfo
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    JobExecutionInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.JobExecutionInfo";
+                    };
+    
                     return JobExecutionInfo;
                 })();
     
@@ -10406,11 +10998,12 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                if (!(message.stepName && message.stepName.length))
-                                    message.stepName = [];
-                                message.stepName.push(reader.string());
-                                break;
+                            case 1: {
+                                    if (!(message.stepName && message.stepName.length))
+                                        message.stepName = [];
+                                    message.stepName.push(reader.string());
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -10510,6 +11103,21 @@
                      */
                     JobExecutionStageInfo.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for JobExecutionStageInfo
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.JobExecutionStageInfo
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    JobExecutionStageInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.JobExecutionStageInfo";
                     };
     
                     return JobExecutionStageInfo;
@@ -10669,21 +11277,26 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.projectId = reader.string();
-                                break;
-                            case 2:
-                                message.job = $root.google.dataflow.v1beta3.Job.decode(reader, reader.uint32());
-                                break;
-                            case 3:
-                                message.view = reader.int32();
-                                break;
-                            case 4:
-                                message.replaceJobId = reader.string();
-                                break;
-                            case 5:
-                                message.location = reader.string();
-                                break;
+                            case 1: {
+                                    message.projectId = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.job = $root.google.dataflow.v1beta3.Job.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 3: {
+                                    message.view = reader.int32();
+                                    break;
+                                }
+                            case 4: {
+                                    message.replaceJobId = reader.string();
+                                    break;
+                                }
+                            case 5: {
+                                    message.location = reader.string();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -10834,6 +11447,21 @@
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
+                    /**
+                     * Gets the default type url for CreateJobRequest
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.CreateJobRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    CreateJobRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.CreateJobRequest";
+                    };
+    
                     return CreateJobRequest;
                 })();
     
@@ -10962,18 +11590,22 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.projectId = reader.string();
-                                break;
-                            case 2:
-                                message.jobId = reader.string();
-                                break;
-                            case 3:
-                                message.view = reader.int32();
-                                break;
-                            case 4:
-                                message.location = reader.string();
-                                break;
+                            case 1: {
+                                    message.projectId = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.jobId = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.view = reader.int32();
+                                    break;
+                                }
+                            case 4: {
+                                    message.location = reader.string();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -11111,6 +11743,21 @@
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
+                    /**
+                     * Gets the default type url for GetJobRequest
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.GetJobRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    GetJobRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.GetJobRequest";
+                    };
+    
                     return GetJobRequest;
                 })();
     
@@ -11239,18 +11886,22 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.projectId = reader.string();
-                                break;
-                            case 2:
-                                message.jobId = reader.string();
-                                break;
-                            case 3:
-                                message.job = $root.google.dataflow.v1beta3.Job.decode(reader, reader.uint32());
-                                break;
-                            case 4:
-                                message.location = reader.string();
-                                break;
+                            case 1: {
+                                    message.projectId = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.jobId = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.job = $root.google.dataflow.v1beta3.Job.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 4: {
+                                    message.location = reader.string();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -11368,6 +12019,21 @@
                      */
                     UpdateJobRequest.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for UpdateJobRequest
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.UpdateJobRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    UpdateJobRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.UpdateJobRequest";
                     };
     
                     return UpdateJobRequest;
@@ -11520,24 +12186,30 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 5:
-                                message.filter = reader.int32();
-                                break;
-                            case 1:
-                                message.projectId = reader.string();
-                                break;
-                            case 2:
-                                message.view = reader.int32();
-                                break;
-                            case 3:
-                                message.pageSize = reader.int32();
-                                break;
-                            case 4:
-                                message.pageToken = reader.string();
-                                break;
-                            case 17:
-                                message.location = reader.string();
-                                break;
+                            case 5: {
+                                    message.filter = reader.int32();
+                                    break;
+                                }
+                            case 1: {
+                                    message.projectId = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.view = reader.int32();
+                                    break;
+                                }
+                            case 3: {
+                                    message.pageSize = reader.int32();
+                                    break;
+                                }
+                            case 4: {
+                                    message.pageToken = reader.string();
+                                    break;
+                                }
+                            case 17: {
+                                    message.location = reader.string();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -11715,6 +12387,21 @@
                     };
     
                     /**
+                     * Gets the default type url for ListJobsRequest
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.ListJobsRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ListJobsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.ListJobsRequest";
+                    };
+    
+                    /**
                      * Filter enum.
                      * @name google.dataflow.v1beta3.ListJobsRequest.Filter
                      * @enum {number}
@@ -11827,9 +12514,10 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.name = reader.string();
-                                break;
+                            case 1: {
+                                    message.name = reader.string();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -11917,6 +12605,21 @@
                      */
                     FailedLocation.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for FailedLocation
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.FailedLocation
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    FailedLocation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.FailedLocation";
                     };
     
                     return FailedLocation;
@@ -12040,19 +12743,22 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                if (!(message.jobs && message.jobs.length))
-                                    message.jobs = [];
-                                message.jobs.push($root.google.dataflow.v1beta3.Job.decode(reader, reader.uint32()));
-                                break;
-                            case 2:
-                                message.nextPageToken = reader.string();
-                                break;
-                            case 3:
-                                if (!(message.failedLocation && message.failedLocation.length))
-                                    message.failedLocation = [];
-                                message.failedLocation.push($root.google.dataflow.v1beta3.FailedLocation.decode(reader, reader.uint32()));
-                                break;
+                            case 1: {
+                                    if (!(message.jobs && message.jobs.length))
+                                        message.jobs = [];
+                                    message.jobs.push($root.google.dataflow.v1beta3.Job.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 2: {
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    if (!(message.failedLocation && message.failedLocation.length))
+                                        message.failedLocation = [];
+                                    message.failedLocation.push($root.google.dataflow.v1beta3.FailedLocation.decode(reader, reader.uint32()));
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -12192,6 +12898,21 @@
                      */
                     ListJobsResponse.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ListJobsResponse
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.ListJobsResponse
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ListJobsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.ListJobsResponse";
                     };
     
                     return ListJobsResponse;
@@ -12344,24 +13065,30 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.projectId = reader.string();
-                                break;
-                            case 2:
-                                message.jobId = reader.string();
-                                break;
-                            case 3:
-                                message.ttl = $root.google.protobuf.Duration.decode(reader, reader.uint32());
-                                break;
-                            case 4:
-                                message.location = reader.string();
-                                break;
-                            case 5:
-                                message.snapshotSources = reader.bool();
-                                break;
-                            case 6:
-                                message.description = reader.string();
-                                break;
+                            case 1: {
+                                    message.projectId = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.jobId = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.ttl = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 4: {
+                                    message.location = reader.string();
+                                    break;
+                                }
+                            case 5: {
+                                    message.snapshotSources = reader.bool();
+                                    break;
+                                }
+                            case 6: {
+                                    message.description = reader.string();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -12497,6 +13224,21 @@
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
+                    /**
+                     * Gets the default type url for SnapshotJobRequest
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.SnapshotJobRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    SnapshotJobRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.SnapshotJobRequest";
+                    };
+    
                     return SnapshotJobRequest;
                 })();
     
@@ -12592,9 +13334,10 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.projectId = reader.string();
-                                break;
+                            case 1: {
+                                    message.projectId = reader.string();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -12682,6 +13425,21 @@
                      */
                     CheckActiveJobsRequest.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for CheckActiveJobsRequest
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.CheckActiveJobsRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    CheckActiveJobsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.CheckActiveJobsRequest";
                     };
     
                     return CheckActiveJobsRequest;
@@ -12779,9 +13537,10 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.activeJobsExist = reader.bool();
-                                break;
+                            case 1: {
+                                    message.activeJobsExist = reader.bool();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -12871,6 +13630,21 @@
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
+                    /**
+                     * Gets the default type url for CheckActiveJobsResponse
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.CheckActiveJobsResponse
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    CheckActiveJobsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.CheckActiveJobsResponse";
+                    };
+    
                     return CheckActiveJobsResponse;
                 })();
     
@@ -12907,7 +13681,7 @@
                     };
     
                     /**
-                     * Callback as used by {@link google.dataflow.v1beta3.SnapshotsV1Beta3#getSnapshot}.
+                     * Callback as used by {@link google.dataflow.v1beta3.SnapshotsV1Beta3|getSnapshot}.
                      * @memberof google.dataflow.v1beta3.SnapshotsV1Beta3
                      * @typedef GetSnapshotCallback
                      * @type {function}
@@ -12940,7 +13714,7 @@
                      */
     
                     /**
-                     * Callback as used by {@link google.dataflow.v1beta3.SnapshotsV1Beta3#deleteSnapshot}.
+                     * Callback as used by {@link google.dataflow.v1beta3.SnapshotsV1Beta3|deleteSnapshot}.
                      * @memberof google.dataflow.v1beta3.SnapshotsV1Beta3
                      * @typedef DeleteSnapshotCallback
                      * @type {function}
@@ -12973,7 +13747,7 @@
                      */
     
                     /**
-                     * Callback as used by {@link google.dataflow.v1beta3.SnapshotsV1Beta3#listSnapshots}.
+                     * Callback as used by {@link google.dataflow.v1beta3.SnapshotsV1Beta3|listSnapshots}.
                      * @memberof google.dataflow.v1beta3.SnapshotsV1Beta3
                      * @typedef ListSnapshotsCallback
                      * @type {function}
@@ -13144,15 +13918,18 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.topicName = reader.string();
-                                break;
-                            case 2:
-                                message.snapshotName = reader.string();
-                                break;
-                            case 3:
-                                message.expireTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                break;
+                            case 1: {
+                                    message.topicName = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.snapshotName = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.expireTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -13262,6 +14039,21 @@
                      */
                     PubsubSnapshotMetadata.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for PubsubSnapshotMetadata
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.PubsubSnapshotMetadata
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    PubsubSnapshotMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.PubsubSnapshotMetadata";
                     };
     
                     return PubsubSnapshotMetadata;
@@ -13460,38 +14252,48 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.id = reader.string();
-                                break;
-                            case 2:
-                                message.projectId = reader.string();
-                                break;
-                            case 3:
-                                message.sourceJobId = reader.string();
-                                break;
-                            case 4:
-                                message.creationTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                break;
-                            case 5:
-                                message.ttl = $root.google.protobuf.Duration.decode(reader, reader.uint32());
-                                break;
-                            case 6:
-                                message.state = reader.int32();
-                                break;
-                            case 7:
-                                if (!(message.pubsubMetadata && message.pubsubMetadata.length))
-                                    message.pubsubMetadata = [];
-                                message.pubsubMetadata.push($root.google.dataflow.v1beta3.PubsubSnapshotMetadata.decode(reader, reader.uint32()));
-                                break;
-                            case 8:
-                                message.description = reader.string();
-                                break;
-                            case 9:
-                                message.diskSizeBytes = reader.int64();
-                                break;
-                            case 10:
-                                message.region = reader.string();
-                                break;
+                            case 1: {
+                                    message.id = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.projectId = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.sourceJobId = reader.string();
+                                    break;
+                                }
+                            case 4: {
+                                    message.creationTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 5: {
+                                    message.ttl = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 6: {
+                                    message.state = reader.int32();
+                                    break;
+                                }
+                            case 7: {
+                                    if (!(message.pubsubMetadata && message.pubsubMetadata.length))
+                                        message.pubsubMetadata = [];
+                                    message.pubsubMetadata.push($root.google.dataflow.v1beta3.PubsubSnapshotMetadata.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 8: {
+                                    message.description = reader.string();
+                                    break;
+                                }
+                            case 9: {
+                                    message.diskSizeBytes = reader.int64();
+                                    break;
+                                }
+                            case 10: {
+                                    message.region = reader.string();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -13729,6 +14531,21 @@
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
+                    /**
+                     * Gets the default type url for Snapshot
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.Snapshot
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    Snapshot.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.Snapshot";
+                    };
+    
                     return Snapshot;
                 })();
     
@@ -13846,15 +14663,18 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.projectId = reader.string();
-                                break;
-                            case 2:
-                                message.snapshotId = reader.string();
-                                break;
-                            case 3:
-                                message.location = reader.string();
-                                break;
+                            case 1: {
+                                    message.projectId = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.snapshotId = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.location = reader.string();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -13959,6 +14779,21 @@
                      */
                     GetSnapshotRequest.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for GetSnapshotRequest
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.GetSnapshotRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    GetSnapshotRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.GetSnapshotRequest";
                     };
     
                     return GetSnapshotRequest;
@@ -14078,15 +14913,18 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.projectId = reader.string();
-                                break;
-                            case 2:
-                                message.snapshotId = reader.string();
-                                break;
-                            case 3:
-                                message.location = reader.string();
-                                break;
+                            case 1: {
+                                    message.projectId = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.snapshotId = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.location = reader.string();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -14191,6 +15029,21 @@
                      */
                     DeleteSnapshotRequest.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for DeleteSnapshotRequest
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.DeleteSnapshotRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    DeleteSnapshotRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.DeleteSnapshotRequest";
                     };
     
                     return DeleteSnapshotRequest;
@@ -14353,6 +15206,21 @@
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
+                    /**
+                     * Gets the default type url for DeleteSnapshotResponse
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.DeleteSnapshotResponse
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    DeleteSnapshotResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.DeleteSnapshotResponse";
+                    };
+    
                     return DeleteSnapshotResponse;
                 })();
     
@@ -14470,15 +15338,18 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.projectId = reader.string();
-                                break;
-                            case 3:
-                                message.jobId = reader.string();
-                                break;
-                            case 2:
-                                message.location = reader.string();
-                                break;
+                            case 1: {
+                                    message.projectId = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.jobId = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.location = reader.string();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -14585,6 +15456,21 @@
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
+                    /**
+                     * Gets the default type url for ListSnapshotsRequest
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.ListSnapshotsRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ListSnapshotsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.ListSnapshotsRequest";
+                    };
+    
                     return ListSnapshotsRequest;
                 })();
     
@@ -14682,11 +15568,12 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                if (!(message.snapshots && message.snapshots.length))
-                                    message.snapshots = [];
-                                message.snapshots.push($root.google.dataflow.v1beta3.Snapshot.decode(reader, reader.uint32()));
-                                break;
+                            case 1: {
+                                    if (!(message.snapshots && message.snapshots.length))
+                                        message.snapshots = [];
+                                    message.snapshots.push($root.google.dataflow.v1beta3.Snapshot.decode(reader, reader.uint32()));
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -14793,6 +15680,21 @@
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
+                    /**
+                     * Gets the default type url for ListSnapshotsResponse
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.ListSnapshotsResponse
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ListSnapshotsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.ListSnapshotsResponse";
+                    };
+    
                     return ListSnapshotsResponse;
                 })();
     
@@ -14829,7 +15731,7 @@
                     };
     
                     /**
-                     * Callback as used by {@link google.dataflow.v1beta3.MessagesV1Beta3#listJobMessages}.
+                     * Callback as used by {@link google.dataflow.v1beta3.MessagesV1Beta3|listJobMessages}.
                      * @memberof google.dataflow.v1beta3.MessagesV1Beta3
                      * @typedef ListJobMessagesCallback
                      * @type {function}
@@ -14989,18 +15891,22 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.id = reader.string();
-                                break;
-                            case 2:
-                                message.time = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                break;
-                            case 3:
-                                message.messageText = reader.string();
-                                break;
-                            case 4:
-                                message.messageImportance = reader.int32();
-                                break;
+                            case 1: {
+                                    message.id = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.time = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 3: {
+                                    message.messageText = reader.string();
+                                    break;
+                                }
+                            case 4: {
+                                    message.messageImportance = reader.int32();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -15153,6 +16059,21 @@
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
+                    /**
+                     * Gets the default type url for JobMessage
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.JobMessage
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    JobMessage.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.JobMessage";
+                    };
+    
                     return JobMessage;
                 })();
     
@@ -15294,17 +16215,20 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.messageText = reader.string();
-                                break;
-                            case 2:
-                                message.messageKey = reader.string();
-                                break;
-                            case 3:
-                                if (!(message.parameters && message.parameters.length))
-                                    message.parameters = [];
-                                message.parameters.push($root.google.dataflow.v1beta3.StructuredMessage.Parameter.decode(reader, reader.uint32()));
-                                break;
+                            case 1: {
+                                    message.messageText = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.messageKey = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    if (!(message.parameters && message.parameters.length))
+                                        message.parameters = [];
+                                    message.parameters.push($root.google.dataflow.v1beta3.StructuredMessage.Parameter.decode(reader, reader.uint32()));
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -15429,6 +16353,21 @@
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
+                    /**
+                     * Gets the default type url for StructuredMessage
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.StructuredMessage
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    StructuredMessage.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.StructuredMessage";
+                    };
+    
                     StructuredMessage.Parameter = (function() {
     
                         /**
@@ -15532,12 +16471,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.key = reader.string();
-                                    break;
-                                case 2:
-                                    message.value = $root.google.protobuf.Value.decode(reader, reader.uint32());
-                                    break;
+                                case 1: {
+                                        message.key = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.value = $root.google.protobuf.Value.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -15639,6 +16580,21 @@
                          */
                         Parameter.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Parameter
+                         * @function getTypeUrl
+                         * @memberof google.dataflow.v1beta3.StructuredMessage.Parameter
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Parameter.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.dataflow.v1beta3.StructuredMessage.Parameter";
                         };
     
                         return Parameter;
@@ -15794,24 +16750,30 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.currentNumWorkers = reader.int64();
-                                break;
-                            case 2:
-                                message.targetNumWorkers = reader.int64();
-                                break;
-                            case 3:
-                                message.eventType = reader.int32();
-                                break;
-                            case 4:
-                                message.description = $root.google.dataflow.v1beta3.StructuredMessage.decode(reader, reader.uint32());
-                                break;
-                            case 5:
-                                message.time = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                break;
-                            case 7:
-                                message.workerPool = reader.string();
-                                break;
+                            case 1: {
+                                    message.currentNumWorkers = reader.int64();
+                                    break;
+                                }
+                            case 2: {
+                                    message.targetNumWorkers = reader.int64();
+                                    break;
+                                }
+                            case 3: {
+                                    message.eventType = reader.int32();
+                                    break;
+                                }
+                            case 4: {
+                                    message.description = $root.google.dataflow.v1beta3.StructuredMessage.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 5: {
+                                    message.time = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 7: {
+                                    message.workerPool = reader.string();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -16009,6 +16971,21 @@
                     };
     
                     /**
+                     * Gets the default type url for AutoscalingEvent
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.AutoscalingEvent
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    AutoscalingEvent.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.AutoscalingEvent";
+                    };
+    
+                    /**
                      * AutoscalingEventType enum.
                      * @name google.dataflow.v1beta3.AutoscalingEvent.AutoscalingEventType
                      * @enum {number}
@@ -16200,30 +17177,38 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.projectId = reader.string();
-                                break;
-                            case 2:
-                                message.jobId = reader.string();
-                                break;
-                            case 3:
-                                message.minimumImportance = reader.int32();
-                                break;
-                            case 4:
-                                message.pageSize = reader.int32();
-                                break;
-                            case 5:
-                                message.pageToken = reader.string();
-                                break;
-                            case 6:
-                                message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                break;
-                            case 7:
-                                message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                break;
-                            case 8:
-                                message.location = reader.string();
-                                break;
+                            case 1: {
+                                    message.projectId = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.jobId = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.minimumImportance = reader.int32();
+                                    break;
+                                }
+                            case 4: {
+                                    message.pageSize = reader.int32();
+                                    break;
+                                }
+                            case 5: {
+                                    message.pageToken = reader.string();
+                                    break;
+                                }
+                            case 6: {
+                                    message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 7: {
+                                    message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 8: {
+                                    message.location = reader.string();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -16413,6 +17398,21 @@
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
+                    /**
+                     * Gets the default type url for ListJobMessagesRequest
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.ListJobMessagesRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ListJobMessagesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.ListJobMessagesRequest";
+                    };
+    
                     return ListJobMessagesRequest;
                 })();
     
@@ -16534,19 +17534,22 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                if (!(message.jobMessages && message.jobMessages.length))
-                                    message.jobMessages = [];
-                                message.jobMessages.push($root.google.dataflow.v1beta3.JobMessage.decode(reader, reader.uint32()));
-                                break;
-                            case 2:
-                                message.nextPageToken = reader.string();
-                                break;
-                            case 3:
-                                if (!(message.autoscalingEvents && message.autoscalingEvents.length))
-                                    message.autoscalingEvents = [];
-                                message.autoscalingEvents.push($root.google.dataflow.v1beta3.AutoscalingEvent.decode(reader, reader.uint32()));
-                                break;
+                            case 1: {
+                                    if (!(message.jobMessages && message.jobMessages.length))
+                                        message.jobMessages = [];
+                                    message.jobMessages.push($root.google.dataflow.v1beta3.JobMessage.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 2: {
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    if (!(message.autoscalingEvents && message.autoscalingEvents.length))
+                                        message.autoscalingEvents = [];
+                                    message.autoscalingEvents.push($root.google.dataflow.v1beta3.AutoscalingEvent.decode(reader, reader.uint32()));
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -16688,6 +17691,21 @@
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
+                    /**
+                     * Gets the default type url for ListJobMessagesResponse
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.ListJobMessagesResponse
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ListJobMessagesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.ListJobMessagesResponse";
+                    };
+    
                     return ListJobMessagesResponse;
                 })();
     
@@ -16724,7 +17742,7 @@
                     };
     
                     /**
-                     * Callback as used by {@link google.dataflow.v1beta3.MetricsV1Beta3#getJobMetrics}.
+                     * Callback as used by {@link google.dataflow.v1beta3.MetricsV1Beta3|getJobMetrics}.
                      * @memberof google.dataflow.v1beta3.MetricsV1Beta3
                      * @typedef GetJobMetricsCallback
                      * @type {function}
@@ -16757,7 +17775,7 @@
                      */
     
                     /**
-                     * Callback as used by {@link google.dataflow.v1beta3.MetricsV1Beta3#getJobExecutionDetails}.
+                     * Callback as used by {@link google.dataflow.v1beta3.MetricsV1Beta3|getJobExecutionDetails}.
                      * @memberof google.dataflow.v1beta3.MetricsV1Beta3
                      * @typedef GetJobExecutionDetailsCallback
                      * @type {function}
@@ -16790,7 +17808,7 @@
                      */
     
                     /**
-                     * Callback as used by {@link google.dataflow.v1beta3.MetricsV1Beta3#getStageExecutionDetails}.
+                     * Callback as used by {@link google.dataflow.v1beta3.MetricsV1Beta3|getStageExecutionDetails}.
                      * @memberof google.dataflow.v1beta3.MetricsV1Beta3
                      * @typedef GetStageExecutionDetailsCallback
                      * @type {function}
@@ -16941,34 +17959,37 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.origin = reader.string();
-                                break;
-                            case 2:
-                                message.name = reader.string();
-                                break;
-                            case 3:
-                                if (message.context === $util.emptyObject)
-                                    message.context = {};
-                                var end2 = reader.uint32() + reader.pos;
-                                key = "";
-                                value = "";
-                                while (reader.pos < end2) {
-                                    var tag2 = reader.uint32();
-                                    switch (tag2 >>> 3) {
-                                    case 1:
-                                        key = reader.string();
-                                        break;
-                                    case 2:
-                                        value = reader.string();
-                                        break;
-                                    default:
-                                        reader.skipType(tag2 & 7);
-                                        break;
-                                    }
+                            case 1: {
+                                    message.origin = reader.string();
+                                    break;
                                 }
-                                message.context[key] = value;
-                                break;
+                            case 2: {
+                                    message.name = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    if (message.context === $util.emptyObject)
+                                        message.context = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.context[key] = value;
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -17088,6 +18109,21 @@
                      */
                     MetricStructuredName.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for MetricStructuredName
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.MetricStructuredName
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    MetricStructuredName.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.MetricStructuredName";
                     };
     
                     return MetricStructuredName;
@@ -17295,39 +18331,50 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.name = $root.google.dataflow.v1beta3.MetricStructuredName.decode(reader, reader.uint32());
-                                break;
-                            case 2:
-                                message.kind = reader.string();
-                                break;
-                            case 3:
-                                message.cumulative = reader.bool();
-                                break;
-                            case 4:
-                                message.scalar = $root.google.protobuf.Value.decode(reader, reader.uint32());
-                                break;
-                            case 5:
-                                message.meanSum = $root.google.protobuf.Value.decode(reader, reader.uint32());
-                                break;
-                            case 6:
-                                message.meanCount = $root.google.protobuf.Value.decode(reader, reader.uint32());
-                                break;
-                            case 7:
-                                message.set = $root.google.protobuf.Value.decode(reader, reader.uint32());
-                                break;
-                            case 11:
-                                message.distribution = $root.google.protobuf.Value.decode(reader, reader.uint32());
-                                break;
-                            case 12:
-                                message.gauge = $root.google.protobuf.Value.decode(reader, reader.uint32());
-                                break;
-                            case 8:
-                                message.internal = $root.google.protobuf.Value.decode(reader, reader.uint32());
-                                break;
-                            case 9:
-                                message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                break;
+                            case 1: {
+                                    message.name = $root.google.dataflow.v1beta3.MetricStructuredName.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 2: {
+                                    message.kind = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.cumulative = reader.bool();
+                                    break;
+                                }
+                            case 4: {
+                                    message.scalar = $root.google.protobuf.Value.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 5: {
+                                    message.meanSum = $root.google.protobuf.Value.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 6: {
+                                    message.meanCount = $root.google.protobuf.Value.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 7: {
+                                    message.set = $root.google.protobuf.Value.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 11: {
+                                    message.distribution = $root.google.protobuf.Value.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 12: {
+                                    message.gauge = $root.google.protobuf.Value.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 8: {
+                                    message.internal = $root.google.protobuf.Value.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 9: {
+                                    message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -17543,6 +18590,21 @@
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
+                    /**
+                     * Gets the default type url for MetricUpdate
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.MetricUpdate
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    MetricUpdate.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.MetricUpdate";
+                    };
+    
                     return MetricUpdate;
                 })();
     
@@ -17671,18 +18733,22 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.projectId = reader.string();
-                                break;
-                            case 2:
-                                message.jobId = reader.string();
-                                break;
-                            case 3:
-                                message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                break;
-                            case 4:
-                                message.location = reader.string();
-                                break;
+                            case 1: {
+                                    message.projectId = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.jobId = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 4: {
+                                    message.location = reader.string();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -17802,6 +18868,21 @@
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
+                    /**
+                     * Gets the default type url for GetJobMetricsRequest
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.GetJobMetricsRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    GetJobMetricsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.GetJobMetricsRequest";
+                    };
+    
                     return GetJobMetricsRequest;
                 })();
     
@@ -17910,14 +18991,16 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.metricTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                break;
-                            case 2:
-                                if (!(message.metrics && message.metrics.length))
-                                    message.metrics = [];
-                                message.metrics.push($root.google.dataflow.v1beta3.MetricUpdate.decode(reader, reader.uint32()));
-                                break;
+                            case 1: {
+                                    message.metricTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 2: {
+                                    if (!(message.metrics && message.metrics.length))
+                                        message.metrics = [];
+                                    message.metrics.push($root.google.dataflow.v1beta3.MetricUpdate.decode(reader, reader.uint32()));
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -18036,6 +19119,21 @@
                      */
                     JobMetrics.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for JobMetrics
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.JobMetrics
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    JobMetrics.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.JobMetrics";
                     };
     
                     return JobMetrics;
@@ -18177,21 +19275,26 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.projectId = reader.string();
-                                break;
-                            case 2:
-                                message.jobId = reader.string();
-                                break;
-                            case 3:
-                                message.location = reader.string();
-                                break;
-                            case 4:
-                                message.pageSize = reader.int32();
-                                break;
-                            case 5:
-                                message.pageToken = reader.string();
-                                break;
+                            case 1: {
+                                    message.projectId = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.jobId = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.location = reader.string();
+                                    break;
+                                }
+                            case 4: {
+                                    message.pageSize = reader.int32();
+                                    break;
+                                }
+                            case 5: {
+                                    message.pageToken = reader.string();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -18314,6 +19417,21 @@
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
+                    /**
+                     * Gets the default type url for GetJobExecutionDetailsRequest
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.GetJobExecutionDetailsRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    GetJobExecutionDetailsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.GetJobExecutionDetailsRequest";
+                    };
+    
                     return GetJobExecutionDetailsRequest;
                 })();
     
@@ -18422,14 +19540,16 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.currentProgress = reader.double();
-                                break;
-                            case 2:
-                                if (!(message.dataPoints && message.dataPoints.length))
-                                    message.dataPoints = [];
-                                message.dataPoints.push($root.google.dataflow.v1beta3.ProgressTimeseries.Point.decode(reader, reader.uint32()));
-                                break;
+                            case 1: {
+                                    message.currentProgress = reader.double();
+                                    break;
+                                }
+                            case 2: {
+                                    if (!(message.dataPoints && message.dataPoints.length))
+                                        message.dataPoints = [];
+                                    message.dataPoints.push($root.google.dataflow.v1beta3.ProgressTimeseries.Point.decode(reader, reader.uint32()));
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -18545,6 +19665,21 @@
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
+                    /**
+                     * Gets the default type url for ProgressTimeseries
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.ProgressTimeseries
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ProgressTimeseries.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.ProgressTimeseries";
+                    };
+    
                     ProgressTimeseries.Point = (function() {
     
                         /**
@@ -18648,12 +19783,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.time = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 2:
-                                    message.value = reader.double();
-                                    break;
+                                case 1: {
+                                        message.time = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.value = reader.double();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -18755,6 +19892,21 @@
                          */
                         Point.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Point
+                         * @function getTypeUrl
+                         * @memberof google.dataflow.v1beta3.ProgressTimeseries.Point
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Point.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.dataflow.v1beta3.ProgressTimeseries.Point";
                         };
     
                         return Point;
@@ -18934,26 +20086,32 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.stageId = reader.string();
-                                break;
-                            case 2:
-                                message.state = reader.int32();
-                                break;
-                            case 3:
-                                message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                break;
-                            case 4:
-                                message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                break;
-                            case 5:
-                                message.progress = $root.google.dataflow.v1beta3.ProgressTimeseries.decode(reader, reader.uint32());
-                                break;
-                            case 6:
-                                if (!(message.metrics && message.metrics.length))
-                                    message.metrics = [];
-                                message.metrics.push($root.google.dataflow.v1beta3.MetricUpdate.decode(reader, reader.uint32()));
-                                break;
+                            case 1: {
+                                    message.stageId = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.state = reader.int32();
+                                    break;
+                                }
+                            case 3: {
+                                    message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 4: {
+                                    message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 5: {
+                                    message.progress = $root.google.dataflow.v1beta3.ProgressTimeseries.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 6: {
+                                    if (!(message.metrics && message.metrics.length))
+                                        message.metrics = [];
+                                    message.metrics.push($root.google.dataflow.v1beta3.MetricUpdate.decode(reader, reader.uint32()));
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -19150,6 +20308,21 @@
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
+                    /**
+                     * Gets the default type url for StageSummary
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.StageSummary
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    StageSummary.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.StageSummary";
+                    };
+    
                     return StageSummary;
                 })();
     
@@ -19258,14 +20431,16 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                if (!(message.stages && message.stages.length))
-                                    message.stages = [];
-                                message.stages.push($root.google.dataflow.v1beta3.StageSummary.decode(reader, reader.uint32()));
-                                break;
-                            case 2:
-                                message.nextPageToken = reader.string();
-                                break;
+                            case 1: {
+                                    if (!(message.stages && message.stages.length))
+                                        message.stages = [];
+                                    message.stages.push($root.google.dataflow.v1beta3.StageSummary.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 2: {
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -19379,6 +20554,21 @@
                      */
                     JobExecutionDetails.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for JobExecutionDetails
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.JobExecutionDetails
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    JobExecutionDetails.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.JobExecutionDetails";
                     };
     
                     return JobExecutionDetails;
@@ -19553,30 +20743,38 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.projectId = reader.string();
-                                break;
-                            case 2:
-                                message.jobId = reader.string();
-                                break;
-                            case 3:
-                                message.location = reader.string();
-                                break;
-                            case 4:
-                                message.stageId = reader.string();
-                                break;
-                            case 5:
-                                message.pageSize = reader.int32();
-                                break;
-                            case 6:
-                                message.pageToken = reader.string();
-                                break;
-                            case 7:
-                                message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                break;
-                            case 8:
-                                message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                break;
+                            case 1: {
+                                    message.projectId = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.jobId = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.location = reader.string();
+                                    break;
+                                }
+                            case 4: {
+                                    message.stageId = reader.string();
+                                    break;
+                                }
+                            case 5: {
+                                    message.pageSize = reader.int32();
+                                    break;
+                                }
+                            case 6: {
+                                    message.pageToken = reader.string();
+                                    break;
+                                }
+                            case 7: {
+                                    message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 8: {
+                                    message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -19731,6 +20929,21 @@
                      */
                     GetStageExecutionDetailsRequest.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for GetStageExecutionDetailsRequest
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.GetStageExecutionDetailsRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    GetStageExecutionDetailsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.GetStageExecutionDetailsRequest";
                     };
     
                     return GetStageExecutionDetailsRequest;
@@ -19896,29 +21109,36 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.taskId = reader.string();
-                                break;
-                            case 2:
-                                message.attemptId = reader.string();
-                                break;
-                            case 3:
-                                message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                break;
-                            case 4:
-                                message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                break;
-                            case 5:
-                                message.state = reader.int32();
-                                break;
-                            case 6:
-                                message.progress = $root.google.dataflow.v1beta3.ProgressTimeseries.decode(reader, reader.uint32());
-                                break;
-                            case 7:
-                                if (!(message.metrics && message.metrics.length))
-                                    message.metrics = [];
-                                message.metrics.push($root.google.dataflow.v1beta3.MetricUpdate.decode(reader, reader.uint32()));
-                                break;
+                            case 1: {
+                                    message.taskId = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.attemptId = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 4: {
+                                    message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 5: {
+                                    message.state = reader.int32();
+                                    break;
+                                }
+                            case 6: {
+                                    message.progress = $root.google.dataflow.v1beta3.ProgressTimeseries.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 7: {
+                                    if (!(message.metrics && message.metrics.length))
+                                        message.metrics = [];
+                                    message.metrics.push($root.google.dataflow.v1beta3.MetricUpdate.decode(reader, reader.uint32()));
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -20123,6 +21343,21 @@
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
+                    /**
+                     * Gets the default type url for WorkItemDetails
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.WorkItemDetails
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    WorkItemDetails.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.WorkItemDetails";
+                    };
+    
                     return WorkItemDetails;
                 })();
     
@@ -20231,14 +21466,16 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.workerName = reader.string();
-                                break;
-                            case 2:
-                                if (!(message.workItems && message.workItems.length))
-                                    message.workItems = [];
-                                message.workItems.push($root.google.dataflow.v1beta3.WorkItemDetails.decode(reader, reader.uint32()));
-                                break;
+                            case 1: {
+                                    message.workerName = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    if (!(message.workItems && message.workItems.length))
+                                        message.workItems = [];
+                                    message.workItems.push($root.google.dataflow.v1beta3.WorkItemDetails.decode(reader, reader.uint32()));
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -20354,6 +21591,21 @@
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
+                    /**
+                     * Gets the default type url for WorkerDetails
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.WorkerDetails
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    WorkerDetails.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.WorkerDetails";
+                    };
+    
                     return WorkerDetails;
                 })();
     
@@ -20462,14 +21714,16 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                if (!(message.workers && message.workers.length))
-                                    message.workers = [];
-                                message.workers.push($root.google.dataflow.v1beta3.WorkerDetails.decode(reader, reader.uint32()));
-                                break;
-                            case 2:
-                                message.nextPageToken = reader.string();
-                                break;
+                            case 1: {
+                                    if (!(message.workers && message.workers.length))
+                                        message.workers = [];
+                                    message.workers.push($root.google.dataflow.v1beta3.WorkerDetails.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 2: {
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -20583,6 +21837,21 @@
                      */
                     StageExecutionDetails.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for StageExecutionDetails
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.StageExecutionDetails
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    StageExecutionDetails.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.StageExecutionDetails";
                     };
     
                     return StageExecutionDetails;
@@ -20730,44 +21999,49 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                if (!(message.computations && message.computations.length))
-                                    message.computations = [];
-                                message.computations.push($root.google.dataflow.v1beta3.ComputationTopology.decode(reader, reader.uint32()));
-                                break;
-                            case 2:
-                                if (!(message.dataDiskAssignments && message.dataDiskAssignments.length))
-                                    message.dataDiskAssignments = [];
-                                message.dataDiskAssignments.push($root.google.dataflow.v1beta3.DataDiskAssignment.decode(reader, reader.uint32()));
-                                break;
-                            case 3:
-                                if (message.userStageToComputationNameMap === $util.emptyObject)
-                                    message.userStageToComputationNameMap = {};
-                                var end2 = reader.uint32() + reader.pos;
-                                key = "";
-                                value = "";
-                                while (reader.pos < end2) {
-                                    var tag2 = reader.uint32();
-                                    switch (tag2 >>> 3) {
-                                    case 1:
-                                        key = reader.string();
-                                        break;
-                                    case 2:
-                                        value = reader.string();
-                                        break;
-                                    default:
-                                        reader.skipType(tag2 & 7);
-                                        break;
-                                    }
+                            case 1: {
+                                    if (!(message.computations && message.computations.length))
+                                        message.computations = [];
+                                    message.computations.push($root.google.dataflow.v1beta3.ComputationTopology.decode(reader, reader.uint32()));
+                                    break;
                                 }
-                                message.userStageToComputationNameMap[key] = value;
-                                break;
-                            case 4:
-                                message.forwardingKeyBits = reader.int32();
-                                break;
-                            case 5:
-                                message.persistentStateVersion = reader.int32();
-                                break;
+                            case 2: {
+                                    if (!(message.dataDiskAssignments && message.dataDiskAssignments.length))
+                                        message.dataDiskAssignments = [];
+                                    message.dataDiskAssignments.push($root.google.dataflow.v1beta3.DataDiskAssignment.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 3: {
+                                    if (message.userStageToComputationNameMap === $util.emptyObject)
+                                        message.userStageToComputationNameMap = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.userStageToComputationNameMap[key] = value;
+                                    break;
+                                }
+                            case 4: {
+                                    message.forwardingKeyBits = reader.int32();
+                                    break;
+                                }
+                            case 5: {
+                                    message.persistentStateVersion = reader.int32();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -20941,6 +22215,21 @@
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
+                    /**
+                     * Gets the default type url for TopologyConfig
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.TopologyConfig
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    TopologyConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.TopologyConfig";
+                    };
+    
                     return TopologyConfig;
                 })();
     
@@ -21102,27 +22391,34 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.topic = reader.string();
-                                break;
-                            case 2:
-                                message.subscription = reader.string();
-                                break;
-                            case 3:
-                                message.timestampLabel = reader.string();
-                                break;
-                            case 4:
-                                message.idLabel = reader.string();
-                                break;
-                            case 5:
-                                message.dropLateData = reader.bool();
-                                break;
-                            case 6:
-                                message.trackingSubscription = reader.string();
-                                break;
-                            case 7:
-                                message.withAttributes = reader.bool();
-                                break;
+                            case 1: {
+                                    message.topic = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.subscription = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.timestampLabel = reader.string();
+                                    break;
+                                }
+                            case 4: {
+                                    message.idLabel = reader.string();
+                                    break;
+                                }
+                            case 5: {
+                                    message.dropLateData = reader.bool();
+                                    break;
+                                }
+                            case 6: {
+                                    message.trackingSubscription = reader.string();
+                                    break;
+                                }
+                            case 7: {
+                                    message.withAttributes = reader.bool();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -21261,6 +22557,21 @@
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
+                    /**
+                     * Gets the default type url for PubsubLocation
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.PubsubLocation
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    PubsubLocation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.PubsubLocation";
+                    };
+    
                     return PubsubLocation;
                 })();
     
@@ -21356,9 +22667,10 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.streamId = reader.string();
-                                break;
+                            case 1: {
+                                    message.streamId = reader.string();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -21446,6 +22758,21 @@
                      */
                     StreamingStageLocation.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for StreamingStageLocation
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.StreamingStageLocation
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    StreamingStageLocation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.StreamingStageLocation";
                     };
     
                     return StreamingStageLocation;
@@ -21554,12 +22881,14 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.tag = reader.string();
-                                break;
-                            case 2:
-                                message.stateFamily = reader.string();
-                                break;
+                            case 1: {
+                                    message.tag = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.stateFamily = reader.string();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -21658,6 +22987,21 @@
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
+                    /**
+                     * Gets the default type url for StreamingSideInputLocation
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.StreamingSideInputLocation
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    StreamingSideInputLocation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.StreamingSideInputLocation";
+                    };
+    
                     return StreamingSideInputLocation;
                 })();
     
@@ -21753,9 +23097,10 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.stateful = reader.bool();
-                                break;
+                            case 1: {
+                                    message.stateful = reader.bool();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -21843,6 +23188,21 @@
                      */
                     CustomSourceLocation.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for CustomSourceLocation
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.CustomSourceLocation
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    CustomSourceLocation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.CustomSourceLocation";
                     };
     
                     return CustomSourceLocation;
@@ -21987,18 +23347,22 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.streamingStageLocation = $root.google.dataflow.v1beta3.StreamingStageLocation.decode(reader, reader.uint32());
-                                break;
-                            case 2:
-                                message.pubsubLocation = $root.google.dataflow.v1beta3.PubsubLocation.decode(reader, reader.uint32());
-                                break;
-                            case 3:
-                                message.sideInputLocation = $root.google.dataflow.v1beta3.StreamingSideInputLocation.decode(reader, reader.uint32());
-                                break;
-                            case 4:
-                                message.customSourceLocation = $root.google.dataflow.v1beta3.CustomSourceLocation.decode(reader, reader.uint32());
-                                break;
+                            case 1: {
+                                    message.streamingStageLocation = $root.google.dataflow.v1beta3.StreamingStageLocation.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 2: {
+                                    message.pubsubLocation = $root.google.dataflow.v1beta3.PubsubLocation.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 3: {
+                                    message.sideInputLocation = $root.google.dataflow.v1beta3.StreamingSideInputLocation.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 4: {
+                                    message.customSourceLocation = $root.google.dataflow.v1beta3.CustomSourceLocation.decode(reader, reader.uint32());
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -22158,6 +23522,21 @@
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
+                    /**
+                     * Gets the default type url for StreamLocation
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.StreamLocation
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    StreamLocation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.StreamLocation";
+                    };
+    
                     return StreamLocation;
                 })();
     
@@ -22264,12 +23643,14 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.stateFamily = reader.string();
-                                break;
-                            case 2:
-                                message.isRead = reader.bool();
-                                break;
+                            case 1: {
+                                    message.stateFamily = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.isRead = reader.bool();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -22366,6 +23747,21 @@
                      */
                     StateFamilyConfig.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for StateFamilyConfig
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.StateFamilyConfig
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    StateFamilyConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.StateFamilyConfig";
                     };
     
                     return StateFamilyConfig;
@@ -22526,32 +23922,38 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.systemStageName = reader.string();
-                                break;
-                            case 5:
-                                message.computationId = reader.string();
-                                break;
-                            case 2:
-                                if (!(message.keyRanges && message.keyRanges.length))
-                                    message.keyRanges = [];
-                                message.keyRanges.push($root.google.dataflow.v1beta3.KeyRangeLocation.decode(reader, reader.uint32()));
-                                break;
-                            case 3:
-                                if (!(message.inputs && message.inputs.length))
-                                    message.inputs = [];
-                                message.inputs.push($root.google.dataflow.v1beta3.StreamLocation.decode(reader, reader.uint32()));
-                                break;
-                            case 4:
-                                if (!(message.outputs && message.outputs.length))
-                                    message.outputs = [];
-                                message.outputs.push($root.google.dataflow.v1beta3.StreamLocation.decode(reader, reader.uint32()));
-                                break;
-                            case 7:
-                                if (!(message.stateFamilies && message.stateFamilies.length))
-                                    message.stateFamilies = [];
-                                message.stateFamilies.push($root.google.dataflow.v1beta3.StateFamilyConfig.decode(reader, reader.uint32()));
-                                break;
+                            case 1: {
+                                    message.systemStageName = reader.string();
+                                    break;
+                                }
+                            case 5: {
+                                    message.computationId = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    if (!(message.keyRanges && message.keyRanges.length))
+                                        message.keyRanges = [];
+                                    message.keyRanges.push($root.google.dataflow.v1beta3.KeyRangeLocation.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 3: {
+                                    if (!(message.inputs && message.inputs.length))
+                                        message.inputs = [];
+                                    message.inputs.push($root.google.dataflow.v1beta3.StreamLocation.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 4: {
+                                    if (!(message.outputs && message.outputs.length))
+                                        message.outputs = [];
+                                    message.outputs.push($root.google.dataflow.v1beta3.StreamLocation.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 7: {
+                                    if (!(message.stateFamilies && message.stateFamilies.length))
+                                        message.stateFamilies = [];
+                                    message.stateFamilies.push($root.google.dataflow.v1beta3.StateFamilyConfig.decode(reader, reader.uint32()));
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -22752,6 +24154,21 @@
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
+                    /**
+                     * Gets the default type url for ComputationTopology
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.ComputationTopology
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ComputationTopology.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.ComputationTopology";
+                    };
+    
                     return ComputationTopology;
                 })();
     
@@ -22891,21 +24308,26 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.start = reader.string();
-                                break;
-                            case 2:
-                                message.end = reader.string();
-                                break;
-                            case 3:
-                                message.deliveryEndpoint = reader.string();
-                                break;
-                            case 5:
-                                message.dataDisk = reader.string();
-                                break;
-                            case 4:
-                                message.deprecatedPersistentDirectory = reader.string();
-                                break;
+                            case 1: {
+                                    message.start = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.end = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.deliveryEndpoint = reader.string();
+                                    break;
+                                }
+                            case 5: {
+                                    message.dataDisk = reader.string();
+                                    break;
+                                }
+                            case 4: {
+                                    message.deprecatedPersistentDirectory = reader.string();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -23028,6 +24450,21 @@
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
+                    /**
+                     * Gets the default type url for KeyRangeLocation
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.KeyRangeLocation
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    KeyRangeLocation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.KeyRangeLocation";
+                    };
+    
                     return KeyRangeLocation;
                 })();
     
@@ -23123,9 +24560,10 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.dataDisk = reader.string();
-                                break;
+                            case 1: {
+                                    message.dataDisk = reader.string();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -23213,6 +24651,21 @@
                      */
                     MountedDataDisk.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for MountedDataDisk
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.MountedDataDisk
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    MountedDataDisk.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.MountedDataDisk";
                     };
     
                     return MountedDataDisk;
@@ -23323,14 +24776,16 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.vmInstance = reader.string();
-                                break;
-                            case 2:
-                                if (!(message.dataDisks && message.dataDisks.length))
-                                    message.dataDisks = [];
-                                message.dataDisks.push(reader.string());
-                                break;
+                            case 1: {
+                                    message.vmInstance = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    if (!(message.dataDisks && message.dataDisks.length))
+                                        message.dataDisks = [];
+                                    message.dataDisks.push(reader.string());
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -23439,6 +24894,21 @@
                      */
                     DataDiskAssignment.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for DataDiskAssignment
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.DataDiskAssignment
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    DataDiskAssignment.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.DataDiskAssignment";
                     };
     
                     return DataDiskAssignment;
@@ -23558,15 +25028,18 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.start = reader.string();
-                                break;
-                            case 2:
-                                message.end = reader.string();
-                                break;
-                            case 3:
-                                message.dataDisk = reader.string();
-                                break;
+                            case 1: {
+                                    message.start = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.end = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.dataDisk = reader.string();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -23671,6 +25144,21 @@
                      */
                     KeyRangeDataDiskAssignment.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for KeyRangeDataDiskAssignment
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.KeyRangeDataDiskAssignment
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    KeyRangeDataDiskAssignment.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.KeyRangeDataDiskAssignment";
                     };
     
                     return KeyRangeDataDiskAssignment;
@@ -23781,14 +25269,16 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.computationId = reader.string();
-                                break;
-                            case 2:
-                                if (!(message.rangeAssignments && message.rangeAssignments.length))
-                                    message.rangeAssignments = [];
-                                message.rangeAssignments.push($root.google.dataflow.v1beta3.KeyRangeDataDiskAssignment.decode(reader, reader.uint32()));
-                                break;
+                            case 1: {
+                                    message.computationId = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    if (!(message.rangeAssignments && message.rangeAssignments.length))
+                                        message.rangeAssignments = [];
+                                    message.rangeAssignments.push($root.google.dataflow.v1beta3.KeyRangeDataDiskAssignment.decode(reader, reader.uint32()));
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -23904,6 +25394,21 @@
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
+                    /**
+                     * Gets the default type url for StreamingComputationRanges
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.StreamingComputationRanges
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    StreamingComputationRanges.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.StreamingComputationRanges";
+                    };
+    
                     return StreamingComputationRanges;
                 })();
     
@@ -24010,12 +25515,14 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.snapshotId = reader.string();
-                                break;
-                            case 2:
-                                message.importStateEndpoint = reader.string();
-                                break;
+                            case 1: {
+                                    message.snapshotId = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.importStateEndpoint = reader.string();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -24114,6 +25621,21 @@
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
+                    /**
+                     * Gets the default type url for StreamingApplianceSnapshotConfig
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.StreamingApplianceSnapshotConfig
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    StreamingApplianceSnapshotConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.StreamingApplianceSnapshotConfig";
+                    };
+    
                     return StreamingApplianceSnapshotConfig;
                 })();
     
@@ -24150,7 +25672,7 @@
                     };
     
                     /**
-                     * Callback as used by {@link google.dataflow.v1beta3.TemplatesService#createJobFromTemplate}.
+                     * Callback as used by {@link google.dataflow.v1beta3.TemplatesService|createJobFromTemplate}.
                      * @memberof google.dataflow.v1beta3.TemplatesService
                      * @typedef CreateJobFromTemplateCallback
                      * @type {function}
@@ -24183,7 +25705,7 @@
                      */
     
                     /**
-                     * Callback as used by {@link google.dataflow.v1beta3.TemplatesService#launchTemplate}.
+                     * Callback as used by {@link google.dataflow.v1beta3.TemplatesService|launchTemplate}.
                      * @memberof google.dataflow.v1beta3.TemplatesService
                      * @typedef LaunchTemplateCallback
                      * @type {function}
@@ -24216,7 +25738,7 @@
                      */
     
                     /**
-                     * Callback as used by {@link google.dataflow.v1beta3.TemplatesService#getTemplate}.
+                     * Callback as used by {@link google.dataflow.v1beta3.TemplatesService|getTemplate}.
                      * @memberof google.dataflow.v1beta3.TemplatesService
                      * @typedef GetTemplateCallback
                      * @type {function}
@@ -24284,7 +25806,7 @@
                     };
     
                     /**
-                     * Callback as used by {@link google.dataflow.v1beta3.FlexTemplatesService#launchFlexTemplate}.
+                     * Callback as used by {@link google.dataflow.v1beta3.FlexTemplatesService|launchFlexTemplate}.
                      * @memberof google.dataflow.v1beta3.FlexTemplatesService
                      * @typedef LaunchFlexTemplateCallback
                      * @type {function}
@@ -24411,9 +25933,10 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.job = $root.google.dataflow.v1beta3.Job.decode(reader, reader.uint32());
-                                break;
+                            case 1: {
+                                    message.job = $root.google.dataflow.v1beta3.Job.decode(reader, reader.uint32());
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -24506,6 +26029,21 @@
                      */
                     LaunchFlexTemplateResponse.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for LaunchFlexTemplateResponse
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.LaunchFlexTemplateResponse
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    LaunchFlexTemplateResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.LaunchFlexTemplateResponse";
                     };
     
                     return LaunchFlexTemplateResponse;
@@ -24636,18 +26174,22 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.image = reader.string();
-                                break;
-                            case 2:
-                                message.metadata = $root.google.dataflow.v1beta3.TemplateMetadata.decode(reader, reader.uint32());
-                                break;
-                            case 3:
-                                message.sdkInfo = $root.google.dataflow.v1beta3.SDKInfo.decode(reader, reader.uint32());
-                                break;
-                            case 4:
-                                message.defaultEnvironment = $root.google.dataflow.v1beta3.FlexTemplateRuntimeEnvironment.decode(reader, reader.uint32());
-                                break;
+                            case 1: {
+                                    message.image = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.metadata = $root.google.dataflow.v1beta3.TemplateMetadata.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 3: {
+                                    message.sdkInfo = $root.google.dataflow.v1beta3.SDKInfo.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 4: {
+                                    message.defaultEnvironment = $root.google.dataflow.v1beta3.FlexTemplateRuntimeEnvironment.decode(reader, reader.uint32());
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -24775,6 +26317,21 @@
                      */
                     ContainerSpec.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ContainerSpec
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.ContainerSpec
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ContainerSpec.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.ContainerSpec";
                     };
     
                     return ContainerSpec;
@@ -24969,87 +26526,95 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.jobName = reader.string();
-                                break;
-                            case 4:
-                                message.containerSpec = $root.google.dataflow.v1beta3.ContainerSpec.decode(reader, reader.uint32());
-                                break;
-                            case 5:
-                                message.containerSpecGcsPath = reader.string();
-                                break;
-                            case 2:
-                                if (message.parameters === $util.emptyObject)
-                                    message.parameters = {};
-                                var end2 = reader.uint32() + reader.pos;
-                                key = "";
-                                value = "";
-                                while (reader.pos < end2) {
-                                    var tag2 = reader.uint32();
-                                    switch (tag2 >>> 3) {
-                                    case 1:
-                                        key = reader.string();
-                                        break;
-                                    case 2:
-                                        value = reader.string();
-                                        break;
-                                    default:
-                                        reader.skipType(tag2 & 7);
-                                        break;
-                                    }
+                            case 1: {
+                                    message.jobName = reader.string();
+                                    break;
                                 }
-                                message.parameters[key] = value;
-                                break;
-                            case 6:
-                                if (message.launchOptions === $util.emptyObject)
-                                    message.launchOptions = {};
-                                var end2 = reader.uint32() + reader.pos;
-                                key = "";
-                                value = "";
-                                while (reader.pos < end2) {
-                                    var tag2 = reader.uint32();
-                                    switch (tag2 >>> 3) {
-                                    case 1:
-                                        key = reader.string();
-                                        break;
-                                    case 2:
-                                        value = reader.string();
-                                        break;
-                                    default:
-                                        reader.skipType(tag2 & 7);
-                                        break;
-                                    }
+                            case 4: {
+                                    message.containerSpec = $root.google.dataflow.v1beta3.ContainerSpec.decode(reader, reader.uint32());
+                                    break;
                                 }
-                                message.launchOptions[key] = value;
-                                break;
-                            case 7:
-                                message.environment = $root.google.dataflow.v1beta3.FlexTemplateRuntimeEnvironment.decode(reader, reader.uint32());
-                                break;
-                            case 8:
-                                message.update = reader.bool();
-                                break;
-                            case 9:
-                                if (message.transformNameMappings === $util.emptyObject)
-                                    message.transformNameMappings = {};
-                                var end2 = reader.uint32() + reader.pos;
-                                key = "";
-                                value = "";
-                                while (reader.pos < end2) {
-                                    var tag2 = reader.uint32();
-                                    switch (tag2 >>> 3) {
-                                    case 1:
-                                        key = reader.string();
-                                        break;
-                                    case 2:
-                                        value = reader.string();
-                                        break;
-                                    default:
-                                        reader.skipType(tag2 & 7);
-                                        break;
-                                    }
+                            case 5: {
+                                    message.containerSpecGcsPath = reader.string();
+                                    break;
                                 }
-                                message.transformNameMappings[key] = value;
-                                break;
+                            case 2: {
+                                    if (message.parameters === $util.emptyObject)
+                                        message.parameters = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.parameters[key] = value;
+                                    break;
+                                }
+                            case 6: {
+                                    if (message.launchOptions === $util.emptyObject)
+                                        message.launchOptions = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.launchOptions[key] = value;
+                                    break;
+                                }
+                            case 7: {
+                                    message.environment = $root.google.dataflow.v1beta3.FlexTemplateRuntimeEnvironment.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 8: {
+                                    message.update = reader.bool();
+                                    break;
+                                }
+                            case 9: {
+                                    if (message.transformNameMappings === $util.emptyObject)
+                                        message.transformNameMappings = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.transformNameMappings[key] = value;
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -25258,6 +26823,21 @@
                      */
                     LaunchFlexTemplateParameter.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for LaunchFlexTemplateParameter
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.LaunchFlexTemplateParameter
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    LaunchFlexTemplateParameter.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.LaunchFlexTemplateParameter";
                     };
     
                     return LaunchFlexTemplateParameter;
@@ -25601,96 +27181,119 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.numWorkers = reader.int32();
-                                break;
-                            case 2:
-                                message.maxWorkers = reader.int32();
-                                break;
-                            case 3:
-                                message.zone = reader.string();
-                                break;
-                            case 4:
-                                message.serviceAccountEmail = reader.string();
-                                break;
-                            case 5:
-                                message.tempLocation = reader.string();
-                                break;
-                            case 6:
-                                message.machineType = reader.string();
-                                break;
-                            case 7:
-                                if (!(message.additionalExperiments && message.additionalExperiments.length))
-                                    message.additionalExperiments = [];
-                                message.additionalExperiments.push(reader.string());
-                                break;
-                            case 8:
-                                message.network = reader.string();
-                                break;
-                            case 9:
-                                message.subnetwork = reader.string();
-                                break;
-                            case 10:
-                                if (message.additionalUserLabels === $util.emptyObject)
-                                    message.additionalUserLabels = {};
-                                var end2 = reader.uint32() + reader.pos;
-                                key = "";
-                                value = "";
-                                while (reader.pos < end2) {
-                                    var tag2 = reader.uint32();
-                                    switch (tag2 >>> 3) {
-                                    case 1:
-                                        key = reader.string();
-                                        break;
-                                    case 2:
-                                        value = reader.string();
-                                        break;
-                                    default:
-                                        reader.skipType(tag2 & 7);
-                                        break;
-                                    }
+                            case 1: {
+                                    message.numWorkers = reader.int32();
+                                    break;
                                 }
-                                message.additionalUserLabels[key] = value;
-                                break;
-                            case 11:
-                                message.kmsKeyName = reader.string();
-                                break;
-                            case 12:
-                                message.ipConfiguration = reader.int32();
-                                break;
-                            case 13:
-                                message.workerRegion = reader.string();
-                                break;
-                            case 14:
-                                message.workerZone = reader.string();
-                                break;
-                            case 15:
-                                message.enableStreamingEngine = reader.bool();
-                                break;
-                            case 16:
-                                message.flexrsGoal = reader.int32();
-                                break;
-                            case 17:
-                                message.stagingLocation = reader.string();
-                                break;
-                            case 18:
-                                message.sdkContainerImage = reader.string();
-                                break;
-                            case 20:
-                                message.diskSizeGb = reader.int32();
-                                break;
-                            case 21:
-                                message.autoscalingAlgorithm = reader.int32();
-                                break;
-                            case 22:
-                                message.dumpHeapOnOom = reader.bool();
-                                break;
-                            case 23:
-                                message.saveHeapDumpsToGcsPath = reader.string();
-                                break;
-                            case 24:
-                                message.launcherMachineType = reader.string();
-                                break;
+                            case 2: {
+                                    message.maxWorkers = reader.int32();
+                                    break;
+                                }
+                            case 3: {
+                                    message.zone = reader.string();
+                                    break;
+                                }
+                            case 4: {
+                                    message.serviceAccountEmail = reader.string();
+                                    break;
+                                }
+                            case 5: {
+                                    message.tempLocation = reader.string();
+                                    break;
+                                }
+                            case 6: {
+                                    message.machineType = reader.string();
+                                    break;
+                                }
+                            case 7: {
+                                    if (!(message.additionalExperiments && message.additionalExperiments.length))
+                                        message.additionalExperiments = [];
+                                    message.additionalExperiments.push(reader.string());
+                                    break;
+                                }
+                            case 8: {
+                                    message.network = reader.string();
+                                    break;
+                                }
+                            case 9: {
+                                    message.subnetwork = reader.string();
+                                    break;
+                                }
+                            case 10: {
+                                    if (message.additionalUserLabels === $util.emptyObject)
+                                        message.additionalUserLabels = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.additionalUserLabels[key] = value;
+                                    break;
+                                }
+                            case 11: {
+                                    message.kmsKeyName = reader.string();
+                                    break;
+                                }
+                            case 12: {
+                                    message.ipConfiguration = reader.int32();
+                                    break;
+                                }
+                            case 13: {
+                                    message.workerRegion = reader.string();
+                                    break;
+                                }
+                            case 14: {
+                                    message.workerZone = reader.string();
+                                    break;
+                                }
+                            case 15: {
+                                    message.enableStreamingEngine = reader.bool();
+                                    break;
+                                }
+                            case 16: {
+                                    message.flexrsGoal = reader.int32();
+                                    break;
+                                }
+                            case 17: {
+                                    message.stagingLocation = reader.string();
+                                    break;
+                                }
+                            case 18: {
+                                    message.sdkContainerImage = reader.string();
+                                    break;
+                                }
+                            case 20: {
+                                    message.diskSizeGb = reader.int32();
+                                    break;
+                                }
+                            case 21: {
+                                    message.autoscalingAlgorithm = reader.int32();
+                                    break;
+                                }
+                            case 22: {
+                                    message.dumpHeapOnOom = reader.bool();
+                                    break;
+                                }
+                            case 23: {
+                                    message.saveHeapDumpsToGcsPath = reader.string();
+                                    break;
+                                }
+                            case 24: {
+                                    message.launcherMachineType = reader.string();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -26039,6 +27642,21 @@
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
+                    /**
+                     * Gets the default type url for FlexTemplateRuntimeEnvironment
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.FlexTemplateRuntimeEnvironment
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    FlexTemplateRuntimeEnvironment.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.FlexTemplateRuntimeEnvironment";
+                    };
+    
                     return FlexTemplateRuntimeEnvironment;
                 })();
     
@@ -26167,18 +27785,22 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.projectId = reader.string();
-                                break;
-                            case 2:
-                                message.launchParameter = $root.google.dataflow.v1beta3.LaunchFlexTemplateParameter.decode(reader, reader.uint32());
-                                break;
-                            case 3:
-                                message.location = reader.string();
-                                break;
-                            case 4:
-                                message.validateOnly = reader.bool();
-                                break;
+                            case 1: {
+                                    message.projectId = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.launchParameter = $root.google.dataflow.v1beta3.LaunchFlexTemplateParameter.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 3: {
+                                    message.location = reader.string();
+                                    break;
+                                }
+                            case 4: {
+                                    message.validateOnly = reader.bool();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -26296,6 +27918,21 @@
                      */
                     LaunchFlexTemplateRequest.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for LaunchFlexTemplateRequest
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.LaunchFlexTemplateRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    LaunchFlexTemplateRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.LaunchFlexTemplateRequest";
                     };
     
                     return LaunchFlexTemplateRequest;
@@ -26562,75 +28199,91 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 11:
-                                message.numWorkers = reader.int32();
-                                break;
-                            case 1:
-                                message.maxWorkers = reader.int32();
-                                break;
-                            case 2:
-                                message.zone = reader.string();
-                                break;
-                            case 3:
-                                message.serviceAccountEmail = reader.string();
-                                break;
-                            case 4:
-                                message.tempLocation = reader.string();
-                                break;
-                            case 5:
-                                message.bypassTempDirValidation = reader.bool();
-                                break;
-                            case 6:
-                                message.machineType = reader.string();
-                                break;
-                            case 7:
-                                if (!(message.additionalExperiments && message.additionalExperiments.length))
-                                    message.additionalExperiments = [];
-                                message.additionalExperiments.push(reader.string());
-                                break;
-                            case 8:
-                                message.network = reader.string();
-                                break;
-                            case 9:
-                                message.subnetwork = reader.string();
-                                break;
-                            case 10:
-                                if (message.additionalUserLabels === $util.emptyObject)
-                                    message.additionalUserLabels = {};
-                                var end2 = reader.uint32() + reader.pos;
-                                key = "";
-                                value = "";
-                                while (reader.pos < end2) {
-                                    var tag2 = reader.uint32();
-                                    switch (tag2 >>> 3) {
-                                    case 1:
-                                        key = reader.string();
-                                        break;
-                                    case 2:
-                                        value = reader.string();
-                                        break;
-                                    default:
-                                        reader.skipType(tag2 & 7);
-                                        break;
-                                    }
+                            case 11: {
+                                    message.numWorkers = reader.int32();
+                                    break;
                                 }
-                                message.additionalUserLabels[key] = value;
-                                break;
-                            case 12:
-                                message.kmsKeyName = reader.string();
-                                break;
-                            case 14:
-                                message.ipConfiguration = reader.int32();
-                                break;
-                            case 15:
-                                message.workerRegion = reader.string();
-                                break;
-                            case 16:
-                                message.workerZone = reader.string();
-                                break;
-                            case 17:
-                                message.enableStreamingEngine = reader.bool();
-                                break;
+                            case 1: {
+                                    message.maxWorkers = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    message.zone = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.serviceAccountEmail = reader.string();
+                                    break;
+                                }
+                            case 4: {
+                                    message.tempLocation = reader.string();
+                                    break;
+                                }
+                            case 5: {
+                                    message.bypassTempDirValidation = reader.bool();
+                                    break;
+                                }
+                            case 6: {
+                                    message.machineType = reader.string();
+                                    break;
+                                }
+                            case 7: {
+                                    if (!(message.additionalExperiments && message.additionalExperiments.length))
+                                        message.additionalExperiments = [];
+                                    message.additionalExperiments.push(reader.string());
+                                    break;
+                                }
+                            case 8: {
+                                    message.network = reader.string();
+                                    break;
+                                }
+                            case 9: {
+                                    message.subnetwork = reader.string();
+                                    break;
+                                }
+                            case 10: {
+                                    if (message.additionalUserLabels === $util.emptyObject)
+                                        message.additionalUserLabels = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.additionalUserLabels[key] = value;
+                                    break;
+                                }
+                            case 12: {
+                                    message.kmsKeyName = reader.string();
+                                    break;
+                                }
+                            case 14: {
+                                    message.ipConfiguration = reader.int32();
+                                    break;
+                                }
+                            case 15: {
+                                    message.workerRegion = reader.string();
+                                    break;
+                                }
+                            case 16: {
+                                    message.workerZone = reader.string();
+                                    break;
+                                }
+                            case 17: {
+                                    message.enableStreamingEngine = reader.bool();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -26887,6 +28540,21 @@
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
+                    /**
+                     * Gets the default type url for RuntimeEnvironment
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.RuntimeEnvironment
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    RuntimeEnvironment.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.RuntimeEnvironment";
+                    };
+    
                     return RuntimeEnvironment;
                 })();
     
@@ -27052,48 +28720,55 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.name = reader.string();
-                                break;
-                            case 2:
-                                message.label = reader.string();
-                                break;
-                            case 3:
-                                message.helpText = reader.string();
-                                break;
-                            case 4:
-                                message.isOptional = reader.bool();
-                                break;
-                            case 5:
-                                if (!(message.regexes && message.regexes.length))
-                                    message.regexes = [];
-                                message.regexes.push(reader.string());
-                                break;
-                            case 6:
-                                message.paramType = reader.int32();
-                                break;
-                            case 7:
-                                if (message.customMetadata === $util.emptyObject)
-                                    message.customMetadata = {};
-                                var end2 = reader.uint32() + reader.pos;
-                                key = "";
-                                value = "";
-                                while (reader.pos < end2) {
-                                    var tag2 = reader.uint32();
-                                    switch (tag2 >>> 3) {
-                                    case 1:
-                                        key = reader.string();
-                                        break;
-                                    case 2:
-                                        value = reader.string();
-                                        break;
-                                    default:
-                                        reader.skipType(tag2 & 7);
-                                        break;
-                                    }
+                            case 1: {
+                                    message.name = reader.string();
+                                    break;
                                 }
-                                message.customMetadata[key] = value;
-                                break;
+                            case 2: {
+                                    message.label = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.helpText = reader.string();
+                                    break;
+                                }
+                            case 4: {
+                                    message.isOptional = reader.bool();
+                                    break;
+                                }
+                            case 5: {
+                                    if (!(message.regexes && message.regexes.length))
+                                        message.regexes = [];
+                                    message.regexes.push(reader.string());
+                                    break;
+                                }
+                            case 6: {
+                                    message.paramType = reader.int32();
+                                    break;
+                                }
+                            case 7: {
+                                    if (message.customMetadata === $util.emptyObject)
+                                        message.customMetadata = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.customMetadata[key] = value;
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -27313,6 +28988,21 @@
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
+                    /**
+                     * Gets the default type url for ParameterMetadata
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.ParameterMetadata
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ParameterMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.ParameterMetadata";
+                    };
+    
                     return ParameterMetadata;
                 })();
     
@@ -27462,17 +29152,20 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.name = reader.string();
-                                break;
-                            case 2:
-                                message.description = reader.string();
-                                break;
-                            case 3:
-                                if (!(message.parameters && message.parameters.length))
-                                    message.parameters = [];
-                                message.parameters.push($root.google.dataflow.v1beta3.ParameterMetadata.decode(reader, reader.uint32()));
-                                break;
+                            case 1: {
+                                    message.name = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.description = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    if (!(message.parameters && message.parameters.length))
+                                        message.parameters = [];
+                                    message.parameters.push($root.google.dataflow.v1beta3.ParameterMetadata.decode(reader, reader.uint32()));
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -27597,6 +29290,21 @@
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
+                    /**
+                     * Gets the default type url for TemplateMetadata
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.TemplateMetadata
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    TemplateMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.TemplateMetadata";
+                    };
+    
                     return TemplateMetadata;
                 })();
     
@@ -27703,12 +29411,14 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.language = reader.int32();
-                                break;
-                            case 2:
-                                message.version = reader.string();
-                                break;
+                            case 1: {
+                                    message.language = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    message.version = reader.string();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -27823,6 +29533,21 @@
                      */
                     SDKInfo.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for SDKInfo
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.SDKInfo
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    SDKInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.SDKInfo";
                     };
     
                     /**
@@ -27949,14 +29674,16 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.sdkInfo = $root.google.dataflow.v1beta3.SDKInfo.decode(reader, reader.uint32());
-                                break;
-                            case 2:
-                                if (!(message.parameters && message.parameters.length))
-                                    message.parameters = [];
-                                message.parameters.push($root.google.dataflow.v1beta3.ParameterMetadata.decode(reader, reader.uint32()));
-                                break;
+                            case 1: {
+                                    message.sdkInfo = $root.google.dataflow.v1beta3.SDKInfo.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 2: {
+                                    if (!(message.parameters && message.parameters.length))
+                                        message.parameters = [];
+                                    message.parameters.push($root.google.dataflow.v1beta3.ParameterMetadata.decode(reader, reader.uint32()));
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -28075,6 +29802,21 @@
                      */
                     RuntimeMetadata.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for RuntimeMetadata
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.RuntimeMetadata
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    RuntimeMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.RuntimeMetadata";
                     };
     
                     return RuntimeMetadata;
@@ -28243,43 +29985,49 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.projectId = reader.string();
-                                break;
-                            case 4:
-                                message.jobName = reader.string();
-                                break;
-                            case 2:
-                                message.gcsPath = reader.string();
-                                break;
-                            case 3:
-                                if (message.parameters === $util.emptyObject)
-                                    message.parameters = {};
-                                var end2 = reader.uint32() + reader.pos;
-                                key = "";
-                                value = "";
-                                while (reader.pos < end2) {
-                                    var tag2 = reader.uint32();
-                                    switch (tag2 >>> 3) {
-                                    case 1:
-                                        key = reader.string();
-                                        break;
-                                    case 2:
-                                        value = reader.string();
-                                        break;
-                                    default:
-                                        reader.skipType(tag2 & 7);
-                                        break;
-                                    }
+                            case 1: {
+                                    message.projectId = reader.string();
+                                    break;
                                 }
-                                message.parameters[key] = value;
-                                break;
-                            case 5:
-                                message.environment = $root.google.dataflow.v1beta3.RuntimeEnvironment.decode(reader, reader.uint32());
-                                break;
-                            case 6:
-                                message.location = reader.string();
-                                break;
+                            case 4: {
+                                    message.jobName = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.gcsPath = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    if (message.parameters === $util.emptyObject)
+                                        message.parameters = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.parameters[key] = value;
+                                    break;
+                                }
+                            case 5: {
+                                    message.environment = $root.google.dataflow.v1beta3.RuntimeEnvironment.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 6: {
+                                    message.location = reader.string();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -28435,6 +30183,21 @@
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
+                    /**
+                     * Gets the default type url for CreateJobFromTemplateRequest
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.CreateJobFromTemplateRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    CreateJobFromTemplateRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.CreateJobFromTemplateRequest";
+                    };
+    
                     return CreateJobFromTemplateRequest;
                 })();
     
@@ -28577,18 +30340,22 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.projectId = reader.string();
-                                break;
-                            case 2:
-                                message.gcsPath = reader.string();
-                                break;
-                            case 3:
-                                message.view = reader.int32();
-                                break;
-                            case 4:
-                                message.location = reader.string();
-                                break;
+                            case 1: {
+                                    message.projectId = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.gcsPath = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.view = reader.int32();
+                                    break;
+                                }
+                            case 4: {
+                                    message.location = reader.string();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -28714,6 +30481,21 @@
                      */
                     GetTemplateRequest.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for GetTemplateRequest
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.GetTemplateRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    GetTemplateRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.GetTemplateRequest";
                     };
     
                     /**
@@ -28856,18 +30638,22 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.status = $root.google.rpc.Status.decode(reader, reader.uint32());
-                                break;
-                            case 2:
-                                message.metadata = $root.google.dataflow.v1beta3.TemplateMetadata.decode(reader, reader.uint32());
-                                break;
-                            case 3:
-                                message.templateType = reader.int32();
-                                break;
-                            case 4:
-                                message.runtimeMetadata = $root.google.dataflow.v1beta3.RuntimeMetadata.decode(reader, reader.uint32());
-                                break;
+                            case 1: {
+                                    message.status = $root.google.rpc.Status.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 2: {
+                                    message.metadata = $root.google.dataflow.v1beta3.TemplateMetadata.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 3: {
+                                    message.templateType = reader.int32();
+                                    break;
+                                }
+                            case 4: {
+                                    message.runtimeMetadata = $root.google.dataflow.v1beta3.RuntimeMetadata.decode(reader, reader.uint32());
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -29013,6 +30799,21 @@
                      */
                     GetTemplateResponse.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for GetTemplateResponse
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.GetTemplateResponse
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    GetTemplateResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.GetTemplateResponse";
                     };
     
                     /**
@@ -29174,59 +30975,64 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.jobName = reader.string();
-                                break;
-                            case 2:
-                                if (message.parameters === $util.emptyObject)
-                                    message.parameters = {};
-                                var end2 = reader.uint32() + reader.pos;
-                                key = "";
-                                value = "";
-                                while (reader.pos < end2) {
-                                    var tag2 = reader.uint32();
-                                    switch (tag2 >>> 3) {
-                                    case 1:
-                                        key = reader.string();
-                                        break;
-                                    case 2:
-                                        value = reader.string();
-                                        break;
-                                    default:
-                                        reader.skipType(tag2 & 7);
-                                        break;
-                                    }
+                            case 1: {
+                                    message.jobName = reader.string();
+                                    break;
                                 }
-                                message.parameters[key] = value;
-                                break;
-                            case 3:
-                                message.environment = $root.google.dataflow.v1beta3.RuntimeEnvironment.decode(reader, reader.uint32());
-                                break;
-                            case 4:
-                                message.update = reader.bool();
-                                break;
-                            case 5:
-                                if (message.transformNameMapping === $util.emptyObject)
-                                    message.transformNameMapping = {};
-                                var end2 = reader.uint32() + reader.pos;
-                                key = "";
-                                value = "";
-                                while (reader.pos < end2) {
-                                    var tag2 = reader.uint32();
-                                    switch (tag2 >>> 3) {
-                                    case 1:
-                                        key = reader.string();
-                                        break;
-                                    case 2:
-                                        value = reader.string();
-                                        break;
-                                    default:
-                                        reader.skipType(tag2 & 7);
-                                        break;
+                            case 2: {
+                                    if (message.parameters === $util.emptyObject)
+                                        message.parameters = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
                                     }
+                                    message.parameters[key] = value;
+                                    break;
                                 }
-                                message.transformNameMapping[key] = value;
-                                break;
+                            case 3: {
+                                    message.environment = $root.google.dataflow.v1beta3.RuntimeEnvironment.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 4: {
+                                    message.update = reader.bool();
+                                    break;
+                                }
+                            case 5: {
+                                    if (message.transformNameMapping === $util.emptyObject)
+                                        message.transformNameMapping = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.transformNameMapping[key] = value;
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -29381,6 +31187,21 @@
                      */
                     LaunchTemplateParameters.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for LaunchTemplateParameters
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.LaunchTemplateParameters
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    LaunchTemplateParameters.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.LaunchTemplateParameters";
                     };
     
                     return LaunchTemplateParameters;
@@ -29547,24 +31368,30 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.projectId = reader.string();
-                                break;
-                            case 2:
-                                message.validateOnly = reader.bool();
-                                break;
-                            case 3:
-                                message.gcsPath = reader.string();
-                                break;
-                            case 6:
-                                message.dynamicTemplate = $root.google.dataflow.v1beta3.DynamicTemplateLaunchParams.decode(reader, reader.uint32());
-                                break;
-                            case 4:
-                                message.launchParameters = $root.google.dataflow.v1beta3.LaunchTemplateParameters.decode(reader, reader.uint32());
-                                break;
-                            case 5:
-                                message.location = reader.string();
-                                break;
+                            case 1: {
+                                    message.projectId = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.validateOnly = reader.bool();
+                                    break;
+                                }
+                            case 3: {
+                                    message.gcsPath = reader.string();
+                                    break;
+                                }
+                            case 6: {
+                                    message.dynamicTemplate = $root.google.dataflow.v1beta3.DynamicTemplateLaunchParams.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 4: {
+                                    message.launchParameters = $root.google.dataflow.v1beta3.LaunchTemplateParameters.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 5: {
+                                    message.location = reader.string();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -29717,6 +31544,21 @@
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
+                    /**
+                     * Gets the default type url for LaunchTemplateRequest
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.LaunchTemplateRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    LaunchTemplateRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.LaunchTemplateRequest";
+                    };
+    
                     return LaunchTemplateRequest;
                 })();
     
@@ -29812,9 +31654,10 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.job = $root.google.dataflow.v1beta3.Job.decode(reader, reader.uint32());
-                                break;
+                            case 1: {
+                                    message.job = $root.google.dataflow.v1beta3.Job.decode(reader, reader.uint32());
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -29907,6 +31750,21 @@
                      */
                     LaunchTemplateResponse.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for LaunchTemplateResponse
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.LaunchTemplateResponse
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    LaunchTemplateResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.LaunchTemplateResponse";
                     };
     
                     return LaunchTemplateResponse;
@@ -30006,11 +31864,12 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                if (!(message.parameterViolations && message.parameterViolations.length))
-                                    message.parameterViolations = [];
-                                message.parameterViolations.push($root.google.dataflow.v1beta3.InvalidTemplateParameters.ParameterViolation.decode(reader, reader.uint32()));
-                                break;
+                            case 1: {
+                                    if (!(message.parameterViolations && message.parameterViolations.length))
+                                        message.parameterViolations = [];
+                                    message.parameterViolations.push($root.google.dataflow.v1beta3.InvalidTemplateParameters.ParameterViolation.decode(reader, reader.uint32()));
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -30117,6 +31976,21 @@
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
+                    /**
+                     * Gets the default type url for InvalidTemplateParameters
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.InvalidTemplateParameters
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    InvalidTemplateParameters.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.InvalidTemplateParameters";
+                    };
+    
                     InvalidTemplateParameters.ParameterViolation = (function() {
     
                         /**
@@ -30220,12 +32094,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.parameter = reader.string();
-                                    break;
-                                case 2:
-                                    message.description = reader.string();
-                                    break;
+                                case 1: {
+                                        message.parameter = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -30322,6 +32198,21 @@
                          */
                         ParameterViolation.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ParameterViolation
+                         * @function getTypeUrl
+                         * @memberof google.dataflow.v1beta3.InvalidTemplateParameters.ParameterViolation
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ParameterViolation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.dataflow.v1beta3.InvalidTemplateParameters.ParameterViolation";
                         };
     
                         return ParameterViolation;
@@ -30433,12 +32324,14 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.gcsPath = reader.string();
-                                break;
-                            case 2:
-                                message.stagingLocation = reader.string();
-                                break;
+                            case 1: {
+                                    message.gcsPath = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.stagingLocation = reader.string();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -30535,6 +32428,21 @@
                      */
                     DynamicTemplateLaunchParams.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for DynamicTemplateLaunchParams
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.DynamicTemplateLaunchParams
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    DynamicTemplateLaunchParams.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.DynamicTemplateLaunchParams";
                     };
     
                     return DynamicTemplateLaunchParams;
@@ -30686,14 +32594,16 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            if (!(message.rules && message.rules.length))
-                                message.rules = [];
-                            message.rules.push($root.google.api.HttpRule.decode(reader, reader.uint32()));
-                            break;
-                        case 2:
-                            message.fullyDecodeReservedExpansion = reader.bool();
-                            break;
+                        case 1: {
+                                if (!(message.rules && message.rules.length))
+                                    message.rules = [];
+                                message.rules.push($root.google.api.HttpRule.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 2: {
+                                message.fullyDecodeReservedExpansion = reader.bool();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -30807,6 +32717,21 @@
                  */
                 Http.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Http
+                 * @function getTypeUrl
+                 * @memberof google.api.Http
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Http.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.Http";
                 };
     
                 return Http;
@@ -31019,38 +32944,48 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.selector = reader.string();
-                            break;
-                        case 2:
-                            message.get = reader.string();
-                            break;
-                        case 3:
-                            message.put = reader.string();
-                            break;
-                        case 4:
-                            message.post = reader.string();
-                            break;
-                        case 5:
-                            message["delete"] = reader.string();
-                            break;
-                        case 6:
-                            message.patch = reader.string();
-                            break;
-                        case 8:
-                            message.custom = $root.google.api.CustomHttpPattern.decode(reader, reader.uint32());
-                            break;
-                        case 7:
-                            message.body = reader.string();
-                            break;
-                        case 12:
-                            message.responseBody = reader.string();
-                            break;
-                        case 11:
-                            if (!(message.additionalBindings && message.additionalBindings.length))
-                                message.additionalBindings = [];
-                            message.additionalBindings.push($root.google.api.HttpRule.decode(reader, reader.uint32()));
-                            break;
+                        case 1: {
+                                message.selector = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.get = reader.string();
+                                break;
+                            }
+                        case 3: {
+                                message.put = reader.string();
+                                break;
+                            }
+                        case 4: {
+                                message.post = reader.string();
+                                break;
+                            }
+                        case 5: {
+                                message["delete"] = reader.string();
+                                break;
+                            }
+                        case 6: {
+                                message.patch = reader.string();
+                                break;
+                            }
+                        case 8: {
+                                message.custom = $root.google.api.CustomHttpPattern.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 7: {
+                                message.body = reader.string();
+                                break;
+                            }
+                        case 12: {
+                                message.responseBody = reader.string();
+                                break;
+                            }
+                        case 11: {
+                                if (!(message.additionalBindings && message.additionalBindings.length))
+                                    message.additionalBindings = [];
+                                message.additionalBindings.push($root.google.api.HttpRule.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -31272,6 +33207,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for HttpRule
+                 * @function getTypeUrl
+                 * @memberof google.api.HttpRule
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                HttpRule.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.HttpRule";
+                };
+    
                 return HttpRule;
             })();
     
@@ -31378,12 +33328,14 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.kind = reader.string();
-                            break;
-                        case 2:
-                            message.path = reader.string();
-                            break;
+                        case 1: {
+                                message.kind = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.path = reader.string();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -31480,6 +33432,21 @@
                  */
                 CustomHttpPattern.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for CustomHttpPattern
+                 * @function getTypeUrl
+                 * @memberof google.api.CustomHttpPattern
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                CustomHttpPattern.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.CustomHttpPattern";
                 };
     
                 return CustomHttpPattern;
@@ -31591,11 +33558,12 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            if (!(message.file && message.file.length))
-                                message.file = [];
-                            message.file.push($root.google.protobuf.FileDescriptorProto.decode(reader, reader.uint32()));
-                            break;
+                        case 1: {
+                                if (!(message.file && message.file.length))
+                                    message.file = [];
+                                message.file.push($root.google.protobuf.FileDescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -31702,6 +33670,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for FileDescriptorSet
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.FileDescriptorSet
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FileDescriptorSet.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.FileDescriptorSet";
+                };
+    
                 return FileDescriptorSet;
             })();
     
@@ -31723,6 +33706,7 @@
                  * @property {google.protobuf.IFileOptions|null} [options] FileDescriptorProto options
                  * @property {google.protobuf.ISourceCodeInfo|null} [sourceCodeInfo] FileDescriptorProto sourceCodeInfo
                  * @property {string|null} [syntax] FileDescriptorProto syntax
+                 * @property {string|null} [edition] FileDescriptorProto edition
                  */
     
                 /**
@@ -31844,6 +33828,14 @@
                 FileDescriptorProto.prototype.syntax = "";
     
                 /**
+                 * FileDescriptorProto edition.
+                 * @member {string} edition
+                 * @memberof google.protobuf.FileDescriptorProto
+                 * @instance
+                 */
+                FileDescriptorProto.prototype.edition = "";
+    
+                /**
                  * Creates a new FileDescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.FileDescriptorProto
@@ -31898,6 +33890,8 @@
                             writer.uint32(/* id 11, wireType 0 =*/88).int32(message.weakDependency[i]);
                     if (message.syntax != null && Object.hasOwnProperty.call(message, "syntax"))
                         writer.uint32(/* id 12, wireType 2 =*/98).string(message.syntax);
+                    if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
+                        writer.uint32(/* id 13, wireType 2 =*/106).string(message.edition);
                     return writer;
                 };
     
@@ -31932,66 +33926,82 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 2:
-                            message["package"] = reader.string();
-                            break;
-                        case 3:
-                            if (!(message.dependency && message.dependency.length))
-                                message.dependency = [];
-                            message.dependency.push(reader.string());
-                            break;
-                        case 10:
-                            if (!(message.publicDependency && message.publicDependency.length))
-                                message.publicDependency = [];
-                            if ((tag & 7) === 2) {
-                                var end2 = reader.uint32() + reader.pos;
-                                while (reader.pos < end2)
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message["package"] = reader.string();
+                                break;
+                            }
+                        case 3: {
+                                if (!(message.dependency && message.dependency.length))
+                                    message.dependency = [];
+                                message.dependency.push(reader.string());
+                                break;
+                            }
+                        case 10: {
+                                if (!(message.publicDependency && message.publicDependency.length))
+                                    message.publicDependency = [];
+                                if ((tag & 7) === 2) {
+                                    var end2 = reader.uint32() + reader.pos;
+                                    while (reader.pos < end2)
+                                        message.publicDependency.push(reader.int32());
+                                } else
                                     message.publicDependency.push(reader.int32());
-                            } else
-                                message.publicDependency.push(reader.int32());
-                            break;
-                        case 11:
-                            if (!(message.weakDependency && message.weakDependency.length))
-                                message.weakDependency = [];
-                            if ((tag & 7) === 2) {
-                                var end2 = reader.uint32() + reader.pos;
-                                while (reader.pos < end2)
+                                break;
+                            }
+                        case 11: {
+                                if (!(message.weakDependency && message.weakDependency.length))
+                                    message.weakDependency = [];
+                                if ((tag & 7) === 2) {
+                                    var end2 = reader.uint32() + reader.pos;
+                                    while (reader.pos < end2)
+                                        message.weakDependency.push(reader.int32());
+                                } else
                                     message.weakDependency.push(reader.int32());
-                            } else
-                                message.weakDependency.push(reader.int32());
-                            break;
-                        case 4:
-                            if (!(message.messageType && message.messageType.length))
-                                message.messageType = [];
-                            message.messageType.push($root.google.protobuf.DescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 5:
-                            if (!(message.enumType && message.enumType.length))
-                                message.enumType = [];
-                            message.enumType.push($root.google.protobuf.EnumDescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 6:
-                            if (!(message.service && message.service.length))
-                                message.service = [];
-                            message.service.push($root.google.protobuf.ServiceDescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 7:
-                            if (!(message.extension && message.extension.length))
-                                message.extension = [];
-                            message.extension.push($root.google.protobuf.FieldDescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 8:
-                            message.options = $root.google.protobuf.FileOptions.decode(reader, reader.uint32());
-                            break;
-                        case 9:
-                            message.sourceCodeInfo = $root.google.protobuf.SourceCodeInfo.decode(reader, reader.uint32());
-                            break;
-                        case 12:
-                            message.syntax = reader.string();
-                            break;
+                                break;
+                            }
+                        case 4: {
+                                if (!(message.messageType && message.messageType.length))
+                                    message.messageType = [];
+                                message.messageType.push($root.google.protobuf.DescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 5: {
+                                if (!(message.enumType && message.enumType.length))
+                                    message.enumType = [];
+                                message.enumType.push($root.google.protobuf.EnumDescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 6: {
+                                if (!(message.service && message.service.length))
+                                    message.service = [];
+                                message.service.push($root.google.protobuf.ServiceDescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 7: {
+                                if (!(message.extension && message.extension.length))
+                                    message.extension = [];
+                                message.extension.push($root.google.protobuf.FieldDescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 8: {
+                                message.options = $root.google.protobuf.FileOptions.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 9: {
+                                message.sourceCodeInfo = $root.google.protobuf.SourceCodeInfo.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 12: {
+                                message.syntax = reader.string();
+                                break;
+                            }
+                        case 13: {
+                                message.edition = reader.string();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -32103,6 +34113,9 @@
                     if (message.syntax != null && message.hasOwnProperty("syntax"))
                         if (!$util.isString(message.syntax))
                             return "syntax: string expected";
+                    if (message.edition != null && message.hasOwnProperty("edition"))
+                        if (!$util.isString(message.edition))
+                            return "edition: string expected";
                     return null;
                 };
     
@@ -32195,6 +34208,8 @@
                     }
                     if (object.syntax != null)
                         message.syntax = String(object.syntax);
+                    if (object.edition != null)
+                        message.edition = String(object.edition);
                     return message;
                 };
     
@@ -32226,6 +34241,7 @@
                         object.options = null;
                         object.sourceCodeInfo = null;
                         object.syntax = "";
+                        object.edition = "";
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -32272,6 +34288,8 @@
                     }
                     if (message.syntax != null && message.hasOwnProperty("syntax"))
                         object.syntax = message.syntax;
+                    if (message.edition != null && message.hasOwnProperty("edition"))
+                        object.edition = message.edition;
                     return object;
                 };
     
@@ -32284,6 +34302,21 @@
                  */
                 FileDescriptorProto.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for FileDescriptorProto
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.FileDescriptorProto
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FileDescriptorProto.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.FileDescriptorProto";
                 };
     
                 return FileDescriptorProto;
@@ -32496,52 +34529,62 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 2:
-                            if (!(message.field && message.field.length))
-                                message.field = [];
-                            message.field.push($root.google.protobuf.FieldDescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 6:
-                            if (!(message.extension && message.extension.length))
-                                message.extension = [];
-                            message.extension.push($root.google.protobuf.FieldDescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 3:
-                            if (!(message.nestedType && message.nestedType.length))
-                                message.nestedType = [];
-                            message.nestedType.push($root.google.protobuf.DescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 4:
-                            if (!(message.enumType && message.enumType.length))
-                                message.enumType = [];
-                            message.enumType.push($root.google.protobuf.EnumDescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 5:
-                            if (!(message.extensionRange && message.extensionRange.length))
-                                message.extensionRange = [];
-                            message.extensionRange.push($root.google.protobuf.DescriptorProto.ExtensionRange.decode(reader, reader.uint32()));
-                            break;
-                        case 8:
-                            if (!(message.oneofDecl && message.oneofDecl.length))
-                                message.oneofDecl = [];
-                            message.oneofDecl.push($root.google.protobuf.OneofDescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 7:
-                            message.options = $root.google.protobuf.MessageOptions.decode(reader, reader.uint32());
-                            break;
-                        case 9:
-                            if (!(message.reservedRange && message.reservedRange.length))
-                                message.reservedRange = [];
-                            message.reservedRange.push($root.google.protobuf.DescriptorProto.ReservedRange.decode(reader, reader.uint32()));
-                            break;
-                        case 10:
-                            if (!(message.reservedName && message.reservedName.length))
-                                message.reservedName = [];
-                            message.reservedName.push(reader.string());
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                if (!(message.field && message.field.length))
+                                    message.field = [];
+                                message.field.push($root.google.protobuf.FieldDescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 6: {
+                                if (!(message.extension && message.extension.length))
+                                    message.extension = [];
+                                message.extension.push($root.google.protobuf.FieldDescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 3: {
+                                if (!(message.nestedType && message.nestedType.length))
+                                    message.nestedType = [];
+                                message.nestedType.push($root.google.protobuf.DescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 4: {
+                                if (!(message.enumType && message.enumType.length))
+                                    message.enumType = [];
+                                message.enumType.push($root.google.protobuf.EnumDescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 5: {
+                                if (!(message.extensionRange && message.extensionRange.length))
+                                    message.extensionRange = [];
+                                message.extensionRange.push($root.google.protobuf.DescriptorProto.ExtensionRange.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 8: {
+                                if (!(message.oneofDecl && message.oneofDecl.length))
+                                    message.oneofDecl = [];
+                                message.oneofDecl.push($root.google.protobuf.OneofDescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 7: {
+                                message.options = $root.google.protobuf.MessageOptions.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 9: {
+                                if (!(message.reservedRange && message.reservedRange.length))
+                                    message.reservedRange = [];
+                                message.reservedRange.push($root.google.protobuf.DescriptorProto.ReservedRange.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 10: {
+                                if (!(message.reservedName && message.reservedName.length))
+                                    message.reservedName = [];
+                                message.reservedName.push(reader.string());
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -32842,6 +34885,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for DescriptorProto
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.DescriptorProto
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                DescriptorProto.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.DescriptorProto";
+                };
+    
                 DescriptorProto.ExtensionRange = (function() {
     
                     /**
@@ -32956,15 +35014,18 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.start = reader.int32();
-                                break;
-                            case 2:
-                                message.end = reader.int32();
-                                break;
-                            case 3:
-                                message.options = $root.google.protobuf.ExtensionRangeOptions.decode(reader, reader.uint32());
-                                break;
+                            case 1: {
+                                    message.start = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    message.end = reader.int32();
+                                    break;
+                                }
+                            case 3: {
+                                    message.options = $root.google.protobuf.ExtensionRangeOptions.decode(reader, reader.uint32());
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -33076,6 +35137,21 @@
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
+                    /**
+                     * Gets the default type url for ExtensionRange
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.DescriptorProto.ExtensionRange
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ExtensionRange.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.DescriptorProto.ExtensionRange";
+                    };
+    
                     return ExtensionRange;
                 })();
     
@@ -33182,12 +35258,14 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.start = reader.int32();
-                                break;
-                            case 2:
-                                message.end = reader.int32();
-                                break;
+                            case 1: {
+                                    message.start = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    message.end = reader.int32();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -33284,6 +35362,21 @@
                      */
                     ReservedRange.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ReservedRange
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.DescriptorProto.ReservedRange
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ReservedRange.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.DescriptorProto.ReservedRange";
                     };
     
                     return ReservedRange;
@@ -33386,11 +35479,12 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 999:
-                            if (!(message.uninterpretedOption && message.uninterpretedOption.length))
-                                message.uninterpretedOption = [];
-                            message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
-                            break;
+                        case 999: {
+                                if (!(message.uninterpretedOption && message.uninterpretedOption.length))
+                                    message.uninterpretedOption = [];
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -33495,6 +35589,21 @@
                  */
                 ExtensionRangeOptions.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for ExtensionRangeOptions
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.ExtensionRangeOptions
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ExtensionRangeOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.ExtensionRangeOptions";
                 };
     
                 return ExtensionRangeOptions;
@@ -33702,39 +35811,50 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 3:
-                            message.number = reader.int32();
-                            break;
-                        case 4:
-                            message.label = reader.int32();
-                            break;
-                        case 5:
-                            message.type = reader.int32();
-                            break;
-                        case 6:
-                            message.typeName = reader.string();
-                            break;
-                        case 2:
-                            message.extendee = reader.string();
-                            break;
-                        case 7:
-                            message.defaultValue = reader.string();
-                            break;
-                        case 9:
-                            message.oneofIndex = reader.int32();
-                            break;
-                        case 10:
-                            message.jsonName = reader.string();
-                            break;
-                        case 8:
-                            message.options = $root.google.protobuf.FieldOptions.decode(reader, reader.uint32());
-                            break;
-                        case 17:
-                            message.proto3Optional = reader.bool();
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 3: {
+                                message.number = reader.int32();
+                                break;
+                            }
+                        case 4: {
+                                message.label = reader.int32();
+                                break;
+                            }
+                        case 5: {
+                                message.type = reader.int32();
+                                break;
+                            }
+                        case 6: {
+                                message.typeName = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.extendee = reader.string();
+                                break;
+                            }
+                        case 7: {
+                                message.defaultValue = reader.string();
+                                break;
+                            }
+                        case 9: {
+                                message.oneofIndex = reader.int32();
+                                break;
+                            }
+                        case 10: {
+                                message.jsonName = reader.string();
+                                break;
+                            }
+                        case 8: {
+                                message.options = $root.google.protobuf.FieldOptions.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 17: {
+                                message.proto3Optional = reader.bool();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -34022,6 +36142,21 @@
                 };
     
                 /**
+                 * Gets the default type url for FieldDescriptorProto
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.FieldDescriptorProto
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FieldDescriptorProto.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.FieldDescriptorProto";
+                };
+    
+                /**
                  * Type enum.
                  * @name google.protobuf.FieldDescriptorProto.Type
                  * @enum {number}
@@ -34189,12 +36324,14 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 2:
-                            message.options = $root.google.protobuf.OneofOptions.decode(reader, reader.uint32());
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.options = $root.google.protobuf.OneofOptions.decode(reader, reader.uint32());
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -34296,6 +36433,21 @@
                  */
                 OneofDescriptorProto.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for OneofDescriptorProto
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.OneofDescriptorProto
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                OneofDescriptorProto.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.OneofDescriptorProto";
                 };
     
                 return OneofDescriptorProto;
@@ -34443,27 +36595,32 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 2:
-                            if (!(message.value && message.value.length))
-                                message.value = [];
-                            message.value.push($root.google.protobuf.EnumValueDescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 3:
-                            message.options = $root.google.protobuf.EnumOptions.decode(reader, reader.uint32());
-                            break;
-                        case 4:
-                            if (!(message.reservedRange && message.reservedRange.length))
-                                message.reservedRange = [];
-                            message.reservedRange.push($root.google.protobuf.EnumDescriptorProto.EnumReservedRange.decode(reader, reader.uint32()));
-                            break;
-                        case 5:
-                            if (!(message.reservedName && message.reservedName.length))
-                                message.reservedName = [];
-                            message.reservedName.push(reader.string());
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                if (!(message.value && message.value.length))
+                                    message.value = [];
+                                message.value.push($root.google.protobuf.EnumValueDescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 3: {
+                                message.options = $root.google.protobuf.EnumOptions.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 4: {
+                                if (!(message.reservedRange && message.reservedRange.length))
+                                    message.reservedRange = [];
+                                message.reservedRange.push($root.google.protobuf.EnumDescriptorProto.EnumReservedRange.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 5: {
+                                if (!(message.reservedName && message.reservedName.length))
+                                    message.reservedName = [];
+                                message.reservedName.push(reader.string());
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -34639,6 +36796,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for EnumDescriptorProto
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.EnumDescriptorProto
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                EnumDescriptorProto.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.EnumDescriptorProto";
+                };
+    
                 EnumDescriptorProto.EnumReservedRange = (function() {
     
                     /**
@@ -34742,12 +36914,14 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.start = reader.int32();
-                                break;
-                            case 2:
-                                message.end = reader.int32();
-                                break;
+                            case 1: {
+                                    message.start = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    message.end = reader.int32();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -34844,6 +37018,21 @@
                      */
                     EnumReservedRange.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for EnumReservedRange
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.EnumDescriptorProto.EnumReservedRange
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    EnumReservedRange.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.EnumDescriptorProto.EnumReservedRange";
                     };
     
                     return EnumReservedRange;
@@ -34966,15 +37155,18 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 2:
-                            message.number = reader.int32();
-                            break;
-                        case 3:
-                            message.options = $root.google.protobuf.EnumValueOptions.decode(reader, reader.uint32());
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.number = reader.int32();
+                                break;
+                            }
+                        case 3: {
+                                message.options = $root.google.protobuf.EnumValueOptions.decode(reader, reader.uint32());
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -35084,6 +37276,21 @@
                  */
                 EnumValueDescriptorProto.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for EnumValueDescriptorProto
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.EnumValueDescriptorProto
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                EnumValueDescriptorProto.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.EnumValueDescriptorProto";
                 };
     
                 return EnumValueDescriptorProto;
@@ -35205,17 +37412,20 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 2:
-                            if (!(message.method && message.method.length))
-                                message.method = [];
-                            message.method.push($root.google.protobuf.MethodDescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 3:
-                            message.options = $root.google.protobuf.ServiceOptions.decode(reader, reader.uint32());
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                if (!(message.method && message.method.length))
+                                    message.method = [];
+                                message.method.push($root.google.protobuf.MethodDescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 3: {
+                                message.options = $root.google.protobuf.ServiceOptions.decode(reader, reader.uint32());
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -35343,6 +37553,21 @@
                  */
                 ServiceDescriptorProto.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for ServiceDescriptorProto
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.ServiceDescriptorProto
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ServiceDescriptorProto.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.ServiceDescriptorProto";
                 };
     
                 return ServiceDescriptorProto;
@@ -35495,24 +37720,30 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 2:
-                            message.inputType = reader.string();
-                            break;
-                        case 3:
-                            message.outputType = reader.string();
-                            break;
-                        case 4:
-                            message.options = $root.google.protobuf.MethodOptions.decode(reader, reader.uint32());
-                            break;
-                        case 5:
-                            message.clientStreaming = reader.bool();
-                            break;
-                        case 6:
-                            message.serverStreaming = reader.bool();
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.inputType = reader.string();
+                                break;
+                            }
+                        case 3: {
+                                message.outputType = reader.string();
+                                break;
+                            }
+                        case 4: {
+                                message.options = $root.google.protobuf.MethodOptions.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 5: {
+                                message.clientStreaming = reader.bool();
+                                break;
+                            }
+                        case 6: {
+                                message.serverStreaming = reader.bool();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -35646,6 +37877,21 @@
                  */
                 MethodDescriptorProto.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for MethodDescriptorProto
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.MethodDescriptorProto
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                MethodDescriptorProto.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.MethodDescriptorProto";
                 };
     
                 return MethodDescriptorProto;
@@ -35965,71 +38211,92 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.javaPackage = reader.string();
-                            break;
-                        case 8:
-                            message.javaOuterClassname = reader.string();
-                            break;
-                        case 10:
-                            message.javaMultipleFiles = reader.bool();
-                            break;
-                        case 20:
-                            message.javaGenerateEqualsAndHash = reader.bool();
-                            break;
-                        case 27:
-                            message.javaStringCheckUtf8 = reader.bool();
-                            break;
-                        case 9:
-                            message.optimizeFor = reader.int32();
-                            break;
-                        case 11:
-                            message.goPackage = reader.string();
-                            break;
-                        case 16:
-                            message.ccGenericServices = reader.bool();
-                            break;
-                        case 17:
-                            message.javaGenericServices = reader.bool();
-                            break;
-                        case 18:
-                            message.pyGenericServices = reader.bool();
-                            break;
-                        case 42:
-                            message.phpGenericServices = reader.bool();
-                            break;
-                        case 23:
-                            message.deprecated = reader.bool();
-                            break;
-                        case 31:
-                            message.ccEnableArenas = reader.bool();
-                            break;
-                        case 36:
-                            message.objcClassPrefix = reader.string();
-                            break;
-                        case 37:
-                            message.csharpNamespace = reader.string();
-                            break;
-                        case 39:
-                            message.swiftPrefix = reader.string();
-                            break;
-                        case 40:
-                            message.phpClassPrefix = reader.string();
-                            break;
-                        case 41:
-                            message.phpNamespace = reader.string();
-                            break;
-                        case 44:
-                            message.phpMetadataNamespace = reader.string();
-                            break;
-                        case 45:
-                            message.rubyPackage = reader.string();
-                            break;
-                        case 999:
-                            if (!(message.uninterpretedOption && message.uninterpretedOption.length))
-                                message.uninterpretedOption = [];
-                            message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
-                            break;
+                        case 1: {
+                                message.javaPackage = reader.string();
+                                break;
+                            }
+                        case 8: {
+                                message.javaOuterClassname = reader.string();
+                                break;
+                            }
+                        case 10: {
+                                message.javaMultipleFiles = reader.bool();
+                                break;
+                            }
+                        case 20: {
+                                message.javaGenerateEqualsAndHash = reader.bool();
+                                break;
+                            }
+                        case 27: {
+                                message.javaStringCheckUtf8 = reader.bool();
+                                break;
+                            }
+                        case 9: {
+                                message.optimizeFor = reader.int32();
+                                break;
+                            }
+                        case 11: {
+                                message.goPackage = reader.string();
+                                break;
+                            }
+                        case 16: {
+                                message.ccGenericServices = reader.bool();
+                                break;
+                            }
+                        case 17: {
+                                message.javaGenericServices = reader.bool();
+                                break;
+                            }
+                        case 18: {
+                                message.pyGenericServices = reader.bool();
+                                break;
+                            }
+                        case 42: {
+                                message.phpGenericServices = reader.bool();
+                                break;
+                            }
+                        case 23: {
+                                message.deprecated = reader.bool();
+                                break;
+                            }
+                        case 31: {
+                                message.ccEnableArenas = reader.bool();
+                                break;
+                            }
+                        case 36: {
+                                message.objcClassPrefix = reader.string();
+                                break;
+                            }
+                        case 37: {
+                                message.csharpNamespace = reader.string();
+                                break;
+                            }
+                        case 39: {
+                                message.swiftPrefix = reader.string();
+                                break;
+                            }
+                        case 40: {
+                                message.phpClassPrefix = reader.string();
+                                break;
+                            }
+                        case 41: {
+                                message.phpNamespace = reader.string();
+                                break;
+                            }
+                        case 44: {
+                                message.phpMetadataNamespace = reader.string();
+                                break;
+                            }
+                        case 45: {
+                                message.rubyPackage = reader.string();
+                                break;
+                            }
+                        case 999: {
+                                if (!(message.uninterpretedOption && message.uninterpretedOption.length))
+                                    message.uninterpretedOption = [];
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -36317,6 +38584,21 @@
                 };
     
                 /**
+                 * Gets the default type url for FileOptions
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.FileOptions
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FileOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.FileOptions";
+                };
+    
+                /**
                  * OptimizeMode enum.
                  * @name google.protobuf.FileOptions.OptimizeMode
                  * @enum {number}
@@ -36473,23 +38755,28 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.messageSetWireFormat = reader.bool();
-                            break;
-                        case 2:
-                            message.noStandardDescriptorAccessor = reader.bool();
-                            break;
-                        case 3:
-                            message.deprecated = reader.bool();
-                            break;
-                        case 7:
-                            message.mapEntry = reader.bool();
-                            break;
-                        case 999:
-                            if (!(message.uninterpretedOption && message.uninterpretedOption.length))
-                                message.uninterpretedOption = [];
-                            message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
-                            break;
+                        case 1: {
+                                message.messageSetWireFormat = reader.bool();
+                                break;
+                            }
+                        case 2: {
+                                message.noStandardDescriptorAccessor = reader.bool();
+                                break;
+                            }
+                        case 3: {
+                                message.deprecated = reader.bool();
+                                break;
+                            }
+                        case 7: {
+                                message.mapEntry = reader.bool();
+                                break;
+                            }
+                        case 999: {
+                                if (!(message.uninterpretedOption && message.uninterpretedOption.length))
+                                    message.uninterpretedOption = [];
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -36630,6 +38917,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for MessageOptions
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.MessageOptions
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                MessageOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.MessageOptions";
+                };
+    
                 return MessageOptions;
             })();
     
@@ -36643,6 +38945,7 @@
                  * @property {boolean|null} [packed] FieldOptions packed
                  * @property {google.protobuf.FieldOptions.JSType|null} [jstype] FieldOptions jstype
                  * @property {boolean|null} [lazy] FieldOptions lazy
+                 * @property {boolean|null} [unverifiedLazy] FieldOptions unverifiedLazy
                  * @property {boolean|null} [deprecated] FieldOptions deprecated
                  * @property {boolean|null} [weak] FieldOptions weak
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
@@ -36697,6 +39000,14 @@
                  * @instance
                  */
                 FieldOptions.prototype.lazy = false;
+    
+                /**
+                 * FieldOptions unverifiedLazy.
+                 * @member {boolean} unverifiedLazy
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype.unverifiedLazy = false;
     
                 /**
                  * FieldOptions deprecated.
@@ -36766,6 +39077,8 @@
                         writer.uint32(/* id 6, wireType 0 =*/48).int32(message.jstype);
                     if (message.weak != null && Object.hasOwnProperty.call(message, "weak"))
                         writer.uint32(/* id 10, wireType 0 =*/80).bool(message.weak);
+                    if (message.unverifiedLazy != null && Object.hasOwnProperty.call(message, "unverifiedLazy"))
+                        writer.uint32(/* id 15, wireType 0 =*/120).bool(message.unverifiedLazy);
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -36809,39 +39122,51 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.ctype = reader.int32();
-                            break;
-                        case 2:
-                            message.packed = reader.bool();
-                            break;
-                        case 6:
-                            message.jstype = reader.int32();
-                            break;
-                        case 5:
-                            message.lazy = reader.bool();
-                            break;
-                        case 3:
-                            message.deprecated = reader.bool();
-                            break;
-                        case 10:
-                            message.weak = reader.bool();
-                            break;
-                        case 999:
-                            if (!(message.uninterpretedOption && message.uninterpretedOption.length))
-                                message.uninterpretedOption = [];
-                            message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
-                            break;
-                        case 1052:
-                            if (!(message[".google.api.fieldBehavior"] && message[".google.api.fieldBehavior"].length))
-                                message[".google.api.fieldBehavior"] = [];
-                            if ((tag & 7) === 2) {
-                                var end2 = reader.uint32() + reader.pos;
-                                while (reader.pos < end2)
+                        case 1: {
+                                message.ctype = reader.int32();
+                                break;
+                            }
+                        case 2: {
+                                message.packed = reader.bool();
+                                break;
+                            }
+                        case 6: {
+                                message.jstype = reader.int32();
+                                break;
+                            }
+                        case 5: {
+                                message.lazy = reader.bool();
+                                break;
+                            }
+                        case 15: {
+                                message.unverifiedLazy = reader.bool();
+                                break;
+                            }
+                        case 3: {
+                                message.deprecated = reader.bool();
+                                break;
+                            }
+                        case 10: {
+                                message.weak = reader.bool();
+                                break;
+                            }
+                        case 999: {
+                                if (!(message.uninterpretedOption && message.uninterpretedOption.length))
+                                    message.uninterpretedOption = [];
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 1052: {
+                                if (!(message[".google.api.fieldBehavior"] && message[".google.api.fieldBehavior"].length))
+                                    message[".google.api.fieldBehavior"] = [];
+                                if ((tag & 7) === 2) {
+                                    var end2 = reader.uint32() + reader.pos;
+                                    while (reader.pos < end2)
+                                        message[".google.api.fieldBehavior"].push(reader.int32());
+                                } else
                                     message[".google.api.fieldBehavior"].push(reader.int32());
-                            } else
-                                message[".google.api.fieldBehavior"].push(reader.int32());
-                            break;
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -36901,6 +39226,9 @@
                     if (message.lazy != null && message.hasOwnProperty("lazy"))
                         if (typeof message.lazy !== "boolean")
                             return "lazy: boolean expected";
+                    if (message.unverifiedLazy != null && message.hasOwnProperty("unverifiedLazy"))
+                        if (typeof message.unverifiedLazy !== "boolean")
+                            return "unverifiedLazy: boolean expected";
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         if (typeof message.deprecated !== "boolean")
                             return "deprecated: boolean expected";
@@ -36981,6 +39309,8 @@
                     }
                     if (object.lazy != null)
                         message.lazy = Boolean(object.lazy);
+                    if (object.unverifiedLazy != null)
+                        message.unverifiedLazy = Boolean(object.unverifiedLazy);
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
                     if (object.weak != null)
@@ -37063,6 +39393,7 @@
                         object.lazy = false;
                         object.jstype = options.enums === String ? "JS_NORMAL" : 0;
                         object.weak = false;
+                        object.unverifiedLazy = false;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
                         object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
@@ -37076,6 +39407,8 @@
                         object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
                     if (message.weak != null && message.hasOwnProperty("weak"))
                         object.weak = message.weak;
+                    if (message.unverifiedLazy != null && message.hasOwnProperty("unverifiedLazy"))
+                        object.unverifiedLazy = message.unverifiedLazy;
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -37098,6 +39431,21 @@
                  */
                 FieldOptions.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for FieldOptions
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.FieldOptions
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FieldOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.FieldOptions";
                 };
     
                 /**
@@ -37229,11 +39577,12 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 999:
-                            if (!(message.uninterpretedOption && message.uninterpretedOption.length))
-                                message.uninterpretedOption = [];
-                            message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
-                            break;
+                        case 999: {
+                                if (!(message.uninterpretedOption && message.uninterpretedOption.length))
+                                    message.uninterpretedOption = [];
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -37338,6 +39687,21 @@
                  */
                 OneofOptions.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for OneofOptions
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.OneofOptions
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                OneofOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.OneofOptions";
                 };
     
                 return OneofOptions;
@@ -37459,17 +39823,20 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 2:
-                            message.allowAlias = reader.bool();
-                            break;
-                        case 3:
-                            message.deprecated = reader.bool();
-                            break;
-                        case 999:
-                            if (!(message.uninterpretedOption && message.uninterpretedOption.length))
-                                message.uninterpretedOption = [];
-                            message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
-                            break;
+                        case 2: {
+                                message.allowAlias = reader.bool();
+                                break;
+                            }
+                        case 3: {
+                                message.deprecated = reader.bool();
+                                break;
+                            }
+                        case 999: {
+                                if (!(message.uninterpretedOption && message.uninterpretedOption.length))
+                                    message.uninterpretedOption = [];
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -37594,6 +39961,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for EnumOptions
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.EnumOptions
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                EnumOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.EnumOptions";
+                };
+    
                 return EnumOptions;
             })();
     
@@ -37702,14 +40084,16 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.deprecated = reader.bool();
-                            break;
-                        case 999:
-                            if (!(message.uninterpretedOption && message.uninterpretedOption.length))
-                                message.uninterpretedOption = [];
-                            message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
-                            break;
+                        case 1: {
+                                message.deprecated = reader.bool();
+                                break;
+                            }
+                        case 999: {
+                                if (!(message.uninterpretedOption && message.uninterpretedOption.length))
+                                    message.uninterpretedOption = [];
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -37823,6 +40207,21 @@
                  */
                 EnumValueOptions.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for EnumValueOptions
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.EnumValueOptions
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                EnumValueOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.EnumValueOptions";
                 };
     
                 return EnumValueOptions;
@@ -37955,20 +40354,24 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 33:
-                            message.deprecated = reader.bool();
-                            break;
-                        case 999:
-                            if (!(message.uninterpretedOption && message.uninterpretedOption.length))
-                                message.uninterpretedOption = [];
-                            message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
-                            break;
-                        case 1049:
-                            message[".google.api.defaultHost"] = reader.string();
-                            break;
-                        case 1050:
-                            message[".google.api.oauthScopes"] = reader.string();
-                            break;
+                        case 33: {
+                                message.deprecated = reader.bool();
+                                break;
+                            }
+                        case 999: {
+                                if (!(message.uninterpretedOption && message.uninterpretedOption.length))
+                                    message.uninterpretedOption = [];
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 1049: {
+                                message[".google.api.defaultHost"] = reader.string();
+                                break;
+                            }
+                        case 1050: {
+                                message[".google.api.oauthScopes"] = reader.string();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -38099,6 +40502,21 @@
                  */
                 ServiceOptions.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for ServiceOptions
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.ServiceOptions
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ServiceOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.ServiceOptions";
                 };
     
                 return ServiceOptions;
@@ -38244,25 +40662,30 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 33:
-                            message.deprecated = reader.bool();
-                            break;
-                        case 34:
-                            message.idempotencyLevel = reader.int32();
-                            break;
-                        case 999:
-                            if (!(message.uninterpretedOption && message.uninterpretedOption.length))
-                                message.uninterpretedOption = [];
-                            message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
-                            break;
-                        case 72295728:
-                            message[".google.api.http"] = $root.google.api.HttpRule.decode(reader, reader.uint32());
-                            break;
-                        case 1051:
-                            if (!(message[".google.api.methodSignature"] && message[".google.api.methodSignature"].length))
-                                message[".google.api.methodSignature"] = [];
-                            message[".google.api.methodSignature"].push(reader.string());
-                            break;
+                        case 33: {
+                                message.deprecated = reader.bool();
+                                break;
+                            }
+                        case 34: {
+                                message.idempotencyLevel = reader.int32();
+                                break;
+                            }
+                        case 999: {
+                                if (!(message.uninterpretedOption && message.uninterpretedOption.length))
+                                    message.uninterpretedOption = [];
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 72295728: {
+                                message[".google.api.http"] = $root.google.api.HttpRule.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 1051: {
+                                if (!(message[".google.api.methodSignature"] && message[".google.api.methodSignature"].length))
+                                    message[".google.api.methodSignature"] = [];
+                                message[".google.api.methodSignature"].push(reader.string());
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -38437,6 +40860,21 @@
                  */
                 MethodOptions.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for MethodOptions
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.MethodOptions
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                MethodOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.MethodOptions";
                 };
     
                 /**
@@ -38618,29 +41056,36 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 2:
-                            if (!(message.name && message.name.length))
-                                message.name = [];
-                            message.name.push($root.google.protobuf.UninterpretedOption.NamePart.decode(reader, reader.uint32()));
-                            break;
-                        case 3:
-                            message.identifierValue = reader.string();
-                            break;
-                        case 4:
-                            message.positiveIntValue = reader.uint64();
-                            break;
-                        case 5:
-                            message.negativeIntValue = reader.int64();
-                            break;
-                        case 6:
-                            message.doubleValue = reader.double();
-                            break;
-                        case 7:
-                            message.stringValue = reader.bytes();
-                            break;
-                        case 8:
-                            message.aggregateValue = reader.string();
-                            break;
+                        case 2: {
+                                if (!(message.name && message.name.length))
+                                    message.name = [];
+                                message.name.push($root.google.protobuf.UninterpretedOption.NamePart.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 3: {
+                                message.identifierValue = reader.string();
+                                break;
+                            }
+                        case 4: {
+                                message.positiveIntValue = reader.uint64();
+                                break;
+                            }
+                        case 5: {
+                                message.negativeIntValue = reader.int64();
+                                break;
+                            }
+                        case 6: {
+                                message.doubleValue = reader.double();
+                                break;
+                            }
+                        case 7: {
+                                message.stringValue = reader.bytes();
+                                break;
+                            }
+                        case 8: {
+                                message.aggregateValue = reader.string();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -38753,7 +41198,7 @@
                     if (object.stringValue != null)
                         if (typeof object.stringValue === "string")
                             $util.base64.decode(object.stringValue, message.stringValue = $util.newBuffer($util.base64.length(object.stringValue)), 0);
-                        else if (object.stringValue.length)
+                        else if (object.stringValue.length >= 0)
                             message.stringValue = object.stringValue;
                     if (object.aggregateValue != null)
                         message.aggregateValue = String(object.aggregateValue);
@@ -38832,6 +41277,21 @@
                  */
                 UninterpretedOption.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for UninterpretedOption
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.UninterpretedOption
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                UninterpretedOption.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.UninterpretedOption";
                 };
     
                 UninterpretedOption.NamePart = (function() {
@@ -38935,12 +41395,14 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.namePart = reader.string();
-                                break;
-                            case 2:
-                                message.isExtension = reader.bool();
-                                break;
+                            case 1: {
+                                    message.namePart = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.isExtension = reader.bool();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -39039,6 +41501,21 @@
                      */
                     NamePart.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for NamePart
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.UninterpretedOption.NamePart
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    NamePart.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.UninterpretedOption.NamePart";
                     };
     
                     return NamePart;
@@ -39141,11 +41618,12 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            if (!(message.location && message.location.length))
-                                message.location = [];
-                            message.location.push($root.google.protobuf.SourceCodeInfo.Location.decode(reader, reader.uint32()));
-                            break;
+                        case 1: {
+                                if (!(message.location && message.location.length))
+                                    message.location = [];
+                                message.location.push($root.google.protobuf.SourceCodeInfo.Location.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -39250,6 +41728,21 @@
                  */
                 SourceCodeInfo.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for SourceCodeInfo
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.SourceCodeInfo
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                SourceCodeInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.SourceCodeInfo";
                 };
     
                 SourceCodeInfo.Location = (function() {
@@ -39400,37 +41893,42 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                if (!(message.path && message.path.length))
-                                    message.path = [];
-                                if ((tag & 7) === 2) {
-                                    var end2 = reader.uint32() + reader.pos;
-                                    while (reader.pos < end2)
+                            case 1: {
+                                    if (!(message.path && message.path.length))
+                                        message.path = [];
+                                    if ((tag & 7) === 2) {
+                                        var end2 = reader.uint32() + reader.pos;
+                                        while (reader.pos < end2)
+                                            message.path.push(reader.int32());
+                                    } else
                                         message.path.push(reader.int32());
-                                } else
-                                    message.path.push(reader.int32());
-                                break;
-                            case 2:
-                                if (!(message.span && message.span.length))
-                                    message.span = [];
-                                if ((tag & 7) === 2) {
-                                    var end2 = reader.uint32() + reader.pos;
-                                    while (reader.pos < end2)
+                                    break;
+                                }
+                            case 2: {
+                                    if (!(message.span && message.span.length))
+                                        message.span = [];
+                                    if ((tag & 7) === 2) {
+                                        var end2 = reader.uint32() + reader.pos;
+                                        while (reader.pos < end2)
+                                            message.span.push(reader.int32());
+                                    } else
                                         message.span.push(reader.int32());
-                                } else
-                                    message.span.push(reader.int32());
-                                break;
-                            case 3:
-                                message.leadingComments = reader.string();
-                                break;
-                            case 4:
-                                message.trailingComments = reader.string();
-                                break;
-                            case 6:
-                                if (!(message.leadingDetachedComments && message.leadingDetachedComments.length))
-                                    message.leadingDetachedComments = [];
-                                message.leadingDetachedComments.push(reader.string());
-                                break;
+                                    break;
+                                }
+                            case 3: {
+                                    message.leadingComments = reader.string();
+                                    break;
+                                }
+                            case 4: {
+                                    message.trailingComments = reader.string();
+                                    break;
+                                }
+                            case 6: {
+                                    if (!(message.leadingDetachedComments && message.leadingDetachedComments.length))
+                                        message.leadingDetachedComments = [];
+                                    message.leadingDetachedComments.push(reader.string());
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -39591,6 +42089,21 @@
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
+                    /**
+                     * Gets the default type url for Location
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.SourceCodeInfo.Location
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    Location.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.SourceCodeInfo.Location";
+                    };
+    
                     return Location;
                 })();
     
@@ -39691,11 +42204,12 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            if (!(message.annotation && message.annotation.length))
-                                message.annotation = [];
-                            message.annotation.push($root.google.protobuf.GeneratedCodeInfo.Annotation.decode(reader, reader.uint32()));
-                            break;
+                        case 1: {
+                                if (!(message.annotation && message.annotation.length))
+                                    message.annotation = [];
+                                message.annotation.push($root.google.protobuf.GeneratedCodeInfo.Annotation.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -39802,6 +42316,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for GeneratedCodeInfo
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.GeneratedCodeInfo
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                GeneratedCodeInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.GeneratedCodeInfo";
+                };
+    
                 GeneratedCodeInfo.Annotation = (function() {
     
                     /**
@@ -39812,6 +42341,7 @@
                      * @property {string|null} [sourceFile] Annotation sourceFile
                      * @property {number|null} [begin] Annotation begin
                      * @property {number|null} [end] Annotation end
+                     * @property {google.protobuf.GeneratedCodeInfo.Annotation.Semantic|null} [semantic] Annotation semantic
                      */
     
                     /**
@@ -39863,6 +42393,14 @@
                     Annotation.prototype.end = 0;
     
                     /**
+                     * Annotation semantic.
+                     * @member {google.protobuf.GeneratedCodeInfo.Annotation.Semantic} semantic
+                     * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                     * @instance
+                     */
+                    Annotation.prototype.semantic = 0;
+    
+                    /**
                      * Creates a new Annotation instance using the specified properties.
                      * @function create
                      * @memberof google.protobuf.GeneratedCodeInfo.Annotation
@@ -39898,6 +42436,8 @@
                             writer.uint32(/* id 3, wireType 0 =*/24).int32(message.begin);
                         if (message.end != null && Object.hasOwnProperty.call(message, "end"))
                             writer.uint32(/* id 4, wireType 0 =*/32).int32(message.end);
+                        if (message.semantic != null && Object.hasOwnProperty.call(message, "semantic"))
+                            writer.uint32(/* id 5, wireType 0 =*/40).int32(message.semantic);
                         return writer;
                     };
     
@@ -39932,25 +42472,33 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                if (!(message.path && message.path.length))
-                                    message.path = [];
-                                if ((tag & 7) === 2) {
-                                    var end2 = reader.uint32() + reader.pos;
-                                    while (reader.pos < end2)
+                            case 1: {
+                                    if (!(message.path && message.path.length))
+                                        message.path = [];
+                                    if ((tag & 7) === 2) {
+                                        var end2 = reader.uint32() + reader.pos;
+                                        while (reader.pos < end2)
+                                            message.path.push(reader.int32());
+                                    } else
                                         message.path.push(reader.int32());
-                                } else
-                                    message.path.push(reader.int32());
-                                break;
-                            case 2:
-                                message.sourceFile = reader.string();
-                                break;
-                            case 3:
-                                message.begin = reader.int32();
-                                break;
-                            case 4:
-                                message.end = reader.int32();
-                                break;
+                                    break;
+                                }
+                            case 2: {
+                                    message.sourceFile = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.begin = reader.int32();
+                                    break;
+                                }
+                            case 4: {
+                                    message.end = reader.int32();
+                                    break;
+                                }
+                            case 5: {
+                                    message.semantic = reader.int32();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -40002,6 +42550,15 @@
                         if (message.end != null && message.hasOwnProperty("end"))
                             if (!$util.isInteger(message.end))
                                 return "end: integer expected";
+                        if (message.semantic != null && message.hasOwnProperty("semantic"))
+                            switch (message.semantic) {
+                            default:
+                                return "semantic: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            }
                         return null;
                     };
     
@@ -40030,6 +42587,20 @@
                             message.begin = object.begin | 0;
                         if (object.end != null)
                             message.end = object.end | 0;
+                        switch (object.semantic) {
+                        case "NONE":
+                        case 0:
+                            message.semantic = 0;
+                            break;
+                        case "SET":
+                        case 1:
+                            message.semantic = 1;
+                            break;
+                        case "ALIAS":
+                        case 2:
+                            message.semantic = 2;
+                            break;
+                        }
                         return message;
                     };
     
@@ -40052,6 +42623,7 @@
                             object.sourceFile = "";
                             object.begin = 0;
                             object.end = 0;
+                            object.semantic = options.enums === String ? "NONE" : 0;
                         }
                         if (message.path && message.path.length) {
                             object.path = [];
@@ -40064,6 +42636,8 @@
                             object.begin = message.begin;
                         if (message.end != null && message.hasOwnProperty("end"))
                             object.end = message.end;
+                        if (message.semantic != null && message.hasOwnProperty("semantic"))
+                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
                         return object;
                     };
     
@@ -40077,6 +42651,37 @@
                     Annotation.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
+    
+                    /**
+                     * Gets the default type url for Annotation
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    Annotation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.GeneratedCodeInfo.Annotation";
+                    };
+    
+                    /**
+                     * Semantic enum.
+                     * @name google.protobuf.GeneratedCodeInfo.Annotation.Semantic
+                     * @enum {number}
+                     * @property {number} NONE=0 NONE value
+                     * @property {number} SET=1 SET value
+                     * @property {number} ALIAS=2 ALIAS value
+                     */
+                    Annotation.Semantic = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "NONE"] = 0;
+                        values[valuesById[1] = "SET"] = 1;
+                        values[valuesById[2] = "ALIAS"] = 2;
+                        return values;
+                    })();
     
                     return Annotation;
                 })();
@@ -40187,12 +42792,14 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.type_url = reader.string();
-                            break;
-                        case 2:
-                            message.value = reader.bytes();
-                            break;
+                        case 1: {
+                                message.type_url = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.value = reader.bytes();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -40254,7 +42861,7 @@
                     if (object.value != null)
                         if (typeof object.value === "string")
                             $util.base64.decode(object.value, message.value = $util.newBuffer($util.base64.length(object.value)), 0);
-                        else if (object.value.length)
+                        else if (object.value.length >= 0)
                             message.value = object.value;
                     return message;
                 };
@@ -40298,6 +42905,21 @@
                  */
                 Any.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Any
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Any.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Any";
                 };
     
                 return Any;
@@ -40399,28 +43021,29 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            if (message.fields === $util.emptyObject)
-                                message.fields = {};
-                            var end2 = reader.uint32() + reader.pos;
-                            key = "";
-                            value = null;
-                            while (reader.pos < end2) {
-                                var tag2 = reader.uint32();
-                                switch (tag2 >>> 3) {
-                                case 1:
-                                    key = reader.string();
-                                    break;
-                                case 2:
-                                    value = $root.google.protobuf.Value.decode(reader, reader.uint32());
-                                    break;
-                                default:
-                                    reader.skipType(tag2 & 7);
-                                    break;
+                        case 1: {
+                                if (message.fields === $util.emptyObject)
+                                    message.fields = {};
+                                var end2 = reader.uint32() + reader.pos;
+                                key = "";
+                                value = null;
+                                while (reader.pos < end2) {
+                                    var tag2 = reader.uint32();
+                                    switch (tag2 >>> 3) {
+                                    case 1:
+                                        key = reader.string();
+                                        break;
+                                    case 2:
+                                        value = $root.google.protobuf.Value.decode(reader, reader.uint32());
+                                        break;
+                                    default:
+                                        reader.skipType(tag2 & 7);
+                                        break;
+                                    }
                                 }
+                                message.fields[key] = value;
+                                break;
                             }
-                            message.fields[key] = value;
-                            break;
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -40527,6 +43150,21 @@
                  */
                 Struct.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Struct
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Struct
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Struct.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Struct";
                 };
     
                 return Struct;
@@ -40693,24 +43331,30 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.nullValue = reader.int32();
-                            break;
-                        case 2:
-                            message.numberValue = reader.double();
-                            break;
-                        case 3:
-                            message.stringValue = reader.string();
-                            break;
-                        case 4:
-                            message.boolValue = reader.bool();
-                            break;
-                        case 5:
-                            message.structValue = $root.google.protobuf.Struct.decode(reader, reader.uint32());
-                            break;
-                        case 6:
-                            message.listValue = $root.google.protobuf.ListValue.decode(reader, reader.uint32());
-                            break;
+                        case 1: {
+                                message.nullValue = reader.int32();
+                                break;
+                            }
+                        case 2: {
+                                message.numberValue = reader.double();
+                                break;
+                            }
+                        case 3: {
+                                message.stringValue = reader.string();
+                                break;
+                            }
+                        case 4: {
+                                message.boolValue = reader.bool();
+                                break;
+                            }
+                        case 5: {
+                                message.structValue = $root.google.protobuf.Struct.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 6: {
+                                message.listValue = $root.google.protobuf.ListValue.decode(reader, reader.uint32());
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -40894,6 +43538,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for Value
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Value
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Value.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Value";
+                };
+    
                 return Value;
             })();
     
@@ -41003,11 +43662,12 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            if (!(message.values && message.values.length))
-                                message.values = [];
-                            message.values.push($root.google.protobuf.Value.decode(reader, reader.uint32()));
-                            break;
+                        case 1: {
+                                if (!(message.values && message.values.length))
+                                    message.values = [];
+                                message.values.push($root.google.protobuf.Value.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -41112,6 +43772,21 @@
                  */
                 ListValue.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for ListValue
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.ListValue
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ListValue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.ListValue";
                 };
     
                 return ListValue;
@@ -41220,12 +43895,14 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.seconds = reader.int64();
-                            break;
-                        case 2:
-                            message.nanos = reader.int32();
-                            break;
+                        case 1: {
+                                message.seconds = reader.int64();
+                                break;
+                            }
+                        case 2: {
+                                message.nanos = reader.int32();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -41338,6 +44015,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for Duration
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Duration
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Duration.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Duration";
+                };
+    
                 return Duration;
             })();
     
@@ -41444,12 +44136,14 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.seconds = reader.int64();
-                            break;
-                        case 2:
-                            message.nanos = reader.int32();
-                            break;
+                        case 1: {
+                                message.seconds = reader.int64();
+                                break;
+                            }
+                        case 2: {
+                                message.nanos = reader.int32();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -41560,6 +44254,21 @@
                  */
                 Timestamp.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Timestamp
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Timestamp.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Timestamp";
                 };
     
                 return Timestamp;
@@ -41693,17 +44402,20 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.code = reader.int32();
-                            break;
-                        case 2:
-                            message.message = reader.string();
-                            break;
-                        case 3:
-                            if (!(message.details && message.details.length))
-                                message.details = [];
-                            message.details.push($root.google.protobuf.Any.decode(reader, reader.uint32()));
-                            break;
+                        case 1: {
+                                message.code = reader.int32();
+                                break;
+                            }
+                        case 2: {
+                                message.message = reader.string();
+                                break;
+                            }
+                        case 3: {
+                                if (!(message.details && message.details.length))
+                                    message.details = [];
+                                message.details.push($root.google.protobuf.Any.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -41826,6 +44538,21 @@
                  */
                 Status.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Status
+                 * @function getTypeUrl
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Status.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.rpc.Status";
                 };
     
                 return Status;
