@@ -167,9 +167,10 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.serializedSchema = reader.bytes();
-                                        break;
+                                    case 1: {
+                                            message.serializedSchema = reader.bytes();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -226,7 +227,7 @@
                                 if (object.serializedSchema != null)
                                     if (typeof object.serializedSchema === "string")
                                         $util.base64.decode(object.serializedSchema, message.serializedSchema = $util.newBuffer($util.base64.length(object.serializedSchema)), 0);
-                                    else if (object.serializedSchema.length)
+                                    else if (object.serializedSchema.length >= 0)
                                         message.serializedSchema = object.serializedSchema;
                                 return message;
                             };
@@ -266,6 +267,21 @@
                              */
                             ArrowSchema.prototype.toJSON = function toJSON() {
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ArrowSchema
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.storage.v1.ArrowSchema
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ArrowSchema.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.storage.v1.ArrowSchema";
                             };
     
                             return ArrowSchema;
@@ -374,12 +390,14 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.serializedRecordBatch = reader.bytes();
-                                        break;
-                                    case 2:
-                                        message.rowCount = reader.int64();
-                                        break;
+                                    case 1: {
+                                            message.serializedRecordBatch = reader.bytes();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.rowCount = reader.int64();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -439,7 +457,7 @@
                                 if (object.serializedRecordBatch != null)
                                     if (typeof object.serializedRecordBatch === "string")
                                         $util.base64.decode(object.serializedRecordBatch, message.serializedRecordBatch = $util.newBuffer($util.base64.length(object.serializedRecordBatch)), 0);
-                                    else if (object.serializedRecordBatch.length)
+                                    else if (object.serializedRecordBatch.length >= 0)
                                         message.serializedRecordBatch = object.serializedRecordBatch;
                                 if (object.rowCount != null)
                                     if ($util.Long)
@@ -499,6 +517,21 @@
                              */
                             ArrowRecordBatch.prototype.toJSON = function toJSON() {
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ArrowRecordBatch
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.storage.v1.ArrowRecordBatch
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ArrowRecordBatch.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.storage.v1.ArrowRecordBatch";
                             };
     
                             return ArrowRecordBatch;
@@ -596,9 +629,10 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 2:
-                                        message.bufferCompression = reader.int32();
-                                        break;
+                                    case 2: {
+                                            message.bufferCompression = reader.int32();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -704,6 +738,21 @@
                              */
                             ArrowSerializationOptions.prototype.toJSON = function toJSON() {
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ArrowSerializationOptions
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.storage.v1.ArrowSerializationOptions
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ArrowSerializationOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.storage.v1.ArrowSerializationOptions";
                             };
     
                             /**
@@ -817,9 +866,10 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.schema = reader.string();
-                                        break;
+                                    case 1: {
+                                            message.schema = reader.string();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -907,6 +957,21 @@
                              */
                             AvroSchema.prototype.toJSON = function toJSON() {
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for AvroSchema
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.storage.v1.AvroSchema
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            AvroSchema.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.storage.v1.AvroSchema";
                             };
     
                             return AvroSchema;
@@ -1015,12 +1080,14 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.serializedBinaryRows = reader.bytes();
-                                        break;
-                                    case 2:
-                                        message.rowCount = reader.int64();
-                                        break;
+                                    case 1: {
+                                            message.serializedBinaryRows = reader.bytes();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.rowCount = reader.int64();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -1080,7 +1147,7 @@
                                 if (object.serializedBinaryRows != null)
                                     if (typeof object.serializedBinaryRows === "string")
                                         $util.base64.decode(object.serializedBinaryRows, message.serializedBinaryRows = $util.newBuffer($util.base64.length(object.serializedBinaryRows)), 0);
-                                    else if (object.serializedBinaryRows.length)
+                                    else if (object.serializedBinaryRows.length >= 0)
                                         message.serializedBinaryRows = object.serializedBinaryRows;
                                 if (object.rowCount != null)
                                     if ($util.Long)
@@ -1140,6 +1207,21 @@
                              */
                             AvroRows.prototype.toJSON = function toJSON() {
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for AvroRows
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.storage.v1.AvroRows
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            AvroRows.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.storage.v1.AvroRows";
                             };
     
                             return AvroRows;
@@ -1237,9 +1319,10 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.enableDisplayNameAttribute = reader.bool();
-                                        break;
+                                    case 1: {
+                                            message.enableDisplayNameAttribute = reader.bool();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -1327,6 +1410,21 @@
                              */
                             AvroSerializationOptions.prototype.toJSON = function toJSON() {
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for AvroSerializationOptions
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.storage.v1.AvroSerializationOptions
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            AvroSerializationOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.storage.v1.AvroSerializationOptions";
                             };
     
                             return AvroSerializationOptions;
@@ -1424,9 +1522,10 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.protoDescriptor = $root.google.protobuf.DescriptorProto.decode(reader, reader.uint32());
-                                        break;
+                                    case 1: {
+                                            message.protoDescriptor = $root.google.protobuf.DescriptorProto.decode(reader, reader.uint32());
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -1519,6 +1618,21 @@
                              */
                             ProtoSchema.prototype.toJSON = function toJSON() {
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ProtoSchema
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.storage.v1.ProtoSchema
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ProtoSchema.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.storage.v1.ProtoSchema";
                             };
     
                             return ProtoSchema;
@@ -1618,11 +1732,12 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        if (!(message.serializedRows && message.serializedRows.length))
-                                            message.serializedRows = [];
-                                        message.serializedRows.push(reader.bytes());
-                                        break;
+                                    case 1: {
+                                            if (!(message.serializedRows && message.serializedRows.length))
+                                                message.serializedRows = [];
+                                            message.serializedRows.push(reader.bytes());
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -1687,7 +1802,7 @@
                                     for (var i = 0; i < object.serializedRows.length; ++i)
                                         if (typeof object.serializedRows[i] === "string")
                                             $util.base64.decode(object.serializedRows[i], message.serializedRows[i] = $util.newBuffer($util.base64.length(object.serializedRows[i])), 0);
-                                        else if (object.serializedRows[i].length)
+                                        else if (object.serializedRows[i].length >= 0)
                                             message.serializedRows[i] = object.serializedRows[i];
                                 }
                                 return message;
@@ -1727,6 +1842,21 @@
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                             };
     
+                            /**
+                             * Gets the default type url for ProtoRows
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.storage.v1.ProtoRows
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ProtoRows.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.storage.v1.ProtoRows";
+                            };
+    
                             return ProtoRows;
                         })();
     
@@ -1763,7 +1893,7 @@
                             };
     
                             /**
-                             * Callback as used by {@link google.cloud.bigquery.storage.v1.BigQueryRead#createReadSession}.
+                             * Callback as used by {@link google.cloud.bigquery.storage.v1.BigQueryRead|createReadSession}.
                              * @memberof google.cloud.bigquery.storage.v1.BigQueryRead
                              * @typedef CreateReadSessionCallback
                              * @type {function}
@@ -1796,7 +1926,7 @@
                              */
     
                             /**
-                             * Callback as used by {@link google.cloud.bigquery.storage.v1.BigQueryRead#readRows}.
+                             * Callback as used by {@link google.cloud.bigquery.storage.v1.BigQueryRead|readRows}.
                              * @memberof google.cloud.bigquery.storage.v1.BigQueryRead
                              * @typedef ReadRowsCallback
                              * @type {function}
@@ -1829,7 +1959,7 @@
                              */
     
                             /**
-                             * Callback as used by {@link google.cloud.bigquery.storage.v1.BigQueryRead#splitReadStream}.
+                             * Callback as used by {@link google.cloud.bigquery.storage.v1.BigQueryRead|splitReadStream}.
                              * @memberof google.cloud.bigquery.storage.v1.BigQueryRead
                              * @typedef SplitReadStreamCallback
                              * @type {function}
@@ -1897,7 +2027,7 @@
                             };
     
                             /**
-                             * Callback as used by {@link google.cloud.bigquery.storage.v1.BigQueryWrite#createWriteStream}.
+                             * Callback as used by {@link google.cloud.bigquery.storage.v1.BigQueryWrite|createWriteStream}.
                              * @memberof google.cloud.bigquery.storage.v1.BigQueryWrite
                              * @typedef CreateWriteStreamCallback
                              * @type {function}
@@ -1930,7 +2060,7 @@
                              */
     
                             /**
-                             * Callback as used by {@link google.cloud.bigquery.storage.v1.BigQueryWrite#appendRows}.
+                             * Callback as used by {@link google.cloud.bigquery.storage.v1.BigQueryWrite|appendRows}.
                              * @memberof google.cloud.bigquery.storage.v1.BigQueryWrite
                              * @typedef AppendRowsCallback
                              * @type {function}
@@ -1963,7 +2093,7 @@
                              */
     
                             /**
-                             * Callback as used by {@link google.cloud.bigquery.storage.v1.BigQueryWrite#getWriteStream}.
+                             * Callback as used by {@link google.cloud.bigquery.storage.v1.BigQueryWrite|getWriteStream}.
                              * @memberof google.cloud.bigquery.storage.v1.BigQueryWrite
                              * @typedef GetWriteStreamCallback
                              * @type {function}
@@ -1996,7 +2126,7 @@
                              */
     
                             /**
-                             * Callback as used by {@link google.cloud.bigquery.storage.v1.BigQueryWrite#finalizeWriteStream}.
+                             * Callback as used by {@link google.cloud.bigquery.storage.v1.BigQueryWrite|finalizeWriteStream}.
                              * @memberof google.cloud.bigquery.storage.v1.BigQueryWrite
                              * @typedef FinalizeWriteStreamCallback
                              * @type {function}
@@ -2029,7 +2159,7 @@
                              */
     
                             /**
-                             * Callback as used by {@link google.cloud.bigquery.storage.v1.BigQueryWrite#batchCommitWriteStreams}.
+                             * Callback as used by {@link google.cloud.bigquery.storage.v1.BigQueryWrite|batchCommitWriteStreams}.
                              * @memberof google.cloud.bigquery.storage.v1.BigQueryWrite
                              * @typedef BatchCommitWriteStreamsCallback
                              * @type {function}
@@ -2062,7 +2192,7 @@
                              */
     
                             /**
-                             * Callback as used by {@link google.cloud.bigquery.storage.v1.BigQueryWrite#flushRows}.
+                             * Callback as used by {@link google.cloud.bigquery.storage.v1.BigQueryWrite|flushRows}.
                              * @memberof google.cloud.bigquery.storage.v1.BigQueryWrite
                              * @typedef FlushRowsCallback
                              * @type {function}
@@ -2222,18 +2352,22 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.parent = reader.string();
-                                        break;
-                                    case 2:
-                                        message.readSession = $root.google.cloud.bigquery.storage.v1.ReadSession.decode(reader, reader.uint32());
-                                        break;
-                                    case 3:
-                                        message.maxStreamCount = reader.int32();
-                                        break;
-                                    case 4:
-                                        message.preferredMinStreamCount = reader.int32();
-                                        break;
+                                    case 1: {
+                                            message.parent = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.readSession = $root.google.cloud.bigquery.storage.v1.ReadSession.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.maxStreamCount = reader.int32();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.preferredMinStreamCount = reader.int32();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -2353,6 +2487,21 @@
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                             };
     
+                            /**
+                             * Gets the default type url for CreateReadSessionRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.storage.v1.CreateReadSessionRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            CreateReadSessionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.storage.v1.CreateReadSessionRequest";
+                            };
+    
                             return CreateReadSessionRequest;
                         })();
     
@@ -2459,12 +2608,14 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.readStream = reader.string();
-                                        break;
-                                    case 2:
-                                        message.offset = reader.int64();
-                                        break;
+                                    case 1: {
+                                            message.readStream = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.offset = reader.int64();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -2577,6 +2728,21 @@
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                             };
     
+                            /**
+                             * Gets the default type url for ReadRowsRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.storage.v1.ReadRowsRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ReadRowsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.storage.v1.ReadRowsRequest";
+                            };
+    
                             return ReadRowsRequest;
                         })();
     
@@ -2672,9 +2838,10 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.throttlePercent = reader.int32();
-                                        break;
+                                    case 1: {
+                                            message.throttlePercent = reader.int32();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -2762,6 +2929,21 @@
                              */
                             ThrottleState.prototype.toJSON = function toJSON() {
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ThrottleState
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.storage.v1.ThrottleState
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ThrottleState.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.storage.v1.ThrottleState";
                             };
     
                             return ThrottleState;
@@ -2859,9 +3041,10 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 2:
-                                        message.progress = $root.google.cloud.bigquery.storage.v1.StreamStats.Progress.decode(reader, reader.uint32());
-                                        break;
+                                    case 2: {
+                                            message.progress = $root.google.cloud.bigquery.storage.v1.StreamStats.Progress.decode(reader, reader.uint32());
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -2954,6 +3137,21 @@
                              */
                             StreamStats.prototype.toJSON = function toJSON() {
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for StreamStats
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.storage.v1.StreamStats
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            StreamStats.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.storage.v1.StreamStats";
                             };
     
                             StreamStats.Progress = (function() {
@@ -3059,12 +3257,14 @@
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
                                         switch (tag >>> 3) {
-                                        case 1:
-                                            message.atResponseStart = reader.double();
-                                            break;
-                                        case 2:
-                                            message.atResponseEnd = reader.double();
-                                            break;
+                                        case 1: {
+                                                message.atResponseStart = reader.double();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.atResponseEnd = reader.double();
+                                                break;
+                                            }
                                         default:
                                             reader.skipType(tag & 7);
                                             break;
@@ -3161,6 +3361,21 @@
                                  */
                                 Progress.prototype.toJSON = function toJSON() {
                                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for Progress
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.bigquery.storage.v1.StreamStats.Progress
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                Progress.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.bigquery.storage.v1.StreamStats.Progress";
                                 };
     
                                 return Progress;
@@ -3352,27 +3567,34 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 3:
-                                        message.avroRows = $root.google.cloud.bigquery.storage.v1.AvroRows.decode(reader, reader.uint32());
-                                        break;
-                                    case 4:
-                                        message.arrowRecordBatch = $root.google.cloud.bigquery.storage.v1.ArrowRecordBatch.decode(reader, reader.uint32());
-                                        break;
-                                    case 6:
-                                        message.rowCount = reader.int64();
-                                        break;
-                                    case 2:
-                                        message.stats = $root.google.cloud.bigquery.storage.v1.StreamStats.decode(reader, reader.uint32());
-                                        break;
-                                    case 5:
-                                        message.throttleState = $root.google.cloud.bigquery.storage.v1.ThrottleState.decode(reader, reader.uint32());
-                                        break;
-                                    case 7:
-                                        message.avroSchema = $root.google.cloud.bigquery.storage.v1.AvroSchema.decode(reader, reader.uint32());
-                                        break;
-                                    case 8:
-                                        message.arrowSchema = $root.google.cloud.bigquery.storage.v1.ArrowSchema.decode(reader, reader.uint32());
-                                        break;
+                                    case 3: {
+                                            message.avroRows = $root.google.cloud.bigquery.storage.v1.AvroRows.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.arrowRecordBatch = $root.google.cloud.bigquery.storage.v1.ArrowRecordBatch.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.rowCount = reader.int64();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.stats = $root.google.cloud.bigquery.storage.v1.StreamStats.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.throttleState = $root.google.cloud.bigquery.storage.v1.ThrottleState.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.avroSchema = $root.google.cloud.bigquery.storage.v1.AvroSchema.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 8: {
+                                            message.arrowSchema = $root.google.cloud.bigquery.storage.v1.ArrowSchema.decode(reader, reader.uint32());
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -3580,6 +3802,21 @@
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                             };
     
+                            /**
+                             * Gets the default type url for ReadRowsResponse
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.storage.v1.ReadRowsResponse
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ReadRowsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.storage.v1.ReadRowsResponse";
+                            };
+    
                             return ReadRowsResponse;
                         })();
     
@@ -3686,12 +3923,14 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.name = reader.string();
-                                        break;
-                                    case 2:
-                                        message.fraction = reader.double();
-                                        break;
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.fraction = reader.double();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -3788,6 +4027,21 @@
                              */
                             SplitReadStreamRequest.prototype.toJSON = function toJSON() {
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SplitReadStreamRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.storage.v1.SplitReadStreamRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SplitReadStreamRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.storage.v1.SplitReadStreamRequest";
                             };
     
                             return SplitReadStreamRequest;
@@ -3896,12 +4150,14 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.primaryStream = $root.google.cloud.bigquery.storage.v1.ReadStream.decode(reader, reader.uint32());
-                                        break;
-                                    case 2:
-                                        message.remainderStream = $root.google.cloud.bigquery.storage.v1.ReadStream.decode(reader, reader.uint32());
-                                        break;
+                                    case 1: {
+                                            message.primaryStream = $root.google.cloud.bigquery.storage.v1.ReadStream.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.remainderStream = $root.google.cloud.bigquery.storage.v1.ReadStream.decode(reader, reader.uint32());
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -4010,6 +4266,21 @@
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                             };
     
+                            /**
+                             * Gets the default type url for SplitReadStreamResponse
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.storage.v1.SplitReadStreamResponse
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SplitReadStreamResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.storage.v1.SplitReadStreamResponse";
+                            };
+    
                             return SplitReadStreamResponse;
                         })();
     
@@ -4116,12 +4387,14 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.parent = reader.string();
-                                        break;
-                                    case 2:
-                                        message.writeStream = $root.google.cloud.bigquery.storage.v1.WriteStream.decode(reader, reader.uint32());
-                                        break;
+                                    case 1: {
+                                            message.parent = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.writeStream = $root.google.cloud.bigquery.storage.v1.WriteStream.decode(reader, reader.uint32());
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -4223,6 +4496,21 @@
                              */
                             CreateWriteStreamRequest.prototype.toJSON = function toJSON() {
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for CreateWriteStreamRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.storage.v1.CreateWriteStreamRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            CreateWriteStreamRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.storage.v1.CreateWriteStreamRequest";
                             };
     
                             return CreateWriteStreamRequest;
@@ -4367,18 +4655,22 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.writeStream = reader.string();
-                                        break;
-                                    case 2:
-                                        message.offset = $root.google.protobuf.Int64Value.decode(reader, reader.uint32());
-                                        break;
-                                    case 4:
-                                        message.protoRows = $root.google.cloud.bigquery.storage.v1.AppendRowsRequest.ProtoData.decode(reader, reader.uint32());
-                                        break;
-                                    case 6:
-                                        message.traceId = reader.string();
-                                        break;
+                                    case 1: {
+                                            message.writeStream = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.offset = $root.google.protobuf.Int64Value.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.protoRows = $root.google.cloud.bigquery.storage.v1.AppendRowsRequest.ProtoData.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.traceId = reader.string();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -4509,6 +4801,21 @@
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                             };
     
+                            /**
+                             * Gets the default type url for AppendRowsRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.storage.v1.AppendRowsRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            AppendRowsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.storage.v1.AppendRowsRequest";
+                            };
+    
                             AppendRowsRequest.ProtoData = (function() {
     
                                 /**
@@ -4612,12 +4919,14 @@
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
                                         switch (tag >>> 3) {
-                                        case 1:
-                                            message.writerSchema = $root.google.cloud.bigquery.storage.v1.ProtoSchema.decode(reader, reader.uint32());
-                                            break;
-                                        case 2:
-                                            message.rows = $root.google.cloud.bigquery.storage.v1.ProtoRows.decode(reader, reader.uint32());
-                                            break;
+                                        case 1: {
+                                                message.writerSchema = $root.google.cloud.bigquery.storage.v1.ProtoSchema.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.rows = $root.google.cloud.bigquery.storage.v1.ProtoRows.decode(reader, reader.uint32());
+                                                break;
+                                            }
                                         default:
                                             reader.skipType(tag & 7);
                                             break;
@@ -4724,6 +5033,21 @@
                                  */
                                 ProtoData.prototype.toJSON = function toJSON() {
                                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for ProtoData
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.bigquery.storage.v1.AppendRowsRequest.ProtoData
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                ProtoData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.bigquery.storage.v1.AppendRowsRequest.ProtoData";
                                 };
     
                                 return ProtoData;
@@ -4884,23 +5208,28 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.appendResult = $root.google.cloud.bigquery.storage.v1.AppendRowsResponse.AppendResult.decode(reader, reader.uint32());
-                                        break;
-                                    case 2:
-                                        message.error = $root.google.rpc.Status.decode(reader, reader.uint32());
-                                        break;
-                                    case 3:
-                                        message.updatedSchema = $root.google.cloud.bigquery.storage.v1.TableSchema.decode(reader, reader.uint32());
-                                        break;
-                                    case 4:
-                                        if (!(message.rowErrors && message.rowErrors.length))
-                                            message.rowErrors = [];
-                                        message.rowErrors.push($root.google.cloud.bigquery.storage.v1.RowError.decode(reader, reader.uint32()));
-                                        break;
-                                    case 5:
-                                        message.writeStream = reader.string();
-                                        break;
+                                    case 1: {
+                                            message.appendResult = $root.google.cloud.bigquery.storage.v1.AppendRowsResponse.AppendResult.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.error = $root.google.rpc.Status.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.updatedSchema = $root.google.cloud.bigquery.storage.v1.TableSchema.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 4: {
+                                            if (!(message.rowErrors && message.rowErrors.length))
+                                                message.rowErrors = [];
+                                            message.rowErrors.push($root.google.cloud.bigquery.storage.v1.RowError.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.writeStream = reader.string();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -5069,6 +5398,21 @@
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                             };
     
+                            /**
+                             * Gets the default type url for AppendRowsResponse
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.storage.v1.AppendRowsResponse
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            AppendRowsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.storage.v1.AppendRowsResponse";
+                            };
+    
                             AppendRowsResponse.AppendResult = (function() {
     
                                 /**
@@ -5161,9 +5505,10 @@
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
                                         switch (tag >>> 3) {
-                                        case 1:
-                                            message.offset = $root.google.protobuf.Int64Value.decode(reader, reader.uint32());
-                                            break;
+                                        case 1: {
+                                                message.offset = $root.google.protobuf.Int64Value.decode(reader, reader.uint32());
+                                                break;
+                                            }
                                         default:
                                             reader.skipType(tag & 7);
                                             break;
@@ -5256,6 +5601,21 @@
                                  */
                                 AppendResult.prototype.toJSON = function toJSON() {
                                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for AppendResult
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.bigquery.storage.v1.AppendRowsResponse.AppendResult
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                AppendResult.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.bigquery.storage.v1.AppendRowsResponse.AppendResult";
                                 };
     
                                 return AppendResult;
@@ -5356,9 +5716,10 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.name = reader.string();
-                                        break;
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -5446,6 +5807,21 @@
                              */
                             GetWriteStreamRequest.prototype.toJSON = function toJSON() {
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for GetWriteStreamRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.storage.v1.GetWriteStreamRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            GetWriteStreamRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.storage.v1.GetWriteStreamRequest";
                             };
     
                             return GetWriteStreamRequest;
@@ -5556,14 +5932,16 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.parent = reader.string();
-                                        break;
-                                    case 2:
-                                        if (!(message.writeStreams && message.writeStreams.length))
-                                            message.writeStreams = [];
-                                        message.writeStreams.push(reader.string());
-                                        break;
+                                    case 1: {
+                                            message.parent = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            if (!(message.writeStreams && message.writeStreams.length))
+                                                message.writeStreams = [];
+                                            message.writeStreams.push(reader.string());
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -5674,6 +6052,21 @@
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                             };
     
+                            /**
+                             * Gets the default type url for BatchCommitWriteStreamsRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.storage.v1.BatchCommitWriteStreamsRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            BatchCommitWriteStreamsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.storage.v1.BatchCommitWriteStreamsRequest";
+                            };
+    
                             return BatchCommitWriteStreamsRequest;
                         })();
     
@@ -5782,14 +6175,16 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.commitTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                        break;
-                                    case 2:
-                                        if (!(message.streamErrors && message.streamErrors.length))
-                                            message.streamErrors = [];
-                                        message.streamErrors.push($root.google.cloud.bigquery.storage.v1.StorageError.decode(reader, reader.uint32()));
-                                        break;
+                                    case 1: {
+                                            message.commitTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            if (!(message.streamErrors && message.streamErrors.length))
+                                                message.streamErrors = [];
+                                            message.streamErrors.push($root.google.cloud.bigquery.storage.v1.StorageError.decode(reader, reader.uint32()));
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -5910,6 +6305,21 @@
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                             };
     
+                            /**
+                             * Gets the default type url for BatchCommitWriteStreamsResponse
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.storage.v1.BatchCommitWriteStreamsResponse
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            BatchCommitWriteStreamsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.storage.v1.BatchCommitWriteStreamsResponse";
+                            };
+    
                             return BatchCommitWriteStreamsResponse;
                         })();
     
@@ -6005,9 +6415,10 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.name = reader.string();
-                                        break;
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -6095,6 +6506,21 @@
                              */
                             FinalizeWriteStreamRequest.prototype.toJSON = function toJSON() {
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for FinalizeWriteStreamRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.storage.v1.FinalizeWriteStreamRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            FinalizeWriteStreamRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.storage.v1.FinalizeWriteStreamRequest";
                             };
     
                             return FinalizeWriteStreamRequest;
@@ -6192,9 +6618,10 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.rowCount = reader.int64();
-                                        break;
+                                    case 1: {
+                                            message.rowCount = reader.int64();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -6296,6 +6723,21 @@
                              */
                             FinalizeWriteStreamResponse.prototype.toJSON = function toJSON() {
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for FinalizeWriteStreamResponse
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.storage.v1.FinalizeWriteStreamResponse
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            FinalizeWriteStreamResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.storage.v1.FinalizeWriteStreamResponse";
                             };
     
                             return FinalizeWriteStreamResponse;
@@ -6404,12 +6846,14 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.writeStream = reader.string();
-                                        break;
-                                    case 2:
-                                        message.offset = $root.google.protobuf.Int64Value.decode(reader, reader.uint32());
-                                        break;
+                                    case 1: {
+                                            message.writeStream = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.offset = $root.google.protobuf.Int64Value.decode(reader, reader.uint32());
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -6513,6 +6957,21 @@
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                             };
     
+                            /**
+                             * Gets the default type url for FlushRowsRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.storage.v1.FlushRowsRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            FlushRowsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.storage.v1.FlushRowsRequest";
+                            };
+    
                             return FlushRowsRequest;
                         })();
     
@@ -6608,9 +7067,10 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.offset = reader.int64();
-                                        break;
+                                    case 1: {
+                                            message.offset = reader.int64();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -6712,6 +7172,21 @@
                              */
                             FlushRowsResponse.prototype.toJSON = function toJSON() {
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for FlushRowsResponse
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.storage.v1.FlushRowsResponse
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            FlushRowsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.storage.v1.FlushRowsResponse";
                             };
     
                             return FlushRowsResponse;
@@ -6831,15 +7306,18 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.code = reader.int32();
-                                        break;
-                                    case 2:
-                                        message.entity = reader.string();
-                                        break;
-                                    case 3:
-                                        message.errorMessage = reader.string();
-                                        break;
+                                    case 1: {
+                                            message.code = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.entity = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.errorMessage = reader.string();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -7000,6 +7478,21 @@
                             };
     
                             /**
+                             * Gets the default type url for StorageError
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.storage.v1.StorageError
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            StorageError.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.storage.v1.StorageError";
+                            };
+    
+                            /**
                              * StorageErrorCode enum.
                              * @name google.cloud.bigquery.storage.v1.StorageError.StorageErrorCode
                              * @enum {number}
@@ -7146,15 +7639,18 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.index = reader.int64();
-                                        break;
-                                    case 2:
-                                        message.code = reader.int32();
-                                        break;
-                                    case 3:
-                                        message.message = reader.string();
-                                        break;
+                                    case 1: {
+                                            message.index = reader.int64();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.code = reader.int32();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.message = reader.string();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -7286,6 +7782,21 @@
                              */
                             RowError.prototype.toJSON = function toJSON() {
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for RowError
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.storage.v1.RowError
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            RowError.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.storage.v1.RowError";
                             };
     
                             /**
@@ -7539,41 +8050,52 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.name = reader.string();
-                                        break;
-                                    case 2:
-                                        message.expireTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                        break;
-                                    case 3:
-                                        message.dataFormat = reader.int32();
-                                        break;
-                                    case 4:
-                                        message.avroSchema = $root.google.cloud.bigquery.storage.v1.AvroSchema.decode(reader, reader.uint32());
-                                        break;
-                                    case 5:
-                                        message.arrowSchema = $root.google.cloud.bigquery.storage.v1.ArrowSchema.decode(reader, reader.uint32());
-                                        break;
-                                    case 6:
-                                        message.table = reader.string();
-                                        break;
-                                    case 7:
-                                        message.tableModifiers = $root.google.cloud.bigquery.storage.v1.ReadSession.TableModifiers.decode(reader, reader.uint32());
-                                        break;
-                                    case 8:
-                                        message.readOptions = $root.google.cloud.bigquery.storage.v1.ReadSession.TableReadOptions.decode(reader, reader.uint32());
-                                        break;
-                                    case 10:
-                                        if (!(message.streams && message.streams.length))
-                                            message.streams = [];
-                                        message.streams.push($root.google.cloud.bigquery.storage.v1.ReadStream.decode(reader, reader.uint32()));
-                                        break;
-                                    case 12:
-                                        message.estimatedTotalBytesScanned = reader.int64();
-                                        break;
-                                    case 13:
-                                        message.traceId = reader.string();
-                                        break;
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.expireTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.dataFormat = reader.int32();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.avroSchema = $root.google.cloud.bigquery.storage.v1.AvroSchema.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.arrowSchema = $root.google.cloud.bigquery.storage.v1.ArrowSchema.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.table = reader.string();
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.tableModifiers = $root.google.cloud.bigquery.storage.v1.ReadSession.TableModifiers.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 8: {
+                                            message.readOptions = $root.google.cloud.bigquery.storage.v1.ReadSession.TableReadOptions.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 10: {
+                                            if (!(message.streams && message.streams.length))
+                                                message.streams = [];
+                                            message.streams.push($root.google.cloud.bigquery.storage.v1.ReadStream.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 12: {
+                                            message.estimatedTotalBytesScanned = reader.int64();
+                                            break;
+                                        }
+                                    case 13: {
+                                            message.traceId = reader.string();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -7832,6 +8354,21 @@
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                             };
     
+                            /**
+                             * Gets the default type url for ReadSession
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.storage.v1.ReadSession
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ReadSession.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.storage.v1.ReadSession";
+                            };
+    
                             ReadSession.TableModifiers = (function() {
     
                                 /**
@@ -7924,9 +8461,10 @@
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
                                         switch (tag >>> 3) {
-                                        case 1:
-                                            message.snapshotTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                            break;
+                                        case 1: {
+                                                message.snapshotTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                                break;
+                                            }
                                         default:
                                             reader.skipType(tag & 7);
                                             break;
@@ -8019,6 +8557,21 @@
                                  */
                                 TableModifiers.prototype.toJSON = function toJSON() {
                                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for TableModifiers
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.bigquery.storage.v1.ReadSession.TableModifiers
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                TableModifiers.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.bigquery.storage.v1.ReadSession.TableModifiers";
                                 };
     
                                 return TableModifiers;
@@ -8165,20 +8718,24 @@
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
                                         switch (tag >>> 3) {
-                                        case 1:
-                                            if (!(message.selectedFields && message.selectedFields.length))
-                                                message.selectedFields = [];
-                                            message.selectedFields.push(reader.string());
-                                            break;
-                                        case 2:
-                                            message.rowRestriction = reader.string();
-                                            break;
-                                        case 3:
-                                            message.arrowSerializationOptions = $root.google.cloud.bigquery.storage.v1.ArrowSerializationOptions.decode(reader, reader.uint32());
-                                            break;
-                                        case 4:
-                                            message.avroSerializationOptions = $root.google.cloud.bigquery.storage.v1.AvroSerializationOptions.decode(reader, reader.uint32());
-                                            break;
+                                        case 1: {
+                                                if (!(message.selectedFields && message.selectedFields.length))
+                                                    message.selectedFields = [];
+                                                message.selectedFields.push(reader.string());
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.rowRestriction = reader.string();
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.arrowSerializationOptions = $root.google.cloud.bigquery.storage.v1.ArrowSerializationOptions.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 4: {
+                                                message.avroSerializationOptions = $root.google.cloud.bigquery.storage.v1.AvroSerializationOptions.decode(reader, reader.uint32());
+                                                break;
+                                            }
                                         default:
                                             reader.skipType(tag & 7);
                                             break;
@@ -8328,6 +8885,21 @@
                                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                                 };
     
+                                /**
+                                 * Gets the default type url for TableReadOptions
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.bigquery.storage.v1.ReadSession.TableReadOptions
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                TableReadOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.bigquery.storage.v1.ReadSession.TableReadOptions";
+                                };
+    
                                 return TableReadOptions;
                             })();
     
@@ -8426,9 +8998,10 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.name = reader.string();
-                                        break;
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -8516,6 +9089,21 @@
                              */
                             ReadStream.prototype.toJSON = function toJSON() {
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ReadStream
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.storage.v1.ReadStream
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ReadStream.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.storage.v1.ReadStream";
                             };
     
                             return ReadStream;
@@ -8668,24 +9256,30 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.name = reader.string();
-                                        break;
-                                    case 2:
-                                        message.type = reader.int32();
-                                        break;
-                                    case 3:
-                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                        break;
-                                    case 4:
-                                        message.commitTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                        break;
-                                    case 5:
-                                        message.tableSchema = $root.google.cloud.bigquery.storage.v1.TableSchema.decode(reader, reader.uint32());
-                                        break;
-                                    case 7:
-                                        message.writeMode = reader.int32();
-                                        break;
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.type = reader.int32();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.commitTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.tableSchema = $root.google.cloud.bigquery.storage.v1.TableSchema.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.writeMode = reader.int32();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -8868,6 +9462,21 @@
                             };
     
                             /**
+                             * Gets the default type url for WriteStream
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.storage.v1.WriteStream
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            WriteStream.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.storage.v1.WriteStream";
+                            };
+    
+                            /**
                              * Type enum.
                              * @name google.cloud.bigquery.storage.v1.WriteStream.Type
                              * @enum {number}
@@ -8996,11 +9605,12 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        if (!(message.fields && message.fields.length))
-                                            message.fields = [];
-                                        message.fields.push($root.google.cloud.bigquery.storage.v1.TableFieldSchema.decode(reader, reader.uint32()));
-                                        break;
+                                    case 1: {
+                                            if (!(message.fields && message.fields.length))
+                                                message.fields = [];
+                                            message.fields.push($root.google.cloud.bigquery.storage.v1.TableFieldSchema.decode(reader, reader.uint32()));
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -9105,6 +9715,21 @@
                              */
                             TableSchema.prototype.toJSON = function toJSON() {
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for TableSchema
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.storage.v1.TableSchema
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            TableSchema.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.storage.v1.TableSchema";
                             };
     
                             return TableSchema;
@@ -9281,32 +9906,40 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.name = reader.string();
-                                        break;
-                                    case 2:
-                                        message.type = reader.int32();
-                                        break;
-                                    case 3:
-                                        message.mode = reader.int32();
-                                        break;
-                                    case 4:
-                                        if (!(message.fields && message.fields.length))
-                                            message.fields = [];
-                                        message.fields.push($root.google.cloud.bigquery.storage.v1.TableFieldSchema.decode(reader, reader.uint32()));
-                                        break;
-                                    case 6:
-                                        message.description = reader.string();
-                                        break;
-                                    case 7:
-                                        message.maxLength = reader.int64();
-                                        break;
-                                    case 8:
-                                        message.precision = reader.int64();
-                                        break;
-                                    case 9:
-                                        message.scale = reader.int64();
-                                        break;
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.type = reader.int32();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.mode = reader.int32();
+                                            break;
+                                        }
+                                    case 4: {
+                                            if (!(message.fields && message.fields.length))
+                                                message.fields = [];
+                                            message.fields.push($root.google.cloud.bigquery.storage.v1.TableFieldSchema.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.description = reader.string();
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.maxLength = reader.int64();
+                                            break;
+                                        }
+                                    case 8: {
+                                            message.precision = reader.int64();
+                                            break;
+                                        }
+                                    case 9: {
+                                            message.scale = reader.int64();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -9620,6 +10253,21 @@
                             };
     
                             /**
+                             * Gets the default type url for TableFieldSchema
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.storage.v1.TableFieldSchema
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            TableFieldSchema.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.storage.v1.TableFieldSchema";
+                            };
+    
+                            /**
                              * Type enum.
                              * @name google.cloud.bigquery.storage.v1.TableFieldSchema.Type
                              * @enum {number}
@@ -9786,9 +10434,10 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.serializedSchema = reader.bytes();
-                                        break;
+                                    case 1: {
+                                            message.serializedSchema = reader.bytes();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -9845,7 +10494,7 @@
                                 if (object.serializedSchema != null)
                                     if (typeof object.serializedSchema === "string")
                                         $util.base64.decode(object.serializedSchema, message.serializedSchema = $util.newBuffer($util.base64.length(object.serializedSchema)), 0);
-                                    else if (object.serializedSchema.length)
+                                    else if (object.serializedSchema.length >= 0)
                                         message.serializedSchema = object.serializedSchema;
                                 return message;
                             };
@@ -9885,6 +10534,21 @@
                              */
                             ArrowSchema.prototype.toJSON = function toJSON() {
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ArrowSchema
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.storage.v1beta1.ArrowSchema
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ArrowSchema.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.storage.v1beta1.ArrowSchema";
                             };
     
                             return ArrowSchema;
@@ -9993,12 +10657,14 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.serializedRecordBatch = reader.bytes();
-                                        break;
-                                    case 2:
-                                        message.rowCount = reader.int64();
-                                        break;
+                                    case 1: {
+                                            message.serializedRecordBatch = reader.bytes();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.rowCount = reader.int64();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -10058,7 +10724,7 @@
                                 if (object.serializedRecordBatch != null)
                                     if (typeof object.serializedRecordBatch === "string")
                                         $util.base64.decode(object.serializedRecordBatch, message.serializedRecordBatch = $util.newBuffer($util.base64.length(object.serializedRecordBatch)), 0);
-                                    else if (object.serializedRecordBatch.length)
+                                    else if (object.serializedRecordBatch.length >= 0)
                                         message.serializedRecordBatch = object.serializedRecordBatch;
                                 if (object.rowCount != null)
                                     if ($util.Long)
@@ -10118,6 +10784,21 @@
                              */
                             ArrowRecordBatch.prototype.toJSON = function toJSON() {
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ArrowRecordBatch
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.storage.v1beta1.ArrowRecordBatch
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ArrowRecordBatch.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.storage.v1beta1.ArrowRecordBatch";
                             };
     
                             return ArrowRecordBatch;
@@ -10215,9 +10896,10 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.schema = reader.string();
-                                        break;
+                                    case 1: {
+                                            message.schema = reader.string();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -10305,6 +10987,21 @@
                              */
                             AvroSchema.prototype.toJSON = function toJSON() {
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for AvroSchema
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.storage.v1beta1.AvroSchema
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            AvroSchema.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.storage.v1beta1.AvroSchema";
                             };
     
                             return AvroSchema;
@@ -10413,12 +11110,14 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.serializedBinaryRows = reader.bytes();
-                                        break;
-                                    case 2:
-                                        message.rowCount = reader.int64();
-                                        break;
+                                    case 1: {
+                                            message.serializedBinaryRows = reader.bytes();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.rowCount = reader.int64();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -10478,7 +11177,7 @@
                                 if (object.serializedBinaryRows != null)
                                     if (typeof object.serializedBinaryRows === "string")
                                         $util.base64.decode(object.serializedBinaryRows, message.serializedBinaryRows = $util.newBuffer($util.base64.length(object.serializedBinaryRows)), 0);
-                                    else if (object.serializedBinaryRows.length)
+                                    else if (object.serializedBinaryRows.length >= 0)
                                         message.serializedBinaryRows = object.serializedBinaryRows;
                                 if (object.rowCount != null)
                                     if ($util.Long)
@@ -10538,6 +11237,21 @@
                              */
                             AvroRows.prototype.toJSON = function toJSON() {
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for AvroRows
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.storage.v1beta1.AvroRows
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            AvroRows.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.storage.v1beta1.AvroRows";
                             };
     
                             return AvroRows;
@@ -10648,14 +11362,16 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        if (!(message.selectedFields && message.selectedFields.length))
-                                            message.selectedFields = [];
-                                        message.selectedFields.push(reader.string());
-                                        break;
-                                    case 2:
-                                        message.rowRestriction = reader.string();
-                                        break;
+                                    case 1: {
+                                            if (!(message.selectedFields && message.selectedFields.length))
+                                                message.selectedFields = [];
+                                            message.selectedFields.push(reader.string());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.rowRestriction = reader.string();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -10766,6 +11482,21 @@
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                             };
     
+                            /**
+                             * Gets the default type url for TableReadOptions
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.storage.v1beta1.TableReadOptions
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            TableReadOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.storage.v1beta1.TableReadOptions";
+                            };
+    
                             return TableReadOptions;
                         })();
     
@@ -10802,7 +11533,7 @@
                             };
     
                             /**
-                             * Callback as used by {@link google.cloud.bigquery.storage.v1beta1.BigQueryStorage#createReadSession}.
+                             * Callback as used by {@link google.cloud.bigquery.storage.v1beta1.BigQueryStorage|createReadSession}.
                              * @memberof google.cloud.bigquery.storage.v1beta1.BigQueryStorage
                              * @typedef CreateReadSessionCallback
                              * @type {function}
@@ -10835,7 +11566,7 @@
                              */
     
                             /**
-                             * Callback as used by {@link google.cloud.bigquery.storage.v1beta1.BigQueryStorage#readRows}.
+                             * Callback as used by {@link google.cloud.bigquery.storage.v1beta1.BigQueryStorage|readRows}.
                              * @memberof google.cloud.bigquery.storage.v1beta1.BigQueryStorage
                              * @typedef ReadRowsCallback
                              * @type {function}
@@ -10868,7 +11599,7 @@
                              */
     
                             /**
-                             * Callback as used by {@link google.cloud.bigquery.storage.v1beta1.BigQueryStorage#batchCreateReadSessionStreams}.
+                             * Callback as used by {@link google.cloud.bigquery.storage.v1beta1.BigQueryStorage|batchCreateReadSessionStreams}.
                              * @memberof google.cloud.bigquery.storage.v1beta1.BigQueryStorage
                              * @typedef BatchCreateReadSessionStreamsCallback
                              * @type {function}
@@ -10901,7 +11632,7 @@
                              */
     
                             /**
-                             * Callback as used by {@link google.cloud.bigquery.storage.v1beta1.BigQueryStorage#finalizeStream}.
+                             * Callback as used by {@link google.cloud.bigquery.storage.v1beta1.BigQueryStorage|finalizeStream}.
                              * @memberof google.cloud.bigquery.storage.v1beta1.BigQueryStorage
                              * @typedef FinalizeStreamCallback
                              * @type {function}
@@ -10934,7 +11665,7 @@
                              */
     
                             /**
-                             * Callback as used by {@link google.cloud.bigquery.storage.v1beta1.BigQueryStorage#splitReadStream}.
+                             * Callback as used by {@link google.cloud.bigquery.storage.v1beta1.BigQueryStorage|splitReadStream}.
                              * @memberof google.cloud.bigquery.storage.v1beta1.BigQueryStorage
                              * @typedef SplitReadStreamCallback
                              * @type {function}
@@ -11061,9 +11792,10 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.name = reader.string();
-                                        break;
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -11151,6 +11883,21 @@
                              */
                             Stream.prototype.toJSON = function toJSON() {
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Stream
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.storage.v1beta1.Stream
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Stream.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.storage.v1beta1.Stream";
                             };
     
                             return Stream;
@@ -11259,12 +12006,14 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.stream = $root.google.cloud.bigquery.storage.v1beta1.Stream.decode(reader, reader.uint32());
-                                        break;
-                                    case 2:
-                                        message.offset = reader.int64();
-                                        break;
+                                    case 1: {
+                                            message.stream = $root.google.cloud.bigquery.storage.v1beta1.Stream.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.offset = reader.int64();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -11380,6 +12129,21 @@
                              */
                             StreamPosition.prototype.toJSON = function toJSON() {
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for StreamPosition
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.storage.v1beta1.StreamPosition
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            StreamPosition.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.storage.v1beta1.StreamPosition";
                             };
     
                             return StreamPosition;
@@ -11570,32 +12334,40 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.name = reader.string();
-                                        break;
-                                    case 2:
-                                        message.expireTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                        break;
-                                    case 5:
-                                        message.avroSchema = $root.google.cloud.bigquery.storage.v1beta1.AvroSchema.decode(reader, reader.uint32());
-                                        break;
-                                    case 6:
-                                        message.arrowSchema = $root.google.cloud.bigquery.storage.v1beta1.ArrowSchema.decode(reader, reader.uint32());
-                                        break;
-                                    case 4:
-                                        if (!(message.streams && message.streams.length))
-                                            message.streams = [];
-                                        message.streams.push($root.google.cloud.bigquery.storage.v1beta1.Stream.decode(reader, reader.uint32()));
-                                        break;
-                                    case 7:
-                                        message.tableReference = $root.google.cloud.bigquery.storage.v1beta1.TableReference.decode(reader, reader.uint32());
-                                        break;
-                                    case 8:
-                                        message.tableModifiers = $root.google.cloud.bigquery.storage.v1beta1.TableModifiers.decode(reader, reader.uint32());
-                                        break;
-                                    case 9:
-                                        message.shardingStrategy = reader.int32();
-                                        break;
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.expireTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.avroSchema = $root.google.cloud.bigquery.storage.v1beta1.AvroSchema.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.arrowSchema = $root.google.cloud.bigquery.storage.v1beta1.ArrowSchema.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 4: {
+                                            if (!(message.streams && message.streams.length))
+                                                message.streams = [];
+                                            message.streams.push($root.google.cloud.bigquery.storage.v1beta1.Stream.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.tableReference = $root.google.cloud.bigquery.storage.v1beta1.TableReference.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 8: {
+                                            message.tableModifiers = $root.google.cloud.bigquery.storage.v1beta1.TableModifiers.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 9: {
+                                            message.shardingStrategy = reader.int32();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -11816,6 +12588,21 @@
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                             };
     
+                            /**
+                             * Gets the default type url for ReadSession
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.storage.v1beta1.ReadSession
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ReadSession.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.storage.v1beta1.ReadSession";
+                            };
+    
                             return ReadSession;
                         })();
     
@@ -11977,27 +12764,34 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.tableReference = $root.google.cloud.bigquery.storage.v1beta1.TableReference.decode(reader, reader.uint32());
-                                        break;
-                                    case 6:
-                                        message.parent = reader.string();
-                                        break;
-                                    case 2:
-                                        message.tableModifiers = $root.google.cloud.bigquery.storage.v1beta1.TableModifiers.decode(reader, reader.uint32());
-                                        break;
-                                    case 3:
-                                        message.requestedStreams = reader.int32();
-                                        break;
-                                    case 4:
-                                        message.readOptions = $root.google.cloud.bigquery.storage.v1beta1.TableReadOptions.decode(reader, reader.uint32());
-                                        break;
-                                    case 5:
-                                        message.format = reader.int32();
-                                        break;
-                                    case 7:
-                                        message.shardingStrategy = reader.int32();
-                                        break;
+                                    case 1: {
+                                            message.tableReference = $root.google.cloud.bigquery.storage.v1beta1.TableReference.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.parent = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.tableModifiers = $root.google.cloud.bigquery.storage.v1beta1.TableModifiers.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.requestedStreams = reader.int32();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.readOptions = $root.google.cloud.bigquery.storage.v1beta1.TableReadOptions.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.format = reader.int32();
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.shardingStrategy = reader.int32();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -12187,6 +12981,21 @@
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                             };
     
+                            /**
+                             * Gets the default type url for CreateReadSessionRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.storage.v1beta1.CreateReadSessionRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            CreateReadSessionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.storage.v1beta1.CreateReadSessionRequest";
+                            };
+    
                             return CreateReadSessionRequest;
                         })();
     
@@ -12314,9 +13123,10 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.readPosition = $root.google.cloud.bigquery.storage.v1beta1.StreamPosition.decode(reader, reader.uint32());
-                                        break;
+                                    case 1: {
+                                            message.readPosition = $root.google.cloud.bigquery.storage.v1beta1.StreamPosition.decode(reader, reader.uint32());
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -12409,6 +13219,21 @@
                              */
                             ReadRowsRequest.prototype.toJSON = function toJSON() {
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ReadRowsRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.storage.v1beta1.ReadRowsRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ReadRowsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.storage.v1beta1.ReadRowsRequest";
                             };
     
                             return ReadRowsRequest;
@@ -12539,18 +13364,22 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.estimatedRowCount = reader.int64();
-                                        break;
-                                    case 2:
-                                        message.fractionConsumed = reader.float();
-                                        break;
-                                    case 4:
-                                        message.progress = $root.google.cloud.bigquery.storage.v1beta1.Progress.decode(reader, reader.uint32());
-                                        break;
-                                    case 3:
-                                        message.isSplittable = reader.bool();
-                                        break;
+                                    case 1: {
+                                            message.estimatedRowCount = reader.int64();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.fractionConsumed = reader.float();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.progress = $root.google.cloud.bigquery.storage.v1beta1.Progress.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.isSplittable = reader.bool();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -12684,6 +13513,21 @@
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                             };
     
+                            /**
+                             * Gets the default type url for StreamStatus
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.storage.v1beta1.StreamStatus
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            StreamStatus.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.storage.v1beta1.StreamStatus";
+                            };
+    
                             return StreamStatus;
                         })();
     
@@ -12790,12 +13634,14 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.atResponseStart = reader.float();
-                                        break;
-                                    case 2:
-                                        message.atResponseEnd = reader.float();
-                                        break;
+                                    case 1: {
+                                            message.atResponseStart = reader.float();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.atResponseEnd = reader.float();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -12894,6 +13740,21 @@
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                             };
     
+                            /**
+                             * Gets the default type url for Progress
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.storage.v1beta1.Progress
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Progress.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.storage.v1beta1.Progress";
+                            };
+    
                             return Progress;
                         })();
     
@@ -12989,9 +13850,10 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.throttlePercent = reader.int32();
-                                        break;
+                                    case 1: {
+                                            message.throttlePercent = reader.int32();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -13079,6 +13941,21 @@
                              */
                             ThrottleStatus.prototype.toJSON = function toJSON() {
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ThrottleStatus
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.storage.v1beta1.ThrottleStatus
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ThrottleStatus.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.storage.v1beta1.ThrottleStatus";
                             };
     
                             return ThrottleStatus;
@@ -13234,21 +14111,26 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 3:
-                                        message.avroRows = $root.google.cloud.bigquery.storage.v1beta1.AvroRows.decode(reader, reader.uint32());
-                                        break;
-                                    case 4:
-                                        message.arrowRecordBatch = $root.google.cloud.bigquery.storage.v1beta1.ArrowRecordBatch.decode(reader, reader.uint32());
-                                        break;
-                                    case 6:
-                                        message.rowCount = reader.int64();
-                                        break;
-                                    case 2:
-                                        message.status = $root.google.cloud.bigquery.storage.v1beta1.StreamStatus.decode(reader, reader.uint32());
-                                        break;
-                                    case 5:
-                                        message.throttleStatus = $root.google.cloud.bigquery.storage.v1beta1.ThrottleStatus.decode(reader, reader.uint32());
-                                        break;
+                                    case 3: {
+                                            message.avroRows = $root.google.cloud.bigquery.storage.v1beta1.AvroRows.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.arrowRecordBatch = $root.google.cloud.bigquery.storage.v1beta1.ArrowRecordBatch.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.rowCount = reader.int64();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.status = $root.google.cloud.bigquery.storage.v1beta1.StreamStatus.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.throttleStatus = $root.google.cloud.bigquery.storage.v1beta1.ThrottleStatus.decode(reader, reader.uint32());
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -13418,6 +14300,21 @@
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                             };
     
+                            /**
+                             * Gets the default type url for ReadRowsResponse
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.storage.v1beta1.ReadRowsResponse
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ReadRowsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.storage.v1beta1.ReadRowsResponse";
+                            };
+    
                             return ReadRowsResponse;
                         })();
     
@@ -13524,12 +14421,14 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.session = $root.google.cloud.bigquery.storage.v1beta1.ReadSession.decode(reader, reader.uint32());
-                                        break;
-                                    case 2:
-                                        message.requestedStreams = reader.int32();
-                                        break;
+                                    case 1: {
+                                            message.session = $root.google.cloud.bigquery.storage.v1beta1.ReadSession.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.requestedStreams = reader.int32();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -13633,6 +14532,21 @@
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                             };
     
+                            /**
+                             * Gets the default type url for BatchCreateReadSessionStreamsRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.storage.v1beta1.BatchCreateReadSessionStreamsRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            BatchCreateReadSessionStreamsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.storage.v1beta1.BatchCreateReadSessionStreamsRequest";
+                            };
+    
                             return BatchCreateReadSessionStreamsRequest;
                         })();
     
@@ -13730,11 +14644,12 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        if (!(message.streams && message.streams.length))
-                                            message.streams = [];
-                                        message.streams.push($root.google.cloud.bigquery.storage.v1beta1.Stream.decode(reader, reader.uint32()));
-                                        break;
+                                    case 1: {
+                                            if (!(message.streams && message.streams.length))
+                                                message.streams = [];
+                                            message.streams.push($root.google.cloud.bigquery.storage.v1beta1.Stream.decode(reader, reader.uint32()));
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -13841,6 +14756,21 @@
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                             };
     
+                            /**
+                             * Gets the default type url for BatchCreateReadSessionStreamsResponse
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.storage.v1beta1.BatchCreateReadSessionStreamsResponse
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            BatchCreateReadSessionStreamsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.storage.v1beta1.BatchCreateReadSessionStreamsResponse";
+                            };
+    
                             return BatchCreateReadSessionStreamsResponse;
                         })();
     
@@ -13936,9 +14866,10 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 2:
-                                        message.stream = $root.google.cloud.bigquery.storage.v1beta1.Stream.decode(reader, reader.uint32());
-                                        break;
+                                    case 2: {
+                                            message.stream = $root.google.cloud.bigquery.storage.v1beta1.Stream.decode(reader, reader.uint32());
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -14031,6 +14962,21 @@
                              */
                             FinalizeStreamRequest.prototype.toJSON = function toJSON() {
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for FinalizeStreamRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.storage.v1beta1.FinalizeStreamRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            FinalizeStreamRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.storage.v1beta1.FinalizeStreamRequest";
                             };
     
                             return FinalizeStreamRequest;
@@ -14139,12 +15085,14 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.originalStream = $root.google.cloud.bigquery.storage.v1beta1.Stream.decode(reader, reader.uint32());
-                                        break;
-                                    case 2:
-                                        message.fraction = reader.float();
-                                        break;
+                                    case 1: {
+                                            message.originalStream = $root.google.cloud.bigquery.storage.v1beta1.Stream.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.fraction = reader.float();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -14246,6 +15194,21 @@
                              */
                             SplitReadStreamRequest.prototype.toJSON = function toJSON() {
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SplitReadStreamRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.storage.v1beta1.SplitReadStreamRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SplitReadStreamRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.storage.v1beta1.SplitReadStreamRequest";
                             };
     
                             return SplitReadStreamRequest;
@@ -14354,12 +15317,14 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.primaryStream = $root.google.cloud.bigquery.storage.v1beta1.Stream.decode(reader, reader.uint32());
-                                        break;
-                                    case 2:
-                                        message.remainderStream = $root.google.cloud.bigquery.storage.v1beta1.Stream.decode(reader, reader.uint32());
-                                        break;
+                                    case 1: {
+                                            message.primaryStream = $root.google.cloud.bigquery.storage.v1beta1.Stream.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.remainderStream = $root.google.cloud.bigquery.storage.v1beta1.Stream.decode(reader, reader.uint32());
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -14466,6 +15431,21 @@
                              */
                             SplitReadStreamResponse.prototype.toJSON = function toJSON() {
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SplitReadStreamResponse
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.storage.v1beta1.SplitReadStreamResponse
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SplitReadStreamResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.storage.v1beta1.SplitReadStreamResponse";
                             };
     
                             return SplitReadStreamResponse;
@@ -14585,15 +15565,18 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.projectId = reader.string();
-                                        break;
-                                    case 2:
-                                        message.datasetId = reader.string();
-                                        break;
-                                    case 3:
-                                        message.tableId = reader.string();
-                                        break;
+                                    case 1: {
+                                            message.projectId = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.datasetId = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.tableId = reader.string();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -14700,6 +15683,21 @@
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                             };
     
+                            /**
+                             * Gets the default type url for TableReference
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.storage.v1beta1.TableReference
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            TableReference.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.storage.v1beta1.TableReference";
+                            };
+    
                             return TableReference;
                         })();
     
@@ -14795,9 +15793,10 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        message.snapshotTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                        break;
+                                    case 1: {
+                                            message.snapshotTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -14890,6 +15889,21 @@
                              */
                             TableModifiers.prototype.toJSON = function toJSON() {
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for TableModifiers
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.storage.v1beta1.TableModifiers
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            TableModifiers.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.storage.v1beta1.TableModifiers";
                             };
     
                             return TableModifiers;
@@ -15010,11 +16024,12 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            if (!(message.file && message.file.length))
-                                message.file = [];
-                            message.file.push($root.google.protobuf.FileDescriptorProto.decode(reader, reader.uint32()));
-                            break;
+                        case 1: {
+                                if (!(message.file && message.file.length))
+                                    message.file = [];
+                                message.file.push($root.google.protobuf.FileDescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -15121,6 +16136,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for FileDescriptorSet
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.FileDescriptorSet
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FileDescriptorSet.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.FileDescriptorSet";
+                };
+    
                 return FileDescriptorSet;
             })();
     
@@ -15142,6 +16172,7 @@
                  * @property {google.protobuf.IFileOptions|null} [options] FileDescriptorProto options
                  * @property {google.protobuf.ISourceCodeInfo|null} [sourceCodeInfo] FileDescriptorProto sourceCodeInfo
                  * @property {string|null} [syntax] FileDescriptorProto syntax
+                 * @property {string|null} [edition] FileDescriptorProto edition
                  */
     
                 /**
@@ -15263,6 +16294,14 @@
                 FileDescriptorProto.prototype.syntax = "";
     
                 /**
+                 * FileDescriptorProto edition.
+                 * @member {string} edition
+                 * @memberof google.protobuf.FileDescriptorProto
+                 * @instance
+                 */
+                FileDescriptorProto.prototype.edition = "";
+    
+                /**
                  * Creates a new FileDescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.FileDescriptorProto
@@ -15317,6 +16356,8 @@
                             writer.uint32(/* id 11, wireType 0 =*/88).int32(message.weakDependency[i]);
                     if (message.syntax != null && Object.hasOwnProperty.call(message, "syntax"))
                         writer.uint32(/* id 12, wireType 2 =*/98).string(message.syntax);
+                    if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
+                        writer.uint32(/* id 13, wireType 2 =*/106).string(message.edition);
                     return writer;
                 };
     
@@ -15351,66 +16392,82 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 2:
-                            message["package"] = reader.string();
-                            break;
-                        case 3:
-                            if (!(message.dependency && message.dependency.length))
-                                message.dependency = [];
-                            message.dependency.push(reader.string());
-                            break;
-                        case 10:
-                            if (!(message.publicDependency && message.publicDependency.length))
-                                message.publicDependency = [];
-                            if ((tag & 7) === 2) {
-                                var end2 = reader.uint32() + reader.pos;
-                                while (reader.pos < end2)
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message["package"] = reader.string();
+                                break;
+                            }
+                        case 3: {
+                                if (!(message.dependency && message.dependency.length))
+                                    message.dependency = [];
+                                message.dependency.push(reader.string());
+                                break;
+                            }
+                        case 10: {
+                                if (!(message.publicDependency && message.publicDependency.length))
+                                    message.publicDependency = [];
+                                if ((tag & 7) === 2) {
+                                    var end2 = reader.uint32() + reader.pos;
+                                    while (reader.pos < end2)
+                                        message.publicDependency.push(reader.int32());
+                                } else
                                     message.publicDependency.push(reader.int32());
-                            } else
-                                message.publicDependency.push(reader.int32());
-                            break;
-                        case 11:
-                            if (!(message.weakDependency && message.weakDependency.length))
-                                message.weakDependency = [];
-                            if ((tag & 7) === 2) {
-                                var end2 = reader.uint32() + reader.pos;
-                                while (reader.pos < end2)
+                                break;
+                            }
+                        case 11: {
+                                if (!(message.weakDependency && message.weakDependency.length))
+                                    message.weakDependency = [];
+                                if ((tag & 7) === 2) {
+                                    var end2 = reader.uint32() + reader.pos;
+                                    while (reader.pos < end2)
+                                        message.weakDependency.push(reader.int32());
+                                } else
                                     message.weakDependency.push(reader.int32());
-                            } else
-                                message.weakDependency.push(reader.int32());
-                            break;
-                        case 4:
-                            if (!(message.messageType && message.messageType.length))
-                                message.messageType = [];
-                            message.messageType.push($root.google.protobuf.DescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 5:
-                            if (!(message.enumType && message.enumType.length))
-                                message.enumType = [];
-                            message.enumType.push($root.google.protobuf.EnumDescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 6:
-                            if (!(message.service && message.service.length))
-                                message.service = [];
-                            message.service.push($root.google.protobuf.ServiceDescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 7:
-                            if (!(message.extension && message.extension.length))
-                                message.extension = [];
-                            message.extension.push($root.google.protobuf.FieldDescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 8:
-                            message.options = $root.google.protobuf.FileOptions.decode(reader, reader.uint32());
-                            break;
-                        case 9:
-                            message.sourceCodeInfo = $root.google.protobuf.SourceCodeInfo.decode(reader, reader.uint32());
-                            break;
-                        case 12:
-                            message.syntax = reader.string();
-                            break;
+                                break;
+                            }
+                        case 4: {
+                                if (!(message.messageType && message.messageType.length))
+                                    message.messageType = [];
+                                message.messageType.push($root.google.protobuf.DescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 5: {
+                                if (!(message.enumType && message.enumType.length))
+                                    message.enumType = [];
+                                message.enumType.push($root.google.protobuf.EnumDescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 6: {
+                                if (!(message.service && message.service.length))
+                                    message.service = [];
+                                message.service.push($root.google.protobuf.ServiceDescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 7: {
+                                if (!(message.extension && message.extension.length))
+                                    message.extension = [];
+                                message.extension.push($root.google.protobuf.FieldDescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 8: {
+                                message.options = $root.google.protobuf.FileOptions.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 9: {
+                                message.sourceCodeInfo = $root.google.protobuf.SourceCodeInfo.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 12: {
+                                message.syntax = reader.string();
+                                break;
+                            }
+                        case 13: {
+                                message.edition = reader.string();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -15522,6 +16579,9 @@
                     if (message.syntax != null && message.hasOwnProperty("syntax"))
                         if (!$util.isString(message.syntax))
                             return "syntax: string expected";
+                    if (message.edition != null && message.hasOwnProperty("edition"))
+                        if (!$util.isString(message.edition))
+                            return "edition: string expected";
                     return null;
                 };
     
@@ -15614,6 +16674,8 @@
                     }
                     if (object.syntax != null)
                         message.syntax = String(object.syntax);
+                    if (object.edition != null)
+                        message.edition = String(object.edition);
                     return message;
                 };
     
@@ -15645,6 +16707,7 @@
                         object.options = null;
                         object.sourceCodeInfo = null;
                         object.syntax = "";
+                        object.edition = "";
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -15691,6 +16754,8 @@
                     }
                     if (message.syntax != null && message.hasOwnProperty("syntax"))
                         object.syntax = message.syntax;
+                    if (message.edition != null && message.hasOwnProperty("edition"))
+                        object.edition = message.edition;
                     return object;
                 };
     
@@ -15703,6 +16768,21 @@
                  */
                 FileDescriptorProto.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for FileDescriptorProto
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.FileDescriptorProto
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FileDescriptorProto.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.FileDescriptorProto";
                 };
     
                 return FileDescriptorProto;
@@ -15915,52 +16995,62 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 2:
-                            if (!(message.field && message.field.length))
-                                message.field = [];
-                            message.field.push($root.google.protobuf.FieldDescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 6:
-                            if (!(message.extension && message.extension.length))
-                                message.extension = [];
-                            message.extension.push($root.google.protobuf.FieldDescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 3:
-                            if (!(message.nestedType && message.nestedType.length))
-                                message.nestedType = [];
-                            message.nestedType.push($root.google.protobuf.DescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 4:
-                            if (!(message.enumType && message.enumType.length))
-                                message.enumType = [];
-                            message.enumType.push($root.google.protobuf.EnumDescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 5:
-                            if (!(message.extensionRange && message.extensionRange.length))
-                                message.extensionRange = [];
-                            message.extensionRange.push($root.google.protobuf.DescriptorProto.ExtensionRange.decode(reader, reader.uint32()));
-                            break;
-                        case 8:
-                            if (!(message.oneofDecl && message.oneofDecl.length))
-                                message.oneofDecl = [];
-                            message.oneofDecl.push($root.google.protobuf.OneofDescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 7:
-                            message.options = $root.google.protobuf.MessageOptions.decode(reader, reader.uint32());
-                            break;
-                        case 9:
-                            if (!(message.reservedRange && message.reservedRange.length))
-                                message.reservedRange = [];
-                            message.reservedRange.push($root.google.protobuf.DescriptorProto.ReservedRange.decode(reader, reader.uint32()));
-                            break;
-                        case 10:
-                            if (!(message.reservedName && message.reservedName.length))
-                                message.reservedName = [];
-                            message.reservedName.push(reader.string());
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                if (!(message.field && message.field.length))
+                                    message.field = [];
+                                message.field.push($root.google.protobuf.FieldDescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 6: {
+                                if (!(message.extension && message.extension.length))
+                                    message.extension = [];
+                                message.extension.push($root.google.protobuf.FieldDescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 3: {
+                                if (!(message.nestedType && message.nestedType.length))
+                                    message.nestedType = [];
+                                message.nestedType.push($root.google.protobuf.DescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 4: {
+                                if (!(message.enumType && message.enumType.length))
+                                    message.enumType = [];
+                                message.enumType.push($root.google.protobuf.EnumDescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 5: {
+                                if (!(message.extensionRange && message.extensionRange.length))
+                                    message.extensionRange = [];
+                                message.extensionRange.push($root.google.protobuf.DescriptorProto.ExtensionRange.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 8: {
+                                if (!(message.oneofDecl && message.oneofDecl.length))
+                                    message.oneofDecl = [];
+                                message.oneofDecl.push($root.google.protobuf.OneofDescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 7: {
+                                message.options = $root.google.protobuf.MessageOptions.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 9: {
+                                if (!(message.reservedRange && message.reservedRange.length))
+                                    message.reservedRange = [];
+                                message.reservedRange.push($root.google.protobuf.DescriptorProto.ReservedRange.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 10: {
+                                if (!(message.reservedName && message.reservedName.length))
+                                    message.reservedName = [];
+                                message.reservedName.push(reader.string());
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -16261,6 +17351,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for DescriptorProto
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.DescriptorProto
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                DescriptorProto.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.DescriptorProto";
+                };
+    
                 DescriptorProto.ExtensionRange = (function() {
     
                     /**
@@ -16375,15 +17480,18 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.start = reader.int32();
-                                break;
-                            case 2:
-                                message.end = reader.int32();
-                                break;
-                            case 3:
-                                message.options = $root.google.protobuf.ExtensionRangeOptions.decode(reader, reader.uint32());
-                                break;
+                            case 1: {
+                                    message.start = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    message.end = reader.int32();
+                                    break;
+                                }
+                            case 3: {
+                                    message.options = $root.google.protobuf.ExtensionRangeOptions.decode(reader, reader.uint32());
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -16495,6 +17603,21 @@
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
+                    /**
+                     * Gets the default type url for ExtensionRange
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.DescriptorProto.ExtensionRange
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ExtensionRange.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.DescriptorProto.ExtensionRange";
+                    };
+    
                     return ExtensionRange;
                 })();
     
@@ -16601,12 +17724,14 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.start = reader.int32();
-                                break;
-                            case 2:
-                                message.end = reader.int32();
-                                break;
+                            case 1: {
+                                    message.start = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    message.end = reader.int32();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -16703,6 +17828,21 @@
                      */
                     ReservedRange.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ReservedRange
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.DescriptorProto.ReservedRange
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ReservedRange.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.DescriptorProto.ReservedRange";
                     };
     
                     return ReservedRange;
@@ -16805,11 +17945,12 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 999:
-                            if (!(message.uninterpretedOption && message.uninterpretedOption.length))
-                                message.uninterpretedOption = [];
-                            message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
-                            break;
+                        case 999: {
+                                if (!(message.uninterpretedOption && message.uninterpretedOption.length))
+                                    message.uninterpretedOption = [];
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -16914,6 +18055,21 @@
                  */
                 ExtensionRangeOptions.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for ExtensionRangeOptions
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.ExtensionRangeOptions
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ExtensionRangeOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.ExtensionRangeOptions";
                 };
     
                 return ExtensionRangeOptions;
@@ -17121,39 +18277,50 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 3:
-                            message.number = reader.int32();
-                            break;
-                        case 4:
-                            message.label = reader.int32();
-                            break;
-                        case 5:
-                            message.type = reader.int32();
-                            break;
-                        case 6:
-                            message.typeName = reader.string();
-                            break;
-                        case 2:
-                            message.extendee = reader.string();
-                            break;
-                        case 7:
-                            message.defaultValue = reader.string();
-                            break;
-                        case 9:
-                            message.oneofIndex = reader.int32();
-                            break;
-                        case 10:
-                            message.jsonName = reader.string();
-                            break;
-                        case 8:
-                            message.options = $root.google.protobuf.FieldOptions.decode(reader, reader.uint32());
-                            break;
-                        case 17:
-                            message.proto3Optional = reader.bool();
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 3: {
+                                message.number = reader.int32();
+                                break;
+                            }
+                        case 4: {
+                                message.label = reader.int32();
+                                break;
+                            }
+                        case 5: {
+                                message.type = reader.int32();
+                                break;
+                            }
+                        case 6: {
+                                message.typeName = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.extendee = reader.string();
+                                break;
+                            }
+                        case 7: {
+                                message.defaultValue = reader.string();
+                                break;
+                            }
+                        case 9: {
+                                message.oneofIndex = reader.int32();
+                                break;
+                            }
+                        case 10: {
+                                message.jsonName = reader.string();
+                                break;
+                            }
+                        case 8: {
+                                message.options = $root.google.protobuf.FieldOptions.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 17: {
+                                message.proto3Optional = reader.bool();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -17441,6 +18608,21 @@
                 };
     
                 /**
+                 * Gets the default type url for FieldDescriptorProto
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.FieldDescriptorProto
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FieldDescriptorProto.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.FieldDescriptorProto";
+                };
+    
+                /**
                  * Type enum.
                  * @name google.protobuf.FieldDescriptorProto.Type
                  * @enum {number}
@@ -17608,12 +18790,14 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 2:
-                            message.options = $root.google.protobuf.OneofOptions.decode(reader, reader.uint32());
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.options = $root.google.protobuf.OneofOptions.decode(reader, reader.uint32());
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -17715,6 +18899,21 @@
                  */
                 OneofDescriptorProto.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for OneofDescriptorProto
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.OneofDescriptorProto
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                OneofDescriptorProto.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.OneofDescriptorProto";
                 };
     
                 return OneofDescriptorProto;
@@ -17862,27 +19061,32 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 2:
-                            if (!(message.value && message.value.length))
-                                message.value = [];
-                            message.value.push($root.google.protobuf.EnumValueDescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 3:
-                            message.options = $root.google.protobuf.EnumOptions.decode(reader, reader.uint32());
-                            break;
-                        case 4:
-                            if (!(message.reservedRange && message.reservedRange.length))
-                                message.reservedRange = [];
-                            message.reservedRange.push($root.google.protobuf.EnumDescriptorProto.EnumReservedRange.decode(reader, reader.uint32()));
-                            break;
-                        case 5:
-                            if (!(message.reservedName && message.reservedName.length))
-                                message.reservedName = [];
-                            message.reservedName.push(reader.string());
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                if (!(message.value && message.value.length))
+                                    message.value = [];
+                                message.value.push($root.google.protobuf.EnumValueDescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 3: {
+                                message.options = $root.google.protobuf.EnumOptions.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 4: {
+                                if (!(message.reservedRange && message.reservedRange.length))
+                                    message.reservedRange = [];
+                                message.reservedRange.push($root.google.protobuf.EnumDescriptorProto.EnumReservedRange.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 5: {
+                                if (!(message.reservedName && message.reservedName.length))
+                                    message.reservedName = [];
+                                message.reservedName.push(reader.string());
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -18058,6 +19262,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for EnumDescriptorProto
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.EnumDescriptorProto
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                EnumDescriptorProto.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.EnumDescriptorProto";
+                };
+    
                 EnumDescriptorProto.EnumReservedRange = (function() {
     
                     /**
@@ -18161,12 +19380,14 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.start = reader.int32();
-                                break;
-                            case 2:
-                                message.end = reader.int32();
-                                break;
+                            case 1: {
+                                    message.start = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    message.end = reader.int32();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -18263,6 +19484,21 @@
                      */
                     EnumReservedRange.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for EnumReservedRange
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.EnumDescriptorProto.EnumReservedRange
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    EnumReservedRange.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.EnumDescriptorProto.EnumReservedRange";
                     };
     
                     return EnumReservedRange;
@@ -18385,15 +19621,18 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 2:
-                            message.number = reader.int32();
-                            break;
-                        case 3:
-                            message.options = $root.google.protobuf.EnumValueOptions.decode(reader, reader.uint32());
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.number = reader.int32();
+                                break;
+                            }
+                        case 3: {
+                                message.options = $root.google.protobuf.EnumValueOptions.decode(reader, reader.uint32());
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -18503,6 +19742,21 @@
                  */
                 EnumValueDescriptorProto.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for EnumValueDescriptorProto
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.EnumValueDescriptorProto
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                EnumValueDescriptorProto.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.EnumValueDescriptorProto";
                 };
     
                 return EnumValueDescriptorProto;
@@ -18624,17 +19878,20 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 2:
-                            if (!(message.method && message.method.length))
-                                message.method = [];
-                            message.method.push($root.google.protobuf.MethodDescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 3:
-                            message.options = $root.google.protobuf.ServiceOptions.decode(reader, reader.uint32());
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                if (!(message.method && message.method.length))
+                                    message.method = [];
+                                message.method.push($root.google.protobuf.MethodDescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 3: {
+                                message.options = $root.google.protobuf.ServiceOptions.decode(reader, reader.uint32());
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -18762,6 +20019,21 @@
                  */
                 ServiceDescriptorProto.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for ServiceDescriptorProto
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.ServiceDescriptorProto
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ServiceDescriptorProto.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.ServiceDescriptorProto";
                 };
     
                 return ServiceDescriptorProto;
@@ -18914,24 +20186,30 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 2:
-                            message.inputType = reader.string();
-                            break;
-                        case 3:
-                            message.outputType = reader.string();
-                            break;
-                        case 4:
-                            message.options = $root.google.protobuf.MethodOptions.decode(reader, reader.uint32());
-                            break;
-                        case 5:
-                            message.clientStreaming = reader.bool();
-                            break;
-                        case 6:
-                            message.serverStreaming = reader.bool();
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.inputType = reader.string();
+                                break;
+                            }
+                        case 3: {
+                                message.outputType = reader.string();
+                                break;
+                            }
+                        case 4: {
+                                message.options = $root.google.protobuf.MethodOptions.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 5: {
+                                message.clientStreaming = reader.bool();
+                                break;
+                            }
+                        case 6: {
+                                message.serverStreaming = reader.bool();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -19065,6 +20343,21 @@
                  */
                 MethodDescriptorProto.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for MethodDescriptorProto
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.MethodDescriptorProto
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                MethodDescriptorProto.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.MethodDescriptorProto";
                 };
     
                 return MethodDescriptorProto;
@@ -19397,76 +20690,98 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.javaPackage = reader.string();
-                            break;
-                        case 8:
-                            message.javaOuterClassname = reader.string();
-                            break;
-                        case 10:
-                            message.javaMultipleFiles = reader.bool();
-                            break;
-                        case 20:
-                            message.javaGenerateEqualsAndHash = reader.bool();
-                            break;
-                        case 27:
-                            message.javaStringCheckUtf8 = reader.bool();
-                            break;
-                        case 9:
-                            message.optimizeFor = reader.int32();
-                            break;
-                        case 11:
-                            message.goPackage = reader.string();
-                            break;
-                        case 16:
-                            message.ccGenericServices = reader.bool();
-                            break;
-                        case 17:
-                            message.javaGenericServices = reader.bool();
-                            break;
-                        case 18:
-                            message.pyGenericServices = reader.bool();
-                            break;
-                        case 42:
-                            message.phpGenericServices = reader.bool();
-                            break;
-                        case 23:
-                            message.deprecated = reader.bool();
-                            break;
-                        case 31:
-                            message.ccEnableArenas = reader.bool();
-                            break;
-                        case 36:
-                            message.objcClassPrefix = reader.string();
-                            break;
-                        case 37:
-                            message.csharpNamespace = reader.string();
-                            break;
-                        case 39:
-                            message.swiftPrefix = reader.string();
-                            break;
-                        case 40:
-                            message.phpClassPrefix = reader.string();
-                            break;
-                        case 41:
-                            message.phpNamespace = reader.string();
-                            break;
-                        case 44:
-                            message.phpMetadataNamespace = reader.string();
-                            break;
-                        case 45:
-                            message.rubyPackage = reader.string();
-                            break;
-                        case 999:
-                            if (!(message.uninterpretedOption && message.uninterpretedOption.length))
-                                message.uninterpretedOption = [];
-                            message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
-                            break;
-                        case 1053:
-                            if (!(message[".google.api.resourceDefinition"] && message[".google.api.resourceDefinition"].length))
-                                message[".google.api.resourceDefinition"] = [];
-                            message[".google.api.resourceDefinition"].push($root.google.api.ResourceDescriptor.decode(reader, reader.uint32()));
-                            break;
+                        case 1: {
+                                message.javaPackage = reader.string();
+                                break;
+                            }
+                        case 8: {
+                                message.javaOuterClassname = reader.string();
+                                break;
+                            }
+                        case 10: {
+                                message.javaMultipleFiles = reader.bool();
+                                break;
+                            }
+                        case 20: {
+                                message.javaGenerateEqualsAndHash = reader.bool();
+                                break;
+                            }
+                        case 27: {
+                                message.javaStringCheckUtf8 = reader.bool();
+                                break;
+                            }
+                        case 9: {
+                                message.optimizeFor = reader.int32();
+                                break;
+                            }
+                        case 11: {
+                                message.goPackage = reader.string();
+                                break;
+                            }
+                        case 16: {
+                                message.ccGenericServices = reader.bool();
+                                break;
+                            }
+                        case 17: {
+                                message.javaGenericServices = reader.bool();
+                                break;
+                            }
+                        case 18: {
+                                message.pyGenericServices = reader.bool();
+                                break;
+                            }
+                        case 42: {
+                                message.phpGenericServices = reader.bool();
+                                break;
+                            }
+                        case 23: {
+                                message.deprecated = reader.bool();
+                                break;
+                            }
+                        case 31: {
+                                message.ccEnableArenas = reader.bool();
+                                break;
+                            }
+                        case 36: {
+                                message.objcClassPrefix = reader.string();
+                                break;
+                            }
+                        case 37: {
+                                message.csharpNamespace = reader.string();
+                                break;
+                            }
+                        case 39: {
+                                message.swiftPrefix = reader.string();
+                                break;
+                            }
+                        case 40: {
+                                message.phpClassPrefix = reader.string();
+                                break;
+                            }
+                        case 41: {
+                                message.phpNamespace = reader.string();
+                                break;
+                            }
+                        case 44: {
+                                message.phpMetadataNamespace = reader.string();
+                                break;
+                            }
+                        case 45: {
+                                message.rubyPackage = reader.string();
+                                break;
+                            }
+                        case 999: {
+                                if (!(message.uninterpretedOption && message.uninterpretedOption.length))
+                                    message.uninterpretedOption = [];
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 1053: {
+                                if (!(message[".google.api.resourceDefinition"] && message[".google.api.resourceDefinition"].length))
+                                    message[".google.api.resourceDefinition"] = [];
+                                message[".google.api.resourceDefinition"].push($root.google.api.ResourceDescriptor.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -19780,6 +21095,21 @@
                 };
     
                 /**
+                 * Gets the default type url for FileOptions
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.FileOptions
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FileOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.FileOptions";
+                };
+    
+                /**
                  * OptimizeMode enum.
                  * @name google.protobuf.FileOptions.OptimizeMode
                  * @enum {number}
@@ -19947,26 +21277,32 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.messageSetWireFormat = reader.bool();
-                            break;
-                        case 2:
-                            message.noStandardDescriptorAccessor = reader.bool();
-                            break;
-                        case 3:
-                            message.deprecated = reader.bool();
-                            break;
-                        case 7:
-                            message.mapEntry = reader.bool();
-                            break;
-                        case 999:
-                            if (!(message.uninterpretedOption && message.uninterpretedOption.length))
-                                message.uninterpretedOption = [];
-                            message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
-                            break;
-                        case 1053:
-                            message[".google.api.resource"] = $root.google.api.ResourceDescriptor.decode(reader, reader.uint32());
-                            break;
+                        case 1: {
+                                message.messageSetWireFormat = reader.bool();
+                                break;
+                            }
+                        case 2: {
+                                message.noStandardDescriptorAccessor = reader.bool();
+                                break;
+                            }
+                        case 3: {
+                                message.deprecated = reader.bool();
+                                break;
+                            }
+                        case 7: {
+                                message.mapEntry = reader.bool();
+                                break;
+                            }
+                        case 999: {
+                                if (!(message.uninterpretedOption && message.uninterpretedOption.length))
+                                    message.uninterpretedOption = [];
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 1053: {
+                                message[".google.api.resource"] = $root.google.api.ResourceDescriptor.decode(reader, reader.uint32());
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -20120,6 +21456,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for MessageOptions
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.MessageOptions
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                MessageOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.MessageOptions";
+                };
+    
                 return MessageOptions;
             })();
     
@@ -20133,6 +21484,7 @@
                  * @property {boolean|null} [packed] FieldOptions packed
                  * @property {google.protobuf.FieldOptions.JSType|null} [jstype] FieldOptions jstype
                  * @property {boolean|null} [lazy] FieldOptions lazy
+                 * @property {boolean|null} [unverifiedLazy] FieldOptions unverifiedLazy
                  * @property {boolean|null} [deprecated] FieldOptions deprecated
                  * @property {boolean|null} [weak] FieldOptions weak
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
@@ -20188,6 +21540,14 @@
                  * @instance
                  */
                 FieldOptions.prototype.lazy = false;
+    
+                /**
+                 * FieldOptions unverifiedLazy.
+                 * @member {boolean} unverifiedLazy
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype.unverifiedLazy = false;
     
                 /**
                  * FieldOptions deprecated.
@@ -20265,6 +21625,8 @@
                         writer.uint32(/* id 6, wireType 0 =*/48).int32(message.jstype);
                     if (message.weak != null && Object.hasOwnProperty.call(message, "weak"))
                         writer.uint32(/* id 10, wireType 0 =*/80).bool(message.weak);
+                    if (message.unverifiedLazy != null && Object.hasOwnProperty.call(message, "unverifiedLazy"))
+                        writer.uint32(/* id 15, wireType 0 =*/120).bool(message.unverifiedLazy);
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -20310,42 +21672,55 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.ctype = reader.int32();
-                            break;
-                        case 2:
-                            message.packed = reader.bool();
-                            break;
-                        case 6:
-                            message.jstype = reader.int32();
-                            break;
-                        case 5:
-                            message.lazy = reader.bool();
-                            break;
-                        case 3:
-                            message.deprecated = reader.bool();
-                            break;
-                        case 10:
-                            message.weak = reader.bool();
-                            break;
-                        case 999:
-                            if (!(message.uninterpretedOption && message.uninterpretedOption.length))
-                                message.uninterpretedOption = [];
-                            message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
-                            break;
-                        case 1052:
-                            if (!(message[".google.api.fieldBehavior"] && message[".google.api.fieldBehavior"].length))
-                                message[".google.api.fieldBehavior"] = [];
-                            if ((tag & 7) === 2) {
-                                var end2 = reader.uint32() + reader.pos;
-                                while (reader.pos < end2)
+                        case 1: {
+                                message.ctype = reader.int32();
+                                break;
+                            }
+                        case 2: {
+                                message.packed = reader.bool();
+                                break;
+                            }
+                        case 6: {
+                                message.jstype = reader.int32();
+                                break;
+                            }
+                        case 5: {
+                                message.lazy = reader.bool();
+                                break;
+                            }
+                        case 15: {
+                                message.unverifiedLazy = reader.bool();
+                                break;
+                            }
+                        case 3: {
+                                message.deprecated = reader.bool();
+                                break;
+                            }
+                        case 10: {
+                                message.weak = reader.bool();
+                                break;
+                            }
+                        case 999: {
+                                if (!(message.uninterpretedOption && message.uninterpretedOption.length))
+                                    message.uninterpretedOption = [];
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 1052: {
+                                if (!(message[".google.api.fieldBehavior"] && message[".google.api.fieldBehavior"].length))
+                                    message[".google.api.fieldBehavior"] = [];
+                                if ((tag & 7) === 2) {
+                                    var end2 = reader.uint32() + reader.pos;
+                                    while (reader.pos < end2)
+                                        message[".google.api.fieldBehavior"].push(reader.int32());
+                                } else
                                     message[".google.api.fieldBehavior"].push(reader.int32());
-                            } else
-                                message[".google.api.fieldBehavior"].push(reader.int32());
-                            break;
-                        case 1055:
-                            message[".google.api.resourceReference"] = $root.google.api.ResourceReference.decode(reader, reader.uint32());
-                            break;
+                                break;
+                            }
+                        case 1055: {
+                                message[".google.api.resourceReference"] = $root.google.api.ResourceReference.decode(reader, reader.uint32());
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -20405,6 +21780,9 @@
                     if (message.lazy != null && message.hasOwnProperty("lazy"))
                         if (typeof message.lazy !== "boolean")
                             return "lazy: boolean expected";
+                    if (message.unverifiedLazy != null && message.hasOwnProperty("unverifiedLazy"))
+                        if (typeof message.unverifiedLazy !== "boolean")
+                            return "unverifiedLazy: boolean expected";
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         if (typeof message.deprecated !== "boolean")
                             return "deprecated: boolean expected";
@@ -20490,6 +21868,8 @@
                     }
                     if (object.lazy != null)
                         message.lazy = Boolean(object.lazy);
+                    if (object.unverifiedLazy != null)
+                        message.unverifiedLazy = Boolean(object.unverifiedLazy);
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
                     if (object.weak != null)
@@ -20577,6 +21957,7 @@
                         object.lazy = false;
                         object.jstype = options.enums === String ? "JS_NORMAL" : 0;
                         object.weak = false;
+                        object.unverifiedLazy = false;
                         object[".google.api.resourceReference"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
@@ -20591,6 +21972,8 @@
                         object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
                     if (message.weak != null && message.hasOwnProperty("weak"))
                         object.weak = message.weak;
+                    if (message.unverifiedLazy != null && message.hasOwnProperty("unverifiedLazy"))
+                        object.unverifiedLazy = message.unverifiedLazy;
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -20615,6 +21998,21 @@
                  */
                 FieldOptions.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for FieldOptions
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.FieldOptions
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FieldOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.FieldOptions";
                 };
     
                 /**
@@ -20746,11 +22144,12 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 999:
-                            if (!(message.uninterpretedOption && message.uninterpretedOption.length))
-                                message.uninterpretedOption = [];
-                            message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
-                            break;
+                        case 999: {
+                                if (!(message.uninterpretedOption && message.uninterpretedOption.length))
+                                    message.uninterpretedOption = [];
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -20855,6 +22254,21 @@
                  */
                 OneofOptions.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for OneofOptions
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.OneofOptions
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                OneofOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.OneofOptions";
                 };
     
                 return OneofOptions;
@@ -20976,17 +22390,20 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 2:
-                            message.allowAlias = reader.bool();
-                            break;
-                        case 3:
-                            message.deprecated = reader.bool();
-                            break;
-                        case 999:
-                            if (!(message.uninterpretedOption && message.uninterpretedOption.length))
-                                message.uninterpretedOption = [];
-                            message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
-                            break;
+                        case 2: {
+                                message.allowAlias = reader.bool();
+                                break;
+                            }
+                        case 3: {
+                                message.deprecated = reader.bool();
+                                break;
+                            }
+                        case 999: {
+                                if (!(message.uninterpretedOption && message.uninterpretedOption.length))
+                                    message.uninterpretedOption = [];
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -21111,6 +22528,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for EnumOptions
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.EnumOptions
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                EnumOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.EnumOptions";
+                };
+    
                 return EnumOptions;
             })();
     
@@ -21219,14 +22651,16 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.deprecated = reader.bool();
-                            break;
-                        case 999:
-                            if (!(message.uninterpretedOption && message.uninterpretedOption.length))
-                                message.uninterpretedOption = [];
-                            message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
-                            break;
+                        case 1: {
+                                message.deprecated = reader.bool();
+                                break;
+                            }
+                        case 999: {
+                                if (!(message.uninterpretedOption && message.uninterpretedOption.length))
+                                    message.uninterpretedOption = [];
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -21340,6 +22774,21 @@
                  */
                 EnumValueOptions.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for EnumValueOptions
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.EnumValueOptions
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                EnumValueOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.EnumValueOptions";
                 };
     
                 return EnumValueOptions;
@@ -21472,20 +22921,24 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 33:
-                            message.deprecated = reader.bool();
-                            break;
-                        case 999:
-                            if (!(message.uninterpretedOption && message.uninterpretedOption.length))
-                                message.uninterpretedOption = [];
-                            message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
-                            break;
-                        case 1049:
-                            message[".google.api.defaultHost"] = reader.string();
-                            break;
-                        case 1050:
-                            message[".google.api.oauthScopes"] = reader.string();
-                            break;
+                        case 33: {
+                                message.deprecated = reader.bool();
+                                break;
+                            }
+                        case 999: {
+                                if (!(message.uninterpretedOption && message.uninterpretedOption.length))
+                                    message.uninterpretedOption = [];
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 1049: {
+                                message[".google.api.defaultHost"] = reader.string();
+                                break;
+                            }
+                        case 1050: {
+                                message[".google.api.oauthScopes"] = reader.string();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -21616,6 +23069,21 @@
                  */
                 ServiceOptions.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for ServiceOptions
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.ServiceOptions
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ServiceOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.ServiceOptions";
                 };
     
                 return ServiceOptions;
@@ -21761,25 +23229,30 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 33:
-                            message.deprecated = reader.bool();
-                            break;
-                        case 34:
-                            message.idempotencyLevel = reader.int32();
-                            break;
-                        case 999:
-                            if (!(message.uninterpretedOption && message.uninterpretedOption.length))
-                                message.uninterpretedOption = [];
-                            message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
-                            break;
-                        case 72295728:
-                            message[".google.api.http"] = $root.google.api.HttpRule.decode(reader, reader.uint32());
-                            break;
-                        case 1051:
-                            if (!(message[".google.api.methodSignature"] && message[".google.api.methodSignature"].length))
-                                message[".google.api.methodSignature"] = [];
-                            message[".google.api.methodSignature"].push(reader.string());
-                            break;
+                        case 33: {
+                                message.deprecated = reader.bool();
+                                break;
+                            }
+                        case 34: {
+                                message.idempotencyLevel = reader.int32();
+                                break;
+                            }
+                        case 999: {
+                                if (!(message.uninterpretedOption && message.uninterpretedOption.length))
+                                    message.uninterpretedOption = [];
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 72295728: {
+                                message[".google.api.http"] = $root.google.api.HttpRule.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 1051: {
+                                if (!(message[".google.api.methodSignature"] && message[".google.api.methodSignature"].length))
+                                    message[".google.api.methodSignature"] = [];
+                                message[".google.api.methodSignature"].push(reader.string());
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -21954,6 +23427,21 @@
                  */
                 MethodOptions.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for MethodOptions
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.MethodOptions
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                MethodOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.MethodOptions";
                 };
     
                 /**
@@ -22135,29 +23623,36 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 2:
-                            if (!(message.name && message.name.length))
-                                message.name = [];
-                            message.name.push($root.google.protobuf.UninterpretedOption.NamePart.decode(reader, reader.uint32()));
-                            break;
-                        case 3:
-                            message.identifierValue = reader.string();
-                            break;
-                        case 4:
-                            message.positiveIntValue = reader.uint64();
-                            break;
-                        case 5:
-                            message.negativeIntValue = reader.int64();
-                            break;
-                        case 6:
-                            message.doubleValue = reader.double();
-                            break;
-                        case 7:
-                            message.stringValue = reader.bytes();
-                            break;
-                        case 8:
-                            message.aggregateValue = reader.string();
-                            break;
+                        case 2: {
+                                if (!(message.name && message.name.length))
+                                    message.name = [];
+                                message.name.push($root.google.protobuf.UninterpretedOption.NamePart.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 3: {
+                                message.identifierValue = reader.string();
+                                break;
+                            }
+                        case 4: {
+                                message.positiveIntValue = reader.uint64();
+                                break;
+                            }
+                        case 5: {
+                                message.negativeIntValue = reader.int64();
+                                break;
+                            }
+                        case 6: {
+                                message.doubleValue = reader.double();
+                                break;
+                            }
+                        case 7: {
+                                message.stringValue = reader.bytes();
+                                break;
+                            }
+                        case 8: {
+                                message.aggregateValue = reader.string();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -22270,7 +23765,7 @@
                     if (object.stringValue != null)
                         if (typeof object.stringValue === "string")
                             $util.base64.decode(object.stringValue, message.stringValue = $util.newBuffer($util.base64.length(object.stringValue)), 0);
-                        else if (object.stringValue.length)
+                        else if (object.stringValue.length >= 0)
                             message.stringValue = object.stringValue;
                     if (object.aggregateValue != null)
                         message.aggregateValue = String(object.aggregateValue);
@@ -22349,6 +23844,21 @@
                  */
                 UninterpretedOption.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for UninterpretedOption
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.UninterpretedOption
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                UninterpretedOption.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.UninterpretedOption";
                 };
     
                 UninterpretedOption.NamePart = (function() {
@@ -22452,12 +23962,14 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.namePart = reader.string();
-                                break;
-                            case 2:
-                                message.isExtension = reader.bool();
-                                break;
+                            case 1: {
+                                    message.namePart = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.isExtension = reader.bool();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -22556,6 +24068,21 @@
                      */
                     NamePart.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for NamePart
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.UninterpretedOption.NamePart
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    NamePart.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.UninterpretedOption.NamePart";
                     };
     
                     return NamePart;
@@ -22658,11 +24185,12 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            if (!(message.location && message.location.length))
-                                message.location = [];
-                            message.location.push($root.google.protobuf.SourceCodeInfo.Location.decode(reader, reader.uint32()));
-                            break;
+                        case 1: {
+                                if (!(message.location && message.location.length))
+                                    message.location = [];
+                                message.location.push($root.google.protobuf.SourceCodeInfo.Location.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -22767,6 +24295,21 @@
                  */
                 SourceCodeInfo.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for SourceCodeInfo
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.SourceCodeInfo
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                SourceCodeInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.SourceCodeInfo";
                 };
     
                 SourceCodeInfo.Location = (function() {
@@ -22917,37 +24460,42 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                if (!(message.path && message.path.length))
-                                    message.path = [];
-                                if ((tag & 7) === 2) {
-                                    var end2 = reader.uint32() + reader.pos;
-                                    while (reader.pos < end2)
+                            case 1: {
+                                    if (!(message.path && message.path.length))
+                                        message.path = [];
+                                    if ((tag & 7) === 2) {
+                                        var end2 = reader.uint32() + reader.pos;
+                                        while (reader.pos < end2)
+                                            message.path.push(reader.int32());
+                                    } else
                                         message.path.push(reader.int32());
-                                } else
-                                    message.path.push(reader.int32());
-                                break;
-                            case 2:
-                                if (!(message.span && message.span.length))
-                                    message.span = [];
-                                if ((tag & 7) === 2) {
-                                    var end2 = reader.uint32() + reader.pos;
-                                    while (reader.pos < end2)
+                                    break;
+                                }
+                            case 2: {
+                                    if (!(message.span && message.span.length))
+                                        message.span = [];
+                                    if ((tag & 7) === 2) {
+                                        var end2 = reader.uint32() + reader.pos;
+                                        while (reader.pos < end2)
+                                            message.span.push(reader.int32());
+                                    } else
                                         message.span.push(reader.int32());
-                                } else
-                                    message.span.push(reader.int32());
-                                break;
-                            case 3:
-                                message.leadingComments = reader.string();
-                                break;
-                            case 4:
-                                message.trailingComments = reader.string();
-                                break;
-                            case 6:
-                                if (!(message.leadingDetachedComments && message.leadingDetachedComments.length))
-                                    message.leadingDetachedComments = [];
-                                message.leadingDetachedComments.push(reader.string());
-                                break;
+                                    break;
+                                }
+                            case 3: {
+                                    message.leadingComments = reader.string();
+                                    break;
+                                }
+                            case 4: {
+                                    message.trailingComments = reader.string();
+                                    break;
+                                }
+                            case 6: {
+                                    if (!(message.leadingDetachedComments && message.leadingDetachedComments.length))
+                                        message.leadingDetachedComments = [];
+                                    message.leadingDetachedComments.push(reader.string());
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -23108,6 +24656,21 @@
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
+                    /**
+                     * Gets the default type url for Location
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.SourceCodeInfo.Location
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    Location.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.SourceCodeInfo.Location";
+                    };
+    
                     return Location;
                 })();
     
@@ -23208,11 +24771,12 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            if (!(message.annotation && message.annotation.length))
-                                message.annotation = [];
-                            message.annotation.push($root.google.protobuf.GeneratedCodeInfo.Annotation.decode(reader, reader.uint32()));
-                            break;
+                        case 1: {
+                                if (!(message.annotation && message.annotation.length))
+                                    message.annotation = [];
+                                message.annotation.push($root.google.protobuf.GeneratedCodeInfo.Annotation.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -23319,6 +24883,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for GeneratedCodeInfo
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.GeneratedCodeInfo
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                GeneratedCodeInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.GeneratedCodeInfo";
+                };
+    
                 GeneratedCodeInfo.Annotation = (function() {
     
                     /**
@@ -23329,6 +24908,7 @@
                      * @property {string|null} [sourceFile] Annotation sourceFile
                      * @property {number|null} [begin] Annotation begin
                      * @property {number|null} [end] Annotation end
+                     * @property {google.protobuf.GeneratedCodeInfo.Annotation.Semantic|null} [semantic] Annotation semantic
                      */
     
                     /**
@@ -23380,6 +24960,14 @@
                     Annotation.prototype.end = 0;
     
                     /**
+                     * Annotation semantic.
+                     * @member {google.protobuf.GeneratedCodeInfo.Annotation.Semantic} semantic
+                     * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                     * @instance
+                     */
+                    Annotation.prototype.semantic = 0;
+    
+                    /**
                      * Creates a new Annotation instance using the specified properties.
                      * @function create
                      * @memberof google.protobuf.GeneratedCodeInfo.Annotation
@@ -23415,6 +25003,8 @@
                             writer.uint32(/* id 3, wireType 0 =*/24).int32(message.begin);
                         if (message.end != null && Object.hasOwnProperty.call(message, "end"))
                             writer.uint32(/* id 4, wireType 0 =*/32).int32(message.end);
+                        if (message.semantic != null && Object.hasOwnProperty.call(message, "semantic"))
+                            writer.uint32(/* id 5, wireType 0 =*/40).int32(message.semantic);
                         return writer;
                     };
     
@@ -23449,25 +25039,33 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                if (!(message.path && message.path.length))
-                                    message.path = [];
-                                if ((tag & 7) === 2) {
-                                    var end2 = reader.uint32() + reader.pos;
-                                    while (reader.pos < end2)
+                            case 1: {
+                                    if (!(message.path && message.path.length))
+                                        message.path = [];
+                                    if ((tag & 7) === 2) {
+                                        var end2 = reader.uint32() + reader.pos;
+                                        while (reader.pos < end2)
+                                            message.path.push(reader.int32());
+                                    } else
                                         message.path.push(reader.int32());
-                                } else
-                                    message.path.push(reader.int32());
-                                break;
-                            case 2:
-                                message.sourceFile = reader.string();
-                                break;
-                            case 3:
-                                message.begin = reader.int32();
-                                break;
-                            case 4:
-                                message.end = reader.int32();
-                                break;
+                                    break;
+                                }
+                            case 2: {
+                                    message.sourceFile = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.begin = reader.int32();
+                                    break;
+                                }
+                            case 4: {
+                                    message.end = reader.int32();
+                                    break;
+                                }
+                            case 5: {
+                                    message.semantic = reader.int32();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -23519,6 +25117,15 @@
                         if (message.end != null && message.hasOwnProperty("end"))
                             if (!$util.isInteger(message.end))
                                 return "end: integer expected";
+                        if (message.semantic != null && message.hasOwnProperty("semantic"))
+                            switch (message.semantic) {
+                            default:
+                                return "semantic: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            }
                         return null;
                     };
     
@@ -23547,6 +25154,20 @@
                             message.begin = object.begin | 0;
                         if (object.end != null)
                             message.end = object.end | 0;
+                        switch (object.semantic) {
+                        case "NONE":
+                        case 0:
+                            message.semantic = 0;
+                            break;
+                        case "SET":
+                        case 1:
+                            message.semantic = 1;
+                            break;
+                        case "ALIAS":
+                        case 2:
+                            message.semantic = 2;
+                            break;
+                        }
                         return message;
                     };
     
@@ -23569,6 +25190,7 @@
                             object.sourceFile = "";
                             object.begin = 0;
                             object.end = 0;
+                            object.semantic = options.enums === String ? "NONE" : 0;
                         }
                         if (message.path && message.path.length) {
                             object.path = [];
@@ -23581,6 +25203,8 @@
                             object.begin = message.begin;
                         if (message.end != null && message.hasOwnProperty("end"))
                             object.end = message.end;
+                        if (message.semantic != null && message.hasOwnProperty("semantic"))
+                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
                         return object;
                     };
     
@@ -23594,6 +25218,37 @@
                     Annotation.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
+    
+                    /**
+                     * Gets the default type url for Annotation
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    Annotation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.GeneratedCodeInfo.Annotation";
+                    };
+    
+                    /**
+                     * Semantic enum.
+                     * @name google.protobuf.GeneratedCodeInfo.Annotation.Semantic
+                     * @enum {number}
+                     * @property {number} NONE=0 NONE value
+                     * @property {number} SET=1 SET value
+                     * @property {number} ALIAS=2 ALIAS value
+                     */
+                    Annotation.Semantic = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "NONE"] = 0;
+                        values[valuesById[1] = "SET"] = 1;
+                        values[valuesById[2] = "ALIAS"] = 2;
+                        return values;
+                    })();
     
                     return Annotation;
                 })();
@@ -23704,12 +25359,14 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.seconds = reader.int64();
-                            break;
-                        case 2:
-                            message.nanos = reader.int32();
-                            break;
+                        case 1: {
+                                message.seconds = reader.int64();
+                                break;
+                            }
+                        case 2: {
+                                message.nanos = reader.int32();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -23822,6 +25479,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for Timestamp
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Timestamp.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Timestamp";
+                };
+    
                 return Timestamp;
             })();
     
@@ -23917,9 +25589,10 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.value = reader.double();
-                            break;
+                        case 1: {
+                                message.value = reader.double();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -24007,6 +25680,21 @@
                  */
                 DoubleValue.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for DoubleValue
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.DoubleValue
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                DoubleValue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.DoubleValue";
                 };
     
                 return DoubleValue;
@@ -24104,9 +25792,10 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.value = reader.float();
-                            break;
+                        case 1: {
+                                message.value = reader.float();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -24194,6 +25883,21 @@
                  */
                 FloatValue.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for FloatValue
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.FloatValue
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FloatValue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.FloatValue";
                 };
     
                 return FloatValue;
@@ -24291,9 +25995,10 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.value = reader.int64();
-                            break;
+                        case 1: {
+                                message.value = reader.int64();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -24397,6 +26102,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for Int64Value
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Int64Value
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Int64Value.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Int64Value";
+                };
+    
                 return Int64Value;
             })();
     
@@ -24492,9 +26212,10 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.value = reader.uint64();
-                            break;
+                        case 1: {
+                                message.value = reader.uint64();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -24598,6 +26319,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for UInt64Value
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.UInt64Value
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                UInt64Value.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.UInt64Value";
+                };
+    
                 return UInt64Value;
             })();
     
@@ -24693,9 +26429,10 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.value = reader.int32();
-                            break;
+                        case 1: {
+                                message.value = reader.int32();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -24783,6 +26520,21 @@
                  */
                 Int32Value.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Int32Value
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Int32Value
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Int32Value.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Int32Value";
                 };
     
                 return Int32Value;
@@ -24880,9 +26632,10 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.value = reader.uint32();
-                            break;
+                        case 1: {
+                                message.value = reader.uint32();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -24970,6 +26723,21 @@
                  */
                 UInt32Value.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for UInt32Value
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.UInt32Value
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                UInt32Value.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.UInt32Value";
                 };
     
                 return UInt32Value;
@@ -25067,9 +26835,10 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.value = reader.bool();
-                            break;
+                        case 1: {
+                                message.value = reader.bool();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -25157,6 +26926,21 @@
                  */
                 BoolValue.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for BoolValue
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.BoolValue
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                BoolValue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.BoolValue";
                 };
     
                 return BoolValue;
@@ -25254,9 +27038,10 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.value = reader.string();
-                            break;
+                        case 1: {
+                                message.value = reader.string();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -25344,6 +27129,21 @@
                  */
                 StringValue.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for StringValue
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.StringValue
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                StringValue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.StringValue";
                 };
     
                 return StringValue;
@@ -25441,9 +27241,10 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.value = reader.bytes();
-                            break;
+                        case 1: {
+                                message.value = reader.bytes();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -25500,7 +27301,7 @@
                     if (object.value != null)
                         if (typeof object.value === "string")
                             $util.base64.decode(object.value, message.value = $util.newBuffer($util.base64.length(object.value)), 0);
-                        else if (object.value.length)
+                        else if (object.value.length >= 0)
                             message.value = object.value;
                     return message;
                 };
@@ -25540,6 +27341,21 @@
                  */
                 BytesValue.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for BytesValue
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.BytesValue
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                BytesValue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.BytesValue";
                 };
     
                 return BytesValue;
@@ -25648,12 +27464,14 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.type_url = reader.string();
-                            break;
-                        case 2:
-                            message.value = reader.bytes();
-                            break;
+                        case 1: {
+                                message.type_url = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.value = reader.bytes();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -25715,7 +27533,7 @@
                     if (object.value != null)
                         if (typeof object.value === "string")
                             $util.base64.decode(object.value, message.value = $util.newBuffer($util.base64.length(object.value)), 0);
-                        else if (object.value.length)
+                        else if (object.value.length >= 0)
                             message.value = object.value;
                     return message;
                 };
@@ -25759,6 +27577,21 @@
                  */
                 Any.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Any
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Any.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Any";
                 };
     
                 return Any;
@@ -25921,6 +27754,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for Empty
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Empty.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Empty";
+                };
+    
                 return Empty;
             })();
     
@@ -26041,14 +27889,16 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            if (!(message.rules && message.rules.length))
-                                message.rules = [];
-                            message.rules.push($root.google.api.HttpRule.decode(reader, reader.uint32()));
-                            break;
-                        case 2:
-                            message.fullyDecodeReservedExpansion = reader.bool();
-                            break;
+                        case 1: {
+                                if (!(message.rules && message.rules.length))
+                                    message.rules = [];
+                                message.rules.push($root.google.api.HttpRule.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 2: {
+                                message.fullyDecodeReservedExpansion = reader.bool();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -26162,6 +28012,21 @@
                  */
                 Http.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Http
+                 * @function getTypeUrl
+                 * @memberof google.api.Http
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Http.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.Http";
                 };
     
                 return Http;
@@ -26374,38 +28239,48 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.selector = reader.string();
-                            break;
-                        case 2:
-                            message.get = reader.string();
-                            break;
-                        case 3:
-                            message.put = reader.string();
-                            break;
-                        case 4:
-                            message.post = reader.string();
-                            break;
-                        case 5:
-                            message["delete"] = reader.string();
-                            break;
-                        case 6:
-                            message.patch = reader.string();
-                            break;
-                        case 8:
-                            message.custom = $root.google.api.CustomHttpPattern.decode(reader, reader.uint32());
-                            break;
-                        case 7:
-                            message.body = reader.string();
-                            break;
-                        case 12:
-                            message.responseBody = reader.string();
-                            break;
-                        case 11:
-                            if (!(message.additionalBindings && message.additionalBindings.length))
-                                message.additionalBindings = [];
-                            message.additionalBindings.push($root.google.api.HttpRule.decode(reader, reader.uint32()));
-                            break;
+                        case 1: {
+                                message.selector = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.get = reader.string();
+                                break;
+                            }
+                        case 3: {
+                                message.put = reader.string();
+                                break;
+                            }
+                        case 4: {
+                                message.post = reader.string();
+                                break;
+                            }
+                        case 5: {
+                                message["delete"] = reader.string();
+                                break;
+                            }
+                        case 6: {
+                                message.patch = reader.string();
+                                break;
+                            }
+                        case 8: {
+                                message.custom = $root.google.api.CustomHttpPattern.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 7: {
+                                message.body = reader.string();
+                                break;
+                            }
+                        case 12: {
+                                message.responseBody = reader.string();
+                                break;
+                            }
+                        case 11: {
+                                if (!(message.additionalBindings && message.additionalBindings.length))
+                                    message.additionalBindings = [];
+                                message.additionalBindings.push($root.google.api.HttpRule.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -26627,6 +28502,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for HttpRule
+                 * @function getTypeUrl
+                 * @memberof google.api.HttpRule
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                HttpRule.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.HttpRule";
+                };
+    
                 return HttpRule;
             })();
     
@@ -26733,12 +28623,14 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.kind = reader.string();
-                            break;
-                        case 2:
-                            message.path = reader.string();
-                            break;
+                        case 1: {
+                                message.kind = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.path = reader.string();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -26835,6 +28727,21 @@
                  */
                 CustomHttpPattern.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for CustomHttpPattern
+                 * @function getTypeUrl
+                 * @memberof google.api.CustomHttpPattern
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                CustomHttpPattern.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.CustomHttpPattern";
                 };
     
                 return CustomHttpPattern;
@@ -27031,36 +28938,43 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.type = reader.string();
-                            break;
-                        case 2:
-                            if (!(message.pattern && message.pattern.length))
-                                message.pattern = [];
-                            message.pattern.push(reader.string());
-                            break;
-                        case 3:
-                            message.nameField = reader.string();
-                            break;
-                        case 4:
-                            message.history = reader.int32();
-                            break;
-                        case 5:
-                            message.plural = reader.string();
-                            break;
-                        case 6:
-                            message.singular = reader.string();
-                            break;
-                        case 10:
-                            if (!(message.style && message.style.length))
-                                message.style = [];
-                            if ((tag & 7) === 2) {
-                                var end2 = reader.uint32() + reader.pos;
-                                while (reader.pos < end2)
+                        case 1: {
+                                message.type = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                if (!(message.pattern && message.pattern.length))
+                                    message.pattern = [];
+                                message.pattern.push(reader.string());
+                                break;
+                            }
+                        case 3: {
+                                message.nameField = reader.string();
+                                break;
+                            }
+                        case 4: {
+                                message.history = reader.int32();
+                                break;
+                            }
+                        case 5: {
+                                message.plural = reader.string();
+                                break;
+                            }
+                        case 6: {
+                                message.singular = reader.string();
+                                break;
+                            }
+                        case 10: {
+                                if (!(message.style && message.style.length))
+                                    message.style = [];
+                                if ((tag & 7) === 2) {
+                                    var end2 = reader.uint32() + reader.pos;
+                                    while (reader.pos < end2)
+                                        message.style.push(reader.int32());
+                                } else
                                     message.style.push(reader.int32());
-                            } else
-                                message.style.push(reader.int32());
-                            break;
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -27259,6 +29173,21 @@
                 };
     
                 /**
+                 * Gets the default type url for ResourceDescriptor
+                 * @function getTypeUrl
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ResourceDescriptor.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.ResourceDescriptor";
+                };
+    
+                /**
                  * History enum.
                  * @name google.api.ResourceDescriptor.History
                  * @enum {number}
@@ -27394,12 +29323,14 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.type = reader.string();
-                            break;
-                        case 2:
-                            message.childType = reader.string();
-                            break;
+                        case 1: {
+                                message.type = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.childType = reader.string();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -27496,6 +29427,21 @@
                  */
                 ResourceReference.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for ResourceReference
+                 * @function getTypeUrl
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ResourceReference.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.ResourceReference";
                 };
     
                 return ResourceReference;
@@ -27629,17 +29575,20 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.code = reader.int32();
-                            break;
-                        case 2:
-                            message.message = reader.string();
-                            break;
-                        case 3:
-                            if (!(message.details && message.details.length))
-                                message.details = [];
-                            message.details.push($root.google.protobuf.Any.decode(reader, reader.uint32()));
-                            break;
+                        case 1: {
+                                message.code = reader.int32();
+                                break;
+                            }
+                        case 2: {
+                                message.message = reader.string();
+                                break;
+                            }
+                        case 3: {
+                                if (!(message.details && message.details.length))
+                                    message.details = [];
+                                message.details.push($root.google.protobuf.Any.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -27762,6 +29711,21 @@
                  */
                 Status.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Status
+                 * @function getTypeUrl
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Status.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.rpc.Status";
                 };
     
                 return Status;
