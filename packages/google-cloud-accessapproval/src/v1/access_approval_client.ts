@@ -28,7 +28,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -320,7 +319,8 @@ export class AccessApprovalClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -1396,7 +1396,7 @@ export class AccessApprovalClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listApprovalRequests.createStream(
-      this.innerApiCalls.listApprovalRequests as gax.GaxCall,
+      this.innerApiCalls.listApprovalRequests as GaxCall,
       request,
       callSettings
     );
@@ -1458,7 +1458,7 @@ export class AccessApprovalClient {
     this.initialize();
     return this.descriptors.page.listApprovalRequests.asyncIterate(
       this.innerApiCalls['listApprovalRequests'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.accessapproval.v1.IApprovalRequest>;
   }
