@@ -341,7 +341,8 @@ export class PredictionServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -790,7 +791,7 @@ export class PredictionServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.batchPredict,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.automl.v1.BatchPredictResult,

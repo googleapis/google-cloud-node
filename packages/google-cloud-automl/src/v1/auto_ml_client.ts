@@ -30,7 +30,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -489,7 +488,8 @@ export class AutoMlClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -1204,7 +1204,7 @@ export class AutoMlClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createDataset,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.automl.v1.Dataset,
@@ -1345,7 +1345,7 @@ export class AutoMlClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteDataset,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -1494,7 +1494,7 @@ export class AutoMlClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.importData,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -1635,7 +1635,7 @@ export class AutoMlClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.exportData,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -1778,7 +1778,7 @@ export class AutoMlClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createModel,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.automl.v1.Model,
@@ -1919,7 +1919,7 @@ export class AutoMlClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteModel,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -2070,7 +2070,7 @@ export class AutoMlClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deployModel,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -2213,7 +2213,7 @@ export class AutoMlClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.undeployModel,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -2358,7 +2358,7 @@ export class AutoMlClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.exportModel,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -2520,7 +2520,7 @@ export class AutoMlClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listDatasets.createStream(
-      this.innerApiCalls.listDatasets as gax.GaxCall,
+      this.innerApiCalls.listDatasets as GaxCall,
       request,
       callSettings
     );
@@ -2580,7 +2580,7 @@ export class AutoMlClient {
     this.initialize();
     return this.descriptors.page.listDatasets.asyncIterate(
       this.innerApiCalls['listDatasets'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.automl.v1.IDataset>;
   }
@@ -2739,7 +2739,7 @@ export class AutoMlClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listModels.createStream(
-      this.innerApiCalls.listModels as gax.GaxCall,
+      this.innerApiCalls.listModels as GaxCall,
       request,
       callSettings
     );
@@ -2800,7 +2800,7 @@ export class AutoMlClient {
     this.initialize();
     return this.descriptors.page.listModels.asyncIterate(
       this.innerApiCalls['listModels'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.automl.v1.IModel>;
   }
@@ -2975,7 +2975,7 @@ export class AutoMlClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listModelEvaluations.createStream(
-      this.innerApiCalls.listModelEvaluations as gax.GaxCall,
+      this.innerApiCalls.listModelEvaluations as GaxCall,
       request,
       callSettings
     );
@@ -3040,7 +3040,7 @@ export class AutoMlClient {
     this.initialize();
     return this.descriptors.page.listModelEvaluations.asyncIterate(
       this.innerApiCalls['listModelEvaluations'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.automl.v1.IModelEvaluation>;
   }
