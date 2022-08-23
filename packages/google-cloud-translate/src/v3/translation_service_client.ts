@@ -30,7 +30,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -366,7 +365,8 @@ export class TranslationServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -1257,7 +1257,7 @@ export class TranslationServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.batchTranslateText,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.translation.v3.BatchTranslateResponse,
@@ -1457,7 +1457,7 @@ export class TranslationServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.batchTranslateDocument,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.translation.v3.BatchTranslateDocumentResponse,
@@ -1597,7 +1597,7 @@ export class TranslationServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createGlossary,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.translation.v3.Glossary,
@@ -1736,7 +1736,7 @@ export class TranslationServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteGlossary,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.translation.v3.DeleteGlossaryResponse,
@@ -1923,7 +1923,7 @@ export class TranslationServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listGlossaries.createStream(
-      this.innerApiCalls.listGlossaries as gax.GaxCall,
+      this.innerApiCalls.listGlossaries as GaxCall,
       request,
       callSettings
     );
@@ -1992,7 +1992,7 @@ export class TranslationServiceClient {
     this.initialize();
     return this.descriptors.page.listGlossaries.asyncIterate(
       this.innerApiCalls['listGlossaries'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.translation.v3.IGlossary>;
   }
