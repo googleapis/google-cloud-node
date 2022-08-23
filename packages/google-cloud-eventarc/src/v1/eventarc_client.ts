@@ -30,7 +30,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -485,7 +484,8 @@ export class EventarcClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -1027,7 +1027,7 @@ export class EventarcClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createTrigger,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.eventarc.v1.Trigger,
@@ -1174,7 +1174,7 @@ export class EventarcClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateTrigger,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.eventarc.v1.Trigger,
@@ -1320,7 +1320,7 @@ export class EventarcClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteTrigger,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.eventarc.v1.Trigger,
@@ -1464,7 +1464,7 @@ export class EventarcClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createChannel,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.eventarc.v1.Channel,
@@ -1608,7 +1608,7 @@ export class EventarcClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateChannel,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.eventarc.v1.Channel,
@@ -1748,7 +1748,7 @@ export class EventarcClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteChannel,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.eventarc.v1.Channel,
@@ -1893,7 +1893,7 @@ export class EventarcClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createChannelConnection,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.eventarc.v1.ChannelConnection,
@@ -2034,7 +2034,7 @@ export class EventarcClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteChannelConnection,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.eventarc.v1.ChannelConnection,
@@ -2192,7 +2192,7 @@ export class EventarcClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listTriggers.createStream(
-      this.innerApiCalls.listTriggers as gax.GaxCall,
+      this.innerApiCalls.listTriggers as GaxCall,
       request,
       callSettings
     );
@@ -2250,7 +2250,7 @@ export class EventarcClient {
     this.initialize();
     return this.descriptors.page.listTriggers.asyncIterate(
       this.innerApiCalls['listTriggers'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.eventarc.v1.ITrigger>;
   }
@@ -2405,7 +2405,7 @@ export class EventarcClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listChannels.createStream(
-      this.innerApiCalls.listChannels as gax.GaxCall,
+      this.innerApiCalls.listChannels as GaxCall,
       request,
       callSettings
     );
@@ -2463,7 +2463,7 @@ export class EventarcClient {
     this.initialize();
     return this.descriptors.page.listChannels.asyncIterate(
       this.innerApiCalls['listChannels'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.eventarc.v1.IChannel>;
   }
@@ -2620,7 +2620,7 @@ export class EventarcClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listProviders.createStream(
-      this.innerApiCalls.listProviders as gax.GaxCall,
+      this.innerApiCalls.listProviders as GaxCall,
       request,
       callSettings
     );
@@ -2679,7 +2679,7 @@ export class EventarcClient {
     this.initialize();
     return this.descriptors.page.listProviders.asyncIterate(
       this.innerApiCalls['listProviders'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.eventarc.v1.IProvider>;
   }
@@ -2834,7 +2834,7 @@ export class EventarcClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listChannelConnections.createStream(
-      this.innerApiCalls.listChannelConnections as gax.GaxCall,
+      this.innerApiCalls.listChannelConnections as GaxCall,
       request,
       callSettings
     );
@@ -2887,7 +2887,7 @@ export class EventarcClient {
     this.initialize();
     return this.descriptors.page.listChannelConnections.asyncIterate(
       this.innerApiCalls['listChannelConnections'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.eventarc.v1.IChannelConnection>;
   }
