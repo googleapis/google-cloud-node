@@ -32,7 +32,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -477,7 +476,8 @@ export class DocumentProcessorServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -1145,7 +1145,7 @@ export class DocumentProcessorServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.batchProcessDocuments,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.documentai.v1.BatchProcessResponse,
@@ -1287,7 +1287,7 @@ export class DocumentProcessorServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteProcessorVersion,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -1428,7 +1428,7 @@ export class DocumentProcessorServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deployProcessorVersion,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.documentai.v1.DeployProcessorVersionResponse,
@@ -1569,7 +1569,7 @@ export class DocumentProcessorServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.undeployProcessorVersion,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.documentai.v1.UndeployProcessorVersionResponse,
@@ -1707,7 +1707,7 @@ export class DocumentProcessorServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteProcessor,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -1844,7 +1844,7 @@ export class DocumentProcessorServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.enableProcessor,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.documentai.v1.EnableProcessorResponse,
@@ -1981,7 +1981,7 @@ export class DocumentProcessorServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.disableProcessor,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.documentai.v1.DisableProcessorResponse,
@@ -2128,7 +2128,7 @@ export class DocumentProcessorServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.setDefaultProcessorVersion,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.documentai.v1.SetDefaultProcessorVersionResponse,
@@ -2275,7 +2275,7 @@ export class DocumentProcessorServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.reviewDocument,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.documentai.v1.ReviewDocumentResponse,
@@ -2427,7 +2427,7 @@ export class DocumentProcessorServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listProcessorTypes.createStream(
-      this.innerApiCalls.listProcessorTypes as gax.GaxCall,
+      this.innerApiCalls.listProcessorTypes as GaxCall,
       request,
       callSettings
     );
@@ -2479,7 +2479,7 @@ export class DocumentProcessorServiceClient {
     this.initialize();
     return this.descriptors.page.listProcessorTypes.asyncIterate(
       this.innerApiCalls['listProcessorTypes'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.documentai.v1.IProcessorType>;
   }
@@ -2628,7 +2628,7 @@ export class DocumentProcessorServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listProcessors.createStream(
-      this.innerApiCalls.listProcessors as gax.GaxCall,
+      this.innerApiCalls.listProcessors as GaxCall,
       request,
       callSettings
     );
@@ -2680,7 +2680,7 @@ export class DocumentProcessorServiceClient {
     this.initialize();
     return this.descriptors.page.listProcessors.asyncIterate(
       this.innerApiCalls['listProcessors'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.documentai.v1.IProcessor>;
   }
@@ -2829,7 +2829,7 @@ export class DocumentProcessorServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listProcessorVersions.createStream(
-      this.innerApiCalls.listProcessorVersions as gax.GaxCall,
+      this.innerApiCalls.listProcessorVersions as GaxCall,
       request,
       callSettings
     );
@@ -2881,7 +2881,7 @@ export class DocumentProcessorServiceClient {
     this.initialize();
     return this.descriptors.page.listProcessorVersions.asyncIterate(
       this.innerApiCalls['listProcessorVersions'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.documentai.v1.IProcessorVersion>;
   }
