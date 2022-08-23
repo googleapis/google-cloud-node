@@ -1324,146 +1324,6 @@
                 }
               }
             },
-            "MetricDescriptor": {
-              "fields": {
-                "name": {
-                  "type": "string",
-                  "id": 1
-                },
-                "type": {
-                  "type": "string",
-                  "id": 8
-                },
-                "labels": {
-                  "rule": "repeated",
-                  "type": "LabelDescriptor",
-                  "id": 2
-                },
-                "metricKind": {
-                  "type": "MetricKind",
-                  "id": 3
-                },
-                "valueType": {
-                  "type": "ValueType",
-                  "id": 4
-                },
-                "unit": {
-                  "type": "string",
-                  "id": 5
-                },
-                "description": {
-                  "type": "string",
-                  "id": 6
-                },
-                "displayName": {
-                  "type": "string",
-                  "id": 7
-                },
-                "metadata": {
-                  "type": "MetricDescriptorMetadata",
-                  "id": 10
-                },
-                "launchStage": {
-                  "type": "LaunchStage",
-                  "id": 12
-                },
-                "monitoredResourceTypes": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 13
-                }
-              },
-              "nested": {
-                "MetricDescriptorMetadata": {
-                  "fields": {
-                    "launchStage": {
-                      "type": "LaunchStage",
-                      "id": 1,
-                      "options": {
-                        "deprecated": true
-                      }
-                    },
-                    "samplePeriod": {
-                      "type": "google.protobuf.Duration",
-                      "id": 2
-                    },
-                    "ingestDelay": {
-                      "type": "google.protobuf.Duration",
-                      "id": 3
-                    }
-                  }
-                },
-                "MetricKind": {
-                  "values": {
-                    "METRIC_KIND_UNSPECIFIED": 0,
-                    "GAUGE": 1,
-                    "DELTA": 2,
-                    "CUMULATIVE": 3
-                  }
-                },
-                "ValueType": {
-                  "values": {
-                    "VALUE_TYPE_UNSPECIFIED": 0,
-                    "BOOL": 1,
-                    "INT64": 2,
-                    "DOUBLE": 3,
-                    "STRING": 4,
-                    "DISTRIBUTION": 5,
-                    "MONEY": 6
-                  }
-                }
-              }
-            },
-            "Metric": {
-              "fields": {
-                "type": {
-                  "type": "string",
-                  "id": 3
-                },
-                "labels": {
-                  "keyType": "string",
-                  "type": "string",
-                  "id": 2
-                }
-              }
-            },
-            "LabelDescriptor": {
-              "fields": {
-                "key": {
-                  "type": "string",
-                  "id": 1
-                },
-                "valueType": {
-                  "type": "ValueType",
-                  "id": 2
-                },
-                "description": {
-                  "type": "string",
-                  "id": 3
-                }
-              },
-              "nested": {
-                "ValueType": {
-                  "values": {
-                    "STRING": 0,
-                    "BOOL": 1,
-                    "INT64": 2
-                  }
-                }
-              }
-            },
-            "LaunchStage": {
-              "values": {
-                "LAUNCH_STAGE_UNSPECIFIED": 0,
-                "UNIMPLEMENTED": 6,
-                "PRELAUNCH": 7,
-                "EARLY_ACCESS": 1,
-                "ALPHA": 2,
-                "BETA": 3,
-                "GA": 4,
-                "DEPRECATED": 5
-              }
-            },
             "Context": {
               "fields": {
                 "rules": {
@@ -1617,6 +1477,31 @@
                 }
               }
             },
+            "LabelDescriptor": {
+              "fields": {
+                "key": {
+                  "type": "string",
+                  "id": 1
+                },
+                "valueType": {
+                  "type": "ValueType",
+                  "id": 2
+                },
+                "description": {
+                  "type": "string",
+                  "id": 3
+                }
+              },
+              "nested": {
+                "ValueType": {
+                  "values": {
+                    "STRING": 0,
+                    "BOOL": 1,
+                    "INT64": 2
+                  }
+                }
+              }
+            },
             "Logging": {
               "fields": {
                 "producerDestinations": {
@@ -1644,6 +1529,121 @@
                     }
                   }
                 }
+              }
+            },
+            "MetricDescriptor": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "type": {
+                  "type": "string",
+                  "id": 8
+                },
+                "labels": {
+                  "rule": "repeated",
+                  "type": "LabelDescriptor",
+                  "id": 2
+                },
+                "metricKind": {
+                  "type": "MetricKind",
+                  "id": 3
+                },
+                "valueType": {
+                  "type": "ValueType",
+                  "id": 4
+                },
+                "unit": {
+                  "type": "string",
+                  "id": 5
+                },
+                "description": {
+                  "type": "string",
+                  "id": 6
+                },
+                "displayName": {
+                  "type": "string",
+                  "id": 7
+                },
+                "metadata": {
+                  "type": "MetricDescriptorMetadata",
+                  "id": 10
+                },
+                "launchStage": {
+                  "type": "LaunchStage",
+                  "id": 12
+                },
+                "monitoredResourceTypes": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 13
+                }
+              },
+              "nested": {
+                "MetricDescriptorMetadata": {
+                  "fields": {
+                    "launchStage": {
+                      "type": "LaunchStage",
+                      "id": 1,
+                      "options": {
+                        "deprecated": true
+                      }
+                    },
+                    "samplePeriod": {
+                      "type": "google.protobuf.Duration",
+                      "id": 2
+                    },
+                    "ingestDelay": {
+                      "type": "google.protobuf.Duration",
+                      "id": 3
+                    }
+                  }
+                },
+                "MetricKind": {
+                  "values": {
+                    "METRIC_KIND_UNSPECIFIED": 0,
+                    "GAUGE": 1,
+                    "DELTA": 2,
+                    "CUMULATIVE": 3
+                  }
+                },
+                "ValueType": {
+                  "values": {
+                    "VALUE_TYPE_UNSPECIFIED": 0,
+                    "BOOL": 1,
+                    "INT64": 2,
+                    "DOUBLE": 3,
+                    "STRING": 4,
+                    "DISTRIBUTION": 5,
+                    "MONEY": 6
+                  }
+                }
+              }
+            },
+            "Metric": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 3
+                },
+                "labels": {
+                  "keyType": "string",
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "LaunchStage": {
+              "values": {
+                "LAUNCH_STAGE_UNSPECIFIED": 0,
+                "UNIMPLEMENTED": 6,
+                "PRELAUNCH": 7,
+                "EARLY_ACCESS": 1,
+                "ALPHA": 2,
+                "BETA": 3,
+                "GA": 4,
+                "DEPRECATED": 5
               }
             },
             "MonitoredResourceDescriptor": {
@@ -1799,83 +1799,6 @@
                 "displayName": {
                   "type": "string",
                   "id": 12
-                }
-              }
-            },
-            "resourceReference": {
-              "type": "google.api.ResourceReference",
-              "id": 1055,
-              "extend": "google.protobuf.FieldOptions"
-            },
-            "resourceDefinition": {
-              "rule": "repeated",
-              "type": "google.api.ResourceDescriptor",
-              "id": 1053,
-              "extend": "google.protobuf.FileOptions"
-            },
-            "resource": {
-              "type": "google.api.ResourceDescriptor",
-              "id": 1053,
-              "extend": "google.protobuf.MessageOptions"
-            },
-            "ResourceDescriptor": {
-              "fields": {
-                "type": {
-                  "type": "string",
-                  "id": 1
-                },
-                "pattern": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 2
-                },
-                "nameField": {
-                  "type": "string",
-                  "id": 3
-                },
-                "history": {
-                  "type": "History",
-                  "id": 4
-                },
-                "plural": {
-                  "type": "string",
-                  "id": 5
-                },
-                "singular": {
-                  "type": "string",
-                  "id": 6
-                },
-                "style": {
-                  "rule": "repeated",
-                  "type": "Style",
-                  "id": 10
-                }
-              },
-              "nested": {
-                "History": {
-                  "values": {
-                    "HISTORY_UNSPECIFIED": 0,
-                    "ORIGINALLY_SINGLE_PATTERN": 1,
-                    "FUTURE_MULTI_PATTERN": 2
-                  }
-                },
-                "Style": {
-                  "values": {
-                    "STYLE_UNSPECIFIED": 0,
-                    "DECLARATIVE_FRIENDLY": 1
-                  }
-                }
-              }
-            },
-            "ResourceReference": {
-              "fields": {
-                "type": {
-                  "type": "string",
-                  "id": 1
-                },
-                "childType": {
-                  "type": "string",
-                  "id": 2
                 }
               }
             },
@@ -2045,6 +1968,10 @@
                 "syntax": {
                   "type": "string",
                   "id": 12
+                },
+                "edition": {
+                  "type": "string",
+                  "id": 13
                 }
               }
             },
@@ -2573,6 +2500,13 @@
                     "default": false
                   }
                 },
+                "unverifiedLazy": {
+                  "type": "bool",
+                  "id": 15,
+                  "options": {
+                    "default": false
+                  }
+                },
                 "deprecated": {
                   "type": "bool",
                   "id": 3,
@@ -2865,6 +2799,19 @@
                     "end": {
                       "type": "int32",
                       "id": 4
+                    },
+                    "semantic": {
+                      "type": "Semantic",
+                      "id": 5
+                    }
+                  },
+                  "nested": {
+                    "Semantic": {
+                      "values": {
+                        "NONE": 0,
+                        "SET": 1,
+                        "ALIAS": 2
+                      }
                     }
                   }
                 }

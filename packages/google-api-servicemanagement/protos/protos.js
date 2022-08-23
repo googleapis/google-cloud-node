@@ -169,12 +169,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 2:
-                                    message.serviceName = reader.string();
-                                    break;
-                                case 3:
-                                    message.producerProjectId = reader.string();
-                                    break;
+                                case 2: {
+                                        message.serviceName = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.producerProjectId = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -271,6 +273,21 @@
                          */
                         ManagedService.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ManagedService
+                         * @function getTypeUrl
+                         * @memberof google.api.servicemanagement.v1.ManagedService
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ManagedService.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.api.servicemanagement.v1.ManagedService";
                         };
     
                         return ManagedService;
@@ -405,22 +422,26 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    if (!(message.resourceNames && message.resourceNames.length))
-                                        message.resourceNames = [];
-                                    message.resourceNames.push(reader.string());
-                                    break;
-                                case 2:
-                                    if (!(message.steps && message.steps.length))
-                                        message.steps = [];
-                                    message.steps.push($root.google.api.servicemanagement.v1.OperationMetadata.Step.decode(reader, reader.uint32()));
-                                    break;
-                                case 3:
-                                    message.progressPercentage = reader.int32();
-                                    break;
-                                case 4:
-                                    message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
+                                case 1: {
+                                        if (!(message.resourceNames && message.resourceNames.length))
+                                            message.resourceNames = [];
+                                        message.resourceNames.push(reader.string());
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.steps && message.steps.length))
+                                            message.steps = [];
+                                        message.steps.push($root.google.api.servicemanagement.v1.OperationMetadata.Step.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 3: {
+                                        message.progressPercentage = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -571,6 +592,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for OperationMetadata
+                         * @function getTypeUrl
+                         * @memberof google.api.servicemanagement.v1.OperationMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        OperationMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.api.servicemanagement.v1.OperationMetadata";
+                        };
+    
                         OperationMetadata.Step = (function() {
     
                             /**
@@ -674,12 +710,14 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 2:
-                                        message.description = reader.string();
-                                        break;
-                                    case 4:
-                                        message.status = reader.int32();
-                                        break;
+                                    case 2: {
+                                            message.description = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.status = reader.int32();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -809,6 +847,21 @@
                              */
                             Step.prototype.toJSON = function toJSON() {
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Step
+                             * @function getTypeUrl
+                             * @memberof google.api.servicemanagement.v1.OperationMetadata.Step
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Step.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.api.servicemanagement.v1.OperationMetadata.Step";
                             };
     
                             return Step;
@@ -953,15 +1006,18 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.location = reader.string();
-                                    break;
-                                case 2:
-                                    message.kind = reader.int32();
-                                    break;
-                                case 3:
-                                    message.message = reader.string();
-                                    break;
+                                case 1: {
+                                        message.location = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.kind = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.message = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -1079,6 +1135,21 @@
                          */
                         Diagnostic.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Diagnostic
+                         * @function getTypeUrl
+                         * @memberof google.api.servicemanagement.v1.Diagnostic
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Diagnostic.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.api.servicemanagement.v1.Diagnostic";
                         };
     
                         /**
@@ -1203,14 +1274,16 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 5:
-                                    message.id = reader.string();
-                                    break;
-                                case 2:
-                                    if (!(message.files && message.files.length))
-                                        message.files = [];
-                                    message.files.push($root.google.api.servicemanagement.v1.ConfigFile.decode(reader, reader.uint32()));
-                                    break;
+                                case 5: {
+                                        message.id = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.files && message.files.length))
+                                            message.files = [];
+                                        message.files.push($root.google.api.servicemanagement.v1.ConfigFile.decode(reader, reader.uint32()));
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -1324,6 +1397,21 @@
                          */
                         ConfigSource.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ConfigSource
+                         * @function getTypeUrl
+                         * @memberof google.api.servicemanagement.v1.ConfigSource
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ConfigSource.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.api.servicemanagement.v1.ConfigSource";
                         };
     
                         return ConfigSource;
@@ -1443,15 +1531,18 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.filePath = reader.string();
-                                    break;
-                                case 3:
-                                    message.fileContents = reader.bytes();
-                                    break;
-                                case 4:
-                                    message.fileType = reader.int32();
-                                    break;
+                                case 1: {
+                                        message.filePath = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.fileContents = reader.bytes();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.fileType = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -1525,7 +1616,7 @@
                             if (object.fileContents != null)
                                 if (typeof object.fileContents === "string")
                                     $util.base64.decode(object.fileContents, message.fileContents = $util.newBuffer($util.base64.length(object.fileContents)), 0);
-                                else if (object.fileContents.length)
+                                else if (object.fileContents.length >= 0)
                                     message.fileContents = object.fileContents;
                             switch (object.fileType) {
                             case "FILE_TYPE_UNSPECIFIED":
@@ -1598,6 +1689,21 @@
                          */
                         ConfigFile.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ConfigFile
+                         * @function getTypeUrl
+                         * @memberof google.api.servicemanagement.v1.ConfigFile
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ConfigFile.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.api.servicemanagement.v1.ConfigFile";
                         };
     
                         /**
@@ -1717,9 +1823,10 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -1807,6 +1914,21 @@
                          */
                         ConfigRef.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ConfigRef
+                         * @function getTypeUrl
+                         * @memberof google.api.servicemanagement.v1.ConfigRef
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ConfigRef.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.api.servicemanagement.v1.ConfigRef";
                         };
     
                         return ConfigRef;
@@ -1906,11 +2028,12 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    if (!(message.configChanges && message.configChanges.length))
-                                        message.configChanges = [];
-                                    message.configChanges.push($root.google.api.ConfigChange.decode(reader, reader.uint32()));
-                                    break;
+                                case 1: {
+                                        if (!(message.configChanges && message.configChanges.length))
+                                            message.configChanges = [];
+                                        message.configChanges.push($root.google.api.ConfigChange.decode(reader, reader.uint32()));
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -2015,6 +2138,21 @@
                          */
                         ChangeReport.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ChangeReport
+                         * @function getTypeUrl
+                         * @memberof google.api.servicemanagement.v1.ChangeReport
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ChangeReport.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.api.servicemanagement.v1.ChangeReport";
                         };
     
                         return ChangeReport;
@@ -2192,27 +2330,34 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.rolloutId = reader.string();
-                                    break;
-                                case 2:
-                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 3:
-                                    message.createdBy = reader.string();
-                                    break;
-                                case 4:
-                                    message.status = reader.int32();
-                                    break;
-                                case 5:
-                                    message.trafficPercentStrategy = $root.google.api.servicemanagement.v1.Rollout.TrafficPercentStrategy.decode(reader, reader.uint32());
-                                    break;
-                                case 200:
-                                    message.deleteServiceStrategy = $root.google.api.servicemanagement.v1.Rollout.DeleteServiceStrategy.decode(reader, reader.uint32());
-                                    break;
-                                case 8:
-                                    message.serviceName = reader.string();
-                                    break;
+                                case 1: {
+                                        message.rolloutId = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.createdBy = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.status = reader.int32();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.trafficPercentStrategy = $root.google.api.servicemanagement.v1.Rollout.TrafficPercentStrategy.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 200: {
+                                        message.deleteServiceStrategy = $root.google.api.servicemanagement.v1.Rollout.DeleteServiceStrategy.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.serviceName = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -2417,6 +2562,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for Rollout
+                         * @function getTypeUrl
+                         * @memberof google.api.servicemanagement.v1.Rollout
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Rollout.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.api.servicemanagement.v1.Rollout";
+                        };
+    
                         Rollout.TrafficPercentStrategy = (function() {
     
                             /**
@@ -2511,28 +2671,29 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1:
-                                        if (message.percentages === $util.emptyObject)
-                                            message.percentages = {};
-                                        var end2 = reader.uint32() + reader.pos;
-                                        key = "";
-                                        value = 0;
-                                        while (reader.pos < end2) {
-                                            var tag2 = reader.uint32();
-                                            switch (tag2 >>> 3) {
-                                            case 1:
-                                                key = reader.string();
-                                                break;
-                                            case 2:
-                                                value = reader.double();
-                                                break;
-                                            default:
-                                                reader.skipType(tag2 & 7);
-                                                break;
+                                    case 1: {
+                                            if (message.percentages === $util.emptyObject)
+                                                message.percentages = {};
+                                            var end2 = reader.uint32() + reader.pos;
+                                            key = "";
+                                            value = 0;
+                                            while (reader.pos < end2) {
+                                                var tag2 = reader.uint32();
+                                                switch (tag2 >>> 3) {
+                                                case 1:
+                                                    key = reader.string();
+                                                    break;
+                                                case 2:
+                                                    value = reader.double();
+                                                    break;
+                                                default:
+                                                    reader.skipType(tag2 & 7);
+                                                    break;
+                                                }
                                             }
+                                            message.percentages[key] = value;
+                                            break;
                                         }
-                                        message.percentages[key] = value;
-                                        break;
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -2634,6 +2795,21 @@
                              */
                             TrafficPercentStrategy.prototype.toJSON = function toJSON() {
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for TrafficPercentStrategy
+                             * @function getTypeUrl
+                             * @memberof google.api.servicemanagement.v1.Rollout.TrafficPercentStrategy
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            TrafficPercentStrategy.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.api.servicemanagement.v1.Rollout.TrafficPercentStrategy";
                             };
     
                             return TrafficPercentStrategy;
@@ -2796,6 +2972,21 @@
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                             };
     
+                            /**
+                             * Gets the default type url for DeleteServiceStrategy
+                             * @function getTypeUrl
+                             * @memberof google.api.servicemanagement.v1.Rollout.DeleteServiceStrategy
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            DeleteServiceStrategy.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.api.servicemanagement.v1.Rollout.DeleteServiceStrategy";
+                            };
+    
                             return DeleteServiceStrategy;
                         })();
     
@@ -2859,7 +3050,7 @@
                         };
     
                         /**
-                         * Callback as used by {@link google.api.servicemanagement.v1.ServiceManager#listServices}.
+                         * Callback as used by {@link google.api.servicemanagement.v1.ServiceManager|listServices}.
                          * @memberof google.api.servicemanagement.v1.ServiceManager
                          * @typedef ListServicesCallback
                          * @type {function}
@@ -2892,7 +3083,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.api.servicemanagement.v1.ServiceManager#getService}.
+                         * Callback as used by {@link google.api.servicemanagement.v1.ServiceManager|getService}.
                          * @memberof google.api.servicemanagement.v1.ServiceManager
                          * @typedef GetServiceCallback
                          * @type {function}
@@ -2925,7 +3116,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.api.servicemanagement.v1.ServiceManager#createService}.
+                         * Callback as used by {@link google.api.servicemanagement.v1.ServiceManager|createService}.
                          * @memberof google.api.servicemanagement.v1.ServiceManager
                          * @typedef CreateServiceCallback
                          * @type {function}
@@ -2958,7 +3149,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.api.servicemanagement.v1.ServiceManager#deleteService}.
+                         * Callback as used by {@link google.api.servicemanagement.v1.ServiceManager|deleteService}.
                          * @memberof google.api.servicemanagement.v1.ServiceManager
                          * @typedef DeleteServiceCallback
                          * @type {function}
@@ -2991,7 +3182,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.api.servicemanagement.v1.ServiceManager#undeleteService}.
+                         * Callback as used by {@link google.api.servicemanagement.v1.ServiceManager|undeleteService}.
                          * @memberof google.api.servicemanagement.v1.ServiceManager
                          * @typedef UndeleteServiceCallback
                          * @type {function}
@@ -3024,7 +3215,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.api.servicemanagement.v1.ServiceManager#listServiceConfigs}.
+                         * Callback as used by {@link google.api.servicemanagement.v1.ServiceManager|listServiceConfigs}.
                          * @memberof google.api.servicemanagement.v1.ServiceManager
                          * @typedef ListServiceConfigsCallback
                          * @type {function}
@@ -3057,7 +3248,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.api.servicemanagement.v1.ServiceManager#getServiceConfig}.
+                         * Callback as used by {@link google.api.servicemanagement.v1.ServiceManager|getServiceConfig}.
                          * @memberof google.api.servicemanagement.v1.ServiceManager
                          * @typedef GetServiceConfigCallback
                          * @type {function}
@@ -3090,7 +3281,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.api.servicemanagement.v1.ServiceManager#createServiceConfig}.
+                         * Callback as used by {@link google.api.servicemanagement.v1.ServiceManager|createServiceConfig}.
                          * @memberof google.api.servicemanagement.v1.ServiceManager
                          * @typedef CreateServiceConfigCallback
                          * @type {function}
@@ -3123,7 +3314,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.api.servicemanagement.v1.ServiceManager#submitConfigSource}.
+                         * Callback as used by {@link google.api.servicemanagement.v1.ServiceManager|submitConfigSource}.
                          * @memberof google.api.servicemanagement.v1.ServiceManager
                          * @typedef SubmitConfigSourceCallback
                          * @type {function}
@@ -3156,7 +3347,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.api.servicemanagement.v1.ServiceManager#listServiceRollouts}.
+                         * Callback as used by {@link google.api.servicemanagement.v1.ServiceManager|listServiceRollouts}.
                          * @memberof google.api.servicemanagement.v1.ServiceManager
                          * @typedef ListServiceRolloutsCallback
                          * @type {function}
@@ -3189,7 +3380,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.api.servicemanagement.v1.ServiceManager#getServiceRollout}.
+                         * Callback as used by {@link google.api.servicemanagement.v1.ServiceManager|getServiceRollout}.
                          * @memberof google.api.servicemanagement.v1.ServiceManager
                          * @typedef GetServiceRolloutCallback
                          * @type {function}
@@ -3222,7 +3413,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.api.servicemanagement.v1.ServiceManager#createServiceRollout}.
+                         * Callback as used by {@link google.api.servicemanagement.v1.ServiceManager|createServiceRollout}.
                          * @memberof google.api.servicemanagement.v1.ServiceManager
                          * @typedef CreateServiceRolloutCallback
                          * @type {function}
@@ -3255,7 +3446,7 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.api.servicemanagement.v1.ServiceManager#generateConfigReport}.
+                         * Callback as used by {@link google.api.servicemanagement.v1.ServiceManager|generateConfigReport}.
                          * @memberof google.api.servicemanagement.v1.ServiceManager
                          * @typedef GenerateConfigReportCallback
                          * @type {function}
@@ -3415,18 +3606,22 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.producerProjectId = reader.string();
-                                    break;
-                                case 5:
-                                    message.pageSize = reader.int32();
-                                    break;
-                                case 6:
-                                    message.pageToken = reader.string();
-                                    break;
-                                case 7:
-                                    message.consumerId = reader.string();
-                                    break;
+                                case 1: {
+                                        message.producerProjectId = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.consumerId = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -3541,6 +3736,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for ListServicesRequest
+                         * @function getTypeUrl
+                         * @memberof google.api.servicemanagement.v1.ListServicesRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListServicesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.api.servicemanagement.v1.ListServicesRequest";
+                        };
+    
                         return ListServicesRequest;
                     })();
     
@@ -3649,14 +3859,16 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    if (!(message.services && message.services.length))
-                                        message.services = [];
-                                    message.services.push($root.google.api.servicemanagement.v1.ManagedService.decode(reader, reader.uint32()));
-                                    break;
-                                case 2:
-                                    message.nextPageToken = reader.string();
-                                    break;
+                                case 1: {
+                                        if (!(message.services && message.services.length))
+                                            message.services = [];
+                                        message.services.push($root.google.api.servicemanagement.v1.ManagedService.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -3772,6 +3984,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for ListServicesResponse
+                         * @function getTypeUrl
+                         * @memberof google.api.servicemanagement.v1.ListServicesResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListServicesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.api.servicemanagement.v1.ListServicesResponse";
+                        };
+    
                         return ListServicesResponse;
                     })();
     
@@ -3867,9 +4094,10 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.serviceName = reader.string();
-                                    break;
+                                case 1: {
+                                        message.serviceName = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -3957,6 +4185,21 @@
                          */
                         GetServiceRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetServiceRequest
+                         * @function getTypeUrl
+                         * @memberof google.api.servicemanagement.v1.GetServiceRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetServiceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.api.servicemanagement.v1.GetServiceRequest";
                         };
     
                         return GetServiceRequest;
@@ -4054,9 +4297,10 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.service = $root.google.api.servicemanagement.v1.ManagedService.decode(reader, reader.uint32());
-                                    break;
+                                case 1: {
+                                        message.service = $root.google.api.servicemanagement.v1.ManagedService.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -4149,6 +4393,21 @@
                          */
                         CreateServiceRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateServiceRequest
+                         * @function getTypeUrl
+                         * @memberof google.api.servicemanagement.v1.CreateServiceRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateServiceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.api.servicemanagement.v1.CreateServiceRequest";
                         };
     
                         return CreateServiceRequest;
@@ -4246,9 +4505,10 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.serviceName = reader.string();
-                                    break;
+                                case 1: {
+                                        message.serviceName = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -4336,6 +4596,21 @@
                          */
                         DeleteServiceRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteServiceRequest
+                         * @function getTypeUrl
+                         * @memberof google.api.servicemanagement.v1.DeleteServiceRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteServiceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.api.servicemanagement.v1.DeleteServiceRequest";
                         };
     
                         return DeleteServiceRequest;
@@ -4433,9 +4708,10 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.serviceName = reader.string();
-                                    break;
+                                case 1: {
+                                        message.serviceName = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -4523,6 +4799,21 @@
                          */
                         UndeleteServiceRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UndeleteServiceRequest
+                         * @function getTypeUrl
+                         * @memberof google.api.servicemanagement.v1.UndeleteServiceRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UndeleteServiceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.api.servicemanagement.v1.UndeleteServiceRequest";
                         };
     
                         return UndeleteServiceRequest;
@@ -4620,9 +4911,10 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.service = $root.google.api.servicemanagement.v1.ManagedService.decode(reader, reader.uint32());
-                                    break;
+                                case 1: {
+                                        message.service = $root.google.api.servicemanagement.v1.ManagedService.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -4715,6 +5007,21 @@
                          */
                         UndeleteServiceResponse.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UndeleteServiceResponse
+                         * @function getTypeUrl
+                         * @memberof google.api.servicemanagement.v1.UndeleteServiceResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UndeleteServiceResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.api.servicemanagement.v1.UndeleteServiceResponse";
                         };
     
                         return UndeleteServiceResponse;
@@ -4834,15 +5141,18 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.serviceName = reader.string();
-                                    break;
-                                case 2:
-                                    message.configId = reader.string();
-                                    break;
-                                case 3:
-                                    message.view = reader.int32();
-                                    break;
+                                case 1: {
+                                        message.serviceName = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.configId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.view = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -4960,6 +5270,21 @@
                          */
                         GetServiceConfigRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetServiceConfigRequest
+                         * @function getTypeUrl
+                         * @memberof google.api.servicemanagement.v1.GetServiceConfigRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetServiceConfigRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.api.servicemanagement.v1.GetServiceConfigRequest";
                         };
     
                         /**
@@ -5093,15 +5418,18 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.serviceName = reader.string();
-                                    break;
-                                case 2:
-                                    message.pageToken = reader.string();
-                                    break;
-                                case 3:
-                                    message.pageSize = reader.int32();
-                                    break;
+                                case 1: {
+                                        message.serviceName = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -5206,6 +5534,21 @@
                          */
                         ListServiceConfigsRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListServiceConfigsRequest
+                         * @function getTypeUrl
+                         * @memberof google.api.servicemanagement.v1.ListServiceConfigsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListServiceConfigsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.api.servicemanagement.v1.ListServiceConfigsRequest";
                         };
     
                         return ListServiceConfigsRequest;
@@ -5316,14 +5659,16 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    if (!(message.serviceConfigs && message.serviceConfigs.length))
-                                        message.serviceConfigs = [];
-                                    message.serviceConfigs.push($root.google.api.Service.decode(reader, reader.uint32()));
-                                    break;
-                                case 2:
-                                    message.nextPageToken = reader.string();
-                                    break;
+                                case 1: {
+                                        if (!(message.serviceConfigs && message.serviceConfigs.length))
+                                            message.serviceConfigs = [];
+                                        message.serviceConfigs.push($root.google.api.Service.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -5439,6 +5784,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for ListServiceConfigsResponse
+                         * @function getTypeUrl
+                         * @memberof google.api.servicemanagement.v1.ListServiceConfigsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListServiceConfigsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.api.servicemanagement.v1.ListServiceConfigsResponse";
+                        };
+    
                         return ListServiceConfigsResponse;
                     })();
     
@@ -5545,12 +5905,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.serviceName = reader.string();
-                                    break;
-                                case 2:
-                                    message.serviceConfig = $root.google.api.Service.decode(reader, reader.uint32());
-                                    break;
+                                case 1: {
+                                        message.serviceName = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.serviceConfig = $root.google.api.Service.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -5652,6 +6014,21 @@
                          */
                         CreateServiceConfigRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateServiceConfigRequest
+                         * @function getTypeUrl
+                         * @memberof google.api.servicemanagement.v1.CreateServiceConfigRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateServiceConfigRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.api.servicemanagement.v1.CreateServiceConfigRequest";
                         };
     
                         return CreateServiceConfigRequest;
@@ -5771,15 +6148,18 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.serviceName = reader.string();
-                                    break;
-                                case 2:
-                                    message.configSource = $root.google.api.servicemanagement.v1.ConfigSource.decode(reader, reader.uint32());
-                                    break;
-                                case 3:
-                                    message.validateOnly = reader.bool();
-                                    break;
+                                case 1: {
+                                        message.serviceName = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.configSource = $root.google.api.servicemanagement.v1.ConfigSource.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.validateOnly = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -5891,6 +6271,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for SubmitConfigSourceRequest
+                         * @function getTypeUrl
+                         * @memberof google.api.servicemanagement.v1.SubmitConfigSourceRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SubmitConfigSourceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.api.servicemanagement.v1.SubmitConfigSourceRequest";
+                        };
+    
                         return SubmitConfigSourceRequest;
                     })();
     
@@ -5986,9 +6381,10 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.serviceConfig = $root.google.api.Service.decode(reader, reader.uint32());
-                                    break;
+                                case 1: {
+                                        message.serviceConfig = $root.google.api.Service.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -6081,6 +6477,21 @@
                          */
                         SubmitConfigSourceResponse.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SubmitConfigSourceResponse
+                         * @function getTypeUrl
+                         * @memberof google.api.servicemanagement.v1.SubmitConfigSourceResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SubmitConfigSourceResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.api.servicemanagement.v1.SubmitConfigSourceResponse";
                         };
     
                         return SubmitConfigSourceResponse;
@@ -6189,12 +6600,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.serviceName = reader.string();
-                                    break;
-                                case 2:
-                                    message.rollout = $root.google.api.servicemanagement.v1.Rollout.decode(reader, reader.uint32());
-                                    break;
+                                case 1: {
+                                        message.serviceName = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.rollout = $root.google.api.servicemanagement.v1.Rollout.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -6296,6 +6709,21 @@
                          */
                         CreateServiceRolloutRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateServiceRolloutRequest
+                         * @function getTypeUrl
+                         * @memberof google.api.servicemanagement.v1.CreateServiceRolloutRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateServiceRolloutRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.api.servicemanagement.v1.CreateServiceRolloutRequest";
                         };
     
                         return CreateServiceRolloutRequest;
@@ -6426,18 +6854,22 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.serviceName = reader.string();
-                                    break;
-                                case 2:
-                                    message.pageToken = reader.string();
-                                    break;
-                                case 3:
-                                    message.pageSize = reader.int32();
-                                    break;
-                                case 4:
-                                    message.filter = reader.string();
-                                    break;
+                                case 1: {
+                                        message.serviceName = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -6552,6 +6984,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for ListServiceRolloutsRequest
+                         * @function getTypeUrl
+                         * @memberof google.api.servicemanagement.v1.ListServiceRolloutsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListServiceRolloutsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.api.servicemanagement.v1.ListServiceRolloutsRequest";
+                        };
+    
                         return ListServiceRolloutsRequest;
                     })();
     
@@ -6660,14 +7107,16 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    if (!(message.rollouts && message.rollouts.length))
-                                        message.rollouts = [];
-                                    message.rollouts.push($root.google.api.servicemanagement.v1.Rollout.decode(reader, reader.uint32()));
-                                    break;
-                                case 2:
-                                    message.nextPageToken = reader.string();
-                                    break;
+                                case 1: {
+                                        if (!(message.rollouts && message.rollouts.length))
+                                            message.rollouts = [];
+                                        message.rollouts.push($root.google.api.servicemanagement.v1.Rollout.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -6783,6 +7232,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for ListServiceRolloutsResponse
+                         * @function getTypeUrl
+                         * @memberof google.api.servicemanagement.v1.ListServiceRolloutsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListServiceRolloutsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.api.servicemanagement.v1.ListServiceRolloutsResponse";
+                        };
+    
                         return ListServiceRolloutsResponse;
                     })();
     
@@ -6889,12 +7353,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.serviceName = reader.string();
-                                    break;
-                                case 2:
-                                    message.rolloutId = reader.string();
-                                    break;
+                                case 1: {
+                                        message.serviceName = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.rolloutId = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -6991,6 +7457,21 @@
                          */
                         GetServiceRolloutRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetServiceRolloutRequest
+                         * @function getTypeUrl
+                         * @memberof google.api.servicemanagement.v1.GetServiceRolloutRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetServiceRolloutRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.api.servicemanagement.v1.GetServiceRolloutRequest";
                         };
     
                         return GetServiceRolloutRequest;
@@ -7099,12 +7580,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.newConfig = $root.google.protobuf.Any.decode(reader, reader.uint32());
-                                    break;
-                                case 2:
-                                    message.oldConfig = $root.google.protobuf.Any.decode(reader, reader.uint32());
-                                    break;
+                                case 1: {
+                                        message.newConfig = $root.google.protobuf.Any.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.oldConfig = $root.google.protobuf.Any.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -7211,6 +7694,21 @@
                          */
                         GenerateConfigReportRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GenerateConfigReportRequest
+                         * @function getTypeUrl
+                         * @memberof google.api.servicemanagement.v1.GenerateConfigReportRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GenerateConfigReportRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.api.servicemanagement.v1.GenerateConfigReportRequest";
                         };
     
                         return GenerateConfigReportRequest;
@@ -7345,22 +7843,26 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
-                                    message.serviceName = reader.string();
-                                    break;
-                                case 2:
-                                    message.id = reader.string();
-                                    break;
-                                case 3:
-                                    if (!(message.changeReports && message.changeReports.length))
-                                        message.changeReports = [];
-                                    message.changeReports.push($root.google.api.servicemanagement.v1.ChangeReport.decode(reader, reader.uint32()));
-                                    break;
-                                case 4:
-                                    if (!(message.diagnostics && message.diagnostics.length))
-                                        message.diagnostics = [];
-                                    message.diagnostics.push($root.google.api.servicemanagement.v1.Diagnostic.decode(reader, reader.uint32()));
-                                    break;
+                                case 1: {
+                                        message.serviceName = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.id = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.changeReports && message.changeReports.length))
+                                            message.changeReports = [];
+                                        message.changeReports.push($root.google.api.servicemanagement.v1.ChangeReport.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 4: {
+                                        if (!(message.diagnostics && message.diagnostics.length))
+                                            message.diagnostics = [];
+                                        message.diagnostics.push($root.google.api.servicemanagement.v1.Diagnostic.decode(reader, reader.uint32()));
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -7511,6 +8013,21 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Gets the default type url for GenerateConfigReportResponse
+                         * @function getTypeUrl
+                         * @memberof google.api.servicemanagement.v1.GenerateConfigReportResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GenerateConfigReportResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.api.servicemanagement.v1.GenerateConfigReportResponse";
+                        };
+    
                         return GenerateConfigReportResponse;
                     })();
     
@@ -7658,23 +8175,28 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.element = reader.string();
-                            break;
-                        case 2:
-                            message.oldValue = reader.string();
-                            break;
-                        case 3:
-                            message.newValue = reader.string();
-                            break;
-                        case 4:
-                            message.changeType = reader.int32();
-                            break;
-                        case 5:
-                            if (!(message.advices && message.advices.length))
-                                message.advices = [];
-                            message.advices.push($root.google.api.Advice.decode(reader, reader.uint32()));
-                            break;
+                        case 1: {
+                                message.element = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.oldValue = reader.string();
+                                break;
+                            }
+                        case 3: {
+                                message.newValue = reader.string();
+                                break;
+                            }
+                        case 4: {
+                                message.changeType = reader.int32();
+                                break;
+                            }
+                        case 5: {
+                                if (!(message.advices && message.advices.length))
+                                    message.advices = [];
+                                message.advices.push($root.google.api.Advice.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -7838,6 +8360,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for ConfigChange
+                 * @function getTypeUrl
+                 * @memberof google.api.ConfigChange
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ConfigChange.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.ConfigChange";
+                };
+    
                 return ConfigChange;
             })();
     
@@ -7933,9 +8470,10 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 2:
-                            message.description = reader.string();
-                            break;
+                        case 2: {
+                                message.description = reader.string();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -8023,6 +8561,21 @@
                  */
                 Advice.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Advice
+                 * @function getTypeUrl
+                 * @memberof google.api.Advice
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Advice.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.Advice";
                 };
     
                 return Advice;
@@ -8177,14 +8730,16 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            if (!(message.rules && message.rules.length))
-                                message.rules = [];
-                            message.rules.push($root.google.api.HttpRule.decode(reader, reader.uint32()));
-                            break;
-                        case 2:
-                            message.fullyDecodeReservedExpansion = reader.bool();
-                            break;
+                        case 1: {
+                                if (!(message.rules && message.rules.length))
+                                    message.rules = [];
+                                message.rules.push($root.google.api.HttpRule.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 2: {
+                                message.fullyDecodeReservedExpansion = reader.bool();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -8298,6 +8853,21 @@
                  */
                 Http.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Http
+                 * @function getTypeUrl
+                 * @memberof google.api.Http
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Http.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.Http";
                 };
     
                 return Http;
@@ -8510,38 +9080,48 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.selector = reader.string();
-                            break;
-                        case 2:
-                            message.get = reader.string();
-                            break;
-                        case 3:
-                            message.put = reader.string();
-                            break;
-                        case 4:
-                            message.post = reader.string();
-                            break;
-                        case 5:
-                            message["delete"] = reader.string();
-                            break;
-                        case 6:
-                            message.patch = reader.string();
-                            break;
-                        case 8:
-                            message.custom = $root.google.api.CustomHttpPattern.decode(reader, reader.uint32());
-                            break;
-                        case 7:
-                            message.body = reader.string();
-                            break;
-                        case 12:
-                            message.responseBody = reader.string();
-                            break;
-                        case 11:
-                            if (!(message.additionalBindings && message.additionalBindings.length))
-                                message.additionalBindings = [];
-                            message.additionalBindings.push($root.google.api.HttpRule.decode(reader, reader.uint32()));
-                            break;
+                        case 1: {
+                                message.selector = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.get = reader.string();
+                                break;
+                            }
+                        case 3: {
+                                message.put = reader.string();
+                                break;
+                            }
+                        case 4: {
+                                message.post = reader.string();
+                                break;
+                            }
+                        case 5: {
+                                message["delete"] = reader.string();
+                                break;
+                            }
+                        case 6: {
+                                message.patch = reader.string();
+                                break;
+                            }
+                        case 8: {
+                                message.custom = $root.google.api.CustomHttpPattern.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 7: {
+                                message.body = reader.string();
+                                break;
+                            }
+                        case 12: {
+                                message.responseBody = reader.string();
+                                break;
+                            }
+                        case 11: {
+                                if (!(message.additionalBindings && message.additionalBindings.length))
+                                    message.additionalBindings = [];
+                                message.additionalBindings.push($root.google.api.HttpRule.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -8763,6 +9343,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for HttpRule
+                 * @function getTypeUrl
+                 * @memberof google.api.HttpRule
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                HttpRule.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.HttpRule";
+                };
+    
                 return HttpRule;
             })();
     
@@ -8869,12 +9464,14 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.kind = reader.string();
-                            break;
-                        case 2:
-                            message.path = reader.string();
-                            break;
+                        case 1: {
+                                message.kind = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.path = reader.string();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -8971,6 +9568,21 @@
                  */
                 CustomHttpPattern.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for CustomHttpPattern
+                 * @function getTypeUrl
+                 * @memberof google.api.CustomHttpPattern
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                CustomHttpPattern.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.CustomHttpPattern";
                 };
     
                 return CustomHttpPattern;
@@ -9346,95 +9958,120 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 2:
-                            message.title = reader.string();
-                            break;
-                        case 22:
-                            message.producerProjectId = reader.string();
-                            break;
-                        case 33:
-                            message.id = reader.string();
-                            break;
-                        case 3:
-                            if (!(message.apis && message.apis.length))
-                                message.apis = [];
-                            message.apis.push($root.google.protobuf.Api.decode(reader, reader.uint32()));
-                            break;
-                        case 4:
-                            if (!(message.types && message.types.length))
-                                message.types = [];
-                            message.types.push($root.google.protobuf.Type.decode(reader, reader.uint32()));
-                            break;
-                        case 5:
-                            if (!(message.enums && message.enums.length))
-                                message.enums = [];
-                            message.enums.push($root.google.protobuf.Enum.decode(reader, reader.uint32()));
-                            break;
-                        case 6:
-                            message.documentation = $root.google.api.Documentation.decode(reader, reader.uint32());
-                            break;
-                        case 8:
-                            message.backend = $root.google.api.Backend.decode(reader, reader.uint32());
-                            break;
-                        case 9:
-                            message.http = $root.google.api.Http.decode(reader, reader.uint32());
-                            break;
-                        case 10:
-                            message.quota = $root.google.api.Quota.decode(reader, reader.uint32());
-                            break;
-                        case 11:
-                            message.authentication = $root.google.api.Authentication.decode(reader, reader.uint32());
-                            break;
-                        case 12:
-                            message.context = $root.google.api.Context.decode(reader, reader.uint32());
-                            break;
-                        case 15:
-                            message.usage = $root.google.api.Usage.decode(reader, reader.uint32());
-                            break;
-                        case 18:
-                            if (!(message.endpoints && message.endpoints.length))
-                                message.endpoints = [];
-                            message.endpoints.push($root.google.api.Endpoint.decode(reader, reader.uint32()));
-                            break;
-                        case 21:
-                            message.control = $root.google.api.Control.decode(reader, reader.uint32());
-                            break;
-                        case 23:
-                            if (!(message.logs && message.logs.length))
-                                message.logs = [];
-                            message.logs.push($root.google.api.LogDescriptor.decode(reader, reader.uint32()));
-                            break;
-                        case 24:
-                            if (!(message.metrics && message.metrics.length))
-                                message.metrics = [];
-                            message.metrics.push($root.google.api.MetricDescriptor.decode(reader, reader.uint32()));
-                            break;
-                        case 25:
-                            if (!(message.monitoredResources && message.monitoredResources.length))
-                                message.monitoredResources = [];
-                            message.monitoredResources.push($root.google.api.MonitoredResourceDescriptor.decode(reader, reader.uint32()));
-                            break;
-                        case 26:
-                            message.billing = $root.google.api.Billing.decode(reader, reader.uint32());
-                            break;
-                        case 27:
-                            message.logging = $root.google.api.Logging.decode(reader, reader.uint32());
-                            break;
-                        case 28:
-                            message.monitoring = $root.google.api.Monitoring.decode(reader, reader.uint32());
-                            break;
-                        case 29:
-                            message.systemParameters = $root.google.api.SystemParameters.decode(reader, reader.uint32());
-                            break;
-                        case 37:
-                            message.sourceInfo = $root.google.api.SourceInfo.decode(reader, reader.uint32());
-                            break;
-                        case 20:
-                            message.configVersion = $root.google.protobuf.UInt32Value.decode(reader, reader.uint32());
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.title = reader.string();
+                                break;
+                            }
+                        case 22: {
+                                message.producerProjectId = reader.string();
+                                break;
+                            }
+                        case 33: {
+                                message.id = reader.string();
+                                break;
+                            }
+                        case 3: {
+                                if (!(message.apis && message.apis.length))
+                                    message.apis = [];
+                                message.apis.push($root.google.protobuf.Api.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 4: {
+                                if (!(message.types && message.types.length))
+                                    message.types = [];
+                                message.types.push($root.google.protobuf.Type.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 5: {
+                                if (!(message.enums && message.enums.length))
+                                    message.enums = [];
+                                message.enums.push($root.google.protobuf.Enum.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 6: {
+                                message.documentation = $root.google.api.Documentation.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 8: {
+                                message.backend = $root.google.api.Backend.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 9: {
+                                message.http = $root.google.api.Http.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 10: {
+                                message.quota = $root.google.api.Quota.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 11: {
+                                message.authentication = $root.google.api.Authentication.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 12: {
+                                message.context = $root.google.api.Context.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 15: {
+                                message.usage = $root.google.api.Usage.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 18: {
+                                if (!(message.endpoints && message.endpoints.length))
+                                    message.endpoints = [];
+                                message.endpoints.push($root.google.api.Endpoint.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 21: {
+                                message.control = $root.google.api.Control.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 23: {
+                                if (!(message.logs && message.logs.length))
+                                    message.logs = [];
+                                message.logs.push($root.google.api.LogDescriptor.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 24: {
+                                if (!(message.metrics && message.metrics.length))
+                                    message.metrics = [];
+                                message.metrics.push($root.google.api.MetricDescriptor.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 25: {
+                                if (!(message.monitoredResources && message.monitoredResources.length))
+                                    message.monitoredResources = [];
+                                message.monitoredResources.push($root.google.api.MonitoredResourceDescriptor.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 26: {
+                                message.billing = $root.google.api.Billing.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 27: {
+                                message.logging = $root.google.api.Logging.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 28: {
+                                message.monitoring = $root.google.api.Monitoring.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 29: {
+                                message.systemParameters = $root.google.api.SystemParameters.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 37: {
+                                message.sourceInfo = $root.google.api.SourceInfo.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 20: {
+                                message.configVersion = $root.google.protobuf.UInt32Value.decode(reader, reader.uint32());
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -9908,6 +10545,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for Service
+                 * @function getTypeUrl
+                 * @memberof google.api.Service
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Service.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.Service";
+                };
+    
                 return Service;
             })();
     
@@ -10018,16 +10670,18 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 3:
-                            if (!(message.rules && message.rules.length))
-                                message.rules = [];
-                            message.rules.push($root.google.api.AuthenticationRule.decode(reader, reader.uint32()));
-                            break;
-                        case 4:
-                            if (!(message.providers && message.providers.length))
-                                message.providers = [];
-                            message.providers.push($root.google.api.AuthProvider.decode(reader, reader.uint32()));
-                            break;
+                        case 3: {
+                                if (!(message.rules && message.rules.length))
+                                    message.rules = [];
+                                message.rules.push($root.google.api.AuthenticationRule.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 4: {
+                                if (!(message.providers && message.providers.length))
+                                    message.providers = [];
+                                message.providers.push($root.google.api.AuthProvider.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -10160,6 +10814,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for Authentication
+                 * @function getTypeUrl
+                 * @memberof google.api.Authentication
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Authentication.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.Authentication";
+                };
+    
                 return Authentication;
             })();
     
@@ -10290,20 +10959,24 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.selector = reader.string();
-                            break;
-                        case 2:
-                            message.oauth = $root.google.api.OAuthRequirements.decode(reader, reader.uint32());
-                            break;
-                        case 5:
-                            message.allowWithoutCredential = reader.bool();
-                            break;
-                        case 7:
-                            if (!(message.requirements && message.requirements.length))
-                                message.requirements = [];
-                            message.requirements.push($root.google.api.AuthRequirement.decode(reader, reader.uint32()));
-                            break;
+                        case 1: {
+                                message.selector = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.oauth = $root.google.api.OAuthRequirements.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 5: {
+                                message.allowWithoutCredential = reader.bool();
+                                break;
+                            }
+                        case 7: {
+                                if (!(message.requirements && message.requirements.length))
+                                    message.requirements = [];
+                                message.requirements.push($root.google.api.AuthRequirement.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -10441,6 +11114,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for AuthenticationRule
+                 * @function getTypeUrl
+                 * @memberof google.api.AuthenticationRule
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                AuthenticationRule.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.AuthenticationRule";
+                };
+    
                 return AuthenticationRule;
             })();
     
@@ -10572,15 +11260,18 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.header = reader.string();
-                            break;
-                        case 2:
-                            message.query = reader.string();
-                            break;
-                        case 3:
-                            message.valuePrefix = reader.string();
-                            break;
+                        case 1: {
+                                message.header = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.query = reader.string();
+                                break;
+                            }
+                        case 3: {
+                                message.valuePrefix = reader.string();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -10695,6 +11386,21 @@
                  */
                 JwtLocation.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for JwtLocation
+                 * @function getTypeUrl
+                 * @memberof google.api.JwtLocation
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                JwtLocation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.JwtLocation";
                 };
     
                 return JwtLocation;
@@ -10849,26 +11555,32 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.id = reader.string();
-                            break;
-                        case 2:
-                            message.issuer = reader.string();
-                            break;
-                        case 3:
-                            message.jwksUri = reader.string();
-                            break;
-                        case 4:
-                            message.audiences = reader.string();
-                            break;
-                        case 5:
-                            message.authorizationUrl = reader.string();
-                            break;
-                        case 6:
-                            if (!(message.jwtLocations && message.jwtLocations.length))
-                                message.jwtLocations = [];
-                            message.jwtLocations.push($root.google.api.JwtLocation.decode(reader, reader.uint32()));
-                            break;
+                        case 1: {
+                                message.id = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.issuer = reader.string();
+                                break;
+                            }
+                        case 3: {
+                                message.jwksUri = reader.string();
+                                break;
+                            }
+                        case 4: {
+                                message.audiences = reader.string();
+                                break;
+                            }
+                        case 5: {
+                                message.authorizationUrl = reader.string();
+                                break;
+                            }
+                        case 6: {
+                                if (!(message.jwtLocations && message.jwtLocations.length))
+                                    message.jwtLocations = [];
+                                message.jwtLocations.push($root.google.api.JwtLocation.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -11017,6 +11729,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for AuthProvider
+                 * @function getTypeUrl
+                 * @memberof google.api.AuthProvider
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                AuthProvider.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.AuthProvider";
+                };
+    
                 return AuthProvider;
             })();
     
@@ -11112,9 +11839,10 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.canonicalScopes = reader.string();
-                            break;
+                        case 1: {
+                                message.canonicalScopes = reader.string();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -11202,6 +11930,21 @@
                  */
                 OAuthRequirements.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for OAuthRequirements
+                 * @function getTypeUrl
+                 * @memberof google.api.OAuthRequirements
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                OAuthRequirements.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.OAuthRequirements";
                 };
     
                 return OAuthRequirements;
@@ -11310,12 +12053,14 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.providerId = reader.string();
-                            break;
-                        case 2:
-                            message.audiences = reader.string();
-                            break;
+                        case 1: {
+                                message.providerId = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.audiences = reader.string();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -11412,6 +12157,21 @@
                  */
                 AuthRequirement.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for AuthRequirement
+                 * @function getTypeUrl
+                 * @memberof google.api.AuthRequirement
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                AuthRequirement.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.AuthRequirement";
                 };
     
                 return AuthRequirement;
@@ -11511,11 +12271,12 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            if (!(message.rules && message.rules.length))
-                                message.rules = [];
-                            message.rules.push($root.google.api.BackendRule.decode(reader, reader.uint32()));
-                            break;
+                        case 1: {
+                                if (!(message.rules && message.rules.length))
+                                    message.rules = [];
+                                message.rules.push($root.google.api.BackendRule.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -11620,6 +12381,21 @@
                  */
                 Backend.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Backend
+                 * @function getTypeUrl
+                 * @memberof google.api.Backend
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Backend.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.Backend";
                 };
     
                 return Backend;
@@ -11819,33 +12595,42 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.selector = reader.string();
-                            break;
-                        case 2:
-                            message.address = reader.string();
-                            break;
-                        case 3:
-                            message.deadline = reader.double();
-                            break;
-                        case 4:
-                            message.minDeadline = reader.double();
-                            break;
-                        case 5:
-                            message.operationDeadline = reader.double();
-                            break;
-                        case 6:
-                            message.pathTranslation = reader.int32();
-                            break;
-                        case 7:
-                            message.jwtAudience = reader.string();
-                            break;
-                        case 8:
-                            message.disableAuth = reader.bool();
-                            break;
-                        case 9:
-                            message.protocol = reader.string();
-                            break;
+                        case 1: {
+                                message.selector = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.address = reader.string();
+                                break;
+                            }
+                        case 3: {
+                                message.deadline = reader.double();
+                                break;
+                            }
+                        case 4: {
+                                message.minDeadline = reader.double();
+                                break;
+                            }
+                        case 5: {
+                                message.operationDeadline = reader.double();
+                                break;
+                            }
+                        case 6: {
+                                message.pathTranslation = reader.int32();
+                                break;
+                            }
+                        case 7: {
+                                message.jwtAudience = reader.string();
+                                break;
+                            }
+                        case 8: {
+                                message.disableAuth = reader.bool();
+                                break;
+                            }
+                        case 9: {
+                                message.protocol = reader.string();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -12030,6 +12815,21 @@
                 };
     
                 /**
+                 * Gets the default type url for BackendRule
+                 * @function getTypeUrl
+                 * @memberof google.api.BackendRule
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                BackendRule.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.BackendRule";
+                };
+    
+                /**
                  * PathTranslation enum.
                  * @name google.api.BackendRule.PathTranslation
                  * @enum {number}
@@ -12142,11 +12942,12 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 8:
-                            if (!(message.consumerDestinations && message.consumerDestinations.length))
-                                message.consumerDestinations = [];
-                            message.consumerDestinations.push($root.google.api.Billing.BillingDestination.decode(reader, reader.uint32()));
-                            break;
+                        case 8: {
+                                if (!(message.consumerDestinations && message.consumerDestinations.length))
+                                    message.consumerDestinations = [];
+                                message.consumerDestinations.push($root.google.api.Billing.BillingDestination.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -12251,6 +13052,21 @@
                  */
                 Billing.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Billing
+                 * @function getTypeUrl
+                 * @memberof google.api.Billing
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Billing.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.Billing";
                 };
     
                 Billing.BillingDestination = (function() {
@@ -12358,14 +13174,16 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.monitoredResource = reader.string();
-                                break;
-                            case 2:
-                                if (!(message.metrics && message.metrics.length))
-                                    message.metrics = [];
-                                message.metrics.push(reader.string());
-                                break;
+                            case 1: {
+                                    message.monitoredResource = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    if (!(message.metrics && message.metrics.length))
+                                        message.metrics = [];
+                                    message.metrics.push(reader.string());
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -12476,10 +13294,3079 @@
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
+                    /**
+                     * Gets the default type url for BillingDestination
+                     * @function getTypeUrl
+                     * @memberof google.api.Billing.BillingDestination
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    BillingDestination.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.api.Billing.BillingDestination";
+                    };
+    
                     return BillingDestination;
                 })();
     
                 return Billing;
+            })();
+    
+            api.Context = (function() {
+    
+                /**
+                 * Properties of a Context.
+                 * @memberof google.api
+                 * @interface IContext
+                 * @property {Array.<google.api.IContextRule>|null} [rules] Context rules
+                 */
+    
+                /**
+                 * Constructs a new Context.
+                 * @memberof google.api
+                 * @classdesc Represents a Context.
+                 * @implements IContext
+                 * @constructor
+                 * @param {google.api.IContext=} [properties] Properties to set
+                 */
+                function Context(properties) {
+                    this.rules = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Context rules.
+                 * @member {Array.<google.api.IContextRule>} rules
+                 * @memberof google.api.Context
+                 * @instance
+                 */
+                Context.prototype.rules = $util.emptyArray;
+    
+                /**
+                 * Creates a new Context instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.Context
+                 * @static
+                 * @param {google.api.IContext=} [properties] Properties to set
+                 * @returns {google.api.Context} Context instance
+                 */
+                Context.create = function create(properties) {
+                    return new Context(properties);
+                };
+    
+                /**
+                 * Encodes the specified Context message. Does not implicitly {@link google.api.Context.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.Context
+                 * @static
+                 * @param {google.api.IContext} message Context message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Context.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.rules != null && message.rules.length)
+                        for (var i = 0; i < message.rules.length; ++i)
+                            $root.google.api.ContextRule.encode(message.rules[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Context message, length delimited. Does not implicitly {@link google.api.Context.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.Context
+                 * @static
+                 * @param {google.api.IContext} message Context message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Context.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Context message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.Context
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.Context} Context
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Context.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Context();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                if (!(message.rules && message.rules.length))
+                                    message.rules = [];
+                                message.rules.push($root.google.api.ContextRule.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Context message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.Context
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.Context} Context
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Context.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Context message.
+                 * @function verify
+                 * @memberof google.api.Context
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Context.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.rules != null && message.hasOwnProperty("rules")) {
+                        if (!Array.isArray(message.rules))
+                            return "rules: array expected";
+                        for (var i = 0; i < message.rules.length; ++i) {
+                            var error = $root.google.api.ContextRule.verify(message.rules[i]);
+                            if (error)
+                                return "rules." + error;
+                        }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a Context message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.Context
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.Context} Context
+                 */
+                Context.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.Context)
+                        return object;
+                    var message = new $root.google.api.Context();
+                    if (object.rules) {
+                        if (!Array.isArray(object.rules))
+                            throw TypeError(".google.api.Context.rules: array expected");
+                        message.rules = [];
+                        for (var i = 0; i < object.rules.length; ++i) {
+                            if (typeof object.rules[i] !== "object")
+                                throw TypeError(".google.api.Context.rules: object expected");
+                            message.rules[i] = $root.google.api.ContextRule.fromObject(object.rules[i]);
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Context message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.Context
+                 * @static
+                 * @param {google.api.Context} message Context
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Context.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.rules = [];
+                    if (message.rules && message.rules.length) {
+                        object.rules = [];
+                        for (var j = 0; j < message.rules.length; ++j)
+                            object.rules[j] = $root.google.api.ContextRule.toObject(message.rules[j], options);
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this Context to JSON.
+                 * @function toJSON
+                 * @memberof google.api.Context
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Context.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Context
+                 * @function getTypeUrl
+                 * @memberof google.api.Context
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Context.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.Context";
+                };
+    
+                return Context;
+            })();
+    
+            api.ContextRule = (function() {
+    
+                /**
+                 * Properties of a ContextRule.
+                 * @memberof google.api
+                 * @interface IContextRule
+                 * @property {string|null} [selector] ContextRule selector
+                 * @property {Array.<string>|null} [requested] ContextRule requested
+                 * @property {Array.<string>|null} [provided] ContextRule provided
+                 * @property {Array.<string>|null} [allowedRequestExtensions] ContextRule allowedRequestExtensions
+                 * @property {Array.<string>|null} [allowedResponseExtensions] ContextRule allowedResponseExtensions
+                 */
+    
+                /**
+                 * Constructs a new ContextRule.
+                 * @memberof google.api
+                 * @classdesc Represents a ContextRule.
+                 * @implements IContextRule
+                 * @constructor
+                 * @param {google.api.IContextRule=} [properties] Properties to set
+                 */
+                function ContextRule(properties) {
+                    this.requested = [];
+                    this.provided = [];
+                    this.allowedRequestExtensions = [];
+                    this.allowedResponseExtensions = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ContextRule selector.
+                 * @member {string} selector
+                 * @memberof google.api.ContextRule
+                 * @instance
+                 */
+                ContextRule.prototype.selector = "";
+    
+                /**
+                 * ContextRule requested.
+                 * @member {Array.<string>} requested
+                 * @memberof google.api.ContextRule
+                 * @instance
+                 */
+                ContextRule.prototype.requested = $util.emptyArray;
+    
+                /**
+                 * ContextRule provided.
+                 * @member {Array.<string>} provided
+                 * @memberof google.api.ContextRule
+                 * @instance
+                 */
+                ContextRule.prototype.provided = $util.emptyArray;
+    
+                /**
+                 * ContextRule allowedRequestExtensions.
+                 * @member {Array.<string>} allowedRequestExtensions
+                 * @memberof google.api.ContextRule
+                 * @instance
+                 */
+                ContextRule.prototype.allowedRequestExtensions = $util.emptyArray;
+    
+                /**
+                 * ContextRule allowedResponseExtensions.
+                 * @member {Array.<string>} allowedResponseExtensions
+                 * @memberof google.api.ContextRule
+                 * @instance
+                 */
+                ContextRule.prototype.allowedResponseExtensions = $util.emptyArray;
+    
+                /**
+                 * Creates a new ContextRule instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.ContextRule
+                 * @static
+                 * @param {google.api.IContextRule=} [properties] Properties to set
+                 * @returns {google.api.ContextRule} ContextRule instance
+                 */
+                ContextRule.create = function create(properties) {
+                    return new ContextRule(properties);
+                };
+    
+                /**
+                 * Encodes the specified ContextRule message. Does not implicitly {@link google.api.ContextRule.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.ContextRule
+                 * @static
+                 * @param {google.api.IContextRule} message ContextRule message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ContextRule.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.selector != null && Object.hasOwnProperty.call(message, "selector"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.selector);
+                    if (message.requested != null && message.requested.length)
+                        for (var i = 0; i < message.requested.length; ++i)
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.requested[i]);
+                    if (message.provided != null && message.provided.length)
+                        for (var i = 0; i < message.provided.length; ++i)
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.provided[i]);
+                    if (message.allowedRequestExtensions != null && message.allowedRequestExtensions.length)
+                        for (var i = 0; i < message.allowedRequestExtensions.length; ++i)
+                            writer.uint32(/* id 4, wireType 2 =*/34).string(message.allowedRequestExtensions[i]);
+                    if (message.allowedResponseExtensions != null && message.allowedResponseExtensions.length)
+                        for (var i = 0; i < message.allowedResponseExtensions.length; ++i)
+                            writer.uint32(/* id 5, wireType 2 =*/42).string(message.allowedResponseExtensions[i]);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ContextRule message, length delimited. Does not implicitly {@link google.api.ContextRule.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.ContextRule
+                 * @static
+                 * @param {google.api.IContextRule} message ContextRule message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ContextRule.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ContextRule message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.ContextRule
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.ContextRule} ContextRule
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ContextRule.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ContextRule();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.selector = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                if (!(message.requested && message.requested.length))
+                                    message.requested = [];
+                                message.requested.push(reader.string());
+                                break;
+                            }
+                        case 3: {
+                                if (!(message.provided && message.provided.length))
+                                    message.provided = [];
+                                message.provided.push(reader.string());
+                                break;
+                            }
+                        case 4: {
+                                if (!(message.allowedRequestExtensions && message.allowedRequestExtensions.length))
+                                    message.allowedRequestExtensions = [];
+                                message.allowedRequestExtensions.push(reader.string());
+                                break;
+                            }
+                        case 5: {
+                                if (!(message.allowedResponseExtensions && message.allowedResponseExtensions.length))
+                                    message.allowedResponseExtensions = [];
+                                message.allowedResponseExtensions.push(reader.string());
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ContextRule message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.ContextRule
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.ContextRule} ContextRule
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ContextRule.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ContextRule message.
+                 * @function verify
+                 * @memberof google.api.ContextRule
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ContextRule.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.selector != null && message.hasOwnProperty("selector"))
+                        if (!$util.isString(message.selector))
+                            return "selector: string expected";
+                    if (message.requested != null && message.hasOwnProperty("requested")) {
+                        if (!Array.isArray(message.requested))
+                            return "requested: array expected";
+                        for (var i = 0; i < message.requested.length; ++i)
+                            if (!$util.isString(message.requested[i]))
+                                return "requested: string[] expected";
+                    }
+                    if (message.provided != null && message.hasOwnProperty("provided")) {
+                        if (!Array.isArray(message.provided))
+                            return "provided: array expected";
+                        for (var i = 0; i < message.provided.length; ++i)
+                            if (!$util.isString(message.provided[i]))
+                                return "provided: string[] expected";
+                    }
+                    if (message.allowedRequestExtensions != null && message.hasOwnProperty("allowedRequestExtensions")) {
+                        if (!Array.isArray(message.allowedRequestExtensions))
+                            return "allowedRequestExtensions: array expected";
+                        for (var i = 0; i < message.allowedRequestExtensions.length; ++i)
+                            if (!$util.isString(message.allowedRequestExtensions[i]))
+                                return "allowedRequestExtensions: string[] expected";
+                    }
+                    if (message.allowedResponseExtensions != null && message.hasOwnProperty("allowedResponseExtensions")) {
+                        if (!Array.isArray(message.allowedResponseExtensions))
+                            return "allowedResponseExtensions: array expected";
+                        for (var i = 0; i < message.allowedResponseExtensions.length; ++i)
+                            if (!$util.isString(message.allowedResponseExtensions[i]))
+                                return "allowedResponseExtensions: string[] expected";
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a ContextRule message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.ContextRule
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.ContextRule} ContextRule
+                 */
+                ContextRule.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.ContextRule)
+                        return object;
+                    var message = new $root.google.api.ContextRule();
+                    if (object.selector != null)
+                        message.selector = String(object.selector);
+                    if (object.requested) {
+                        if (!Array.isArray(object.requested))
+                            throw TypeError(".google.api.ContextRule.requested: array expected");
+                        message.requested = [];
+                        for (var i = 0; i < object.requested.length; ++i)
+                            message.requested[i] = String(object.requested[i]);
+                    }
+                    if (object.provided) {
+                        if (!Array.isArray(object.provided))
+                            throw TypeError(".google.api.ContextRule.provided: array expected");
+                        message.provided = [];
+                        for (var i = 0; i < object.provided.length; ++i)
+                            message.provided[i] = String(object.provided[i]);
+                    }
+                    if (object.allowedRequestExtensions) {
+                        if (!Array.isArray(object.allowedRequestExtensions))
+                            throw TypeError(".google.api.ContextRule.allowedRequestExtensions: array expected");
+                        message.allowedRequestExtensions = [];
+                        for (var i = 0; i < object.allowedRequestExtensions.length; ++i)
+                            message.allowedRequestExtensions[i] = String(object.allowedRequestExtensions[i]);
+                    }
+                    if (object.allowedResponseExtensions) {
+                        if (!Array.isArray(object.allowedResponseExtensions))
+                            throw TypeError(".google.api.ContextRule.allowedResponseExtensions: array expected");
+                        message.allowedResponseExtensions = [];
+                        for (var i = 0; i < object.allowedResponseExtensions.length; ++i)
+                            message.allowedResponseExtensions[i] = String(object.allowedResponseExtensions[i]);
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ContextRule message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.ContextRule
+                 * @static
+                 * @param {google.api.ContextRule} message ContextRule
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ContextRule.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults) {
+                        object.requested = [];
+                        object.provided = [];
+                        object.allowedRequestExtensions = [];
+                        object.allowedResponseExtensions = [];
+                    }
+                    if (options.defaults)
+                        object.selector = "";
+                    if (message.selector != null && message.hasOwnProperty("selector"))
+                        object.selector = message.selector;
+                    if (message.requested && message.requested.length) {
+                        object.requested = [];
+                        for (var j = 0; j < message.requested.length; ++j)
+                            object.requested[j] = message.requested[j];
+                    }
+                    if (message.provided && message.provided.length) {
+                        object.provided = [];
+                        for (var j = 0; j < message.provided.length; ++j)
+                            object.provided[j] = message.provided[j];
+                    }
+                    if (message.allowedRequestExtensions && message.allowedRequestExtensions.length) {
+                        object.allowedRequestExtensions = [];
+                        for (var j = 0; j < message.allowedRequestExtensions.length; ++j)
+                            object.allowedRequestExtensions[j] = message.allowedRequestExtensions[j];
+                    }
+                    if (message.allowedResponseExtensions && message.allowedResponseExtensions.length) {
+                        object.allowedResponseExtensions = [];
+                        for (var j = 0; j < message.allowedResponseExtensions.length; ++j)
+                            object.allowedResponseExtensions[j] = message.allowedResponseExtensions[j];
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this ContextRule to JSON.
+                 * @function toJSON
+                 * @memberof google.api.ContextRule
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ContextRule.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for ContextRule
+                 * @function getTypeUrl
+                 * @memberof google.api.ContextRule
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ContextRule.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.ContextRule";
+                };
+    
+                return ContextRule;
+            })();
+    
+            api.Control = (function() {
+    
+                /**
+                 * Properties of a Control.
+                 * @memberof google.api
+                 * @interface IControl
+                 * @property {string|null} [environment] Control environment
+                 */
+    
+                /**
+                 * Constructs a new Control.
+                 * @memberof google.api
+                 * @classdesc Represents a Control.
+                 * @implements IControl
+                 * @constructor
+                 * @param {google.api.IControl=} [properties] Properties to set
+                 */
+                function Control(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Control environment.
+                 * @member {string} environment
+                 * @memberof google.api.Control
+                 * @instance
+                 */
+                Control.prototype.environment = "";
+    
+                /**
+                 * Creates a new Control instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.Control
+                 * @static
+                 * @param {google.api.IControl=} [properties] Properties to set
+                 * @returns {google.api.Control} Control instance
+                 */
+                Control.create = function create(properties) {
+                    return new Control(properties);
+                };
+    
+                /**
+                 * Encodes the specified Control message. Does not implicitly {@link google.api.Control.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.Control
+                 * @static
+                 * @param {google.api.IControl} message Control message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Control.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.environment != null && Object.hasOwnProperty.call(message, "environment"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.environment);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Control message, length delimited. Does not implicitly {@link google.api.Control.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.Control
+                 * @static
+                 * @param {google.api.IControl} message Control message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Control.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Control message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.Control
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.Control} Control
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Control.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Control();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.environment = reader.string();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Control message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.Control
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.Control} Control
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Control.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Control message.
+                 * @function verify
+                 * @memberof google.api.Control
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Control.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.environment != null && message.hasOwnProperty("environment"))
+                        if (!$util.isString(message.environment))
+                            return "environment: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a Control message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.Control
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.Control} Control
+                 */
+                Control.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.Control)
+                        return object;
+                    var message = new $root.google.api.Control();
+                    if (object.environment != null)
+                        message.environment = String(object.environment);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Control message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.Control
+                 * @static
+                 * @param {google.api.Control} message Control
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Control.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.environment = "";
+                    if (message.environment != null && message.hasOwnProperty("environment"))
+                        object.environment = message.environment;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Control to JSON.
+                 * @function toJSON
+                 * @memberof google.api.Control
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Control.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Control
+                 * @function getTypeUrl
+                 * @memberof google.api.Control
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Control.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.Control";
+                };
+    
+                return Control;
+            })();
+    
+            api.Documentation = (function() {
+    
+                /**
+                 * Properties of a Documentation.
+                 * @memberof google.api
+                 * @interface IDocumentation
+                 * @property {string|null} [summary] Documentation summary
+                 * @property {Array.<google.api.IPage>|null} [pages] Documentation pages
+                 * @property {Array.<google.api.IDocumentationRule>|null} [rules] Documentation rules
+                 * @property {string|null} [documentationRootUrl] Documentation documentationRootUrl
+                 * @property {string|null} [serviceRootUrl] Documentation serviceRootUrl
+                 * @property {string|null} [overview] Documentation overview
+                 */
+    
+                /**
+                 * Constructs a new Documentation.
+                 * @memberof google.api
+                 * @classdesc Represents a Documentation.
+                 * @implements IDocumentation
+                 * @constructor
+                 * @param {google.api.IDocumentation=} [properties] Properties to set
+                 */
+                function Documentation(properties) {
+                    this.pages = [];
+                    this.rules = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Documentation summary.
+                 * @member {string} summary
+                 * @memberof google.api.Documentation
+                 * @instance
+                 */
+                Documentation.prototype.summary = "";
+    
+                /**
+                 * Documentation pages.
+                 * @member {Array.<google.api.IPage>} pages
+                 * @memberof google.api.Documentation
+                 * @instance
+                 */
+                Documentation.prototype.pages = $util.emptyArray;
+    
+                /**
+                 * Documentation rules.
+                 * @member {Array.<google.api.IDocumentationRule>} rules
+                 * @memberof google.api.Documentation
+                 * @instance
+                 */
+                Documentation.prototype.rules = $util.emptyArray;
+    
+                /**
+                 * Documentation documentationRootUrl.
+                 * @member {string} documentationRootUrl
+                 * @memberof google.api.Documentation
+                 * @instance
+                 */
+                Documentation.prototype.documentationRootUrl = "";
+    
+                /**
+                 * Documentation serviceRootUrl.
+                 * @member {string} serviceRootUrl
+                 * @memberof google.api.Documentation
+                 * @instance
+                 */
+                Documentation.prototype.serviceRootUrl = "";
+    
+                /**
+                 * Documentation overview.
+                 * @member {string} overview
+                 * @memberof google.api.Documentation
+                 * @instance
+                 */
+                Documentation.prototype.overview = "";
+    
+                /**
+                 * Creates a new Documentation instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.Documentation
+                 * @static
+                 * @param {google.api.IDocumentation=} [properties] Properties to set
+                 * @returns {google.api.Documentation} Documentation instance
+                 */
+                Documentation.create = function create(properties) {
+                    return new Documentation(properties);
+                };
+    
+                /**
+                 * Encodes the specified Documentation message. Does not implicitly {@link google.api.Documentation.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.Documentation
+                 * @static
+                 * @param {google.api.IDocumentation} message Documentation message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Documentation.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.summary != null && Object.hasOwnProperty.call(message, "summary"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.summary);
+                    if (message.overview != null && Object.hasOwnProperty.call(message, "overview"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.overview);
+                    if (message.rules != null && message.rules.length)
+                        for (var i = 0; i < message.rules.length; ++i)
+                            $root.google.api.DocumentationRule.encode(message.rules[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                    if (message.documentationRootUrl != null && Object.hasOwnProperty.call(message, "documentationRootUrl"))
+                        writer.uint32(/* id 4, wireType 2 =*/34).string(message.documentationRootUrl);
+                    if (message.pages != null && message.pages.length)
+                        for (var i = 0; i < message.pages.length; ++i)
+                            $root.google.api.Page.encode(message.pages[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                    if (message.serviceRootUrl != null && Object.hasOwnProperty.call(message, "serviceRootUrl"))
+                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.serviceRootUrl);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Documentation message, length delimited. Does not implicitly {@link google.api.Documentation.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.Documentation
+                 * @static
+                 * @param {google.api.IDocumentation} message Documentation message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Documentation.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Documentation message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.Documentation
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.Documentation} Documentation
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Documentation.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Documentation();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.summary = reader.string();
+                                break;
+                            }
+                        case 5: {
+                                if (!(message.pages && message.pages.length))
+                                    message.pages = [];
+                                message.pages.push($root.google.api.Page.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 3: {
+                                if (!(message.rules && message.rules.length))
+                                    message.rules = [];
+                                message.rules.push($root.google.api.DocumentationRule.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 4: {
+                                message.documentationRootUrl = reader.string();
+                                break;
+                            }
+                        case 6: {
+                                message.serviceRootUrl = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.overview = reader.string();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Documentation message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.Documentation
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.Documentation} Documentation
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Documentation.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Documentation message.
+                 * @function verify
+                 * @memberof google.api.Documentation
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Documentation.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.summary != null && message.hasOwnProperty("summary"))
+                        if (!$util.isString(message.summary))
+                            return "summary: string expected";
+                    if (message.pages != null && message.hasOwnProperty("pages")) {
+                        if (!Array.isArray(message.pages))
+                            return "pages: array expected";
+                        for (var i = 0; i < message.pages.length; ++i) {
+                            var error = $root.google.api.Page.verify(message.pages[i]);
+                            if (error)
+                                return "pages." + error;
+                        }
+                    }
+                    if (message.rules != null && message.hasOwnProperty("rules")) {
+                        if (!Array.isArray(message.rules))
+                            return "rules: array expected";
+                        for (var i = 0; i < message.rules.length; ++i) {
+                            var error = $root.google.api.DocumentationRule.verify(message.rules[i]);
+                            if (error)
+                                return "rules." + error;
+                        }
+                    }
+                    if (message.documentationRootUrl != null && message.hasOwnProperty("documentationRootUrl"))
+                        if (!$util.isString(message.documentationRootUrl))
+                            return "documentationRootUrl: string expected";
+                    if (message.serviceRootUrl != null && message.hasOwnProperty("serviceRootUrl"))
+                        if (!$util.isString(message.serviceRootUrl))
+                            return "serviceRootUrl: string expected";
+                    if (message.overview != null && message.hasOwnProperty("overview"))
+                        if (!$util.isString(message.overview))
+                            return "overview: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a Documentation message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.Documentation
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.Documentation} Documentation
+                 */
+                Documentation.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.Documentation)
+                        return object;
+                    var message = new $root.google.api.Documentation();
+                    if (object.summary != null)
+                        message.summary = String(object.summary);
+                    if (object.pages) {
+                        if (!Array.isArray(object.pages))
+                            throw TypeError(".google.api.Documentation.pages: array expected");
+                        message.pages = [];
+                        for (var i = 0; i < object.pages.length; ++i) {
+                            if (typeof object.pages[i] !== "object")
+                                throw TypeError(".google.api.Documentation.pages: object expected");
+                            message.pages[i] = $root.google.api.Page.fromObject(object.pages[i]);
+                        }
+                    }
+                    if (object.rules) {
+                        if (!Array.isArray(object.rules))
+                            throw TypeError(".google.api.Documentation.rules: array expected");
+                        message.rules = [];
+                        for (var i = 0; i < object.rules.length; ++i) {
+                            if (typeof object.rules[i] !== "object")
+                                throw TypeError(".google.api.Documentation.rules: object expected");
+                            message.rules[i] = $root.google.api.DocumentationRule.fromObject(object.rules[i]);
+                        }
+                    }
+                    if (object.documentationRootUrl != null)
+                        message.documentationRootUrl = String(object.documentationRootUrl);
+                    if (object.serviceRootUrl != null)
+                        message.serviceRootUrl = String(object.serviceRootUrl);
+                    if (object.overview != null)
+                        message.overview = String(object.overview);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Documentation message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.Documentation
+                 * @static
+                 * @param {google.api.Documentation} message Documentation
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Documentation.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults) {
+                        object.rules = [];
+                        object.pages = [];
+                    }
+                    if (options.defaults) {
+                        object.summary = "";
+                        object.overview = "";
+                        object.documentationRootUrl = "";
+                        object.serviceRootUrl = "";
+                    }
+                    if (message.summary != null && message.hasOwnProperty("summary"))
+                        object.summary = message.summary;
+                    if (message.overview != null && message.hasOwnProperty("overview"))
+                        object.overview = message.overview;
+                    if (message.rules && message.rules.length) {
+                        object.rules = [];
+                        for (var j = 0; j < message.rules.length; ++j)
+                            object.rules[j] = $root.google.api.DocumentationRule.toObject(message.rules[j], options);
+                    }
+                    if (message.documentationRootUrl != null && message.hasOwnProperty("documentationRootUrl"))
+                        object.documentationRootUrl = message.documentationRootUrl;
+                    if (message.pages && message.pages.length) {
+                        object.pages = [];
+                        for (var j = 0; j < message.pages.length; ++j)
+                            object.pages[j] = $root.google.api.Page.toObject(message.pages[j], options);
+                    }
+                    if (message.serviceRootUrl != null && message.hasOwnProperty("serviceRootUrl"))
+                        object.serviceRootUrl = message.serviceRootUrl;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Documentation to JSON.
+                 * @function toJSON
+                 * @memberof google.api.Documentation
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Documentation.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Documentation
+                 * @function getTypeUrl
+                 * @memberof google.api.Documentation
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Documentation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.Documentation";
+                };
+    
+                return Documentation;
+            })();
+    
+            api.DocumentationRule = (function() {
+    
+                /**
+                 * Properties of a DocumentationRule.
+                 * @memberof google.api
+                 * @interface IDocumentationRule
+                 * @property {string|null} [selector] DocumentationRule selector
+                 * @property {string|null} [description] DocumentationRule description
+                 * @property {string|null} [deprecationDescription] DocumentationRule deprecationDescription
+                 */
+    
+                /**
+                 * Constructs a new DocumentationRule.
+                 * @memberof google.api
+                 * @classdesc Represents a DocumentationRule.
+                 * @implements IDocumentationRule
+                 * @constructor
+                 * @param {google.api.IDocumentationRule=} [properties] Properties to set
+                 */
+                function DocumentationRule(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * DocumentationRule selector.
+                 * @member {string} selector
+                 * @memberof google.api.DocumentationRule
+                 * @instance
+                 */
+                DocumentationRule.prototype.selector = "";
+    
+                /**
+                 * DocumentationRule description.
+                 * @member {string} description
+                 * @memberof google.api.DocumentationRule
+                 * @instance
+                 */
+                DocumentationRule.prototype.description = "";
+    
+                /**
+                 * DocumentationRule deprecationDescription.
+                 * @member {string} deprecationDescription
+                 * @memberof google.api.DocumentationRule
+                 * @instance
+                 */
+                DocumentationRule.prototype.deprecationDescription = "";
+    
+                /**
+                 * Creates a new DocumentationRule instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.DocumentationRule
+                 * @static
+                 * @param {google.api.IDocumentationRule=} [properties] Properties to set
+                 * @returns {google.api.DocumentationRule} DocumentationRule instance
+                 */
+                DocumentationRule.create = function create(properties) {
+                    return new DocumentationRule(properties);
+                };
+    
+                /**
+                 * Encodes the specified DocumentationRule message. Does not implicitly {@link google.api.DocumentationRule.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.DocumentationRule
+                 * @static
+                 * @param {google.api.IDocumentationRule} message DocumentationRule message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                DocumentationRule.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.selector != null && Object.hasOwnProperty.call(message, "selector"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.selector);
+                    if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.description);
+                    if (message.deprecationDescription != null && Object.hasOwnProperty.call(message, "deprecationDescription"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.deprecationDescription);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified DocumentationRule message, length delimited. Does not implicitly {@link google.api.DocumentationRule.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.DocumentationRule
+                 * @static
+                 * @param {google.api.IDocumentationRule} message DocumentationRule message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                DocumentationRule.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a DocumentationRule message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.DocumentationRule
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.DocumentationRule} DocumentationRule
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                DocumentationRule.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.DocumentationRule();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.selector = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.description = reader.string();
+                                break;
+                            }
+                        case 3: {
+                                message.deprecationDescription = reader.string();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a DocumentationRule message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.DocumentationRule
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.DocumentationRule} DocumentationRule
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                DocumentationRule.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a DocumentationRule message.
+                 * @function verify
+                 * @memberof google.api.DocumentationRule
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                DocumentationRule.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.selector != null && message.hasOwnProperty("selector"))
+                        if (!$util.isString(message.selector))
+                            return "selector: string expected";
+                    if (message.description != null && message.hasOwnProperty("description"))
+                        if (!$util.isString(message.description))
+                            return "description: string expected";
+                    if (message.deprecationDescription != null && message.hasOwnProperty("deprecationDescription"))
+                        if (!$util.isString(message.deprecationDescription))
+                            return "deprecationDescription: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a DocumentationRule message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.DocumentationRule
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.DocumentationRule} DocumentationRule
+                 */
+                DocumentationRule.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.DocumentationRule)
+                        return object;
+                    var message = new $root.google.api.DocumentationRule();
+                    if (object.selector != null)
+                        message.selector = String(object.selector);
+                    if (object.description != null)
+                        message.description = String(object.description);
+                    if (object.deprecationDescription != null)
+                        message.deprecationDescription = String(object.deprecationDescription);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a DocumentationRule message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.DocumentationRule
+                 * @static
+                 * @param {google.api.DocumentationRule} message DocumentationRule
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                DocumentationRule.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.selector = "";
+                        object.description = "";
+                        object.deprecationDescription = "";
+                    }
+                    if (message.selector != null && message.hasOwnProperty("selector"))
+                        object.selector = message.selector;
+                    if (message.description != null && message.hasOwnProperty("description"))
+                        object.description = message.description;
+                    if (message.deprecationDescription != null && message.hasOwnProperty("deprecationDescription"))
+                        object.deprecationDescription = message.deprecationDescription;
+                    return object;
+                };
+    
+                /**
+                 * Converts this DocumentationRule to JSON.
+                 * @function toJSON
+                 * @memberof google.api.DocumentationRule
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                DocumentationRule.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for DocumentationRule
+                 * @function getTypeUrl
+                 * @memberof google.api.DocumentationRule
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                DocumentationRule.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.DocumentationRule";
+                };
+    
+                return DocumentationRule;
+            })();
+    
+            api.Page = (function() {
+    
+                /**
+                 * Properties of a Page.
+                 * @memberof google.api
+                 * @interface IPage
+                 * @property {string|null} [name] Page name
+                 * @property {string|null} [content] Page content
+                 * @property {Array.<google.api.IPage>|null} [subpages] Page subpages
+                 */
+    
+                /**
+                 * Constructs a new Page.
+                 * @memberof google.api
+                 * @classdesc Represents a Page.
+                 * @implements IPage
+                 * @constructor
+                 * @param {google.api.IPage=} [properties] Properties to set
+                 */
+                function Page(properties) {
+                    this.subpages = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Page name.
+                 * @member {string} name
+                 * @memberof google.api.Page
+                 * @instance
+                 */
+                Page.prototype.name = "";
+    
+                /**
+                 * Page content.
+                 * @member {string} content
+                 * @memberof google.api.Page
+                 * @instance
+                 */
+                Page.prototype.content = "";
+    
+                /**
+                 * Page subpages.
+                 * @member {Array.<google.api.IPage>} subpages
+                 * @memberof google.api.Page
+                 * @instance
+                 */
+                Page.prototype.subpages = $util.emptyArray;
+    
+                /**
+                 * Creates a new Page instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.Page
+                 * @static
+                 * @param {google.api.IPage=} [properties] Properties to set
+                 * @returns {google.api.Page} Page instance
+                 */
+                Page.create = function create(properties) {
+                    return new Page(properties);
+                };
+    
+                /**
+                 * Encodes the specified Page message. Does not implicitly {@link google.api.Page.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.Page
+                 * @static
+                 * @param {google.api.IPage} message Page message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Page.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                    if (message.content != null && Object.hasOwnProperty.call(message, "content"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.content);
+                    if (message.subpages != null && message.subpages.length)
+                        for (var i = 0; i < message.subpages.length; ++i)
+                            $root.google.api.Page.encode(message.subpages[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Page message, length delimited. Does not implicitly {@link google.api.Page.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.Page
+                 * @static
+                 * @param {google.api.IPage} message Page message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Page.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Page message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.Page
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.Page} Page
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Page.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Page();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.content = reader.string();
+                                break;
+                            }
+                        case 3: {
+                                if (!(message.subpages && message.subpages.length))
+                                    message.subpages = [];
+                                message.subpages.push($root.google.api.Page.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Page message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.Page
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.Page} Page
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Page.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Page message.
+                 * @function verify
+                 * @memberof google.api.Page
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Page.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        if (!$util.isString(message.name))
+                            return "name: string expected";
+                    if (message.content != null && message.hasOwnProperty("content"))
+                        if (!$util.isString(message.content))
+                            return "content: string expected";
+                    if (message.subpages != null && message.hasOwnProperty("subpages")) {
+                        if (!Array.isArray(message.subpages))
+                            return "subpages: array expected";
+                        for (var i = 0; i < message.subpages.length; ++i) {
+                            var error = $root.google.api.Page.verify(message.subpages[i]);
+                            if (error)
+                                return "subpages." + error;
+                        }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a Page message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.Page
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.Page} Page
+                 */
+                Page.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.Page)
+                        return object;
+                    var message = new $root.google.api.Page();
+                    if (object.name != null)
+                        message.name = String(object.name);
+                    if (object.content != null)
+                        message.content = String(object.content);
+                    if (object.subpages) {
+                        if (!Array.isArray(object.subpages))
+                            throw TypeError(".google.api.Page.subpages: array expected");
+                        message.subpages = [];
+                        for (var i = 0; i < object.subpages.length; ++i) {
+                            if (typeof object.subpages[i] !== "object")
+                                throw TypeError(".google.api.Page.subpages: object expected");
+                            message.subpages[i] = $root.google.api.Page.fromObject(object.subpages[i]);
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Page message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.Page
+                 * @static
+                 * @param {google.api.Page} message Page
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Page.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.subpages = [];
+                    if (options.defaults) {
+                        object.name = "";
+                        object.content = "";
+                    }
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        object.name = message.name;
+                    if (message.content != null && message.hasOwnProperty("content"))
+                        object.content = message.content;
+                    if (message.subpages && message.subpages.length) {
+                        object.subpages = [];
+                        for (var j = 0; j < message.subpages.length; ++j)
+                            object.subpages[j] = $root.google.api.Page.toObject(message.subpages[j], options);
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this Page to JSON.
+                 * @function toJSON
+                 * @memberof google.api.Page
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Page.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Page
+                 * @function getTypeUrl
+                 * @memberof google.api.Page
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Page.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.Page";
+                };
+    
+                return Page;
+            })();
+    
+            api.Endpoint = (function() {
+    
+                /**
+                 * Properties of an Endpoint.
+                 * @memberof google.api
+                 * @interface IEndpoint
+                 * @property {string|null} [name] Endpoint name
+                 * @property {Array.<string>|null} [aliases] Endpoint aliases
+                 * @property {string|null} [target] Endpoint target
+                 * @property {boolean|null} [allowCors] Endpoint allowCors
+                 */
+    
+                /**
+                 * Constructs a new Endpoint.
+                 * @memberof google.api
+                 * @classdesc Represents an Endpoint.
+                 * @implements IEndpoint
+                 * @constructor
+                 * @param {google.api.IEndpoint=} [properties] Properties to set
+                 */
+                function Endpoint(properties) {
+                    this.aliases = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Endpoint name.
+                 * @member {string} name
+                 * @memberof google.api.Endpoint
+                 * @instance
+                 */
+                Endpoint.prototype.name = "";
+    
+                /**
+                 * Endpoint aliases.
+                 * @member {Array.<string>} aliases
+                 * @memberof google.api.Endpoint
+                 * @instance
+                 */
+                Endpoint.prototype.aliases = $util.emptyArray;
+    
+                /**
+                 * Endpoint target.
+                 * @member {string} target
+                 * @memberof google.api.Endpoint
+                 * @instance
+                 */
+                Endpoint.prototype.target = "";
+    
+                /**
+                 * Endpoint allowCors.
+                 * @member {boolean} allowCors
+                 * @memberof google.api.Endpoint
+                 * @instance
+                 */
+                Endpoint.prototype.allowCors = false;
+    
+                /**
+                 * Creates a new Endpoint instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.Endpoint
+                 * @static
+                 * @param {google.api.IEndpoint=} [properties] Properties to set
+                 * @returns {google.api.Endpoint} Endpoint instance
+                 */
+                Endpoint.create = function create(properties) {
+                    return new Endpoint(properties);
+                };
+    
+                /**
+                 * Encodes the specified Endpoint message. Does not implicitly {@link google.api.Endpoint.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.Endpoint
+                 * @static
+                 * @param {google.api.IEndpoint} message Endpoint message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Endpoint.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                    if (message.aliases != null && message.aliases.length)
+                        for (var i = 0; i < message.aliases.length; ++i)
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.aliases[i]);
+                    if (message.allowCors != null && Object.hasOwnProperty.call(message, "allowCors"))
+                        writer.uint32(/* id 5, wireType 0 =*/40).bool(message.allowCors);
+                    if (message.target != null && Object.hasOwnProperty.call(message, "target"))
+                        writer.uint32(/* id 101, wireType 2 =*/810).string(message.target);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Endpoint message, length delimited. Does not implicitly {@link google.api.Endpoint.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.Endpoint
+                 * @static
+                 * @param {google.api.IEndpoint} message Endpoint message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Endpoint.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an Endpoint message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.Endpoint
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.Endpoint} Endpoint
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Endpoint.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Endpoint();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                if (!(message.aliases && message.aliases.length))
+                                    message.aliases = [];
+                                message.aliases.push(reader.string());
+                                break;
+                            }
+                        case 101: {
+                                message.target = reader.string();
+                                break;
+                            }
+                        case 5: {
+                                message.allowCors = reader.bool();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an Endpoint message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.Endpoint
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.Endpoint} Endpoint
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Endpoint.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an Endpoint message.
+                 * @function verify
+                 * @memberof google.api.Endpoint
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Endpoint.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        if (!$util.isString(message.name))
+                            return "name: string expected";
+                    if (message.aliases != null && message.hasOwnProperty("aliases")) {
+                        if (!Array.isArray(message.aliases))
+                            return "aliases: array expected";
+                        for (var i = 0; i < message.aliases.length; ++i)
+                            if (!$util.isString(message.aliases[i]))
+                                return "aliases: string[] expected";
+                    }
+                    if (message.target != null && message.hasOwnProperty("target"))
+                        if (!$util.isString(message.target))
+                            return "target: string expected";
+                    if (message.allowCors != null && message.hasOwnProperty("allowCors"))
+                        if (typeof message.allowCors !== "boolean")
+                            return "allowCors: boolean expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates an Endpoint message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.Endpoint
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.Endpoint} Endpoint
+                 */
+                Endpoint.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.Endpoint)
+                        return object;
+                    var message = new $root.google.api.Endpoint();
+                    if (object.name != null)
+                        message.name = String(object.name);
+                    if (object.aliases) {
+                        if (!Array.isArray(object.aliases))
+                            throw TypeError(".google.api.Endpoint.aliases: array expected");
+                        message.aliases = [];
+                        for (var i = 0; i < object.aliases.length; ++i)
+                            message.aliases[i] = String(object.aliases[i]);
+                    }
+                    if (object.target != null)
+                        message.target = String(object.target);
+                    if (object.allowCors != null)
+                        message.allowCors = Boolean(object.allowCors);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an Endpoint message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.Endpoint
+                 * @static
+                 * @param {google.api.Endpoint} message Endpoint
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Endpoint.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.aliases = [];
+                    if (options.defaults) {
+                        object.name = "";
+                        object.allowCors = false;
+                        object.target = "";
+                    }
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        object.name = message.name;
+                    if (message.aliases && message.aliases.length) {
+                        object.aliases = [];
+                        for (var j = 0; j < message.aliases.length; ++j)
+                            object.aliases[j] = message.aliases[j];
+                    }
+                    if (message.allowCors != null && message.hasOwnProperty("allowCors"))
+                        object.allowCors = message.allowCors;
+                    if (message.target != null && message.hasOwnProperty("target"))
+                        object.target = message.target;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Endpoint to JSON.
+                 * @function toJSON
+                 * @memberof google.api.Endpoint
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Endpoint.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Endpoint
+                 * @function getTypeUrl
+                 * @memberof google.api.Endpoint
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Endpoint.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.Endpoint";
+                };
+    
+                return Endpoint;
+            })();
+    
+            api.LogDescriptor = (function() {
+    
+                /**
+                 * Properties of a LogDescriptor.
+                 * @memberof google.api
+                 * @interface ILogDescriptor
+                 * @property {string|null} [name] LogDescriptor name
+                 * @property {Array.<google.api.ILabelDescriptor>|null} [labels] LogDescriptor labels
+                 * @property {string|null} [description] LogDescriptor description
+                 * @property {string|null} [displayName] LogDescriptor displayName
+                 */
+    
+                /**
+                 * Constructs a new LogDescriptor.
+                 * @memberof google.api
+                 * @classdesc Represents a LogDescriptor.
+                 * @implements ILogDescriptor
+                 * @constructor
+                 * @param {google.api.ILogDescriptor=} [properties] Properties to set
+                 */
+                function LogDescriptor(properties) {
+                    this.labels = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * LogDescriptor name.
+                 * @member {string} name
+                 * @memberof google.api.LogDescriptor
+                 * @instance
+                 */
+                LogDescriptor.prototype.name = "";
+    
+                /**
+                 * LogDescriptor labels.
+                 * @member {Array.<google.api.ILabelDescriptor>} labels
+                 * @memberof google.api.LogDescriptor
+                 * @instance
+                 */
+                LogDescriptor.prototype.labels = $util.emptyArray;
+    
+                /**
+                 * LogDescriptor description.
+                 * @member {string} description
+                 * @memberof google.api.LogDescriptor
+                 * @instance
+                 */
+                LogDescriptor.prototype.description = "";
+    
+                /**
+                 * LogDescriptor displayName.
+                 * @member {string} displayName
+                 * @memberof google.api.LogDescriptor
+                 * @instance
+                 */
+                LogDescriptor.prototype.displayName = "";
+    
+                /**
+                 * Creates a new LogDescriptor instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.LogDescriptor
+                 * @static
+                 * @param {google.api.ILogDescriptor=} [properties] Properties to set
+                 * @returns {google.api.LogDescriptor} LogDescriptor instance
+                 */
+                LogDescriptor.create = function create(properties) {
+                    return new LogDescriptor(properties);
+                };
+    
+                /**
+                 * Encodes the specified LogDescriptor message. Does not implicitly {@link google.api.LogDescriptor.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.LogDescriptor
+                 * @static
+                 * @param {google.api.ILogDescriptor} message LogDescriptor message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                LogDescriptor.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                    if (message.labels != null && message.labels.length)
+                        for (var i = 0; i < message.labels.length; ++i)
+                            $root.google.api.LabelDescriptor.encode(message.labels[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                    if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.description);
+                    if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                        writer.uint32(/* id 4, wireType 2 =*/34).string(message.displayName);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified LogDescriptor message, length delimited. Does not implicitly {@link google.api.LogDescriptor.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.LogDescriptor
+                 * @static
+                 * @param {google.api.ILogDescriptor} message LogDescriptor message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                LogDescriptor.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a LogDescriptor message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.LogDescriptor
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.LogDescriptor} LogDescriptor
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                LogDescriptor.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.LogDescriptor();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                if (!(message.labels && message.labels.length))
+                                    message.labels = [];
+                                message.labels.push($root.google.api.LabelDescriptor.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 3: {
+                                message.description = reader.string();
+                                break;
+                            }
+                        case 4: {
+                                message.displayName = reader.string();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a LogDescriptor message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.LogDescriptor
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.LogDescriptor} LogDescriptor
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                LogDescriptor.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a LogDescriptor message.
+                 * @function verify
+                 * @memberof google.api.LogDescriptor
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                LogDescriptor.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        if (!$util.isString(message.name))
+                            return "name: string expected";
+                    if (message.labels != null && message.hasOwnProperty("labels")) {
+                        if (!Array.isArray(message.labels))
+                            return "labels: array expected";
+                        for (var i = 0; i < message.labels.length; ++i) {
+                            var error = $root.google.api.LabelDescriptor.verify(message.labels[i]);
+                            if (error)
+                                return "labels." + error;
+                        }
+                    }
+                    if (message.description != null && message.hasOwnProperty("description"))
+                        if (!$util.isString(message.description))
+                            return "description: string expected";
+                    if (message.displayName != null && message.hasOwnProperty("displayName"))
+                        if (!$util.isString(message.displayName))
+                            return "displayName: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a LogDescriptor message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.LogDescriptor
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.LogDescriptor} LogDescriptor
+                 */
+                LogDescriptor.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.LogDescriptor)
+                        return object;
+                    var message = new $root.google.api.LogDescriptor();
+                    if (object.name != null)
+                        message.name = String(object.name);
+                    if (object.labels) {
+                        if (!Array.isArray(object.labels))
+                            throw TypeError(".google.api.LogDescriptor.labels: array expected");
+                        message.labels = [];
+                        for (var i = 0; i < object.labels.length; ++i) {
+                            if (typeof object.labels[i] !== "object")
+                                throw TypeError(".google.api.LogDescriptor.labels: object expected");
+                            message.labels[i] = $root.google.api.LabelDescriptor.fromObject(object.labels[i]);
+                        }
+                    }
+                    if (object.description != null)
+                        message.description = String(object.description);
+                    if (object.displayName != null)
+                        message.displayName = String(object.displayName);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a LogDescriptor message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.LogDescriptor
+                 * @static
+                 * @param {google.api.LogDescriptor} message LogDescriptor
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                LogDescriptor.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.labels = [];
+                    if (options.defaults) {
+                        object.name = "";
+                        object.description = "";
+                        object.displayName = "";
+                    }
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        object.name = message.name;
+                    if (message.labels && message.labels.length) {
+                        object.labels = [];
+                        for (var j = 0; j < message.labels.length; ++j)
+                            object.labels[j] = $root.google.api.LabelDescriptor.toObject(message.labels[j], options);
+                    }
+                    if (message.description != null && message.hasOwnProperty("description"))
+                        object.description = message.description;
+                    if (message.displayName != null && message.hasOwnProperty("displayName"))
+                        object.displayName = message.displayName;
+                    return object;
+                };
+    
+                /**
+                 * Converts this LogDescriptor to JSON.
+                 * @function toJSON
+                 * @memberof google.api.LogDescriptor
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                LogDescriptor.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for LogDescriptor
+                 * @function getTypeUrl
+                 * @memberof google.api.LogDescriptor
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                LogDescriptor.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.LogDescriptor";
+                };
+    
+                return LogDescriptor;
+            })();
+    
+            api.LabelDescriptor = (function() {
+    
+                /**
+                 * Properties of a LabelDescriptor.
+                 * @memberof google.api
+                 * @interface ILabelDescriptor
+                 * @property {string|null} [key] LabelDescriptor key
+                 * @property {google.api.LabelDescriptor.ValueType|null} [valueType] LabelDescriptor valueType
+                 * @property {string|null} [description] LabelDescriptor description
+                 */
+    
+                /**
+                 * Constructs a new LabelDescriptor.
+                 * @memberof google.api
+                 * @classdesc Represents a LabelDescriptor.
+                 * @implements ILabelDescriptor
+                 * @constructor
+                 * @param {google.api.ILabelDescriptor=} [properties] Properties to set
+                 */
+                function LabelDescriptor(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * LabelDescriptor key.
+                 * @member {string} key
+                 * @memberof google.api.LabelDescriptor
+                 * @instance
+                 */
+                LabelDescriptor.prototype.key = "";
+    
+                /**
+                 * LabelDescriptor valueType.
+                 * @member {google.api.LabelDescriptor.ValueType} valueType
+                 * @memberof google.api.LabelDescriptor
+                 * @instance
+                 */
+                LabelDescriptor.prototype.valueType = 0;
+    
+                /**
+                 * LabelDescriptor description.
+                 * @member {string} description
+                 * @memberof google.api.LabelDescriptor
+                 * @instance
+                 */
+                LabelDescriptor.prototype.description = "";
+    
+                /**
+                 * Creates a new LabelDescriptor instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.LabelDescriptor
+                 * @static
+                 * @param {google.api.ILabelDescriptor=} [properties] Properties to set
+                 * @returns {google.api.LabelDescriptor} LabelDescriptor instance
+                 */
+                LabelDescriptor.create = function create(properties) {
+                    return new LabelDescriptor(properties);
+                };
+    
+                /**
+                 * Encodes the specified LabelDescriptor message. Does not implicitly {@link google.api.LabelDescriptor.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.LabelDescriptor
+                 * @static
+                 * @param {google.api.ILabelDescriptor} message LabelDescriptor message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                LabelDescriptor.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.key != null && Object.hasOwnProperty.call(message, "key"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.key);
+                    if (message.valueType != null && Object.hasOwnProperty.call(message, "valueType"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.valueType);
+                    if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.description);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified LabelDescriptor message, length delimited. Does not implicitly {@link google.api.LabelDescriptor.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.LabelDescriptor
+                 * @static
+                 * @param {google.api.ILabelDescriptor} message LabelDescriptor message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                LabelDescriptor.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a LabelDescriptor message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.LabelDescriptor
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.LabelDescriptor} LabelDescriptor
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                LabelDescriptor.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.LabelDescriptor();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.key = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.valueType = reader.int32();
+                                break;
+                            }
+                        case 3: {
+                                message.description = reader.string();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a LabelDescriptor message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.LabelDescriptor
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.LabelDescriptor} LabelDescriptor
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                LabelDescriptor.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a LabelDescriptor message.
+                 * @function verify
+                 * @memberof google.api.LabelDescriptor
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                LabelDescriptor.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.key != null && message.hasOwnProperty("key"))
+                        if (!$util.isString(message.key))
+                            return "key: string expected";
+                    if (message.valueType != null && message.hasOwnProperty("valueType"))
+                        switch (message.valueType) {
+                        default:
+                            return "valueType: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
+                    if (message.description != null && message.hasOwnProperty("description"))
+                        if (!$util.isString(message.description))
+                            return "description: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a LabelDescriptor message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.LabelDescriptor
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.LabelDescriptor} LabelDescriptor
+                 */
+                LabelDescriptor.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.LabelDescriptor)
+                        return object;
+                    var message = new $root.google.api.LabelDescriptor();
+                    if (object.key != null)
+                        message.key = String(object.key);
+                    switch (object.valueType) {
+                    case "STRING":
+                    case 0:
+                        message.valueType = 0;
+                        break;
+                    case "BOOL":
+                    case 1:
+                        message.valueType = 1;
+                        break;
+                    case "INT64":
+                    case 2:
+                        message.valueType = 2;
+                        break;
+                    }
+                    if (object.description != null)
+                        message.description = String(object.description);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a LabelDescriptor message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.LabelDescriptor
+                 * @static
+                 * @param {google.api.LabelDescriptor} message LabelDescriptor
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                LabelDescriptor.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.key = "";
+                        object.valueType = options.enums === String ? "STRING" : 0;
+                        object.description = "";
+                    }
+                    if (message.key != null && message.hasOwnProperty("key"))
+                        object.key = message.key;
+                    if (message.valueType != null && message.hasOwnProperty("valueType"))
+                        object.valueType = options.enums === String ? $root.google.api.LabelDescriptor.ValueType[message.valueType] : message.valueType;
+                    if (message.description != null && message.hasOwnProperty("description"))
+                        object.description = message.description;
+                    return object;
+                };
+    
+                /**
+                 * Converts this LabelDescriptor to JSON.
+                 * @function toJSON
+                 * @memberof google.api.LabelDescriptor
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                LabelDescriptor.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for LabelDescriptor
+                 * @function getTypeUrl
+                 * @memberof google.api.LabelDescriptor
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                LabelDescriptor.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.LabelDescriptor";
+                };
+    
+                /**
+                 * ValueType enum.
+                 * @name google.api.LabelDescriptor.ValueType
+                 * @enum {number}
+                 * @property {number} STRING=0 STRING value
+                 * @property {number} BOOL=1 BOOL value
+                 * @property {number} INT64=2 INT64 value
+                 */
+                LabelDescriptor.ValueType = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "STRING"] = 0;
+                    values[valuesById[1] = "BOOL"] = 1;
+                    values[valuesById[2] = "INT64"] = 2;
+                    return values;
+                })();
+    
+                return LabelDescriptor;
+            })();
+    
+            api.Logging = (function() {
+    
+                /**
+                 * Properties of a Logging.
+                 * @memberof google.api
+                 * @interface ILogging
+                 * @property {Array.<google.api.Logging.ILoggingDestination>|null} [producerDestinations] Logging producerDestinations
+                 * @property {Array.<google.api.Logging.ILoggingDestination>|null} [consumerDestinations] Logging consumerDestinations
+                 */
+    
+                /**
+                 * Constructs a new Logging.
+                 * @memberof google.api
+                 * @classdesc Represents a Logging.
+                 * @implements ILogging
+                 * @constructor
+                 * @param {google.api.ILogging=} [properties] Properties to set
+                 */
+                function Logging(properties) {
+                    this.producerDestinations = [];
+                    this.consumerDestinations = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Logging producerDestinations.
+                 * @member {Array.<google.api.Logging.ILoggingDestination>} producerDestinations
+                 * @memberof google.api.Logging
+                 * @instance
+                 */
+                Logging.prototype.producerDestinations = $util.emptyArray;
+    
+                /**
+                 * Logging consumerDestinations.
+                 * @member {Array.<google.api.Logging.ILoggingDestination>} consumerDestinations
+                 * @memberof google.api.Logging
+                 * @instance
+                 */
+                Logging.prototype.consumerDestinations = $util.emptyArray;
+    
+                /**
+                 * Creates a new Logging instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.Logging
+                 * @static
+                 * @param {google.api.ILogging=} [properties] Properties to set
+                 * @returns {google.api.Logging} Logging instance
+                 */
+                Logging.create = function create(properties) {
+                    return new Logging(properties);
+                };
+    
+                /**
+                 * Encodes the specified Logging message. Does not implicitly {@link google.api.Logging.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.Logging
+                 * @static
+                 * @param {google.api.ILogging} message Logging message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Logging.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.producerDestinations != null && message.producerDestinations.length)
+                        for (var i = 0; i < message.producerDestinations.length; ++i)
+                            $root.google.api.Logging.LoggingDestination.encode(message.producerDestinations[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (message.consumerDestinations != null && message.consumerDestinations.length)
+                        for (var i = 0; i < message.consumerDestinations.length; ++i)
+                            $root.google.api.Logging.LoggingDestination.encode(message.consumerDestinations[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Logging message, length delimited. Does not implicitly {@link google.api.Logging.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.Logging
+                 * @static
+                 * @param {google.api.ILogging} message Logging message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Logging.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Logging message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.Logging
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.Logging} Logging
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Logging.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Logging();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                if (!(message.producerDestinations && message.producerDestinations.length))
+                                    message.producerDestinations = [];
+                                message.producerDestinations.push($root.google.api.Logging.LoggingDestination.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 2: {
+                                if (!(message.consumerDestinations && message.consumerDestinations.length))
+                                    message.consumerDestinations = [];
+                                message.consumerDestinations.push($root.google.api.Logging.LoggingDestination.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Logging message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.Logging
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.Logging} Logging
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Logging.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Logging message.
+                 * @function verify
+                 * @memberof google.api.Logging
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Logging.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.producerDestinations != null && message.hasOwnProperty("producerDestinations")) {
+                        if (!Array.isArray(message.producerDestinations))
+                            return "producerDestinations: array expected";
+                        for (var i = 0; i < message.producerDestinations.length; ++i) {
+                            var error = $root.google.api.Logging.LoggingDestination.verify(message.producerDestinations[i]);
+                            if (error)
+                                return "producerDestinations." + error;
+                        }
+                    }
+                    if (message.consumerDestinations != null && message.hasOwnProperty("consumerDestinations")) {
+                        if (!Array.isArray(message.consumerDestinations))
+                            return "consumerDestinations: array expected";
+                        for (var i = 0; i < message.consumerDestinations.length; ++i) {
+                            var error = $root.google.api.Logging.LoggingDestination.verify(message.consumerDestinations[i]);
+                            if (error)
+                                return "consumerDestinations." + error;
+                        }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a Logging message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.Logging
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.Logging} Logging
+                 */
+                Logging.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.Logging)
+                        return object;
+                    var message = new $root.google.api.Logging();
+                    if (object.producerDestinations) {
+                        if (!Array.isArray(object.producerDestinations))
+                            throw TypeError(".google.api.Logging.producerDestinations: array expected");
+                        message.producerDestinations = [];
+                        for (var i = 0; i < object.producerDestinations.length; ++i) {
+                            if (typeof object.producerDestinations[i] !== "object")
+                                throw TypeError(".google.api.Logging.producerDestinations: object expected");
+                            message.producerDestinations[i] = $root.google.api.Logging.LoggingDestination.fromObject(object.producerDestinations[i]);
+                        }
+                    }
+                    if (object.consumerDestinations) {
+                        if (!Array.isArray(object.consumerDestinations))
+                            throw TypeError(".google.api.Logging.consumerDestinations: array expected");
+                        message.consumerDestinations = [];
+                        for (var i = 0; i < object.consumerDestinations.length; ++i) {
+                            if (typeof object.consumerDestinations[i] !== "object")
+                                throw TypeError(".google.api.Logging.consumerDestinations: object expected");
+                            message.consumerDestinations[i] = $root.google.api.Logging.LoggingDestination.fromObject(object.consumerDestinations[i]);
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Logging message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.Logging
+                 * @static
+                 * @param {google.api.Logging} message Logging
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Logging.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults) {
+                        object.producerDestinations = [];
+                        object.consumerDestinations = [];
+                    }
+                    if (message.producerDestinations && message.producerDestinations.length) {
+                        object.producerDestinations = [];
+                        for (var j = 0; j < message.producerDestinations.length; ++j)
+                            object.producerDestinations[j] = $root.google.api.Logging.LoggingDestination.toObject(message.producerDestinations[j], options);
+                    }
+                    if (message.consumerDestinations && message.consumerDestinations.length) {
+                        object.consumerDestinations = [];
+                        for (var j = 0; j < message.consumerDestinations.length; ++j)
+                            object.consumerDestinations[j] = $root.google.api.Logging.LoggingDestination.toObject(message.consumerDestinations[j], options);
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this Logging to JSON.
+                 * @function toJSON
+                 * @memberof google.api.Logging
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Logging.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Logging
+                 * @function getTypeUrl
+                 * @memberof google.api.Logging
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Logging.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.Logging";
+                };
+    
+                Logging.LoggingDestination = (function() {
+    
+                    /**
+                     * Properties of a LoggingDestination.
+                     * @memberof google.api.Logging
+                     * @interface ILoggingDestination
+                     * @property {string|null} [monitoredResource] LoggingDestination monitoredResource
+                     * @property {Array.<string>|null} [logs] LoggingDestination logs
+                     */
+    
+                    /**
+                     * Constructs a new LoggingDestination.
+                     * @memberof google.api.Logging
+                     * @classdesc Represents a LoggingDestination.
+                     * @implements ILoggingDestination
+                     * @constructor
+                     * @param {google.api.Logging.ILoggingDestination=} [properties] Properties to set
+                     */
+                    function LoggingDestination(properties) {
+                        this.logs = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * LoggingDestination monitoredResource.
+                     * @member {string} monitoredResource
+                     * @memberof google.api.Logging.LoggingDestination
+                     * @instance
+                     */
+                    LoggingDestination.prototype.monitoredResource = "";
+    
+                    /**
+                     * LoggingDestination logs.
+                     * @member {Array.<string>} logs
+                     * @memberof google.api.Logging.LoggingDestination
+                     * @instance
+                     */
+                    LoggingDestination.prototype.logs = $util.emptyArray;
+    
+                    /**
+                     * Creates a new LoggingDestination instance using the specified properties.
+                     * @function create
+                     * @memberof google.api.Logging.LoggingDestination
+                     * @static
+                     * @param {google.api.Logging.ILoggingDestination=} [properties] Properties to set
+                     * @returns {google.api.Logging.LoggingDestination} LoggingDestination instance
+                     */
+                    LoggingDestination.create = function create(properties) {
+                        return new LoggingDestination(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified LoggingDestination message. Does not implicitly {@link google.api.Logging.LoggingDestination.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.api.Logging.LoggingDestination
+                     * @static
+                     * @param {google.api.Logging.ILoggingDestination} message LoggingDestination message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    LoggingDestination.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.logs != null && message.logs.length)
+                            for (var i = 0; i < message.logs.length; ++i)
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.logs[i]);
+                        if (message.monitoredResource != null && Object.hasOwnProperty.call(message, "monitoredResource"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.monitoredResource);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified LoggingDestination message, length delimited. Does not implicitly {@link google.api.Logging.LoggingDestination.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.api.Logging.LoggingDestination
+                     * @static
+                     * @param {google.api.Logging.ILoggingDestination} message LoggingDestination message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    LoggingDestination.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a LoggingDestination message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.api.Logging.LoggingDestination
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.api.Logging.LoggingDestination} LoggingDestination
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    LoggingDestination.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Logging.LoggingDestination();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 3: {
+                                    message.monitoredResource = reader.string();
+                                    break;
+                                }
+                            case 1: {
+                                    if (!(message.logs && message.logs.length))
+                                        message.logs = [];
+                                    message.logs.push(reader.string());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a LoggingDestination message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.api.Logging.LoggingDestination
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.api.Logging.LoggingDestination} LoggingDestination
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    LoggingDestination.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a LoggingDestination message.
+                     * @function verify
+                     * @memberof google.api.Logging.LoggingDestination
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    LoggingDestination.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.monitoredResource != null && message.hasOwnProperty("monitoredResource"))
+                            if (!$util.isString(message.monitoredResource))
+                                return "monitoredResource: string expected";
+                        if (message.logs != null && message.hasOwnProperty("logs")) {
+                            if (!Array.isArray(message.logs))
+                                return "logs: array expected";
+                            for (var i = 0; i < message.logs.length; ++i)
+                                if (!$util.isString(message.logs[i]))
+                                    return "logs: string[] expected";
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a LoggingDestination message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.api.Logging.LoggingDestination
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.api.Logging.LoggingDestination} LoggingDestination
+                     */
+                    LoggingDestination.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.api.Logging.LoggingDestination)
+                            return object;
+                        var message = new $root.google.api.Logging.LoggingDestination();
+                        if (object.monitoredResource != null)
+                            message.monitoredResource = String(object.monitoredResource);
+                        if (object.logs) {
+                            if (!Array.isArray(object.logs))
+                                throw TypeError(".google.api.Logging.LoggingDestination.logs: array expected");
+                            message.logs = [];
+                            for (var i = 0; i < object.logs.length; ++i)
+                                message.logs[i] = String(object.logs[i]);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a LoggingDestination message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.api.Logging.LoggingDestination
+                     * @static
+                     * @param {google.api.Logging.LoggingDestination} message LoggingDestination
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    LoggingDestination.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.logs = [];
+                        if (options.defaults)
+                            object.monitoredResource = "";
+                        if (message.logs && message.logs.length) {
+                            object.logs = [];
+                            for (var j = 0; j < message.logs.length; ++j)
+                                object.logs[j] = message.logs[j];
+                        }
+                        if (message.monitoredResource != null && message.hasOwnProperty("monitoredResource"))
+                            object.monitoredResource = message.monitoredResource;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this LoggingDestination to JSON.
+                     * @function toJSON
+                     * @memberof google.api.Logging.LoggingDestination
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    LoggingDestination.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for LoggingDestination
+                     * @function getTypeUrl
+                     * @memberof google.api.Logging.LoggingDestination
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    LoggingDestination.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.api.Logging.LoggingDestination";
+                    };
+    
+                    return LoggingDestination;
+                })();
+    
+                return Logging;
             })();
     
             api.MetricDescriptor = (function() {
@@ -12688,43 +16575,54 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 8:
-                            message.type = reader.string();
-                            break;
-                        case 2:
-                            if (!(message.labels && message.labels.length))
-                                message.labels = [];
-                            message.labels.push($root.google.api.LabelDescriptor.decode(reader, reader.uint32()));
-                            break;
-                        case 3:
-                            message.metricKind = reader.int32();
-                            break;
-                        case 4:
-                            message.valueType = reader.int32();
-                            break;
-                        case 5:
-                            message.unit = reader.string();
-                            break;
-                        case 6:
-                            message.description = reader.string();
-                            break;
-                        case 7:
-                            message.displayName = reader.string();
-                            break;
-                        case 10:
-                            message.metadata = $root.google.api.MetricDescriptor.MetricDescriptorMetadata.decode(reader, reader.uint32());
-                            break;
-                        case 12:
-                            message.launchStage = reader.int32();
-                            break;
-                        case 13:
-                            if (!(message.monitoredResourceTypes && message.monitoredResourceTypes.length))
-                                message.monitoredResourceTypes = [];
-                            message.monitoredResourceTypes.push(reader.string());
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 8: {
+                                message.type = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                if (!(message.labels && message.labels.length))
+                                    message.labels = [];
+                                message.labels.push($root.google.api.LabelDescriptor.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 3: {
+                                message.metricKind = reader.int32();
+                                break;
+                            }
+                        case 4: {
+                                message.valueType = reader.int32();
+                                break;
+                            }
+                        case 5: {
+                                message.unit = reader.string();
+                                break;
+                            }
+                        case 6: {
+                                message.description = reader.string();
+                                break;
+                            }
+                        case 7: {
+                                message.displayName = reader.string();
+                                break;
+                            }
+                        case 10: {
+                                message.metadata = $root.google.api.MetricDescriptor.MetricDescriptorMetadata.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 12: {
+                                message.launchStage = reader.int32();
+                                break;
+                            }
+                        case 13: {
+                                if (!(message.monitoredResourceTypes && message.monitoredResourceTypes.length))
+                                    message.monitoredResourceTypes = [];
+                                message.monitoredResourceTypes.push(reader.string());
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -13035,6 +16933,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for MetricDescriptor
+                 * @function getTypeUrl
+                 * @memberof google.api.MetricDescriptor
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                MetricDescriptor.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.MetricDescriptor";
+                };
+    
                 MetricDescriptor.MetricDescriptorMetadata = (function() {
     
                     /**
@@ -13149,15 +17062,18 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.launchStage = reader.int32();
-                                break;
-                            case 2:
-                                message.samplePeriod = $root.google.protobuf.Duration.decode(reader, reader.uint32());
-                                break;
-                            case 3:
-                                message.ingestDelay = $root.google.protobuf.Duration.decode(reader, reader.uint32());
-                                break;
+                            case 1: {
+                                    message.launchStage = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    message.samplePeriod = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 3: {
+                                    message.ingestDelay = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -13317,6 +17233,21 @@
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
+                    /**
+                     * Gets the default type url for MetricDescriptorMetadata
+                     * @function getTypeUrl
+                     * @memberof google.api.MetricDescriptor.MetricDescriptorMetadata
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    MetricDescriptorMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.api.MetricDescriptor.MetricDescriptorMetadata";
+                    };
+    
                     return MetricDescriptorMetadata;
                 })();
     
@@ -13470,31 +17401,33 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 3:
-                            message.type = reader.string();
-                            break;
-                        case 2:
-                            if (message.labels === $util.emptyObject)
-                                message.labels = {};
-                            var end2 = reader.uint32() + reader.pos;
-                            key = "";
-                            value = "";
-                            while (reader.pos < end2) {
-                                var tag2 = reader.uint32();
-                                switch (tag2 >>> 3) {
-                                case 1:
-                                    key = reader.string();
-                                    break;
-                                case 2:
-                                    value = reader.string();
-                                    break;
-                                default:
-                                    reader.skipType(tag2 & 7);
-                                    break;
-                                }
+                        case 3: {
+                                message.type = reader.string();
+                                break;
                             }
-                            message.labels[key] = value;
-                            break;
+                        case 2: {
+                                if (message.labels === $util.emptyObject)
+                                    message.labels = {};
+                                var end2 = reader.uint32() + reader.pos;
+                                key = "";
+                                value = "";
+                                while (reader.pos < end2) {
+                                    var tag2 = reader.uint32();
+                                    switch (tag2 >>> 3) {
+                                    case 1:
+                                        key = reader.string();
+                                        break;
+                                    case 2:
+                                        value = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag2 & 7);
+                                        break;
+                                    }
+                                }
+                                message.labels[key] = value;
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -13607,273 +17540,22 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for Metric
+                 * @function getTypeUrl
+                 * @memberof google.api.Metric
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Metric.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.Metric";
+                };
+    
                 return Metric;
-            })();
-    
-            api.LabelDescriptor = (function() {
-    
-                /**
-                 * Properties of a LabelDescriptor.
-                 * @memberof google.api
-                 * @interface ILabelDescriptor
-                 * @property {string|null} [key] LabelDescriptor key
-                 * @property {google.api.LabelDescriptor.ValueType|null} [valueType] LabelDescriptor valueType
-                 * @property {string|null} [description] LabelDescriptor description
-                 */
-    
-                /**
-                 * Constructs a new LabelDescriptor.
-                 * @memberof google.api
-                 * @classdesc Represents a LabelDescriptor.
-                 * @implements ILabelDescriptor
-                 * @constructor
-                 * @param {google.api.ILabelDescriptor=} [properties] Properties to set
-                 */
-                function LabelDescriptor(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * LabelDescriptor key.
-                 * @member {string} key
-                 * @memberof google.api.LabelDescriptor
-                 * @instance
-                 */
-                LabelDescriptor.prototype.key = "";
-    
-                /**
-                 * LabelDescriptor valueType.
-                 * @member {google.api.LabelDescriptor.ValueType} valueType
-                 * @memberof google.api.LabelDescriptor
-                 * @instance
-                 */
-                LabelDescriptor.prototype.valueType = 0;
-    
-                /**
-                 * LabelDescriptor description.
-                 * @member {string} description
-                 * @memberof google.api.LabelDescriptor
-                 * @instance
-                 */
-                LabelDescriptor.prototype.description = "";
-    
-                /**
-                 * Creates a new LabelDescriptor instance using the specified properties.
-                 * @function create
-                 * @memberof google.api.LabelDescriptor
-                 * @static
-                 * @param {google.api.ILabelDescriptor=} [properties] Properties to set
-                 * @returns {google.api.LabelDescriptor} LabelDescriptor instance
-                 */
-                LabelDescriptor.create = function create(properties) {
-                    return new LabelDescriptor(properties);
-                };
-    
-                /**
-                 * Encodes the specified LabelDescriptor message. Does not implicitly {@link google.api.LabelDescriptor.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.api.LabelDescriptor
-                 * @static
-                 * @param {google.api.ILabelDescriptor} message LabelDescriptor message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                LabelDescriptor.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.key != null && Object.hasOwnProperty.call(message, "key"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.key);
-                    if (message.valueType != null && Object.hasOwnProperty.call(message, "valueType"))
-                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.valueType);
-                    if (message.description != null && Object.hasOwnProperty.call(message, "description"))
-                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.description);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified LabelDescriptor message, length delimited. Does not implicitly {@link google.api.LabelDescriptor.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.api.LabelDescriptor
-                 * @static
-                 * @param {google.api.ILabelDescriptor} message LabelDescriptor message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                LabelDescriptor.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a LabelDescriptor message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.api.LabelDescriptor
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.api.LabelDescriptor} LabelDescriptor
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                LabelDescriptor.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.LabelDescriptor();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.key = reader.string();
-                            break;
-                        case 2:
-                            message.valueType = reader.int32();
-                            break;
-                        case 3:
-                            message.description = reader.string();
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a LabelDescriptor message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.api.LabelDescriptor
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.api.LabelDescriptor} LabelDescriptor
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                LabelDescriptor.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a LabelDescriptor message.
-                 * @function verify
-                 * @memberof google.api.LabelDescriptor
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                LabelDescriptor.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.key != null && message.hasOwnProperty("key"))
-                        if (!$util.isString(message.key))
-                            return "key: string expected";
-                    if (message.valueType != null && message.hasOwnProperty("valueType"))
-                        switch (message.valueType) {
-                        default:
-                            return "valueType: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                            break;
-                        }
-                    if (message.description != null && message.hasOwnProperty("description"))
-                        if (!$util.isString(message.description))
-                            return "description: string expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a LabelDescriptor message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.api.LabelDescriptor
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.api.LabelDescriptor} LabelDescriptor
-                 */
-                LabelDescriptor.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.api.LabelDescriptor)
-                        return object;
-                    var message = new $root.google.api.LabelDescriptor();
-                    if (object.key != null)
-                        message.key = String(object.key);
-                    switch (object.valueType) {
-                    case "STRING":
-                    case 0:
-                        message.valueType = 0;
-                        break;
-                    case "BOOL":
-                    case 1:
-                        message.valueType = 1;
-                        break;
-                    case "INT64":
-                    case 2:
-                        message.valueType = 2;
-                        break;
-                    }
-                    if (object.description != null)
-                        message.description = String(object.description);
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a LabelDescriptor message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.api.LabelDescriptor
-                 * @static
-                 * @param {google.api.LabelDescriptor} message LabelDescriptor
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                LabelDescriptor.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults) {
-                        object.key = "";
-                        object.valueType = options.enums === String ? "STRING" : 0;
-                        object.description = "";
-                    }
-                    if (message.key != null && message.hasOwnProperty("key"))
-                        object.key = message.key;
-                    if (message.valueType != null && message.hasOwnProperty("valueType"))
-                        object.valueType = options.enums === String ? $root.google.api.LabelDescriptor.ValueType[message.valueType] : message.valueType;
-                    if (message.description != null && message.hasOwnProperty("description"))
-                        object.description = message.description;
-                    return object;
-                };
-    
-                /**
-                 * Converts this LabelDescriptor to JSON.
-                 * @function toJSON
-                 * @memberof google.api.LabelDescriptor
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                LabelDescriptor.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * ValueType enum.
-                 * @name google.api.LabelDescriptor.ValueType
-                 * @enum {number}
-                 * @property {number} STRING=0 STRING value
-                 * @property {number} BOOL=1 BOOL value
-                 * @property {number} INT64=2 INT64 value
-                 */
-                LabelDescriptor.ValueType = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "STRING"] = 0;
-                    values[valuesById[1] = "BOOL"] = 1;
-                    values[valuesById[2] = "INT64"] = 2;
-                    return values;
-                })();
-    
-                return LabelDescriptor;
             })();
     
             /**
@@ -13900,2595 +17582,6 @@
                 values[valuesById[4] = "GA"] = 4;
                 values[valuesById[5] = "DEPRECATED"] = 5;
                 return values;
-            })();
-    
-            api.Context = (function() {
-    
-                /**
-                 * Properties of a Context.
-                 * @memberof google.api
-                 * @interface IContext
-                 * @property {Array.<google.api.IContextRule>|null} [rules] Context rules
-                 */
-    
-                /**
-                 * Constructs a new Context.
-                 * @memberof google.api
-                 * @classdesc Represents a Context.
-                 * @implements IContext
-                 * @constructor
-                 * @param {google.api.IContext=} [properties] Properties to set
-                 */
-                function Context(properties) {
-                    this.rules = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * Context rules.
-                 * @member {Array.<google.api.IContextRule>} rules
-                 * @memberof google.api.Context
-                 * @instance
-                 */
-                Context.prototype.rules = $util.emptyArray;
-    
-                /**
-                 * Creates a new Context instance using the specified properties.
-                 * @function create
-                 * @memberof google.api.Context
-                 * @static
-                 * @param {google.api.IContext=} [properties] Properties to set
-                 * @returns {google.api.Context} Context instance
-                 */
-                Context.create = function create(properties) {
-                    return new Context(properties);
-                };
-    
-                /**
-                 * Encodes the specified Context message. Does not implicitly {@link google.api.Context.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.api.Context
-                 * @static
-                 * @param {google.api.IContext} message Context message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Context.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.rules != null && message.rules.length)
-                        for (var i = 0; i < message.rules.length; ++i)
-                            $root.google.api.ContextRule.encode(message.rules[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified Context message, length delimited. Does not implicitly {@link google.api.Context.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.api.Context
-                 * @static
-                 * @param {google.api.IContext} message Context message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Context.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a Context message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.api.Context
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.api.Context} Context
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Context.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Context();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            if (!(message.rules && message.rules.length))
-                                message.rules = [];
-                            message.rules.push($root.google.api.ContextRule.decode(reader, reader.uint32()));
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a Context message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.api.Context
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.api.Context} Context
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Context.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a Context message.
-                 * @function verify
-                 * @memberof google.api.Context
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                Context.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.rules != null && message.hasOwnProperty("rules")) {
-                        if (!Array.isArray(message.rules))
-                            return "rules: array expected";
-                        for (var i = 0; i < message.rules.length; ++i) {
-                            var error = $root.google.api.ContextRule.verify(message.rules[i]);
-                            if (error)
-                                return "rules." + error;
-                        }
-                    }
-                    return null;
-                };
-    
-                /**
-                 * Creates a Context message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.api.Context
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.api.Context} Context
-                 */
-                Context.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.api.Context)
-                        return object;
-                    var message = new $root.google.api.Context();
-                    if (object.rules) {
-                        if (!Array.isArray(object.rules))
-                            throw TypeError(".google.api.Context.rules: array expected");
-                        message.rules = [];
-                        for (var i = 0; i < object.rules.length; ++i) {
-                            if (typeof object.rules[i] !== "object")
-                                throw TypeError(".google.api.Context.rules: object expected");
-                            message.rules[i] = $root.google.api.ContextRule.fromObject(object.rules[i]);
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a Context message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.api.Context
-                 * @static
-                 * @param {google.api.Context} message Context
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                Context.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.arrays || options.defaults)
-                        object.rules = [];
-                    if (message.rules && message.rules.length) {
-                        object.rules = [];
-                        for (var j = 0; j < message.rules.length; ++j)
-                            object.rules[j] = $root.google.api.ContextRule.toObject(message.rules[j], options);
-                    }
-                    return object;
-                };
-    
-                /**
-                 * Converts this Context to JSON.
-                 * @function toJSON
-                 * @memberof google.api.Context
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                Context.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                return Context;
-            })();
-    
-            api.ContextRule = (function() {
-    
-                /**
-                 * Properties of a ContextRule.
-                 * @memberof google.api
-                 * @interface IContextRule
-                 * @property {string|null} [selector] ContextRule selector
-                 * @property {Array.<string>|null} [requested] ContextRule requested
-                 * @property {Array.<string>|null} [provided] ContextRule provided
-                 * @property {Array.<string>|null} [allowedRequestExtensions] ContextRule allowedRequestExtensions
-                 * @property {Array.<string>|null} [allowedResponseExtensions] ContextRule allowedResponseExtensions
-                 */
-    
-                /**
-                 * Constructs a new ContextRule.
-                 * @memberof google.api
-                 * @classdesc Represents a ContextRule.
-                 * @implements IContextRule
-                 * @constructor
-                 * @param {google.api.IContextRule=} [properties] Properties to set
-                 */
-                function ContextRule(properties) {
-                    this.requested = [];
-                    this.provided = [];
-                    this.allowedRequestExtensions = [];
-                    this.allowedResponseExtensions = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * ContextRule selector.
-                 * @member {string} selector
-                 * @memberof google.api.ContextRule
-                 * @instance
-                 */
-                ContextRule.prototype.selector = "";
-    
-                /**
-                 * ContextRule requested.
-                 * @member {Array.<string>} requested
-                 * @memberof google.api.ContextRule
-                 * @instance
-                 */
-                ContextRule.prototype.requested = $util.emptyArray;
-    
-                /**
-                 * ContextRule provided.
-                 * @member {Array.<string>} provided
-                 * @memberof google.api.ContextRule
-                 * @instance
-                 */
-                ContextRule.prototype.provided = $util.emptyArray;
-    
-                /**
-                 * ContextRule allowedRequestExtensions.
-                 * @member {Array.<string>} allowedRequestExtensions
-                 * @memberof google.api.ContextRule
-                 * @instance
-                 */
-                ContextRule.prototype.allowedRequestExtensions = $util.emptyArray;
-    
-                /**
-                 * ContextRule allowedResponseExtensions.
-                 * @member {Array.<string>} allowedResponseExtensions
-                 * @memberof google.api.ContextRule
-                 * @instance
-                 */
-                ContextRule.prototype.allowedResponseExtensions = $util.emptyArray;
-    
-                /**
-                 * Creates a new ContextRule instance using the specified properties.
-                 * @function create
-                 * @memberof google.api.ContextRule
-                 * @static
-                 * @param {google.api.IContextRule=} [properties] Properties to set
-                 * @returns {google.api.ContextRule} ContextRule instance
-                 */
-                ContextRule.create = function create(properties) {
-                    return new ContextRule(properties);
-                };
-    
-                /**
-                 * Encodes the specified ContextRule message. Does not implicitly {@link google.api.ContextRule.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.api.ContextRule
-                 * @static
-                 * @param {google.api.IContextRule} message ContextRule message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ContextRule.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.selector != null && Object.hasOwnProperty.call(message, "selector"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.selector);
-                    if (message.requested != null && message.requested.length)
-                        for (var i = 0; i < message.requested.length; ++i)
-                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.requested[i]);
-                    if (message.provided != null && message.provided.length)
-                        for (var i = 0; i < message.provided.length; ++i)
-                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.provided[i]);
-                    if (message.allowedRequestExtensions != null && message.allowedRequestExtensions.length)
-                        for (var i = 0; i < message.allowedRequestExtensions.length; ++i)
-                            writer.uint32(/* id 4, wireType 2 =*/34).string(message.allowedRequestExtensions[i]);
-                    if (message.allowedResponseExtensions != null && message.allowedResponseExtensions.length)
-                        for (var i = 0; i < message.allowedResponseExtensions.length; ++i)
-                            writer.uint32(/* id 5, wireType 2 =*/42).string(message.allowedResponseExtensions[i]);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified ContextRule message, length delimited. Does not implicitly {@link google.api.ContextRule.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.api.ContextRule
-                 * @static
-                 * @param {google.api.IContextRule} message ContextRule message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ContextRule.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a ContextRule message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.api.ContextRule
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.api.ContextRule} ContextRule
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ContextRule.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ContextRule();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.selector = reader.string();
-                            break;
-                        case 2:
-                            if (!(message.requested && message.requested.length))
-                                message.requested = [];
-                            message.requested.push(reader.string());
-                            break;
-                        case 3:
-                            if (!(message.provided && message.provided.length))
-                                message.provided = [];
-                            message.provided.push(reader.string());
-                            break;
-                        case 4:
-                            if (!(message.allowedRequestExtensions && message.allowedRequestExtensions.length))
-                                message.allowedRequestExtensions = [];
-                            message.allowedRequestExtensions.push(reader.string());
-                            break;
-                        case 5:
-                            if (!(message.allowedResponseExtensions && message.allowedResponseExtensions.length))
-                                message.allowedResponseExtensions = [];
-                            message.allowedResponseExtensions.push(reader.string());
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a ContextRule message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.api.ContextRule
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.api.ContextRule} ContextRule
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ContextRule.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a ContextRule message.
-                 * @function verify
-                 * @memberof google.api.ContextRule
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                ContextRule.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.selector != null && message.hasOwnProperty("selector"))
-                        if (!$util.isString(message.selector))
-                            return "selector: string expected";
-                    if (message.requested != null && message.hasOwnProperty("requested")) {
-                        if (!Array.isArray(message.requested))
-                            return "requested: array expected";
-                        for (var i = 0; i < message.requested.length; ++i)
-                            if (!$util.isString(message.requested[i]))
-                                return "requested: string[] expected";
-                    }
-                    if (message.provided != null && message.hasOwnProperty("provided")) {
-                        if (!Array.isArray(message.provided))
-                            return "provided: array expected";
-                        for (var i = 0; i < message.provided.length; ++i)
-                            if (!$util.isString(message.provided[i]))
-                                return "provided: string[] expected";
-                    }
-                    if (message.allowedRequestExtensions != null && message.hasOwnProperty("allowedRequestExtensions")) {
-                        if (!Array.isArray(message.allowedRequestExtensions))
-                            return "allowedRequestExtensions: array expected";
-                        for (var i = 0; i < message.allowedRequestExtensions.length; ++i)
-                            if (!$util.isString(message.allowedRequestExtensions[i]))
-                                return "allowedRequestExtensions: string[] expected";
-                    }
-                    if (message.allowedResponseExtensions != null && message.hasOwnProperty("allowedResponseExtensions")) {
-                        if (!Array.isArray(message.allowedResponseExtensions))
-                            return "allowedResponseExtensions: array expected";
-                        for (var i = 0; i < message.allowedResponseExtensions.length; ++i)
-                            if (!$util.isString(message.allowedResponseExtensions[i]))
-                                return "allowedResponseExtensions: string[] expected";
-                    }
-                    return null;
-                };
-    
-                /**
-                 * Creates a ContextRule message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.api.ContextRule
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.api.ContextRule} ContextRule
-                 */
-                ContextRule.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.api.ContextRule)
-                        return object;
-                    var message = new $root.google.api.ContextRule();
-                    if (object.selector != null)
-                        message.selector = String(object.selector);
-                    if (object.requested) {
-                        if (!Array.isArray(object.requested))
-                            throw TypeError(".google.api.ContextRule.requested: array expected");
-                        message.requested = [];
-                        for (var i = 0; i < object.requested.length; ++i)
-                            message.requested[i] = String(object.requested[i]);
-                    }
-                    if (object.provided) {
-                        if (!Array.isArray(object.provided))
-                            throw TypeError(".google.api.ContextRule.provided: array expected");
-                        message.provided = [];
-                        for (var i = 0; i < object.provided.length; ++i)
-                            message.provided[i] = String(object.provided[i]);
-                    }
-                    if (object.allowedRequestExtensions) {
-                        if (!Array.isArray(object.allowedRequestExtensions))
-                            throw TypeError(".google.api.ContextRule.allowedRequestExtensions: array expected");
-                        message.allowedRequestExtensions = [];
-                        for (var i = 0; i < object.allowedRequestExtensions.length; ++i)
-                            message.allowedRequestExtensions[i] = String(object.allowedRequestExtensions[i]);
-                    }
-                    if (object.allowedResponseExtensions) {
-                        if (!Array.isArray(object.allowedResponseExtensions))
-                            throw TypeError(".google.api.ContextRule.allowedResponseExtensions: array expected");
-                        message.allowedResponseExtensions = [];
-                        for (var i = 0; i < object.allowedResponseExtensions.length; ++i)
-                            message.allowedResponseExtensions[i] = String(object.allowedResponseExtensions[i]);
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a ContextRule message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.api.ContextRule
-                 * @static
-                 * @param {google.api.ContextRule} message ContextRule
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                ContextRule.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.arrays || options.defaults) {
-                        object.requested = [];
-                        object.provided = [];
-                        object.allowedRequestExtensions = [];
-                        object.allowedResponseExtensions = [];
-                    }
-                    if (options.defaults)
-                        object.selector = "";
-                    if (message.selector != null && message.hasOwnProperty("selector"))
-                        object.selector = message.selector;
-                    if (message.requested && message.requested.length) {
-                        object.requested = [];
-                        for (var j = 0; j < message.requested.length; ++j)
-                            object.requested[j] = message.requested[j];
-                    }
-                    if (message.provided && message.provided.length) {
-                        object.provided = [];
-                        for (var j = 0; j < message.provided.length; ++j)
-                            object.provided[j] = message.provided[j];
-                    }
-                    if (message.allowedRequestExtensions && message.allowedRequestExtensions.length) {
-                        object.allowedRequestExtensions = [];
-                        for (var j = 0; j < message.allowedRequestExtensions.length; ++j)
-                            object.allowedRequestExtensions[j] = message.allowedRequestExtensions[j];
-                    }
-                    if (message.allowedResponseExtensions && message.allowedResponseExtensions.length) {
-                        object.allowedResponseExtensions = [];
-                        for (var j = 0; j < message.allowedResponseExtensions.length; ++j)
-                            object.allowedResponseExtensions[j] = message.allowedResponseExtensions[j];
-                    }
-                    return object;
-                };
-    
-                /**
-                 * Converts this ContextRule to JSON.
-                 * @function toJSON
-                 * @memberof google.api.ContextRule
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                ContextRule.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                return ContextRule;
-            })();
-    
-            api.Control = (function() {
-    
-                /**
-                 * Properties of a Control.
-                 * @memberof google.api
-                 * @interface IControl
-                 * @property {string|null} [environment] Control environment
-                 */
-    
-                /**
-                 * Constructs a new Control.
-                 * @memberof google.api
-                 * @classdesc Represents a Control.
-                 * @implements IControl
-                 * @constructor
-                 * @param {google.api.IControl=} [properties] Properties to set
-                 */
-                function Control(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * Control environment.
-                 * @member {string} environment
-                 * @memberof google.api.Control
-                 * @instance
-                 */
-                Control.prototype.environment = "";
-    
-                /**
-                 * Creates a new Control instance using the specified properties.
-                 * @function create
-                 * @memberof google.api.Control
-                 * @static
-                 * @param {google.api.IControl=} [properties] Properties to set
-                 * @returns {google.api.Control} Control instance
-                 */
-                Control.create = function create(properties) {
-                    return new Control(properties);
-                };
-    
-                /**
-                 * Encodes the specified Control message. Does not implicitly {@link google.api.Control.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.api.Control
-                 * @static
-                 * @param {google.api.IControl} message Control message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Control.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.environment != null && Object.hasOwnProperty.call(message, "environment"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.environment);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified Control message, length delimited. Does not implicitly {@link google.api.Control.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.api.Control
-                 * @static
-                 * @param {google.api.IControl} message Control message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Control.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a Control message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.api.Control
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.api.Control} Control
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Control.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Control();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.environment = reader.string();
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a Control message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.api.Control
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.api.Control} Control
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Control.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a Control message.
-                 * @function verify
-                 * @memberof google.api.Control
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                Control.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.environment != null && message.hasOwnProperty("environment"))
-                        if (!$util.isString(message.environment))
-                            return "environment: string expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a Control message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.api.Control
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.api.Control} Control
-                 */
-                Control.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.api.Control)
-                        return object;
-                    var message = new $root.google.api.Control();
-                    if (object.environment != null)
-                        message.environment = String(object.environment);
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a Control message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.api.Control
-                 * @static
-                 * @param {google.api.Control} message Control
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                Control.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults)
-                        object.environment = "";
-                    if (message.environment != null && message.hasOwnProperty("environment"))
-                        object.environment = message.environment;
-                    return object;
-                };
-    
-                /**
-                 * Converts this Control to JSON.
-                 * @function toJSON
-                 * @memberof google.api.Control
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                Control.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                return Control;
-            })();
-    
-            api.Documentation = (function() {
-    
-                /**
-                 * Properties of a Documentation.
-                 * @memberof google.api
-                 * @interface IDocumentation
-                 * @property {string|null} [summary] Documentation summary
-                 * @property {Array.<google.api.IPage>|null} [pages] Documentation pages
-                 * @property {Array.<google.api.IDocumentationRule>|null} [rules] Documentation rules
-                 * @property {string|null} [documentationRootUrl] Documentation documentationRootUrl
-                 * @property {string|null} [serviceRootUrl] Documentation serviceRootUrl
-                 * @property {string|null} [overview] Documentation overview
-                 */
-    
-                /**
-                 * Constructs a new Documentation.
-                 * @memberof google.api
-                 * @classdesc Represents a Documentation.
-                 * @implements IDocumentation
-                 * @constructor
-                 * @param {google.api.IDocumentation=} [properties] Properties to set
-                 */
-                function Documentation(properties) {
-                    this.pages = [];
-                    this.rules = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * Documentation summary.
-                 * @member {string} summary
-                 * @memberof google.api.Documentation
-                 * @instance
-                 */
-                Documentation.prototype.summary = "";
-    
-                /**
-                 * Documentation pages.
-                 * @member {Array.<google.api.IPage>} pages
-                 * @memberof google.api.Documentation
-                 * @instance
-                 */
-                Documentation.prototype.pages = $util.emptyArray;
-    
-                /**
-                 * Documentation rules.
-                 * @member {Array.<google.api.IDocumentationRule>} rules
-                 * @memberof google.api.Documentation
-                 * @instance
-                 */
-                Documentation.prototype.rules = $util.emptyArray;
-    
-                /**
-                 * Documentation documentationRootUrl.
-                 * @member {string} documentationRootUrl
-                 * @memberof google.api.Documentation
-                 * @instance
-                 */
-                Documentation.prototype.documentationRootUrl = "";
-    
-                /**
-                 * Documentation serviceRootUrl.
-                 * @member {string} serviceRootUrl
-                 * @memberof google.api.Documentation
-                 * @instance
-                 */
-                Documentation.prototype.serviceRootUrl = "";
-    
-                /**
-                 * Documentation overview.
-                 * @member {string} overview
-                 * @memberof google.api.Documentation
-                 * @instance
-                 */
-                Documentation.prototype.overview = "";
-    
-                /**
-                 * Creates a new Documentation instance using the specified properties.
-                 * @function create
-                 * @memberof google.api.Documentation
-                 * @static
-                 * @param {google.api.IDocumentation=} [properties] Properties to set
-                 * @returns {google.api.Documentation} Documentation instance
-                 */
-                Documentation.create = function create(properties) {
-                    return new Documentation(properties);
-                };
-    
-                /**
-                 * Encodes the specified Documentation message. Does not implicitly {@link google.api.Documentation.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.api.Documentation
-                 * @static
-                 * @param {google.api.IDocumentation} message Documentation message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Documentation.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.summary != null && Object.hasOwnProperty.call(message, "summary"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.summary);
-                    if (message.overview != null && Object.hasOwnProperty.call(message, "overview"))
-                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.overview);
-                    if (message.rules != null && message.rules.length)
-                        for (var i = 0; i < message.rules.length; ++i)
-                            $root.google.api.DocumentationRule.encode(message.rules[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                    if (message.documentationRootUrl != null && Object.hasOwnProperty.call(message, "documentationRootUrl"))
-                        writer.uint32(/* id 4, wireType 2 =*/34).string(message.documentationRootUrl);
-                    if (message.pages != null && message.pages.length)
-                        for (var i = 0; i < message.pages.length; ++i)
-                            $root.google.api.Page.encode(message.pages[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
-                    if (message.serviceRootUrl != null && Object.hasOwnProperty.call(message, "serviceRootUrl"))
-                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.serviceRootUrl);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified Documentation message, length delimited. Does not implicitly {@link google.api.Documentation.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.api.Documentation
-                 * @static
-                 * @param {google.api.IDocumentation} message Documentation message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Documentation.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a Documentation message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.api.Documentation
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.api.Documentation} Documentation
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Documentation.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Documentation();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.summary = reader.string();
-                            break;
-                        case 5:
-                            if (!(message.pages && message.pages.length))
-                                message.pages = [];
-                            message.pages.push($root.google.api.Page.decode(reader, reader.uint32()));
-                            break;
-                        case 3:
-                            if (!(message.rules && message.rules.length))
-                                message.rules = [];
-                            message.rules.push($root.google.api.DocumentationRule.decode(reader, reader.uint32()));
-                            break;
-                        case 4:
-                            message.documentationRootUrl = reader.string();
-                            break;
-                        case 6:
-                            message.serviceRootUrl = reader.string();
-                            break;
-                        case 2:
-                            message.overview = reader.string();
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a Documentation message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.api.Documentation
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.api.Documentation} Documentation
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Documentation.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a Documentation message.
-                 * @function verify
-                 * @memberof google.api.Documentation
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                Documentation.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.summary != null && message.hasOwnProperty("summary"))
-                        if (!$util.isString(message.summary))
-                            return "summary: string expected";
-                    if (message.pages != null && message.hasOwnProperty("pages")) {
-                        if (!Array.isArray(message.pages))
-                            return "pages: array expected";
-                        for (var i = 0; i < message.pages.length; ++i) {
-                            var error = $root.google.api.Page.verify(message.pages[i]);
-                            if (error)
-                                return "pages." + error;
-                        }
-                    }
-                    if (message.rules != null && message.hasOwnProperty("rules")) {
-                        if (!Array.isArray(message.rules))
-                            return "rules: array expected";
-                        for (var i = 0; i < message.rules.length; ++i) {
-                            var error = $root.google.api.DocumentationRule.verify(message.rules[i]);
-                            if (error)
-                                return "rules." + error;
-                        }
-                    }
-                    if (message.documentationRootUrl != null && message.hasOwnProperty("documentationRootUrl"))
-                        if (!$util.isString(message.documentationRootUrl))
-                            return "documentationRootUrl: string expected";
-                    if (message.serviceRootUrl != null && message.hasOwnProperty("serviceRootUrl"))
-                        if (!$util.isString(message.serviceRootUrl))
-                            return "serviceRootUrl: string expected";
-                    if (message.overview != null && message.hasOwnProperty("overview"))
-                        if (!$util.isString(message.overview))
-                            return "overview: string expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a Documentation message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.api.Documentation
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.api.Documentation} Documentation
-                 */
-                Documentation.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.api.Documentation)
-                        return object;
-                    var message = new $root.google.api.Documentation();
-                    if (object.summary != null)
-                        message.summary = String(object.summary);
-                    if (object.pages) {
-                        if (!Array.isArray(object.pages))
-                            throw TypeError(".google.api.Documentation.pages: array expected");
-                        message.pages = [];
-                        for (var i = 0; i < object.pages.length; ++i) {
-                            if (typeof object.pages[i] !== "object")
-                                throw TypeError(".google.api.Documentation.pages: object expected");
-                            message.pages[i] = $root.google.api.Page.fromObject(object.pages[i]);
-                        }
-                    }
-                    if (object.rules) {
-                        if (!Array.isArray(object.rules))
-                            throw TypeError(".google.api.Documentation.rules: array expected");
-                        message.rules = [];
-                        for (var i = 0; i < object.rules.length; ++i) {
-                            if (typeof object.rules[i] !== "object")
-                                throw TypeError(".google.api.Documentation.rules: object expected");
-                            message.rules[i] = $root.google.api.DocumentationRule.fromObject(object.rules[i]);
-                        }
-                    }
-                    if (object.documentationRootUrl != null)
-                        message.documentationRootUrl = String(object.documentationRootUrl);
-                    if (object.serviceRootUrl != null)
-                        message.serviceRootUrl = String(object.serviceRootUrl);
-                    if (object.overview != null)
-                        message.overview = String(object.overview);
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a Documentation message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.api.Documentation
-                 * @static
-                 * @param {google.api.Documentation} message Documentation
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                Documentation.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.arrays || options.defaults) {
-                        object.rules = [];
-                        object.pages = [];
-                    }
-                    if (options.defaults) {
-                        object.summary = "";
-                        object.overview = "";
-                        object.documentationRootUrl = "";
-                        object.serviceRootUrl = "";
-                    }
-                    if (message.summary != null && message.hasOwnProperty("summary"))
-                        object.summary = message.summary;
-                    if (message.overview != null && message.hasOwnProperty("overview"))
-                        object.overview = message.overview;
-                    if (message.rules && message.rules.length) {
-                        object.rules = [];
-                        for (var j = 0; j < message.rules.length; ++j)
-                            object.rules[j] = $root.google.api.DocumentationRule.toObject(message.rules[j], options);
-                    }
-                    if (message.documentationRootUrl != null && message.hasOwnProperty("documentationRootUrl"))
-                        object.documentationRootUrl = message.documentationRootUrl;
-                    if (message.pages && message.pages.length) {
-                        object.pages = [];
-                        for (var j = 0; j < message.pages.length; ++j)
-                            object.pages[j] = $root.google.api.Page.toObject(message.pages[j], options);
-                    }
-                    if (message.serviceRootUrl != null && message.hasOwnProperty("serviceRootUrl"))
-                        object.serviceRootUrl = message.serviceRootUrl;
-                    return object;
-                };
-    
-                /**
-                 * Converts this Documentation to JSON.
-                 * @function toJSON
-                 * @memberof google.api.Documentation
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                Documentation.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                return Documentation;
-            })();
-    
-            api.DocumentationRule = (function() {
-    
-                /**
-                 * Properties of a DocumentationRule.
-                 * @memberof google.api
-                 * @interface IDocumentationRule
-                 * @property {string|null} [selector] DocumentationRule selector
-                 * @property {string|null} [description] DocumentationRule description
-                 * @property {string|null} [deprecationDescription] DocumentationRule deprecationDescription
-                 */
-    
-                /**
-                 * Constructs a new DocumentationRule.
-                 * @memberof google.api
-                 * @classdesc Represents a DocumentationRule.
-                 * @implements IDocumentationRule
-                 * @constructor
-                 * @param {google.api.IDocumentationRule=} [properties] Properties to set
-                 */
-                function DocumentationRule(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * DocumentationRule selector.
-                 * @member {string} selector
-                 * @memberof google.api.DocumentationRule
-                 * @instance
-                 */
-                DocumentationRule.prototype.selector = "";
-    
-                /**
-                 * DocumentationRule description.
-                 * @member {string} description
-                 * @memberof google.api.DocumentationRule
-                 * @instance
-                 */
-                DocumentationRule.prototype.description = "";
-    
-                /**
-                 * DocumentationRule deprecationDescription.
-                 * @member {string} deprecationDescription
-                 * @memberof google.api.DocumentationRule
-                 * @instance
-                 */
-                DocumentationRule.prototype.deprecationDescription = "";
-    
-                /**
-                 * Creates a new DocumentationRule instance using the specified properties.
-                 * @function create
-                 * @memberof google.api.DocumentationRule
-                 * @static
-                 * @param {google.api.IDocumentationRule=} [properties] Properties to set
-                 * @returns {google.api.DocumentationRule} DocumentationRule instance
-                 */
-                DocumentationRule.create = function create(properties) {
-                    return new DocumentationRule(properties);
-                };
-    
-                /**
-                 * Encodes the specified DocumentationRule message. Does not implicitly {@link google.api.DocumentationRule.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.api.DocumentationRule
-                 * @static
-                 * @param {google.api.IDocumentationRule} message DocumentationRule message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                DocumentationRule.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.selector != null && Object.hasOwnProperty.call(message, "selector"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.selector);
-                    if (message.description != null && Object.hasOwnProperty.call(message, "description"))
-                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.description);
-                    if (message.deprecationDescription != null && Object.hasOwnProperty.call(message, "deprecationDescription"))
-                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.deprecationDescription);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified DocumentationRule message, length delimited. Does not implicitly {@link google.api.DocumentationRule.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.api.DocumentationRule
-                 * @static
-                 * @param {google.api.IDocumentationRule} message DocumentationRule message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                DocumentationRule.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a DocumentationRule message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.api.DocumentationRule
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.api.DocumentationRule} DocumentationRule
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                DocumentationRule.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.DocumentationRule();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.selector = reader.string();
-                            break;
-                        case 2:
-                            message.description = reader.string();
-                            break;
-                        case 3:
-                            message.deprecationDescription = reader.string();
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a DocumentationRule message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.api.DocumentationRule
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.api.DocumentationRule} DocumentationRule
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                DocumentationRule.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a DocumentationRule message.
-                 * @function verify
-                 * @memberof google.api.DocumentationRule
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                DocumentationRule.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.selector != null && message.hasOwnProperty("selector"))
-                        if (!$util.isString(message.selector))
-                            return "selector: string expected";
-                    if (message.description != null && message.hasOwnProperty("description"))
-                        if (!$util.isString(message.description))
-                            return "description: string expected";
-                    if (message.deprecationDescription != null && message.hasOwnProperty("deprecationDescription"))
-                        if (!$util.isString(message.deprecationDescription))
-                            return "deprecationDescription: string expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a DocumentationRule message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.api.DocumentationRule
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.api.DocumentationRule} DocumentationRule
-                 */
-                DocumentationRule.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.api.DocumentationRule)
-                        return object;
-                    var message = new $root.google.api.DocumentationRule();
-                    if (object.selector != null)
-                        message.selector = String(object.selector);
-                    if (object.description != null)
-                        message.description = String(object.description);
-                    if (object.deprecationDescription != null)
-                        message.deprecationDescription = String(object.deprecationDescription);
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a DocumentationRule message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.api.DocumentationRule
-                 * @static
-                 * @param {google.api.DocumentationRule} message DocumentationRule
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                DocumentationRule.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults) {
-                        object.selector = "";
-                        object.description = "";
-                        object.deprecationDescription = "";
-                    }
-                    if (message.selector != null && message.hasOwnProperty("selector"))
-                        object.selector = message.selector;
-                    if (message.description != null && message.hasOwnProperty("description"))
-                        object.description = message.description;
-                    if (message.deprecationDescription != null && message.hasOwnProperty("deprecationDescription"))
-                        object.deprecationDescription = message.deprecationDescription;
-                    return object;
-                };
-    
-                /**
-                 * Converts this DocumentationRule to JSON.
-                 * @function toJSON
-                 * @memberof google.api.DocumentationRule
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                DocumentationRule.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                return DocumentationRule;
-            })();
-    
-            api.Page = (function() {
-    
-                /**
-                 * Properties of a Page.
-                 * @memberof google.api
-                 * @interface IPage
-                 * @property {string|null} [name] Page name
-                 * @property {string|null} [content] Page content
-                 * @property {Array.<google.api.IPage>|null} [subpages] Page subpages
-                 */
-    
-                /**
-                 * Constructs a new Page.
-                 * @memberof google.api
-                 * @classdesc Represents a Page.
-                 * @implements IPage
-                 * @constructor
-                 * @param {google.api.IPage=} [properties] Properties to set
-                 */
-                function Page(properties) {
-                    this.subpages = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * Page name.
-                 * @member {string} name
-                 * @memberof google.api.Page
-                 * @instance
-                 */
-                Page.prototype.name = "";
-    
-                /**
-                 * Page content.
-                 * @member {string} content
-                 * @memberof google.api.Page
-                 * @instance
-                 */
-                Page.prototype.content = "";
-    
-                /**
-                 * Page subpages.
-                 * @member {Array.<google.api.IPage>} subpages
-                 * @memberof google.api.Page
-                 * @instance
-                 */
-                Page.prototype.subpages = $util.emptyArray;
-    
-                /**
-                 * Creates a new Page instance using the specified properties.
-                 * @function create
-                 * @memberof google.api.Page
-                 * @static
-                 * @param {google.api.IPage=} [properties] Properties to set
-                 * @returns {google.api.Page} Page instance
-                 */
-                Page.create = function create(properties) {
-                    return new Page(properties);
-                };
-    
-                /**
-                 * Encodes the specified Page message. Does not implicitly {@link google.api.Page.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.api.Page
-                 * @static
-                 * @param {google.api.IPage} message Page message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Page.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                    if (message.content != null && Object.hasOwnProperty.call(message, "content"))
-                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.content);
-                    if (message.subpages != null && message.subpages.length)
-                        for (var i = 0; i < message.subpages.length; ++i)
-                            $root.google.api.Page.encode(message.subpages[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified Page message, length delimited. Does not implicitly {@link google.api.Page.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.api.Page
-                 * @static
-                 * @param {google.api.IPage} message Page message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Page.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a Page message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.api.Page
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.api.Page} Page
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Page.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Page();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 2:
-                            message.content = reader.string();
-                            break;
-                        case 3:
-                            if (!(message.subpages && message.subpages.length))
-                                message.subpages = [];
-                            message.subpages.push($root.google.api.Page.decode(reader, reader.uint32()));
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a Page message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.api.Page
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.api.Page} Page
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Page.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a Page message.
-                 * @function verify
-                 * @memberof google.api.Page
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                Page.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.name != null && message.hasOwnProperty("name"))
-                        if (!$util.isString(message.name))
-                            return "name: string expected";
-                    if (message.content != null && message.hasOwnProperty("content"))
-                        if (!$util.isString(message.content))
-                            return "content: string expected";
-                    if (message.subpages != null && message.hasOwnProperty("subpages")) {
-                        if (!Array.isArray(message.subpages))
-                            return "subpages: array expected";
-                        for (var i = 0; i < message.subpages.length; ++i) {
-                            var error = $root.google.api.Page.verify(message.subpages[i]);
-                            if (error)
-                                return "subpages." + error;
-                        }
-                    }
-                    return null;
-                };
-    
-                /**
-                 * Creates a Page message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.api.Page
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.api.Page} Page
-                 */
-                Page.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.api.Page)
-                        return object;
-                    var message = new $root.google.api.Page();
-                    if (object.name != null)
-                        message.name = String(object.name);
-                    if (object.content != null)
-                        message.content = String(object.content);
-                    if (object.subpages) {
-                        if (!Array.isArray(object.subpages))
-                            throw TypeError(".google.api.Page.subpages: array expected");
-                        message.subpages = [];
-                        for (var i = 0; i < object.subpages.length; ++i) {
-                            if (typeof object.subpages[i] !== "object")
-                                throw TypeError(".google.api.Page.subpages: object expected");
-                            message.subpages[i] = $root.google.api.Page.fromObject(object.subpages[i]);
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a Page message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.api.Page
-                 * @static
-                 * @param {google.api.Page} message Page
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                Page.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.arrays || options.defaults)
-                        object.subpages = [];
-                    if (options.defaults) {
-                        object.name = "";
-                        object.content = "";
-                    }
-                    if (message.name != null && message.hasOwnProperty("name"))
-                        object.name = message.name;
-                    if (message.content != null && message.hasOwnProperty("content"))
-                        object.content = message.content;
-                    if (message.subpages && message.subpages.length) {
-                        object.subpages = [];
-                        for (var j = 0; j < message.subpages.length; ++j)
-                            object.subpages[j] = $root.google.api.Page.toObject(message.subpages[j], options);
-                    }
-                    return object;
-                };
-    
-                /**
-                 * Converts this Page to JSON.
-                 * @function toJSON
-                 * @memberof google.api.Page
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                Page.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                return Page;
-            })();
-    
-            api.Endpoint = (function() {
-    
-                /**
-                 * Properties of an Endpoint.
-                 * @memberof google.api
-                 * @interface IEndpoint
-                 * @property {string|null} [name] Endpoint name
-                 * @property {Array.<string>|null} [aliases] Endpoint aliases
-                 * @property {string|null} [target] Endpoint target
-                 * @property {boolean|null} [allowCors] Endpoint allowCors
-                 */
-    
-                /**
-                 * Constructs a new Endpoint.
-                 * @memberof google.api
-                 * @classdesc Represents an Endpoint.
-                 * @implements IEndpoint
-                 * @constructor
-                 * @param {google.api.IEndpoint=} [properties] Properties to set
-                 */
-                function Endpoint(properties) {
-                    this.aliases = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * Endpoint name.
-                 * @member {string} name
-                 * @memberof google.api.Endpoint
-                 * @instance
-                 */
-                Endpoint.prototype.name = "";
-    
-                /**
-                 * Endpoint aliases.
-                 * @member {Array.<string>} aliases
-                 * @memberof google.api.Endpoint
-                 * @instance
-                 */
-                Endpoint.prototype.aliases = $util.emptyArray;
-    
-                /**
-                 * Endpoint target.
-                 * @member {string} target
-                 * @memberof google.api.Endpoint
-                 * @instance
-                 */
-                Endpoint.prototype.target = "";
-    
-                /**
-                 * Endpoint allowCors.
-                 * @member {boolean} allowCors
-                 * @memberof google.api.Endpoint
-                 * @instance
-                 */
-                Endpoint.prototype.allowCors = false;
-    
-                /**
-                 * Creates a new Endpoint instance using the specified properties.
-                 * @function create
-                 * @memberof google.api.Endpoint
-                 * @static
-                 * @param {google.api.IEndpoint=} [properties] Properties to set
-                 * @returns {google.api.Endpoint} Endpoint instance
-                 */
-                Endpoint.create = function create(properties) {
-                    return new Endpoint(properties);
-                };
-    
-                /**
-                 * Encodes the specified Endpoint message. Does not implicitly {@link google.api.Endpoint.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.api.Endpoint
-                 * @static
-                 * @param {google.api.IEndpoint} message Endpoint message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Endpoint.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                    if (message.aliases != null && message.aliases.length)
-                        for (var i = 0; i < message.aliases.length; ++i)
-                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.aliases[i]);
-                    if (message.allowCors != null && Object.hasOwnProperty.call(message, "allowCors"))
-                        writer.uint32(/* id 5, wireType 0 =*/40).bool(message.allowCors);
-                    if (message.target != null && Object.hasOwnProperty.call(message, "target"))
-                        writer.uint32(/* id 101, wireType 2 =*/810).string(message.target);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified Endpoint message, length delimited. Does not implicitly {@link google.api.Endpoint.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.api.Endpoint
-                 * @static
-                 * @param {google.api.IEndpoint} message Endpoint message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Endpoint.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes an Endpoint message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.api.Endpoint
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.api.Endpoint} Endpoint
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Endpoint.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Endpoint();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 2:
-                            if (!(message.aliases && message.aliases.length))
-                                message.aliases = [];
-                            message.aliases.push(reader.string());
-                            break;
-                        case 101:
-                            message.target = reader.string();
-                            break;
-                        case 5:
-                            message.allowCors = reader.bool();
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes an Endpoint message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.api.Endpoint
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.api.Endpoint} Endpoint
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Endpoint.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies an Endpoint message.
-                 * @function verify
-                 * @memberof google.api.Endpoint
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                Endpoint.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.name != null && message.hasOwnProperty("name"))
-                        if (!$util.isString(message.name))
-                            return "name: string expected";
-                    if (message.aliases != null && message.hasOwnProperty("aliases")) {
-                        if (!Array.isArray(message.aliases))
-                            return "aliases: array expected";
-                        for (var i = 0; i < message.aliases.length; ++i)
-                            if (!$util.isString(message.aliases[i]))
-                                return "aliases: string[] expected";
-                    }
-                    if (message.target != null && message.hasOwnProperty("target"))
-                        if (!$util.isString(message.target))
-                            return "target: string expected";
-                    if (message.allowCors != null && message.hasOwnProperty("allowCors"))
-                        if (typeof message.allowCors !== "boolean")
-                            return "allowCors: boolean expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates an Endpoint message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.api.Endpoint
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.api.Endpoint} Endpoint
-                 */
-                Endpoint.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.api.Endpoint)
-                        return object;
-                    var message = new $root.google.api.Endpoint();
-                    if (object.name != null)
-                        message.name = String(object.name);
-                    if (object.aliases) {
-                        if (!Array.isArray(object.aliases))
-                            throw TypeError(".google.api.Endpoint.aliases: array expected");
-                        message.aliases = [];
-                        for (var i = 0; i < object.aliases.length; ++i)
-                            message.aliases[i] = String(object.aliases[i]);
-                    }
-                    if (object.target != null)
-                        message.target = String(object.target);
-                    if (object.allowCors != null)
-                        message.allowCors = Boolean(object.allowCors);
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from an Endpoint message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.api.Endpoint
-                 * @static
-                 * @param {google.api.Endpoint} message Endpoint
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                Endpoint.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.arrays || options.defaults)
-                        object.aliases = [];
-                    if (options.defaults) {
-                        object.name = "";
-                        object.allowCors = false;
-                        object.target = "";
-                    }
-                    if (message.name != null && message.hasOwnProperty("name"))
-                        object.name = message.name;
-                    if (message.aliases && message.aliases.length) {
-                        object.aliases = [];
-                        for (var j = 0; j < message.aliases.length; ++j)
-                            object.aliases[j] = message.aliases[j];
-                    }
-                    if (message.allowCors != null && message.hasOwnProperty("allowCors"))
-                        object.allowCors = message.allowCors;
-                    if (message.target != null && message.hasOwnProperty("target"))
-                        object.target = message.target;
-                    return object;
-                };
-    
-                /**
-                 * Converts this Endpoint to JSON.
-                 * @function toJSON
-                 * @memberof google.api.Endpoint
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                Endpoint.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                return Endpoint;
-            })();
-    
-            api.LogDescriptor = (function() {
-    
-                /**
-                 * Properties of a LogDescriptor.
-                 * @memberof google.api
-                 * @interface ILogDescriptor
-                 * @property {string|null} [name] LogDescriptor name
-                 * @property {Array.<google.api.ILabelDescriptor>|null} [labels] LogDescriptor labels
-                 * @property {string|null} [description] LogDescriptor description
-                 * @property {string|null} [displayName] LogDescriptor displayName
-                 */
-    
-                /**
-                 * Constructs a new LogDescriptor.
-                 * @memberof google.api
-                 * @classdesc Represents a LogDescriptor.
-                 * @implements ILogDescriptor
-                 * @constructor
-                 * @param {google.api.ILogDescriptor=} [properties] Properties to set
-                 */
-                function LogDescriptor(properties) {
-                    this.labels = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * LogDescriptor name.
-                 * @member {string} name
-                 * @memberof google.api.LogDescriptor
-                 * @instance
-                 */
-                LogDescriptor.prototype.name = "";
-    
-                /**
-                 * LogDescriptor labels.
-                 * @member {Array.<google.api.ILabelDescriptor>} labels
-                 * @memberof google.api.LogDescriptor
-                 * @instance
-                 */
-                LogDescriptor.prototype.labels = $util.emptyArray;
-    
-                /**
-                 * LogDescriptor description.
-                 * @member {string} description
-                 * @memberof google.api.LogDescriptor
-                 * @instance
-                 */
-                LogDescriptor.prototype.description = "";
-    
-                /**
-                 * LogDescriptor displayName.
-                 * @member {string} displayName
-                 * @memberof google.api.LogDescriptor
-                 * @instance
-                 */
-                LogDescriptor.prototype.displayName = "";
-    
-                /**
-                 * Creates a new LogDescriptor instance using the specified properties.
-                 * @function create
-                 * @memberof google.api.LogDescriptor
-                 * @static
-                 * @param {google.api.ILogDescriptor=} [properties] Properties to set
-                 * @returns {google.api.LogDescriptor} LogDescriptor instance
-                 */
-                LogDescriptor.create = function create(properties) {
-                    return new LogDescriptor(properties);
-                };
-    
-                /**
-                 * Encodes the specified LogDescriptor message. Does not implicitly {@link google.api.LogDescriptor.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.api.LogDescriptor
-                 * @static
-                 * @param {google.api.ILogDescriptor} message LogDescriptor message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                LogDescriptor.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                    if (message.labels != null && message.labels.length)
-                        for (var i = 0; i < message.labels.length; ++i)
-                            $root.google.api.LabelDescriptor.encode(message.labels[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                    if (message.description != null && Object.hasOwnProperty.call(message, "description"))
-                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.description);
-                    if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
-                        writer.uint32(/* id 4, wireType 2 =*/34).string(message.displayName);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified LogDescriptor message, length delimited. Does not implicitly {@link google.api.LogDescriptor.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.api.LogDescriptor
-                 * @static
-                 * @param {google.api.ILogDescriptor} message LogDescriptor message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                LogDescriptor.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a LogDescriptor message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.api.LogDescriptor
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.api.LogDescriptor} LogDescriptor
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                LogDescriptor.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.LogDescriptor();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 2:
-                            if (!(message.labels && message.labels.length))
-                                message.labels = [];
-                            message.labels.push($root.google.api.LabelDescriptor.decode(reader, reader.uint32()));
-                            break;
-                        case 3:
-                            message.description = reader.string();
-                            break;
-                        case 4:
-                            message.displayName = reader.string();
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a LogDescriptor message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.api.LogDescriptor
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.api.LogDescriptor} LogDescriptor
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                LogDescriptor.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a LogDescriptor message.
-                 * @function verify
-                 * @memberof google.api.LogDescriptor
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                LogDescriptor.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.name != null && message.hasOwnProperty("name"))
-                        if (!$util.isString(message.name))
-                            return "name: string expected";
-                    if (message.labels != null && message.hasOwnProperty("labels")) {
-                        if (!Array.isArray(message.labels))
-                            return "labels: array expected";
-                        for (var i = 0; i < message.labels.length; ++i) {
-                            var error = $root.google.api.LabelDescriptor.verify(message.labels[i]);
-                            if (error)
-                                return "labels." + error;
-                        }
-                    }
-                    if (message.description != null && message.hasOwnProperty("description"))
-                        if (!$util.isString(message.description))
-                            return "description: string expected";
-                    if (message.displayName != null && message.hasOwnProperty("displayName"))
-                        if (!$util.isString(message.displayName))
-                            return "displayName: string expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a LogDescriptor message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.api.LogDescriptor
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.api.LogDescriptor} LogDescriptor
-                 */
-                LogDescriptor.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.api.LogDescriptor)
-                        return object;
-                    var message = new $root.google.api.LogDescriptor();
-                    if (object.name != null)
-                        message.name = String(object.name);
-                    if (object.labels) {
-                        if (!Array.isArray(object.labels))
-                            throw TypeError(".google.api.LogDescriptor.labels: array expected");
-                        message.labels = [];
-                        for (var i = 0; i < object.labels.length; ++i) {
-                            if (typeof object.labels[i] !== "object")
-                                throw TypeError(".google.api.LogDescriptor.labels: object expected");
-                            message.labels[i] = $root.google.api.LabelDescriptor.fromObject(object.labels[i]);
-                        }
-                    }
-                    if (object.description != null)
-                        message.description = String(object.description);
-                    if (object.displayName != null)
-                        message.displayName = String(object.displayName);
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a LogDescriptor message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.api.LogDescriptor
-                 * @static
-                 * @param {google.api.LogDescriptor} message LogDescriptor
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                LogDescriptor.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.arrays || options.defaults)
-                        object.labels = [];
-                    if (options.defaults) {
-                        object.name = "";
-                        object.description = "";
-                        object.displayName = "";
-                    }
-                    if (message.name != null && message.hasOwnProperty("name"))
-                        object.name = message.name;
-                    if (message.labels && message.labels.length) {
-                        object.labels = [];
-                        for (var j = 0; j < message.labels.length; ++j)
-                            object.labels[j] = $root.google.api.LabelDescriptor.toObject(message.labels[j], options);
-                    }
-                    if (message.description != null && message.hasOwnProperty("description"))
-                        object.description = message.description;
-                    if (message.displayName != null && message.hasOwnProperty("displayName"))
-                        object.displayName = message.displayName;
-                    return object;
-                };
-    
-                /**
-                 * Converts this LogDescriptor to JSON.
-                 * @function toJSON
-                 * @memberof google.api.LogDescriptor
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                LogDescriptor.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                return LogDescriptor;
-            })();
-    
-            api.Logging = (function() {
-    
-                /**
-                 * Properties of a Logging.
-                 * @memberof google.api
-                 * @interface ILogging
-                 * @property {Array.<google.api.Logging.ILoggingDestination>|null} [producerDestinations] Logging producerDestinations
-                 * @property {Array.<google.api.Logging.ILoggingDestination>|null} [consumerDestinations] Logging consumerDestinations
-                 */
-    
-                /**
-                 * Constructs a new Logging.
-                 * @memberof google.api
-                 * @classdesc Represents a Logging.
-                 * @implements ILogging
-                 * @constructor
-                 * @param {google.api.ILogging=} [properties] Properties to set
-                 */
-                function Logging(properties) {
-                    this.producerDestinations = [];
-                    this.consumerDestinations = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * Logging producerDestinations.
-                 * @member {Array.<google.api.Logging.ILoggingDestination>} producerDestinations
-                 * @memberof google.api.Logging
-                 * @instance
-                 */
-                Logging.prototype.producerDestinations = $util.emptyArray;
-    
-                /**
-                 * Logging consumerDestinations.
-                 * @member {Array.<google.api.Logging.ILoggingDestination>} consumerDestinations
-                 * @memberof google.api.Logging
-                 * @instance
-                 */
-                Logging.prototype.consumerDestinations = $util.emptyArray;
-    
-                /**
-                 * Creates a new Logging instance using the specified properties.
-                 * @function create
-                 * @memberof google.api.Logging
-                 * @static
-                 * @param {google.api.ILogging=} [properties] Properties to set
-                 * @returns {google.api.Logging} Logging instance
-                 */
-                Logging.create = function create(properties) {
-                    return new Logging(properties);
-                };
-    
-                /**
-                 * Encodes the specified Logging message. Does not implicitly {@link google.api.Logging.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.api.Logging
-                 * @static
-                 * @param {google.api.ILogging} message Logging message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Logging.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.producerDestinations != null && message.producerDestinations.length)
-                        for (var i = 0; i < message.producerDestinations.length; ++i)
-                            $root.google.api.Logging.LoggingDestination.encode(message.producerDestinations[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                    if (message.consumerDestinations != null && message.consumerDestinations.length)
-                        for (var i = 0; i < message.consumerDestinations.length; ++i)
-                            $root.google.api.Logging.LoggingDestination.encode(message.consumerDestinations[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified Logging message, length delimited. Does not implicitly {@link google.api.Logging.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.api.Logging
-                 * @static
-                 * @param {google.api.ILogging} message Logging message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Logging.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a Logging message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.api.Logging
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.api.Logging} Logging
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Logging.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Logging();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            if (!(message.producerDestinations && message.producerDestinations.length))
-                                message.producerDestinations = [];
-                            message.producerDestinations.push($root.google.api.Logging.LoggingDestination.decode(reader, reader.uint32()));
-                            break;
-                        case 2:
-                            if (!(message.consumerDestinations && message.consumerDestinations.length))
-                                message.consumerDestinations = [];
-                            message.consumerDestinations.push($root.google.api.Logging.LoggingDestination.decode(reader, reader.uint32()));
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a Logging message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.api.Logging
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.api.Logging} Logging
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Logging.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a Logging message.
-                 * @function verify
-                 * @memberof google.api.Logging
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                Logging.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.producerDestinations != null && message.hasOwnProperty("producerDestinations")) {
-                        if (!Array.isArray(message.producerDestinations))
-                            return "producerDestinations: array expected";
-                        for (var i = 0; i < message.producerDestinations.length; ++i) {
-                            var error = $root.google.api.Logging.LoggingDestination.verify(message.producerDestinations[i]);
-                            if (error)
-                                return "producerDestinations." + error;
-                        }
-                    }
-                    if (message.consumerDestinations != null && message.hasOwnProperty("consumerDestinations")) {
-                        if (!Array.isArray(message.consumerDestinations))
-                            return "consumerDestinations: array expected";
-                        for (var i = 0; i < message.consumerDestinations.length; ++i) {
-                            var error = $root.google.api.Logging.LoggingDestination.verify(message.consumerDestinations[i]);
-                            if (error)
-                                return "consumerDestinations." + error;
-                        }
-                    }
-                    return null;
-                };
-    
-                /**
-                 * Creates a Logging message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.api.Logging
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.api.Logging} Logging
-                 */
-                Logging.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.api.Logging)
-                        return object;
-                    var message = new $root.google.api.Logging();
-                    if (object.producerDestinations) {
-                        if (!Array.isArray(object.producerDestinations))
-                            throw TypeError(".google.api.Logging.producerDestinations: array expected");
-                        message.producerDestinations = [];
-                        for (var i = 0; i < object.producerDestinations.length; ++i) {
-                            if (typeof object.producerDestinations[i] !== "object")
-                                throw TypeError(".google.api.Logging.producerDestinations: object expected");
-                            message.producerDestinations[i] = $root.google.api.Logging.LoggingDestination.fromObject(object.producerDestinations[i]);
-                        }
-                    }
-                    if (object.consumerDestinations) {
-                        if (!Array.isArray(object.consumerDestinations))
-                            throw TypeError(".google.api.Logging.consumerDestinations: array expected");
-                        message.consumerDestinations = [];
-                        for (var i = 0; i < object.consumerDestinations.length; ++i) {
-                            if (typeof object.consumerDestinations[i] !== "object")
-                                throw TypeError(".google.api.Logging.consumerDestinations: object expected");
-                            message.consumerDestinations[i] = $root.google.api.Logging.LoggingDestination.fromObject(object.consumerDestinations[i]);
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a Logging message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.api.Logging
-                 * @static
-                 * @param {google.api.Logging} message Logging
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                Logging.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.arrays || options.defaults) {
-                        object.producerDestinations = [];
-                        object.consumerDestinations = [];
-                    }
-                    if (message.producerDestinations && message.producerDestinations.length) {
-                        object.producerDestinations = [];
-                        for (var j = 0; j < message.producerDestinations.length; ++j)
-                            object.producerDestinations[j] = $root.google.api.Logging.LoggingDestination.toObject(message.producerDestinations[j], options);
-                    }
-                    if (message.consumerDestinations && message.consumerDestinations.length) {
-                        object.consumerDestinations = [];
-                        for (var j = 0; j < message.consumerDestinations.length; ++j)
-                            object.consumerDestinations[j] = $root.google.api.Logging.LoggingDestination.toObject(message.consumerDestinations[j], options);
-                    }
-                    return object;
-                };
-    
-                /**
-                 * Converts this Logging to JSON.
-                 * @function toJSON
-                 * @memberof google.api.Logging
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                Logging.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                Logging.LoggingDestination = (function() {
-    
-                    /**
-                     * Properties of a LoggingDestination.
-                     * @memberof google.api.Logging
-                     * @interface ILoggingDestination
-                     * @property {string|null} [monitoredResource] LoggingDestination monitoredResource
-                     * @property {Array.<string>|null} [logs] LoggingDestination logs
-                     */
-    
-                    /**
-                     * Constructs a new LoggingDestination.
-                     * @memberof google.api.Logging
-                     * @classdesc Represents a LoggingDestination.
-                     * @implements ILoggingDestination
-                     * @constructor
-                     * @param {google.api.Logging.ILoggingDestination=} [properties] Properties to set
-                     */
-                    function LoggingDestination(properties) {
-                        this.logs = [];
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * LoggingDestination monitoredResource.
-                     * @member {string} monitoredResource
-                     * @memberof google.api.Logging.LoggingDestination
-                     * @instance
-                     */
-                    LoggingDestination.prototype.monitoredResource = "";
-    
-                    /**
-                     * LoggingDestination logs.
-                     * @member {Array.<string>} logs
-                     * @memberof google.api.Logging.LoggingDestination
-                     * @instance
-                     */
-                    LoggingDestination.prototype.logs = $util.emptyArray;
-    
-                    /**
-                     * Creates a new LoggingDestination instance using the specified properties.
-                     * @function create
-                     * @memberof google.api.Logging.LoggingDestination
-                     * @static
-                     * @param {google.api.Logging.ILoggingDestination=} [properties] Properties to set
-                     * @returns {google.api.Logging.LoggingDestination} LoggingDestination instance
-                     */
-                    LoggingDestination.create = function create(properties) {
-                        return new LoggingDestination(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified LoggingDestination message. Does not implicitly {@link google.api.Logging.LoggingDestination.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.api.Logging.LoggingDestination
-                     * @static
-                     * @param {google.api.Logging.ILoggingDestination} message LoggingDestination message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    LoggingDestination.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.logs != null && message.logs.length)
-                            for (var i = 0; i < message.logs.length; ++i)
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.logs[i]);
-                        if (message.monitoredResource != null && Object.hasOwnProperty.call(message, "monitoredResource"))
-                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.monitoredResource);
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified LoggingDestination message, length delimited. Does not implicitly {@link google.api.Logging.LoggingDestination.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.api.Logging.LoggingDestination
-                     * @static
-                     * @param {google.api.Logging.ILoggingDestination} message LoggingDestination message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    LoggingDestination.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes a LoggingDestination message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.api.Logging.LoggingDestination
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.api.Logging.LoggingDestination} LoggingDestination
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    LoggingDestination.decode = function decode(reader, length) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Logging.LoggingDestination();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            switch (tag >>> 3) {
-                            case 3:
-                                message.monitoredResource = reader.string();
-                                break;
-                            case 1:
-                                if (!(message.logs && message.logs.length))
-                                    message.logs = [];
-                                message.logs.push(reader.string());
-                                break;
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes a LoggingDestination message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.api.Logging.LoggingDestination
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.api.Logging.LoggingDestination} LoggingDestination
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    LoggingDestination.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies a LoggingDestination message.
-                     * @function verify
-                     * @memberof google.api.Logging.LoggingDestination
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    LoggingDestination.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (message.monitoredResource != null && message.hasOwnProperty("monitoredResource"))
-                            if (!$util.isString(message.monitoredResource))
-                                return "monitoredResource: string expected";
-                        if (message.logs != null && message.hasOwnProperty("logs")) {
-                            if (!Array.isArray(message.logs))
-                                return "logs: array expected";
-                            for (var i = 0; i < message.logs.length; ++i)
-                                if (!$util.isString(message.logs[i]))
-                                    return "logs: string[] expected";
-                        }
-                        return null;
-                    };
-    
-                    /**
-                     * Creates a LoggingDestination message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.api.Logging.LoggingDestination
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.api.Logging.LoggingDestination} LoggingDestination
-                     */
-                    LoggingDestination.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.api.Logging.LoggingDestination)
-                            return object;
-                        var message = new $root.google.api.Logging.LoggingDestination();
-                        if (object.monitoredResource != null)
-                            message.monitoredResource = String(object.monitoredResource);
-                        if (object.logs) {
-                            if (!Array.isArray(object.logs))
-                                throw TypeError(".google.api.Logging.LoggingDestination.logs: array expected");
-                            message.logs = [];
-                            for (var i = 0; i < object.logs.length; ++i)
-                                message.logs[i] = String(object.logs[i]);
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from a LoggingDestination message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.api.Logging.LoggingDestination
-                     * @static
-                     * @param {google.api.Logging.LoggingDestination} message LoggingDestination
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    LoggingDestination.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.arrays || options.defaults)
-                            object.logs = [];
-                        if (options.defaults)
-                            object.monitoredResource = "";
-                        if (message.logs && message.logs.length) {
-                            object.logs = [];
-                            for (var j = 0; j < message.logs.length; ++j)
-                                object.logs[j] = message.logs[j];
-                        }
-                        if (message.monitoredResource != null && message.hasOwnProperty("monitoredResource"))
-                            object.monitoredResource = message.monitoredResource;
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this LoggingDestination to JSON.
-                     * @function toJSON
-                     * @memberof google.api.Logging.LoggingDestination
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    LoggingDestination.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    return LoggingDestination;
-                })();
-    
-                return Logging;
             })();
     
             api.MonitoredResourceDescriptor = (function() {
@@ -16640,26 +17733,32 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 5:
-                            message.name = reader.string();
-                            break;
-                        case 1:
-                            message.type = reader.string();
-                            break;
-                        case 2:
-                            message.displayName = reader.string();
-                            break;
-                        case 3:
-                            message.description = reader.string();
-                            break;
-                        case 4:
-                            if (!(message.labels && message.labels.length))
-                                message.labels = [];
-                            message.labels.push($root.google.api.LabelDescriptor.decode(reader, reader.uint32()));
-                            break;
-                        case 7:
-                            message.launchStage = reader.int32();
-                            break;
+                        case 5: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 1: {
+                                message.type = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.displayName = reader.string();
+                                break;
+                            }
+                        case 3: {
+                                message.description = reader.string();
+                                break;
+                            }
+                        case 4: {
+                                if (!(message.labels && message.labels.length))
+                                    message.labels = [];
+                                message.labels.push($root.google.api.LabelDescriptor.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 7: {
+                                message.launchStage = reader.int32();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -16851,6 +17950,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for MonitoredResourceDescriptor
+                 * @function getTypeUrl
+                 * @memberof google.api.MonitoredResourceDescriptor
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                MonitoredResourceDescriptor.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.MonitoredResourceDescriptor";
+                };
+    
                 return MonitoredResourceDescriptor;
             })();
     
@@ -16959,31 +18073,33 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.type = reader.string();
-                            break;
-                        case 2:
-                            if (message.labels === $util.emptyObject)
-                                message.labels = {};
-                            var end2 = reader.uint32() + reader.pos;
-                            key = "";
-                            value = "";
-                            while (reader.pos < end2) {
-                                var tag2 = reader.uint32();
-                                switch (tag2 >>> 3) {
-                                case 1:
-                                    key = reader.string();
-                                    break;
-                                case 2:
-                                    value = reader.string();
-                                    break;
-                                default:
-                                    reader.skipType(tag2 & 7);
-                                    break;
-                                }
+                        case 1: {
+                                message.type = reader.string();
+                                break;
                             }
-                            message.labels[key] = value;
-                            break;
+                        case 2: {
+                                if (message.labels === $util.emptyObject)
+                                    message.labels = {};
+                                var end2 = reader.uint32() + reader.pos;
+                                key = "";
+                                value = "";
+                                while (reader.pos < end2) {
+                                    var tag2 = reader.uint32();
+                                    switch (tag2 >>> 3) {
+                                    case 1:
+                                        key = reader.string();
+                                        break;
+                                    case 2:
+                                        value = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag2 & 7);
+                                        break;
+                                    }
+                                }
+                                message.labels[key] = value;
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -17096,6 +18212,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for MonitoredResource
+                 * @function getTypeUrl
+                 * @memberof google.api.MonitoredResource
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                MonitoredResource.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.MonitoredResource";
+                };
+    
                 return MonitoredResource;
             })();
     
@@ -17204,31 +18335,33 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.systemLabels = $root.google.protobuf.Struct.decode(reader, reader.uint32());
-                            break;
-                        case 2:
-                            if (message.userLabels === $util.emptyObject)
-                                message.userLabels = {};
-                            var end2 = reader.uint32() + reader.pos;
-                            key = "";
-                            value = "";
-                            while (reader.pos < end2) {
-                                var tag2 = reader.uint32();
-                                switch (tag2 >>> 3) {
-                                case 1:
-                                    key = reader.string();
-                                    break;
-                                case 2:
-                                    value = reader.string();
-                                    break;
-                                default:
-                                    reader.skipType(tag2 & 7);
-                                    break;
-                                }
+                        case 1: {
+                                message.systemLabels = $root.google.protobuf.Struct.decode(reader, reader.uint32());
+                                break;
                             }
-                            message.userLabels[key] = value;
-                            break;
+                        case 2: {
+                                if (message.userLabels === $util.emptyObject)
+                                    message.userLabels = {};
+                                var end2 = reader.uint32() + reader.pos;
+                                key = "";
+                                value = "";
+                                while (reader.pos < end2) {
+                                    var tag2 = reader.uint32();
+                                    switch (tag2 >>> 3) {
+                                    case 1:
+                                        key = reader.string();
+                                        break;
+                                    case 2:
+                                        value = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag2 & 7);
+                                        break;
+                                    }
+                                }
+                                message.userLabels[key] = value;
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -17346,6 +18479,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for MonitoredResourceMetadata
+                 * @function getTypeUrl
+                 * @memberof google.api.MonitoredResourceMetadata
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                MonitoredResourceMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.MonitoredResourceMetadata";
+                };
+    
                 return MonitoredResourceMetadata;
             })();
     
@@ -17456,16 +18604,18 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            if (!(message.producerDestinations && message.producerDestinations.length))
-                                message.producerDestinations = [];
-                            message.producerDestinations.push($root.google.api.Monitoring.MonitoringDestination.decode(reader, reader.uint32()));
-                            break;
-                        case 2:
-                            if (!(message.consumerDestinations && message.consumerDestinations.length))
-                                message.consumerDestinations = [];
-                            message.consumerDestinations.push($root.google.api.Monitoring.MonitoringDestination.decode(reader, reader.uint32()));
-                            break;
+                        case 1: {
+                                if (!(message.producerDestinations && message.producerDestinations.length))
+                                    message.producerDestinations = [];
+                                message.producerDestinations.push($root.google.api.Monitoring.MonitoringDestination.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 2: {
+                                if (!(message.consumerDestinations && message.consumerDestinations.length))
+                                    message.consumerDestinations = [];
+                                message.consumerDestinations.push($root.google.api.Monitoring.MonitoringDestination.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -17598,6 +18748,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for Monitoring
+                 * @function getTypeUrl
+                 * @memberof google.api.Monitoring
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Monitoring.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.Monitoring";
+                };
+    
                 Monitoring.MonitoringDestination = (function() {
     
                     /**
@@ -17703,14 +18868,16 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.monitoredResource = reader.string();
-                                break;
-                            case 2:
-                                if (!(message.metrics && message.metrics.length))
-                                    message.metrics = [];
-                                message.metrics.push(reader.string());
-                                break;
+                            case 1: {
+                                    message.monitoredResource = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    if (!(message.metrics && message.metrics.length))
+                                        message.metrics = [];
+                                    message.metrics.push(reader.string());
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -17819,6 +18986,21 @@
                      */
                     MonitoringDestination.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for MonitoringDestination
+                     * @function getTypeUrl
+                     * @memberof google.api.Monitoring.MonitoringDestination
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    MonitoringDestination.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.api.Monitoring.MonitoringDestination";
                     };
     
                     return MonitoringDestination;
@@ -17934,16 +19116,18 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 3:
-                            if (!(message.limits && message.limits.length))
-                                message.limits = [];
-                            message.limits.push($root.google.api.QuotaLimit.decode(reader, reader.uint32()));
-                            break;
-                        case 4:
-                            if (!(message.metricRules && message.metricRules.length))
-                                message.metricRules = [];
-                            message.metricRules.push($root.google.api.MetricRule.decode(reader, reader.uint32()));
-                            break;
+                        case 3: {
+                                if (!(message.limits && message.limits.length))
+                                    message.limits = [];
+                                message.limits.push($root.google.api.QuotaLimit.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 4: {
+                                if (!(message.metricRules && message.metricRules.length))
+                                    message.metricRules = [];
+                                message.metricRules.push($root.google.api.MetricRule.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -18076,6 +19260,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for Quota
+                 * @function getTypeUrl
+                 * @memberof google.api.Quota
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Quota.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.Quota";
+                };
+    
                 return Quota;
             })();
     
@@ -18184,31 +19383,33 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.selector = reader.string();
-                            break;
-                        case 2:
-                            if (message.metricCosts === $util.emptyObject)
-                                message.metricCosts = {};
-                            var end2 = reader.uint32() + reader.pos;
-                            key = "";
-                            value = 0;
-                            while (reader.pos < end2) {
-                                var tag2 = reader.uint32();
-                                switch (tag2 >>> 3) {
-                                case 1:
-                                    key = reader.string();
-                                    break;
-                                case 2:
-                                    value = reader.int64();
-                                    break;
-                                default:
-                                    reader.skipType(tag2 & 7);
-                                    break;
-                                }
+                        case 1: {
+                                message.selector = reader.string();
+                                break;
                             }
-                            message.metricCosts[key] = value;
-                            break;
+                        case 2: {
+                                if (message.metricCosts === $util.emptyObject)
+                                    message.metricCosts = {};
+                                var end2 = reader.uint32() + reader.pos;
+                                key = "";
+                                value = 0;
+                                while (reader.pos < end2) {
+                                    var tag2 = reader.uint32();
+                                    switch (tag2 >>> 3) {
+                                    case 1:
+                                        key = reader.string();
+                                        break;
+                                    case 2:
+                                        value = reader.int64();
+                                        break;
+                                    default:
+                                        reader.skipType(tag2 & 7);
+                                        break;
+                                    }
+                                }
+                                message.metricCosts[key] = value;
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -18329,6 +19530,21 @@
                  */
                 MetricRule.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for MetricRule
+                 * @function getTypeUrl
+                 * @memberof google.api.MetricRule
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                MetricRule.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.MetricRule";
                 };
     
                 return MetricRule;
@@ -18527,55 +19743,65 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 6:
-                            message.name = reader.string();
-                            break;
-                        case 2:
-                            message.description = reader.string();
-                            break;
-                        case 3:
-                            message.defaultLimit = reader.int64();
-                            break;
-                        case 4:
-                            message.maxLimit = reader.int64();
-                            break;
-                        case 7:
-                            message.freeTier = reader.int64();
-                            break;
-                        case 5:
-                            message.duration = reader.string();
-                            break;
-                        case 8:
-                            message.metric = reader.string();
-                            break;
-                        case 9:
-                            message.unit = reader.string();
-                            break;
-                        case 10:
-                            if (message.values === $util.emptyObject)
-                                message.values = {};
-                            var end2 = reader.uint32() + reader.pos;
-                            key = "";
-                            value = 0;
-                            while (reader.pos < end2) {
-                                var tag2 = reader.uint32();
-                                switch (tag2 >>> 3) {
-                                case 1:
-                                    key = reader.string();
-                                    break;
-                                case 2:
-                                    value = reader.int64();
-                                    break;
-                                default:
-                                    reader.skipType(tag2 & 7);
-                                    break;
-                                }
+                        case 6: {
+                                message.name = reader.string();
+                                break;
                             }
-                            message.values[key] = value;
-                            break;
-                        case 12:
-                            message.displayName = reader.string();
-                            break;
+                        case 2: {
+                                message.description = reader.string();
+                                break;
+                            }
+                        case 3: {
+                                message.defaultLimit = reader.int64();
+                                break;
+                            }
+                        case 4: {
+                                message.maxLimit = reader.int64();
+                                break;
+                            }
+                        case 7: {
+                                message.freeTier = reader.int64();
+                                break;
+                            }
+                        case 5: {
+                                message.duration = reader.string();
+                                break;
+                            }
+                        case 8: {
+                                message.metric = reader.string();
+                                break;
+                            }
+                        case 9: {
+                                message.unit = reader.string();
+                                break;
+                            }
+                        case 10: {
+                                if (message.values === $util.emptyObject)
+                                    message.values = {};
+                                var end2 = reader.uint32() + reader.pos;
+                                key = "";
+                                value = 0;
+                                while (reader.pos < end2) {
+                                    var tag2 = reader.uint32();
+                                    switch (tag2 >>> 3) {
+                                    case 1:
+                                        key = reader.string();
+                                        break;
+                                    case 2:
+                                        value = reader.int64();
+                                        break;
+                                    default:
+                                        reader.skipType(tag2 & 7);
+                                        break;
+                                    }
+                                }
+                                message.values[key] = value;
+                                break;
+                            }
+                        case 12: {
+                                message.displayName = reader.string();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -18805,642 +20031,22 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for QuotaLimit
+                 * @function getTypeUrl
+                 * @memberof google.api.QuotaLimit
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                QuotaLimit.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.QuotaLimit";
+                };
+    
                 return QuotaLimit;
-            })();
-    
-            api.ResourceDescriptor = (function() {
-    
-                /**
-                 * Properties of a ResourceDescriptor.
-                 * @memberof google.api
-                 * @interface IResourceDescriptor
-                 * @property {string|null} [type] ResourceDescriptor type
-                 * @property {Array.<string>|null} [pattern] ResourceDescriptor pattern
-                 * @property {string|null} [nameField] ResourceDescriptor nameField
-                 * @property {google.api.ResourceDescriptor.History|null} [history] ResourceDescriptor history
-                 * @property {string|null} [plural] ResourceDescriptor plural
-                 * @property {string|null} [singular] ResourceDescriptor singular
-                 * @property {Array.<google.api.ResourceDescriptor.Style>|null} [style] ResourceDescriptor style
-                 */
-    
-                /**
-                 * Constructs a new ResourceDescriptor.
-                 * @memberof google.api
-                 * @classdesc Represents a ResourceDescriptor.
-                 * @implements IResourceDescriptor
-                 * @constructor
-                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
-                 */
-                function ResourceDescriptor(properties) {
-                    this.pattern = [];
-                    this.style = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * ResourceDescriptor type.
-                 * @member {string} type
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.type = "";
-    
-                /**
-                 * ResourceDescriptor pattern.
-                 * @member {Array.<string>} pattern
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.pattern = $util.emptyArray;
-    
-                /**
-                 * ResourceDescriptor nameField.
-                 * @member {string} nameField
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.nameField = "";
-    
-                /**
-                 * ResourceDescriptor history.
-                 * @member {google.api.ResourceDescriptor.History} history
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.history = 0;
-    
-                /**
-                 * ResourceDescriptor plural.
-                 * @member {string} plural
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.plural = "";
-    
-                /**
-                 * ResourceDescriptor singular.
-                 * @member {string} singular
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.singular = "";
-    
-                /**
-                 * ResourceDescriptor style.
-                 * @member {Array.<google.api.ResourceDescriptor.Style>} style
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.style = $util.emptyArray;
-    
-                /**
-                 * Creates a new ResourceDescriptor instance using the specified properties.
-                 * @function create
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
-                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor instance
-                 */
-                ResourceDescriptor.create = function create(properties) {
-                    return new ResourceDescriptor(properties);
-                };
-    
-                /**
-                 * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ResourceDescriptor.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
-                    if (message.pattern != null && message.pattern.length)
-                        for (var i = 0; i < message.pattern.length; ++i)
-                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.pattern[i]);
-                    if (message.nameField != null && Object.hasOwnProperty.call(message, "nameField"))
-                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.nameField);
-                    if (message.history != null && Object.hasOwnProperty.call(message, "history"))
-                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.history);
-                    if (message.plural != null && Object.hasOwnProperty.call(message, "plural"))
-                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.plural);
-                    if (message.singular != null && Object.hasOwnProperty.call(message, "singular"))
-                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.singular);
-                    if (message.style != null && message.style.length) {
-                        writer.uint32(/* id 10, wireType 2 =*/82).fork();
-                        for (var i = 0; i < message.style.length; ++i)
-                            writer.int32(message.style[i]);
-                        writer.ldelim();
-                    }
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ResourceDescriptor.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a ResourceDescriptor message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ResourceDescriptor.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.type = reader.string();
-                            break;
-                        case 2:
-                            if (!(message.pattern && message.pattern.length))
-                                message.pattern = [];
-                            message.pattern.push(reader.string());
-                            break;
-                        case 3:
-                            message.nameField = reader.string();
-                            break;
-                        case 4:
-                            message.history = reader.int32();
-                            break;
-                        case 5:
-                            message.plural = reader.string();
-                            break;
-                        case 6:
-                            message.singular = reader.string();
-                            break;
-                        case 10:
-                            if (!(message.style && message.style.length))
-                                message.style = [];
-                            if ((tag & 7) === 2) {
-                                var end2 = reader.uint32() + reader.pos;
-                                while (reader.pos < end2)
-                                    message.style.push(reader.int32());
-                            } else
-                                message.style.push(reader.int32());
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ResourceDescriptor.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a ResourceDescriptor message.
-                 * @function verify
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                ResourceDescriptor.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        if (!$util.isString(message.type))
-                            return "type: string expected";
-                    if (message.pattern != null && message.hasOwnProperty("pattern")) {
-                        if (!Array.isArray(message.pattern))
-                            return "pattern: array expected";
-                        for (var i = 0; i < message.pattern.length; ++i)
-                            if (!$util.isString(message.pattern[i]))
-                                return "pattern: string[] expected";
-                    }
-                    if (message.nameField != null && message.hasOwnProperty("nameField"))
-                        if (!$util.isString(message.nameField))
-                            return "nameField: string expected";
-                    if (message.history != null && message.hasOwnProperty("history"))
-                        switch (message.history) {
-                        default:
-                            return "history: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                            break;
-                        }
-                    if (message.plural != null && message.hasOwnProperty("plural"))
-                        if (!$util.isString(message.plural))
-                            return "plural: string expected";
-                    if (message.singular != null && message.hasOwnProperty("singular"))
-                        if (!$util.isString(message.singular))
-                            return "singular: string expected";
-                    if (message.style != null && message.hasOwnProperty("style")) {
-                        if (!Array.isArray(message.style))
-                            return "style: array expected";
-                        for (var i = 0; i < message.style.length; ++i)
-                            switch (message.style[i]) {
-                            default:
-                                return "style: enum value[] expected";
-                            case 0:
-                            case 1:
-                                break;
-                            }
-                    }
-                    return null;
-                };
-    
-                /**
-                 * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
-                 */
-                ResourceDescriptor.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.api.ResourceDescriptor)
-                        return object;
-                    var message = new $root.google.api.ResourceDescriptor();
-                    if (object.type != null)
-                        message.type = String(object.type);
-                    if (object.pattern) {
-                        if (!Array.isArray(object.pattern))
-                            throw TypeError(".google.api.ResourceDescriptor.pattern: array expected");
-                        message.pattern = [];
-                        for (var i = 0; i < object.pattern.length; ++i)
-                            message.pattern[i] = String(object.pattern[i]);
-                    }
-                    if (object.nameField != null)
-                        message.nameField = String(object.nameField);
-                    switch (object.history) {
-                    case "HISTORY_UNSPECIFIED":
-                    case 0:
-                        message.history = 0;
-                        break;
-                    case "ORIGINALLY_SINGLE_PATTERN":
-                    case 1:
-                        message.history = 1;
-                        break;
-                    case "FUTURE_MULTI_PATTERN":
-                    case 2:
-                        message.history = 2;
-                        break;
-                    }
-                    if (object.plural != null)
-                        message.plural = String(object.plural);
-                    if (object.singular != null)
-                        message.singular = String(object.singular);
-                    if (object.style) {
-                        if (!Array.isArray(object.style))
-                            throw TypeError(".google.api.ResourceDescriptor.style: array expected");
-                        message.style = [];
-                        for (var i = 0; i < object.style.length; ++i)
-                            switch (object.style[i]) {
-                            default:
-                            case "STYLE_UNSPECIFIED":
-                            case 0:
-                                message.style[i] = 0;
-                                break;
-                            case "DECLARATIVE_FRIENDLY":
-                            case 1:
-                                message.style[i] = 1;
-                                break;
-                            }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {google.api.ResourceDescriptor} message ResourceDescriptor
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                ResourceDescriptor.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.arrays || options.defaults) {
-                        object.pattern = [];
-                        object.style = [];
-                    }
-                    if (options.defaults) {
-                        object.type = "";
-                        object.nameField = "";
-                        object.history = options.enums === String ? "HISTORY_UNSPECIFIED" : 0;
-                        object.plural = "";
-                        object.singular = "";
-                    }
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = message.type;
-                    if (message.pattern && message.pattern.length) {
-                        object.pattern = [];
-                        for (var j = 0; j < message.pattern.length; ++j)
-                            object.pattern[j] = message.pattern[j];
-                    }
-                    if (message.nameField != null && message.hasOwnProperty("nameField"))
-                        object.nameField = message.nameField;
-                    if (message.history != null && message.hasOwnProperty("history"))
-                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] : message.history;
-                    if (message.plural != null && message.hasOwnProperty("plural"))
-                        object.plural = message.plural;
-                    if (message.singular != null && message.hasOwnProperty("singular"))
-                        object.singular = message.singular;
-                    if (message.style && message.style.length) {
-                        object.style = [];
-                        for (var j = 0; j < message.style.length; ++j)
-                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
-                    }
-                    return object;
-                };
-    
-                /**
-                 * Converts this ResourceDescriptor to JSON.
-                 * @function toJSON
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                ResourceDescriptor.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * History enum.
-                 * @name google.api.ResourceDescriptor.History
-                 * @enum {number}
-                 * @property {number} HISTORY_UNSPECIFIED=0 HISTORY_UNSPECIFIED value
-                 * @property {number} ORIGINALLY_SINGLE_PATTERN=1 ORIGINALLY_SINGLE_PATTERN value
-                 * @property {number} FUTURE_MULTI_PATTERN=2 FUTURE_MULTI_PATTERN value
-                 */
-                ResourceDescriptor.History = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "HISTORY_UNSPECIFIED"] = 0;
-                    values[valuesById[1] = "ORIGINALLY_SINGLE_PATTERN"] = 1;
-                    values[valuesById[2] = "FUTURE_MULTI_PATTERN"] = 2;
-                    return values;
-                })();
-    
-                /**
-                 * Style enum.
-                 * @name google.api.ResourceDescriptor.Style
-                 * @enum {number}
-                 * @property {number} STYLE_UNSPECIFIED=0 STYLE_UNSPECIFIED value
-                 * @property {number} DECLARATIVE_FRIENDLY=1 DECLARATIVE_FRIENDLY value
-                 */
-                ResourceDescriptor.Style = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "STYLE_UNSPECIFIED"] = 0;
-                    values[valuesById[1] = "DECLARATIVE_FRIENDLY"] = 1;
-                    return values;
-                })();
-    
-                return ResourceDescriptor;
-            })();
-    
-            api.ResourceReference = (function() {
-    
-                /**
-                 * Properties of a ResourceReference.
-                 * @memberof google.api
-                 * @interface IResourceReference
-                 * @property {string|null} [type] ResourceReference type
-                 * @property {string|null} [childType] ResourceReference childType
-                 */
-    
-                /**
-                 * Constructs a new ResourceReference.
-                 * @memberof google.api
-                 * @classdesc Represents a ResourceReference.
-                 * @implements IResourceReference
-                 * @constructor
-                 * @param {google.api.IResourceReference=} [properties] Properties to set
-                 */
-                function ResourceReference(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * ResourceReference type.
-                 * @member {string} type
-                 * @memberof google.api.ResourceReference
-                 * @instance
-                 */
-                ResourceReference.prototype.type = "";
-    
-                /**
-                 * ResourceReference childType.
-                 * @member {string} childType
-                 * @memberof google.api.ResourceReference
-                 * @instance
-                 */
-                ResourceReference.prototype.childType = "";
-    
-                /**
-                 * Creates a new ResourceReference instance using the specified properties.
-                 * @function create
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {google.api.IResourceReference=} [properties] Properties to set
-                 * @returns {google.api.ResourceReference} ResourceReference instance
-                 */
-                ResourceReference.create = function create(properties) {
-                    return new ResourceReference(properties);
-                };
-    
-                /**
-                 * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ResourceReference.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
-                    if (message.childType != null && Object.hasOwnProperty.call(message, "childType"))
-                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.childType);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ResourceReference.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a ResourceReference message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.api.ResourceReference} ResourceReference
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ResourceReference.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.type = reader.string();
-                            break;
-                        case 2:
-                            message.childType = reader.string();
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.api.ResourceReference} ResourceReference
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ResourceReference.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a ResourceReference message.
-                 * @function verify
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                ResourceReference.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        if (!$util.isString(message.type))
-                            return "type: string expected";
-                    if (message.childType != null && message.hasOwnProperty("childType"))
-                        if (!$util.isString(message.childType))
-                            return "childType: string expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.api.ResourceReference} ResourceReference
-                 */
-                ResourceReference.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.api.ResourceReference)
-                        return object;
-                    var message = new $root.google.api.ResourceReference();
-                    if (object.type != null)
-                        message.type = String(object.type);
-                    if (object.childType != null)
-                        message.childType = String(object.childType);
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {google.api.ResourceReference} message ResourceReference
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                ResourceReference.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults) {
-                        object.type = "";
-                        object.childType = "";
-                    }
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = message.type;
-                    if (message.childType != null && message.hasOwnProperty("childType"))
-                        object.childType = message.childType;
-                    return object;
-                };
-    
-                /**
-                 * Converts this ResourceReference to JSON.
-                 * @function toJSON
-                 * @memberof google.api.ResourceReference
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                ResourceReference.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                return ResourceReference;
             })();
     
             api.SourceInfo = (function() {
@@ -19537,11 +20143,12 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            if (!(message.sourceFiles && message.sourceFiles.length))
-                                message.sourceFiles = [];
-                            message.sourceFiles.push($root.google.protobuf.Any.decode(reader, reader.uint32()));
-                            break;
+                        case 1: {
+                                if (!(message.sourceFiles && message.sourceFiles.length))
+                                    message.sourceFiles = [];
+                                message.sourceFiles.push($root.google.protobuf.Any.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -19648,6 +20255,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for SourceInfo
+                 * @function getTypeUrl
+                 * @memberof google.api.SourceInfo
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                SourceInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.SourceInfo";
+                };
+    
                 return SourceInfo;
             })();
     
@@ -19745,11 +20367,12 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            if (!(message.rules && message.rules.length))
-                                message.rules = [];
-                            message.rules.push($root.google.api.SystemParameterRule.decode(reader, reader.uint32()));
-                            break;
+                        case 1: {
+                                if (!(message.rules && message.rules.length))
+                                    message.rules = [];
+                                message.rules.push($root.google.api.SystemParameterRule.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -19854,6 +20477,21 @@
                  */
                 SystemParameters.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for SystemParameters
+                 * @function getTypeUrl
+                 * @memberof google.api.SystemParameters
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                SystemParameters.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.SystemParameters";
                 };
     
                 return SystemParameters;
@@ -19964,14 +20602,16 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.selector = reader.string();
-                            break;
-                        case 2:
-                            if (!(message.parameters && message.parameters.length))
-                                message.parameters = [];
-                            message.parameters.push($root.google.api.SystemParameter.decode(reader, reader.uint32()));
-                            break;
+                        case 1: {
+                                message.selector = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                if (!(message.parameters && message.parameters.length))
+                                    message.parameters = [];
+                                message.parameters.push($root.google.api.SystemParameter.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -20085,6 +20725,21 @@
                  */
                 SystemParameterRule.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for SystemParameterRule
+                 * @function getTypeUrl
+                 * @memberof google.api.SystemParameterRule
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                SystemParameterRule.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.SystemParameterRule";
                 };
     
                 return SystemParameterRule;
@@ -20204,15 +20859,18 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 2:
-                            message.httpHeader = reader.string();
-                            break;
-                        case 3:
-                            message.urlQueryParameter = reader.string();
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.httpHeader = reader.string();
+                                break;
+                            }
+                        case 3: {
+                                message.urlQueryParameter = reader.string();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -20317,6 +20975,21 @@
                  */
                 SystemParameter.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for SystemParameter
+                 * @function getTypeUrl
+                 * @memberof google.api.SystemParameter
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                SystemParameter.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.SystemParameter";
                 };
     
                 return SystemParameter;
@@ -20440,19 +21113,22 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            if (!(message.requirements && message.requirements.length))
-                                message.requirements = [];
-                            message.requirements.push(reader.string());
-                            break;
-                        case 6:
-                            if (!(message.rules && message.rules.length))
-                                message.rules = [];
-                            message.rules.push($root.google.api.UsageRule.decode(reader, reader.uint32()));
-                            break;
-                        case 7:
-                            message.producerNotificationChannel = reader.string();
-                            break;
+                        case 1: {
+                                if (!(message.requirements && message.requirements.length))
+                                    message.requirements = [];
+                                message.requirements.push(reader.string());
+                                break;
+                            }
+                        case 6: {
+                                if (!(message.rules && message.rules.length))
+                                    message.rules = [];
+                                message.rules.push($root.google.api.UsageRule.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 7: {
+                                message.producerNotificationChannel = reader.string();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -20589,6 +21265,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for Usage
+                 * @function getTypeUrl
+                 * @memberof google.api.Usage
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Usage.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.Usage";
+                };
+    
                 return Usage;
             })();
     
@@ -20706,15 +21397,18 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.selector = reader.string();
-                            break;
-                        case 2:
-                            message.allowUnregisteredCalls = reader.bool();
-                            break;
-                        case 3:
-                            message.skipServiceControl = reader.bool();
-                            break;
+                        case 1: {
+                                message.selector = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.allowUnregisteredCalls = reader.bool();
+                                break;
+                            }
+                        case 3: {
+                                message.skipServiceControl = reader.bool();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -20819,6 +21513,21 @@
                  */
                 UsageRule.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for UsageRule
+                 * @function getTypeUrl
+                 * @memberof google.api.UsageRule
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                UsageRule.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.UsageRule";
                 };
     
                 return UsageRule;
@@ -20930,11 +21639,12 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            if (!(message.file && message.file.length))
-                                message.file = [];
-                            message.file.push($root.google.protobuf.FileDescriptorProto.decode(reader, reader.uint32()));
-                            break;
+                        case 1: {
+                                if (!(message.file && message.file.length))
+                                    message.file = [];
+                                message.file.push($root.google.protobuf.FileDescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -21041,6 +21751,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for FileDescriptorSet
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.FileDescriptorSet
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FileDescriptorSet.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.FileDescriptorSet";
+                };
+    
                 return FileDescriptorSet;
             })();
     
@@ -21062,6 +21787,7 @@
                  * @property {google.protobuf.IFileOptions|null} [options] FileDescriptorProto options
                  * @property {google.protobuf.ISourceCodeInfo|null} [sourceCodeInfo] FileDescriptorProto sourceCodeInfo
                  * @property {string|null} [syntax] FileDescriptorProto syntax
+                 * @property {string|null} [edition] FileDescriptorProto edition
                  */
     
                 /**
@@ -21183,6 +21909,14 @@
                 FileDescriptorProto.prototype.syntax = "";
     
                 /**
+                 * FileDescriptorProto edition.
+                 * @member {string} edition
+                 * @memberof google.protobuf.FileDescriptorProto
+                 * @instance
+                 */
+                FileDescriptorProto.prototype.edition = "";
+    
+                /**
                  * Creates a new FileDescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.FileDescriptorProto
@@ -21237,6 +21971,8 @@
                             writer.uint32(/* id 11, wireType 0 =*/88).int32(message.weakDependency[i]);
                     if (message.syntax != null && Object.hasOwnProperty.call(message, "syntax"))
                         writer.uint32(/* id 12, wireType 2 =*/98).string(message.syntax);
+                    if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
+                        writer.uint32(/* id 13, wireType 2 =*/106).string(message.edition);
                     return writer;
                 };
     
@@ -21271,66 +22007,82 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 2:
-                            message["package"] = reader.string();
-                            break;
-                        case 3:
-                            if (!(message.dependency && message.dependency.length))
-                                message.dependency = [];
-                            message.dependency.push(reader.string());
-                            break;
-                        case 10:
-                            if (!(message.publicDependency && message.publicDependency.length))
-                                message.publicDependency = [];
-                            if ((tag & 7) === 2) {
-                                var end2 = reader.uint32() + reader.pos;
-                                while (reader.pos < end2)
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message["package"] = reader.string();
+                                break;
+                            }
+                        case 3: {
+                                if (!(message.dependency && message.dependency.length))
+                                    message.dependency = [];
+                                message.dependency.push(reader.string());
+                                break;
+                            }
+                        case 10: {
+                                if (!(message.publicDependency && message.publicDependency.length))
+                                    message.publicDependency = [];
+                                if ((tag & 7) === 2) {
+                                    var end2 = reader.uint32() + reader.pos;
+                                    while (reader.pos < end2)
+                                        message.publicDependency.push(reader.int32());
+                                } else
                                     message.publicDependency.push(reader.int32());
-                            } else
-                                message.publicDependency.push(reader.int32());
-                            break;
-                        case 11:
-                            if (!(message.weakDependency && message.weakDependency.length))
-                                message.weakDependency = [];
-                            if ((tag & 7) === 2) {
-                                var end2 = reader.uint32() + reader.pos;
-                                while (reader.pos < end2)
+                                break;
+                            }
+                        case 11: {
+                                if (!(message.weakDependency && message.weakDependency.length))
+                                    message.weakDependency = [];
+                                if ((tag & 7) === 2) {
+                                    var end2 = reader.uint32() + reader.pos;
+                                    while (reader.pos < end2)
+                                        message.weakDependency.push(reader.int32());
+                                } else
                                     message.weakDependency.push(reader.int32());
-                            } else
-                                message.weakDependency.push(reader.int32());
-                            break;
-                        case 4:
-                            if (!(message.messageType && message.messageType.length))
-                                message.messageType = [];
-                            message.messageType.push($root.google.protobuf.DescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 5:
-                            if (!(message.enumType && message.enumType.length))
-                                message.enumType = [];
-                            message.enumType.push($root.google.protobuf.EnumDescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 6:
-                            if (!(message.service && message.service.length))
-                                message.service = [];
-                            message.service.push($root.google.protobuf.ServiceDescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 7:
-                            if (!(message.extension && message.extension.length))
-                                message.extension = [];
-                            message.extension.push($root.google.protobuf.FieldDescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 8:
-                            message.options = $root.google.protobuf.FileOptions.decode(reader, reader.uint32());
-                            break;
-                        case 9:
-                            message.sourceCodeInfo = $root.google.protobuf.SourceCodeInfo.decode(reader, reader.uint32());
-                            break;
-                        case 12:
-                            message.syntax = reader.string();
-                            break;
+                                break;
+                            }
+                        case 4: {
+                                if (!(message.messageType && message.messageType.length))
+                                    message.messageType = [];
+                                message.messageType.push($root.google.protobuf.DescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 5: {
+                                if (!(message.enumType && message.enumType.length))
+                                    message.enumType = [];
+                                message.enumType.push($root.google.protobuf.EnumDescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 6: {
+                                if (!(message.service && message.service.length))
+                                    message.service = [];
+                                message.service.push($root.google.protobuf.ServiceDescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 7: {
+                                if (!(message.extension && message.extension.length))
+                                    message.extension = [];
+                                message.extension.push($root.google.protobuf.FieldDescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 8: {
+                                message.options = $root.google.protobuf.FileOptions.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 9: {
+                                message.sourceCodeInfo = $root.google.protobuf.SourceCodeInfo.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 12: {
+                                message.syntax = reader.string();
+                                break;
+                            }
+                        case 13: {
+                                message.edition = reader.string();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -21442,6 +22194,9 @@
                     if (message.syntax != null && message.hasOwnProperty("syntax"))
                         if (!$util.isString(message.syntax))
                             return "syntax: string expected";
+                    if (message.edition != null && message.hasOwnProperty("edition"))
+                        if (!$util.isString(message.edition))
+                            return "edition: string expected";
                     return null;
                 };
     
@@ -21534,6 +22289,8 @@
                     }
                     if (object.syntax != null)
                         message.syntax = String(object.syntax);
+                    if (object.edition != null)
+                        message.edition = String(object.edition);
                     return message;
                 };
     
@@ -21565,6 +22322,7 @@
                         object.options = null;
                         object.sourceCodeInfo = null;
                         object.syntax = "";
+                        object.edition = "";
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -21611,6 +22369,8 @@
                     }
                     if (message.syntax != null && message.hasOwnProperty("syntax"))
                         object.syntax = message.syntax;
+                    if (message.edition != null && message.hasOwnProperty("edition"))
+                        object.edition = message.edition;
                     return object;
                 };
     
@@ -21623,6 +22383,21 @@
                  */
                 FileDescriptorProto.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for FileDescriptorProto
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.FileDescriptorProto
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FileDescriptorProto.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.FileDescriptorProto";
                 };
     
                 return FileDescriptorProto;
@@ -21835,52 +22610,62 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 2:
-                            if (!(message.field && message.field.length))
-                                message.field = [];
-                            message.field.push($root.google.protobuf.FieldDescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 6:
-                            if (!(message.extension && message.extension.length))
-                                message.extension = [];
-                            message.extension.push($root.google.protobuf.FieldDescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 3:
-                            if (!(message.nestedType && message.nestedType.length))
-                                message.nestedType = [];
-                            message.nestedType.push($root.google.protobuf.DescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 4:
-                            if (!(message.enumType && message.enumType.length))
-                                message.enumType = [];
-                            message.enumType.push($root.google.protobuf.EnumDescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 5:
-                            if (!(message.extensionRange && message.extensionRange.length))
-                                message.extensionRange = [];
-                            message.extensionRange.push($root.google.protobuf.DescriptorProto.ExtensionRange.decode(reader, reader.uint32()));
-                            break;
-                        case 8:
-                            if (!(message.oneofDecl && message.oneofDecl.length))
-                                message.oneofDecl = [];
-                            message.oneofDecl.push($root.google.protobuf.OneofDescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 7:
-                            message.options = $root.google.protobuf.MessageOptions.decode(reader, reader.uint32());
-                            break;
-                        case 9:
-                            if (!(message.reservedRange && message.reservedRange.length))
-                                message.reservedRange = [];
-                            message.reservedRange.push($root.google.protobuf.DescriptorProto.ReservedRange.decode(reader, reader.uint32()));
-                            break;
-                        case 10:
-                            if (!(message.reservedName && message.reservedName.length))
-                                message.reservedName = [];
-                            message.reservedName.push(reader.string());
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                if (!(message.field && message.field.length))
+                                    message.field = [];
+                                message.field.push($root.google.protobuf.FieldDescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 6: {
+                                if (!(message.extension && message.extension.length))
+                                    message.extension = [];
+                                message.extension.push($root.google.protobuf.FieldDescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 3: {
+                                if (!(message.nestedType && message.nestedType.length))
+                                    message.nestedType = [];
+                                message.nestedType.push($root.google.protobuf.DescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 4: {
+                                if (!(message.enumType && message.enumType.length))
+                                    message.enumType = [];
+                                message.enumType.push($root.google.protobuf.EnumDescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 5: {
+                                if (!(message.extensionRange && message.extensionRange.length))
+                                    message.extensionRange = [];
+                                message.extensionRange.push($root.google.protobuf.DescriptorProto.ExtensionRange.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 8: {
+                                if (!(message.oneofDecl && message.oneofDecl.length))
+                                    message.oneofDecl = [];
+                                message.oneofDecl.push($root.google.protobuf.OneofDescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 7: {
+                                message.options = $root.google.protobuf.MessageOptions.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 9: {
+                                if (!(message.reservedRange && message.reservedRange.length))
+                                    message.reservedRange = [];
+                                message.reservedRange.push($root.google.protobuf.DescriptorProto.ReservedRange.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 10: {
+                                if (!(message.reservedName && message.reservedName.length))
+                                    message.reservedName = [];
+                                message.reservedName.push(reader.string());
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -22181,6 +22966,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for DescriptorProto
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.DescriptorProto
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                DescriptorProto.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.DescriptorProto";
+                };
+    
                 DescriptorProto.ExtensionRange = (function() {
     
                     /**
@@ -22295,15 +23095,18 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.start = reader.int32();
-                                break;
-                            case 2:
-                                message.end = reader.int32();
-                                break;
-                            case 3:
-                                message.options = $root.google.protobuf.ExtensionRangeOptions.decode(reader, reader.uint32());
-                                break;
+                            case 1: {
+                                    message.start = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    message.end = reader.int32();
+                                    break;
+                                }
+                            case 3: {
+                                    message.options = $root.google.protobuf.ExtensionRangeOptions.decode(reader, reader.uint32());
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -22415,6 +23218,21 @@
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
+                    /**
+                     * Gets the default type url for ExtensionRange
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.DescriptorProto.ExtensionRange
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ExtensionRange.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.DescriptorProto.ExtensionRange";
+                    };
+    
                     return ExtensionRange;
                 })();
     
@@ -22521,12 +23339,14 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.start = reader.int32();
-                                break;
-                            case 2:
-                                message.end = reader.int32();
-                                break;
+                            case 1: {
+                                    message.start = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    message.end = reader.int32();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -22623,6 +23443,21 @@
                      */
                     ReservedRange.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ReservedRange
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.DescriptorProto.ReservedRange
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ReservedRange.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.DescriptorProto.ReservedRange";
                     };
     
                     return ReservedRange;
@@ -22725,11 +23560,12 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 999:
-                            if (!(message.uninterpretedOption && message.uninterpretedOption.length))
-                                message.uninterpretedOption = [];
-                            message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
-                            break;
+                        case 999: {
+                                if (!(message.uninterpretedOption && message.uninterpretedOption.length))
+                                    message.uninterpretedOption = [];
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -22834,6 +23670,21 @@
                  */
                 ExtensionRangeOptions.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for ExtensionRangeOptions
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.ExtensionRangeOptions
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ExtensionRangeOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.ExtensionRangeOptions";
                 };
     
                 return ExtensionRangeOptions;
@@ -23041,39 +23892,50 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 3:
-                            message.number = reader.int32();
-                            break;
-                        case 4:
-                            message.label = reader.int32();
-                            break;
-                        case 5:
-                            message.type = reader.int32();
-                            break;
-                        case 6:
-                            message.typeName = reader.string();
-                            break;
-                        case 2:
-                            message.extendee = reader.string();
-                            break;
-                        case 7:
-                            message.defaultValue = reader.string();
-                            break;
-                        case 9:
-                            message.oneofIndex = reader.int32();
-                            break;
-                        case 10:
-                            message.jsonName = reader.string();
-                            break;
-                        case 8:
-                            message.options = $root.google.protobuf.FieldOptions.decode(reader, reader.uint32());
-                            break;
-                        case 17:
-                            message.proto3Optional = reader.bool();
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 3: {
+                                message.number = reader.int32();
+                                break;
+                            }
+                        case 4: {
+                                message.label = reader.int32();
+                                break;
+                            }
+                        case 5: {
+                                message.type = reader.int32();
+                                break;
+                            }
+                        case 6: {
+                                message.typeName = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.extendee = reader.string();
+                                break;
+                            }
+                        case 7: {
+                                message.defaultValue = reader.string();
+                                break;
+                            }
+                        case 9: {
+                                message.oneofIndex = reader.int32();
+                                break;
+                            }
+                        case 10: {
+                                message.jsonName = reader.string();
+                                break;
+                            }
+                        case 8: {
+                                message.options = $root.google.protobuf.FieldOptions.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 17: {
+                                message.proto3Optional = reader.bool();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -23361,6 +24223,21 @@
                 };
     
                 /**
+                 * Gets the default type url for FieldDescriptorProto
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.FieldDescriptorProto
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FieldDescriptorProto.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.FieldDescriptorProto";
+                };
+    
+                /**
                  * Type enum.
                  * @name google.protobuf.FieldDescriptorProto.Type
                  * @enum {number}
@@ -23528,12 +24405,14 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 2:
-                            message.options = $root.google.protobuf.OneofOptions.decode(reader, reader.uint32());
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.options = $root.google.protobuf.OneofOptions.decode(reader, reader.uint32());
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -23635,6 +24514,21 @@
                  */
                 OneofDescriptorProto.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for OneofDescriptorProto
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.OneofDescriptorProto
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                OneofDescriptorProto.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.OneofDescriptorProto";
                 };
     
                 return OneofDescriptorProto;
@@ -23782,27 +24676,32 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 2:
-                            if (!(message.value && message.value.length))
-                                message.value = [];
-                            message.value.push($root.google.protobuf.EnumValueDescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 3:
-                            message.options = $root.google.protobuf.EnumOptions.decode(reader, reader.uint32());
-                            break;
-                        case 4:
-                            if (!(message.reservedRange && message.reservedRange.length))
-                                message.reservedRange = [];
-                            message.reservedRange.push($root.google.protobuf.EnumDescriptorProto.EnumReservedRange.decode(reader, reader.uint32()));
-                            break;
-                        case 5:
-                            if (!(message.reservedName && message.reservedName.length))
-                                message.reservedName = [];
-                            message.reservedName.push(reader.string());
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                if (!(message.value && message.value.length))
+                                    message.value = [];
+                                message.value.push($root.google.protobuf.EnumValueDescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 3: {
+                                message.options = $root.google.protobuf.EnumOptions.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 4: {
+                                if (!(message.reservedRange && message.reservedRange.length))
+                                    message.reservedRange = [];
+                                message.reservedRange.push($root.google.protobuf.EnumDescriptorProto.EnumReservedRange.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 5: {
+                                if (!(message.reservedName && message.reservedName.length))
+                                    message.reservedName = [];
+                                message.reservedName.push(reader.string());
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -23978,6 +24877,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for EnumDescriptorProto
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.EnumDescriptorProto
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                EnumDescriptorProto.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.EnumDescriptorProto";
+                };
+    
                 EnumDescriptorProto.EnumReservedRange = (function() {
     
                     /**
@@ -24081,12 +24995,14 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.start = reader.int32();
-                                break;
-                            case 2:
-                                message.end = reader.int32();
-                                break;
+                            case 1: {
+                                    message.start = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    message.end = reader.int32();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -24183,6 +25099,21 @@
                      */
                     EnumReservedRange.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for EnumReservedRange
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.EnumDescriptorProto.EnumReservedRange
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    EnumReservedRange.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.EnumDescriptorProto.EnumReservedRange";
                     };
     
                     return EnumReservedRange;
@@ -24305,15 +25236,18 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 2:
-                            message.number = reader.int32();
-                            break;
-                        case 3:
-                            message.options = $root.google.protobuf.EnumValueOptions.decode(reader, reader.uint32());
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.number = reader.int32();
+                                break;
+                            }
+                        case 3: {
+                                message.options = $root.google.protobuf.EnumValueOptions.decode(reader, reader.uint32());
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -24423,6 +25357,21 @@
                  */
                 EnumValueDescriptorProto.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for EnumValueDescriptorProto
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.EnumValueDescriptorProto
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                EnumValueDescriptorProto.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.EnumValueDescriptorProto";
                 };
     
                 return EnumValueDescriptorProto;
@@ -24544,17 +25493,20 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 2:
-                            if (!(message.method && message.method.length))
-                                message.method = [];
-                            message.method.push($root.google.protobuf.MethodDescriptorProto.decode(reader, reader.uint32()));
-                            break;
-                        case 3:
-                            message.options = $root.google.protobuf.ServiceOptions.decode(reader, reader.uint32());
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                if (!(message.method && message.method.length))
+                                    message.method = [];
+                                message.method.push($root.google.protobuf.MethodDescriptorProto.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 3: {
+                                message.options = $root.google.protobuf.ServiceOptions.decode(reader, reader.uint32());
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -24682,6 +25634,21 @@
                  */
                 ServiceDescriptorProto.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for ServiceDescriptorProto
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.ServiceDescriptorProto
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ServiceDescriptorProto.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.ServiceDescriptorProto";
                 };
     
                 return ServiceDescriptorProto;
@@ -24834,24 +25801,30 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 2:
-                            message.inputType = reader.string();
-                            break;
-                        case 3:
-                            message.outputType = reader.string();
-                            break;
-                        case 4:
-                            message.options = $root.google.protobuf.MethodOptions.decode(reader, reader.uint32());
-                            break;
-                        case 5:
-                            message.clientStreaming = reader.bool();
-                            break;
-                        case 6:
-                            message.serverStreaming = reader.bool();
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.inputType = reader.string();
+                                break;
+                            }
+                        case 3: {
+                                message.outputType = reader.string();
+                                break;
+                            }
+                        case 4: {
+                                message.options = $root.google.protobuf.MethodOptions.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 5: {
+                                message.clientStreaming = reader.bool();
+                                break;
+                            }
+                        case 6: {
+                                message.serverStreaming = reader.bool();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -24987,6 +25960,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for MethodDescriptorProto
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.MethodDescriptorProto
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                MethodDescriptorProto.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.MethodDescriptorProto";
+                };
+    
                 return MethodDescriptorProto;
             })();
     
@@ -25017,7 +26005,6 @@
                  * @property {string|null} [phpMetadataNamespace] FileOptions phpMetadataNamespace
                  * @property {string|null} [rubyPackage] FileOptions rubyPackage
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FileOptions uninterpretedOption
-                 * @property {Array.<google.api.IResourceDescriptor>|null} [".google.api.resourceDefinition"] FileOptions .google.api.resourceDefinition
                  */
     
                 /**
@@ -25030,7 +26017,6 @@
                  */
                 function FileOptions(properties) {
                     this.uninterpretedOption = [];
-                    this[".google.api.resourceDefinition"] = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -25206,14 +26192,6 @@
                 FileOptions.prototype.uninterpretedOption = $util.emptyArray;
     
                 /**
-                 * FileOptions .google.api.resourceDefinition.
-                 * @member {Array.<google.api.IResourceDescriptor>} .google.api.resourceDefinition
-                 * @memberof google.protobuf.FileOptions
-                 * @instance
-                 */
-                FileOptions.prototype[".google.api.resourceDefinition"] = $util.emptyArray;
-    
-                /**
                  * Creates a new FileOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.FileOptions
@@ -25280,9 +26258,6 @@
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
-                    if (message[".google.api.resourceDefinition"] != null && message[".google.api.resourceDefinition"].length)
-                        for (var i = 0; i < message[".google.api.resourceDefinition"].length; ++i)
-                            $root.google.api.ResourceDescriptor.encode(message[".google.api.resourceDefinition"][i], writer.uint32(/* id 1053, wireType 2 =*/8426).fork()).ldelim();
                     return writer;
                 };
     
@@ -25317,76 +26292,92 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.javaPackage = reader.string();
-                            break;
-                        case 8:
-                            message.javaOuterClassname = reader.string();
-                            break;
-                        case 10:
-                            message.javaMultipleFiles = reader.bool();
-                            break;
-                        case 20:
-                            message.javaGenerateEqualsAndHash = reader.bool();
-                            break;
-                        case 27:
-                            message.javaStringCheckUtf8 = reader.bool();
-                            break;
-                        case 9:
-                            message.optimizeFor = reader.int32();
-                            break;
-                        case 11:
-                            message.goPackage = reader.string();
-                            break;
-                        case 16:
-                            message.ccGenericServices = reader.bool();
-                            break;
-                        case 17:
-                            message.javaGenericServices = reader.bool();
-                            break;
-                        case 18:
-                            message.pyGenericServices = reader.bool();
-                            break;
-                        case 42:
-                            message.phpGenericServices = reader.bool();
-                            break;
-                        case 23:
-                            message.deprecated = reader.bool();
-                            break;
-                        case 31:
-                            message.ccEnableArenas = reader.bool();
-                            break;
-                        case 36:
-                            message.objcClassPrefix = reader.string();
-                            break;
-                        case 37:
-                            message.csharpNamespace = reader.string();
-                            break;
-                        case 39:
-                            message.swiftPrefix = reader.string();
-                            break;
-                        case 40:
-                            message.phpClassPrefix = reader.string();
-                            break;
-                        case 41:
-                            message.phpNamespace = reader.string();
-                            break;
-                        case 44:
-                            message.phpMetadataNamespace = reader.string();
-                            break;
-                        case 45:
-                            message.rubyPackage = reader.string();
-                            break;
-                        case 999:
-                            if (!(message.uninterpretedOption && message.uninterpretedOption.length))
-                                message.uninterpretedOption = [];
-                            message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
-                            break;
-                        case 1053:
-                            if (!(message[".google.api.resourceDefinition"] && message[".google.api.resourceDefinition"].length))
-                                message[".google.api.resourceDefinition"] = [];
-                            message[".google.api.resourceDefinition"].push($root.google.api.ResourceDescriptor.decode(reader, reader.uint32()));
-                            break;
+                        case 1: {
+                                message.javaPackage = reader.string();
+                                break;
+                            }
+                        case 8: {
+                                message.javaOuterClassname = reader.string();
+                                break;
+                            }
+                        case 10: {
+                                message.javaMultipleFiles = reader.bool();
+                                break;
+                            }
+                        case 20: {
+                                message.javaGenerateEqualsAndHash = reader.bool();
+                                break;
+                            }
+                        case 27: {
+                                message.javaStringCheckUtf8 = reader.bool();
+                                break;
+                            }
+                        case 9: {
+                                message.optimizeFor = reader.int32();
+                                break;
+                            }
+                        case 11: {
+                                message.goPackage = reader.string();
+                                break;
+                            }
+                        case 16: {
+                                message.ccGenericServices = reader.bool();
+                                break;
+                            }
+                        case 17: {
+                                message.javaGenericServices = reader.bool();
+                                break;
+                            }
+                        case 18: {
+                                message.pyGenericServices = reader.bool();
+                                break;
+                            }
+                        case 42: {
+                                message.phpGenericServices = reader.bool();
+                                break;
+                            }
+                        case 23: {
+                                message.deprecated = reader.bool();
+                                break;
+                            }
+                        case 31: {
+                                message.ccEnableArenas = reader.bool();
+                                break;
+                            }
+                        case 36: {
+                                message.objcClassPrefix = reader.string();
+                                break;
+                            }
+                        case 37: {
+                                message.csharpNamespace = reader.string();
+                                break;
+                            }
+                        case 39: {
+                                message.swiftPrefix = reader.string();
+                                break;
+                            }
+                        case 40: {
+                                message.phpClassPrefix = reader.string();
+                                break;
+                            }
+                        case 41: {
+                                message.phpNamespace = reader.string();
+                                break;
+                            }
+                        case 44: {
+                                message.phpMetadataNamespace = reader.string();
+                                break;
+                            }
+                        case 45: {
+                                message.rubyPackage = reader.string();
+                                break;
+                            }
+                        case 999: {
+                                if (!(message.uninterpretedOption && message.uninterpretedOption.length))
+                                    message.uninterpretedOption = [];
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -25497,15 +26488,6 @@
                                 return "uninterpretedOption." + error;
                         }
                     }
-                    if (message[".google.api.resourceDefinition"] != null && message.hasOwnProperty(".google.api.resourceDefinition")) {
-                        if (!Array.isArray(message[".google.api.resourceDefinition"]))
-                            return ".google.api.resourceDefinition: array expected";
-                        for (var i = 0; i < message[".google.api.resourceDefinition"].length; ++i) {
-                            var error = $root.google.api.ResourceDescriptor.verify(message[".google.api.resourceDefinition"][i]);
-                            if (error)
-                                return ".google.api.resourceDefinition." + error;
-                        }
-                    }
                     return null;
                 };
     
@@ -25583,16 +26565,6 @@
                             message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
                         }
                     }
-                    if (object[".google.api.resourceDefinition"]) {
-                        if (!Array.isArray(object[".google.api.resourceDefinition"]))
-                            throw TypeError(".google.protobuf.FileOptions..google.api.resourceDefinition: array expected");
-                        message[".google.api.resourceDefinition"] = [];
-                        for (var i = 0; i < object[".google.api.resourceDefinition"].length; ++i) {
-                            if (typeof object[".google.api.resourceDefinition"][i] !== "object")
-                                throw TypeError(".google.protobuf.FileOptions..google.api.resourceDefinition: object expected");
-                            message[".google.api.resourceDefinition"][i] = $root.google.api.ResourceDescriptor.fromObject(object[".google.api.resourceDefinition"][i]);
-                        }
-                    }
                     return message;
                 };
     
@@ -25609,10 +26581,8 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.arrays || options.defaults) {
+                    if (options.arrays || options.defaults)
                         object.uninterpretedOption = [];
-                        object[".google.api.resourceDefinition"] = [];
-                    }
                     if (options.defaults) {
                         object.javaPackage = "";
                         object.javaOuterClassname = "";
@@ -25680,11 +26650,6 @@
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
                             object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options);
                     }
-                    if (message[".google.api.resourceDefinition"] && message[".google.api.resourceDefinition"].length) {
-                        object[".google.api.resourceDefinition"] = [];
-                        for (var j = 0; j < message[".google.api.resourceDefinition"].length; ++j)
-                            object[".google.api.resourceDefinition"][j] = $root.google.api.ResourceDescriptor.toObject(message[".google.api.resourceDefinition"][j], options);
-                    }
                     return object;
                 };
     
@@ -25697,6 +26662,21 @@
                  */
                 FileOptions.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for FileOptions
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.FileOptions
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FileOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.FileOptions";
                 };
     
                 /**
@@ -25729,7 +26709,6 @@
                  * @property {boolean|null} [deprecated] MessageOptions deprecated
                  * @property {boolean|null} [mapEntry] MessageOptions mapEntry
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] MessageOptions uninterpretedOption
-                 * @property {google.api.IResourceDescriptor|null} [".google.api.resource"] MessageOptions .google.api.resource
                  */
     
                 /**
@@ -25789,14 +26768,6 @@
                 MessageOptions.prototype.uninterpretedOption = $util.emptyArray;
     
                 /**
-                 * MessageOptions .google.api.resource.
-                 * @member {google.api.IResourceDescriptor|null|undefined} .google.api.resource
-                 * @memberof google.protobuf.MessageOptions
-                 * @instance
-                 */
-                MessageOptions.prototype[".google.api.resource"] = null;
-    
-                /**
                  * Creates a new MessageOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.MessageOptions
@@ -25831,8 +26802,6 @@
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
-                    if (message[".google.api.resource"] != null && Object.hasOwnProperty.call(message, ".google.api.resource"))
-                        $root.google.api.ResourceDescriptor.encode(message[".google.api.resource"], writer.uint32(/* id 1053, wireType 2 =*/8426).fork()).ldelim();
                     return writer;
                 };
     
@@ -25867,26 +26836,28 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.messageSetWireFormat = reader.bool();
-                            break;
-                        case 2:
-                            message.noStandardDescriptorAccessor = reader.bool();
-                            break;
-                        case 3:
-                            message.deprecated = reader.bool();
-                            break;
-                        case 7:
-                            message.mapEntry = reader.bool();
-                            break;
-                        case 999:
-                            if (!(message.uninterpretedOption && message.uninterpretedOption.length))
-                                message.uninterpretedOption = [];
-                            message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
-                            break;
-                        case 1053:
-                            message[".google.api.resource"] = $root.google.api.ResourceDescriptor.decode(reader, reader.uint32());
-                            break;
+                        case 1: {
+                                message.messageSetWireFormat = reader.bool();
+                                break;
+                            }
+                        case 2: {
+                                message.noStandardDescriptorAccessor = reader.bool();
+                                break;
+                            }
+                        case 3: {
+                                message.deprecated = reader.bool();
+                                break;
+                            }
+                        case 7: {
+                                message.mapEntry = reader.bool();
+                                break;
+                            }
+                        case 999: {
+                                if (!(message.uninterpretedOption && message.uninterpretedOption.length))
+                                    message.uninterpretedOption = [];
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -25943,11 +26914,6 @@
                                 return "uninterpretedOption." + error;
                         }
                     }
-                    if (message[".google.api.resource"] != null && message.hasOwnProperty(".google.api.resource")) {
-                        var error = $root.google.api.ResourceDescriptor.verify(message[".google.api.resource"]);
-                        if (error)
-                            return ".google.api.resource." + error;
-                    }
                     return null;
                 };
     
@@ -25981,11 +26947,6 @@
                             message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
                         }
                     }
-                    if (object[".google.api.resource"] != null) {
-                        if (typeof object[".google.api.resource"] !== "object")
-                            throw TypeError(".google.protobuf.MessageOptions..google.api.resource: object expected");
-                        message[".google.api.resource"] = $root.google.api.ResourceDescriptor.fromObject(object[".google.api.resource"]);
-                    }
                     return message;
                 };
     
@@ -26009,7 +26970,6 @@
                         object.noStandardDescriptorAccessor = false;
                         object.deprecated = false;
                         object.mapEntry = false;
-                        object[".google.api.resource"] = null;
                     }
                     if (message.messageSetWireFormat != null && message.hasOwnProperty("messageSetWireFormat"))
                         object.messageSetWireFormat = message.messageSetWireFormat;
@@ -26024,8 +26984,6 @@
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
                             object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options);
                     }
-                    if (message[".google.api.resource"] != null && message.hasOwnProperty(".google.api.resource"))
-                        object[".google.api.resource"] = $root.google.api.ResourceDescriptor.toObject(message[".google.api.resource"], options);
                     return object;
                 };
     
@@ -26038,6 +26996,21 @@
                  */
                 MessageOptions.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for MessageOptions
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.MessageOptions
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                MessageOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.MessageOptions";
                 };
     
                 return MessageOptions;
@@ -26053,11 +27026,11 @@
                  * @property {boolean|null} [packed] FieldOptions packed
                  * @property {google.protobuf.FieldOptions.JSType|null} [jstype] FieldOptions jstype
                  * @property {boolean|null} [lazy] FieldOptions lazy
+                 * @property {boolean|null} [unverifiedLazy] FieldOptions unverifiedLazy
                  * @property {boolean|null} [deprecated] FieldOptions deprecated
                  * @property {boolean|null} [weak] FieldOptions weak
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
                  * @property {Array.<google.api.FieldBehavior>|null} [".google.api.fieldBehavior"] FieldOptions .google.api.fieldBehavior
-                 * @property {google.api.IResourceReference|null} [".google.api.resourceReference"] FieldOptions .google.api.resourceReference
                  */
     
                 /**
@@ -26110,6 +27083,14 @@
                 FieldOptions.prototype.lazy = false;
     
                 /**
+                 * FieldOptions unverifiedLazy.
+                 * @member {boolean} unverifiedLazy
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype.unverifiedLazy = false;
+    
+                /**
                  * FieldOptions deprecated.
                  * @member {boolean} deprecated
                  * @memberof google.protobuf.FieldOptions
@@ -26140,14 +27121,6 @@
                  * @instance
                  */
                 FieldOptions.prototype[".google.api.fieldBehavior"] = $util.emptyArray;
-    
-                /**
-                 * FieldOptions .google.api.resourceReference.
-                 * @member {google.api.IResourceReference|null|undefined} .google.api.resourceReference
-                 * @memberof google.protobuf.FieldOptions
-                 * @instance
-                 */
-                FieldOptions.prototype[".google.api.resourceReference"] = null;
     
                 /**
                  * Creates a new FieldOptions instance using the specified properties.
@@ -26185,6 +27158,8 @@
                         writer.uint32(/* id 6, wireType 0 =*/48).int32(message.jstype);
                     if (message.weak != null && Object.hasOwnProperty.call(message, "weak"))
                         writer.uint32(/* id 10, wireType 0 =*/80).bool(message.weak);
+                    if (message.unverifiedLazy != null && Object.hasOwnProperty.call(message, "unverifiedLazy"))
+                        writer.uint32(/* id 15, wireType 0 =*/120).bool(message.unverifiedLazy);
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -26194,8 +27169,6 @@
                             writer.int32(message[".google.api.fieldBehavior"][i]);
                         writer.ldelim();
                     }
-                    if (message[".google.api.resourceReference"] != null && Object.hasOwnProperty.call(message, ".google.api.resourceReference"))
-                        $root.google.api.ResourceReference.encode(message[".google.api.resourceReference"], writer.uint32(/* id 1055, wireType 2 =*/8442).fork()).ldelim();
                     return writer;
                 };
     
@@ -26230,42 +27203,51 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.ctype = reader.int32();
-                            break;
-                        case 2:
-                            message.packed = reader.bool();
-                            break;
-                        case 6:
-                            message.jstype = reader.int32();
-                            break;
-                        case 5:
-                            message.lazy = reader.bool();
-                            break;
-                        case 3:
-                            message.deprecated = reader.bool();
-                            break;
-                        case 10:
-                            message.weak = reader.bool();
-                            break;
-                        case 999:
-                            if (!(message.uninterpretedOption && message.uninterpretedOption.length))
-                                message.uninterpretedOption = [];
-                            message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
-                            break;
-                        case 1052:
-                            if (!(message[".google.api.fieldBehavior"] && message[".google.api.fieldBehavior"].length))
-                                message[".google.api.fieldBehavior"] = [];
-                            if ((tag & 7) === 2) {
-                                var end2 = reader.uint32() + reader.pos;
-                                while (reader.pos < end2)
+                        case 1: {
+                                message.ctype = reader.int32();
+                                break;
+                            }
+                        case 2: {
+                                message.packed = reader.bool();
+                                break;
+                            }
+                        case 6: {
+                                message.jstype = reader.int32();
+                                break;
+                            }
+                        case 5: {
+                                message.lazy = reader.bool();
+                                break;
+                            }
+                        case 15: {
+                                message.unverifiedLazy = reader.bool();
+                                break;
+                            }
+                        case 3: {
+                                message.deprecated = reader.bool();
+                                break;
+                            }
+                        case 10: {
+                                message.weak = reader.bool();
+                                break;
+                            }
+                        case 999: {
+                                if (!(message.uninterpretedOption && message.uninterpretedOption.length))
+                                    message.uninterpretedOption = [];
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 1052: {
+                                if (!(message[".google.api.fieldBehavior"] && message[".google.api.fieldBehavior"].length))
+                                    message[".google.api.fieldBehavior"] = [];
+                                if ((tag & 7) === 2) {
+                                    var end2 = reader.uint32() + reader.pos;
+                                    while (reader.pos < end2)
+                                        message[".google.api.fieldBehavior"].push(reader.int32());
+                                } else
                                     message[".google.api.fieldBehavior"].push(reader.int32());
-                            } else
-                                message[".google.api.fieldBehavior"].push(reader.int32());
-                            break;
-                        case 1055:
-                            message[".google.api.resourceReference"] = $root.google.api.ResourceReference.decode(reader, reader.uint32());
-                            break;
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -26325,6 +27307,9 @@
                     if (message.lazy != null && message.hasOwnProperty("lazy"))
                         if (typeof message.lazy !== "boolean")
                             return "lazy: boolean expected";
+                    if (message.unverifiedLazy != null && message.hasOwnProperty("unverifiedLazy"))
+                        if (typeof message.unverifiedLazy !== "boolean")
+                            return "unverifiedLazy: boolean expected";
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         if (typeof message.deprecated !== "boolean")
                             return "deprecated: boolean expected";
@@ -26357,11 +27342,6 @@
                             case 7:
                                 break;
                             }
-                    }
-                    if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference")) {
-                        var error = $root.google.api.ResourceReference.verify(message[".google.api.resourceReference"]);
-                        if (error)
-                            return ".google.api.resourceReference." + error;
                     }
                     return null;
                 };
@@ -26410,6 +27390,8 @@
                     }
                     if (object.lazy != null)
                         message.lazy = Boolean(object.lazy);
+                    if (object.unverifiedLazy != null)
+                        message.unverifiedLazy = Boolean(object.unverifiedLazy);
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
                     if (object.weak != null)
@@ -26465,11 +27447,6 @@
                                 break;
                             }
                     }
-                    if (object[".google.api.resourceReference"] != null) {
-                        if (typeof object[".google.api.resourceReference"] !== "object")
-                            throw TypeError(".google.protobuf.FieldOptions..google.api.resourceReference: object expected");
-                        message[".google.api.resourceReference"] = $root.google.api.ResourceReference.fromObject(object[".google.api.resourceReference"]);
-                    }
                     return message;
                 };
     
@@ -26497,7 +27474,7 @@
                         object.lazy = false;
                         object.jstype = options.enums === String ? "JS_NORMAL" : 0;
                         object.weak = false;
-                        object[".google.api.resourceReference"] = null;
+                        object.unverifiedLazy = false;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
                         object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
@@ -26511,6 +27488,8 @@
                         object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
                     if (message.weak != null && message.hasOwnProperty("weak"))
                         object.weak = message.weak;
+                    if (message.unverifiedLazy != null && message.hasOwnProperty("unverifiedLazy"))
+                        object.unverifiedLazy = message.unverifiedLazy;
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -26521,8 +27500,6 @@
                         for (var j = 0; j < message[".google.api.fieldBehavior"].length; ++j)
                             object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
                     }
-                    if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference"))
-                        object[".google.api.resourceReference"] = $root.google.api.ResourceReference.toObject(message[".google.api.resourceReference"], options);
                     return object;
                 };
     
@@ -26535,6 +27512,21 @@
                  */
                 FieldOptions.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for FieldOptions
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.FieldOptions
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FieldOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.FieldOptions";
                 };
     
                 /**
@@ -26666,11 +27658,12 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 999:
-                            if (!(message.uninterpretedOption && message.uninterpretedOption.length))
-                                message.uninterpretedOption = [];
-                            message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
-                            break;
+                        case 999: {
+                                if (!(message.uninterpretedOption && message.uninterpretedOption.length))
+                                    message.uninterpretedOption = [];
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -26775,6 +27768,21 @@
                  */
                 OneofOptions.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for OneofOptions
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.OneofOptions
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                OneofOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.OneofOptions";
                 };
     
                 return OneofOptions;
@@ -26896,17 +27904,20 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 2:
-                            message.allowAlias = reader.bool();
-                            break;
-                        case 3:
-                            message.deprecated = reader.bool();
-                            break;
-                        case 999:
-                            if (!(message.uninterpretedOption && message.uninterpretedOption.length))
-                                message.uninterpretedOption = [];
-                            message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
-                            break;
+                        case 2: {
+                                message.allowAlias = reader.bool();
+                                break;
+                            }
+                        case 3: {
+                                message.deprecated = reader.bool();
+                                break;
+                            }
+                        case 999: {
+                                if (!(message.uninterpretedOption && message.uninterpretedOption.length))
+                                    message.uninterpretedOption = [];
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -27031,6 +28042,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for EnumOptions
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.EnumOptions
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                EnumOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.EnumOptions";
+                };
+    
                 return EnumOptions;
             })();
     
@@ -27139,14 +28165,16 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.deprecated = reader.bool();
-                            break;
-                        case 999:
-                            if (!(message.uninterpretedOption && message.uninterpretedOption.length))
-                                message.uninterpretedOption = [];
-                            message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
-                            break;
+                        case 1: {
+                                message.deprecated = reader.bool();
+                                break;
+                            }
+                        case 999: {
+                                if (!(message.uninterpretedOption && message.uninterpretedOption.length))
+                                    message.uninterpretedOption = [];
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -27260,6 +28288,21 @@
                  */
                 EnumValueOptions.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for EnumValueOptions
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.EnumValueOptions
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                EnumValueOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.EnumValueOptions";
                 };
     
                 return EnumValueOptions;
@@ -27392,20 +28435,24 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 33:
-                            message.deprecated = reader.bool();
-                            break;
-                        case 999:
-                            if (!(message.uninterpretedOption && message.uninterpretedOption.length))
-                                message.uninterpretedOption = [];
-                            message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
-                            break;
-                        case 1049:
-                            message[".google.api.defaultHost"] = reader.string();
-                            break;
-                        case 1050:
-                            message[".google.api.oauthScopes"] = reader.string();
-                            break;
+                        case 33: {
+                                message.deprecated = reader.bool();
+                                break;
+                            }
+                        case 999: {
+                                if (!(message.uninterpretedOption && message.uninterpretedOption.length))
+                                    message.uninterpretedOption = [];
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 1049: {
+                                message[".google.api.defaultHost"] = reader.string();
+                                break;
+                            }
+                        case 1050: {
+                                message[".google.api.oauthScopes"] = reader.string();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -27536,6 +28583,21 @@
                  */
                 ServiceOptions.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for ServiceOptions
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.ServiceOptions
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ServiceOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.ServiceOptions";
                 };
     
                 return ServiceOptions;
@@ -27692,28 +28754,34 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 33:
-                            message.deprecated = reader.bool();
-                            break;
-                        case 34:
-                            message.idempotencyLevel = reader.int32();
-                            break;
-                        case 999:
-                            if (!(message.uninterpretedOption && message.uninterpretedOption.length))
-                                message.uninterpretedOption = [];
-                            message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
-                            break;
-                        case 72295728:
-                            message[".google.api.http"] = $root.google.api.HttpRule.decode(reader, reader.uint32());
-                            break;
-                        case 1051:
-                            if (!(message[".google.api.methodSignature"] && message[".google.api.methodSignature"].length))
-                                message[".google.api.methodSignature"] = [];
-                            message[".google.api.methodSignature"].push(reader.string());
-                            break;
-                        case 1049:
-                            message[".google.longrunning.operationInfo"] = $root.google.longrunning.OperationInfo.decode(reader, reader.uint32());
-                            break;
+                        case 33: {
+                                message.deprecated = reader.bool();
+                                break;
+                            }
+                        case 34: {
+                                message.idempotencyLevel = reader.int32();
+                                break;
+                            }
+                        case 999: {
+                                if (!(message.uninterpretedOption && message.uninterpretedOption.length))
+                                    message.uninterpretedOption = [];
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 72295728: {
+                                message[".google.api.http"] = $root.google.api.HttpRule.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 1051: {
+                                if (!(message[".google.api.methodSignature"] && message[".google.api.methodSignature"].length))
+                                    message[".google.api.methodSignature"] = [];
+                                message[".google.api.methodSignature"].push(reader.string());
+                                break;
+                            }
+                        case 1049: {
+                                message[".google.longrunning.operationInfo"] = $root.google.longrunning.OperationInfo.decode(reader, reader.uint32());
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -27904,6 +28972,21 @@
                 };
     
                 /**
+                 * Gets the default type url for MethodOptions
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.MethodOptions
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                MethodOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.MethodOptions";
+                };
+    
+                /**
                  * IdempotencyLevel enum.
                  * @name google.protobuf.MethodOptions.IdempotencyLevel
                  * @enum {number}
@@ -28082,29 +29165,36 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 2:
-                            if (!(message.name && message.name.length))
-                                message.name = [];
-                            message.name.push($root.google.protobuf.UninterpretedOption.NamePart.decode(reader, reader.uint32()));
-                            break;
-                        case 3:
-                            message.identifierValue = reader.string();
-                            break;
-                        case 4:
-                            message.positiveIntValue = reader.uint64();
-                            break;
-                        case 5:
-                            message.negativeIntValue = reader.int64();
-                            break;
-                        case 6:
-                            message.doubleValue = reader.double();
-                            break;
-                        case 7:
-                            message.stringValue = reader.bytes();
-                            break;
-                        case 8:
-                            message.aggregateValue = reader.string();
-                            break;
+                        case 2: {
+                                if (!(message.name && message.name.length))
+                                    message.name = [];
+                                message.name.push($root.google.protobuf.UninterpretedOption.NamePart.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 3: {
+                                message.identifierValue = reader.string();
+                                break;
+                            }
+                        case 4: {
+                                message.positiveIntValue = reader.uint64();
+                                break;
+                            }
+                        case 5: {
+                                message.negativeIntValue = reader.int64();
+                                break;
+                            }
+                        case 6: {
+                                message.doubleValue = reader.double();
+                                break;
+                            }
+                        case 7: {
+                                message.stringValue = reader.bytes();
+                                break;
+                            }
+                        case 8: {
+                                message.aggregateValue = reader.string();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -28217,7 +29307,7 @@
                     if (object.stringValue != null)
                         if (typeof object.stringValue === "string")
                             $util.base64.decode(object.stringValue, message.stringValue = $util.newBuffer($util.base64.length(object.stringValue)), 0);
-                        else if (object.stringValue.length)
+                        else if (object.stringValue.length >= 0)
                             message.stringValue = object.stringValue;
                     if (object.aggregateValue != null)
                         message.aggregateValue = String(object.aggregateValue);
@@ -28296,6 +29386,21 @@
                  */
                 UninterpretedOption.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for UninterpretedOption
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.UninterpretedOption
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                UninterpretedOption.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.UninterpretedOption";
                 };
     
                 UninterpretedOption.NamePart = (function() {
@@ -28399,12 +29504,14 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                message.namePart = reader.string();
-                                break;
-                            case 2:
-                                message.isExtension = reader.bool();
-                                break;
+                            case 1: {
+                                    message.namePart = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.isExtension = reader.bool();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -28503,6 +29610,21 @@
                      */
                     NamePart.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for NamePart
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.UninterpretedOption.NamePart
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    NamePart.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.UninterpretedOption.NamePart";
                     };
     
                     return NamePart;
@@ -28605,11 +29727,12 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            if (!(message.location && message.location.length))
-                                message.location = [];
-                            message.location.push($root.google.protobuf.SourceCodeInfo.Location.decode(reader, reader.uint32()));
-                            break;
+                        case 1: {
+                                if (!(message.location && message.location.length))
+                                    message.location = [];
+                                message.location.push($root.google.protobuf.SourceCodeInfo.Location.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -28714,6 +29837,21 @@
                  */
                 SourceCodeInfo.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for SourceCodeInfo
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.SourceCodeInfo
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                SourceCodeInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.SourceCodeInfo";
                 };
     
                 SourceCodeInfo.Location = (function() {
@@ -28864,37 +30002,42 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                if (!(message.path && message.path.length))
-                                    message.path = [];
-                                if ((tag & 7) === 2) {
-                                    var end2 = reader.uint32() + reader.pos;
-                                    while (reader.pos < end2)
+                            case 1: {
+                                    if (!(message.path && message.path.length))
+                                        message.path = [];
+                                    if ((tag & 7) === 2) {
+                                        var end2 = reader.uint32() + reader.pos;
+                                        while (reader.pos < end2)
+                                            message.path.push(reader.int32());
+                                    } else
                                         message.path.push(reader.int32());
-                                } else
-                                    message.path.push(reader.int32());
-                                break;
-                            case 2:
-                                if (!(message.span && message.span.length))
-                                    message.span = [];
-                                if ((tag & 7) === 2) {
-                                    var end2 = reader.uint32() + reader.pos;
-                                    while (reader.pos < end2)
+                                    break;
+                                }
+                            case 2: {
+                                    if (!(message.span && message.span.length))
+                                        message.span = [];
+                                    if ((tag & 7) === 2) {
+                                        var end2 = reader.uint32() + reader.pos;
+                                        while (reader.pos < end2)
+                                            message.span.push(reader.int32());
+                                    } else
                                         message.span.push(reader.int32());
-                                } else
-                                    message.span.push(reader.int32());
-                                break;
-                            case 3:
-                                message.leadingComments = reader.string();
-                                break;
-                            case 4:
-                                message.trailingComments = reader.string();
-                                break;
-                            case 6:
-                                if (!(message.leadingDetachedComments && message.leadingDetachedComments.length))
-                                    message.leadingDetachedComments = [];
-                                message.leadingDetachedComments.push(reader.string());
-                                break;
+                                    break;
+                                }
+                            case 3: {
+                                    message.leadingComments = reader.string();
+                                    break;
+                                }
+                            case 4: {
+                                    message.trailingComments = reader.string();
+                                    break;
+                                }
+                            case 6: {
+                                    if (!(message.leadingDetachedComments && message.leadingDetachedComments.length))
+                                        message.leadingDetachedComments = [];
+                                    message.leadingDetachedComments.push(reader.string());
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -29055,6 +30198,21 @@
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
+                    /**
+                     * Gets the default type url for Location
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.SourceCodeInfo.Location
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    Location.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.SourceCodeInfo.Location";
+                    };
+    
                     return Location;
                 })();
     
@@ -29155,11 +30313,12 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            if (!(message.annotation && message.annotation.length))
-                                message.annotation = [];
-                            message.annotation.push($root.google.protobuf.GeneratedCodeInfo.Annotation.decode(reader, reader.uint32()));
-                            break;
+                        case 1: {
+                                if (!(message.annotation && message.annotation.length))
+                                    message.annotation = [];
+                                message.annotation.push($root.google.protobuf.GeneratedCodeInfo.Annotation.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -29266,6 +30425,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for GeneratedCodeInfo
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.GeneratedCodeInfo
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                GeneratedCodeInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.GeneratedCodeInfo";
+                };
+    
                 GeneratedCodeInfo.Annotation = (function() {
     
                     /**
@@ -29276,6 +30450,7 @@
                      * @property {string|null} [sourceFile] Annotation sourceFile
                      * @property {number|null} [begin] Annotation begin
                      * @property {number|null} [end] Annotation end
+                     * @property {google.protobuf.GeneratedCodeInfo.Annotation.Semantic|null} [semantic] Annotation semantic
                      */
     
                     /**
@@ -29327,6 +30502,14 @@
                     Annotation.prototype.end = 0;
     
                     /**
+                     * Annotation semantic.
+                     * @member {google.protobuf.GeneratedCodeInfo.Annotation.Semantic} semantic
+                     * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                     * @instance
+                     */
+                    Annotation.prototype.semantic = 0;
+    
+                    /**
                      * Creates a new Annotation instance using the specified properties.
                      * @function create
                      * @memberof google.protobuf.GeneratedCodeInfo.Annotation
@@ -29362,6 +30545,8 @@
                             writer.uint32(/* id 3, wireType 0 =*/24).int32(message.begin);
                         if (message.end != null && Object.hasOwnProperty.call(message, "end"))
                             writer.uint32(/* id 4, wireType 0 =*/32).int32(message.end);
+                        if (message.semantic != null && Object.hasOwnProperty.call(message, "semantic"))
+                            writer.uint32(/* id 5, wireType 0 =*/40).int32(message.semantic);
                         return writer;
                     };
     
@@ -29396,25 +30581,33 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
-                            case 1:
-                                if (!(message.path && message.path.length))
-                                    message.path = [];
-                                if ((tag & 7) === 2) {
-                                    var end2 = reader.uint32() + reader.pos;
-                                    while (reader.pos < end2)
+                            case 1: {
+                                    if (!(message.path && message.path.length))
+                                        message.path = [];
+                                    if ((tag & 7) === 2) {
+                                        var end2 = reader.uint32() + reader.pos;
+                                        while (reader.pos < end2)
+                                            message.path.push(reader.int32());
+                                    } else
                                         message.path.push(reader.int32());
-                                } else
-                                    message.path.push(reader.int32());
-                                break;
-                            case 2:
-                                message.sourceFile = reader.string();
-                                break;
-                            case 3:
-                                message.begin = reader.int32();
-                                break;
-                            case 4:
-                                message.end = reader.int32();
-                                break;
+                                    break;
+                                }
+                            case 2: {
+                                    message.sourceFile = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.begin = reader.int32();
+                                    break;
+                                }
+                            case 4: {
+                                    message.end = reader.int32();
+                                    break;
+                                }
+                            case 5: {
+                                    message.semantic = reader.int32();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -29466,6 +30659,15 @@
                         if (message.end != null && message.hasOwnProperty("end"))
                             if (!$util.isInteger(message.end))
                                 return "end: integer expected";
+                        if (message.semantic != null && message.hasOwnProperty("semantic"))
+                            switch (message.semantic) {
+                            default:
+                                return "semantic: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            }
                         return null;
                     };
     
@@ -29494,6 +30696,20 @@
                             message.begin = object.begin | 0;
                         if (object.end != null)
                             message.end = object.end | 0;
+                        switch (object.semantic) {
+                        case "NONE":
+                        case 0:
+                            message.semantic = 0;
+                            break;
+                        case "SET":
+                        case 1:
+                            message.semantic = 1;
+                            break;
+                        case "ALIAS":
+                        case 2:
+                            message.semantic = 2;
+                            break;
+                        }
                         return message;
                     };
     
@@ -29516,6 +30732,7 @@
                             object.sourceFile = "";
                             object.begin = 0;
                             object.end = 0;
+                            object.semantic = options.enums === String ? "NONE" : 0;
                         }
                         if (message.path && message.path.length) {
                             object.path = [];
@@ -29528,6 +30745,8 @@
                             object.begin = message.begin;
                         if (message.end != null && message.hasOwnProperty("end"))
                             object.end = message.end;
+                        if (message.semantic != null && message.hasOwnProperty("semantic"))
+                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
                         return object;
                     };
     
@@ -29541,6 +30760,37 @@
                     Annotation.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
+    
+                    /**
+                     * Gets the default type url for Annotation
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    Annotation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.GeneratedCodeInfo.Annotation";
+                    };
+    
+                    /**
+                     * Semantic enum.
+                     * @name google.protobuf.GeneratedCodeInfo.Annotation.Semantic
+                     * @enum {number}
+                     * @property {number} NONE=0 NONE value
+                     * @property {number} SET=1 SET value
+                     * @property {number} ALIAS=2 ALIAS value
+                     */
+                    Annotation.Semantic = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "NONE"] = 0;
+                        values[valuesById[1] = "SET"] = 1;
+                        values[valuesById[2] = "ALIAS"] = 2;
+                        return values;
+                    })();
     
                     return Annotation;
                 })();
@@ -29651,12 +30901,14 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.seconds = reader.int64();
-                            break;
-                        case 2:
-                            message.nanos = reader.int32();
-                            break;
+                        case 1: {
+                                message.seconds = reader.int64();
+                                break;
+                            }
+                        case 2: {
+                                message.nanos = reader.int32();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -29769,6 +31021,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for Timestamp
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Timestamp.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Timestamp";
+                };
+    
                 return Timestamp;
             })();
     
@@ -29875,12 +31142,14 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.seconds = reader.int64();
-                            break;
-                        case 2:
-                            message.nanos = reader.int32();
-                            break;
+                        case 1: {
+                                message.seconds = reader.int64();
+                                break;
+                            }
+                        case 2: {
+                                message.nanos = reader.int32();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -29993,6 +31262,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for Duration
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Duration
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Duration.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Duration";
+                };
+    
                 return Duration;
             })();
     
@@ -30092,28 +31376,29 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            if (message.fields === $util.emptyObject)
-                                message.fields = {};
-                            var end2 = reader.uint32() + reader.pos;
-                            key = "";
-                            value = null;
-                            while (reader.pos < end2) {
-                                var tag2 = reader.uint32();
-                                switch (tag2 >>> 3) {
-                                case 1:
-                                    key = reader.string();
-                                    break;
-                                case 2:
-                                    value = $root.google.protobuf.Value.decode(reader, reader.uint32());
-                                    break;
-                                default:
-                                    reader.skipType(tag2 & 7);
-                                    break;
+                        case 1: {
+                                if (message.fields === $util.emptyObject)
+                                    message.fields = {};
+                                var end2 = reader.uint32() + reader.pos;
+                                key = "";
+                                value = null;
+                                while (reader.pos < end2) {
+                                    var tag2 = reader.uint32();
+                                    switch (tag2 >>> 3) {
+                                    case 1:
+                                        key = reader.string();
+                                        break;
+                                    case 2:
+                                        value = $root.google.protobuf.Value.decode(reader, reader.uint32());
+                                        break;
+                                    default:
+                                        reader.skipType(tag2 & 7);
+                                        break;
+                                    }
                                 }
+                                message.fields[key] = value;
+                                break;
                             }
-                            message.fields[key] = value;
-                            break;
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -30220,6 +31505,21 @@
                  */
                 Struct.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Struct
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Struct
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Struct.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Struct";
                 };
     
                 return Struct;
@@ -30386,24 +31686,30 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.nullValue = reader.int32();
-                            break;
-                        case 2:
-                            message.numberValue = reader.double();
-                            break;
-                        case 3:
-                            message.stringValue = reader.string();
-                            break;
-                        case 4:
-                            message.boolValue = reader.bool();
-                            break;
-                        case 5:
-                            message.structValue = $root.google.protobuf.Struct.decode(reader, reader.uint32());
-                            break;
-                        case 6:
-                            message.listValue = $root.google.protobuf.ListValue.decode(reader, reader.uint32());
-                            break;
+                        case 1: {
+                                message.nullValue = reader.int32();
+                                break;
+                            }
+                        case 2: {
+                                message.numberValue = reader.double();
+                                break;
+                            }
+                        case 3: {
+                                message.stringValue = reader.string();
+                                break;
+                            }
+                        case 4: {
+                                message.boolValue = reader.bool();
+                                break;
+                            }
+                        case 5: {
+                                message.structValue = $root.google.protobuf.Struct.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 6: {
+                                message.listValue = $root.google.protobuf.ListValue.decode(reader, reader.uint32());
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -30587,6 +31893,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for Value
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Value
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Value.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Value";
+                };
+    
                 return Value;
             })();
     
@@ -30696,11 +32017,12 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            if (!(message.values && message.values.length))
-                                message.values = [];
-                            message.values.push($root.google.protobuf.Value.decode(reader, reader.uint32()));
-                            break;
+                        case 1: {
+                                if (!(message.values && message.values.length))
+                                    message.values = [];
+                                message.values.push($root.google.protobuf.Value.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -30805,6 +32127,21 @@
                  */
                 ListValue.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for ListValue
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.ListValue
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ListValue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.ListValue";
                 };
     
                 return ListValue;
@@ -30913,12 +32250,14 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.type_url = reader.string();
-                            break;
-                        case 2:
-                            message.value = reader.bytes();
-                            break;
+                        case 1: {
+                                message.type_url = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.value = reader.bytes();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -30980,7 +32319,7 @@
                     if (object.value != null)
                         if (typeof object.value === "string")
                             $util.base64.decode(object.value, message.value = $util.newBuffer($util.base64.length(object.value)), 0);
-                        else if (object.value.length)
+                        else if (object.value.length >= 0)
                             message.value = object.value;
                     return message;
                 };
@@ -31024,6 +32363,21 @@
                  */
                 Any.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Any
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Any.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Any";
                 };
     
                 return Any;
@@ -31193,33 +32547,40 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 2:
-                            if (!(message.methods && message.methods.length))
-                                message.methods = [];
-                            message.methods.push($root.google.protobuf.Method.decode(reader, reader.uint32()));
-                            break;
-                        case 3:
-                            if (!(message.options && message.options.length))
-                                message.options = [];
-                            message.options.push($root.google.protobuf.Option.decode(reader, reader.uint32()));
-                            break;
-                        case 4:
-                            message.version = reader.string();
-                            break;
-                        case 5:
-                            message.sourceContext = $root.google.protobuf.SourceContext.decode(reader, reader.uint32());
-                            break;
-                        case 6:
-                            if (!(message.mixins && message.mixins.length))
-                                message.mixins = [];
-                            message.mixins.push($root.google.protobuf.Mixin.decode(reader, reader.uint32()));
-                            break;
-                        case 7:
-                            message.syntax = reader.int32();
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                if (!(message.methods && message.methods.length))
+                                    message.methods = [];
+                                message.methods.push($root.google.protobuf.Method.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 3: {
+                                if (!(message.options && message.options.length))
+                                    message.options = [];
+                                message.options.push($root.google.protobuf.Option.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 4: {
+                                message.version = reader.string();
+                                break;
+                            }
+                        case 5: {
+                                message.sourceContext = $root.google.protobuf.SourceContext.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 6: {
+                                if (!(message.mixins && message.mixins.length))
+                                    message.mixins = [];
+                                message.mixins.push($root.google.protobuf.Mixin.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 7: {
+                                message.syntax = reader.int32();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -31429,6 +32790,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for Api
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Api
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Api.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Api";
+                };
+    
                 return Api;
             })();
     
@@ -31592,29 +32968,36 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 2:
-                            message.requestTypeUrl = reader.string();
-                            break;
-                        case 3:
-                            message.requestStreaming = reader.bool();
-                            break;
-                        case 4:
-                            message.responseTypeUrl = reader.string();
-                            break;
-                        case 5:
-                            message.responseStreaming = reader.bool();
-                            break;
-                        case 6:
-                            if (!(message.options && message.options.length))
-                                message.options = [];
-                            message.options.push($root.google.protobuf.Option.decode(reader, reader.uint32()));
-                            break;
-                        case 7:
-                            message.syntax = reader.int32();
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.requestTypeUrl = reader.string();
+                                break;
+                            }
+                        case 3: {
+                                message.requestStreaming = reader.bool();
+                                break;
+                            }
+                        case 4: {
+                                message.responseTypeUrl = reader.string();
+                                break;
+                            }
+                        case 5: {
+                                message.responseStreaming = reader.bool();
+                                break;
+                            }
+                        case 6: {
+                                if (!(message.options && message.options.length))
+                                    message.options = [];
+                                message.options.push($root.google.protobuf.Option.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 7: {
+                                message.syntax = reader.int32();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -31784,6 +33167,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for Method
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Method
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Method.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Method";
+                };
+    
                 return Method;
             })();
     
@@ -31890,12 +33288,14 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 2:
-                            message.root = reader.string();
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.root = reader.string();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -31994,6 +33394,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for Mixin
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Mixin
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Mixin.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Mixin";
+                };
+    
                 return Mixin;
             })();
     
@@ -32089,9 +33504,10 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.fileName = reader.string();
-                            break;
+                        case 1: {
+                                message.fileName = reader.string();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -32179,6 +33595,21 @@
                  */
                 SourceContext.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for SourceContext
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.SourceContext
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                SourceContext.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.SourceContext";
                 };
     
                 return SourceContext;
@@ -32337,30 +33768,36 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 2:
-                            if (!(message.fields && message.fields.length))
-                                message.fields = [];
-                            message.fields.push($root.google.protobuf.Field.decode(reader, reader.uint32()));
-                            break;
-                        case 3:
-                            if (!(message.oneofs && message.oneofs.length))
-                                message.oneofs = [];
-                            message.oneofs.push(reader.string());
-                            break;
-                        case 4:
-                            if (!(message.options && message.options.length))
-                                message.options = [];
-                            message.options.push($root.google.protobuf.Option.decode(reader, reader.uint32()));
-                            break;
-                        case 5:
-                            message.sourceContext = $root.google.protobuf.SourceContext.decode(reader, reader.uint32());
-                            break;
-                        case 6:
-                            message.syntax = reader.int32();
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                if (!(message.fields && message.fields.length))
+                                    message.fields = [];
+                                message.fields.push($root.google.protobuf.Field.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 3: {
+                                if (!(message.oneofs && message.oneofs.length))
+                                    message.oneofs = [];
+                                message.oneofs.push(reader.string());
+                                break;
+                            }
+                        case 4: {
+                                if (!(message.options && message.options.length))
+                                    message.options = [];
+                                message.options.push($root.google.protobuf.Option.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 5: {
+                                message.sourceContext = $root.google.protobuf.SourceContext.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 6: {
+                                message.syntax = reader.int32();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -32555,6 +33992,21 @@
                  */
                 Type.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Type
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Type
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Type.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Type";
                 };
     
                 return Type;
@@ -32753,38 +34205,48 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.kind = reader.int32();
-                            break;
-                        case 2:
-                            message.cardinality = reader.int32();
-                            break;
-                        case 3:
-                            message.number = reader.int32();
-                            break;
-                        case 4:
-                            message.name = reader.string();
-                            break;
-                        case 6:
-                            message.typeUrl = reader.string();
-                            break;
-                        case 7:
-                            message.oneofIndex = reader.int32();
-                            break;
-                        case 8:
-                            message.packed = reader.bool();
-                            break;
-                        case 9:
-                            if (!(message.options && message.options.length))
-                                message.options = [];
-                            message.options.push($root.google.protobuf.Option.decode(reader, reader.uint32()));
-                            break;
-                        case 10:
-                            message.jsonName = reader.string();
-                            break;
-                        case 11:
-                            message.defaultValue = reader.string();
-                            break;
+                        case 1: {
+                                message.kind = reader.int32();
+                                break;
+                            }
+                        case 2: {
+                                message.cardinality = reader.int32();
+                                break;
+                            }
+                        case 3: {
+                                message.number = reader.int32();
+                                break;
+                            }
+                        case 4: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 6: {
+                                message.typeUrl = reader.string();
+                                break;
+                            }
+                        case 7: {
+                                message.oneofIndex = reader.int32();
+                                break;
+                            }
+                        case 8: {
+                                message.packed = reader.bool();
+                                break;
+                            }
+                        case 9: {
+                                if (!(message.options && message.options.length))
+                                    message.options = [];
+                                message.options.push($root.google.protobuf.Option.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 10: {
+                                message.jsonName = reader.string();
+                                break;
+                            }
+                        case 11: {
+                                message.defaultValue = reader.string();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -33087,6 +34549,21 @@
                 };
     
                 /**
+                 * Gets the default type url for Field
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Field
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Field.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Field";
+                };
+    
+                /**
                  * Kind enum.
                  * @name google.protobuf.Field.Kind
                  * @enum {number}
@@ -33295,25 +34772,30 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 2:
-                            if (!(message.enumvalue && message.enumvalue.length))
-                                message.enumvalue = [];
-                            message.enumvalue.push($root.google.protobuf.EnumValue.decode(reader, reader.uint32()));
-                            break;
-                        case 3:
-                            if (!(message.options && message.options.length))
-                                message.options = [];
-                            message.options.push($root.google.protobuf.Option.decode(reader, reader.uint32()));
-                            break;
-                        case 4:
-                            message.sourceContext = $root.google.protobuf.SourceContext.decode(reader, reader.uint32());
-                            break;
-                        case 5:
-                            message.syntax = reader.int32();
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                if (!(message.enumvalue && message.enumvalue.length))
+                                    message.enumvalue = [];
+                                message.enumvalue.push($root.google.protobuf.EnumValue.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 3: {
+                                if (!(message.options && message.options.length))
+                                    message.options = [];
+                                message.options.push($root.google.protobuf.Option.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 4: {
+                                message.sourceContext = $root.google.protobuf.SourceContext.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 5: {
+                                message.syntax = reader.int32();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -33490,6 +34972,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for Enum
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Enum
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Enum.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Enum";
+                };
+    
                 return Enum;
             })();
     
@@ -33609,17 +35106,20 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 2:
-                            message.number = reader.int32();
-                            break;
-                        case 3:
-                            if (!(message.options && message.options.length))
-                                message.options = [];
-                            message.options.push($root.google.protobuf.Option.decode(reader, reader.uint32()));
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.number = reader.int32();
+                                break;
+                            }
+                        case 3: {
+                                if (!(message.options && message.options.length))
+                                    message.options = [];
+                                message.options.push($root.google.protobuf.Option.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -33744,6 +35244,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for EnumValue
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.EnumValue
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                EnumValue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.EnumValue";
+                };
+    
                 return EnumValue;
             })();
     
@@ -33850,12 +35365,14 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 2:
-                            message.value = $root.google.protobuf.Any.decode(reader, reader.uint32());
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.value = $root.google.protobuf.Any.decode(reader, reader.uint32());
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -33957,6 +35474,21 @@
                  */
                 Option.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Option
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Option
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Option.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Option";
                 };
     
                 return Option;
@@ -34068,9 +35600,10 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.value = reader.double();
-                            break;
+                        case 1: {
+                                message.value = reader.double();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -34158,6 +35691,21 @@
                  */
                 DoubleValue.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for DoubleValue
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.DoubleValue
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                DoubleValue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.DoubleValue";
                 };
     
                 return DoubleValue;
@@ -34255,9 +35803,10 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.value = reader.float();
-                            break;
+                        case 1: {
+                                message.value = reader.float();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -34345,6 +35894,21 @@
                  */
                 FloatValue.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for FloatValue
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.FloatValue
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FloatValue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.FloatValue";
                 };
     
                 return FloatValue;
@@ -34442,9 +36006,10 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.value = reader.int64();
-                            break;
+                        case 1: {
+                                message.value = reader.int64();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -34548,6 +36113,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for Int64Value
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Int64Value
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Int64Value.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Int64Value";
+                };
+    
                 return Int64Value;
             })();
     
@@ -34643,9 +36223,10 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.value = reader.uint64();
-                            break;
+                        case 1: {
+                                message.value = reader.uint64();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -34749,6 +36330,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for UInt64Value
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.UInt64Value
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                UInt64Value.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.UInt64Value";
+                };
+    
                 return UInt64Value;
             })();
     
@@ -34844,9 +36440,10 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.value = reader.int32();
-                            break;
+                        case 1: {
+                                message.value = reader.int32();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -34934,6 +36531,21 @@
                  */
                 Int32Value.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Int32Value
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Int32Value
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Int32Value.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Int32Value";
                 };
     
                 return Int32Value;
@@ -35031,9 +36643,10 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.value = reader.uint32();
-                            break;
+                        case 1: {
+                                message.value = reader.uint32();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -35121,6 +36734,21 @@
                  */
                 UInt32Value.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for UInt32Value
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.UInt32Value
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                UInt32Value.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.UInt32Value";
                 };
     
                 return UInt32Value;
@@ -35218,9 +36846,10 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.value = reader.bool();
-                            break;
+                        case 1: {
+                                message.value = reader.bool();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -35308,6 +36937,21 @@
                  */
                 BoolValue.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for BoolValue
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.BoolValue
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                BoolValue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.BoolValue";
                 };
     
                 return BoolValue;
@@ -35405,9 +37049,10 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.value = reader.string();
-                            break;
+                        case 1: {
+                                message.value = reader.string();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -35495,6 +37140,21 @@
                  */
                 StringValue.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for StringValue
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.StringValue
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                StringValue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.StringValue";
                 };
     
                 return StringValue;
@@ -35592,9 +37252,10 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.value = reader.bytes();
-                            break;
+                        case 1: {
+                                message.value = reader.bytes();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -35651,7 +37312,7 @@
                     if (object.value != null)
                         if (typeof object.value === "string")
                             $util.base64.decode(object.value, message.value = $util.newBuffer($util.base64.length(object.value)), 0);
-                        else if (object.value.length)
+                        else if (object.value.length >= 0)
                             message.value = object.value;
                     return message;
                 };
@@ -35691,6 +37352,21 @@
                  */
                 BytesValue.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for BytesValue
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.BytesValue
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                BytesValue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.BytesValue";
                 };
     
                 return BytesValue;
@@ -35853,6 +37529,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for Empty
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Empty.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Empty";
+                };
+    
                 return Empty;
             })();
     
@@ -35901,7 +37592,7 @@
                 };
     
                 /**
-                 * Callback as used by {@link google.longrunning.Operations#listOperations}.
+                 * Callback as used by {@link google.longrunning.Operations|listOperations}.
                  * @memberof google.longrunning.Operations
                  * @typedef ListOperationsCallback
                  * @type {function}
@@ -35934,7 +37625,7 @@
                  */
     
                 /**
-                 * Callback as used by {@link google.longrunning.Operations#getOperation}.
+                 * Callback as used by {@link google.longrunning.Operations|getOperation}.
                  * @memberof google.longrunning.Operations
                  * @typedef GetOperationCallback
                  * @type {function}
@@ -35967,7 +37658,7 @@
                  */
     
                 /**
-                 * Callback as used by {@link google.longrunning.Operations#deleteOperation}.
+                 * Callback as used by {@link google.longrunning.Operations|deleteOperation}.
                  * @memberof google.longrunning.Operations
                  * @typedef DeleteOperationCallback
                  * @type {function}
@@ -36000,7 +37691,7 @@
                  */
     
                 /**
-                 * Callback as used by {@link google.longrunning.Operations#cancelOperation}.
+                 * Callback as used by {@link google.longrunning.Operations|cancelOperation}.
                  * @memberof google.longrunning.Operations
                  * @typedef CancelOperationCallback
                  * @type {function}
@@ -36033,7 +37724,7 @@
                  */
     
                 /**
-                 * Callback as used by {@link google.longrunning.Operations#waitOperation}.
+                 * Callback as used by {@link google.longrunning.Operations|waitOperation}.
                  * @memberof google.longrunning.Operations
                  * @typedef WaitOperationCallback
                  * @type {function}
@@ -36218,21 +37909,26 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 2:
-                            message.metadata = $root.google.protobuf.Any.decode(reader, reader.uint32());
-                            break;
-                        case 3:
-                            message.done = reader.bool();
-                            break;
-                        case 4:
-                            message.error = $root.google.rpc.Status.decode(reader, reader.uint32());
-                            break;
-                        case 5:
-                            message.response = $root.google.protobuf.Any.decode(reader, reader.uint32());
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.metadata = $root.google.protobuf.Any.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 3: {
+                                message.done = reader.bool();
+                                break;
+                            }
+                        case 4: {
+                                message.error = $root.google.rpc.Status.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 5: {
+                                message.response = $root.google.protobuf.Any.decode(reader, reader.uint32());
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -36383,6 +38079,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for Operation
+                 * @function getTypeUrl
+                 * @memberof google.longrunning.Operation
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Operation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.longrunning.Operation";
+                };
+    
                 return Operation;
             })();
     
@@ -36478,9 +38189,10 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -36568,6 +38280,21 @@
                  */
                 GetOperationRequest.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for GetOperationRequest
+                 * @function getTypeUrl
+                 * @memberof google.longrunning.GetOperationRequest
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                GetOperationRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.longrunning.GetOperationRequest";
                 };
     
                 return GetOperationRequest;
@@ -36698,18 +38425,22 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 4:
-                            message.name = reader.string();
-                            break;
-                        case 1:
-                            message.filter = reader.string();
-                            break;
-                        case 2:
-                            message.pageSize = reader.int32();
-                            break;
-                        case 3:
-                            message.pageToken = reader.string();
-                            break;
+                        case 4: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 1: {
+                                message.filter = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.pageSize = reader.int32();
+                                break;
+                            }
+                        case 3: {
+                                message.pageToken = reader.string();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -36824,6 +38555,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for ListOperationsRequest
+                 * @function getTypeUrl
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ListOperationsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.longrunning.ListOperationsRequest";
+                };
+    
                 return ListOperationsRequest;
             })();
     
@@ -36932,14 +38678,16 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            if (!(message.operations && message.operations.length))
-                                message.operations = [];
-                            message.operations.push($root.google.longrunning.Operation.decode(reader, reader.uint32()));
-                            break;
-                        case 2:
-                            message.nextPageToken = reader.string();
-                            break;
+                        case 1: {
+                                if (!(message.operations && message.operations.length))
+                                    message.operations = [];
+                                message.operations.push($root.google.longrunning.Operation.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 2: {
+                                message.nextPageToken = reader.string();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -37055,6 +38803,21 @@
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
+                /**
+                 * Gets the default type url for ListOperationsResponse
+                 * @function getTypeUrl
+                 * @memberof google.longrunning.ListOperationsResponse
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ListOperationsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.longrunning.ListOperationsResponse";
+                };
+    
                 return ListOperationsResponse;
             })();
     
@@ -37150,9 +38913,10 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -37240,6 +39004,21 @@
                  */
                 CancelOperationRequest.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for CancelOperationRequest
+                 * @function getTypeUrl
+                 * @memberof google.longrunning.CancelOperationRequest
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                CancelOperationRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.longrunning.CancelOperationRequest";
                 };
     
                 return CancelOperationRequest;
@@ -37337,9 +39116,10 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -37427,6 +39207,21 @@
                  */
                 DeleteOperationRequest.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for DeleteOperationRequest
+                 * @function getTypeUrl
+                 * @memberof google.longrunning.DeleteOperationRequest
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                DeleteOperationRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.longrunning.DeleteOperationRequest";
                 };
     
                 return DeleteOperationRequest;
@@ -37535,12 +39330,14 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 2:
-                            message.timeout = $root.google.protobuf.Duration.decode(reader, reader.uint32());
-                            break;
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.timeout = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -37642,6 +39439,21 @@
                  */
                 WaitOperationRequest.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for WaitOperationRequest
+                 * @function getTypeUrl
+                 * @memberof google.longrunning.WaitOperationRequest
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                WaitOperationRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.longrunning.WaitOperationRequest";
                 };
     
                 return WaitOperationRequest;
@@ -37750,12 +39562,14 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.responseType = reader.string();
-                            break;
-                        case 2:
-                            message.metadataType = reader.string();
-                            break;
+                        case 1: {
+                                message.responseType = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.metadataType = reader.string();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -37852,6 +39666,21 @@
                  */
                 OperationInfo.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for OperationInfo
+                 * @function getTypeUrl
+                 * @memberof google.longrunning.OperationInfo
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                OperationInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.longrunning.OperationInfo";
                 };
     
                 return OperationInfo;
@@ -37985,17 +39814,20 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 1:
-                            message.code = reader.int32();
-                            break;
-                        case 2:
-                            message.message = reader.string();
-                            break;
-                        case 3:
-                            if (!(message.details && message.details.length))
-                                message.details = [];
-                            message.details.push($root.google.protobuf.Any.decode(reader, reader.uint32()));
-                            break;
+                        case 1: {
+                                message.code = reader.int32();
+                                break;
+                            }
+                        case 2: {
+                                message.message = reader.string();
+                                break;
+                            }
+                        case 3: {
+                                if (!(message.details && message.details.length))
+                                    message.details = [];
+                                message.details.push($root.google.protobuf.Any.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -38118,6 +39950,21 @@
                  */
                 Status.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Status
+                 * @function getTypeUrl
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Status.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.rpc.Status";
                 };
     
                 return Status;

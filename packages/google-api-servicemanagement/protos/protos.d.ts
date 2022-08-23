@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import * as Long from "long";
+import Long = require("long");
 import {protobuf as $protobuf} from "google-gax";
 /** Namespace google. */
 export namespace google {
@@ -120,6 +120,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ManagedService
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of an OperationMetadata. */
@@ -228,6 +235,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OperationMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 namespace OperationMetadata {
@@ -326,6 +340,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Step
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Status enum. */
@@ -439,6 +460,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Diagnostic
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 namespace Diagnostic {
@@ -544,6 +572,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ConfigSource
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ConfigFile. */
@@ -646,6 +681,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ConfigFile
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 namespace ConfigFile {
@@ -749,6 +791,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ConfigRef
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ChangeReport. */
@@ -839,6 +888,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ChangeReport
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a Rollout. */
@@ -968,6 +1024,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Rollout
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 namespace Rollout {
@@ -1060,6 +1123,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for TrafficPercentStrategy
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a DeleteServiceStrategy. */
@@ -1144,6 +1214,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DeleteServiceStrategy
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** RolloutStatus enum. */
@@ -1364,91 +1441,91 @@ export namespace google {
                 namespace ServiceManager {
 
                     /**
-                     * Callback as used by {@link google.api.servicemanagement.v1.ServiceManager#listServices}.
+                     * Callback as used by {@link google.api.servicemanagement.v1.ServiceManager|listServices}.
                      * @param error Error, if any
                      * @param [response] ListServicesResponse
                      */
                     type ListServicesCallback = (error: (Error|null), response?: google.api.servicemanagement.v1.ListServicesResponse) => void;
 
                     /**
-                     * Callback as used by {@link google.api.servicemanagement.v1.ServiceManager#getService}.
+                     * Callback as used by {@link google.api.servicemanagement.v1.ServiceManager|getService}.
                      * @param error Error, if any
                      * @param [response] ManagedService
                      */
                     type GetServiceCallback = (error: (Error|null), response?: google.api.servicemanagement.v1.ManagedService) => void;
 
                     /**
-                     * Callback as used by {@link google.api.servicemanagement.v1.ServiceManager#createService}.
+                     * Callback as used by {@link google.api.servicemanagement.v1.ServiceManager|createService}.
                      * @param error Error, if any
                      * @param [response] Operation
                      */
                     type CreateServiceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
-                     * Callback as used by {@link google.api.servicemanagement.v1.ServiceManager#deleteService}.
+                     * Callback as used by {@link google.api.servicemanagement.v1.ServiceManager|deleteService}.
                      * @param error Error, if any
                      * @param [response] Operation
                      */
                     type DeleteServiceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
-                     * Callback as used by {@link google.api.servicemanagement.v1.ServiceManager#undeleteService}.
+                     * Callback as used by {@link google.api.servicemanagement.v1.ServiceManager|undeleteService}.
                      * @param error Error, if any
                      * @param [response] Operation
                      */
                     type UndeleteServiceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
-                     * Callback as used by {@link google.api.servicemanagement.v1.ServiceManager#listServiceConfigs}.
+                     * Callback as used by {@link google.api.servicemanagement.v1.ServiceManager|listServiceConfigs}.
                      * @param error Error, if any
                      * @param [response] ListServiceConfigsResponse
                      */
                     type ListServiceConfigsCallback = (error: (Error|null), response?: google.api.servicemanagement.v1.ListServiceConfigsResponse) => void;
 
                     /**
-                     * Callback as used by {@link google.api.servicemanagement.v1.ServiceManager#getServiceConfig}.
+                     * Callback as used by {@link google.api.servicemanagement.v1.ServiceManager|getServiceConfig}.
                      * @param error Error, if any
                      * @param [response] Service
                      */
                     type GetServiceConfigCallback = (error: (Error|null), response?: google.api.Service) => void;
 
                     /**
-                     * Callback as used by {@link google.api.servicemanagement.v1.ServiceManager#createServiceConfig}.
+                     * Callback as used by {@link google.api.servicemanagement.v1.ServiceManager|createServiceConfig}.
                      * @param error Error, if any
                      * @param [response] Service
                      */
                     type CreateServiceConfigCallback = (error: (Error|null), response?: google.api.Service) => void;
 
                     /**
-                     * Callback as used by {@link google.api.servicemanagement.v1.ServiceManager#submitConfigSource}.
+                     * Callback as used by {@link google.api.servicemanagement.v1.ServiceManager|submitConfigSource}.
                      * @param error Error, if any
                      * @param [response] Operation
                      */
                     type SubmitConfigSourceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
-                     * Callback as used by {@link google.api.servicemanagement.v1.ServiceManager#listServiceRollouts}.
+                     * Callback as used by {@link google.api.servicemanagement.v1.ServiceManager|listServiceRollouts}.
                      * @param error Error, if any
                      * @param [response] ListServiceRolloutsResponse
                      */
                     type ListServiceRolloutsCallback = (error: (Error|null), response?: google.api.servicemanagement.v1.ListServiceRolloutsResponse) => void;
 
                     /**
-                     * Callback as used by {@link google.api.servicemanagement.v1.ServiceManager#getServiceRollout}.
+                     * Callback as used by {@link google.api.servicemanagement.v1.ServiceManager|getServiceRollout}.
                      * @param error Error, if any
                      * @param [response] Rollout
                      */
                     type GetServiceRolloutCallback = (error: (Error|null), response?: google.api.servicemanagement.v1.Rollout) => void;
 
                     /**
-                     * Callback as used by {@link google.api.servicemanagement.v1.ServiceManager#createServiceRollout}.
+                     * Callback as used by {@link google.api.servicemanagement.v1.ServiceManager|createServiceRollout}.
                      * @param error Error, if any
                      * @param [response] Operation
                      */
                     type CreateServiceRolloutCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
-                     * Callback as used by {@link google.api.servicemanagement.v1.ServiceManager#generateConfigReport}.
+                     * Callback as used by {@link google.api.servicemanagement.v1.ServiceManager|generateConfigReport}.
                      * @param error Error, if any
                      * @param [response] GenerateConfigReportResponse
                      */
@@ -1561,6 +1638,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListServicesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ListServicesResponse. */
@@ -1657,6 +1741,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListServicesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a GetServiceRequest. */
@@ -1747,6 +1838,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetServiceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a CreateServiceRequest. */
@@ -1837,6 +1935,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateServiceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a DeleteServiceRequest. */
@@ -1927,6 +2032,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteServiceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of an UndeleteServiceRequest. */
@@ -2017,6 +2129,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UndeleteServiceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of an UndeleteServiceResponse. */
@@ -2107,6 +2226,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UndeleteServiceResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a GetServiceConfigRequest. */
@@ -2209,6 +2335,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetServiceConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 namespace GetServiceConfigRequest {
@@ -2320,6 +2453,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListServiceConfigsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ListServiceConfigsResponse. */
@@ -2416,6 +2556,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListServiceConfigsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a CreateServiceConfigRequest. */
@@ -2512,6 +2659,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateServiceConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a SubmitConfigSourceRequest. */
@@ -2614,6 +2768,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SubmitConfigSourceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a SubmitConfigSourceResponse. */
@@ -2704,6 +2865,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SubmitConfigSourceResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a CreateServiceRolloutRequest. */
@@ -2800,6 +2968,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateServiceRolloutRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ListServiceRolloutsRequest. */
@@ -2908,6 +3083,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListServiceRolloutsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ListServiceRolloutsResponse. */
@@ -3004,6 +3186,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListServiceRolloutsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a GetServiceRolloutRequest. */
@@ -3100,6 +3289,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetServiceRolloutRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a GenerateConfigReportRequest. */
@@ -3196,6 +3392,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GenerateConfigReportRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a GenerateConfigReportResponse. */
@@ -3304,6 +3507,13 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GenerateConfigReportResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
             }
         }
@@ -3420,6 +3630,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ConfigChange
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of an Advice. */
@@ -3510,6 +3727,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Advice
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** ChangeType enum. */
@@ -3626,6 +3850,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Http
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a HttpRule. */
@@ -3773,6 +4004,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for HttpRule
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a CustomHttpPattern. */
@@ -3869,6 +4107,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for CustomHttpPattern
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a Service. */
@@ -4103,6 +4348,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Service
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of an Authentication. */
@@ -4199,6 +4451,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Authentication
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of an AuthenticationRule. */
@@ -4307,6 +4566,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for AuthenticationRule
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a JwtLocation. */
@@ -4412,6 +4678,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for JwtLocation
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of an AuthProvider. */
@@ -4532,6 +4805,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for AuthProvider
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a OAuthRequirements. */
@@ -4622,6 +4902,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for OAuthRequirements
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of an AuthRequirement. */
@@ -4718,6 +5005,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for AuthRequirement
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a Backend. */
@@ -4808,6 +5102,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Backend
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a BackendRule. */
@@ -4949,6 +5250,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BackendRule
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         namespace BackendRule {
@@ -5049,6 +5357,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Billing
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         namespace Billing {
@@ -5147,6 +5462,1231 @@ export namespace google {
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for BillingDestination
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+        }
+
+        /** Properties of a Context. */
+        interface IContext {
+
+            /** Context rules */
+            rules?: (google.api.IContextRule[]|null);
+        }
+
+        /** Represents a Context. */
+        class Context implements IContext {
+
+            /**
+             * Constructs a new Context.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IContext);
+
+            /** Context rules. */
+            public rules: google.api.IContextRule[];
+
+            /**
+             * Creates a new Context instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Context instance
+             */
+            public static create(properties?: google.api.IContext): google.api.Context;
+
+            /**
+             * Encodes the specified Context message. Does not implicitly {@link google.api.Context.verify|verify} messages.
+             * @param message Context message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IContext, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Context message, length delimited. Does not implicitly {@link google.api.Context.verify|verify} messages.
+             * @param message Context message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IContext, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Context message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Context
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.Context;
+
+            /**
+             * Decodes a Context message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Context
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.Context;
+
+            /**
+             * Verifies a Context message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Context message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Context
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.Context;
+
+            /**
+             * Creates a plain object from a Context message. Also converts values to other types if specified.
+             * @param message Context
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.Context, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Context to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Context
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a ContextRule. */
+        interface IContextRule {
+
+            /** ContextRule selector */
+            selector?: (string|null);
+
+            /** ContextRule requested */
+            requested?: (string[]|null);
+
+            /** ContextRule provided */
+            provided?: (string[]|null);
+
+            /** ContextRule allowedRequestExtensions */
+            allowedRequestExtensions?: (string[]|null);
+
+            /** ContextRule allowedResponseExtensions */
+            allowedResponseExtensions?: (string[]|null);
+        }
+
+        /** Represents a ContextRule. */
+        class ContextRule implements IContextRule {
+
+            /**
+             * Constructs a new ContextRule.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IContextRule);
+
+            /** ContextRule selector. */
+            public selector: string;
+
+            /** ContextRule requested. */
+            public requested: string[];
+
+            /** ContextRule provided. */
+            public provided: string[];
+
+            /** ContextRule allowedRequestExtensions. */
+            public allowedRequestExtensions: string[];
+
+            /** ContextRule allowedResponseExtensions. */
+            public allowedResponseExtensions: string[];
+
+            /**
+             * Creates a new ContextRule instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ContextRule instance
+             */
+            public static create(properties?: google.api.IContextRule): google.api.ContextRule;
+
+            /**
+             * Encodes the specified ContextRule message. Does not implicitly {@link google.api.ContextRule.verify|verify} messages.
+             * @param message ContextRule message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IContextRule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ContextRule message, length delimited. Does not implicitly {@link google.api.ContextRule.verify|verify} messages.
+             * @param message ContextRule message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IContextRule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ContextRule message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ContextRule
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ContextRule;
+
+            /**
+             * Decodes a ContextRule message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ContextRule
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ContextRule;
+
+            /**
+             * Verifies a ContextRule message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ContextRule message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ContextRule
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.ContextRule;
+
+            /**
+             * Creates a plain object from a ContextRule message. Also converts values to other types if specified.
+             * @param message ContextRule
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.ContextRule, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ContextRule to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ContextRule
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a Control. */
+        interface IControl {
+
+            /** Control environment */
+            environment?: (string|null);
+        }
+
+        /** Represents a Control. */
+        class Control implements IControl {
+
+            /**
+             * Constructs a new Control.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IControl);
+
+            /** Control environment. */
+            public environment: string;
+
+            /**
+             * Creates a new Control instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Control instance
+             */
+            public static create(properties?: google.api.IControl): google.api.Control;
+
+            /**
+             * Encodes the specified Control message. Does not implicitly {@link google.api.Control.verify|verify} messages.
+             * @param message Control message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IControl, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Control message, length delimited. Does not implicitly {@link google.api.Control.verify|verify} messages.
+             * @param message Control message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IControl, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Control message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Control
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.Control;
+
+            /**
+             * Decodes a Control message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Control
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.Control;
+
+            /**
+             * Verifies a Control message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Control message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Control
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.Control;
+
+            /**
+             * Creates a plain object from a Control message. Also converts values to other types if specified.
+             * @param message Control
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.Control, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Control to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Control
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a Documentation. */
+        interface IDocumentation {
+
+            /** Documentation summary */
+            summary?: (string|null);
+
+            /** Documentation pages */
+            pages?: (google.api.IPage[]|null);
+
+            /** Documentation rules */
+            rules?: (google.api.IDocumentationRule[]|null);
+
+            /** Documentation documentationRootUrl */
+            documentationRootUrl?: (string|null);
+
+            /** Documentation serviceRootUrl */
+            serviceRootUrl?: (string|null);
+
+            /** Documentation overview */
+            overview?: (string|null);
+        }
+
+        /** Represents a Documentation. */
+        class Documentation implements IDocumentation {
+
+            /**
+             * Constructs a new Documentation.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IDocumentation);
+
+            /** Documentation summary. */
+            public summary: string;
+
+            /** Documentation pages. */
+            public pages: google.api.IPage[];
+
+            /** Documentation rules. */
+            public rules: google.api.IDocumentationRule[];
+
+            /** Documentation documentationRootUrl. */
+            public documentationRootUrl: string;
+
+            /** Documentation serviceRootUrl. */
+            public serviceRootUrl: string;
+
+            /** Documentation overview. */
+            public overview: string;
+
+            /**
+             * Creates a new Documentation instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Documentation instance
+             */
+            public static create(properties?: google.api.IDocumentation): google.api.Documentation;
+
+            /**
+             * Encodes the specified Documentation message. Does not implicitly {@link google.api.Documentation.verify|verify} messages.
+             * @param message Documentation message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IDocumentation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Documentation message, length delimited. Does not implicitly {@link google.api.Documentation.verify|verify} messages.
+             * @param message Documentation message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IDocumentation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Documentation message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Documentation
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.Documentation;
+
+            /**
+             * Decodes a Documentation message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Documentation
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.Documentation;
+
+            /**
+             * Verifies a Documentation message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Documentation message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Documentation
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.Documentation;
+
+            /**
+             * Creates a plain object from a Documentation message. Also converts values to other types if specified.
+             * @param message Documentation
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.Documentation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Documentation to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Documentation
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a DocumentationRule. */
+        interface IDocumentationRule {
+
+            /** DocumentationRule selector */
+            selector?: (string|null);
+
+            /** DocumentationRule description */
+            description?: (string|null);
+
+            /** DocumentationRule deprecationDescription */
+            deprecationDescription?: (string|null);
+        }
+
+        /** Represents a DocumentationRule. */
+        class DocumentationRule implements IDocumentationRule {
+
+            /**
+             * Constructs a new DocumentationRule.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IDocumentationRule);
+
+            /** DocumentationRule selector. */
+            public selector: string;
+
+            /** DocumentationRule description. */
+            public description: string;
+
+            /** DocumentationRule deprecationDescription. */
+            public deprecationDescription: string;
+
+            /**
+             * Creates a new DocumentationRule instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns DocumentationRule instance
+             */
+            public static create(properties?: google.api.IDocumentationRule): google.api.DocumentationRule;
+
+            /**
+             * Encodes the specified DocumentationRule message. Does not implicitly {@link google.api.DocumentationRule.verify|verify} messages.
+             * @param message DocumentationRule message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IDocumentationRule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified DocumentationRule message, length delimited. Does not implicitly {@link google.api.DocumentationRule.verify|verify} messages.
+             * @param message DocumentationRule message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IDocumentationRule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a DocumentationRule message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns DocumentationRule
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.DocumentationRule;
+
+            /**
+             * Decodes a DocumentationRule message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns DocumentationRule
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.DocumentationRule;
+
+            /**
+             * Verifies a DocumentationRule message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a DocumentationRule message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns DocumentationRule
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.DocumentationRule;
+
+            /**
+             * Creates a plain object from a DocumentationRule message. Also converts values to other types if specified.
+             * @param message DocumentationRule
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.DocumentationRule, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this DocumentationRule to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for DocumentationRule
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a Page. */
+        interface IPage {
+
+            /** Page name */
+            name?: (string|null);
+
+            /** Page content */
+            content?: (string|null);
+
+            /** Page subpages */
+            subpages?: (google.api.IPage[]|null);
+        }
+
+        /** Represents a Page. */
+        class Page implements IPage {
+
+            /**
+             * Constructs a new Page.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IPage);
+
+            /** Page name. */
+            public name: string;
+
+            /** Page content. */
+            public content: string;
+
+            /** Page subpages. */
+            public subpages: google.api.IPage[];
+
+            /**
+             * Creates a new Page instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Page instance
+             */
+            public static create(properties?: google.api.IPage): google.api.Page;
+
+            /**
+             * Encodes the specified Page message. Does not implicitly {@link google.api.Page.verify|verify} messages.
+             * @param message Page message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IPage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Page message, length delimited. Does not implicitly {@link google.api.Page.verify|verify} messages.
+             * @param message Page message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IPage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Page message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Page
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.Page;
+
+            /**
+             * Decodes a Page message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Page
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.Page;
+
+            /**
+             * Verifies a Page message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Page message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Page
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.Page;
+
+            /**
+             * Creates a plain object from a Page message. Also converts values to other types if specified.
+             * @param message Page
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.Page, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Page to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Page
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of an Endpoint. */
+        interface IEndpoint {
+
+            /** Endpoint name */
+            name?: (string|null);
+
+            /** Endpoint aliases */
+            aliases?: (string[]|null);
+
+            /** Endpoint target */
+            target?: (string|null);
+
+            /** Endpoint allowCors */
+            allowCors?: (boolean|null);
+        }
+
+        /** Represents an Endpoint. */
+        class Endpoint implements IEndpoint {
+
+            /**
+             * Constructs a new Endpoint.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IEndpoint);
+
+            /** Endpoint name. */
+            public name: string;
+
+            /** Endpoint aliases. */
+            public aliases: string[];
+
+            /** Endpoint target. */
+            public target: string;
+
+            /** Endpoint allowCors. */
+            public allowCors: boolean;
+
+            /**
+             * Creates a new Endpoint instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Endpoint instance
+             */
+            public static create(properties?: google.api.IEndpoint): google.api.Endpoint;
+
+            /**
+             * Encodes the specified Endpoint message. Does not implicitly {@link google.api.Endpoint.verify|verify} messages.
+             * @param message Endpoint message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IEndpoint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Endpoint message, length delimited. Does not implicitly {@link google.api.Endpoint.verify|verify} messages.
+             * @param message Endpoint message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IEndpoint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an Endpoint message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Endpoint
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.Endpoint;
+
+            /**
+             * Decodes an Endpoint message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Endpoint
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.Endpoint;
+
+            /**
+             * Verifies an Endpoint message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an Endpoint message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Endpoint
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.Endpoint;
+
+            /**
+             * Creates a plain object from an Endpoint message. Also converts values to other types if specified.
+             * @param message Endpoint
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.Endpoint, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Endpoint to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Endpoint
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a LogDescriptor. */
+        interface ILogDescriptor {
+
+            /** LogDescriptor name */
+            name?: (string|null);
+
+            /** LogDescriptor labels */
+            labels?: (google.api.ILabelDescriptor[]|null);
+
+            /** LogDescriptor description */
+            description?: (string|null);
+
+            /** LogDescriptor displayName */
+            displayName?: (string|null);
+        }
+
+        /** Represents a LogDescriptor. */
+        class LogDescriptor implements ILogDescriptor {
+
+            /**
+             * Constructs a new LogDescriptor.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.ILogDescriptor);
+
+            /** LogDescriptor name. */
+            public name: string;
+
+            /** LogDescriptor labels. */
+            public labels: google.api.ILabelDescriptor[];
+
+            /** LogDescriptor description. */
+            public description: string;
+
+            /** LogDescriptor displayName. */
+            public displayName: string;
+
+            /**
+             * Creates a new LogDescriptor instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns LogDescriptor instance
+             */
+            public static create(properties?: google.api.ILogDescriptor): google.api.LogDescriptor;
+
+            /**
+             * Encodes the specified LogDescriptor message. Does not implicitly {@link google.api.LogDescriptor.verify|verify} messages.
+             * @param message LogDescriptor message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.ILogDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified LogDescriptor message, length delimited. Does not implicitly {@link google.api.LogDescriptor.verify|verify} messages.
+             * @param message LogDescriptor message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.ILogDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a LogDescriptor message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns LogDescriptor
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.LogDescriptor;
+
+            /**
+             * Decodes a LogDescriptor message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns LogDescriptor
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.LogDescriptor;
+
+            /**
+             * Verifies a LogDescriptor message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a LogDescriptor message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns LogDescriptor
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.LogDescriptor;
+
+            /**
+             * Creates a plain object from a LogDescriptor message. Also converts values to other types if specified.
+             * @param message LogDescriptor
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.LogDescriptor, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this LogDescriptor to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for LogDescriptor
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a LabelDescriptor. */
+        interface ILabelDescriptor {
+
+            /** LabelDescriptor key */
+            key?: (string|null);
+
+            /** LabelDescriptor valueType */
+            valueType?: (google.api.LabelDescriptor.ValueType|keyof typeof google.api.LabelDescriptor.ValueType|null);
+
+            /** LabelDescriptor description */
+            description?: (string|null);
+        }
+
+        /** Represents a LabelDescriptor. */
+        class LabelDescriptor implements ILabelDescriptor {
+
+            /**
+             * Constructs a new LabelDescriptor.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.ILabelDescriptor);
+
+            /** LabelDescriptor key. */
+            public key: string;
+
+            /** LabelDescriptor valueType. */
+            public valueType: (google.api.LabelDescriptor.ValueType|keyof typeof google.api.LabelDescriptor.ValueType);
+
+            /** LabelDescriptor description. */
+            public description: string;
+
+            /**
+             * Creates a new LabelDescriptor instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns LabelDescriptor instance
+             */
+            public static create(properties?: google.api.ILabelDescriptor): google.api.LabelDescriptor;
+
+            /**
+             * Encodes the specified LabelDescriptor message. Does not implicitly {@link google.api.LabelDescriptor.verify|verify} messages.
+             * @param message LabelDescriptor message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.ILabelDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified LabelDescriptor message, length delimited. Does not implicitly {@link google.api.LabelDescriptor.verify|verify} messages.
+             * @param message LabelDescriptor message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.ILabelDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a LabelDescriptor message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns LabelDescriptor
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.LabelDescriptor;
+
+            /**
+             * Decodes a LabelDescriptor message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns LabelDescriptor
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.LabelDescriptor;
+
+            /**
+             * Verifies a LabelDescriptor message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a LabelDescriptor message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns LabelDescriptor
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.LabelDescriptor;
+
+            /**
+             * Creates a plain object from a LabelDescriptor message. Also converts values to other types if specified.
+             * @param message LabelDescriptor
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.LabelDescriptor, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this LabelDescriptor to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for LabelDescriptor
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace LabelDescriptor {
+
+            /** ValueType enum. */
+            enum ValueType {
+                STRING = 0,
+                BOOL = 1,
+                INT64 = 2
+            }
+        }
+
+        /** Properties of a Logging. */
+        interface ILogging {
+
+            /** Logging producerDestinations */
+            producerDestinations?: (google.api.Logging.ILoggingDestination[]|null);
+
+            /** Logging consumerDestinations */
+            consumerDestinations?: (google.api.Logging.ILoggingDestination[]|null);
+        }
+
+        /** Represents a Logging. */
+        class Logging implements ILogging {
+
+            /**
+             * Constructs a new Logging.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.ILogging);
+
+            /** Logging producerDestinations. */
+            public producerDestinations: google.api.Logging.ILoggingDestination[];
+
+            /** Logging consumerDestinations. */
+            public consumerDestinations: google.api.Logging.ILoggingDestination[];
+
+            /**
+             * Creates a new Logging instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Logging instance
+             */
+            public static create(properties?: google.api.ILogging): google.api.Logging;
+
+            /**
+             * Encodes the specified Logging message. Does not implicitly {@link google.api.Logging.verify|verify} messages.
+             * @param message Logging message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.ILogging, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Logging message, length delimited. Does not implicitly {@link google.api.Logging.verify|verify} messages.
+             * @param message Logging message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.ILogging, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Logging message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Logging
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.Logging;
+
+            /**
+             * Decodes a Logging message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Logging
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.Logging;
+
+            /**
+             * Verifies a Logging message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Logging message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Logging
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.Logging;
+
+            /**
+             * Creates a plain object from a Logging message. Also converts values to other types if specified.
+             * @param message Logging
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.Logging, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Logging to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Logging
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace Logging {
+
+            /** Properties of a LoggingDestination. */
+            interface ILoggingDestination {
+
+                /** LoggingDestination monitoredResource */
+                monitoredResource?: (string|null);
+
+                /** LoggingDestination logs */
+                logs?: (string[]|null);
+            }
+
+            /** Represents a LoggingDestination. */
+            class LoggingDestination implements ILoggingDestination {
+
+                /**
+                 * Constructs a new LoggingDestination.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.api.Logging.ILoggingDestination);
+
+                /** LoggingDestination monitoredResource. */
+                public monitoredResource: string;
+
+                /** LoggingDestination logs. */
+                public logs: string[];
+
+                /**
+                 * Creates a new LoggingDestination instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns LoggingDestination instance
+                 */
+                public static create(properties?: google.api.Logging.ILoggingDestination): google.api.Logging.LoggingDestination;
+
+                /**
+                 * Encodes the specified LoggingDestination message. Does not implicitly {@link google.api.Logging.LoggingDestination.verify|verify} messages.
+                 * @param message LoggingDestination message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.api.Logging.ILoggingDestination, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified LoggingDestination message, length delimited. Does not implicitly {@link google.api.Logging.LoggingDestination.verify|verify} messages.
+                 * @param message LoggingDestination message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.api.Logging.ILoggingDestination, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a LoggingDestination message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns LoggingDestination
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.Logging.LoggingDestination;
+
+                /**
+                 * Decodes a LoggingDestination message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns LoggingDestination
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.Logging.LoggingDestination;
+
+                /**
+                 * Verifies a LoggingDestination message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a LoggingDestination message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns LoggingDestination
+                 */
+                public static fromObject(object: { [k: string]: any }): google.api.Logging.LoggingDestination;
+
+                /**
+                 * Creates a plain object from a LoggingDestination message. Also converts values to other types if specified.
+                 * @param message LoggingDestination
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.api.Logging.LoggingDestination, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this LoggingDestination to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for LoggingDestination
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
             }
         }
 
@@ -5298,6 +6838,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for MetricDescriptor
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         namespace MetricDescriptor {
@@ -5402,6 +6949,13 @@ export namespace google {
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for MetricDescriptorMetadata
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
             }
 
             /** MetricKind enum. */
@@ -5518,118 +7072,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
-        }
-
-        /** Properties of a LabelDescriptor. */
-        interface ILabelDescriptor {
-
-            /** LabelDescriptor key */
-            key?: (string|null);
-
-            /** LabelDescriptor valueType */
-            valueType?: (google.api.LabelDescriptor.ValueType|keyof typeof google.api.LabelDescriptor.ValueType|null);
-
-            /** LabelDescriptor description */
-            description?: (string|null);
-        }
-
-        /** Represents a LabelDescriptor. */
-        class LabelDescriptor implements ILabelDescriptor {
 
             /**
-             * Constructs a new LabelDescriptor.
-             * @param [properties] Properties to set
+             * Gets the default type url for Metric
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
              */
-            constructor(properties?: google.api.ILabelDescriptor);
-
-            /** LabelDescriptor key. */
-            public key: string;
-
-            /** LabelDescriptor valueType. */
-            public valueType: (google.api.LabelDescriptor.ValueType|keyof typeof google.api.LabelDescriptor.ValueType);
-
-            /** LabelDescriptor description. */
-            public description: string;
-
-            /**
-             * Creates a new LabelDescriptor instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns LabelDescriptor instance
-             */
-            public static create(properties?: google.api.ILabelDescriptor): google.api.LabelDescriptor;
-
-            /**
-             * Encodes the specified LabelDescriptor message. Does not implicitly {@link google.api.LabelDescriptor.verify|verify} messages.
-             * @param message LabelDescriptor message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.ILabelDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified LabelDescriptor message, length delimited. Does not implicitly {@link google.api.LabelDescriptor.verify|verify} messages.
-             * @param message LabelDescriptor message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.ILabelDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a LabelDescriptor message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns LabelDescriptor
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.LabelDescriptor;
-
-            /**
-             * Decodes a LabelDescriptor message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns LabelDescriptor
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.LabelDescriptor;
-
-            /**
-             * Verifies a LabelDescriptor message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a LabelDescriptor message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns LabelDescriptor
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.LabelDescriptor;
-
-            /**
-             * Creates a plain object from a LabelDescriptor message. Also converts values to other types if specified.
-             * @param message LabelDescriptor
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.LabelDescriptor, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this LabelDescriptor to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        namespace LabelDescriptor {
-
-            /** ValueType enum. */
-            enum ValueType {
-                STRING = 0,
-                BOOL = 1,
-                INT64 = 2
-            }
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** LaunchStage enum. */
@@ -5642,1035 +7091,6 @@ export namespace google {
             BETA = 3,
             GA = 4,
             DEPRECATED = 5
-        }
-
-        /** Properties of a Context. */
-        interface IContext {
-
-            /** Context rules */
-            rules?: (google.api.IContextRule[]|null);
-        }
-
-        /** Represents a Context. */
-        class Context implements IContext {
-
-            /**
-             * Constructs a new Context.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IContext);
-
-            /** Context rules. */
-            public rules: google.api.IContextRule[];
-
-            /**
-             * Creates a new Context instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Context instance
-             */
-            public static create(properties?: google.api.IContext): google.api.Context;
-
-            /**
-             * Encodes the specified Context message. Does not implicitly {@link google.api.Context.verify|verify} messages.
-             * @param message Context message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.IContext, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Context message, length delimited. Does not implicitly {@link google.api.Context.verify|verify} messages.
-             * @param message Context message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.IContext, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a Context message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Context
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.Context;
-
-            /**
-             * Decodes a Context message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Context
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.Context;
-
-            /**
-             * Verifies a Context message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a Context message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Context
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.Context;
-
-            /**
-             * Creates a plain object from a Context message. Also converts values to other types if specified.
-             * @param message Context
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.Context, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Context to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        /** Properties of a ContextRule. */
-        interface IContextRule {
-
-            /** ContextRule selector */
-            selector?: (string|null);
-
-            /** ContextRule requested */
-            requested?: (string[]|null);
-
-            /** ContextRule provided */
-            provided?: (string[]|null);
-
-            /** ContextRule allowedRequestExtensions */
-            allowedRequestExtensions?: (string[]|null);
-
-            /** ContextRule allowedResponseExtensions */
-            allowedResponseExtensions?: (string[]|null);
-        }
-
-        /** Represents a ContextRule. */
-        class ContextRule implements IContextRule {
-
-            /**
-             * Constructs a new ContextRule.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IContextRule);
-
-            /** ContextRule selector. */
-            public selector: string;
-
-            /** ContextRule requested. */
-            public requested: string[];
-
-            /** ContextRule provided. */
-            public provided: string[];
-
-            /** ContextRule allowedRequestExtensions. */
-            public allowedRequestExtensions: string[];
-
-            /** ContextRule allowedResponseExtensions. */
-            public allowedResponseExtensions: string[];
-
-            /**
-             * Creates a new ContextRule instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns ContextRule instance
-             */
-            public static create(properties?: google.api.IContextRule): google.api.ContextRule;
-
-            /**
-             * Encodes the specified ContextRule message. Does not implicitly {@link google.api.ContextRule.verify|verify} messages.
-             * @param message ContextRule message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.IContextRule, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified ContextRule message, length delimited. Does not implicitly {@link google.api.ContextRule.verify|verify} messages.
-             * @param message ContextRule message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.IContextRule, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a ContextRule message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns ContextRule
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ContextRule;
-
-            /**
-             * Decodes a ContextRule message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns ContextRule
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ContextRule;
-
-            /**
-             * Verifies a ContextRule message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a ContextRule message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns ContextRule
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.ContextRule;
-
-            /**
-             * Creates a plain object from a ContextRule message. Also converts values to other types if specified.
-             * @param message ContextRule
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.ContextRule, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this ContextRule to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        /** Properties of a Control. */
-        interface IControl {
-
-            /** Control environment */
-            environment?: (string|null);
-        }
-
-        /** Represents a Control. */
-        class Control implements IControl {
-
-            /**
-             * Constructs a new Control.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IControl);
-
-            /** Control environment. */
-            public environment: string;
-
-            /**
-             * Creates a new Control instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Control instance
-             */
-            public static create(properties?: google.api.IControl): google.api.Control;
-
-            /**
-             * Encodes the specified Control message. Does not implicitly {@link google.api.Control.verify|verify} messages.
-             * @param message Control message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.IControl, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Control message, length delimited. Does not implicitly {@link google.api.Control.verify|verify} messages.
-             * @param message Control message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.IControl, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a Control message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Control
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.Control;
-
-            /**
-             * Decodes a Control message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Control
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.Control;
-
-            /**
-             * Verifies a Control message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a Control message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Control
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.Control;
-
-            /**
-             * Creates a plain object from a Control message. Also converts values to other types if specified.
-             * @param message Control
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.Control, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Control to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        /** Properties of a Documentation. */
-        interface IDocumentation {
-
-            /** Documentation summary */
-            summary?: (string|null);
-
-            /** Documentation pages */
-            pages?: (google.api.IPage[]|null);
-
-            /** Documentation rules */
-            rules?: (google.api.IDocumentationRule[]|null);
-
-            /** Documentation documentationRootUrl */
-            documentationRootUrl?: (string|null);
-
-            /** Documentation serviceRootUrl */
-            serviceRootUrl?: (string|null);
-
-            /** Documentation overview */
-            overview?: (string|null);
-        }
-
-        /** Represents a Documentation. */
-        class Documentation implements IDocumentation {
-
-            /**
-             * Constructs a new Documentation.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IDocumentation);
-
-            /** Documentation summary. */
-            public summary: string;
-
-            /** Documentation pages. */
-            public pages: google.api.IPage[];
-
-            /** Documentation rules. */
-            public rules: google.api.IDocumentationRule[];
-
-            /** Documentation documentationRootUrl. */
-            public documentationRootUrl: string;
-
-            /** Documentation serviceRootUrl. */
-            public serviceRootUrl: string;
-
-            /** Documentation overview. */
-            public overview: string;
-
-            /**
-             * Creates a new Documentation instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Documentation instance
-             */
-            public static create(properties?: google.api.IDocumentation): google.api.Documentation;
-
-            /**
-             * Encodes the specified Documentation message. Does not implicitly {@link google.api.Documentation.verify|verify} messages.
-             * @param message Documentation message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.IDocumentation, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Documentation message, length delimited. Does not implicitly {@link google.api.Documentation.verify|verify} messages.
-             * @param message Documentation message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.IDocumentation, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a Documentation message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Documentation
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.Documentation;
-
-            /**
-             * Decodes a Documentation message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Documentation
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.Documentation;
-
-            /**
-             * Verifies a Documentation message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a Documentation message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Documentation
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.Documentation;
-
-            /**
-             * Creates a plain object from a Documentation message. Also converts values to other types if specified.
-             * @param message Documentation
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.Documentation, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Documentation to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        /** Properties of a DocumentationRule. */
-        interface IDocumentationRule {
-
-            /** DocumentationRule selector */
-            selector?: (string|null);
-
-            /** DocumentationRule description */
-            description?: (string|null);
-
-            /** DocumentationRule deprecationDescription */
-            deprecationDescription?: (string|null);
-        }
-
-        /** Represents a DocumentationRule. */
-        class DocumentationRule implements IDocumentationRule {
-
-            /**
-             * Constructs a new DocumentationRule.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IDocumentationRule);
-
-            /** DocumentationRule selector. */
-            public selector: string;
-
-            /** DocumentationRule description. */
-            public description: string;
-
-            /** DocumentationRule deprecationDescription. */
-            public deprecationDescription: string;
-
-            /**
-             * Creates a new DocumentationRule instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns DocumentationRule instance
-             */
-            public static create(properties?: google.api.IDocumentationRule): google.api.DocumentationRule;
-
-            /**
-             * Encodes the specified DocumentationRule message. Does not implicitly {@link google.api.DocumentationRule.verify|verify} messages.
-             * @param message DocumentationRule message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.IDocumentationRule, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified DocumentationRule message, length delimited. Does not implicitly {@link google.api.DocumentationRule.verify|verify} messages.
-             * @param message DocumentationRule message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.IDocumentationRule, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a DocumentationRule message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns DocumentationRule
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.DocumentationRule;
-
-            /**
-             * Decodes a DocumentationRule message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns DocumentationRule
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.DocumentationRule;
-
-            /**
-             * Verifies a DocumentationRule message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a DocumentationRule message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns DocumentationRule
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.DocumentationRule;
-
-            /**
-             * Creates a plain object from a DocumentationRule message. Also converts values to other types if specified.
-             * @param message DocumentationRule
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.DocumentationRule, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this DocumentationRule to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        /** Properties of a Page. */
-        interface IPage {
-
-            /** Page name */
-            name?: (string|null);
-
-            /** Page content */
-            content?: (string|null);
-
-            /** Page subpages */
-            subpages?: (google.api.IPage[]|null);
-        }
-
-        /** Represents a Page. */
-        class Page implements IPage {
-
-            /**
-             * Constructs a new Page.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IPage);
-
-            /** Page name. */
-            public name: string;
-
-            /** Page content. */
-            public content: string;
-
-            /** Page subpages. */
-            public subpages: google.api.IPage[];
-
-            /**
-             * Creates a new Page instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Page instance
-             */
-            public static create(properties?: google.api.IPage): google.api.Page;
-
-            /**
-             * Encodes the specified Page message. Does not implicitly {@link google.api.Page.verify|verify} messages.
-             * @param message Page message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.IPage, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Page message, length delimited. Does not implicitly {@link google.api.Page.verify|verify} messages.
-             * @param message Page message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.IPage, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a Page message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Page
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.Page;
-
-            /**
-             * Decodes a Page message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Page
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.Page;
-
-            /**
-             * Verifies a Page message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a Page message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Page
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.Page;
-
-            /**
-             * Creates a plain object from a Page message. Also converts values to other types if specified.
-             * @param message Page
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.Page, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Page to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        /** Properties of an Endpoint. */
-        interface IEndpoint {
-
-            /** Endpoint name */
-            name?: (string|null);
-
-            /** Endpoint aliases */
-            aliases?: (string[]|null);
-
-            /** Endpoint target */
-            target?: (string|null);
-
-            /** Endpoint allowCors */
-            allowCors?: (boolean|null);
-        }
-
-        /** Represents an Endpoint. */
-        class Endpoint implements IEndpoint {
-
-            /**
-             * Constructs a new Endpoint.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IEndpoint);
-
-            /** Endpoint name. */
-            public name: string;
-
-            /** Endpoint aliases. */
-            public aliases: string[];
-
-            /** Endpoint target. */
-            public target: string;
-
-            /** Endpoint allowCors. */
-            public allowCors: boolean;
-
-            /**
-             * Creates a new Endpoint instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Endpoint instance
-             */
-            public static create(properties?: google.api.IEndpoint): google.api.Endpoint;
-
-            /**
-             * Encodes the specified Endpoint message. Does not implicitly {@link google.api.Endpoint.verify|verify} messages.
-             * @param message Endpoint message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.IEndpoint, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Endpoint message, length delimited. Does not implicitly {@link google.api.Endpoint.verify|verify} messages.
-             * @param message Endpoint message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.IEndpoint, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes an Endpoint message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Endpoint
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.Endpoint;
-
-            /**
-             * Decodes an Endpoint message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Endpoint
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.Endpoint;
-
-            /**
-             * Verifies an Endpoint message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates an Endpoint message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Endpoint
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.Endpoint;
-
-            /**
-             * Creates a plain object from an Endpoint message. Also converts values to other types if specified.
-             * @param message Endpoint
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.Endpoint, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Endpoint to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        /** Properties of a LogDescriptor. */
-        interface ILogDescriptor {
-
-            /** LogDescriptor name */
-            name?: (string|null);
-
-            /** LogDescriptor labels */
-            labels?: (google.api.ILabelDescriptor[]|null);
-
-            /** LogDescriptor description */
-            description?: (string|null);
-
-            /** LogDescriptor displayName */
-            displayName?: (string|null);
-        }
-
-        /** Represents a LogDescriptor. */
-        class LogDescriptor implements ILogDescriptor {
-
-            /**
-             * Constructs a new LogDescriptor.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.ILogDescriptor);
-
-            /** LogDescriptor name. */
-            public name: string;
-
-            /** LogDescriptor labels. */
-            public labels: google.api.ILabelDescriptor[];
-
-            /** LogDescriptor description. */
-            public description: string;
-
-            /** LogDescriptor displayName. */
-            public displayName: string;
-
-            /**
-             * Creates a new LogDescriptor instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns LogDescriptor instance
-             */
-            public static create(properties?: google.api.ILogDescriptor): google.api.LogDescriptor;
-
-            /**
-             * Encodes the specified LogDescriptor message. Does not implicitly {@link google.api.LogDescriptor.verify|verify} messages.
-             * @param message LogDescriptor message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.ILogDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified LogDescriptor message, length delimited. Does not implicitly {@link google.api.LogDescriptor.verify|verify} messages.
-             * @param message LogDescriptor message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.ILogDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a LogDescriptor message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns LogDescriptor
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.LogDescriptor;
-
-            /**
-             * Decodes a LogDescriptor message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns LogDescriptor
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.LogDescriptor;
-
-            /**
-             * Verifies a LogDescriptor message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a LogDescriptor message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns LogDescriptor
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.LogDescriptor;
-
-            /**
-             * Creates a plain object from a LogDescriptor message. Also converts values to other types if specified.
-             * @param message LogDescriptor
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.LogDescriptor, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this LogDescriptor to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        /** Properties of a Logging. */
-        interface ILogging {
-
-            /** Logging producerDestinations */
-            producerDestinations?: (google.api.Logging.ILoggingDestination[]|null);
-
-            /** Logging consumerDestinations */
-            consumerDestinations?: (google.api.Logging.ILoggingDestination[]|null);
-        }
-
-        /** Represents a Logging. */
-        class Logging implements ILogging {
-
-            /**
-             * Constructs a new Logging.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.ILogging);
-
-            /** Logging producerDestinations. */
-            public producerDestinations: google.api.Logging.ILoggingDestination[];
-
-            /** Logging consumerDestinations. */
-            public consumerDestinations: google.api.Logging.ILoggingDestination[];
-
-            /**
-             * Creates a new Logging instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Logging instance
-             */
-            public static create(properties?: google.api.ILogging): google.api.Logging;
-
-            /**
-             * Encodes the specified Logging message. Does not implicitly {@link google.api.Logging.verify|verify} messages.
-             * @param message Logging message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.ILogging, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Logging message, length delimited. Does not implicitly {@link google.api.Logging.verify|verify} messages.
-             * @param message Logging message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.ILogging, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a Logging message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Logging
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.Logging;
-
-            /**
-             * Decodes a Logging message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Logging
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.Logging;
-
-            /**
-             * Verifies a Logging message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a Logging message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Logging
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.Logging;
-
-            /**
-             * Creates a plain object from a Logging message. Also converts values to other types if specified.
-             * @param message Logging
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.Logging, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Logging to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        namespace Logging {
-
-            /** Properties of a LoggingDestination. */
-            interface ILoggingDestination {
-
-                /** LoggingDestination monitoredResource */
-                monitoredResource?: (string|null);
-
-                /** LoggingDestination logs */
-                logs?: (string[]|null);
-            }
-
-            /** Represents a LoggingDestination. */
-            class LoggingDestination implements ILoggingDestination {
-
-                /**
-                 * Constructs a new LoggingDestination.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.api.Logging.ILoggingDestination);
-
-                /** LoggingDestination monitoredResource. */
-                public monitoredResource: string;
-
-                /** LoggingDestination logs. */
-                public logs: string[];
-
-                /**
-                 * Creates a new LoggingDestination instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns LoggingDestination instance
-                 */
-                public static create(properties?: google.api.Logging.ILoggingDestination): google.api.Logging.LoggingDestination;
-
-                /**
-                 * Encodes the specified LoggingDestination message. Does not implicitly {@link google.api.Logging.LoggingDestination.verify|verify} messages.
-                 * @param message LoggingDestination message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.api.Logging.ILoggingDestination, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified LoggingDestination message, length delimited. Does not implicitly {@link google.api.Logging.LoggingDestination.verify|verify} messages.
-                 * @param message LoggingDestination message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.api.Logging.ILoggingDestination, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a LoggingDestination message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns LoggingDestination
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.Logging.LoggingDestination;
-
-                /**
-                 * Decodes a LoggingDestination message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns LoggingDestination
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.Logging.LoggingDestination;
-
-                /**
-                 * Verifies a LoggingDestination message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a LoggingDestination message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns LoggingDestination
-                 */
-                public static fromObject(object: { [k: string]: any }): google.api.Logging.LoggingDestination;
-
-                /**
-                 * Creates a plain object from a LoggingDestination message. Also converts values to other types if specified.
-                 * @param message LoggingDestination
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.api.Logging.LoggingDestination, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this LoggingDestination to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-            }
         }
 
         /** Properties of a MonitoredResourceDescriptor. */
@@ -6791,6 +7211,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for MonitoredResourceDescriptor
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a MonitoredResource. */
@@ -6887,6 +7314,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for MonitoredResource
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a MonitoredResourceMetadata. */
@@ -6983,6 +7417,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for MonitoredResourceMetadata
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a Monitoring. */
@@ -7079,6 +7520,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Monitoring
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         namespace Monitoring {
@@ -7177,6 +7625,13 @@ export namespace google {
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for MonitoringDestination
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
             }
         }
 
@@ -7274,6 +7729,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Quota
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a MetricRule. */
@@ -7370,6 +7832,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for MetricRule
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a QuotaLimit. */
@@ -7514,244 +7983,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
-        }
-
-        /** Properties of a ResourceDescriptor. */
-        interface IResourceDescriptor {
-
-            /** ResourceDescriptor type */
-            type?: (string|null);
-
-            /** ResourceDescriptor pattern */
-            pattern?: (string[]|null);
-
-            /** ResourceDescriptor nameField */
-            nameField?: (string|null);
-
-            /** ResourceDescriptor history */
-            history?: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History|null);
-
-            /** ResourceDescriptor plural */
-            plural?: (string|null);
-
-            /** ResourceDescriptor singular */
-            singular?: (string|null);
-
-            /** ResourceDescriptor style */
-            style?: (google.api.ResourceDescriptor.Style[]|null);
-        }
-
-        /** Represents a ResourceDescriptor. */
-        class ResourceDescriptor implements IResourceDescriptor {
 
             /**
-             * Constructs a new ResourceDescriptor.
-             * @param [properties] Properties to set
+             * Gets the default type url for QuotaLimit
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
              */
-            constructor(properties?: google.api.IResourceDescriptor);
-
-            /** ResourceDescriptor type. */
-            public type: string;
-
-            /** ResourceDescriptor pattern. */
-            public pattern: string[];
-
-            /** ResourceDescriptor nameField. */
-            public nameField: string;
-
-            /** ResourceDescriptor history. */
-            public history: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History);
-
-            /** ResourceDescriptor plural. */
-            public plural: string;
-
-            /** ResourceDescriptor singular. */
-            public singular: string;
-
-            /** ResourceDescriptor style. */
-            public style: google.api.ResourceDescriptor.Style[];
-
-            /**
-             * Creates a new ResourceDescriptor instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns ResourceDescriptor instance
-             */
-            public static create(properties?: google.api.IResourceDescriptor): google.api.ResourceDescriptor;
-
-            /**
-             * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-             * @param message ResourceDescriptor message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-             * @param message ResourceDescriptor message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a ResourceDescriptor message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns ResourceDescriptor
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceDescriptor;
-
-            /**
-             * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns ResourceDescriptor
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceDescriptor;
-
-            /**
-             * Verifies a ResourceDescriptor message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns ResourceDescriptor
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.ResourceDescriptor;
-
-            /**
-             * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
-             * @param message ResourceDescriptor
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.ResourceDescriptor, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this ResourceDescriptor to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        namespace ResourceDescriptor {
-
-            /** History enum. */
-            enum History {
-                HISTORY_UNSPECIFIED = 0,
-                ORIGINALLY_SINGLE_PATTERN = 1,
-                FUTURE_MULTI_PATTERN = 2
-            }
-
-            /** Style enum. */
-            enum Style {
-                STYLE_UNSPECIFIED = 0,
-                DECLARATIVE_FRIENDLY = 1
-            }
-        }
-
-        /** Properties of a ResourceReference. */
-        interface IResourceReference {
-
-            /** ResourceReference type */
-            type?: (string|null);
-
-            /** ResourceReference childType */
-            childType?: (string|null);
-        }
-
-        /** Represents a ResourceReference. */
-        class ResourceReference implements IResourceReference {
-
-            /**
-             * Constructs a new ResourceReference.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IResourceReference);
-
-            /** ResourceReference type. */
-            public type: string;
-
-            /** ResourceReference childType. */
-            public childType: string;
-
-            /**
-             * Creates a new ResourceReference instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns ResourceReference instance
-             */
-            public static create(properties?: google.api.IResourceReference): google.api.ResourceReference;
-
-            /**
-             * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-             * @param message ResourceReference message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-             * @param message ResourceReference message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a ResourceReference message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns ResourceReference
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceReference;
-
-            /**
-             * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns ResourceReference
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceReference;
-
-            /**
-             * Verifies a ResourceReference message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns ResourceReference
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.ResourceReference;
-
-            /**
-             * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
-             * @param message ResourceReference
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.ResourceReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this ResourceReference to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a SourceInfo. */
@@ -7842,6 +8080,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for SourceInfo
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a SystemParameters. */
@@ -7932,6 +8177,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for SystemParameters
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a SystemParameterRule. */
@@ -8028,6 +8280,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for SystemParameterRule
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a SystemParameter. */
@@ -8130,6 +8389,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for SystemParameter
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a Usage. */
@@ -8232,6 +8498,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Usage
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a UsageRule. */
@@ -8334,6 +8607,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for UsageRule
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
     }
 
@@ -8428,6 +8708,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FileDescriptorSet
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a FileDescriptorProto. */
@@ -8468,6 +8755,9 @@ export namespace google {
 
             /** FileDescriptorProto syntax */
             syntax?: (string|null);
+
+            /** FileDescriptorProto edition */
+            edition?: (string|null);
         }
 
         /** Represents a FileDescriptorProto. */
@@ -8514,6 +8804,9 @@ export namespace google {
 
             /** FileDescriptorProto syntax. */
             public syntax: string;
+
+            /** FileDescriptorProto edition. */
+            public edition: string;
 
             /**
              * Creates a new FileDescriptorProto instance using the specified properties.
@@ -8584,6 +8877,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FileDescriptorProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a DescriptorProto. */
@@ -8728,6 +9028,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for DescriptorProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         namespace DescriptorProto {
@@ -8832,6 +9139,13 @@ export namespace google {
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ExtensionRange
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
             }
 
             /** Properties of a ReservedRange. */
@@ -8928,6 +9242,13 @@ export namespace google {
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ReservedRange
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
             }
         }
 
@@ -9019,6 +9340,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ExtensionRangeOptions
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a FieldDescriptorProto. */
@@ -9169,6 +9497,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FieldDescriptorProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         namespace FieldDescriptorProto {
@@ -9297,6 +9632,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for OneofDescriptorProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of an EnumDescriptorProto. */
@@ -9411,6 +9753,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for EnumDescriptorProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         namespace EnumDescriptorProto {
@@ -9509,6 +9858,13 @@ export namespace google {
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for EnumReservedRange
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
             }
         }
 
@@ -9612,6 +9968,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for EnumValueDescriptorProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a ServiceDescriptorProto. */
@@ -9714,6 +10077,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ServiceDescriptorProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a MethodDescriptorProto. */
@@ -9834,6 +10204,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for MethodDescriptorProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a FileOptions. */
@@ -9901,9 +10278,6 @@ export namespace google {
 
             /** FileOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
-
-            /** FileOptions .google.api.resourceDefinition */
-            ".google.api.resourceDefinition"?: (google.api.IResourceDescriptor[]|null);
         }
 
         /** Represents a FileOptions. */
@@ -10047,6 +10421,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FileOptions
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         namespace FileOptions {
@@ -10076,9 +10457,6 @@ export namespace google {
 
             /** MessageOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
-
-            /** MessageOptions .google.api.resource */
-            ".google.api.resource"?: (google.api.IResourceDescriptor|null);
         }
 
         /** Represents a MessageOptions. */
@@ -10174,6 +10552,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for MessageOptions
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a FieldOptions. */
@@ -10191,6 +10576,9 @@ export namespace google {
             /** FieldOptions lazy */
             lazy?: (boolean|null);
 
+            /** FieldOptions unverifiedLazy */
+            unverifiedLazy?: (boolean|null);
+
             /** FieldOptions deprecated */
             deprecated?: (boolean|null);
 
@@ -10202,9 +10590,6 @@ export namespace google {
 
             /** FieldOptions .google.api.fieldBehavior */
             ".google.api.fieldBehavior"?: (google.api.FieldBehavior[]|null);
-
-            /** FieldOptions .google.api.resourceReference */
-            ".google.api.resourceReference"?: (google.api.IResourceReference|null);
         }
 
         /** Represents a FieldOptions. */
@@ -10227,6 +10612,9 @@ export namespace google {
 
             /** FieldOptions lazy. */
             public lazy: boolean;
+
+            /** FieldOptions unverifiedLazy. */
+            public unverifiedLazy: boolean;
 
             /** FieldOptions deprecated. */
             public deprecated: boolean;
@@ -10306,6 +10694,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FieldOptions
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         namespace FieldOptions {
@@ -10413,6 +10808,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for OneofOptions
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of an EnumOptions. */
@@ -10515,6 +10917,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for EnumOptions
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of an EnumValueOptions. */
@@ -10611,6 +11020,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for EnumValueOptions
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a ServiceOptions. */
@@ -10713,6 +11129,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ServiceOptions
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a MethodOptions. */
@@ -10824,6 +11247,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for MethodOptions
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         namespace MethodOptions {
@@ -10960,6 +11390,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for UninterpretedOption
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         namespace UninterpretedOption {
@@ -11058,6 +11495,13 @@ export namespace google {
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for NamePart
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
             }
         }
 
@@ -11149,6 +11593,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for SourceCodeInfo
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         namespace SourceCodeInfo {
@@ -11265,6 +11716,13 @@ export namespace google {
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for Location
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
             }
         }
 
@@ -11356,6 +11814,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for GeneratedCodeInfo
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         namespace GeneratedCodeInfo {
@@ -11374,6 +11839,9 @@ export namespace google {
 
                 /** Annotation end */
                 end?: (number|null);
+
+                /** Annotation semantic */
+                semantic?: (google.protobuf.GeneratedCodeInfo.Annotation.Semantic|keyof typeof google.protobuf.GeneratedCodeInfo.Annotation.Semantic|null);
             }
 
             /** Represents an Annotation. */
@@ -11396,6 +11864,9 @@ export namespace google {
 
                 /** Annotation end. */
                 public end: number;
+
+                /** Annotation semantic. */
+                public semantic: (google.protobuf.GeneratedCodeInfo.Annotation.Semantic|keyof typeof google.protobuf.GeneratedCodeInfo.Annotation.Semantic);
 
                 /**
                  * Creates a new Annotation instance using the specified properties.
@@ -11466,6 +11937,23 @@ export namespace google {
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for Annotation
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace Annotation {
+
+                /** Semantic enum. */
+                enum Semantic {
+                    NONE = 0,
+                    SET = 1,
+                    ALIAS = 2
+                }
             }
         }
 
@@ -11563,6 +12051,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Timestamp
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a Duration. */
@@ -11659,6 +12154,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Duration
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a Struct. */
@@ -11749,6 +12251,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Struct
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a Value. */
@@ -11872,6 +12381,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Value
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** NullValue enum. */
@@ -11967,6 +12483,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ListValue
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of an Any. */
@@ -12063,6 +12586,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Any
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of an Api. */
@@ -12189,6 +12719,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Api
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a Method. */
@@ -12315,6 +12852,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Method
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a Mixin. */
@@ -12411,6 +12955,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Mixin
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a SourceContext. */
@@ -12501,6 +13052,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for SourceContext
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a Type. */
@@ -12621,6 +13179,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Type
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a Field. */
@@ -12765,6 +13330,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Field
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         namespace Field {
@@ -12913,6 +13485,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Enum
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of an EnumValue. */
@@ -13015,6 +13594,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for EnumValue
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of an Option. */
@@ -13111,6 +13697,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Option
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Syntax enum. */
@@ -13207,6 +13800,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for DoubleValue
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a FloatValue. */
@@ -13297,6 +13897,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FloatValue
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of an Int64Value. */
@@ -13387,6 +13994,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Int64Value
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a UInt64Value. */
@@ -13477,6 +14091,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for UInt64Value
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of an Int32Value. */
@@ -13567,6 +14188,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Int32Value
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a UInt32Value. */
@@ -13657,6 +14285,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for UInt32Value
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a BoolValue. */
@@ -13747,6 +14382,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BoolValue
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a StringValue. */
@@ -13837,6 +14479,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for StringValue
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a BytesValue. */
@@ -13927,6 +14576,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BytesValue
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of an Empty. */
@@ -14011,6 +14667,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Empty
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
     }
 
@@ -14111,35 +14774,35 @@ export namespace google {
         namespace Operations {
 
             /**
-             * Callback as used by {@link google.longrunning.Operations#listOperations}.
+             * Callback as used by {@link google.longrunning.Operations|listOperations}.
              * @param error Error, if any
              * @param [response] ListOperationsResponse
              */
             type ListOperationsCallback = (error: (Error|null), response?: google.longrunning.ListOperationsResponse) => void;
 
             /**
-             * Callback as used by {@link google.longrunning.Operations#getOperation}.
+             * Callback as used by {@link google.longrunning.Operations|getOperation}.
              * @param error Error, if any
              * @param [response] Operation
              */
             type GetOperationCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
             /**
-             * Callback as used by {@link google.longrunning.Operations#deleteOperation}.
+             * Callback as used by {@link google.longrunning.Operations|deleteOperation}.
              * @param error Error, if any
              * @param [response] Empty
              */
             type DeleteOperationCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
 
             /**
-             * Callback as used by {@link google.longrunning.Operations#cancelOperation}.
+             * Callback as used by {@link google.longrunning.Operations|cancelOperation}.
              * @param error Error, if any
              * @param [response] Empty
              */
             type CancelOperationCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
 
             /**
-             * Callback as used by {@link google.longrunning.Operations#waitOperation}.
+             * Callback as used by {@link google.longrunning.Operations|waitOperation}.
              * @param error Error, if any
              * @param [response] Operation
              */
@@ -14261,6 +14924,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Operation
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a GetOperationRequest. */
@@ -14351,6 +15021,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for GetOperationRequest
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a ListOperationsRequest. */
@@ -14459,6 +15136,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ListOperationsRequest
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a ListOperationsResponse. */
@@ -14555,6 +15239,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ListOperationsResponse
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a CancelOperationRequest. */
@@ -14645,6 +15336,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for CancelOperationRequest
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a DeleteOperationRequest. */
@@ -14735,6 +15433,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for DeleteOperationRequest
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a WaitOperationRequest. */
@@ -14831,6 +15536,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for WaitOperationRequest
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of an OperationInfo. */
@@ -14927,6 +15639,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for OperationInfo
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
     }
 
@@ -15033,6 +15752,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Status
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
     }
 }
