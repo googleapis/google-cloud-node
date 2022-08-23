@@ -28,7 +28,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -252,7 +251,8 @@ export class JobsV1Beta3Client {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -957,7 +957,7 @@ export class JobsV1Beta3Client {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listJobs.createStream(
-      this.innerApiCalls.listJobs as gax.GaxCall,
+      this.innerApiCalls.listJobs as GaxCall,
       request,
       callSettings
     );
@@ -1018,7 +1018,7 @@ export class JobsV1Beta3Client {
     this.initialize();
     return this.descriptors.page.listJobs.asyncIterate(
       this.innerApiCalls['listJobs'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.dataflow.v1beta3.IJob>;
   }
@@ -1175,7 +1175,7 @@ export class JobsV1Beta3Client {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.aggregatedListJobs.createStream(
-      this.innerApiCalls.aggregatedListJobs as gax.GaxCall,
+      this.innerApiCalls.aggregatedListJobs as GaxCall,
       request,
       callSettings
     );
@@ -1235,7 +1235,7 @@ export class JobsV1Beta3Client {
     this.initialize();
     return this.descriptors.page.aggregatedListJobs.asyncIterate(
       this.innerApiCalls['aggregatedListJobs'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.dataflow.v1beta3.IJob>;
   }
