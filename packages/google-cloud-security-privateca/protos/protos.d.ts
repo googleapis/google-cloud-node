@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import * as Long from "long";
+import Long = require("long");
 import {protobuf as $protobuf} from "google-gax";
 /** Namespace google. */
 export namespace google {
@@ -213,6 +213,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CertificateAuthority
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     namespace CertificateAuthority {
@@ -328,6 +335,13 @@ export namespace google {
                              * @returns JSON object
                              */
                             public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for AccessUrls
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
 
                         /** Properties of a KeyVersionSpec. */
@@ -427,6 +441,13 @@ export namespace google {
                              * @returns JSON object
                              */
                             public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for KeyVersionSpec
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
 
                         /** SignHashAlgorithm enum. */
@@ -555,6 +576,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CaPool
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     namespace CaPool {
@@ -660,6 +688,13 @@ export namespace google {
                              * @returns JSON object
                              */
                             public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for PublishingOptions
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
 
                         /** Properties of an IssuancePolicy. */
@@ -780,6 +815,13 @@ export namespace google {
                              * @returns JSON object
                              */
                             public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for IssuancePolicy
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
 
                         namespace IssuancePolicy {
@@ -881,6 +923,13 @@ export namespace google {
                                  * @returns JSON object
                                  */
                                 public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for AllowedKeyType
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
                             }
 
                             namespace AllowedKeyType {
@@ -979,6 +1028,13 @@ export namespace google {
                                      * @returns JSON object
                                      */
                                     public toJSON(): { [k: string]: any };
+
+                                    /**
+                                     * Gets the default type url for RsaKeyType
+                                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns The default type url
+                                     */
+                                    public static getTypeUrl(typeUrlPrefix?: string): string;
                                 }
 
                                 /** Properties of an EcKeyType. */
@@ -1069,6 +1125,13 @@ export namespace google {
                                      * @returns JSON object
                                      */
                                     public toJSON(): { [k: string]: any };
+
+                                    /**
+                                     * Gets the default type url for EcKeyType
+                                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns The default type url
+                                     */
+                                    public static getTypeUrl(typeUrlPrefix?: string): string;
                                 }
 
                                 namespace EcKeyType {
@@ -1177,6 +1240,13 @@ export namespace google {
                                  * @returns JSON object
                                  */
                                 public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for IssuanceModes
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
                             }
                         }
                     }
@@ -1323,6 +1393,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CertificateRevocationList
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     namespace CertificateRevocationList {
@@ -1427,6 +1504,13 @@ export namespace google {
                              * @returns JSON object
                              */
                             public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for RevokedCertificate
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
 
                         /** State enum. */
@@ -1606,6 +1690,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Certificate
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     namespace Certificate {
@@ -1704,6 +1795,13 @@ export namespace google {
                              * @returns JSON object
                              */
                             public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for RevocationDetails
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
                     }
 
@@ -1837,6 +1935,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CertificateTemplate
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a X509Parameters. */
@@ -1951,6 +2056,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for X509Parameters
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     namespace X509Parameters {
@@ -2055,6 +2167,13 @@ export namespace google {
                              * @returns JSON object
                              */
                             public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for CaOptions
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
                     }
 
@@ -2155,6 +2274,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SubordinateConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     namespace SubordinateConfig {
@@ -2247,6 +2373,13 @@ export namespace google {
                              * @returns JSON object
                              */
                             public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for SubordinateConfigChain
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
                     }
 
@@ -2344,6 +2477,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PublicKey
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     namespace PublicKey {
@@ -2455,6 +2595,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CertificateConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     namespace CertificateConfig {
@@ -2553,6 +2700,13 @@ export namespace google {
                              * @returns JSON object
                              */
                             public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for SubjectConfig
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
                     }
 
@@ -2686,6 +2840,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CertificateDescription
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     namespace CertificateDescription {
@@ -2808,6 +2969,13 @@ export namespace google {
                              * @returns JSON object
                              */
                             public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for SubjectDescription
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
 
                         /** Properties of a KeyId. */
@@ -2898,6 +3066,13 @@ export namespace google {
                              * @returns JSON object
                              */
                             public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for KeyId
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
 
                         /** Properties of a CertificateFingerprint. */
@@ -2988,6 +3163,13 @@ export namespace google {
                              * @returns JSON object
                              */
                             public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for CertificateFingerprint
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
                     }
 
@@ -3079,6 +3261,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ObjectId
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a X509Extension. */
@@ -3181,6 +3370,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for X509Extension
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a KeyUsage. */
@@ -3283,6 +3479,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for KeyUsage
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     namespace KeyUsage {
@@ -3423,6 +3626,13 @@ export namespace google {
                              * @returns JSON object
                              */
                             public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for KeyUsageOptions
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
 
                         /** Properties of an ExtendedKeyUsageOptions. */
@@ -3543,6 +3753,13 @@ export namespace google {
                              * @returns JSON object
                              */
                             public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ExtendedKeyUsageOptions
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
                     }
 
@@ -3676,6 +3893,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Subject
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a SubjectAltNames. */
@@ -3790,6 +4014,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SubjectAltNames
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a CertificateIdentityConstraints. */
@@ -3898,6 +4129,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CertificateIdentityConstraints
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a CertificateExtensionConstraints. */
@@ -3994,6 +4232,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CertificateExtensionConstraints
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     namespace CertificateExtensionConstraints {
@@ -4459,203 +4704,203 @@ export namespace google {
                     namespace CertificateAuthorityService {
 
                         /**
-                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService#createCertificate}.
+                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService|createCertificate}.
                          * @param error Error, if any
                          * @param [response] Certificate
                          */
                         type CreateCertificateCallback = (error: (Error|null), response?: google.cloud.security.privateca.v1.Certificate) => void;
 
                         /**
-                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService#getCertificate}.
+                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService|getCertificate}.
                          * @param error Error, if any
                          * @param [response] Certificate
                          */
                         type GetCertificateCallback = (error: (Error|null), response?: google.cloud.security.privateca.v1.Certificate) => void;
 
                         /**
-                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService#listCertificates}.
+                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService|listCertificates}.
                          * @param error Error, if any
                          * @param [response] ListCertificatesResponse
                          */
                         type ListCertificatesCallback = (error: (Error|null), response?: google.cloud.security.privateca.v1.ListCertificatesResponse) => void;
 
                         /**
-                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService#revokeCertificate}.
+                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService|revokeCertificate}.
                          * @param error Error, if any
                          * @param [response] Certificate
                          */
                         type RevokeCertificateCallback = (error: (Error|null), response?: google.cloud.security.privateca.v1.Certificate) => void;
 
                         /**
-                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService#updateCertificate}.
+                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService|updateCertificate}.
                          * @param error Error, if any
                          * @param [response] Certificate
                          */
                         type UpdateCertificateCallback = (error: (Error|null), response?: google.cloud.security.privateca.v1.Certificate) => void;
 
                         /**
-                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService#activateCertificateAuthority}.
+                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService|activateCertificateAuthority}.
                          * @param error Error, if any
                          * @param [response] Operation
                          */
                         type ActivateCertificateAuthorityCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                         /**
-                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService#createCertificateAuthority}.
+                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService|createCertificateAuthority}.
                          * @param error Error, if any
                          * @param [response] Operation
                          */
                         type CreateCertificateAuthorityCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                         /**
-                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService#disableCertificateAuthority}.
+                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService|disableCertificateAuthority}.
                          * @param error Error, if any
                          * @param [response] Operation
                          */
                         type DisableCertificateAuthorityCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                         /**
-                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService#enableCertificateAuthority}.
+                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService|enableCertificateAuthority}.
                          * @param error Error, if any
                          * @param [response] Operation
                          */
                         type EnableCertificateAuthorityCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                         /**
-                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService#fetchCertificateAuthorityCsr}.
+                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService|fetchCertificateAuthorityCsr}.
                          * @param error Error, if any
                          * @param [response] FetchCertificateAuthorityCsrResponse
                          */
                         type FetchCertificateAuthorityCsrCallback = (error: (Error|null), response?: google.cloud.security.privateca.v1.FetchCertificateAuthorityCsrResponse) => void;
 
                         /**
-                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService#getCertificateAuthority}.
+                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService|getCertificateAuthority}.
                          * @param error Error, if any
                          * @param [response] CertificateAuthority
                          */
                         type GetCertificateAuthorityCallback = (error: (Error|null), response?: google.cloud.security.privateca.v1.CertificateAuthority) => void;
 
                         /**
-                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService#listCertificateAuthorities}.
+                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService|listCertificateAuthorities}.
                          * @param error Error, if any
                          * @param [response] ListCertificateAuthoritiesResponse
                          */
                         type ListCertificateAuthoritiesCallback = (error: (Error|null), response?: google.cloud.security.privateca.v1.ListCertificateAuthoritiesResponse) => void;
 
                         /**
-                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService#undeleteCertificateAuthority}.
+                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService|undeleteCertificateAuthority}.
                          * @param error Error, if any
                          * @param [response] Operation
                          */
                         type UndeleteCertificateAuthorityCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                         /**
-                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService#deleteCertificateAuthority}.
+                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService|deleteCertificateAuthority}.
                          * @param error Error, if any
                          * @param [response] Operation
                          */
                         type DeleteCertificateAuthorityCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                         /**
-                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService#updateCertificateAuthority}.
+                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService|updateCertificateAuthority}.
                          * @param error Error, if any
                          * @param [response] Operation
                          */
                         type UpdateCertificateAuthorityCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                         /**
-                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService#createCaPool}.
+                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService|createCaPool}.
                          * @param error Error, if any
                          * @param [response] Operation
                          */
                         type CreateCaPoolCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                         /**
-                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService#updateCaPool}.
+                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService|updateCaPool}.
                          * @param error Error, if any
                          * @param [response] Operation
                          */
                         type UpdateCaPoolCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                         /**
-                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService#getCaPool}.
+                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService|getCaPool}.
                          * @param error Error, if any
                          * @param [response] CaPool
                          */
                         type GetCaPoolCallback = (error: (Error|null), response?: google.cloud.security.privateca.v1.CaPool) => void;
 
                         /**
-                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService#listCaPools}.
+                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService|listCaPools}.
                          * @param error Error, if any
                          * @param [response] ListCaPoolsResponse
                          */
                         type ListCaPoolsCallback = (error: (Error|null), response?: google.cloud.security.privateca.v1.ListCaPoolsResponse) => void;
 
                         /**
-                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService#deleteCaPool}.
+                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService|deleteCaPool}.
                          * @param error Error, if any
                          * @param [response] Operation
                          */
                         type DeleteCaPoolCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                         /**
-                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService#fetchCaCerts}.
+                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService|fetchCaCerts}.
                          * @param error Error, if any
                          * @param [response] FetchCaCertsResponse
                          */
                         type FetchCaCertsCallback = (error: (Error|null), response?: google.cloud.security.privateca.v1.FetchCaCertsResponse) => void;
 
                         /**
-                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService#getCertificateRevocationList}.
+                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService|getCertificateRevocationList}.
                          * @param error Error, if any
                          * @param [response] CertificateRevocationList
                          */
                         type GetCertificateRevocationListCallback = (error: (Error|null), response?: google.cloud.security.privateca.v1.CertificateRevocationList) => void;
 
                         /**
-                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService#listCertificateRevocationLists}.
+                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService|listCertificateRevocationLists}.
                          * @param error Error, if any
                          * @param [response] ListCertificateRevocationListsResponse
                          */
                         type ListCertificateRevocationListsCallback = (error: (Error|null), response?: google.cloud.security.privateca.v1.ListCertificateRevocationListsResponse) => void;
 
                         /**
-                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService#updateCertificateRevocationList}.
+                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService|updateCertificateRevocationList}.
                          * @param error Error, if any
                          * @param [response] Operation
                          */
                         type UpdateCertificateRevocationListCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                         /**
-                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService#createCertificateTemplate}.
+                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService|createCertificateTemplate}.
                          * @param error Error, if any
                          * @param [response] Operation
                          */
                         type CreateCertificateTemplateCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                         /**
-                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService#deleteCertificateTemplate}.
+                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService|deleteCertificateTemplate}.
                          * @param error Error, if any
                          * @param [response] Operation
                          */
                         type DeleteCertificateTemplateCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                         /**
-                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService#getCertificateTemplate}.
+                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService|getCertificateTemplate}.
                          * @param error Error, if any
                          * @param [response] CertificateTemplate
                          */
                         type GetCertificateTemplateCallback = (error: (Error|null), response?: google.cloud.security.privateca.v1.CertificateTemplate) => void;
 
                         /**
-                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService#listCertificateTemplates}.
+                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService|listCertificateTemplates}.
                          * @param error Error, if any
                          * @param [response] ListCertificateTemplatesResponse
                          */
                         type ListCertificateTemplatesCallback = (error: (Error|null), response?: google.cloud.security.privateca.v1.ListCertificateTemplatesResponse) => void;
 
                         /**
-                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService#updateCertificateTemplate}.
+                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService|updateCertificateTemplate}.
                          * @param error Error, if any
                          * @param [response] Operation
                          */
@@ -4780,6 +5025,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CreateCertificateRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a GetCertificateRequest. */
@@ -4870,6 +5122,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GetCertificateRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a ListCertificatesRequest. */
@@ -4984,6 +5243,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListCertificatesRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a ListCertificatesResponse. */
@@ -5086,6 +5352,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListCertificatesResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a RevokeCertificateRequest. */
@@ -5188,6 +5461,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RevokeCertificateRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of an UpdateCertificateRequest. */
@@ -5290,6 +5570,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for UpdateCertificateRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of an ActivateCertificateAuthorityRequest. */
@@ -5398,6 +5685,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ActivateCertificateAuthorityRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a CreateCertificateAuthorityRequest. */
@@ -5506,6 +5800,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CreateCertificateAuthorityRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a DisableCertificateAuthorityRequest. */
@@ -5602,6 +5903,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DisableCertificateAuthorityRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of an EnableCertificateAuthorityRequest. */
@@ -5698,6 +6006,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for EnableCertificateAuthorityRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a FetchCertificateAuthorityCsrRequest. */
@@ -5788,6 +6103,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for FetchCertificateAuthorityCsrRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a FetchCertificateAuthorityCsrResponse. */
@@ -5878,6 +6200,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for FetchCertificateAuthorityCsrResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a GetCertificateAuthorityRequest. */
@@ -5968,6 +6297,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GetCertificateAuthorityRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a ListCertificateAuthoritiesRequest. */
@@ -6082,6 +6418,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListCertificateAuthoritiesRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a ListCertificateAuthoritiesResponse. */
@@ -6184,6 +6527,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListCertificateAuthoritiesResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of an UndeleteCertificateAuthorityRequest. */
@@ -6280,6 +6630,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for UndeleteCertificateAuthorityRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a DeleteCertificateAuthorityRequest. */
@@ -6388,6 +6745,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DeleteCertificateAuthorityRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of an UpdateCertificateAuthorityRequest. */
@@ -6490,6 +6854,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for UpdateCertificateAuthorityRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a CreateCaPoolRequest. */
@@ -6598,6 +6969,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CreateCaPoolRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of an UpdateCaPoolRequest. */
@@ -6700,6 +7078,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for UpdateCaPoolRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a DeleteCaPoolRequest. */
@@ -6796,6 +7181,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DeleteCaPoolRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a FetchCaCertsRequest. */
@@ -6892,6 +7284,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for FetchCaCertsRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a FetchCaCertsResponse. */
@@ -6982,6 +7381,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for FetchCaCertsResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     namespace FetchCaCertsResponse {
@@ -7074,6 +7480,13 @@ export namespace google {
                              * @returns JSON object
                              */
                             public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for CertChain
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
                     }
 
@@ -7165,6 +7578,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GetCaPoolRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a ListCaPoolsRequest. */
@@ -7279,6 +7699,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListCaPoolsRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a ListCaPoolsResponse. */
@@ -7381,6 +7808,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListCaPoolsResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a GetCertificateRevocationListRequest. */
@@ -7471,6 +7905,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GetCertificateRevocationListRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a ListCertificateRevocationListsRequest. */
@@ -7585,6 +8026,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListCertificateRevocationListsRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a ListCertificateRevocationListsResponse. */
@@ -7687,6 +8135,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListCertificateRevocationListsResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of an UpdateCertificateRevocationListRequest. */
@@ -7789,6 +8244,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for UpdateCertificateRevocationListRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a CreateCertificateTemplateRequest. */
@@ -7897,6 +8359,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CreateCertificateTemplateRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a DeleteCertificateTemplateRequest. */
@@ -7993,6 +8462,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DeleteCertificateTemplateRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a GetCertificateTemplateRequest. */
@@ -8083,6 +8559,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GetCertificateTemplateRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a ListCertificateTemplatesRequest. */
@@ -8197,6 +8680,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListCertificateTemplatesRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a ListCertificateTemplatesResponse. */
@@ -8299,6 +8789,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListCertificateTemplatesResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of an UpdateCertificateTemplateRequest. */
@@ -8401,6 +8898,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for UpdateCertificateTemplateRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of an OperationMetadata. */
@@ -8527,6 +9031,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for OperationMetadata
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
                 }
 
@@ -8723,6 +9234,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CertificateAuthority
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     namespace CertificateAuthority {
@@ -8821,6 +9339,13 @@ export namespace google {
                              * @returns JSON object
                              */
                             public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for IssuingOptions
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
 
                         /** Properties of a CertificateAuthorityPolicy. */
@@ -8950,6 +9475,13 @@ export namespace google {
                              * @returns JSON object
                              */
                             public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for CertificateAuthorityPolicy
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
 
                         namespace CertificateAuthorityPolicy {
@@ -9042,6 +9574,13 @@ export namespace google {
                                  * @returns JSON object
                                  */
                                 public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for AllowedConfigList
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
                             }
 
                             /** Properties of an AllowedSubjectAltNames. */
@@ -9162,6 +9701,13 @@ export namespace google {
                                  * @returns JSON object
                                  */
                                 public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for AllowedSubjectAltNames
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
                             }
 
                             /** Properties of an IssuanceModes. */
@@ -9258,6 +9804,13 @@ export namespace google {
                                  * @returns JSON object
                                  */
                                 public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for IssuanceModes
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
                             }
                         }
 
@@ -9355,6 +9908,13 @@ export namespace google {
                              * @returns JSON object
                              */
                             public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for AccessUrls
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
 
                         /** Properties of a KeyVersionSpec. */
@@ -9454,6 +10014,13 @@ export namespace google {
                              * @returns JSON object
                              */
                             public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for KeyVersionSpec
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
 
                         /** Type enum. */
@@ -9629,6 +10196,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CertificateRevocationList
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     namespace CertificateRevocationList {
@@ -9733,6 +10307,13 @@ export namespace google {
                              * @returns JSON object
                              */
                             public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for RevokedCertificate
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
 
                         /** State enum. */
@@ -9894,6 +10475,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Certificate
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     namespace Certificate {
@@ -9992,6 +10580,13 @@ export namespace google {
                              * @returns JSON object
                              */
                             public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for RevocationDetails
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
                     }
 
@@ -10113,6 +10708,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ReusableConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a ReusableConfigValues. */
@@ -10227,6 +10829,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ReusableConfigValues
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     namespace ReusableConfigValues {
@@ -10325,6 +10934,13 @@ export namespace google {
                              * @returns JSON object
                              */
                             public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for CaOptions
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
                     }
 
@@ -10425,6 +11041,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ReusableConfigWrapper
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a SubordinateConfig. */
@@ -10524,6 +11147,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SubordinateConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     namespace SubordinateConfig {
@@ -10616,6 +11246,13 @@ export namespace google {
                              * @returns JSON object
                              */
                             public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for SubordinateConfigChain
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
                     }
 
@@ -10713,6 +11350,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PublicKey
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     namespace PublicKey {
@@ -10825,6 +11469,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CertificateConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     namespace CertificateConfig {
@@ -10929,6 +11580,13 @@ export namespace google {
                              * @returns JSON object
                              */
                             public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for SubjectConfig
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
                     }
 
@@ -11062,6 +11720,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CertificateDescription
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     namespace CertificateDescription {
@@ -11190,6 +11855,13 @@ export namespace google {
                              * @returns JSON object
                              */
                             public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for SubjectDescription
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
 
                         /** Properties of a KeyId. */
@@ -11280,6 +11952,13 @@ export namespace google {
                              * @returns JSON object
                              */
                             public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for KeyId
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
 
                         /** Properties of a CertificateFingerprint. */
@@ -11370,6 +12049,13 @@ export namespace google {
                              * @returns JSON object
                              */
                             public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for CertificateFingerprint
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
                     }
 
@@ -11461,6 +12147,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ObjectId
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a X509Extension. */
@@ -11563,6 +12256,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for X509Extension
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a KeyUsage. */
@@ -11665,6 +12365,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for KeyUsage
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     namespace KeyUsage {
@@ -11805,6 +12512,13 @@ export namespace google {
                              * @returns JSON object
                              */
                             public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for KeyUsageOptions
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
 
                         /** Properties of an ExtendedKeyUsageOptions. */
@@ -11925,6 +12639,13 @@ export namespace google {
                              * @returns JSON object
                              */
                             public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ExtendedKeyUsageOptions
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
                     }
 
@@ -12052,6 +12773,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Subject
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a SubjectAltNames. */
@@ -12166,6 +12894,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SubjectAltNames
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** RevocationReason enum. */
@@ -12485,140 +13220,140 @@ export namespace google {
                     namespace CertificateAuthorityService {
 
                         /**
-                         * Callback as used by {@link google.cloud.security.privateca.v1beta1.CertificateAuthorityService#createCertificate}.
+                         * Callback as used by {@link google.cloud.security.privateca.v1beta1.CertificateAuthorityService|createCertificate}.
                          * @param error Error, if any
                          * @param [response] Certificate
                          */
                         type CreateCertificateCallback = (error: (Error|null), response?: google.cloud.security.privateca.v1beta1.Certificate) => void;
 
                         /**
-                         * Callback as used by {@link google.cloud.security.privateca.v1beta1.CertificateAuthorityService#getCertificate}.
+                         * Callback as used by {@link google.cloud.security.privateca.v1beta1.CertificateAuthorityService|getCertificate}.
                          * @param error Error, if any
                          * @param [response] Certificate
                          */
                         type GetCertificateCallback = (error: (Error|null), response?: google.cloud.security.privateca.v1beta1.Certificate) => void;
 
                         /**
-                         * Callback as used by {@link google.cloud.security.privateca.v1beta1.CertificateAuthorityService#listCertificates}.
+                         * Callback as used by {@link google.cloud.security.privateca.v1beta1.CertificateAuthorityService|listCertificates}.
                          * @param error Error, if any
                          * @param [response] ListCertificatesResponse
                          */
                         type ListCertificatesCallback = (error: (Error|null), response?: google.cloud.security.privateca.v1beta1.ListCertificatesResponse) => void;
 
                         /**
-                         * Callback as used by {@link google.cloud.security.privateca.v1beta1.CertificateAuthorityService#revokeCertificate}.
+                         * Callback as used by {@link google.cloud.security.privateca.v1beta1.CertificateAuthorityService|revokeCertificate}.
                          * @param error Error, if any
                          * @param [response] Certificate
                          */
                         type RevokeCertificateCallback = (error: (Error|null), response?: google.cloud.security.privateca.v1beta1.Certificate) => void;
 
                         /**
-                         * Callback as used by {@link google.cloud.security.privateca.v1beta1.CertificateAuthorityService#updateCertificate}.
+                         * Callback as used by {@link google.cloud.security.privateca.v1beta1.CertificateAuthorityService|updateCertificate}.
                          * @param error Error, if any
                          * @param [response] Certificate
                          */
                         type UpdateCertificateCallback = (error: (Error|null), response?: google.cloud.security.privateca.v1beta1.Certificate) => void;
 
                         /**
-                         * Callback as used by {@link google.cloud.security.privateca.v1beta1.CertificateAuthorityService#activateCertificateAuthority}.
+                         * Callback as used by {@link google.cloud.security.privateca.v1beta1.CertificateAuthorityService|activateCertificateAuthority}.
                          * @param error Error, if any
                          * @param [response] Operation
                          */
                         type ActivateCertificateAuthorityCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                         /**
-                         * Callback as used by {@link google.cloud.security.privateca.v1beta1.CertificateAuthorityService#createCertificateAuthority}.
+                         * Callback as used by {@link google.cloud.security.privateca.v1beta1.CertificateAuthorityService|createCertificateAuthority}.
                          * @param error Error, if any
                          * @param [response] Operation
                          */
                         type CreateCertificateAuthorityCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                         /**
-                         * Callback as used by {@link google.cloud.security.privateca.v1beta1.CertificateAuthorityService#disableCertificateAuthority}.
+                         * Callback as used by {@link google.cloud.security.privateca.v1beta1.CertificateAuthorityService|disableCertificateAuthority}.
                          * @param error Error, if any
                          * @param [response] Operation
                          */
                         type DisableCertificateAuthorityCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                         /**
-                         * Callback as used by {@link google.cloud.security.privateca.v1beta1.CertificateAuthorityService#enableCertificateAuthority}.
+                         * Callback as used by {@link google.cloud.security.privateca.v1beta1.CertificateAuthorityService|enableCertificateAuthority}.
                          * @param error Error, if any
                          * @param [response] Operation
                          */
                         type EnableCertificateAuthorityCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                         /**
-                         * Callback as used by {@link google.cloud.security.privateca.v1beta1.CertificateAuthorityService#fetchCertificateAuthorityCsr}.
+                         * Callback as used by {@link google.cloud.security.privateca.v1beta1.CertificateAuthorityService|fetchCertificateAuthorityCsr}.
                          * @param error Error, if any
                          * @param [response] FetchCertificateAuthorityCsrResponse
                          */
                         type FetchCertificateAuthorityCsrCallback = (error: (Error|null), response?: google.cloud.security.privateca.v1beta1.FetchCertificateAuthorityCsrResponse) => void;
 
                         /**
-                         * Callback as used by {@link google.cloud.security.privateca.v1beta1.CertificateAuthorityService#getCertificateAuthority}.
+                         * Callback as used by {@link google.cloud.security.privateca.v1beta1.CertificateAuthorityService|getCertificateAuthority}.
                          * @param error Error, if any
                          * @param [response] CertificateAuthority
                          */
                         type GetCertificateAuthorityCallback = (error: (Error|null), response?: google.cloud.security.privateca.v1beta1.CertificateAuthority) => void;
 
                         /**
-                         * Callback as used by {@link google.cloud.security.privateca.v1beta1.CertificateAuthorityService#listCertificateAuthorities}.
+                         * Callback as used by {@link google.cloud.security.privateca.v1beta1.CertificateAuthorityService|listCertificateAuthorities}.
                          * @param error Error, if any
                          * @param [response] ListCertificateAuthoritiesResponse
                          */
                         type ListCertificateAuthoritiesCallback = (error: (Error|null), response?: google.cloud.security.privateca.v1beta1.ListCertificateAuthoritiesResponse) => void;
 
                         /**
-                         * Callback as used by {@link google.cloud.security.privateca.v1beta1.CertificateAuthorityService#restoreCertificateAuthority}.
+                         * Callback as used by {@link google.cloud.security.privateca.v1beta1.CertificateAuthorityService|restoreCertificateAuthority}.
                          * @param error Error, if any
                          * @param [response] Operation
                          */
                         type RestoreCertificateAuthorityCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                         /**
-                         * Callback as used by {@link google.cloud.security.privateca.v1beta1.CertificateAuthorityService#scheduleDeleteCertificateAuthority}.
+                         * Callback as used by {@link google.cloud.security.privateca.v1beta1.CertificateAuthorityService|scheduleDeleteCertificateAuthority}.
                          * @param error Error, if any
                          * @param [response] Operation
                          */
                         type ScheduleDeleteCertificateAuthorityCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                         /**
-                         * Callback as used by {@link google.cloud.security.privateca.v1beta1.CertificateAuthorityService#updateCertificateAuthority}.
+                         * Callback as used by {@link google.cloud.security.privateca.v1beta1.CertificateAuthorityService|updateCertificateAuthority}.
                          * @param error Error, if any
                          * @param [response] Operation
                          */
                         type UpdateCertificateAuthorityCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                         /**
-                         * Callback as used by {@link google.cloud.security.privateca.v1beta1.CertificateAuthorityService#getCertificateRevocationList}.
+                         * Callback as used by {@link google.cloud.security.privateca.v1beta1.CertificateAuthorityService|getCertificateRevocationList}.
                          * @param error Error, if any
                          * @param [response] CertificateRevocationList
                          */
                         type GetCertificateRevocationListCallback = (error: (Error|null), response?: google.cloud.security.privateca.v1beta1.CertificateRevocationList) => void;
 
                         /**
-                         * Callback as used by {@link google.cloud.security.privateca.v1beta1.CertificateAuthorityService#listCertificateRevocationLists}.
+                         * Callback as used by {@link google.cloud.security.privateca.v1beta1.CertificateAuthorityService|listCertificateRevocationLists}.
                          * @param error Error, if any
                          * @param [response] ListCertificateRevocationListsResponse
                          */
                         type ListCertificateRevocationListsCallback = (error: (Error|null), response?: google.cloud.security.privateca.v1beta1.ListCertificateRevocationListsResponse) => void;
 
                         /**
-                         * Callback as used by {@link google.cloud.security.privateca.v1beta1.CertificateAuthorityService#updateCertificateRevocationList}.
+                         * Callback as used by {@link google.cloud.security.privateca.v1beta1.CertificateAuthorityService|updateCertificateRevocationList}.
                          * @param error Error, if any
                          * @param [response] Operation
                          */
                         type UpdateCertificateRevocationListCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                         /**
-                         * Callback as used by {@link google.cloud.security.privateca.v1beta1.CertificateAuthorityService#getReusableConfig}.
+                         * Callback as used by {@link google.cloud.security.privateca.v1beta1.CertificateAuthorityService|getReusableConfig}.
                          * @param error Error, if any
                          * @param [response] ReusableConfig
                          */
                         type GetReusableConfigCallback = (error: (Error|null), response?: google.cloud.security.privateca.v1beta1.ReusableConfig) => void;
 
                         /**
-                         * Callback as used by {@link google.cloud.security.privateca.v1beta1.CertificateAuthorityService#listReusableConfigs}.
+                         * Callback as used by {@link google.cloud.security.privateca.v1beta1.CertificateAuthorityService|listReusableConfigs}.
                          * @param error Error, if any
                          * @param [response] ListReusableConfigsResponse
                          */
@@ -12731,6 +13466,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CreateCertificateRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a GetCertificateRequest. */
@@ -12821,6 +13563,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GetCertificateRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a ListCertificatesRequest. */
@@ -12935,6 +13684,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListCertificatesRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a ListCertificatesResponse. */
@@ -13037,6 +13793,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListCertificatesResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a RevokeCertificateRequest. */
@@ -13139,6 +13902,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RevokeCertificateRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of an UpdateCertificateRequest. */
@@ -13241,6 +14011,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for UpdateCertificateRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of an ActivateCertificateAuthorityRequest. */
@@ -13349,6 +14126,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ActivateCertificateAuthorityRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a CreateCertificateAuthorityRequest. */
@@ -13457,6 +14241,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CreateCertificateAuthorityRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a DisableCertificateAuthorityRequest. */
@@ -13553,6 +14344,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DisableCertificateAuthorityRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of an EnableCertificateAuthorityRequest. */
@@ -13649,6 +14447,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for EnableCertificateAuthorityRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a FetchCertificateAuthorityCsrRequest. */
@@ -13739,6 +14544,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for FetchCertificateAuthorityCsrRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a FetchCertificateAuthorityCsrResponse. */
@@ -13829,6 +14641,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for FetchCertificateAuthorityCsrResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a GetCertificateAuthorityRequest. */
@@ -13919,6 +14738,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GetCertificateAuthorityRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a ListCertificateAuthoritiesRequest. */
@@ -14033,6 +14859,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListCertificateAuthoritiesRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a ListCertificateAuthoritiesResponse. */
@@ -14135,6 +14968,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListCertificateAuthoritiesResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a RestoreCertificateAuthorityRequest. */
@@ -14231,6 +15071,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RestoreCertificateAuthorityRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a ScheduleDeleteCertificateAuthorityRequest. */
@@ -14327,6 +15174,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ScheduleDeleteCertificateAuthorityRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of an UpdateCertificateAuthorityRequest. */
@@ -14429,6 +15283,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for UpdateCertificateAuthorityRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a GetCertificateRevocationListRequest. */
@@ -14519,6 +15380,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GetCertificateRevocationListRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a ListCertificateRevocationListsRequest. */
@@ -14633,6 +15501,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListCertificateRevocationListsRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a ListCertificateRevocationListsResponse. */
@@ -14735,6 +15610,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListCertificateRevocationListsResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of an UpdateCertificateRevocationListRequest. */
@@ -14837,6 +15719,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for UpdateCertificateRevocationListRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a GetReusableConfigRequest. */
@@ -14927,6 +15816,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GetReusableConfigRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a ListReusableConfigsRequest. */
@@ -15041,6 +15937,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListReusableConfigsRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a ListReusableConfigsResponse. */
@@ -15143,6 +16046,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListReusableConfigsResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of an OperationMetadata. */
@@ -15269,6 +16179,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for OperationMetadata
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
                 }
             }
@@ -15414,6 +16331,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ResourceDescriptor
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         namespace ResourceDescriptor {
@@ -15526,6 +16450,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ResourceReference
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a Http. */
@@ -15622,6 +16553,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Http
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a HttpRule. */
@@ -15769,6 +16707,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for HttpRule
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a CustomHttpPattern. */
@@ -15865,6 +16810,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for CustomHttpPattern
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
     }
 
@@ -15959,6 +16911,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FileDescriptorSet
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a FileDescriptorProto. */
@@ -15999,6 +16958,9 @@ export namespace google {
 
             /** FileDescriptorProto syntax */
             syntax?: (string|null);
+
+            /** FileDescriptorProto edition */
+            edition?: (string|null);
         }
 
         /** Represents a FileDescriptorProto. */
@@ -16045,6 +17007,9 @@ export namespace google {
 
             /** FileDescriptorProto syntax. */
             public syntax: string;
+
+            /** FileDescriptorProto edition. */
+            public edition: string;
 
             /**
              * Creates a new FileDescriptorProto instance using the specified properties.
@@ -16115,6 +17080,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FileDescriptorProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a DescriptorProto. */
@@ -16259,6 +17231,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for DescriptorProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         namespace DescriptorProto {
@@ -16363,6 +17342,13 @@ export namespace google {
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ExtensionRange
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
             }
 
             /** Properties of a ReservedRange. */
@@ -16459,6 +17445,13 @@ export namespace google {
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ReservedRange
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
             }
         }
 
@@ -16550,6 +17543,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ExtensionRangeOptions
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a FieldDescriptorProto. */
@@ -16700,6 +17700,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FieldDescriptorProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         namespace FieldDescriptorProto {
@@ -16828,6 +17835,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for OneofDescriptorProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of an EnumDescriptorProto. */
@@ -16942,6 +17956,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for EnumDescriptorProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         namespace EnumDescriptorProto {
@@ -17040,6 +18061,13 @@ export namespace google {
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for EnumReservedRange
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
             }
         }
 
@@ -17143,6 +18171,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for EnumValueDescriptorProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a ServiceDescriptorProto. */
@@ -17245,6 +18280,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ServiceDescriptorProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a MethodDescriptorProto. */
@@ -17365,6 +18407,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for MethodDescriptorProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a FileOptions. */
@@ -17578,6 +18627,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FileOptions
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         namespace FileOptions {
@@ -17705,6 +18761,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for MessageOptions
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a FieldOptions. */
@@ -17721,6 +18784,9 @@ export namespace google {
 
             /** FieldOptions lazy */
             lazy?: (boolean|null);
+
+            /** FieldOptions unverifiedLazy */
+            unverifiedLazy?: (boolean|null);
 
             /** FieldOptions deprecated */
             deprecated?: (boolean|null);
@@ -17758,6 +18824,9 @@ export namespace google {
 
             /** FieldOptions lazy. */
             public lazy: boolean;
+
+            /** FieldOptions unverifiedLazy. */
+            public unverifiedLazy: boolean;
 
             /** FieldOptions deprecated. */
             public deprecated: boolean;
@@ -17837,6 +18906,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FieldOptions
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         namespace FieldOptions {
@@ -17944,6 +19020,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for OneofOptions
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of an EnumOptions. */
@@ -18046,6 +19129,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for EnumOptions
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of an EnumValueOptions. */
@@ -18142,6 +19232,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for EnumValueOptions
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a ServiceOptions. */
@@ -18244,6 +19341,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ServiceOptions
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a MethodOptions. */
@@ -18355,6 +19459,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for MethodOptions
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         namespace MethodOptions {
@@ -18491,6 +19602,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for UninterpretedOption
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         namespace UninterpretedOption {
@@ -18589,6 +19707,13 @@ export namespace google {
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for NamePart
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
             }
         }
 
@@ -18680,6 +19805,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for SourceCodeInfo
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         namespace SourceCodeInfo {
@@ -18796,6 +19928,13 @@ export namespace google {
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for Location
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
             }
         }
 
@@ -18887,6 +20026,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for GeneratedCodeInfo
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         namespace GeneratedCodeInfo {
@@ -18905,6 +20051,9 @@ export namespace google {
 
                 /** Annotation end */
                 end?: (number|null);
+
+                /** Annotation semantic */
+                semantic?: (google.protobuf.GeneratedCodeInfo.Annotation.Semantic|keyof typeof google.protobuf.GeneratedCodeInfo.Annotation.Semantic|null);
             }
 
             /** Represents an Annotation. */
@@ -18927,6 +20076,9 @@ export namespace google {
 
                 /** Annotation end. */
                 public end: number;
+
+                /** Annotation semantic. */
+                public semantic: (google.protobuf.GeneratedCodeInfo.Annotation.Semantic|keyof typeof google.protobuf.GeneratedCodeInfo.Annotation.Semantic);
 
                 /**
                  * Creates a new Annotation instance using the specified properties.
@@ -18997,6 +20149,23 @@ export namespace google {
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for Annotation
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace Annotation {
+
+                /** Semantic enum. */
+                enum Semantic {
+                    NONE = 0,
+                    SET = 1,
+                    ALIAS = 2
+                }
             }
         }
 
@@ -19094,6 +20263,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Duration
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a Timestamp. */
@@ -19190,6 +20366,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Timestamp
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of an Any. */
@@ -19286,6 +20469,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Any
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of an Empty. */
@@ -19370,6 +20560,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Empty
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a FieldMask. */
@@ -19460,6 +20657,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FieldMask
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a DoubleValue. */
@@ -19550,6 +20754,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for DoubleValue
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a FloatValue. */
@@ -19640,6 +20851,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FloatValue
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of an Int64Value. */
@@ -19730,6 +20948,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Int64Value
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a UInt64Value. */
@@ -19820,6 +21045,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for UInt64Value
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of an Int32Value. */
@@ -19910,6 +21142,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Int32Value
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a UInt32Value. */
@@ -20000,6 +21239,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for UInt32Value
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a BoolValue. */
@@ -20090,6 +21336,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BoolValue
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a StringValue. */
@@ -20180,6 +21433,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for StringValue
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a BytesValue. */
@@ -20270,6 +21530,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BytesValue
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
     }
 
@@ -20382,6 +21649,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Expr
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
     }
 
@@ -20482,35 +21756,35 @@ export namespace google {
         namespace Operations {
 
             /**
-             * Callback as used by {@link google.longrunning.Operations#listOperations}.
+             * Callback as used by {@link google.longrunning.Operations|listOperations}.
              * @param error Error, if any
              * @param [response] ListOperationsResponse
              */
             type ListOperationsCallback = (error: (Error|null), response?: google.longrunning.ListOperationsResponse) => void;
 
             /**
-             * Callback as used by {@link google.longrunning.Operations#getOperation}.
+             * Callback as used by {@link google.longrunning.Operations|getOperation}.
              * @param error Error, if any
              * @param [response] Operation
              */
             type GetOperationCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
             /**
-             * Callback as used by {@link google.longrunning.Operations#deleteOperation}.
+             * Callback as used by {@link google.longrunning.Operations|deleteOperation}.
              * @param error Error, if any
              * @param [response] Empty
              */
             type DeleteOperationCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
 
             /**
-             * Callback as used by {@link google.longrunning.Operations#cancelOperation}.
+             * Callback as used by {@link google.longrunning.Operations|cancelOperation}.
              * @param error Error, if any
              * @param [response] Empty
              */
             type CancelOperationCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
 
             /**
-             * Callback as used by {@link google.longrunning.Operations#waitOperation}.
+             * Callback as used by {@link google.longrunning.Operations|waitOperation}.
              * @param error Error, if any
              * @param [response] Operation
              */
@@ -20632,6 +21906,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Operation
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a GetOperationRequest. */
@@ -20722,6 +22003,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for GetOperationRequest
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a ListOperationsRequest. */
@@ -20830,6 +22118,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ListOperationsRequest
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a ListOperationsResponse. */
@@ -20926,6 +22221,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ListOperationsResponse
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a CancelOperationRequest. */
@@ -21016,6 +22318,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for CancelOperationRequest
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a DeleteOperationRequest. */
@@ -21106,6 +22415,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for DeleteOperationRequest
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a WaitOperationRequest. */
@@ -21202,6 +22518,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for WaitOperationRequest
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of an OperationInfo. */
@@ -21298,6 +22621,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for OperationInfo
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
     }
 
@@ -21404,6 +22734,13 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Status
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
     }
 }
