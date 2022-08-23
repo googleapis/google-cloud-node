@@ -30,7 +30,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -464,7 +463,8 @@ export class CertificateAuthorityServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -1542,7 +1542,7 @@ export class CertificateAuthorityServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.activateCertificateAuthority,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.security.privateca.v1beta1.CertificateAuthority,
@@ -1704,7 +1704,7 @@ export class CertificateAuthorityServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createCertificateAuthority,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.security.privateca.v1beta1.CertificateAuthority,
@@ -1860,7 +1860,7 @@ export class CertificateAuthorityServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.disableCertificateAuthority,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.security.privateca.v1beta1.CertificateAuthority,
@@ -2016,7 +2016,7 @@ export class CertificateAuthorityServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.enableCertificateAuthority,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.security.privateca.v1beta1.CertificateAuthority,
@@ -2172,7 +2172,7 @@ export class CertificateAuthorityServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.restoreCertificateAuthority,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.security.privateca.v1beta1.CertificateAuthority,
@@ -2328,7 +2328,7 @@ export class CertificateAuthorityServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.scheduleDeleteCertificateAuthority,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.security.privateca.v1beta1.CertificateAuthority,
@@ -2485,7 +2485,7 @@ export class CertificateAuthorityServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateCertificateAuthority,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.security.privateca.v1beta1.CertificateAuthority,
@@ -2643,7 +2643,7 @@ export class CertificateAuthorityServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateCertificateRevocationList,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.security.privateca.v1beta1.CertificateRevocationList,
@@ -2819,7 +2819,7 @@ export class CertificateAuthorityServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listCertificates.createStream(
-      this.innerApiCalls.listCertificates as gax.GaxCall,
+      this.innerApiCalls.listCertificates as GaxCall,
       request,
       callSettings
     );
@@ -2883,7 +2883,7 @@ export class CertificateAuthorityServiceClient {
     this.initialize();
     return this.descriptors.page.listCertificates.asyncIterate(
       this.innerApiCalls['listCertificates'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.security.privateca.v1beta1.ICertificate>;
   }
@@ -3052,7 +3052,7 @@ export class CertificateAuthorityServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listCertificateAuthorities.createStream(
-      this.innerApiCalls.listCertificateAuthorities as gax.GaxCall,
+      this.innerApiCalls.listCertificateAuthorities as GaxCall,
       request,
       callSettings
     );
@@ -3112,7 +3112,7 @@ export class CertificateAuthorityServiceClient {
     this.initialize();
     return this.descriptors.page.listCertificateAuthorities.asyncIterate(
       this.innerApiCalls['listCertificateAuthorities'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.security.privateca.v1beta1.ICertificateAuthority>;
   }
@@ -3282,7 +3282,7 @@ export class CertificateAuthorityServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listCertificateRevocationLists.createStream(
-      this.innerApiCalls.listCertificateRevocationLists as gax.GaxCall,
+      this.innerApiCalls.listCertificateRevocationLists as GaxCall,
       request,
       callSettings
     );
@@ -3343,7 +3343,7 @@ export class CertificateAuthorityServiceClient {
     this.initialize();
     return this.descriptors.page.listCertificateRevocationLists.asyncIterate(
       this.innerApiCalls['listCertificateRevocationLists'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.security.privateca.v1beta1.ICertificateRevocationList>;
   }
@@ -3508,7 +3508,7 @@ export class CertificateAuthorityServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listReusableConfigs.createStream(
-      this.innerApiCalls.listReusableConfigs as gax.GaxCall,
+      this.innerApiCalls.listReusableConfigs as GaxCall,
       request,
       callSettings
     );
@@ -3568,7 +3568,7 @@ export class CertificateAuthorityServiceClient {
     this.initialize();
     return this.descriptors.page.listReusableConfigs.asyncIterate(
       this.innerApiCalls['listReusableConfigs'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.security.privateca.v1beta1.IReusableConfig>;
   }
