@@ -30,7 +30,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -386,7 +385,8 @@ export class ReachabilityServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -705,7 +705,7 @@ export class ReachabilityServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createConnectivityTest,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.networkmanagement.v1.ConnectivityTest,
@@ -862,7 +862,7 @@ export class ReachabilityServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateConnectivityTest,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.networkmanagement.v1.ConnectivityTest,
@@ -1011,7 +1011,7 @@ export class ReachabilityServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.rerunConnectivityTest,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.networkmanagement.v1.ConnectivityTest,
@@ -1153,7 +1153,7 @@ export class ReachabilityServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteConnectivityTest,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -1341,7 +1341,7 @@ export class ReachabilityServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listConnectivityTests.createStream(
-      this.innerApiCalls.listConnectivityTests as gax.GaxCall,
+      this.innerApiCalls.listConnectivityTests as GaxCall,
       request,
       callSettings
     );
@@ -1411,7 +1411,7 @@ export class ReachabilityServiceClient {
     this.initialize();
     return this.descriptors.page.listConnectivityTests.asyncIterate(
       this.innerApiCalls['listConnectivityTests'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.networkmanagement.v1.IConnectivityTest>;
   }
