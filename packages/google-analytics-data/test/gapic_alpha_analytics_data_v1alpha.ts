@@ -50,108 +50,111 @@ function stubSimpleCallWithCallback<ResponseType>(
 }
 
 describe('v1alpha.AlphaAnalyticsDataClient', () => {
-  it('has servicePath', () => {
-    const servicePath =
-      alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient.servicePath;
-    assert(servicePath);
-  });
-
-  it('has apiEndpoint', () => {
-    const apiEndpoint =
-      alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient.apiEndpoint;
-    assert(apiEndpoint);
-  });
-
-  it('has port', () => {
-    const port = alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient.port;
-    assert(port);
-    assert(typeof port === 'number');
-  });
-
-  it('should create a client with no option', () => {
-    const client =
-      new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient();
-    assert(client);
-  });
-
-  it('should create a client with gRPC fallback', () => {
-    const client =
-      new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-        fallback: true,
-      });
-    assert(client);
-  });
-
-  it('has initialize method and supports deferred initialization', async () => {
-    const client =
-      new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-    assert.strictEqual(client.alphaAnalyticsDataStub, undefined);
-    await client.initialize();
-    assert(client.alphaAnalyticsDataStub);
-  });
-
-  it('has close method for the initialized client', done => {
-    const client =
-      new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-    client.initialize();
-    assert(client.alphaAnalyticsDataStub);
-    client.close().then(() => {
-      done();
+  describe('Common methods', () => {
+    it('has servicePath', () => {
+      const servicePath =
+        alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient.servicePath;
+      assert(servicePath);
     });
-  });
 
-  it('has close method for the non-initialized client', done => {
-    const client =
-      new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-    assert.strictEqual(client.alphaAnalyticsDataStub, undefined);
-    client.close().then(() => {
-      done();
+    it('has apiEndpoint', () => {
+      const apiEndpoint =
+        alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient.apiEndpoint;
+      assert(apiEndpoint);
     });
-  });
 
-  it('has getProjectId method', async () => {
-    const fakeProjectId = 'fake-project-id';
-    const client =
-      new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-    client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-    const result = await client.getProjectId();
-    assert.strictEqual(result, fakeProjectId);
-    assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-  });
+    it('has port', () => {
+      const port =
+        alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient.port;
+      assert(port);
+      assert(typeof port === 'number');
+    });
 
-  it('has getProjectId method with callback', async () => {
-    const fakeProjectId = 'fake-project-id';
-    const client =
-      new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-    client.auth.getProjectId = sinon
-      .stub()
-      .callsArgWith(0, null, fakeProjectId);
-    const promise = new Promise((resolve, reject) => {
-      client.getProjectId((err?: Error | null, projectId?: string | null) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(projectId);
-        }
+    it('should create a client with no option', () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient();
+      assert(client);
+    });
+
+    it('should create a client with gRPC fallback', () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          fallback: true,
+        });
+      assert(client);
+    });
+
+    it('has initialize method and supports deferred initialization', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      assert.strictEqual(client.alphaAnalyticsDataStub, undefined);
+      await client.initialize();
+      assert(client.alphaAnalyticsDataStub);
+    });
+
+    it('has close method for the initialized client', done => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      assert(client.alphaAnalyticsDataStub);
+      client.close().then(() => {
+        done();
       });
     });
-    const result = await promise;
-    assert.strictEqual(result, fakeProjectId);
+
+    it('has close method for the non-initialized client', done => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      assert.strictEqual(client.alphaAnalyticsDataStub, undefined);
+      client.close().then(() => {
+        done();
+      });
+    });
+
+    it('has getProjectId method', async () => {
+      const fakeProjectId = 'fake-project-id';
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+      const result = await client.getProjectId();
+      assert.strictEqual(result, fakeProjectId);
+      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+    });
+
+    it('has getProjectId method with callback', async () => {
+      const fakeProjectId = 'fake-project-id';
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.auth.getProjectId = sinon
+        .stub()
+        .callsArgWith(0, null, fakeProjectId);
+      const promise = new Promise((resolve, reject) => {
+        client.getProjectId((err?: Error | null, projectId?: string | null) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(projectId);
+          }
+        });
+      });
+      const result = await promise;
+      assert.strictEqual(result, fakeProjectId);
+    });
   });
 
   describe('runFunnelReport', () => {
