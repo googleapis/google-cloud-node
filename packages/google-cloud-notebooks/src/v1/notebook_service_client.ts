@@ -30,7 +30,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -649,7 +648,8 @@ export class NotebookServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -1494,7 +1494,7 @@ export class NotebookServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createInstance,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.notebooks.v1.Instance,
@@ -1640,7 +1640,7 @@ export class NotebookServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.registerInstance,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.notebooks.v1.Instance,
@@ -1789,7 +1789,7 @@ export class NotebookServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.setInstanceAccelerator,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.notebooks.v1.Instance,
@@ -1934,7 +1934,7 @@ export class NotebookServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.setInstanceMachineType,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.notebooks.v1.Instance,
@@ -2074,7 +2074,7 @@ export class NotebookServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateInstanceConfig,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.notebooks.v1.Instance,
@@ -2218,7 +2218,7 @@ export class NotebookServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateShieldedInstanceConfig,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.notebooks.v1.Instance,
@@ -2359,7 +2359,7 @@ export class NotebookServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.setInstanceLabels,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.notebooks.v1.Instance,
@@ -2497,7 +2497,7 @@ export class NotebookServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteInstance,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -2635,7 +2635,7 @@ export class NotebookServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.startInstance,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.notebooks.v1.Instance,
@@ -2773,7 +2773,7 @@ export class NotebookServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.stopInstance,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.notebooks.v1.Instance,
@@ -2911,7 +2911,7 @@ export class NotebookServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.resetInstance,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.notebooks.v1.Instance,
@@ -3058,7 +3058,7 @@ export class NotebookServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.reportInstanceInfo,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.notebooks.v1.Instance,
@@ -3199,7 +3199,7 @@ export class NotebookServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.upgradeInstance,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.notebooks.v1.Instance,
@@ -3340,7 +3340,7 @@ export class NotebookServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.rollbackInstance,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.notebooks.v1.Instance,
@@ -3489,7 +3489,7 @@ export class NotebookServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.upgradeInstanceInternal,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.notebooks.v1.Instance,
@@ -3633,7 +3633,7 @@ export class NotebookServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createEnvironment,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.notebooks.v1.Environment,
@@ -3771,7 +3771,7 @@ export class NotebookServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteEnvironment,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -3909,7 +3909,7 @@ export class NotebookServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteSchedule,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -4051,7 +4051,7 @@ export class NotebookServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createSchedule,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.notebooks.v1.Schedule,
@@ -4189,7 +4189,7 @@ export class NotebookServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.triggerSchedule,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.notebooks.v1.Schedule,
@@ -4327,7 +4327,7 @@ export class NotebookServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteExecution,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -4469,7 +4469,7 @@ export class NotebookServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createExecution,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.notebooks.v1.Execution,
@@ -4617,7 +4617,7 @@ export class NotebookServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listInstances.createStream(
-      this.innerApiCalls.listInstances as gax.GaxCall,
+      this.innerApiCalls.listInstances as GaxCall,
       request,
       callSettings
     );
@@ -4667,7 +4667,7 @@ export class NotebookServiceClient {
     this.initialize();
     return this.descriptors.page.listInstances.asyncIterate(
       this.innerApiCalls['listInstances'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.notebooks.v1.IInstance>;
   }
@@ -4810,7 +4810,7 @@ export class NotebookServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listEnvironments.createStream(
-      this.innerApiCalls.listEnvironments as gax.GaxCall,
+      this.innerApiCalls.listEnvironments as GaxCall,
       request,
       callSettings
     );
@@ -4859,7 +4859,7 @@ export class NotebookServiceClient {
     this.initialize();
     return this.descriptors.page.listEnvironments.asyncIterate(
       this.innerApiCalls['listEnvironments'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.notebooks.v1.IEnvironment>;
   }
@@ -5012,7 +5012,7 @@ export class NotebookServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listSchedules.createStream(
-      this.innerApiCalls.listSchedules as gax.GaxCall,
+      this.innerApiCalls.listSchedules as GaxCall,
       request,
       callSettings
     );
@@ -5066,7 +5066,7 @@ export class NotebookServiceClient {
     this.initialize();
     return this.descriptors.page.listSchedules.asyncIterate(
       this.innerApiCalls['listSchedules'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.notebooks.v1.ISchedule>;
   }
@@ -5223,7 +5223,7 @@ export class NotebookServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listExecutions.createStream(
-      this.innerApiCalls.listExecutions as gax.GaxCall,
+      this.innerApiCalls.listExecutions as GaxCall,
       request,
       callSettings
     );
@@ -5279,7 +5279,7 @@ export class NotebookServiceClient {
     this.initialize();
     return this.descriptors.page.listExecutions.asyncIterate(
       this.innerApiCalls['listExecutions'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.notebooks.v1.IExecution>;
   }

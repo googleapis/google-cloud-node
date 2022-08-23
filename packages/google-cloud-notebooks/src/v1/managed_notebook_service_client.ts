@@ -30,7 +30,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -438,7 +437,8 @@ export class ManagedNotebookServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -831,7 +831,7 @@ export class ManagedNotebookServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createRuntime,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.notebooks.v1.Runtime,
@@ -971,7 +971,7 @@ export class ManagedNotebookServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteRuntime,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -1115,7 +1115,7 @@ export class ManagedNotebookServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.startRuntime,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.notebooks.v1.Runtime,
@@ -1259,7 +1259,7 @@ export class ManagedNotebookServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.stopRuntime,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.notebooks.v1.Runtime,
@@ -1403,7 +1403,7 @@ export class ManagedNotebookServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.switchRuntime,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.notebooks.v1.Runtime,
@@ -1543,7 +1543,7 @@ export class ManagedNotebookServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.resetRuntime,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.notebooks.v1.Runtime,
@@ -1686,7 +1686,7 @@ export class ManagedNotebookServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.reportRuntimeEvent,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.notebooks.v1.Runtime,
@@ -1828,7 +1828,7 @@ export class ManagedNotebookServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listRuntimes.createStream(
-      this.innerApiCalls.listRuntimes as gax.GaxCall,
+      this.innerApiCalls.listRuntimes as GaxCall,
       request,
       callSettings
     );
@@ -1878,7 +1878,7 @@ export class ManagedNotebookServiceClient {
     this.initialize();
     return this.descriptors.page.listRuntimes.asyncIterate(
       this.innerApiCalls['listRuntimes'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.notebooks.v1.IRuntime>;
   }
