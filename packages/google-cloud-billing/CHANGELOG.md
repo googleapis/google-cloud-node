@@ -1,5 +1,14 @@
 # Changelog
 
+## [3.1.1](https://github.com/googleapis/nodejs-billing/compare/v3.1.0...v3.1.1) (2022-08-23)
+
+
+### Bug Fixes
+
+* better support for fallback mode ([#240](https://github.com/googleapis/nodejs-billing/issues/240)) ([b56bc7d](https://github.com/googleapis/nodejs-billing/commit/b56bc7d793cc28edc272a257f0477c240653c4bb))
+* change import long to require ([#241](https://github.com/googleapis/nodejs-billing/issues/241)) ([b9a1546](https://github.com/googleapis/nodejs-billing/commit/b9a15460a5075c4f1cbf9686f33f1117b82b1134))
+* remove pip install statements ([#1546](https://github.com/googleapis/nodejs-billing/issues/1546)) ([#243](https://github.com/googleapis/nodejs-billing/issues/243)) ([64c462c](https://github.com/googleapis/nodejs-billing/commit/64c462caa3db15dd193a3043111e33453a5b8bab))
+
 ## [3.1.0](https://github.com/googleapis/nodejs-billing/compare/v3.0.0...v3.1.0) (2022-07-04)
 
 
