@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.1.1](https://github.com/googleapis/nodejs-vpc-access/compare/v2.1.0...v2.1.1) (2022-08-23)
+
+
+### Bug Fixes
+
+* better support for fallback mode ([#95](https://github.com/googleapis/nodejs-vpc-access/issues/95)) ([f888df6](https://github.com/googleapis/nodejs-vpc-access/commit/f888df68b5e77dc60ee6f09ee75f41a669727292))
+* change import long to require ([#96](https://github.com/googleapis/nodejs-vpc-access/issues/96)) ([4f29ee0](https://github.com/googleapis/nodejs-vpc-access/commit/4f29ee04c1f3d878dfa28c30d58c5149b150daed))
+* remove pip install statements ([#1546](https://github.com/googleapis/nodejs-vpc-access/issues/1546)) ([#99](https://github.com/googleapis/nodejs-vpc-access/issues/99)) ([6cf3872](https://github.com/googleapis/nodejs-vpc-access/commit/6cf3872aa4b17e53a90402a1d56288caece3616f))
+
 ## [2.1.0](https://github.com/googleapis/nodejs-vpc-access/compare/v2.0.0...v2.1.0) (2022-06-29)
 
 
