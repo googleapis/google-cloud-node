@@ -59,9 +59,7 @@ describe('tests for templates', () => {
       serviceName: 'KeyManagementService',
     });
 
-    snapshot(
-      readFileSync(join(templateDirWrite, '.OwlBot.yaml'), 'utf8')
-    );
+    snapshot(readFileSync(join(templateDirWrite, '.OwlBot.yaml'), 'utf8'));
     snapshot(
       readFileSync(join(templateDirWrite, '.repo-metadata.json'), 'utf8')
     );
