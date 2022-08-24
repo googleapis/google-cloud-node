@@ -6,6 +6,7 @@
   "directories": {
     "doc": "docs"
   },
+  "type": "module",
   "scripts": {
     "fix": "semistandard --fix",
     "test": "semistandard",
