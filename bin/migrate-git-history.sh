@@ -41,6 +41,11 @@ KEEP_FILES=$6
 # override the HEAD branch name for the migration PR
 BRANCH=$7
 
+if [[ ! -z "${UPDATE_SCRIPT}" ]]
+then
+  UPDATE_SCRIPT=$(realpath "${UPDATE_SCRIPT}")
+fi
+
 if [[ -z "${BRANCH}" ]]
 then
   # default the branch name to be generated from the source repo name
@@ -111,6 +116,11 @@ git remote add --fetch migration ../source-repo
 git checkout -b "${BRANCH}"
 git merge --allow-unrelated-histories migration/main --no-edit
 git push -u origin "${BRANCH}" --force
+
+if [[ ! -z "${UPDATE_SCRIPT}" ]]
+then
+  bash "${UPDATE_SCRIPT}"
+fi
 
 # create pull request
 hub pull-request -m "migrate code from ${SOURCE_REPO}"
