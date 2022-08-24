@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.1.1](https://github.com/googleapis/nodejs-appengine-admin/compare/v2.1.0...v2.1.1) (2022-08-23)
+
+
+### Bug Fixes
+
+* better support for fallback mode ([#150](https://github.com/googleapis/nodejs-appengine-admin/issues/150)) ([ec76f66](https://github.com/googleapis/nodejs-appengine-admin/commit/ec76f6685ad06a47e3b0d3facdf4c1a0020244e0))
+* change import long to require ([#152](https://github.com/googleapis/nodejs-appengine-admin/issues/152)) ([62e67ec](https://github.com/googleapis/nodejs-appengine-admin/commit/62e67ec394573b41b24aebef89a12dbf3a3f42e2))
+* remove pip install statements ([#1546](https://github.com/googleapis/nodejs-appengine-admin/issues/1546)) ([#154](https://github.com/googleapis/nodejs-appengine-admin/issues/154)) ([f31d99b](https://github.com/googleapis/nodejs-appengine-admin/commit/f31d99bb423a295bea56e2a8aee0ada9823fbb7f))
+
 ## [2.1.0](https://github.com/googleapis/nodejs-appengine-admin/compare/v2.0.0...v2.1.0) (2022-06-29)
 
 
