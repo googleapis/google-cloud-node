@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/logging-winston?activeTab=versions
 
+## [5.1.4](https://github.com/googleapis/nodejs-logging-winston/compare/v5.1.3...v5.1.4) (2022-08-25)
+
+
+### Bug Fixes
+
+* Update latest logging-nodejs to repaire google-gax vulnerability ([#733](https://github.com/googleapis/nodejs-logging-winston/issues/733)) ([5097ab5](https://github.com/googleapis/nodejs-logging-winston/commit/5097ab53e2a44aa09a164cd87c3ca424fdca682b))
+
 ## [5.1.3](https://github.com/googleapis/nodejs-logging-winston/compare/v5.1.2...v5.1.3) (2022-08-23)
 
 
