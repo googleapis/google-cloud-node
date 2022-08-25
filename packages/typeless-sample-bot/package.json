@@ -8,7 +8,8 @@
     "node": ">=16.0.0"
   },
   "repository": "googleapis/google-cloud-node",
-  "main": "node build/src/bin/samples-ts-to-js.js",
+  "bin": "node build/src/bin/samples-ts-to-js.js",
+  "main": "build/src/bin/samples-ts-to-js.js",
   "type": "module",
   "files": [
     "build/src"
