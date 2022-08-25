@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/nodejs-logging-bunyan?activeTab=versions
 
+## [4.1.2](https://github.com/googleapis/nodejs-logging-bunyan/compare/v4.1.1...v4.1.2) (2022-08-25)
+
+
+### Bug Fixes
+
+* remove pip install statements ([#1546](https://github.com/googleapis/nodejs-logging-bunyan/issues/1546)) ([#649](https://github.com/googleapis/nodejs-logging-bunyan/issues/649)) ([0fdd9ec](https://github.com/googleapis/nodejs-logging-bunyan/commit/0fdd9ec12ad76518e630d0f51f69e34a78b6e693))
+* Update latest logging-nodejs to repaire google-gax vulnerability ([#651](https://github.com/googleapis/nodejs-logging-bunyan/issues/651)) ([857de69](https://github.com/googleapis/nodejs-logging-bunyan/commit/857de693a20e142a16468a6cb352295acd1249a5))
+
 ## [4.1.1](https://github.com/googleapis/nodejs-logging-bunyan/compare/v4.1.0...v4.1.1) (2022-07-18)
 
 
