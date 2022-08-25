@@ -5,5 +5,5 @@
   "packages/google-cloud-beyondcorp-appconnections": "0.1.0",
   "packages/google-cloud-beyondcorp-clientconnectorservices": "0.1.0",
   "packages/google-cloud-beyondcorp-clientgateways": "0.1.0",
-  "packages/typeless-sample-bot": "0.1.0"
+  "packages/typeless-sample-bot": "0.0.0"
 }
