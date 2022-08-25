@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/error-reporting?activeTab=versions
 
+## [3.0.2](https://github.com/googleapis/nodejs-error-reporting/compare/v3.0.1...v3.0.2) (2022-08-24)
+
+
+### Bug Fixes
+
+* add hashes to requirements.txt ([#1544](https://github.com/googleapis/nodejs-error-reporting/issues/1544)) ([#654](https://github.com/googleapis/nodejs-error-reporting/issues/654)) ([c0af3a2](https://github.com/googleapis/nodejs-error-reporting/commit/c0af3a2f0e009b3889901da518a78c520d8bee45))
+
 ## [3.0.1](https://github.com/googleapis/nodejs-error-reporting/compare/v3.0.0...v3.0.1) (2022-06-09)
 
 
