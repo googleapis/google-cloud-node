@@ -89,7 +89,7 @@ const batchClient = new BatchServiceClient();
 async function callListJobs() {
   // Construct request
   const request = {
-    parent
+    parent,
   };
 
   // Run request
