@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.2.0](https://github.com/googleapis/nodejs-vmmigration/compare/v2.1.0...v2.2.0) (2022-08-23)
+
+
+### Features
+
+* add upgrade appliance method, update other methods ([#53](https://github.com/googleapis/nodejs-vmmigration/issues/53)) ([5271100](https://github.com/googleapis/nodejs-vmmigration/commit/5271100c96928df3fd032e64718c19522c66d99e))
+
+
+### Bug Fixes
+
+* better support for fallback mode ([#55](https://github.com/googleapis/nodejs-vmmigration/issues/55)) ([d3c2f2d](https://github.com/googleapis/nodejs-vmmigration/commit/d3c2f2d3e730bf8d3c8168cb6fbc567f2fe01159))
+* change import long to require ([#56](https://github.com/googleapis/nodejs-vmmigration/issues/56)) ([7eb23fd](https://github.com/googleapis/nodejs-vmmigration/commit/7eb23fdc358abad1d0dc6432432732c2b75091a2))
+* remove pip install statements ([#1546](https://github.com/googleapis/nodejs-vmmigration/issues/1546)) ([#57](https://github.com/googleapis/nodejs-vmmigration/issues/57)) ([ad4ccd1](https://github.com/googleapis/nodejs-vmmigration/commit/ad4ccd1032c48002770bff672d2781bd63c1e692))
+
 ## [2.1.0](https://github.com/googleapis/nodejs-vmmigration/compare/v2.0.0...v2.1.0) (2022-07-13)
 
 
