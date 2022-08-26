@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.1.1](https://github.com/googleapis/nodejs-service-management/compare/v1.1.0...v1.1.1) (2022-08-23)
+
+
+### Bug Fixes
+
+* better support for fallback mode ([#161](https://github.com/googleapis/nodejs-service-management/issues/161)) ([a84e12c](https://github.com/googleapis/nodejs-service-management/commit/a84e12c4dd4edc5b8486f7b1d47ce109b1927099))
+* change import long to require ([#162](https://github.com/googleapis/nodejs-service-management/issues/162)) ([309942f](https://github.com/googleapis/nodejs-service-management/commit/309942f977356bcaaf77a1ee439e5d4389f011ec))
+* remove pip install statements ([#1546](https://github.com/googleapis/nodejs-service-management/issues/1546)) ([#164](https://github.com/googleapis/nodejs-service-management/issues/164)) ([41397e6](https://github.com/googleapis/nodejs-service-management/commit/41397e628dcbc33e54d1f052343df51d8ae8a771))
+
 ## [1.1.0](https://github.com/googleapis/nodejs-service-management/compare/v1.0.0...v1.1.0) (2022-06-30)
 
 
