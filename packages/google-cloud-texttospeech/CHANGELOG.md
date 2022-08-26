@@ -4,6 +4,15 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/text-to-speech?activeTab=versions
 
+## [4.0.2](https://github.com/googleapis/nodejs-text-to-speech/compare/v4.0.1...v4.0.2) (2022-08-23)
+
+
+### Bug Fixes
+
+* better support for fallback mode ([#618](https://github.com/googleapis/nodejs-text-to-speech/issues/618)) ([cece3bd](https://github.com/googleapis/nodejs-text-to-speech/commit/cece3bdb3782c3c8e8bd264fac706edc887c281b))
+* change import long to require ([#620](https://github.com/googleapis/nodejs-text-to-speech/issues/620)) ([e525bd8](https://github.com/googleapis/nodejs-text-to-speech/commit/e525bd8d1b4ecf281b8b3d6145f5183384dacc3f))
+* remove pip install statements ([#1546](https://github.com/googleapis/nodejs-text-to-speech/issues/1546)) ([#623](https://github.com/googleapis/nodejs-text-to-speech/issues/623)) ([6626498](https://github.com/googleapis/nodejs-text-to-speech/commit/6626498331534247b53a876b06aefa11c689b5a2))
+
 ## [4.0.1](https://github.com/googleapis/nodejs-text-to-speech/compare/v4.0.0...v4.0.1) (2022-06-30)
 
 
