@@ -21,7 +21,7 @@
 'use strict';
 
 function main(name) {
-  // [START beyondcorp_v1_generated_AppConnectionsService_GetAppConnection_async]
+  // [START batch_v1alpha_generated_BatchService_GetTask_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,30 +29,29 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. BeyondCorp AppConnection name using the form:
-   *  `projects/{project_id}/locations/{location_id}/appConnections/{app_connection_id}`
+   *  Required. Task name.
    */
   // const name = 'abc123'
 
-  // Imports the Appconnections library
-  const {AppConnectionsServiceClient} = require('@google-cloud/appconnections').v1;
+  // Imports the Batch library
+  const {BatchServiceClient} = require('@google-cloud/batch').v1alpha;
 
   // Instantiates a client
-  const appconnectionsClient = new AppConnectionsServiceClient();
+  const batchClient = new BatchServiceClient();
 
-  async function callGetAppConnection() {
+  async function callGetTask() {
     // Construct request
     const request = {
       name,
     };
 
     // Run request
-    const response = await appconnectionsClient.getAppConnection(request);
+    const response = await batchClient.getTask(request);
     console.log(response);
   }
 
-  callGetAppConnection();
-  // [END beyondcorp_v1_generated_AppConnectionsService_GetAppConnection_async]
+  callGetTask();
+  // [END batch_v1alpha_generated_BatchService_GetTask_async]
 }
 
 process.on('unhandledRejection', err => {

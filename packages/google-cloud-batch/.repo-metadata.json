@@ -1,0 +1,16 @@
+{
+  "name": "batch",
+  "name_pretty": "Batch",
+  "product_documentation": "cloud.google.com/batch/",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/batch/latest",
+  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+  "release_level": "beta",
+  "language": "nodejs",
+  "repo": "googleapis/google-cloud-node",
+  "distribution_name": "@google-cloud/batch",
+  "api_id": "google.cloud.batch.v1",
+  "default_version": "v1",
+  "requires_billing": true,
+  "library_type": "GAPIC_AUTO"
+}
+

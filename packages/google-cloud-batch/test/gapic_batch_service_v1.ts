@@ -21,7 +21,7 @@ import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
-import * as appconnectionsserviceModule from '../src';
+import * as batchserviceModule from '../src';
 
 import {PassThrough} from 'stream';
 
@@ -150,72 +150,64 @@ function stubAsyncIterationCall<ResponseType>(
   return sinon.stub().returns(asyncIterable);
 }
 
-describe('v1.AppConnectionsServiceClient', () => {
+describe('v1.BatchServiceClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath =
-        appconnectionsserviceModule.v1.AppConnectionsServiceClient.servicePath;
+      const servicePath = batchserviceModule.v1.BatchServiceClient.servicePath;
       assert(servicePath);
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint =
-        appconnectionsserviceModule.v1.AppConnectionsServiceClient.apiEndpoint;
+      const apiEndpoint = batchserviceModule.v1.BatchServiceClient.apiEndpoint;
       assert(apiEndpoint);
     });
 
     it('has port', () => {
-      const port =
-        appconnectionsserviceModule.v1.AppConnectionsServiceClient.port;
+      const port = batchserviceModule.v1.BatchServiceClient.port;
       assert(port);
       assert(typeof port === 'number');
     });
 
     it('should create a client with no option', () => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient();
+      const client = new batchserviceModule.v1.BatchServiceClient();
       assert(client);
     });
 
     it('should create a client with gRPC fallback', () => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          fallback: true,
-        });
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        fallback: true,
+      });
       assert(client);
     });
 
     it('has initialize method and supports deferred initialization', async () => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      assert.strictEqual(client.appConnectionsServiceStub, undefined);
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      assert.strictEqual(client.batchServiceStub, undefined);
       await client.initialize();
-      assert(client.appConnectionsServiceStub);
+      assert(client.batchServiceStub);
     });
 
     it('has close method for the initialized client', done => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
-      assert(client.appConnectionsServiceStub);
+      assert(client.batchServiceStub);
       client.close().then(() => {
         done();
       });
     });
 
     it('has close method for the non-initialized client', done => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      assert.strictEqual(client.appConnectionsServiceStub, undefined);
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      assert.strictEqual(client.batchServiceStub, undefined);
       client.close().then(() => {
         done();
       });
@@ -223,11 +215,10 @@ describe('v1.AppConnectionsServiceClient', () => {
 
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
       const result = await client.getProjectId();
       assert.strictEqual(result, fakeProjectId);
@@ -236,11 +227,10 @@ describe('v1.AppConnectionsServiceClient', () => {
 
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.auth.getProjectId = sinon
         .stub()
         .callsArgWith(0, null, fakeProjectId);
@@ -258,19 +248,18 @@ describe('v1.AppConnectionsServiceClient', () => {
     });
   });
 
-  describe('getAppConnection', () => {
-    it('invokes getAppConnection without error', async () => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+  describe('createJob', () => {
+    it('invokes createJob without error', async () => {
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.beyondcorp.appconnections.v1.GetAppConnectionRequest()
+        new protos.google.cloud.batch.v1.CreateJobRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -279,30 +268,29 @@ describe('v1.AppConnectionsServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.beyondcorp.appconnections.v1.AppConnection()
+        new protos.google.cloud.batch.v1.Job()
       );
-      client.innerApiCalls.getAppConnection = stubSimpleCall(expectedResponse);
-      const [response] = await client.getAppConnection(request);
+      client.innerApiCalls.createJob = stubSimpleCall(expectedResponse);
+      const [response] = await client.createJob(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.getAppConnection as SinonStub)
+        (client.innerApiCalls.createJob as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
     });
 
-    it('invokes getAppConnection without error using callback', async () => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+    it('invokes createJob without error using callback', async () => {
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.beyondcorp.appconnections.v1.GetAppConnectionRequest()
+        new protos.google.cloud.batch.v1.CreateJobRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -311,16 +299,16 @@ describe('v1.AppConnectionsServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.beyondcorp.appconnections.v1.AppConnection()
+        new protos.google.cloud.batch.v1.Job()
       );
-      client.innerApiCalls.getAppConnection =
+      client.innerApiCalls.createJob =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.getAppConnection(
+        client.createJob(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.beyondcorp.appconnections.v1.IAppConnection | null
+            result?: protos.google.cloud.batch.v1.IJob | null
           ) => {
             if (err) {
               reject(err);
@@ -333,21 +321,143 @@ describe('v1.AppConnectionsServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.getAppConnection as SinonStub)
+        (client.innerApiCalls.createJob as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions /*, callback defined above */)
       );
     });
 
-    it('invokes getAppConnection with error', async () => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+    it('invokes createJob with error', async () => {
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.beyondcorp.appconnections.v1.GetAppConnectionRequest()
+        new protos.google.cloud.batch.v1.CreateJobRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createJob = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.createJob(request), expectedError);
+      assert(
+        (client.innerApiCalls.createJob as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes createJob with closed client', async () => {
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.batch.v1.CreateJobRequest()
+      );
+      request.parent = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createJob(request), expectedError);
+    });
+  });
+
+  describe('getJob', () => {
+    it('invokes getJob without error', async () => {
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.batch.v1.GetJobRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.batch.v1.Job()
+      );
+      client.innerApiCalls.getJob = stubSimpleCall(expectedResponse);
+      const [response] = await client.getJob(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.getJob as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes getJob without error using callback', async () => {
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.batch.v1.GetJobRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.batch.v1.Job()
+      );
+      client.innerApiCalls.getJob =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getJob(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.batch.v1.IJob | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.getJob as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes getJob with error', async () => {
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.batch.v1.GetJobRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -359,48 +469,43 @@ describe('v1.AppConnectionsServiceClient', () => {
         },
       };
       const expectedError = new Error('expected');
-      client.innerApiCalls.getAppConnection = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getAppConnection(request), expectedError);
+      client.innerApiCalls.getJob = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.getJob(request), expectedError);
       assert(
-        (client.innerApiCalls.getAppConnection as SinonStub)
+        (client.innerApiCalls.getJob as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
     });
 
-    it('invokes getAppConnection with closed client', async () => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+    it('invokes getJob with closed client', async () => {
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.beyondcorp.appconnections.v1.GetAppConnectionRequest()
+        new protos.google.cloud.batch.v1.GetJobRequest()
       );
       request.name = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
-      await assert.rejects(client.getAppConnection(request), expectedError);
+      await assert.rejects(client.getJob(request), expectedError);
     });
   });
 
-  describe('createAppConnection', () => {
-    it('invokes createAppConnection without error', async () => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+  describe('getTask', () => {
+    it('invokes getTask without error', async () => {
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.beyondcorp.appconnections.v1.CreateAppConnectionRequest()
+        new protos.google.cloud.batch.v1.GetTaskRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -409,32 +514,29 @@ describe('v1.AppConnectionsServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
+        new protos.google.cloud.batch.v1.Task()
       );
-      client.innerApiCalls.createAppConnection =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createAppConnection(request);
-      const [response] = await operation.promise();
+      client.innerApiCalls.getTask = stubSimpleCall(expectedResponse);
+      const [response] = await client.getTask(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.createAppConnection as SinonStub)
+        (client.innerApiCalls.getTask as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
     });
 
-    it('invokes createAppConnection without error using callback', async () => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+    it('invokes getTask without error using callback', async () => {
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.beyondcorp.appconnections.v1.CreateAppConnectionRequest()
+        new protos.google.cloud.batch.v1.GetTaskRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -443,19 +545,16 @@ describe('v1.AppConnectionsServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
+        new protos.google.cloud.batch.v1.Task()
       );
-      client.innerApiCalls.createAppConnection =
-        stubLongRunningCallWithCallback(expectedResponse);
+      client.innerApiCalls.getTask =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.createAppConnection(
+        client.getTask(
           request,
           (
             err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.beyondcorp.appconnections.v1.IAppConnection,
-              protos.google.cloud.beyondcorp.appconnections.v1.IAppConnectionOperationMetadata
-            > | null
+            result?: protos.google.cloud.batch.v1.ITask | null
           ) => {
             if (err) {
               reject(err);
@@ -465,234 +564,26 @@ describe('v1.AppConnectionsServiceClient', () => {
           }
         );
       });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.beyondcorp.appconnections.v1.IAppConnection,
-        protos.google.cloud.beyondcorp.appconnections.v1.IAppConnectionOperationMetadata
-      >;
-      const [response] = await operation.promise();
+      const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.createAppConnection as SinonStub)
+        (client.innerApiCalls.getTask as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions /*, callback defined above */)
       );
     });
 
-    it('invokes createAppConnection with call error', async () => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.beyondcorp.appconnections.v1.CreateAppConnectionRequest()
-      );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createAppConnection = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createAppConnection(request), expectedError);
-      assert(
-        (client.innerApiCalls.createAppConnection as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-
-    it('invokes createAppConnection with LRO error', async () => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.beyondcorp.appconnections.v1.CreateAppConnectionRequest()
-      );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createAppConnection = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createAppConnection(request);
-      await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.createAppConnection as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-
-    it('invokes checkCreateAppConnectionProgress without error', async () => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateAppConnectionProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateAppConnectionProgress with error', async () => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkCreateAppConnectionProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('updateAppConnection', () => {
-    it('invokes updateAppConnection without error', async () => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.beyondcorp.appconnections.v1.UpdateAppConnectionRequest()
-      );
-      request.appConnection = {};
-      request.appConnection.name = '';
-      const expectedHeaderRequestParams = 'app_connection.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateAppConnection =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.updateAppConnection(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateAppConnection as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-
-    it('invokes updateAppConnection without error using callback', async () => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.beyondcorp.appconnections.v1.UpdateAppConnectionRequest()
-      );
-      request.appConnection = {};
-      request.appConnection.name = '';
-      const expectedHeaderRequestParams = 'app_connection.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateAppConnection =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateAppConnection(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.beyondcorp.appconnections.v1.IAppConnection,
-              protos.google.cloud.beyondcorp.appconnections.v1.IAppConnectionOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
+    it('invokes getTask with error', async () => {
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
       });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.beyondcorp.appconnections.v1.IAppConnection,
-        protos.google.cloud.beyondcorp.appconnections.v1.IAppConnectionOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateAppConnection as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
-    });
-
-    it('invokes updateAppConnection with call error', async () => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.beyondcorp.appconnections.v1.UpdateAppConnectionRequest()
+        new protos.google.cloud.batch.v1.GetTaskRequest()
       );
-      request.appConnection = {};
-      request.appConnection.name = '';
-      const expectedHeaderRequestParams = 'app_connection.name=';
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -701,107 +592,40 @@ describe('v1.AppConnectionsServiceClient', () => {
         },
       };
       const expectedError = new Error('expected');
-      client.innerApiCalls.updateAppConnection = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateAppConnection(request), expectedError);
+      client.innerApiCalls.getTask = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.getTask(request), expectedError);
       assert(
-        (client.innerApiCalls.updateAppConnection as SinonStub)
+        (client.innerApiCalls.getTask as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
     });
 
-    it('invokes updateAppConnection with LRO error', async () => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+    it('invokes getTask with closed client', async () => {
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.beyondcorp.appconnections.v1.UpdateAppConnectionRequest()
+        new protos.google.cloud.batch.v1.GetTaskRequest()
       );
-      request.appConnection = {};
-      request.appConnection.name = '';
-      const expectedHeaderRequestParams = 'app_connection.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateAppConnection = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.updateAppConnection(request);
-      await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.updateAppConnection as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-
-    it('invokes checkUpdateAppConnectionProgress without error', async () => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpdateAppConnectionProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpdateAppConnectionProgress with error', async () => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkUpdateAppConnectionProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+      request.name = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getTask(request), expectedError);
     });
   });
 
-  describe('deleteAppConnection', () => {
-    it('invokes deleteAppConnection without error', async () => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+  describe('deleteJob', () => {
+    it('invokes deleteJob without error', async () => {
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.beyondcorp.appconnections.v1.DeleteAppConnectionRequest()
+        new protos.google.cloud.batch.v1.DeleteJobRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -815,27 +639,25 @@ describe('v1.AppConnectionsServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteAppConnection =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteAppConnection(request);
+      client.innerApiCalls.deleteJob = stubLongRunningCall(expectedResponse);
+      const [operation] = await client.deleteJob(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.deleteAppConnection as SinonStub)
+        (client.innerApiCalls.deleteJob as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
     });
 
-    it('invokes deleteAppConnection without error using callback', async () => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+    it('invokes deleteJob without error using callback', async () => {
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.beyondcorp.appconnections.v1.DeleteAppConnectionRequest()
+        new protos.google.cloud.batch.v1.DeleteJobRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -849,16 +671,16 @@ describe('v1.AppConnectionsServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteAppConnection =
+      client.innerApiCalls.deleteJob =
         stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.deleteAppConnection(
+        client.deleteJob(
           request,
           (
             err?: Error | null,
             result?: LROperation<
               protos.google.protobuf.IEmpty,
-              protos.google.cloud.beyondcorp.appconnections.v1.IAppConnectionOperationMetadata
+              protos.google.cloud.batch.v1.IOperationMetadata
             > | null
           ) => {
             if (err) {
@@ -871,26 +693,25 @@ describe('v1.AppConnectionsServiceClient', () => {
       });
       const operation = (await promise) as LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.beyondcorp.appconnections.v1.IAppConnectionOperationMetadata
+        protos.google.cloud.batch.v1.IOperationMetadata
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.deleteAppConnection as SinonStub)
+        (client.innerApiCalls.deleteJob as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions /*, callback defined above */)
       );
     });
 
-    it('invokes deleteAppConnection with call error', async () => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+    it('invokes deleteJob with call error', async () => {
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.beyondcorp.appconnections.v1.DeleteAppConnectionRequest()
+        new protos.google.cloud.batch.v1.DeleteJobRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -902,27 +723,26 @@ describe('v1.AppConnectionsServiceClient', () => {
         },
       };
       const expectedError = new Error('expected');
-      client.innerApiCalls.deleteAppConnection = stubLongRunningCall(
+      client.innerApiCalls.deleteJob = stubLongRunningCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.deleteAppConnection(request), expectedError);
+      await assert.rejects(client.deleteJob(request), expectedError);
       assert(
-        (client.innerApiCalls.deleteAppConnection as SinonStub)
+        (client.innerApiCalls.deleteJob as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
     });
 
-    it('invokes deleteAppConnection with LRO error', async () => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+    it('invokes deleteJob with LRO error', async () => {
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.beyondcorp.appconnections.v1.DeleteAppConnectionRequest()
+        new protos.google.cloud.batch.v1.DeleteJobRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -934,26 +754,25 @@ describe('v1.AppConnectionsServiceClient', () => {
         },
       };
       const expectedError = new Error('expected');
-      client.innerApiCalls.deleteAppConnection = stubLongRunningCall(
+      client.innerApiCalls.deleteJob = stubLongRunningCall(
         undefined,
         undefined,
         expectedError
       );
-      const [operation] = await client.deleteAppConnection(request);
+      const [operation] = await client.deleteJob(request);
       await assert.rejects(operation.promise(), expectedError);
       assert(
-        (client.innerApiCalls.deleteAppConnection as SinonStub)
+        (client.innerApiCalls.deleteJob as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
     });
 
-    it('invokes checkDeleteAppConnectionProgress without error', async () => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+    it('invokes checkDeleteJobProgress without error', async () => {
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -963,7 +782,7 @@ describe('v1.AppConnectionsServiceClient', () => {
       expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteAppConnectionProgress(
+      const decodedOperation = await client.checkDeleteJobProgress(
         expectedResponse.name
       );
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
@@ -971,12 +790,11 @@ describe('v1.AppConnectionsServiceClient', () => {
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
 
-    it('invokes checkDeleteAppConnectionProgress with error', async () => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+    it('invokes checkDeleteJobProgress with error', async () => {
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -984,24 +802,20 @@ describe('v1.AppConnectionsServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(
-        client.checkDeleteAppConnectionProgress(''),
-        expectedError
-      );
+      await assert.rejects(client.checkDeleteJobProgress(''), expectedError);
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
-  describe('listAppConnections', () => {
-    it('invokes listAppConnections without error', async () => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+  describe('listJobs', () => {
+    it('invokes listJobs without error', async () => {
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.beyondcorp.appconnections.v1.ListAppConnectionsRequest()
+        new protos.google.cloud.batch.v1.ListJobsRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -1013,36 +827,28 @@ describe('v1.AppConnectionsServiceClient', () => {
         },
       };
       const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.beyondcorp.appconnections.v1.AppConnection()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.beyondcorp.appconnections.v1.AppConnection()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.beyondcorp.appconnections.v1.AppConnection()
-        ),
+        generateSampleMessage(new protos.google.cloud.batch.v1.Job()),
+        generateSampleMessage(new protos.google.cloud.batch.v1.Job()),
+        generateSampleMessage(new protos.google.cloud.batch.v1.Job()),
       ];
-      client.innerApiCalls.listAppConnections =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listAppConnections(request);
+      client.innerApiCalls.listJobs = stubSimpleCall(expectedResponse);
+      const [response] = await client.listJobs(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.listAppConnections as SinonStub)
+        (client.innerApiCalls.listJobs as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
     });
 
-    it('invokes listAppConnections without error using callback', async () => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+    it('invokes listJobs without error using callback', async () => {
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.beyondcorp.appconnections.v1.ListAppConnectionsRequest()
+        new protos.google.cloud.batch.v1.ListJobsRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -1054,26 +860,18 @@ describe('v1.AppConnectionsServiceClient', () => {
         },
       };
       const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.beyondcorp.appconnections.v1.AppConnection()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.beyondcorp.appconnections.v1.AppConnection()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.beyondcorp.appconnections.v1.AppConnection()
-        ),
+        generateSampleMessage(new protos.google.cloud.batch.v1.Job()),
+        generateSampleMessage(new protos.google.cloud.batch.v1.Job()),
+        generateSampleMessage(new protos.google.cloud.batch.v1.Job()),
       ];
-      client.innerApiCalls.listAppConnections =
+      client.innerApiCalls.listJobs =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.listAppConnections(
+        client.listJobs(
           request,
           (
             err?: Error | null,
-            result?:
-              | protos.google.cloud.beyondcorp.appconnections.v1.IAppConnection[]
-              | null
+            result?: protos.google.cloud.batch.v1.IJob[] | null
           ) => {
             if (err) {
               reject(err);
@@ -1086,21 +884,20 @@ describe('v1.AppConnectionsServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.listAppConnections as SinonStub)
+        (client.innerApiCalls.listJobs as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions /*, callback defined above */)
       );
     });
 
-    it('invokes listAppConnections with error', async () => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+    it('invokes listJobs with error', async () => {
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.beyondcorp.appconnections.v1.ListAppConnectionsRequest()
+        new protos.google.cloud.batch.v1.ListJobsRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -1112,55 +909,39 @@ describe('v1.AppConnectionsServiceClient', () => {
         },
       };
       const expectedError = new Error('expected');
-      client.innerApiCalls.listAppConnections = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listAppConnections(request), expectedError);
+      client.innerApiCalls.listJobs = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.listJobs(request), expectedError);
       assert(
-        (client.innerApiCalls.listAppConnections as SinonStub)
+        (client.innerApiCalls.listJobs as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
     });
 
-    it('invokes listAppConnectionsStream without error', async () => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+    it('invokes listJobsStream without error', async () => {
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.beyondcorp.appconnections.v1.ListAppConnectionsRequest()
+        new protos.google.cloud.batch.v1.ListJobsRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.beyondcorp.appconnections.v1.AppConnection()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.beyondcorp.appconnections.v1.AppConnection()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.beyondcorp.appconnections.v1.AppConnection()
-        ),
+        generateSampleMessage(new protos.google.cloud.batch.v1.Job()),
+        generateSampleMessage(new protos.google.cloud.batch.v1.Job()),
+        generateSampleMessage(new protos.google.cloud.batch.v1.Job()),
       ];
-      client.descriptors.page.listAppConnections.createStream =
+      client.descriptors.page.listJobs.createStream =
         stubPageStreamingCall(expectedResponse);
-      const stream = client.listAppConnectionsStream(request);
+      const stream = client.listJobsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.beyondcorp.appconnections.v1.AppConnection[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.beyondcorp.appconnections.v1.AppConnection
-          ) => {
-            responses.push(response);
-          }
-        );
+        const responses: protos.google.cloud.batch.v1.Job[] = [];
+        stream.on('data', (response: protos.google.cloud.batch.v1.Job) => {
+          responses.push(response);
+        });
         stream.on('end', () => {
           resolve(responses);
         });
@@ -1171,45 +952,39 @@ describe('v1.AppConnectionsServiceClient', () => {
       const responses = await promise;
       assert.deepStrictEqual(responses, expectedResponse);
       assert(
-        (client.descriptors.page.listAppConnections.createStream as SinonStub)
+        (client.descriptors.page.listJobs.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listAppConnections, request)
+          .calledWith(client.innerApiCalls.listJobs, request)
       );
       assert.strictEqual(
-        (
-          client.descriptors.page.listAppConnections.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        (client.descriptors.page.listJobs.createStream as SinonStub).getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
-    it('invokes listAppConnectionsStream with error', async () => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+    it('invokes listJobsStream with error', async () => {
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.beyondcorp.appconnections.v1.ListAppConnectionsRequest()
+        new protos.google.cloud.batch.v1.ListJobsRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listAppConnections.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listAppConnectionsStream(request);
+      client.descriptors.page.listJobs.createStream = stubPageStreamingCall(
+        undefined,
+        expectedError
+      );
+      const stream = client.listJobsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.beyondcorp.appconnections.v1.AppConnection[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.beyondcorp.appconnections.v1.AppConnection
-          ) => {
-            responses.push(response);
-          }
-        );
+        const responses: protos.google.cloud.batch.v1.Job[] = [];
+        stream.on('data', (response: protos.google.cloud.batch.v1.Job) => {
+          responses.push(response);
+        });
         stream.on('end', () => {
           resolve(responses);
         });
@@ -1219,112 +994,98 @@ describe('v1.AppConnectionsServiceClient', () => {
       });
       await assert.rejects(promise, expectedError);
       assert(
-        (client.descriptors.page.listAppConnections.createStream as SinonStub)
+        (client.descriptors.page.listJobs.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listAppConnections, request)
+          .calledWith(client.innerApiCalls.listJobs, request)
       );
       assert.strictEqual(
-        (
-          client.descriptors.page.listAppConnections.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        (client.descriptors.page.listJobs.createStream as SinonStub).getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
-    it('uses async iteration with listAppConnections without error', async () => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+    it('uses async iteration with listJobs without error', async () => {
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.beyondcorp.appconnections.v1.ListAppConnectionsRequest()
+        new protos.google.cloud.batch.v1.ListJobsRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.beyondcorp.appconnections.v1.AppConnection()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.beyondcorp.appconnections.v1.AppConnection()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.beyondcorp.appconnections.v1.AppConnection()
-        ),
+        generateSampleMessage(new protos.google.cloud.batch.v1.Job()),
+        generateSampleMessage(new protos.google.cloud.batch.v1.Job()),
+        generateSampleMessage(new protos.google.cloud.batch.v1.Job()),
       ];
-      client.descriptors.page.listAppConnections.asyncIterate =
+      client.descriptors.page.listJobs.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.beyondcorp.appconnections.v1.IAppConnection[] =
-        [];
-      const iterable = client.listAppConnectionsAsync(request);
+      const responses: protos.google.cloud.batch.v1.IJob[] = [];
+      const iterable = client.listJobsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (
-          client.descriptors.page.listAppConnections.asyncIterate as SinonStub
-        ).getCall(0).args[1],
+        (client.descriptors.page.listJobs.asyncIterate as SinonStub).getCall(0)
+          .args[1],
         request
       );
       assert.strictEqual(
-        (
-          client.descriptors.page.listAppConnections.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        (client.descriptors.page.listJobs.asyncIterate as SinonStub).getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
-    it('uses async iteration with listAppConnections with error', async () => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+    it('uses async iteration with listJobs with error', async () => {
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.beyondcorp.appconnections.v1.ListAppConnectionsRequest()
+        new protos.google.cloud.batch.v1.ListJobsRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listAppConnections.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listAppConnectionsAsync(request);
+      client.descriptors.page.listJobs.asyncIterate = stubAsyncIterationCall(
+        undefined,
+        expectedError
+      );
+      const iterable = client.listJobsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.beyondcorp.appconnections.v1.IAppConnection[] =
-          [];
+        const responses: protos.google.cloud.batch.v1.IJob[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (
-          client.descriptors.page.listAppConnections.asyncIterate as SinonStub
-        ).getCall(0).args[1],
+        (client.descriptors.page.listJobs.asyncIterate as SinonStub).getCall(0)
+          .args[1],
         request
       );
       assert.strictEqual(
-        (
-          client.descriptors.page.listAppConnections.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        (client.descriptors.page.listJobs.asyncIterate as SinonStub).getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
   });
 
-  describe('resolveAppConnections', () => {
-    it('invokes resolveAppConnections without error', async () => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+  describe('listTasks', () => {
+    it('invokes listTasks without error', async () => {
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsRequest()
+        new protos.google.cloud.batch.v1.ListTasksRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -1336,36 +1097,28 @@ describe('v1.AppConnectionsServiceClient', () => {
         },
       };
       const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsResponse.AppConnectionDetails()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsResponse.AppConnectionDetails()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsResponse.AppConnectionDetails()
-        ),
+        generateSampleMessage(new protos.google.cloud.batch.v1.Task()),
+        generateSampleMessage(new protos.google.cloud.batch.v1.Task()),
+        generateSampleMessage(new protos.google.cloud.batch.v1.Task()),
       ];
-      client.innerApiCalls.resolveAppConnections =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.resolveAppConnections(request);
+      client.innerApiCalls.listTasks = stubSimpleCall(expectedResponse);
+      const [response] = await client.listTasks(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.resolveAppConnections as SinonStub)
+        (client.innerApiCalls.listTasks as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
     });
 
-    it('invokes resolveAppConnections without error using callback', async () => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+    it('invokes listTasks without error using callback', async () => {
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsRequest()
+        new protos.google.cloud.batch.v1.ListTasksRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -1377,26 +1130,18 @@ describe('v1.AppConnectionsServiceClient', () => {
         },
       };
       const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsResponse.AppConnectionDetails()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsResponse.AppConnectionDetails()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsResponse.AppConnectionDetails()
-        ),
+        generateSampleMessage(new protos.google.cloud.batch.v1.Task()),
+        generateSampleMessage(new protos.google.cloud.batch.v1.Task()),
+        generateSampleMessage(new protos.google.cloud.batch.v1.Task()),
       ];
-      client.innerApiCalls.resolveAppConnections =
+      client.innerApiCalls.listTasks =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.resolveAppConnections(
+        client.listTasks(
           request,
           (
             err?: Error | null,
-            result?:
-              | protos.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsResponse.IAppConnectionDetails[]
-              | null
+            result?: protos.google.cloud.batch.v1.ITask[] | null
           ) => {
             if (err) {
               reject(err);
@@ -1409,21 +1154,20 @@ describe('v1.AppConnectionsServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.resolveAppConnections as SinonStub)
+        (client.innerApiCalls.listTasks as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions /*, callback defined above */)
       );
     });
 
-    it('invokes resolveAppConnections with error', async () => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+    it('invokes listTasks with error', async () => {
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsRequest()
+        new protos.google.cloud.batch.v1.ListTasksRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -1435,58 +1179,39 @@ describe('v1.AppConnectionsServiceClient', () => {
         },
       };
       const expectedError = new Error('expected');
-      client.innerApiCalls.resolveAppConnections = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.resolveAppConnections(request),
-        expectedError
-      );
+      client.innerApiCalls.listTasks = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.listTasks(request), expectedError);
       assert(
-        (client.innerApiCalls.resolveAppConnections as SinonStub)
+        (client.innerApiCalls.listTasks as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
     });
 
-    it('invokes resolveAppConnectionsStream without error', async () => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+    it('invokes listTasksStream without error', async () => {
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsRequest()
+        new protos.google.cloud.batch.v1.ListTasksRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsResponse.AppConnectionDetails()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsResponse.AppConnectionDetails()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsResponse.AppConnectionDetails()
-        ),
+        generateSampleMessage(new protos.google.cloud.batch.v1.Task()),
+        generateSampleMessage(new protos.google.cloud.batch.v1.Task()),
+        generateSampleMessage(new protos.google.cloud.batch.v1.Task()),
       ];
-      client.descriptors.page.resolveAppConnections.createStream =
+      client.descriptors.page.listTasks.createStream =
         stubPageStreamingCall(expectedResponse);
-      const stream = client.resolveAppConnectionsStream(request);
+      const stream = client.listTasksStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsResponse.AppConnectionDetails[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsResponse.AppConnectionDetails
-          ) => {
-            responses.push(response);
-          }
-        );
+        const responses: protos.google.cloud.batch.v1.Task[] = [];
+        stream.on('data', (response: protos.google.cloud.batch.v1.Task) => {
+          responses.push(response);
+        });
         stream.on('end', () => {
           resolve(responses);
         });
@@ -1497,49 +1222,39 @@ describe('v1.AppConnectionsServiceClient', () => {
       const responses = await promise;
       assert.deepStrictEqual(responses, expectedResponse);
       assert(
-        (
-          client.descriptors.page.resolveAppConnections
-            .createStream as SinonStub
-        )
+        (client.descriptors.page.listTasks.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.resolveAppConnections, request)
+          .calledWith(client.innerApiCalls.listTasks, request)
       );
       assert.strictEqual(
-        (
-          client.descriptors.page.resolveAppConnections
-            .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        (client.descriptors.page.listTasks.createStream as SinonStub).getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
-    it('invokes resolveAppConnectionsStream with error', async () => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+    it('invokes listTasksStream with error', async () => {
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsRequest()
+        new protos.google.cloud.batch.v1.ListTasksRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.resolveAppConnections.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.resolveAppConnectionsStream(request);
+      client.descriptors.page.listTasks.createStream = stubPageStreamingCall(
+        undefined,
+        expectedError
+      );
+      const stream = client.listTasksStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsResponse.AppConnectionDetails[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsResponse.AppConnectionDetails
-          ) => {
-            responses.push(response);
-          }
-        );
+        const responses: protos.google.cloud.batch.v1.Task[] = [];
+        stream.on('data', (response: protos.google.cloud.batch.v1.Task) => {
+          responses.push(response);
+        });
         stream.on('end', () => {
           resolve(responses);
         });
@@ -1549,116 +1264,94 @@ describe('v1.AppConnectionsServiceClient', () => {
       });
       await assert.rejects(promise, expectedError);
       assert(
-        (
-          client.descriptors.page.resolveAppConnections
-            .createStream as SinonStub
-        )
+        (client.descriptors.page.listTasks.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.resolveAppConnections, request)
+          .calledWith(client.innerApiCalls.listTasks, request)
       );
       assert.strictEqual(
-        (
-          client.descriptors.page.resolveAppConnections
-            .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        (client.descriptors.page.listTasks.createStream as SinonStub).getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
-    it('uses async iteration with resolveAppConnections without error', async () => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+    it('uses async iteration with listTasks without error', async () => {
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsRequest()
+        new protos.google.cloud.batch.v1.ListTasksRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsResponse.AppConnectionDetails()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsResponse.AppConnectionDetails()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsResponse.AppConnectionDetails()
-        ),
+        generateSampleMessage(new protos.google.cloud.batch.v1.Task()),
+        generateSampleMessage(new protos.google.cloud.batch.v1.Task()),
+        generateSampleMessage(new protos.google.cloud.batch.v1.Task()),
       ];
-      client.descriptors.page.resolveAppConnections.asyncIterate =
+      client.descriptors.page.listTasks.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsResponse.IAppConnectionDetails[] =
-        [];
-      const iterable = client.resolveAppConnectionsAsync(request);
+      const responses: protos.google.cloud.batch.v1.ITask[] = [];
+      const iterable = client.listTasksAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (
-          client.descriptors.page.resolveAppConnections
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
+        (client.descriptors.page.listTasks.asyncIterate as SinonStub).getCall(0)
+          .args[1],
         request
       );
       assert.strictEqual(
-        (
-          client.descriptors.page.resolveAppConnections
-            .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        (client.descriptors.page.listTasks.asyncIterate as SinonStub).getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
-    it('uses async iteration with resolveAppConnections with error', async () => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+    it('uses async iteration with listTasks with error', async () => {
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsRequest()
+        new protos.google.cloud.batch.v1.ListTasksRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.resolveAppConnections.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.resolveAppConnectionsAsync(request);
+      client.descriptors.page.listTasks.asyncIterate = stubAsyncIterationCall(
+        undefined,
+        expectedError
+      );
+      const iterable = client.listTasksAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsResponse.IAppConnectionDetails[] =
-          [];
+        const responses: protos.google.cloud.batch.v1.ITask[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (
-          client.descriptors.page.resolveAppConnections
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
+        (client.descriptors.page.listTasks.asyncIterate as SinonStub).getCall(0)
+          .args[1],
         request
       );
       assert.strictEqual(
-        (
-          client.descriptors.page.resolveAppConnections
-            .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        (client.descriptors.page.listTasks.asyncIterate as SinonStub).getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
   });
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
@@ -1685,11 +1378,10 @@ describe('v1.AppConnectionsServiceClient', () => {
       );
     });
     it('invokes getIamPolicy without error using callback', async () => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
@@ -1730,11 +1422,10 @@ describe('v1.AppConnectionsServiceClient', () => {
       assert((client.iamClient.getIamPolicy as SinonStub).getCall(0));
     });
     it('invokes getIamPolicy with error', async () => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
@@ -1763,11 +1454,10 @@ describe('v1.AppConnectionsServiceClient', () => {
   });
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
@@ -1794,11 +1484,10 @@ describe('v1.AppConnectionsServiceClient', () => {
       );
     });
     it('invokes setIamPolicy without error using callback', async () => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
@@ -1839,11 +1528,10 @@ describe('v1.AppConnectionsServiceClient', () => {
       assert((client.iamClient.setIamPolicy as SinonStub).getCall(0));
     });
     it('invokes setIamPolicy with error', async () => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
@@ -1872,11 +1560,10 @@ describe('v1.AppConnectionsServiceClient', () => {
   });
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
@@ -1906,11 +1593,10 @@ describe('v1.AppConnectionsServiceClient', () => {
       );
     });
     it('invokes testIamPermissions without error using callback', async () => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
@@ -1951,11 +1637,10 @@ describe('v1.AppConnectionsServiceClient', () => {
       assert((client.iamClient.testIamPermissions as SinonStub).getCall(0));
     });
     it('invokes testIamPermissions with error', async () => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
@@ -1987,11 +1672,10 @@ describe('v1.AppConnectionsServiceClient', () => {
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
@@ -2018,11 +1702,10 @@ describe('v1.AppConnectionsServiceClient', () => {
       );
     });
     it('invokes getLocation without error using callback', async () => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
@@ -2063,11 +1746,10 @@ describe('v1.AppConnectionsServiceClient', () => {
       assert((client.locationsClient.getLocation as SinonStub).getCall(0));
     });
     it('invokes getLocation with error', async () => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
@@ -2099,11 +1781,10 @@ describe('v1.AppConnectionsServiceClient', () => {
   });
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
@@ -2145,11 +1826,10 @@ describe('v1.AppConnectionsServiceClient', () => {
       );
     });
     it('uses async iteration with listLocations with error', async () => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
@@ -2184,11 +1864,10 @@ describe('v1.AppConnectionsServiceClient', () => {
   });
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
@@ -2206,11 +1885,10 @@ describe('v1.AppConnectionsServiceClient', () => {
       );
     });
     it('invokes getOperation without error using callback', async () => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -2241,11 +1919,10 @@ describe('v1.AppConnectionsServiceClient', () => {
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
     it('invokes getOperation with error', async () => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -2266,11 +1943,10 @@ describe('v1.AppConnectionsServiceClient', () => {
   });
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
@@ -2289,11 +1965,10 @@ describe('v1.AppConnectionsServiceClient', () => {
       );
     });
     it('invokes cancelOperation without error using callback', async () => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -2324,11 +1999,10 @@ describe('v1.AppConnectionsServiceClient', () => {
       assert((client.operationsClient.cancelOperation as SinonStub).getCall(0));
     });
     it('invokes cancelOperation with error', async () => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -2349,11 +2023,10 @@ describe('v1.AppConnectionsServiceClient', () => {
   });
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
@@ -2372,11 +2045,10 @@ describe('v1.AppConnectionsServiceClient', () => {
       );
     });
     it('invokes deleteOperation without error using callback', async () => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -2407,11 +2079,10 @@ describe('v1.AppConnectionsServiceClient', () => {
       assert((client.operationsClient.deleteOperation as SinonStub).getCall(0));
     });
     it('invokes deleteOperation with error', async () => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -2432,11 +2103,10 @@ describe('v1.AppConnectionsServiceClient', () => {
   });
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
       );
@@ -2469,11 +2139,10 @@ describe('v1.AppConnectionsServiceClient', () => {
       );
     });
     it('uses async iteration with listOperations with error', async () => {
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
@@ -2500,130 +2169,64 @@ describe('v1.AppConnectionsServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('appConnection', () => {
-      const fakePath = '/rendered/path/appConnection';
+    describe('job', () => {
+      const fakePath = '/rendered/path/job';
       const expectedParameters = {
         project: 'projectValue',
         location: 'locationValue',
-        app_connection: 'appConnectionValue',
+        job: 'jobValue',
       };
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
-      client.pathTemplates.appConnectionPathTemplate.render = sinon
+      client.pathTemplates.jobPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
-      client.pathTemplates.appConnectionPathTemplate.match = sinon
+      client.pathTemplates.jobPathTemplate.match = sinon
         .stub()
         .returns(expectedParameters);
 
-      it('appConnectionPath', () => {
-        const result = client.appConnectionPath(
+      it('jobPath', () => {
+        const result = client.jobPath(
           'projectValue',
           'locationValue',
-          'appConnectionValue'
+          'jobValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.appConnectionPathTemplate.render as SinonStub)
+          (client.pathTemplates.jobPathTemplate.render as SinonStub)
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
-      it('matchProjectFromAppConnectionName', () => {
-        const result = client.matchProjectFromAppConnectionName(fakePath);
+      it('matchProjectFromJobName', () => {
+        const result = client.matchProjectFromJobName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.appConnectionPathTemplate.match as SinonStub)
+          (client.pathTemplates.jobPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
-      it('matchLocationFromAppConnectionName', () => {
-        const result = client.matchLocationFromAppConnectionName(fakePath);
+      it('matchLocationFromJobName', () => {
+        const result = client.matchLocationFromJobName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.appConnectionPathTemplate.match as SinonStub)
+          (client.pathTemplates.jobPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
-      it('matchAppConnectionFromAppConnectionName', () => {
-        const result = client.matchAppConnectionFromAppConnectionName(fakePath);
-        assert.strictEqual(result, 'appConnectionValue');
+      it('matchJobFromJobName', () => {
+        const result = client.matchJobFromJobName(fakePath);
+        assert.strictEqual(result, 'jobValue');
         assert(
-          (client.pathTemplates.appConnectionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('appConnector', () => {
-      const fakePath = '/rendered/path/appConnector';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        app_connector: 'appConnectorValue',
-      };
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      client.pathTemplates.appConnectorPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.appConnectorPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('appConnectorPath', () => {
-        const result = client.appConnectorPath(
-          'projectValue',
-          'locationValue',
-          'appConnectorValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.appConnectorPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromAppConnectorName', () => {
-        const result = client.matchProjectFromAppConnectorName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.appConnectorPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromAppConnectorName', () => {
-        const result = client.matchLocationFromAppConnectorName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.appConnectorPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAppConnectorFromAppConnectorName', () => {
-        const result = client.matchAppConnectorFromAppConnectorName(fakePath);
-        assert.strictEqual(result, 'appConnectorValue');
-        assert(
-          (client.pathTemplates.appConnectorPathTemplate.match as SinonStub)
+          (client.pathTemplates.jobPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2636,11 +2239,10 @@ describe('v1.AppConnectionsServiceClient', () => {
         project: 'projectValue',
         location: 'locationValue',
       };
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
@@ -2685,11 +2287,10 @@ describe('v1.AppConnectionsServiceClient', () => {
       const expectedParameters = {
         project: 'projectValue',
       };
-      const client =
-        new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
@@ -2713,6 +2314,170 @@ describe('v1.AppConnectionsServiceClient', () => {
         assert.strictEqual(result, 'projectValue');
         assert(
           (client.pathTemplates.projectPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('task', () => {
+      const fakePath = '/rendered/path/task';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        job: 'jobValue',
+        task_group: 'taskGroupValue',
+        task: 'taskValue',
+      };
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.taskPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.taskPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('taskPath', () => {
+        const result = client.taskPath(
+          'projectValue',
+          'locationValue',
+          'jobValue',
+          'taskGroupValue',
+          'taskValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.taskPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromTaskName', () => {
+        const result = client.matchProjectFromTaskName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.taskPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromTaskName', () => {
+        const result = client.matchLocationFromTaskName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.taskPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchJobFromTaskName', () => {
+        const result = client.matchJobFromTaskName(fakePath);
+        assert.strictEqual(result, 'jobValue');
+        assert(
+          (client.pathTemplates.taskPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchTaskGroupFromTaskName', () => {
+        const result = client.matchTaskGroupFromTaskName(fakePath);
+        assert.strictEqual(result, 'taskGroupValue');
+        assert(
+          (client.pathTemplates.taskPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchTaskFromTaskName', () => {
+        const result = client.matchTaskFromTaskName(fakePath);
+        assert.strictEqual(result, 'taskValue');
+        assert(
+          (client.pathTemplates.taskPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('taskGroup', () => {
+      const fakePath = '/rendered/path/taskGroup';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        job: 'jobValue',
+        task_group: 'taskGroupValue',
+      };
+      const client = new batchserviceModule.v1.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.taskGroupPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.taskGroupPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('taskGroupPath', () => {
+        const result = client.taskGroupPath(
+          'projectValue',
+          'locationValue',
+          'jobValue',
+          'taskGroupValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.taskGroupPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromTaskGroupName', () => {
+        const result = client.matchProjectFromTaskGroupName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.taskGroupPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromTaskGroupName', () => {
+        const result = client.matchLocationFromTaskGroupName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.taskGroupPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchJobFromTaskGroupName', () => {
+        const result = client.matchJobFromTaskGroupName(fakePath);
+        assert.strictEqual(result, 'jobValue');
+        assert(
+          (client.pathTemplates.taskGroupPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchTaskGroupFromTaskGroupName', () => {
+        const result = client.matchTaskGroupFromTaskGroupName(fakePath);
+        assert.strictEqual(result, 'taskGroupValue');
+        assert(
+          (client.pathTemplates.taskGroupPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

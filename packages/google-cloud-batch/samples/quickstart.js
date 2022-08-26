@@ -16,12 +16,10 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-
-
 'use strict';
 
-function main(parent, appConnectorId) {
-  // [START beyondcorp_v1_generated_AppConnectionsService_ResolveAppConnections_async]
+function main(parent) {
+  // [START batch_quickstart]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,53 +27,43 @@ function main(parent, appConnectorId) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the AppConnection location using the form:
-   *  `projects/{project_id}/locations/{location_id}`
+   *  Parent path.
    */
   // const parent = 'abc123'
   /**
-   *  Required. BeyondCorp Connector name of the connector associated with those
-   *  AppConnections using the form:
-   *  `projects/{project_id}/locations/{location_id}/appConnectors/{app_connector_id}`
+   *  List filter.
    */
-  // const appConnectorId = 'abc123'
+  // const filter = 'abc123'
   /**
-   *  Optional. The maximum number of items to return.
-   *  If not specified, a default value of 50 will be used by the service.
-   *  Regardless of the page_size value, the response may include a partial list
-   *  and a caller should only rely on response's
-   *  next_page_token BeyondCorp.ResolveAppConnectionsResponse.next_page_token 
-   *  to determine if there are more instances left to be queried.
+   *  Page size.
    */
   // const pageSize = 1234
   /**
-   *  Optional. The next_page_token value returned from a previous
-   *  ResolveAppConnectionsResponse, if any.
+   *  Page token.
    */
   // const pageToken = 'abc123'
 
-  // Imports the Appconnections library
-  const {AppConnectionsServiceClient} = require('@google-cloud/appconnections').v1;
+  // Imports the Batch library
+  const {BatchServiceClient} = require('@google-cloud/batch').v1;
 
   // Instantiates a client
-  const appconnectionsClient = new AppConnectionsServiceClient();
+  const batchClient = new BatchServiceClient();
 
-  async function callResolveAppConnections() {
+  async function callListJobs() {
     // Construct request
     const request = {
       parent,
-      appConnectorId,
     };
 
     // Run request
-    const iterable = await appconnectionsClient.resolveAppConnectionsAsync(request);
+    const iterable = await batchClient.listJobsAsync(request);
     for await (const response of iterable) {
-        console.log(response);
+      console.log(response);
     }
   }
 
-  callResolveAppConnections();
-  // [END beyondcorp_v1_generated_AppConnectionsService_ResolveAppConnections_async]
+  callListJobs();
+  // [END batch_quickstart]
 }
 
 process.on('unhandledRejection', err => {

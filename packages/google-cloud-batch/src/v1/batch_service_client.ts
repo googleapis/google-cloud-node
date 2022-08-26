@@ -38,32 +38,21 @@ import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
  * Client JSON configuration object, loaded from
- * `src/v1/app_connections_service_client_config.json`.
+ * `src/v1/batch_service_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
-import * as gapicConfig from './app_connections_service_client_config.json';
+import * as gapicConfig from './batch_service_client_config.json';
 import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
 
 /**
- *  ## API Overview
- *
- *  The `beyondcorp.googleapis.com` service implements the Google Cloud
- *  BeyondCorp API.
- *
- *  ## Data Model
- *
- *  The AppConnectionsService exposes the following resources:
- *
- *  * AppConnections, named as follows:
- *    `projects/{project_id}/locations/{location_id}/appConnections/{app_connection_id}`.
- *
- *  The AppConnectionsService service provides methods to manage
- *  (create/read/update/delete) BeyondCorp AppConnections.
+ *  Google Batch Service.
+ *  The service manages user submitted batch jobs and allocates Google Compute
+ *  Engine VM instances to run the jobs.
  * @class
  * @memberof v1
  */
-export class AppConnectionsServiceClient {
+export class BatchServiceClient {
   private _terminated = false;
   private _opts: ClientOptions;
   private _providedCustomServicePath: boolean;
@@ -84,10 +73,10 @@ export class AppConnectionsServiceClient {
   locationsClient: LocationsClient;
   pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  appConnectionsServiceStub?: Promise<{[name: string]: Function}>;
+  batchServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
-   * Construct an instance of AppConnectionsServiceClient.
+   * Construct an instance of BatchServiceClient.
    *
    * @param {object} [options] - The configuration object.
    * The options accepted by the constructor are described in detail
@@ -121,8 +110,7 @@ export class AppConnectionsServiceClient {
    */
   constructor(opts?: ClientOptions) {
     // Ensure that options include all the required fields.
-    const staticMembers = this
-      .constructor as typeof AppConnectionsServiceClient;
+    const staticMembers = this.constructor as typeof BatchServiceClient;
     const servicePath =
       opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
     this._providedCustomServicePath = !!(
@@ -188,11 +176,8 @@ export class AppConnectionsServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
-      appConnectionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/appConnections/{app_connection}'
-      ),
-      appConnectorPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/appConnectors/{app_connector}'
+      jobPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/jobs/{job}'
       ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
@@ -200,21 +185,27 @@ export class AppConnectionsServiceClient {
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
       ),
+      taskPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/jobs/{job}/taskGroups/{task_group}/tasks/{task}'
+      ),
+      taskGroupPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/jobs/{job}/taskGroups/{task_group}'
+      ),
     };
 
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listAppConnections: new this._gaxModule.PageDescriptor(
+      listJobs: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
-        'appConnections'
+        'jobs'
       ),
-      resolveAppConnections: new this._gaxModule.PageDescriptor(
+      listTasks: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
-        'appConnectionDetails'
+        'tasks'
       ),
     };
 
@@ -239,64 +230,38 @@ export class AppConnectionsServiceClient {
         },
         {
           selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',
-          get: '/v1/{resource=projects/*/locations/*/appConnections/*}:getIamPolicy',
+          get: '/v1/{resource=projects/*/locations/*/jobs/*}:getIamPolicy',
           additional_bindings: [
-            {
-              get: '/v1/{resource=projects/*/locations/*/appConnectors/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/appGateways/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/clientConnectorServices/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/clientGateways/*}:getIamPolicy',
-            },
+            {get: '/v1/{resource=projects/*/locations/*/tasks/*}:getIamPolicy'},
+            {get: '/v1/{resource=projects/*/locations/*/nodes/*}:getIamPolicy'},
           ],
         },
         {
           selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',
-          post: '/v1/{resource=projects/*/locations/*/appConnections/*}:setIamPolicy',
+          post: '/v1/{resource=projects/*/locations/*/jobs/*}:setIamPolicy',
           body: '*',
           additional_bindings: [
             {
-              post: '/v1/{resource=projects/*/locations/*/appConnectors/*}:setIamPolicy',
+              post: '/v1/{resource=projects/*/locations/*/tasks/*}:setIamPolicy',
               body: '*',
             },
             {
-              post: '/v1/{resource=projects/*/locations/*/appGateways/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/clientConnectorServices/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/clientGateways/*}:setIamPolicy',
+              post: '/v1/{resource=projects/*/locations/*/nodes/*}:setIamPolicy',
               body: '*',
             },
           ],
         },
         {
           selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',
-          post: '/v1/{resource=projects/*/locations/*/appConnections/*}:testIamPermissions',
+          post: '/v1/{resource=projects/*/locations/*/jobs/*}:testIamPermissions',
           body: '*',
           additional_bindings: [
             {
-              post: '/v1/{resource=projects/*/locations/*/appConnectors/*}:testIamPermissions',
+              post: '/v1/{resource=projects/*/locations/*/tasks/*}:testIamPermissions',
               body: '*',
             },
             {
-              post: '/v1/{resource=projects/*/locations/*/appGateways/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/clientConnectorServices/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/clientGateways/*}:testIamPermissions',
+              post: '/v1/{resource=projects/*/locations/*/nodes/*}:testIamPermissions',
               body: '*',
             },
           ],
@@ -323,46 +288,24 @@ export class AppConnectionsServiceClient {
     this.operationsClient = this._gaxModule
       .lro(lroOptions)
       .operationsClient(opts);
-    const createAppConnectionResponse = protoFilesRoot.lookup(
-      '.google.cloud.beyondcorp.appconnections.v1.AppConnection'
-    ) as gax.protobuf.Type;
-    const createAppConnectionMetadata = protoFilesRoot.lookup(
-      '.google.cloud.beyondcorp.appconnections.v1.AppConnectionOperationMetadata'
-    ) as gax.protobuf.Type;
-    const updateAppConnectionResponse = protoFilesRoot.lookup(
-      '.google.cloud.beyondcorp.appconnections.v1.AppConnection'
-    ) as gax.protobuf.Type;
-    const updateAppConnectionMetadata = protoFilesRoot.lookup(
-      '.google.cloud.beyondcorp.appconnections.v1.AppConnectionOperationMetadata'
-    ) as gax.protobuf.Type;
-    const deleteAppConnectionResponse = protoFilesRoot.lookup(
+    const deleteJobResponse = protoFilesRoot.lookup(
       '.google.protobuf.Empty'
     ) as gax.protobuf.Type;
-    const deleteAppConnectionMetadata = protoFilesRoot.lookup(
-      '.google.cloud.beyondcorp.appconnections.v1.AppConnectionOperationMetadata'
+    const deleteJobMetadata = protoFilesRoot.lookup(
+      '.google.cloud.batch.v1.OperationMetadata'
     ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
-      createAppConnection: new this._gaxModule.LongrunningDescriptor(
+      deleteJob: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        createAppConnectionResponse.decode.bind(createAppConnectionResponse),
-        createAppConnectionMetadata.decode.bind(createAppConnectionMetadata)
-      ),
-      updateAppConnection: new this._gaxModule.LongrunningDescriptor(
-        this.operationsClient,
-        updateAppConnectionResponse.decode.bind(updateAppConnectionResponse),
-        updateAppConnectionMetadata.decode.bind(updateAppConnectionMetadata)
-      ),
-      deleteAppConnection: new this._gaxModule.LongrunningDescriptor(
-        this.operationsClient,
-        deleteAppConnectionResponse.decode.bind(deleteAppConnectionResponse),
-        deleteAppConnectionMetadata.decode.bind(deleteAppConnectionMetadata)
+        deleteJobResponse.decode.bind(deleteJobResponse),
+        deleteJobMetadata.decode.bind(deleteJobMetadata)
       ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.beyondcorp.appconnections.v1.AppConnectionsService',
+      'google.cloud.batch.v1.BatchService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
       {'x-goog-api-client': clientHeader.join(' ')}
@@ -390,36 +333,35 @@ export class AppConnectionsServiceClient {
    */
   initialize() {
     // If the client stub promise is already initialized, return immediately.
-    if (this.appConnectionsServiceStub) {
-      return this.appConnectionsServiceStub;
+    if (this.batchServiceStub) {
+      return this.batchServiceStub;
     }
 
     // Put together the "service stub" for
-    // google.cloud.beyondcorp.appconnections.v1.AppConnectionsService.
-    this.appConnectionsServiceStub = this._gaxGrpc.createStub(
+    // google.cloud.batch.v1.BatchService.
+    this.batchServiceStub = this._gaxGrpc.createStub(
       this._opts.fallback
         ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.beyondcorp.appconnections.v1.AppConnectionsService'
+            'google.cloud.batch.v1.BatchService'
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.beyondcorp.appconnections.v1
-            .AppConnectionsService,
+          (this._protos as any).google.cloud.batch.v1.BatchService,
       this._opts,
       this._providedCustomServicePath
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const appConnectionsServiceStubMethods = [
-      'listAppConnections',
-      'getAppConnection',
-      'createAppConnection',
-      'updateAppConnection',
-      'deleteAppConnection',
-      'resolveAppConnections',
+    const batchServiceStubMethods = [
+      'createJob',
+      'getJob',
+      'deleteJob',
+      'listJobs',
+      'getTask',
+      'listTasks',
     ];
-    for (const methodName of appConnectionsServiceStubMethods) {
-      const callPromise = this.appConnectionsServiceStub.then(
+    for (const methodName of batchServiceStubMethods) {
+      const callPromise = this.batchServiceStub.then(
         stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
@@ -447,7 +389,7 @@ export class AppConnectionsServiceClient {
       this.innerApiCalls[methodName] = apiCall;
     }
 
-    return this.appConnectionsServiceStub;
+    return this.batchServiceStub;
   }
 
   /**
@@ -455,7 +397,7 @@ export class AppConnectionsServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    return 'beyondcorp.googleapis.com';
+    return 'batch.googleapis.com';
   }
 
   /**
@@ -464,7 +406,7 @@ export class AppConnectionsServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    return 'beyondcorp.googleapis.com';
+    return 'batch.googleapis.com';
   }
 
   /**
@@ -504,124 +446,29 @@ export class AppConnectionsServiceClient {
   // -- Service calls --
   // -------------------
   /**
-   * Gets details of a single AppConnection.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. BeyondCorp AppConnection name using the form:
-   *   `projects/{project_id}/locations/{location_id}/appConnections/{app_connection_id}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [AppConnection]{@link google.cloud.beyondcorp.appconnections.v1.AppConnection}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/app_connections_service.get_app_connection.js</caption>
-   * region_tag:beyondcorp_v1_generated_AppConnectionsService_GetAppConnection_async
-   */
-  getAppConnection(
-    request?: protos.google.cloud.beyondcorp.appconnections.v1.IGetAppConnectionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.beyondcorp.appconnections.v1.IAppConnection,
-      (
-        | protos.google.cloud.beyondcorp.appconnections.v1.IGetAppConnectionRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  >;
-  getAppConnection(
-    request: protos.google.cloud.beyondcorp.appconnections.v1.IGetAppConnectionRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.beyondcorp.appconnections.v1.IAppConnection,
-      | protos.google.cloud.beyondcorp.appconnections.v1.IGetAppConnectionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getAppConnection(
-    request: protos.google.cloud.beyondcorp.appconnections.v1.IGetAppConnectionRequest,
-    callback: Callback<
-      protos.google.cloud.beyondcorp.appconnections.v1.IAppConnection,
-      | protos.google.cloud.beyondcorp.appconnections.v1.IGetAppConnectionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getAppConnection(
-    request?: protos.google.cloud.beyondcorp.appconnections.v1.IGetAppConnectionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.cloud.beyondcorp.appconnections.v1.IAppConnection,
-          | protos.google.cloud.beyondcorp.appconnections.v1.IGetAppConnectionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.beyondcorp.appconnections.v1.IAppConnection,
-      | protos.google.cloud.beyondcorp.appconnections.v1.IGetAppConnectionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.beyondcorp.appconnections.v1.IAppConnection,
-      (
-        | protos.google.cloud.beyondcorp.appconnections.v1.IGetAppConnectionRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
-      });
-    this.initialize();
-    return this.innerApiCalls.getAppConnection(request, options, callback);
-  }
-
-  /**
-   * Creates a new AppConnection in a given project and location.
+   * Create a Job.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource project name of the AppConnection location using the
-   *   form: `projects/{project_id}/locations/{location_id}`
-   * @param {string} [request.appConnectionId]
-   *   Optional. User-settable AppConnection resource ID.
-   *    * Must start with a letter.
-   *    * Must contain between 4-63 characters from `/{@link 0-9|a-z}-/`.
-   *    * Must end with a number or a letter.
-   * @param {google.cloud.beyondcorp.appconnections.v1.AppConnection} request.appConnection
-   *   Required. A BeyondCorp AppConnection resource.
+   *   Required. The parent resource name where the Job will be created.
+   *   Pattern: "projects/{project}/locations/{location}"
+   * @param {string} request.jobId
+   *   ID used to uniquely identify the Job within its parent scope.
+   *   This field should contain at most 63 characters.
+   *   Only alphanumeric characters or '-' are accepted.
+   *   The '-' character cannot be the first or the last one.
+   *   A system generated ID will be used if the field is not set.
+   *
+   *   The job.name field in the request will be ignored and the created resource
+   *   name of the Job will be "{parent}/jobs/{job_id}".
+   * @param {google.cloud.batch.v1.Job} request.job
+   *   Required. The Job to create.
    * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes since the first request.
+   *   Optional. An optional request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server will guarantee
+   *   that for at least 60 minutes since the first request.
    *
    *   For example, consider a situation where you make an initial request and t
    *   he request times out. If you make the request again with the same request
@@ -631,84 +478,61 @@ export class AppConnectionsServiceClient {
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is
    *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {boolean} [request.validateOnly]
-   *   Optional. If set, validates request by executing a dry-run which would not
-   *   alter the resource in any way.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
+   *   The first element of the array is an object representing [Job]{@link google.cloud.batch.v1.Job}.
    *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/app_connections_service.create_app_connection.js</caption>
-   * region_tag:beyondcorp_v1_generated_AppConnectionsService_CreateAppConnection_async
+   * @example <caption>include:samples/generated/v1/batch_service.create_job.js</caption>
+   * region_tag:batch_v1_generated_BatchService_CreateJob_async
    */
-  createAppConnection(
-    request?: protos.google.cloud.beyondcorp.appconnections.v1.ICreateAppConnectionRequest,
+  createJob(
+    request?: protos.google.cloud.batch.v1.ICreateJobRequest,
     options?: CallOptions
   ): Promise<
     [
-      LROperation<
-        protos.google.cloud.beyondcorp.appconnections.v1.IAppConnection,
-        protos.google.cloud.beyondcorp.appconnections.v1.IAppConnectionOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
+      protos.google.cloud.batch.v1.IJob,
+      protos.google.cloud.batch.v1.ICreateJobRequest | undefined,
       {} | undefined
     ]
   >;
-  createAppConnection(
-    request: protos.google.cloud.beyondcorp.appconnections.v1.ICreateAppConnectionRequest,
+  createJob(
+    request: protos.google.cloud.batch.v1.ICreateJobRequest,
     options: CallOptions,
     callback: Callback<
-      LROperation<
-        protos.google.cloud.beyondcorp.appconnections.v1.IAppConnection,
-        protos.google.cloud.beyondcorp.appconnections.v1.IAppConnectionOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
+      protos.google.cloud.batch.v1.IJob,
+      protos.google.cloud.batch.v1.ICreateJobRequest | null | undefined,
       {} | null | undefined
     >
   ): void;
-  createAppConnection(
-    request: protos.google.cloud.beyondcorp.appconnections.v1.ICreateAppConnectionRequest,
+  createJob(
+    request: protos.google.cloud.batch.v1.ICreateJobRequest,
     callback: Callback<
-      LROperation<
-        protos.google.cloud.beyondcorp.appconnections.v1.IAppConnection,
-        protos.google.cloud.beyondcorp.appconnections.v1.IAppConnectionOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
+      protos.google.cloud.batch.v1.IJob,
+      protos.google.cloud.batch.v1.ICreateJobRequest | null | undefined,
       {} | null | undefined
     >
   ): void;
-  createAppConnection(
-    request?: protos.google.cloud.beyondcorp.appconnections.v1.ICreateAppConnectionRequest,
+  createJob(
+    request?: protos.google.cloud.batch.v1.ICreateJobRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          LROperation<
-            protos.google.cloud.beyondcorp.appconnections.v1.IAppConnection,
-            protos.google.cloud.beyondcorp.appconnections.v1.IAppConnectionOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
+          protos.google.cloud.batch.v1.IJob,
+          protos.google.cloud.batch.v1.ICreateJobRequest | null | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      LROperation<
-        protos.google.cloud.beyondcorp.appconnections.v1.IAppConnection,
-        protos.google.cloud.beyondcorp.appconnections.v1.IAppConnectionOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
+      protos.google.cloud.batch.v1.IJob,
+      protos.google.cloud.batch.v1.ICreateJobRequest | null | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      LROperation<
-        protos.google.cloud.beyondcorp.appconnections.v1.IAppConnection,
-        protos.google.cloud.beyondcorp.appconnections.v1.IAppConnectionOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
+      protos.google.cloud.batch.v1.IJob,
+      protos.google.cloud.batch.v1.ICreateJobRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -728,152 +552,70 @@ export class AppConnectionsServiceClient {
         parent: request.parent || '',
       });
     this.initialize();
-    return this.innerApiCalls.createAppConnection(request, options, callback);
+    return this.innerApiCalls.createJob(request, options, callback);
   }
   /**
-   * Check the status of the long running operation returned by `createAppConnection()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/app_connections_service.create_app_connection.js</caption>
-   * region_tag:beyondcorp_v1_generated_AppConnectionsService_CreateAppConnection_async
-   */
-  async checkCreateAppConnectionProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.beyondcorp.appconnections.v1.AppConnection,
-      protos.google.cloud.beyondcorp.appconnections.v1.AppConnectionOperationMetadata
-    >
-  > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
-    const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
-      operation,
-      this.descriptors.longrunning.createAppConnection,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.beyondcorp.appconnections.v1.AppConnection,
-      protos.google.cloud.beyondcorp.appconnections.v1.AppConnectionOperationMetadata
-    >;
-  }
-  /**
-   * Updates the parameters of a single AppConnection.
+   * Get a Job specified by its resource name.
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Mask of fields to update. At least one path must be supplied in
-   *   this field. The elements of the repeated paths field may only include these
-   *   fields from [BeyondCorp.AppConnection]:
-   *   * `labels`
-   *   * `display_name`
-   *   * `application_endpoint`
-   *   * `connectors`
-   * @param {google.cloud.beyondcorp.appconnections.v1.AppConnection} request.appConnection
-   *   Required. AppConnection message with updated fields. Only supported fields
-   *   specified in update_mask are updated.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and t
-   *   he request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {boolean} [request.validateOnly]
-   *   Optional. If set, validates request by executing a dry-run which would not
-   *   alter the resource in any way.
-   * @param {boolean} [request.allowMissing]
-   *   Optional. If set as true, will create the resource if it is not found.
+   * @param {string} request.name
+   *   Required. Job name.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
+   *   The first element of the array is an object representing [Job]{@link google.cloud.batch.v1.Job}.
    *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/app_connections_service.update_app_connection.js</caption>
-   * region_tag:beyondcorp_v1_generated_AppConnectionsService_UpdateAppConnection_async
+   * @example <caption>include:samples/generated/v1/batch_service.get_job.js</caption>
+   * region_tag:batch_v1_generated_BatchService_GetJob_async
    */
-  updateAppConnection(
-    request?: protos.google.cloud.beyondcorp.appconnections.v1.IUpdateAppConnectionRequest,
+  getJob(
+    request?: protos.google.cloud.batch.v1.IGetJobRequest,
     options?: CallOptions
   ): Promise<
     [
-      LROperation<
-        protos.google.cloud.beyondcorp.appconnections.v1.IAppConnection,
-        protos.google.cloud.beyondcorp.appconnections.v1.IAppConnectionOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
+      protos.google.cloud.batch.v1.IJob,
+      protos.google.cloud.batch.v1.IGetJobRequest | undefined,
       {} | undefined
     ]
   >;
-  updateAppConnection(
-    request: protos.google.cloud.beyondcorp.appconnections.v1.IUpdateAppConnectionRequest,
+  getJob(
+    request: protos.google.cloud.batch.v1.IGetJobRequest,
     options: CallOptions,
     callback: Callback<
-      LROperation<
-        protos.google.cloud.beyondcorp.appconnections.v1.IAppConnection,
-        protos.google.cloud.beyondcorp.appconnections.v1.IAppConnectionOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
+      protos.google.cloud.batch.v1.IJob,
+      protos.google.cloud.batch.v1.IGetJobRequest | null | undefined,
       {} | null | undefined
     >
   ): void;
-  updateAppConnection(
-    request: protos.google.cloud.beyondcorp.appconnections.v1.IUpdateAppConnectionRequest,
+  getJob(
+    request: protos.google.cloud.batch.v1.IGetJobRequest,
     callback: Callback<
-      LROperation<
-        protos.google.cloud.beyondcorp.appconnections.v1.IAppConnection,
-        protos.google.cloud.beyondcorp.appconnections.v1.IAppConnectionOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
+      protos.google.cloud.batch.v1.IJob,
+      protos.google.cloud.batch.v1.IGetJobRequest | null | undefined,
       {} | null | undefined
     >
   ): void;
-  updateAppConnection(
-    request?: protos.google.cloud.beyondcorp.appconnections.v1.IUpdateAppConnectionRequest,
+  getJob(
+    request?: protos.google.cloud.batch.v1.IGetJobRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          LROperation<
-            protos.google.cloud.beyondcorp.appconnections.v1.IAppConnection,
-            protos.google.cloud.beyondcorp.appconnections.v1.IAppConnectionOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
+          protos.google.cloud.batch.v1.IJob,
+          protos.google.cloud.batch.v1.IGetJobRequest | null | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      LROperation<
-        protos.google.cloud.beyondcorp.appconnections.v1.IAppConnection,
-        protos.google.cloud.beyondcorp.appconnections.v1.IAppConnectionOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
+      protos.google.cloud.batch.v1.IJob,
+      protos.google.cloud.batch.v1.IGetJobRequest | null | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      LROperation<
-        protos.google.cloud.beyondcorp.appconnections.v1.IAppConnection,
-        protos.google.cloud.beyondcorp.appconnections.v1.IAppConnectionOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
+      protos.google.cloud.batch.v1.IJob,
+      protos.google.cloud.batch.v1.IGetJobRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -890,58 +632,109 @@ export class AppConnectionsServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
-        'app_connection.name': request.appConnection!.name || '',
+        name: request.name || '',
       });
     this.initialize();
-    return this.innerApiCalls.updateAppConnection(request, options, callback);
+    return this.innerApiCalls.getJob(request, options, callback);
   }
   /**
-   * Check the status of the long running operation returned by `updateAppConnection()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/app_connections_service.update_app_connection.js</caption>
-   * region_tag:beyondcorp_v1_generated_AppConnectionsService_UpdateAppConnection_async
-   */
-  async checkUpdateAppConnectionProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.beyondcorp.appconnections.v1.AppConnection,
-      protos.google.cloud.beyondcorp.appconnections.v1.AppConnectionOperationMetadata
-    >
-  > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
-    const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
-      operation,
-      this.descriptors.longrunning.updateAppConnection,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.beyondcorp.appconnections.v1.AppConnection,
-      protos.google.cloud.beyondcorp.appconnections.v1.AppConnectionOperationMetadata
-    >;
-  }
-  /**
-   * Deletes a single AppConnection.
+   * Return a single Task.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. BeyondCorp Connector name using the form:
-   *   `projects/{project_id}/locations/{location_id}/appConnections/{app_connection_id}`
+   *   Required. Task name.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Task]{@link google.cloud.batch.v1.Task}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/batch_service.get_task.js</caption>
+   * region_tag:batch_v1_generated_BatchService_GetTask_async
+   */
+  getTask(
+    request?: protos.google.cloud.batch.v1.IGetTaskRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.batch.v1.ITask,
+      protos.google.cloud.batch.v1.IGetTaskRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  getTask(
+    request: protos.google.cloud.batch.v1.IGetTaskRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.batch.v1.ITask,
+      protos.google.cloud.batch.v1.IGetTaskRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getTask(
+    request: protos.google.cloud.batch.v1.IGetTaskRequest,
+    callback: Callback<
+      protos.google.cloud.batch.v1.ITask,
+      protos.google.cloud.batch.v1.IGetTaskRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getTask(
+    request?: protos.google.cloud.batch.v1.IGetTaskRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.batch.v1.ITask,
+          protos.google.cloud.batch.v1.IGetTaskRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.batch.v1.ITask,
+      protos.google.cloud.batch.v1.IGetTaskRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.batch.v1.ITask,
+      protos.google.cloud.batch.v1.IGetTaskRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getTask(request, options, callback);
+  }
+
+  /**
+   * Delete a Job.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Job name.
+   * @param {string} [request.reason]
+   *   Optional. Reason for this deletion.
    * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes after the first request.
+   *   Optional. An optional request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server will guarantee
+   *   that for at least 60 minutes after the first request.
    *
    *   For example, consider a situation where you make an initial request and t
    *   he request times out. If you make the request again with the same request
@@ -951,9 +744,6 @@ export class AppConnectionsServiceClient {
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is
    *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {boolean} [request.validateOnly]
-   *   Optional. If set, validates request by executing a dry-run which would not
-   *   alter the resource in any way.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -963,53 +753,53 @@ export class AppConnectionsServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/app_connections_service.delete_app_connection.js</caption>
-   * region_tag:beyondcorp_v1_generated_AppConnectionsService_DeleteAppConnection_async
+   * @example <caption>include:samples/generated/v1/batch_service.delete_job.js</caption>
+   * region_tag:batch_v1_generated_BatchService_DeleteJob_async
    */
-  deleteAppConnection(
-    request?: protos.google.cloud.beyondcorp.appconnections.v1.IDeleteAppConnectionRequest,
+  deleteJob(
+    request?: protos.google.cloud.batch.v1.IDeleteJobRequest,
     options?: CallOptions
   ): Promise<
     [
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.beyondcorp.appconnections.v1.IAppConnectionOperationMetadata
+        protos.google.cloud.batch.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   >;
-  deleteAppConnection(
-    request: protos.google.cloud.beyondcorp.appconnections.v1.IDeleteAppConnectionRequest,
+  deleteJob(
+    request: protos.google.cloud.batch.v1.IDeleteJobRequest,
     options: CallOptions,
     callback: Callback<
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.beyondcorp.appconnections.v1.IAppConnectionOperationMetadata
+        protos.google.cloud.batch.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
-  deleteAppConnection(
-    request: protos.google.cloud.beyondcorp.appconnections.v1.IDeleteAppConnectionRequest,
+  deleteJob(
+    request: protos.google.cloud.batch.v1.IDeleteJobRequest,
     callback: Callback<
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.beyondcorp.appconnections.v1.IAppConnectionOperationMetadata
+        protos.google.cloud.batch.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
-  deleteAppConnection(
-    request?: protos.google.cloud.beyondcorp.appconnections.v1.IDeleteAppConnectionRequest,
+  deleteJob(
+    request?: protos.google.cloud.batch.v1.IDeleteJobRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
           LROperation<
             protos.google.protobuf.IEmpty,
-            protos.google.cloud.beyondcorp.appconnections.v1.IAppConnectionOperationMetadata
+            protos.google.cloud.batch.v1.IOperationMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
           {} | null | undefined
@@ -1017,7 +807,7 @@ export class AppConnectionsServiceClient {
     callback?: Callback<
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.beyondcorp.appconnections.v1.IAppConnectionOperationMetadata
+        protos.google.cloud.batch.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -1026,7 +816,7 @@ export class AppConnectionsServiceClient {
     [
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.beyondcorp.appconnections.v1.IAppConnectionOperationMetadata
+        protos.google.cloud.batch.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined
@@ -1048,10 +838,10 @@ export class AppConnectionsServiceClient {
         name: request.name || '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteAppConnection(request, options, callback);
+    return this.innerApiCalls.deleteJob(request, options, callback);
   }
   /**
-   * Check the status of the long running operation returned by `deleteAppConnection()`.
+   * Check the status of the long running operation returned by `deleteJob()`.
    * @param {String} name
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
@@ -1059,15 +849,15 @@ export class AppConnectionsServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/app_connections_service.delete_app_connection.js</caption>
-   * region_tag:beyondcorp_v1_generated_AppConnectionsService_DeleteAppConnection_async
+   * @example <caption>include:samples/generated/v1/batch_service.delete_job.js</caption>
+   * region_tag:batch_v1_generated_BatchService_DeleteJob_async
    */
-  async checkDeleteAppConnectionProgress(
+  async checkDeleteJobProgress(
     name: string
   ): Promise<
     LROperation<
       protos.google.protobuf.Empty,
-      protos.google.cloud.beyondcorp.appconnections.v1.AppConnectionOperationMetadata
+      protos.google.cloud.batch.v1.OperationMetadata
     >
   > {
     const request = new operationsProtos.google.longrunning.GetOperationRequest(
@@ -1076,106 +866,86 @@ export class AppConnectionsServiceClient {
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new gax.Operation(
       operation,
-      this.descriptors.longrunning.deleteAppConnection,
+      this.descriptors.longrunning.deleteJob,
       this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
-      protos.google.cloud.beyondcorp.appconnections.v1.AppConnectionOperationMetadata
+      protos.google.cloud.batch.v1.OperationMetadata
     >;
   }
   /**
-   * Lists AppConnections in a given project and location.
+   * List all Jobs for a project within a region.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the AppConnection location using the form:
-   *   `projects/{project_id}/locations/{location_id}`
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return.
-   *   If not specified, a default value of 50 will be used by the service.
-   *   Regardless of the page_size value, the response may include a partial list
-   *   and a caller should only rely on response's
-   *   {@link BeyondCorp.ListAppConnectionsResponse.next_page_token|next_page_token} to
-   *   determine if there are more instances left to be queried.
-   * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous
-   *   ListAppConnectionsRequest, if any.
-   * @param {string} [request.filter]
-   *   Optional. A filter specifying constraints of a list operation.
-   * @param {string} [request.orderBy]
-   *   Optional. Specifies the ordering of results. See
-   *   [Sorting
-   *   order](https://cloud.google.com/apis/design/design_patterns#sorting_order)
-   *   for more information.
+   *   Parent path.
+   * @param {string} request.filter
+   *   List filter.
+   * @param {number} request.pageSize
+   *   Page size.
+   * @param {string} request.pageToken
+   *   Page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [AppConnection]{@link google.cloud.beyondcorp.appconnections.v1.AppConnection}.
+   *   The first element of the array is Array of [Job]{@link google.cloud.batch.v1.Job}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
-   *   We recommend using `listAppConnectionsAsync()`
+   *   We recommend using `listJobsAsync()`
    *   method described below for async iteration which you can stop as needed.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
-  listAppConnections(
-    request?: protos.google.cloud.beyondcorp.appconnections.v1.IListAppConnectionsRequest,
+  listJobs(
+    request?: protos.google.cloud.batch.v1.IListJobsRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.beyondcorp.appconnections.v1.IAppConnection[],
-      protos.google.cloud.beyondcorp.appconnections.v1.IListAppConnectionsRequest | null,
-      protos.google.cloud.beyondcorp.appconnections.v1.IListAppConnectionsResponse
+      protos.google.cloud.batch.v1.IJob[],
+      protos.google.cloud.batch.v1.IListJobsRequest | null,
+      protos.google.cloud.batch.v1.IListJobsResponse
     ]
   >;
-  listAppConnections(
-    request: protos.google.cloud.beyondcorp.appconnections.v1.IListAppConnectionsRequest,
+  listJobs(
+    request: protos.google.cloud.batch.v1.IListJobsRequest,
     options: CallOptions,
     callback: PaginationCallback<
-      protos.google.cloud.beyondcorp.appconnections.v1.IListAppConnectionsRequest,
-      | protos.google.cloud.beyondcorp.appconnections.v1.IListAppConnectionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.beyondcorp.appconnections.v1.IAppConnection
+      protos.google.cloud.batch.v1.IListJobsRequest,
+      protos.google.cloud.batch.v1.IListJobsResponse | null | undefined,
+      protos.google.cloud.batch.v1.IJob
     >
   ): void;
-  listAppConnections(
-    request: protos.google.cloud.beyondcorp.appconnections.v1.IListAppConnectionsRequest,
+  listJobs(
+    request: protos.google.cloud.batch.v1.IListJobsRequest,
     callback: PaginationCallback<
-      protos.google.cloud.beyondcorp.appconnections.v1.IListAppConnectionsRequest,
-      | protos.google.cloud.beyondcorp.appconnections.v1.IListAppConnectionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.beyondcorp.appconnections.v1.IAppConnection
+      protos.google.cloud.batch.v1.IListJobsRequest,
+      protos.google.cloud.batch.v1.IListJobsResponse | null | undefined,
+      protos.google.cloud.batch.v1.IJob
     >
   ): void;
-  listAppConnections(
-    request?: protos.google.cloud.beyondcorp.appconnections.v1.IListAppConnectionsRequest,
+  listJobs(
+    request?: protos.google.cloud.batch.v1.IListJobsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
-          protos.google.cloud.beyondcorp.appconnections.v1.IListAppConnectionsRequest,
-          | protos.google.cloud.beyondcorp.appconnections.v1.IListAppConnectionsResponse
-          | null
-          | undefined,
-          protos.google.cloud.beyondcorp.appconnections.v1.IAppConnection
+          protos.google.cloud.batch.v1.IListJobsRequest,
+          protos.google.cloud.batch.v1.IListJobsResponse | null | undefined,
+          protos.google.cloud.batch.v1.IJob
         >,
     callback?: PaginationCallback<
-      protos.google.cloud.beyondcorp.appconnections.v1.IListAppConnectionsRequest,
-      | protos.google.cloud.beyondcorp.appconnections.v1.IListAppConnectionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.beyondcorp.appconnections.v1.IAppConnection
+      protos.google.cloud.batch.v1.IListJobsRequest,
+      protos.google.cloud.batch.v1.IListJobsResponse | null | undefined,
+      protos.google.cloud.batch.v1.IJob
     >
   ): Promise<
     [
-      protos.google.cloud.beyondcorp.appconnections.v1.IAppConnection[],
-      protos.google.cloud.beyondcorp.appconnections.v1.IListAppConnectionsRequest | null,
-      protos.google.cloud.beyondcorp.appconnections.v1.IListAppConnectionsResponse
+      protos.google.cloud.batch.v1.IJob[],
+      protos.google.cloud.batch.v1.IListJobsRequest | null,
+      protos.google.cloud.batch.v1.IListJobsResponse
     ]
   > | void {
     request = request || {};
@@ -1194,7 +964,7 @@ export class AppConnectionsServiceClient {
         parent: request.parent || '',
       });
     this.initialize();
-    return this.innerApiCalls.listAppConnections(request, options, callback);
+    return this.innerApiCalls.listJobs(request, options, callback);
   }
 
   /**
@@ -1202,39 +972,27 @@ export class AppConnectionsServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the AppConnection location using the form:
-   *   `projects/{project_id}/locations/{location_id}`
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return.
-   *   If not specified, a default value of 50 will be used by the service.
-   *   Regardless of the page_size value, the response may include a partial list
-   *   and a caller should only rely on response's
-   *   {@link BeyondCorp.ListAppConnectionsResponse.next_page_token|next_page_token} to
-   *   determine if there are more instances left to be queried.
-   * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous
-   *   ListAppConnectionsRequest, if any.
-   * @param {string} [request.filter]
-   *   Optional. A filter specifying constraints of a list operation.
-   * @param {string} [request.orderBy]
-   *   Optional. Specifies the ordering of results. See
-   *   [Sorting
-   *   order](https://cloud.google.com/apis/design/design_patterns#sorting_order)
-   *   for more information.
+   *   Parent path.
+   * @param {string} request.filter
+   *   List filter.
+   * @param {number} request.pageSize
+   *   Page size.
+   * @param {string} request.pageToken
+   *   Page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [AppConnection]{@link google.cloud.beyondcorp.appconnections.v1.AppConnection} on 'data' event.
+   *   An object stream which emits an object representing [Job]{@link google.cloud.batch.v1.Job} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listAppConnectionsAsync()`
+   *   We recommend using `listJobsAsync()`
    *   method described below for async iteration which you can stop as needed.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
-  listAppConnectionsStream(
-    request?: protos.google.cloud.beyondcorp.appconnections.v1.IListAppConnectionsRequest,
+  listJobsStream(
+    request?: protos.google.cloud.batch.v1.IListJobsRequest,
     options?: CallOptions
   ): Transform {
     request = request || {};
@@ -1245,59 +1003,47 @@ export class AppConnectionsServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const defaultCallSettings = this._defaults['listAppConnections'];
+    const defaultCallSettings = this._defaults['listJobs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
-    return this.descriptors.page.listAppConnections.createStream(
-      this.innerApiCalls.listAppConnections as GaxCall,
+    return this.descriptors.page.listJobs.createStream(
+      this.innerApiCalls.listJobs as GaxCall,
       request,
       callSettings
     );
   }
 
   /**
-   * Equivalent to `listAppConnections`, but returns an iterable object.
+   * Equivalent to `listJobs`, but returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the AppConnection location using the form:
-   *   `projects/{project_id}/locations/{location_id}`
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return.
-   *   If not specified, a default value of 50 will be used by the service.
-   *   Regardless of the page_size value, the response may include a partial list
-   *   and a caller should only rely on response's
-   *   {@link BeyondCorp.ListAppConnectionsResponse.next_page_token|next_page_token} to
-   *   determine if there are more instances left to be queried.
-   * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous
-   *   ListAppConnectionsRequest, if any.
-   * @param {string} [request.filter]
-   *   Optional. A filter specifying constraints of a list operation.
-   * @param {string} [request.orderBy]
-   *   Optional. Specifies the ordering of results. See
-   *   [Sorting
-   *   order](https://cloud.google.com/apis/design/design_patterns#sorting_order)
-   *   for more information.
+   *   Parent path.
+   * @param {string} request.filter
+   *   List filter.
+   * @param {number} request.pageSize
+   *   Page size.
+   * @param {string} request.pageToken
+   *   Page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [AppConnection]{@link google.cloud.beyondcorp.appconnections.v1.AppConnection}. The API will be called under the hood as needed, once per the page,
+   *   [Job]{@link google.cloud.batch.v1.Job}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/app_connections_service.list_app_connections.js</caption>
-   * region_tag:beyondcorp_v1_generated_AppConnectionsService_ListAppConnections_async
+   * @example <caption>include:samples/generated/v1/batch_service.list_jobs.js</caption>
+   * region_tag:batch_v1_generated_BatchService_ListJobs_async
    */
-  listAppConnectionsAsync(
-    request?: protos.google.cloud.beyondcorp.appconnections.v1.IListAppConnectionsRequest,
+  listJobsAsync(
+    request?: protos.google.cloud.batch.v1.IListJobsRequest,
     options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.beyondcorp.appconnections.v1.IAppConnection> {
+  ): AsyncIterable<protos.google.cloud.batch.v1.IJob> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1306,106 +1052,91 @@ export class AppConnectionsServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const defaultCallSettings = this._defaults['listAppConnections'];
+    const defaultCallSettings = this._defaults['listJobs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
-    return this.descriptors.page.listAppConnections.asyncIterate(
-      this.innerApiCalls['listAppConnections'] as GaxCall,
+    return this.descriptors.page.listJobs.asyncIterate(
+      this.innerApiCalls['listJobs'] as GaxCall,
       request as {},
       callSettings
-    ) as AsyncIterable<protos.google.cloud.beyondcorp.appconnections.v1.IAppConnection>;
+    ) as AsyncIterable<protos.google.cloud.batch.v1.IJob>;
   }
   /**
-   * Resolves AppConnections details for a given AppConnector.
-   * An internal method called by a connector to find AppConnections to connect
-   * to.
+   * List Tasks associated with a job.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the AppConnection location using the form:
-   *   `projects/{project_id}/locations/{location_id}`
-   * @param {string} request.appConnectorId
-   *   Required. BeyondCorp Connector name of the connector associated with those
-   *   AppConnections using the form:
-   *   `projects/{project_id}/locations/{location_id}/appConnectors/{app_connector_id}`
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return.
-   *   If not specified, a default value of 50 will be used by the service.
-   *   Regardless of the page_size value, the response may include a partial list
-   *   and a caller should only rely on response's
-   *   {@link BeyondCorp.ResolveAppConnectionsResponse.next_page_token|next_page_token}
-   *   to determine if there are more instances left to be queried.
-   * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous
-   *   ResolveAppConnectionsResponse, if any.
+   *   Required. Name of a TaskGroup from which Tasks are being requested.
+   *   Pattern:
+   *   "projects/{project}/locations/{location}/jobs/{job}/taskGroups/{task_group}"
+   * @param {string} request.filter
+   *   Task filter, null filter matches all Tasks.
+   *   Filter string should be of the format State=TaskStatus.State e.g.
+   *   State=RUNNING
+   * @param {number} request.pageSize
+   *   Page size.
+   * @param {string} request.pageToken
+   *   Page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [AppConnectionDetails]{@link google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsResponse.AppConnectionDetails}.
+   *   The first element of the array is Array of [Task]{@link google.cloud.batch.v1.Task}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
-   *   We recommend using `resolveAppConnectionsAsync()`
+   *   We recommend using `listTasksAsync()`
    *   method described below for async iteration which you can stop as needed.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
-  resolveAppConnections(
-    request?: protos.google.cloud.beyondcorp.appconnections.v1.IResolveAppConnectionsRequest,
+  listTasks(
+    request?: protos.google.cloud.batch.v1.IListTasksRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsResponse.IAppConnectionDetails[],
-      protos.google.cloud.beyondcorp.appconnections.v1.IResolveAppConnectionsRequest | null,
-      protos.google.cloud.beyondcorp.appconnections.v1.IResolveAppConnectionsResponse
+      protos.google.cloud.batch.v1.ITask[],
+      protos.google.cloud.batch.v1.IListTasksRequest | null,
+      protos.google.cloud.batch.v1.IListTasksResponse
     ]
   >;
-  resolveAppConnections(
-    request: protos.google.cloud.beyondcorp.appconnections.v1.IResolveAppConnectionsRequest,
+  listTasks(
+    request: protos.google.cloud.batch.v1.IListTasksRequest,
     options: CallOptions,
     callback: PaginationCallback<
-      protos.google.cloud.beyondcorp.appconnections.v1.IResolveAppConnectionsRequest,
-      | protos.google.cloud.beyondcorp.appconnections.v1.IResolveAppConnectionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsResponse.IAppConnectionDetails
+      protos.google.cloud.batch.v1.IListTasksRequest,
+      protos.google.cloud.batch.v1.IListTasksResponse | null | undefined,
+      protos.google.cloud.batch.v1.ITask
     >
   ): void;
-  resolveAppConnections(
-    request: protos.google.cloud.beyondcorp.appconnections.v1.IResolveAppConnectionsRequest,
+  listTasks(
+    request: protos.google.cloud.batch.v1.IListTasksRequest,
     callback: PaginationCallback<
-      protos.google.cloud.beyondcorp.appconnections.v1.IResolveAppConnectionsRequest,
-      | protos.google.cloud.beyondcorp.appconnections.v1.IResolveAppConnectionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsResponse.IAppConnectionDetails
+      protos.google.cloud.batch.v1.IListTasksRequest,
+      protos.google.cloud.batch.v1.IListTasksResponse | null | undefined,
+      protos.google.cloud.batch.v1.ITask
     >
   ): void;
-  resolveAppConnections(
-    request?: protos.google.cloud.beyondcorp.appconnections.v1.IResolveAppConnectionsRequest,
+  listTasks(
+    request?: protos.google.cloud.batch.v1.IListTasksRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
-          protos.google.cloud.beyondcorp.appconnections.v1.IResolveAppConnectionsRequest,
-          | protos.google.cloud.beyondcorp.appconnections.v1.IResolveAppConnectionsResponse
-          | null
-          | undefined,
-          protos.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsResponse.IAppConnectionDetails
+          protos.google.cloud.batch.v1.IListTasksRequest,
+          protos.google.cloud.batch.v1.IListTasksResponse | null | undefined,
+          protos.google.cloud.batch.v1.ITask
         >,
     callback?: PaginationCallback<
-      protos.google.cloud.beyondcorp.appconnections.v1.IResolveAppConnectionsRequest,
-      | protos.google.cloud.beyondcorp.appconnections.v1.IResolveAppConnectionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsResponse.IAppConnectionDetails
+      protos.google.cloud.batch.v1.IListTasksRequest,
+      protos.google.cloud.batch.v1.IListTasksResponse | null | undefined,
+      protos.google.cloud.batch.v1.ITask
     >
   ): Promise<
     [
-      protos.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsResponse.IAppConnectionDetails[],
-      protos.google.cloud.beyondcorp.appconnections.v1.IResolveAppConnectionsRequest | null,
-      protos.google.cloud.beyondcorp.appconnections.v1.IResolveAppConnectionsResponse
+      protos.google.cloud.batch.v1.ITask[],
+      protos.google.cloud.batch.v1.IListTasksRequest | null,
+      protos.google.cloud.batch.v1.IListTasksResponse
     ]
   > | void {
     request = request || {};
@@ -1424,7 +1155,7 @@ export class AppConnectionsServiceClient {
         parent: request.parent || '',
       });
     this.initialize();
-    return this.innerApiCalls.resolveAppConnections(request, options, callback);
+    return this.innerApiCalls.listTasks(request, options, callback);
   }
 
   /**
@@ -1432,36 +1163,31 @@ export class AppConnectionsServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the AppConnection location using the form:
-   *   `projects/{project_id}/locations/{location_id}`
-   * @param {string} request.appConnectorId
-   *   Required. BeyondCorp Connector name of the connector associated with those
-   *   AppConnections using the form:
-   *   `projects/{project_id}/locations/{location_id}/appConnectors/{app_connector_id}`
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return.
-   *   If not specified, a default value of 50 will be used by the service.
-   *   Regardless of the page_size value, the response may include a partial list
-   *   and a caller should only rely on response's
-   *   {@link BeyondCorp.ResolveAppConnectionsResponse.next_page_token|next_page_token}
-   *   to determine if there are more instances left to be queried.
-   * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous
-   *   ResolveAppConnectionsResponse, if any.
+   *   Required. Name of a TaskGroup from which Tasks are being requested.
+   *   Pattern:
+   *   "projects/{project}/locations/{location}/jobs/{job}/taskGroups/{task_group}"
+   * @param {string} request.filter
+   *   Task filter, null filter matches all Tasks.
+   *   Filter string should be of the format State=TaskStatus.State e.g.
+   *   State=RUNNING
+   * @param {number} request.pageSize
+   *   Page size.
+   * @param {string} request.pageToken
+   *   Page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [AppConnectionDetails]{@link google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsResponse.AppConnectionDetails} on 'data' event.
+   *   An object stream which emits an object representing [Task]{@link google.cloud.batch.v1.Task} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
-   *   We recommend using `resolveAppConnectionsAsync()`
+   *   We recommend using `listTasksAsync()`
    *   method described below for async iteration which you can stop as needed.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
-  resolveAppConnectionsStream(
-    request?: protos.google.cloud.beyondcorp.appconnections.v1.IResolveAppConnectionsRequest,
+  listTasksStream(
+    request?: protos.google.cloud.batch.v1.IListTasksRequest,
     options?: CallOptions
   ): Transform {
     request = request || {};
@@ -1472,56 +1198,51 @@ export class AppConnectionsServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const defaultCallSettings = this._defaults['resolveAppConnections'];
+    const defaultCallSettings = this._defaults['listTasks'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
-    return this.descriptors.page.resolveAppConnections.createStream(
-      this.innerApiCalls.resolveAppConnections as GaxCall,
+    return this.descriptors.page.listTasks.createStream(
+      this.innerApiCalls.listTasks as GaxCall,
       request,
       callSettings
     );
   }
 
   /**
-   * Equivalent to `resolveAppConnections`, but returns an iterable object.
+   * Equivalent to `listTasks`, but returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the AppConnection location using the form:
-   *   `projects/{project_id}/locations/{location_id}`
-   * @param {string} request.appConnectorId
-   *   Required. BeyondCorp Connector name of the connector associated with those
-   *   AppConnections using the form:
-   *   `projects/{project_id}/locations/{location_id}/appConnectors/{app_connector_id}`
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return.
-   *   If not specified, a default value of 50 will be used by the service.
-   *   Regardless of the page_size value, the response may include a partial list
-   *   and a caller should only rely on response's
-   *   {@link BeyondCorp.ResolveAppConnectionsResponse.next_page_token|next_page_token}
-   *   to determine if there are more instances left to be queried.
-   * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous
-   *   ResolveAppConnectionsResponse, if any.
+   *   Required. Name of a TaskGroup from which Tasks are being requested.
+   *   Pattern:
+   *   "projects/{project}/locations/{location}/jobs/{job}/taskGroups/{task_group}"
+   * @param {string} request.filter
+   *   Task filter, null filter matches all Tasks.
+   *   Filter string should be of the format State=TaskStatus.State e.g.
+   *   State=RUNNING
+   * @param {number} request.pageSize
+   *   Page size.
+   * @param {string} request.pageToken
+   *   Page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [AppConnectionDetails]{@link google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsResponse.AppConnectionDetails}. The API will be called under the hood as needed, once per the page,
+   *   [Task]{@link google.cloud.batch.v1.Task}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/app_connections_service.resolve_app_connections.js</caption>
-   * region_tag:beyondcorp_v1_generated_AppConnectionsService_ResolveAppConnections_async
+   * @example <caption>include:samples/generated/v1/batch_service.list_tasks.js</caption>
+   * region_tag:batch_v1_generated_BatchService_ListTasks_async
    */
-  resolveAppConnectionsAsync(
-    request?: protos.google.cloud.beyondcorp.appconnections.v1.IResolveAppConnectionsRequest,
+  listTasksAsync(
+    request?: protos.google.cloud.batch.v1.IListTasksRequest,
     options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsResponse.IAppConnectionDetails> {
+  ): AsyncIterable<protos.google.cloud.batch.v1.ITask> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1530,14 +1251,14 @@ export class AppConnectionsServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const defaultCallSettings = this._defaults['resolveAppConnections'];
+    const defaultCallSettings = this._defaults['listTasks'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
-    return this.descriptors.page.resolveAppConnections.asyncIterate(
-      this.innerApiCalls['resolveAppConnections'] as GaxCall,
+    return this.descriptors.page.listTasks.asyncIterate(
+      this.innerApiCalls['listTasks'] as GaxCall,
       request as {},
       callSettings
-    ) as AsyncIterable<protos.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsResponse.IAppConnectionDetails>;
+    ) as AsyncIterable<protos.google.cloud.batch.v1.ITask>;
   }
   /**
    * Gets the access control policy for a resource. Returns an empty policy
@@ -1941,107 +1662,52 @@ export class AppConnectionsServiceClient {
   // --------------------
 
   /**
-   * Return a fully-qualified appConnection resource name string.
+   * Return a fully-qualified job resource name string.
    *
    * @param {string} project
    * @param {string} location
-   * @param {string} app_connection
+   * @param {string} job
    * @returns {string} Resource name string.
    */
-  appConnectionPath(project: string, location: string, appConnection: string) {
-    return this.pathTemplates.appConnectionPathTemplate.render({
+  jobPath(project: string, location: string, job: string) {
+    return this.pathTemplates.jobPathTemplate.render({
       project: project,
       location: location,
-      app_connection: appConnection,
+      job: job,
     });
   }
 
   /**
-   * Parse the project from AppConnection resource.
+   * Parse the project from Job resource.
    *
-   * @param {string} appConnectionName
-   *   A fully-qualified path representing AppConnection resource.
+   * @param {string} jobName
+   *   A fully-qualified path representing Job resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromAppConnectionName(appConnectionName: string) {
-    return this.pathTemplates.appConnectionPathTemplate.match(appConnectionName)
-      .project;
+  matchProjectFromJobName(jobName: string) {
+    return this.pathTemplates.jobPathTemplate.match(jobName).project;
   }
 
   /**
-   * Parse the location from AppConnection resource.
+   * Parse the location from Job resource.
    *
-   * @param {string} appConnectionName
-   *   A fully-qualified path representing AppConnection resource.
+   * @param {string} jobName
+   *   A fully-qualified path representing Job resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromAppConnectionName(appConnectionName: string) {
-    return this.pathTemplates.appConnectionPathTemplate.match(appConnectionName)
-      .location;
+  matchLocationFromJobName(jobName: string) {
+    return this.pathTemplates.jobPathTemplate.match(jobName).location;
   }
 
   /**
-   * Parse the app_connection from AppConnection resource.
+   * Parse the job from Job resource.
    *
-   * @param {string} appConnectionName
-   *   A fully-qualified path representing AppConnection resource.
-   * @returns {string} A string representing the app_connection.
+   * @param {string} jobName
+   *   A fully-qualified path representing Job resource.
+   * @returns {string} A string representing the job.
    */
-  matchAppConnectionFromAppConnectionName(appConnectionName: string) {
-    return this.pathTemplates.appConnectionPathTemplate.match(appConnectionName)
-      .app_connection;
-  }
-
-  /**
-   * Return a fully-qualified appConnector resource name string.
-   *
-   * @param {string} project
-   * @param {string} location
-   * @param {string} app_connector
-   * @returns {string} Resource name string.
-   */
-  appConnectorPath(project: string, location: string, appConnector: string) {
-    return this.pathTemplates.appConnectorPathTemplate.render({
-      project: project,
-      location: location,
-      app_connector: appConnector,
-    });
-  }
-
-  /**
-   * Parse the project from AppConnector resource.
-   *
-   * @param {string} appConnectorName
-   *   A fully-qualified path representing AppConnector resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromAppConnectorName(appConnectorName: string) {
-    return this.pathTemplates.appConnectorPathTemplate.match(appConnectorName)
-      .project;
-  }
-
-  /**
-   * Parse the location from AppConnector resource.
-   *
-   * @param {string} appConnectorName
-   *   A fully-qualified path representing AppConnector resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromAppConnectorName(appConnectorName: string) {
-    return this.pathTemplates.appConnectorPathTemplate.match(appConnectorName)
-      .location;
-  }
-
-  /**
-   * Parse the app_connector from AppConnector resource.
-   *
-   * @param {string} appConnectorName
-   *   A fully-qualified path representing AppConnector resource.
-   * @returns {string} A string representing the app_connector.
-   */
-  matchAppConnectorFromAppConnectorName(appConnectorName: string) {
-    return this.pathTemplates.appConnectorPathTemplate.match(appConnectorName)
-      .app_connector;
+  matchJobFromJobName(jobName: string) {
+    return this.pathTemplates.jobPathTemplate.match(jobName).job;
   }
 
   /**
@@ -2104,14 +1770,165 @@ export class AppConnectionsServiceClient {
   }
 
   /**
+   * Return a fully-qualified task resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} job
+   * @param {string} task_group
+   * @param {string} task
+   * @returns {string} Resource name string.
+   */
+  taskPath(
+    project: string,
+    location: string,
+    job: string,
+    taskGroup: string,
+    task: string
+  ) {
+    return this.pathTemplates.taskPathTemplate.render({
+      project: project,
+      location: location,
+      job: job,
+      task_group: taskGroup,
+      task: task,
+    });
+  }
+
+  /**
+   * Parse the project from Task resource.
+   *
+   * @param {string} taskName
+   *   A fully-qualified path representing Task resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromTaskName(taskName: string) {
+    return this.pathTemplates.taskPathTemplate.match(taskName).project;
+  }
+
+  /**
+   * Parse the location from Task resource.
+   *
+   * @param {string} taskName
+   *   A fully-qualified path representing Task resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromTaskName(taskName: string) {
+    return this.pathTemplates.taskPathTemplate.match(taskName).location;
+  }
+
+  /**
+   * Parse the job from Task resource.
+   *
+   * @param {string} taskName
+   *   A fully-qualified path representing Task resource.
+   * @returns {string} A string representing the job.
+   */
+  matchJobFromTaskName(taskName: string) {
+    return this.pathTemplates.taskPathTemplate.match(taskName).job;
+  }
+
+  /**
+   * Parse the task_group from Task resource.
+   *
+   * @param {string} taskName
+   *   A fully-qualified path representing Task resource.
+   * @returns {string} A string representing the task_group.
+   */
+  matchTaskGroupFromTaskName(taskName: string) {
+    return this.pathTemplates.taskPathTemplate.match(taskName).task_group;
+  }
+
+  /**
+   * Parse the task from Task resource.
+   *
+   * @param {string} taskName
+   *   A fully-qualified path representing Task resource.
+   * @returns {string} A string representing the task.
+   */
+  matchTaskFromTaskName(taskName: string) {
+    return this.pathTemplates.taskPathTemplate.match(taskName).task;
+  }
+
+  /**
+   * Return a fully-qualified taskGroup resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} job
+   * @param {string} task_group
+   * @returns {string} Resource name string.
+   */
+  taskGroupPath(
+    project: string,
+    location: string,
+    job: string,
+    taskGroup: string
+  ) {
+    return this.pathTemplates.taskGroupPathTemplate.render({
+      project: project,
+      location: location,
+      job: job,
+      task_group: taskGroup,
+    });
+  }
+
+  /**
+   * Parse the project from TaskGroup resource.
+   *
+   * @param {string} taskGroupName
+   *   A fully-qualified path representing TaskGroup resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromTaskGroupName(taskGroupName: string) {
+    return this.pathTemplates.taskGroupPathTemplate.match(taskGroupName)
+      .project;
+  }
+
+  /**
+   * Parse the location from TaskGroup resource.
+   *
+   * @param {string} taskGroupName
+   *   A fully-qualified path representing TaskGroup resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromTaskGroupName(taskGroupName: string) {
+    return this.pathTemplates.taskGroupPathTemplate.match(taskGroupName)
+      .location;
+  }
+
+  /**
+   * Parse the job from TaskGroup resource.
+   *
+   * @param {string} taskGroupName
+   *   A fully-qualified path representing TaskGroup resource.
+   * @returns {string} A string representing the job.
+   */
+  matchJobFromTaskGroupName(taskGroupName: string) {
+    return this.pathTemplates.taskGroupPathTemplate.match(taskGroupName).job;
+  }
+
+  /**
+   * Parse the task_group from TaskGroup resource.
+   *
+   * @param {string} taskGroupName
+   *   A fully-qualified path representing TaskGroup resource.
+   * @returns {string} A string representing the task_group.
+   */
+  matchTaskGroupFromTaskGroupName(taskGroupName: string) {
+    return this.pathTemplates.taskGroupPathTemplate.match(taskGroupName)
+      .task_group;
+  }
+
+  /**
    * Terminate the gRPC channel and close the client.
    *
    * The client will no longer be usable and all future behavior is undefined.
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    if (this.appConnectionsServiceStub && !this._terminated) {
-      return this.appConnectionsServiceStub.then(stub => {
+    if (this.batchServiceStub && !this._terminated) {
+      return this.batchServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.iamClient.close();
