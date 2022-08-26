@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.1.1](https://github.com/googleapis/nodejs-deploy/compare/v2.1.0...v2.1.1) (2022-08-23)
+
+
+### Bug Fixes
+
+* better support for fallback mode ([#59](https://github.com/googleapis/nodejs-deploy/issues/59)) ([21bd8f3](https://github.com/googleapis/nodejs-deploy/commit/21bd8f318612224884e01504e949d59f9f9c5615))
+* change import long to require ([#60](https://github.com/googleapis/nodejs-deploy/issues/60)) ([682372a](https://github.com/googleapis/nodejs-deploy/commit/682372af2f6758cb797743ad08ad474837024219))
+* remove pip install statements ([#1546](https://github.com/googleapis/nodejs-deploy/issues/1546)) ([#62](https://github.com/googleapis/nodejs-deploy/issues/62)) ([d70fc8b](https://github.com/googleapis/nodejs-deploy/commit/d70fc8b1f161cd908385001eb433fb0a1bdae561))
+
 ## [2.1.0](https://github.com/googleapis/nodejs-deploy/compare/v2.0.0...v2.1.0) (2022-06-30)
 
 
