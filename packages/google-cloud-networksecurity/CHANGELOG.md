@@ -1,5 +1,24 @@
 # Changelog
 
+## [1.0.0](https://github.com/googleapis/nodejs-network-security/compare/v0.5.0...v1.0.0) (2022-08-23)
+
+
+### ⚠ BREAKING CHANGES
+
+* fix annotation of parent in Create*Request
+
+### Features
+
+* publish cloud networksecurity v1 ([858ee80](https://github.com/googleapis/nodejs-network-security/commit/858ee804679e04d8e895ed2028eacc5caeb8afe5))
+
+
+### Bug Fixes
+
+* better support for fallback mode ([#65](https://github.com/googleapis/nodejs-network-security/issues/65)) ([858ee80](https://github.com/googleapis/nodejs-network-security/commit/858ee804679e04d8e895ed2028eacc5caeb8afe5))
+* change import long to require ([#66](https://github.com/googleapis/nodejs-network-security/issues/66)) ([e4bd65a](https://github.com/googleapis/nodejs-network-security/commit/e4bd65acc43bf259ee39edf0fcd5121ab2abcc1c))
+* fix annotation of parent in Create*Request ([858ee80](https://github.com/googleapis/nodejs-network-security/commit/858ee804679e04d8e895ed2028eacc5caeb8afe5))
+* remove pip install statements ([#1546](https://github.com/googleapis/nodejs-network-security/issues/1546)) ([#68](https://github.com/googleapis/nodejs-network-security/issues/68)) ([35d9202](https://github.com/googleapis/nodejs-network-security/commit/35d920268ffc865ecaac9ad2e9db56290b677763))
+
 ## [0.5.0](https://github.com/googleapis/nodejs-network-security/compare/v0.4.0...v0.5.0) (2022-06-30)
 
 
