@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.1.1](https://github.com/googleapis/nodejs-storage-transfer/compare/v2.1.0...v2.1.1) (2022-08-23)
+
+
+### Bug Fixes
+
+* better support for fallback mode ([#83](https://github.com/googleapis/nodejs-storage-transfer/issues/83)) ([e5e44b9](https://github.com/googleapis/nodejs-storage-transfer/commit/e5e44b993b427afedc50be45670dfb76fd1ad3a4))
+* change import long to require ([#85](https://github.com/googleapis/nodejs-storage-transfer/issues/85)) ([7a95e0b](https://github.com/googleapis/nodejs-storage-transfer/commit/7a95e0b487ccbcc58f13019a90b7fb4f80b482fd))
+* remove pip install statements ([#1546](https://github.com/googleapis/nodejs-storage-transfer/issues/1546)) ([#88](https://github.com/googleapis/nodejs-storage-transfer/issues/88)) ([bf0cd79](https://github.com/googleapis/nodejs-storage-transfer/commit/bf0cd793f48d21e51fa70c043377e07f2604cbc1))
+
 ## [2.1.0](https://github.com/googleapis/nodejs-storage-transfer/compare/v2.0.0...v2.1.0) (2022-06-30)
 
 
