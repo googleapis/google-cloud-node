@@ -34,7 +34,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -443,7 +442,8 @@ export class AppConnectorsServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -760,7 +760,7 @@ export class AppConnectorsServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createAppConnector,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.beyondcorp.appconnectors.v1.AppConnector,
@@ -921,7 +921,7 @@ export class AppConnectorsServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateAppConnector,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.beyondcorp.appconnectors.v1.AppConnector,
@@ -1076,7 +1076,7 @@ export class AppConnectorsServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteAppConnector,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -1233,7 +1233,7 @@ export class AppConnectorsServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.reportStatus,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.beyondcorp.appconnectors.v1.AppConnector,
@@ -1405,7 +1405,7 @@ export class AppConnectorsServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listAppConnectors.createStream(
-      this.innerApiCalls.listAppConnectors as gax.GaxCall,
+      this.innerApiCalls.listAppConnectors as GaxCall,
       request,
       callSettings
     );
@@ -1467,7 +1467,7 @@ export class AppConnectorsServiceClient {
     this.initialize();
     return this.descriptors.page.listAppConnectors.asyncIterate(
       this.innerApiCalls['listAppConnectors'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.beyondcorp.appconnectors.v1.IAppConnector>;
   }
