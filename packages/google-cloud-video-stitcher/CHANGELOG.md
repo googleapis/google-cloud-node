@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.2.1](https://github.com/googleapis/nodejs-video-stitcher/compare/v0.2.0...v0.2.1) (2022-08-23)
+
+
+### Bug Fixes
+
+* better support for fallback mode ([#23](https://github.com/googleapis/nodejs-video-stitcher/issues/23)) ([0485b9e](https://github.com/googleapis/nodejs-video-stitcher/commit/0485b9e11d90f9181e38214b5b4289fc491fc7d8))
+* change import long to require ([#24](https://github.com/googleapis/nodejs-video-stitcher/issues/24)) ([9c8676a](https://github.com/googleapis/nodejs-video-stitcher/commit/9c8676aebc019cbbf7ab0aded6add6d8f5a1c9a6))
+* remove pip install statements ([#1546](https://github.com/googleapis/nodejs-video-stitcher/issues/1546)) ([#26](https://github.com/googleapis/nodejs-video-stitcher/issues/26)) ([ab5b4bf](https://github.com/googleapis/nodejs-video-stitcher/commit/ab5b4bf3c04e38e3ae76decea1e650b3f614a599))
+
 ## [0.2.0](https://github.com/googleapis/nodejs-video-stitcher/compare/v0.1.1...v0.2.0) (2022-07-04)
 
 
