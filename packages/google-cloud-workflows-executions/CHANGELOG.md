@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.1.1](https://github.com/googleapis/nodejs-workflows/compare/v2.1.0...v2.1.1) (2022-08-23)
+
+
+### Bug Fixes
+
+* better support for fallback mode ([#154](https://github.com/googleapis/nodejs-workflows/issues/154)) ([28911e9](https://github.com/googleapis/nodejs-workflows/commit/28911e9643f23783568b1a855792067b5ad8dde4))
+* change import long to require ([#156](https://github.com/googleapis/nodejs-workflows/issues/156)) ([c236dda](https://github.com/googleapis/nodejs-workflows/commit/c236dda4b8c9d9098ded34119face5bfaa224552))
+* remove pip install statements ([#1546](https://github.com/googleapis/nodejs-workflows/issues/1546)) ([#159](https://github.com/googleapis/nodejs-workflows/issues/159)) ([971982a](https://github.com/googleapis/nodejs-workflows/commit/971982aa6d8394f2ff08c19ed879074caedfe591))
+
 ## [2.1.0](https://github.com/googleapis/nodejs-workflows/compare/v2.0.0...v2.1.0) (2022-06-29)
 
 
