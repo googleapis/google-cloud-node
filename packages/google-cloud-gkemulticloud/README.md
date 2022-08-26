@@ -101,7 +101,7 @@ async function callListAwsClusters() {
   // Run request
   const iterable = await gkemulticloudClient.listAwsClustersAsync(request);
   for await (const response of iterable) {
-      console.log(response);
+    console.log(response);
   }
 }
 
