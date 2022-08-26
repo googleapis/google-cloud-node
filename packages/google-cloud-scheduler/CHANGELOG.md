@@ -4,6 +4,15 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/scheduler?activeTab=versions
 
+## [3.0.3](https://github.com/googleapis/nodejs-scheduler/compare/v3.0.2...v3.0.3) (2022-08-23)
+
+
+### Bug Fixes
+
+* better support for fallback mode ([#464](https://github.com/googleapis/nodejs-scheduler/issues/464)) ([506bfc8](https://github.com/googleapis/nodejs-scheduler/commit/506bfc8281c788cbad548483d6d246624332c03d))
+* change import long to require ([#465](https://github.com/googleapis/nodejs-scheduler/issues/465)) ([1b0ea74](https://github.com/googleapis/nodejs-scheduler/commit/1b0ea74f574c2983fb21d7a2d58d5ed4c6112890))
+* remove pip install statements ([#1546](https://github.com/googleapis/nodejs-scheduler/issues/1546)) ([#467](https://github.com/googleapis/nodejs-scheduler/issues/467)) ([3492cf9](https://github.com/googleapis/nodejs-scheduler/commit/3492cf99fcf7c3105be4a9453beaafe7aab6f1d5))
+
 ## [3.0.2](https://github.com/googleapis/nodejs-scheduler/compare/v3.0.1...v3.0.2) (2022-07-10)
 
 
