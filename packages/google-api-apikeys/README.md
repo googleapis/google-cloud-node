@@ -31,8 +31,8 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-
-
+  * [Using the client library](#using-the-client-library)
+* [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
@@ -54,6 +54,65 @@ npm install @google-cloud/apikeys
 ```
 
 
+### Using the client library
+
+```javascript
+/**
+ * This snippet has been automatically generated and should be regarded as a code template only.
+ * It will require modifications to work.
+ * It may require correct/in-range values for request initialization.
+ * TODO(developer): Uncomment these variables before running the sample.
+ */
+/**
+ *  Required. Lists all API keys associated with this project.
+ */
+// const parent = 'abc123'
+/**
+ *  Optional. Specifies the maximum number of results to be returned at a time.
+ */
+// const pageSize = 1234
+/**
+ *  Optional. Requests a specific page of results.
+ */
+// const pageToken = 'abc123'
+/**
+ *  Optional. Indicate that keys deleted in the past 30 days should also be
+ *  returned.
+ */
+// const showDeleted = true
+
+// Imports the Apikeys library
+const {ApiKeysClient} = require('@google-cloud/apikeys').v2;
+
+// Instantiates a client
+const apikeysClient = new ApiKeysClient();
+
+async function callListKeys() {
+  // Construct request
+  const request = {
+    parent,
+  };
+
+  // Run request
+  const iterable = await apikeysClient.listKeysAsync(request);
+  for await (const response of iterable) {
+      console.log(response);
+  }
+}
+
+callListKeys();
+
+```
+
+
+
+## Samples
+
+Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/tree/main/samples) directory. Each sample's `README.md` has instructions for running its sample.
+
+| Sample                      | Source Code                       | Try it |
+| --------------------------- | --------------------------------- | ------ |
+| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/packages/google-api-apikeys/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/packages/google-api-apikeys/samples/quickstart.js,samples/README.md) |
 
 
 
