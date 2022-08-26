@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.1.1](https://github.com/googleapis/nodejs-service-usage/compare/v2.1.0...v2.1.1) (2022-08-23)
+
+
+### Bug Fixes
+
+* better support for fallback mode ([#105](https://github.com/googleapis/nodejs-service-usage/issues/105)) ([9cf34e1](https://github.com/googleapis/nodejs-service-usage/commit/9cf34e15b2b7c2d259b5cc42052b913328e0071e))
+* change import long to require ([#106](https://github.com/googleapis/nodejs-service-usage/issues/106)) ([4f574a0](https://github.com/googleapis/nodejs-service-usage/commit/4f574a04a9017fe5797afa28fda5f6b47e512bc0))
+* remove pip install statements ([#1546](https://github.com/googleapis/nodejs-service-usage/issues/1546)) ([#108](https://github.com/googleapis/nodejs-service-usage/issues/108)) ([c49f10a](https://github.com/googleapis/nodejs-service-usage/commit/c49f10a089baef23b9cac55bed1dc8b8f94f9406))
+
 ## [2.1.0](https://github.com/googleapis/nodejs-service-usage/compare/v2.0.0...v2.1.0) (2022-06-30)
 
 
