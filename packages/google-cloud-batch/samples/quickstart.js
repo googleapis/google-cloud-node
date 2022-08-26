@@ -18,7 +18,7 @@
 
 'use strict';
 
-function main() {
+function main(parent) {
   // [START batch_quickstart]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -51,7 +51,9 @@ function main() {
 
   async function callListJobs() {
     // Construct request
-    const request = {};
+    const request = {
+      parent
+    };
 
     // Run request
     const iterable = await batchClient.listJobsAsync(request);
