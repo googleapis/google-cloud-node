@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.3.1](https://github.com/googleapis/nodejs-video-live-stream/compare/v0.3.0...v0.3.1) (2022-08-23)
+
+
+### Bug Fixes
+
+* better support for fallback mode ([#50](https://github.com/googleapis/nodejs-video-live-stream/issues/50)) ([b816f7f](https://github.com/googleapis/nodejs-video-live-stream/commit/b816f7f2b9898e78c504d30a5d83ae5701174346))
+* change import long to require ([#51](https://github.com/googleapis/nodejs-video-live-stream/issues/51)) ([9bcb06a](https://github.com/googleapis/nodejs-video-live-stream/commit/9bcb06af177b5d49f3d731183e1ee077874fd0db))
+* remove pip install statements ([#1546](https://github.com/googleapis/nodejs-video-live-stream/issues/1546)) ([#53](https://github.com/googleapis/nodejs-video-live-stream/issues/53)) ([018602e](https://github.com/googleapis/nodejs-video-live-stream/commit/018602e7994dc37ba8b08df2547a3048ac0a493c))
+
 ## [0.3.0](https://github.com/googleapis/nodejs-video-live-stream/compare/v0.2.0...v0.3.0) (2022-06-29)
 
 
