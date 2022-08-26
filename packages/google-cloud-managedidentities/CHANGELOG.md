@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.1.1](https://github.com/googleapis/nodejs-managed-identities/compare/v2.1.0...v2.1.1) (2022-08-23)
+
+
+### Bug Fixes
+
+* better support for fallback mode ([#145](https://github.com/googleapis/nodejs-managed-identities/issues/145)) ([17ffe79](https://github.com/googleapis/nodejs-managed-identities/commit/17ffe79fc93a6f4e5aab2d252263759cafb19ebb))
+* change import long to require ([#146](https://github.com/googleapis/nodejs-managed-identities/issues/146)) ([150ea5f](https://github.com/googleapis/nodejs-managed-identities/commit/150ea5ffc908f80b63c25019d1b00abf56e7c7dc))
+* remove pip install statements ([#1546](https://github.com/googleapis/nodejs-managed-identities/issues/1546)) ([#148](https://github.com/googleapis/nodejs-managed-identities/issues/148)) ([5e9ee30](https://github.com/googleapis/nodejs-managed-identities/commit/5e9ee30b914febafe32c3b97b7bd6f6f0e370b4b))
+
 ## [2.1.0](https://github.com/googleapis/nodejs-managed-identities/compare/v2.0.0...v2.1.0) (2022-06-30)
 
 
