@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.0.2](https://github.com/googleapis/nodejs-org-policy/compare/v2.0.1...v2.0.2) (2022-08-23)
+
+
+### Bug Fixes
+
+* better support for fallback mode ([#121](https://github.com/googleapis/nodejs-org-policy/issues/121)) ([16843cd](https://github.com/googleapis/nodejs-org-policy/commit/16843cde09ec1a5c8d106995da2300216f593ea9))
+* change import long to require ([#122](https://github.com/googleapis/nodejs-org-policy/issues/122)) ([6ecde2c](https://github.com/googleapis/nodejs-org-policy/commit/6ecde2c561576546b6b214dfcb3a4bd8e31814d8))
+* remove pip install statements ([#1546](https://github.com/googleapis/nodejs-org-policy/issues/1546)) ([#124](https://github.com/googleapis/nodejs-org-policy/issues/124)) ([e894016](https://github.com/googleapis/nodejs-org-policy/commit/e894016082069fe0b87403977ac830df588b1ac8))
+
 ## [2.0.1](https://github.com/googleapis/nodejs-org-policy/compare/v2.0.0...v2.0.1) (2022-06-30)
 
 
