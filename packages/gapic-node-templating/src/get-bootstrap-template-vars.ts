@@ -14,7 +14,7 @@
 
 import {CliArgs} from './commands/bootstrap-library';
 import {Storage} from '@google-cloud/storage';
-import {Octokit} from 'octokit';
+import {Octokit} from '@octokit/rest';
 import {join} from 'path';
 import ChildProcess from 'child_process';
 import {writeFileSync} from 'fs';
