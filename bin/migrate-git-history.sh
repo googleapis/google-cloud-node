@@ -84,8 +84,8 @@ then
   FILTER="(rm -rf ${FOLDERS} || /bin/true)"
   if [[ ! -z "${KEEP_FILES}" ]]
   then
-    # restore files to keep
-    FILTER="${FILTER}; git checkout -- ${KEEP_FILES} || /bin/true"
+    # restore files to keep, silence errors if the file doesn't exist
+    FILTER="${FILTER}; git checkout -- ${KEEP_FILES} 2> /dev/null || /bin/true"
   fi
   git filter-branch \
     --force \
@@ -115,12 +115,13 @@ pushd target-repo
 git remote add --fetch migration ../source-repo
 git checkout -b "${BRANCH}"
 git merge --allow-unrelated-histories migration/main --no-edit
-git push -u origin "${BRANCH}" --force
 
 if [[ ! -z "${UPDATE_SCRIPT}" ]]
 then
   bash "${UPDATE_SCRIPT}"
 fi
+
+git push -u origin "${BRANCH}" --force
 
 # create pull request
 hub pull-request -m "migrate code from ${SOURCE_REPO}"
