@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/monitoring?activeTab=versions
 
+## [3.0.1](https://github.com/googleapis/nodejs-monitoring/compare/v3.0.0...v3.0.1) (2022-08-23)
+
+
+### Bug Fixes
+
+* change import long to require ([#624](https://github.com/googleapis/nodejs-monitoring/issues/624)) ([5cd302e](https://github.com/googleapis/nodejs-monitoring/commit/5cd302e9bb803ce2b2da844faaccacadac73f833))
+* remove pip install statements ([#1546](https://github.com/googleapis/nodejs-monitoring/issues/1546)) ([#626](https://github.com/googleapis/nodejs-monitoring/issues/626)) ([7f1f9c6](https://github.com/googleapis/nodejs-monitoring/commit/7f1f9c6f226c9abc48d9da4d6a452312ce3085d2))
+
 ## [3.0.0](https://github.com/googleapis/nodejs-monitoring/compare/v2.3.5...v3.0.0) (2022-05-20)
 
 
