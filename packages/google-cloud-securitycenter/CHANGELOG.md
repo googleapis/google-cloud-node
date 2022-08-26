@@ -4,6 +4,20 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/security-center?activeTab=versions
 
+## [6.3.0](https://github.com/googleapis/nodejs-security-center/compare/v6.2.0...v6.3.0) (2022-08-23)
+
+
+### Features
+
+* Adding uris to indicator of compromise (IOC) field ([bcf1a98](https://github.com/googleapis/nodejs-security-center/commit/bcf1a9875618b05830cbf787fb4676c92a3d2920))
+
+
+### Bug Fixes
+
+* better support for fallback mode ([#503](https://github.com/googleapis/nodejs-security-center/issues/503)) ([08f348c](https://github.com/googleapis/nodejs-security-center/commit/08f348ca11f4ef153201982280fc49e24a056e4c))
+* change import long to require ([#504](https://github.com/googleapis/nodejs-security-center/issues/504)) ([0eccdf0](https://github.com/googleapis/nodejs-security-center/commit/0eccdf080c75cf83ef4b2b5cd0b10dc98fd1596d))
+* remove pip install statements ([#1546](https://github.com/googleapis/nodejs-security-center/issues/1546)) ([#505](https://github.com/googleapis/nodejs-security-center/issues/505)) ([66a776b](https://github.com/googleapis/nodejs-security-center/commit/66a776b6e419c8d3980f126b98f7cb396e66cdca))
+
 ## [6.2.0](https://github.com/googleapis/nodejs-security-center/compare/v6.1.0...v6.2.0) (2022-07-29)
 
 
