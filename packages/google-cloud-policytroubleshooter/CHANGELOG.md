@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.0.2](https://github.com/googleapis/nodejs-policy-troubleshooter/compare/v2.0.1...v2.0.2) (2022-08-23)
+
+
+### Bug Fixes
+
+* better support for fallback mode ([#135](https://github.com/googleapis/nodejs-policy-troubleshooter/issues/135)) ([7acbd17](https://github.com/googleapis/nodejs-policy-troubleshooter/commit/7acbd17c45d76cac504436fbcd7a2f6463c3d3ef))
+* change import long to require ([#136](https://github.com/googleapis/nodejs-policy-troubleshooter/issues/136)) ([05699c7](https://github.com/googleapis/nodejs-policy-troubleshooter/commit/05699c7f0d17826d3635618803e41557ebc377d7))
+* remove pip install statements ([#1546](https://github.com/googleapis/nodejs-policy-troubleshooter/issues/1546)) ([#138](https://github.com/googleapis/nodejs-policy-troubleshooter/issues/138)) ([2b8a030](https://github.com/googleapis/nodejs-policy-troubleshooter/commit/2b8a030f81a00161baf08a9aafd4add86528d082))
+
 ## [2.0.1](https://github.com/googleapis/nodejs-policy-troubleshooter/compare/v2.0.0...v2.0.1) (2022-06-30)
 
 
