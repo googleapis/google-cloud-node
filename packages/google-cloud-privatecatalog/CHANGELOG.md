@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.0.2](https://github.com/googleapis/nodejs-private-catalog/compare/v2.0.1...v2.0.2) (2022-08-23)
+
+
+### Bug Fixes
+
+* better support for fallback mode ([#97](https://github.com/googleapis/nodejs-private-catalog/issues/97)) ([fb44b6c](https://github.com/googleapis/nodejs-private-catalog/commit/fb44b6c08f068ae0b0b240ecf5834483a17d653a))
+* change import long to require ([#98](https://github.com/googleapis/nodejs-private-catalog/issues/98)) ([b67b633](https://github.com/googleapis/nodejs-private-catalog/commit/b67b63324e8a6f3bd5e36f403cbc92710576957e))
+* remove pip install statements ([#1546](https://github.com/googleapis/nodejs-private-catalog/issues/1546)) ([#100](https://github.com/googleapis/nodejs-private-catalog/issues/100)) ([8dd298f](https://github.com/googleapis/nodejs-private-catalog/commit/8dd298f04e1d272697421c03a7c2a53942dd673b))
+
 ## [2.0.1](https://github.com/googleapis/nodejs-private-catalog/compare/v2.0.0...v2.0.1) (2022-06-30)
 
 
