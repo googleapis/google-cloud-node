@@ -34,7 +34,6 @@ import {
 } from 'google-gax';
 
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -441,7 +440,8 @@ export class AppConnectionsServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -757,7 +757,7 @@ export class AppConnectionsServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.createAppConnection,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.beyondcorp.appconnections.v1.AppConnection,
@@ -922,7 +922,7 @@ export class AppConnectionsServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateAppConnection,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.beyondcorp.appconnections.v1.AppConnection,
@@ -1077,7 +1077,7 @@ export class AppConnectionsServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteAppConnection,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -1249,7 +1249,7 @@ export class AppConnectionsServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listAppConnections.createStream(
-      this.innerApiCalls.listAppConnections as gax.GaxCall,
+      this.innerApiCalls.listAppConnections as GaxCall,
       request,
       callSettings
     );
@@ -1311,7 +1311,7 @@ export class AppConnectionsServiceClient {
     this.initialize();
     return this.descriptors.page.listAppConnections.asyncIterate(
       this.innerApiCalls['listAppConnections'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.beyondcorp.appconnections.v1.IAppConnection>;
   }
@@ -1476,7 +1476,7 @@ export class AppConnectionsServiceClient {
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.resolveAppConnections.createStream(
-      this.innerApiCalls.resolveAppConnections as gax.GaxCall,
+      this.innerApiCalls.resolveAppConnections as GaxCall,
       request,
       callSettings
     );
@@ -1535,7 +1535,7 @@ export class AppConnectionsServiceClient {
     this.initialize();
     return this.descriptors.page.resolveAppConnections.asyncIterate(
       this.innerApiCalls['resolveAppConnections'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsResponse.IAppConnectionDetails>;
   }
