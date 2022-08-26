@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.1.1](https://github.com/googleapis/nodejs-network-connectivity/compare/v2.1.0...v2.1.1) (2022-08-23)
+
+
+### Bug Fixes
+
+* better support for fallback mode ([#146](https://github.com/googleapis/nodejs-network-connectivity/issues/146)) ([76610c8](https://github.com/googleapis/nodejs-network-connectivity/commit/76610c8df1cf6ff75f473c06beb615d9957ecb72))
+* change import long to require ([#147](https://github.com/googleapis/nodejs-network-connectivity/issues/147)) ([c7a03e5](https://github.com/googleapis/nodejs-network-connectivity/commit/c7a03e515b22a9f00fc2bb3cbfc0b947e84513af))
+* remove pip install statements ([#1546](https://github.com/googleapis/nodejs-network-connectivity/issues/1546)) ([#149](https://github.com/googleapis/nodejs-network-connectivity/issues/149)) ([df4946c](https://github.com/googleapis/nodejs-network-connectivity/commit/df4946c655356a71a4e6e4468bf19cace01b3e12))
+
 ## [2.1.0](https://github.com/googleapis/nodejs-network-connectivity/compare/v2.0.0...v2.1.0) (2022-06-30)
 
 
