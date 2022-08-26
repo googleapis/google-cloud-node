@@ -1,5 +1,13 @@
 # Changelog
 
+## [5.0.1](https://github.com/googleapis/nodejs-recommender/compare/v5.0.0...v5.0.1) (2022-08-23)
+
+
+### Bug Fixes
+
+* change import long to require ([#239](https://github.com/googleapis/nodejs-recommender/issues/239)) ([a25747e](https://github.com/googleapis/nodejs-recommender/commit/a25747ef09f8ca018b7507e2af66a046098fb4e1))
+* remove pip install statements ([#1546](https://github.com/googleapis/nodejs-recommender/issues/1546)) ([#241](https://github.com/googleapis/nodejs-recommender/issues/241)) ([a7b3598](https://github.com/googleapis/nodejs-recommender/commit/a7b35986d32e9fedb8d7f9c2956ca35a500262d0))
+
 ## [5.0.0](https://github.com/googleapis/nodejs-recommender/compare/v4.2.5...v5.0.0) (2022-05-17)
 
 
