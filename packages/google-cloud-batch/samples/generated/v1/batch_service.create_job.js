@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(updateMask, appConnection) {
-  // [START beyondcorp_v1_generated_AppConnectionsService_UpdateAppConnection_async]
+function main(parent, job) {
+  // [START batch_v1_generated_BatchService_CreateJob_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,25 +29,29 @@ function main(updateMask, appConnection) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Mask of fields to update. At least one path must be supplied in
-   *  this field. The elements of the repeated paths field may only include these
-   *  fields from BeyondCorp.AppConnection:
-   *  * `labels`
-   *  * `display_name`
-   *  * `application_endpoint`
-   *  * `connectors`
+   *  Required. The parent resource name where the Job will be created.
+   *  Pattern: "projects/{project}/locations/{location}"
    */
-  // const updateMask = {}
+  // const parent = 'abc123'
   /**
-   *  Required. AppConnection message with updated fields. Only supported fields
-   *  specified in update_mask are updated.
+   *  ID used to uniquely identify the Job within its parent scope.
+   *  This field should contain at most 63 characters.
+   *  Only alphanumeric characters or '-' are accepted.
+   *  The '-' character cannot be the first or the last one.
+   *  A system generated ID will be used if the field is not set.
+   *  The job.name field in the request will be ignored and the created resource
+   *  name of the Job will be "{parent}/jobs/{job_id}".
    */
-  // const appConnection = {}
+  // const jobId = 'abc123'
   /**
-   *  Optional. An optional request ID to identify requests. Specify a unique
-   *  request ID so that if you must retry your request, the server will know to
-   *  ignore the request if it has already been completed. The server will
-   *  guarantee that for at least 60 minutes since the first request.
+   *  Required. The Job to create.
+   */
+  // const job = {}
+  /**
+   *  Optional. An optional request ID to identify requests. Specify a unique request ID
+   *  so that if you must retry your request, the server will know to ignore
+   *  the request if it has already been completed. The server will guarantee
+   *  that for at least 60 minutes since the first request.
    *  For example, consider a situation where you make an initial request and t
    *  he request times out. If you make the request again with the same request
    *  ID, the server can check if original operation with the same request ID
@@ -57,37 +61,27 @@ function main(updateMask, appConnection) {
    *  not supported (00000000-0000-0000-0000-000000000000).
    */
   // const requestId = 'abc123'
-  /**
-   *  Optional. If set, validates request by executing a dry-run which would not
-   *  alter the resource in any way.
-   */
-  // const validateOnly = true
-  /**
-   *  Optional. If set as true, will create the resource if it is not found.
-   */
-  // const allowMissing = true
 
-  // Imports the Appconnections library
-  const {AppConnectionsServiceClient} = require('@google-cloud/appconnections').v1;
+  // Imports the Batch library
+  const {BatchServiceClient} = require('@google-cloud/batch').v1;
 
   // Instantiates a client
-  const appconnectionsClient = new AppConnectionsServiceClient();
+  const batchClient = new BatchServiceClient();
 
-  async function callUpdateAppConnection() {
+  async function callCreateJob() {
     // Construct request
     const request = {
-      updateMask,
-      appConnection,
+      parent,
+      job,
     };
 
     // Run request
-    const [operation] = await appconnectionsClient.updateAppConnection(request);
-    const [response] = await operation.promise();
+    const response = await batchClient.createJob(request);
     console.log(response);
   }
 
-  callUpdateAppConnection();
-  // [END beyondcorp_v1_generated_AppConnectionsService_UpdateAppConnection_async]
+  callCreateJob();
+  // [END batch_v1_generated_BatchService_CreateJob_async]
 }
 
 process.on('unhandledRejection', err => {
