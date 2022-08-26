@@ -18,8 +18,8 @@ const assert = require('assert');
 const path = require('path');
 const cp = require('child_process');
 const {describe, it, before} = require('mocha');
-const {Client} = require('@google-cloud/apikeys').v2;
-const apikeysClient = new Client();
+const {ApiKeysClient} = require('@google-cloud/apikeys').v2;
+const apikeysClient = new ApiKeysClient();
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
