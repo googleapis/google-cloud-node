@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.1.1](https://github.com/googleapis/nodejs-os-config/compare/v2.1.0...v2.1.1) (2022-08-23)
+
+
+### Bug Fixes
+
+* better support for fallback mode ([#215](https://github.com/googleapis/nodejs-os-config/issues/215)) ([6460d25](https://github.com/googleapis/nodejs-os-config/commit/6460d2540ee1c65230c5bfefac19d5f60e57dd35))
+* change import long to require ([#216](https://github.com/googleapis/nodejs-os-config/issues/216)) ([4a53d92](https://github.com/googleapis/nodejs-os-config/commit/4a53d9258f285f29b7fe47659d76368f7f116b35))
+* remove pip install statements ([#1546](https://github.com/googleapis/nodejs-os-config/issues/1546)) ([#218](https://github.com/googleapis/nodejs-os-config/issues/218)) ([60e2d27](https://github.com/googleapis/nodejs-os-config/commit/60e2d273dcff7b2d88db8b4689524341e138edd3))
+
 ## [2.1.0](https://github.com/googleapis/nodejs-os-config/compare/v2.0.0...v2.1.0) (2022-07-02)
 
 
