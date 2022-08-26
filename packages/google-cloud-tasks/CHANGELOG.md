@@ -4,6 +4,15 @@
 
 [1]: https://www.npmjs.com/package/nodejs-tasks?activeTab=versions
 
+## [3.0.2](https://github.com/googleapis/nodejs-tasks/compare/v3.0.1...v3.0.2) (2022-08-23)
+
+
+### Bug Fixes
+
+* better support for fallback mode ([#644](https://github.com/googleapis/nodejs-tasks/issues/644)) ([e3dc832](https://github.com/googleapis/nodejs-tasks/commit/e3dc83293c398631e9bdb26903a2d3be3d826af9))
+* change import long to require ([#645](https://github.com/googleapis/nodejs-tasks/issues/645)) ([5d2238b](https://github.com/googleapis/nodejs-tasks/commit/5d2238b0126314bc1b8f78715e85a97ad6a61e80))
+* remove pip install statements ([#1546](https://github.com/googleapis/nodejs-tasks/issues/1546)) ([#648](https://github.com/googleapis/nodejs-tasks/issues/648)) ([e67689e](https://github.com/googleapis/nodejs-tasks/commit/e67689e0933252ab88fc2dfadc5e3cb75a0fb145))
+
 ## [3.0.1](https://github.com/googleapis/nodejs-tasks/compare/v3.0.0...v3.0.1) (2022-06-30)
 
 
