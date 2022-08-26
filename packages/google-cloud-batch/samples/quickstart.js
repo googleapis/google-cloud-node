@@ -16,8 +16,6 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-
-
 'use strict';
 
 function main() {
@@ -53,13 +51,12 @@ function main() {
 
   async function callListJobs() {
     // Construct request
-    const request = {
-    };
+    const request = {};
 
     // Run request
     const iterable = await batchClient.listJobsAsync(request);
     for await (const response of iterable) {
-        console.log(response);
+      console.log(response);
     }
   }
 
