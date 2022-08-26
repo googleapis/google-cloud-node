@@ -4,6 +4,15 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/recaptcha-enterprise?activeTab=versions
 
+## [3.0.3](https://github.com/googleapis/nodejs-recaptcha-enterprise/compare/v3.0.2...v3.0.3) (2022-08-23)
+
+
+### Bug Fixes
+
+* better support for fallback mode ([#396](https://github.com/googleapis/nodejs-recaptcha-enterprise/issues/396)) ([a3dde75](https://github.com/googleapis/nodejs-recaptcha-enterprise/commit/a3dde75d3080a30c5613703041d48ec466403511))
+* change import long to require ([#398](https://github.com/googleapis/nodejs-recaptcha-enterprise/issues/398)) ([6d14b20](https://github.com/googleapis/nodejs-recaptcha-enterprise/commit/6d14b2030dd5ca2bf6fdc7ba72c45d05ac19bd1a))
+* remove pip install statements ([#1546](https://github.com/googleapis/nodejs-recaptcha-enterprise/issues/1546)) ([#401](https://github.com/googleapis/nodejs-recaptcha-enterprise/issues/401)) ([82e9ae9](https://github.com/googleapis/nodejs-recaptcha-enterprise/commit/82e9ae9361edbb1c98284d6946ae299fbf607faf))
+
 ## [3.0.2](https://github.com/googleapis/nodejs-recaptcha-enterprise/compare/v3.0.1...v3.0.2) (2022-06-30)
 
 

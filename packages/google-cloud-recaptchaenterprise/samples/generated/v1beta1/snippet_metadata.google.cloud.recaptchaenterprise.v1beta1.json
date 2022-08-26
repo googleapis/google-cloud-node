@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-recaptchaenterprise",
-        "version": "3.0.2",
+        "version": "3.0.3",
         "language": "TYPESCRIPT",
         "apis": [
             {
