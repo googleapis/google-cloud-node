@@ -4,6 +4,15 @@
 
 [1]: https://www.npmjs.com/package/nodejs-redis?activeTab=versions
 
+## [3.1.1](https://github.com/googleapis/nodejs-redis/compare/v3.1.0...v3.1.1) (2022-08-23)
+
+
+### Bug Fixes
+
+* better support for fallback mode ([#580](https://github.com/googleapis/nodejs-redis/issues/580)) ([823c63d](https://github.com/googleapis/nodejs-redis/commit/823c63d6b78fc77104ac78f3d7d2ee3ea31644ba))
+* change import long to require ([#582](https://github.com/googleapis/nodejs-redis/issues/582)) ([65ed662](https://github.com/googleapis/nodejs-redis/commit/65ed662dde7eef60d89b3b985f17d2eb5cf4ec9b))
+* remove pip install statements ([#1546](https://github.com/googleapis/nodejs-redis/issues/1546)) ([#584](https://github.com/googleapis/nodejs-redis/issues/584)) ([a124970](https://github.com/googleapis/nodejs-redis/commit/a124970f07a186a810db1c24c56f639385952abf))
+
 ## [3.1.0](https://github.com/googleapis/nodejs-redis/compare/v3.0.0...v3.1.0) (2022-06-30)
 
 
