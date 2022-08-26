@@ -16,7 +16,10 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {AwsClustersClient, AzureClustersClient} from '@google-cloud/gkemulticloud';
+import {
+  AwsClustersClient,
+  AzureClustersClient,
+} from '@google-cloud/gkemulticloud';
 
 // check that the client class type name can be used
 function doStuffWithAwsClustersClient(client: AwsClustersClient) {

@@ -16,7 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+/* eslint-disable node/no-missing-require, no-unused-vars */
+const gkemulticloud = require('@google-cloud/gkemulticloud');
 
-module.exports = {
-  ...require('gts/.prettierrc.json')
+function main() {
+  const awsClustersClient = new gkemulticloud.AwsClustersClient();
+  const azureClustersClient = new gkemulticloud.AzureClustersClient();
 }
+
+main();
