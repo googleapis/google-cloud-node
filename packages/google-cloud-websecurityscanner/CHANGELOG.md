@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.1.1](https://github.com/googleapis/nodejs-web-security-scanner/compare/v2.1.0...v2.1.1) (2022-08-23)
+
+
+### Bug Fixes
+
+* better support for fallback mode ([#135](https://github.com/googleapis/nodejs-web-security-scanner/issues/135)) ([9b70cc5](https://github.com/googleapis/nodejs-web-security-scanner/commit/9b70cc5a238bdf595a0dd05244662e60156de8d1))
+* change import long to require ([#136](https://github.com/googleapis/nodejs-web-security-scanner/issues/136)) ([f9e6d50](https://github.com/googleapis/nodejs-web-security-scanner/commit/f9e6d502b1b5c7e47e349dc8569d61853524c519))
+* remove pip install statements ([#1546](https://github.com/googleapis/nodejs-web-security-scanner/issues/1546)) ([#138](https://github.com/googleapis/nodejs-web-security-scanner/issues/138)) ([00a8d54](https://github.com/googleapis/nodejs-web-security-scanner/commit/00a8d549df6e346b202e8ea674642769a08cead5))
+
 ## [2.1.0](https://github.com/googleapis/nodejs-web-security-scanner/compare/v2.0.0...v2.1.0) (2022-06-29)
 
 
