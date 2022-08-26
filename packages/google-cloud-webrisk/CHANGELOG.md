@@ -4,6 +4,15 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/web-risk?activeTab=versions
 
+## [3.1.1](https://github.com/googleapis/nodejs-web-risk/compare/v3.1.0...v3.1.1) (2022-08-23)
+
+
+### Bug Fixes
+
+* better support for fallback mode ([#337](https://github.com/googleapis/nodejs-web-risk/issues/337)) ([2da1386](https://github.com/googleapis/nodejs-web-risk/commit/2da138691740b8ef1264613346587839a52d083b))
+* change import long to require ([#338](https://github.com/googleapis/nodejs-web-risk/issues/338)) ([50a0a67](https://github.com/googleapis/nodejs-web-risk/commit/50a0a672ffbb9b5e0cda7dc1a53e51c31b20684a))
+* remove pip install statements ([#1546](https://github.com/googleapis/nodejs-web-risk/issues/1546)) ([#340](https://github.com/googleapis/nodejs-web-risk/issues/340)) ([0a19105](https://github.com/googleapis/nodejs-web-risk/commit/0a1910579ee8bf97a5b0ea20d05a39fc933d7eac))
+
 ## [3.1.0](https://github.com/googleapis/nodejs-web-risk/compare/v3.0.0...v3.1.0) (2022-06-29)
 
 
