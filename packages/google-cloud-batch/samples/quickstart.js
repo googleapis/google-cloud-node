@@ -52,7 +52,7 @@ function main(parent) {
   async function callListJobs() {
     // Construct request
     const request = {
-      parent
+      parent,
     };
 
     // Run request

@@ -88,7 +88,9 @@ const batchClient = new BatchServiceClient();
 
 async function callListJobs() {
   // Construct request
-  const request = {};
+  const request = {
+    parent
+  };
 
   // Run request
   const iterable = await batchClient.listJobsAsync(request);
