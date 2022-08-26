@@ -1,5 +1,14 @@
 # Changelog
 
+## [4.0.2](https://github.com/googleapis/nodejs-service-directory/compare/v4.0.1...v4.0.2) (2022-08-23)
+
+
+### Bug Fixes
+
+* better support for fallback mode ([#241](https://github.com/googleapis/nodejs-service-directory/issues/241)) ([59365c7](https://github.com/googleapis/nodejs-service-directory/commit/59365c79e44b3a134d14be41ec5979c08fdf053f))
+* change import long to require ([#242](https://github.com/googleapis/nodejs-service-directory/issues/242)) ([28ba038](https://github.com/googleapis/nodejs-service-directory/commit/28ba0388590806ca97ef96be7d2aa0113d66488d))
+* remove pip install statements ([#1546](https://github.com/googleapis/nodejs-service-directory/issues/1546)) ([#244](https://github.com/googleapis/nodejs-service-directory/issues/244)) ([2a10e38](https://github.com/googleapis/nodejs-service-directory/commit/2a10e38ed733c8679d7a25546c5b91534e0a2895))
+
 ## [4.0.1](https://github.com/googleapis/nodejs-service-directory/compare/v4.0.0...v4.0.1) (2022-06-30)
 
 

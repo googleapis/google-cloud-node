@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/service-directory",
-  "version": "4.0.1",
+  "version": "4.0.2",
   "description": "Servicedirectory client for Node.js",
   "repository": "googleapis/nodejs-service-directory",
   "license": "Apache-2.0",
