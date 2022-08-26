@@ -1,5 +1,14 @@
 # Changelog
 
+## [3.0.2](https://github.com/googleapis/nodejs-media-translation/compare/v3.0.1...v3.0.2) (2022-08-23)
+
+
+### Bug Fixes
+
+* better support for fallback mode ([#243](https://github.com/googleapis/nodejs-media-translation/issues/243)) ([a0dc4be](https://github.com/googleapis/nodejs-media-translation/commit/a0dc4be632b474ef5fe3a3df3719743fc31b911b))
+* change import long to require ([#244](https://github.com/googleapis/nodejs-media-translation/issues/244)) ([31a670e](https://github.com/googleapis/nodejs-media-translation/commit/31a670ed83c2de493a15504422b3c2a09612ef05))
+* remove pip install statements ([#1546](https://github.com/googleapis/nodejs-media-translation/issues/1546)) ([#247](https://github.com/googleapis/nodejs-media-translation/issues/247)) ([8a11196](https://github.com/googleapis/nodejs-media-translation/commit/8a11196b52832ff61ad709f9f12683185bc6e96a))
+
 ## [3.0.1](https://github.com/googleapis/nodejs-media-translation/compare/v3.0.0...v3.0.1) (2022-06-30)
 
 
