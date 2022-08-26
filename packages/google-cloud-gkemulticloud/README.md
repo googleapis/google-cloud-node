@@ -31,8 +31,8 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-
-
+  * [Using the client library](#using-the-client-library)
+* [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
@@ -54,6 +54,70 @@ npm install @google-cloud/gkemulticloud
 ```
 
 
+### Using the client library
+
+```javascript
+/**
+ * This snippet has been automatically generated and should be regarded as a code template only.
+ * It will require modifications to work.
+ * It may require correct/in-range values for request initialization.
+ * TODO(developer): Uncomment these variables before running the sample.
+ */
+/**
+ *  Required. The parent location which owns this collection of
+ *  AwsCluster google.cloud.gkemulticloud.v1.AwsCluster  resources.
+ *  Location names are formatted as `projects/<project-id>/locations/<region>`.
+ *  See Resource Names (https://cloud.google.com/apis/design/resource_names)
+ *  for more details on GCP resource names.
+ */
+// const parent = 'abc123'
+/**
+ *  The maximum number of items to return.
+ *  If not specified, a default value of 50 will be used by the service.
+ *  Regardless of the pageSize value, the response can include a partial list
+ *  and a caller should only rely on response's
+ *  nextPageToken google.cloud.gkemulticloud.v1.ListAwsClustersResponse.next_page_token  to determine if
+ *  there are more instances left to be queried.
+ */
+// const pageSize = 1234
+/**
+ *  The `nextPageToken` value returned from a previous
+ *  awsClusters.list google.cloud.gkemulticloud.v1.AwsClusters.ListAwsClusters  request, if any.
+ */
+// const pageToken = 'abc123'
+
+// Imports the Gkemulticloud library
+const {AwsClustersClient} = require('@google-cloud/gkemulticloud').v1;
+
+// Instantiates a client
+const gkemulticloudClient = new AwsClustersClient();
+
+async function callListAwsClusters() {
+  // Construct request
+  const request = {
+    parent,
+  };
+
+  // Run request
+  const iterable = await gkemulticloudClient.listAwsClustersAsync(request);
+  for await (const response of iterable) {
+      console.log(response);
+  }
+}
+
+callListAwsClusters();
+
+```
+
+
+
+## Samples
+
+Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/tree/main/samples) directory. Each sample's `README.md` has instructions for running its sample.
+
+| Sample                      | Source Code                       | Try it |
+| --------------------------- | --------------------------------- | ------ |
+| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/packages/google-cloud-gkemulticloud/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/packages/google-cloud-gkemulticloud/samples/quickstart.js,samples/README.md) |
 
 
 
