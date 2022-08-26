@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-speech",
-        "version": "5.0.0",
+        "version": "5.0.1",
         "language": "TYPESCRIPT",
         "apis": [
             {

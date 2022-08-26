@@ -4,6 +4,20 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+## [5.0.1](https://github.com/googleapis/nodejs-speech/compare/v5.0.0...v5.0.1) (2022-08-23)
+
+
+### Bug Fixes
+
+* better support for fallback mode ([#918](https://github.com/googleapis/nodejs-speech/issues/918)) ([7cf922a](https://github.com/googleapis/nodejs-speech/commit/7cf922a2e13ccd9432aa9ca801e2bf5b7d0fa6ff))
+* change import long to require ([#920](https://github.com/googleapis/nodejs-speech/issues/920)) ([375a9b0](https://github.com/googleapis/nodejs-speech/commit/375a9b0abe8bb224b4da8bf82da28b6205c1c817))
+* **deps:** do not depend on protobufjs; bump dep in samples ([#911](https://github.com/googleapis/nodejs-speech/issues/911)) ([02c3fb7](https://github.com/googleapis/nodejs-speech/commit/02c3fb74f1229162401922fad143852a12338fe6))
+* **deps:** update dependency @google-cloud/common to v4 ([#896](https://github.com/googleapis/nodejs-speech/issues/896)) ([3bdda3f](https://github.com/googleapis/nodejs-speech/commit/3bdda3fff9733dbd0236d4ba36a6cbe1ec0449c5))
+* **deps:** update dependency @google-cloud/storage to v6 ([#893](https://github.com/googleapis/nodejs-speech/issues/893)) ([738c538](https://github.com/googleapis/nodejs-speech/commit/738c5380e15c3bbe4c05def4b42cfbbb8c366263))
+* **deps:** update dependency google-proto-files to v3 ([#900](https://github.com/googleapis/nodejs-speech/issues/900)) ([557a2f0](https://github.com/googleapis/nodejs-speech/commit/557a2f0527a29bb2668e7a499156f2c0a4e6148c))
+* **deps:** update dependency proto3-json-serializer to v1 ([#890](https://github.com/googleapis/nodejs-speech/issues/890)) ([697ca5c](https://github.com/googleapis/nodejs-speech/commit/697ca5c70c5f09967a7a93203208d090f3edf33d))
+* remove pip install statements ([#1546](https://github.com/googleapis/nodejs-speech/issues/1546)) ([#922](https://github.com/googleapis/nodejs-speech/issues/922)) ([8699490](https://github.com/googleapis/nodejs-speech/commit/8699490a782c1ab532eda6b9596ddf2e0810cfff))
+
 ## [5.0.0](https://github.com/googleapis/nodejs-speech/compare/v4.10.2...v5.0.0) (2022-06-24)
 
 
