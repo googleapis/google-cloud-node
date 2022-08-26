@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.1.1](https://github.com/googleapis/nodejs-secret-manager/compare/v4.1.0...v4.1.1) (2022-08-23)
+
+
+### Bug Fixes
+
+* remove pip install statements ([#1546](https://github.com/googleapis/nodejs-secret-manager/issues/1546)) ([#396](https://github.com/googleapis/nodejs-secret-manager/issues/396)) ([4c0575e](https://github.com/googleapis/nodejs-secret-manager/commit/4c0575e404659f11ac07ebfe7090bcaf93b13a09))
+
 ## [4.1.0](https://github.com/googleapis/nodejs-secret-manager/compare/v4.0.1...v4.1.0) (2022-08-23)
 
 
