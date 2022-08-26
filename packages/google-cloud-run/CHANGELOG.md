@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.2.2](https://github.com/googleapis/nodejs-run/compare/v0.2.1...v0.2.2) (2022-08-23)
+
+
+### Bug Fixes
+
+* better support for fallback mode ([#19](https://github.com/googleapis/nodejs-run/issues/19)) ([83e8ce5](https://github.com/googleapis/nodejs-run/commit/83e8ce58950e0a7eaedede16e53575497833331b))
+* change import long to require ([#20](https://github.com/googleapis/nodejs-run/issues/20)) ([5609e28](https://github.com/googleapis/nodejs-run/commit/5609e285e3ad19054466c2299e76896ef7cd70db))
+* remove pip install statements ([#1546](https://github.com/googleapis/nodejs-run/issues/1546)) ([#22](https://github.com/googleapis/nodejs-run/issues/22)) ([779e287](https://github.com/googleapis/nodejs-run/commit/779e287b36fa55e0d9bab843c34ef99719a6fa8e))
+
 ## [0.2.1](https://github.com/googleapis/nodejs-run/compare/v0.2.0...v0.2.1) (2022-07-20)
 
 
