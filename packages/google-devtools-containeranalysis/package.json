@@ -24,7 +24,7 @@
   ],
   "dependencies": {
     "@google-cloud/grafeas": "^4.0.0",
-    "google-gax": "^3.0.1"
+    "google-gax": "^3.3.0"
   },
   "devDependencies": {
     "@types/mocha": "^9.0.0",
