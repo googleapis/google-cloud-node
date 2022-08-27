@@ -39,7 +39,7 @@
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../"
   },
   "dependencies": {
-    "google-gax": "^3.0.2"
+    "google-gax": "^3.3.0"
   },
   "devDependencies": {
     "@types/mocha": "^9.0.0",
