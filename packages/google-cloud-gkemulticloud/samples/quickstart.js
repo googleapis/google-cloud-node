@@ -53,7 +53,10 @@ function main(parent) {
   const {AwsClustersClient} = require('@google-cloud/gkemulticloud').v1;
 
   // Instantiates a client
-  const gkemulticloudClient = new AwsClustersClient();
+  const gkemulticloudClient = new AwsClustersClient({
+    // API endpoint must be set:
+    apiEndpoint: 'us-west1-gkemulticloud.googleapis.com',
+  });
 
   async function callListAwsClusters() {
     // Construct request
