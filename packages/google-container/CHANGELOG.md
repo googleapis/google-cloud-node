@@ -4,6 +4,15 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## [4.1.1](https://github.com/googleapis/nodejs-cloud-container/compare/v4.1.0...v4.1.1) (2022-08-27)
+
+
+### Bug Fixes
+
+* change import long to require ([#558](https://github.com/googleapis/nodejs-cloud-container/issues/558)) ([83df9aa](https://github.com/googleapis/nodejs-cloud-container/commit/83df9aa300b311b4a4928671a518d25a4b38300f))
+* do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-cloud-container/issues/1553)) ([#562](https://github.com/googleapis/nodejs-cloud-container/issues/562)) ([50f317f](https://github.com/googleapis/nodejs-cloud-container/commit/50f317fff66003b40086b219a0e21a5fa1e7608a))
+* use google-gax v3.3.0 ([50f317f](https://github.com/googleapis/nodejs-cloud-container/commit/50f317fff66003b40086b219a0e21a5fa1e7608a))
+
 ## [4.1.0](https://github.com/googleapis/nodejs-cloud-container/compare/v4.0.1...v4.1.0) (2022-07-04)
 
 
