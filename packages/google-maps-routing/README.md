@@ -5,12 +5,12 @@
 # [: Node.js Client](https://github.com/googleapis/google-cloud-node)
 
 [![release level](https://img.shields.io/badge/release%20level-beta-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
-[![npm version](https://img.shields.io/npm/v/@google-cloud/gkemulticloud.svg)](https://www.npmjs.org/package/@google-cloud/gkemulticloud)
+[![npm version](https://img.shields.io/npm/v/@google-cloud/routing.svg)](https://www.npmjs.org/package/@google-cloud/routing)
 
 
 
 
-Anthos Multi-Cloud API client for Node.js
+ client for Node.js
 
 
 A comprehensive list of changes in each version may be found in
@@ -31,8 +31,8 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-  * [Using the client library](#using-the-client-library)
-* [Samples](#samples)
+
+
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
@@ -50,77 +50,10 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 ### Installing the client library
 
 ```bash
-npm install @google-cloud/gkemulticloud
+npm install @google-cloud/routing
 ```
 
 
-### Using the client library
-
-```javascript
-/**
- * This snippet has been automatically generated and should be regarded as a code template only.
- * It will require modifications to work.
- * It may require correct/in-range values for request initialization.
- * TODO(developer): Uncomment these variables before running the sample.
- */
-/**
- *  Required. The parent location which owns this collection of
- *  AwsCluster google.cloud.gkemulticloud.v1.AwsCluster  resources.
- *  Location names are formatted as `projects/<project-id>/locations/<region>`.
- *  See Resource Names (https://cloud.google.com/apis/design/resource_names)
- *  for more details on GCP resource names.
- */
-// const parent = 'abc123'
-/**
- *  The maximum number of items to return.
- *  If not specified, a default value of 50 will be used by the service.
- *  Regardless of the pageSize value, the response can include a partial list
- *  and a caller should only rely on response's
- *  nextPageToken google.cloud.gkemulticloud.v1.ListAwsClustersResponse.next_page_token  to determine if
- *  there are more instances left to be queried.
- */
-// const pageSize = 1234
-/**
- *  The `nextPageToken` value returned from a previous
- *  awsClusters.list google.cloud.gkemulticloud.v1.AwsClusters.ListAwsClusters  request, if any.
- */
-// const pageToken = 'abc123'
-
-// Imports the Gkemulticloud library
-const {AwsClustersClient} = require('@google-cloud/gkemulticloud').v1;
-
-// Instantiates a client
-const gkemulticloudClient = new AwsClustersClient({
-  // API endpoint must be set:
-  apiEndpoint: 'us-west1-gkemulticloud.googleapis.com',
-});
-
-async function callListAwsClusters() {
-  // Construct request
-  const request = {
-    parent,
-  };
-
-  // Run request
-  const iterable = await gkemulticloudClient.listAwsClustersAsync(request);
-  for await (const response of iterable) {
-    console.log(response);
-  }
-}
-
-callListAwsClusters();
-
-```
-
-
-
-## Samples
-
-Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/tree/main/samples) directory. Each sample's `README.md` has instructions for running its sample.
-
-| Sample                      | Source Code                       | Try it |
-| --------------------------- | --------------------------------- | ------ |
-| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/packages/google-cloud-gkemulticloud/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/packages/google-cloud-gkemulticloud/samples/quickstart.js,samples/README.md) |
 
 
 
@@ -145,7 +78,7 @@ best-efforts basis with the following warnings:
 Client libraries targeting some end-of-life versions of Node.js are available, and
 can be installed through npm [dist-tags](https://docs.npmjs.com/cli/dist-tag).
 The dist-tags follow the naming convention `legacy-(version)`.
-For example, `npm install @google-cloud/gkemulticloud@legacy-8` installs client libraries
+For example, `npm install @google-cloud/routing@legacy-8` installs client libraries
 for versions compatible with Node.js 8.
 
 ## Versioning
@@ -184,10 +117,10 @@ Apache Version 2.0
 
 See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
-[client-docs]: https://cloud.google.com/nodejs/docs/reference/gkemulticloud/latest
+[client-docs]: https://cloud.google.com/nodejs/docs/reference/routing/latest
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
-[enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=google.cloud.gkemulticloud.v1
+[enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=google.maps.routing.v2
 [auth]: https://cloud.google.com/docs/authentication/getting-started

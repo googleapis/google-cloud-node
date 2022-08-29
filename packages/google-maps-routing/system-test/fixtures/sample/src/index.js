@@ -16,10 +16,11 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import * as v2 from './v2';
-const RoutesClient = v2.RoutesClient;
-type RoutesClient = v2.RoutesClient;
-export {v2, RoutesClient};
-export default {v2, RoutesClient};
-import * as protos from '../protos/protos';
-export {protos}
+/* eslint-disable node/no-missing-require, no-unused-vars */
+const routing = require('@google-cloud/routing');
+
+function main() {
+  const routesClient = new routing.RoutesClient();
+}
+
+main();
