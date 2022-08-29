@@ -19,9 +19,7 @@
 import {ClientGatewaysServiceClient} from '@google-cloud/clientgateways';
 
 // check that the client class type name can be used
-function doStuffWithClientGatewaysServiceClient(
-  client: ClientGatewaysServiceClient
-) {
+function doStuffWithClientGatewaysServiceClient(client: ClientGatewaysServiceClient) {
   client.close();
 }
 
