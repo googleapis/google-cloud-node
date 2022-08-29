@@ -115,9 +115,15 @@ async function callComputeRouteMatrix() {
 
   // Run request
   const stream = await routingClient.computeRouteMatrix(request);
-  stream.on('data', (response) => { console.log(response) });
-  stream.on('error', (err) => { throw(err) });
-  stream.on('end', () => { /* API call completed */ });
+  stream.on('data', response => {
+    console.log(response);
+  });
+  stream.on('error', err => {
+    throw err;
+  });
+  stream.on('end', () => {
+    /* API call completed */
+  });
 }
 
 callComputeRouteMatrix();
