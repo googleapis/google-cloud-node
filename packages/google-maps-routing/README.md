@@ -31,8 +31,8 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-
-
+  * [Using the client library](#using-the-client-library)
+* [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
@@ -54,6 +54,85 @@ npm install @google-cloud/routing
 ```
 
 
+### Using the client library
+
+```javascript
+/**
+ * This snippet has been automatically generated and should be regarded as a code template only.
+ * It will require modifications to work.
+ * It may require correct/in-range values for request initialization.
+ * TODO(developer): Uncomment these variables before running the sample.
+ */
+/**
+ *  Required. Array of origins, which determines the rows of the response matrix.
+ *  Several size restrictions apply to the cardinality of origins and
+ *  destinations:
+ *  * The number of elements (origins × destinations) must be no greater than
+ *  625 in any case.
+ *  * The number of elements (origins × destinations) must be no greater than
+ *  100 if routing_preference is set to `TRAFFIC_AWARE_OPTIMAL`.
+ *  * The number of waypoints (origins + destinations) specified as `place_id`
+ *  must be no greater than 50.
+ */
+// const origins = 1234
+/**
+ *  Required. Array of destinations, which determines the columns of the response matrix.
+ */
+// const destinations = 1234
+/**
+ *  Optional. Specifies the mode of transportation.
+ */
+// const travelMode = {}
+/**
+ *  Optional. Specifies how to compute the route. The server attempts to use the selected
+ *  routing preference to compute the route. If the routing preference results
+ *  in an error or an extra long latency, an error is returned. In the future,
+ *  we might implement a fallback mechanism to use a different option when the
+ *  preferred option does not give a valid result. You can specify this option
+ *  only when the `travel_mode` is `DRIVE` or `TWO_WHEELER`, otherwise the
+ *  request fails.
+ */
+// const routingPreference = {}
+/**
+ *  Optional. The departure time. If you don't set this value, this defaults to the time
+ *  that you made the request. If you set this value to a time that has already
+ *  occurred, the request fails.
+ */
+// const departureTime = {}
+
+// Imports the Routing library
+const {RoutesClient} = require('@google-cloud/routing').v2;
+
+// Instantiates a client
+const routingClient = new RoutesClient();
+
+async function callComputeRouteMatrix() {
+  // Construct request
+  const request = {
+    origins,
+    destinations,
+  };
+
+  // Run request
+  const stream = await routingClient.computeRouteMatrix(request);
+  stream.on('data', (response) => { console.log(response) });
+  stream.on('error', (err) => { throw(err) });
+  stream.on('end', () => { /* API call completed */ });
+}
+
+callComputeRouteMatrix();
+
+```
+
+
+
+## Samples
+
+Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/tree/main/samples) directory. Each sample's `README.md` has instructions for running its sample.
+
+| Sample                      | Source Code                       | Try it |
+| --------------------------- | --------------------------------- | ------ |
+| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/packages/google-maps-routing/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/packages/google-maps-routing/samples/quickstart.js,samples/README.md) |
 
 
 

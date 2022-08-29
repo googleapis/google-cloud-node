@@ -16,8 +16,6 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-
-
 'use strict';
 
 function main(origins, destinations) {
@@ -80,9 +78,15 @@ function main(origins, destinations) {
 
     // Run request
     const stream = await routingClient.computeRouteMatrix(request);
-    stream.on('data', (response) => { console.log(response) });
-    stream.on('error', (err) => { throw(err) });
-    stream.on('end', () => { /* API call completed */ });
+    stream.on('data', response => {
+      console.log(response);
+    });
+    stream.on('error', err => {
+      throw err;
+    });
+    stream.on('end', () => {
+      /* API call completed */
+    });
   }
 
   callComputeRouteMatrix();
