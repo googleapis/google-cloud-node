@@ -1,0 +1,16 @@
+{
+  "name": "iam",
+  "name_pretty": "Identity and Access Management",
+  "product_documentation": "cloud.google.com/iam/",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/iam/latest",
+  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+  "release_level": "beta",
+  "language": "nodejs",
+  "repo": "googleapis/google-cloud-node",
+  "distribution_name": "@google-cloud/iam",
+  "api_id": "google.iam.v2",
+  "default_version": "v2",
+  "requires_billing": true,
+  "library_type": "GAPIC_AUTO"
+}
+
