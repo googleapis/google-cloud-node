@@ -18,8 +18,8 @@ const assert = require('assert');
 const path = require('path');
 const cp = require('child_process');
 const {describe, it, before} = require('mocha');
-const {Client} = require('@google-cloud/iam').v2;
-const iamClient = new Client();
+const {PoliciesClient} = require('@google-cloud/iam').v2;
+const iamClient = new PoliciesClient();
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
@@ -34,7 +34,7 @@ describe('Quickstart', () => {
 
   it('should run quickstart', async () => {
     const output = execSync(
-      `node ./quickstart.js projects/${projectId}/locations/us-central1`,
+      `node ./quickstart.js policies/cloudresourcemanager.googleapis.com%2Fprojects%2F${projectId}/denypolicies`,
       {cwd}
     );
     assert(output !== null);
