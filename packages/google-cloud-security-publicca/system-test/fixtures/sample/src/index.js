@@ -16,10 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import * as v1beta1 from './v1beta1';
-const PublicCertificateAuthorityServiceClient = v1beta1.PublicCertificateAuthorityServiceClient;
-type PublicCertificateAuthorityServiceClient = v1beta1.PublicCertificateAuthorityServiceClient;
-export {v1beta1, PublicCertificateAuthorityServiceClient};
-export default {v1beta1, PublicCertificateAuthorityServiceClient};
-import * as protos from '../protos/protos';
-export {protos}
+/* eslint-disable node/no-missing-require, no-unused-vars */
+const publicca = require('@google-cloud/publicca');
+
+function main() {
+  const publicCertificateAuthorityServiceClient =
+    new publicca.PublicCertificateAuthorityServiceClient();
+}
+
+main();
