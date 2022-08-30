@@ -1431,6 +1431,10 @@
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "apigeeregistry.googleapis.com/Api"
                           }
+                        },
+                        "force": {
+                          "type": "bool",
+                          "id": 2
                         }
                       }
                     },
@@ -1537,6 +1541,10 @@
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "apigeeregistry.googleapis.com/ApiVersion"
                           }
+                        },
+                        "force": {
+                          "type": "bool",
+                          "id": 2
                         }
                       }
                     },

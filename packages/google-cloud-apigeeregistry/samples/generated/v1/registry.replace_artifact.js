@@ -23,17 +23,20 @@
 function main(artifact) {
   // [START apigeeregistry_v1_generated_Registry_ReplaceArtifact_async]
   /**
+   * This snippet has been automatically generated and should be regarded as a code template only.
+   * It will require modifications to work.
+   * It may require correct/in-range values for request initialization.
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
    *  Required. The artifact to replace.
    *  The `name` field is used to identify the artifact to replace.
-   *  Format: {parent}/artifacts/*
+   *  Format: `{parent}/artifacts/*`
    */
   // const artifact = {}
 
   // Imports the Apigeeregistry library
-  const {RegistryClient} = require('@google-cloud/apigeeregistry').v1;
+  const {RegistryClient} = require('@google-cloud/apigee-registry').v1;
 
   // Instantiates a client
   const apigeeregistryClient = new RegistryClient();

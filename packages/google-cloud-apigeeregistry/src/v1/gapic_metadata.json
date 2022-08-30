@@ -3,7 +3,7 @@
   "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
   "language": "typescript",
   "protoPackage": "google.cloud.apigeeregistry.v1",
-  "libraryPackage": "@google-cloud/apigeeregistry",
+  "libraryPackage": "@google-cloud/apigee-registry",
   "services": {
     "Provisioning": {
       "clients": {

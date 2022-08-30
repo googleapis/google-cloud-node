@@ -23,16 +23,24 @@
 function main(name) {
   // [START apigeeregistry_v1_generated_Registry_DeleteApi_async]
   /**
+   * This snippet has been automatically generated and should be regarded as a code template only.
+   * It will require modifications to work.
+   * It may require correct/in-range values for request initialization.
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
    *  Required. The name of the API to delete.
-   *  Format: projects/* /locations/* /apis/*
+   *  Format: `projects/* /locations/* /apis/*`
    */
   // const name = 'abc123'
+  /**
+   *  If set to true, any child resources will also be deleted.
+   *  (Otherwise, the request will only work if there are no child resources.)
+   */
+  // const force = true
 
   // Imports the Apigeeregistry library
-  const {RegistryClient} = require('@google-cloud/apigeeregistry').v1;
+  const {RegistryClient} = require('@google-cloud/apigee-registry').v1;
 
   // Instantiates a client
   const apigeeregistryClient = new RegistryClient();

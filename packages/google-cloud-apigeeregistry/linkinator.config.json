@@ -5,10 +5,7 @@
     "www.googleapis.com",
     "img.shields.io",
     "https://console.cloud.google.com/cloudshell",
-    "https://support.google.com",
-    "https://cloud.google.com/nodejs/docs/reference/apigeeregistry/latest",
-    "https://github.com/googleapis/nodejs-apigee-registry/blob/master/CHANGELOG.md",
-    "https://github.com/googleapis/nodejs-apigee-registry/blob/addSamples/CHANGELOG.md"
+    "https://support.google.com"
   ],
   "silent": true,
   "concurrency": 5,

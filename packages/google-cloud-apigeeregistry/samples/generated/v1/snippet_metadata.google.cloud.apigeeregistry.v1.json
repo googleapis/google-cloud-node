@@ -22,7 +22,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 62,
+                    "end": 65,
                     "type": "FULL"
                 }
             ],
@@ -70,7 +70,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 52,
+                    "end": 55,
                     "type": "FULL"
                 }
             ],
@@ -110,7 +110,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 51,
+                    "end": 54,
                     "type": "FULL"
                 }
             ],
@@ -143,14 +143,14 @@
             "regionTag": "apigeeregistry_v1_generated_Registry_ListApis_async",
             "title": "Provisioning listApis Sample",
             "origin": "API_DEFINITION",
-            "description": " ListApis returns matching APIs.",
+            "description": " Returns matching APIs.",
             "canonical": true,
             "file": "registry.list_apis.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 72,
+                    "end": 75,
                     "type": "FULL"
                 }
             ],
@@ -195,14 +195,14 @@
             "regionTag": "apigeeregistry_v1_generated_Registry_GetApi_async",
             "title": "Provisioning getApi Sample",
             "origin": "API_DEFINITION",
-            "description": " GetApi returns a specified API.",
+            "description": " Returns a specified API.",
             "canonical": true,
             "file": "registry.get_api.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 51,
+                    "end": 54,
                     "type": "FULL"
                 }
             ],
@@ -235,14 +235,14 @@
             "regionTag": "apigeeregistry_v1_generated_Registry_CreateApi_async",
             "title": "Provisioning createApi Sample",
             "origin": "API_DEFINITION",
-            "description": " CreateApi creates a specified API.",
+            "description": " Creates a specified API.",
             "canonical": true,
             "file": "registry.create_api.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 65,
+                    "end": 68,
                     "type": "FULL"
                 }
             ],
@@ -283,14 +283,14 @@
             "regionTag": "apigeeregistry_v1_generated_Registry_UpdateApi_async",
             "title": "Provisioning updateApi Sample",
             "origin": "API_DEFINITION",
-            "description": " UpdateApi can be used to modify a specified API.",
+            "description": " Used to modify a specified API.",
             "canonical": true,
             "file": "registry.update_api.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 64,
+                    "end": 67,
                     "type": "FULL"
                 }
             ],
@@ -331,14 +331,14 @@
             "regionTag": "apigeeregistry_v1_generated_Registry_DeleteApi_async",
             "title": "Provisioning deleteApi Sample",
             "origin": "API_DEFINITION",
-            "description": " DeleteApi removes a specified API and all of the resources that it owns.",
+            "description": " Removes a specified API and all of the resources that it owns.",
             "canonical": true,
             "file": "registry.delete_api.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 51,
+                    "end": 59,
                     "type": "FULL"
                 }
             ],
@@ -350,6 +350,10 @@
                     {
                         "name": "name",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "force",
+                        "type": "TYPE_BOOL"
                     }
                 ],
                 "resultType": ".google.protobuf.Empty",
@@ -371,14 +375,14 @@
             "regionTag": "apigeeregistry_v1_generated_Registry_ListApiVersions_async",
             "title": "Provisioning listApiVersions Sample",
             "origin": "API_DEFINITION",
-            "description": " ListApiVersions returns matching versions.",
+            "description": " Returns matching versions.",
             "canonical": true,
             "file": "registry.list_api_versions.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 72,
+                    "end": 75,
                     "type": "FULL"
                 }
             ],
@@ -423,14 +427,14 @@
             "regionTag": "apigeeregistry_v1_generated_Registry_GetApiVersion_async",
             "title": "Provisioning getApiVersion Sample",
             "origin": "API_DEFINITION",
-            "description": " GetApiVersion returns a specified version.",
+            "description": " Returns a specified version.",
             "canonical": true,
             "file": "registry.get_api_version.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 51,
+                    "end": 54,
                     "type": "FULL"
                 }
             ],
@@ -463,14 +467,14 @@
             "regionTag": "apigeeregistry_v1_generated_Registry_CreateApiVersion_async",
             "title": "Provisioning createApiVersion Sample",
             "origin": "API_DEFINITION",
-            "description": " CreateApiVersion creates a specified version.",
+            "description": " Creates a specified version.",
             "canonical": true,
             "file": "registry.create_api_version.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 65,
+                    "end": 68,
                     "type": "FULL"
                 }
             ],
@@ -511,14 +515,14 @@
             "regionTag": "apigeeregistry_v1_generated_Registry_UpdateApiVersion_async",
             "title": "Provisioning updateApiVersion Sample",
             "origin": "API_DEFINITION",
-            "description": " UpdateApiVersion can be used to modify a specified version.",
+            "description": " Used to modify a specified version.",
             "canonical": true,
             "file": "registry.update_api_version.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 64,
+                    "end": 67,
                     "type": "FULL"
                 }
             ],
@@ -559,14 +563,14 @@
             "regionTag": "apigeeregistry_v1_generated_Registry_DeleteApiVersion_async",
             "title": "Provisioning deleteApiVersion Sample",
             "origin": "API_DEFINITION",
-            "description": " DeleteApiVersion removes a specified version and all of the resources that it owns.",
+            "description": " Removes a specified version and all of the resources that it owns.",
             "canonical": true,
             "file": "registry.delete_api_version.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 51,
+                    "end": 59,
                     "type": "FULL"
                 }
             ],
@@ -578,6 +582,10 @@
                     {
                         "name": "name",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "force",
+                        "type": "TYPE_BOOL"
                     }
                 ],
                 "resultType": ".google.protobuf.Empty",
@@ -599,14 +607,14 @@
             "regionTag": "apigeeregistry_v1_generated_Registry_ListApiSpecs_async",
             "title": "Provisioning listApiSpecs Sample",
             "origin": "API_DEFINITION",
-            "description": " ListApiSpecs returns matching specs.",
+            "description": " Returns matching specs.",
             "canonical": true,
             "file": "registry.list_api_specs.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 72,
+                    "end": 75,
                     "type": "FULL"
                 }
             ],
@@ -651,14 +659,14 @@
             "regionTag": "apigeeregistry_v1_generated_Registry_GetApiSpec_async",
             "title": "Provisioning getApiSpec Sample",
             "origin": "API_DEFINITION",
-            "description": " GetApiSpec returns a specified spec.",
+            "description": " Returns a specified spec.",
             "canonical": true,
             "file": "registry.get_api_spec.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 51,
+                    "end": 54,
                     "type": "FULL"
                 }
             ],
@@ -691,14 +699,14 @@
             "regionTag": "apigeeregistry_v1_generated_Registry_GetApiSpecContents_async",
             "title": "Provisioning getApiSpecContents Sample",
             "origin": "API_DEFINITION",
-            "description": " GetApiSpecContents returns the contents of a specified spec. If specs are stored with GZip compression, the default behavior is to return the spec uncompressed (the mime_type response field indicates the exact format returned).",
+            "description": " Returns the contents of a specified spec. If specs are stored with GZip compression, the default behavior is to return the spec uncompressed (the mime_type response field indicates the exact format returned).",
             "canonical": true,
             "file": "registry.get_api_spec_contents.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 51,
+                    "end": 54,
                     "type": "FULL"
                 }
             ],
@@ -731,14 +739,14 @@
             "regionTag": "apigeeregistry_v1_generated_Registry_CreateApiSpec_async",
             "title": "Provisioning createApiSpec Sample",
             "origin": "API_DEFINITION",
-            "description": " CreateApiSpec creates a specified spec.",
+            "description": " Creates a specified spec.",
             "canonical": true,
             "file": "registry.create_api_spec.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 65,
+                    "end": 68,
                     "type": "FULL"
                 }
             ],
@@ -779,14 +787,14 @@
             "regionTag": "apigeeregistry_v1_generated_Registry_UpdateApiSpec_async",
             "title": "Provisioning updateApiSpec Sample",
             "origin": "API_DEFINITION",
-            "description": " UpdateApiSpec can be used to modify a specified spec.",
+            "description": " Used to modify a specified spec.",
             "canonical": true,
             "file": "registry.update_api_spec.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 64,
+                    "end": 67,
                     "type": "FULL"
                 }
             ],
@@ -827,14 +835,14 @@
             "regionTag": "apigeeregistry_v1_generated_Registry_DeleteApiSpec_async",
             "title": "Provisioning deleteApiSpec Sample",
             "origin": "API_DEFINITION",
-            "description": " DeleteApiSpec removes a specified spec, all revisions, and all child resources (e.g. artifacts).",
+            "description": " Removes a specified spec, all revisions, and all child resources (e.g., artifacts).",
             "canonical": true,
             "file": "registry.delete_api_spec.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 56,
+                    "end": 59,
                     "type": "FULL"
                 }
             ],
@@ -871,14 +879,14 @@
             "regionTag": "apigeeregistry_v1_generated_Registry_TagApiSpecRevision_async",
             "title": "Provisioning tagApiSpecRevision Sample",
             "origin": "API_DEFINITION",
-            "description": " TagApiSpecRevision adds a tag to a specified revision of a spec.",
+            "description": " Adds a tag to a specified revision of a spec.",
             "canonical": true,
             "file": "registry.tag_api_spec_revision.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 56,
+                    "end": 59,
                     "type": "FULL"
                 }
             ],
@@ -915,14 +923,14 @@
             "regionTag": "apigeeregistry_v1_generated_Registry_ListApiSpecRevisions_async",
             "title": "Provisioning listApiSpecRevisions Sample",
             "origin": "API_DEFINITION",
-            "description": " ListApiSpecRevisions lists all revisions of a spec. Revisions are returned in descending order of revision creation time.",
+            "description": " Lists all revisions of a spec. Revisions are returned in descending order of revision creation time.",
             "canonical": true,
             "file": "registry.list_api_spec_revisions.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 61,
+                    "end": 64,
                     "type": "FULL"
                 }
             ],
@@ -963,14 +971,14 @@
             "regionTag": "apigeeregistry_v1_generated_Registry_RollbackApiSpec_async",
             "title": "Provisioning rollbackApiSpec Sample",
             "origin": "API_DEFINITION",
-            "description": " RollbackApiSpec sets the current revision to a specified prior revision. Note that this creates a new revision with a new revision ID.",
+            "description": " Sets the current revision to a specified prior revision. Note that this creates a new revision with a new revision ID.",
             "canonical": true,
             "file": "registry.rollback_api_spec.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 57,
+                    "end": 60,
                     "type": "FULL"
                 }
             ],
@@ -1007,14 +1015,14 @@
             "regionTag": "apigeeregistry_v1_generated_Registry_DeleteApiSpecRevision_async",
             "title": "Provisioning deleteApiSpecRevision Sample",
             "origin": "API_DEFINITION",
-            "description": " DeleteApiSpecRevision deletes a revision of a spec.",
+            "description": " Deletes a revision of a spec.",
             "canonical": true,
             "file": "registry.delete_api_spec_revision.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 53,
+                    "end": 56,
                     "type": "FULL"
                 }
             ],
@@ -1047,14 +1055,14 @@
             "regionTag": "apigeeregistry_v1_generated_Registry_ListApiDeployments_async",
             "title": "Provisioning listApiDeployments Sample",
             "origin": "API_DEFINITION",
-            "description": " ListApiDeployments returns matching deployments.",
+            "description": " Returns matching deployments.",
             "canonical": true,
             "file": "registry.list_api_deployments.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 72,
+                    "end": 75,
                     "type": "FULL"
                 }
             ],
@@ -1099,14 +1107,14 @@
             "regionTag": "apigeeregistry_v1_generated_Registry_GetApiDeployment_async",
             "title": "Provisioning getApiDeployment Sample",
             "origin": "API_DEFINITION",
-            "description": " GetApiDeployment returns a specified deployment.",
+            "description": " Returns a specified deployment.",
             "canonical": true,
             "file": "registry.get_api_deployment.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 51,
+                    "end": 54,
                     "type": "FULL"
                 }
             ],
@@ -1139,14 +1147,14 @@
             "regionTag": "apigeeregistry_v1_generated_Registry_CreateApiDeployment_async",
             "title": "Provisioning createApiDeployment Sample",
             "origin": "API_DEFINITION",
-            "description": " CreateApiDeployment creates a specified deployment.",
+            "description": " Creates a specified deployment.",
             "canonical": true,
             "file": "registry.create_api_deployment.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 65,
+                    "end": 68,
                     "type": "FULL"
                 }
             ],
@@ -1187,14 +1195,14 @@
             "regionTag": "apigeeregistry_v1_generated_Registry_UpdateApiDeployment_async",
             "title": "Provisioning updateApiDeployment Sample",
             "origin": "API_DEFINITION",
-            "description": " UpdateApiDeployment can be used to modify a specified deployment.",
+            "description": " Used to modify a specified deployment.",
             "canonical": true,
             "file": "registry.update_api_deployment.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 64,
+                    "end": 67,
                     "type": "FULL"
                 }
             ],
@@ -1235,14 +1243,14 @@
             "regionTag": "apigeeregistry_v1_generated_Registry_DeleteApiDeployment_async",
             "title": "Provisioning deleteApiDeployment Sample",
             "origin": "API_DEFINITION",
-            "description": " DeleteApiDeployment removes a specified deployment, all revisions, and all child resources (e.g. artifacts).",
+            "description": " Removes a specified deployment, all revisions, and all child resources (e.g., artifacts).",
             "canonical": true,
             "file": "registry.delete_api_deployment.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 56,
+                    "end": 59,
                     "type": "FULL"
                 }
             ],
@@ -1279,14 +1287,14 @@
             "regionTag": "apigeeregistry_v1_generated_Registry_TagApiDeploymentRevision_async",
             "title": "Provisioning tagApiDeploymentRevision Sample",
             "origin": "API_DEFINITION",
-            "description": " TagApiDeploymentRevision adds a tag to a specified revision of a deployment.",
+            "description": " Adds a tag to a specified revision of a deployment.",
             "canonical": true,
             "file": "registry.tag_api_deployment_revision.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 56,
+                    "end": 59,
                     "type": "FULL"
                 }
             ],
@@ -1323,14 +1331,14 @@
             "regionTag": "apigeeregistry_v1_generated_Registry_ListApiDeploymentRevisions_async",
             "title": "Provisioning listApiDeploymentRevisions Sample",
             "origin": "API_DEFINITION",
-            "description": " ListApiDeploymentRevisions lists all revisions of a deployment. Revisions are returned in descending order of revision creation time.",
+            "description": " Lists all revisions of a deployment. Revisions are returned in descending order of revision creation time.",
             "canonical": true,
             "file": "registry.list_api_deployment_revisions.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 61,
+                    "end": 64,
                     "type": "FULL"
                 }
             ],
@@ -1371,14 +1379,14 @@
             "regionTag": "apigeeregistry_v1_generated_Registry_RollbackApiDeployment_async",
             "title": "Provisioning rollbackApiDeployment Sample",
             "origin": "API_DEFINITION",
-            "description": " RollbackApiDeployment sets the current revision to a specified prior revision. Note that this creates a new revision with a new revision ID.",
+            "description": " Sets the current revision to a specified prior revision. Note that this creates a new revision with a new revision ID.",
             "canonical": true,
             "file": "registry.rollback_api_deployment.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 57,
+                    "end": 60,
                     "type": "FULL"
                 }
             ],
@@ -1415,14 +1423,14 @@
             "regionTag": "apigeeregistry_v1_generated_Registry_DeleteApiDeploymentRevision_async",
             "title": "Provisioning deleteApiDeploymentRevision Sample",
             "origin": "API_DEFINITION",
-            "description": " DeleteApiDeploymentRevision deletes a revision of a deployment.",
+            "description": " Deletes a revision of a deployment.",
             "canonical": true,
             "file": "registry.delete_api_deployment_revision.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 53,
+                    "end": 56,
                     "type": "FULL"
                 }
             ],
@@ -1455,14 +1463,14 @@
             "regionTag": "apigeeregistry_v1_generated_Registry_ListArtifacts_async",
             "title": "Provisioning listArtifacts Sample",
             "origin": "API_DEFINITION",
-            "description": " ListArtifacts returns matching artifacts.",
+            "description": " Returns matching artifacts.",
             "canonical": true,
             "file": "registry.list_artifacts.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 72,
+                    "end": 75,
                     "type": "FULL"
                 }
             ],
@@ -1507,14 +1515,14 @@
             "regionTag": "apigeeregistry_v1_generated_Registry_GetArtifact_async",
             "title": "Provisioning getArtifact Sample",
             "origin": "API_DEFINITION",
-            "description": " GetArtifact returns a specified artifact.",
+            "description": " Returns a specified artifact.",
             "canonical": true,
             "file": "registry.get_artifact.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 51,
+                    "end": 54,
                     "type": "FULL"
                 }
             ],
@@ -1547,14 +1555,14 @@
             "regionTag": "apigeeregistry_v1_generated_Registry_GetArtifactContents_async",
             "title": "Provisioning getArtifactContents Sample",
             "origin": "API_DEFINITION",
-            "description": " GetArtifactContents returns the contents of a specified artifact. If artifacts are stored with GZip compression, the default behavior is to return the artifact uncompressed (the mime_type response field indicates the exact format returned).",
+            "description": " Returns the contents of a specified artifact. If artifacts are stored with GZip compression, the default behavior is to return the artifact uncompressed (the mime_type response field indicates the exact format returned).",
             "canonical": true,
             "file": "registry.get_artifact_contents.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 51,
+                    "end": 54,
                     "type": "FULL"
                 }
             ],
@@ -1587,14 +1595,14 @@
             "regionTag": "apigeeregistry_v1_generated_Registry_CreateArtifact_async",
             "title": "Provisioning createArtifact Sample",
             "origin": "API_DEFINITION",
-            "description": " CreateArtifact creates a specified artifact.",
+            "description": " Creates a specified artifact.",
             "canonical": true,
             "file": "registry.create_artifact.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 65,
+                    "end": 68,
                     "type": "FULL"
                 }
             ],
@@ -1635,14 +1643,14 @@
             "regionTag": "apigeeregistry_v1_generated_Registry_ReplaceArtifact_async",
             "title": "Provisioning replaceArtifact Sample",
             "origin": "API_DEFINITION",
-            "description": " ReplaceArtifact can be used to replace a specified artifact.",
+            "description": " Used to replace a specified artifact.",
             "canonical": true,
             "file": "registry.replace_artifact.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 52,
+                    "end": 55,
                     "type": "FULL"
                 }
             ],
@@ -1675,14 +1683,14 @@
             "regionTag": "apigeeregistry_v1_generated_Registry_DeleteArtifact_async",
             "title": "Provisioning deleteArtifact Sample",
             "origin": "API_DEFINITION",
-            "description": " DeleteArtifact removes a specified artifact.",
+            "description": " Removes a specified artifact.",
             "canonical": true,
             "file": "registry.delete_artifact.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 51,
+                    "end": 54,
                     "type": "FULL"
                 }
             ],

@@ -23,6 +23,9 @@
 function main(name, revisionId) {
   // [START apigeeregistry_v1_generated_Registry_RollbackApiSpec_async]
   /**
+   * This snippet has been automatically generated and should be regarded as a code template only.
+   * It will require modifications to work.
+   * It may require correct/in-range values for request initialization.
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
@@ -32,12 +35,12 @@ function main(name, revisionId) {
   /**
    *  Required. The revision ID to roll back to.
    *  It must be a revision of the same spec.
-   *    Example: c7cfa2a8
+   *    Example: `c7cfa2a8`
    */
   // const revisionId = 'abc123'
 
   // Imports the Apigeeregistry library
-  const {RegistryClient} = require('@google-cloud/apigeeregistry').v1;
+  const {RegistryClient} = require('@google-cloud/apigee-registry').v1;
 
   // Instantiates a client
   const apigeeregistryClient = new RegistryClient();

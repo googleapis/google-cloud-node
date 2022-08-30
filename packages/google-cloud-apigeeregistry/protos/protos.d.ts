@@ -2863,6 +2863,9 @@ export namespace google {
 
                     /** DeleteApiRequest name */
                     name?: (string|null);
+
+                    /** DeleteApiRequest force */
+                    force?: (boolean|null);
                 }
 
                 /** Represents a DeleteApiRequest. */
@@ -2876,6 +2879,9 @@ export namespace google {
 
                     /** DeleteApiRequest name. */
                     public name: string;
+
+                    /** DeleteApiRequest force. */
+                    public force: boolean;
 
                     /**
                      * Creates a new DeleteApiRequest instance using the specified properties.
@@ -3493,6 +3499,9 @@ export namespace google {
 
                     /** DeleteApiVersionRequest name */
                     name?: (string|null);
+
+                    /** DeleteApiVersionRequest force */
+                    force?: (boolean|null);
                 }
 
                 /** Represents a DeleteApiVersionRequest. */
@@ -3506,6 +3515,9 @@ export namespace google {
 
                     /** DeleteApiVersionRequest name. */
                     public name: string;
+
+                    /** DeleteApiVersionRequest force. */
+                    public force: boolean;
 
                     /**
                      * Creates a new DeleteApiVersionRequest instance using the specified properties.

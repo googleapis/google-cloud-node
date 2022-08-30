@@ -23,11 +23,14 @@
 function main(parent, api, apiId) {
   // [START apigeeregistry_v1_generated_Registry_CreateApi_async]
   /**
+   * This snippet has been automatically generated and should be regarded as a code template only.
+   * It will require modifications to work.
+   * It may require correct/in-range values for request initialization.
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
    *  Required. The parent, which owns this collection of APIs.
-   *  Format: projects/* /locations/*
+   *  Format: `projects/* /locations/*`
    */
   // const parent = 'abc123'
   /**
@@ -35,8 +38,8 @@ function main(parent, api, apiId) {
    */
   // const api = {}
   /**
-   *  Required. The ID to use for the api, which will become the final component of
-   *  the api's resource name.
+   *  Required. The ID to use for the API, which will become the final component of
+   *  the API's resource name.
    *  This value should be 4-63 characters, and valid characters
    *  are /[a-z][0-9]-/.
    *  Following AIP-162, IDs must not have the form of a UUID.
@@ -44,7 +47,7 @@ function main(parent, api, apiId) {
   // const apiId = 'abc123'
 
   // Imports the Apigeeregistry library
-  const {RegistryClient} = require('@google-cloud/apigeeregistry').v1;
+  const {RegistryClient} = require('@google-cloud/apigee-registry').v1;
 
   // Instantiates a client
   const apigeeregistryClient = new RegistryClient();

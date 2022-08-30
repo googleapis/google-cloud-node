@@ -6758,6 +6758,7 @@
                          * @memberof google.cloud.apigeeregistry.v1
                          * @interface IDeleteApiRequest
                          * @property {string|null} [name] DeleteApiRequest name
+                         * @property {boolean|null} [force] DeleteApiRequest force
                          */
     
                         /**
@@ -6782,6 +6783,14 @@
                          * @instance
                          */
                         DeleteApiRequest.prototype.name = "";
+    
+                        /**
+                         * DeleteApiRequest force.
+                         * @member {boolean} force
+                         * @memberof google.cloud.apigeeregistry.v1.DeleteApiRequest
+                         * @instance
+                         */
+                        DeleteApiRequest.prototype.force = false;
     
                         /**
                          * Creates a new DeleteApiRequest instance using the specified properties.
@@ -6809,6 +6818,8 @@
                                 writer = $Writer.create();
                             if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.force != null && Object.hasOwnProperty.call(message, "force"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.force);
                             return writer;
                         };
     
@@ -6845,6 +6856,10 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.force = reader.bool();
                                         break;
                                     }
                                 default:
@@ -6885,6 +6900,9 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
+                            if (message.force != null && message.hasOwnProperty("force"))
+                                if (typeof message.force !== "boolean")
+                                    return "force: boolean expected";
                             return null;
                         };
     
@@ -6902,6 +6920,8 @@
                             var message = new $root.google.cloud.apigeeregistry.v1.DeleteApiRequest();
                             if (object.name != null)
                                 message.name = String(object.name);
+                            if (object.force != null)
+                                message.force = Boolean(object.force);
                             return message;
                         };
     
@@ -6918,10 +6938,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.name = "";
+                                object.force = false;
+                            }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
+                            if (message.force != null && message.hasOwnProperty("force"))
+                                object.force = message.force;
                             return object;
                         };
     
@@ -8200,6 +8224,7 @@
                          * @memberof google.cloud.apigeeregistry.v1
                          * @interface IDeleteApiVersionRequest
                          * @property {string|null} [name] DeleteApiVersionRequest name
+                         * @property {boolean|null} [force] DeleteApiVersionRequest force
                          */
     
                         /**
@@ -8224,6 +8249,14 @@
                          * @instance
                          */
                         DeleteApiVersionRequest.prototype.name = "";
+    
+                        /**
+                         * DeleteApiVersionRequest force.
+                         * @member {boolean} force
+                         * @memberof google.cloud.apigeeregistry.v1.DeleteApiVersionRequest
+                         * @instance
+                         */
+                        DeleteApiVersionRequest.prototype.force = false;
     
                         /**
                          * Creates a new DeleteApiVersionRequest instance using the specified properties.
@@ -8251,6 +8284,8 @@
                                 writer = $Writer.create();
                             if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.force != null && Object.hasOwnProperty.call(message, "force"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.force);
                             return writer;
                         };
     
@@ -8287,6 +8322,10 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.force = reader.bool();
                                         break;
                                     }
                                 default:
@@ -8327,6 +8366,9 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
+                            if (message.force != null && message.hasOwnProperty("force"))
+                                if (typeof message.force !== "boolean")
+                                    return "force: boolean expected";
                             return null;
                         };
     
@@ -8344,6 +8386,8 @@
                             var message = new $root.google.cloud.apigeeregistry.v1.DeleteApiVersionRequest();
                             if (object.name != null)
                                 message.name = String(object.name);
+                            if (object.force != null)
+                                message.force = Boolean(object.force);
                             return message;
                         };
     
@@ -8360,10 +8404,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.name = "";
+                                object.force = false;
+                            }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
+                            if (message.force != null && message.hasOwnProperty("force"))
+                                object.force = message.force;
                             return object;
                         };
     
