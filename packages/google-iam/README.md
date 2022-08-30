@@ -31,8 +31,8 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-
-
+  * [Using the client library](#using-the-client-library)
+* [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
@@ -54,6 +54,70 @@ npm install @google-cloud/iam
 ```
 
 
+### Using the client library
+
+```javascript
+/**
+ * This snippet has been automatically generated and should be regarded as a code template only.
+ * It will require modifications to work.
+ * It may require correct/in-range values for request initialization.
+ * TODO(developer): Uncomment these variables before running the sample.
+ */
+/**
+ *  Required. The resource that the policy is attached to, along with the kind
+ *  of policy to list. Format: `policies/{attachment_point}/denypolicies`
+ *  The attachment point is identified by its URL-encoded full resource name,
+ *  which means that the forward-slash character, `/`, must be written as
+ *  `%2F`. For example,
+ *  `policies/cloudresourcemanager.googleapis.com%2Fprojects%2Fmy-project/denypolicies`.
+ *  For organizations and folders, use the numeric ID in the full resource
+ *  name. For projects, you can use the alphanumeric or the numeric ID.
+ */
+// const parent = 'abc123'
+/**
+ *  The maximum number of policies to return. IAM ignores this value and uses
+ *  the value 1000.
+ */
+// const pageSize = 1234
+/**
+ *  A page token received in a
+ *  ListPoliciesResponse google.iam.v2.ListPoliciesResponse. Provide this
+ *  token to retrieve the next page.
+ */
+// const pageToken = 'abc123'
+
+// Imports the Iam library
+const {PoliciesClient} = require('@google-cloud/iam').v2;
+
+// Instantiates a client
+const iamClient = new PoliciesClient();
+
+async function callListPolicies() {
+  // Construct request
+  const request = {
+    parent,
+  };
+
+  // Run request
+  const iterable = await iamClient.listPoliciesAsync(request);
+  for await (const response of iterable) {
+    console.log(response);
+  }
+}
+
+callListPolicies();
+
+```
+
+
+
+## Samples
+
+Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/tree/main/samples) directory. Each sample's `README.md` has instructions for running its sample.
+
+| Sample                      | Source Code                       | Try it |
+| --------------------------- | --------------------------------- | ------ |
+| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/packages/google-iam/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/packages/google-iam/samples/quickstart.js,samples/README.md) |
 
 
 
