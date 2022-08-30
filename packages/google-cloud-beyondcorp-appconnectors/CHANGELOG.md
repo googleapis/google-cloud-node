@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/appconnectors-v0.2.0...appconnectors-v0.3.0) (2022-08-29)
+
+
+### Features
+
+* accept google-gax instance as a parameter ([#3306](https://github.com/googleapis/google-cloud-node/issues/3306)) ([de0e5c1](https://github.com/googleapis/google-cloud-node/commit/de0e5c1172c84a650c6e8fd268b2614f60d1b0ad))
+* update typescript generator for beyond corp app ([#3309](https://github.com/googleapis/google-cloud-node/issues/3309)) ([380e7b7](https://github.com/googleapis/google-cloud-node/commit/380e7b70316e072f97fef0e050011d52f41262b1))
+
 ## 0.2.0 (2022-08-10)
 
 
