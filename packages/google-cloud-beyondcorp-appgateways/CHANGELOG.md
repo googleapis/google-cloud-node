@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/appgateways-v0.1.0...appgateways-v0.2.0) (2022-08-29)
+
+
+### Features
+
+* accept google-gax instance as a parameter ([#3306](https://github.com/googleapis/google-cloud-node/issues/3306)) ([de0e5c1](https://github.com/googleapis/google-cloud-node/commit/de0e5c1172c84a650c6e8fd268b2614f60d1b0ad))
+
 ## 0.1.0 (2022-08-11)
 
 

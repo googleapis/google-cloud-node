@@ -1,9 +1,12 @@
 {
   "packages/gapic-node-templating": "0.0.0",
-  "packages/google-cloud-beyondcorp-appconnectors": "0.2.0",
-  "packages/google-cloud-beyondcorp-appgateways": "0.1.0",
-  "packages/google-cloud-beyondcorp-appconnections": "0.1.0",
-  "packages/google-cloud-beyondcorp-clientconnectorservices": "0.1.0",
-  "packages/google-cloud-beyondcorp-clientgateways": "0.1.0",
-  "packages/typeless-sample-bot": "1.0.0"
+  "packages/google-cloud-beyondcorp-appconnectors": "0.3.0",
+  "packages/google-cloud-beyondcorp-appgateways": "0.2.0",
+  "packages/google-cloud-beyondcorp-appconnections": "0.2.0",
+  "packages/google-cloud-beyondcorp-clientconnectorservices": "0.2.0",
+  "packages/google-cloud-beyondcorp-clientgateways": "0.2.0",
+  "packages/typeless-sample-bot": "1.0.0",
+  "packages/google-cloud-gkemulticloud": "0.1.1",
+  "packages/google-api-apikeys": "0.1.0",
+  "packages/google-cloud-batch": "0.1.0"
 }
