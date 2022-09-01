@@ -23,6 +23,9 @@
 function main() {
   // [START dialogflow_v2beta1_generated_AnswerRecords_ListAnswerRecords_async]
   /**
+   * This snippet has been automatically generated and should be regarded as a code template only.
+   * It will require modifications to work.
+   * It may require correct/in-range values for request initialization.
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
@@ -33,7 +36,6 @@ function main() {
   // const parent = 'abc123'
   /**
    *  Optional. Filters to restrict results to specific answer records.
-   *  Marked deprecated as it hasn't been, and isn't currently, supported.
    *  For more information about filtering, see
    *  API Filtering (https://aip.dev/160).
    */

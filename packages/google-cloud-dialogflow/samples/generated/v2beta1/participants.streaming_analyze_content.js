@@ -23,6 +23,9 @@
 function main(participant) {
   // [START dialogflow_v2beta1_generated_Participants_StreamingAnalyzeContent_async]
   /**
+   * This snippet has been automatically generated and should be regarded as a code template only.
+   * It will require modifications to work.
+   * It may require correct/in-range values for request initialization.
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
@@ -56,7 +59,8 @@ function main(participant) {
   /**
    *  The UTF-8 encoded natural language text to be processed. Must be sent if
    *  `text_config` is set in the first message. Text length must not exceed
-   *  256 bytes. The `input_text` field can be only sent once.
+   *  256 bytes for virtual agent interactions. The `input_text` field can be
+   *  only sent once.
    */
   // const inputText = 'abc123'
   /**

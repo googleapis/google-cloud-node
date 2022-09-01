@@ -10419,7 +10419,7 @@
                             "(google.api.http).body": "*",
                             "(google.api.http).additional_bindings.post": "/v2beta1/{participant=projects/*/locations/*/conversations/*/participants/*}:analyzeContent",
                             "(google.api.http).additional_bindings.body": "*",
-                            "(google.api.method_signature)": "participant,audio_input"
+                            "(google.api.method_signature)": "participant,event_input"
                           },
                           "parsedOptions": [
                             {
@@ -10436,10 +10436,10 @@
                               "(google.api.method_signature)": "participant,text_input"
                             },
                             {
-                              "(google.api.method_signature)": "participant,event_input"
+                              "(google.api.method_signature)": "participant,audio_input"
                             },
                             {
-                              "(google.api.method_signature)": "participant,audio_input"
+                              "(google.api.method_signature)": "participant,event_input"
                             }
                           ]
                         },
