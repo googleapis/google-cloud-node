@@ -44,6 +44,31 @@
                         "methodName": {
                           "type": "string",
                           "id": 6
+                        },
+                        "principalSubject": {
+                          "type": "string",
+                          "id": 7
+                        },
+                        "serviceAccountKeyName": {
+                          "type": "string",
+                          "id": 8
+                        },
+                        "serviceAccountDelegationInfo": {
+                          "rule": "repeated",
+                          "type": "ServiceAccountDelegationInfo",
+                          "id": 9
+                        }
+                      }
+                    },
+                    "ServiceAccountDelegationInfo": {
+                      "fields": {
+                        "principalEmail": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "principalSubject": {
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     },
@@ -336,6 +361,31 @@
                         }
                       }
                     },
+                    "Database": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "userName": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "query": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "grantees": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 5
+                        }
+                      }
+                    },
                     "Exfiltration": {
                       "fields": {
                         "sources": {
@@ -569,6 +619,10 @@
                         "kubernetes": {
                           "type": "Kubernetes",
                           "id": 43
+                        },
+                        "database": {
+                          "type": "Database",
+                          "id": 44
                         }
                       },
                       "nested": {

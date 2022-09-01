@@ -46,6 +46,15 @@ export namespace google {
 
                     /** Access methodName */
                     methodName?: (string|null);
+
+                    /** Access principalSubject */
+                    principalSubject?: (string|null);
+
+                    /** Access serviceAccountKeyName */
+                    serviceAccountKeyName?: (string|null);
+
+                    /** Access serviceAccountDelegationInfo */
+                    serviceAccountDelegationInfo?: (google.cloud.securitycenter.v1.IServiceAccountDelegationInfo[]|null);
                 }
 
                 /** Represents an Access. */
@@ -74,6 +83,15 @@ export namespace google {
 
                     /** Access methodName. */
                     public methodName: string;
+
+                    /** Access principalSubject. */
+                    public principalSubject: string;
+
+                    /** Access serviceAccountKeyName. */
+                    public serviceAccountKeyName: string;
+
+                    /** Access serviceAccountDelegationInfo. */
+                    public serviceAccountDelegationInfo: google.cloud.securitycenter.v1.IServiceAccountDelegationInfo[];
 
                     /**
                      * Creates a new Access instance using the specified properties.
@@ -147,6 +165,109 @@ export namespace google {
 
                     /**
                      * Gets the default type url for Access
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ServiceAccountDelegationInfo. */
+                interface IServiceAccountDelegationInfo {
+
+                    /** ServiceAccountDelegationInfo principalEmail */
+                    principalEmail?: (string|null);
+
+                    /** ServiceAccountDelegationInfo principalSubject */
+                    principalSubject?: (string|null);
+                }
+
+                /** Represents a ServiceAccountDelegationInfo. */
+                class ServiceAccountDelegationInfo implements IServiceAccountDelegationInfo {
+
+                    /**
+                     * Constructs a new ServiceAccountDelegationInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.IServiceAccountDelegationInfo);
+
+                    /** ServiceAccountDelegationInfo principalEmail. */
+                    public principalEmail: string;
+
+                    /** ServiceAccountDelegationInfo principalSubject. */
+                    public principalSubject: string;
+
+                    /**
+                     * Creates a new ServiceAccountDelegationInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ServiceAccountDelegationInfo instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.IServiceAccountDelegationInfo): google.cloud.securitycenter.v1.ServiceAccountDelegationInfo;
+
+                    /**
+                     * Encodes the specified ServiceAccountDelegationInfo message. Does not implicitly {@link google.cloud.securitycenter.v1.ServiceAccountDelegationInfo.verify|verify} messages.
+                     * @param message ServiceAccountDelegationInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.IServiceAccountDelegationInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ServiceAccountDelegationInfo message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.ServiceAccountDelegationInfo.verify|verify} messages.
+                     * @param message ServiceAccountDelegationInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.IServiceAccountDelegationInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ServiceAccountDelegationInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ServiceAccountDelegationInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.ServiceAccountDelegationInfo;
+
+                    /**
+                     * Decodes a ServiceAccountDelegationInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ServiceAccountDelegationInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.ServiceAccountDelegationInfo;
+
+                    /**
+                     * Verifies a ServiceAccountDelegationInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ServiceAccountDelegationInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ServiceAccountDelegationInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.ServiceAccountDelegationInfo;
+
+                    /**
+                     * Creates a plain object from a ServiceAccountDelegationInfo message. Also converts values to other types if specified.
+                     * @param message ServiceAccountDelegationInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.ServiceAccountDelegationInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ServiceAccountDelegationInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ServiceAccountDelegationInfo
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -1640,6 +1761,127 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a Database. */
+                interface IDatabase {
+
+                    /** Database name */
+                    name?: (string|null);
+
+                    /** Database displayName */
+                    displayName?: (string|null);
+
+                    /** Database userName */
+                    userName?: (string|null);
+
+                    /** Database query */
+                    query?: (string|null);
+
+                    /** Database grantees */
+                    grantees?: (string[]|null);
+                }
+
+                /** Represents a Database. */
+                class Database implements IDatabase {
+
+                    /**
+                     * Constructs a new Database.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.IDatabase);
+
+                    /** Database name. */
+                    public name: string;
+
+                    /** Database displayName. */
+                    public displayName: string;
+
+                    /** Database userName. */
+                    public userName: string;
+
+                    /** Database query. */
+                    public query: string;
+
+                    /** Database grantees. */
+                    public grantees: string[];
+
+                    /**
+                     * Creates a new Database instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Database instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.IDatabase): google.cloud.securitycenter.v1.Database;
+
+                    /**
+                     * Encodes the specified Database message. Does not implicitly {@link google.cloud.securitycenter.v1.Database.verify|verify} messages.
+                     * @param message Database message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.IDatabase, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Database message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.Database.verify|verify} messages.
+                     * @param message Database message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.IDatabase, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Database message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Database
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.Database;
+
+                    /**
+                     * Decodes a Database message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Database
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.Database;
+
+                    /**
+                     * Verifies a Database message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Database message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Database
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.Database;
+
+                    /**
+                     * Creates a plain object from a Database message. Also converts values to other types if specified.
+                     * @param message Database
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.Database, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Database to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Database
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of an Exfiltration. */
                 interface IExfiltration {
 
@@ -2189,6 +2431,9 @@ export namespace google {
 
                     /** Finding kubernetes */
                     kubernetes?: (google.cloud.securitycenter.v1.IKubernetes|null);
+
+                    /** Finding database */
+                    database?: (google.cloud.securitycenter.v1.IDatabase|null);
                 }
 
                 /** Represents a Finding. */
@@ -2292,6 +2537,9 @@ export namespace google {
 
                     /** Finding kubernetes. */
                     public kubernetes?: (google.cloud.securitycenter.v1.IKubernetes|null);
+
+                    /** Finding database. */
+                    public database?: (google.cloud.securitycenter.v1.IDatabase|null);
 
                     /**
                      * Creates a new Finding instance using the specified properties.

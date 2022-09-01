@@ -6,6 +6,7 @@
   "../../protos/google/cloud/securitycenter/v1/connection.proto",
   "../../protos/google/cloud/securitycenter/v1/contact_details.proto",
   "../../protos/google/cloud/securitycenter/v1/container.proto",
+  "../../protos/google/cloud/securitycenter/v1/database.proto",
   "../../protos/google/cloud/securitycenter/v1/exfiltration.proto",
   "../../protos/google/cloud/securitycenter/v1/external_system.proto",
   "../../protos/google/cloud/securitycenter/v1/file.proto",
