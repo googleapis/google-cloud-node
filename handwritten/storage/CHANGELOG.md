@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+## [6.4.2](https://github.com/googleapis/nodejs-storage/compare/v6.4.1...v6.4.2) (2022-09-01)
+
+
+### Bug Fixes
+
+* remove pip install statements ([#1546](https://github.com/googleapis/nodejs-storage/issues/1546)) ([#2049](https://github.com/googleapis/nodejs-storage/issues/2049)) ([c90ba0f](https://github.com/googleapis/nodejs-storage/commit/c90ba0feecca9d39de3c52f12cc9423b7a2d4d47))
+* truncated `createReadStream` through early `end` event ([#2056](https://github.com/googleapis/nodejs-storage/issues/2056)) ([a4716a4](https://github.com/googleapis/nodejs-storage/commit/a4716a4ed1053560f2692647c8a90131763c1e72))
+
 ## [6.4.1](https://github.com/googleapis/nodejs-storage/compare/v6.4.0...v6.4.1) (2022-08-12)
 
 
