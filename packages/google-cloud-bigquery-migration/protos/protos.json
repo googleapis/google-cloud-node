@@ -422,7 +422,10 @@
                                 "netezzaDialect",
                                 "azureSynapseDialect",
                                 "verticaDialect",
-                                "sqlServerDialect"
+                                "sqlServerDialect",
+                                "postgresqlDialect",
+                                "prestoDialect",
+                                "mysqlDialect"
                               ]
                             }
                           },
@@ -470,6 +473,18 @@
                             "sqlServerDialect": {
                               "type": "SQLServerDialect",
                               "id": 11
+                            },
+                            "postgresqlDialect": {
+                              "type": "PostgresqlDialect",
+                              "id": 12
+                            },
+                            "prestoDialect": {
+                              "type": "PrestoDialect",
+                              "id": 13
+                            },
+                            "mysqlDialect": {
+                              "type": "MySQLDialect",
+                              "id": 14
                             }
                           }
                         },
@@ -518,6 +533,15 @@
                           "fields": {}
                         },
                         "SQLServerDialect": {
+                          "fields": {}
+                        },
+                        "PostgresqlDialect": {
+                          "fields": {}
+                        },
+                        "PrestoDialect": {
+                          "fields": {}
+                        },
+                        "MySQLDialect": {
                           "fields": {}
                         },
                         "ObjectNameMappingList": {

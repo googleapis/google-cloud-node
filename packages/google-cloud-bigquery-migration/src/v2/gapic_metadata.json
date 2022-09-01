@@ -3,7 +3,7 @@
   "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
   "language": "typescript",
   "protoPackage": "google.cloud.bigquery.migration.v2",
-  "libraryPackage": "@google-cloud/migration",
+  "libraryPackage": "@google-cloud/bigquery-migration",
   "services": {
     "MigrationService": {
       "clients": {

@@ -23,6 +23,9 @@
 function main(name) {
   // [START bigquerymigration_v2alpha_generated_MigrationService_GetMigrationWorkflow_async]
   /**
+   * This snippet has been automatically generated and should be regarded as a code template only.
+   * It will require modifications to work.
+   * It may require correct/in-range values for request initialization.
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
@@ -36,7 +39,7 @@ function main(name) {
   // const readMask = {}
 
   // Imports the Migration library
-  const {MigrationServiceClient} = require('@google-cloud/migration').v2alpha;
+  const {MigrationServiceClient} = require('@google-cloud/bigquery-migration').v2alpha;
 
   // Instantiates a client
   const migrationClient = new MigrationServiceClient();

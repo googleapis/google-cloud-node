@@ -3794,6 +3794,9 @@
                              * @property {google.cloud.bigquery.migration.v2.IAzureSynapseDialect|null} [azureSynapseDialect] Dialect azureSynapseDialect
                              * @property {google.cloud.bigquery.migration.v2.IVerticaDialect|null} [verticaDialect] Dialect verticaDialect
                              * @property {google.cloud.bigquery.migration.v2.ISQLServerDialect|null} [sqlServerDialect] Dialect sqlServerDialect
+                             * @property {google.cloud.bigquery.migration.v2.IPostgresqlDialect|null} [postgresqlDialect] Dialect postgresqlDialect
+                             * @property {google.cloud.bigquery.migration.v2.IPrestoDialect|null} [prestoDialect] Dialect prestoDialect
+                             * @property {google.cloud.bigquery.migration.v2.IMySQLDialect|null} [mysqlDialect] Dialect mysqlDialect
                              */
     
                             /**
@@ -3899,17 +3902,41 @@
                              */
                             Dialect.prototype.sqlServerDialect = null;
     
+                            /**
+                             * Dialect postgresqlDialect.
+                             * @member {google.cloud.bigquery.migration.v2.IPostgresqlDialect|null|undefined} postgresqlDialect
+                             * @memberof google.cloud.bigquery.migration.v2.Dialect
+                             * @instance
+                             */
+                            Dialect.prototype.postgresqlDialect = null;
+    
+                            /**
+                             * Dialect prestoDialect.
+                             * @member {google.cloud.bigquery.migration.v2.IPrestoDialect|null|undefined} prestoDialect
+                             * @memberof google.cloud.bigquery.migration.v2.Dialect
+                             * @instance
+                             */
+                            Dialect.prototype.prestoDialect = null;
+    
+                            /**
+                             * Dialect mysqlDialect.
+                             * @member {google.cloud.bigquery.migration.v2.IMySQLDialect|null|undefined} mysqlDialect
+                             * @memberof google.cloud.bigquery.migration.v2.Dialect
+                             * @instance
+                             */
+                            Dialect.prototype.mysqlDialect = null;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
                             /**
                              * Dialect dialectValue.
-                             * @member {"bigqueryDialect"|"hiveqlDialect"|"redshiftDialect"|"teradataDialect"|"oracleDialect"|"sparksqlDialect"|"snowflakeDialect"|"netezzaDialect"|"azureSynapseDialect"|"verticaDialect"|"sqlServerDialect"|undefined} dialectValue
+                             * @member {"bigqueryDialect"|"hiveqlDialect"|"redshiftDialect"|"teradataDialect"|"oracleDialect"|"sparksqlDialect"|"snowflakeDialect"|"netezzaDialect"|"azureSynapseDialect"|"verticaDialect"|"sqlServerDialect"|"postgresqlDialect"|"prestoDialect"|"mysqlDialect"|undefined} dialectValue
                              * @memberof google.cloud.bigquery.migration.v2.Dialect
                              * @instance
                              */
                             Object.defineProperty(Dialect.prototype, "dialectValue", {
-                                get: $util.oneOfGetter($oneOfFields = ["bigqueryDialect", "hiveqlDialect", "redshiftDialect", "teradataDialect", "oracleDialect", "sparksqlDialect", "snowflakeDialect", "netezzaDialect", "azureSynapseDialect", "verticaDialect", "sqlServerDialect"]),
+                                get: $util.oneOfGetter($oneOfFields = ["bigqueryDialect", "hiveqlDialect", "redshiftDialect", "teradataDialect", "oracleDialect", "sparksqlDialect", "snowflakeDialect", "netezzaDialect", "azureSynapseDialect", "verticaDialect", "sqlServerDialect", "postgresqlDialect", "prestoDialect", "mysqlDialect"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
@@ -3959,6 +3986,12 @@
                                     $root.google.cloud.bigquery.migration.v2.VerticaDialect.encode(message.verticaDialect, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                                 if (message.sqlServerDialect != null && Object.hasOwnProperty.call(message, "sqlServerDialect"))
                                     $root.google.cloud.bigquery.migration.v2.SQLServerDialect.encode(message.sqlServerDialect, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                                if (message.postgresqlDialect != null && Object.hasOwnProperty.call(message, "postgresqlDialect"))
+                                    $root.google.cloud.bigquery.migration.v2.PostgresqlDialect.encode(message.postgresqlDialect, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                                if (message.prestoDialect != null && Object.hasOwnProperty.call(message, "prestoDialect"))
+                                    $root.google.cloud.bigquery.migration.v2.PrestoDialect.encode(message.prestoDialect, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                                if (message.mysqlDialect != null && Object.hasOwnProperty.call(message, "mysqlDialect"))
+                                    $root.google.cloud.bigquery.migration.v2.MySQLDialect.encode(message.mysqlDialect, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
                                 return writer;
                             };
     
@@ -4035,6 +4068,18 @@
                                         }
                                     case 11: {
                                             message.sqlServerDialect = $root.google.cloud.bigquery.migration.v2.SQLServerDialect.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 12: {
+                                            message.postgresqlDialect = $root.google.cloud.bigquery.migration.v2.PostgresqlDialect.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 13: {
+                                            message.prestoDialect = $root.google.cloud.bigquery.migration.v2.PrestoDialect.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 14: {
+                                            message.mysqlDialect = $root.google.cloud.bigquery.migration.v2.MySQLDialect.decode(reader, reader.uint32());
                                             break;
                                         }
                                     default:
@@ -4181,6 +4226,36 @@
                                             return "sqlServerDialect." + error;
                                     }
                                 }
+                                if (message.postgresqlDialect != null && message.hasOwnProperty("postgresqlDialect")) {
+                                    if (properties.dialectValue === 1)
+                                        return "dialectValue: multiple values";
+                                    properties.dialectValue = 1;
+                                    {
+                                        var error = $root.google.cloud.bigquery.migration.v2.PostgresqlDialect.verify(message.postgresqlDialect);
+                                        if (error)
+                                            return "postgresqlDialect." + error;
+                                    }
+                                }
+                                if (message.prestoDialect != null && message.hasOwnProperty("prestoDialect")) {
+                                    if (properties.dialectValue === 1)
+                                        return "dialectValue: multiple values";
+                                    properties.dialectValue = 1;
+                                    {
+                                        var error = $root.google.cloud.bigquery.migration.v2.PrestoDialect.verify(message.prestoDialect);
+                                        if (error)
+                                            return "prestoDialect." + error;
+                                    }
+                                }
+                                if (message.mysqlDialect != null && message.hasOwnProperty("mysqlDialect")) {
+                                    if (properties.dialectValue === 1)
+                                        return "dialectValue: multiple values";
+                                    properties.dialectValue = 1;
+                                    {
+                                        var error = $root.google.cloud.bigquery.migration.v2.MySQLDialect.verify(message.mysqlDialect);
+                                        if (error)
+                                            return "mysqlDialect." + error;
+                                    }
+                                }
                                 return null;
                             };
     
@@ -4250,6 +4325,21 @@
                                     if (typeof object.sqlServerDialect !== "object")
                                         throw TypeError(".google.cloud.bigquery.migration.v2.Dialect.sqlServerDialect: object expected");
                                     message.sqlServerDialect = $root.google.cloud.bigquery.migration.v2.SQLServerDialect.fromObject(object.sqlServerDialect);
+                                }
+                                if (object.postgresqlDialect != null) {
+                                    if (typeof object.postgresqlDialect !== "object")
+                                        throw TypeError(".google.cloud.bigquery.migration.v2.Dialect.postgresqlDialect: object expected");
+                                    message.postgresqlDialect = $root.google.cloud.bigquery.migration.v2.PostgresqlDialect.fromObject(object.postgresqlDialect);
+                                }
+                                if (object.prestoDialect != null) {
+                                    if (typeof object.prestoDialect !== "object")
+                                        throw TypeError(".google.cloud.bigquery.migration.v2.Dialect.prestoDialect: object expected");
+                                    message.prestoDialect = $root.google.cloud.bigquery.migration.v2.PrestoDialect.fromObject(object.prestoDialect);
+                                }
+                                if (object.mysqlDialect != null) {
+                                    if (typeof object.mysqlDialect !== "object")
+                                        throw TypeError(".google.cloud.bigquery.migration.v2.Dialect.mysqlDialect: object expected");
+                                    message.mysqlDialect = $root.google.cloud.bigquery.migration.v2.MySQLDialect.fromObject(object.mysqlDialect);
                                 }
                                 return message;
                             };
@@ -4321,6 +4411,21 @@
                                     object.sqlServerDialect = $root.google.cloud.bigquery.migration.v2.SQLServerDialect.toObject(message.sqlServerDialect, options);
                                     if (options.oneofs)
                                         object.dialectValue = "sqlServerDialect";
+                                }
+                                if (message.postgresqlDialect != null && message.hasOwnProperty("postgresqlDialect")) {
+                                    object.postgresqlDialect = $root.google.cloud.bigquery.migration.v2.PostgresqlDialect.toObject(message.postgresqlDialect, options);
+                                    if (options.oneofs)
+                                        object.dialectValue = "postgresqlDialect";
+                                }
+                                if (message.prestoDialect != null && message.hasOwnProperty("prestoDialect")) {
+                                    object.prestoDialect = $root.google.cloud.bigquery.migration.v2.PrestoDialect.toObject(message.prestoDialect, options);
+                                    if (options.oneofs)
+                                        object.dialectValue = "prestoDialect";
+                                }
+                                if (message.mysqlDialect != null && message.hasOwnProperty("mysqlDialect")) {
+                                    object.mysqlDialect = $root.google.cloud.bigquery.migration.v2.MySQLDialect.toObject(message.mysqlDialect, options);
+                                    if (options.oneofs)
+                                        object.dialectValue = "mysqlDialect";
                                 }
                                 return object;
                             };
@@ -6339,6 +6444,531 @@
                             };
     
                             return SQLServerDialect;
+                        })();
+    
+                        v2.PostgresqlDialect = (function() {
+    
+                            /**
+                             * Properties of a PostgresqlDialect.
+                             * @memberof google.cloud.bigquery.migration.v2
+                             * @interface IPostgresqlDialect
+                             */
+    
+                            /**
+                             * Constructs a new PostgresqlDialect.
+                             * @memberof google.cloud.bigquery.migration.v2
+                             * @classdesc Represents a PostgresqlDialect.
+                             * @implements IPostgresqlDialect
+                             * @constructor
+                             * @param {google.cloud.bigquery.migration.v2.IPostgresqlDialect=} [properties] Properties to set
+                             */
+                            function PostgresqlDialect(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Creates a new PostgresqlDialect instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.migration.v2.PostgresqlDialect
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.IPostgresqlDialect=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.migration.v2.PostgresqlDialect} PostgresqlDialect instance
+                             */
+                            PostgresqlDialect.create = function create(properties) {
+                                return new PostgresqlDialect(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified PostgresqlDialect message. Does not implicitly {@link google.cloud.bigquery.migration.v2.PostgresqlDialect.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.migration.v2.PostgresqlDialect
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.IPostgresqlDialect} message PostgresqlDialect message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PostgresqlDialect.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified PostgresqlDialect message, length delimited. Does not implicitly {@link google.cloud.bigquery.migration.v2.PostgresqlDialect.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.migration.v2.PostgresqlDialect
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.IPostgresqlDialect} message PostgresqlDialect message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PostgresqlDialect.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a PostgresqlDialect message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.migration.v2.PostgresqlDialect
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.migration.v2.PostgresqlDialect} PostgresqlDialect
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PostgresqlDialect.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.migration.v2.PostgresqlDialect();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a PostgresqlDialect message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.migration.v2.PostgresqlDialect
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.migration.v2.PostgresqlDialect} PostgresqlDialect
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PostgresqlDialect.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a PostgresqlDialect message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.migration.v2.PostgresqlDialect
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            PostgresqlDialect.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a PostgresqlDialect message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.migration.v2.PostgresqlDialect
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.migration.v2.PostgresqlDialect} PostgresqlDialect
+                             */
+                            PostgresqlDialect.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.migration.v2.PostgresqlDialect)
+                                    return object;
+                                return new $root.google.cloud.bigquery.migration.v2.PostgresqlDialect();
+                            };
+    
+                            /**
+                             * Creates a plain object from a PostgresqlDialect message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.migration.v2.PostgresqlDialect
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.PostgresqlDialect} message PostgresqlDialect
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            PostgresqlDialect.toObject = function toObject() {
+                                return {};
+                            };
+    
+                            /**
+                             * Converts this PostgresqlDialect to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.migration.v2.PostgresqlDialect
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            PostgresqlDialect.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for PostgresqlDialect
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.migration.v2.PostgresqlDialect
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            PostgresqlDialect.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.migration.v2.PostgresqlDialect";
+                            };
+    
+                            return PostgresqlDialect;
+                        })();
+    
+                        v2.PrestoDialect = (function() {
+    
+                            /**
+                             * Properties of a PrestoDialect.
+                             * @memberof google.cloud.bigquery.migration.v2
+                             * @interface IPrestoDialect
+                             */
+    
+                            /**
+                             * Constructs a new PrestoDialect.
+                             * @memberof google.cloud.bigquery.migration.v2
+                             * @classdesc Represents a PrestoDialect.
+                             * @implements IPrestoDialect
+                             * @constructor
+                             * @param {google.cloud.bigquery.migration.v2.IPrestoDialect=} [properties] Properties to set
+                             */
+                            function PrestoDialect(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Creates a new PrestoDialect instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.migration.v2.PrestoDialect
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.IPrestoDialect=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.migration.v2.PrestoDialect} PrestoDialect instance
+                             */
+                            PrestoDialect.create = function create(properties) {
+                                return new PrestoDialect(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified PrestoDialect message. Does not implicitly {@link google.cloud.bigquery.migration.v2.PrestoDialect.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.migration.v2.PrestoDialect
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.IPrestoDialect} message PrestoDialect message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PrestoDialect.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified PrestoDialect message, length delimited. Does not implicitly {@link google.cloud.bigquery.migration.v2.PrestoDialect.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.migration.v2.PrestoDialect
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.IPrestoDialect} message PrestoDialect message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PrestoDialect.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a PrestoDialect message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.migration.v2.PrestoDialect
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.migration.v2.PrestoDialect} PrestoDialect
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PrestoDialect.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.migration.v2.PrestoDialect();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a PrestoDialect message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.migration.v2.PrestoDialect
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.migration.v2.PrestoDialect} PrestoDialect
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PrestoDialect.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a PrestoDialect message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.migration.v2.PrestoDialect
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            PrestoDialect.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a PrestoDialect message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.migration.v2.PrestoDialect
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.migration.v2.PrestoDialect} PrestoDialect
+                             */
+                            PrestoDialect.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.migration.v2.PrestoDialect)
+                                    return object;
+                                return new $root.google.cloud.bigquery.migration.v2.PrestoDialect();
+                            };
+    
+                            /**
+                             * Creates a plain object from a PrestoDialect message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.migration.v2.PrestoDialect
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.PrestoDialect} message PrestoDialect
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            PrestoDialect.toObject = function toObject() {
+                                return {};
+                            };
+    
+                            /**
+                             * Converts this PrestoDialect to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.migration.v2.PrestoDialect
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            PrestoDialect.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for PrestoDialect
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.migration.v2.PrestoDialect
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            PrestoDialect.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.migration.v2.PrestoDialect";
+                            };
+    
+                            return PrestoDialect;
+                        })();
+    
+                        v2.MySQLDialect = (function() {
+    
+                            /**
+                             * Properties of a MySQLDialect.
+                             * @memberof google.cloud.bigquery.migration.v2
+                             * @interface IMySQLDialect
+                             */
+    
+                            /**
+                             * Constructs a new MySQLDialect.
+                             * @memberof google.cloud.bigquery.migration.v2
+                             * @classdesc Represents a MySQLDialect.
+                             * @implements IMySQLDialect
+                             * @constructor
+                             * @param {google.cloud.bigquery.migration.v2.IMySQLDialect=} [properties] Properties to set
+                             */
+                            function MySQLDialect(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Creates a new MySQLDialect instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.migration.v2.MySQLDialect
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.IMySQLDialect=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.migration.v2.MySQLDialect} MySQLDialect instance
+                             */
+                            MySQLDialect.create = function create(properties) {
+                                return new MySQLDialect(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified MySQLDialect message. Does not implicitly {@link google.cloud.bigquery.migration.v2.MySQLDialect.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.migration.v2.MySQLDialect
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.IMySQLDialect} message MySQLDialect message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            MySQLDialect.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified MySQLDialect message, length delimited. Does not implicitly {@link google.cloud.bigquery.migration.v2.MySQLDialect.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.migration.v2.MySQLDialect
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.IMySQLDialect} message MySQLDialect message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            MySQLDialect.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a MySQLDialect message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.migration.v2.MySQLDialect
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.migration.v2.MySQLDialect} MySQLDialect
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            MySQLDialect.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.migration.v2.MySQLDialect();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a MySQLDialect message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.migration.v2.MySQLDialect
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.migration.v2.MySQLDialect} MySQLDialect
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            MySQLDialect.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a MySQLDialect message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.migration.v2.MySQLDialect
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            MySQLDialect.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a MySQLDialect message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.migration.v2.MySQLDialect
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.migration.v2.MySQLDialect} MySQLDialect
+                             */
+                            MySQLDialect.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.migration.v2.MySQLDialect)
+                                    return object;
+                                return new $root.google.cloud.bigquery.migration.v2.MySQLDialect();
+                            };
+    
+                            /**
+                             * Creates a plain object from a MySQLDialect message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.migration.v2.MySQLDialect
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.MySQLDialect} message MySQLDialect
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            MySQLDialect.toObject = function toObject() {
+                                return {};
+                            };
+    
+                            /**
+                             * Converts this MySQLDialect to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.migration.v2.MySQLDialect
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            MySQLDialect.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for MySQLDialect
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.migration.v2.MySQLDialect
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            MySQLDialect.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.migration.v2.MySQLDialect";
+                            };
+    
+                            return MySQLDialect;
                         })();
     
                         v2.ObjectNameMappingList = (function() {
