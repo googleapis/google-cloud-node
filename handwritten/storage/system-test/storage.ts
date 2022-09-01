@@ -1719,7 +1719,7 @@ describe('storage', () => {
 
           // Validate the desired functionality
           const results = await testFunction(USER_PROJECT_OPTIONS);
-          return results;
+          return results as ReturnType<F>;
         }
 
         it('bucket#combine', async () => {
@@ -2117,6 +2117,14 @@ describe('storage', () => {
       const [file] = await bucket.upload(FILES.big.path);
       const [remoteContents] = await file.download();
       assert.strictEqual(String(fileContents), String(remoteContents));
+    });
+
+    it('should download an entire file if range `start:0` is provided', async () => {
+      const fileContents = fs.readFileSync(FILES.big.path);
+      const [file] = await bucket.upload(FILES.big.path);
+      const [result] = await file.download({start: 0});
+
+      assert.strictEqual(result.toString(), fileContents.toString());
     });
 
     it('should download an empty file', async () => {
