@@ -17,8 +17,8 @@
 // ** All changes to this file may be overwritten. **
 
 /* global window */
-import * as gax from 'google-gax';
-import {
+import type * as gax from 'google-gax';
+import type {
   Callback,
   CallOptions,
   Descriptors,
@@ -28,7 +28,6 @@ import {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
@@ -38,7 +37,6 @@ import jsonProtos = require('../../protos/protos.json');
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
 import * as gapicConfig from './data_migration_service_client_config.json';
-import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
 
 /**
@@ -99,8 +97,18 @@ export class DataMigrationServiceClient {
    *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
+   * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
+   *     need to avoid loading the default gRPC version and want to use the fallback
+   *     HTTP implementation. Load only fallback version and pass it to the constructor:
+   *     ```
+   *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
+   *     const client = new DataMigrationServiceClient({fallback: 'rest'}, gax);
+   *     ```
    */
-  constructor(opts?: ClientOptions) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof DataMigrationServiceClient;
     const servicePath =
@@ -120,8 +128,13 @@ export class DataMigrationServiceClient {
       opts['scopes'] = staticMembers.scopes;
     }
 
+    // Load google-gax module synchronously if needed
+    if (!gaxInstance) {
+      gaxInstance = require('google-gax') as typeof gax;
+    }
+
     // Choose either gRPC or proto-over-HTTP implementation of google-gax.
-    this._gaxModule = opts.fallback ? gax.fallback : gax;
+    this._gaxModule = opts.fallback ? gaxInstance.fallback : gaxInstance;
 
     // Create a `gaxGrpc` object, with any grpc-specific options sent to the client.
     this._gaxGrpc = new this._gaxModule.GrpcClient(opts);
@@ -429,7 +442,7 @@ export class DataMigrationServiceClient {
     this.innerApiCalls = {};
 
     // Add a warn function to the client constructor so it can be easily tested.
-    this.warn = gax.warn;
+    this.warn = this._gaxModule.warn;
   }
 
   /**
@@ -653,7 +666,7 @@ export class DataMigrationServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         name: request.name || '',
       });
     this.initialize();
@@ -753,7 +766,7 @@ export class DataMigrationServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         migration_job: request.migrationJob || '',
       });
     this.initialize();
@@ -844,7 +857,7 @@ export class DataMigrationServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         name: request.name || '',
       });
     this.initialize();
@@ -962,7 +975,7 @@ export class DataMigrationServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         parent: request.parent || '',
       });
     this.initialize();
@@ -988,11 +1001,12 @@ export class DataMigrationServiceClient {
       protos.google.cloud.clouddms.v1.OperationMetadata
     >
   > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
+    const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.createMigrationJob,
       this._gaxModule.createDefaultBackoffSettings()
@@ -1110,7 +1124,7 @@ export class DataMigrationServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         'migration_job.name': request.migrationJob!.name || '',
       });
     this.initialize();
@@ -1136,11 +1150,12 @@ export class DataMigrationServiceClient {
       protos.google.cloud.clouddms.v1.OperationMetadata
     >
   > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
+    const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.updateMigrationJob,
       this._gaxModule.createDefaultBackoffSettings()
@@ -1259,7 +1274,7 @@ export class DataMigrationServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         name: request.name || '',
       });
     this.initialize();
@@ -1285,11 +1300,12 @@ export class DataMigrationServiceClient {
       protos.google.cloud.clouddms.v1.OperationMetadata
     >
   > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
+    const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.deleteMigrationJob,
       this._gaxModule.createDefaultBackoffSettings()
@@ -1396,7 +1412,7 @@ export class DataMigrationServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         name: request.name || '',
       });
     this.initialize();
@@ -1422,11 +1438,12 @@ export class DataMigrationServiceClient {
       protos.google.cloud.clouddms.v1.OperationMetadata
     >
   > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
+    const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.startMigrationJob,
       this._gaxModule.createDefaultBackoffSettings()
@@ -1533,7 +1550,7 @@ export class DataMigrationServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         name: request.name || '',
       });
     this.initialize();
@@ -1559,11 +1576,12 @@ export class DataMigrationServiceClient {
       protos.google.cloud.clouddms.v1.OperationMetadata
     >
   > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
+    const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.stopMigrationJob,
       this._gaxModule.createDefaultBackoffSettings()
@@ -1671,7 +1689,7 @@ export class DataMigrationServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         name: request.name || '',
       });
     this.initialize();
@@ -1697,11 +1715,12 @@ export class DataMigrationServiceClient {
       protos.google.cloud.clouddms.v1.OperationMetadata
     >
   > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
+    const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.resumeMigrationJob,
       this._gaxModule.createDefaultBackoffSettings()
@@ -1809,7 +1828,7 @@ export class DataMigrationServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         name: request.name || '',
       });
     this.initialize();
@@ -1835,11 +1854,12 @@ export class DataMigrationServiceClient {
       protos.google.cloud.clouddms.v1.OperationMetadata
     >
   > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
+    const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.promoteMigrationJob,
       this._gaxModule.createDefaultBackoffSettings()
@@ -1947,7 +1967,7 @@ export class DataMigrationServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         name: request.name || '',
       });
     this.initialize();
@@ -1973,11 +1993,12 @@ export class DataMigrationServiceClient {
       protos.google.cloud.clouddms.v1.OperationMetadata
     >
   > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
+    const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.verifyMigrationJob,
       this._gaxModule.createDefaultBackoffSettings()
@@ -2086,7 +2107,7 @@ export class DataMigrationServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         name: request.name || '',
       });
     this.initialize();
@@ -2112,11 +2133,12 @@ export class DataMigrationServiceClient {
       protos.google.cloud.clouddms.v1.OperationMetadata
     >
   > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
+    const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.restartMigrationJob,
       this._gaxModule.createDefaultBackoffSettings()
@@ -2235,7 +2257,7 @@ export class DataMigrationServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         parent: request.parent || '',
       });
     this.initialize();
@@ -2265,11 +2287,12 @@ export class DataMigrationServiceClient {
       protos.google.cloud.clouddms.v1.OperationMetadata
     >
   > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
+    const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.createConnectionProfile,
       this._gaxModule.createDefaultBackoffSettings()
@@ -2387,7 +2410,7 @@ export class DataMigrationServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         'connection_profile.name': request.connectionProfile!.name || '',
       });
     this.initialize();
@@ -2417,11 +2440,12 @@ export class DataMigrationServiceClient {
       protos.google.cloud.clouddms.v1.OperationMetadata
     >
   > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
+    const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.updateConnectionProfile,
       this._gaxModule.createDefaultBackoffSettings()
@@ -2541,7 +2565,7 @@ export class DataMigrationServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         name: request.name || '',
       });
     this.initialize();
@@ -2571,11 +2595,12 @@ export class DataMigrationServiceClient {
       protos.google.cloud.clouddms.v1.OperationMetadata
     >
   > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
+    const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.deleteConnectionProfile,
       this._gaxModule.createDefaultBackoffSettings()
@@ -2697,7 +2722,7 @@ export class DataMigrationServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         parent: request.parent || '',
       });
     this.initialize();
@@ -2755,7 +2780,7 @@ export class DataMigrationServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         parent: request.parent || '',
       });
     const defaultCallSettings = this._defaults['listMigrationJobs'];
@@ -2822,7 +2847,7 @@ export class DataMigrationServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         parent: request.parent || '',
       });
     const defaultCallSettings = this._defaults['listMigrationJobs'];
@@ -2945,7 +2970,7 @@ export class DataMigrationServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         parent: request.parent || '',
       });
     this.initialize();
@@ -3006,7 +3031,7 @@ export class DataMigrationServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         parent: request.parent || '',
       });
     const defaultCallSettings = this._defaults['listConnectionProfiles'];
@@ -3072,7 +3097,7 @@ export class DataMigrationServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         parent: request.parent || '',
       });
     const defaultCallSettings = this._defaults['listConnectionProfiles'];
