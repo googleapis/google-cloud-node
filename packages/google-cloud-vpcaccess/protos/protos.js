@@ -247,6 +247,9 @@
                          * @property {number|null} [maxThroughput] Connector maxThroughput
                          * @property {Array.<string>|null} [connectedProjects] Connector connectedProjects
                          * @property {google.cloud.vpcaccess.v1.Connector.ISubnet|null} [subnet] Connector subnet
+                         * @property {string|null} [machineType] Connector machineType
+                         * @property {number|null} [minInstances] Connector minInstances
+                         * @property {number|null} [maxInstances] Connector maxInstances
                          */
     
                         /**
@@ -330,6 +333,30 @@
                         Connector.prototype.subnet = null;
     
                         /**
+                         * Connector machineType.
+                         * @member {string} machineType
+                         * @memberof google.cloud.vpcaccess.v1.Connector
+                         * @instance
+                         */
+                        Connector.prototype.machineType = "";
+    
+                        /**
+                         * Connector minInstances.
+                         * @member {number} minInstances
+                         * @memberof google.cloud.vpcaccess.v1.Connector
+                         * @instance
+                         */
+                        Connector.prototype.minInstances = 0;
+    
+                        /**
+                         * Connector maxInstances.
+                         * @member {number} maxInstances
+                         * @memberof google.cloud.vpcaccess.v1.Connector
+                         * @instance
+                         */
+                        Connector.prototype.maxInstances = 0;
+    
+                        /**
                          * Creates a new Connector instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.vpcaccess.v1.Connector
@@ -370,6 +397,12 @@
                                     writer.uint32(/* id 7, wireType 2 =*/58).string(message.connectedProjects[i]);
                             if (message.subnet != null && Object.hasOwnProperty.call(message, "subnet"))
                                 $root.google.cloud.vpcaccess.v1.Connector.Subnet.encode(message.subnet, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.machineType != null && Object.hasOwnProperty.call(message, "machineType"))
+                                writer.uint32(/* id 10, wireType 2 =*/82).string(message.machineType);
+                            if (message.minInstances != null && Object.hasOwnProperty.call(message, "minInstances"))
+                                writer.uint32(/* id 11, wireType 0 =*/88).int32(message.minInstances);
+                            if (message.maxInstances != null && Object.hasOwnProperty.call(message, "maxInstances"))
+                                writer.uint32(/* id 12, wireType 0 =*/96).int32(message.maxInstances);
                             return writer;
                         };
     
@@ -436,6 +469,18 @@
                                     }
                                 case 8: {
                                         message.subnet = $root.google.cloud.vpcaccess.v1.Connector.Subnet.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 10: {
+                                        message.machineType = reader.string();
+                                        break;
+                                    }
+                                case 11: {
+                                        message.minInstances = reader.int32();
+                                        break;
+                                    }
+                                case 12: {
+                                        message.maxInstances = reader.int32();
                                         break;
                                     }
                                 default:
@@ -512,6 +557,15 @@
                                 if (error)
                                     return "subnet." + error;
                             }
+                            if (message.machineType != null && message.hasOwnProperty("machineType"))
+                                if (!$util.isString(message.machineType))
+                                    return "machineType: string expected";
+                            if (message.minInstances != null && message.hasOwnProperty("minInstances"))
+                                if (!$util.isInteger(message.minInstances))
+                                    return "minInstances: integer expected";
+                            if (message.maxInstances != null && message.hasOwnProperty("maxInstances"))
+                                if (!$util.isInteger(message.maxInstances))
+                                    return "maxInstances: integer expected";
                             return null;
                         };
     
@@ -575,6 +629,12 @@
                                     throw TypeError(".google.cloud.vpcaccess.v1.Connector.subnet: object expected");
                                 message.subnet = $root.google.cloud.vpcaccess.v1.Connector.Subnet.fromObject(object.subnet);
                             }
+                            if (object.machineType != null)
+                                message.machineType = String(object.machineType);
+                            if (object.minInstances != null)
+                                message.minInstances = object.minInstances | 0;
+                            if (object.maxInstances != null)
+                                message.maxInstances = object.maxInstances | 0;
                             return message;
                         };
     
@@ -601,6 +661,9 @@
                                 object.minThroughput = 0;
                                 object.maxThroughput = 0;
                                 object.subnet = null;
+                                object.machineType = "";
+                                object.minInstances = 0;
+                                object.maxInstances = 0;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -621,6 +684,12 @@
                             }
                             if (message.subnet != null && message.hasOwnProperty("subnet"))
                                 object.subnet = $root.google.cloud.vpcaccess.v1.Connector.Subnet.toObject(message.subnet, options);
+                            if (message.machineType != null && message.hasOwnProperty("machineType"))
+                                object.machineType = message.machineType;
+                            if (message.minInstances != null && message.hasOwnProperty("minInstances"))
+                                object.minInstances = message.minInstances;
+                            if (message.maxInstances != null && message.hasOwnProperty("maxInstances"))
+                                object.maxInstances = message.maxInstances;
                             return object;
                         };
     
@@ -649,6 +718,28 @@
                             }
                             return typeUrlPrefix + "/google.cloud.vpcaccess.v1.Connector";
                         };
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.vpcaccess.v1.Connector.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} READY=1 READY value
+                         * @property {number} CREATING=2 CREATING value
+                         * @property {number} DELETING=3 DELETING value
+                         * @property {number} ERROR=4 ERROR value
+                         * @property {number} UPDATING=5 UPDATING value
+                         */
+                        Connector.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "READY"] = 1;
+                            values[valuesById[2] = "CREATING"] = 2;
+                            values[valuesById[3] = "DELETING"] = 3;
+                            values[valuesById[4] = "ERROR"] = 4;
+                            values[valuesById[5] = "UPDATING"] = 5;
+                            return values;
+                        })();
     
                         Connector.Subnet = (function() {
     
@@ -875,28 +966,6 @@
                             };
     
                             return Subnet;
-                        })();
-    
-                        /**
-                         * State enum.
-                         * @name google.cloud.vpcaccess.v1.Connector.State
-                         * @enum {number}
-                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
-                         * @property {number} READY=1 READY value
-                         * @property {number} CREATING=2 CREATING value
-                         * @property {number} DELETING=3 DELETING value
-                         * @property {number} ERROR=4 ERROR value
-                         * @property {number} UPDATING=5 UPDATING value
-                         */
-                        Connector.State = (function() {
-                            var valuesById = {}, values = Object.create(valuesById);
-                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
-                            values[valuesById[1] = "READY"] = 1;
-                            values[valuesById[2] = "CREATING"] = 2;
-                            values[valuesById[3] = "DELETING"] = 3;
-                            values[valuesById[4] = "ERROR"] = 4;
-                            values[valuesById[5] = "UPDATING"] = 5;
-                            return values;
                         })();
     
                         return Connector;

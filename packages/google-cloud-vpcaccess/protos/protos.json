@@ -159,9 +159,31 @@
                         "subnet": {
                           "type": "Subnet",
                           "id": 8
+                        },
+                        "machineType": {
+                          "type": "string",
+                          "id": 10
+                        },
+                        "minInstances": {
+                          "type": "int32",
+                          "id": 11
+                        },
+                        "maxInstances": {
+                          "type": "int32",
+                          "id": 12
                         }
                       },
                       "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "READY": 1,
+                            "CREATING": 2,
+                            "DELETING": 3,
+                            "ERROR": 4,
+                            "UPDATING": 5
+                          }
+                        },
                         "Subnet": {
                           "fields": {
                             "name": {
@@ -172,16 +194,6 @@
                               "type": "string",
                               "id": 2
                             }
-                          }
-                        },
-                        "State": {
-                          "values": {
-                            "STATE_UNSPECIFIED": 0,
-                            "READY": 1,
-                            "CREATING": 2,
-                            "DELETING": 3,
-                            "ERROR": 4,
-                            "UPDATING": 5
                           }
                         }
                       }

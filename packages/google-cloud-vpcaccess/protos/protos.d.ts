@@ -160,6 +160,15 @@ export namespace google {
 
                     /** Connector subnet */
                     subnet?: (google.cloud.vpcaccess.v1.Connector.ISubnet|null);
+
+                    /** Connector machineType */
+                    machineType?: (string|null);
+
+                    /** Connector minInstances */
+                    minInstances?: (number|null);
+
+                    /** Connector maxInstances */
+                    maxInstances?: (number|null);
                 }
 
                 /** Represents a Connector. */
@@ -194,6 +203,15 @@ export namespace google {
 
                     /** Connector subnet. */
                     public subnet?: (google.cloud.vpcaccess.v1.Connector.ISubnet|null);
+
+                    /** Connector machineType. */
+                    public machineType: string;
+
+                    /** Connector minInstances. */
+                    public minInstances: number;
+
+                    /** Connector maxInstances. */
+                    public maxInstances: number;
 
                     /**
                      * Creates a new Connector instance using the specified properties.
@@ -274,6 +292,16 @@ export namespace google {
                 }
 
                 namespace Connector {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        READY = 1,
+                        CREATING = 2,
+                        DELETING = 3,
+                        ERROR = 4,
+                        UPDATING = 5
+                    }
 
                     /** Properties of a Subnet. */
                     interface ISubnet {
@@ -376,16 +404,6 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
-                    }
-
-                    /** State enum. */
-                    enum State {
-                        STATE_UNSPECIFIED = 0,
-                        READY = 1,
-                        CREATING = 2,
-                        DELETING = 3,
-                        ERROR = 4,
-                        UPDATING = 5
                     }
                 }
 
