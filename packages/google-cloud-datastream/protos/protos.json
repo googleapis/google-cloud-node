@@ -586,7 +586,8 @@
                         "dataObject": {
                           "oneof": [
                             "oracleRdbms",
-                            "mysqlRdbms"
+                            "mysqlRdbms",
+                            "postgresqlRdbms"
                           ]
                         }
                       },
@@ -622,6 +623,10 @@
                         "mysqlRdbms": {
                           "type": "MysqlRdbms",
                           "id": 101
+                        },
+                        "postgresqlRdbms": {
+                          "type": "PostgresqlRdbms",
+                          "id": 102
                         }
                       }
                     },
@@ -630,7 +635,8 @@
                         "dataObject": {
                           "oneof": [
                             "oracleRdbms",
-                            "mysqlRdbms"
+                            "mysqlRdbms",
+                            "postgresqlRdbms"
                           ]
                         }
                       },
@@ -642,6 +648,10 @@
                         "mysqlRdbms": {
                           "type": "MysqlRdbms",
                           "id": 101
+                        },
+                        "postgresqlRdbms": {
+                          "type": "PostgresqlRdbms",
+                          "id": 102
                         }
                       }
                     },
@@ -1469,6 +1479,42 @@
                         }
                       }
                     },
+                    "PostgresqlProfile": {
+                      "fields": {
+                        "hostname": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "port": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "username": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "password": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "database": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "GcsProfile": {
                       "fields": {
                         "bucket": {
@@ -1483,6 +1529,9 @@
                           "id": 2
                         }
                       }
+                    },
+                    "BigQueryProfile": {
+                      "fields": {}
                     },
                     "StaticServiceIpConnectivity": {
                       "fields": {}
@@ -1741,7 +1790,9 @@
                           "oneof": [
                             "oracleProfile",
                             "gcsProfile",
-                            "mysqlProfile"
+                            "mysqlProfile",
+                            "bigqueryProfile",
+                            "postgresqlProfile"
                           ]
                         },
                         "connectivity": {
@@ -1797,6 +1848,14 @@
                         "mysqlProfile": {
                           "type": "MysqlProfile",
                           "id": 102
+                        },
+                        "bigqueryProfile": {
+                          "type": "BigQueryProfile",
+                          "id": 103
+                        },
+                        "postgresqlProfile": {
+                          "type": "PostgresqlProfile",
+                          "id": 104
                         },
                         "staticServiceIpConnectivity": {
                           "type": "StaticServiceIpConnectivity",
@@ -1888,6 +1947,14 @@
                       }
                     },
                     "OracleSourceConfig": {
+                      "oneofs": {
+                        "largeObjectsHandling": {
+                          "oneof": [
+                            "dropLargeObjects",
+                            "streamLargeObjects"
+                          ]
+                        }
+                      },
                       "fields": {
                         "includeObjects": {
                           "type": "OracleRdbms",
@@ -1896,6 +1963,123 @@
                         "excludeObjects": {
                           "type": "OracleRdbms",
                           "id": 2
+                        },
+                        "maxConcurrentCdcTasks": {
+                          "type": "int32",
+                          "id": 3
+                        },
+                        "dropLargeObjects": {
+                          "type": "DropLargeObjects",
+                          "id": 100
+                        },
+                        "streamLargeObjects": {
+                          "type": "StreamLargeObjects",
+                          "id": 102
+                        }
+                      },
+                      "nested": {
+                        "DropLargeObjects": {
+                          "fields": {}
+                        },
+                        "StreamLargeObjects": {
+                          "fields": {}
+                        }
+                      }
+                    },
+                    "PostgresqlColumn": {
+                      "fields": {
+                        "column": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "dataType": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "length": {
+                          "type": "int32",
+                          "id": 3
+                        },
+                        "precision": {
+                          "type": "int32",
+                          "id": 4
+                        },
+                        "scale": {
+                          "type": "int32",
+                          "id": 5
+                        },
+                        "primaryKey": {
+                          "type": "bool",
+                          "id": 7
+                        },
+                        "nullable": {
+                          "type": "bool",
+                          "id": 8
+                        },
+                        "ordinalPosition": {
+                          "type": "int32",
+                          "id": 9
+                        }
+                      }
+                    },
+                    "PostgresqlTable": {
+                      "fields": {
+                        "table": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "postgresqlColumns": {
+                          "rule": "repeated",
+                          "type": "PostgresqlColumn",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "PostgresqlSchema": {
+                      "fields": {
+                        "schema": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "postgresqlTables": {
+                          "rule": "repeated",
+                          "type": "PostgresqlTable",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "PostgresqlRdbms": {
+                      "fields": {
+                        "postgresqlSchemas": {
+                          "rule": "repeated",
+                          "type": "PostgresqlSchema",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "PostgresqlSourceConfig": {
+                      "fields": {
+                        "includeObjects": {
+                          "type": "PostgresqlRdbms",
+                          "id": 1
+                        },
+                        "excludeObjects": {
+                          "type": "PostgresqlRdbms",
+                          "id": 2
+                        },
+                        "replicationSlot": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "publication": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -1975,6 +2159,10 @@
                         "excludeObjects": {
                           "type": "MysqlRdbms",
                           "id": 2
+                        },
+                        "maxConcurrentCdcTasks": {
+                          "type": "int32",
+                          "id": 3
                         }
                       }
                     },
@@ -1983,7 +2171,8 @@
                         "sourceStreamConfig": {
                           "oneof": [
                             "oracleSourceConfig",
-                            "mysqlSourceConfig"
+                            "mysqlSourceConfig",
+                            "postgresqlSourceConfig"
                           ]
                         }
                       },
@@ -2003,6 +2192,10 @@
                         "mysqlSourceConfig": {
                           "type": "MysqlSourceConfig",
                           "id": 101
+                        },
+                        "postgresqlSourceConfig": {
+                          "type": "PostgresqlSourceConfig",
+                          "id": 102
                         }
                       }
                     },
@@ -2069,11 +2262,75 @@
                         }
                       }
                     },
+                    "BigQueryDestinationConfig": {
+                      "oneofs": {
+                        "datasetConfig": {
+                          "oneof": [
+                            "singleTargetDataset",
+                            "sourceHierarchyDatasets"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "singleTargetDataset": {
+                          "type": "SingleTargetDataset",
+                          "id": 201
+                        },
+                        "sourceHierarchyDatasets": {
+                          "type": "SourceHierarchyDatasets",
+                          "id": 202
+                        },
+                        "dataFreshness": {
+                          "type": "google.protobuf.Duration",
+                          "id": 300
+                        }
+                      },
+                      "nested": {
+                        "SingleTargetDataset": {
+                          "fields": {
+                            "datasetId": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "SourceHierarchyDatasets": {
+                          "fields": {
+                            "datasetTemplate": {
+                              "type": "DatasetTemplate",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "DatasetTemplate": {
+                              "fields": {
+                                "location": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "datasetIdPrefix": {
+                                  "type": "string",
+                                  "id": 2
+                                },
+                                "kmsKeyName": {
+                                  "type": "string",
+                                  "id": 3
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
                     "DestinationConfig": {
                       "oneofs": {
                         "destinationStreamConfig": {
                           "oneof": [
-                            "gcsDestinationConfig"
+                            "gcsDestinationConfig",
+                            "bigqueryDestinationConfig"
                           ]
                         }
                       },
@@ -2089,6 +2346,10 @@
                         "gcsDestinationConfig": {
                           "type": "GcsDestinationConfig",
                           "id": 100
+                        },
+                        "bigqueryDestinationConfig": {
+                          "type": "BigQueryDestinationConfig",
+                          "id": 101
                         }
                       }
                     },
@@ -2206,7 +2467,8 @@
                             "excludedObjects": {
                               "oneof": [
                                 "oracleExcludedObjects",
-                                "mysqlExcludedObjects"
+                                "mysqlExcludedObjects",
+                                "postgresqlExcludedObjects"
                               ]
                             }
                           },
@@ -2218,6 +2480,10 @@
                             "mysqlExcludedObjects": {
                               "type": "MysqlRdbms",
                               "id": 2
+                            },
+                            "postgresqlExcludedObjects": {
+                              "type": "PostgresqlRdbms",
+                              "id": 3
                             }
                           }
                         },
@@ -2283,7 +2549,8 @@
                         "sourceIdentifier": {
                           "oneof": [
                             "oracleIdentifier",
-                            "mysqlIdentifier"
+                            "mysqlIdentifier",
+                            "postgresqlIdentifier"
                           ]
                         }
                       },
@@ -2295,10 +2562,32 @@
                         "mysqlIdentifier": {
                           "type": "MysqlObjectIdentifier",
                           "id": 2
+                        },
+                        "postgresqlIdentifier": {
+                          "type": "PostgresqlObjectIdentifier",
+                          "id": 3
                         }
                       },
                       "nested": {
                         "OracleObjectIdentifier": {
+                          "fields": {
+                            "schema": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "table": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "PostgresqlObjectIdentifier": {
                           "fields": {
                             "schema": {
                               "type": "string",

@@ -598,6 +598,9 @@ export namespace google {
 
                     /** DiscoverConnectionProfileRequest mysqlRdbms */
                     mysqlRdbms?: (google.cloud.datastream.v1.IMysqlRdbms|null);
+
+                    /** DiscoverConnectionProfileRequest postgresqlRdbms */
+                    postgresqlRdbms?: (google.cloud.datastream.v1.IPostgresqlRdbms|null);
                 }
 
                 /** Represents a DiscoverConnectionProfileRequest. */
@@ -630,6 +633,9 @@ export namespace google {
                     /** DiscoverConnectionProfileRequest mysqlRdbms. */
                     public mysqlRdbms?: (google.cloud.datastream.v1.IMysqlRdbms|null);
 
+                    /** DiscoverConnectionProfileRequest postgresqlRdbms. */
+                    public postgresqlRdbms?: (google.cloud.datastream.v1.IPostgresqlRdbms|null);
+
                     /** DiscoverConnectionProfileRequest target. */
                     public target?: ("connectionProfile"|"connectionProfileName");
 
@@ -637,7 +643,7 @@ export namespace google {
                     public hierarchy?: ("fullHierarchy"|"hierarchyDepth");
 
                     /** DiscoverConnectionProfileRequest dataObject. */
-                    public dataObject?: ("oracleRdbms"|"mysqlRdbms");
+                    public dataObject?: ("oracleRdbms"|"mysqlRdbms"|"postgresqlRdbms");
 
                     /**
                      * Creates a new DiscoverConnectionProfileRequest instance using the specified properties.
@@ -725,6 +731,9 @@ export namespace google {
 
                     /** DiscoverConnectionProfileResponse mysqlRdbms */
                     mysqlRdbms?: (google.cloud.datastream.v1.IMysqlRdbms|null);
+
+                    /** DiscoverConnectionProfileResponse postgresqlRdbms */
+                    postgresqlRdbms?: (google.cloud.datastream.v1.IPostgresqlRdbms|null);
                 }
 
                 /** Represents a DiscoverConnectionProfileResponse. */
@@ -742,8 +751,11 @@ export namespace google {
                     /** DiscoverConnectionProfileResponse mysqlRdbms. */
                     public mysqlRdbms?: (google.cloud.datastream.v1.IMysqlRdbms|null);
 
+                    /** DiscoverConnectionProfileResponse postgresqlRdbms. */
+                    public postgresqlRdbms?: (google.cloud.datastream.v1.IPostgresqlRdbms|null);
+
                     /** DiscoverConnectionProfileResponse dataObject. */
-                    public dataObject?: ("oracleRdbms"|"mysqlRdbms");
+                    public dataObject?: ("oracleRdbms"|"mysqlRdbms"|"postgresqlRdbms");
 
                     /**
                      * Creates a new DiscoverConnectionProfileResponse instance using the specified properties.
@@ -4674,6 +4686,127 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a PostgresqlProfile. */
+                interface IPostgresqlProfile {
+
+                    /** PostgresqlProfile hostname */
+                    hostname?: (string|null);
+
+                    /** PostgresqlProfile port */
+                    port?: (number|null);
+
+                    /** PostgresqlProfile username */
+                    username?: (string|null);
+
+                    /** PostgresqlProfile password */
+                    password?: (string|null);
+
+                    /** PostgresqlProfile database */
+                    database?: (string|null);
+                }
+
+                /** Represents a PostgresqlProfile. */
+                class PostgresqlProfile implements IPostgresqlProfile {
+
+                    /**
+                     * Constructs a new PostgresqlProfile.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datastream.v1.IPostgresqlProfile);
+
+                    /** PostgresqlProfile hostname. */
+                    public hostname: string;
+
+                    /** PostgresqlProfile port. */
+                    public port: number;
+
+                    /** PostgresqlProfile username. */
+                    public username: string;
+
+                    /** PostgresqlProfile password. */
+                    public password: string;
+
+                    /** PostgresqlProfile database. */
+                    public database: string;
+
+                    /**
+                     * Creates a new PostgresqlProfile instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PostgresqlProfile instance
+                     */
+                    public static create(properties?: google.cloud.datastream.v1.IPostgresqlProfile): google.cloud.datastream.v1.PostgresqlProfile;
+
+                    /**
+                     * Encodes the specified PostgresqlProfile message. Does not implicitly {@link google.cloud.datastream.v1.PostgresqlProfile.verify|verify} messages.
+                     * @param message PostgresqlProfile message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datastream.v1.IPostgresqlProfile, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PostgresqlProfile message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.PostgresqlProfile.verify|verify} messages.
+                     * @param message PostgresqlProfile message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datastream.v1.IPostgresqlProfile, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PostgresqlProfile message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PostgresqlProfile
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datastream.v1.PostgresqlProfile;
+
+                    /**
+                     * Decodes a PostgresqlProfile message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PostgresqlProfile
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datastream.v1.PostgresqlProfile;
+
+                    /**
+                     * Verifies a PostgresqlProfile message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PostgresqlProfile message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PostgresqlProfile
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datastream.v1.PostgresqlProfile;
+
+                    /**
+                     * Creates a plain object from a PostgresqlProfile message. Also converts values to other types if specified.
+                     * @param message PostgresqlProfile
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datastream.v1.PostgresqlProfile, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PostgresqlProfile to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PostgresqlProfile
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a GcsProfile. */
                 interface IGcsProfile {
 
@@ -4771,6 +4904,97 @@ export namespace google {
 
                     /**
                      * Gets the default type url for GcsProfile
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BigQueryProfile. */
+                interface IBigQueryProfile {
+                }
+
+                /** Represents a BigQueryProfile. */
+                class BigQueryProfile implements IBigQueryProfile {
+
+                    /**
+                     * Constructs a new BigQueryProfile.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datastream.v1.IBigQueryProfile);
+
+                    /**
+                     * Creates a new BigQueryProfile instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BigQueryProfile instance
+                     */
+                    public static create(properties?: google.cloud.datastream.v1.IBigQueryProfile): google.cloud.datastream.v1.BigQueryProfile;
+
+                    /**
+                     * Encodes the specified BigQueryProfile message. Does not implicitly {@link google.cloud.datastream.v1.BigQueryProfile.verify|verify} messages.
+                     * @param message BigQueryProfile message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datastream.v1.IBigQueryProfile, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BigQueryProfile message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.BigQueryProfile.verify|verify} messages.
+                     * @param message BigQueryProfile message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datastream.v1.IBigQueryProfile, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BigQueryProfile message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BigQueryProfile
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datastream.v1.BigQueryProfile;
+
+                    /**
+                     * Decodes a BigQueryProfile message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BigQueryProfile
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datastream.v1.BigQueryProfile;
+
+                    /**
+                     * Verifies a BigQueryProfile message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BigQueryProfile message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BigQueryProfile
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datastream.v1.BigQueryProfile;
+
+                    /**
+                     * Creates a plain object from a BigQueryProfile message. Also converts values to other types if specified.
+                     * @param message BigQueryProfile
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datastream.v1.BigQueryProfile, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BigQueryProfile to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BigQueryProfile
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -5631,6 +5855,12 @@ export namespace google {
                     /** ConnectionProfile mysqlProfile */
                     mysqlProfile?: (google.cloud.datastream.v1.IMysqlProfile|null);
 
+                    /** ConnectionProfile bigqueryProfile */
+                    bigqueryProfile?: (google.cloud.datastream.v1.IBigQueryProfile|null);
+
+                    /** ConnectionProfile postgresqlProfile */
+                    postgresqlProfile?: (google.cloud.datastream.v1.IPostgresqlProfile|null);
+
                     /** ConnectionProfile staticServiceIpConnectivity */
                     staticServiceIpConnectivity?: (google.cloud.datastream.v1.IStaticServiceIpConnectivity|null);
 
@@ -5674,6 +5904,12 @@ export namespace google {
                     /** ConnectionProfile mysqlProfile. */
                     public mysqlProfile?: (google.cloud.datastream.v1.IMysqlProfile|null);
 
+                    /** ConnectionProfile bigqueryProfile. */
+                    public bigqueryProfile?: (google.cloud.datastream.v1.IBigQueryProfile|null);
+
+                    /** ConnectionProfile postgresqlProfile. */
+                    public postgresqlProfile?: (google.cloud.datastream.v1.IPostgresqlProfile|null);
+
                     /** ConnectionProfile staticServiceIpConnectivity. */
                     public staticServiceIpConnectivity?: (google.cloud.datastream.v1.IStaticServiceIpConnectivity|null);
 
@@ -5684,7 +5920,7 @@ export namespace google {
                     public privateConnectivity?: (google.cloud.datastream.v1.IPrivateConnectivity|null);
 
                     /** ConnectionProfile profile. */
-                    public profile?: ("oracleProfile"|"gcsProfile"|"mysqlProfile");
+                    public profile?: ("oracleProfile"|"gcsProfile"|"mysqlProfile"|"bigqueryProfile"|"postgresqlProfile");
 
                     /** ConnectionProfile connectivity. */
                     public connectivity?: ("staticServiceIpConnectivity"|"forwardSshConnectivity"|"privateConnectivity");
@@ -6223,6 +6459,15 @@ export namespace google {
 
                     /** OracleSourceConfig excludeObjects */
                     excludeObjects?: (google.cloud.datastream.v1.IOracleRdbms|null);
+
+                    /** OracleSourceConfig maxConcurrentCdcTasks */
+                    maxConcurrentCdcTasks?: (number|null);
+
+                    /** OracleSourceConfig dropLargeObjects */
+                    dropLargeObjects?: (google.cloud.datastream.v1.OracleSourceConfig.IDropLargeObjects|null);
+
+                    /** OracleSourceConfig streamLargeObjects */
+                    streamLargeObjects?: (google.cloud.datastream.v1.OracleSourceConfig.IStreamLargeObjects|null);
                 }
 
                 /** Represents an OracleSourceConfig. */
@@ -6239,6 +6484,18 @@ export namespace google {
 
                     /** OracleSourceConfig excludeObjects. */
                     public excludeObjects?: (google.cloud.datastream.v1.IOracleRdbms|null);
+
+                    /** OracleSourceConfig maxConcurrentCdcTasks. */
+                    public maxConcurrentCdcTasks: number;
+
+                    /** OracleSourceConfig dropLargeObjects. */
+                    public dropLargeObjects?: (google.cloud.datastream.v1.OracleSourceConfig.IDropLargeObjects|null);
+
+                    /** OracleSourceConfig streamLargeObjects. */
+                    public streamLargeObjects?: (google.cloud.datastream.v1.OracleSourceConfig.IStreamLargeObjects|null);
+
+                    /** OracleSourceConfig largeObjectsHandling. */
+                    public largeObjectsHandling?: ("dropLargeObjects"|"streamLargeObjects");
 
                     /**
                      * Creates a new OracleSourceConfig instance using the specified properties.
@@ -6312,6 +6569,748 @@ export namespace google {
 
                     /**
                      * Gets the default type url for OracleSourceConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace OracleSourceConfig {
+
+                    /** Properties of a DropLargeObjects. */
+                    interface IDropLargeObjects {
+                    }
+
+                    /** Represents a DropLargeObjects. */
+                    class DropLargeObjects implements IDropLargeObjects {
+
+                        /**
+                         * Constructs a new DropLargeObjects.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.datastream.v1.OracleSourceConfig.IDropLargeObjects);
+
+                        /**
+                         * Creates a new DropLargeObjects instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DropLargeObjects instance
+                         */
+                        public static create(properties?: google.cloud.datastream.v1.OracleSourceConfig.IDropLargeObjects): google.cloud.datastream.v1.OracleSourceConfig.DropLargeObjects;
+
+                        /**
+                         * Encodes the specified DropLargeObjects message. Does not implicitly {@link google.cloud.datastream.v1.OracleSourceConfig.DropLargeObjects.verify|verify} messages.
+                         * @param message DropLargeObjects message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.datastream.v1.OracleSourceConfig.IDropLargeObjects, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DropLargeObjects message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.OracleSourceConfig.DropLargeObjects.verify|verify} messages.
+                         * @param message DropLargeObjects message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.datastream.v1.OracleSourceConfig.IDropLargeObjects, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DropLargeObjects message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DropLargeObjects
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datastream.v1.OracleSourceConfig.DropLargeObjects;
+
+                        /**
+                         * Decodes a DropLargeObjects message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DropLargeObjects
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datastream.v1.OracleSourceConfig.DropLargeObjects;
+
+                        /**
+                         * Verifies a DropLargeObjects message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DropLargeObjects message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DropLargeObjects
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.datastream.v1.OracleSourceConfig.DropLargeObjects;
+
+                        /**
+                         * Creates a plain object from a DropLargeObjects message. Also converts values to other types if specified.
+                         * @param message DropLargeObjects
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.datastream.v1.OracleSourceConfig.DropLargeObjects, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DropLargeObjects to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DropLargeObjects
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a StreamLargeObjects. */
+                    interface IStreamLargeObjects {
+                    }
+
+                    /** Represents a StreamLargeObjects. */
+                    class StreamLargeObjects implements IStreamLargeObjects {
+
+                        /**
+                         * Constructs a new StreamLargeObjects.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.datastream.v1.OracleSourceConfig.IStreamLargeObjects);
+
+                        /**
+                         * Creates a new StreamLargeObjects instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns StreamLargeObjects instance
+                         */
+                        public static create(properties?: google.cloud.datastream.v1.OracleSourceConfig.IStreamLargeObjects): google.cloud.datastream.v1.OracleSourceConfig.StreamLargeObjects;
+
+                        /**
+                         * Encodes the specified StreamLargeObjects message. Does not implicitly {@link google.cloud.datastream.v1.OracleSourceConfig.StreamLargeObjects.verify|verify} messages.
+                         * @param message StreamLargeObjects message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.datastream.v1.OracleSourceConfig.IStreamLargeObjects, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified StreamLargeObjects message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.OracleSourceConfig.StreamLargeObjects.verify|verify} messages.
+                         * @param message StreamLargeObjects message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.datastream.v1.OracleSourceConfig.IStreamLargeObjects, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a StreamLargeObjects message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns StreamLargeObjects
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datastream.v1.OracleSourceConfig.StreamLargeObjects;
+
+                        /**
+                         * Decodes a StreamLargeObjects message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns StreamLargeObjects
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datastream.v1.OracleSourceConfig.StreamLargeObjects;
+
+                        /**
+                         * Verifies a StreamLargeObjects message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a StreamLargeObjects message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns StreamLargeObjects
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.datastream.v1.OracleSourceConfig.StreamLargeObjects;
+
+                        /**
+                         * Creates a plain object from a StreamLargeObjects message. Also converts values to other types if specified.
+                         * @param message StreamLargeObjects
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.datastream.v1.OracleSourceConfig.StreamLargeObjects, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this StreamLargeObjects to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for StreamLargeObjects
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a PostgresqlColumn. */
+                interface IPostgresqlColumn {
+
+                    /** PostgresqlColumn column */
+                    column?: (string|null);
+
+                    /** PostgresqlColumn dataType */
+                    dataType?: (string|null);
+
+                    /** PostgresqlColumn length */
+                    length?: (number|null);
+
+                    /** PostgresqlColumn precision */
+                    precision?: (number|null);
+
+                    /** PostgresqlColumn scale */
+                    scale?: (number|null);
+
+                    /** PostgresqlColumn primaryKey */
+                    primaryKey?: (boolean|null);
+
+                    /** PostgresqlColumn nullable */
+                    nullable?: (boolean|null);
+
+                    /** PostgresqlColumn ordinalPosition */
+                    ordinalPosition?: (number|null);
+                }
+
+                /** Represents a PostgresqlColumn. */
+                class PostgresqlColumn implements IPostgresqlColumn {
+
+                    /**
+                     * Constructs a new PostgresqlColumn.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datastream.v1.IPostgresqlColumn);
+
+                    /** PostgresqlColumn column. */
+                    public column: string;
+
+                    /** PostgresqlColumn dataType. */
+                    public dataType: string;
+
+                    /** PostgresqlColumn length. */
+                    public length: number;
+
+                    /** PostgresqlColumn precision. */
+                    public precision: number;
+
+                    /** PostgresqlColumn scale. */
+                    public scale: number;
+
+                    /** PostgresqlColumn primaryKey. */
+                    public primaryKey: boolean;
+
+                    /** PostgresqlColumn nullable. */
+                    public nullable: boolean;
+
+                    /** PostgresqlColumn ordinalPosition. */
+                    public ordinalPosition: number;
+
+                    /**
+                     * Creates a new PostgresqlColumn instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PostgresqlColumn instance
+                     */
+                    public static create(properties?: google.cloud.datastream.v1.IPostgresqlColumn): google.cloud.datastream.v1.PostgresqlColumn;
+
+                    /**
+                     * Encodes the specified PostgresqlColumn message. Does not implicitly {@link google.cloud.datastream.v1.PostgresqlColumn.verify|verify} messages.
+                     * @param message PostgresqlColumn message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datastream.v1.IPostgresqlColumn, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PostgresqlColumn message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.PostgresqlColumn.verify|verify} messages.
+                     * @param message PostgresqlColumn message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datastream.v1.IPostgresqlColumn, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PostgresqlColumn message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PostgresqlColumn
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datastream.v1.PostgresqlColumn;
+
+                    /**
+                     * Decodes a PostgresqlColumn message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PostgresqlColumn
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datastream.v1.PostgresqlColumn;
+
+                    /**
+                     * Verifies a PostgresqlColumn message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PostgresqlColumn message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PostgresqlColumn
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datastream.v1.PostgresqlColumn;
+
+                    /**
+                     * Creates a plain object from a PostgresqlColumn message. Also converts values to other types if specified.
+                     * @param message PostgresqlColumn
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datastream.v1.PostgresqlColumn, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PostgresqlColumn to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PostgresqlColumn
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PostgresqlTable. */
+                interface IPostgresqlTable {
+
+                    /** PostgresqlTable table */
+                    table?: (string|null);
+
+                    /** PostgresqlTable postgresqlColumns */
+                    postgresqlColumns?: (google.cloud.datastream.v1.IPostgresqlColumn[]|null);
+                }
+
+                /** Represents a PostgresqlTable. */
+                class PostgresqlTable implements IPostgresqlTable {
+
+                    /**
+                     * Constructs a new PostgresqlTable.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datastream.v1.IPostgresqlTable);
+
+                    /** PostgresqlTable table. */
+                    public table: string;
+
+                    /** PostgresqlTable postgresqlColumns. */
+                    public postgresqlColumns: google.cloud.datastream.v1.IPostgresqlColumn[];
+
+                    /**
+                     * Creates a new PostgresqlTable instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PostgresqlTable instance
+                     */
+                    public static create(properties?: google.cloud.datastream.v1.IPostgresqlTable): google.cloud.datastream.v1.PostgresqlTable;
+
+                    /**
+                     * Encodes the specified PostgresqlTable message. Does not implicitly {@link google.cloud.datastream.v1.PostgresqlTable.verify|verify} messages.
+                     * @param message PostgresqlTable message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datastream.v1.IPostgresqlTable, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PostgresqlTable message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.PostgresqlTable.verify|verify} messages.
+                     * @param message PostgresqlTable message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datastream.v1.IPostgresqlTable, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PostgresqlTable message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PostgresqlTable
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datastream.v1.PostgresqlTable;
+
+                    /**
+                     * Decodes a PostgresqlTable message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PostgresqlTable
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datastream.v1.PostgresqlTable;
+
+                    /**
+                     * Verifies a PostgresqlTable message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PostgresqlTable message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PostgresqlTable
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datastream.v1.PostgresqlTable;
+
+                    /**
+                     * Creates a plain object from a PostgresqlTable message. Also converts values to other types if specified.
+                     * @param message PostgresqlTable
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datastream.v1.PostgresqlTable, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PostgresqlTable to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PostgresqlTable
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PostgresqlSchema. */
+                interface IPostgresqlSchema {
+
+                    /** PostgresqlSchema schema */
+                    schema?: (string|null);
+
+                    /** PostgresqlSchema postgresqlTables */
+                    postgresqlTables?: (google.cloud.datastream.v1.IPostgresqlTable[]|null);
+                }
+
+                /** Represents a PostgresqlSchema. */
+                class PostgresqlSchema implements IPostgresqlSchema {
+
+                    /**
+                     * Constructs a new PostgresqlSchema.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datastream.v1.IPostgresqlSchema);
+
+                    /** PostgresqlSchema schema. */
+                    public schema: string;
+
+                    /** PostgresqlSchema postgresqlTables. */
+                    public postgresqlTables: google.cloud.datastream.v1.IPostgresqlTable[];
+
+                    /**
+                     * Creates a new PostgresqlSchema instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PostgresqlSchema instance
+                     */
+                    public static create(properties?: google.cloud.datastream.v1.IPostgresqlSchema): google.cloud.datastream.v1.PostgresqlSchema;
+
+                    /**
+                     * Encodes the specified PostgresqlSchema message. Does not implicitly {@link google.cloud.datastream.v1.PostgresqlSchema.verify|verify} messages.
+                     * @param message PostgresqlSchema message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datastream.v1.IPostgresqlSchema, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PostgresqlSchema message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.PostgresqlSchema.verify|verify} messages.
+                     * @param message PostgresqlSchema message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datastream.v1.IPostgresqlSchema, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PostgresqlSchema message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PostgresqlSchema
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datastream.v1.PostgresqlSchema;
+
+                    /**
+                     * Decodes a PostgresqlSchema message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PostgresqlSchema
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datastream.v1.PostgresqlSchema;
+
+                    /**
+                     * Verifies a PostgresqlSchema message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PostgresqlSchema message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PostgresqlSchema
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datastream.v1.PostgresqlSchema;
+
+                    /**
+                     * Creates a plain object from a PostgresqlSchema message. Also converts values to other types if specified.
+                     * @param message PostgresqlSchema
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datastream.v1.PostgresqlSchema, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PostgresqlSchema to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PostgresqlSchema
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PostgresqlRdbms. */
+                interface IPostgresqlRdbms {
+
+                    /** PostgresqlRdbms postgresqlSchemas */
+                    postgresqlSchemas?: (google.cloud.datastream.v1.IPostgresqlSchema[]|null);
+                }
+
+                /** Represents a PostgresqlRdbms. */
+                class PostgresqlRdbms implements IPostgresqlRdbms {
+
+                    /**
+                     * Constructs a new PostgresqlRdbms.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datastream.v1.IPostgresqlRdbms);
+
+                    /** PostgresqlRdbms postgresqlSchemas. */
+                    public postgresqlSchemas: google.cloud.datastream.v1.IPostgresqlSchema[];
+
+                    /**
+                     * Creates a new PostgresqlRdbms instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PostgresqlRdbms instance
+                     */
+                    public static create(properties?: google.cloud.datastream.v1.IPostgresqlRdbms): google.cloud.datastream.v1.PostgresqlRdbms;
+
+                    /**
+                     * Encodes the specified PostgresqlRdbms message. Does not implicitly {@link google.cloud.datastream.v1.PostgresqlRdbms.verify|verify} messages.
+                     * @param message PostgresqlRdbms message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datastream.v1.IPostgresqlRdbms, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PostgresqlRdbms message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.PostgresqlRdbms.verify|verify} messages.
+                     * @param message PostgresqlRdbms message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datastream.v1.IPostgresqlRdbms, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PostgresqlRdbms message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PostgresqlRdbms
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datastream.v1.PostgresqlRdbms;
+
+                    /**
+                     * Decodes a PostgresqlRdbms message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PostgresqlRdbms
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datastream.v1.PostgresqlRdbms;
+
+                    /**
+                     * Verifies a PostgresqlRdbms message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PostgresqlRdbms message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PostgresqlRdbms
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datastream.v1.PostgresqlRdbms;
+
+                    /**
+                     * Creates a plain object from a PostgresqlRdbms message. Also converts values to other types if specified.
+                     * @param message PostgresqlRdbms
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datastream.v1.PostgresqlRdbms, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PostgresqlRdbms to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PostgresqlRdbms
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PostgresqlSourceConfig. */
+                interface IPostgresqlSourceConfig {
+
+                    /** PostgresqlSourceConfig includeObjects */
+                    includeObjects?: (google.cloud.datastream.v1.IPostgresqlRdbms|null);
+
+                    /** PostgresqlSourceConfig excludeObjects */
+                    excludeObjects?: (google.cloud.datastream.v1.IPostgresqlRdbms|null);
+
+                    /** PostgresqlSourceConfig replicationSlot */
+                    replicationSlot?: (string|null);
+
+                    /** PostgresqlSourceConfig publication */
+                    publication?: (string|null);
+                }
+
+                /** Represents a PostgresqlSourceConfig. */
+                class PostgresqlSourceConfig implements IPostgresqlSourceConfig {
+
+                    /**
+                     * Constructs a new PostgresqlSourceConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datastream.v1.IPostgresqlSourceConfig);
+
+                    /** PostgresqlSourceConfig includeObjects. */
+                    public includeObjects?: (google.cloud.datastream.v1.IPostgresqlRdbms|null);
+
+                    /** PostgresqlSourceConfig excludeObjects. */
+                    public excludeObjects?: (google.cloud.datastream.v1.IPostgresqlRdbms|null);
+
+                    /** PostgresqlSourceConfig replicationSlot. */
+                    public replicationSlot: string;
+
+                    /** PostgresqlSourceConfig publication. */
+                    public publication: string;
+
+                    /**
+                     * Creates a new PostgresqlSourceConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PostgresqlSourceConfig instance
+                     */
+                    public static create(properties?: google.cloud.datastream.v1.IPostgresqlSourceConfig): google.cloud.datastream.v1.PostgresqlSourceConfig;
+
+                    /**
+                     * Encodes the specified PostgresqlSourceConfig message. Does not implicitly {@link google.cloud.datastream.v1.PostgresqlSourceConfig.verify|verify} messages.
+                     * @param message PostgresqlSourceConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datastream.v1.IPostgresqlSourceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PostgresqlSourceConfig message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.PostgresqlSourceConfig.verify|verify} messages.
+                     * @param message PostgresqlSourceConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datastream.v1.IPostgresqlSourceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PostgresqlSourceConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PostgresqlSourceConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datastream.v1.PostgresqlSourceConfig;
+
+                    /**
+                     * Decodes a PostgresqlSourceConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PostgresqlSourceConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datastream.v1.PostgresqlSourceConfig;
+
+                    /**
+                     * Verifies a PostgresqlSourceConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PostgresqlSourceConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PostgresqlSourceConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datastream.v1.PostgresqlSourceConfig;
+
+                    /**
+                     * Creates a plain object from a PostgresqlSourceConfig message. Also converts values to other types if specified.
+                     * @param message PostgresqlSourceConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datastream.v1.PostgresqlSourceConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PostgresqlSourceConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PostgresqlSourceConfig
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -6762,6 +7761,9 @@ export namespace google {
 
                     /** MysqlSourceConfig excludeObjects */
                     excludeObjects?: (google.cloud.datastream.v1.IMysqlRdbms|null);
+
+                    /** MysqlSourceConfig maxConcurrentCdcTasks */
+                    maxConcurrentCdcTasks?: (number|null);
                 }
 
                 /** Represents a MysqlSourceConfig. */
@@ -6778,6 +7780,9 @@ export namespace google {
 
                     /** MysqlSourceConfig excludeObjects. */
                     public excludeObjects?: (google.cloud.datastream.v1.IMysqlRdbms|null);
+
+                    /** MysqlSourceConfig maxConcurrentCdcTasks. */
+                    public maxConcurrentCdcTasks: number;
 
                     /**
                      * Creates a new MysqlSourceConfig instance using the specified properties.
@@ -6868,6 +7873,9 @@ export namespace google {
 
                     /** SourceConfig mysqlSourceConfig */
                     mysqlSourceConfig?: (google.cloud.datastream.v1.IMysqlSourceConfig|null);
+
+                    /** SourceConfig postgresqlSourceConfig */
+                    postgresqlSourceConfig?: (google.cloud.datastream.v1.IPostgresqlSourceConfig|null);
                 }
 
                 /** Represents a SourceConfig. */
@@ -6888,8 +7896,11 @@ export namespace google {
                     /** SourceConfig mysqlSourceConfig. */
                     public mysqlSourceConfig?: (google.cloud.datastream.v1.IMysqlSourceConfig|null);
 
+                    /** SourceConfig postgresqlSourceConfig. */
+                    public postgresqlSourceConfig?: (google.cloud.datastream.v1.IPostgresqlSourceConfig|null);
+
                     /** SourceConfig sourceStreamConfig. */
-                    public sourceStreamConfig?: ("oracleSourceConfig"|"mysqlSourceConfig");
+                    public sourceStreamConfig?: ("oracleSourceConfig"|"mysqlSourceConfig"|"postgresqlSourceConfig");
 
                     /**
                      * Creates a new SourceConfig instance using the specified properties.
@@ -7304,6 +8315,427 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a BigQueryDestinationConfig. */
+                interface IBigQueryDestinationConfig {
+
+                    /** BigQueryDestinationConfig singleTargetDataset */
+                    singleTargetDataset?: (google.cloud.datastream.v1.BigQueryDestinationConfig.ISingleTargetDataset|null);
+
+                    /** BigQueryDestinationConfig sourceHierarchyDatasets */
+                    sourceHierarchyDatasets?: (google.cloud.datastream.v1.BigQueryDestinationConfig.ISourceHierarchyDatasets|null);
+
+                    /** BigQueryDestinationConfig dataFreshness */
+                    dataFreshness?: (google.protobuf.IDuration|null);
+                }
+
+                /** Represents a BigQueryDestinationConfig. */
+                class BigQueryDestinationConfig implements IBigQueryDestinationConfig {
+
+                    /**
+                     * Constructs a new BigQueryDestinationConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datastream.v1.IBigQueryDestinationConfig);
+
+                    /** BigQueryDestinationConfig singleTargetDataset. */
+                    public singleTargetDataset?: (google.cloud.datastream.v1.BigQueryDestinationConfig.ISingleTargetDataset|null);
+
+                    /** BigQueryDestinationConfig sourceHierarchyDatasets. */
+                    public sourceHierarchyDatasets?: (google.cloud.datastream.v1.BigQueryDestinationConfig.ISourceHierarchyDatasets|null);
+
+                    /** BigQueryDestinationConfig dataFreshness. */
+                    public dataFreshness?: (google.protobuf.IDuration|null);
+
+                    /** BigQueryDestinationConfig datasetConfig. */
+                    public datasetConfig?: ("singleTargetDataset"|"sourceHierarchyDatasets");
+
+                    /**
+                     * Creates a new BigQueryDestinationConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BigQueryDestinationConfig instance
+                     */
+                    public static create(properties?: google.cloud.datastream.v1.IBigQueryDestinationConfig): google.cloud.datastream.v1.BigQueryDestinationConfig;
+
+                    /**
+                     * Encodes the specified BigQueryDestinationConfig message. Does not implicitly {@link google.cloud.datastream.v1.BigQueryDestinationConfig.verify|verify} messages.
+                     * @param message BigQueryDestinationConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datastream.v1.IBigQueryDestinationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BigQueryDestinationConfig message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.BigQueryDestinationConfig.verify|verify} messages.
+                     * @param message BigQueryDestinationConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datastream.v1.IBigQueryDestinationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BigQueryDestinationConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BigQueryDestinationConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datastream.v1.BigQueryDestinationConfig;
+
+                    /**
+                     * Decodes a BigQueryDestinationConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BigQueryDestinationConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datastream.v1.BigQueryDestinationConfig;
+
+                    /**
+                     * Verifies a BigQueryDestinationConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BigQueryDestinationConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BigQueryDestinationConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datastream.v1.BigQueryDestinationConfig;
+
+                    /**
+                     * Creates a plain object from a BigQueryDestinationConfig message. Also converts values to other types if specified.
+                     * @param message BigQueryDestinationConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datastream.v1.BigQueryDestinationConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BigQueryDestinationConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BigQueryDestinationConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace BigQueryDestinationConfig {
+
+                    /** Properties of a SingleTargetDataset. */
+                    interface ISingleTargetDataset {
+
+                        /** SingleTargetDataset datasetId */
+                        datasetId?: (string|null);
+                    }
+
+                    /** Represents a SingleTargetDataset. */
+                    class SingleTargetDataset implements ISingleTargetDataset {
+
+                        /**
+                         * Constructs a new SingleTargetDataset.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.datastream.v1.BigQueryDestinationConfig.ISingleTargetDataset);
+
+                        /** SingleTargetDataset datasetId. */
+                        public datasetId: string;
+
+                        /**
+                         * Creates a new SingleTargetDataset instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SingleTargetDataset instance
+                         */
+                        public static create(properties?: google.cloud.datastream.v1.BigQueryDestinationConfig.ISingleTargetDataset): google.cloud.datastream.v1.BigQueryDestinationConfig.SingleTargetDataset;
+
+                        /**
+                         * Encodes the specified SingleTargetDataset message. Does not implicitly {@link google.cloud.datastream.v1.BigQueryDestinationConfig.SingleTargetDataset.verify|verify} messages.
+                         * @param message SingleTargetDataset message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.datastream.v1.BigQueryDestinationConfig.ISingleTargetDataset, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SingleTargetDataset message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.BigQueryDestinationConfig.SingleTargetDataset.verify|verify} messages.
+                         * @param message SingleTargetDataset message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.datastream.v1.BigQueryDestinationConfig.ISingleTargetDataset, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SingleTargetDataset message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SingleTargetDataset
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datastream.v1.BigQueryDestinationConfig.SingleTargetDataset;
+
+                        /**
+                         * Decodes a SingleTargetDataset message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SingleTargetDataset
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datastream.v1.BigQueryDestinationConfig.SingleTargetDataset;
+
+                        /**
+                         * Verifies a SingleTargetDataset message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SingleTargetDataset message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SingleTargetDataset
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.datastream.v1.BigQueryDestinationConfig.SingleTargetDataset;
+
+                        /**
+                         * Creates a plain object from a SingleTargetDataset message. Also converts values to other types if specified.
+                         * @param message SingleTargetDataset
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.datastream.v1.BigQueryDestinationConfig.SingleTargetDataset, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SingleTargetDataset to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SingleTargetDataset
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a SourceHierarchyDatasets. */
+                    interface ISourceHierarchyDatasets {
+
+                        /** SourceHierarchyDatasets datasetTemplate */
+                        datasetTemplate?: (google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.IDatasetTemplate|null);
+                    }
+
+                    /** Represents a SourceHierarchyDatasets. */
+                    class SourceHierarchyDatasets implements ISourceHierarchyDatasets {
+
+                        /**
+                         * Constructs a new SourceHierarchyDatasets.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.datastream.v1.BigQueryDestinationConfig.ISourceHierarchyDatasets);
+
+                        /** SourceHierarchyDatasets datasetTemplate. */
+                        public datasetTemplate?: (google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.IDatasetTemplate|null);
+
+                        /**
+                         * Creates a new SourceHierarchyDatasets instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SourceHierarchyDatasets instance
+                         */
+                        public static create(properties?: google.cloud.datastream.v1.BigQueryDestinationConfig.ISourceHierarchyDatasets): google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets;
+
+                        /**
+                         * Encodes the specified SourceHierarchyDatasets message. Does not implicitly {@link google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.verify|verify} messages.
+                         * @param message SourceHierarchyDatasets message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.datastream.v1.BigQueryDestinationConfig.ISourceHierarchyDatasets, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SourceHierarchyDatasets message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.verify|verify} messages.
+                         * @param message SourceHierarchyDatasets message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.datastream.v1.BigQueryDestinationConfig.ISourceHierarchyDatasets, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SourceHierarchyDatasets message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SourceHierarchyDatasets
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets;
+
+                        /**
+                         * Decodes a SourceHierarchyDatasets message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SourceHierarchyDatasets
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets;
+
+                        /**
+                         * Verifies a SourceHierarchyDatasets message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SourceHierarchyDatasets message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SourceHierarchyDatasets
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets;
+
+                        /**
+                         * Creates a plain object from a SourceHierarchyDatasets message. Also converts values to other types if specified.
+                         * @param message SourceHierarchyDatasets
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SourceHierarchyDatasets to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SourceHierarchyDatasets
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace SourceHierarchyDatasets {
+
+                        /** Properties of a DatasetTemplate. */
+                        interface IDatasetTemplate {
+
+                            /** DatasetTemplate location */
+                            location?: (string|null);
+
+                            /** DatasetTemplate datasetIdPrefix */
+                            datasetIdPrefix?: (string|null);
+
+                            /** DatasetTemplate kmsKeyName */
+                            kmsKeyName?: (string|null);
+                        }
+
+                        /** Represents a DatasetTemplate. */
+                        class DatasetTemplate implements IDatasetTemplate {
+
+                            /**
+                             * Constructs a new DatasetTemplate.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.IDatasetTemplate);
+
+                            /** DatasetTemplate location. */
+                            public location: string;
+
+                            /** DatasetTemplate datasetIdPrefix. */
+                            public datasetIdPrefix: string;
+
+                            /** DatasetTemplate kmsKeyName. */
+                            public kmsKeyName: string;
+
+                            /**
+                             * Creates a new DatasetTemplate instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns DatasetTemplate instance
+                             */
+                            public static create(properties?: google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.IDatasetTemplate): google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.DatasetTemplate;
+
+                            /**
+                             * Encodes the specified DatasetTemplate message. Does not implicitly {@link google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.DatasetTemplate.verify|verify} messages.
+                             * @param message DatasetTemplate message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.IDatasetTemplate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified DatasetTemplate message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.DatasetTemplate.verify|verify} messages.
+                             * @param message DatasetTemplate message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.IDatasetTemplate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a DatasetTemplate message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns DatasetTemplate
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.DatasetTemplate;
+
+                            /**
+                             * Decodes a DatasetTemplate message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns DatasetTemplate
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.DatasetTemplate;
+
+                            /**
+                             * Verifies a DatasetTemplate message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a DatasetTemplate message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns DatasetTemplate
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.DatasetTemplate;
+
+                            /**
+                             * Creates a plain object from a DatasetTemplate message. Also converts values to other types if specified.
+                             * @param message DatasetTemplate
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.DatasetTemplate, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this DatasetTemplate to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for DatasetTemplate
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+                }
+
                 /** Properties of a DestinationConfig. */
                 interface IDestinationConfig {
 
@@ -7312,6 +8744,9 @@ export namespace google {
 
                     /** DestinationConfig gcsDestinationConfig */
                     gcsDestinationConfig?: (google.cloud.datastream.v1.IGcsDestinationConfig|null);
+
+                    /** DestinationConfig bigqueryDestinationConfig */
+                    bigqueryDestinationConfig?: (google.cloud.datastream.v1.IBigQueryDestinationConfig|null);
                 }
 
                 /** Represents a DestinationConfig. */
@@ -7329,8 +8764,11 @@ export namespace google {
                     /** DestinationConfig gcsDestinationConfig. */
                     public gcsDestinationConfig?: (google.cloud.datastream.v1.IGcsDestinationConfig|null);
 
+                    /** DestinationConfig bigqueryDestinationConfig. */
+                    public bigqueryDestinationConfig?: (google.cloud.datastream.v1.IBigQueryDestinationConfig|null);
+
                     /** DestinationConfig destinationStreamConfig. */
-                    public destinationStreamConfig?: "gcsDestinationConfig";
+                    public destinationStreamConfig?: ("gcsDestinationConfig"|"bigqueryDestinationConfig");
 
                     /**
                      * Creates a new DestinationConfig instance using the specified properties.
@@ -7602,6 +9040,9 @@ export namespace google {
 
                         /** BackfillAllStrategy mysqlExcludedObjects */
                         mysqlExcludedObjects?: (google.cloud.datastream.v1.IMysqlRdbms|null);
+
+                        /** BackfillAllStrategy postgresqlExcludedObjects */
+                        postgresqlExcludedObjects?: (google.cloud.datastream.v1.IPostgresqlRdbms|null);
                     }
 
                     /** Represents a BackfillAllStrategy. */
@@ -7619,8 +9060,11 @@ export namespace google {
                         /** BackfillAllStrategy mysqlExcludedObjects. */
                         public mysqlExcludedObjects?: (google.cloud.datastream.v1.IMysqlRdbms|null);
 
+                        /** BackfillAllStrategy postgresqlExcludedObjects. */
+                        public postgresqlExcludedObjects?: (google.cloud.datastream.v1.IPostgresqlRdbms|null);
+
                         /** BackfillAllStrategy excludedObjects. */
-                        public excludedObjects?: ("oracleExcludedObjects"|"mysqlExcludedObjects");
+                        public excludedObjects?: ("oracleExcludedObjects"|"mysqlExcludedObjects"|"postgresqlExcludedObjects");
 
                         /**
                          * Creates a new BackfillAllStrategy instance using the specified properties.
@@ -7933,6 +9377,9 @@ export namespace google {
 
                     /** SourceObjectIdentifier mysqlIdentifier */
                     mysqlIdentifier?: (google.cloud.datastream.v1.SourceObjectIdentifier.IMysqlObjectIdentifier|null);
+
+                    /** SourceObjectIdentifier postgresqlIdentifier */
+                    postgresqlIdentifier?: (google.cloud.datastream.v1.SourceObjectIdentifier.IPostgresqlObjectIdentifier|null);
                 }
 
                 /** Represents a SourceObjectIdentifier. */
@@ -7950,8 +9397,11 @@ export namespace google {
                     /** SourceObjectIdentifier mysqlIdentifier. */
                     public mysqlIdentifier?: (google.cloud.datastream.v1.SourceObjectIdentifier.IMysqlObjectIdentifier|null);
 
+                    /** SourceObjectIdentifier postgresqlIdentifier. */
+                    public postgresqlIdentifier?: (google.cloud.datastream.v1.SourceObjectIdentifier.IPostgresqlObjectIdentifier|null);
+
                     /** SourceObjectIdentifier sourceIdentifier. */
-                    public sourceIdentifier?: ("oracleIdentifier"|"mysqlIdentifier");
+                    public sourceIdentifier?: ("oracleIdentifier"|"mysqlIdentifier"|"postgresqlIdentifier");
 
                     /**
                      * Creates a new SourceObjectIdentifier instance using the specified properties.
@@ -8130,6 +9580,109 @@ export namespace google {
 
                         /**
                          * Gets the default type url for OracleObjectIdentifier
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a PostgresqlObjectIdentifier. */
+                    interface IPostgresqlObjectIdentifier {
+
+                        /** PostgresqlObjectIdentifier schema */
+                        schema?: (string|null);
+
+                        /** PostgresqlObjectIdentifier table */
+                        table?: (string|null);
+                    }
+
+                    /** Represents a PostgresqlObjectIdentifier. */
+                    class PostgresqlObjectIdentifier implements IPostgresqlObjectIdentifier {
+
+                        /**
+                         * Constructs a new PostgresqlObjectIdentifier.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.datastream.v1.SourceObjectIdentifier.IPostgresqlObjectIdentifier);
+
+                        /** PostgresqlObjectIdentifier schema. */
+                        public schema: string;
+
+                        /** PostgresqlObjectIdentifier table. */
+                        public table: string;
+
+                        /**
+                         * Creates a new PostgresqlObjectIdentifier instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PostgresqlObjectIdentifier instance
+                         */
+                        public static create(properties?: google.cloud.datastream.v1.SourceObjectIdentifier.IPostgresqlObjectIdentifier): google.cloud.datastream.v1.SourceObjectIdentifier.PostgresqlObjectIdentifier;
+
+                        /**
+                         * Encodes the specified PostgresqlObjectIdentifier message. Does not implicitly {@link google.cloud.datastream.v1.SourceObjectIdentifier.PostgresqlObjectIdentifier.verify|verify} messages.
+                         * @param message PostgresqlObjectIdentifier message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.datastream.v1.SourceObjectIdentifier.IPostgresqlObjectIdentifier, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PostgresqlObjectIdentifier message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.SourceObjectIdentifier.PostgresqlObjectIdentifier.verify|verify} messages.
+                         * @param message PostgresqlObjectIdentifier message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.datastream.v1.SourceObjectIdentifier.IPostgresqlObjectIdentifier, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PostgresqlObjectIdentifier message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PostgresqlObjectIdentifier
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datastream.v1.SourceObjectIdentifier.PostgresqlObjectIdentifier;
+
+                        /**
+                         * Decodes a PostgresqlObjectIdentifier message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PostgresqlObjectIdentifier
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datastream.v1.SourceObjectIdentifier.PostgresqlObjectIdentifier;
+
+                        /**
+                         * Verifies a PostgresqlObjectIdentifier message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PostgresqlObjectIdentifier message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PostgresqlObjectIdentifier
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.datastream.v1.SourceObjectIdentifier.PostgresqlObjectIdentifier;
+
+                        /**
+                         * Creates a plain object from a PostgresqlObjectIdentifier message. Also converts values to other types if specified.
+                         * @param message PostgresqlObjectIdentifier
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.datastream.v1.SourceObjectIdentifier.PostgresqlObjectIdentifier, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PostgresqlObjectIdentifier to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PostgresqlObjectIdentifier
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */

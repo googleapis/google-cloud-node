@@ -939,6 +939,7 @@
                          * @property {number|null} [hierarchyDepth] DiscoverConnectionProfileRequest hierarchyDepth
                          * @property {google.cloud.datastream.v1.IOracleRdbms|null} [oracleRdbms] DiscoverConnectionProfileRequest oracleRdbms
                          * @property {google.cloud.datastream.v1.IMysqlRdbms|null} [mysqlRdbms] DiscoverConnectionProfileRequest mysqlRdbms
+                         * @property {google.cloud.datastream.v1.IPostgresqlRdbms|null} [postgresqlRdbms] DiscoverConnectionProfileRequest postgresqlRdbms
                          */
     
                         /**
@@ -1012,6 +1013,14 @@
                          */
                         DiscoverConnectionProfileRequest.prototype.mysqlRdbms = null;
     
+                        /**
+                         * DiscoverConnectionProfileRequest postgresqlRdbms.
+                         * @member {google.cloud.datastream.v1.IPostgresqlRdbms|null|undefined} postgresqlRdbms
+                         * @memberof google.cloud.datastream.v1.DiscoverConnectionProfileRequest
+                         * @instance
+                         */
+                        DiscoverConnectionProfileRequest.prototype.postgresqlRdbms = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -1039,12 +1048,12 @@
     
                         /**
                          * DiscoverConnectionProfileRequest dataObject.
-                         * @member {"oracleRdbms"|"mysqlRdbms"|undefined} dataObject
+                         * @member {"oracleRdbms"|"mysqlRdbms"|"postgresqlRdbms"|undefined} dataObject
                          * @memberof google.cloud.datastream.v1.DiscoverConnectionProfileRequest
                          * @instance
                          */
                         Object.defineProperty(DiscoverConnectionProfileRequest.prototype, "dataObject", {
-                            get: $util.oneOfGetter($oneOfFields = ["oracleRdbms", "mysqlRdbms"]),
+                            get: $util.oneOfGetter($oneOfFields = ["oracleRdbms", "mysqlRdbms", "postgresqlRdbms"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -1082,6 +1091,8 @@
                                 $root.google.cloud.datastream.v1.OracleRdbms.encode(message.oracleRdbms, writer.uint32(/* id 100, wireType 2 =*/802).fork()).ldelim();
                             if (message.mysqlRdbms != null && Object.hasOwnProperty.call(message, "mysqlRdbms"))
                                 $root.google.cloud.datastream.v1.MysqlRdbms.encode(message.mysqlRdbms, writer.uint32(/* id 101, wireType 2 =*/810).fork()).ldelim();
+                            if (message.postgresqlRdbms != null && Object.hasOwnProperty.call(message, "postgresqlRdbms"))
+                                $root.google.cloud.datastream.v1.PostgresqlRdbms.encode(message.postgresqlRdbms, writer.uint32(/* id 102, wireType 2 =*/818).fork()).ldelim();
                             if (message.connectionProfile != null && Object.hasOwnProperty.call(message, "connectionProfile"))
                                 $root.google.cloud.datastream.v1.ConnectionProfile.encode(message.connectionProfile, writer.uint32(/* id 200, wireType 2 =*/1602).fork()).ldelim();
                             if (message.connectionProfileName != null && Object.hasOwnProperty.call(message, "connectionProfileName"))
@@ -1146,6 +1157,10 @@
                                     }
                                 case 101: {
                                         message.mysqlRdbms = $root.google.cloud.datastream.v1.MysqlRdbms.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 102: {
+                                        message.postgresqlRdbms = $root.google.cloud.datastream.v1.PostgresqlRdbms.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -1232,6 +1247,16 @@
                                         return "mysqlRdbms." + error;
                                 }
                             }
+                            if (message.postgresqlRdbms != null && message.hasOwnProperty("postgresqlRdbms")) {
+                                if (properties.dataObject === 1)
+                                    return "dataObject: multiple values";
+                                properties.dataObject = 1;
+                                {
+                                    var error = $root.google.cloud.datastream.v1.PostgresqlRdbms.verify(message.postgresqlRdbms);
+                                    if (error)
+                                        return "postgresqlRdbms." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -1269,6 +1294,11 @@
                                 if (typeof object.mysqlRdbms !== "object")
                                     throw TypeError(".google.cloud.datastream.v1.DiscoverConnectionProfileRequest.mysqlRdbms: object expected");
                                 message.mysqlRdbms = $root.google.cloud.datastream.v1.MysqlRdbms.fromObject(object.mysqlRdbms);
+                            }
+                            if (object.postgresqlRdbms != null) {
+                                if (typeof object.postgresqlRdbms !== "object")
+                                    throw TypeError(".google.cloud.datastream.v1.DiscoverConnectionProfileRequest.postgresqlRdbms: object expected");
+                                message.postgresqlRdbms = $root.google.cloud.datastream.v1.PostgresqlRdbms.fromObject(object.postgresqlRdbms);
                             }
                             return message;
                         };
@@ -1309,6 +1339,11 @@
                                 object.mysqlRdbms = $root.google.cloud.datastream.v1.MysqlRdbms.toObject(message.mysqlRdbms, options);
                                 if (options.oneofs)
                                     object.dataObject = "mysqlRdbms";
+                            }
+                            if (message.postgresqlRdbms != null && message.hasOwnProperty("postgresqlRdbms")) {
+                                object.postgresqlRdbms = $root.google.cloud.datastream.v1.PostgresqlRdbms.toObject(message.postgresqlRdbms, options);
+                                if (options.oneofs)
+                                    object.dataObject = "postgresqlRdbms";
                             }
                             if (message.connectionProfile != null && message.hasOwnProperty("connectionProfile")) {
                                 object.connectionProfile = $root.google.cloud.datastream.v1.ConnectionProfile.toObject(message.connectionProfile, options);
@@ -1360,6 +1395,7 @@
                          * @interface IDiscoverConnectionProfileResponse
                          * @property {google.cloud.datastream.v1.IOracleRdbms|null} [oracleRdbms] DiscoverConnectionProfileResponse oracleRdbms
                          * @property {google.cloud.datastream.v1.IMysqlRdbms|null} [mysqlRdbms] DiscoverConnectionProfileResponse mysqlRdbms
+                         * @property {google.cloud.datastream.v1.IPostgresqlRdbms|null} [postgresqlRdbms] DiscoverConnectionProfileResponse postgresqlRdbms
                          */
     
                         /**
@@ -1393,17 +1429,25 @@
                          */
                         DiscoverConnectionProfileResponse.prototype.mysqlRdbms = null;
     
+                        /**
+                         * DiscoverConnectionProfileResponse postgresqlRdbms.
+                         * @member {google.cloud.datastream.v1.IPostgresqlRdbms|null|undefined} postgresqlRdbms
+                         * @memberof google.cloud.datastream.v1.DiscoverConnectionProfileResponse
+                         * @instance
+                         */
+                        DiscoverConnectionProfileResponse.prototype.postgresqlRdbms = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         /**
                          * DiscoverConnectionProfileResponse dataObject.
-                         * @member {"oracleRdbms"|"mysqlRdbms"|undefined} dataObject
+                         * @member {"oracleRdbms"|"mysqlRdbms"|"postgresqlRdbms"|undefined} dataObject
                          * @memberof google.cloud.datastream.v1.DiscoverConnectionProfileResponse
                          * @instance
                          */
                         Object.defineProperty(DiscoverConnectionProfileResponse.prototype, "dataObject", {
-                            get: $util.oneOfGetter($oneOfFields = ["oracleRdbms", "mysqlRdbms"]),
+                            get: $util.oneOfGetter($oneOfFields = ["oracleRdbms", "mysqlRdbms", "postgresqlRdbms"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -1435,6 +1479,8 @@
                                 $root.google.cloud.datastream.v1.OracleRdbms.encode(message.oracleRdbms, writer.uint32(/* id 100, wireType 2 =*/802).fork()).ldelim();
                             if (message.mysqlRdbms != null && Object.hasOwnProperty.call(message, "mysqlRdbms"))
                                 $root.google.cloud.datastream.v1.MysqlRdbms.encode(message.mysqlRdbms, writer.uint32(/* id 101, wireType 2 =*/810).fork()).ldelim();
+                            if (message.postgresqlRdbms != null && Object.hasOwnProperty.call(message, "postgresqlRdbms"))
+                                $root.google.cloud.datastream.v1.PostgresqlRdbms.encode(message.postgresqlRdbms, writer.uint32(/* id 102, wireType 2 =*/818).fork()).ldelim();
                             return writer;
                         };
     
@@ -1475,6 +1521,10 @@
                                     }
                                 case 101: {
                                         message.mysqlRdbms = $root.google.cloud.datastream.v1.MysqlRdbms.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 102: {
+                                        message.postgresqlRdbms = $root.google.cloud.datastream.v1.PostgresqlRdbms.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -1531,6 +1581,16 @@
                                         return "mysqlRdbms." + error;
                                 }
                             }
+                            if (message.postgresqlRdbms != null && message.hasOwnProperty("postgresqlRdbms")) {
+                                if (properties.dataObject === 1)
+                                    return "dataObject: multiple values";
+                                properties.dataObject = 1;
+                                {
+                                    var error = $root.google.cloud.datastream.v1.PostgresqlRdbms.verify(message.postgresqlRdbms);
+                                    if (error)
+                                        return "postgresqlRdbms." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -1555,6 +1615,11 @@
                                 if (typeof object.mysqlRdbms !== "object")
                                     throw TypeError(".google.cloud.datastream.v1.DiscoverConnectionProfileResponse.mysqlRdbms: object expected");
                                 message.mysqlRdbms = $root.google.cloud.datastream.v1.MysqlRdbms.fromObject(object.mysqlRdbms);
+                            }
+                            if (object.postgresqlRdbms != null) {
+                                if (typeof object.postgresqlRdbms !== "object")
+                                    throw TypeError(".google.cloud.datastream.v1.DiscoverConnectionProfileResponse.postgresqlRdbms: object expected");
+                                message.postgresqlRdbms = $root.google.cloud.datastream.v1.PostgresqlRdbms.fromObject(object.postgresqlRdbms);
                             }
                             return message;
                         };
@@ -1581,6 +1646,11 @@
                                 object.mysqlRdbms = $root.google.cloud.datastream.v1.MysqlRdbms.toObject(message.mysqlRdbms, options);
                                 if (options.oneofs)
                                     object.dataObject = "mysqlRdbms";
+                            }
+                            if (message.postgresqlRdbms != null && message.hasOwnProperty("postgresqlRdbms")) {
+                                object.postgresqlRdbms = $root.google.cloud.datastream.v1.PostgresqlRdbms.toObject(message.postgresqlRdbms, options);
+                                if (options.oneofs)
+                                    object.dataObject = "postgresqlRdbms";
                             }
                             return object;
                         };
@@ -10793,6 +10863,302 @@
                         return MysqlProfile;
                     })();
     
+                    v1.PostgresqlProfile = (function() {
+    
+                        /**
+                         * Properties of a PostgresqlProfile.
+                         * @memberof google.cloud.datastream.v1
+                         * @interface IPostgresqlProfile
+                         * @property {string|null} [hostname] PostgresqlProfile hostname
+                         * @property {number|null} [port] PostgresqlProfile port
+                         * @property {string|null} [username] PostgresqlProfile username
+                         * @property {string|null} [password] PostgresqlProfile password
+                         * @property {string|null} [database] PostgresqlProfile database
+                         */
+    
+                        /**
+                         * Constructs a new PostgresqlProfile.
+                         * @memberof google.cloud.datastream.v1
+                         * @classdesc Represents a PostgresqlProfile.
+                         * @implements IPostgresqlProfile
+                         * @constructor
+                         * @param {google.cloud.datastream.v1.IPostgresqlProfile=} [properties] Properties to set
+                         */
+                        function PostgresqlProfile(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PostgresqlProfile hostname.
+                         * @member {string} hostname
+                         * @memberof google.cloud.datastream.v1.PostgresqlProfile
+                         * @instance
+                         */
+                        PostgresqlProfile.prototype.hostname = "";
+    
+                        /**
+                         * PostgresqlProfile port.
+                         * @member {number} port
+                         * @memberof google.cloud.datastream.v1.PostgresqlProfile
+                         * @instance
+                         */
+                        PostgresqlProfile.prototype.port = 0;
+    
+                        /**
+                         * PostgresqlProfile username.
+                         * @member {string} username
+                         * @memberof google.cloud.datastream.v1.PostgresqlProfile
+                         * @instance
+                         */
+                        PostgresqlProfile.prototype.username = "";
+    
+                        /**
+                         * PostgresqlProfile password.
+                         * @member {string} password
+                         * @memberof google.cloud.datastream.v1.PostgresqlProfile
+                         * @instance
+                         */
+                        PostgresqlProfile.prototype.password = "";
+    
+                        /**
+                         * PostgresqlProfile database.
+                         * @member {string} database
+                         * @memberof google.cloud.datastream.v1.PostgresqlProfile
+                         * @instance
+                         */
+                        PostgresqlProfile.prototype.database = "";
+    
+                        /**
+                         * Creates a new PostgresqlProfile instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datastream.v1.PostgresqlProfile
+                         * @static
+                         * @param {google.cloud.datastream.v1.IPostgresqlProfile=} [properties] Properties to set
+                         * @returns {google.cloud.datastream.v1.PostgresqlProfile} PostgresqlProfile instance
+                         */
+                        PostgresqlProfile.create = function create(properties) {
+                            return new PostgresqlProfile(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PostgresqlProfile message. Does not implicitly {@link google.cloud.datastream.v1.PostgresqlProfile.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datastream.v1.PostgresqlProfile
+                         * @static
+                         * @param {google.cloud.datastream.v1.IPostgresqlProfile} message PostgresqlProfile message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PostgresqlProfile.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.hostname != null && Object.hasOwnProperty.call(message, "hostname"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.hostname);
+                            if (message.port != null && Object.hasOwnProperty.call(message, "port"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.port);
+                            if (message.username != null && Object.hasOwnProperty.call(message, "username"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.username);
+                            if (message.password != null && Object.hasOwnProperty.call(message, "password"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.password);
+                            if (message.database != null && Object.hasOwnProperty.call(message, "database"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.database);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PostgresqlProfile message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.PostgresqlProfile.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datastream.v1.PostgresqlProfile
+                         * @static
+                         * @param {google.cloud.datastream.v1.IPostgresqlProfile} message PostgresqlProfile message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PostgresqlProfile.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PostgresqlProfile message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datastream.v1.PostgresqlProfile
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datastream.v1.PostgresqlProfile} PostgresqlProfile
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PostgresqlProfile.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.PostgresqlProfile();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.hostname = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.port = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.username = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.password = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.database = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PostgresqlProfile message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datastream.v1.PostgresqlProfile
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datastream.v1.PostgresqlProfile} PostgresqlProfile
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PostgresqlProfile.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PostgresqlProfile message.
+                         * @function verify
+                         * @memberof google.cloud.datastream.v1.PostgresqlProfile
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PostgresqlProfile.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.hostname != null && message.hasOwnProperty("hostname"))
+                                if (!$util.isString(message.hostname))
+                                    return "hostname: string expected";
+                            if (message.port != null && message.hasOwnProperty("port"))
+                                if (!$util.isInteger(message.port))
+                                    return "port: integer expected";
+                            if (message.username != null && message.hasOwnProperty("username"))
+                                if (!$util.isString(message.username))
+                                    return "username: string expected";
+                            if (message.password != null && message.hasOwnProperty("password"))
+                                if (!$util.isString(message.password))
+                                    return "password: string expected";
+                            if (message.database != null && message.hasOwnProperty("database"))
+                                if (!$util.isString(message.database))
+                                    return "database: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PostgresqlProfile message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datastream.v1.PostgresqlProfile
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datastream.v1.PostgresqlProfile} PostgresqlProfile
+                         */
+                        PostgresqlProfile.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datastream.v1.PostgresqlProfile)
+                                return object;
+                            var message = new $root.google.cloud.datastream.v1.PostgresqlProfile();
+                            if (object.hostname != null)
+                                message.hostname = String(object.hostname);
+                            if (object.port != null)
+                                message.port = object.port | 0;
+                            if (object.username != null)
+                                message.username = String(object.username);
+                            if (object.password != null)
+                                message.password = String(object.password);
+                            if (object.database != null)
+                                message.database = String(object.database);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PostgresqlProfile message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datastream.v1.PostgresqlProfile
+                         * @static
+                         * @param {google.cloud.datastream.v1.PostgresqlProfile} message PostgresqlProfile
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PostgresqlProfile.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.hostname = "";
+                                object.port = 0;
+                                object.username = "";
+                                object.password = "";
+                                object.database = "";
+                            }
+                            if (message.hostname != null && message.hasOwnProperty("hostname"))
+                                object.hostname = message.hostname;
+                            if (message.port != null && message.hasOwnProperty("port"))
+                                object.port = message.port;
+                            if (message.username != null && message.hasOwnProperty("username"))
+                                object.username = message.username;
+                            if (message.password != null && message.hasOwnProperty("password"))
+                                object.password = message.password;
+                            if (message.database != null && message.hasOwnProperty("database"))
+                                object.database = message.database;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PostgresqlProfile to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datastream.v1.PostgresqlProfile
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PostgresqlProfile.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for PostgresqlProfile
+                         * @function getTypeUrl
+                         * @memberof google.cloud.datastream.v1.PostgresqlProfile
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        PostgresqlProfile.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.datastream.v1.PostgresqlProfile";
+                        };
+    
+                        return PostgresqlProfile;
+                    })();
+    
                     v1.GcsProfile = (function() {
     
                         /**
@@ -11018,6 +11384,181 @@
                         };
     
                         return GcsProfile;
+                    })();
+    
+                    v1.BigQueryProfile = (function() {
+    
+                        /**
+                         * Properties of a BigQueryProfile.
+                         * @memberof google.cloud.datastream.v1
+                         * @interface IBigQueryProfile
+                         */
+    
+                        /**
+                         * Constructs a new BigQueryProfile.
+                         * @memberof google.cloud.datastream.v1
+                         * @classdesc Represents a BigQueryProfile.
+                         * @implements IBigQueryProfile
+                         * @constructor
+                         * @param {google.cloud.datastream.v1.IBigQueryProfile=} [properties] Properties to set
+                         */
+                        function BigQueryProfile(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new BigQueryProfile instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datastream.v1.BigQueryProfile
+                         * @static
+                         * @param {google.cloud.datastream.v1.IBigQueryProfile=} [properties] Properties to set
+                         * @returns {google.cloud.datastream.v1.BigQueryProfile} BigQueryProfile instance
+                         */
+                        BigQueryProfile.create = function create(properties) {
+                            return new BigQueryProfile(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BigQueryProfile message. Does not implicitly {@link google.cloud.datastream.v1.BigQueryProfile.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datastream.v1.BigQueryProfile
+                         * @static
+                         * @param {google.cloud.datastream.v1.IBigQueryProfile} message BigQueryProfile message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BigQueryProfile.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BigQueryProfile message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.BigQueryProfile.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datastream.v1.BigQueryProfile
+                         * @static
+                         * @param {google.cloud.datastream.v1.IBigQueryProfile} message BigQueryProfile message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BigQueryProfile.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BigQueryProfile message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datastream.v1.BigQueryProfile
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datastream.v1.BigQueryProfile} BigQueryProfile
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BigQueryProfile.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.BigQueryProfile();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BigQueryProfile message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datastream.v1.BigQueryProfile
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datastream.v1.BigQueryProfile} BigQueryProfile
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BigQueryProfile.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BigQueryProfile message.
+                         * @function verify
+                         * @memberof google.cloud.datastream.v1.BigQueryProfile
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BigQueryProfile.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BigQueryProfile message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datastream.v1.BigQueryProfile
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datastream.v1.BigQueryProfile} BigQueryProfile
+                         */
+                        BigQueryProfile.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datastream.v1.BigQueryProfile)
+                                return object;
+                            return new $root.google.cloud.datastream.v1.BigQueryProfile();
+                        };
+    
+                        /**
+                         * Creates a plain object from a BigQueryProfile message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datastream.v1.BigQueryProfile
+                         * @static
+                         * @param {google.cloud.datastream.v1.BigQueryProfile} message BigQueryProfile
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BigQueryProfile.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this BigQueryProfile to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datastream.v1.BigQueryProfile
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BigQueryProfile.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BigQueryProfile
+                         * @function getTypeUrl
+                         * @memberof google.cloud.datastream.v1.BigQueryProfile
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BigQueryProfile.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.datastream.v1.BigQueryProfile";
+                        };
+    
+                        return BigQueryProfile;
                     })();
     
                     v1.StaticServiceIpConnectivity = (function() {
@@ -13143,6 +13684,8 @@
                          * @property {google.cloud.datastream.v1.IOracleProfile|null} [oracleProfile] ConnectionProfile oracleProfile
                          * @property {google.cloud.datastream.v1.IGcsProfile|null} [gcsProfile] ConnectionProfile gcsProfile
                          * @property {google.cloud.datastream.v1.IMysqlProfile|null} [mysqlProfile] ConnectionProfile mysqlProfile
+                         * @property {google.cloud.datastream.v1.IBigQueryProfile|null} [bigqueryProfile] ConnectionProfile bigqueryProfile
+                         * @property {google.cloud.datastream.v1.IPostgresqlProfile|null} [postgresqlProfile] ConnectionProfile postgresqlProfile
                          * @property {google.cloud.datastream.v1.IStaticServiceIpConnectivity|null} [staticServiceIpConnectivity] ConnectionProfile staticServiceIpConnectivity
                          * @property {google.cloud.datastream.v1.IForwardSshTunnelConnectivity|null} [forwardSshConnectivity] ConnectionProfile forwardSshConnectivity
                          * @property {google.cloud.datastream.v1.IPrivateConnectivity|null} [privateConnectivity] ConnectionProfile privateConnectivity
@@ -13229,6 +13772,22 @@
                         ConnectionProfile.prototype.mysqlProfile = null;
     
                         /**
+                         * ConnectionProfile bigqueryProfile.
+                         * @member {google.cloud.datastream.v1.IBigQueryProfile|null|undefined} bigqueryProfile
+                         * @memberof google.cloud.datastream.v1.ConnectionProfile
+                         * @instance
+                         */
+                        ConnectionProfile.prototype.bigqueryProfile = null;
+    
+                        /**
+                         * ConnectionProfile postgresqlProfile.
+                         * @member {google.cloud.datastream.v1.IPostgresqlProfile|null|undefined} postgresqlProfile
+                         * @memberof google.cloud.datastream.v1.ConnectionProfile
+                         * @instance
+                         */
+                        ConnectionProfile.prototype.postgresqlProfile = null;
+    
+                        /**
                          * ConnectionProfile staticServiceIpConnectivity.
                          * @member {google.cloud.datastream.v1.IStaticServiceIpConnectivity|null|undefined} staticServiceIpConnectivity
                          * @memberof google.cloud.datastream.v1.ConnectionProfile
@@ -13257,12 +13816,12 @@
     
                         /**
                          * ConnectionProfile profile.
-                         * @member {"oracleProfile"|"gcsProfile"|"mysqlProfile"|undefined} profile
+                         * @member {"oracleProfile"|"gcsProfile"|"mysqlProfile"|"bigqueryProfile"|"postgresqlProfile"|undefined} profile
                          * @memberof google.cloud.datastream.v1.ConnectionProfile
                          * @instance
                          */
                         Object.defineProperty(ConnectionProfile.prototype, "profile", {
-                            get: $util.oneOfGetter($oneOfFields = ["oracleProfile", "gcsProfile", "mysqlProfile"]),
+                            get: $util.oneOfGetter($oneOfFields = ["oracleProfile", "gcsProfile", "mysqlProfile", "bigqueryProfile", "postgresqlProfile"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -13318,6 +13877,10 @@
                                 $root.google.cloud.datastream.v1.GcsProfile.encode(message.gcsProfile, writer.uint32(/* id 101, wireType 2 =*/810).fork()).ldelim();
                             if (message.mysqlProfile != null && Object.hasOwnProperty.call(message, "mysqlProfile"))
                                 $root.google.cloud.datastream.v1.MysqlProfile.encode(message.mysqlProfile, writer.uint32(/* id 102, wireType 2 =*/818).fork()).ldelim();
+                            if (message.bigqueryProfile != null && Object.hasOwnProperty.call(message, "bigqueryProfile"))
+                                $root.google.cloud.datastream.v1.BigQueryProfile.encode(message.bigqueryProfile, writer.uint32(/* id 103, wireType 2 =*/826).fork()).ldelim();
+                            if (message.postgresqlProfile != null && Object.hasOwnProperty.call(message, "postgresqlProfile"))
+                                $root.google.cloud.datastream.v1.PostgresqlProfile.encode(message.postgresqlProfile, writer.uint32(/* id 104, wireType 2 =*/834).fork()).ldelim();
                             if (message.staticServiceIpConnectivity != null && Object.hasOwnProperty.call(message, "staticServiceIpConnectivity"))
                                 $root.google.cloud.datastream.v1.StaticServiceIpConnectivity.encode(message.staticServiceIpConnectivity, writer.uint32(/* id 200, wireType 2 =*/1602).fork()).ldelim();
                             if (message.forwardSshConnectivity != null && Object.hasOwnProperty.call(message, "forwardSshConnectivity"))
@@ -13407,6 +13970,14 @@
                                     }
                                 case 102: {
                                         message.mysqlProfile = $root.google.cloud.datastream.v1.MysqlProfile.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 103: {
+                                        message.bigqueryProfile = $root.google.cloud.datastream.v1.BigQueryProfile.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 104: {
+                                        message.postgresqlProfile = $root.google.cloud.datastream.v1.PostgresqlProfile.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 200: {
@@ -13509,6 +14080,26 @@
                                         return "mysqlProfile." + error;
                                 }
                             }
+                            if (message.bigqueryProfile != null && message.hasOwnProperty("bigqueryProfile")) {
+                                if (properties.profile === 1)
+                                    return "profile: multiple values";
+                                properties.profile = 1;
+                                {
+                                    var error = $root.google.cloud.datastream.v1.BigQueryProfile.verify(message.bigqueryProfile);
+                                    if (error)
+                                        return "bigqueryProfile." + error;
+                                }
+                            }
+                            if (message.postgresqlProfile != null && message.hasOwnProperty("postgresqlProfile")) {
+                                if (properties.profile === 1)
+                                    return "profile: multiple values";
+                                properties.profile = 1;
+                                {
+                                    var error = $root.google.cloud.datastream.v1.PostgresqlProfile.verify(message.postgresqlProfile);
+                                    if (error)
+                                        return "postgresqlProfile." + error;
+                                }
+                            }
                             if (message.staticServiceIpConnectivity != null && message.hasOwnProperty("staticServiceIpConnectivity")) {
                                 properties.connectivity = 1;
                                 {
@@ -13588,6 +14179,16 @@
                                     throw TypeError(".google.cloud.datastream.v1.ConnectionProfile.mysqlProfile: object expected");
                                 message.mysqlProfile = $root.google.cloud.datastream.v1.MysqlProfile.fromObject(object.mysqlProfile);
                             }
+                            if (object.bigqueryProfile != null) {
+                                if (typeof object.bigqueryProfile !== "object")
+                                    throw TypeError(".google.cloud.datastream.v1.ConnectionProfile.bigqueryProfile: object expected");
+                                message.bigqueryProfile = $root.google.cloud.datastream.v1.BigQueryProfile.fromObject(object.bigqueryProfile);
+                            }
+                            if (object.postgresqlProfile != null) {
+                                if (typeof object.postgresqlProfile !== "object")
+                                    throw TypeError(".google.cloud.datastream.v1.ConnectionProfile.postgresqlProfile: object expected");
+                                message.postgresqlProfile = $root.google.cloud.datastream.v1.PostgresqlProfile.fromObject(object.postgresqlProfile);
+                            }
                             if (object.staticServiceIpConnectivity != null) {
                                 if (typeof object.staticServiceIpConnectivity !== "object")
                                     throw TypeError(".google.cloud.datastream.v1.ConnectionProfile.staticServiceIpConnectivity: object expected");
@@ -13655,6 +14256,16 @@
                                 object.mysqlProfile = $root.google.cloud.datastream.v1.MysqlProfile.toObject(message.mysqlProfile, options);
                                 if (options.oneofs)
                                     object.profile = "mysqlProfile";
+                            }
+                            if (message.bigqueryProfile != null && message.hasOwnProperty("bigqueryProfile")) {
+                                object.bigqueryProfile = $root.google.cloud.datastream.v1.BigQueryProfile.toObject(message.bigqueryProfile, options);
+                                if (options.oneofs)
+                                    object.profile = "bigqueryProfile";
+                            }
+                            if (message.postgresqlProfile != null && message.hasOwnProperty("postgresqlProfile")) {
+                                object.postgresqlProfile = $root.google.cloud.datastream.v1.PostgresqlProfile.toObject(message.postgresqlProfile, options);
+                                if (options.oneofs)
+                                    object.profile = "postgresqlProfile";
                             }
                             if (message.staticServiceIpConnectivity != null && message.hasOwnProperty("staticServiceIpConnectivity")) {
                                 object.staticServiceIpConnectivity = $root.google.cloud.datastream.v1.StaticServiceIpConnectivity.toObject(message.staticServiceIpConnectivity, options);
@@ -14819,6 +15430,9 @@
                          * @interface IOracleSourceConfig
                          * @property {google.cloud.datastream.v1.IOracleRdbms|null} [includeObjects] OracleSourceConfig includeObjects
                          * @property {google.cloud.datastream.v1.IOracleRdbms|null} [excludeObjects] OracleSourceConfig excludeObjects
+                         * @property {number|null} [maxConcurrentCdcTasks] OracleSourceConfig maxConcurrentCdcTasks
+                         * @property {google.cloud.datastream.v1.OracleSourceConfig.IDropLargeObjects|null} [dropLargeObjects] OracleSourceConfig dropLargeObjects
+                         * @property {google.cloud.datastream.v1.OracleSourceConfig.IStreamLargeObjects|null} [streamLargeObjects] OracleSourceConfig streamLargeObjects
                          */
     
                         /**
@@ -14853,6 +15467,44 @@
                         OracleSourceConfig.prototype.excludeObjects = null;
     
                         /**
+                         * OracleSourceConfig maxConcurrentCdcTasks.
+                         * @member {number} maxConcurrentCdcTasks
+                         * @memberof google.cloud.datastream.v1.OracleSourceConfig
+                         * @instance
+                         */
+                        OracleSourceConfig.prototype.maxConcurrentCdcTasks = 0;
+    
+                        /**
+                         * OracleSourceConfig dropLargeObjects.
+                         * @member {google.cloud.datastream.v1.OracleSourceConfig.IDropLargeObjects|null|undefined} dropLargeObjects
+                         * @memberof google.cloud.datastream.v1.OracleSourceConfig
+                         * @instance
+                         */
+                        OracleSourceConfig.prototype.dropLargeObjects = null;
+    
+                        /**
+                         * OracleSourceConfig streamLargeObjects.
+                         * @member {google.cloud.datastream.v1.OracleSourceConfig.IStreamLargeObjects|null|undefined} streamLargeObjects
+                         * @memberof google.cloud.datastream.v1.OracleSourceConfig
+                         * @instance
+                         */
+                        OracleSourceConfig.prototype.streamLargeObjects = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * OracleSourceConfig largeObjectsHandling.
+                         * @member {"dropLargeObjects"|"streamLargeObjects"|undefined} largeObjectsHandling
+                         * @memberof google.cloud.datastream.v1.OracleSourceConfig
+                         * @instance
+                         */
+                        Object.defineProperty(OracleSourceConfig.prototype, "largeObjectsHandling", {
+                            get: $util.oneOfGetter($oneOfFields = ["dropLargeObjects", "streamLargeObjects"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
                          * Creates a new OracleSourceConfig instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.datastream.v1.OracleSourceConfig
@@ -14880,6 +15532,12 @@
                                 $root.google.cloud.datastream.v1.OracleRdbms.encode(message.includeObjects, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                             if (message.excludeObjects != null && Object.hasOwnProperty.call(message, "excludeObjects"))
                                 $root.google.cloud.datastream.v1.OracleRdbms.encode(message.excludeObjects, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.maxConcurrentCdcTasks != null && Object.hasOwnProperty.call(message, "maxConcurrentCdcTasks"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.maxConcurrentCdcTasks);
+                            if (message.dropLargeObjects != null && Object.hasOwnProperty.call(message, "dropLargeObjects"))
+                                $root.google.cloud.datastream.v1.OracleSourceConfig.DropLargeObjects.encode(message.dropLargeObjects, writer.uint32(/* id 100, wireType 2 =*/802).fork()).ldelim();
+                            if (message.streamLargeObjects != null && Object.hasOwnProperty.call(message, "streamLargeObjects"))
+                                $root.google.cloud.datastream.v1.OracleSourceConfig.StreamLargeObjects.encode(message.streamLargeObjects, writer.uint32(/* id 102, wireType 2 =*/818).fork()).ldelim();
                             return writer;
                         };
     
@@ -14922,6 +15580,18 @@
                                         message.excludeObjects = $root.google.cloud.datastream.v1.OracleRdbms.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 3: {
+                                        message.maxConcurrentCdcTasks = reader.int32();
+                                        break;
+                                    }
+                                case 100: {
+                                        message.dropLargeObjects = $root.google.cloud.datastream.v1.OracleSourceConfig.DropLargeObjects.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 102: {
+                                        message.streamLargeObjects = $root.google.cloud.datastream.v1.OracleSourceConfig.StreamLargeObjects.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -14957,6 +15627,7 @@
                         OracleSourceConfig.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.includeObjects != null && message.hasOwnProperty("includeObjects")) {
                                 var error = $root.google.cloud.datastream.v1.OracleRdbms.verify(message.includeObjects);
                                 if (error)
@@ -14966,6 +15637,27 @@
                                 var error = $root.google.cloud.datastream.v1.OracleRdbms.verify(message.excludeObjects);
                                 if (error)
                                     return "excludeObjects." + error;
+                            }
+                            if (message.maxConcurrentCdcTasks != null && message.hasOwnProperty("maxConcurrentCdcTasks"))
+                                if (!$util.isInteger(message.maxConcurrentCdcTasks))
+                                    return "maxConcurrentCdcTasks: integer expected";
+                            if (message.dropLargeObjects != null && message.hasOwnProperty("dropLargeObjects")) {
+                                properties.largeObjectsHandling = 1;
+                                {
+                                    var error = $root.google.cloud.datastream.v1.OracleSourceConfig.DropLargeObjects.verify(message.dropLargeObjects);
+                                    if (error)
+                                        return "dropLargeObjects." + error;
+                                }
+                            }
+                            if (message.streamLargeObjects != null && message.hasOwnProperty("streamLargeObjects")) {
+                                if (properties.largeObjectsHandling === 1)
+                                    return "largeObjectsHandling: multiple values";
+                                properties.largeObjectsHandling = 1;
+                                {
+                                    var error = $root.google.cloud.datastream.v1.OracleSourceConfig.StreamLargeObjects.verify(message.streamLargeObjects);
+                                    if (error)
+                                        return "streamLargeObjects." + error;
+                                }
                             }
                             return null;
                         };
@@ -14992,6 +15684,18 @@
                                     throw TypeError(".google.cloud.datastream.v1.OracleSourceConfig.excludeObjects: object expected");
                                 message.excludeObjects = $root.google.cloud.datastream.v1.OracleRdbms.fromObject(object.excludeObjects);
                             }
+                            if (object.maxConcurrentCdcTasks != null)
+                                message.maxConcurrentCdcTasks = object.maxConcurrentCdcTasks | 0;
+                            if (object.dropLargeObjects != null) {
+                                if (typeof object.dropLargeObjects !== "object")
+                                    throw TypeError(".google.cloud.datastream.v1.OracleSourceConfig.dropLargeObjects: object expected");
+                                message.dropLargeObjects = $root.google.cloud.datastream.v1.OracleSourceConfig.DropLargeObjects.fromObject(object.dropLargeObjects);
+                            }
+                            if (object.streamLargeObjects != null) {
+                                if (typeof object.streamLargeObjects !== "object")
+                                    throw TypeError(".google.cloud.datastream.v1.OracleSourceConfig.streamLargeObjects: object expected");
+                                message.streamLargeObjects = $root.google.cloud.datastream.v1.OracleSourceConfig.StreamLargeObjects.fromObject(object.streamLargeObjects);
+                            }
                             return message;
                         };
     
@@ -15011,11 +15715,24 @@
                             if (options.defaults) {
                                 object.includeObjects = null;
                                 object.excludeObjects = null;
+                                object.maxConcurrentCdcTasks = 0;
                             }
                             if (message.includeObjects != null && message.hasOwnProperty("includeObjects"))
                                 object.includeObjects = $root.google.cloud.datastream.v1.OracleRdbms.toObject(message.includeObjects, options);
                             if (message.excludeObjects != null && message.hasOwnProperty("excludeObjects"))
                                 object.excludeObjects = $root.google.cloud.datastream.v1.OracleRdbms.toObject(message.excludeObjects, options);
+                            if (message.maxConcurrentCdcTasks != null && message.hasOwnProperty("maxConcurrentCdcTasks"))
+                                object.maxConcurrentCdcTasks = message.maxConcurrentCdcTasks;
+                            if (message.dropLargeObjects != null && message.hasOwnProperty("dropLargeObjects")) {
+                                object.dropLargeObjects = $root.google.cloud.datastream.v1.OracleSourceConfig.DropLargeObjects.toObject(message.dropLargeObjects, options);
+                                if (options.oneofs)
+                                    object.largeObjectsHandling = "dropLargeObjects";
+                            }
+                            if (message.streamLargeObjects != null && message.hasOwnProperty("streamLargeObjects")) {
+                                object.streamLargeObjects = $root.google.cloud.datastream.v1.OracleSourceConfig.StreamLargeObjects.toObject(message.streamLargeObjects, options);
+                                if (options.oneofs)
+                                    object.largeObjectsHandling = "streamLargeObjects";
+                            }
                             return object;
                         };
     
@@ -15045,7 +15762,1725 @@
                             return typeUrlPrefix + "/google.cloud.datastream.v1.OracleSourceConfig";
                         };
     
+                        OracleSourceConfig.DropLargeObjects = (function() {
+    
+                            /**
+                             * Properties of a DropLargeObjects.
+                             * @memberof google.cloud.datastream.v1.OracleSourceConfig
+                             * @interface IDropLargeObjects
+                             */
+    
+                            /**
+                             * Constructs a new DropLargeObjects.
+                             * @memberof google.cloud.datastream.v1.OracleSourceConfig
+                             * @classdesc Represents a DropLargeObjects.
+                             * @implements IDropLargeObjects
+                             * @constructor
+                             * @param {google.cloud.datastream.v1.OracleSourceConfig.IDropLargeObjects=} [properties] Properties to set
+                             */
+                            function DropLargeObjects(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Creates a new DropLargeObjects instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.datastream.v1.OracleSourceConfig.DropLargeObjects
+                             * @static
+                             * @param {google.cloud.datastream.v1.OracleSourceConfig.IDropLargeObjects=} [properties] Properties to set
+                             * @returns {google.cloud.datastream.v1.OracleSourceConfig.DropLargeObjects} DropLargeObjects instance
+                             */
+                            DropLargeObjects.create = function create(properties) {
+                                return new DropLargeObjects(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified DropLargeObjects message. Does not implicitly {@link google.cloud.datastream.v1.OracleSourceConfig.DropLargeObjects.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.datastream.v1.OracleSourceConfig.DropLargeObjects
+                             * @static
+                             * @param {google.cloud.datastream.v1.OracleSourceConfig.IDropLargeObjects} message DropLargeObjects message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DropLargeObjects.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified DropLargeObjects message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.OracleSourceConfig.DropLargeObjects.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.datastream.v1.OracleSourceConfig.DropLargeObjects
+                             * @static
+                             * @param {google.cloud.datastream.v1.OracleSourceConfig.IDropLargeObjects} message DropLargeObjects message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DropLargeObjects.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a DropLargeObjects message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.datastream.v1.OracleSourceConfig.DropLargeObjects
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.datastream.v1.OracleSourceConfig.DropLargeObjects} DropLargeObjects
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DropLargeObjects.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.OracleSourceConfig.DropLargeObjects();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a DropLargeObjects message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.datastream.v1.OracleSourceConfig.DropLargeObjects
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.datastream.v1.OracleSourceConfig.DropLargeObjects} DropLargeObjects
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DropLargeObjects.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a DropLargeObjects message.
+                             * @function verify
+                             * @memberof google.cloud.datastream.v1.OracleSourceConfig.DropLargeObjects
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            DropLargeObjects.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a DropLargeObjects message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.datastream.v1.OracleSourceConfig.DropLargeObjects
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.datastream.v1.OracleSourceConfig.DropLargeObjects} DropLargeObjects
+                             */
+                            DropLargeObjects.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.datastream.v1.OracleSourceConfig.DropLargeObjects)
+                                    return object;
+                                return new $root.google.cloud.datastream.v1.OracleSourceConfig.DropLargeObjects();
+                            };
+    
+                            /**
+                             * Creates a plain object from a DropLargeObjects message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.datastream.v1.OracleSourceConfig.DropLargeObjects
+                             * @static
+                             * @param {google.cloud.datastream.v1.OracleSourceConfig.DropLargeObjects} message DropLargeObjects
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            DropLargeObjects.toObject = function toObject() {
+                                return {};
+                            };
+    
+                            /**
+                             * Converts this DropLargeObjects to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.datastream.v1.OracleSourceConfig.DropLargeObjects
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            DropLargeObjects.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for DropLargeObjects
+                             * @function getTypeUrl
+                             * @memberof google.cloud.datastream.v1.OracleSourceConfig.DropLargeObjects
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            DropLargeObjects.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.datastream.v1.OracleSourceConfig.DropLargeObjects";
+                            };
+    
+                            return DropLargeObjects;
+                        })();
+    
+                        OracleSourceConfig.StreamLargeObjects = (function() {
+    
+                            /**
+                             * Properties of a StreamLargeObjects.
+                             * @memberof google.cloud.datastream.v1.OracleSourceConfig
+                             * @interface IStreamLargeObjects
+                             */
+    
+                            /**
+                             * Constructs a new StreamLargeObjects.
+                             * @memberof google.cloud.datastream.v1.OracleSourceConfig
+                             * @classdesc Represents a StreamLargeObjects.
+                             * @implements IStreamLargeObjects
+                             * @constructor
+                             * @param {google.cloud.datastream.v1.OracleSourceConfig.IStreamLargeObjects=} [properties] Properties to set
+                             */
+                            function StreamLargeObjects(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Creates a new StreamLargeObjects instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.datastream.v1.OracleSourceConfig.StreamLargeObjects
+                             * @static
+                             * @param {google.cloud.datastream.v1.OracleSourceConfig.IStreamLargeObjects=} [properties] Properties to set
+                             * @returns {google.cloud.datastream.v1.OracleSourceConfig.StreamLargeObjects} StreamLargeObjects instance
+                             */
+                            StreamLargeObjects.create = function create(properties) {
+                                return new StreamLargeObjects(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified StreamLargeObjects message. Does not implicitly {@link google.cloud.datastream.v1.OracleSourceConfig.StreamLargeObjects.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.datastream.v1.OracleSourceConfig.StreamLargeObjects
+                             * @static
+                             * @param {google.cloud.datastream.v1.OracleSourceConfig.IStreamLargeObjects} message StreamLargeObjects message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            StreamLargeObjects.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified StreamLargeObjects message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.OracleSourceConfig.StreamLargeObjects.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.datastream.v1.OracleSourceConfig.StreamLargeObjects
+                             * @static
+                             * @param {google.cloud.datastream.v1.OracleSourceConfig.IStreamLargeObjects} message StreamLargeObjects message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            StreamLargeObjects.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a StreamLargeObjects message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.datastream.v1.OracleSourceConfig.StreamLargeObjects
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.datastream.v1.OracleSourceConfig.StreamLargeObjects} StreamLargeObjects
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            StreamLargeObjects.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.OracleSourceConfig.StreamLargeObjects();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a StreamLargeObjects message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.datastream.v1.OracleSourceConfig.StreamLargeObjects
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.datastream.v1.OracleSourceConfig.StreamLargeObjects} StreamLargeObjects
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            StreamLargeObjects.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a StreamLargeObjects message.
+                             * @function verify
+                             * @memberof google.cloud.datastream.v1.OracleSourceConfig.StreamLargeObjects
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            StreamLargeObjects.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a StreamLargeObjects message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.datastream.v1.OracleSourceConfig.StreamLargeObjects
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.datastream.v1.OracleSourceConfig.StreamLargeObjects} StreamLargeObjects
+                             */
+                            StreamLargeObjects.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.datastream.v1.OracleSourceConfig.StreamLargeObjects)
+                                    return object;
+                                return new $root.google.cloud.datastream.v1.OracleSourceConfig.StreamLargeObjects();
+                            };
+    
+                            /**
+                             * Creates a plain object from a StreamLargeObjects message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.datastream.v1.OracleSourceConfig.StreamLargeObjects
+                             * @static
+                             * @param {google.cloud.datastream.v1.OracleSourceConfig.StreamLargeObjects} message StreamLargeObjects
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            StreamLargeObjects.toObject = function toObject() {
+                                return {};
+                            };
+    
+                            /**
+                             * Converts this StreamLargeObjects to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.datastream.v1.OracleSourceConfig.StreamLargeObjects
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            StreamLargeObjects.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for StreamLargeObjects
+                             * @function getTypeUrl
+                             * @memberof google.cloud.datastream.v1.OracleSourceConfig.StreamLargeObjects
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            StreamLargeObjects.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.datastream.v1.OracleSourceConfig.StreamLargeObjects";
+                            };
+    
+                            return StreamLargeObjects;
+                        })();
+    
                         return OracleSourceConfig;
+                    })();
+    
+                    v1.PostgresqlColumn = (function() {
+    
+                        /**
+                         * Properties of a PostgresqlColumn.
+                         * @memberof google.cloud.datastream.v1
+                         * @interface IPostgresqlColumn
+                         * @property {string|null} [column] PostgresqlColumn column
+                         * @property {string|null} [dataType] PostgresqlColumn dataType
+                         * @property {number|null} [length] PostgresqlColumn length
+                         * @property {number|null} [precision] PostgresqlColumn precision
+                         * @property {number|null} [scale] PostgresqlColumn scale
+                         * @property {boolean|null} [primaryKey] PostgresqlColumn primaryKey
+                         * @property {boolean|null} [nullable] PostgresqlColumn nullable
+                         * @property {number|null} [ordinalPosition] PostgresqlColumn ordinalPosition
+                         */
+    
+                        /**
+                         * Constructs a new PostgresqlColumn.
+                         * @memberof google.cloud.datastream.v1
+                         * @classdesc Represents a PostgresqlColumn.
+                         * @implements IPostgresqlColumn
+                         * @constructor
+                         * @param {google.cloud.datastream.v1.IPostgresqlColumn=} [properties] Properties to set
+                         */
+                        function PostgresqlColumn(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PostgresqlColumn column.
+                         * @member {string} column
+                         * @memberof google.cloud.datastream.v1.PostgresqlColumn
+                         * @instance
+                         */
+                        PostgresqlColumn.prototype.column = "";
+    
+                        /**
+                         * PostgresqlColumn dataType.
+                         * @member {string} dataType
+                         * @memberof google.cloud.datastream.v1.PostgresqlColumn
+                         * @instance
+                         */
+                        PostgresqlColumn.prototype.dataType = "";
+    
+                        /**
+                         * PostgresqlColumn length.
+                         * @member {number} length
+                         * @memberof google.cloud.datastream.v1.PostgresqlColumn
+                         * @instance
+                         */
+                        PostgresqlColumn.prototype.length = 0;
+    
+                        /**
+                         * PostgresqlColumn precision.
+                         * @member {number} precision
+                         * @memberof google.cloud.datastream.v1.PostgresqlColumn
+                         * @instance
+                         */
+                        PostgresqlColumn.prototype.precision = 0;
+    
+                        /**
+                         * PostgresqlColumn scale.
+                         * @member {number} scale
+                         * @memberof google.cloud.datastream.v1.PostgresqlColumn
+                         * @instance
+                         */
+                        PostgresqlColumn.prototype.scale = 0;
+    
+                        /**
+                         * PostgresqlColumn primaryKey.
+                         * @member {boolean} primaryKey
+                         * @memberof google.cloud.datastream.v1.PostgresqlColumn
+                         * @instance
+                         */
+                        PostgresqlColumn.prototype.primaryKey = false;
+    
+                        /**
+                         * PostgresqlColumn nullable.
+                         * @member {boolean} nullable
+                         * @memberof google.cloud.datastream.v1.PostgresqlColumn
+                         * @instance
+                         */
+                        PostgresqlColumn.prototype.nullable = false;
+    
+                        /**
+                         * PostgresqlColumn ordinalPosition.
+                         * @member {number} ordinalPosition
+                         * @memberof google.cloud.datastream.v1.PostgresqlColumn
+                         * @instance
+                         */
+                        PostgresqlColumn.prototype.ordinalPosition = 0;
+    
+                        /**
+                         * Creates a new PostgresqlColumn instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datastream.v1.PostgresqlColumn
+                         * @static
+                         * @param {google.cloud.datastream.v1.IPostgresqlColumn=} [properties] Properties to set
+                         * @returns {google.cloud.datastream.v1.PostgresqlColumn} PostgresqlColumn instance
+                         */
+                        PostgresqlColumn.create = function create(properties) {
+                            return new PostgresqlColumn(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PostgresqlColumn message. Does not implicitly {@link google.cloud.datastream.v1.PostgresqlColumn.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datastream.v1.PostgresqlColumn
+                         * @static
+                         * @param {google.cloud.datastream.v1.IPostgresqlColumn} message PostgresqlColumn message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PostgresqlColumn.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.column != null && Object.hasOwnProperty.call(message, "column"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.column);
+                            if (message.dataType != null && Object.hasOwnProperty.call(message, "dataType"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.dataType);
+                            if (message.length != null && Object.hasOwnProperty.call(message, "length"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.length);
+                            if (message.precision != null && Object.hasOwnProperty.call(message, "precision"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.precision);
+                            if (message.scale != null && Object.hasOwnProperty.call(message, "scale"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.scale);
+                            if (message.primaryKey != null && Object.hasOwnProperty.call(message, "primaryKey"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).bool(message.primaryKey);
+                            if (message.nullable != null && Object.hasOwnProperty.call(message, "nullable"))
+                                writer.uint32(/* id 8, wireType 0 =*/64).bool(message.nullable);
+                            if (message.ordinalPosition != null && Object.hasOwnProperty.call(message, "ordinalPosition"))
+                                writer.uint32(/* id 9, wireType 0 =*/72).int32(message.ordinalPosition);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PostgresqlColumn message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.PostgresqlColumn.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datastream.v1.PostgresqlColumn
+                         * @static
+                         * @param {google.cloud.datastream.v1.IPostgresqlColumn} message PostgresqlColumn message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PostgresqlColumn.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PostgresqlColumn message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datastream.v1.PostgresqlColumn
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datastream.v1.PostgresqlColumn} PostgresqlColumn
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PostgresqlColumn.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.PostgresqlColumn();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.column = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.dataType = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.length = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.precision = reader.int32();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.scale = reader.int32();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.primaryKey = reader.bool();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.nullable = reader.bool();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.ordinalPosition = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PostgresqlColumn message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datastream.v1.PostgresqlColumn
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datastream.v1.PostgresqlColumn} PostgresqlColumn
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PostgresqlColumn.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PostgresqlColumn message.
+                         * @function verify
+                         * @memberof google.cloud.datastream.v1.PostgresqlColumn
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PostgresqlColumn.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.column != null && message.hasOwnProperty("column"))
+                                if (!$util.isString(message.column))
+                                    return "column: string expected";
+                            if (message.dataType != null && message.hasOwnProperty("dataType"))
+                                if (!$util.isString(message.dataType))
+                                    return "dataType: string expected";
+                            if (message.length != null && message.hasOwnProperty("length"))
+                                if (!$util.isInteger(message.length))
+                                    return "length: integer expected";
+                            if (message.precision != null && message.hasOwnProperty("precision"))
+                                if (!$util.isInteger(message.precision))
+                                    return "precision: integer expected";
+                            if (message.scale != null && message.hasOwnProperty("scale"))
+                                if (!$util.isInteger(message.scale))
+                                    return "scale: integer expected";
+                            if (message.primaryKey != null && message.hasOwnProperty("primaryKey"))
+                                if (typeof message.primaryKey !== "boolean")
+                                    return "primaryKey: boolean expected";
+                            if (message.nullable != null && message.hasOwnProperty("nullable"))
+                                if (typeof message.nullable !== "boolean")
+                                    return "nullable: boolean expected";
+                            if (message.ordinalPosition != null && message.hasOwnProperty("ordinalPosition"))
+                                if (!$util.isInteger(message.ordinalPosition))
+                                    return "ordinalPosition: integer expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PostgresqlColumn message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datastream.v1.PostgresqlColumn
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datastream.v1.PostgresqlColumn} PostgresqlColumn
+                         */
+                        PostgresqlColumn.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datastream.v1.PostgresqlColumn)
+                                return object;
+                            var message = new $root.google.cloud.datastream.v1.PostgresqlColumn();
+                            if (object.column != null)
+                                message.column = String(object.column);
+                            if (object.dataType != null)
+                                message.dataType = String(object.dataType);
+                            if (object.length != null)
+                                message.length = object.length | 0;
+                            if (object.precision != null)
+                                message.precision = object.precision | 0;
+                            if (object.scale != null)
+                                message.scale = object.scale | 0;
+                            if (object.primaryKey != null)
+                                message.primaryKey = Boolean(object.primaryKey);
+                            if (object.nullable != null)
+                                message.nullable = Boolean(object.nullable);
+                            if (object.ordinalPosition != null)
+                                message.ordinalPosition = object.ordinalPosition | 0;
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PostgresqlColumn message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datastream.v1.PostgresqlColumn
+                         * @static
+                         * @param {google.cloud.datastream.v1.PostgresqlColumn} message PostgresqlColumn
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PostgresqlColumn.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.column = "";
+                                object.dataType = "";
+                                object.length = 0;
+                                object.precision = 0;
+                                object.scale = 0;
+                                object.primaryKey = false;
+                                object.nullable = false;
+                                object.ordinalPosition = 0;
+                            }
+                            if (message.column != null && message.hasOwnProperty("column"))
+                                object.column = message.column;
+                            if (message.dataType != null && message.hasOwnProperty("dataType"))
+                                object.dataType = message.dataType;
+                            if (message.length != null && message.hasOwnProperty("length"))
+                                object.length = message.length;
+                            if (message.precision != null && message.hasOwnProperty("precision"))
+                                object.precision = message.precision;
+                            if (message.scale != null && message.hasOwnProperty("scale"))
+                                object.scale = message.scale;
+                            if (message.primaryKey != null && message.hasOwnProperty("primaryKey"))
+                                object.primaryKey = message.primaryKey;
+                            if (message.nullable != null && message.hasOwnProperty("nullable"))
+                                object.nullable = message.nullable;
+                            if (message.ordinalPosition != null && message.hasOwnProperty("ordinalPosition"))
+                                object.ordinalPosition = message.ordinalPosition;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PostgresqlColumn to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datastream.v1.PostgresqlColumn
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PostgresqlColumn.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for PostgresqlColumn
+                         * @function getTypeUrl
+                         * @memberof google.cloud.datastream.v1.PostgresqlColumn
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        PostgresqlColumn.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.datastream.v1.PostgresqlColumn";
+                        };
+    
+                        return PostgresqlColumn;
+                    })();
+    
+                    v1.PostgresqlTable = (function() {
+    
+                        /**
+                         * Properties of a PostgresqlTable.
+                         * @memberof google.cloud.datastream.v1
+                         * @interface IPostgresqlTable
+                         * @property {string|null} [table] PostgresqlTable table
+                         * @property {Array.<google.cloud.datastream.v1.IPostgresqlColumn>|null} [postgresqlColumns] PostgresqlTable postgresqlColumns
+                         */
+    
+                        /**
+                         * Constructs a new PostgresqlTable.
+                         * @memberof google.cloud.datastream.v1
+                         * @classdesc Represents a PostgresqlTable.
+                         * @implements IPostgresqlTable
+                         * @constructor
+                         * @param {google.cloud.datastream.v1.IPostgresqlTable=} [properties] Properties to set
+                         */
+                        function PostgresqlTable(properties) {
+                            this.postgresqlColumns = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PostgresqlTable table.
+                         * @member {string} table
+                         * @memberof google.cloud.datastream.v1.PostgresqlTable
+                         * @instance
+                         */
+                        PostgresqlTable.prototype.table = "";
+    
+                        /**
+                         * PostgresqlTable postgresqlColumns.
+                         * @member {Array.<google.cloud.datastream.v1.IPostgresqlColumn>} postgresqlColumns
+                         * @memberof google.cloud.datastream.v1.PostgresqlTable
+                         * @instance
+                         */
+                        PostgresqlTable.prototype.postgresqlColumns = $util.emptyArray;
+    
+                        /**
+                         * Creates a new PostgresqlTable instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datastream.v1.PostgresqlTable
+                         * @static
+                         * @param {google.cloud.datastream.v1.IPostgresqlTable=} [properties] Properties to set
+                         * @returns {google.cloud.datastream.v1.PostgresqlTable} PostgresqlTable instance
+                         */
+                        PostgresqlTable.create = function create(properties) {
+                            return new PostgresqlTable(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PostgresqlTable message. Does not implicitly {@link google.cloud.datastream.v1.PostgresqlTable.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datastream.v1.PostgresqlTable
+                         * @static
+                         * @param {google.cloud.datastream.v1.IPostgresqlTable} message PostgresqlTable message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PostgresqlTable.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.table != null && Object.hasOwnProperty.call(message, "table"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.table);
+                            if (message.postgresqlColumns != null && message.postgresqlColumns.length)
+                                for (var i = 0; i < message.postgresqlColumns.length; ++i)
+                                    $root.google.cloud.datastream.v1.PostgresqlColumn.encode(message.postgresqlColumns[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PostgresqlTable message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.PostgresqlTable.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datastream.v1.PostgresqlTable
+                         * @static
+                         * @param {google.cloud.datastream.v1.IPostgresqlTable} message PostgresqlTable message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PostgresqlTable.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PostgresqlTable message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datastream.v1.PostgresqlTable
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datastream.v1.PostgresqlTable} PostgresqlTable
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PostgresqlTable.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.PostgresqlTable();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.table = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.postgresqlColumns && message.postgresqlColumns.length))
+                                            message.postgresqlColumns = [];
+                                        message.postgresqlColumns.push($root.google.cloud.datastream.v1.PostgresqlColumn.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PostgresqlTable message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datastream.v1.PostgresqlTable
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datastream.v1.PostgresqlTable} PostgresqlTable
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PostgresqlTable.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PostgresqlTable message.
+                         * @function verify
+                         * @memberof google.cloud.datastream.v1.PostgresqlTable
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PostgresqlTable.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.table != null && message.hasOwnProperty("table"))
+                                if (!$util.isString(message.table))
+                                    return "table: string expected";
+                            if (message.postgresqlColumns != null && message.hasOwnProperty("postgresqlColumns")) {
+                                if (!Array.isArray(message.postgresqlColumns))
+                                    return "postgresqlColumns: array expected";
+                                for (var i = 0; i < message.postgresqlColumns.length; ++i) {
+                                    var error = $root.google.cloud.datastream.v1.PostgresqlColumn.verify(message.postgresqlColumns[i]);
+                                    if (error)
+                                        return "postgresqlColumns." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PostgresqlTable message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datastream.v1.PostgresqlTable
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datastream.v1.PostgresqlTable} PostgresqlTable
+                         */
+                        PostgresqlTable.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datastream.v1.PostgresqlTable)
+                                return object;
+                            var message = new $root.google.cloud.datastream.v1.PostgresqlTable();
+                            if (object.table != null)
+                                message.table = String(object.table);
+                            if (object.postgresqlColumns) {
+                                if (!Array.isArray(object.postgresqlColumns))
+                                    throw TypeError(".google.cloud.datastream.v1.PostgresqlTable.postgresqlColumns: array expected");
+                                message.postgresqlColumns = [];
+                                for (var i = 0; i < object.postgresqlColumns.length; ++i) {
+                                    if (typeof object.postgresqlColumns[i] !== "object")
+                                        throw TypeError(".google.cloud.datastream.v1.PostgresqlTable.postgresqlColumns: object expected");
+                                    message.postgresqlColumns[i] = $root.google.cloud.datastream.v1.PostgresqlColumn.fromObject(object.postgresqlColumns[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PostgresqlTable message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datastream.v1.PostgresqlTable
+                         * @static
+                         * @param {google.cloud.datastream.v1.PostgresqlTable} message PostgresqlTable
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PostgresqlTable.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.postgresqlColumns = [];
+                            if (options.defaults)
+                                object.table = "";
+                            if (message.table != null && message.hasOwnProperty("table"))
+                                object.table = message.table;
+                            if (message.postgresqlColumns && message.postgresqlColumns.length) {
+                                object.postgresqlColumns = [];
+                                for (var j = 0; j < message.postgresqlColumns.length; ++j)
+                                    object.postgresqlColumns[j] = $root.google.cloud.datastream.v1.PostgresqlColumn.toObject(message.postgresqlColumns[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PostgresqlTable to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datastream.v1.PostgresqlTable
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PostgresqlTable.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for PostgresqlTable
+                         * @function getTypeUrl
+                         * @memberof google.cloud.datastream.v1.PostgresqlTable
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        PostgresqlTable.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.datastream.v1.PostgresqlTable";
+                        };
+    
+                        return PostgresqlTable;
+                    })();
+    
+                    v1.PostgresqlSchema = (function() {
+    
+                        /**
+                         * Properties of a PostgresqlSchema.
+                         * @memberof google.cloud.datastream.v1
+                         * @interface IPostgresqlSchema
+                         * @property {string|null} [schema] PostgresqlSchema schema
+                         * @property {Array.<google.cloud.datastream.v1.IPostgresqlTable>|null} [postgresqlTables] PostgresqlSchema postgresqlTables
+                         */
+    
+                        /**
+                         * Constructs a new PostgresqlSchema.
+                         * @memberof google.cloud.datastream.v1
+                         * @classdesc Represents a PostgresqlSchema.
+                         * @implements IPostgresqlSchema
+                         * @constructor
+                         * @param {google.cloud.datastream.v1.IPostgresqlSchema=} [properties] Properties to set
+                         */
+                        function PostgresqlSchema(properties) {
+                            this.postgresqlTables = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PostgresqlSchema schema.
+                         * @member {string} schema
+                         * @memberof google.cloud.datastream.v1.PostgresqlSchema
+                         * @instance
+                         */
+                        PostgresqlSchema.prototype.schema = "";
+    
+                        /**
+                         * PostgresqlSchema postgresqlTables.
+                         * @member {Array.<google.cloud.datastream.v1.IPostgresqlTable>} postgresqlTables
+                         * @memberof google.cloud.datastream.v1.PostgresqlSchema
+                         * @instance
+                         */
+                        PostgresqlSchema.prototype.postgresqlTables = $util.emptyArray;
+    
+                        /**
+                         * Creates a new PostgresqlSchema instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datastream.v1.PostgresqlSchema
+                         * @static
+                         * @param {google.cloud.datastream.v1.IPostgresqlSchema=} [properties] Properties to set
+                         * @returns {google.cloud.datastream.v1.PostgresqlSchema} PostgresqlSchema instance
+                         */
+                        PostgresqlSchema.create = function create(properties) {
+                            return new PostgresqlSchema(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PostgresqlSchema message. Does not implicitly {@link google.cloud.datastream.v1.PostgresqlSchema.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datastream.v1.PostgresqlSchema
+                         * @static
+                         * @param {google.cloud.datastream.v1.IPostgresqlSchema} message PostgresqlSchema message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PostgresqlSchema.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.schema != null && Object.hasOwnProperty.call(message, "schema"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.schema);
+                            if (message.postgresqlTables != null && message.postgresqlTables.length)
+                                for (var i = 0; i < message.postgresqlTables.length; ++i)
+                                    $root.google.cloud.datastream.v1.PostgresqlTable.encode(message.postgresqlTables[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PostgresqlSchema message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.PostgresqlSchema.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datastream.v1.PostgresqlSchema
+                         * @static
+                         * @param {google.cloud.datastream.v1.IPostgresqlSchema} message PostgresqlSchema message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PostgresqlSchema.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PostgresqlSchema message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datastream.v1.PostgresqlSchema
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datastream.v1.PostgresqlSchema} PostgresqlSchema
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PostgresqlSchema.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.PostgresqlSchema();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.schema = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.postgresqlTables && message.postgresqlTables.length))
+                                            message.postgresqlTables = [];
+                                        message.postgresqlTables.push($root.google.cloud.datastream.v1.PostgresqlTable.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PostgresqlSchema message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datastream.v1.PostgresqlSchema
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datastream.v1.PostgresqlSchema} PostgresqlSchema
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PostgresqlSchema.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PostgresqlSchema message.
+                         * @function verify
+                         * @memberof google.cloud.datastream.v1.PostgresqlSchema
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PostgresqlSchema.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.schema != null && message.hasOwnProperty("schema"))
+                                if (!$util.isString(message.schema))
+                                    return "schema: string expected";
+                            if (message.postgresqlTables != null && message.hasOwnProperty("postgresqlTables")) {
+                                if (!Array.isArray(message.postgresqlTables))
+                                    return "postgresqlTables: array expected";
+                                for (var i = 0; i < message.postgresqlTables.length; ++i) {
+                                    var error = $root.google.cloud.datastream.v1.PostgresqlTable.verify(message.postgresqlTables[i]);
+                                    if (error)
+                                        return "postgresqlTables." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PostgresqlSchema message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datastream.v1.PostgresqlSchema
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datastream.v1.PostgresqlSchema} PostgresqlSchema
+                         */
+                        PostgresqlSchema.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datastream.v1.PostgresqlSchema)
+                                return object;
+                            var message = new $root.google.cloud.datastream.v1.PostgresqlSchema();
+                            if (object.schema != null)
+                                message.schema = String(object.schema);
+                            if (object.postgresqlTables) {
+                                if (!Array.isArray(object.postgresqlTables))
+                                    throw TypeError(".google.cloud.datastream.v1.PostgresqlSchema.postgresqlTables: array expected");
+                                message.postgresqlTables = [];
+                                for (var i = 0; i < object.postgresqlTables.length; ++i) {
+                                    if (typeof object.postgresqlTables[i] !== "object")
+                                        throw TypeError(".google.cloud.datastream.v1.PostgresqlSchema.postgresqlTables: object expected");
+                                    message.postgresqlTables[i] = $root.google.cloud.datastream.v1.PostgresqlTable.fromObject(object.postgresqlTables[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PostgresqlSchema message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datastream.v1.PostgresqlSchema
+                         * @static
+                         * @param {google.cloud.datastream.v1.PostgresqlSchema} message PostgresqlSchema
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PostgresqlSchema.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.postgresqlTables = [];
+                            if (options.defaults)
+                                object.schema = "";
+                            if (message.schema != null && message.hasOwnProperty("schema"))
+                                object.schema = message.schema;
+                            if (message.postgresqlTables && message.postgresqlTables.length) {
+                                object.postgresqlTables = [];
+                                for (var j = 0; j < message.postgresqlTables.length; ++j)
+                                    object.postgresqlTables[j] = $root.google.cloud.datastream.v1.PostgresqlTable.toObject(message.postgresqlTables[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PostgresqlSchema to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datastream.v1.PostgresqlSchema
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PostgresqlSchema.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for PostgresqlSchema
+                         * @function getTypeUrl
+                         * @memberof google.cloud.datastream.v1.PostgresqlSchema
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        PostgresqlSchema.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.datastream.v1.PostgresqlSchema";
+                        };
+    
+                        return PostgresqlSchema;
+                    })();
+    
+                    v1.PostgresqlRdbms = (function() {
+    
+                        /**
+                         * Properties of a PostgresqlRdbms.
+                         * @memberof google.cloud.datastream.v1
+                         * @interface IPostgresqlRdbms
+                         * @property {Array.<google.cloud.datastream.v1.IPostgresqlSchema>|null} [postgresqlSchemas] PostgresqlRdbms postgresqlSchemas
+                         */
+    
+                        /**
+                         * Constructs a new PostgresqlRdbms.
+                         * @memberof google.cloud.datastream.v1
+                         * @classdesc Represents a PostgresqlRdbms.
+                         * @implements IPostgresqlRdbms
+                         * @constructor
+                         * @param {google.cloud.datastream.v1.IPostgresqlRdbms=} [properties] Properties to set
+                         */
+                        function PostgresqlRdbms(properties) {
+                            this.postgresqlSchemas = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PostgresqlRdbms postgresqlSchemas.
+                         * @member {Array.<google.cloud.datastream.v1.IPostgresqlSchema>} postgresqlSchemas
+                         * @memberof google.cloud.datastream.v1.PostgresqlRdbms
+                         * @instance
+                         */
+                        PostgresqlRdbms.prototype.postgresqlSchemas = $util.emptyArray;
+    
+                        /**
+                         * Creates a new PostgresqlRdbms instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datastream.v1.PostgresqlRdbms
+                         * @static
+                         * @param {google.cloud.datastream.v1.IPostgresqlRdbms=} [properties] Properties to set
+                         * @returns {google.cloud.datastream.v1.PostgresqlRdbms} PostgresqlRdbms instance
+                         */
+                        PostgresqlRdbms.create = function create(properties) {
+                            return new PostgresqlRdbms(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PostgresqlRdbms message. Does not implicitly {@link google.cloud.datastream.v1.PostgresqlRdbms.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datastream.v1.PostgresqlRdbms
+                         * @static
+                         * @param {google.cloud.datastream.v1.IPostgresqlRdbms} message PostgresqlRdbms message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PostgresqlRdbms.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.postgresqlSchemas != null && message.postgresqlSchemas.length)
+                                for (var i = 0; i < message.postgresqlSchemas.length; ++i)
+                                    $root.google.cloud.datastream.v1.PostgresqlSchema.encode(message.postgresqlSchemas[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PostgresqlRdbms message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.PostgresqlRdbms.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datastream.v1.PostgresqlRdbms
+                         * @static
+                         * @param {google.cloud.datastream.v1.IPostgresqlRdbms} message PostgresqlRdbms message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PostgresqlRdbms.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PostgresqlRdbms message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datastream.v1.PostgresqlRdbms
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datastream.v1.PostgresqlRdbms} PostgresqlRdbms
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PostgresqlRdbms.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.PostgresqlRdbms();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.postgresqlSchemas && message.postgresqlSchemas.length))
+                                            message.postgresqlSchemas = [];
+                                        message.postgresqlSchemas.push($root.google.cloud.datastream.v1.PostgresqlSchema.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PostgresqlRdbms message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datastream.v1.PostgresqlRdbms
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datastream.v1.PostgresqlRdbms} PostgresqlRdbms
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PostgresqlRdbms.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PostgresqlRdbms message.
+                         * @function verify
+                         * @memberof google.cloud.datastream.v1.PostgresqlRdbms
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PostgresqlRdbms.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.postgresqlSchemas != null && message.hasOwnProperty("postgresqlSchemas")) {
+                                if (!Array.isArray(message.postgresqlSchemas))
+                                    return "postgresqlSchemas: array expected";
+                                for (var i = 0; i < message.postgresqlSchemas.length; ++i) {
+                                    var error = $root.google.cloud.datastream.v1.PostgresqlSchema.verify(message.postgresqlSchemas[i]);
+                                    if (error)
+                                        return "postgresqlSchemas." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PostgresqlRdbms message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datastream.v1.PostgresqlRdbms
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datastream.v1.PostgresqlRdbms} PostgresqlRdbms
+                         */
+                        PostgresqlRdbms.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datastream.v1.PostgresqlRdbms)
+                                return object;
+                            var message = new $root.google.cloud.datastream.v1.PostgresqlRdbms();
+                            if (object.postgresqlSchemas) {
+                                if (!Array.isArray(object.postgresqlSchemas))
+                                    throw TypeError(".google.cloud.datastream.v1.PostgresqlRdbms.postgresqlSchemas: array expected");
+                                message.postgresqlSchemas = [];
+                                for (var i = 0; i < object.postgresqlSchemas.length; ++i) {
+                                    if (typeof object.postgresqlSchemas[i] !== "object")
+                                        throw TypeError(".google.cloud.datastream.v1.PostgresqlRdbms.postgresqlSchemas: object expected");
+                                    message.postgresqlSchemas[i] = $root.google.cloud.datastream.v1.PostgresqlSchema.fromObject(object.postgresqlSchemas[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PostgresqlRdbms message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datastream.v1.PostgresqlRdbms
+                         * @static
+                         * @param {google.cloud.datastream.v1.PostgresqlRdbms} message PostgresqlRdbms
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PostgresqlRdbms.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.postgresqlSchemas = [];
+                            if (message.postgresqlSchemas && message.postgresqlSchemas.length) {
+                                object.postgresqlSchemas = [];
+                                for (var j = 0; j < message.postgresqlSchemas.length; ++j)
+                                    object.postgresqlSchemas[j] = $root.google.cloud.datastream.v1.PostgresqlSchema.toObject(message.postgresqlSchemas[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PostgresqlRdbms to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datastream.v1.PostgresqlRdbms
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PostgresqlRdbms.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for PostgresqlRdbms
+                         * @function getTypeUrl
+                         * @memberof google.cloud.datastream.v1.PostgresqlRdbms
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        PostgresqlRdbms.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.datastream.v1.PostgresqlRdbms";
+                        };
+    
+                        return PostgresqlRdbms;
+                    })();
+    
+                    v1.PostgresqlSourceConfig = (function() {
+    
+                        /**
+                         * Properties of a PostgresqlSourceConfig.
+                         * @memberof google.cloud.datastream.v1
+                         * @interface IPostgresqlSourceConfig
+                         * @property {google.cloud.datastream.v1.IPostgresqlRdbms|null} [includeObjects] PostgresqlSourceConfig includeObjects
+                         * @property {google.cloud.datastream.v1.IPostgresqlRdbms|null} [excludeObjects] PostgresqlSourceConfig excludeObjects
+                         * @property {string|null} [replicationSlot] PostgresqlSourceConfig replicationSlot
+                         * @property {string|null} [publication] PostgresqlSourceConfig publication
+                         */
+    
+                        /**
+                         * Constructs a new PostgresqlSourceConfig.
+                         * @memberof google.cloud.datastream.v1
+                         * @classdesc Represents a PostgresqlSourceConfig.
+                         * @implements IPostgresqlSourceConfig
+                         * @constructor
+                         * @param {google.cloud.datastream.v1.IPostgresqlSourceConfig=} [properties] Properties to set
+                         */
+                        function PostgresqlSourceConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PostgresqlSourceConfig includeObjects.
+                         * @member {google.cloud.datastream.v1.IPostgresqlRdbms|null|undefined} includeObjects
+                         * @memberof google.cloud.datastream.v1.PostgresqlSourceConfig
+                         * @instance
+                         */
+                        PostgresqlSourceConfig.prototype.includeObjects = null;
+    
+                        /**
+                         * PostgresqlSourceConfig excludeObjects.
+                         * @member {google.cloud.datastream.v1.IPostgresqlRdbms|null|undefined} excludeObjects
+                         * @memberof google.cloud.datastream.v1.PostgresqlSourceConfig
+                         * @instance
+                         */
+                        PostgresqlSourceConfig.prototype.excludeObjects = null;
+    
+                        /**
+                         * PostgresqlSourceConfig replicationSlot.
+                         * @member {string} replicationSlot
+                         * @memberof google.cloud.datastream.v1.PostgresqlSourceConfig
+                         * @instance
+                         */
+                        PostgresqlSourceConfig.prototype.replicationSlot = "";
+    
+                        /**
+                         * PostgresqlSourceConfig publication.
+                         * @member {string} publication
+                         * @memberof google.cloud.datastream.v1.PostgresqlSourceConfig
+                         * @instance
+                         */
+                        PostgresqlSourceConfig.prototype.publication = "";
+    
+                        /**
+                         * Creates a new PostgresqlSourceConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datastream.v1.PostgresqlSourceConfig
+                         * @static
+                         * @param {google.cloud.datastream.v1.IPostgresqlSourceConfig=} [properties] Properties to set
+                         * @returns {google.cloud.datastream.v1.PostgresqlSourceConfig} PostgresqlSourceConfig instance
+                         */
+                        PostgresqlSourceConfig.create = function create(properties) {
+                            return new PostgresqlSourceConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PostgresqlSourceConfig message. Does not implicitly {@link google.cloud.datastream.v1.PostgresqlSourceConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datastream.v1.PostgresqlSourceConfig
+                         * @static
+                         * @param {google.cloud.datastream.v1.IPostgresqlSourceConfig} message PostgresqlSourceConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PostgresqlSourceConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.includeObjects != null && Object.hasOwnProperty.call(message, "includeObjects"))
+                                $root.google.cloud.datastream.v1.PostgresqlRdbms.encode(message.includeObjects, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.excludeObjects != null && Object.hasOwnProperty.call(message, "excludeObjects"))
+                                $root.google.cloud.datastream.v1.PostgresqlRdbms.encode(message.excludeObjects, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.replicationSlot != null && Object.hasOwnProperty.call(message, "replicationSlot"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.replicationSlot);
+                            if (message.publication != null && Object.hasOwnProperty.call(message, "publication"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.publication);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PostgresqlSourceConfig message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.PostgresqlSourceConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datastream.v1.PostgresqlSourceConfig
+                         * @static
+                         * @param {google.cloud.datastream.v1.IPostgresqlSourceConfig} message PostgresqlSourceConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PostgresqlSourceConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PostgresqlSourceConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datastream.v1.PostgresqlSourceConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datastream.v1.PostgresqlSourceConfig} PostgresqlSourceConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PostgresqlSourceConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.PostgresqlSourceConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.includeObjects = $root.google.cloud.datastream.v1.PostgresqlRdbms.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.excludeObjects = $root.google.cloud.datastream.v1.PostgresqlRdbms.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.replicationSlot = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.publication = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PostgresqlSourceConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datastream.v1.PostgresqlSourceConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datastream.v1.PostgresqlSourceConfig} PostgresqlSourceConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PostgresqlSourceConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PostgresqlSourceConfig message.
+                         * @function verify
+                         * @memberof google.cloud.datastream.v1.PostgresqlSourceConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PostgresqlSourceConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.includeObjects != null && message.hasOwnProperty("includeObjects")) {
+                                var error = $root.google.cloud.datastream.v1.PostgresqlRdbms.verify(message.includeObjects);
+                                if (error)
+                                    return "includeObjects." + error;
+                            }
+                            if (message.excludeObjects != null && message.hasOwnProperty("excludeObjects")) {
+                                var error = $root.google.cloud.datastream.v1.PostgresqlRdbms.verify(message.excludeObjects);
+                                if (error)
+                                    return "excludeObjects." + error;
+                            }
+                            if (message.replicationSlot != null && message.hasOwnProperty("replicationSlot"))
+                                if (!$util.isString(message.replicationSlot))
+                                    return "replicationSlot: string expected";
+                            if (message.publication != null && message.hasOwnProperty("publication"))
+                                if (!$util.isString(message.publication))
+                                    return "publication: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PostgresqlSourceConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datastream.v1.PostgresqlSourceConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datastream.v1.PostgresqlSourceConfig} PostgresqlSourceConfig
+                         */
+                        PostgresqlSourceConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datastream.v1.PostgresqlSourceConfig)
+                                return object;
+                            var message = new $root.google.cloud.datastream.v1.PostgresqlSourceConfig();
+                            if (object.includeObjects != null) {
+                                if (typeof object.includeObjects !== "object")
+                                    throw TypeError(".google.cloud.datastream.v1.PostgresqlSourceConfig.includeObjects: object expected");
+                                message.includeObjects = $root.google.cloud.datastream.v1.PostgresqlRdbms.fromObject(object.includeObjects);
+                            }
+                            if (object.excludeObjects != null) {
+                                if (typeof object.excludeObjects !== "object")
+                                    throw TypeError(".google.cloud.datastream.v1.PostgresqlSourceConfig.excludeObjects: object expected");
+                                message.excludeObjects = $root.google.cloud.datastream.v1.PostgresqlRdbms.fromObject(object.excludeObjects);
+                            }
+                            if (object.replicationSlot != null)
+                                message.replicationSlot = String(object.replicationSlot);
+                            if (object.publication != null)
+                                message.publication = String(object.publication);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PostgresqlSourceConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datastream.v1.PostgresqlSourceConfig
+                         * @static
+                         * @param {google.cloud.datastream.v1.PostgresqlSourceConfig} message PostgresqlSourceConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PostgresqlSourceConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.includeObjects = null;
+                                object.excludeObjects = null;
+                                object.replicationSlot = "";
+                                object.publication = "";
+                            }
+                            if (message.includeObjects != null && message.hasOwnProperty("includeObjects"))
+                                object.includeObjects = $root.google.cloud.datastream.v1.PostgresqlRdbms.toObject(message.includeObjects, options);
+                            if (message.excludeObjects != null && message.hasOwnProperty("excludeObjects"))
+                                object.excludeObjects = $root.google.cloud.datastream.v1.PostgresqlRdbms.toObject(message.excludeObjects, options);
+                            if (message.replicationSlot != null && message.hasOwnProperty("replicationSlot"))
+                                object.replicationSlot = message.replicationSlot;
+                            if (message.publication != null && message.hasOwnProperty("publication"))
+                                object.publication = message.publication;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PostgresqlSourceConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datastream.v1.PostgresqlSourceConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PostgresqlSourceConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for PostgresqlSourceConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.datastream.v1.PostgresqlSourceConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        PostgresqlSourceConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.datastream.v1.PostgresqlSourceConfig";
+                        };
+    
+                        return PostgresqlSourceConfig;
                     })();
     
                     v1.MysqlColumn = (function() {
@@ -16118,6 +18553,7 @@
                          * @interface IMysqlSourceConfig
                          * @property {google.cloud.datastream.v1.IMysqlRdbms|null} [includeObjects] MysqlSourceConfig includeObjects
                          * @property {google.cloud.datastream.v1.IMysqlRdbms|null} [excludeObjects] MysqlSourceConfig excludeObjects
+                         * @property {number|null} [maxConcurrentCdcTasks] MysqlSourceConfig maxConcurrentCdcTasks
                          */
     
                         /**
@@ -16152,6 +18588,14 @@
                         MysqlSourceConfig.prototype.excludeObjects = null;
     
                         /**
+                         * MysqlSourceConfig maxConcurrentCdcTasks.
+                         * @member {number} maxConcurrentCdcTasks
+                         * @memberof google.cloud.datastream.v1.MysqlSourceConfig
+                         * @instance
+                         */
+                        MysqlSourceConfig.prototype.maxConcurrentCdcTasks = 0;
+    
+                        /**
                          * Creates a new MysqlSourceConfig instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.datastream.v1.MysqlSourceConfig
@@ -16179,6 +18623,8 @@
                                 $root.google.cloud.datastream.v1.MysqlRdbms.encode(message.includeObjects, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                             if (message.excludeObjects != null && Object.hasOwnProperty.call(message, "excludeObjects"))
                                 $root.google.cloud.datastream.v1.MysqlRdbms.encode(message.excludeObjects, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.maxConcurrentCdcTasks != null && Object.hasOwnProperty.call(message, "maxConcurrentCdcTasks"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.maxConcurrentCdcTasks);
                             return writer;
                         };
     
@@ -16219,6 +18665,10 @@
                                     }
                                 case 2: {
                                         message.excludeObjects = $root.google.cloud.datastream.v1.MysqlRdbms.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.maxConcurrentCdcTasks = reader.int32();
                                         break;
                                     }
                                 default:
@@ -16266,6 +18716,9 @@
                                 if (error)
                                     return "excludeObjects." + error;
                             }
+                            if (message.maxConcurrentCdcTasks != null && message.hasOwnProperty("maxConcurrentCdcTasks"))
+                                if (!$util.isInteger(message.maxConcurrentCdcTasks))
+                                    return "maxConcurrentCdcTasks: integer expected";
                             return null;
                         };
     
@@ -16291,6 +18744,8 @@
                                     throw TypeError(".google.cloud.datastream.v1.MysqlSourceConfig.excludeObjects: object expected");
                                 message.excludeObjects = $root.google.cloud.datastream.v1.MysqlRdbms.fromObject(object.excludeObjects);
                             }
+                            if (object.maxConcurrentCdcTasks != null)
+                                message.maxConcurrentCdcTasks = object.maxConcurrentCdcTasks | 0;
                             return message;
                         };
     
@@ -16310,11 +18765,14 @@
                             if (options.defaults) {
                                 object.includeObjects = null;
                                 object.excludeObjects = null;
+                                object.maxConcurrentCdcTasks = 0;
                             }
                             if (message.includeObjects != null && message.hasOwnProperty("includeObjects"))
                                 object.includeObjects = $root.google.cloud.datastream.v1.MysqlRdbms.toObject(message.includeObjects, options);
                             if (message.excludeObjects != null && message.hasOwnProperty("excludeObjects"))
                                 object.excludeObjects = $root.google.cloud.datastream.v1.MysqlRdbms.toObject(message.excludeObjects, options);
+                            if (message.maxConcurrentCdcTasks != null && message.hasOwnProperty("maxConcurrentCdcTasks"))
+                                object.maxConcurrentCdcTasks = message.maxConcurrentCdcTasks;
                             return object;
                         };
     
@@ -16356,6 +18814,7 @@
                          * @property {string|null} [sourceConnectionProfile] SourceConfig sourceConnectionProfile
                          * @property {google.cloud.datastream.v1.IOracleSourceConfig|null} [oracleSourceConfig] SourceConfig oracleSourceConfig
                          * @property {google.cloud.datastream.v1.IMysqlSourceConfig|null} [mysqlSourceConfig] SourceConfig mysqlSourceConfig
+                         * @property {google.cloud.datastream.v1.IPostgresqlSourceConfig|null} [postgresqlSourceConfig] SourceConfig postgresqlSourceConfig
                          */
     
                         /**
@@ -16397,17 +18856,25 @@
                          */
                         SourceConfig.prototype.mysqlSourceConfig = null;
     
+                        /**
+                         * SourceConfig postgresqlSourceConfig.
+                         * @member {google.cloud.datastream.v1.IPostgresqlSourceConfig|null|undefined} postgresqlSourceConfig
+                         * @memberof google.cloud.datastream.v1.SourceConfig
+                         * @instance
+                         */
+                        SourceConfig.prototype.postgresqlSourceConfig = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         /**
                          * SourceConfig sourceStreamConfig.
-                         * @member {"oracleSourceConfig"|"mysqlSourceConfig"|undefined} sourceStreamConfig
+                         * @member {"oracleSourceConfig"|"mysqlSourceConfig"|"postgresqlSourceConfig"|undefined} sourceStreamConfig
                          * @memberof google.cloud.datastream.v1.SourceConfig
                          * @instance
                          */
                         Object.defineProperty(SourceConfig.prototype, "sourceStreamConfig", {
-                            get: $util.oneOfGetter($oneOfFields = ["oracleSourceConfig", "mysqlSourceConfig"]),
+                            get: $util.oneOfGetter($oneOfFields = ["oracleSourceConfig", "mysqlSourceConfig", "postgresqlSourceConfig"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -16441,6 +18908,8 @@
                                 $root.google.cloud.datastream.v1.OracleSourceConfig.encode(message.oracleSourceConfig, writer.uint32(/* id 100, wireType 2 =*/802).fork()).ldelim();
                             if (message.mysqlSourceConfig != null && Object.hasOwnProperty.call(message, "mysqlSourceConfig"))
                                 $root.google.cloud.datastream.v1.MysqlSourceConfig.encode(message.mysqlSourceConfig, writer.uint32(/* id 101, wireType 2 =*/810).fork()).ldelim();
+                            if (message.postgresqlSourceConfig != null && Object.hasOwnProperty.call(message, "postgresqlSourceConfig"))
+                                $root.google.cloud.datastream.v1.PostgresqlSourceConfig.encode(message.postgresqlSourceConfig, writer.uint32(/* id 102, wireType 2 =*/818).fork()).ldelim();
                             return writer;
                         };
     
@@ -16485,6 +18954,10 @@
                                     }
                                 case 101: {
                                         message.mysqlSourceConfig = $root.google.cloud.datastream.v1.MysqlSourceConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 102: {
+                                        message.postgresqlSourceConfig = $root.google.cloud.datastream.v1.PostgresqlSourceConfig.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -16544,6 +19017,16 @@
                                         return "mysqlSourceConfig." + error;
                                 }
                             }
+                            if (message.postgresqlSourceConfig != null && message.hasOwnProperty("postgresqlSourceConfig")) {
+                                if (properties.sourceStreamConfig === 1)
+                                    return "sourceStreamConfig: multiple values";
+                                properties.sourceStreamConfig = 1;
+                                {
+                                    var error = $root.google.cloud.datastream.v1.PostgresqlSourceConfig.verify(message.postgresqlSourceConfig);
+                                    if (error)
+                                        return "postgresqlSourceConfig." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -16570,6 +19053,11 @@
                                 if (typeof object.mysqlSourceConfig !== "object")
                                     throw TypeError(".google.cloud.datastream.v1.SourceConfig.mysqlSourceConfig: object expected");
                                 message.mysqlSourceConfig = $root.google.cloud.datastream.v1.MysqlSourceConfig.fromObject(object.mysqlSourceConfig);
+                            }
+                            if (object.postgresqlSourceConfig != null) {
+                                if (typeof object.postgresqlSourceConfig !== "object")
+                                    throw TypeError(".google.cloud.datastream.v1.SourceConfig.postgresqlSourceConfig: object expected");
+                                message.postgresqlSourceConfig = $root.google.cloud.datastream.v1.PostgresqlSourceConfig.fromObject(object.postgresqlSourceConfig);
                             }
                             return message;
                         };
@@ -16600,6 +19088,11 @@
                                 object.mysqlSourceConfig = $root.google.cloud.datastream.v1.MysqlSourceConfig.toObject(message.mysqlSourceConfig, options);
                                 if (options.oneofs)
                                     object.sourceStreamConfig = "mysqlSourceConfig";
+                            }
+                            if (message.postgresqlSourceConfig != null && message.hasOwnProperty("postgresqlSourceConfig")) {
+                                object.postgresqlSourceConfig = $root.google.cloud.datastream.v1.PostgresqlSourceConfig.toObject(message.postgresqlSourceConfig, options);
+                                if (options.oneofs)
+                                    object.sourceStreamConfig = "postgresqlSourceConfig";
                             }
                             return object;
                         };
@@ -17441,6 +19934,958 @@
                         return GcsDestinationConfig;
                     })();
     
+                    v1.BigQueryDestinationConfig = (function() {
+    
+                        /**
+                         * Properties of a BigQueryDestinationConfig.
+                         * @memberof google.cloud.datastream.v1
+                         * @interface IBigQueryDestinationConfig
+                         * @property {google.cloud.datastream.v1.BigQueryDestinationConfig.ISingleTargetDataset|null} [singleTargetDataset] BigQueryDestinationConfig singleTargetDataset
+                         * @property {google.cloud.datastream.v1.BigQueryDestinationConfig.ISourceHierarchyDatasets|null} [sourceHierarchyDatasets] BigQueryDestinationConfig sourceHierarchyDatasets
+                         * @property {google.protobuf.IDuration|null} [dataFreshness] BigQueryDestinationConfig dataFreshness
+                         */
+    
+                        /**
+                         * Constructs a new BigQueryDestinationConfig.
+                         * @memberof google.cloud.datastream.v1
+                         * @classdesc Represents a BigQueryDestinationConfig.
+                         * @implements IBigQueryDestinationConfig
+                         * @constructor
+                         * @param {google.cloud.datastream.v1.IBigQueryDestinationConfig=} [properties] Properties to set
+                         */
+                        function BigQueryDestinationConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BigQueryDestinationConfig singleTargetDataset.
+                         * @member {google.cloud.datastream.v1.BigQueryDestinationConfig.ISingleTargetDataset|null|undefined} singleTargetDataset
+                         * @memberof google.cloud.datastream.v1.BigQueryDestinationConfig
+                         * @instance
+                         */
+                        BigQueryDestinationConfig.prototype.singleTargetDataset = null;
+    
+                        /**
+                         * BigQueryDestinationConfig sourceHierarchyDatasets.
+                         * @member {google.cloud.datastream.v1.BigQueryDestinationConfig.ISourceHierarchyDatasets|null|undefined} sourceHierarchyDatasets
+                         * @memberof google.cloud.datastream.v1.BigQueryDestinationConfig
+                         * @instance
+                         */
+                        BigQueryDestinationConfig.prototype.sourceHierarchyDatasets = null;
+    
+                        /**
+                         * BigQueryDestinationConfig dataFreshness.
+                         * @member {google.protobuf.IDuration|null|undefined} dataFreshness
+                         * @memberof google.cloud.datastream.v1.BigQueryDestinationConfig
+                         * @instance
+                         */
+                        BigQueryDestinationConfig.prototype.dataFreshness = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * BigQueryDestinationConfig datasetConfig.
+                         * @member {"singleTargetDataset"|"sourceHierarchyDatasets"|undefined} datasetConfig
+                         * @memberof google.cloud.datastream.v1.BigQueryDestinationConfig
+                         * @instance
+                         */
+                        Object.defineProperty(BigQueryDestinationConfig.prototype, "datasetConfig", {
+                            get: $util.oneOfGetter($oneOfFields = ["singleTargetDataset", "sourceHierarchyDatasets"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new BigQueryDestinationConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datastream.v1.BigQueryDestinationConfig
+                         * @static
+                         * @param {google.cloud.datastream.v1.IBigQueryDestinationConfig=} [properties] Properties to set
+                         * @returns {google.cloud.datastream.v1.BigQueryDestinationConfig} BigQueryDestinationConfig instance
+                         */
+                        BigQueryDestinationConfig.create = function create(properties) {
+                            return new BigQueryDestinationConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BigQueryDestinationConfig message. Does not implicitly {@link google.cloud.datastream.v1.BigQueryDestinationConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datastream.v1.BigQueryDestinationConfig
+                         * @static
+                         * @param {google.cloud.datastream.v1.IBigQueryDestinationConfig} message BigQueryDestinationConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BigQueryDestinationConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.singleTargetDataset != null && Object.hasOwnProperty.call(message, "singleTargetDataset"))
+                                $root.google.cloud.datastream.v1.BigQueryDestinationConfig.SingleTargetDataset.encode(message.singleTargetDataset, writer.uint32(/* id 201, wireType 2 =*/1610).fork()).ldelim();
+                            if (message.sourceHierarchyDatasets != null && Object.hasOwnProperty.call(message, "sourceHierarchyDatasets"))
+                                $root.google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.encode(message.sourceHierarchyDatasets, writer.uint32(/* id 202, wireType 2 =*/1618).fork()).ldelim();
+                            if (message.dataFreshness != null && Object.hasOwnProperty.call(message, "dataFreshness"))
+                                $root.google.protobuf.Duration.encode(message.dataFreshness, writer.uint32(/* id 300, wireType 2 =*/2402).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BigQueryDestinationConfig message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.BigQueryDestinationConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datastream.v1.BigQueryDestinationConfig
+                         * @static
+                         * @param {google.cloud.datastream.v1.IBigQueryDestinationConfig} message BigQueryDestinationConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BigQueryDestinationConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BigQueryDestinationConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datastream.v1.BigQueryDestinationConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datastream.v1.BigQueryDestinationConfig} BigQueryDestinationConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BigQueryDestinationConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.BigQueryDestinationConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 201: {
+                                        message.singleTargetDataset = $root.google.cloud.datastream.v1.BigQueryDestinationConfig.SingleTargetDataset.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 202: {
+                                        message.sourceHierarchyDatasets = $root.google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 300: {
+                                        message.dataFreshness = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BigQueryDestinationConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datastream.v1.BigQueryDestinationConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datastream.v1.BigQueryDestinationConfig} BigQueryDestinationConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BigQueryDestinationConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BigQueryDestinationConfig message.
+                         * @function verify
+                         * @memberof google.cloud.datastream.v1.BigQueryDestinationConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BigQueryDestinationConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.singleTargetDataset != null && message.hasOwnProperty("singleTargetDataset")) {
+                                properties.datasetConfig = 1;
+                                {
+                                    var error = $root.google.cloud.datastream.v1.BigQueryDestinationConfig.SingleTargetDataset.verify(message.singleTargetDataset);
+                                    if (error)
+                                        return "singleTargetDataset." + error;
+                                }
+                            }
+                            if (message.sourceHierarchyDatasets != null && message.hasOwnProperty("sourceHierarchyDatasets")) {
+                                if (properties.datasetConfig === 1)
+                                    return "datasetConfig: multiple values";
+                                properties.datasetConfig = 1;
+                                {
+                                    var error = $root.google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.verify(message.sourceHierarchyDatasets);
+                                    if (error)
+                                        return "sourceHierarchyDatasets." + error;
+                                }
+                            }
+                            if (message.dataFreshness != null && message.hasOwnProperty("dataFreshness")) {
+                                var error = $root.google.protobuf.Duration.verify(message.dataFreshness);
+                                if (error)
+                                    return "dataFreshness." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BigQueryDestinationConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datastream.v1.BigQueryDestinationConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datastream.v1.BigQueryDestinationConfig} BigQueryDestinationConfig
+                         */
+                        BigQueryDestinationConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datastream.v1.BigQueryDestinationConfig)
+                                return object;
+                            var message = new $root.google.cloud.datastream.v1.BigQueryDestinationConfig();
+                            if (object.singleTargetDataset != null) {
+                                if (typeof object.singleTargetDataset !== "object")
+                                    throw TypeError(".google.cloud.datastream.v1.BigQueryDestinationConfig.singleTargetDataset: object expected");
+                                message.singleTargetDataset = $root.google.cloud.datastream.v1.BigQueryDestinationConfig.SingleTargetDataset.fromObject(object.singleTargetDataset);
+                            }
+                            if (object.sourceHierarchyDatasets != null) {
+                                if (typeof object.sourceHierarchyDatasets !== "object")
+                                    throw TypeError(".google.cloud.datastream.v1.BigQueryDestinationConfig.sourceHierarchyDatasets: object expected");
+                                message.sourceHierarchyDatasets = $root.google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.fromObject(object.sourceHierarchyDatasets);
+                            }
+                            if (object.dataFreshness != null) {
+                                if (typeof object.dataFreshness !== "object")
+                                    throw TypeError(".google.cloud.datastream.v1.BigQueryDestinationConfig.dataFreshness: object expected");
+                                message.dataFreshness = $root.google.protobuf.Duration.fromObject(object.dataFreshness);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BigQueryDestinationConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datastream.v1.BigQueryDestinationConfig
+                         * @static
+                         * @param {google.cloud.datastream.v1.BigQueryDestinationConfig} message BigQueryDestinationConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BigQueryDestinationConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.dataFreshness = null;
+                            if (message.singleTargetDataset != null && message.hasOwnProperty("singleTargetDataset")) {
+                                object.singleTargetDataset = $root.google.cloud.datastream.v1.BigQueryDestinationConfig.SingleTargetDataset.toObject(message.singleTargetDataset, options);
+                                if (options.oneofs)
+                                    object.datasetConfig = "singleTargetDataset";
+                            }
+                            if (message.sourceHierarchyDatasets != null && message.hasOwnProperty("sourceHierarchyDatasets")) {
+                                object.sourceHierarchyDatasets = $root.google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.toObject(message.sourceHierarchyDatasets, options);
+                                if (options.oneofs)
+                                    object.datasetConfig = "sourceHierarchyDatasets";
+                            }
+                            if (message.dataFreshness != null && message.hasOwnProperty("dataFreshness"))
+                                object.dataFreshness = $root.google.protobuf.Duration.toObject(message.dataFreshness, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BigQueryDestinationConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datastream.v1.BigQueryDestinationConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BigQueryDestinationConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BigQueryDestinationConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.datastream.v1.BigQueryDestinationConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BigQueryDestinationConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.datastream.v1.BigQueryDestinationConfig";
+                        };
+    
+                        BigQueryDestinationConfig.SingleTargetDataset = (function() {
+    
+                            /**
+                             * Properties of a SingleTargetDataset.
+                             * @memberof google.cloud.datastream.v1.BigQueryDestinationConfig
+                             * @interface ISingleTargetDataset
+                             * @property {string|null} [datasetId] SingleTargetDataset datasetId
+                             */
+    
+                            /**
+                             * Constructs a new SingleTargetDataset.
+                             * @memberof google.cloud.datastream.v1.BigQueryDestinationConfig
+                             * @classdesc Represents a SingleTargetDataset.
+                             * @implements ISingleTargetDataset
+                             * @constructor
+                             * @param {google.cloud.datastream.v1.BigQueryDestinationConfig.ISingleTargetDataset=} [properties] Properties to set
+                             */
+                            function SingleTargetDataset(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SingleTargetDataset datasetId.
+                             * @member {string} datasetId
+                             * @memberof google.cloud.datastream.v1.BigQueryDestinationConfig.SingleTargetDataset
+                             * @instance
+                             */
+                            SingleTargetDataset.prototype.datasetId = "";
+    
+                            /**
+                             * Creates a new SingleTargetDataset instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.datastream.v1.BigQueryDestinationConfig.SingleTargetDataset
+                             * @static
+                             * @param {google.cloud.datastream.v1.BigQueryDestinationConfig.ISingleTargetDataset=} [properties] Properties to set
+                             * @returns {google.cloud.datastream.v1.BigQueryDestinationConfig.SingleTargetDataset} SingleTargetDataset instance
+                             */
+                            SingleTargetDataset.create = function create(properties) {
+                                return new SingleTargetDataset(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SingleTargetDataset message. Does not implicitly {@link google.cloud.datastream.v1.BigQueryDestinationConfig.SingleTargetDataset.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.datastream.v1.BigQueryDestinationConfig.SingleTargetDataset
+                             * @static
+                             * @param {google.cloud.datastream.v1.BigQueryDestinationConfig.ISingleTargetDataset} message SingleTargetDataset message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SingleTargetDataset.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.datasetId != null && Object.hasOwnProperty.call(message, "datasetId"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.datasetId);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SingleTargetDataset message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.BigQueryDestinationConfig.SingleTargetDataset.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.datastream.v1.BigQueryDestinationConfig.SingleTargetDataset
+                             * @static
+                             * @param {google.cloud.datastream.v1.BigQueryDestinationConfig.ISingleTargetDataset} message SingleTargetDataset message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SingleTargetDataset.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SingleTargetDataset message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.datastream.v1.BigQueryDestinationConfig.SingleTargetDataset
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.datastream.v1.BigQueryDestinationConfig.SingleTargetDataset} SingleTargetDataset
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SingleTargetDataset.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.BigQueryDestinationConfig.SingleTargetDataset();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.datasetId = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SingleTargetDataset message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.datastream.v1.BigQueryDestinationConfig.SingleTargetDataset
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.datastream.v1.BigQueryDestinationConfig.SingleTargetDataset} SingleTargetDataset
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SingleTargetDataset.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SingleTargetDataset message.
+                             * @function verify
+                             * @memberof google.cloud.datastream.v1.BigQueryDestinationConfig.SingleTargetDataset
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SingleTargetDataset.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.datasetId != null && message.hasOwnProperty("datasetId"))
+                                    if (!$util.isString(message.datasetId))
+                                        return "datasetId: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SingleTargetDataset message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.datastream.v1.BigQueryDestinationConfig.SingleTargetDataset
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.datastream.v1.BigQueryDestinationConfig.SingleTargetDataset} SingleTargetDataset
+                             */
+                            SingleTargetDataset.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.datastream.v1.BigQueryDestinationConfig.SingleTargetDataset)
+                                    return object;
+                                var message = new $root.google.cloud.datastream.v1.BigQueryDestinationConfig.SingleTargetDataset();
+                                if (object.datasetId != null)
+                                    message.datasetId = String(object.datasetId);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SingleTargetDataset message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.datastream.v1.BigQueryDestinationConfig.SingleTargetDataset
+                             * @static
+                             * @param {google.cloud.datastream.v1.BigQueryDestinationConfig.SingleTargetDataset} message SingleTargetDataset
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SingleTargetDataset.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.datasetId = "";
+                                if (message.datasetId != null && message.hasOwnProperty("datasetId"))
+                                    object.datasetId = message.datasetId;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SingleTargetDataset to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.datastream.v1.BigQueryDestinationConfig.SingleTargetDataset
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SingleTargetDataset.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SingleTargetDataset
+                             * @function getTypeUrl
+                             * @memberof google.cloud.datastream.v1.BigQueryDestinationConfig.SingleTargetDataset
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SingleTargetDataset.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.datastream.v1.BigQueryDestinationConfig.SingleTargetDataset";
+                            };
+    
+                            return SingleTargetDataset;
+                        })();
+    
+                        BigQueryDestinationConfig.SourceHierarchyDatasets = (function() {
+    
+                            /**
+                             * Properties of a SourceHierarchyDatasets.
+                             * @memberof google.cloud.datastream.v1.BigQueryDestinationConfig
+                             * @interface ISourceHierarchyDatasets
+                             * @property {google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.IDatasetTemplate|null} [datasetTemplate] SourceHierarchyDatasets datasetTemplate
+                             */
+    
+                            /**
+                             * Constructs a new SourceHierarchyDatasets.
+                             * @memberof google.cloud.datastream.v1.BigQueryDestinationConfig
+                             * @classdesc Represents a SourceHierarchyDatasets.
+                             * @implements ISourceHierarchyDatasets
+                             * @constructor
+                             * @param {google.cloud.datastream.v1.BigQueryDestinationConfig.ISourceHierarchyDatasets=} [properties] Properties to set
+                             */
+                            function SourceHierarchyDatasets(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SourceHierarchyDatasets datasetTemplate.
+                             * @member {google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.IDatasetTemplate|null|undefined} datasetTemplate
+                             * @memberof google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets
+                             * @instance
+                             */
+                            SourceHierarchyDatasets.prototype.datasetTemplate = null;
+    
+                            /**
+                             * Creates a new SourceHierarchyDatasets instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets
+                             * @static
+                             * @param {google.cloud.datastream.v1.BigQueryDestinationConfig.ISourceHierarchyDatasets=} [properties] Properties to set
+                             * @returns {google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets} SourceHierarchyDatasets instance
+                             */
+                            SourceHierarchyDatasets.create = function create(properties) {
+                                return new SourceHierarchyDatasets(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SourceHierarchyDatasets message. Does not implicitly {@link google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets
+                             * @static
+                             * @param {google.cloud.datastream.v1.BigQueryDestinationConfig.ISourceHierarchyDatasets} message SourceHierarchyDatasets message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SourceHierarchyDatasets.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.datasetTemplate != null && Object.hasOwnProperty.call(message, "datasetTemplate"))
+                                    $root.google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.DatasetTemplate.encode(message.datasetTemplate, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SourceHierarchyDatasets message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets
+                             * @static
+                             * @param {google.cloud.datastream.v1.BigQueryDestinationConfig.ISourceHierarchyDatasets} message SourceHierarchyDatasets message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SourceHierarchyDatasets.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SourceHierarchyDatasets message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets} SourceHierarchyDatasets
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SourceHierarchyDatasets.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 2: {
+                                            message.datasetTemplate = $root.google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.DatasetTemplate.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SourceHierarchyDatasets message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets} SourceHierarchyDatasets
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SourceHierarchyDatasets.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SourceHierarchyDatasets message.
+                             * @function verify
+                             * @memberof google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SourceHierarchyDatasets.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.datasetTemplate != null && message.hasOwnProperty("datasetTemplate")) {
+                                    var error = $root.google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.DatasetTemplate.verify(message.datasetTemplate);
+                                    if (error)
+                                        return "datasetTemplate." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SourceHierarchyDatasets message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets} SourceHierarchyDatasets
+                             */
+                            SourceHierarchyDatasets.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets)
+                                    return object;
+                                var message = new $root.google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets();
+                                if (object.datasetTemplate != null) {
+                                    if (typeof object.datasetTemplate !== "object")
+                                        throw TypeError(".google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.datasetTemplate: object expected");
+                                    message.datasetTemplate = $root.google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.DatasetTemplate.fromObject(object.datasetTemplate);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SourceHierarchyDatasets message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets
+                             * @static
+                             * @param {google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets} message SourceHierarchyDatasets
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SourceHierarchyDatasets.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.datasetTemplate = null;
+                                if (message.datasetTemplate != null && message.hasOwnProperty("datasetTemplate"))
+                                    object.datasetTemplate = $root.google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.DatasetTemplate.toObject(message.datasetTemplate, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SourceHierarchyDatasets to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SourceHierarchyDatasets.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SourceHierarchyDatasets
+                             * @function getTypeUrl
+                             * @memberof google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SourceHierarchyDatasets.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets";
+                            };
+    
+                            SourceHierarchyDatasets.DatasetTemplate = (function() {
+    
+                                /**
+                                 * Properties of a DatasetTemplate.
+                                 * @memberof google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets
+                                 * @interface IDatasetTemplate
+                                 * @property {string|null} [location] DatasetTemplate location
+                                 * @property {string|null} [datasetIdPrefix] DatasetTemplate datasetIdPrefix
+                                 * @property {string|null} [kmsKeyName] DatasetTemplate kmsKeyName
+                                 */
+    
+                                /**
+                                 * Constructs a new DatasetTemplate.
+                                 * @memberof google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets
+                                 * @classdesc Represents a DatasetTemplate.
+                                 * @implements IDatasetTemplate
+                                 * @constructor
+                                 * @param {google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.IDatasetTemplate=} [properties] Properties to set
+                                 */
+                                function DatasetTemplate(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * DatasetTemplate location.
+                                 * @member {string} location
+                                 * @memberof google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.DatasetTemplate
+                                 * @instance
+                                 */
+                                DatasetTemplate.prototype.location = "";
+    
+                                /**
+                                 * DatasetTemplate datasetIdPrefix.
+                                 * @member {string} datasetIdPrefix
+                                 * @memberof google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.DatasetTemplate
+                                 * @instance
+                                 */
+                                DatasetTemplate.prototype.datasetIdPrefix = "";
+    
+                                /**
+                                 * DatasetTemplate kmsKeyName.
+                                 * @member {string} kmsKeyName
+                                 * @memberof google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.DatasetTemplate
+                                 * @instance
+                                 */
+                                DatasetTemplate.prototype.kmsKeyName = "";
+    
+                                /**
+                                 * Creates a new DatasetTemplate instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.DatasetTemplate
+                                 * @static
+                                 * @param {google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.IDatasetTemplate=} [properties] Properties to set
+                                 * @returns {google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.DatasetTemplate} DatasetTemplate instance
+                                 */
+                                DatasetTemplate.create = function create(properties) {
+                                    return new DatasetTemplate(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified DatasetTemplate message. Does not implicitly {@link google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.DatasetTemplate.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.DatasetTemplate
+                                 * @static
+                                 * @param {google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.IDatasetTemplate} message DatasetTemplate message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                DatasetTemplate.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.location != null && Object.hasOwnProperty.call(message, "location"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.location);
+                                    if (message.datasetIdPrefix != null && Object.hasOwnProperty.call(message, "datasetIdPrefix"))
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.datasetIdPrefix);
+                                    if (message.kmsKeyName != null && Object.hasOwnProperty.call(message, "kmsKeyName"))
+                                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.kmsKeyName);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified DatasetTemplate message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.DatasetTemplate.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.DatasetTemplate
+                                 * @static
+                                 * @param {google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.IDatasetTemplate} message DatasetTemplate message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                DatasetTemplate.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a DatasetTemplate message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.DatasetTemplate
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.DatasetTemplate} DatasetTemplate
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                DatasetTemplate.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.DatasetTemplate();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.location = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.datasetIdPrefix = reader.string();
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.kmsKeyName = reader.string();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a DatasetTemplate message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.DatasetTemplate
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.DatasetTemplate} DatasetTemplate
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                DatasetTemplate.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a DatasetTemplate message.
+                                 * @function verify
+                                 * @memberof google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.DatasetTemplate
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                DatasetTemplate.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.location != null && message.hasOwnProperty("location"))
+                                        if (!$util.isString(message.location))
+                                            return "location: string expected";
+                                    if (message.datasetIdPrefix != null && message.hasOwnProperty("datasetIdPrefix"))
+                                        if (!$util.isString(message.datasetIdPrefix))
+                                            return "datasetIdPrefix: string expected";
+                                    if (message.kmsKeyName != null && message.hasOwnProperty("kmsKeyName"))
+                                        if (!$util.isString(message.kmsKeyName))
+                                            return "kmsKeyName: string expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a DatasetTemplate message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.DatasetTemplate
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.DatasetTemplate} DatasetTemplate
+                                 */
+                                DatasetTemplate.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.DatasetTemplate)
+                                        return object;
+                                    var message = new $root.google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.DatasetTemplate();
+                                    if (object.location != null)
+                                        message.location = String(object.location);
+                                    if (object.datasetIdPrefix != null)
+                                        message.datasetIdPrefix = String(object.datasetIdPrefix);
+                                    if (object.kmsKeyName != null)
+                                        message.kmsKeyName = String(object.kmsKeyName);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a DatasetTemplate message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.DatasetTemplate
+                                 * @static
+                                 * @param {google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.DatasetTemplate} message DatasetTemplate
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                DatasetTemplate.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.location = "";
+                                        object.datasetIdPrefix = "";
+                                        object.kmsKeyName = "";
+                                    }
+                                    if (message.location != null && message.hasOwnProperty("location"))
+                                        object.location = message.location;
+                                    if (message.datasetIdPrefix != null && message.hasOwnProperty("datasetIdPrefix"))
+                                        object.datasetIdPrefix = message.datasetIdPrefix;
+                                    if (message.kmsKeyName != null && message.hasOwnProperty("kmsKeyName"))
+                                        object.kmsKeyName = message.kmsKeyName;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this DatasetTemplate to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.DatasetTemplate
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                DatasetTemplate.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for DatasetTemplate
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.DatasetTemplate
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                DatasetTemplate.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.DatasetTemplate";
+                                };
+    
+                                return DatasetTemplate;
+                            })();
+    
+                            return SourceHierarchyDatasets;
+                        })();
+    
+                        return BigQueryDestinationConfig;
+                    })();
+    
                     v1.DestinationConfig = (function() {
     
                         /**
@@ -17449,6 +20894,7 @@
                          * @interface IDestinationConfig
                          * @property {string|null} [destinationConnectionProfile] DestinationConfig destinationConnectionProfile
                          * @property {google.cloud.datastream.v1.IGcsDestinationConfig|null} [gcsDestinationConfig] DestinationConfig gcsDestinationConfig
+                         * @property {google.cloud.datastream.v1.IBigQueryDestinationConfig|null} [bigqueryDestinationConfig] DestinationConfig bigqueryDestinationConfig
                          */
     
                         /**
@@ -17482,17 +20928,25 @@
                          */
                         DestinationConfig.prototype.gcsDestinationConfig = null;
     
+                        /**
+                         * DestinationConfig bigqueryDestinationConfig.
+                         * @member {google.cloud.datastream.v1.IBigQueryDestinationConfig|null|undefined} bigqueryDestinationConfig
+                         * @memberof google.cloud.datastream.v1.DestinationConfig
+                         * @instance
+                         */
+                        DestinationConfig.prototype.bigqueryDestinationConfig = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         /**
                          * DestinationConfig destinationStreamConfig.
-                         * @member {"gcsDestinationConfig"|undefined} destinationStreamConfig
+                         * @member {"gcsDestinationConfig"|"bigqueryDestinationConfig"|undefined} destinationStreamConfig
                          * @memberof google.cloud.datastream.v1.DestinationConfig
                          * @instance
                          */
                         Object.defineProperty(DestinationConfig.prototype, "destinationStreamConfig", {
-                            get: $util.oneOfGetter($oneOfFields = ["gcsDestinationConfig"]),
+                            get: $util.oneOfGetter($oneOfFields = ["gcsDestinationConfig", "bigqueryDestinationConfig"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -17524,6 +20978,8 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.destinationConnectionProfile);
                             if (message.gcsDestinationConfig != null && Object.hasOwnProperty.call(message, "gcsDestinationConfig"))
                                 $root.google.cloud.datastream.v1.GcsDestinationConfig.encode(message.gcsDestinationConfig, writer.uint32(/* id 100, wireType 2 =*/802).fork()).ldelim();
+                            if (message.bigqueryDestinationConfig != null && Object.hasOwnProperty.call(message, "bigqueryDestinationConfig"))
+                                $root.google.cloud.datastream.v1.BigQueryDestinationConfig.encode(message.bigqueryDestinationConfig, writer.uint32(/* id 101, wireType 2 =*/810).fork()).ldelim();
                             return writer;
                         };
     
@@ -17564,6 +21020,10 @@
                                     }
                                 case 100: {
                                         message.gcsDestinationConfig = $root.google.cloud.datastream.v1.GcsDestinationConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 101: {
+                                        message.bigqueryDestinationConfig = $root.google.cloud.datastream.v1.BigQueryDestinationConfig.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -17613,6 +21073,16 @@
                                         return "gcsDestinationConfig." + error;
                                 }
                             }
+                            if (message.bigqueryDestinationConfig != null && message.hasOwnProperty("bigqueryDestinationConfig")) {
+                                if (properties.destinationStreamConfig === 1)
+                                    return "destinationStreamConfig: multiple values";
+                                properties.destinationStreamConfig = 1;
+                                {
+                                    var error = $root.google.cloud.datastream.v1.BigQueryDestinationConfig.verify(message.bigqueryDestinationConfig);
+                                    if (error)
+                                        return "bigqueryDestinationConfig." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -17634,6 +21104,11 @@
                                 if (typeof object.gcsDestinationConfig !== "object")
                                     throw TypeError(".google.cloud.datastream.v1.DestinationConfig.gcsDestinationConfig: object expected");
                                 message.gcsDestinationConfig = $root.google.cloud.datastream.v1.GcsDestinationConfig.fromObject(object.gcsDestinationConfig);
+                            }
+                            if (object.bigqueryDestinationConfig != null) {
+                                if (typeof object.bigqueryDestinationConfig !== "object")
+                                    throw TypeError(".google.cloud.datastream.v1.DestinationConfig.bigqueryDestinationConfig: object expected");
+                                message.bigqueryDestinationConfig = $root.google.cloud.datastream.v1.BigQueryDestinationConfig.fromObject(object.bigqueryDestinationConfig);
                             }
                             return message;
                         };
@@ -17659,6 +21134,11 @@
                                 object.gcsDestinationConfig = $root.google.cloud.datastream.v1.GcsDestinationConfig.toObject(message.gcsDestinationConfig, options);
                                 if (options.oneofs)
                                     object.destinationStreamConfig = "gcsDestinationConfig";
+                            }
+                            if (message.bigqueryDestinationConfig != null && message.hasOwnProperty("bigqueryDestinationConfig")) {
+                                object.bigqueryDestinationConfig = $root.google.cloud.datastream.v1.BigQueryDestinationConfig.toObject(message.bigqueryDestinationConfig, options);
+                                if (options.oneofs)
+                                    object.destinationStreamConfig = "bigqueryDestinationConfig";
                             }
                             return object;
                         };
@@ -18360,6 +21840,7 @@
                              * @interface IBackfillAllStrategy
                              * @property {google.cloud.datastream.v1.IOracleRdbms|null} [oracleExcludedObjects] BackfillAllStrategy oracleExcludedObjects
                              * @property {google.cloud.datastream.v1.IMysqlRdbms|null} [mysqlExcludedObjects] BackfillAllStrategy mysqlExcludedObjects
+                             * @property {google.cloud.datastream.v1.IPostgresqlRdbms|null} [postgresqlExcludedObjects] BackfillAllStrategy postgresqlExcludedObjects
                              */
     
                             /**
@@ -18393,17 +21874,25 @@
                              */
                             BackfillAllStrategy.prototype.mysqlExcludedObjects = null;
     
+                            /**
+                             * BackfillAllStrategy postgresqlExcludedObjects.
+                             * @member {google.cloud.datastream.v1.IPostgresqlRdbms|null|undefined} postgresqlExcludedObjects
+                             * @memberof google.cloud.datastream.v1.Stream.BackfillAllStrategy
+                             * @instance
+                             */
+                            BackfillAllStrategy.prototype.postgresqlExcludedObjects = null;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
                             /**
                              * BackfillAllStrategy excludedObjects.
-                             * @member {"oracleExcludedObjects"|"mysqlExcludedObjects"|undefined} excludedObjects
+                             * @member {"oracleExcludedObjects"|"mysqlExcludedObjects"|"postgresqlExcludedObjects"|undefined} excludedObjects
                              * @memberof google.cloud.datastream.v1.Stream.BackfillAllStrategy
                              * @instance
                              */
                             Object.defineProperty(BackfillAllStrategy.prototype, "excludedObjects", {
-                                get: $util.oneOfGetter($oneOfFields = ["oracleExcludedObjects", "mysqlExcludedObjects"]),
+                                get: $util.oneOfGetter($oneOfFields = ["oracleExcludedObjects", "mysqlExcludedObjects", "postgresqlExcludedObjects"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
@@ -18435,6 +21924,8 @@
                                     $root.google.cloud.datastream.v1.OracleRdbms.encode(message.oracleExcludedObjects, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                                 if (message.mysqlExcludedObjects != null && Object.hasOwnProperty.call(message, "mysqlExcludedObjects"))
                                     $root.google.cloud.datastream.v1.MysqlRdbms.encode(message.mysqlExcludedObjects, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.postgresqlExcludedObjects != null && Object.hasOwnProperty.call(message, "postgresqlExcludedObjects"))
+                                    $root.google.cloud.datastream.v1.PostgresqlRdbms.encode(message.postgresqlExcludedObjects, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                                 return writer;
                             };
     
@@ -18475,6 +21966,10 @@
                                         }
                                     case 2: {
                                             message.mysqlExcludedObjects = $root.google.cloud.datastream.v1.MysqlRdbms.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.postgresqlExcludedObjects = $root.google.cloud.datastream.v1.PostgresqlRdbms.decode(reader, reader.uint32());
                                             break;
                                         }
                                     default:
@@ -18531,6 +22026,16 @@
                                             return "mysqlExcludedObjects." + error;
                                     }
                                 }
+                                if (message.postgresqlExcludedObjects != null && message.hasOwnProperty("postgresqlExcludedObjects")) {
+                                    if (properties.excludedObjects === 1)
+                                        return "excludedObjects: multiple values";
+                                    properties.excludedObjects = 1;
+                                    {
+                                        var error = $root.google.cloud.datastream.v1.PostgresqlRdbms.verify(message.postgresqlExcludedObjects);
+                                        if (error)
+                                            return "postgresqlExcludedObjects." + error;
+                                    }
+                                }
                                 return null;
                             };
     
@@ -18555,6 +22060,11 @@
                                     if (typeof object.mysqlExcludedObjects !== "object")
                                         throw TypeError(".google.cloud.datastream.v1.Stream.BackfillAllStrategy.mysqlExcludedObjects: object expected");
                                     message.mysqlExcludedObjects = $root.google.cloud.datastream.v1.MysqlRdbms.fromObject(object.mysqlExcludedObjects);
+                                }
+                                if (object.postgresqlExcludedObjects != null) {
+                                    if (typeof object.postgresqlExcludedObjects !== "object")
+                                        throw TypeError(".google.cloud.datastream.v1.Stream.BackfillAllStrategy.postgresqlExcludedObjects: object expected");
+                                    message.postgresqlExcludedObjects = $root.google.cloud.datastream.v1.PostgresqlRdbms.fromObject(object.postgresqlExcludedObjects);
                                 }
                                 return message;
                             };
@@ -18581,6 +22091,11 @@
                                     object.mysqlExcludedObjects = $root.google.cloud.datastream.v1.MysqlRdbms.toObject(message.mysqlExcludedObjects, options);
                                     if (options.oneofs)
                                         object.excludedObjects = "mysqlExcludedObjects";
+                                }
+                                if (message.postgresqlExcludedObjects != null && message.hasOwnProperty("postgresqlExcludedObjects")) {
+                                    object.postgresqlExcludedObjects = $root.google.cloud.datastream.v1.PostgresqlRdbms.toObject(message.postgresqlExcludedObjects, options);
+                                    if (options.oneofs)
+                                        object.excludedObjects = "postgresqlExcludedObjects";
                                 }
                                 return object;
                             };
@@ -19184,6 +22699,7 @@
                          * @interface ISourceObjectIdentifier
                          * @property {google.cloud.datastream.v1.SourceObjectIdentifier.IOracleObjectIdentifier|null} [oracleIdentifier] SourceObjectIdentifier oracleIdentifier
                          * @property {google.cloud.datastream.v1.SourceObjectIdentifier.IMysqlObjectIdentifier|null} [mysqlIdentifier] SourceObjectIdentifier mysqlIdentifier
+                         * @property {google.cloud.datastream.v1.SourceObjectIdentifier.IPostgresqlObjectIdentifier|null} [postgresqlIdentifier] SourceObjectIdentifier postgresqlIdentifier
                          */
     
                         /**
@@ -19217,17 +22733,25 @@
                          */
                         SourceObjectIdentifier.prototype.mysqlIdentifier = null;
     
+                        /**
+                         * SourceObjectIdentifier postgresqlIdentifier.
+                         * @member {google.cloud.datastream.v1.SourceObjectIdentifier.IPostgresqlObjectIdentifier|null|undefined} postgresqlIdentifier
+                         * @memberof google.cloud.datastream.v1.SourceObjectIdentifier
+                         * @instance
+                         */
+                        SourceObjectIdentifier.prototype.postgresqlIdentifier = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         /**
                          * SourceObjectIdentifier sourceIdentifier.
-                         * @member {"oracleIdentifier"|"mysqlIdentifier"|undefined} sourceIdentifier
+                         * @member {"oracleIdentifier"|"mysqlIdentifier"|"postgresqlIdentifier"|undefined} sourceIdentifier
                          * @memberof google.cloud.datastream.v1.SourceObjectIdentifier
                          * @instance
                          */
                         Object.defineProperty(SourceObjectIdentifier.prototype, "sourceIdentifier", {
-                            get: $util.oneOfGetter($oneOfFields = ["oracleIdentifier", "mysqlIdentifier"]),
+                            get: $util.oneOfGetter($oneOfFields = ["oracleIdentifier", "mysqlIdentifier", "postgresqlIdentifier"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -19259,6 +22783,8 @@
                                 $root.google.cloud.datastream.v1.SourceObjectIdentifier.OracleObjectIdentifier.encode(message.oracleIdentifier, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                             if (message.mysqlIdentifier != null && Object.hasOwnProperty.call(message, "mysqlIdentifier"))
                                 $root.google.cloud.datastream.v1.SourceObjectIdentifier.MysqlObjectIdentifier.encode(message.mysqlIdentifier, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.postgresqlIdentifier != null && Object.hasOwnProperty.call(message, "postgresqlIdentifier"))
+                                $root.google.cloud.datastream.v1.SourceObjectIdentifier.PostgresqlObjectIdentifier.encode(message.postgresqlIdentifier, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             return writer;
                         };
     
@@ -19299,6 +22825,10 @@
                                     }
                                 case 2: {
                                         message.mysqlIdentifier = $root.google.cloud.datastream.v1.SourceObjectIdentifier.MysqlObjectIdentifier.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.postgresqlIdentifier = $root.google.cloud.datastream.v1.SourceObjectIdentifier.PostgresqlObjectIdentifier.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -19355,6 +22885,16 @@
                                         return "mysqlIdentifier." + error;
                                 }
                             }
+                            if (message.postgresqlIdentifier != null && message.hasOwnProperty("postgresqlIdentifier")) {
+                                if (properties.sourceIdentifier === 1)
+                                    return "sourceIdentifier: multiple values";
+                                properties.sourceIdentifier = 1;
+                                {
+                                    var error = $root.google.cloud.datastream.v1.SourceObjectIdentifier.PostgresqlObjectIdentifier.verify(message.postgresqlIdentifier);
+                                    if (error)
+                                        return "postgresqlIdentifier." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -19379,6 +22919,11 @@
                                 if (typeof object.mysqlIdentifier !== "object")
                                     throw TypeError(".google.cloud.datastream.v1.SourceObjectIdentifier.mysqlIdentifier: object expected");
                                 message.mysqlIdentifier = $root.google.cloud.datastream.v1.SourceObjectIdentifier.MysqlObjectIdentifier.fromObject(object.mysqlIdentifier);
+                            }
+                            if (object.postgresqlIdentifier != null) {
+                                if (typeof object.postgresqlIdentifier !== "object")
+                                    throw TypeError(".google.cloud.datastream.v1.SourceObjectIdentifier.postgresqlIdentifier: object expected");
+                                message.postgresqlIdentifier = $root.google.cloud.datastream.v1.SourceObjectIdentifier.PostgresqlObjectIdentifier.fromObject(object.postgresqlIdentifier);
                             }
                             return message;
                         };
@@ -19405,6 +22950,11 @@
                                 object.mysqlIdentifier = $root.google.cloud.datastream.v1.SourceObjectIdentifier.MysqlObjectIdentifier.toObject(message.mysqlIdentifier, options);
                                 if (options.oneofs)
                                     object.sourceIdentifier = "mysqlIdentifier";
+                            }
+                            if (message.postgresqlIdentifier != null && message.hasOwnProperty("postgresqlIdentifier")) {
+                                object.postgresqlIdentifier = $root.google.cloud.datastream.v1.SourceObjectIdentifier.PostgresqlObjectIdentifier.toObject(message.postgresqlIdentifier, options);
+                                if (options.oneofs)
+                                    object.sourceIdentifier = "postgresqlIdentifier";
                             }
                             return object;
                         };
@@ -19660,6 +23210,233 @@
                             };
     
                             return OracleObjectIdentifier;
+                        })();
+    
+                        SourceObjectIdentifier.PostgresqlObjectIdentifier = (function() {
+    
+                            /**
+                             * Properties of a PostgresqlObjectIdentifier.
+                             * @memberof google.cloud.datastream.v1.SourceObjectIdentifier
+                             * @interface IPostgresqlObjectIdentifier
+                             * @property {string|null} [schema] PostgresqlObjectIdentifier schema
+                             * @property {string|null} [table] PostgresqlObjectIdentifier table
+                             */
+    
+                            /**
+                             * Constructs a new PostgresqlObjectIdentifier.
+                             * @memberof google.cloud.datastream.v1.SourceObjectIdentifier
+                             * @classdesc Represents a PostgresqlObjectIdentifier.
+                             * @implements IPostgresqlObjectIdentifier
+                             * @constructor
+                             * @param {google.cloud.datastream.v1.SourceObjectIdentifier.IPostgresqlObjectIdentifier=} [properties] Properties to set
+                             */
+                            function PostgresqlObjectIdentifier(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * PostgresqlObjectIdentifier schema.
+                             * @member {string} schema
+                             * @memberof google.cloud.datastream.v1.SourceObjectIdentifier.PostgresqlObjectIdentifier
+                             * @instance
+                             */
+                            PostgresqlObjectIdentifier.prototype.schema = "";
+    
+                            /**
+                             * PostgresqlObjectIdentifier table.
+                             * @member {string} table
+                             * @memberof google.cloud.datastream.v1.SourceObjectIdentifier.PostgresqlObjectIdentifier
+                             * @instance
+                             */
+                            PostgresqlObjectIdentifier.prototype.table = "";
+    
+                            /**
+                             * Creates a new PostgresqlObjectIdentifier instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.datastream.v1.SourceObjectIdentifier.PostgresqlObjectIdentifier
+                             * @static
+                             * @param {google.cloud.datastream.v1.SourceObjectIdentifier.IPostgresqlObjectIdentifier=} [properties] Properties to set
+                             * @returns {google.cloud.datastream.v1.SourceObjectIdentifier.PostgresqlObjectIdentifier} PostgresqlObjectIdentifier instance
+                             */
+                            PostgresqlObjectIdentifier.create = function create(properties) {
+                                return new PostgresqlObjectIdentifier(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified PostgresqlObjectIdentifier message. Does not implicitly {@link google.cloud.datastream.v1.SourceObjectIdentifier.PostgresqlObjectIdentifier.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.datastream.v1.SourceObjectIdentifier.PostgresqlObjectIdentifier
+                             * @static
+                             * @param {google.cloud.datastream.v1.SourceObjectIdentifier.IPostgresqlObjectIdentifier} message PostgresqlObjectIdentifier message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PostgresqlObjectIdentifier.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.schema != null && Object.hasOwnProperty.call(message, "schema"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.schema);
+                                if (message.table != null && Object.hasOwnProperty.call(message, "table"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.table);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified PostgresqlObjectIdentifier message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.SourceObjectIdentifier.PostgresqlObjectIdentifier.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.datastream.v1.SourceObjectIdentifier.PostgresqlObjectIdentifier
+                             * @static
+                             * @param {google.cloud.datastream.v1.SourceObjectIdentifier.IPostgresqlObjectIdentifier} message PostgresqlObjectIdentifier message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PostgresqlObjectIdentifier.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a PostgresqlObjectIdentifier message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.datastream.v1.SourceObjectIdentifier.PostgresqlObjectIdentifier
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.datastream.v1.SourceObjectIdentifier.PostgresqlObjectIdentifier} PostgresqlObjectIdentifier
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PostgresqlObjectIdentifier.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.SourceObjectIdentifier.PostgresqlObjectIdentifier();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.schema = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.table = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a PostgresqlObjectIdentifier message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.datastream.v1.SourceObjectIdentifier.PostgresqlObjectIdentifier
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.datastream.v1.SourceObjectIdentifier.PostgresqlObjectIdentifier} PostgresqlObjectIdentifier
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PostgresqlObjectIdentifier.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a PostgresqlObjectIdentifier message.
+                             * @function verify
+                             * @memberof google.cloud.datastream.v1.SourceObjectIdentifier.PostgresqlObjectIdentifier
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            PostgresqlObjectIdentifier.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.schema != null && message.hasOwnProperty("schema"))
+                                    if (!$util.isString(message.schema))
+                                        return "schema: string expected";
+                                if (message.table != null && message.hasOwnProperty("table"))
+                                    if (!$util.isString(message.table))
+                                        return "table: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a PostgresqlObjectIdentifier message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.datastream.v1.SourceObjectIdentifier.PostgresqlObjectIdentifier
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.datastream.v1.SourceObjectIdentifier.PostgresqlObjectIdentifier} PostgresqlObjectIdentifier
+                             */
+                            PostgresqlObjectIdentifier.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.datastream.v1.SourceObjectIdentifier.PostgresqlObjectIdentifier)
+                                    return object;
+                                var message = new $root.google.cloud.datastream.v1.SourceObjectIdentifier.PostgresqlObjectIdentifier();
+                                if (object.schema != null)
+                                    message.schema = String(object.schema);
+                                if (object.table != null)
+                                    message.table = String(object.table);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a PostgresqlObjectIdentifier message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.datastream.v1.SourceObjectIdentifier.PostgresqlObjectIdentifier
+                             * @static
+                             * @param {google.cloud.datastream.v1.SourceObjectIdentifier.PostgresqlObjectIdentifier} message PostgresqlObjectIdentifier
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            PostgresqlObjectIdentifier.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.schema = "";
+                                    object.table = "";
+                                }
+                                if (message.schema != null && message.hasOwnProperty("schema"))
+                                    object.schema = message.schema;
+                                if (message.table != null && message.hasOwnProperty("table"))
+                                    object.table = message.table;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this PostgresqlObjectIdentifier to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.datastream.v1.SourceObjectIdentifier.PostgresqlObjectIdentifier
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            PostgresqlObjectIdentifier.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for PostgresqlObjectIdentifier
+                             * @function getTypeUrl
+                             * @memberof google.cloud.datastream.v1.SourceObjectIdentifier.PostgresqlObjectIdentifier
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            PostgresqlObjectIdentifier.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.datastream.v1.SourceObjectIdentifier.PostgresqlObjectIdentifier";
+                            };
+    
+                            return PostgresqlObjectIdentifier;
                         })();
     
                         SourceObjectIdentifier.MysqlObjectIdentifier = (function() {
