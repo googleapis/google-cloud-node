@@ -17,8 +17,8 @@
 // ** All changes to this file may be overwritten. **
 
 /* global window */
-import * as gax from 'google-gax';
-import {
+import type * as gax from 'google-gax';
+import type {
   Callback,
   CallOptions,
   Descriptors,
@@ -37,7 +37,6 @@ import jsonProtos = require('../../protos/protos.json');
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
 import * as gapicConfig from './user_event_service_client_config.json';
-import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
 
 /**
@@ -99,8 +98,18 @@ export class UserEventServiceClient {
    *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
+   * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
+   *     need to avoid loading the default gRPC version and want to use the fallback
+   *     HTTP implementation. Load only fallback version and pass it to the constructor:
+   *     ```
+   *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
+   *     const client = new UserEventServiceClient({fallback: 'rest'}, gax);
+   *     ```
    */
-  constructor(opts?: ClientOptions) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof UserEventServiceClient;
     const servicePath =
@@ -120,8 +129,13 @@ export class UserEventServiceClient {
       opts['scopes'] = staticMembers.scopes;
     }
 
+    // Load google-gax module synchronously if needed
+    if (!gaxInstance) {
+      gaxInstance = require('google-gax') as typeof gax;
+    }
+
     // Choose either gRPC or proto-over-HTTP implementation of google-gax.
-    this._gaxModule = opts.fallback ? gax.fallback : gax;
+    this._gaxModule = opts.fallback ? gaxInstance.fallback : gaxInstance;
 
     // Create a `gaxGrpc` object, with any grpc-specific options sent to the client.
     this._gaxGrpc = new this._gaxModule.GrpcClient(opts);
@@ -142,7 +156,10 @@ export class UserEventServiceClient {
     if (servicePath === staticMembers.servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
-    this.locationsClient = new LocationsClient(this._gaxGrpc, opts);
+    this.locationsClient = new this._gaxModule.LocationsClient(
+      this._gaxGrpc,
+      opts
+    );
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
@@ -166,11 +183,23 @@ export class UserEventServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      attributesConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/catalogs/{catalog}/attributesConfig'
+      ),
       catalogPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}'
       ),
+      completionConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/catalogs/{catalog}/completionConfig'
+      ),
+      controlPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/catalogs/{catalog}/controls/{control}'
+      ),
       productPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}/branches/{branch}/products/{product}'
+      ),
+      servingConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/catalogs/{catalog}/servingConfigs/{serving_config}'
       ),
     };
 
@@ -260,7 +289,7 @@ export class UserEventServiceClient {
     this.innerApiCalls = {};
 
     // Add a warn function to the client constructor so it can be easily tested.
-    this.warn = gax.warn;
+    this.warn = this._gaxModule.warn;
   }
 
   /**
@@ -466,7 +495,7 @@ export class UserEventServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         parent: request.parent || '',
       });
     this.initialize();
@@ -568,7 +597,7 @@ export class UserEventServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         parent: request.parent || '',
       });
     this.initialize();
@@ -705,7 +734,7 @@ export class UserEventServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         parent: request.parent || '',
       });
     this.initialize();
@@ -731,11 +760,12 @@ export class UserEventServiceClient {
       protos.google.cloud.retail.v2.PurgeMetadata
     >
   > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
+    const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.purgeUserEvents,
       this._gaxModule.createDefaultBackoffSettings()
@@ -750,9 +780,9 @@ export class UserEventServiceClient {
    * synchronous. Events that already exist are skipped.
    * Use this method for backfilling historical user events.
    *
-   * Operation.response is of type ImportResponse. Note that it is
+   * `Operation.response` is of type `ImportResponse`. Note that it is
    * possible for a subset of the items to be successfully inserted.
-   * Operation.metadata is of type ImportMetadata.
+   * `Operation.metadata` is of type `ImportMetadata`.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -853,7 +883,7 @@ export class UserEventServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         parent: request.parent || '',
       });
     this.initialize();
@@ -879,11 +909,12 @@ export class UserEventServiceClient {
       protos.google.cloud.retail.v2.ImportMetadata
     >
   > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
+    const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.importUserEvents,
       this._gaxModule.createDefaultBackoffSettings()
@@ -1003,7 +1034,7 @@ export class UserEventServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         parent: request.parent || '',
       });
     this.initialize();
@@ -1029,11 +1060,12 @@ export class UserEventServiceClient {
       protos.google.cloud.retail.v2.RejoinUserEventsMetadata
     >
   > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
+    const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.rejoinUserEvents,
       this._gaxModule.createDefaultBackoffSettings()
@@ -1305,6 +1337,61 @@ export class UserEventServiceClient {
   // --------------------
 
   /**
+   * Return a fully-qualified attributesConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} catalog
+   * @returns {string} Resource name string.
+   */
+  attributesConfigPath(project: string, location: string, catalog: string) {
+    return this.pathTemplates.attributesConfigPathTemplate.render({
+      project: project,
+      location: location,
+      catalog: catalog,
+    });
+  }
+
+  /**
+   * Parse the project from AttributesConfig resource.
+   *
+   * @param {string} attributesConfigName
+   *   A fully-qualified path representing AttributesConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAttributesConfigName(attributesConfigName: string) {
+    return this.pathTemplates.attributesConfigPathTemplate.match(
+      attributesConfigName
+    ).project;
+  }
+
+  /**
+   * Parse the location from AttributesConfig resource.
+   *
+   * @param {string} attributesConfigName
+   *   A fully-qualified path representing AttributesConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromAttributesConfigName(attributesConfigName: string) {
+    return this.pathTemplates.attributesConfigPathTemplate.match(
+      attributesConfigName
+    ).location;
+  }
+
+  /**
+   * Parse the catalog from AttributesConfig resource.
+   *
+   * @param {string} attributesConfigName
+   *   A fully-qualified path representing AttributesConfig resource.
+   * @returns {string} A string representing the catalog.
+   */
+  matchCatalogFromAttributesConfigName(attributesConfigName: string) {
+    return this.pathTemplates.attributesConfigPathTemplate.match(
+      attributesConfigName
+    ).catalog;
+  }
+
+  /**
    * Return a fully-qualified catalog resource name string.
    *
    * @param {string} project
@@ -1351,6 +1438,128 @@ export class UserEventServiceClient {
    */
   matchCatalogFromCatalogName(catalogName: string) {
     return this.pathTemplates.catalogPathTemplate.match(catalogName).catalog;
+  }
+
+  /**
+   * Return a fully-qualified completionConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} catalog
+   * @returns {string} Resource name string.
+   */
+  completionConfigPath(project: string, location: string, catalog: string) {
+    return this.pathTemplates.completionConfigPathTemplate.render({
+      project: project,
+      location: location,
+      catalog: catalog,
+    });
+  }
+
+  /**
+   * Parse the project from CompletionConfig resource.
+   *
+   * @param {string} completionConfigName
+   *   A fully-qualified path representing CompletionConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromCompletionConfigName(completionConfigName: string) {
+    return this.pathTemplates.completionConfigPathTemplate.match(
+      completionConfigName
+    ).project;
+  }
+
+  /**
+   * Parse the location from CompletionConfig resource.
+   *
+   * @param {string} completionConfigName
+   *   A fully-qualified path representing CompletionConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromCompletionConfigName(completionConfigName: string) {
+    return this.pathTemplates.completionConfigPathTemplate.match(
+      completionConfigName
+    ).location;
+  }
+
+  /**
+   * Parse the catalog from CompletionConfig resource.
+   *
+   * @param {string} completionConfigName
+   *   A fully-qualified path representing CompletionConfig resource.
+   * @returns {string} A string representing the catalog.
+   */
+  matchCatalogFromCompletionConfigName(completionConfigName: string) {
+    return this.pathTemplates.completionConfigPathTemplate.match(
+      completionConfigName
+    ).catalog;
+  }
+
+  /**
+   * Return a fully-qualified control resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} catalog
+   * @param {string} control
+   * @returns {string} Resource name string.
+   */
+  controlPath(
+    project: string,
+    location: string,
+    catalog: string,
+    control: string
+  ) {
+    return this.pathTemplates.controlPathTemplate.render({
+      project: project,
+      location: location,
+      catalog: catalog,
+      control: control,
+    });
+  }
+
+  /**
+   * Parse the project from Control resource.
+   *
+   * @param {string} controlName
+   *   A fully-qualified path representing Control resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromControlName(controlName: string) {
+    return this.pathTemplates.controlPathTemplate.match(controlName).project;
+  }
+
+  /**
+   * Parse the location from Control resource.
+   *
+   * @param {string} controlName
+   *   A fully-qualified path representing Control resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromControlName(controlName: string) {
+    return this.pathTemplates.controlPathTemplate.match(controlName).location;
+  }
+
+  /**
+   * Parse the catalog from Control resource.
+   *
+   * @param {string} controlName
+   *   A fully-qualified path representing Control resource.
+   * @returns {string} A string representing the catalog.
+   */
+  matchCatalogFromControlName(controlName: string) {
+    return this.pathTemplates.controlPathTemplate.match(controlName).catalog;
+  }
+
+  /**
+   * Parse the control from Control resource.
+   *
+   * @param {string} controlName
+   *   A fully-qualified path representing Control resource.
+   * @returns {string} A string representing the control.
+   */
+  matchControlFromControlName(controlName: string) {
+    return this.pathTemplates.controlPathTemplate.match(controlName).control;
   }
 
   /**
@@ -1432,6 +1641,77 @@ export class UserEventServiceClient {
    */
   matchProductFromProductName(productName: string) {
     return this.pathTemplates.productPathTemplate.match(productName).product;
+  }
+
+  /**
+   * Return a fully-qualified servingConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} catalog
+   * @param {string} serving_config
+   * @returns {string} Resource name string.
+   */
+  servingConfigPath(
+    project: string,
+    location: string,
+    catalog: string,
+    servingConfig: string
+  ) {
+    return this.pathTemplates.servingConfigPathTemplate.render({
+      project: project,
+      location: location,
+      catalog: catalog,
+      serving_config: servingConfig,
+    });
+  }
+
+  /**
+   * Parse the project from ServingConfig resource.
+   *
+   * @param {string} servingConfigName
+   *   A fully-qualified path representing ServingConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromServingConfigName(servingConfigName: string) {
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
+      .project;
+  }
+
+  /**
+   * Parse the location from ServingConfig resource.
+   *
+   * @param {string} servingConfigName
+   *   A fully-qualified path representing ServingConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromServingConfigName(servingConfigName: string) {
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
+      .location;
+  }
+
+  /**
+   * Parse the catalog from ServingConfig resource.
+   *
+   * @param {string} servingConfigName
+   *   A fully-qualified path representing ServingConfig resource.
+   * @returns {string} A string representing the catalog.
+   */
+  matchCatalogFromServingConfigName(servingConfigName: string) {
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
+      .catalog;
+  }
+
+  /**
+   * Parse the serving_config from ServingConfig resource.
+   *
+   * @param {string} servingConfigName
+   *   A fully-qualified path representing ServingConfig resource.
+   * @returns {string} A string representing the serving_config.
+   */
+  matchServingConfigFromServingConfigName(servingConfigName: string) {
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
+      .serving_config;
   }
 
   /**

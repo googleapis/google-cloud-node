@@ -17,8 +17,8 @@
 // ** All changes to this file may be overwritten. **
 
 /* global window */
-import * as gax from 'google-gax';
-import {
+import type * as gax from 'google-gax';
+import type {
   Callback,
   CallOptions,
   Descriptors,
@@ -30,7 +30,6 @@ import {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
@@ -40,7 +39,6 @@ import jsonProtos = require('../../protos/protos.json');
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
 import * as gapicConfig from './product_service_client_config.json';
-import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
 
 /**
@@ -103,8 +101,18 @@ export class ProductServiceClient {
    *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
+   * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
+   *     need to avoid loading the default gRPC version and want to use the fallback
+   *     HTTP implementation. Load only fallback version and pass it to the constructor:
+   *     ```
+   *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
+   *     const client = new ProductServiceClient({fallback: 'rest'}, gax);
+   *     ```
    */
-  constructor(opts?: ClientOptions) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof ProductServiceClient;
     const servicePath =
@@ -124,8 +132,13 @@ export class ProductServiceClient {
       opts['scopes'] = staticMembers.scopes;
     }
 
+    // Load google-gax module synchronously if needed
+    if (!gaxInstance) {
+      gaxInstance = require('google-gax') as typeof gax;
+    }
+
     // Choose either gRPC or proto-over-HTTP implementation of google-gax.
-    this._gaxModule = opts.fallback ? gax.fallback : gax;
+    this._gaxModule = opts.fallback ? gaxInstance.fallback : gaxInstance;
 
     // Create a `gaxGrpc` object, with any grpc-specific options sent to the client.
     this._gaxGrpc = new this._gaxModule.GrpcClient(opts);
@@ -146,7 +159,10 @@ export class ProductServiceClient {
     if (servicePath === staticMembers.servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
-    this.locationsClient = new LocationsClient(this._gaxGrpc, opts);
+    this.locationsClient = new this._gaxModule.LocationsClient(
+      this._gaxGrpc,
+      opts
+    );
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
@@ -170,14 +186,26 @@ export class ProductServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      attributesConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/catalogs/{catalog}/attributesConfig'
+      ),
       branchPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}/branches/{branch}'
       ),
       catalogPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}'
       ),
+      completionConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/catalogs/{catalog}/completionConfig'
+      ),
+      controlPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/catalogs/{catalog}/controls/{control}'
+      ),
       productPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}/branches/{branch}/products/{product}'
+      ),
+      servingConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/catalogs/{catalog}/servingConfigs/{serving_config}'
       ),
     };
 
@@ -319,7 +347,7 @@ export class ProductServiceClient {
     this.innerApiCalls = {};
 
     // Add a warn function to the client constructor so it can be easily tested.
-    this.warn = gax.warn;
+    this.warn = this._gaxModule.warn;
   }
 
   /**
@@ -550,7 +578,7 @@ export class ProductServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         parent: request.parent || '',
       });
     this.initialize();
@@ -642,7 +670,7 @@ export class ProductServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         name: request.name || '',
       });
     this.initialize();
@@ -753,7 +781,7 @@ export class ProductServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         'product.name': request.product!.name || '',
       });
     this.initialize();
@@ -858,7 +886,7 @@ export class ProductServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         name: request.name || '',
       });
     this.initialize();
@@ -889,29 +917,24 @@ export class ProductServiceClient {
    * @param {google.cloud.retail.v2.ImportErrorsConfig} request.errorsConfig
    *   The desired location of errors incurred during the Import.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Indicates which fields in the provided imported 'products' to update. If
-   *   not set, will by default update all fields.
+   *   Indicates which fields in the provided imported `products` to update. If
+   *   not set, all fields are updated.
    * @param {google.cloud.retail.v2.ImportProductsRequest.ReconciliationMode} request.reconciliationMode
    *   The mode of reconciliation between existing products and the products to be
    *   imported. Defaults to
    *   {@link google.cloud.retail.v2.ImportProductsRequest.ReconciliationMode.INCREMENTAL|ReconciliationMode.INCREMENTAL}.
    * @param {string} request.notificationPubsubTopic
    *   Full Pub/Sub topic name for receiving notification. If this field is set,
-   *   when the import is finished, a notification will be sent to
-   *   specified Pub/Sub topic. The message data will be JSON string of a
+   *   when the import is finished, a notification is sent to
+   *   specified Pub/Sub topic. The message data is JSON string of a
    *   {@link google.longrunning.Operation|Operation}.
    *
    *   Format of the Pub/Sub topic is `projects/{project}/topics/{topic}`. It has
    *   to be within the same project as
    *   {@link google.cloud.retail.v2.ImportProductsRequest.parent|ImportProductsRequest.parent}.
-   *   Make sure that both
-   *   `cloud-retail-customer-data-access@system.gserviceaccount.com` and
-   *   `service-<project number>@gcp-sa-retail.iam.gserviceaccount.com`
-   *   have the `pubsub.topics.publish` IAM permission on the topic.
-   *
-   *   Only supported when
-   *   {@link google.cloud.retail.v2.ImportProductsRequest.reconciliation_mode|ImportProductsRequest.reconciliation_mode}
-   *   is set to `FULL`.
+   *   Make sure that `service-<project
+   *   number>@gcp-sa-retail.iam.gserviceaccount.com` has the
+   *   `pubsub.topics.publish` IAM permission on the topic.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1002,7 +1025,7 @@ export class ProductServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         parent: request.parent || '',
       });
     this.initialize();
@@ -1028,11 +1051,12 @@ export class ProductServiceClient {
       protos.google.cloud.retail.v2.ImportMetadata
     >
   > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
+    const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.importProducts,
       this._gaxModule.createDefaultBackoffSettings()
@@ -1083,6 +1107,13 @@ export class ProductServiceClient {
    * {@link google.cloud.retail.v2.ProductService.AddFulfillmentPlaces|ProductService.AddFulfillmentPlaces},
    * and
    * {@link google.cloud.retail.v2.ProductService.RemoveFulfillmentPlaces|ProductService.RemoveFulfillmentPlaces}.
+   *
+   * The returned {@link |Operation}s will be obsolete after 1 day, and
+   * {@link |GetOperation} API will return NOT_FOUND afterwards.
+   *
+   * If conflicting updates are issued, the {@link |Operation}s associated with the
+   * stale updates will not be marked as {@link Operation.done|done} until being
+   * obsolete.
    *
    * This feature is only available for users who have Retail Search enabled.
    * Please enable Retail Search on Cloud Console before using this feature.
@@ -1257,7 +1288,7 @@ export class ProductServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         'inventory.name': request.inventory!.name || '',
       });
     this.initialize();
@@ -1283,11 +1314,12 @@ export class ProductServiceClient {
       protos.google.cloud.retail.v2.SetInventoryMetadata
     >
   > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
+    const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.setInventory,
       this._gaxModule.createDefaultBackoffSettings()
@@ -1310,6 +1342,13 @@ export class ProductServiceClient {
    * {@link google.cloud.retail.v2.ProductService.GetProduct|ProductService.GetProduct}
    * or
    * {@link google.cloud.retail.v2.ProductService.ListProducts|ProductService.ListProducts}.
+   *
+   * The returned {@link |Operation}s will be obsolete after 1 day, and
+   * {@link |GetOperation} API will return NOT_FOUND afterwards.
+   *
+   * If conflicting updates are issued, the {@link |Operation}s associated with the
+   * stale updates will not be marked as {@link Operation.done|done} until being
+   * obsolete.
    *
    * This feature is only available for users who have Retail Search enabled.
    * Please enable Retail Search on Cloud Console before using this feature.
@@ -1462,7 +1501,7 @@ export class ProductServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         product: request.product || '',
       });
     this.initialize();
@@ -1488,11 +1527,12 @@ export class ProductServiceClient {
       protos.google.cloud.retail.v2.AddFulfillmentPlacesMetadata
     >
   > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
+    const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.addFulfillmentPlaces,
       this._gaxModule.createDefaultBackoffSettings()
@@ -1515,6 +1555,13 @@ export class ProductServiceClient {
    * {@link google.cloud.retail.v2.ProductService.GetProduct|ProductService.GetProduct}
    * or
    * {@link google.cloud.retail.v2.ProductService.ListProducts|ProductService.ListProducts}.
+   *
+   * The returned {@link |Operation}s will be obsolete after 1 day, and
+   * {@link |GetOperation} API will return NOT_FOUND afterwards.
+   *
+   * If conflicting updates are issued, the {@link |Operation}s associated with the
+   * stale updates will not be marked as {@link Operation.done|done} until being
+   * obsolete.
    *
    * This feature is only available for users who have Retail Search enabled.
    * Please enable Retail Search on Cloud Console before using this feature.
@@ -1662,7 +1709,7 @@ export class ProductServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         product: request.product || '',
       });
     this.initialize();
@@ -1692,11 +1739,12 @@ export class ProductServiceClient {
       protos.google.cloud.retail.v2.RemoveFulfillmentPlacesMetadata
     >
   > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
+    const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.removeFulfillmentPlaces,
       this._gaxModule.createDefaultBackoffSettings()
@@ -1726,6 +1774,13 @@ export class ProductServiceClient {
    * and
    * {@link google.cloud.retail.v2.ProductService.UpdateProduct|ProductService.UpdateProduct}
    * has no effect on local inventories.
+   *
+   * The returned {@link |Operation}s will be obsolete after 1 day, and
+   * {@link |GetOperation} API will return NOT_FOUND afterwards.
+   *
+   * If conflicting updates are issued, the {@link |Operation}s associated with the
+   * stale updates will not be marked as {@link Operation.done|done} until being
+   * obsolete.
    *
    * This feature is only available for users who have Retail Search enabled.
    * Please enable Retail Search on Cloud Console before using this feature.
@@ -1860,7 +1915,7 @@ export class ProductServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         product: request.product || '',
       });
     this.initialize();
@@ -1886,11 +1941,12 @@ export class ProductServiceClient {
       protos.google.cloud.retail.v2.AddLocalInventoriesMetadata
     >
   > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
+    const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.addLocalInventories,
       this._gaxModule.createDefaultBackoffSettings()
@@ -1918,6 +1974,13 @@ export class ProductServiceClient {
    * and
    * {@link google.cloud.retail.v2.ProductService.UpdateProduct|ProductService.UpdateProduct}
    * has no effect on local inventories.
+   *
+   * The returned {@link |Operation}s will be obsolete after 1 day, and
+   * {@link |GetOperation} API will return NOT_FOUND afterwards.
+   *
+   * If conflicting updates are issued, the {@link |Operation}s associated with the
+   * stale updates will not be marked as {@link Operation.done|done} until being
+   * obsolete.
    *
    * This feature is only available for users who have Retail Search enabled.
    * Please enable Retail Search on Cloud Console before using this feature.
@@ -2036,7 +2099,7 @@ export class ProductServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         product: request.product || '',
       });
     this.initialize();
@@ -2066,11 +2129,12 @@ export class ProductServiceClient {
       protos.google.cloud.retail.v2.RemoveLocalInventoriesMetadata
     >
   > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
+    const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.removeLocalInventories,
       this._gaxModule.createDefaultBackoffSettings()
@@ -2233,7 +2297,7 @@ export class ProductServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         parent: request.parent || '',
       });
     this.initialize();
@@ -2338,7 +2402,7 @@ export class ProductServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         parent: request.parent || '',
       });
     const defaultCallSettings = this._defaults['listProducts'];
@@ -2452,7 +2516,7 @@ export class ProductServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         parent: request.parent || '',
       });
     const defaultCallSettings = this._defaults['listProducts'];
@@ -2726,6 +2790,61 @@ export class ProductServiceClient {
   // --------------------
 
   /**
+   * Return a fully-qualified attributesConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} catalog
+   * @returns {string} Resource name string.
+   */
+  attributesConfigPath(project: string, location: string, catalog: string) {
+    return this.pathTemplates.attributesConfigPathTemplate.render({
+      project: project,
+      location: location,
+      catalog: catalog,
+    });
+  }
+
+  /**
+   * Parse the project from AttributesConfig resource.
+   *
+   * @param {string} attributesConfigName
+   *   A fully-qualified path representing AttributesConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAttributesConfigName(attributesConfigName: string) {
+    return this.pathTemplates.attributesConfigPathTemplate.match(
+      attributesConfigName
+    ).project;
+  }
+
+  /**
+   * Parse the location from AttributesConfig resource.
+   *
+   * @param {string} attributesConfigName
+   *   A fully-qualified path representing AttributesConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromAttributesConfigName(attributesConfigName: string) {
+    return this.pathTemplates.attributesConfigPathTemplate.match(
+      attributesConfigName
+    ).location;
+  }
+
+  /**
+   * Parse the catalog from AttributesConfig resource.
+   *
+   * @param {string} attributesConfigName
+   *   A fully-qualified path representing AttributesConfig resource.
+   * @returns {string} A string representing the catalog.
+   */
+  matchCatalogFromAttributesConfigName(attributesConfigName: string) {
+    return this.pathTemplates.attributesConfigPathTemplate.match(
+      attributesConfigName
+    ).catalog;
+  }
+
+  /**
    * Return a fully-qualified branch resource name string.
    *
    * @param {string} project
@@ -2842,6 +2961,128 @@ export class ProductServiceClient {
   }
 
   /**
+   * Return a fully-qualified completionConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} catalog
+   * @returns {string} Resource name string.
+   */
+  completionConfigPath(project: string, location: string, catalog: string) {
+    return this.pathTemplates.completionConfigPathTemplate.render({
+      project: project,
+      location: location,
+      catalog: catalog,
+    });
+  }
+
+  /**
+   * Parse the project from CompletionConfig resource.
+   *
+   * @param {string} completionConfigName
+   *   A fully-qualified path representing CompletionConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromCompletionConfigName(completionConfigName: string) {
+    return this.pathTemplates.completionConfigPathTemplate.match(
+      completionConfigName
+    ).project;
+  }
+
+  /**
+   * Parse the location from CompletionConfig resource.
+   *
+   * @param {string} completionConfigName
+   *   A fully-qualified path representing CompletionConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromCompletionConfigName(completionConfigName: string) {
+    return this.pathTemplates.completionConfigPathTemplate.match(
+      completionConfigName
+    ).location;
+  }
+
+  /**
+   * Parse the catalog from CompletionConfig resource.
+   *
+   * @param {string} completionConfigName
+   *   A fully-qualified path representing CompletionConfig resource.
+   * @returns {string} A string representing the catalog.
+   */
+  matchCatalogFromCompletionConfigName(completionConfigName: string) {
+    return this.pathTemplates.completionConfigPathTemplate.match(
+      completionConfigName
+    ).catalog;
+  }
+
+  /**
+   * Return a fully-qualified control resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} catalog
+   * @param {string} control
+   * @returns {string} Resource name string.
+   */
+  controlPath(
+    project: string,
+    location: string,
+    catalog: string,
+    control: string
+  ) {
+    return this.pathTemplates.controlPathTemplate.render({
+      project: project,
+      location: location,
+      catalog: catalog,
+      control: control,
+    });
+  }
+
+  /**
+   * Parse the project from Control resource.
+   *
+   * @param {string} controlName
+   *   A fully-qualified path representing Control resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromControlName(controlName: string) {
+    return this.pathTemplates.controlPathTemplate.match(controlName).project;
+  }
+
+  /**
+   * Parse the location from Control resource.
+   *
+   * @param {string} controlName
+   *   A fully-qualified path representing Control resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromControlName(controlName: string) {
+    return this.pathTemplates.controlPathTemplate.match(controlName).location;
+  }
+
+  /**
+   * Parse the catalog from Control resource.
+   *
+   * @param {string} controlName
+   *   A fully-qualified path representing Control resource.
+   * @returns {string} A string representing the catalog.
+   */
+  matchCatalogFromControlName(controlName: string) {
+    return this.pathTemplates.controlPathTemplate.match(controlName).catalog;
+  }
+
+  /**
+   * Parse the control from Control resource.
+   *
+   * @param {string} controlName
+   *   A fully-qualified path representing Control resource.
+   * @returns {string} A string representing the control.
+   */
+  matchControlFromControlName(controlName: string) {
+    return this.pathTemplates.controlPathTemplate.match(controlName).control;
+  }
+
+  /**
    * Return a fully-qualified product resource name string.
    *
    * @param {string} project
@@ -2920,6 +3161,77 @@ export class ProductServiceClient {
    */
   matchProductFromProductName(productName: string) {
     return this.pathTemplates.productPathTemplate.match(productName).product;
+  }
+
+  /**
+   * Return a fully-qualified servingConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} catalog
+   * @param {string} serving_config
+   * @returns {string} Resource name string.
+   */
+  servingConfigPath(
+    project: string,
+    location: string,
+    catalog: string,
+    servingConfig: string
+  ) {
+    return this.pathTemplates.servingConfigPathTemplate.render({
+      project: project,
+      location: location,
+      catalog: catalog,
+      serving_config: servingConfig,
+    });
+  }
+
+  /**
+   * Parse the project from ServingConfig resource.
+   *
+   * @param {string} servingConfigName
+   *   A fully-qualified path representing ServingConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromServingConfigName(servingConfigName: string) {
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
+      .project;
+  }
+
+  /**
+   * Parse the location from ServingConfig resource.
+   *
+   * @param {string} servingConfigName
+   *   A fully-qualified path representing ServingConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromServingConfigName(servingConfigName: string) {
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
+      .location;
+  }
+
+  /**
+   * Parse the catalog from ServingConfig resource.
+   *
+   * @param {string} servingConfigName
+   *   A fully-qualified path representing ServingConfig resource.
+   * @returns {string} A string representing the catalog.
+   */
+  matchCatalogFromServingConfigName(servingConfigName: string) {
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
+      .catalog;
+  }
+
+  /**
+   * Parse the serving_config from ServingConfig resource.
+   *
+   * @param {string} servingConfigName
+   *   A fully-qualified path representing ServingConfig resource.
+   * @returns {string} A string representing the serving_config.
+   */
+  matchServingConfigFromServingConfigName(servingConfigName: string) {
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
+      .serving_config;
   }
 
   /**

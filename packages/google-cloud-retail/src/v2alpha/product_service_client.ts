@@ -17,8 +17,8 @@
 // ** All changes to this file may be overwritten. **
 
 /* global window */
-import * as gax from 'google-gax';
-import {
+import type * as gax from 'google-gax';
+import type {
   Callback,
   CallOptions,
   Descriptors,
@@ -30,7 +30,6 @@ import {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
@@ -40,7 +39,6 @@ import jsonProtos = require('../../protos/protos.json');
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
 import * as gapicConfig from './product_service_client_config.json';
-import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
 
 /**
@@ -103,8 +101,18 @@ export class ProductServiceClient {
    *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
+   * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
+   *     need to avoid loading the default gRPC version and want to use the fallback
+   *     HTTP implementation. Load only fallback version and pass it to the constructor:
+   *     ```
+   *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
+   *     const client = new ProductServiceClient({fallback: 'rest'}, gax);
+   *     ```
    */
-  constructor(opts?: ClientOptions) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof ProductServiceClient;
     const servicePath =
@@ -124,8 +132,13 @@ export class ProductServiceClient {
       opts['scopes'] = staticMembers.scopes;
     }
 
+    // Load google-gax module synchronously if needed
+    if (!gaxInstance) {
+      gaxInstance = require('google-gax') as typeof gax;
+    }
+
     // Choose either gRPC or proto-over-HTTP implementation of google-gax.
-    this._gaxModule = opts.fallback ? gax.fallback : gax;
+    this._gaxModule = opts.fallback ? gaxInstance.fallback : gaxInstance;
 
     // Create a `gaxGrpc` object, with any grpc-specific options sent to the client.
     this._gaxGrpc = new this._gaxModule.GrpcClient(opts);
@@ -146,7 +159,10 @@ export class ProductServiceClient {
     if (servicePath === staticMembers.servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
-    this.locationsClient = new LocationsClient(this._gaxGrpc, opts);
+    this.locationsClient = new this._gaxModule.LocationsClient(
+      this._gaxGrpc,
+      opts
+    );
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
@@ -345,7 +361,7 @@ export class ProductServiceClient {
     this.innerApiCalls = {};
 
     // Add a warn function to the client constructor so it can be easily tested.
-    this.warn = gax.warn;
+    this.warn = this._gaxModule.warn;
   }
 
   /**
@@ -583,7 +599,7 @@ export class ProductServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         parent: request.parent || '',
       });
     this.initialize();
@@ -677,7 +693,7 @@ export class ProductServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         name: request.name || '',
       });
     this.initialize();
@@ -794,7 +810,7 @@ export class ProductServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         'product.name': request.product!.name || '',
       });
     this.initialize();
@@ -906,7 +922,7 @@ export class ProductServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         name: request.name || '',
       });
     this.initialize();
@@ -1073,7 +1089,7 @@ export class ProductServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         parent: request.parent || '',
       });
     this.initialize();
@@ -1099,11 +1115,12 @@ export class ProductServiceClient {
       protos.google.cloud.retail.v2alpha.PurgeProductsMetadata
     >
   > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
+    const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.purgeProducts,
       this._gaxModule.createDefaultBackoffSettings()
@@ -1258,7 +1275,7 @@ export class ProductServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         parent: request.parent || '',
       });
     this.initialize();
@@ -1284,11 +1301,12 @@ export class ProductServiceClient {
       protos.google.cloud.retail.v2alpha.ImportMetadata
     >
   > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
+    const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.importProducts,
       this._gaxModule.createDefaultBackoffSettings()
@@ -1513,7 +1531,7 @@ export class ProductServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         'inventory.name': request.inventory!.name || '',
       });
     this.initialize();
@@ -1539,11 +1557,12 @@ export class ProductServiceClient {
       protos.google.cloud.retail.v2alpha.SetInventoryMetadata
     >
   > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
+    const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.setInventory,
       this._gaxModule.createDefaultBackoffSettings()
@@ -1718,7 +1737,7 @@ export class ProductServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         product: request.product || '',
       });
     this.initialize();
@@ -1744,11 +1763,12 @@ export class ProductServiceClient {
       protos.google.cloud.retail.v2alpha.AddFulfillmentPlacesMetadata
     >
   > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
+    const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.addFulfillmentPlaces,
       this._gaxModule.createDefaultBackoffSettings()
@@ -1918,7 +1938,7 @@ export class ProductServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         product: request.product || '',
       });
     this.initialize();
@@ -1948,11 +1968,12 @@ export class ProductServiceClient {
       protos.google.cloud.retail.v2alpha.RemoveFulfillmentPlacesMetadata
     >
   > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
+    const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.removeFulfillmentPlaces,
       this._gaxModule.createDefaultBackoffSettings()
@@ -2117,7 +2138,7 @@ export class ProductServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         product: request.product || '',
       });
     this.initialize();
@@ -2143,11 +2164,12 @@ export class ProductServiceClient {
       protos.google.cloud.retail.v2alpha.AddLocalInventoriesMetadata
     >
   > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
+    const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.addLocalInventories,
       this._gaxModule.createDefaultBackoffSettings()
@@ -2293,7 +2315,7 @@ export class ProductServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         product: request.product || '',
       });
     this.initialize();
@@ -2323,11 +2345,12 @@ export class ProductServiceClient {
       protos.google.cloud.retail.v2alpha.RemoveLocalInventoriesMetadata
     >
   > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
+    const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.removeLocalInventories,
       this._gaxModule.createDefaultBackoffSettings()
@@ -2506,7 +2529,7 @@ export class ProductServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         parent: request.parent || '',
       });
     this.initialize();
@@ -2621,7 +2644,7 @@ export class ProductServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         parent: request.parent || '',
       });
     const defaultCallSettings = this._defaults['listProducts'];
@@ -2745,7 +2768,7 @@ export class ProductServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         parent: request.parent || '',
       });
     const defaultCallSettings = this._defaults['listProducts'];
