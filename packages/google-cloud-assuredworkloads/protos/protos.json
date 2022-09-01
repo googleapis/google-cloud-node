@@ -562,36 +562,6 @@
                         }
                       }
                     },
-                    "RestrictAllowedServicesRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "restrictionType": {
-                          "type": "RestrictionType",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      },
-                      "nested": {
-                        "RestrictionType": {
-                          "values": {
-                            "RESTRICTION_TYPE_UNSPECIFIED": 0,
-                            "ALLOW_ALL_GCP_SERVICES": 1,
-                            "ALLOW_COMPLIANT_SERVICES": 2
-                          }
-                        }
-                      }
-                    },
-                    "RestrictAllowedServicesResponse": {
-                      "fields": {}
-                    },
                     "RestrictAllowedResourcesRequest": {
                       "fields": {
                         "name": {
@@ -782,7 +752,7 @@
                           "type": "string",
                           "id": 6,
                           "options": {
-                            "(google.api.field_behavior)": "INPUT_ONLY"
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
                         "il4Settings": {
@@ -913,7 +883,8 @@
                             "HITRUST": 7,
                             "EU_REGIONS_AND_SUPPORT": 8,
                             "CA_REGIONS_AND_SUPPORT": 9,
-                            "ITAR": 10
+                            "ITAR": 10,
+                            "AU_REGIONS_AND_US_SUPPORT": 11
                           }
                         },
                         "KMSSettings": {
@@ -1137,25 +1108,13 @@
                           "requestType": "UpdateWorkloadRequest",
                           "responseType": "Workload",
                           "options": {
-                            "(google.api.http).patch": "/v1beta1/{workload.name=organizations/*/locations/*/workloads/*}",
-                            "(google.api.http).body": "workload",
                             "(google.api.method_signature)": "workload,update_mask"
                           },
                           "parsedOptions": [
                             {
-                              "(google.api.http)": {
-                                "patch": "/v1beta1/{workload.name=organizations/*/locations/*/workloads/*}",
-                                "body": "workload"
-                              }
-                            },
-                            {
                               "(google.api.method_signature)": "workload,update_mask"
                             }
                           ]
-                        },
-                        "RestrictAllowedServices": {
-                          "requestType": "RestrictAllowedServicesRequest",
-                          "responseType": "RestrictAllowedServicesResponse"
                         },
                         "RestrictAllowedResources": {
                           "requestType": "RestrictAllowedResourcesRequest",

@@ -1767,210 +1767,6 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
-                /** Properties of a RestrictAllowedServicesRequest. */
-                interface IRestrictAllowedServicesRequest {
-
-                    /** RestrictAllowedServicesRequest name */
-                    name?: (string|null);
-
-                    /** RestrictAllowedServicesRequest restrictionType */
-                    restrictionType?: (google.cloud.assuredworkloads.v1beta1.RestrictAllowedServicesRequest.RestrictionType|keyof typeof google.cloud.assuredworkloads.v1beta1.RestrictAllowedServicesRequest.RestrictionType|null);
-                }
-
-                /** Represents a RestrictAllowedServicesRequest. */
-                class RestrictAllowedServicesRequest implements IRestrictAllowedServicesRequest {
-
-                    /**
-                     * Constructs a new RestrictAllowedServicesRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.assuredworkloads.v1beta1.IRestrictAllowedServicesRequest);
-
-                    /** RestrictAllowedServicesRequest name. */
-                    public name: string;
-
-                    /** RestrictAllowedServicesRequest restrictionType. */
-                    public restrictionType: (google.cloud.assuredworkloads.v1beta1.RestrictAllowedServicesRequest.RestrictionType|keyof typeof google.cloud.assuredworkloads.v1beta1.RestrictAllowedServicesRequest.RestrictionType);
-
-                    /**
-                     * Creates a new RestrictAllowedServicesRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns RestrictAllowedServicesRequest instance
-                     */
-                    public static create(properties?: google.cloud.assuredworkloads.v1beta1.IRestrictAllowedServicesRequest): google.cloud.assuredworkloads.v1beta1.RestrictAllowedServicesRequest;
-
-                    /**
-                     * Encodes the specified RestrictAllowedServicesRequest message. Does not implicitly {@link google.cloud.assuredworkloads.v1beta1.RestrictAllowedServicesRequest.verify|verify} messages.
-                     * @param message RestrictAllowedServicesRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.assuredworkloads.v1beta1.IRestrictAllowedServicesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified RestrictAllowedServicesRequest message, length delimited. Does not implicitly {@link google.cloud.assuredworkloads.v1beta1.RestrictAllowedServicesRequest.verify|verify} messages.
-                     * @param message RestrictAllowedServicesRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.assuredworkloads.v1beta1.IRestrictAllowedServicesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a RestrictAllowedServicesRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns RestrictAllowedServicesRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.assuredworkloads.v1beta1.RestrictAllowedServicesRequest;
-
-                    /**
-                     * Decodes a RestrictAllowedServicesRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns RestrictAllowedServicesRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.assuredworkloads.v1beta1.RestrictAllowedServicesRequest;
-
-                    /**
-                     * Verifies a RestrictAllowedServicesRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a RestrictAllowedServicesRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns RestrictAllowedServicesRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.assuredworkloads.v1beta1.RestrictAllowedServicesRequest;
-
-                    /**
-                     * Creates a plain object from a RestrictAllowedServicesRequest message. Also converts values to other types if specified.
-                     * @param message RestrictAllowedServicesRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.assuredworkloads.v1beta1.RestrictAllowedServicesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this RestrictAllowedServicesRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for RestrictAllowedServicesRequest
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                namespace RestrictAllowedServicesRequest {
-
-                    /** RestrictionType enum. */
-                    enum RestrictionType {
-                        RESTRICTION_TYPE_UNSPECIFIED = 0,
-                        ALLOW_ALL_GCP_SERVICES = 1,
-                        ALLOW_COMPLIANT_SERVICES = 2
-                    }
-                }
-
-                /** Properties of a RestrictAllowedServicesResponse. */
-                interface IRestrictAllowedServicesResponse {
-                }
-
-                /** Represents a RestrictAllowedServicesResponse. */
-                class RestrictAllowedServicesResponse implements IRestrictAllowedServicesResponse {
-
-                    /**
-                     * Constructs a new RestrictAllowedServicesResponse.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.assuredworkloads.v1beta1.IRestrictAllowedServicesResponse);
-
-                    /**
-                     * Creates a new RestrictAllowedServicesResponse instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns RestrictAllowedServicesResponse instance
-                     */
-                    public static create(properties?: google.cloud.assuredworkloads.v1beta1.IRestrictAllowedServicesResponse): google.cloud.assuredworkloads.v1beta1.RestrictAllowedServicesResponse;
-
-                    /**
-                     * Encodes the specified RestrictAllowedServicesResponse message. Does not implicitly {@link google.cloud.assuredworkloads.v1beta1.RestrictAllowedServicesResponse.verify|verify} messages.
-                     * @param message RestrictAllowedServicesResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.assuredworkloads.v1beta1.IRestrictAllowedServicesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified RestrictAllowedServicesResponse message, length delimited. Does not implicitly {@link google.cloud.assuredworkloads.v1beta1.RestrictAllowedServicesResponse.verify|verify} messages.
-                     * @param message RestrictAllowedServicesResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.assuredworkloads.v1beta1.IRestrictAllowedServicesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a RestrictAllowedServicesResponse message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns RestrictAllowedServicesResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.assuredworkloads.v1beta1.RestrictAllowedServicesResponse;
-
-                    /**
-                     * Decodes a RestrictAllowedServicesResponse message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns RestrictAllowedServicesResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.assuredworkloads.v1beta1.RestrictAllowedServicesResponse;
-
-                    /**
-                     * Verifies a RestrictAllowedServicesResponse message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a RestrictAllowedServicesResponse message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns RestrictAllowedServicesResponse
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.assuredworkloads.v1beta1.RestrictAllowedServicesResponse;
-
-                    /**
-                     * Creates a plain object from a RestrictAllowedServicesResponse message. Also converts values to other types if specified.
-                     * @param message RestrictAllowedServicesResponse
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.assuredworkloads.v1beta1.RestrictAllowedServicesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this RestrictAllowedServicesResponse to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for RestrictAllowedServicesResponse
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
                 /** Properties of a RestrictAllowedResourcesRequest. */
                 interface IRestrictAllowedResourcesRequest {
 
@@ -3133,7 +2929,8 @@ export namespace google {
                         HITRUST = 7,
                         EU_REGIONS_AND_SUPPORT = 8,
                         CA_REGIONS_AND_SUPPORT = 9,
-                        ITAR = 10
+                        ITAR = 10,
+                        AU_REGIONS_AND_US_SUPPORT = 11
                     }
 
                     /** Properties of a KMSSettings. */
@@ -4039,20 +3836,6 @@ export namespace google {
                     public updateWorkload(request: google.cloud.assuredworkloads.v1beta1.IUpdateWorkloadRequest): Promise<google.cloud.assuredworkloads.v1beta1.Workload>;
 
                     /**
-                     * Calls RestrictAllowedServices.
-                     * @param request RestrictAllowedServicesRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and RestrictAllowedServicesResponse
-                     */
-                    public restrictAllowedServices(request: google.cloud.assuredworkloads.v1beta1.IRestrictAllowedServicesRequest, callback: google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsService.RestrictAllowedServicesCallback): void;
-
-                    /**
-                     * Calls RestrictAllowedServices.
-                     * @param request RestrictAllowedServicesRequest message or plain object
-                     * @returns Promise
-                     */
-                    public restrictAllowedServices(request: google.cloud.assuredworkloads.v1beta1.IRestrictAllowedServicesRequest): Promise<google.cloud.assuredworkloads.v1beta1.RestrictAllowedServicesResponse>;
-
-                    /**
                      * Calls RestrictAllowedResources.
                      * @param request RestrictAllowedResourcesRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and RestrictAllowedResourcesResponse
@@ -4138,13 +3921,6 @@ export namespace google {
                      * @param [response] Workload
                      */
                     type UpdateWorkloadCallback = (error: (Error|null), response?: google.cloud.assuredworkloads.v1beta1.Workload) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsService|restrictAllowedServices}.
-                     * @param error Error, if any
-                     * @param [response] RestrictAllowedServicesResponse
-                     */
-                    type RestrictAllowedServicesCallback = (error: (Error|null), response?: google.cloud.assuredworkloads.v1beta1.RestrictAllowedServicesResponse) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsService|restrictAllowedResources}.

@@ -280,16 +280,7 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.UpdateWorkloadRequest()
       );
-      request.workload = {};
-      request.workload.name = '';
-      const expectedHeaderRequestParams = 'workload.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.Workload()
       );
@@ -315,16 +306,7 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.UpdateWorkloadRequest()
       );
-      request.workload = {};
-      request.workload.name = '';
-      const expectedHeaderRequestParams = 'workload.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.Workload()
       );
@@ -366,16 +348,7 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.UpdateWorkloadRequest()
       );
-      request.workload = {};
-      request.workload.name = '';
-      const expectedHeaderRequestParams = 'workload.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.updateWorkload = stubSimpleCall(
         undefined,
@@ -401,131 +374,9 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.UpdateWorkloadRequest()
       );
-      request.workload = {};
-      request.workload.name = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateWorkload(request), expectedError);
-    });
-  });
-
-  describe('restrictAllowedServices', () => {
-    it('invokes restrictAllowedServices without error', async () => {
-      const client =
-        new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.assuredworkloads.v1beta1.RestrictAllowedServicesRequest()
-      );
-      const expectedOptions = {otherArgs: {headers: {}}};
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.assuredworkloads.v1beta1.RestrictAllowedServicesResponse()
-      );
-      client.innerApiCalls.restrictAllowedServices =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.restrictAllowedServices(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.restrictAllowedServices as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-
-    it('invokes restrictAllowedServices without error using callback', async () => {
-      const client =
-        new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.assuredworkloads.v1beta1.RestrictAllowedServicesRequest()
-      );
-      const expectedOptions = {otherArgs: {headers: {}}};
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.assuredworkloads.v1beta1.RestrictAllowedServicesResponse()
-      );
-      client.innerApiCalls.restrictAllowedServices =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.restrictAllowedServices(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.assuredworkloads.v1beta1.IRestrictAllowedServicesResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.restrictAllowedServices as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
-    });
-
-    it('invokes restrictAllowedServices with error', async () => {
-      const client =
-        new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.assuredworkloads.v1beta1.RestrictAllowedServicesRequest()
-      );
-      const expectedOptions = {otherArgs: {headers: {}}};
-      const expectedError = new Error('expected');
-      client.innerApiCalls.restrictAllowedServices = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.restrictAllowedServices(request),
-        expectedError
-      );
-      assert(
-        (client.innerApiCalls.restrictAllowedServices as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-
-    it('invokes restrictAllowedServices with closed client', async () => {
-      const client =
-        new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.assuredworkloads.v1beta1.RestrictAllowedServicesRequest()
-      );
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(
-        client.restrictAllowedServices(request),
-        expectedError
-      );
     });
   });
 

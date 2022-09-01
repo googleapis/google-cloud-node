@@ -104,50 +104,6 @@
             }
         },
         {
-            "regionTag": "assuredworkloads_v1beta1_generated_AssuredWorkloadsService_RestrictAllowedServices_async",
-            "title": "AssuredWorkloadsService restrictAllowedServices Sample",
-            "origin": "API_DEFINITION",
-            "description": " Restrict the list of services allowed in the Workload environment. The current list of allowed services can be found at https://cloud.google.com/assured-workloads/docs/supported-products In addition to assuredworkloads.workload.update permission, the user should also have orgpolicy.policy.set permission on the folder resource to use this functionality.",
-            "canonical": true,
-            "file": "assured_workloads_service.restrict_allowed_services.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 62,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "RestrictAllowedServices",
-                "fullName": "google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsService.RestrictAllowedServices",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "restriction_type",
-                        "type": ".google.cloud.assuredworkloads.v1beta1.RestrictAllowedServicesRequest.RestrictionType"
-                    }
-                ],
-                "resultType": ".google.cloud.assuredworkloads.v1beta1.RestrictAllowedServicesResponse",
-                "client": {
-                    "shortName": "AssuredWorkloadsServiceClient",
-                    "fullName": "google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsServiceClient"
-                },
-                "method": {
-                    "shortName": "RestrictAllowedServices",
-                    "fullName": "google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsService.RestrictAllowedServices",
-                    "service": {
-                        "shortName": "AssuredWorkloadsService",
-                        "fullName": "google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsService"
-                    }
-                }
-            }
-        },
-        {
             "regionTag": "assuredworkloads_v1beta1_generated_AssuredWorkloadsService_RestrictAllowedResources_async",
             "title": "AssuredWorkloadsService restrictAllowedResources Sample",
             "origin": "API_DEFINITION",
@@ -279,14 +235,14 @@
             "regionTag": "assuredworkloads_v1beta1_generated_AssuredWorkloadsService_AnalyzeWorkloadMove_async",
             "title": "AssuredWorkloadsService analyzeWorkloadMove Sample",
             "origin": "API_DEFINITION",
-            "description": " Analyze if the source Assured Workloads can be moved to the target Assured Workload",
+            "description": " A request to analyze a hypothetical move of a source project or project-based workload to a target (destination) folder-based workload.",
             "canonical": true,
             "file": "assured_workloads_service.analyze_workload_move.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 76,
+                    "end": 75,
                     "type": "FULL"
                 }
             ],

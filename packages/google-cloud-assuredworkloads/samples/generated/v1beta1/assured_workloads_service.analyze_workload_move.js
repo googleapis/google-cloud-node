@@ -29,30 +29,29 @@ function main(target) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  The Source is project based Workload to be moved. This is the workloads's
-   *  relative path in the API, formatted as
-   *  "organizations/{organization_id}/locations/{location_id}/workloads/{workload_id}".
-   *  For example,
-   *  "organizations/123/locations/us-east1/workloads/assured-workload-1".
+   *  The source type is a project-based workload. Specify the workloads's
+   *  relative resource name, formatted as:
+   *  "organizations/{ORGANIZATION_ID}/locations/{LOCATION_ID}/workloads/{WORKLOAD_ID}"
+   *  For example:
+   *  "organizations/123/locations/us-east1/workloads/assured-workload-1"
    */
   // const source = 'abc123'
   /**
-   *  The Source is a project based to be moved.
-   *  This is the project's relative path in the API, formatted as
-   *  "cloudresourcemanager.googleapis.com/projects/{project_number}"
-   *  "projects/{project_number}"
-   *  "cloudresourcemanager.googleapis.com/projects/{project_id}"
-   *  "projects/{project_id}"
-   *  For example,
-   *  "organizations/123/locations/us-east1/workloads/assured-workload-1".
+   *  The source type is a project. Specify the project's relative resource
+   *  name, formatted as either a project number or a project ID:
+   *  "projects/{PROJECT_NUMBER}" or "projects/{PROJECT_ID}"
+   *  For example:
+   *  "projects/951040570662" when specifying a project number, or
+   *  "projects/my-project-123" when specifying a project ID.
    */
   // const project = 'my-project'
   /**
-   *  Required. The resource name of the Workload to fetch. This is the workloads's
-   *  relative path in the API, formatted as
-   *  "organizations/{organization_id}/locations/{location_id}/workloads/{workload_id}".
-   *  For example,
-   *  "organizations/123/locations/us-east1/workloads/assured-workload-2".
+   *  Required. The resource ID of the folder-based destination workload. This workload is
+   *  where the source project will hypothetically be moved to. Specify the
+   *  workload's relative resource name, formatted as:
+   *  "organizations/{ORGANIZATION_ID}/locations/{LOCATION_ID}/workloads/{WORKLOAD_ID}"
+   *  For example:
+   *  "organizations/123/locations/us-east1/workloads/assured-workload-2"
    */
   // const target = 'abc123'
 
