@@ -186,6 +186,12 @@ describe('quickstart sample tests', () => {
     assert.include(stdout, 'relatedAsset');
   });
 
+  it('should get effective iam policies successfully', async () => {
+    const assetName = `//storage.googleapis.com/${bucketName}`;
+    const stdout = execSync(`node getBatchEffectiveIamPolicies ${assetName}`);
+    assert.include(stdout, assetName);
+  });
+
   it('should analyze iam policy successfully', async () => {
     const stdout = execSync('node analyzeIamPolicy');
     assert.include(stdout, '//cloudresourcemanager.googleapis.com/projects');
