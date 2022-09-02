@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/logging-winston?activeTab=versions
 
+## [5.1.5](https://github.com/googleapis/nodejs-logging-winston/compare/v5.1.4...v5.1.5) (2022-09-02)
+
+
+### Bug Fixes
+
+* MaxRetries parameter is ignored ([#737](https://github.com/googleapis/nodejs-logging-winston/issues/737)) ([f806489](https://github.com/googleapis/nodejs-logging-winston/commit/f806489f9f372beb467ee1cf3c83ad7bd6c2a23d))
+
 ## [5.1.4](https://github.com/googleapis/nodejs-logging-winston/compare/v5.1.3...v5.1.4) (2022-08-25)
 
 
