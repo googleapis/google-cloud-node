@@ -63,7 +63,6 @@ describe('quickstart sample tests', () => {
     await bucket.create();
     await bigquery.createDataset(datasetId, options);
     await bigquery.dataset(datasetId).exists();
-    // [vm] = await zone.vm(vmName, {os: 'ubuntu'});
 
     const [response] = await instancesClient.insert({
       instanceResource: {
@@ -107,6 +106,22 @@ describe('quickstart sample tests', () => {
   after(async () => {
     await bucket.delete();
     await bigquery.dataset(datasetId).delete({force: true}).catch(console.warn);
+    const [response] = await instancesClient.delete({
+      instance: instanceName,
+      project: projectId,
+      zone,
+    });
+    let operation = response.latestResponse;
+    const operationsClient = new compute.ZoneOperationsClient();
+
+    // Wait for the delete operation to complete.
+    while (operation.status !== 'DONE') {
+      [operation] = await operationsClient.wait({
+        operation: operation.name,
+        project: projectId,
+        zone: operation.zone.split('/').pop(),
+      });
+    }
   });
 
   it('should export assets to specified path', async () => {
