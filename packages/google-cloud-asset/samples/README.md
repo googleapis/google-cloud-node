@@ -20,6 +20,7 @@
   * [Export Assets](#export-assets)
   * [Export Assets To BigQuery](#export-assets-to-bigquery)
   * [Get Batch Asset History](#get-batch-asset-history)
+  * [Batch Get Effective Iam Policies](#batch-get-effective-iam-policies)
   * [Get Feed](#get-feed)
   * [List Assets](#list-assets)
   * [List Feeds](#list-feeds)
@@ -188,6 +189,25 @@ __Usage:__
 
 
 `node getBatchAssetHistory "storage.googleapis.com/<BUCKET_NAME>"`
+
+
+-----
+
+
+
+
+### Batch Get Effective Iam Policies
+
+Batch get effective IAM policies that match a request.
+
+View the [source code](https://github.com/googleapis/nodejs-asset/blob/main/samples/getBatchEffectiveIamPolicies.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-asset&page=editor&open_in_editor=samples/getBatchEffectiveIamPolicies.js,samples/README.md)
+
+__Usage:__
+
+
+`node batchGetEffectiveIamPolicies`
 
 
 -----
