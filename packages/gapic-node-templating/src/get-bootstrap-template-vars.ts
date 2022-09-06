@@ -163,7 +163,7 @@ export async function getServiceName(octokit: Octokit, apiId: string) {
   ).data as GHDir[];
 
   for (const file of dir) {
-    if (file.name.endsWith('.yaml')) {
+    if (file.name.endsWith('.yaml') && !file.name.includes('gapic')) {
       path = `${path}/${file.name}`;
     }
   }
