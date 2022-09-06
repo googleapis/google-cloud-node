@@ -31,8 +31,8 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-
-
+  * [Using the client library](#using-the-client-library)
+* [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
@@ -54,6 +54,52 @@ npm install @google-cloud/metricsscope
 ```
 
 
+### Using the client library
+
+```javascript
+/**
+ * This snippet has been automatically generated and should be regarded as a code template only.
+ * It will require modifications to work.
+ * It may require correct/in-range values for request initialization.
+ * TODO(developer): Uncomment these variables before running the sample.
+ */
+/**
+ *  Required. The resource name of the `Monitored Project` being requested.
+ *  Example:
+ *  `projects/{MONITORED_PROJECT_ID_OR_NUMBER}`
+ */
+// const monitoredResourceContainer = 'abc123'
+
+// Imports the Metricsscope library
+const {MetricsScopesClient} = require('@google-cloud/metricsscope').v1;
+
+// Instantiates a client
+const metricsscopeClient = new MetricsScopesClient();
+
+async function callListMetricsScopesByMonitoredProject() {
+  // Construct request
+  const request = {
+    monitoredResourceContainer,
+  };
+
+  // Run request
+  const response = await metricsscopeClient.listMetricsScopesByMonitoredProject(request);
+  console.log(response);
+}
+
+callListMetricsScopesByMonitoredProject();
+
+```
+
+
+
+## Samples
+
+Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/tree/main/samples) directory. Each sample's `README.md` has instructions for running its sample.
+
+| Sample                      | Source Code                       | Try it |
+| --------------------------- | --------------------------------- | ------ |
+| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/packages/google-monitoring-metricsscope/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/packages/google-monitoring-metricsscope/samples/quickstart.js,samples/README.md) |
 
 
 

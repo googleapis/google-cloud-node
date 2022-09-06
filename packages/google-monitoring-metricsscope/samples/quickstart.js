@@ -16,8 +16,6 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-
-
 'use strict';
 
 function main(monitoredResourceContainer) {
@@ -48,7 +46,8 @@ function main(monitoredResourceContainer) {
     };
 
     // Run request
-    const response = await metricsscopeClient.listMetricsScopesByMonitoredProject(request);
+    const response =
+      await metricsscopeClient.listMetricsScopesByMonitoredProject(request);
     console.log(response);
   }
 
