@@ -83,7 +83,8 @@ async function callListMetricsScopesByMonitoredProject() {
   };
 
   // Run request
-  const response = await metricsscopeClient.listMetricsScopesByMonitoredProject(request);
+  const response =
+    await metricsscopeClient.listMetricsScopesByMonitoredProject(request);
   console.log(response);
 }
 
