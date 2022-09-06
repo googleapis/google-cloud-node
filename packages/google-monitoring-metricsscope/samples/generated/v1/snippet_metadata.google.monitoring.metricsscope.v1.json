@@ -1,0 +1,179 @@
+{
+    "clientLibrary": {
+        "name": "nodejs-metricsscope",
+        "version": "0.1.0",
+        "language": "TYPESCRIPT",
+        "apis": [
+            {
+                "id": "google.monitoring.metricsscope.v1",
+                "version": "v1"
+            }
+        ]
+    },
+    "snippets": [
+        {
+            "regionTag": "monitoring_v1_generated_MetricsScopes_GetMetricsScope_async",
+            "title": "MetricsScopes getMetricsScope Sample",
+            "origin": "API_DEFINITION",
+            "description": " Returns a specific `Metrics Scope`.",
+            "canonical": true,
+            "file": "metrics_scopes.get_metrics_scope.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetMetricsScope",
+                "fullName": "google.monitoring.metricsscope.v1.MetricsScopes.GetMetricsScope",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.monitoring.metricsscope.v1.MetricsScope",
+                "client": {
+                    "shortName": "MetricsScopesClient",
+                    "fullName": "google.monitoring.metricsscope.v1.MetricsScopesClient"
+                },
+                "method": {
+                    "shortName": "GetMetricsScope",
+                    "fullName": "google.monitoring.metricsscope.v1.MetricsScopes.GetMetricsScope",
+                    "service": {
+                        "shortName": "MetricsScopes",
+                        "fullName": "google.monitoring.metricsscope.v1.MetricsScopes"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "monitoring_v1_generated_MetricsScopes_ListMetricsScopesByMonitoredProject_async",
+            "title": "MetricsScopes listMetricsScopesByMonitoredProject Sample",
+            "origin": "API_DEFINITION",
+            "description": " Returns a list of every `Metrics Scope` that a specific `MonitoredProject` has been added to. The metrics scope representing the specified monitored project will always be the first entry in the response.",
+            "canonical": true,
+            "file": "metrics_scopes.list_metrics_scopes_by_monitored_project.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListMetricsScopesByMonitoredProject",
+                "fullName": "google.monitoring.metricsscope.v1.MetricsScopes.ListMetricsScopesByMonitoredProject",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "monitored_resource_container",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.monitoring.metricsscope.v1.ListMetricsScopesByMonitoredProjectResponse",
+                "client": {
+                    "shortName": "MetricsScopesClient",
+                    "fullName": "google.monitoring.metricsscope.v1.MetricsScopesClient"
+                },
+                "method": {
+                    "shortName": "ListMetricsScopesByMonitoredProject",
+                    "fullName": "google.monitoring.metricsscope.v1.MetricsScopes.ListMetricsScopesByMonitoredProject",
+                    "service": {
+                        "shortName": "MetricsScopes",
+                        "fullName": "google.monitoring.metricsscope.v1.MetricsScopes"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "monitoring_v1_generated_MetricsScopes_CreateMonitoredProject_async",
+            "title": "MetricsScopes createMonitoredProject Sample",
+            "origin": "API_DEFINITION",
+            "description": " Adds a `MonitoredProject` with the given project ID to the specified `Metrics Scope`.",
+            "canonical": true,
+            "file": "metrics_scopes.create_monitored_project.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 65,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateMonitoredProject",
+                "fullName": "google.monitoring.metricsscope.v1.MetricsScopes.CreateMonitoredProject",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "monitored_project",
+                        "type": ".google.monitoring.metricsscope.v1.MonitoredProject"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "MetricsScopesClient",
+                    "fullName": "google.monitoring.metricsscope.v1.MetricsScopesClient"
+                },
+                "method": {
+                    "shortName": "CreateMonitoredProject",
+                    "fullName": "google.monitoring.metricsscope.v1.MetricsScopes.CreateMonitoredProject",
+                    "service": {
+                        "shortName": "MetricsScopes",
+                        "fullName": "google.monitoring.metricsscope.v1.MetricsScopes"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "monitoring_v1_generated_MetricsScopes_DeleteMonitoredProject_async",
+            "title": "MetricsScopes deleteMonitoredProject Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes a `MonitoredProject` from the specified `Metrics Scope`.",
+            "canonical": true,
+            "file": "metrics_scopes.delete_monitored_project.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 59,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteMonitoredProject",
+                "fullName": "google.monitoring.metricsscope.v1.MetricsScopes.DeleteMonitoredProject",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "MetricsScopesClient",
+                    "fullName": "google.monitoring.metricsscope.v1.MetricsScopesClient"
+                },
+                "method": {
+                    "shortName": "DeleteMonitoredProject",
+                    "fullName": "google.monitoring.metricsscope.v1.MetricsScopes.DeleteMonitoredProject",
+                    "service": {
+                        "shortName": "MetricsScopes",
+                        "fullName": "google.monitoring.metricsscope.v1.MetricsScopes"
+                    }
+                }
+            }
+        }
+    ]
+}
