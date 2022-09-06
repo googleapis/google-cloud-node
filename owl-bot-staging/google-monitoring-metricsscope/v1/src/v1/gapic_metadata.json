@@ -1,0 +1,63 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.monitoring.metricsscope.v1",
+  "libraryPackage": "@google-cloud/metricsscope",
+  "services": {
+    "MetricsScopes": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "MetricsScopesClient",
+          "rpcs": {
+            "GetMetricsScope": {
+              "methods": [
+                "getMetricsScope"
+              ]
+            },
+            "ListMetricsScopesByMonitoredProject": {
+              "methods": [
+                "listMetricsScopesByMonitoredProject"
+              ]
+            },
+            "CreateMonitoredProject": {
+              "methods": [
+                "createMonitoredProject"
+              ]
+            },
+            "DeleteMonitoredProject": {
+              "methods": [
+                "deleteMonitoredProject"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "MetricsScopesClient",
+          "rpcs": {
+            "GetMetricsScope": {
+              "methods": [
+                "getMetricsScope"
+              ]
+            },
+            "ListMetricsScopesByMonitoredProject": {
+              "methods": [
+                "listMetricsScopesByMonitoredProject"
+              ]
+            },
+            "CreateMonitoredProject": {
+              "methods": [
+                "createMonitoredProject"
+              ]
+            },
+            "DeleteMonitoredProject": {
+              "methods": [
+                "deleteMonitoredProject"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

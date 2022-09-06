@@ -1,0 +1,4 @@
+[
+  "../../protos/google/monitoring/metricsscope/v1/metrics_scope.proto",
+  "../../protos/google/monitoring/metricsscope/v1/metrics_scopes.proto"
+]
