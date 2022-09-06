@@ -1741,7 +1741,10 @@
                         },
                         "serviceAccountEmail": {
                           "type": "string",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "deprecated": true
+                          }
                         },
                         "serviceAccount": {
                           "type": "ServiceAccount",

@@ -204,6 +204,9 @@ describe('get bootstrap template vars', () => {
           {
             name: 'cloudkms_grpc_service_config.json',
           },
+          {
+            name: 'cloudkms_gapic.yaml',
+          },
         ])
         .get(
           '/repos/googleapis/googleapis/contents/google%2Fcloud%2Fkms%2Fv1%2Fcloudkms_v1.yaml'
