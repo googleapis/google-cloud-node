@@ -4,6 +4,35 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/nodejs-vision?activeTab=versions
 
+## [3.0.0](https://github.com/googleapis/nodejs-vision/compare/v2.4.2...v3.0.0) (2022-09-01)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update library to use Node 12 (#1016)
+* BatchAnnotateImagesRequest.requests is required (#1011)
+
+### Features
+
+* Add TextDetectionParams.advanced_ocr_options ([#1034](https://github.com/googleapis/nodejs-vision/issues/1034)) ([828f045](https://github.com/googleapis/nodejs-vision/commit/828f045563eff5668dc95f628745716978759788))
+* Support regapic LRO ([a5f8f72](https://github.com/googleapis/nodejs-vision/commit/a5f8f72328655c7959475d0258df164b576af570))
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#1042](https://github.com/googleapis/nodejs-vision/issues/1042)) ([4cc32dc](https://github.com/googleapis/nodejs-vision/commit/4cc32dc2068cd9490b28a8869a1d6de6c7a7b0c3))
+* BatchAnnotateImagesRequest.requests is required ([#1011](https://github.com/googleapis/nodejs-vision/issues/1011)) ([574f43e](https://github.com/googleapis/nodejs-vision/commit/574f43ecfadab77aa992aae2a24e36a3bb9f7b22))
+* Better support for fallback mode ([#1037](https://github.com/googleapis/nodejs-vision/issues/1037)) ([ea578e7](https://github.com/googleapis/nodejs-vision/commit/ea578e784271fd2f68c330850f64d1d9e406625d))
+* Change import long to require ([#1038](https://github.com/googleapis/nodejs-vision/issues/1038)) ([b57b334](https://github.com/googleapis/nodejs-vision/commit/b57b334c35591e73f875ef61f375f452e78ce094))
+* **deps:** Update dependency redis to ~4.3.0 ([#1039](https://github.com/googleapis/nodejs-vision/issues/1039)) ([ea26d33](https://github.com/googleapis/nodejs-vision/commit/ea26d3349b1e2db8eb021924b1ee2406f135b712))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-vision/issues/1553)) ([#1041](https://github.com/googleapis/nodejs-vision/issues/1041)) ([4de6e42](https://github.com/googleapis/nodejs-vision/commit/4de6e42aada9228574bc2f50d6b6e10f7f244b4d))
+* Remove pip install statements ([#1546](https://github.com/googleapis/nodejs-vision/issues/1546)) ([#1040](https://github.com/googleapis/nodejs-vision/issues/1040)) ([85f115f](https://github.com/googleapis/nodejs-vision/commit/85f115f31f9b26c64e7b2704e6f908b88673db86))
+
+
+### Build System
+
+* Update library to use Node 12 ([#1016](https://github.com/googleapis/nodejs-vision/issues/1016)) ([12bd0f6](https://github.com/googleapis/nodejs-vision/commit/12bd0f66db6c497eb8e2d8a8236dca95432043b8))
+
 ### [2.4.2](https://www.github.com/googleapis/nodejs-vision/compare/v2.4.1...v2.4.2) (2022-01-06)
 
 

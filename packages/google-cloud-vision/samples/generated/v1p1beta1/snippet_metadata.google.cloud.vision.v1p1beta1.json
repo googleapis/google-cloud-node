@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-vision",
-        "version": "2.4.2",
+        "version": "3.0.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
