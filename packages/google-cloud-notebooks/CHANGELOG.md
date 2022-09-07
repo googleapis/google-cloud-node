@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.1.1](https://github.com/googleapis/nodejs-notebooks/compare/v2.1.0...v2.1.1) (2022-09-01)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#163](https://github.com/googleapis/nodejs-notebooks/issues/163)) ([66090cb](https://github.com/googleapis/nodejs-notebooks/commit/66090cb78f638fb0a7e2c95c5ce7fb4146a2bd42))
+* Better support for fallback mode ([#156](https://github.com/googleapis/nodejs-notebooks/issues/156)) ([51ca0cd](https://github.com/googleapis/nodejs-notebooks/commit/51ca0cd37591dc8b1ab1c79ae84216845ebd2d64))
+* Change import long to require ([#158](https://github.com/googleapis/nodejs-notebooks/issues/158)) ([c774bcb](https://github.com/googleapis/nodejs-notebooks/commit/c774bcbc1957df9c60b608c6d96b3d9a090f30f3))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-notebooks/issues/1553)) ([#162](https://github.com/googleapis/nodejs-notebooks/issues/162)) ([284f924](https://github.com/googleapis/nodejs-notebooks/commit/284f92495e8a7ec4875988a48d6b3f2627f25eb2))
+* Remove pip install statements ([#1546](https://github.com/googleapis/nodejs-notebooks/issues/1546)) ([#161](https://github.com/googleapis/nodejs-notebooks/issues/161)) ([6723a6b](https://github.com/googleapis/nodejs-notebooks/commit/6723a6ba01aad07b0775d33f3ccf7507986457bc))
+
 ## [2.1.0](https://github.com/googleapis/nodejs-notebooks/compare/v2.0.0...v2.1.0) (2022-06-30)
 
 
