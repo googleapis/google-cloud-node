@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.1.1](https://github.com/googleapis/nodejs-dataproc-metastore/compare/v3.1.0...v3.1.1) (2022-09-01)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#152](https://github.com/googleapis/nodejs-dataproc-metastore/issues/152)) ([28e83b3](https://github.com/googleapis/nodejs-dataproc-metastore/commit/28e83b33281f67df3825eceb9acc2cc4f2df2abf))
+* Better support for fallback mode ([#147](https://github.com/googleapis/nodejs-dataproc-metastore/issues/147)) ([2d7557a](https://github.com/googleapis/nodejs-dataproc-metastore/commit/2d7557a5b691b843738a3f635bfe6cc481e0ff58))
+* Change import long to require ([#148](https://github.com/googleapis/nodejs-dataproc-metastore/issues/148)) ([7176158](https://github.com/googleapis/nodejs-dataproc-metastore/commit/717615861a0a7252ff3fa875147a149ef8f4b862))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-dataproc-metastore/issues/1553)) ([#151](https://github.com/googleapis/nodejs-dataproc-metastore/issues/151)) ([61b4ed3](https://github.com/googleapis/nodejs-dataproc-metastore/commit/61b4ed3bdf64834d93bfe72c6891e81599729207))
+* Remove pip install statements ([#1546](https://github.com/googleapis/nodejs-dataproc-metastore/issues/1546)) ([#150](https://github.com/googleapis/nodejs-dataproc-metastore/issues/150)) ([928f44d](https://github.com/googleapis/nodejs-dataproc-metastore/commit/928f44d6be2a21f5e987a8ed85df9741ec27f2bf))
+
 ## [3.1.0](https://github.com/googleapis/nodejs-dataproc-metastore/compare/v3.0.0...v3.1.0) (2022-06-30)
 
 
