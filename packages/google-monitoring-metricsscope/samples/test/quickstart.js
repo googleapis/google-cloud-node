@@ -18,8 +18,8 @@ const assert = require('assert');
 const path = require('path');
 const cp = require('child_process');
 const {describe, it, before} = require('mocha');
-const {Client} = require('@google-cloud/metricsscope').v1;
-const metricsscopeClient = new Client();
+const {MetricsScopesClient} = require('@google-cloud/metricsscope').v1;
+const metricsscopeClient = new MetricsScopesClient();
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
