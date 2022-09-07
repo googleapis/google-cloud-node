@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.1](https://github.com/googleapis/nodejs-network-security/compare/v1.0.0...v1.0.1) (2022-09-01)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#70](https://github.com/googleapis/nodejs-network-security/issues/70)) ([c973483](https://github.com/googleapis/nodejs-network-security/commit/c9734837faed2fb8ed93eafcd3bacff2f019f3d6))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-network-security/issues/1553)) ([#69](https://github.com/googleapis/nodejs-network-security/issues/69)) ([7ecb7ee](https://github.com/googleapis/nodejs-network-security/commit/7ecb7ee199213c5da40fac7adc7e5225944c29fa))
+
 ## [1.0.0](https://github.com/googleapis/nodejs-network-security/compare/v0.5.0...v1.0.0) (2022-08-23)
 
 
