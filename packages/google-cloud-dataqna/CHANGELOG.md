@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.0.1](https://github.com/googleapis/nodejs-data-qna/compare/v2.0.0...v2.0.1) (2022-09-01)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#126](https://github.com/googleapis/nodejs-data-qna/issues/126)) ([8d03113](https://github.com/googleapis/nodejs-data-qna/commit/8d03113db0ef47a09691bbaede4f6234da55200b))
+* Better support for fallback mode ([#122](https://github.com/googleapis/nodejs-data-qna/issues/122)) ([12947ca](https://github.com/googleapis/nodejs-data-qna/commit/12947cab0f97b89d0afc3bb7b84fb124322d9c60))
+* Change import long to require ([#123](https://github.com/googleapis/nodejs-data-qna/issues/123)) ([9b0f93d](https://github.com/googleapis/nodejs-data-qna/commit/9b0f93dee65eda577fa0e7a1d159019dfeba7121))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-data-qna/issues/1553)) ([#125](https://github.com/googleapis/nodejs-data-qna/issues/125)) ([a408179](https://github.com/googleapis/nodejs-data-qna/commit/a408179604ce35e32d3d2233388777abdbba3d3b))
+* **docs:** Document fallback rest option ([#118](https://github.com/googleapis/nodejs-data-qna/issues/118)) ([34380af](https://github.com/googleapis/nodejs-data-qna/commit/34380af413735866ab87d19a10e8edd9517a75de))
+* Remove pip install statements ([#1546](https://github.com/googleapis/nodejs-data-qna/issues/1546)) ([#124](https://github.com/googleapis/nodejs-data-qna/issues/124)) ([54ca160](https://github.com/googleapis/nodejs-data-qna/commit/54ca16066ca21f6d3d990469044873beba4390e2))
+
 ## [2.0.0](https://github.com/googleapis/nodejs-data-qna/compare/v1.1.0...v2.0.0) (2022-06-10)
 
 
