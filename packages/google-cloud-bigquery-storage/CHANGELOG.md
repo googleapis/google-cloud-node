@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.1.1](https://github.com/googleapis/nodejs-bigquery-storage/compare/v3.1.0...v3.1.1) (2022-09-01)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#292](https://github.com/googleapis/nodejs-bigquery-storage/issues/292)) ([89f953d](https://github.com/googleapis/nodejs-bigquery-storage/commit/89f953de24d774de076ce9aeef649122ab3d65a6))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-bigquery-storage/issues/1553)) ([#291](https://github.com/googleapis/nodejs-bigquery-storage/issues/291)) ([507e378](https://github.com/googleapis/nodejs-bigquery-storage/commit/507e3780553fa339ffccbba9a8f9ac930d1e9c6d))
+
 ## [3.1.0](https://github.com/googleapis/nodejs-bigquery-storage/compare/v3.0.0...v3.1.0) (2022-08-23)
 
 
