@@ -4,6 +4,17 @@
 
 [1]: https://www.npmjs.com/package/nodejs-translate?activeTab=versions
 
+## [7.0.2](https://github.com/googleapis/nodejs-translate/compare/v7.0.1...v7.0.2) (2022-08-27)
+
+
+### Bug Fixes
+
+* better support for fallback mode ([#809](https://github.com/googleapis/nodejs-translate/issues/809)) ([1a90646](https://github.com/googleapis/nodejs-translate/commit/1a9064602582090468e9371ddfe830bd32dad566))
+* change import long to require ([#810](https://github.com/googleapis/nodejs-translate/issues/810)) ([2fa0935](https://github.com/googleapis/nodejs-translate/commit/2fa09350e03c4abd34ab00956a0349627baa5196))
+* do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-translate/issues/1553)) ([#813](https://github.com/googleapis/nodejs-translate/issues/813)) ([15e8ec9](https://github.com/googleapis/nodejs-translate/commit/15e8ec92bfa95adcfd31f8f8945f7ad6b7f02a79))
+* remove pip install statements ([#1546](https://github.com/googleapis/nodejs-translate/issues/1546)) ([#812](https://github.com/googleapis/nodejs-translate/issues/812)) ([d82da1f](https://github.com/googleapis/nodejs-translate/commit/d82da1f4788f273931324e8a84a2d06abc9a7e7e))
+* use google-gax v3.3.0 ([15e8ec9](https://github.com/googleapis/nodejs-translate/commit/15e8ec92bfa95adcfd31f8f8945f7ad6b7f02a79))
+
 ## [7.0.1](https://github.com/googleapis/nodejs-translate/compare/v7.0.0...v7.0.1) (2022-08-10)
 
 
