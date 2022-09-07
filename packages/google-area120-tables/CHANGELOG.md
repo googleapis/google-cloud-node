@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.1.1](https://github.com/googleapis/nodejs-area120-tables/compare/v2.1.0...v2.1.1) (2022-09-01)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#158](https://github.com/googleapis/nodejs-area120-tables/issues/158)) ([1660fa1](https://github.com/googleapis/nodejs-area120-tables/commit/1660fa19243b4199a92ad38b01c3a835f5347c99))
+* Better support for fallback mode ([#153](https://github.com/googleapis/nodejs-area120-tables/issues/153)) ([69283b1](https://github.com/googleapis/nodejs-area120-tables/commit/69283b1abf7538382fea4af27935a13abf1800b8))
+* Change import long to require ([#154](https://github.com/googleapis/nodejs-area120-tables/issues/154)) ([941e24a](https://github.com/googleapis/nodejs-area120-tables/commit/941e24abe395bb3145d65193bb5a313d9e88141a))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-area120-tables/issues/1553)) ([#157](https://github.com/googleapis/nodejs-area120-tables/issues/157)) ([06f14b9](https://github.com/googleapis/nodejs-area120-tables/commit/06f14b9581890a9428423c9b3b0719387013890f))
+* Remove pip install statements ([#1546](https://github.com/googleapis/nodejs-area120-tables/issues/1546)) ([#156](https://github.com/googleapis/nodejs-area120-tables/issues/156)) ([e6e1981](https://github.com/googleapis/nodejs-area120-tables/commit/e6e19814573fff8d73776d455f85c81e0c0d2891))
+
 ## [2.1.0](https://github.com/googleapis/nodejs-area120-tables/compare/v2.0.0...v2.1.0) (2022-06-29)
 
 
