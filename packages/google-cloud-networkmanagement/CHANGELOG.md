@@ -1,5 +1,21 @@
 # Changelog
 
+## [2.3.0](https://github.com/googleapis/nodejs-network-management/compare/v2.2.0...v2.3.0) (2022-09-01)
+
+
+### Features
+
+* Add new deliver targets and drop causes for Private Service Connect ([#78](https://github.com/googleapis/nodejs-network-management/issues/78)) ([9e6277d](https://github.com/googleapis/nodejs-network-management/commit/9e6277d62ee11696e8c28ff1f7cd46cc367acebe))
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#85](https://github.com/googleapis/nodejs-network-management/issues/85)) ([b415b26](https://github.com/googleapis/nodejs-network-management/commit/b415b26aba8e7d9bf640a6a2f392f71aacf851f4))
+* Better support for fallback mode ([#81](https://github.com/googleapis/nodejs-network-management/issues/81)) ([899669c](https://github.com/googleapis/nodejs-network-management/commit/899669c5145dd6dd17544fedd904e304f2fea0a7))
+* Change import long to require ([#82](https://github.com/googleapis/nodejs-network-management/issues/82)) ([495dd3e](https://github.com/googleapis/nodejs-network-management/commit/495dd3e62aa3880ee0069dc66981a31e12b08bb8))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-network-management/issues/1553)) ([#84](https://github.com/googleapis/nodejs-network-management/issues/84)) ([1efdfd9](https://github.com/googleapis/nodejs-network-management/commit/1efdfd9a6c663a3ce032410d6ddb4c679320e1fb))
+* Remove pip install statements ([#1546](https://github.com/googleapis/nodejs-network-management/issues/1546)) ([#83](https://github.com/googleapis/nodejs-network-management/issues/83)) ([b8cbf10](https://github.com/googleapis/nodejs-network-management/commit/b8cbf10ec9411cb8ecda8021344eb42c5f3761f4))
+
 ## [2.2.0](https://github.com/googleapis/nodejs-network-management/compare/v2.1.0...v2.2.0) (2022-07-13)
 
 
