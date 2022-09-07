@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.1.1](https://github.com/googleapis/nodejs-eventarc/compare/v2.1.0...v2.1.1) (2022-09-01)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#94](https://github.com/googleapis/nodejs-eventarc/issues/94)) ([4510e6a](https://github.com/googleapis/nodejs-eventarc/commit/4510e6ae4129e391391a7dcf8a1d1ffdb32e5562))
+* Better support for fallback mode ([#87](https://github.com/googleapis/nodejs-eventarc/issues/87)) ([b3d5dc0](https://github.com/googleapis/nodejs-eventarc/commit/b3d5dc00e6b3543c962a6ec105fce70472d0ed3c))
+* Change import long to require ([#89](https://github.com/googleapis/nodejs-eventarc/issues/89)) ([6804ddf](https://github.com/googleapis/nodejs-eventarc/commit/6804ddf83e3df1d74a83db2a56ef23e934ef0cc7))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-eventarc/issues/1553)) ([#93](https://github.com/googleapis/nodejs-eventarc/issues/93)) ([3b133cd](https://github.com/googleapis/nodejs-eventarc/commit/3b133cdab07b4c302a1b9b48c897e8c4f8c6b3d9))
+* Remove pip install statements ([#1546](https://github.com/googleapis/nodejs-eventarc/issues/1546)) ([#92](https://github.com/googleapis/nodejs-eventarc/issues/92)) ([4fccc50](https://github.com/googleapis/nodejs-eventarc/commit/4fccc5011cd9c4b22f16de3942eeba2313b08e46))
+
 ## [2.1.0](https://github.com/googleapis/nodejs-eventarc/compare/v2.0.0...v2.1.0) (2022-06-30)
 
 
