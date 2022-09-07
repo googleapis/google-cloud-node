@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.2](https://github.com/googleapis/nodejs-service-management/compare/v1.1.1...v1.1.2) (2022-09-01)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#166](https://github.com/googleapis/nodejs-service-management/issues/166)) ([deda310](https://github.com/googleapis/nodejs-service-management/commit/deda3102c60ed95a03de5f4ae123c858d9af1cf4))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-service-management/issues/1553)) ([#165](https://github.com/googleapis/nodejs-service-management/issues/165)) ([aa21cf2](https://github.com/googleapis/nodejs-service-management/commit/aa21cf2c463c6410be8f9dc8906493dc78f131c1))
+
 ## [1.1.1](https://github.com/googleapis/nodejs-service-management/compare/v1.1.0...v1.1.1) (2022-08-23)
 
 
