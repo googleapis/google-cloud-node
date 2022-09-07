@@ -10,6 +10,7 @@
     "packages/google-cloud-gkemulticloud": {},
     "packages/google-api-apikeys": {},
     "packages/google-cloud-batch": {},
+    "packages/google-iam": {},
     "packages/google-cloud-security-publicca": {}
   }
 }
