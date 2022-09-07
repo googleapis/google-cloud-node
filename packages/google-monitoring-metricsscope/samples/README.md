@@ -2,7 +2,7 @@
 [//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [: Node.js Samples](https://github.com/googleapis/google-cloud-node)
+# [Cloud Monitoring API: Node.js Samples](https://github.com/googleapis/google-cloud-node)
 
 [![Open in Cloud Shell][shell_img]][shell_link]
 
@@ -47,4 +47,4 @@ __Usage:__
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=samples/README.md
-[product-docs]: 
+[product-docs]: https://cloud.google.com/monitoring/settings
