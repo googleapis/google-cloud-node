@@ -9,6 +9,7 @@
     "packages/typeless-sample-bot": {},
     "packages/google-cloud-gkemulticloud": {},
     "packages/google-api-apikeys": {},
-    "packages/google-cloud-batch": {}
+    "packages/google-cloud-batch": {},
+    "packages/google-cloud-security-publicca": {}
   }
 }
