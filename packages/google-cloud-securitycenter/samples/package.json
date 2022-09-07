@@ -14,7 +14,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "@google-cloud/pubsub": "^3.0.0",
-    "@google-cloud/security-center": "^6.3.0"
+    "@google-cloud/security-center": "^6.3.1"
   },
   "devDependencies": {
     "chai": "^4.2.0",

@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/security-center?activeTab=versions
 
+## [6.3.1](https://github.com/googleapis/nodejs-security-center/compare/v6.3.0...v6.3.1) (2022-09-01)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#506](https://github.com/googleapis/nodejs-security-center/issues/506)) ([22478d6](https://github.com/googleapis/nodejs-security-center/commit/22478d6fd89ec40aa281aa47daf14cfd96392341))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-security-center/issues/1553)) ([#507](https://github.com/googleapis/nodejs-security-center/issues/507)) ([fcea451](https://github.com/googleapis/nodejs-security-center/commit/fcea45122f431e6b1a1d680d960301b41f1eef39))
+
 ## [6.3.0](https://github.com/googleapis/nodejs-security-center/compare/v6.2.0...v6.3.0) (2022-08-23)
 
 
