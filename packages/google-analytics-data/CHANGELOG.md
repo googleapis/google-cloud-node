@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.0.2](https://github.com/googleapis/nodejs-analytics-data/compare/v3.0.1...v3.0.2) (2022-09-01)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#232](https://github.com/googleapis/nodejs-analytics-data/issues/232)) ([df75612](https://github.com/googleapis/nodejs-analytics-data/commit/df75612adeadf7c3db4fe755b8ba9a2473a2fbae))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-analytics-data/issues/1553)) ([#231](https://github.com/googleapis/nodejs-analytics-data/issues/231)) ([635cddf](https://github.com/googleapis/nodejs-analytics-data/commit/635cddfb95f3252ea92765c45b8844aaf1eb6494))
+
 ## [3.0.1](https://github.com/googleapis/nodejs-analytics-data/compare/v3.0.0...v3.0.1) (2022-08-23)
 
 
