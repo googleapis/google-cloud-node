@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.1.2](https://github.com/googleapis/nodejs-secret-manager/compare/v4.1.1...v4.1.2) (2022-09-01)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#399](https://github.com/googleapis/nodejs-secret-manager/issues/399)) ([02d820f](https://github.com/googleapis/nodejs-secret-manager/commit/02d820fd521c58263eaa46e98d6b98bac8d973d3))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-secret-manager/issues/1553)) ([#398](https://github.com/googleapis/nodejs-secret-manager/issues/398)) ([e16be85](https://github.com/googleapis/nodejs-secret-manager/commit/e16be85ab62f69a5680ec09149f9fade8ddcaf54))
+
 ## [4.1.1](https://github.com/googleapis/nodejs-secret-manager/compare/v4.1.0...v4.1.1) (2022-08-23)
 
 
