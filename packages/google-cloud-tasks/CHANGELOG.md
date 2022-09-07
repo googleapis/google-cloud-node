@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/nodejs-tasks?activeTab=versions
 
+## [3.0.3](https://github.com/googleapis/nodejs-tasks/compare/v3.0.2...v3.0.3) (2022-09-01)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#650](https://github.com/googleapis/nodejs-tasks/issues/650)) ([f26f795](https://github.com/googleapis/nodejs-tasks/commit/f26f795d0cc5d191b9f67904861d5fa9235244f8))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-tasks/issues/1553)) ([#649](https://github.com/googleapis/nodejs-tasks/issues/649)) ([6802824](https://github.com/googleapis/nodejs-tasks/commit/68028244ec60f38d800adbc79517304ae7ac1031))
+
 ## [3.0.2](https://github.com/googleapis/nodejs-tasks/compare/v3.0.1...v3.0.2) (2022-08-23)
 
 
