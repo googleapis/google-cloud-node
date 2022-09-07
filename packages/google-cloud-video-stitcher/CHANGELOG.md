@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.2](https://github.com/googleapis/nodejs-video-stitcher/compare/v0.2.1...v0.2.2) (2022-09-01)
+
+
+### Bug Fixes
+
+* use _gaxModule when accessing gax for bundling ([#28](https://github.com/googleapis/nodejs-video-stitcher/issues/28)) ([80ddf81](https://github.com/googleapis/nodejs-video-stitcher/commit/80ddf81c0bedc918bb37c3c24ba29a363878fc74))
+
 ## [0.2.1](https://github.com/googleapis/nodejs-video-stitcher/compare/v0.2.0...v0.2.1) (2022-08-23)
 
 
