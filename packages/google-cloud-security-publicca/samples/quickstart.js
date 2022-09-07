@@ -16,8 +16,6 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-
-
 'use strict';
 
 function main(parent, externalAccountKey) {
@@ -43,7 +41,8 @@ function main(parent, externalAccountKey) {
   // const externalAccountKey = {}
 
   // Imports the Publicca library
-  const {PublicCertificateAuthorityServiceClient} = require('@google-cloud/publicca').v1beta1;
+  const {PublicCertificateAuthorityServiceClient} =
+    require('@google-cloud/publicca').v1beta1;
 
   // Instantiates a client
   const publiccaClient = new PublicCertificateAuthorityServiceClient();

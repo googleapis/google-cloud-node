@@ -31,8 +31,8 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-
-
+  * [Using the client library](#using-the-client-library)
+* [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
@@ -54,6 +54,68 @@ npm install @google-cloud/publicca
 ```
 
 
+### Using the client library
+
+```javascript
+  /**
+   * This snippet has been automatically generated and should be regarded as a code template only.
+   * It will require modifications to work.
+   * It may require correct/in-range values for request initialization.
+   * TODO(developer): Uncomment these variables before running the sample.
+   */
+  /**
+   *  Required. The parent resource where this external_account_key will be created.
+   *  Format: projects/[project_quickstart].
+   *  At present only the "global" location is supported.
+   */
+  // const parent = 'abc123'
+  /**
+   *  Required. The external account key to create. This field only exists to future-proof
+   *  the API. At present, all fields in ExternalAccountKey are output only and
+   *  all values are ignored. For the purpose of the
+   *  CreateExternalAccountKeyRequest, set it to a default/empty value.
+   */
+  // const externalAccountKey = {}
+
+  // Imports the Publicca library
+  const {PublicCertificateAuthorityServiceClient} = require('@google-cloud/publicca').v1beta1;
+
+  // Instantiates a client
+  const publiccaClient = new PublicCertificateAuthorityServiceClient();
+
+  async function callCreateExternalAccountKey() {
+    // Construct request
+    const request = {
+      parent,
+      externalAccountKey,
+    };
+
+    // Run request
+    const response = await publiccaClient.createExternalAccountKey(request);
+    console.log(response);
+  }
+
+  callCreateExternalAccountKey();
+  // [END publicca_v1beta1_generated_PublicCertificateAuthorityService_CreateExternalAccountKey_async]
+}
+
+process.on('unhandledRejection', err => {
+  console.error(err.message);
+  process.exitCode = 1;
+});
+main(...process.argv.slice(2));
+
+```
+
+
+
+## Samples
+
+Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/tree/main/samples) directory. Each sample's `README.md` has instructions for running its sample.
+
+| Sample                      | Source Code                       | Try it |
+| --------------------------- | --------------------------------- | ------ |
+| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/packages/google-cloud-security-publicca/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/packages/google-cloud-security-publicca/samples/quickstart.js,samples/README.md) |
 
 
 
