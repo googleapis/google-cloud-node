@@ -18,7 +18,12 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
@@ -97,14 +102,23 @@ export class PublicCertificateAuthorityServiceClient {
    *     const client = new PublicCertificateAuthorityServiceClient({fallback: 'rest'}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback
+  ) {
     // Ensure that options include all the required fields.
-    const staticMembers = this.constructor as typeof PublicCertificateAuthorityServiceClient;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const staticMembers = this
+      .constructor as typeof PublicCertificateAuthorityServiceClient;
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
@@ -127,7 +141,7 @@ export class PublicCertificateAuthorityServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -141,10 +155,7 @@ export class PublicCertificateAuthorityServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process !== 'undefined' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -152,7 +163,7 @@ export class PublicCertificateAuthorityServiceClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest' ) {
+    } else if (opts.fallback === 'rest') {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -178,8 +189,11 @@ export class PublicCertificateAuthorityServiceClient {
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.security.publicca.v1beta1.PublicCertificateAuthorityService', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.security.publicca.v1beta1.PublicCertificateAuthorityService',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      {'x-goog-api-client': clientHeader.join(' ')}
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -210,31 +224,38 @@ export class PublicCertificateAuthorityServiceClient {
     // Put together the "service stub" for
     // google.cloud.security.publicca.v1beta1.PublicCertificateAuthorityService.
     this.publicCertificateAuthorityServiceStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.security.publicca.v1beta1.PublicCertificateAuthorityService') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.security.publicca.v1beta1.PublicCertificateAuthorityService,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.security.publicca.v1beta1.PublicCertificateAuthorityService'
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.security.publicca.v1beta1
+            .PublicCertificateAuthorityService,
+      this._opts,
+      this._providedCustomServicePath
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const publicCertificateAuthorityServiceStubMethods =
-        ['createExternalAccountKey'];
+    const publicCertificateAuthorityServiceStubMethods = [
+      'createExternalAccountKey',
+    ];
     for (const methodName of publicCertificateAuthorityServiceStubMethods) {
       const callPromise = this.publicCertificateAuthorityServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        stub =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        }
+      );
 
-      const descriptor =
-        undefined;
+      const descriptor = undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -279,9 +300,7 @@ export class PublicCertificateAuthorityServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -290,8 +309,9 @@ export class PublicCertificateAuthorityServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -302,83 +322,113 @@ export class PublicCertificateAuthorityServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Creates a new {@link google.cloud.security.publicca.v1beta1.ExternalAccountKey|ExternalAccountKey} bound to the project.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent resource where this external_account_key will be created.
- *   Format: projects/[project_id]/locations/[location].
- *   At present only the "global" location is supported.
- * @param {google.cloud.security.publicca.v1beta1.ExternalAccountKey} request.externalAccountKey
- *   Required. The external account key to create. This field only exists to future-proof
- *   the API. At present, all fields in ExternalAccountKey are output only and
- *   all values are ignored. For the purpose of the
- *   CreateExternalAccountKeyRequest, set it to a default/empty value.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [ExternalAccountKey]{@link google.cloud.security.publicca.v1beta1.ExternalAccountKey}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/public_certificate_authority_service.create_external_account_key.js</caption>
- * region_tag:publicca_v1beta1_generated_PublicCertificateAuthorityService_CreateExternalAccountKey_async
- */
+  /**
+   * Creates a new {@link google.cloud.security.publicca.v1beta1.ExternalAccountKey|ExternalAccountKey} bound to the project.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where this external_account_key will be created.
+   *   Format: projects/[project_id]/locations/[location].
+   *   At present only the "global" location is supported.
+   * @param {google.cloud.security.publicca.v1beta1.ExternalAccountKey} request.externalAccountKey
+   *   Required. The external account key to create. This field only exists to future-proof
+   *   the API. At present, all fields in ExternalAccountKey are output only and
+   *   all values are ignored. For the purpose of the
+   *   CreateExternalAccountKeyRequest, set it to a default/empty value.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ExternalAccountKey]{@link google.cloud.security.publicca.v1beta1.ExternalAccountKey}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/public_certificate_authority_service.create_external_account_key.js</caption>
+   * region_tag:publicca_v1beta1_generated_PublicCertificateAuthorityService_CreateExternalAccountKey_async
+   */
   createExternalAccountKey(
-      request?: protos.google.cloud.security.publicca.v1beta1.ICreateExternalAccountKeyRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.security.publicca.v1beta1.IExternalAccountKey,
-        protos.google.cloud.security.publicca.v1beta1.ICreateExternalAccountKeyRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.security.publicca.v1beta1.ICreateExternalAccountKeyRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.security.publicca.v1beta1.IExternalAccountKey,
+      (
+        | protos.google.cloud.security.publicca.v1beta1.ICreateExternalAccountKeyRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
   createExternalAccountKey(
-      request: protos.google.cloud.security.publicca.v1beta1.ICreateExternalAccountKeyRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.security.publicca.v1beta1.IExternalAccountKey,
-          protos.google.cloud.security.publicca.v1beta1.ICreateExternalAccountKeyRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.security.publicca.v1beta1.ICreateExternalAccountKeyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.security.publicca.v1beta1.IExternalAccountKey,
+      | protos.google.cloud.security.publicca.v1beta1.ICreateExternalAccountKeyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   createExternalAccountKey(
-      request: protos.google.cloud.security.publicca.v1beta1.ICreateExternalAccountKeyRequest,
-      callback: Callback<
-          protos.google.cloud.security.publicca.v1beta1.IExternalAccountKey,
-          protos.google.cloud.security.publicca.v1beta1.ICreateExternalAccountKeyRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.security.publicca.v1beta1.ICreateExternalAccountKeyRequest,
+    callback: Callback<
+      protos.google.cloud.security.publicca.v1beta1.IExternalAccountKey,
+      | protos.google.cloud.security.publicca.v1beta1.ICreateExternalAccountKeyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   createExternalAccountKey(
-      request?: protos.google.cloud.security.publicca.v1beta1.ICreateExternalAccountKeyRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.security.publicca.v1beta1.ICreateExternalAccountKeyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.security.publicca.v1beta1.IExternalAccountKey,
-          protos.google.cloud.security.publicca.v1beta1.ICreateExternalAccountKeyRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.security.publicca.v1beta1.IExternalAccountKey,
-          protos.google.cloud.security.publicca.v1beta1.ICreateExternalAccountKeyRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.security.publicca.v1beta1.IExternalAccountKey,
-        protos.google.cloud.security.publicca.v1beta1.ICreateExternalAccountKeyRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.security.publicca.v1beta1.ICreateExternalAccountKeyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.security.publicca.v1beta1.IExternalAccountKey,
+      | protos.google.cloud.security.publicca.v1beta1.ICreateExternalAccountKeyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.security.publicca.v1beta1.IExternalAccountKey,
+      (
+        | protos.google.cloud.security.publicca.v1beta1.ICreateExternalAccountKeyRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
     this.initialize();
-    return this.innerApiCalls.createExternalAccountKey(request, options, callback);
+    return this.innerApiCalls.createExternalAccountKey(
+      request,
+      options,
+      callback
+    );
   }
 
   // --------------------
@@ -393,7 +443,11 @@ export class PublicCertificateAuthorityServiceClient {
    * @param {string} external_account_key
    * @returns {string} Resource name string.
    */
-  externalAccountKeyPath(project:string,location:string,externalAccountKey:string) {
+  externalAccountKeyPath(
+    project: string,
+    location: string,
+    externalAccountKey: string
+  ) {
     return this.pathTemplates.externalAccountKeyPathTemplate.render({
       project: project,
       location: location,
@@ -409,7 +463,9 @@ export class PublicCertificateAuthorityServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromExternalAccountKeyName(externalAccountKeyName: string) {
-    return this.pathTemplates.externalAccountKeyPathTemplate.match(externalAccountKeyName).project;
+    return this.pathTemplates.externalAccountKeyPathTemplate.match(
+      externalAccountKeyName
+    ).project;
   }
 
   /**
@@ -420,7 +476,9 @@ export class PublicCertificateAuthorityServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromExternalAccountKeyName(externalAccountKeyName: string) {
-    return this.pathTemplates.externalAccountKeyPathTemplate.match(externalAccountKeyName).location;
+    return this.pathTemplates.externalAccountKeyPathTemplate.match(
+      externalAccountKeyName
+    ).location;
   }
 
   /**
@@ -430,8 +488,12 @@ export class PublicCertificateAuthorityServiceClient {
    *   A fully-qualified path representing ExternalAccountKey resource.
    * @returns {string} A string representing the external_account_key.
    */
-  matchExternalAccountKeyFromExternalAccountKeyName(externalAccountKeyName: string) {
-    return this.pathTemplates.externalAccountKeyPathTemplate.match(externalAccountKeyName).external_account_key;
+  matchExternalAccountKeyFromExternalAccountKeyName(
+    externalAccountKeyName: string
+  ) {
+    return this.pathTemplates.externalAccountKeyPathTemplate.match(
+      externalAccountKeyName
+    ).external_account_key;
   }
 
   /**
@@ -441,7 +503,7 @@ export class PublicCertificateAuthorityServiceClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project:string,location:string) {
+  locationPath(project: string, location: string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -476,7 +538,7 @@ export class PublicCertificateAuthorityServiceClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project:string) {
+  projectPath(project: string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
