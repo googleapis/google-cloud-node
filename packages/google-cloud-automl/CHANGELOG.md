@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/automl?activeTab=versions
 
+## [3.1.1](https://github.com/googleapis/nodejs-automl/compare/v3.1.0...v3.1.1) (2022-09-01)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#629](https://github.com/googleapis/nodejs-automl/issues/629)) ([b58d43f](https://github.com/googleapis/nodejs-automl/commit/b58d43ff09ce5e80dd0e51dac4e01af71d7aeddc))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-automl/issues/1553)) ([#628](https://github.com/googleapis/nodejs-automl/issues/628)) ([c29c1d0](https://github.com/googleapis/nodejs-automl/commit/c29c1d08817e23cae1d1183ef6a2a695cb146312))
+
 ## [3.1.0](https://github.com/googleapis/nodejs-automl/compare/v3.0.0...v3.1.0) (2022-08-23)
 
 
