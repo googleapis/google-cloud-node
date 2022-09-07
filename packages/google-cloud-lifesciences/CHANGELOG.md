@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.1.1](https://github.com/googleapis/nodejs-life-sciences/compare/v2.1.0...v2.1.1) (2022-09-01)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#93](https://github.com/googleapis/nodejs-life-sciences/issues/93)) ([6b0a26a](https://github.com/googleapis/nodejs-life-sciences/commit/6b0a26af9f0494c389af5186d04e0d3b3a9f1bcd))
+* Better support for fallback mode ([#88](https://github.com/googleapis/nodejs-life-sciences/issues/88)) ([fdc377d](https://github.com/googleapis/nodejs-life-sciences/commit/fdc377dcc414457a8085c71cff5c9b70ffbf3a96))
+* Change import long to require ([#89](https://github.com/googleapis/nodejs-life-sciences/issues/89)) ([dce704a](https://github.com/googleapis/nodejs-life-sciences/commit/dce704abcb99f84e9afd76bcd8704b765d696251))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-life-sciences/issues/1553)) ([#92](https://github.com/googleapis/nodejs-life-sciences/issues/92)) ([c1c554c](https://github.com/googleapis/nodejs-life-sciences/commit/c1c554c55a7e6233d1590d2504b7b9d7d93370f3))
+* Remove pip install statements ([#1546](https://github.com/googleapis/nodejs-life-sciences/issues/1546)) ([#91](https://github.com/googleapis/nodejs-life-sciences/issues/91)) ([bb1206d](https://github.com/googleapis/nodejs-life-sciences/commit/bb1206d04652a2e1f505cde61cfe84e410b7f221))
+
 ## [2.1.0](https://github.com/googleapis/nodejs-life-sciences/compare/v2.0.0...v2.1.0) (2022-06-30)
 
 
