@@ -1,5 +1,15 @@
 # Changelog
 
+## [2.1.1](https://github.com/googleapis/nodejs-dataplex/compare/v2.1.0...v2.1.1) (2022-08-27)
+
+
+### Bug Fixes
+
+* change import long to require ([#45](https://github.com/googleapis/nodejs-dataplex/issues/45)) ([7f3455c](https://github.com/googleapis/nodejs-dataplex/commit/7f3455c33f91a950b28d71e4af317eb31549a035))
+* do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-dataplex/issues/1553)) ([#48](https://github.com/googleapis/nodejs-dataplex/issues/48)) ([8ced1a1](https://github.com/googleapis/nodejs-dataplex/commit/8ced1a11ec7a280d8fe10b5180dd7b7252377441))
+* remove pip install statements ([#1546](https://github.com/googleapis/nodejs-dataplex/issues/1546)) ([#47](https://github.com/googleapis/nodejs-dataplex/issues/47)) ([76d8469](https://github.com/googleapis/nodejs-dataplex/commit/76d84695d49aec32df66626ea7cfa6f9d4eb2516))
+* use google-gax v3.3.0 ([8ced1a1](https://github.com/googleapis/nodejs-dataplex/commit/8ced1a11ec7a280d8fe10b5180dd7b7252377441))
+
 ## [2.1.0](https://github.com/googleapis/nodejs-dataplex/compare/v2.0.0...v2.1.0) (2022-06-30)
 
 
