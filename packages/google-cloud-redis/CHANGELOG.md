@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/nodejs-redis?activeTab=versions
 
+## [3.1.2](https://github.com/googleapis/nodejs-redis/compare/v3.1.1...v3.1.2) (2022-09-01)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#586](https://github.com/googleapis/nodejs-redis/issues/586)) ([c9cf55a](https://github.com/googleapis/nodejs-redis/commit/c9cf55a83a32d48d9f90e703ab298af76d37d6c6))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-redis/issues/1553)) ([#585](https://github.com/googleapis/nodejs-redis/issues/585)) ([05f7f56](https://github.com/googleapis/nodejs-redis/commit/05f7f56866b83b2f1f05d95c9353a8062beba00f))
+
 ## [3.1.1](https://github.com/googleapis/nodejs-redis/compare/v3.1.0...v3.1.1) (2022-08-23)
 
 
