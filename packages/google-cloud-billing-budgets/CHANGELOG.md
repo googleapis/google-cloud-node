@@ -1,5 +1,16 @@
 # Changelog
 
+## [4.1.1](https://github.com/googleapis/nodejs-billing-budgets/compare/v4.1.0...v4.1.1) (2022-09-01)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#324](https://github.com/googleapis/nodejs-billing-budgets/issues/324)) ([52f05f2](https://github.com/googleapis/nodejs-billing-budgets/commit/52f05f28a38a1ebece2e882cf02f09be27c4af21))
+* Better support for fallback mode ([#319](https://github.com/googleapis/nodejs-billing-budgets/issues/319)) ([6357f94](https://github.com/googleapis/nodejs-billing-budgets/commit/6357f947a1ad894ee23adfc065a1ef4cb7ad4d8e))
+* Change import long to require ([#320](https://github.com/googleapis/nodejs-billing-budgets/issues/320)) ([31559d4](https://github.com/googleapis/nodejs-billing-budgets/commit/31559d42b655b6570ce4b5055ba45c6decb465d9))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-billing-budgets/issues/1553)) ([#323](https://github.com/googleapis/nodejs-billing-budgets/issues/323)) ([82eaf47](https://github.com/googleapis/nodejs-billing-budgets/commit/82eaf47ee49da06a9d96d9a2bdff8765941a9b97))
+* Remove pip install statements ([#1546](https://github.com/googleapis/nodejs-billing-budgets/issues/1546)) ([#322](https://github.com/googleapis/nodejs-billing-budgets/issues/322)) ([03ec73e](https://github.com/googleapis/nodejs-billing-budgets/commit/03ec73e8a0414257e51e6a3f437d47f8057c8ffb))
+
 ## [4.1.0](https://github.com/googleapis/nodejs-billing-budgets/compare/v4.0.0...v4.1.0) (2022-07-04)
 
 

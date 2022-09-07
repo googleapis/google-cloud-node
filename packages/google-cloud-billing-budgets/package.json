@@ -1,7 +1,7 @@
 {
   "repository": "googleapis/nodejs-billing-budgets",
   "name": "@google-cloud/billing-budgets",
-  "version": "4.1.0",
+  "version": "4.1.1",
   "author": "Google LLC",
   "description": "Budgets client for Node.js",
   "main": "build/src/index.js",
