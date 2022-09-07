@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.1.1](https://github.com/googleapis/nodejs-game-servers/compare/v3.1.0...v3.1.1) (2022-09-01)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#310](https://github.com/googleapis/nodejs-game-servers/issues/310)) ([49f18a8](https://github.com/googleapis/nodejs-game-servers/commit/49f18a8372e8ad2ec6bea1561ade77fc793918ba))
+* Better support for fallback mode ([#305](https://github.com/googleapis/nodejs-game-servers/issues/305)) ([d8a5d01](https://github.com/googleapis/nodejs-game-servers/commit/d8a5d01053a90d8839aafcffa4ed28f7a02050fa))
+* Change import long to require ([#306](https://github.com/googleapis/nodejs-game-servers/issues/306)) ([ecb3015](https://github.com/googleapis/nodejs-game-servers/commit/ecb3015e40ba2c7e7dedc0f48327c55230923f7a))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-game-servers/issues/1553)) ([#309](https://github.com/googleapis/nodejs-game-servers/issues/309)) ([47eb79c](https://github.com/googleapis/nodejs-game-servers/commit/47eb79c061bd658c0a6530f16364bc36993372b8))
+* Remove pip install statements ([#1546](https://github.com/googleapis/nodejs-game-servers/issues/1546)) ([#308](https://github.com/googleapis/nodejs-game-servers/issues/308)) ([40cf668](https://github.com/googleapis/nodejs-game-servers/commit/40cf668dd38423b254e889a3fa17fe546b7da66e))
+
 ## [3.1.0](https://github.com/googleapis/nodejs-game-servers/compare/v3.0.0...v3.1.0) (2022-07-05)
 
 
