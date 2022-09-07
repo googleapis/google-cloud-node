@@ -4,6 +4,17 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/phishing-protection?activeTab=versions
 
+## [3.0.2](https://github.com/googleapis/nodejs-phishing-protection/compare/v3.0.1...v3.0.2) (2022-09-01)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#407](https://github.com/googleapis/nodejs-phishing-protection/issues/407)) ([33e1faa](https://github.com/googleapis/nodejs-phishing-protection/commit/33e1faa0ca2408612796e491f20ab15e25c96bc6))
+* Better support for fallback mode ([#402](https://github.com/googleapis/nodejs-phishing-protection/issues/402)) ([9490c72](https://github.com/googleapis/nodejs-phishing-protection/commit/9490c7233ab25fd4cae6379cf283be6b955f424b))
+* Change import long to require ([#403](https://github.com/googleapis/nodejs-phishing-protection/issues/403)) ([5ff8e2f](https://github.com/googleapis/nodejs-phishing-protection/commit/5ff8e2f645a224a5aac6319bd4347ab6af8494b4))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-phishing-protection/issues/1553)) ([#406](https://github.com/googleapis/nodejs-phishing-protection/issues/406)) ([54ef38f](https://github.com/googleapis/nodejs-phishing-protection/commit/54ef38f0c9ce81bdaf4ac22faf579de80917bc82))
+* Remove pip install statements ([#1546](https://github.com/googleapis/nodejs-phishing-protection/issues/1546)) ([#405](https://github.com/googleapis/nodejs-phishing-protection/issues/405)) ([5347c0e](https://github.com/googleapis/nodejs-phishing-protection/commit/5347c0e94fa416c201c424a719d2cf607d31a3e5))
+
 ## [3.0.1](https://github.com/googleapis/nodejs-phishing-protection/compare/v3.0.0...v3.0.1) (2022-06-30)
 
 
