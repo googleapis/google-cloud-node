@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.2](https://github.com/googleapis/nodejs-service-control/compare/v2.0.1...v2.0.2) (2022-09-01)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#155](https://github.com/googleapis/nodejs-service-control/issues/155)) ([9c751ed](https://github.com/googleapis/nodejs-service-control/commit/9c751ed0914d63a02f34f965a921bb8c752cac6d))
+* Better support for fallback mode ([#150](https://github.com/googleapis/nodejs-service-control/issues/150)) ([a46190d](https://github.com/googleapis/nodejs-service-control/commit/a46190dfbd4f6336f68f2daa12f2e3aa8ff536de))
+* Change import long to require ([#151](https://github.com/googleapis/nodejs-service-control/issues/151)) ([8d0550f](https://github.com/googleapis/nodejs-service-control/commit/8d0550f24a2f1348aed0af1db01d91170478dbd8))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-service-control/issues/1553)) ([#154](https://github.com/googleapis/nodejs-service-control/issues/154)) ([d039b24](https://github.com/googleapis/nodejs-service-control/commit/d039b2489bd1c74b8a402de4e0c4c3d264e3655a))
+* Remove pip install statements ([#1546](https://github.com/googleapis/nodejs-service-control/issues/1546)) ([#153](https://github.com/googleapis/nodejs-service-control/issues/153)) ([ee9cb23](https://github.com/googleapis/nodejs-service-control/commit/ee9cb231ea40cbcd01bd9a3b7748a0bf88bcf6d7))
+
 ## [2.0.1](https://github.com/googleapis/nodejs-service-control/compare/v2.0.0...v2.0.1) (2022-06-30)
 
 
