@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/data-fusion",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "datafusion client for Node.js",
   "repository": "googleapis/nodejs-data-fusion",
   "license": "Apache-2.0",

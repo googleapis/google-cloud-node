@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.1.1](https://github.com/googleapis/nodejs-data-fusion/compare/v2.1.0...v2.1.1) (2022-09-01)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#66](https://github.com/googleapis/nodejs-data-fusion/issues/66)) ([42a24b7](https://github.com/googleapis/nodejs-data-fusion/commit/42a24b79cd87fed6cb480edf9e10ab72b6d63aba))
+* Better support for fallback mode ([#61](https://github.com/googleapis/nodejs-data-fusion/issues/61)) ([0098350](https://github.com/googleapis/nodejs-data-fusion/commit/0098350779b5f2d26d4385c44981ebe2a2ba1d17))
+* Change import long to require ([#62](https://github.com/googleapis/nodejs-data-fusion/issues/62)) ([b284743](https://github.com/googleapis/nodejs-data-fusion/commit/b284743fe36fa68aa5fe47f09dece179ad9915d4))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-data-fusion/issues/1553)) ([#65](https://github.com/googleapis/nodejs-data-fusion/issues/65)) ([5a66df0](https://github.com/googleapis/nodejs-data-fusion/commit/5a66df00bce6554e077cc554867cd5f4289681b4))
+* Remove pip install statements ([#1546](https://github.com/googleapis/nodejs-data-fusion/issues/1546)) ([#64](https://github.com/googleapis/nodejs-data-fusion/issues/64)) ([428bfd4](https://github.com/googleapis/nodejs-data-fusion/commit/428bfd495a60857a1c5fc8b4f5e57c67d598b8cf))
+
 ## [2.1.0](https://github.com/googleapis/nodejs-data-fusion/compare/v2.0.0...v2.1.0) (2022-06-30)
 
 
