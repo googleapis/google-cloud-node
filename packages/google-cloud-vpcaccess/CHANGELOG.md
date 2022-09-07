@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.1.2](https://github.com/googleapis/nodejs-vpc-access/compare/v2.1.1...v2.1.2) (2022-09-01)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#98](https://github.com/googleapis/nodejs-vpc-access/issues/98)) ([fd0b3ca](https://github.com/googleapis/nodejs-vpc-access/commit/fd0b3cac56dbd4f6c9610f7e88826ccc9fefdcef))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-vpc-access/issues/1553)) ([#100](https://github.com/googleapis/nodejs-vpc-access/issues/100)) ([205d13d](https://github.com/googleapis/nodejs-vpc-access/commit/205d13dc20a616f6f54bd24086f8635ce5c6cf20))
+
 ## [2.1.1](https://github.com/googleapis/nodejs-vpc-access/compare/v2.1.0...v2.1.1) (2022-08-23)
 
 
