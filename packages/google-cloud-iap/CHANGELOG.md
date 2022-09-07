@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.2](https://github.com/googleapis/nodejs-iap/compare/v2.0.1...v2.0.2) (2022-09-01)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#78](https://github.com/googleapis/nodejs-iap/issues/78)) ([819ed55](https://github.com/googleapis/nodejs-iap/commit/819ed550836f5fac12a7488227e04610cfab72f7))
+* Better support for fallback mode ([#73](https://github.com/googleapis/nodejs-iap/issues/73)) ([8433c4d](https://github.com/googleapis/nodejs-iap/commit/8433c4d3c21da8ee88b49feaadb286a299b72cb5))
+* Change import long to require ([#74](https://github.com/googleapis/nodejs-iap/issues/74)) ([4775b84](https://github.com/googleapis/nodejs-iap/commit/4775b8416d62feb49d448eebf1d186f6e49f4ef9))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-iap/issues/1553)) ([#77](https://github.com/googleapis/nodejs-iap/issues/77)) ([863d928](https://github.com/googleapis/nodejs-iap/commit/863d92823a1efc459b1b851984687acc21da3ffc))
+* Remove pip install statements ([#1546](https://github.com/googleapis/nodejs-iap/issues/1546)) ([#76](https://github.com/googleapis/nodejs-iap/issues/76)) ([27e283a](https://github.com/googleapis/nodejs-iap/commit/27e283a01ac720112b307dc149492012ebccce1f))
+
 ## [2.0.1](https://github.com/googleapis/nodejs-iap/compare/v2.0.0...v2.0.1) (2022-07-12)
 
 
