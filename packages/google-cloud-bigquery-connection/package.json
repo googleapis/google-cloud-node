@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/bigquery-connection",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "BigQuery Connection client for Node.js",
   "repository": "googleapis/nodejs-bigquery-connection",
   "license": "Apache-2.0",

@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.0.2](https://github.com/googleapis/nodejs-bigquery-connection/compare/v2.0.1...v2.0.2) (2022-09-01)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#192](https://github.com/googleapis/nodejs-bigquery-connection/issues/192)) ([8c0ff4f](https://github.com/googleapis/nodejs-bigquery-connection/commit/8c0ff4ff10e8f8f2d680de15f703981a769d8e38))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-bigquery-connection/issues/1553)) ([#191](https://github.com/googleapis/nodejs-bigquery-connection/issues/191)) ([4442884](https://github.com/googleapis/nodejs-bigquery-connection/commit/4442884234d2e6e28659379534288839225c7091))
+* Remove pip install statements ([#1546](https://github.com/googleapis/nodejs-bigquery-connection/issues/1546)) ([#189](https://github.com/googleapis/nodejs-bigquery-connection/issues/189)) ([f93111c](https://github.com/googleapis/nodejs-bigquery-connection/commit/f93111c57ebfb6527a14e7af017e2c7ce379dcb8))
+
 ## [2.0.1](https://github.com/googleapis/nodejs-bigquery-connection/compare/v2.0.0...v2.0.1) (2022-08-23)
 
 
