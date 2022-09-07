@@ -4,6 +4,16 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+## [5.2.1](https://github.com/googleapis/nodejs-dialogflow/compare/v5.2.0...v5.2.1) (2022-09-01)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#971](https://github.com/googleapis/nodejs-dialogflow/issues/971)) ([f4ee343](https://github.com/googleapis/nodejs-dialogflow/commit/f4ee343be47632cecab651b83879d6bdb66efef1))
+* Change import long to require ([#972](https://github.com/googleapis/nodejs-dialogflow/issues/972)) ([7104597](https://github.com/googleapis/nodejs-dialogflow/commit/7104597a6c26f6e484a70ba9dc460118c9174d9e))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-dialogflow/issues/1553)) ([#976](https://github.com/googleapis/nodejs-dialogflow/issues/976)) ([33fe037](https://github.com/googleapis/nodejs-dialogflow/commit/33fe037549e6c2a77b26dc12857ccb77aad3c4b4))
+* Remove pip install statements ([#1546](https://github.com/googleapis/nodejs-dialogflow/issues/1546)) ([#974](https://github.com/googleapis/nodejs-dialogflow/issues/974)) ([54282a6](https://github.com/googleapis/nodejs-dialogflow/commit/54282a69cef164649ab3560d99e2bfd3b12bb9b3))
+
 ## [5.2.0](https://github.com/googleapis/nodejs-dialogflow/compare/v5.1.0...v5.2.0) (2022-07-10)
 
 
