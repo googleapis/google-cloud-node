@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/aiplatform",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Vertex AI client for Node.js",
   "repository": "googleapis/nodejs-ai-platform",
   "license": "Apache-2.0",

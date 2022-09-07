@@ -1,5 +1,34 @@
 # Changelog
 
+## [2.2.0](https://github.com/googleapis/nodejs-ai-platform/compare/v2.1.0...v2.2.0) (2022-08-27)
+
+
+### Features
+
+* add a DeploymentResourcePool API resource_definition ([fa3c209](https://github.com/googleapis/nodejs-ai-platform/commit/fa3c209a4b9c1dbe55f55ba6fa4589f14866156b))
+* add DeploymentResourcePool in aiplatform v1beta1 deployment_resource_pool.proto ([fa3c209](https://github.com/googleapis/nodejs-ai-platform/commit/fa3c209a4b9c1dbe55f55ba6fa4589f14866156b))
+* add DeploymentResourcePoolService in aiplatform v1beta1 deployment_resource_pool_service.proto ([fa3c209](https://github.com/googleapis/nodejs-ai-platform/commit/fa3c209a4b9c1dbe55f55ba6fa4589f14866156b))
+* add shared_resources for supported prediction_resources ([fa3c209](https://github.com/googleapis/nodejs-ai-platform/commit/fa3c209a4b9c1dbe55f55ba6fa4589f14866156b))
+* add SHARED_RESOURCES to DeploymentResourcesType in aiplatform v1beta1 model.proto ([fa3c209](https://github.com/googleapis/nodejs-ai-platform/commit/fa3c209a4b9c1dbe55f55ba6fa4589f14866156b))
+* add WriteFeatureValues in aiplatform v1beta1 featurestore_online_service.proto ([fa3c209](https://github.com/googleapis/nodejs-ai-platform/commit/fa3c209a4b9c1dbe55f55ba6fa4589f14866156b))
+* added SHARED_RESOURCES enum to aiplatform v1 model.proto ([fa3c209](https://github.com/googleapis/nodejs-ai-platform/commit/fa3c209a4b9c1dbe55f55ba6fa4589f14866156b))
+* DeploymentResourcePool and DeployementResourcePoolService added to aiplatform v1beta1 model.proto (cl/463147866) ([fa3c209](https://github.com/googleapis/nodejs-ai-platform/commit/fa3c209a4b9c1dbe55f55ba6fa4589f14866156b))
+* making network arg optional in aiplatform v1 custom_job.proto ([fa3c209](https://github.com/googleapis/nodejs-ai-platform/commit/fa3c209a4b9c1dbe55f55ba6fa4589f14866156b))
+* making network arg optional in aiplatform v1beta1 custom_job.proto ([fa3c209](https://github.com/googleapis/nodejs-ai-platform/commit/fa3c209a4b9c1dbe55f55ba6fa4589f14866156b))
+* **samples:** add entity type apis samples ([#339](https://github.com/googleapis/nodejs-ai-platform/issues/339)) ([5bb18f3](https://github.com/googleapis/nodejs-ai-platform/commit/5bb18f3cc9b5b565612cc44dec3f5b503a89bb88))
+* **samples:** add feature apis samples ([#340](https://github.com/googleapis/nodejs-ai-platform/issues/340)) ([90dcec7](https://github.com/googleapis/nodejs-ai-platform/commit/90dcec729659b811dcb2eddb6425e48d19e5dddd))
+* **samples:** add feature values apis samples ([#341](https://github.com/googleapis/nodejs-ai-platform/issues/341)) ([4cef015](https://github.com/googleapis/nodejs-ai-platform/commit/4cef015867dd80af195236efc43b309d82c7f8af))
+* **samples:** add remaining featurestore api samples ([#338](https://github.com/googleapis/nodejs-ai-platform/issues/338)) ([f136458](https://github.com/googleapis/nodejs-ai-platform/commit/f1364583a58793c5f04cf180e7b2e0bbda100f53))
+
+
+### Bug Fixes
+
+* better support for fallback mode ([#362](https://github.com/googleapis/nodejs-ai-platform/issues/362)) ([3786e75](https://github.com/googleapis/nodejs-ai-platform/commit/3786e7563eb294dbb22bec89f4ec3b012c6437b1))
+* change import long to require ([#363](https://github.com/googleapis/nodejs-ai-platform/issues/363)) ([b26381c](https://github.com/googleapis/nodejs-ai-platform/commit/b26381cd314dcdda56f5cc0fc7d0f62f2ebd44ba))
+* do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-ai-platform/issues/1553)) ([#366](https://github.com/googleapis/nodejs-ai-platform/issues/366)) ([1ccaa8d](https://github.com/googleapis/nodejs-ai-platform/commit/1ccaa8dff34cf684ab372bbc79b8a25ffa2a4b26))
+* remove pip install statements ([#1546](https://github.com/googleapis/nodejs-ai-platform/issues/1546)) ([#364](https://github.com/googleapis/nodejs-ai-platform/issues/364)) ([275a048](https://github.com/googleapis/nodejs-ai-platform/commit/275a0481ea783ba14505a5c296e1e3c3ccf48556))
+* use google-gax v3.3.0 ([1ccaa8d](https://github.com/googleapis/nodejs-ai-platform/commit/1ccaa8dff34cf684ab372bbc79b8a25ffa2a4b26))
+
 ## [2.1.0](https://github.com/googleapis/nodejs-ai-platform/compare/v2.0.0...v2.1.0) (2022-07-04)
 
 
