@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.1.2](https://github.com/googleapis/nodejs-billing/compare/v3.1.1...v3.1.2) (2022-09-01)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#245](https://github.com/googleapis/nodejs-billing/issues/245)) ([68bb343](https://github.com/googleapis/nodejs-billing/commit/68bb3435033a105250d20f60ef68e0849ddeecba))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-billing/issues/1553)) ([#244](https://github.com/googleapis/nodejs-billing/issues/244)) ([eaa9bee](https://github.com/googleapis/nodejs-billing/commit/eaa9bee03df0efe9ed741281c8d927d922574aba))
+
 ## [3.1.1](https://github.com/googleapis/nodejs-billing/compare/v3.1.0...v3.1.1) (2022-08-23)
 
 
