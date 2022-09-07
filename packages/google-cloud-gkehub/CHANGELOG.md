@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.2.1](https://github.com/googleapis/nodejs-gke-hub/compare/v3.2.0...v3.2.1) (2022-09-01)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#168](https://github.com/googleapis/nodejs-gke-hub/issues/168)) ([2de7b16](https://github.com/googleapis/nodejs-gke-hub/commit/2de7b1638a74487c342c4064f15aa089deb50a8e))
+* Better support for fallback mode ([#163](https://github.com/googleapis/nodejs-gke-hub/issues/163)) ([4f8a42c](https://github.com/googleapis/nodejs-gke-hub/commit/4f8a42cac167b7cd8616e9cde6472e1e679ec0a2))
+* Change import long to require ([#164](https://github.com/googleapis/nodejs-gke-hub/issues/164)) ([d1f6564](https://github.com/googleapis/nodejs-gke-hub/commit/d1f65647389881648bd27d5ca020941ed7053792))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-gke-hub/issues/1553)) ([#167](https://github.com/googleapis/nodejs-gke-hub/issues/167)) ([4843067](https://github.com/googleapis/nodejs-gke-hub/commit/484306762d3eff733aa68c077ce6092190e8b22b))
+* Remove pip install statements ([#1546](https://github.com/googleapis/nodejs-gke-hub/issues/1546)) ([#166](https://github.com/googleapis/nodejs-gke-hub/issues/166)) ([be085a0](https://github.com/googleapis/nodejs-gke-hub/commit/be085a01bf5a9648c43d57680364791d0b84547e))
+
 ## [3.2.0](https://github.com/googleapis/nodejs-gke-hub/compare/v3.1.0...v3.2.0) (2022-06-30)
 
 
