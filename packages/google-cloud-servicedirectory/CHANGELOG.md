@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.0.3](https://github.com/googleapis/nodejs-service-directory/compare/v4.0.2...v4.0.3) (2022-09-01)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#246](https://github.com/googleapis/nodejs-service-directory/issues/246)) ([a0a3f47](https://github.com/googleapis/nodejs-service-directory/commit/a0a3f47b45cbac1ae71865cebefe81c818f32714))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-service-directory/issues/1553)) ([#245](https://github.com/googleapis/nodejs-service-directory/issues/245)) ([5e84b2a](https://github.com/googleapis/nodejs-service-directory/commit/5e84b2a67cdef856374fabe20522e21895cb125b))
+
 ## [4.0.2](https://github.com/googleapis/nodejs-service-directory/compare/v4.0.1...v4.0.2) (2022-08-23)
 
 
