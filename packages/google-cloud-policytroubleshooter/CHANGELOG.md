@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.0.3](https://github.com/googleapis/nodejs-policy-troubleshooter/compare/v2.0.2...v2.0.3) (2022-09-01)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#140](https://github.com/googleapis/nodejs-policy-troubleshooter/issues/140)) ([f8bd6b4](https://github.com/googleapis/nodejs-policy-troubleshooter/commit/f8bd6b4000f7b11b0e5f5e1a3c199a5d5f8f57e8))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-policy-troubleshooter/issues/1553)) ([#139](https://github.com/googleapis/nodejs-policy-troubleshooter/issues/139)) ([a5d502f](https://github.com/googleapis/nodejs-policy-troubleshooter/commit/a5d502f7ce2a43f62c1bfeaa55fe9f6bc1796982))
+
 ## [2.0.2](https://github.com/googleapis/nodejs-policy-troubleshooter/compare/v2.0.1...v2.0.2) (2022-08-23)
 
 
