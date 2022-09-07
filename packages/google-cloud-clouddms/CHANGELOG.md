@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.1.1](https://github.com/googleapis/nodejs-dms/compare/v2.1.0...v2.1.1) (2022-09-01)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#107](https://github.com/googleapis/nodejs-dms/issues/107)) ([b90e1bf](https://github.com/googleapis/nodejs-dms/commit/b90e1bf394cfd86007241c8d786ddeca2bbd7178))
+* Better support for fallback mode ([#102](https://github.com/googleapis/nodejs-dms/issues/102)) ([8ac6651](https://github.com/googleapis/nodejs-dms/commit/8ac6651be4422f4cfa4d43aa0fa050e5c186627a))
+* Change import long to require ([#103](https://github.com/googleapis/nodejs-dms/issues/103)) ([0d7d555](https://github.com/googleapis/nodejs-dms/commit/0d7d55597c70bb6edc5f2dcaf7840fae4e8644a3))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-dms/issues/1553)) ([#106](https://github.com/googleapis/nodejs-dms/issues/106)) ([9e7d8e4](https://github.com/googleapis/nodejs-dms/commit/9e7d8e46f989591ade8b06559516bd2c56f83658))
+* Remove pip install statements ([#1546](https://github.com/googleapis/nodejs-dms/issues/1546)) ([#105](https://github.com/googleapis/nodejs-dms/issues/105)) ([85ff0f7](https://github.com/googleapis/nodejs-dms/commit/85ff0f7da4a925d96b477faa6161bcf2b8244b51))
+
 ## [2.1.0](https://github.com/googleapis/nodejs-dms/compare/v2.0.0...v2.1.0) (2022-07-12)
 
 
