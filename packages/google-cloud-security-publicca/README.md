@@ -78,7 +78,8 @@ npm install @google-cloud/publicca
   // const externalAccountKey = {}
 
   // Imports the Publicca library
-  const {PublicCertificateAuthorityServiceClient} = require('@google-cloud/publicca').v1beta1;
+  const {PublicCertificateAuthorityServiceClient} =
+    require('@google-cloud/publicca').v1beta1;
 
   // Instantiates a client
   const publiccaClient = new PublicCertificateAuthorityServiceClient();
