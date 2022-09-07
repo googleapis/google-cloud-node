@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.0.1](https://github.com/googleapis/nodejs-bigquery-reservation/compare/v2.0.0...v2.0.1) (2022-09-01)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#169](https://github.com/googleapis/nodejs-bigquery-reservation/issues/169)) ([3532064](https://github.com/googleapis/nodejs-bigquery-reservation/commit/3532064ee2c7d07efe437875aaf18065ca7c036e))
+* Better support for fallback mode ([#165](https://github.com/googleapis/nodejs-bigquery-reservation/issues/165)) ([90fbf83](https://github.com/googleapis/nodejs-bigquery-reservation/commit/90fbf831bb4dbb4b5b03d782deeb5c8dc854e8dc))
+* Change import long to require ([#166](https://github.com/googleapis/nodejs-bigquery-reservation/issues/166)) ([c41ce5a](https://github.com/googleapis/nodejs-bigquery-reservation/commit/c41ce5a29572372d8e6ec8b0d2ca2901e10dfb71))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-bigquery-reservation/issues/1553)) ([#168](https://github.com/googleapis/nodejs-bigquery-reservation/issues/168)) ([56f9393](https://github.com/googleapis/nodejs-bigquery-reservation/commit/56f939367a5e3e8367c3d907638acefbcb945e8d))
+* **docs:** Document fallback rest option ([#161](https://github.com/googleapis/nodejs-bigquery-reservation/issues/161)) ([9db1472](https://github.com/googleapis/nodejs-bigquery-reservation/commit/9db14722d4bd6c74e47a4145691b3920bb82ebe0))
+* Remove pip install statements ([#1546](https://github.com/googleapis/nodejs-bigquery-reservation/issues/1546)) ([#167](https://github.com/googleapis/nodejs-bigquery-reservation/issues/167)) ([fd418d7](https://github.com/googleapis/nodejs-bigquery-reservation/commit/fd418d758721e21e86ecfab0f5e4c82fc8f40726))
+
 ## [2.0.0](https://github.com/googleapis/nodejs-bigquery-reservation/compare/v1.4.0...v2.0.0) (2022-06-07)
 
 
