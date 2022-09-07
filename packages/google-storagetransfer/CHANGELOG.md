@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.1.2](https://github.com/googleapis/nodejs-storage-transfer/compare/v2.1.1...v2.1.2) (2022-09-01)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#90](https://github.com/googleapis/nodejs-storage-transfer/issues/90)) ([4a3a152](https://github.com/googleapis/nodejs-storage-transfer/commit/4a3a15289dbb40d3aabc4f2e3b192f7e0f0bbc18))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-storage-transfer/issues/1553)) ([#89](https://github.com/googleapis/nodejs-storage-transfer/issues/89)) ([c6768fb](https://github.com/googleapis/nodejs-storage-transfer/commit/c6768fb0b61e87960b4bdf6a647017b4a4a93029))
+
 ## [2.1.1](https://github.com/googleapis/nodejs-storage-transfer/compare/v2.1.0...v2.1.1) (2022-08-23)
 
 

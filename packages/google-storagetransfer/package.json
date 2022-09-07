@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/storage-transfer",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "storagetransfer client for Node.js",
   "repository": "googleapis/nodejs-storage-transfer",
   "license": "Apache-2.0",
