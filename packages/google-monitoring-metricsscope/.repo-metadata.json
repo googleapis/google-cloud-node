@@ -1,7 +1,7 @@
 {
   "name": "metricsscope",
-  "name_pretty": "",
-  "product_documentation": "",
+  "name_pretty": "Cloud Monitoring API",
+  "product_documentation": "https://cloud.google.com/monitoring/settings",
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/metricsscope/latest",
   "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
   "release_level": "beta",
