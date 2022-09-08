@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.2.1](https://github.com/googleapis/nodejs-video-transcoder/compare/v2.2.0...v2.2.1) (2022-09-01)
+
+
+### Bug Fixes
+
+* better support for fallback mode ([#192](https://github.com/googleapis/nodejs-video-transcoder/issues/192)) ([d46c012](https://github.com/googleapis/nodejs-video-transcoder/commit/d46c0120ebb51275b72e4c4538d1031003c10c3d))
+* change import long to require ([#193](https://github.com/googleapis/nodejs-video-transcoder/issues/193)) ([a620922](https://github.com/googleapis/nodejs-video-transcoder/commit/a62092293b4085ec1affca0f0dd8f698622a981b))
+* do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-video-transcoder/issues/1553)) ([#204](https://github.com/googleapis/nodejs-video-transcoder/issues/204)) ([a7bfbd2](https://github.com/googleapis/nodejs-video-transcoder/commit/a7bfbd2a2ee31f8456430adc9f90e365ddcdc98d))
+* remove pip install statements ([#1546](https://github.com/googleapis/nodejs-video-transcoder/issues/1546)) ([#195](https://github.com/googleapis/nodejs-video-transcoder/issues/195)) ([8f21081](https://github.com/googleapis/nodejs-video-transcoder/commit/8f21081c14741ec736b0c418f34a1bd6be329d67))
+* use _gaxModule when accessing gax for bundling ([#205](https://github.com/googleapis/nodejs-video-transcoder/issues/205)) ([836e0f2](https://github.com/googleapis/nodejs-video-transcoder/commit/836e0f2f92ff74d4f5c3a3317ab23ffcdf1ad985))
+* use google-gax v3.3.0 ([a7bfbd2](https://github.com/googleapis/nodejs-video-transcoder/commit/a7bfbd2a2ee31f8456430adc9f90e365ddcdc98d))
+
 ## [2.2.0](https://github.com/googleapis/nodejs-video-transcoder/compare/v2.1.0...v2.2.0) (2022-06-29)
 
 
