@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.1.1](https://github.com/googleapis/nodejs-cloudbuild/compare/v3.1.0...v3.1.1) (2022-09-01)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#343](https://github.com/googleapis/nodejs-cloudbuild/issues/343)) ([4828f1e](https://github.com/googleapis/nodejs-cloudbuild/commit/4828f1e49b530f19d4d25fcc797b9ffe90c7d4ff))
+* Better support for fallback mode ([#337](https://github.com/googleapis/nodejs-cloudbuild/issues/337)) ([909b6c8](https://github.com/googleapis/nodejs-cloudbuild/commit/909b6c8c5f34eeda975f2f818725b9ece202e60d))
+* Change import long to require ([#339](https://github.com/googleapis/nodejs-cloudbuild/issues/339)) ([c1cdde2](https://github.com/googleapis/nodejs-cloudbuild/commit/c1cdde2c692c107414a461620c7e0634b7fc957f))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-cloudbuild/issues/1553)) ([#342](https://github.com/googleapis/nodejs-cloudbuild/issues/342)) ([80cda93](https://github.com/googleapis/nodejs-cloudbuild/commit/80cda938f92ae85266d2468dbb51856fb1d33579))
+* Remove pip install statements ([#1546](https://github.com/googleapis/nodejs-cloudbuild/issues/1546)) ([#341](https://github.com/googleapis/nodejs-cloudbuild/issues/341)) ([f5133f8](https://github.com/googleapis/nodejs-cloudbuild/commit/f5133f8a4e5411a452583b0541c60b09124152be))
+
 ## [3.1.0](https://github.com/googleapis/nodejs-cloudbuild/compare/v3.0.1...v3.1.0) (2022-07-04)
 
 
