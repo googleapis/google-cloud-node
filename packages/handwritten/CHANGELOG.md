@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/error-reporting?activeTab=versions
 
+## [3.0.3](https://github.com/googleapis/nodejs-error-reporting/compare/v3.0.2...v3.0.3) (2022-08-28)
+
+
+### Bug Fixes
+
+* remove pip install statements ([#1546](https://github.com/googleapis/nodejs-error-reporting/issues/1546)) ([#653](https://github.com/googleapis/nodejs-error-reporting/issues/653)) ([2793504](https://github.com/googleapis/nodejs-error-reporting/commit/2793504f9ef2d8f209bd4db64dd1c3170c660291))
+
 ## [3.0.2](https://github.com/googleapis/nodejs-error-reporting/compare/v3.0.1...v3.0.2) (2022-08-24)
 
 
