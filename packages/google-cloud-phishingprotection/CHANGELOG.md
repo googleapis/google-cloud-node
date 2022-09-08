@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/phishing-protection?activeTab=versions
 
+## [3.0.3](https://github.com/googleapis/nodejs-phishing-protection/compare/v3.0.2...v3.0.3) (2022-09-08)
+
+
+### Bug Fixes
+
+* **build:** Enable release-please for tagging releases ([e5d75ea](https://github.com/googleapis/nodejs-phishing-protection/commit/e5d75eaa69f67db2e1d905a77b8d0ffc19f25f88))
+
 ## [3.0.2](https://github.com/googleapis/nodejs-phishing-protection/compare/v3.0.1...v3.0.2) (2022-09-01)
 
 
