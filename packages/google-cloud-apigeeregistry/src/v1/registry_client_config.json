@@ -7,7 +7,10 @@
           "DEADLINE_EXCEEDED",
           "UNAVAILABLE"
         ],
-        "unavailable": [
+        "cancelled_deadline_exceeded_aborted_unavailable": [
+          "CANCELLED",
+          "DEADLINE_EXCEEDED",
+          "ABORTED",
           "UNAVAILABLE"
         ]
       },
@@ -21,8 +24,8 @@
           "max_rpc_timeout_millis": 60000,
           "total_timeout_millis": 600000
         },
-        "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c": {
-          "initial_retry_delay_millis": 1000,
+        "5763d5cb4f40f09b4de469b8a0f10443a7a49d00": {
+          "initial_retry_delay_millis": 200,
           "retry_delay_multiplier": 1.3,
           "max_retry_delay_millis": 60000,
           "initial_rpc_timeout_millis": 60000,
@@ -34,93 +37,93 @@
       "methods": {
         "ListApis": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unavailable",
-          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+          "retry_codes_name": "cancelled_deadline_exceeded_aborted_unavailable",
+          "retry_params_name": "5763d5cb4f40f09b4de469b8a0f10443a7a49d00"
         },
         "GetApi": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unavailable",
-          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+          "retry_codes_name": "cancelled_deadline_exceeded_aborted_unavailable",
+          "retry_params_name": "5763d5cb4f40f09b4de469b8a0f10443a7a49d00"
         },
         "CreateApi": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unavailable",
-          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+          "retry_codes_name": "cancelled_deadline_exceeded_aborted_unavailable",
+          "retry_params_name": "5763d5cb4f40f09b4de469b8a0f10443a7a49d00"
         },
         "UpdateApi": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unavailable",
-          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+          "retry_codes_name": "cancelled_deadline_exceeded_aborted_unavailable",
+          "retry_params_name": "5763d5cb4f40f09b4de469b8a0f10443a7a49d00"
         },
         "DeleteApi": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unavailable",
-          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+          "retry_codes_name": "cancelled_deadline_exceeded_aborted_unavailable",
+          "retry_params_name": "5763d5cb4f40f09b4de469b8a0f10443a7a49d00"
         },
         "ListApiVersions": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unavailable",
-          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+          "retry_codes_name": "cancelled_deadline_exceeded_aborted_unavailable",
+          "retry_params_name": "5763d5cb4f40f09b4de469b8a0f10443a7a49d00"
         },
         "GetApiVersion": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unavailable",
-          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+          "retry_codes_name": "cancelled_deadline_exceeded_aborted_unavailable",
+          "retry_params_name": "5763d5cb4f40f09b4de469b8a0f10443a7a49d00"
         },
         "CreateApiVersion": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unavailable",
-          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+          "retry_codes_name": "cancelled_deadline_exceeded_aborted_unavailable",
+          "retry_params_name": "5763d5cb4f40f09b4de469b8a0f10443a7a49d00"
         },
         "UpdateApiVersion": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unavailable",
-          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+          "retry_codes_name": "cancelled_deadline_exceeded_aborted_unavailable",
+          "retry_params_name": "5763d5cb4f40f09b4de469b8a0f10443a7a49d00"
         },
         "DeleteApiVersion": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unavailable",
-          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+          "retry_codes_name": "cancelled_deadline_exceeded_aborted_unavailable",
+          "retry_params_name": "5763d5cb4f40f09b4de469b8a0f10443a7a49d00"
         },
         "ListApiSpecs": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unavailable",
-          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+          "retry_codes_name": "cancelled_deadline_exceeded_aborted_unavailable",
+          "retry_params_name": "5763d5cb4f40f09b4de469b8a0f10443a7a49d00"
         },
         "GetApiSpec": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unavailable",
-          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+          "retry_codes_name": "cancelled_deadline_exceeded_aborted_unavailable",
+          "retry_params_name": "5763d5cb4f40f09b4de469b8a0f10443a7a49d00"
         },
         "GetApiSpecContents": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unavailable",
-          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+          "retry_codes_name": "cancelled_deadline_exceeded_aborted_unavailable",
+          "retry_params_name": "5763d5cb4f40f09b4de469b8a0f10443a7a49d00"
         },
         "CreateApiSpec": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unavailable",
-          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+          "retry_codes_name": "cancelled_deadline_exceeded_aborted_unavailable",
+          "retry_params_name": "5763d5cb4f40f09b4de469b8a0f10443a7a49d00"
         },
         "UpdateApiSpec": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unavailable",
-          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+          "retry_codes_name": "cancelled_deadline_exceeded_aborted_unavailable",
+          "retry_params_name": "5763d5cb4f40f09b4de469b8a0f10443a7a49d00"
         },
         "DeleteApiSpec": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unavailable",
-          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+          "retry_codes_name": "cancelled_deadline_exceeded_aborted_unavailable",
+          "retry_params_name": "5763d5cb4f40f09b4de469b8a0f10443a7a49d00"
         },
         "TagApiSpecRevision": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unavailable",
-          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+          "retry_codes_name": "cancelled_deadline_exceeded_aborted_unavailable",
+          "retry_params_name": "5763d5cb4f40f09b4de469b8a0f10443a7a49d00"
         },
         "ListApiSpecRevisions": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unavailable",
-          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+          "retry_codes_name": "cancelled_deadline_exceeded_aborted_unavailable",
+          "retry_params_name": "5763d5cb4f40f09b4de469b8a0f10443a7a49d00"
         },
         "RollbackApiSpec": {
           "timeout_millis": 60000,
@@ -129,43 +132,43 @@
         },
         "DeleteApiSpecRevision": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unavailable",
-          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+          "retry_codes_name": "cancelled_deadline_exceeded_aborted_unavailable",
+          "retry_params_name": "5763d5cb4f40f09b4de469b8a0f10443a7a49d00"
         },
         "ListApiDeployments": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unavailable",
-          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+          "retry_codes_name": "cancelled_deadline_exceeded_aborted_unavailable",
+          "retry_params_name": "5763d5cb4f40f09b4de469b8a0f10443a7a49d00"
         },
         "GetApiDeployment": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unavailable",
-          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+          "retry_codes_name": "cancelled_deadline_exceeded_aborted_unavailable",
+          "retry_params_name": "5763d5cb4f40f09b4de469b8a0f10443a7a49d00"
         },
         "CreateApiDeployment": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unavailable",
-          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+          "retry_codes_name": "cancelled_deadline_exceeded_aborted_unavailable",
+          "retry_params_name": "5763d5cb4f40f09b4de469b8a0f10443a7a49d00"
         },
         "UpdateApiDeployment": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unavailable",
-          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+          "retry_codes_name": "cancelled_deadline_exceeded_aborted_unavailable",
+          "retry_params_name": "5763d5cb4f40f09b4de469b8a0f10443a7a49d00"
         },
         "DeleteApiDeployment": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unavailable",
-          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+          "retry_codes_name": "cancelled_deadline_exceeded_aborted_unavailable",
+          "retry_params_name": "5763d5cb4f40f09b4de469b8a0f10443a7a49d00"
         },
         "TagApiDeploymentRevision": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unavailable",
-          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+          "retry_codes_name": "cancelled_deadline_exceeded_aborted_unavailable",
+          "retry_params_name": "5763d5cb4f40f09b4de469b8a0f10443a7a49d00"
         },
         "ListApiDeploymentRevisions": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unavailable",
-          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+          "retry_codes_name": "cancelled_deadline_exceeded_aborted_unavailable",
+          "retry_params_name": "5763d5cb4f40f09b4de469b8a0f10443a7a49d00"
         },
         "RollbackApiDeployment": {
           "timeout_millis": 60000,
@@ -174,38 +177,38 @@
         },
         "DeleteApiDeploymentRevision": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unavailable",
-          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+          "retry_codes_name": "cancelled_deadline_exceeded_aborted_unavailable",
+          "retry_params_name": "5763d5cb4f40f09b4de469b8a0f10443a7a49d00"
         },
         "ListArtifacts": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unavailable",
-          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+          "retry_codes_name": "cancelled_deadline_exceeded_aborted_unavailable",
+          "retry_params_name": "5763d5cb4f40f09b4de469b8a0f10443a7a49d00"
         },
         "GetArtifact": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unavailable",
-          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+          "retry_codes_name": "cancelled_deadline_exceeded_aborted_unavailable",
+          "retry_params_name": "5763d5cb4f40f09b4de469b8a0f10443a7a49d00"
         },
         "GetArtifactContents": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unavailable",
-          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+          "retry_codes_name": "cancelled_deadline_exceeded_aborted_unavailable",
+          "retry_params_name": "5763d5cb4f40f09b4de469b8a0f10443a7a49d00"
         },
         "CreateArtifact": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unavailable",
-          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+          "retry_codes_name": "cancelled_deadline_exceeded_aborted_unavailable",
+          "retry_params_name": "5763d5cb4f40f09b4de469b8a0f10443a7a49d00"
         },
         "ReplaceArtifact": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unavailable",
-          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+          "retry_codes_name": "cancelled_deadline_exceeded_aborted_unavailable",
+          "retry_params_name": "5763d5cb4f40f09b4de469b8a0f10443a7a49d00"
         },
         "DeleteArtifact": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unavailable",
-          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+          "retry_codes_name": "cancelled_deadline_exceeded_aborted_unavailable",
+          "retry_params_name": "5763d5cb4f40f09b4de469b8a0f10443a7a49d00"
         }
       }
     }
