@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.1.2](https://github.com/googleapis/nodejs-managed-identities/compare/v2.1.1...v2.1.2) (2022-09-01)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#150](https://github.com/googleapis/nodejs-managed-identities/issues/150)) ([2011b4c](https://github.com/googleapis/nodejs-managed-identities/commit/2011b4c63dbad2d96809819476de20f6403ab352))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-managed-identities/issues/1553)) ([#149](https://github.com/googleapis/nodejs-managed-identities/issues/149)) ([88b535a](https://github.com/googleapis/nodejs-managed-identities/commit/88b535a915fd811c1081f639cd04b4c20afcf6ea))
+
 ## [2.1.1](https://github.com/googleapis/nodejs-managed-identities/compare/v2.1.0...v2.1.1) (2022-08-23)
 
 
