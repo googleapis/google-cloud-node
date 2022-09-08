@@ -4,6 +4,16 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/grafeas?activeTab=versions
 
+## [4.1.1](https://github.com/googleapis/nodejs-grafeas/compare/v4.1.0...v4.1.1) (2022-09-01)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#364](https://github.com/googleapis/nodejs-grafeas/issues/364)) ([2029b14](https://github.com/googleapis/nodejs-grafeas/commit/2029b145ec102e2852bf91a2e529cdee7fcd4275))
+* Better support for fallback mode ([#358](https://github.com/googleapis/nodejs-grafeas/issues/358)) ([57c5c7f](https://github.com/googleapis/nodejs-grafeas/commit/57c5c7f023fafa33b041aff2031b0a1c381bf4d0))
+* Change import long to require ([#359](https://github.com/googleapis/nodejs-grafeas/issues/359)) ([9ad8458](https://github.com/googleapis/nodejs-grafeas/commit/9ad8458e976f178be462bfe60dd393816f1a8a77))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-grafeas/issues/1553)) ([#363](https://github.com/googleapis/nodejs-grafeas/issues/363)) ([7655119](https://github.com/googleapis/nodejs-grafeas/commit/76551192a851920e4d92d93cd2ef5687504c91e1))
+
 ## [4.1.0](https://github.com/googleapis/nodejs-grafeas/compare/v4.0.0...v4.1.0) (2022-07-05)
 
 
