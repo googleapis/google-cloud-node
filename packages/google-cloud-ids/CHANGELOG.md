@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.1.1](https://github.com/googleapis/nodejs-ids/compare/v2.1.0...v2.1.1) (2022-09-01)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#54](https://github.com/googleapis/nodejs-ids/issues/54)) ([f97b0d0](https://github.com/googleapis/nodejs-ids/commit/f97b0d035bac9f822353328346ee9b2a49b09431))
+* Better support for fallback mode ([#49](https://github.com/googleapis/nodejs-ids/issues/49)) ([681eb87](https://github.com/googleapis/nodejs-ids/commit/681eb8785d22aa934cd8be3ec5fe20f56a1b7d57))
+* Change import long to require ([#50](https://github.com/googleapis/nodejs-ids/issues/50)) ([0c1501e](https://github.com/googleapis/nodejs-ids/commit/0c1501e96d1b64bb1b9d4f26396b12cfb685a99b))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-ids/issues/1553)) ([#53](https://github.com/googleapis/nodejs-ids/issues/53)) ([9056d31](https://github.com/googleapis/nodejs-ids/commit/9056d31088344ad061bef7e44818b163b526cf9e))
+* Remove pip install statements ([#1546](https://github.com/googleapis/nodejs-ids/issues/1546)) ([#52](https://github.com/googleapis/nodejs-ids/issues/52)) ([b25aa46](https://github.com/googleapis/nodejs-ids/commit/b25aa4678c64e77666a9a4b9af29e11e0c214719))
+
 ## [2.1.0](https://github.com/googleapis/nodejs-ids/compare/v2.0.0...v2.1.0) (2022-07-12)
 
 
