@@ -1,5 +1,15 @@
 # Changelog
 
+## [2.0.1](https://github.com/googleapis/nodejs-cloud-shell/compare/v2.0.0...v2.0.1) (2022-08-27)
+
+
+### Bug Fixes
+
+* change import long to require ([#99](https://github.com/googleapis/nodejs-cloud-shell/issues/99)) ([4ff9cc0](https://github.com/googleapis/nodejs-cloud-shell/commit/4ff9cc0cbf92bdb372994b27e81116412b46a10b))
+* do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-cloud-shell/issues/1553)) ([#102](https://github.com/googleapis/nodejs-cloud-shell/issues/102)) ([157f47b](https://github.com/googleapis/nodejs-cloud-shell/commit/157f47b06a9ed2b664e8a2a9a14916bce786adbc))
+* remove pip install statements ([#1546](https://github.com/googleapis/nodejs-cloud-shell/issues/1546)) ([#101](https://github.com/googleapis/nodejs-cloud-shell/issues/101)) ([2b0a031](https://github.com/googleapis/nodejs-cloud-shell/commit/2b0a031a6c7340a9cba6e779bca7afc9d01e9640))
+* use google-gax v3.3.0 ([157f47b](https://github.com/googleapis/nodejs-cloud-shell/commit/157f47b06a9ed2b664e8a2a9a14916bce786adbc))
+
 ## [2.0.0](https://github.com/googleapis/nodejs-cloud-shell/compare/v1.1.0...v2.0.0) (2022-05-19)
 
 
