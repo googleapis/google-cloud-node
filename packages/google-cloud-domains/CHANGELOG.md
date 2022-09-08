@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.1.1](https://github.com/googleapis/nodejs-domains/compare/v2.1.0...v2.1.1) (2022-09-01)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#144](https://github.com/googleapis/nodejs-domains/issues/144)) ([8bf7f53](https://github.com/googleapis/nodejs-domains/commit/8bf7f53f0011f89c87ee182ddf75dcc3c5cef188))
+* Better support for fallback mode ([#139](https://github.com/googleapis/nodejs-domains/issues/139)) ([6d83b72](https://github.com/googleapis/nodejs-domains/commit/6d83b72d9ad9998d5ded5a1ad8aed4f464917b6f))
+* Change import long to require ([#140](https://github.com/googleapis/nodejs-domains/issues/140)) ([f0155a2](https://github.com/googleapis/nodejs-domains/commit/f0155a211d70255155664a9776857cd37e9d46bf))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-domains/issues/1553)) ([#143](https://github.com/googleapis/nodejs-domains/issues/143)) ([c7cce8d](https://github.com/googleapis/nodejs-domains/commit/c7cce8db16bd58052bc6ac5226638ac07bc398c4))
+* Remove pip install statements ([#1546](https://github.com/googleapis/nodejs-domains/issues/1546)) ([#142](https://github.com/googleapis/nodejs-domains/issues/142)) ([ac57104](https://github.com/googleapis/nodejs-domains/commit/ac571044a6299ee5b427b4d8adc84c358cee2cdd))
+
 ## [2.1.0](https://github.com/googleapis/nodejs-domains/compare/v2.0.0...v2.1.0) (2022-06-30)
 
 
