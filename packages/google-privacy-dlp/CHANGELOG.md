@@ -4,6 +4,15 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+## [4.1.1](https://github.com/googleapis/nodejs-dlp/compare/v4.1.0...v4.1.1) (2022-08-23)
+
+
+### Bug Fixes
+
+* better support for fallback mode ([#735](https://github.com/googleapis/nodejs-dlp/issues/735)) ([3b080b0](https://github.com/googleapis/nodejs-dlp/commit/3b080b0fc6f246f8d454212b0c791957c313e2bd))
+* change import long to require ([#736](https://github.com/googleapis/nodejs-dlp/issues/736)) ([b79ae99](https://github.com/googleapis/nodejs-dlp/commit/b79ae998bf5ae4ba56d995fcecaf97437c4df51e))
+* remove pip install statements ([#1546](https://github.com/googleapis/nodejs-dlp/issues/1546)) ([#738](https://github.com/googleapis/nodejs-dlp/issues/738)) ([31172f8](https://github.com/googleapis/nodejs-dlp/commit/31172f8d8cabf1c86668e8f9ce0e4bda8cbc476b))
+
 ## [4.1.0](https://github.com/googleapis/nodejs-dlp/compare/v4.0.2...v4.1.0) (2022-07-12)
 
 
