@@ -67,6 +67,6 @@
     "proxyquire": "^2.1.0",
     "restify": "^8.3.3",
     "typescript": "^4.6.4",
-    "uuid": "^8.0.0"
+    "uuid": "^9.0.0"
   }
 }
