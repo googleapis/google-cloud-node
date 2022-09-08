@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.1.2](https://github.com/googleapis/nodejs-network-connectivity/compare/v2.1.1...v2.1.2) (2022-09-01)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#151](https://github.com/googleapis/nodejs-network-connectivity/issues/151)) ([123398d](https://github.com/googleapis/nodejs-network-connectivity/commit/123398deb9a18c61099525315a4709672211cd49))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-network-connectivity/issues/1553)) ([#150](https://github.com/googleapis/nodejs-network-connectivity/issues/150)) ([e925e35](https://github.com/googleapis/nodejs-network-connectivity/commit/e925e358aee02125f9bfcf6f0bab54a41c848695))
+
 ## [2.1.1](https://github.com/googleapis/nodejs-network-connectivity/compare/v2.1.0...v2.1.1) (2022-08-23)
 
 
