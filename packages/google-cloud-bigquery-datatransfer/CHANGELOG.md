@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/bigquery-data-transfer?activeTab=versions
 
+## [3.1.2](https://github.com/googleapis/nodejs-bigquery-data-transfer/compare/v3.1.1...v3.1.2) (2022-09-01)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#564](https://github.com/googleapis/nodejs-bigquery-data-transfer/issues/564)) ([06d6789](https://github.com/googleapis/nodejs-bigquery-data-transfer/commit/06d678906f1e78a2c8e14ac02a5c190e35045f1c))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-bigquery-data-transfer/issues/1553)) ([#563](https://github.com/googleapis/nodejs-bigquery-data-transfer/issues/563)) ([7cba4dd](https://github.com/googleapis/nodejs-bigquery-data-transfer/commit/7cba4dd5e29e0d46fa64ee607a7172f1e5ab3fc3))
+
 ## [3.1.1](https://github.com/googleapis/nodejs-bigquery-data-transfer/compare/v3.1.0...v3.1.1) (2022-08-23)
 
 
