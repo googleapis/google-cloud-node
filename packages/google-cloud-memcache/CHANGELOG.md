@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.1.1](https://github.com/googleapis/nodejs-memcache/compare/v2.1.0...v2.1.1) (2022-08-27)
+
+
+### Bug Fixes
+
+* better support for fallback mode ([#209](https://github.com/googleapis/nodejs-memcache/issues/209)) ([8398c52](https://github.com/googleapis/nodejs-memcache/commit/8398c52666aca0a251852edc3b3d341bdfa11902))
+* change import long to require ([#211](https://github.com/googleapis/nodejs-memcache/issues/211)) ([9139124](https://github.com/googleapis/nodejs-memcache/commit/91391240a20101ef11b1805973bd772fda8edabe))
+* do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-memcache/issues/1553)) ([#215](https://github.com/googleapis/nodejs-memcache/issues/215)) ([12ee008](https://github.com/googleapis/nodejs-memcache/commit/12ee00812abedba79271ea2dd97e042e1cab22bf))
+* remove pip install statements ([#1546](https://github.com/googleapis/nodejs-memcache/issues/1546)) ([#214](https://github.com/googleapis/nodejs-memcache/issues/214)) ([35b9a7b](https://github.com/googleapis/nodejs-memcache/commit/35b9a7bef37482d3f7209c16b6cd87fab0f72ea8))
+* use google-gax v3.3.0 ([12ee008](https://github.com/googleapis/nodejs-memcache/commit/12ee00812abedba79271ea2dd97e042e1cab22bf))
+
 ## [2.1.0](https://github.com/googleapis/nodejs-memcache/compare/v2.0.0...v2.1.0) (2022-06-30)
 
 
