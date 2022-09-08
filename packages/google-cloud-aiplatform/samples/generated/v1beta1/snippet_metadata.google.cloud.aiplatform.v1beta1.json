@@ -2828,6 +2828,94 @@
             }
         },
         {
+            "regionTag": "aiplatform_v1beta1_generated_IndexService_UpsertDatapoints_async",
+            "title": "DatasetService upsertDatapoints Sample",
+            "origin": "API_DEFINITION",
+            "description": " Add/update Datapoints into an Index.",
+            "canonical": true,
+            "file": "index_service.upsert_datapoints.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 59,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpsertDatapoints",
+                "fullName": "google.cloud.aiplatform.v1beta1.IndexService.UpsertDatapoints",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "index",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "datapoints",
+                        "type": "TYPE_MESSAGE[]"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.UpsertDatapointsResponse",
+                "client": {
+                    "shortName": "IndexServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.IndexServiceClient"
+                },
+                "method": {
+                    "shortName": "UpsertDatapoints",
+                    "fullName": "google.cloud.aiplatform.v1beta1.IndexService.UpsertDatapoints",
+                    "service": {
+                        "shortName": "IndexService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.IndexService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_IndexService_RemoveDatapoints_async",
+            "title": "DatasetService removeDatapoints Sample",
+            "origin": "API_DEFINITION",
+            "description": " Remove Datapoints from an Index.",
+            "canonical": true,
+            "file": "index_service.remove_datapoints.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 59,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "RemoveDatapoints",
+                "fullName": "google.cloud.aiplatform.v1beta1.IndexService.RemoveDatapoints",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "index",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "datapoint_ids",
+                        "type": "TYPE_STRING[]"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.RemoveDatapointsResponse",
+                "client": {
+                    "shortName": "IndexServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.IndexServiceClient"
+                },
+                "method": {
+                    "shortName": "RemoveDatapoints",
+                    "fullName": "google.cloud.aiplatform.v1beta1.IndexService.RemoveDatapoints",
+                    "service": {
+                        "shortName": "IndexService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.IndexService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "aiplatform_v1beta1_generated_JobService_CreateCustomJob_async",
             "title": "DatasetService createCustomJob Sample",
             "origin": "API_DEFINITION",

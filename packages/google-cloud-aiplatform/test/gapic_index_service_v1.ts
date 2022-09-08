@@ -371,6 +371,258 @@ describe('v1.IndexServiceClient', () => {
     });
   });
 
+  describe('upsertDatapoints', () => {
+    it('invokes upsertDatapoints without error', async () => {
+      const client = new indexserviceModule.v1.IndexServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.UpsertDatapointsRequest()
+      );
+      request.index = '';
+      const expectedHeaderRequestParams = 'index=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.UpsertDatapointsResponse()
+      );
+      client.innerApiCalls.upsertDatapoints = stubSimpleCall(expectedResponse);
+      const [response] = await client.upsertDatapoints(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.upsertDatapoints as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes upsertDatapoints without error using callback', async () => {
+      const client = new indexserviceModule.v1.IndexServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.UpsertDatapointsRequest()
+      );
+      request.index = '';
+      const expectedHeaderRequestParams = 'index=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.UpsertDatapointsResponse()
+      );
+      client.innerApiCalls.upsertDatapoints =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.upsertDatapoints(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.aiplatform.v1.IUpsertDatapointsResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.upsertDatapoints as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes upsertDatapoints with error', async () => {
+      const client = new indexserviceModule.v1.IndexServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.UpsertDatapointsRequest()
+      );
+      request.index = '';
+      const expectedHeaderRequestParams = 'index=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.upsertDatapoints = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.upsertDatapoints(request), expectedError);
+      assert(
+        (client.innerApiCalls.upsertDatapoints as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes upsertDatapoints with closed client', async () => {
+      const client = new indexserviceModule.v1.IndexServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.UpsertDatapointsRequest()
+      );
+      request.index = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.upsertDatapoints(request), expectedError);
+    });
+  });
+
+  describe('removeDatapoints', () => {
+    it('invokes removeDatapoints without error', async () => {
+      const client = new indexserviceModule.v1.IndexServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.RemoveDatapointsRequest()
+      );
+      request.index = '';
+      const expectedHeaderRequestParams = 'index=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.RemoveDatapointsResponse()
+      );
+      client.innerApiCalls.removeDatapoints = stubSimpleCall(expectedResponse);
+      const [response] = await client.removeDatapoints(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.removeDatapoints as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes removeDatapoints without error using callback', async () => {
+      const client = new indexserviceModule.v1.IndexServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.RemoveDatapointsRequest()
+      );
+      request.index = '';
+      const expectedHeaderRequestParams = 'index=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.RemoveDatapointsResponse()
+      );
+      client.innerApiCalls.removeDatapoints =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.removeDatapoints(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.aiplatform.v1.IRemoveDatapointsResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.removeDatapoints as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes removeDatapoints with error', async () => {
+      const client = new indexserviceModule.v1.IndexServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.RemoveDatapointsRequest()
+      );
+      request.index = '';
+      const expectedHeaderRequestParams = 'index=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.removeDatapoints = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.removeDatapoints(request), expectedError);
+      assert(
+        (client.innerApiCalls.removeDatapoints as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes removeDatapoints with closed client', async () => {
+      const client = new indexserviceModule.v1.IndexServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.RemoveDatapointsRequest()
+      );
+      request.index = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.removeDatapoints(request), expectedError);
+    });
+  });
+
   describe('createIndex', () => {
     it('invokes createIndex without error', async () => {
       const client = new indexserviceModule.v1.IndexServiceClient({

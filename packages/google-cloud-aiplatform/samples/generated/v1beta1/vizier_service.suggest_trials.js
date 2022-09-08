@@ -34,7 +34,7 @@ function main(parent, suggestionCount, clientId) {
    */
   // const parent = 'abc123'
   /**
-   *  Required. The number of suggestions requested.
+   *  Required. The number of suggestions requested. It must be positive.
    */
   // const suggestionCount = 1234
   /**

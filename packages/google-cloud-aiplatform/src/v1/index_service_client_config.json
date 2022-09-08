@@ -39,6 +39,14 @@
         "DeleteIndex": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
+        },
+        "UpsertDatapoints": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "RemoveDatapoints": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
         }
       }
     }

@@ -600,6 +600,16 @@
                 "getIndex"
               ]
             },
+            "UpsertDatapoints": {
+              "methods": [
+                "upsertDatapoints"
+              ]
+            },
+            "RemoveDatapoints": {
+              "methods": [
+                "removeDatapoints"
+              ]
+            },
             "CreateIndex": {
               "methods": [
                 "createIndex"
@@ -630,6 +640,16 @@
             "GetIndex": {
               "methods": [
                 "getIndex"
+              ]
+            },
+            "UpsertDatapoints": {
+              "methods": [
+                "upsertDatapoints"
+              ]
+            },
+            "RemoveDatapoints": {
+              "methods": [
+                "removeDatapoints"
               ]
             },
             "CreateIndex": {
