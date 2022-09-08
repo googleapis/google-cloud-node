@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.2.1](https://github.com/googleapis/nodejs-functions/compare/v2.2.0...v2.2.1) (2022-09-01)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#186](https://github.com/googleapis/nodejs-functions/issues/186)) ([2ab984e](https://github.com/googleapis/nodejs-functions/commit/2ab984e032f5062862f0ce0fbe65d18bbbc421f1))
+* Better support for fallback mode ([#181](https://github.com/googleapis/nodejs-functions/issues/181)) ([aeaefd4](https://github.com/googleapis/nodejs-functions/commit/aeaefd4debab32e91a0078a342acc15c501281f8))
+* Change import long to require ([#182](https://github.com/googleapis/nodejs-functions/issues/182)) ([1c02a68](https://github.com/googleapis/nodejs-functions/commit/1c02a6842e99c5a0db5eff94b46ca3551f0b13a0))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-functions/issues/1553)) ([#185](https://github.com/googleapis/nodejs-functions/issues/185)) ([b5748ed](https://github.com/googleapis/nodejs-functions/commit/b5748ed5154722907fd407c8bc6fd300a8fdaf21))
+* Remove pip install statements ([#1546](https://github.com/googleapis/nodejs-functions/issues/1546)) ([#184](https://github.com/googleapis/nodejs-functions/issues/184)) ([a8ffbb1](https://github.com/googleapis/nodejs-functions/commit/a8ffbb17e77a95ea23a1f4043c50a17faaa66b7e))
+
 ## [2.2.0](https://github.com/googleapis/nodejs-functions/compare/v2.1.0...v2.2.0) (2022-07-14)
 
 
