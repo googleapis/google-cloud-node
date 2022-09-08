@@ -4,6 +4,20 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/compute?activeTab=versions
 
+## [3.5.0](https://github.com/googleapis/nodejs-compute/compare/v3.4.0...v3.5.0) (2022-09-08)
+
+
+### Features
+
+* Update Compute Engine API to revision 20220720 ([#723](https://github.com/googleapis/nodejs-compute/issues/723)) ([bd36f79](https://github.com/googleapis/nodejs-compute/commit/bd36f795214512d4295a346687255de1fbe2c602))
+
+
+### Bug Fixes
+
+* Add hashes to requirements.txt ([#1544](https://github.com/googleapis/nodejs-compute/issues/1544)) ([#782](https://github.com/googleapis/nodejs-compute/issues/782)) ([8c6b66a](https://github.com/googleapis/nodejs-compute/commit/8c6b66adbf8b476c76b8367235b7bb7cd0585f08))
+* Better support for fallback mode ([#768](https://github.com/googleapis/nodejs-compute/issues/768)) ([bd36f79](https://github.com/googleapis/nodejs-compute/commit/bd36f795214512d4295a346687255de1fbe2c602))
+* Update google-gax and remove obsolete deps ([#1545](https://github.com/googleapis/nodejs-compute/issues/1545)) ([#775](https://github.com/googleapis/nodejs-compute/issues/775)) ([6f56b77](https://github.com/googleapis/nodejs-compute/commit/6f56b773ddee4a22e9f2bc6cab4460764033cc28))
+
 ## [3.4.0](https://github.com/googleapis/nodejs-compute/compare/v3.3.0...v3.4.0) (2022-07-04)
 
 
