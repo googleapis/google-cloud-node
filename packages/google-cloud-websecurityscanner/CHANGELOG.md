@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.1.2](https://github.com/googleapis/nodejs-web-security-scanner/compare/v2.1.1...v2.1.2) (2022-08-27)
+
+
+### Bug Fixes
+
+* do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-web-security-scanner/issues/1553)) ([#139](https://github.com/googleapis/nodejs-web-security-scanner/issues/139)) ([4ff7015](https://github.com/googleapis/nodejs-web-security-scanner/commit/4ff701583b66f1f7f80b9c9ab2b2445549a6c81f))
+* use google-gax v3.3.0 ([4ff7015](https://github.com/googleapis/nodejs-web-security-scanner/commit/4ff701583b66f1f7f80b9c9ab2b2445549a6c81f))
+
 ## [2.1.1](https://github.com/googleapis/nodejs-web-security-scanner/compare/v2.1.0...v2.1.1) (2022-08-23)
 
 
