@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-promisify?activeTab=versions
 
+## [3.0.1](https://github.com/googleapis/nodejs-promisify/compare/v3.0.0...v3.0.1) (2022-08-23)
+
+
+### Bug Fixes
+
+* remove pip install statements ([#1546](https://github.com/googleapis/nodejs-promisify/issues/1546)) ([#310](https://github.com/googleapis/nodejs-promisify/issues/310)) ([c7c6883](https://github.com/googleapis/nodejs-promisify/commit/c7c688389de72ddc0181b19bceee2d95eacd3d96))
+
 ## [3.0.0](https://github.com/googleapis/nodejs-promisify/compare/v2.0.4...v3.0.0) (2022-05-03)
 
 
