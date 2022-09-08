@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.2](https://github.com/googleapis/nodejs-video-live-stream/compare/v0.3.1...v0.3.2) (2022-09-01)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#62](https://github.com/googleapis/nodejs-video-live-stream/issues/62)) ([293e4f7](https://github.com/googleapis/nodejs-video-live-stream/commit/293e4f737d59273d11b2fb53a5c953363a3a6f0c))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-video-live-stream/issues/1553)) ([#61](https://github.com/googleapis/nodejs-video-live-stream/issues/61)) ([02076df](https://github.com/googleapis/nodejs-video-live-stream/commit/02076dfd0649ebd504cbda86ac58a63fc9f2da5f))
+
 ## [0.3.1](https://github.com/googleapis/nodejs-video-live-stream/compare/v0.3.0...v0.3.1) (2022-08-23)
 
 
