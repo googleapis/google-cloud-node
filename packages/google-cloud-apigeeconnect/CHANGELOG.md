@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.1.2](https://github.com/googleapis/nodejs-apigee-connect/compare/v2.1.1...v2.1.2) (2022-09-01)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#99](https://github.com/googleapis/nodejs-apigee-connect/issues/99)) ([bdc2600](https://github.com/googleapis/nodejs-apigee-connect/commit/bdc26002bb391f81cdba9c7c13643944faa20620))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-apigee-connect/issues/1553)) ([#98](https://github.com/googleapis/nodejs-apigee-connect/issues/98)) ([f52ed29](https://github.com/googleapis/nodejs-apigee-connect/commit/f52ed29e966efce3b04b1271e3e161f8bb8ee812))
+
 ## [2.1.1](https://github.com/googleapis/nodejs-apigee-connect/compare/v2.1.0...v2.1.1) (2022-08-23)
 
 
