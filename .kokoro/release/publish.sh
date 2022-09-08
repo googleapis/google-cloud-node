@@ -35,4 +35,4 @@ NPM_TOKEN=$(cat "${KOKORO_GFILE_DIR}/secret_manager/repo_automation_bots_npm_pub
 echo "//wombat-dressing-room.appspot.com/:_authToken=${NPM_TOKEN}" > ~/.npmrc
 
 SCRIPT=$(realpath $(dirname $0)/./publish-single.sh)
-npx @google-cloud/mono-repo-publish custom --script="${SCRIPT}" --pr-url="${AUTORELEASE_PR}"
+npx @google-cloud/mono-repo-publish custom --script="${SCRIPT}" --pr-url="${AUTORELEASE_PR}" --exclude-files=**/samples/*
