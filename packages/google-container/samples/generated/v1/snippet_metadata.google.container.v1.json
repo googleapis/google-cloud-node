@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-container",
-        "version": "4.1.1",
+        "version": "4.1.2",
         "language": "TYPESCRIPT",
         "apis": [
             {

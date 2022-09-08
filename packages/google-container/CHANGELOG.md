@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## [4.1.2](https://github.com/googleapis/nodejs-cloud-container/compare/v4.1.1...v4.1.2) (2022-09-08)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#557](https://github.com/googleapis/nodejs-cloud-container/issues/557)) ([e7a1a02](https://github.com/googleapis/nodejs-cloud-container/commit/e7a1a02e990e1eac2954538f444113c5211912ec))
+* better support for fallback mode ([e7a1a02](https://github.com/googleapis/nodejs-cloud-container/commit/e7a1a02e990e1eac2954538f444113c5211912ec))
+
 ## [4.1.1](https://github.com/googleapis/nodejs-cloud-container/compare/v4.1.0...v4.1.1) (2022-08-27)
 
 
