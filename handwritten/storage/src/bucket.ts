@@ -1148,16 +1148,16 @@ class Bucket extends ServiceObject {
   }
 
   addLifecycleRule(
-    rule: LifecycleRule,
+    rule: LifecycleRule | LifecycleRule[],
     options?: AddLifecycleRuleOptions
   ): Promise<SetBucketMetadataResponse>;
   addLifecycleRule(
-    rule: LifecycleRule,
+    rule: LifecycleRule | LifecycleRule[],
     options: AddLifecycleRuleOptions,
     callback: SetBucketMetadataCallback
   ): void;
   addLifecycleRule(
-    rule: LifecycleRule,
+    rule: LifecycleRule | LifecycleRule[],
     callback: SetBucketMetadataCallback
   ): void;
   /**
@@ -1187,10 +1187,14 @@ class Bucket extends ServiceObject {
    * will be included to the existing policy. To replace all existing rules,
    * supply the `options` argument, setting `append` to `false`.
    *
+   * To add multiple rules, pass a list to the `rule` parameter. Calling this
+   * function multiple times asynchronously does not guarantee that all rules
+   * are added correctly.
+   *
    * See {@link https://cloud.google.com/storage/docs/lifecycle| Object Lifecycle Management}
    * See {@link https://cloud.google.com/storage/docs/json_api/v1/buckets/patch| Buckets: patch API Documentation}
    *
-   * @param {LifecycleRule} rule The new lifecycle rule to be added to objects
+   * @param {LifecycleRule|LifecycleRule[]} rule The new lifecycle rule or rules to be added to objects
    *     in this bucket.
    * @param {string|object} rule.action The action to be taken upon matching of
    *     all the conditions 'delete', 'setStorageClass', or 'AbortIncompleteMultipartUpload'.
@@ -1325,7 +1329,7 @@ class Bucket extends ServiceObject {
    * ```
    */
   addLifecycleRule(
-    rule: LifecycleRule,
+    rule: LifecycleRule | LifecycleRule[],
     optionsOrCallback?: AddLifecycleRuleOptions | SetBucketMetadataCallback,
     callback?: SetBucketMetadataCallback
   ): Promise<SetBucketMetadataResponse> | void {
@@ -1339,7 +1343,9 @@ class Bucket extends ServiceObject {
 
     options = options || {};
 
-    const newLifecycleRules = arrify(rule).map(rule => {
+    const rules = Array.isArray(rule) ? rule : [rule];
+
+    const newLifecycleRules = rules.map(rule => {
       if (typeof rule.action === 'object') {
         // This is a raw-formatted rule object, the way the API expects.
         // Just pass it through as-is.

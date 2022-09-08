@@ -622,6 +622,46 @@ describe('Bucket', () => {
       bucket.addLifecycleRule(newRule, assert.ifError);
     });
 
+    it('should accept multiple rules', done => {
+      const existingRule = {
+        action: {
+          type: 'type',
+        },
+        condition: {},
+      };
+
+      const newRules = [
+        {
+          action: {
+            type: 'type',
+          },
+          condition: {},
+        },
+        {
+          action: {
+            type: 'type2',
+          },
+          condition: {},
+        },
+      ];
+
+      bucket.getMetadata = (callback: GetBucketMetadataCallback) => {
+        callback(null, {lifecycle: {rule: [existingRule]}}, {});
+      };
+
+      bucket.setMetadata = (metadata: Metadata) => {
+        assert.strictEqual(metadata.lifecycle.rule.length, 3);
+        assert.deepStrictEqual(metadata.lifecycle.rule, [
+          existingRule,
+          newRules[0],
+          newRules[1],
+        ]);
+        done();
+      };
+
+      bucket.addLifecycleRule(newRules, assert.ifError);
+    });
+
     it('should pass error from getMetadata to callback', done => {
       const error = new Error('from getMetadata');
       const rule = {
