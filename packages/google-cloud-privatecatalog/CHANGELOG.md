@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.0.3](https://github.com/googleapis/nodejs-private-catalog/compare/v2.0.2...v2.0.3) (2022-09-01)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#102](https://github.com/googleapis/nodejs-private-catalog/issues/102)) ([f162180](https://github.com/googleapis/nodejs-private-catalog/commit/f1621809c2773b4df97efe5d8ade8208ac8f95b4))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-private-catalog/issues/1553)) ([#101](https://github.com/googleapis/nodejs-private-catalog/issues/101)) ([54959ca](https://github.com/googleapis/nodejs-private-catalog/commit/54959cae8e8743c2bed567bacb9a36d0645c99ba))
+
 ## [2.0.2](https://github.com/googleapis/nodejs-private-catalog/compare/v2.0.1...v2.0.2) (2022-08-23)
 
 
