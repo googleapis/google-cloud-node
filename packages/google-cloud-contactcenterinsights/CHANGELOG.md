@@ -1,5 +1,15 @@
 # Changelog
 
+## [2.1.1](https://github.com/googleapis/nodejs-contact-center-insights/compare/v2.1.0...v2.1.1) (2022-09-01)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#137](https://github.com/googleapis/nodejs-contact-center-insights/issues/137)) ([c8d6ba2](https://github.com/googleapis/nodejs-contact-center-insights/commit/c8d6ba2cc240282a36ef6290aa88d0386f6aca21))
+* Change import long to require ([#138](https://github.com/googleapis/nodejs-contact-center-insights/issues/138)) ([79afe96](https://github.com/googleapis/nodejs-contact-center-insights/commit/79afe96953727b9443d677ec89458394c643eced))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-contact-center-insights/issues/1553)) ([#141](https://github.com/googleapis/nodejs-contact-center-insights/issues/141)) ([65dd78d](https://github.com/googleapis/nodejs-contact-center-insights/commit/65dd78d2c1b3e9cca5e241e20774f6764c487963))
+* Remove pip install statements ([#1546](https://github.com/googleapis/nodejs-contact-center-insights/issues/1546)) ([#140](https://github.com/googleapis/nodejs-contact-center-insights/issues/140)) ([d0e4fd5](https://github.com/googleapis/nodejs-contact-center-insights/commit/d0e4fd5223896f029a1a5dd21fc71aab812a7122))
+
 ## [2.1.0](https://github.com/googleapis/nodejs-contact-center-insights/compare/v2.0.1...v2.1.0) (2022-07-05)
 
 
