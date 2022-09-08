@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.1.1](https://github.com/googleapis/nodejs-datastream/compare/v2.1.0...v2.1.1) (2022-09-01)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#62](https://github.com/googleapis/nodejs-datastream/issues/62)) ([376a621](https://github.com/googleapis/nodejs-datastream/commit/376a621015a9fec4eab36f346a81d92a961eecce))
+* Better support for fallback mode ([#58](https://github.com/googleapis/nodejs-datastream/issues/58)) ([cf25122](https://github.com/googleapis/nodejs-datastream/commit/cf251221dd72edf71039400444b59837fe84909a))
+* Change import long to require ([#59](https://github.com/googleapis/nodejs-datastream/issues/59)) ([f32dd36](https://github.com/googleapis/nodejs-datastream/commit/f32dd36297cc9cf60c7e7bd3c937dd13748a163d))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-datastream/issues/1553)) ([#63](https://github.com/googleapis/nodejs-datastream/issues/63)) ([2b7712a](https://github.com/googleapis/nodejs-datastream/commit/2b7712a5480d69f0679654ed1fa12fee269d0cff))
+* Remove pip install statements ([#1546](https://github.com/googleapis/nodejs-datastream/issues/1546)) ([#61](https://github.com/googleapis/nodejs-datastream/issues/61)) ([da04858](https://github.com/googleapis/nodejs-datastream/commit/da04858bec326541248d306c91cb70ff8c6c119c))
+
 ## [2.1.0](https://github.com/googleapis/nodejs-datastream/compare/v2.0.0...v2.1.0) (2022-07-12)
 
 
