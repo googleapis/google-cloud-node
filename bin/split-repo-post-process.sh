@@ -39,7 +39,15 @@ echo "Fixing format of ${PACKAGE_PATH}/.OwlBot.yaml"
 sed -i "/docker:/d" "${PACKAGE_PATH}/.OwlBot.yaml"
 # remove `image:` line
 sed -i "/image:/d" "${PACKAGE_PATH}/.OwlBot.yaml"
-sed -i "s/dest: \/owl-bot-staging/dest: \/owl-bot-staging\/${PACKAGE_NAME}/" "${PACKAGE_PATH}/.OwlBot.yaml"
+
+if grep -q "/owl-bot-staging/\$1/\$2" "${PACKAGE_PATH}/.OwlBot.yaml"
+then
+  echo "OwlBot config is copying each folder"
+  sed -i 's/\.\*-nodejs\/(.*)/.*-nodejs/' "${PACKAGE_PATH}/.OwlBot.yaml"
+  sed -i "s/dest: \/owl-bot-staging\/\$1\/\$2/dest: \/owl-bot-staging\/${PACKAGE_NAME}\/\$1/" "${PACKAGE_PATH}/.OwlBot.yaml"
+else
+  sed -i "s/dest: \/owl-bot-staging/dest: \/owl-bot-staging\/${PACKAGE_NAME}/" "${PACKAGE_PATH}/.OwlBot.yaml"
+fi
 
 # add changes to local git directory
 git add .
