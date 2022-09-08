@@ -23,6 +23,6 @@
     "@google-cloud/storage": "^6.0.0",
     "chai": "^4.2.0",
     "mocha": "^10.0.0",
-    "uuid": "^8.0.0"
+    "uuid": "^9.0.0"
   }
 }
