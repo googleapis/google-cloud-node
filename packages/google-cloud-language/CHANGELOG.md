@@ -4,6 +4,19 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/language?activeTab=versions
 
+## [5.0.2](https://github.com/googleapis/nodejs-language/compare/v5.0.1...v5.0.2) (2022-09-01)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#688](https://github.com/googleapis/nodejs-language/issues/688)) ([a6427f0](https://github.com/googleapis/nodejs-language/commit/a6427f0b488ff09172b0dd3303f26a58b2d9cfde))
+* Better support for fallback mode ([#683](https://github.com/googleapis/nodejs-language/issues/683)) ([f97d4ec](https://github.com/googleapis/nodejs-language/commit/f97d4ec5197cb4571235d28cca13eda2c5ad1243))
+* Change import long to require ([#684](https://github.com/googleapis/nodejs-language/issues/684)) ([dfa3ad2](https://github.com/googleapis/nodejs-language/commit/dfa3ad26f1090aac180406dfd8692b5e15fa87f5))
+* **deps:** Update dependency @google-cloud/automl to v3 ([#672](https://github.com/googleapis/nodejs-language/issues/672)) ([4385333](https://github.com/googleapis/nodejs-language/commit/4385333ed516e98cf5ea44bb1aa133cc7eebb203))
+* **deps:** Update dependency mathjs to v11 ([#679](https://github.com/googleapis/nodejs-language/issues/679)) ([ba23db6](https://github.com/googleapis/nodejs-language/commit/ba23db66808c202b2494019264a6246e66d5f58a))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-language/issues/1553)) ([#687](https://github.com/googleapis/nodejs-language/issues/687)) ([f3c627d](https://github.com/googleapis/nodejs-language/commit/f3c627d25b3a25ac20ae8b61f44ec236202cfb53))
+* Remove pip install statements ([#1546](https://github.com/googleapis/nodejs-language/issues/1546)) ([#686](https://github.com/googleapis/nodejs-language/issues/686)) ([9a47a8d](https://github.com/googleapis/nodejs-language/commit/9a47a8d29f4df3a6ba428b462ac6a255eab28ab1))
+
 ## [5.0.1](https://github.com/googleapis/nodejs-language/compare/v5.0.0...v5.0.1) (2022-06-30)
 
 
