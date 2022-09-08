@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.1.1](https://github.com/googleapis/nodejs-access-approval/compare/v2.1.0...v2.1.1) (2022-09-01)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#139](https://github.com/googleapis/nodejs-access-approval/issues/139)) ([896c016](https://github.com/googleapis/nodejs-access-approval/commit/896c0165305b11015a92c7a87c860e9bb7c2c2c6))
+* Better support for fallback mode ([#135](https://github.com/googleapis/nodejs-access-approval/issues/135)) ([23d8d85](https://github.com/googleapis/nodejs-access-approval/commit/23d8d85d8d2ff53333fb5671a02230aaa0045223))
+* Change import long to require ([#136](https://github.com/googleapis/nodejs-access-approval/issues/136)) ([87f5477](https://github.com/googleapis/nodejs-access-approval/commit/87f5477aa38f970d310a8d7e70b5f09d51e6d50c))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-access-approval/issues/1553)) ([#140](https://github.com/googleapis/nodejs-access-approval/issues/140)) ([2a9fb11](https://github.com/googleapis/nodejs-access-approval/commit/2a9fb11dfe110e5de78762fa86504d3eeb4046d0))
+* Remove pip install statements ([#1546](https://github.com/googleapis/nodejs-access-approval/issues/1546)) ([#138](https://github.com/googleapis/nodejs-access-approval/issues/138)) ([8517413](https://github.com/googleapis/nodejs-access-approval/commit/851741340fca5036ea819c41cb1188b33a181c1c))
+
 ## [2.1.0](https://github.com/googleapis/nodejs-access-approval/compare/v2.0.0...v2.1.0) (2022-06-29)
 
 
