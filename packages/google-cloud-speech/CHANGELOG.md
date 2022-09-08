@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+## [5.0.2](https://github.com/googleapis/nodejs-speech/compare/v5.0.1...v5.0.2) (2022-09-01)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#924](https://github.com/googleapis/nodejs-speech/issues/924)) ([758a28a](https://github.com/googleapis/nodejs-speech/commit/758a28aa977713c35d089e1f89783221dc03e33f))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-speech/issues/1553)) ([#923](https://github.com/googleapis/nodejs-speech/issues/923)) ([c300569](https://github.com/googleapis/nodejs-speech/commit/c3005691b0721dfbd29d2793ceffba98aef20a83))
+
 ## [5.0.1](https://github.com/googleapis/nodejs-speech/compare/v5.0.0...v5.0.1) (2022-08-23)
 
 
