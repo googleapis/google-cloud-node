@@ -18,6 +18,6 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "mocha": "^8.0.0",
-    "uuid": "^8.0.0"
+    "uuid": "^9.0.0"
   }
 }
