@@ -1,0 +1,239 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.asset.v1",
+  "libraryPackage": "@google-cloud/asset",
+  "services": {
+    "AssetService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "AssetServiceClient",
+          "rpcs": {
+            "BatchGetAssetsHistory": {
+              "methods": [
+                "batchGetAssetsHistory"
+              ]
+            },
+            "CreateFeed": {
+              "methods": [
+                "createFeed"
+              ]
+            },
+            "GetFeed": {
+              "methods": [
+                "getFeed"
+              ]
+            },
+            "ListFeeds": {
+              "methods": [
+                "listFeeds"
+              ]
+            },
+            "UpdateFeed": {
+              "methods": [
+                "updateFeed"
+              ]
+            },
+            "DeleteFeed": {
+              "methods": [
+                "deleteFeed"
+              ]
+            },
+            "AnalyzeIamPolicy": {
+              "methods": [
+                "analyzeIamPolicy"
+              ]
+            },
+            "AnalyzeMove": {
+              "methods": [
+                "analyzeMove"
+              ]
+            },
+            "QueryAssets": {
+              "methods": [
+                "queryAssets"
+              ]
+            },
+            "CreateSavedQuery": {
+              "methods": [
+                "createSavedQuery"
+              ]
+            },
+            "GetSavedQuery": {
+              "methods": [
+                "getSavedQuery"
+              ]
+            },
+            "UpdateSavedQuery": {
+              "methods": [
+                "updateSavedQuery"
+              ]
+            },
+            "DeleteSavedQuery": {
+              "methods": [
+                "deleteSavedQuery"
+              ]
+            },
+            "BatchGetEffectiveIamPolicies": {
+              "methods": [
+                "batchGetEffectiveIamPolicies"
+              ]
+            },
+            "ExportAssets": {
+              "methods": [
+                "exportAssets"
+              ]
+            },
+            "AnalyzeIamPolicyLongrunning": {
+              "methods": [
+                "analyzeIamPolicyLongrunning"
+              ]
+            },
+            "ListAssets": {
+              "methods": [
+                "listAssets",
+                "listAssetsStream",
+                "listAssetsAsync"
+              ]
+            },
+            "SearchAllResources": {
+              "methods": [
+                "searchAllResources",
+                "searchAllResourcesStream",
+                "searchAllResourcesAsync"
+              ]
+            },
+            "SearchAllIamPolicies": {
+              "methods": [
+                "searchAllIamPolicies",
+                "searchAllIamPoliciesStream",
+                "searchAllIamPoliciesAsync"
+              ]
+            },
+            "ListSavedQueries": {
+              "methods": [
+                "listSavedQueries",
+                "listSavedQueriesStream",
+                "listSavedQueriesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "AssetServiceClient",
+          "rpcs": {
+            "BatchGetAssetsHistory": {
+              "methods": [
+                "batchGetAssetsHistory"
+              ]
+            },
+            "CreateFeed": {
+              "methods": [
+                "createFeed"
+              ]
+            },
+            "GetFeed": {
+              "methods": [
+                "getFeed"
+              ]
+            },
+            "ListFeeds": {
+              "methods": [
+                "listFeeds"
+              ]
+            },
+            "UpdateFeed": {
+              "methods": [
+                "updateFeed"
+              ]
+            },
+            "DeleteFeed": {
+              "methods": [
+                "deleteFeed"
+              ]
+            },
+            "AnalyzeIamPolicy": {
+              "methods": [
+                "analyzeIamPolicy"
+              ]
+            },
+            "AnalyzeMove": {
+              "methods": [
+                "analyzeMove"
+              ]
+            },
+            "QueryAssets": {
+              "methods": [
+                "queryAssets"
+              ]
+            },
+            "CreateSavedQuery": {
+              "methods": [
+                "createSavedQuery"
+              ]
+            },
+            "GetSavedQuery": {
+              "methods": [
+                "getSavedQuery"
+              ]
+            },
+            "UpdateSavedQuery": {
+              "methods": [
+                "updateSavedQuery"
+              ]
+            },
+            "DeleteSavedQuery": {
+              "methods": [
+                "deleteSavedQuery"
+              ]
+            },
+            "BatchGetEffectiveIamPolicies": {
+              "methods": [
+                "batchGetEffectiveIamPolicies"
+              ]
+            },
+            "ExportAssets": {
+              "methods": [
+                "exportAssets"
+              ]
+            },
+            "AnalyzeIamPolicyLongrunning": {
+              "methods": [
+                "analyzeIamPolicyLongrunning"
+              ]
+            },
+            "ListAssets": {
+              "methods": [
+                "listAssets",
+                "listAssetsStream",
+                "listAssetsAsync"
+              ]
+            },
+            "SearchAllResources": {
+              "methods": [
+                "searchAllResources",
+                "searchAllResourcesStream",
+                "searchAllResourcesAsync"
+              ]
+            },
+            "SearchAllIamPolicies": {
+              "methods": [
+                "searchAllIamPolicies",
+                "searchAllIamPoliciesStream",
+                "searchAllIamPoliciesAsync"
+              ]
+            },
+            "ListSavedQueries": {
+              "methods": [
+                "listSavedQueries",
+                "listSavedQueriesStream",
+                "listSavedQueriesAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
