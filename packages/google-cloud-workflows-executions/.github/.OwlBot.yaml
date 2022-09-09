@@ -18,19 +18,7 @@ deep-remove-regex:
   - /owl-bot-staging
 
 deep-copy-regex:
-  - source: /google/cloud/workflows/executions/(.*)/.*-nodejs/protos/(.*)
-    dest: /owl-bot-staging/$1/protos/$2
-  - source: /google/cloud/workflows/executions/(.*)/.*-nodejs/src/(.*)
-    dest: /owl-bot-staging/$1/src/$2
-  - source: /google/cloud/workflows/executions/(.*)/.*-nodejs/test/(.*)
-    dest: /owl-bot-staging/$1/test/$2
-  - source: /google/cloud/workflows/executions/(.*)/.*-nodejs/system-test/(.*)
-    dest: /owl-bot-staging/$1/system-test/$2
-  - source: /google/cloud/workflows/(.*)/.*-nodejs/src/(.*)
-    dest: /owl-bot-staging/$1/src/$2
-  - source: /google/cloud/workflows/(.*)/.*-nodejs/protos/(.*)
-    dest: /owl-bot-staging/$1/protos/$2
-  - source: /google/cloud/workflows/(.*)/.*-nodejs/test/(.*)
-    dest: /owl-bot-staging/$1/test/$2
-  - source: /google/cloud/workflows/(.*)/.*-nodejs/system-test/(.*)
-    dest: /owl-bot-staging/$1/system-test/$2
+  - source: /google/cloud/workflows/executions/(.*)/.*-nodejs/(.*)
+    dest: /owl-bot-staging/$1/$2
+  - source: /google/cloud/workflows/(.*)/.*-nodejs/(.*)
+    dest: /owl-bot-staging/$1/$2
