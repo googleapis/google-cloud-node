@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1](https://github.com/googleapis/google-cloud-node/compare/batch-v0.1.0...batch-v0.1.1) (2022-09-09)
+
+
+### Bug Fixes
+
+* mark service_account_email as deprecated ([#3325](https://github.com/googleapis/google-cloud-node/issues/3325)) ([4afad9b](https://github.com/googleapis/google-cloud-node/commit/4afad9b52ac6762287c157c576e75165f4a5fb25))
+
 ## 0.1.0 (2022-08-29)
 
 

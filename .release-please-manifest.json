@@ -8,5 +8,7 @@
   "packages/typeless-sample-bot": "1.0.0",
   "packages/google-cloud-gkemulticloud": "0.1.1",
   "packages/google-api-apikeys": "0.1.0",
-  "packages/google-cloud-batch": "0.1.0"
+  "packages/google-cloud-batch": "0.1.1",
+  "packages/google-iam": "0.1.0",
+  "packages/google-cloud-security-publicca": "0.1.0"
 }
