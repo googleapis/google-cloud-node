@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@google-cloud/dialogflow-cx": "^3.1.0",
-    "uuid": "^8.3.1"
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "c8": "^7.3.0",
