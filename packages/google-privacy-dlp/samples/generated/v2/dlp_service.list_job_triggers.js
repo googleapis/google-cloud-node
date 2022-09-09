@@ -60,11 +60,11 @@ function main(parent) {
    *  insignificant.
    *  Example: `name asc,update_time, create_time desc`
    *  Supported fields are:
-   *  - `create_time`: corresponds to time the JobTrigger was created.
-   *  - `update_time`: corresponds to time the JobTrigger was last updated.
+   *  - `create_time`: corresponds to the time the JobTrigger was created.
+   *  - `update_time`: corresponds to the time the JobTrigger was last updated.
    *  - `last_run_time`: corresponds to the last time the JobTrigger ran.
-   *  - `name`: corresponds to JobTrigger's name.
-   *  - `display_name`: corresponds to JobTrigger's display name.
+   *  - `name`: corresponds to the JobTrigger's name.
+   *  - `display_name`: corresponds to the JobTrigger's display name.
    *  - `status`: corresponds to JobTrigger's status.
    */
   // const orderBy = 'abc123'

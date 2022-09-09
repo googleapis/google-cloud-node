@@ -1818,6 +1818,11 @@
                           "type": "string",
                           "id": 4
                         },
+                        "versions": {
+                          "rule": "repeated",
+                          "type": "VersionDescription",
+                          "id": 9
+                        },
                         "categories": {
                           "rule": "repeated",
                           "type": "InfoTypeCategory",
@@ -1914,6 +1919,18 @@
                             "DOCUMENT": 6,
                             "CONTEXTUAL_INFORMATION": 7
                           }
+                        }
+                      }
+                    },
+                    "VersionDescription": {
+                      "fields": {
+                        "version": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     },
@@ -2667,7 +2684,8 @@
                         "transformation": {
                           "oneof": [
                             "infoTypeTransformations",
-                            "recordTransformations"
+                            "recordTransformations",
+                            "imageTransformations"
                           ]
                         }
                       },
@@ -2680,9 +2698,73 @@
                           "type": "RecordTransformations",
                           "id": 2
                         },
+                        "imageTransformations": {
+                          "type": "ImageTransformations",
+                          "id": 4
+                        },
                         "transformationErrorHandling": {
                           "type": "TransformationErrorHandling",
                           "id": 3
+                        }
+                      }
+                    },
+                    "ImageTransformations": {
+                      "fields": {
+                        "transforms": {
+                          "rule": "repeated",
+                          "type": "ImageTransformation",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "ImageTransformation": {
+                          "oneofs": {
+                            "target": {
+                              "oneof": [
+                                "selectedInfoTypes",
+                                "allInfoTypes",
+                                "allText"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "selectedInfoTypes": {
+                              "type": "SelectedInfoTypes",
+                              "id": 4
+                            },
+                            "allInfoTypes": {
+                              "type": "AllInfoTypes",
+                              "id": 5
+                            },
+                            "allText": {
+                              "type": "AllText",
+                              "id": 6
+                            },
+                            "redactionColor": {
+                              "type": "Color",
+                              "id": 3
+                            }
+                          },
+                          "nested": {
+                            "SelectedInfoTypes": {
+                              "fields": {
+                                "infoTypes": {
+                                  "rule": "repeated",
+                                  "type": "InfoType",
+                                  "id": 5,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              }
+                            },
+                            "AllInfoTypes": {
+                              "fields": {}
+                            },
+                            "AllText": {
+                              "fields": {}
+                            }
+                          }
                         }
                       }
                     },
@@ -3339,6 +3421,158 @@
                         }
                       }
                     },
+                    "TransformationDescription": {
+                      "fields": {
+                        "type": {
+                          "type": "TransformationType",
+                          "id": 1
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "condition": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "infoType": {
+                          "type": "InfoType",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "TransformationDetails": {
+                      "fields": {
+                        "resourceName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "containerName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "transformation": {
+                          "rule": "repeated",
+                          "type": "TransformationDescription",
+                          "id": 3
+                        },
+                        "statusDetails": {
+                          "type": "TransformationResultStatus",
+                          "id": 4
+                        },
+                        "transformedBytes": {
+                          "type": "int64",
+                          "id": 5
+                        },
+                        "transformationLocation": {
+                          "type": "TransformationLocation",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "TransformationLocation": {
+                      "oneofs": {
+                        "locationType": {
+                          "oneof": [
+                            "findingId",
+                            "recordTransformation"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "findingId": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "recordTransformation": {
+                          "type": "RecordTransformation",
+                          "id": 2
+                        },
+                        "containerType": {
+                          "type": "TransformationContainerType",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "RecordTransformation": {
+                      "fields": {
+                        "fieldId": {
+                          "type": "FieldId",
+                          "id": 1
+                        },
+                        "containerTimestamp": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        },
+                        "containerVersion": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "TransformationResultStatus": {
+                      "fields": {
+                        "resultStatusType": {
+                          "type": "TransformationResultStatusType",
+                          "id": 1
+                        },
+                        "details": {
+                          "type": "google.rpc.Status",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "TransformationResultStatusType": {
+                      "values": {
+                        "STATE_TYPE_UNSPECIFIED": 0,
+                        "INVALID_TRANSFORM": 1,
+                        "BIGQUERY_MAX_ROW_SIZE_EXCEEDED": 2,
+                        "METADATA_UNRETRIEVABLE": 3,
+                        "SUCCESS": 4
+                      }
+                    },
+                    "TransformationContainerType": {
+                      "values": {
+                        "TRANSFORM_UNKNOWN_CONTAINER": 0,
+                        "TRANSFORM_BODY": 1,
+                        "TRANSFORM_METADATA": 2,
+                        "TRANSFORM_TABLE": 3
+                      }
+                    },
+                    "TransformationType": {
+                      "values": {
+                        "TRANSFORMATION_TYPE_UNSPECIFIED": 0,
+                        "RECORD_SUPPRESSION": 1,
+                        "REPLACE_VALUE": 2,
+                        "REPLACE_DICTIONARY": 15,
+                        "REDACT": 3,
+                        "CHARACTER_MASK": 4,
+                        "CRYPTO_REPLACE_FFX_FPE": 5,
+                        "FIXED_SIZE_BUCKETING": 6,
+                        "BUCKETING": 7,
+                        "REPLACE_WITH_INFO_TYPE": 8,
+                        "TIME_PART": 9,
+                        "CRYPTO_HASH": 10,
+                        "DATE_SHIFT": 12,
+                        "CRYPTO_DETERMINISTIC_CONFIG": 13,
+                        "REDACT_IMAGE": 14
+                      }
+                    },
+                    "TransformationDetailsStorageConfig": {
+                      "oneofs": {
+                        "type": {
+                          "oneof": [
+                            "table"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "table": {
+                          "type": "BigQueryTable",
+                          "id": 1
+                        }
+                      }
+                    },
                     "Schedule": {
                       "oneofs": {
                         "option": {
@@ -3562,6 +3796,7 @@
                             "pubSub",
                             "publishSummaryToCscc",
                             "publishFindingsToCloudDataCatalog",
+                            "deidentify",
                             "jobNotificationEmails",
                             "publishToStackdriver"
                           ]
@@ -3583,6 +3818,10 @@
                         "publishFindingsToCloudDataCatalog": {
                           "type": "PublishFindingsToCloudDataCatalog",
                           "id": 5
+                        },
+                        "deidentify": {
+                          "type": "Deidentify",
+                          "id": 7
                         },
                         "jobNotificationEmails": {
                           "type": "JobNotificationEmails",
@@ -3616,11 +3855,58 @@
                         "PublishFindingsToCloudDataCatalog": {
                           "fields": {}
                         },
+                        "Deidentify": {
+                          "oneofs": {
+                            "output": {
+                              "oneof": [
+                                "cloudStorageOutput"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "transformationConfig": {
+                              "type": "TransformationConfig",
+                              "id": 7
+                            },
+                            "transformationDetailsStorageConfig": {
+                              "type": "TransformationDetailsStorageConfig",
+                              "id": 3
+                            },
+                            "cloudStorageOutput": {
+                              "type": "string",
+                              "id": 9,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "fileTypesToTransform": {
+                              "rule": "repeated",
+                              "type": "FileType",
+                              "id": 8
+                            }
+                          }
+                        },
                         "JobNotificationEmails": {
                           "fields": {}
                         },
                         "PublishToStackdriver": {
                           "fields": {}
+                        }
+                      }
+                    },
+                    "TransformationConfig": {
+                      "fields": {
+                        "deidentifyTemplate": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "structuredDeidentifyTemplate": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "imageRedactTemplate": {
+                          "type": "string",
+                          "id": 4
                         }
                       }
                     },
@@ -4680,24 +4966,6 @@
                         "INVALID": 4
                       }
                     },
-                    "SensitivityScore": {
-                      "fields": {
-                        "score": {
-                          "type": "SensitivityScoreLevel",
-                          "id": 1
-                        }
-                      },
-                      "nested": {
-                        "SensitivityScoreLevel": {
-                          "values": {
-                            "SENSITIVITY_SCORE_UNSPECIFIED": 0,
-                            "SENSITIVITY_LOW": 10,
-                            "SENSITIVITY_MODERATE": 20,
-                            "SENSITIVITY_HIGH": 30
-                          }
-                        }
-                      }
-                    },
                     "DataRiskLevel": {
                       "fields": {
                         "score": {
@@ -4875,6 +5143,10 @@
                         "infoType": {
                           "type": "InfoType",
                           "id": 1
+                        },
+                        "estimatedPrevalence": {
+                          "type": "int32",
+                          "id": 2
                         }
                       }
                     },
@@ -4883,6 +5155,10 @@
                         "infoType": {
                           "type": "InfoType",
                           "id": 1
+                        },
+                        "estimatedPrevalence": {
+                          "type": "int32",
+                          "id": 2
                         }
                       }
                     },
@@ -4966,6 +5242,24 @@
                         "version": {
                           "type": "string",
                           "id": 2
+                        }
+                      }
+                    },
+                    "SensitivityScore": {
+                      "fields": {
+                        "score": {
+                          "type": "SensitivityScoreLevel",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "SensitivityScoreLevel": {
+                          "values": {
+                            "SENSITIVITY_SCORE_UNSPECIFIED": 0,
+                            "SENSITIVITY_LOW": 10,
+                            "SENSITIVITY_MODERATE": 20,
+                            "SENSITIVITY_HIGH": 30
+                          }
                         }
                       }
                     },

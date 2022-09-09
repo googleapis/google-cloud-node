@@ -37,10 +37,6 @@ function main(parent) {
    *    `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
    *  + Projects scope, no location specified (defaults to global):<br/>
    *    `projects/`<var>PROJECT_ID</var>
-   *  + Organizations scope, location specified:<br/>
-   *    `organizations/`<var>ORG_ID</var>`/locations/`<var>LOCATION_ID</var>
-   *  + Organizations scope, no location specified (defaults to global):<br/>
-   *    `organizations/`<var>ORG_ID</var>
    *  The following example `parent` string specifies a parent project with the
    *  identifier `example-project`, and specifies the `europe-west3` location
    *  for processing data:
@@ -53,7 +49,7 @@ function main(parent) {
    */
   // const pageToken = 'abc123'
   /**
-   *  Size of the page, can be limited by server. If zero server returns
+   *  Size of the page, can be limited by the server. If zero server returns
    *  a page of max size 100.
    */
   // const pageSize = 1234
@@ -64,7 +60,7 @@ function main(parent) {
    *  insignificant.
    *  Example: `name asc, display_name, create_time desc`
    *  Supported fields are:
-   *  - `create_time`: corresponds to time the most recent version of the
+   *  - `create_time`: corresponds to the time the most recent version of the
    *  resource was created.
    *  - `state`: corresponds to the state of the resource.
    *  - `name`: corresponds to resource name.

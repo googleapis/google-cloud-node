@@ -259,7 +259,7 @@
             "regionTag": "dlp_v2_generated_DlpService_ListInfoTypes_async",
             "title": "DlpService listInfoTypes Sample",
             "origin": "API_DEFINITION",
-            "description": " Returns a list of the sensitive information types that the DLP API supports. See https://cloud.google.com/dlp/docs/infotypes-reference to learn more.",
+            "description": " Returns a list of the sensitive information types that DLP API supports. See https://cloud.google.com/dlp/docs/infotypes-reference to learn more.",
             "canonical": true,
             "file": "dlp_service.list_info_types.js",
             "language": "JAVASCRIPT",
@@ -311,7 +311,7 @@
             "regionTag": "dlp_v2_generated_DlpService_CreateInspectTemplate_async",
             "title": "DlpService createInspectTemplate Sample",
             "origin": "API_DEFINITION",
-            "description": " Creates an InspectTemplate for re-using frequently used configuration for inspecting content, images, and storage. See https://cloud.google.com/dlp/docs/creating-templates to learn more.",
+            "description": " Creates an InspectTemplate for reusing frequently used configuration for inspecting content, images, and storage. See https://cloud.google.com/dlp/docs/creating-templates to learn more.",
             "canonical": true,
             "file": "dlp_service.create_inspect_template.js",
             "language": "JAVASCRIPT",
@@ -547,7 +547,7 @@
             "regionTag": "dlp_v2_generated_DlpService_CreateDeidentifyTemplate_async",
             "title": "DlpService createDeidentifyTemplate Sample",
             "origin": "API_DEFINITION",
-            "description": " Creates a DeidentifyTemplate for re-using frequently used configuration for de-identifying content, images, and storage. See https://cloud.google.com/dlp/docs/creating-templates-deid to learn more.",
+            "description": " Creates a DeidentifyTemplate for reusing frequently used configuration for de-identifying content, images, and storage. See https://cloud.google.com/dlp/docs/creating-templates-deid to learn more.",
             "canonical": true,
             "file": "dlp_service.create_deidentify_template.js",
             "language": "JAVASCRIPT",
@@ -1271,7 +1271,7 @@
             "regionTag": "dlp_v2_generated_DlpService_DeleteDlpJob_async",
             "title": "DlpService deleteDlpJob Sample",
             "origin": "API_DEFINITION",
-            "description": " Deletes a long-running DlpJob. This method indicates that the client is no longer interested in the DlpJob result. The job will be cancelled if possible. See https://cloud.google.com/dlp/docs/inspecting-storage and https://cloud.google.com/dlp/docs/compute-risk-analysis to learn more.",
+            "description": " Deletes a long-running DlpJob. This method indicates that the client is no longer interested in the DlpJob result. The job will be canceled if possible. See https://cloud.google.com/dlp/docs/inspecting-storage and https://cloud.google.com/dlp/docs/compute-risk-analysis to learn more.",
             "canonical": true,
             "file": "dlp_service.delete_dlp_job.js",
             "language": "JAVASCRIPT",
@@ -1498,7 +1498,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 94,
+                    "end": 90,
                     "type": "FULL"
                 }
             ],
