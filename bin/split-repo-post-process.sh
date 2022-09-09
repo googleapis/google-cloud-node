@@ -49,20 +49,16 @@ else
   sed -i "s/dest: \/owl-bot-staging/dest: \/owl-bot-staging\/${PACKAGE_NAME}/" "${PACKAGE_PATH}/.OwlBot.yaml"
 fi
 
-# update samples and system tests scripts
-for SCRIPT in $(echo "samples-test" "system-test")
-do
-  SCRIPT_VALUE=$(jq -r ".scripts[\"${SCRIPT}\"]" ${PACKAGE_PATH}/package.json)
-  if echo "${SCRIPT_VALUE}" | grep -q "npm run compile"
-  then
-    echo "${SCRIPT} already contains compile step"
-  else
-    echo "adding compile step to ${SCRIPT}"
-    # using a temp file because jq doesn't like writing to the input file as it reads
-    jq -r ".scripts[\"${SCRIPT}\"] = \"npm run compile && ${SCRIPT_VALUE}\"" ${PACKAGE_PATH}/package.json > ${PACKAGE_PATH}/package2.json
-    mv ${PACKAGE_PATH}/package2.json ${PACKAGE_PATH}/package.json
-  fi
-done
+# update system tests scripts
+echo "adding compile step to system-test"
+# using a temp file because jq doesn't like writing to the input file as it reads
+jq -r ".scripts[\"system-test\"] = \"npm run compile && c8 mocha build/system-test\"" ${PACKAGE_PATH}/package.json > ${PACKAGE_PATH}/package2.json
+mv ${PACKAGE_PATH}/package2.json ${PACKAGE_PATH}/package.json
+
+echo "adding compile step to samples-test"
+# using a temp file because jq doesn't like writing to the input file as it reads
+jq -r ".scripts[\"samples-test\"] = \"npm run compile && cd samples/ && npm link ../ && npm i && npm test\"" ${PACKAGE_PATH}/package.json > ${PACKAGE_PATH}/package2.json
+mv ${PACKAGE_PATH}/package2.json ${PACKAGE_PATH}/package.json
 
 # add changes to local git directory
 git add .
