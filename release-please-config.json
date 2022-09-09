@@ -12,5 +12,10 @@
     "packages/google-cloud-batch": {},
     "packages/google-iam": {},
     "packages/google-cloud-security-publicca": {}
-  }
+  },
+  "plugins": [
+    {
+      "type": "sentence-case"
+    }
+  ]
 }
