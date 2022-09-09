@@ -22,7 +22,7 @@ import {
 import {compileTemplates} from '../templating';
 import * as path from 'path';
 import {Storage} from '@google-cloud/storage';
-import {Octokit} from 'octokit';
+import {Octokit} from '@octokit/rest';
 import * as cp from 'child_process';
 
 const BOOTSTRAP_TEMPLATES_PATH = path.resolve(

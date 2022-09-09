@@ -6,6 +6,11 @@
     "packages/google-cloud-beyondcorp-clientgateways": {},
     "packages/google-cloud-beyondcorp-clientconnectorservices": {},
     "packages/google-cloud-beyondcorp-appconnections": {},
-    "packages/typeless-sample-bot": {}
+    "packages/typeless-sample-bot": {},
+    "packages/google-cloud-gkemulticloud": {},
+    "packages/google-api-apikeys": {},
+    "packages/google-cloud-batch": {},
+    "packages/google-iam": {},
+    "packages/google-cloud-security-publicca": {}
   }
 }

@@ -43,7 +43,7 @@
     "@google-cloud/storage": "^6.1.0",
     "js-yaml": "^4.1.0",
     "nunjucks": "^3.2.3",
-    "octokit": "^2.0.0",
+    "@octokit/rest": "^19.0.0",
     "yargs": "^17.5.1"
   }
 }

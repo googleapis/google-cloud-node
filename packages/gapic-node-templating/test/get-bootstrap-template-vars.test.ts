@@ -36,7 +36,7 @@ import * as sinon from 'sinon';
 // eslint-disable-next-line node/no-unpublished-import
 import nock from 'nock';
 // eslint-disable-next-line node/no-unpublished-import
-import {Octokit} from 'octokit';
+import {Octokit} from '@octokit/rest';
 
 const octokit = new Octokit({
   auth: 'mypersonalaccesstoken123',
@@ -203,6 +203,9 @@ describe('get bootstrap template vars', () => {
           },
           {
             name: 'cloudkms_grpc_service_config.json',
+          },
+          {
+            name: 'cloudkms_gapic.yaml',
           },
         ])
         .get(

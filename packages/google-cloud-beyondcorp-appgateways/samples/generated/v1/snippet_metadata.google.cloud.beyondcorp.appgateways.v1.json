@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-appgateways",
-        "version": "0.1.0",
+        "version": "0.2.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -22,7 +22,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 78,
+                    "end": 81,
                     "type": "FULL"
                 }
             ],
@@ -78,7 +78,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 51,
+                    "end": 54,
                     "type": "FULL"
                 }
             ],
@@ -118,7 +118,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 83,
+                    "end": 86,
                     "type": "FULL"
                 }
             ],
@@ -174,7 +174,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 71,
+                    "end": 74,
                     "type": "FULL"
                 }
             ],

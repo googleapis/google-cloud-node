@@ -14,7 +14,7 @@
 
 import {CliArgs} from './commands/bootstrap-library';
 import {Storage} from '@google-cloud/storage';
-import {Octokit} from 'octokit';
+import {Octokit} from '@octokit/rest';
 import {join} from 'path';
 import ChildProcess from 'child_process';
 import {writeFileSync} from 'fs';
@@ -163,7 +163,7 @@ export async function getServiceName(octokit: Octokit, apiId: string) {
   ).data as GHDir[];
 
   for (const file of dir) {
-    if (file.name.endsWith('.yaml')) {
+    if (file.name.endsWith('.yaml') && !file.name.includes('gapic')) {
       path = `${path}/${file.name}`;
     }
   }

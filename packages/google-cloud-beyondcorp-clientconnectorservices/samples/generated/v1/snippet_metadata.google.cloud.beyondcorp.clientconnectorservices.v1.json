@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-clientconnectorservices",
-        "version": "0.1.0",
+        "version": "0.2.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -22,7 +22,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 69,
+                    "end": 72,
                     "type": "FULL"
                 }
             ],
@@ -78,7 +78,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 50,
+                    "end": 53,
                     "type": "FULL"
                 }
             ],
@@ -118,7 +118,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 84,
+                    "end": 87,
                     "type": "FULL"
                 }
             ],
@@ -174,7 +174,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 84,
+                    "end": 87,
                     "type": "FULL"
                 }
             ],
@@ -230,7 +230,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 70,
+                    "end": 73,
                     "type": "FULL"
                 }
             ],
