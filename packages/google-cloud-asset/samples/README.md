@@ -48,9 +48,9 @@ Before running the samples, make sure you've followed the steps outlined in
 
 Analyzes accessible IAM policies that match a request.
 
-View the [source code](https://github.com/googleapis/nodejs-asset/blob/main/samples/analyzeIamPolicy.js).
+View the [source code](https://github.com/googleapis/nodejs-asset/blob/main//workspace/google-cloud-node/packages/google-cloud-asset/samples/analyzeIamPolicy.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-asset&page=editor&open_in_editor=samples/analyzeIamPolicy.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-asset&page=editor&open_in_editor=/workspace/google-cloud-node/packages/google-cloud-asset/samples/analyzeIamPolicy.js,samples/README.md)
 
 __Usage:__
 
@@ -67,9 +67,9 @@ __Usage:__
 
 Analyzes accessible IAM policies that match a request.
 
-View the [source code](https://github.com/googleapis/nodejs-asset/blob/main/samples/analyzeIamPolicyLongrunningBigquery.js).
+View the [source code](https://github.com/googleapis/nodejs-asset/blob/main//workspace/google-cloud-node/packages/google-cloud-asset/samples/analyzeIamPolicyLongrunningBigquery.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-asset&page=editor&open_in_editor=samples/analyzeIamPolicyLongrunningBigquery.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-asset&page=editor&open_in_editor=/workspace/google-cloud-node/packages/google-cloud-asset/samples/analyzeIamPolicyLongrunningBigquery.js,samples/README.md)
 
 __Usage:__
 
@@ -86,9 +86,9 @@ __Usage:__
 
 Analyzes accessible IAM policies that match a request.
 
-View the [source code](https://github.com/googleapis/nodejs-asset/blob/main/samples/analyzeIamPolicyLongrunningGcs.js).
+View the [source code](https://github.com/googleapis/nodejs-asset/blob/main//workspace/google-cloud-node/packages/google-cloud-asset/samples/analyzeIamPolicyLongrunningGcs.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-asset&page=editor&open_in_editor=samples/analyzeIamPolicyLongrunningGcs.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-asset&page=editor&open_in_editor=/workspace/google-cloud-node/packages/google-cloud-asset/samples/analyzeIamPolicyLongrunningGcs.js,samples/README.md)
 
 __Usage:__
 
@@ -105,9 +105,9 @@ __Usage:__
 
 Create Feed.
 
-View the [source code](https://github.com/googleapis/nodejs-asset/blob/main/samples/createFeed.js).
+View the [source code](https://github.com/googleapis/nodejs-asset/blob/main//workspace/google-cloud-node/packages/google-cloud-asset/samples/createFeed.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-asset&page=editor&open_in_editor=samples/createFeed.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-asset&page=editor&open_in_editor=/workspace/google-cloud-node/packages/google-cloud-asset/samples/createFeed.js,samples/README.md)
 
 __Usage:__
 
@@ -124,9 +124,9 @@ __Usage:__
 
 Delete Feed.
 
-View the [source code](https://github.com/googleapis/nodejs-asset/blob/main/samples/deleteFeed.js).
+View the [source code](https://github.com/googleapis/nodejs-asset/blob/main//workspace/google-cloud-node/packages/google-cloud-asset/samples/deleteFeed.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-asset&page=editor&open_in_editor=samples/deleteFeed.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-asset&page=editor&open_in_editor=/workspace/google-cloud-node/packages/google-cloud-asset/samples/deleteFeed.js,samples/README.md)
 
 __Usage:__
 
@@ -143,9 +143,9 @@ __Usage:__
 
 Export asserts to specified dump file path.
 
-View the [source code](https://github.com/googleapis/nodejs-asset/blob/main/samples/exportAssets.js).
+View the [source code](https://github.com/googleapis/nodejs-asset/blob/main//workspace/google-cloud-node/packages/google-cloud-asset/samples/exportAssets.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-asset&page=editor&open_in_editor=samples/exportAssets.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-asset&page=editor&open_in_editor=/workspace/google-cloud-node/packages/google-cloud-asset/samples/exportAssets.js,samples/README.md)
 
 __Usage:__
 
@@ -162,9 +162,9 @@ __Usage:__
 
 Export asserts to specified BigQuery table.
 
-View the [source code](https://github.com/googleapis/nodejs-asset/blob/main/samples/exportAssetsBigquery.js).
+View the [source code](https://github.com/googleapis/nodejs-asset/blob/main//workspace/google-cloud-node/packages/google-cloud-asset/samples/exportAssetsBigquery.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-asset&page=editor&open_in_editor=samples/exportAssetsBigquery.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-asset&page=editor&open_in_editor=/workspace/google-cloud-node/packages/google-cloud-asset/samples/exportAssetsBigquery.js,samples/README.md)
 
 __Usage:__
 
@@ -181,9 +181,9 @@ __Usage:__
 
 Batch get history of assets.
 
-View the [source code](https://github.com/googleapis/nodejs-asset/blob/main/samples/getBatchAssetHistory.js).
+View the [source code](https://github.com/googleapis/nodejs-asset/blob/main//workspace/google-cloud-node/packages/google-cloud-asset/samples/getBatchAssetHistory.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-asset&page=editor&open_in_editor=samples/getBatchAssetHistory.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-asset&page=editor&open_in_editor=/workspace/google-cloud-node/packages/google-cloud-asset/samples/getBatchAssetHistory.js,samples/README.md)
 
 __Usage:__
 
@@ -200,9 +200,9 @@ __Usage:__
 
 Batch get effective IAM policies that match a request.
 
-View the [source code](https://github.com/googleapis/nodejs-asset/blob/main/samples/getBatchEffectiveIamPolicies.js).
+View the [source code](https://github.com/googleapis/nodejs-asset/blob/main//workspace/google-cloud-node/packages/google-cloud-asset/samples/getBatchEffectiveIamPolicies.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-asset&page=editor&open_in_editor=samples/getBatchEffectiveIamPolicies.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-asset&page=editor&open_in_editor=/workspace/google-cloud-node/packages/google-cloud-asset/samples/getBatchEffectiveIamPolicies.js,samples/README.md)
 
 __Usage:__
 
@@ -219,9 +219,9 @@ __Usage:__
 
 Get Feed.
 
-View the [source code](https://github.com/googleapis/nodejs-asset/blob/main/samples/getFeed.js).
+View the [source code](https://github.com/googleapis/nodejs-asset/blob/main//workspace/google-cloud-node/packages/google-cloud-asset/samples/getFeed.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-asset&page=editor&open_in_editor=samples/getFeed.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-asset&page=editor&open_in_editor=/workspace/google-cloud-node/packages/google-cloud-asset/samples/getFeed.js,samples/README.md)
 
 __Usage:__
 
@@ -238,9 +238,9 @@ __Usage:__
 
 List assets under the current project.
 
-View the [source code](https://github.com/googleapis/nodejs-asset/blob/main/samples/listAssets.js).
+View the [source code](https://github.com/googleapis/nodejs-asset/blob/main//workspace/google-cloud-node/packages/google-cloud-asset/samples/listAssets.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-asset&page=editor&open_in_editor=samples/listAssets.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-asset&page=editor&open_in_editor=/workspace/google-cloud-node/packages/google-cloud-asset/samples/listAssets.js,samples/README.md)
 
 __Usage:__
 
@@ -257,9 +257,9 @@ __Usage:__
 
 List Feeds.
 
-View the [source code](https://github.com/googleapis/nodejs-asset/blob/main/samples/listFeeds.js).
+View the [source code](https://github.com/googleapis/nodejs-asset/blob/main//workspace/google-cloud-node/packages/google-cloud-asset/samples/listFeeds.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-asset&page=editor&open_in_editor=samples/listFeeds.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-asset&page=editor&open_in_editor=/workspace/google-cloud-node/packages/google-cloud-asset/samples/listFeeds.js,samples/README.md)
 
 __Usage:__
 
@@ -276,9 +276,9 @@ __Usage:__
 
 Batch get history of assets.
 
-View the [source code](https://github.com/googleapis/nodejs-asset/blob/main/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/nodejs-asset/blob/main//workspace/google-cloud-node/packages/google-cloud-asset/samples/quickstart.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-asset&page=editor&open_in_editor=samples/quickstart.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-asset&page=editor&open_in_editor=/workspace/google-cloud-node/packages/google-cloud-asset/samples/quickstart.js,samples/README.md)
 
 __Usage:__
 
@@ -295,9 +295,9 @@ __Usage:__
 
 Search All Iam Policies.
 
-View the [source code](https://github.com/googleapis/nodejs-asset/blob/main/samples/searchAllIamPolicies.js).
+View the [source code](https://github.com/googleapis/nodejs-asset/blob/main//workspace/google-cloud-node/packages/google-cloud-asset/samples/searchAllIamPolicies.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-asset&page=editor&open_in_editor=samples/searchAllIamPolicies.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-asset&page=editor&open_in_editor=/workspace/google-cloud-node/packages/google-cloud-asset/samples/searchAllIamPolicies.js,samples/README.md)
 
 __Usage:__
 
@@ -314,9 +314,9 @@ __Usage:__
 
 Search All Resources.
 
-View the [source code](https://github.com/googleapis/nodejs-asset/blob/main/samples/searchAllResources.js).
+View the [source code](https://github.com/googleapis/nodejs-asset/blob/main//workspace/google-cloud-node/packages/google-cloud-asset/samples/searchAllResources.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-asset&page=editor&open_in_editor=samples/searchAllResources.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-asset&page=editor&open_in_editor=/workspace/google-cloud-node/packages/google-cloud-asset/samples/searchAllResources.js,samples/README.md)
 
 __Usage:__
 
@@ -333,9 +333,9 @@ __Usage:__
 
 Update Feed.
 
-View the [source code](https://github.com/googleapis/nodejs-asset/blob/main/samples/updateFeed.js).
+View the [source code](https://github.com/googleapis/nodejs-asset/blob/main//workspace/google-cloud-node/packages/google-cloud-asset/samples/updateFeed.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-asset&page=editor&open_in_editor=samples/updateFeed.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-asset&page=editor&open_in_editor=/workspace/google-cloud-node/packages/google-cloud-asset/samples/updateFeed.js,samples/README.md)
 
 __Usage:__
 
