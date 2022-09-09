@@ -49,6 +49,21 @@ else
   sed -i "s/dest: \/owl-bot-staging/dest: \/owl-bot-staging\/${PACKAGE_NAME}/" "${PACKAGE_PATH}/.OwlBot.yaml"
 fi
 
+# update samples and system tests scripts
+for SCRIPT in $(echo "samples-test" "system-test")
+do
+  SCRIPT_VALUE=$(jq -r ".scripts[\"${SCRIPT}\"]" ${PACKAGE_PATH}/package.json)
+  if echo "${SCRIPT_VALUE}" | grep -q "npm run compile"
+  then
+    echo "${SCRIPT} already contains compile step"
+  else
+    echo "adding compile step to ${SCRIPT}"
+    # using a temp file because jq doesn't like writing to the input file as it reads
+    jq -r ".scripts[\"${SCRIPT}\"] = \"npm run compile && ${SCRIPT_VALUE}\"" ${PACKAGE_PATH}/package.json > ${PACKAGE_PATH}/package2.json
+    mv ${PACKAGE_PATH}/package2.json ${PACKAGE_PATH}/package.json
+  fi
+done
+
 # add changes to local git directory
 git add .
 git commit -am "build: add release-please config, fix owlbot-config"
