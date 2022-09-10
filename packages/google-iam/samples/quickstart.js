@@ -19,7 +19,6 @@
 'use strict';
 
 function main(parent) {
-  // [START iam_quickstart]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -69,7 +68,6 @@ function main(parent) {
   }
 
   callListPolicies();
-  // [END iam_quickstart]
 }
 
 process.on('unhandledRejection', err => {
