@@ -46,4 +46,5 @@ echo ${COMMAND}
 if [[ "${PUSH_ARG}" == "--push" ]]
 then
   `${COMMAND}`
+  git push --tags
 fi
