@@ -81,11 +81,11 @@ then
   mkdir -p ${WORKDIR}/filtered-source
   FOLDERS=$(echo ${IGNORE_FOLDERS} | tr "," " ")
   # remove files/folders we don't want
-  FILTER="(rm -rf ${FOLDERS} || /bin/true)"
+  FILTER="(rm -rf ${FOLDERS} || true)"
   if [[ ! -z "${KEEP_FILES}" ]]
   then
     # restore files to keep, silence errors if the file doesn't exist
-    FILTER="${FILTER}; git checkout -- ${KEEP_FILES} 2> /dev/null || /bin/true"
+    FILTER="${FILTER}; git checkout -- ${KEEP_FILES} 2> /dev/null || true"
   fi
   git filter-branch \
     --force \
@@ -124,6 +124,11 @@ fi
 git push -u origin "${BRANCH}" --force
 
 # create pull request
-hub pull-request -m "migrate code from ${SOURCE_REPO}"
+if gh --help
+then
+  gh pr create --title "migrate code from ${SOURCE_REPO}"
+else
+  hub pull-request -m "migrate code from ${SOURCE_REPO}"
+fi
 
 popd
