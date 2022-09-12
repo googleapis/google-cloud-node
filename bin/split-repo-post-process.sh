@@ -49,6 +49,18 @@ else
   sed -i "s/dest: \/owl-bot-staging/dest: \/owl-bot-staging\/${PACKAGE_NAME}/" "${PACKAGE_PATH}/.OwlBot.yaml"
 fi
 
+# update .repo and .issue_tracker in .repo-metadata.json
+echo "Update .repo-metadata.json"
+echo "updating .repo to googleapis/google-cloud-node"
+jq ".repo = \"googleapis/google-cloud-node\"" "${PACKAGE_PATH}/.repo-metadata.json" > "${PACKAGE_PATH}/.repo-metadata2.json"
+mv "${PACKAGE_PATH}/.repo-metadata2.json" "${PACKAGE_PATH}/.repo-metadata.json"
+if jq -r ".issue_tracker" "${PACKAGE_PATH}/.repo-metadata.json" | grep "github.com"
+then
+  echo "updating .issue_tracker to https://github.com/googleapis/google-cloud-node/issues"
+  jq ".issue_tracker = \"https://github.com/googleapis/google-cloud-node/issues\"" "${PACKAGE_PATH}/.repo-metadata.json" > "${PACKAGE_PATH}/.repo-metadata2.json"
+  mv "${PACKAGE_PATH}/.repo-metadata2.json" "${PACKAGE_PATH}/.repo-metadata.json"
+fi
+
 # update system tests scripts
 echo "adding compile step to system-test"
 # using a temp file because jq doesn't like writing to the input file as it reads
