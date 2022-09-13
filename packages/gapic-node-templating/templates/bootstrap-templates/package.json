@@ -1,6 +1,6 @@
 {
     "name": "{{distributionName}}",
-    "version": "0.1.0",
+    "version": "0.0.0",
     "description": "{{namePretty}} client for Node.js",
     "repository": "googleapis/{{monoRepoName}}",
     "license": "Apache-2.0",
