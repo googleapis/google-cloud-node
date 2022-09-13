@@ -4,6 +4,23 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+## [4.3.0](https://github.com/googleapis/nodejs-asset/compare/v4.2.0...v4.3.0) (2022-09-09)
+
+
+### Features
+
+* Add batchGetEffectiveIamPolicies sample code. ([#654](https://github.com/googleapis/nodejs-asset/issues/654)) ([11160b0](https://github.com/googleapis/nodejs-asset/commit/11160b098aec0854fe21fb79144120b9cb29caf6))
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#656](https://github.com/googleapis/nodejs-asset/issues/656)) ([af56ac6](https://github.com/googleapis/nodejs-asset/commit/af56ac6e2213df8bc65e95fee860251569075130))
+* Change import long to require ([#648](https://github.com/googleapis/nodejs-asset/issues/648)) ([0af8467](https://github.com/googleapis/nodejs-asset/commit/0af8467d716cc4f5bfb69482d4264350ceea2ec1))
+* **deps:** Update dependency uuid to v9 ([#657](https://github.com/googleapis/nodejs-asset/issues/657)) ([fac4751](https://github.com/googleapis/nodejs-asset/commit/fac4751e36b3d6340c6323d476bd7fc7ec6a8a30))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-asset/issues/1553)) ([#655](https://github.com/googleapis/nodejs-asset/issues/655)) ([25a9d42](https://github.com/googleapis/nodejs-asset/commit/25a9d42aa57e8a331aa115d6dcb7aa8bf16c4909))
+* Remove pip install statements ([#1546](https://github.com/googleapis/nodejs-asset/issues/1546)) ([#651](https://github.com/googleapis/nodejs-asset/issues/651)) ([4fc24d0](https://github.com/googleapis/nodejs-asset/commit/4fc24d0bd85fca6d7a3b3b0e84f1b520d12d368d))
+* use google-gax v3.3.0 ([25a9d42](https://github.com/googleapis/nodejs-asset/commit/25a9d42aa57e8a331aa115d6dcb7aa8bf16c4909))
+
 ## [4.2.0](https://github.com/googleapis/nodejs-asset/compare/v4.1.0...v4.2.0) (2022-08-23)
 
 
