@@ -1,0 +1,195 @@
+{
+    "clientLibrary": {
+        "name": "nodejs-executions",
+        "version": "2.1.1",
+        "language": "TYPESCRIPT",
+        "apis": [
+            {
+                "id": "google.cloud.workflows.executions.v1",
+                "version": "v1"
+            }
+        ]
+    },
+    "snippets": [
+        {
+            "regionTag": "workflowexecutions_v1_generated_Executions_ListExecutions_async",
+            "title": "Executions listExecutions Sample",
+            "origin": "API_DEFINITION",
+            "description": " Returns a list of executions which belong to the workflow with the given name. The method returns executions of all workflow revisions. Returned executions are ordered by their start time (newest first).",
+            "canonical": true,
+            "file": "executions.list_executions.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 76,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListExecutions",
+                "fullName": "google.cloud.workflows.executions.v1.Executions.ListExecutions",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "view",
+                        "type": ".google.cloud.workflows.executions.v1.ExecutionView"
+                    }
+                ],
+                "resultType": ".google.cloud.workflows.executions.v1.ListExecutionsResponse",
+                "client": {
+                    "shortName": "ExecutionsClient",
+                    "fullName": "google.cloud.workflows.executions.v1.ExecutionsClient"
+                },
+                "method": {
+                    "shortName": "ListExecutions",
+                    "fullName": "google.cloud.workflows.executions.v1.Executions.ListExecutions",
+                    "service": {
+                        "shortName": "Executions",
+                        "fullName": "google.cloud.workflows.executions.v1.Executions"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "workflowexecutions_v1_generated_Executions_CreateExecution_async",
+            "title": "Executions createExecution Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates a new execution using the latest revision of the given workflow.",
+            "canonical": true,
+            "file": "executions.create_execution.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 60,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateExecution",
+                "fullName": "google.cloud.workflows.executions.v1.Executions.CreateExecution",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "execution",
+                        "type": ".google.cloud.workflows.executions.v1.Execution"
+                    }
+                ],
+                "resultType": ".google.cloud.workflows.executions.v1.Execution",
+                "client": {
+                    "shortName": "ExecutionsClient",
+                    "fullName": "google.cloud.workflows.executions.v1.ExecutionsClient"
+                },
+                "method": {
+                    "shortName": "CreateExecution",
+                    "fullName": "google.cloud.workflows.executions.v1.Executions.CreateExecution",
+                    "service": {
+                        "shortName": "Executions",
+                        "fullName": "google.cloud.workflows.executions.v1.Executions"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "workflowexecutions_v1_generated_Executions_GetExecution_async",
+            "title": "Executions getExecution Sample",
+            "origin": "API_DEFINITION",
+            "description": " Returns an execution of the given name.",
+            "canonical": true,
+            "file": "executions.get_execution.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 60,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetExecution",
+                "fullName": "google.cloud.workflows.executions.v1.Executions.GetExecution",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "view",
+                        "type": ".google.cloud.workflows.executions.v1.ExecutionView"
+                    }
+                ],
+                "resultType": ".google.cloud.workflows.executions.v1.Execution",
+                "client": {
+                    "shortName": "ExecutionsClient",
+                    "fullName": "google.cloud.workflows.executions.v1.ExecutionsClient"
+                },
+                "method": {
+                    "shortName": "GetExecution",
+                    "fullName": "google.cloud.workflows.executions.v1.Executions.GetExecution",
+                    "service": {
+                        "shortName": "Executions",
+                        "fullName": "google.cloud.workflows.executions.v1.Executions"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "workflowexecutions_v1_generated_Executions_CancelExecution_async",
+            "title": "Executions cancelExecution Sample",
+            "origin": "API_DEFINITION",
+            "description": " Cancels an execution of the given name.",
+            "canonical": true,
+            "file": "executions.cancel_execution.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CancelExecution",
+                "fullName": "google.cloud.workflows.executions.v1.Executions.CancelExecution",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.workflows.executions.v1.Execution",
+                "client": {
+                    "shortName": "ExecutionsClient",
+                    "fullName": "google.cloud.workflows.executions.v1.ExecutionsClient"
+                },
+                "method": {
+                    "shortName": "CancelExecution",
+                    "fullName": "google.cloud.workflows.executions.v1.Executions.CancelExecution",
+                    "service": {
+                        "shortName": "Executions",
+                        "fullName": "google.cloud.workflows.executions.v1.Executions"
+                    }
+                }
+            }
+        }
+    ]
+}
