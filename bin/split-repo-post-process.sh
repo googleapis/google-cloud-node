@@ -79,6 +79,7 @@ docker run --rm \
   --user $(id -u):$(id -g) \
   -v $(pwd):/repo \
   -w /repo \
+  -e "DEFAULT_BRANCH=main"
   "${IMAGE}"
 
 # add changes to local git directory
