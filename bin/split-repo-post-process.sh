@@ -77,8 +77,8 @@ echo "Running post-processor: ${IMAGE}"
 docker pull "${IMAGE}"
 docker run --rm \
   --user $(id -u):$(id -g) \
-  -v $(pwd):/repo \
-  -w /repo \
+  -v $(pwd):/workspace/google-cloud-node \
+  -w /workspace/google-cloud-node \
   -e "DEFAULT_BRANCH=main" \
   "${IMAGE}"
 
