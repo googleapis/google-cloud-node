@@ -31,7 +31,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-
+  * [Using the client library](#using-the-client-library)
 * [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
@@ -54,6 +54,55 @@ npm install @google-cloud/datapolicies
 ```
 
 
+### Using the client library
+
+```javascript
+/**
+ * This snippet has been automatically generated and should be regarded as a code template only.
+ * It will require modifications to work.
+ * It may require correct/in-range values for request initialization.
+ * TODO(developer): Uncomment these variables before running the sample.
+ */
+/**
+ *  Required. Resource name of the project for which to list data policies. Format is
+ *  `projects/{project_number}/locations/{location_id}`.
+ */
+// const parent = 'abc123'
+/**
+ *  The maximum number of data policies to return. Must be a value between 1
+ *  and 1000.
+ *  If not set, defaults to 50.
+ */
+// const pageSize = 1234
+/**
+ *  The `nextPageToken` value returned from a previous list request, if any. If
+ *  not set, defaults to an empty string.
+ */
+// const pageToken = 'abc123'
+
+// Imports the Datapolicies library
+const {DataPolicyServiceClient} = require('@google-cloud/datapolicies').v1beta1;
+
+// Instantiates a client
+const datapoliciesClient = new DataPolicyServiceClient();
+
+async function callListDataPolicies() {
+  // Construct request
+  const request = {
+    parent,
+  };
+
+  // Run request
+  const iterable = await datapoliciesClient.listDataPoliciesAsync(request);
+  for await (const response of iterable) {
+      console.log(response);
+  }
+}
+
+callListDataPolicies();
+
+```
+
 
 
 ## Samples
@@ -70,6 +119,7 @@ Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/
 | Data_policy_service.set_iam_policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v1beta1/data_policy_service.set_iam_policy.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-datapolicies/samples/generated/v1beta1/data_policy_service.set_iam_policy.js,samples/README.md) |
 | Data_policy_service.test_iam_permissions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v1beta1/data_policy_service.test_iam_permissions.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-datapolicies/samples/generated/v1beta1/data_policy_service.test_iam_permissions.js,samples/README.md) |
 | Data_policy_service.update_data_policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v1beta1/data_policy_service.update_data_policy.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-datapolicies/samples/generated/v1beta1/data_policy_service.update_data_policy.js,samples/README.md) |
+| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-datapolicies/samples/quickstart.js,samples/README.md) |
 | Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/test/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-datapolicies/samples/test/quickstart.js,samples/README.md) |
 
 
