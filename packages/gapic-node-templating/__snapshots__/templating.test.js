@@ -55,7 +55,7 @@ exports['tests for templates it should create the templates in the directory 3']
     "publish": "echo 'sample test; do not publish'"
   },
   "dependencies": {
-    "@google-cloud/kms": "0.1.0"
+    "@google-cloud/kms": "0.0.0"
   },
   "devDependencies": {
     "c8": "^7.1.0",
