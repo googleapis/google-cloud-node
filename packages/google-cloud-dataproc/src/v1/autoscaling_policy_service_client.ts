@@ -457,7 +457,7 @@ export class AutoscalingPolicyServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createAutoscalingPolicy(
@@ -561,7 +561,7 @@ export class AutoscalingPolicyServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'policy.name': request.policy!.name || '',
+        'policy.name': request.policy!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateAutoscalingPolicy(
@@ -665,7 +665,7 @@ export class AutoscalingPolicyServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getAutoscalingPolicy(request, options, callback);
@@ -772,7 +772,7 @@ export class AutoscalingPolicyServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteAutoscalingPolicy(
@@ -886,7 +886,7 @@ export class AutoscalingPolicyServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listAutoscalingPolicies(
@@ -939,7 +939,7 @@ export class AutoscalingPolicyServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listAutoscalingPolicies'];
     const callSettings = defaultCallSettings.merge(options);
@@ -997,7 +997,7 @@ export class AutoscalingPolicyServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listAutoscalingPolicies'];
     const callSettings = defaultCallSettings.merge(options);

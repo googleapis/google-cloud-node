@@ -27,6 +27,21 @@ import {PassThrough} from 'stream';
 
 import {protobuf} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -233,15 +248,12 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.CreateAutoscalingPolicyRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateAutoscalingPolicyRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.AutoscalingPolicy()
       );
@@ -249,11 +261,14 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.createAutoscalingPolicy(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createAutoscalingPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createAutoscalingPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAutoscalingPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createAutoscalingPolicy without error using callback', async () => {
@@ -266,15 +281,12 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.CreateAutoscalingPolicyRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateAutoscalingPolicyRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.AutoscalingPolicy()
       );
@@ -297,11 +309,14 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createAutoscalingPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createAutoscalingPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAutoscalingPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createAutoscalingPolicy with error', async () => {
@@ -314,15 +329,12 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.CreateAutoscalingPolicyRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateAutoscalingPolicyRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createAutoscalingPolicy = stubSimpleCall(
         undefined,
@@ -332,11 +344,14 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
         client.createAutoscalingPolicy(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.createAutoscalingPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createAutoscalingPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAutoscalingPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createAutoscalingPolicy with closed client', async () => {
@@ -349,7 +364,11 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.CreateAutoscalingPolicyRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateAutoscalingPolicyRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -370,16 +389,13 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.UpdateAutoscalingPolicyRequest()
       );
-      request.policy = {};
-      request.policy.name = '';
-      const expectedHeaderRequestParams = 'policy.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.policy ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateAutoscalingPolicyRequest',
+        ['policy', 'name']
+      );
+      request.policy.name = defaultValue1;
+      const expectedHeaderRequestParams = `policy.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.AutoscalingPolicy()
       );
@@ -387,11 +403,14 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.updateAutoscalingPolicy(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateAutoscalingPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateAutoscalingPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAutoscalingPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateAutoscalingPolicy without error using callback', async () => {
@@ -404,16 +423,13 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.UpdateAutoscalingPolicyRequest()
       );
-      request.policy = {};
-      request.policy.name = '';
-      const expectedHeaderRequestParams = 'policy.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.policy ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateAutoscalingPolicyRequest',
+        ['policy', 'name']
+      );
+      request.policy.name = defaultValue1;
+      const expectedHeaderRequestParams = `policy.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.AutoscalingPolicy()
       );
@@ -436,11 +452,14 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateAutoscalingPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateAutoscalingPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAutoscalingPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateAutoscalingPolicy with error', async () => {
@@ -453,16 +472,13 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.UpdateAutoscalingPolicyRequest()
       );
-      request.policy = {};
-      request.policy.name = '';
-      const expectedHeaderRequestParams = 'policy.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.policy ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateAutoscalingPolicyRequest',
+        ['policy', 'name']
+      );
+      request.policy.name = defaultValue1;
+      const expectedHeaderRequestParams = `policy.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateAutoscalingPolicy = stubSimpleCall(
         undefined,
@@ -472,11 +488,14 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
         client.updateAutoscalingPolicy(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.updateAutoscalingPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateAutoscalingPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAutoscalingPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateAutoscalingPolicy with closed client', async () => {
@@ -489,8 +508,12 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.UpdateAutoscalingPolicyRequest()
       );
-      request.policy = {};
-      request.policy.name = '';
+      request.policy ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateAutoscalingPolicyRequest',
+        ['policy', 'name']
+      );
+      request.policy.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -511,15 +534,11 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.GetAutoscalingPolicyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetAutoscalingPolicyRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.AutoscalingPolicy()
       );
@@ -527,11 +546,14 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.getAutoscalingPolicy(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getAutoscalingPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getAutoscalingPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAutoscalingPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getAutoscalingPolicy without error using callback', async () => {
@@ -544,15 +566,11 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.GetAutoscalingPolicyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetAutoscalingPolicyRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.AutoscalingPolicy()
       );
@@ -575,11 +593,14 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getAutoscalingPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getAutoscalingPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAutoscalingPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getAutoscalingPolicy with error', async () => {
@@ -592,26 +613,25 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.GetAutoscalingPolicyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetAutoscalingPolicyRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAutoscalingPolicy = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getAutoscalingPolicy(request), expectedError);
-      assert(
-        (client.innerApiCalls.getAutoscalingPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getAutoscalingPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAutoscalingPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getAutoscalingPolicy with closed client', async () => {
@@ -624,7 +644,10 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.GetAutoscalingPolicyRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetAutoscalingPolicyRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getAutoscalingPolicy(request), expectedError);
@@ -642,15 +665,12 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.DeleteAutoscalingPolicyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteAutoscalingPolicyRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -658,11 +678,14 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.deleteAutoscalingPolicy(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteAutoscalingPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteAutoscalingPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAutoscalingPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteAutoscalingPolicy without error using callback', async () => {
@@ -675,15 +698,12 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.DeleteAutoscalingPolicyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteAutoscalingPolicyRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -706,11 +726,14 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteAutoscalingPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteAutoscalingPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAutoscalingPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteAutoscalingPolicy with error', async () => {
@@ -723,15 +746,12 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.DeleteAutoscalingPolicyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteAutoscalingPolicyRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteAutoscalingPolicy = stubSimpleCall(
         undefined,
@@ -741,11 +761,14 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
         client.deleteAutoscalingPolicy(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.deleteAutoscalingPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteAutoscalingPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAutoscalingPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteAutoscalingPolicy with closed client', async () => {
@@ -758,7 +781,11 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.DeleteAutoscalingPolicyRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteAutoscalingPolicyRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -779,15 +806,12 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.ListAutoscalingPoliciesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListAutoscalingPoliciesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataproc.v1.AutoscalingPolicy()
@@ -803,11 +827,14 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listAutoscalingPolicies(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listAutoscalingPolicies as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listAutoscalingPolicies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAutoscalingPolicies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listAutoscalingPolicies without error using callback', async () => {
@@ -820,15 +847,12 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.ListAutoscalingPoliciesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListAutoscalingPoliciesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataproc.v1.AutoscalingPolicy()
@@ -859,11 +883,14 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listAutoscalingPolicies as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listAutoscalingPolicies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAutoscalingPolicies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listAutoscalingPolicies with error', async () => {
@@ -876,15 +903,12 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.ListAutoscalingPoliciesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListAutoscalingPoliciesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listAutoscalingPolicies = stubSimpleCall(
         undefined,
@@ -894,11 +918,14 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
         client.listAutoscalingPolicies(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.listAutoscalingPolicies as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listAutoscalingPolicies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAutoscalingPolicies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listAutoscalingPoliciesStream without error', async () => {
@@ -911,8 +938,12 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.ListAutoscalingPoliciesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListAutoscalingPoliciesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataproc.v1.AutoscalingPolicy()
@@ -953,12 +984,15 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listAutoscalingPolicies, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listAutoscalingPolicies
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -972,8 +1006,12 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.ListAutoscalingPoliciesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListAutoscalingPoliciesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAutoscalingPolicies.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1003,12 +1041,15 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listAutoscalingPolicies, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listAutoscalingPolicies
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1022,8 +1063,12 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.ListAutoscalingPoliciesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListAutoscalingPoliciesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataproc.v1.AutoscalingPolicy()
@@ -1051,12 +1096,15 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listAutoscalingPolicies
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1070,8 +1118,12 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.ListAutoscalingPoliciesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListAutoscalingPoliciesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAutoscalingPolicies.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1090,12 +1142,15 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listAutoscalingPolicies
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });

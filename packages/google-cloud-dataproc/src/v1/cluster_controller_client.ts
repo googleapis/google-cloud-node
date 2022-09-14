@@ -636,9 +636,9 @@ export class ClusterControllerClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId || '',
-        region: request.region || '',
-        cluster_name: request.clusterName || '',
+        project_id: request.projectId ?? '',
+        region: request.region ?? '',
+        cluster_name: request.clusterName ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getCluster(request, options, callback);
@@ -763,8 +763,8 @@ export class ClusterControllerClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId || '',
-        region: request.region || '',
+        project_id: request.projectId ?? '',
+        region: request.region ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createCluster(request, options, callback);
@@ -988,9 +988,9 @@ export class ClusterControllerClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId || '',
-        region: request.region || '',
-        cluster_name: request.clusterName || '',
+        project_id: request.projectId ?? '',
+        region: request.region ?? '',
+        cluster_name: request.clusterName ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateCluster(request, options, callback);
@@ -1149,9 +1149,9 @@ export class ClusterControllerClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId || '',
-        region: request.region || '',
-        cluster_name: request.clusterName || '',
+        project_id: request.projectId ?? '',
+        region: request.region ?? '',
+        cluster_name: request.clusterName ?? '',
       });
     this.initialize();
     return this.innerApiCalls.stopCluster(request, options, callback);
@@ -1310,9 +1310,9 @@ export class ClusterControllerClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId || '',
-        region: request.region || '',
-        cluster_name: request.clusterName || '',
+        project_id: request.projectId ?? '',
+        region: request.region ?? '',
+        cluster_name: request.clusterName ?? '',
       });
     this.initialize();
     return this.innerApiCalls.startCluster(request, options, callback);
@@ -1473,9 +1473,9 @@ export class ClusterControllerClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId || '',
-        region: request.region || '',
-        cluster_name: request.clusterName || '',
+        project_id: request.projectId ?? '',
+        region: request.region ?? '',
+        cluster_name: request.clusterName ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteCluster(request, options, callback);
@@ -1624,9 +1624,9 @@ export class ClusterControllerClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId || '',
-        region: request.region || '',
-        cluster_name: request.clusterName || '',
+        project_id: request.projectId ?? '',
+        region: request.region ?? '',
+        cluster_name: request.clusterName ?? '',
       });
     this.initialize();
     return this.innerApiCalls.diagnoseCluster(request, options, callback);
@@ -1776,8 +1776,8 @@ export class ClusterControllerClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId || '',
-        region: request.region || '',
+        project_id: request.projectId ?? '',
+        region: request.region ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listClusters(request, options, callback);
@@ -1838,8 +1838,8 @@ export class ClusterControllerClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId || '',
-        region: request.region || '',
+        project_id: request.projectId ?? '',
+        region: request.region ?? '',
       });
     const defaultCallSettings = this._defaults['listClusters'];
     const callSettings = defaultCallSettings.merge(options);
@@ -1909,8 +1909,8 @@ export class ClusterControllerClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId || '',
-        region: request.region || '',
+        project_id: request.projectId ?? '',
+        region: request.region ?? '',
       });
     const defaultCallSettings = this._defaults['listClusters'];
     const callSettings = defaultCallSettings.merge(options);

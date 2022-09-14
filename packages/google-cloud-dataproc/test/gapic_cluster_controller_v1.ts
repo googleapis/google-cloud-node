@@ -27,6 +27,21 @@ import {PassThrough} from 'stream';
 
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -254,28 +269,33 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.GetClusterRequest()
       );
-      request.projectId = '';
-      request.region = '';
-      request.clusterName = '';
-      const expectedHeaderRequestParams = 'project_id=&region=&cluster_name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetClusterRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('GetClusterRequest', [
+        'region',
+      ]);
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('GetClusterRequest', [
+        'clusterName',
+      ]);
+      request.clusterName = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.Cluster()
       );
       client.innerApiCalls.getCluster = stubSimpleCall(expectedResponse);
       const [response] = await client.getCluster(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getCluster without error using callback', async () => {
@@ -287,17 +307,19 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.GetClusterRequest()
       );
-      request.projectId = '';
-      request.region = '';
-      request.clusterName = '';
-      const expectedHeaderRequestParams = 'project_id=&region=&cluster_name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetClusterRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('GetClusterRequest', [
+        'region',
+      ]);
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('GetClusterRequest', [
+        'clusterName',
+      ]);
+      request.clusterName = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.Cluster()
       );
@@ -320,11 +342,14 @@ describe('v1.ClusterControllerClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getCluster with error', async () => {
@@ -336,28 +361,33 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.GetClusterRequest()
       );
-      request.projectId = '';
-      request.region = '';
-      request.clusterName = '';
-      const expectedHeaderRequestParams = 'project_id=&region=&cluster_name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetClusterRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('GetClusterRequest', [
+        'region',
+      ]);
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('GetClusterRequest', [
+        'clusterName',
+      ]);
+      request.clusterName = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getCluster = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getCluster(request), expectedError);
-      assert(
-        (client.innerApiCalls.getCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getCluster with closed client', async () => {
@@ -369,9 +399,18 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.GetClusterRequest()
       );
-      request.projectId = '';
-      request.region = '';
-      request.clusterName = '';
+      const defaultValue1 = getTypeDefaultValue('GetClusterRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('GetClusterRequest', [
+        'region',
+      ]);
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('GetClusterRequest', [
+        'clusterName',
+      ]);
+      request.clusterName = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getCluster(request), expectedError);
@@ -388,16 +427,15 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.CreateClusterRequest()
       );
-      request.projectId = '';
-      request.region = '';
-      const expectedHeaderRequestParams = 'project_id=&region=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateClusterRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('CreateClusterRequest', [
+        'region',
+      ]);
+      request.region = defaultValue2;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -406,11 +444,14 @@ describe('v1.ClusterControllerClient', () => {
       const [operation] = await client.createCluster(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createCluster without error using callback', async () => {
@@ -422,16 +463,15 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.CreateClusterRequest()
       );
-      request.projectId = '';
-      request.region = '';
-      const expectedHeaderRequestParams = 'project_id=&region=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateClusterRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('CreateClusterRequest', [
+        'region',
+      ]);
+      request.region = defaultValue2;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -461,11 +501,14 @@ describe('v1.ClusterControllerClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createCluster with call error', async () => {
@@ -477,27 +520,29 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.CreateClusterRequest()
       );
-      request.projectId = '';
-      request.region = '';
-      const expectedHeaderRequestParams = 'project_id=&region=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateClusterRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('CreateClusterRequest', [
+        'region',
+      ]);
+      request.region = defaultValue2;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCluster = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createCluster(request), expectedError);
-      assert(
-        (client.innerApiCalls.createCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createCluster with LRO error', async () => {
@@ -509,16 +554,15 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.CreateClusterRequest()
       );
-      request.projectId = '';
-      request.region = '';
-      const expectedHeaderRequestParams = 'project_id=&region=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateClusterRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('CreateClusterRequest', [
+        'region',
+      ]);
+      request.region = defaultValue2;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCluster = stubLongRunningCall(
         undefined,
@@ -527,11 +571,14 @@ describe('v1.ClusterControllerClient', () => {
       );
       const [operation] = await client.createCluster(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.createCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkCreateClusterProgress without error', async () => {
@@ -586,17 +633,19 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.UpdateClusterRequest()
       );
-      request.projectId = '';
-      request.region = '';
-      request.clusterName = '';
-      const expectedHeaderRequestParams = 'project_id=&region=&cluster_name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('UpdateClusterRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('UpdateClusterRequest', [
+        'region',
+      ]);
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('UpdateClusterRequest', [
+        'clusterName',
+      ]);
+      request.clusterName = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -605,11 +654,14 @@ describe('v1.ClusterControllerClient', () => {
       const [operation] = await client.updateCluster(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateCluster without error using callback', async () => {
@@ -621,17 +673,19 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.UpdateClusterRequest()
       );
-      request.projectId = '';
-      request.region = '';
-      request.clusterName = '';
-      const expectedHeaderRequestParams = 'project_id=&region=&cluster_name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('UpdateClusterRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('UpdateClusterRequest', [
+        'region',
+      ]);
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('UpdateClusterRequest', [
+        'clusterName',
+      ]);
+      request.clusterName = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -661,11 +715,14 @@ describe('v1.ClusterControllerClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateCluster with call error', async () => {
@@ -677,28 +734,33 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.UpdateClusterRequest()
       );
-      request.projectId = '';
-      request.region = '';
-      request.clusterName = '';
-      const expectedHeaderRequestParams = 'project_id=&region=&cluster_name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('UpdateClusterRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('UpdateClusterRequest', [
+        'region',
+      ]);
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('UpdateClusterRequest', [
+        'clusterName',
+      ]);
+      request.clusterName = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCluster = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateCluster(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateCluster with LRO error', async () => {
@@ -710,17 +772,19 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.UpdateClusterRequest()
       );
-      request.projectId = '';
-      request.region = '';
-      request.clusterName = '';
-      const expectedHeaderRequestParams = 'project_id=&region=&cluster_name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('UpdateClusterRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('UpdateClusterRequest', [
+        'region',
+      ]);
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('UpdateClusterRequest', [
+        'clusterName',
+      ]);
+      request.clusterName = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCluster = stubLongRunningCall(
         undefined,
@@ -729,11 +793,14 @@ describe('v1.ClusterControllerClient', () => {
       );
       const [operation] = await client.updateCluster(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.updateCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkUpdateClusterProgress without error', async () => {
@@ -788,17 +855,19 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.StopClusterRequest()
       );
-      request.projectId = '';
-      request.region = '';
-      request.clusterName = '';
-      const expectedHeaderRequestParams = 'project_id=&region=&cluster_name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('StopClusterRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('StopClusterRequest', [
+        'region',
+      ]);
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('StopClusterRequest', [
+        'clusterName',
+      ]);
+      request.clusterName = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -806,11 +875,14 @@ describe('v1.ClusterControllerClient', () => {
       const [operation] = await client.stopCluster(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.stopCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.stopCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.stopCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes stopCluster without error using callback', async () => {
@@ -822,17 +894,19 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.StopClusterRequest()
       );
-      request.projectId = '';
-      request.region = '';
-      request.clusterName = '';
-      const expectedHeaderRequestParams = 'project_id=&region=&cluster_name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('StopClusterRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('StopClusterRequest', [
+        'region',
+      ]);
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('StopClusterRequest', [
+        'clusterName',
+      ]);
+      request.clusterName = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -862,11 +936,14 @@ describe('v1.ClusterControllerClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.stopCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.stopCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.stopCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes stopCluster with call error', async () => {
@@ -878,28 +955,33 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.StopClusterRequest()
       );
-      request.projectId = '';
-      request.region = '';
-      request.clusterName = '';
-      const expectedHeaderRequestParams = 'project_id=&region=&cluster_name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('StopClusterRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('StopClusterRequest', [
+        'region',
+      ]);
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('StopClusterRequest', [
+        'clusterName',
+      ]);
+      request.clusterName = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.stopCluster = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.stopCluster(request), expectedError);
-      assert(
-        (client.innerApiCalls.stopCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.stopCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.stopCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes stopCluster with LRO error', async () => {
@@ -911,17 +993,19 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.StopClusterRequest()
       );
-      request.projectId = '';
-      request.region = '';
-      request.clusterName = '';
-      const expectedHeaderRequestParams = 'project_id=&region=&cluster_name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('StopClusterRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('StopClusterRequest', [
+        'region',
+      ]);
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('StopClusterRequest', [
+        'clusterName',
+      ]);
+      request.clusterName = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.stopCluster = stubLongRunningCall(
         undefined,
@@ -930,11 +1014,14 @@ describe('v1.ClusterControllerClient', () => {
       );
       const [operation] = await client.stopCluster(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.stopCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.stopCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.stopCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkStopClusterProgress without error', async () => {
@@ -986,17 +1073,19 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.StartClusterRequest()
       );
-      request.projectId = '';
-      request.region = '';
-      request.clusterName = '';
-      const expectedHeaderRequestParams = 'project_id=&region=&cluster_name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('StartClusterRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('StartClusterRequest', [
+        'region',
+      ]);
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('StartClusterRequest', [
+        'clusterName',
+      ]);
+      request.clusterName = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1004,11 +1093,14 @@ describe('v1.ClusterControllerClient', () => {
       const [operation] = await client.startCluster(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.startCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.startCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.startCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes startCluster without error using callback', async () => {
@@ -1020,17 +1112,19 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.StartClusterRequest()
       );
-      request.projectId = '';
-      request.region = '';
-      request.clusterName = '';
-      const expectedHeaderRequestParams = 'project_id=&region=&cluster_name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('StartClusterRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('StartClusterRequest', [
+        'region',
+      ]);
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('StartClusterRequest', [
+        'clusterName',
+      ]);
+      request.clusterName = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1060,11 +1154,14 @@ describe('v1.ClusterControllerClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.startCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.startCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.startCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes startCluster with call error', async () => {
@@ -1076,28 +1173,33 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.StartClusterRequest()
       );
-      request.projectId = '';
-      request.region = '';
-      request.clusterName = '';
-      const expectedHeaderRequestParams = 'project_id=&region=&cluster_name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('StartClusterRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('StartClusterRequest', [
+        'region',
+      ]);
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('StartClusterRequest', [
+        'clusterName',
+      ]);
+      request.clusterName = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.startCluster = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.startCluster(request), expectedError);
-      assert(
-        (client.innerApiCalls.startCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.startCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.startCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes startCluster with LRO error', async () => {
@@ -1109,17 +1211,19 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.StartClusterRequest()
       );
-      request.projectId = '';
-      request.region = '';
-      request.clusterName = '';
-      const expectedHeaderRequestParams = 'project_id=&region=&cluster_name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('StartClusterRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('StartClusterRequest', [
+        'region',
+      ]);
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('StartClusterRequest', [
+        'clusterName',
+      ]);
+      request.clusterName = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.startCluster = stubLongRunningCall(
         undefined,
@@ -1128,11 +1232,14 @@ describe('v1.ClusterControllerClient', () => {
       );
       const [operation] = await client.startCluster(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.startCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.startCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.startCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkStartClusterProgress without error', async () => {
@@ -1184,17 +1291,19 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.DeleteClusterRequest()
       );
-      request.projectId = '';
-      request.region = '';
-      request.clusterName = '';
-      const expectedHeaderRequestParams = 'project_id=&region=&cluster_name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteClusterRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('DeleteClusterRequest', [
+        'region',
+      ]);
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('DeleteClusterRequest', [
+        'clusterName',
+      ]);
+      request.clusterName = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1203,11 +1312,14 @@ describe('v1.ClusterControllerClient', () => {
       const [operation] = await client.deleteCluster(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteCluster without error using callback', async () => {
@@ -1219,17 +1331,19 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.DeleteClusterRequest()
       );
-      request.projectId = '';
-      request.region = '';
-      request.clusterName = '';
-      const expectedHeaderRequestParams = 'project_id=&region=&cluster_name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteClusterRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('DeleteClusterRequest', [
+        'region',
+      ]);
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('DeleteClusterRequest', [
+        'clusterName',
+      ]);
+      request.clusterName = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1259,11 +1373,14 @@ describe('v1.ClusterControllerClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteCluster with call error', async () => {
@@ -1275,28 +1392,33 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.DeleteClusterRequest()
       );
-      request.projectId = '';
-      request.region = '';
-      request.clusterName = '';
-      const expectedHeaderRequestParams = 'project_id=&region=&cluster_name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteClusterRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('DeleteClusterRequest', [
+        'region',
+      ]);
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('DeleteClusterRequest', [
+        'clusterName',
+      ]);
+      request.clusterName = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteCluster = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteCluster(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteCluster with LRO error', async () => {
@@ -1308,17 +1430,19 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.DeleteClusterRequest()
       );
-      request.projectId = '';
-      request.region = '';
-      request.clusterName = '';
-      const expectedHeaderRequestParams = 'project_id=&region=&cluster_name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteClusterRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('DeleteClusterRequest', [
+        'region',
+      ]);
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('DeleteClusterRequest', [
+        'clusterName',
+      ]);
+      request.clusterName = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteCluster = stubLongRunningCall(
         undefined,
@@ -1327,11 +1451,14 @@ describe('v1.ClusterControllerClient', () => {
       );
       const [operation] = await client.deleteCluster(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.deleteCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkDeleteClusterProgress without error', async () => {
@@ -1386,17 +1513,19 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.DiagnoseClusterRequest()
       );
-      request.projectId = '';
-      request.region = '';
-      request.clusterName = '';
-      const expectedHeaderRequestParams = 'project_id=&region=&cluster_name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DiagnoseClusterRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('DiagnoseClusterRequest', [
+        'region',
+      ]);
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('DiagnoseClusterRequest', [
+        'clusterName',
+      ]);
+      request.clusterName = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1405,11 +1534,14 @@ describe('v1.ClusterControllerClient', () => {
       const [operation] = await client.diagnoseCluster(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.diagnoseCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.diagnoseCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.diagnoseCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes diagnoseCluster without error using callback', async () => {
@@ -1421,17 +1553,19 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.DiagnoseClusterRequest()
       );
-      request.projectId = '';
-      request.region = '';
-      request.clusterName = '';
-      const expectedHeaderRequestParams = 'project_id=&region=&cluster_name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DiagnoseClusterRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('DiagnoseClusterRequest', [
+        'region',
+      ]);
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('DiagnoseClusterRequest', [
+        'clusterName',
+      ]);
+      request.clusterName = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1461,11 +1595,14 @@ describe('v1.ClusterControllerClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.diagnoseCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.diagnoseCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.diagnoseCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes diagnoseCluster with call error', async () => {
@@ -1477,28 +1614,33 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.DiagnoseClusterRequest()
       );
-      request.projectId = '';
-      request.region = '';
-      request.clusterName = '';
-      const expectedHeaderRequestParams = 'project_id=&region=&cluster_name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DiagnoseClusterRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('DiagnoseClusterRequest', [
+        'region',
+      ]);
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('DiagnoseClusterRequest', [
+        'clusterName',
+      ]);
+      request.clusterName = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.diagnoseCluster = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.diagnoseCluster(request), expectedError);
-      assert(
-        (client.innerApiCalls.diagnoseCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.diagnoseCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.diagnoseCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes diagnoseCluster with LRO error', async () => {
@@ -1510,17 +1652,19 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.DiagnoseClusterRequest()
       );
-      request.projectId = '';
-      request.region = '';
-      request.clusterName = '';
-      const expectedHeaderRequestParams = 'project_id=&region=&cluster_name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DiagnoseClusterRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('DiagnoseClusterRequest', [
+        'region',
+      ]);
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('DiagnoseClusterRequest', [
+        'clusterName',
+      ]);
+      request.clusterName = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.diagnoseCluster = stubLongRunningCall(
         undefined,
@@ -1529,11 +1673,14 @@ describe('v1.ClusterControllerClient', () => {
       );
       const [operation] = await client.diagnoseCluster(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.diagnoseCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.diagnoseCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.diagnoseCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkDiagnoseClusterProgress without error', async () => {
@@ -1588,16 +1735,15 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.ListClustersRequest()
       );
-      request.projectId = '';
-      request.region = '';
-      const expectedHeaderRequestParams = 'project_id=&region=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListClustersRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('ListClustersRequest', [
+        'region',
+      ]);
+      request.region = defaultValue2;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataproc.v1.Cluster()),
         generateSampleMessage(new protos.google.cloud.dataproc.v1.Cluster()),
@@ -1606,11 +1752,14 @@ describe('v1.ClusterControllerClient', () => {
       client.innerApiCalls.listClusters = stubSimpleCall(expectedResponse);
       const [response] = await client.listClusters(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listClusters as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listClusters as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listClusters as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listClusters without error using callback', async () => {
@@ -1622,16 +1771,15 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.ListClustersRequest()
       );
-      request.projectId = '';
-      request.region = '';
-      const expectedHeaderRequestParams = 'project_id=&region=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListClustersRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('ListClustersRequest', [
+        'region',
+      ]);
+      request.region = defaultValue2;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataproc.v1.Cluster()),
         generateSampleMessage(new protos.google.cloud.dataproc.v1.Cluster()),
@@ -1656,11 +1804,14 @@ describe('v1.ClusterControllerClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listClusters as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listClusters as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listClusters as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listClusters with error', async () => {
@@ -1672,27 +1823,29 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.ListClustersRequest()
       );
-      request.projectId = '';
-      request.region = '';
-      const expectedHeaderRequestParams = 'project_id=&region=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListClustersRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('ListClustersRequest', [
+        'region',
+      ]);
+      request.region = defaultValue2;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listClusters = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listClusters(request), expectedError);
-      assert(
-        (client.innerApiCalls.listClusters as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listClusters as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listClusters as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listClustersStream without error', async () => {
@@ -1704,9 +1857,15 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.ListClustersRequest()
       );
-      request.projectId = '';
-      request.region = '';
-      const expectedHeaderRequestParams = 'project_id=&region=';
+      const defaultValue1 = getTypeDefaultValue('ListClustersRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('ListClustersRequest', [
+        'region',
+      ]);
+      request.region = defaultValue2;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataproc.v1.Cluster()),
         generateSampleMessage(new protos.google.cloud.dataproc.v1.Cluster()),
@@ -1737,11 +1896,12 @@ describe('v1.ClusterControllerClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listClusters, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listClusters.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listClusters.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1754,9 +1914,15 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.ListClustersRequest()
       );
-      request.projectId = '';
-      request.region = '';
-      const expectedHeaderRequestParams = 'project_id=&region=';
+      const defaultValue1 = getTypeDefaultValue('ListClustersRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('ListClustersRequest', [
+        'region',
+      ]);
+      request.region = defaultValue2;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listClusters.createStream = stubPageStreamingCall(
         undefined,
@@ -1784,11 +1950,12 @@ describe('v1.ClusterControllerClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listClusters, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listClusters.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listClusters.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1801,9 +1968,15 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.ListClustersRequest()
       );
-      request.projectId = '';
-      request.region = '';
-      const expectedHeaderRequestParams = 'project_id=&region=';
+      const defaultValue1 = getTypeDefaultValue('ListClustersRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('ListClustersRequest', [
+        'region',
+      ]);
+      request.region = defaultValue2;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataproc.v1.Cluster()),
         generateSampleMessage(new protos.google.cloud.dataproc.v1.Cluster()),
@@ -1823,11 +1996,12 @@ describe('v1.ClusterControllerClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listClusters.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listClusters.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1840,9 +2014,15 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.ListClustersRequest()
       );
-      request.projectId = '';
-      request.region = '';
-      const expectedHeaderRequestParams = 'project_id=&region=';
+      const defaultValue1 = getTypeDefaultValue('ListClustersRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('ListClustersRequest', [
+        'region',
+      ]);
+      request.region = defaultValue2;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listClusters.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1859,11 +2039,12 @@ describe('v1.ClusterControllerClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listClusters.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listClusters.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
