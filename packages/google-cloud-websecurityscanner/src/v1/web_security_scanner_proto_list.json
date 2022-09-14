@@ -7,6 +7,7 @@
   "../../protos/google/cloud/websecurityscanner/v1/scan_config_error.proto",
   "../../protos/google/cloud/websecurityscanner/v1/scan_run.proto",
   "../../protos/google/cloud/websecurityscanner/v1/scan_run_error_trace.proto",
+  "../../protos/google/cloud/websecurityscanner/v1/scan_run_log.proto",
   "../../protos/google/cloud/websecurityscanner/v1/scan_run_warning_trace.proto",
   "../../protos/google/cloud/websecurityscanner/v1/web_security_scanner.proto"
 ]
