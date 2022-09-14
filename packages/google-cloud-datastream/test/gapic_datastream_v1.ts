@@ -33,6 +33,21 @@ import {
   LocationProtos,
 } from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -258,15 +273,11 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.GetConnectionProfileRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetConnectionProfileRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datastream.v1.ConnectionProfile()
       );
@@ -274,11 +285,14 @@ describe('v1.DatastreamClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.getConnectionProfile(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getConnectionProfile as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getConnectionProfile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getConnectionProfile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getConnectionProfile without error using callback', async () => {
@@ -290,15 +304,11 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.GetConnectionProfileRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetConnectionProfileRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datastream.v1.ConnectionProfile()
       );
@@ -321,11 +331,14 @@ describe('v1.DatastreamClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getConnectionProfile as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getConnectionProfile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getConnectionProfile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getConnectionProfile with error', async () => {
@@ -337,26 +350,25 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.GetConnectionProfileRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetConnectionProfileRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getConnectionProfile = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getConnectionProfile(request), expectedError);
-      assert(
-        (client.innerApiCalls.getConnectionProfile as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getConnectionProfile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getConnectionProfile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getConnectionProfile with closed client', async () => {
@@ -368,7 +380,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.GetConnectionProfileRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetConnectionProfileRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getConnectionProfile(request), expectedError);
@@ -385,15 +400,12 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.DiscoverConnectionProfileRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DiscoverConnectionProfileRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datastream.v1.DiscoverConnectionProfileResponse()
       );
@@ -401,11 +413,14 @@ describe('v1.DatastreamClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.discoverConnectionProfile(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.discoverConnectionProfile as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.discoverConnectionProfile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.discoverConnectionProfile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes discoverConnectionProfile without error using callback', async () => {
@@ -417,15 +432,12 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.DiscoverConnectionProfileRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DiscoverConnectionProfileRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datastream.v1.DiscoverConnectionProfileResponse()
       );
@@ -448,11 +460,14 @@ describe('v1.DatastreamClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.discoverConnectionProfile as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.discoverConnectionProfile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.discoverConnectionProfile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes discoverConnectionProfile with error', async () => {
@@ -464,15 +479,12 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.DiscoverConnectionProfileRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DiscoverConnectionProfileRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.discoverConnectionProfile = stubSimpleCall(
         undefined,
@@ -482,11 +494,14 @@ describe('v1.DatastreamClient', () => {
         client.discoverConnectionProfile(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.discoverConnectionProfile as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.discoverConnectionProfile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.discoverConnectionProfile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes discoverConnectionProfile with closed client', async () => {
@@ -498,7 +513,11 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.DiscoverConnectionProfileRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'DiscoverConnectionProfileRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -518,26 +537,23 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.GetStreamRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetStreamRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datastream.v1.Stream()
       );
       client.innerApiCalls.getStream = stubSimpleCall(expectedResponse);
       const [response] = await client.getStream(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getStream as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getStream as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getStream as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getStream without error using callback', async () => {
@@ -549,15 +565,9 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.GetStreamRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetStreamRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datastream.v1.Stream()
       );
@@ -580,11 +590,14 @@ describe('v1.DatastreamClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getStream as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getStream as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getStream as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getStream with error', async () => {
@@ -596,23 +609,20 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.GetStreamRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetStreamRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getStream = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getStream(request), expectedError);
-      assert(
-        (client.innerApiCalls.getStream as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getStream as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getStream as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getStream with closed client', async () => {
@@ -624,7 +634,8 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.GetStreamRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetStreamRequest', ['name']);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getStream(request), expectedError);
@@ -641,26 +652,25 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.GetStreamObjectRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetStreamObjectRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datastream.v1.StreamObject()
       );
       client.innerApiCalls.getStreamObject = stubSimpleCall(expectedResponse);
       const [response] = await client.getStreamObject(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getStreamObject as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getStreamObject as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getStreamObject as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getStreamObject without error using callback', async () => {
@@ -672,15 +682,11 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.GetStreamObjectRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetStreamObjectRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datastream.v1.StreamObject()
       );
@@ -703,11 +709,14 @@ describe('v1.DatastreamClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getStreamObject as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getStreamObject as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getStreamObject as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getStreamObject with error', async () => {
@@ -719,26 +728,25 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.GetStreamObjectRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetStreamObjectRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getStreamObject = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getStreamObject(request), expectedError);
-      assert(
-        (client.innerApiCalls.getStreamObject as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getStreamObject as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getStreamObject as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getStreamObject with closed client', async () => {
@@ -750,7 +758,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.GetStreamObjectRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetStreamObjectRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getStreamObject(request), expectedError);
@@ -767,15 +778,11 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.LookupStreamObjectRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('LookupStreamObjectRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datastream.v1.StreamObject()
       );
@@ -783,11 +790,14 @@ describe('v1.DatastreamClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.lookupStreamObject(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.lookupStreamObject as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.lookupStreamObject as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.lookupStreamObject as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes lookupStreamObject without error using callback', async () => {
@@ -799,15 +809,11 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.LookupStreamObjectRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('LookupStreamObjectRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datastream.v1.StreamObject()
       );
@@ -830,11 +836,14 @@ describe('v1.DatastreamClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.lookupStreamObject as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.lookupStreamObject as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.lookupStreamObject as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes lookupStreamObject with error', async () => {
@@ -846,26 +855,25 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.LookupStreamObjectRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('LookupStreamObjectRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.lookupStreamObject = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.lookupStreamObject(request), expectedError);
-      assert(
-        (client.innerApiCalls.lookupStreamObject as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.lookupStreamObject as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.lookupStreamObject as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes lookupStreamObject with closed client', async () => {
@@ -877,7 +885,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.LookupStreamObjectRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue('LookupStreamObjectRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.lookupStreamObject(request), expectedError);
@@ -894,26 +905,25 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.StartBackfillJobRequest()
       );
-      request.object = '';
-      const expectedHeaderRequestParams = 'object=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('StartBackfillJobRequest', [
+        'object',
+      ]);
+      request.object = defaultValue1;
+      const expectedHeaderRequestParams = `object=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datastream.v1.StartBackfillJobResponse()
       );
       client.innerApiCalls.startBackfillJob = stubSimpleCall(expectedResponse);
       const [response] = await client.startBackfillJob(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.startBackfillJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.startBackfillJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.startBackfillJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes startBackfillJob without error using callback', async () => {
@@ -925,15 +935,11 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.StartBackfillJobRequest()
       );
-      request.object = '';
-      const expectedHeaderRequestParams = 'object=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('StartBackfillJobRequest', [
+        'object',
+      ]);
+      request.object = defaultValue1;
+      const expectedHeaderRequestParams = `object=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datastream.v1.StartBackfillJobResponse()
       );
@@ -956,11 +962,14 @@ describe('v1.DatastreamClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.startBackfillJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.startBackfillJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.startBackfillJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes startBackfillJob with error', async () => {
@@ -972,26 +981,25 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.StartBackfillJobRequest()
       );
-      request.object = '';
-      const expectedHeaderRequestParams = 'object=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('StartBackfillJobRequest', [
+        'object',
+      ]);
+      request.object = defaultValue1;
+      const expectedHeaderRequestParams = `object=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.startBackfillJob = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.startBackfillJob(request), expectedError);
-      assert(
-        (client.innerApiCalls.startBackfillJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.startBackfillJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.startBackfillJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes startBackfillJob with closed client', async () => {
@@ -1003,7 +1011,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.StartBackfillJobRequest()
       );
-      request.object = '';
+      const defaultValue1 = getTypeDefaultValue('StartBackfillJobRequest', [
+        'object',
+      ]);
+      request.object = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.startBackfillJob(request), expectedError);
@@ -1020,26 +1031,25 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.StopBackfillJobRequest()
       );
-      request.object = '';
-      const expectedHeaderRequestParams = 'object=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('StopBackfillJobRequest', [
+        'object',
+      ]);
+      request.object = defaultValue1;
+      const expectedHeaderRequestParams = `object=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datastream.v1.StopBackfillJobResponse()
       );
       client.innerApiCalls.stopBackfillJob = stubSimpleCall(expectedResponse);
       const [response] = await client.stopBackfillJob(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.stopBackfillJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.stopBackfillJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.stopBackfillJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes stopBackfillJob without error using callback', async () => {
@@ -1051,15 +1061,11 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.StopBackfillJobRequest()
       );
-      request.object = '';
-      const expectedHeaderRequestParams = 'object=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('StopBackfillJobRequest', [
+        'object',
+      ]);
+      request.object = defaultValue1;
+      const expectedHeaderRequestParams = `object=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datastream.v1.StopBackfillJobResponse()
       );
@@ -1082,11 +1088,14 @@ describe('v1.DatastreamClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.stopBackfillJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.stopBackfillJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.stopBackfillJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes stopBackfillJob with error', async () => {
@@ -1098,26 +1107,25 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.StopBackfillJobRequest()
       );
-      request.object = '';
-      const expectedHeaderRequestParams = 'object=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('StopBackfillJobRequest', [
+        'object',
+      ]);
+      request.object = defaultValue1;
+      const expectedHeaderRequestParams = `object=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.stopBackfillJob = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.stopBackfillJob(request), expectedError);
-      assert(
-        (client.innerApiCalls.stopBackfillJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.stopBackfillJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.stopBackfillJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes stopBackfillJob with closed client', async () => {
@@ -1129,7 +1137,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.StopBackfillJobRequest()
       );
-      request.object = '';
+      const defaultValue1 = getTypeDefaultValue('StopBackfillJobRequest', [
+        'object',
+      ]);
+      request.object = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.stopBackfillJob(request), expectedError);
@@ -1146,15 +1157,11 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.GetPrivateConnectionRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetPrivateConnectionRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datastream.v1.PrivateConnection()
       );
@@ -1162,11 +1169,14 @@ describe('v1.DatastreamClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.getPrivateConnection(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getPrivateConnection as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getPrivateConnection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getPrivateConnection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getPrivateConnection without error using callback', async () => {
@@ -1178,15 +1188,11 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.GetPrivateConnectionRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetPrivateConnectionRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datastream.v1.PrivateConnection()
       );
@@ -1209,11 +1215,14 @@ describe('v1.DatastreamClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getPrivateConnection as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getPrivateConnection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getPrivateConnection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getPrivateConnection with error', async () => {
@@ -1225,26 +1234,25 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.GetPrivateConnectionRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetPrivateConnectionRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getPrivateConnection = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getPrivateConnection(request), expectedError);
-      assert(
-        (client.innerApiCalls.getPrivateConnection as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getPrivateConnection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getPrivateConnection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getPrivateConnection with closed client', async () => {
@@ -1256,7 +1264,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.GetPrivateConnectionRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetPrivateConnectionRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getPrivateConnection(request), expectedError);
@@ -1273,26 +1284,23 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.GetRouteRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetRouteRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datastream.v1.Route()
       );
       client.innerApiCalls.getRoute = stubSimpleCall(expectedResponse);
       const [response] = await client.getRoute(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getRoute as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getRoute as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getRoute as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getRoute without error using callback', async () => {
@@ -1304,15 +1312,9 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.GetRouteRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetRouteRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datastream.v1.Route()
       );
@@ -1335,11 +1337,14 @@ describe('v1.DatastreamClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getRoute as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getRoute as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getRoute as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getRoute with error', async () => {
@@ -1351,23 +1356,20 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.GetRouteRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetRouteRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getRoute = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getRoute(request), expectedError);
-      assert(
-        (client.innerApiCalls.getRoute as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getRoute as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getRoute as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getRoute with closed client', async () => {
@@ -1379,7 +1381,8 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.GetRouteRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetRouteRequest', ['name']);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getRoute(request), expectedError);
@@ -1396,15 +1399,12 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.CreateConnectionProfileRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateConnectionProfileRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1413,11 +1413,14 @@ describe('v1.DatastreamClient', () => {
       const [operation] = await client.createConnectionProfile(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createConnectionProfile as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createConnectionProfile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createConnectionProfile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createConnectionProfile without error using callback', async () => {
@@ -1429,15 +1432,12 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.CreateConnectionProfileRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateConnectionProfileRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1467,11 +1467,14 @@ describe('v1.DatastreamClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createConnectionProfile as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createConnectionProfile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createConnectionProfile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createConnectionProfile with call error', async () => {
@@ -1483,15 +1486,12 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.CreateConnectionProfileRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateConnectionProfileRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createConnectionProfile = stubLongRunningCall(
         undefined,
@@ -1501,11 +1501,14 @@ describe('v1.DatastreamClient', () => {
         client.createConnectionProfile(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.createConnectionProfile as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createConnectionProfile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createConnectionProfile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createConnectionProfile with LRO error', async () => {
@@ -1517,15 +1520,12 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.CreateConnectionProfileRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateConnectionProfileRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createConnectionProfile = stubLongRunningCall(
         undefined,
@@ -1534,11 +1534,14 @@ describe('v1.DatastreamClient', () => {
       );
       const [operation] = await client.createConnectionProfile(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.createConnectionProfile as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createConnectionProfile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createConnectionProfile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkCreateConnectionProfileProgress without error', async () => {
@@ -1594,16 +1597,13 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.UpdateConnectionProfileRequest()
       );
-      request.connectionProfile = {};
-      request.connectionProfile.name = '';
-      const expectedHeaderRequestParams = 'connection_profile.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.connectionProfile ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateConnectionProfileRequest',
+        ['connectionProfile', 'name']
+      );
+      request.connectionProfile.name = defaultValue1;
+      const expectedHeaderRequestParams = `connection_profile.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1612,11 +1612,14 @@ describe('v1.DatastreamClient', () => {
       const [operation] = await client.updateConnectionProfile(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateConnectionProfile as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateConnectionProfile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateConnectionProfile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateConnectionProfile without error using callback', async () => {
@@ -1628,16 +1631,13 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.UpdateConnectionProfileRequest()
       );
-      request.connectionProfile = {};
-      request.connectionProfile.name = '';
-      const expectedHeaderRequestParams = 'connection_profile.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.connectionProfile ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateConnectionProfileRequest',
+        ['connectionProfile', 'name']
+      );
+      request.connectionProfile.name = defaultValue1;
+      const expectedHeaderRequestParams = `connection_profile.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1667,11 +1667,14 @@ describe('v1.DatastreamClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateConnectionProfile as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateConnectionProfile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateConnectionProfile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateConnectionProfile with call error', async () => {
@@ -1683,16 +1686,13 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.UpdateConnectionProfileRequest()
       );
-      request.connectionProfile = {};
-      request.connectionProfile.name = '';
-      const expectedHeaderRequestParams = 'connection_profile.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.connectionProfile ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateConnectionProfileRequest',
+        ['connectionProfile', 'name']
+      );
+      request.connectionProfile.name = defaultValue1;
+      const expectedHeaderRequestParams = `connection_profile.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateConnectionProfile = stubLongRunningCall(
         undefined,
@@ -1702,11 +1702,14 @@ describe('v1.DatastreamClient', () => {
         client.updateConnectionProfile(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.updateConnectionProfile as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateConnectionProfile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateConnectionProfile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateConnectionProfile with LRO error', async () => {
@@ -1718,16 +1721,13 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.UpdateConnectionProfileRequest()
       );
-      request.connectionProfile = {};
-      request.connectionProfile.name = '';
-      const expectedHeaderRequestParams = 'connection_profile.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.connectionProfile ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateConnectionProfileRequest',
+        ['connectionProfile', 'name']
+      );
+      request.connectionProfile.name = defaultValue1;
+      const expectedHeaderRequestParams = `connection_profile.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateConnectionProfile = stubLongRunningCall(
         undefined,
@@ -1736,11 +1736,14 @@ describe('v1.DatastreamClient', () => {
       );
       const [operation] = await client.updateConnectionProfile(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.updateConnectionProfile as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateConnectionProfile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateConnectionProfile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkUpdateConnectionProfileProgress without error', async () => {
@@ -1796,15 +1799,12 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.DeleteConnectionProfileRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteConnectionProfileRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1813,11 +1813,14 @@ describe('v1.DatastreamClient', () => {
       const [operation] = await client.deleteConnectionProfile(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteConnectionProfile as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteConnectionProfile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteConnectionProfile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteConnectionProfile without error using callback', async () => {
@@ -1829,15 +1832,12 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.DeleteConnectionProfileRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteConnectionProfileRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1867,11 +1867,14 @@ describe('v1.DatastreamClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteConnectionProfile as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteConnectionProfile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteConnectionProfile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteConnectionProfile with call error', async () => {
@@ -1883,15 +1886,12 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.DeleteConnectionProfileRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteConnectionProfileRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteConnectionProfile = stubLongRunningCall(
         undefined,
@@ -1901,11 +1901,14 @@ describe('v1.DatastreamClient', () => {
         client.deleteConnectionProfile(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.deleteConnectionProfile as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteConnectionProfile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteConnectionProfile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteConnectionProfile with LRO error', async () => {
@@ -1917,15 +1920,12 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.DeleteConnectionProfileRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteConnectionProfileRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteConnectionProfile = stubLongRunningCall(
         undefined,
@@ -1934,11 +1934,14 @@ describe('v1.DatastreamClient', () => {
       );
       const [operation] = await client.deleteConnectionProfile(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.deleteConnectionProfile as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteConnectionProfile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteConnectionProfile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkDeleteConnectionProfileProgress without error', async () => {
@@ -1994,15 +1997,11 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.CreateStreamRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateStreamRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2010,11 +2009,14 @@ describe('v1.DatastreamClient', () => {
       const [operation] = await client.createStream(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createStream as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createStream as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createStream without error using callback', async () => {
@@ -2026,15 +2028,11 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.CreateStreamRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateStreamRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2064,11 +2062,14 @@ describe('v1.DatastreamClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createStream as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createStream as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createStream with call error', async () => {
@@ -2080,26 +2081,25 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.CreateStreamRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateStreamRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createStream = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createStream(request), expectedError);
-      assert(
-        (client.innerApiCalls.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createStream as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createStream as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createStream with LRO error', async () => {
@@ -2111,15 +2111,11 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.CreateStreamRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateStreamRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createStream = stubLongRunningCall(
         undefined,
@@ -2128,11 +2124,14 @@ describe('v1.DatastreamClient', () => {
       );
       const [operation] = await client.createStream(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createStream as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createStream as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkCreateStreamProgress without error', async () => {
@@ -2184,16 +2183,13 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.UpdateStreamRequest()
       );
-      request.stream = {};
-      request.stream.name = '';
-      const expectedHeaderRequestParams = 'stream.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.stream ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateStreamRequest', [
+        'stream',
+        'name',
+      ]);
+      request.stream.name = defaultValue1;
+      const expectedHeaderRequestParams = `stream.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2201,11 +2197,14 @@ describe('v1.DatastreamClient', () => {
       const [operation] = await client.updateStream(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateStream as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateStream as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateStream as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateStream without error using callback', async () => {
@@ -2217,16 +2216,13 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.UpdateStreamRequest()
       );
-      request.stream = {};
-      request.stream.name = '';
-      const expectedHeaderRequestParams = 'stream.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.stream ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateStreamRequest', [
+        'stream',
+        'name',
+      ]);
+      request.stream.name = defaultValue1;
+      const expectedHeaderRequestParams = `stream.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2256,11 +2252,14 @@ describe('v1.DatastreamClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateStream as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateStream as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateStream as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateStream with call error', async () => {
@@ -2272,27 +2271,27 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.UpdateStreamRequest()
       );
-      request.stream = {};
-      request.stream.name = '';
-      const expectedHeaderRequestParams = 'stream.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.stream ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateStreamRequest', [
+        'stream',
+        'name',
+      ]);
+      request.stream.name = defaultValue1;
+      const expectedHeaderRequestParams = `stream.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateStream = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateStream(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateStream as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateStream as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateStream as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateStream with LRO error', async () => {
@@ -2304,16 +2303,13 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.UpdateStreamRequest()
       );
-      request.stream = {};
-      request.stream.name = '';
-      const expectedHeaderRequestParams = 'stream.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.stream ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateStreamRequest', [
+        'stream',
+        'name',
+      ]);
+      request.stream.name = defaultValue1;
+      const expectedHeaderRequestParams = `stream.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateStream = stubLongRunningCall(
         undefined,
@@ -2322,11 +2318,14 @@ describe('v1.DatastreamClient', () => {
       );
       const [operation] = await client.updateStream(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.updateStream as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateStream as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateStream as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkUpdateStreamProgress without error', async () => {
@@ -2378,15 +2377,11 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.DeleteStreamRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteStreamRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2394,11 +2389,14 @@ describe('v1.DatastreamClient', () => {
       const [operation] = await client.deleteStream(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteStream as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteStream as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteStream as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteStream without error using callback', async () => {
@@ -2410,15 +2408,11 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.DeleteStreamRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteStreamRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2448,11 +2442,14 @@ describe('v1.DatastreamClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteStream as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteStream as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteStream as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteStream with call error', async () => {
@@ -2464,26 +2461,25 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.DeleteStreamRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteStreamRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteStream = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteStream(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteStream as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteStream as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteStream as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteStream with LRO error', async () => {
@@ -2495,15 +2491,11 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.DeleteStreamRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteStreamRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteStream = stubLongRunningCall(
         undefined,
@@ -2512,11 +2504,14 @@ describe('v1.DatastreamClient', () => {
       );
       const [operation] = await client.deleteStream(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.deleteStream as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteStream as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteStream as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkDeleteStreamProgress without error', async () => {
@@ -2568,15 +2563,12 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.CreatePrivateConnectionRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreatePrivateConnectionRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2585,11 +2577,14 @@ describe('v1.DatastreamClient', () => {
       const [operation] = await client.createPrivateConnection(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createPrivateConnection as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createPrivateConnection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createPrivateConnection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createPrivateConnection without error using callback', async () => {
@@ -2601,15 +2596,12 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.CreatePrivateConnectionRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreatePrivateConnectionRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2639,11 +2631,14 @@ describe('v1.DatastreamClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createPrivateConnection as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createPrivateConnection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createPrivateConnection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createPrivateConnection with call error', async () => {
@@ -2655,15 +2650,12 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.CreatePrivateConnectionRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreatePrivateConnectionRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createPrivateConnection = stubLongRunningCall(
         undefined,
@@ -2673,11 +2665,14 @@ describe('v1.DatastreamClient', () => {
         client.createPrivateConnection(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.createPrivateConnection as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createPrivateConnection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createPrivateConnection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createPrivateConnection with LRO error', async () => {
@@ -2689,15 +2684,12 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.CreatePrivateConnectionRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreatePrivateConnectionRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createPrivateConnection = stubLongRunningCall(
         undefined,
@@ -2706,11 +2698,14 @@ describe('v1.DatastreamClient', () => {
       );
       const [operation] = await client.createPrivateConnection(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.createPrivateConnection as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createPrivateConnection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createPrivateConnection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkCreatePrivateConnectionProgress without error', async () => {
@@ -2766,15 +2761,12 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.DeletePrivateConnectionRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeletePrivateConnectionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2783,11 +2775,14 @@ describe('v1.DatastreamClient', () => {
       const [operation] = await client.deletePrivateConnection(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deletePrivateConnection as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deletePrivateConnection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deletePrivateConnection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deletePrivateConnection without error using callback', async () => {
@@ -2799,15 +2794,12 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.DeletePrivateConnectionRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeletePrivateConnectionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2837,11 +2829,14 @@ describe('v1.DatastreamClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deletePrivateConnection as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deletePrivateConnection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deletePrivateConnection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deletePrivateConnection with call error', async () => {
@@ -2853,15 +2848,12 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.DeletePrivateConnectionRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeletePrivateConnectionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deletePrivateConnection = stubLongRunningCall(
         undefined,
@@ -2871,11 +2863,14 @@ describe('v1.DatastreamClient', () => {
         client.deletePrivateConnection(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.deletePrivateConnection as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deletePrivateConnection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deletePrivateConnection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deletePrivateConnection with LRO error', async () => {
@@ -2887,15 +2882,12 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.DeletePrivateConnectionRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeletePrivateConnectionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deletePrivateConnection = stubLongRunningCall(
         undefined,
@@ -2904,11 +2896,14 @@ describe('v1.DatastreamClient', () => {
       );
       const [operation] = await client.deletePrivateConnection(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.deletePrivateConnection as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deletePrivateConnection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deletePrivateConnection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkDeletePrivateConnectionProgress without error', async () => {
@@ -2964,15 +2959,11 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.CreateRouteRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateRouteRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2980,11 +2971,14 @@ describe('v1.DatastreamClient', () => {
       const [operation] = await client.createRoute(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createRoute as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createRoute as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createRoute as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createRoute without error using callback', async () => {
@@ -2996,15 +2990,11 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.CreateRouteRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateRouteRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3034,11 +3024,14 @@ describe('v1.DatastreamClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createRoute as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createRoute as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createRoute as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createRoute with call error', async () => {
@@ -3050,26 +3043,25 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.CreateRouteRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateRouteRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createRoute = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createRoute(request), expectedError);
-      assert(
-        (client.innerApiCalls.createRoute as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createRoute as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createRoute as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createRoute with LRO error', async () => {
@@ -3081,15 +3073,11 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.CreateRouteRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateRouteRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createRoute = stubLongRunningCall(
         undefined,
@@ -3098,11 +3086,14 @@ describe('v1.DatastreamClient', () => {
       );
       const [operation] = await client.createRoute(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.createRoute as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createRoute as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createRoute as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkCreateRouteProgress without error', async () => {
@@ -3154,15 +3145,9 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.DeleteRouteRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteRouteRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3170,11 +3155,14 @@ describe('v1.DatastreamClient', () => {
       const [operation] = await client.deleteRoute(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteRoute as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteRoute as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteRoute as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteRoute without error using callback', async () => {
@@ -3186,15 +3174,9 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.DeleteRouteRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteRouteRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3224,11 +3206,14 @@ describe('v1.DatastreamClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteRoute as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteRoute as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteRoute as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteRoute with call error', async () => {
@@ -3240,26 +3225,23 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.DeleteRouteRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteRouteRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteRoute = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteRoute(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteRoute as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteRoute as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteRoute as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteRoute with LRO error', async () => {
@@ -3271,15 +3253,9 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.DeleteRouteRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteRouteRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteRoute = stubLongRunningCall(
         undefined,
@@ -3288,11 +3264,14 @@ describe('v1.DatastreamClient', () => {
       );
       const [operation] = await client.deleteRoute(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.deleteRoute as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteRoute as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteRoute as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkDeleteRouteProgress without error', async () => {
@@ -3344,15 +3323,12 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.ListConnectionProfilesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListConnectionProfilesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datastream.v1.ConnectionProfile()
@@ -3368,11 +3344,14 @@ describe('v1.DatastreamClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listConnectionProfiles(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listConnectionProfiles as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listConnectionProfiles as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listConnectionProfiles as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listConnectionProfiles without error using callback', async () => {
@@ -3384,15 +3363,12 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.ListConnectionProfilesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListConnectionProfilesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datastream.v1.ConnectionProfile()
@@ -3425,11 +3401,14 @@ describe('v1.DatastreamClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listConnectionProfiles as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listConnectionProfiles as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listConnectionProfiles as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listConnectionProfiles with error', async () => {
@@ -3441,15 +3420,12 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.ListConnectionProfilesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListConnectionProfilesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listConnectionProfiles = stubSimpleCall(
         undefined,
@@ -3459,11 +3435,14 @@ describe('v1.DatastreamClient', () => {
         client.listConnectionProfiles(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.listConnectionProfiles as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listConnectionProfiles as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listConnectionProfiles as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listConnectionProfilesStream without error', async () => {
@@ -3475,8 +3454,12 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.ListConnectionProfilesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListConnectionProfilesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datastream.v1.ConnectionProfile()
@@ -3517,12 +3500,15 @@ describe('v1.DatastreamClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listConnectionProfiles, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listConnectionProfiles
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3535,8 +3521,12 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.ListConnectionProfilesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListConnectionProfilesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listConnectionProfiles.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3566,12 +3556,15 @@ describe('v1.DatastreamClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listConnectionProfiles, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listConnectionProfiles
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3584,8 +3577,12 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.ListConnectionProfilesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListConnectionProfilesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datastream.v1.ConnectionProfile()
@@ -3613,12 +3610,15 @@ describe('v1.DatastreamClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listConnectionProfiles
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3631,8 +3631,12 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.ListConnectionProfilesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListConnectionProfilesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listConnectionProfiles.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3651,12 +3655,15 @@ describe('v1.DatastreamClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listConnectionProfiles
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -3671,15 +3678,11 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.ListStreamsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListStreamsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.datastream.v1.Stream()),
         generateSampleMessage(new protos.google.cloud.datastream.v1.Stream()),
@@ -3688,11 +3691,14 @@ describe('v1.DatastreamClient', () => {
       client.innerApiCalls.listStreams = stubSimpleCall(expectedResponse);
       const [response] = await client.listStreams(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listStreams as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listStreams as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listStreams as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listStreams without error using callback', async () => {
@@ -3704,15 +3710,11 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.ListStreamsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListStreamsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.datastream.v1.Stream()),
         generateSampleMessage(new protos.google.cloud.datastream.v1.Stream()),
@@ -3737,11 +3739,14 @@ describe('v1.DatastreamClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listStreams as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listStreams as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listStreams as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listStreams with error', async () => {
@@ -3753,26 +3758,25 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.ListStreamsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListStreamsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listStreams = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listStreams(request), expectedError);
-      assert(
-        (client.innerApiCalls.listStreams as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listStreams as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listStreams as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listStreamsStream without error', async () => {
@@ -3784,8 +3788,11 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.ListStreamsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListStreamsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.datastream.v1.Stream()),
         generateSampleMessage(new protos.google.cloud.datastream.v1.Stream()),
@@ -3816,11 +3823,12 @@ describe('v1.DatastreamClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listStreams, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.listStreams.createStream as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listStreams.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3833,8 +3841,11 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.ListStreamsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListStreamsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listStreams.createStream = stubPageStreamingCall(
         undefined,
@@ -3862,11 +3873,12 @@ describe('v1.DatastreamClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listStreams, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.listStreams.createStream as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listStreams.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3879,8 +3891,11 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.ListStreamsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListStreamsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.datastream.v1.Stream()),
         generateSampleMessage(new protos.google.cloud.datastream.v1.Stream()),
@@ -3900,11 +3915,12 @@ describe('v1.DatastreamClient', () => {
         ).args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.listStreams.asyncIterate as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listStreams.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3917,8 +3933,11 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.ListStreamsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListStreamsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listStreams.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -3937,11 +3956,12 @@ describe('v1.DatastreamClient', () => {
         ).args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.listStreams.asyncIterate as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listStreams.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -3956,15 +3976,11 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.ListStreamObjectsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListStreamObjectsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datastream.v1.StreamObject()
@@ -3979,11 +3995,14 @@ describe('v1.DatastreamClient', () => {
       client.innerApiCalls.listStreamObjects = stubSimpleCall(expectedResponse);
       const [response] = await client.listStreamObjects(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listStreamObjects as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listStreamObjects as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listStreamObjects as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listStreamObjects without error using callback', async () => {
@@ -3995,15 +4014,11 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.ListStreamObjectsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListStreamObjectsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datastream.v1.StreamObject()
@@ -4034,11 +4049,14 @@ describe('v1.DatastreamClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listStreamObjects as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listStreamObjects as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listStreamObjects as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listStreamObjects with error', async () => {
@@ -4050,26 +4068,25 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.ListStreamObjectsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListStreamObjectsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listStreamObjects = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listStreamObjects(request), expectedError);
-      assert(
-        (client.innerApiCalls.listStreamObjects as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listStreamObjects as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listStreamObjects as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listStreamObjectsStream without error', async () => {
@@ -4081,8 +4098,11 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.ListStreamObjectsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListStreamObjectsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datastream.v1.StreamObject()
@@ -4119,11 +4139,12 @@ describe('v1.DatastreamClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listStreamObjects, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listStreamObjects.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listStreamObjects.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -4136,8 +4157,11 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.ListStreamObjectsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListStreamObjectsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listStreamObjects.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -4163,11 +4187,12 @@ describe('v1.DatastreamClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listStreamObjects, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listStreamObjects.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listStreamObjects.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -4180,8 +4205,11 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.ListStreamObjectsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListStreamObjectsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datastream.v1.StreamObject()
@@ -4207,11 +4235,12 @@ describe('v1.DatastreamClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listStreamObjects.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listStreamObjects.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -4224,8 +4253,11 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.ListStreamObjectsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListStreamObjectsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listStreamObjects.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -4242,11 +4274,12 @@ describe('v1.DatastreamClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listStreamObjects.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listStreamObjects.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -4261,24 +4294,23 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.FetchStaticIpsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('FetchStaticIpsRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = [new String(), new String(), new String()];
       client.innerApiCalls.fetchStaticIps = stubSimpleCall(expectedResponse);
       const [response] = await client.fetchStaticIps(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.fetchStaticIps as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.fetchStaticIps as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchStaticIps as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes fetchStaticIps without error using callback', async () => {
@@ -4290,15 +4322,11 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.FetchStaticIpsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('FetchStaticIpsRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = [new String(), new String(), new String()];
       client.innerApiCalls.fetchStaticIps =
         stubSimpleCallWithCallback(expectedResponse);
@@ -4316,11 +4344,14 @@ describe('v1.DatastreamClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.fetchStaticIps as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.fetchStaticIps as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchStaticIps as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes fetchStaticIps with error', async () => {
@@ -4332,26 +4363,25 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.FetchStaticIpsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('FetchStaticIpsRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.fetchStaticIps = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.fetchStaticIps(request), expectedError);
-      assert(
-        (client.innerApiCalls.fetchStaticIps as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.fetchStaticIps as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchStaticIps as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes fetchStaticIpsStream without error', async () => {
@@ -4363,8 +4393,11 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.FetchStaticIpsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      const defaultValue1 = getTypeDefaultValue('FetchStaticIpsRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = [new String(), new String(), new String()];
       client.descriptors.page.fetchStaticIps.createStream =
         stubPageStreamingCall(expectedResponse);
@@ -4388,11 +4421,12 @@ describe('v1.DatastreamClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.fetchStaticIps, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.fetchStaticIps.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.fetchStaticIps.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -4405,8 +4439,11 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.FetchStaticIpsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      const defaultValue1 = getTypeDefaultValue('FetchStaticIpsRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.fetchStaticIps.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -4429,11 +4466,12 @@ describe('v1.DatastreamClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.fetchStaticIps, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.fetchStaticIps.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.fetchStaticIps.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -4446,8 +4484,11 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.FetchStaticIpsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      const defaultValue1 = getTypeDefaultValue('FetchStaticIpsRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = [new String(), new String(), new String()];
       client.descriptors.page.fetchStaticIps.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
@@ -4463,11 +4504,12 @@ describe('v1.DatastreamClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.fetchStaticIps.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.fetchStaticIps.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -4480,8 +4522,11 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.FetchStaticIpsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      const defaultValue1 = getTypeDefaultValue('FetchStaticIpsRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.fetchStaticIps.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -4498,11 +4543,12 @@ describe('v1.DatastreamClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.fetchStaticIps.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.fetchStaticIps.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -4517,15 +4563,12 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.ListPrivateConnectionsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListPrivateConnectionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datastream.v1.PrivateConnection()
@@ -4541,11 +4584,14 @@ describe('v1.DatastreamClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listPrivateConnections(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listPrivateConnections as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listPrivateConnections as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listPrivateConnections as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listPrivateConnections without error using callback', async () => {
@@ -4557,15 +4603,12 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.ListPrivateConnectionsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListPrivateConnectionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datastream.v1.PrivateConnection()
@@ -4598,11 +4641,14 @@ describe('v1.DatastreamClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listPrivateConnections as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listPrivateConnections as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listPrivateConnections as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listPrivateConnections with error', async () => {
@@ -4614,15 +4660,12 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.ListPrivateConnectionsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListPrivateConnectionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listPrivateConnections = stubSimpleCall(
         undefined,
@@ -4632,11 +4675,14 @@ describe('v1.DatastreamClient', () => {
         client.listPrivateConnections(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.listPrivateConnections as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listPrivateConnections as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listPrivateConnections as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listPrivateConnectionsStream without error', async () => {
@@ -4648,8 +4694,12 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.ListPrivateConnectionsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListPrivateConnectionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datastream.v1.PrivateConnection()
@@ -4690,12 +4740,15 @@ describe('v1.DatastreamClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listPrivateConnections, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listPrivateConnections
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -4708,8 +4761,12 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.ListPrivateConnectionsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListPrivateConnectionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPrivateConnections.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -4739,12 +4796,15 @@ describe('v1.DatastreamClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listPrivateConnections, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listPrivateConnections
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -4757,8 +4817,12 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.ListPrivateConnectionsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListPrivateConnectionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datastream.v1.PrivateConnection()
@@ -4786,12 +4850,15 @@ describe('v1.DatastreamClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listPrivateConnections
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -4804,8 +4871,12 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.ListPrivateConnectionsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListPrivateConnectionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPrivateConnections.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -4824,12 +4895,15 @@ describe('v1.DatastreamClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listPrivateConnections
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -4844,15 +4918,11 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.ListRoutesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListRoutesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.datastream.v1.Route()),
         generateSampleMessage(new protos.google.cloud.datastream.v1.Route()),
@@ -4861,11 +4931,14 @@ describe('v1.DatastreamClient', () => {
       client.innerApiCalls.listRoutes = stubSimpleCall(expectedResponse);
       const [response] = await client.listRoutes(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listRoutes as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listRoutes as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listRoutes as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listRoutes without error using callback', async () => {
@@ -4877,15 +4950,11 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.ListRoutesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListRoutesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.datastream.v1.Route()),
         generateSampleMessage(new protos.google.cloud.datastream.v1.Route()),
@@ -4910,11 +4979,14 @@ describe('v1.DatastreamClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listRoutes as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listRoutes as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listRoutes as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listRoutes with error', async () => {
@@ -4926,26 +4998,25 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.ListRoutesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListRoutesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listRoutes = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listRoutes(request), expectedError);
-      assert(
-        (client.innerApiCalls.listRoutes as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listRoutes as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listRoutes as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listRoutesStream without error', async () => {
@@ -4957,8 +5028,11 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.ListRoutesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListRoutesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.datastream.v1.Route()),
         generateSampleMessage(new protos.google.cloud.datastream.v1.Route()),
@@ -4989,11 +5063,12 @@ describe('v1.DatastreamClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listRoutes, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.listRoutes.createStream as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listRoutes.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -5006,8 +5081,11 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.ListRoutesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListRoutesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listRoutes.createStream = stubPageStreamingCall(
         undefined,
@@ -5035,11 +5113,12 @@ describe('v1.DatastreamClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listRoutes, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.listRoutes.createStream as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listRoutes.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -5052,8 +5131,11 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.ListRoutesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListRoutesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.datastream.v1.Route()),
         generateSampleMessage(new protos.google.cloud.datastream.v1.Route()),
@@ -5073,11 +5155,12 @@ describe('v1.DatastreamClient', () => {
         ).args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.listRoutes.asyncIterate as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listRoutes.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -5090,8 +5173,11 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.ListRoutesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListRoutesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listRoutes.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -5110,11 +5196,12 @@ describe('v1.DatastreamClient', () => {
         ).args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.listRoutes.asyncIterate as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listRoutes.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -5589,12 +5676,15 @@ describe('v1.DatastreamClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.locationsClient.descriptors.page.listLocations
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
     it('uses async iteration with listLocations with error', async () => {
@@ -5625,12 +5715,15 @@ describe('v1.DatastreamClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.locationsClient.descriptors.page.listLocations
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
