@@ -27,6 +27,21 @@ import {PassThrough} from 'stream';
 
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -254,26 +269,23 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.GetGatewayRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetGatewayRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.Gateway()
       );
       client.innerApiCalls.getGateway = stubSimpleCall(expectedResponse);
       const [response] = await client.getGateway(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getGateway as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getGateway as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getGateway as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getGateway without error using callback', async () => {
@@ -285,15 +297,9 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.GetGatewayRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetGatewayRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.Gateway()
       );
@@ -316,11 +322,14 @@ describe('v1.ApiGatewayServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getGateway as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getGateway as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getGateway as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getGateway with error', async () => {
@@ -332,26 +341,23 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.GetGatewayRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetGatewayRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getGateway = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getGateway(request), expectedError);
-      assert(
-        (client.innerApiCalls.getGateway as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getGateway as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getGateway as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getGateway with closed client', async () => {
@@ -363,7 +369,8 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.GetGatewayRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetGatewayRequest', ['name']);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getGateway(request), expectedError);
@@ -380,26 +387,23 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.GetApiRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetApiRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.Api()
       );
       client.innerApiCalls.getApi = stubSimpleCall(expectedResponse);
       const [response] = await client.getApi(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getApi as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.getApi as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getApi as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getApi without error using callback', async () => {
@@ -411,15 +415,9 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.GetApiRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetApiRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.Api()
       );
@@ -442,11 +440,14 @@ describe('v1.ApiGatewayServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getApi as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (client.innerApiCalls.getApi as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getApi as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getApi with error', async () => {
@@ -458,23 +459,20 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.GetApiRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetApiRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getApi = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getApi(request), expectedError);
-      assert(
-        (client.innerApiCalls.getApi as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.getApi as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getApi as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getApi with closed client', async () => {
@@ -486,7 +484,8 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.GetApiRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetApiRequest', ['name']);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getApi(request), expectedError);
@@ -503,26 +502,25 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.GetApiConfigRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetApiConfigRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ApiConfig()
       );
       client.innerApiCalls.getApiConfig = stubSimpleCall(expectedResponse);
       const [response] = await client.getApiConfig(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getApiConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getApiConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getApiConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getApiConfig without error using callback', async () => {
@@ -534,15 +532,11 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.GetApiConfigRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetApiConfigRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ApiConfig()
       );
@@ -565,11 +559,14 @@ describe('v1.ApiGatewayServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getApiConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getApiConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getApiConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getApiConfig with error', async () => {
@@ -581,26 +578,25 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.GetApiConfigRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetApiConfigRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getApiConfig = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getApiConfig(request), expectedError);
-      assert(
-        (client.innerApiCalls.getApiConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getApiConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getApiConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getApiConfig with closed client', async () => {
@@ -612,7 +608,10 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.GetApiConfigRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetApiConfigRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getApiConfig(request), expectedError);
@@ -629,15 +628,11 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.CreateGatewayRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateGatewayRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -646,11 +641,14 @@ describe('v1.ApiGatewayServiceClient', () => {
       const [operation] = await client.createGateway(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createGateway as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createGateway as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createGateway as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createGateway without error using callback', async () => {
@@ -662,15 +660,11 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.CreateGatewayRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateGatewayRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -700,11 +694,14 @@ describe('v1.ApiGatewayServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createGateway as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createGateway as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createGateway as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createGateway with call error', async () => {
@@ -716,26 +713,25 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.CreateGatewayRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateGatewayRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createGateway = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createGateway(request), expectedError);
-      assert(
-        (client.innerApiCalls.createGateway as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createGateway as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createGateway as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createGateway with LRO error', async () => {
@@ -747,15 +743,11 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.CreateGatewayRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateGatewayRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createGateway = stubLongRunningCall(
         undefined,
@@ -764,11 +756,14 @@ describe('v1.ApiGatewayServiceClient', () => {
       );
       const [operation] = await client.createGateway(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.createGateway as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createGateway as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createGateway as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkCreateGatewayProgress without error', async () => {
@@ -823,16 +818,13 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.UpdateGatewayRequest()
       );
-      request.gateway = {};
-      request.gateway.name = '';
-      const expectedHeaderRequestParams = 'gateway.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.gateway ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateGatewayRequest', [
+        'gateway',
+        'name',
+      ]);
+      request.gateway.name = defaultValue1;
+      const expectedHeaderRequestParams = `gateway.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -841,11 +833,14 @@ describe('v1.ApiGatewayServiceClient', () => {
       const [operation] = await client.updateGateway(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateGateway as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateGateway as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateGateway as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateGateway without error using callback', async () => {
@@ -857,16 +852,13 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.UpdateGatewayRequest()
       );
-      request.gateway = {};
-      request.gateway.name = '';
-      const expectedHeaderRequestParams = 'gateway.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.gateway ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateGatewayRequest', [
+        'gateway',
+        'name',
+      ]);
+      request.gateway.name = defaultValue1;
+      const expectedHeaderRequestParams = `gateway.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -896,11 +888,14 @@ describe('v1.ApiGatewayServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateGateway as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateGateway as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateGateway as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateGateway with call error', async () => {
@@ -912,27 +907,27 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.UpdateGatewayRequest()
       );
-      request.gateway = {};
-      request.gateway.name = '';
-      const expectedHeaderRequestParams = 'gateway.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.gateway ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateGatewayRequest', [
+        'gateway',
+        'name',
+      ]);
+      request.gateway.name = defaultValue1;
+      const expectedHeaderRequestParams = `gateway.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateGateway = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateGateway(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateGateway as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateGateway as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateGateway as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateGateway with LRO error', async () => {
@@ -944,16 +939,13 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.UpdateGatewayRequest()
       );
-      request.gateway = {};
-      request.gateway.name = '';
-      const expectedHeaderRequestParams = 'gateway.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.gateway ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateGatewayRequest', [
+        'gateway',
+        'name',
+      ]);
+      request.gateway.name = defaultValue1;
+      const expectedHeaderRequestParams = `gateway.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateGateway = stubLongRunningCall(
         undefined,
@@ -962,11 +954,14 @@ describe('v1.ApiGatewayServiceClient', () => {
       );
       const [operation] = await client.updateGateway(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.updateGateway as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateGateway as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateGateway as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkUpdateGatewayProgress without error', async () => {
@@ -1021,15 +1016,11 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.DeleteGatewayRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteGatewayRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1038,11 +1029,14 @@ describe('v1.ApiGatewayServiceClient', () => {
       const [operation] = await client.deleteGateway(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteGateway as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteGateway as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteGateway as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteGateway without error using callback', async () => {
@@ -1054,15 +1048,11 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.DeleteGatewayRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteGatewayRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1092,11 +1082,14 @@ describe('v1.ApiGatewayServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteGateway as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteGateway as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteGateway as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteGateway with call error', async () => {
@@ -1108,26 +1101,25 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.DeleteGatewayRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteGatewayRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteGateway = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteGateway(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteGateway as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteGateway as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteGateway as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteGateway with LRO error', async () => {
@@ -1139,15 +1131,11 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.DeleteGatewayRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteGatewayRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteGateway = stubLongRunningCall(
         undefined,
@@ -1156,11 +1144,14 @@ describe('v1.ApiGatewayServiceClient', () => {
       );
       const [operation] = await client.deleteGateway(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.deleteGateway as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteGateway as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteGateway as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkDeleteGatewayProgress without error', async () => {
@@ -1215,15 +1206,9 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.CreateApiRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateApiRequest', ['parent']);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1231,11 +1216,14 @@ describe('v1.ApiGatewayServiceClient', () => {
       const [operation] = await client.createApi(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createApi as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createApi as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createApi as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createApi without error using callback', async () => {
@@ -1247,15 +1235,9 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.CreateApiRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateApiRequest', ['parent']);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1285,11 +1267,14 @@ describe('v1.ApiGatewayServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createApi as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createApi as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createApi as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createApi with call error', async () => {
@@ -1301,26 +1286,23 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.CreateApiRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateApiRequest', ['parent']);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createApi = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createApi(request), expectedError);
-      assert(
-        (client.innerApiCalls.createApi as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createApi as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createApi as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createApi with LRO error', async () => {
@@ -1332,15 +1314,9 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.CreateApiRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateApiRequest', ['parent']);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createApi = stubLongRunningCall(
         undefined,
@@ -1349,11 +1325,14 @@ describe('v1.ApiGatewayServiceClient', () => {
       );
       const [operation] = await client.createApi(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.createApi as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createApi as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createApi as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkCreateApiProgress without error', async () => {
@@ -1405,16 +1384,13 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.UpdateApiRequest()
       );
-      request.api = {};
-      request.api.name = '';
-      const expectedHeaderRequestParams = 'api.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.api ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateApiRequest', [
+        'api',
+        'name',
+      ]);
+      request.api.name = defaultValue1;
+      const expectedHeaderRequestParams = `api.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1422,11 +1398,14 @@ describe('v1.ApiGatewayServiceClient', () => {
       const [operation] = await client.updateApi(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateApi as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateApi as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateApi as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateApi without error using callback', async () => {
@@ -1438,16 +1417,13 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.UpdateApiRequest()
       );
-      request.api = {};
-      request.api.name = '';
-      const expectedHeaderRequestParams = 'api.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.api ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateApiRequest', [
+        'api',
+        'name',
+      ]);
+      request.api.name = defaultValue1;
+      const expectedHeaderRequestParams = `api.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1477,11 +1453,14 @@ describe('v1.ApiGatewayServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateApi as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateApi as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateApi as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateApi with call error', async () => {
@@ -1493,27 +1472,27 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.UpdateApiRequest()
       );
-      request.api = {};
-      request.api.name = '';
-      const expectedHeaderRequestParams = 'api.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.api ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateApiRequest', [
+        'api',
+        'name',
+      ]);
+      request.api.name = defaultValue1;
+      const expectedHeaderRequestParams = `api.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateApi = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateApi(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateApi as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateApi as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateApi as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateApi with LRO error', async () => {
@@ -1525,16 +1504,13 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.UpdateApiRequest()
       );
-      request.api = {};
-      request.api.name = '';
-      const expectedHeaderRequestParams = 'api.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.api ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateApiRequest', [
+        'api',
+        'name',
+      ]);
+      request.api.name = defaultValue1;
+      const expectedHeaderRequestParams = `api.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateApi = stubLongRunningCall(
         undefined,
@@ -1543,11 +1519,14 @@ describe('v1.ApiGatewayServiceClient', () => {
       );
       const [operation] = await client.updateApi(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.updateApi as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateApi as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateApi as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkUpdateApiProgress without error', async () => {
@@ -1599,15 +1578,9 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.DeleteApiRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteApiRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1615,11 +1588,14 @@ describe('v1.ApiGatewayServiceClient', () => {
       const [operation] = await client.deleteApi(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteApi as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteApi as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteApi as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteApi without error using callback', async () => {
@@ -1631,15 +1607,9 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.DeleteApiRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteApiRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1669,11 +1639,14 @@ describe('v1.ApiGatewayServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteApi as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteApi as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteApi as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteApi with call error', async () => {
@@ -1685,26 +1658,23 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.DeleteApiRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteApiRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteApi = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteApi(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteApi as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteApi as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteApi as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteApi with LRO error', async () => {
@@ -1716,15 +1686,9 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.DeleteApiRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteApiRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteApi = stubLongRunningCall(
         undefined,
@@ -1733,11 +1697,14 @@ describe('v1.ApiGatewayServiceClient', () => {
       );
       const [operation] = await client.deleteApi(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.deleteApi as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteApi as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteApi as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkDeleteApiProgress without error', async () => {
@@ -1789,15 +1756,11 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.CreateApiConfigRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateApiConfigRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1806,11 +1769,14 @@ describe('v1.ApiGatewayServiceClient', () => {
       const [operation] = await client.createApiConfig(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createApiConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createApiConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createApiConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createApiConfig without error using callback', async () => {
@@ -1822,15 +1788,11 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.CreateApiConfigRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateApiConfigRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1860,11 +1822,14 @@ describe('v1.ApiGatewayServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createApiConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createApiConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createApiConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createApiConfig with call error', async () => {
@@ -1876,26 +1841,25 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.CreateApiConfigRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateApiConfigRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createApiConfig = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createApiConfig(request), expectedError);
-      assert(
-        (client.innerApiCalls.createApiConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createApiConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createApiConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createApiConfig with LRO error', async () => {
@@ -1907,15 +1871,11 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.CreateApiConfigRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateApiConfigRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createApiConfig = stubLongRunningCall(
         undefined,
@@ -1924,11 +1884,14 @@ describe('v1.ApiGatewayServiceClient', () => {
       );
       const [operation] = await client.createApiConfig(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.createApiConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createApiConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createApiConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkCreateApiConfigProgress without error', async () => {
@@ -1983,16 +1946,13 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.UpdateApiConfigRequest()
       );
-      request.apiConfig = {};
-      request.apiConfig.name = '';
-      const expectedHeaderRequestParams = 'api_config.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.apiConfig ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateApiConfigRequest', [
+        'apiConfig',
+        'name',
+      ]);
+      request.apiConfig.name = defaultValue1;
+      const expectedHeaderRequestParams = `api_config.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2001,11 +1961,14 @@ describe('v1.ApiGatewayServiceClient', () => {
       const [operation] = await client.updateApiConfig(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateApiConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateApiConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateApiConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateApiConfig without error using callback', async () => {
@@ -2017,16 +1980,13 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.UpdateApiConfigRequest()
       );
-      request.apiConfig = {};
-      request.apiConfig.name = '';
-      const expectedHeaderRequestParams = 'api_config.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.apiConfig ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateApiConfigRequest', [
+        'apiConfig',
+        'name',
+      ]);
+      request.apiConfig.name = defaultValue1;
+      const expectedHeaderRequestParams = `api_config.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2056,11 +2016,14 @@ describe('v1.ApiGatewayServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateApiConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateApiConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateApiConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateApiConfig with call error', async () => {
@@ -2072,27 +2035,27 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.UpdateApiConfigRequest()
       );
-      request.apiConfig = {};
-      request.apiConfig.name = '';
-      const expectedHeaderRequestParams = 'api_config.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.apiConfig ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateApiConfigRequest', [
+        'apiConfig',
+        'name',
+      ]);
+      request.apiConfig.name = defaultValue1;
+      const expectedHeaderRequestParams = `api_config.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateApiConfig = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateApiConfig(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateApiConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateApiConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateApiConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateApiConfig with LRO error', async () => {
@@ -2104,16 +2067,13 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.UpdateApiConfigRequest()
       );
-      request.apiConfig = {};
-      request.apiConfig.name = '';
-      const expectedHeaderRequestParams = 'api_config.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.apiConfig ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateApiConfigRequest', [
+        'apiConfig',
+        'name',
+      ]);
+      request.apiConfig.name = defaultValue1;
+      const expectedHeaderRequestParams = `api_config.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateApiConfig = stubLongRunningCall(
         undefined,
@@ -2122,11 +2082,14 @@ describe('v1.ApiGatewayServiceClient', () => {
       );
       const [operation] = await client.updateApiConfig(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.updateApiConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateApiConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateApiConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkUpdateApiConfigProgress without error', async () => {
@@ -2181,15 +2144,11 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.DeleteApiConfigRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteApiConfigRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2198,11 +2157,14 @@ describe('v1.ApiGatewayServiceClient', () => {
       const [operation] = await client.deleteApiConfig(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteApiConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteApiConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteApiConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteApiConfig without error using callback', async () => {
@@ -2214,15 +2176,11 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.DeleteApiConfigRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteApiConfigRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2252,11 +2210,14 @@ describe('v1.ApiGatewayServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteApiConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteApiConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteApiConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteApiConfig with call error', async () => {
@@ -2268,26 +2229,25 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.DeleteApiConfigRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteApiConfigRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteApiConfig = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteApiConfig(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteApiConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteApiConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteApiConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteApiConfig with LRO error', async () => {
@@ -2299,15 +2259,11 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.DeleteApiConfigRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteApiConfigRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteApiConfig = stubLongRunningCall(
         undefined,
@@ -2316,11 +2272,14 @@ describe('v1.ApiGatewayServiceClient', () => {
       );
       const [operation] = await client.deleteApiConfig(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.deleteApiConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteApiConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteApiConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkDeleteApiConfigProgress without error', async () => {
@@ -2375,15 +2334,11 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ListGatewaysRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListGatewaysRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.apigateway.v1.Gateway()),
         generateSampleMessage(new protos.google.cloud.apigateway.v1.Gateway()),
@@ -2392,11 +2347,14 @@ describe('v1.ApiGatewayServiceClient', () => {
       client.innerApiCalls.listGateways = stubSimpleCall(expectedResponse);
       const [response] = await client.listGateways(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listGateways as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listGateways as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listGateways as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listGateways without error using callback', async () => {
@@ -2408,15 +2366,11 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ListGatewaysRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListGatewaysRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.apigateway.v1.Gateway()),
         generateSampleMessage(new protos.google.cloud.apigateway.v1.Gateway()),
@@ -2441,11 +2395,14 @@ describe('v1.ApiGatewayServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listGateways as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listGateways as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listGateways as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listGateways with error', async () => {
@@ -2457,26 +2414,25 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ListGatewaysRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListGatewaysRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listGateways = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listGateways(request), expectedError);
-      assert(
-        (client.innerApiCalls.listGateways as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listGateways as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listGateways as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listGatewaysStream without error', async () => {
@@ -2488,8 +2444,11 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ListGatewaysRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListGatewaysRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.apigateway.v1.Gateway()),
         generateSampleMessage(new protos.google.cloud.apigateway.v1.Gateway()),
@@ -2520,11 +2479,12 @@ describe('v1.ApiGatewayServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listGateways, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listGateways.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listGateways.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2537,8 +2497,11 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ListGatewaysRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListGatewaysRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listGateways.createStream = stubPageStreamingCall(
         undefined,
@@ -2566,11 +2529,12 @@ describe('v1.ApiGatewayServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listGateways, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listGateways.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listGateways.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2583,8 +2547,11 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ListGatewaysRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListGatewaysRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.apigateway.v1.Gateway()),
         generateSampleMessage(new protos.google.cloud.apigateway.v1.Gateway()),
@@ -2604,11 +2571,12 @@ describe('v1.ApiGatewayServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listGateways.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listGateways.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2621,8 +2589,11 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ListGatewaysRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListGatewaysRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listGateways.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2639,11 +2610,12 @@ describe('v1.ApiGatewayServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listGateways.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listGateways.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -2658,15 +2630,9 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ListApisRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListApisRequest', ['parent']);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.apigateway.v1.Api()),
         generateSampleMessage(new protos.google.cloud.apigateway.v1.Api()),
@@ -2675,11 +2641,14 @@ describe('v1.ApiGatewayServiceClient', () => {
       client.innerApiCalls.listApis = stubSimpleCall(expectedResponse);
       const [response] = await client.listApis(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listApis as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listApis as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listApis as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listApis without error using callback', async () => {
@@ -2691,15 +2660,9 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ListApisRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListApisRequest', ['parent']);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.apigateway.v1.Api()),
         generateSampleMessage(new protos.google.cloud.apigateway.v1.Api()),
@@ -2724,11 +2687,14 @@ describe('v1.ApiGatewayServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listApis as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listApis as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listApis as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listApis with error', async () => {
@@ -2740,23 +2706,20 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ListApisRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListApisRequest', ['parent']);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listApis = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.listApis(request), expectedError);
-      assert(
-        (client.innerApiCalls.listApis as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listApis as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listApis as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listApisStream without error', async () => {
@@ -2768,8 +2731,9 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ListApisRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListApisRequest', ['parent']);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.apigateway.v1.Api()),
         generateSampleMessage(new protos.google.cloud.apigateway.v1.Api()),
@@ -2797,10 +2761,12 @@ describe('v1.ApiGatewayServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listApis, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.listApis.createStream as SinonStub).getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listApis.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2813,8 +2779,9 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ListApisRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListApisRequest', ['parent']);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listApis.createStream = stubPageStreamingCall(
         undefined,
@@ -2839,10 +2806,12 @@ describe('v1.ApiGatewayServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listApis, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.listApis.createStream as SinonStub).getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listApis.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2855,8 +2824,9 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ListApisRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListApisRequest', ['parent']);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.apigateway.v1.Api()),
         generateSampleMessage(new protos.google.cloud.apigateway.v1.Api()),
@@ -2875,10 +2845,12 @@ describe('v1.ApiGatewayServiceClient', () => {
           .args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.listApis.asyncIterate as SinonStub).getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listApis.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2891,8 +2863,9 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ListApisRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListApisRequest', ['parent']);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listApis.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -2910,10 +2883,12 @@ describe('v1.ApiGatewayServiceClient', () => {
           .args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.listApis.asyncIterate as SinonStub).getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listApis.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -2928,15 +2903,11 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ListApiConfigsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListApiConfigsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.apigateway.v1.ApiConfig()
@@ -2951,11 +2922,14 @@ describe('v1.ApiGatewayServiceClient', () => {
       client.innerApiCalls.listApiConfigs = stubSimpleCall(expectedResponse);
       const [response] = await client.listApiConfigs(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listApiConfigs as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listApiConfigs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listApiConfigs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listApiConfigs without error using callback', async () => {
@@ -2967,15 +2941,11 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ListApiConfigsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListApiConfigsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.apigateway.v1.ApiConfig()
@@ -3006,11 +2976,14 @@ describe('v1.ApiGatewayServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listApiConfigs as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listApiConfigs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listApiConfigs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listApiConfigs with error', async () => {
@@ -3022,26 +2995,25 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ListApiConfigsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListApiConfigsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listApiConfigs = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listApiConfigs(request), expectedError);
-      assert(
-        (client.innerApiCalls.listApiConfigs as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listApiConfigs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listApiConfigs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listApiConfigsStream without error', async () => {
@@ -3053,8 +3025,11 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ListApiConfigsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListApiConfigsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.apigateway.v1.ApiConfig()
@@ -3091,11 +3066,12 @@ describe('v1.ApiGatewayServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listApiConfigs, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listApiConfigs.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listApiConfigs.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3108,8 +3084,11 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ListApiConfigsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListApiConfigsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listApiConfigs.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3135,11 +3114,12 @@ describe('v1.ApiGatewayServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listApiConfigs, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listApiConfigs.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listApiConfigs.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3152,8 +3132,11 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ListApiConfigsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListApiConfigsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.apigateway.v1.ApiConfig()
@@ -3179,11 +3162,12 @@ describe('v1.ApiGatewayServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listApiConfigs.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listApiConfigs.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3196,8 +3180,11 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ListApiConfigsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListApiConfigsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listApiConfigs.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3214,11 +3201,12 @@ describe('v1.ApiGatewayServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listApiConfigs.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listApiConfigs.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
