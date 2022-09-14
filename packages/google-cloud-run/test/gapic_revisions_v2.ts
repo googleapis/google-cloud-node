@@ -27,6 +27,21 @@ import {PassThrough} from 'stream';
 
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -252,33 +267,23 @@ describe('v2.RevisionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.GetRevisionRequest()
       );
-      const expectedHeaderRequestParamsObj: {[key: string]: string} = {};
       // path template: projects/*/locations/{location=*}/**
       request.name = 'projects/value/locations/value/value';
-      expectedHeaderRequestParamsObj['location'] = 'value';
-      const expectedHeaderRequestParams = Object.entries(
-        expectedHeaderRequestParamsObj
-      )
-        .map(([key, value]) => `${key}=${value}`)
-        .join('&');
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const expectedHeaderRequestParams = 'location=value';
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.run.v2.Revision()
       );
       client.innerApiCalls.getRevision = stubSimpleCall(expectedResponse);
       const [response] = await client.getRevision(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getRevision as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getRevision as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getRevision as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getRevision without error using callback', async () => {
@@ -290,22 +295,9 @@ describe('v2.RevisionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.GetRevisionRequest()
       );
-      const expectedHeaderRequestParamsObj: {[key: string]: string} = {};
       // path template: projects/*/locations/{location=*}/**
       request.name = 'projects/value/locations/value/value';
-      expectedHeaderRequestParamsObj['location'] = 'value';
-      const expectedHeaderRequestParams = Object.entries(
-        expectedHeaderRequestParamsObj
-      )
-        .map(([key, value]) => `${key}=${value}`)
-        .join('&');
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const expectedHeaderRequestParams = 'location=value';
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.run.v2.Revision()
       );
@@ -328,11 +320,14 @@ describe('v2.RevisionsClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getRevision as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getRevision as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getRevision as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getRevision with error', async () => {
@@ -344,33 +339,23 @@ describe('v2.RevisionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.GetRevisionRequest()
       );
-      const expectedHeaderRequestParamsObj: {[key: string]: string} = {};
       // path template: projects/*/locations/{location=*}/**
       request.name = 'projects/value/locations/value/value';
-      expectedHeaderRequestParamsObj['location'] = 'value';
-      const expectedHeaderRequestParams = Object.entries(
-        expectedHeaderRequestParamsObj
-      )
-        .map(([key, value]) => `${key}=${value}`)
-        .join('&');
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const expectedHeaderRequestParams = 'location=value';
       const expectedError = new Error('expected');
       client.innerApiCalls.getRevision = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getRevision(request), expectedError);
-      assert(
-        (client.innerApiCalls.getRevision as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getRevision as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getRevision as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getRevision with closed client', async () => {
@@ -400,22 +385,9 @@ describe('v2.RevisionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.DeleteRevisionRequest()
       );
-      const expectedHeaderRequestParamsObj: {[key: string]: string} = {};
       // path template: projects/*/locations/{location=*}/**
       request.name = 'projects/value/locations/value/value';
-      expectedHeaderRequestParamsObj['location'] = 'value';
-      const expectedHeaderRequestParams = Object.entries(
-        expectedHeaderRequestParamsObj
-      )
-        .map(([key, value]) => `${key}=${value}`)
-        .join('&');
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const expectedHeaderRequestParams = 'location=value';
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -424,11 +396,14 @@ describe('v2.RevisionsClient', () => {
       const [operation] = await client.deleteRevision(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteRevision as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteRevision as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteRevision as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteRevision without error using callback', async () => {
@@ -440,22 +415,9 @@ describe('v2.RevisionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.DeleteRevisionRequest()
       );
-      const expectedHeaderRequestParamsObj: {[key: string]: string} = {};
       // path template: projects/*/locations/{location=*}/**
       request.name = 'projects/value/locations/value/value';
-      expectedHeaderRequestParamsObj['location'] = 'value';
-      const expectedHeaderRequestParams = Object.entries(
-        expectedHeaderRequestParamsObj
-      )
-        .map(([key, value]) => `${key}=${value}`)
-        .join('&');
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const expectedHeaderRequestParams = 'location=value';
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -485,11 +447,14 @@ describe('v2.RevisionsClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteRevision as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteRevision as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteRevision as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteRevision with call error', async () => {
@@ -501,33 +466,23 @@ describe('v2.RevisionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.DeleteRevisionRequest()
       );
-      const expectedHeaderRequestParamsObj: {[key: string]: string} = {};
       // path template: projects/*/locations/{location=*}/**
       request.name = 'projects/value/locations/value/value';
-      expectedHeaderRequestParamsObj['location'] = 'value';
-      const expectedHeaderRequestParams = Object.entries(
-        expectedHeaderRequestParamsObj
-      )
-        .map(([key, value]) => `${key}=${value}`)
-        .join('&');
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const expectedHeaderRequestParams = 'location=value';
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteRevision = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteRevision(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteRevision as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteRevision as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteRevision as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteRevision with LRO error', async () => {
@@ -539,22 +494,9 @@ describe('v2.RevisionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.DeleteRevisionRequest()
       );
-      const expectedHeaderRequestParamsObj: {[key: string]: string} = {};
       // path template: projects/*/locations/{location=*}/**
       request.name = 'projects/value/locations/value/value';
-      expectedHeaderRequestParamsObj['location'] = 'value';
-      const expectedHeaderRequestParams = Object.entries(
-        expectedHeaderRequestParamsObj
-      )
-        .map(([key, value]) => `${key}=${value}`)
-        .join('&');
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const expectedHeaderRequestParams = 'location=value';
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteRevision = stubLongRunningCall(
         undefined,
@@ -563,11 +505,14 @@ describe('v2.RevisionsClient', () => {
       );
       const [operation] = await client.deleteRevision(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.deleteRevision as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteRevision as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteRevision as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkDeleteRevisionProgress without error', async () => {
@@ -622,22 +567,9 @@ describe('v2.RevisionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.ListRevisionsRequest()
       );
-      const expectedHeaderRequestParamsObj: {[key: string]: string} = {};
       // path template: projects/*/locations/{location=*}/**
       request.parent = 'projects/value/locations/value/value';
-      expectedHeaderRequestParamsObj['location'] = 'value';
-      const expectedHeaderRequestParams = Object.entries(
-        expectedHeaderRequestParamsObj
-      )
-        .map(([key, value]) => `${key}=${value}`)
-        .join('&');
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const expectedHeaderRequestParams = 'location=value';
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.run.v2.Revision()),
         generateSampleMessage(new protos.google.cloud.run.v2.Revision()),
@@ -646,11 +578,14 @@ describe('v2.RevisionsClient', () => {
       client.innerApiCalls.listRevisions = stubSimpleCall(expectedResponse);
       const [response] = await client.listRevisions(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listRevisions as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listRevisions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listRevisions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listRevisions without error using callback', async () => {
@@ -662,22 +597,9 @@ describe('v2.RevisionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.ListRevisionsRequest()
       );
-      const expectedHeaderRequestParamsObj: {[key: string]: string} = {};
       // path template: projects/*/locations/{location=*}/**
       request.parent = 'projects/value/locations/value/value';
-      expectedHeaderRequestParamsObj['location'] = 'value';
-      const expectedHeaderRequestParams = Object.entries(
-        expectedHeaderRequestParamsObj
-      )
-        .map(([key, value]) => `${key}=${value}`)
-        .join('&');
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const expectedHeaderRequestParams = 'location=value';
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.run.v2.Revision()),
         generateSampleMessage(new protos.google.cloud.run.v2.Revision()),
@@ -702,11 +624,14 @@ describe('v2.RevisionsClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listRevisions as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listRevisions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listRevisions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listRevisions with error', async () => {
@@ -718,33 +643,23 @@ describe('v2.RevisionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.ListRevisionsRequest()
       );
-      const expectedHeaderRequestParamsObj: {[key: string]: string} = {};
       // path template: projects/*/locations/{location=*}/**
       request.parent = 'projects/value/locations/value/value';
-      expectedHeaderRequestParamsObj['location'] = 'value';
-      const expectedHeaderRequestParams = Object.entries(
-        expectedHeaderRequestParamsObj
-      )
-        .map(([key, value]) => `${key}=${value}`)
-        .join('&');
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const expectedHeaderRequestParams = 'location=value';
       const expectedError = new Error('expected');
       client.innerApiCalls.listRevisions = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listRevisions(request), expectedError);
-      assert(
-        (client.innerApiCalls.listRevisions as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listRevisions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listRevisions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listRevisionsStream without error', async () => {
@@ -756,15 +671,9 @@ describe('v2.RevisionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.ListRevisionsRequest()
       );
-      const expectedHeaderRequestParamsObj: {[key: string]: string} = {};
       // path template: projects/*/locations/{location=*}/**
       request.parent = 'projects/value/locations/value/value';
-      expectedHeaderRequestParamsObj['location'] = 'value';
-      const expectedHeaderRequestParams = Object.entries(
-        expectedHeaderRequestParamsObj
-      )
-        .map(([key, value]) => `${key}=${value}`)
-        .join('&');
+      const expectedHeaderRequestParams = 'location=value';
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.run.v2.Revision()),
         generateSampleMessage(new protos.google.cloud.run.v2.Revision()),
@@ -792,11 +701,12 @@ describe('v2.RevisionsClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listRevisions, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listRevisions.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listRevisions.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -809,15 +719,9 @@ describe('v2.RevisionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.ListRevisionsRequest()
       );
-      const expectedHeaderRequestParamsObj: {[key: string]: string} = {};
       // path template: projects/*/locations/{location=*}/**
       request.parent = 'projects/value/locations/value/value';
-      expectedHeaderRequestParamsObj['location'] = 'value';
-      const expectedHeaderRequestParams = Object.entries(
-        expectedHeaderRequestParamsObj
-      )
-        .map(([key, value]) => `${key}=${value}`)
-        .join('&');
+      const expectedHeaderRequestParams = 'location=value';
       const expectedError = new Error('expected');
       client.descriptors.page.listRevisions.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -840,11 +744,12 @@ describe('v2.RevisionsClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listRevisions, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listRevisions.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listRevisions.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -857,15 +762,9 @@ describe('v2.RevisionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.ListRevisionsRequest()
       );
-      const expectedHeaderRequestParamsObj: {[key: string]: string} = {};
       // path template: projects/*/locations/{location=*}/**
       request.parent = 'projects/value/locations/value/value';
-      expectedHeaderRequestParamsObj['location'] = 'value';
-      const expectedHeaderRequestParams = Object.entries(
-        expectedHeaderRequestParamsObj
-      )
-        .map(([key, value]) => `${key}=${value}`)
-        .join('&');
+      const expectedHeaderRequestParams = 'location=value';
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.run.v2.Revision()),
         generateSampleMessage(new protos.google.cloud.run.v2.Revision()),
@@ -885,11 +784,12 @@ describe('v2.RevisionsClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listRevisions.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listRevisions.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -902,15 +802,9 @@ describe('v2.RevisionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.ListRevisionsRequest()
       );
-      const expectedHeaderRequestParamsObj: {[key: string]: string} = {};
       // path template: projects/*/locations/{location=*}/**
       request.parent = 'projects/value/locations/value/value';
-      expectedHeaderRequestParamsObj['location'] = 'value';
-      const expectedHeaderRequestParams = Object.entries(
-        expectedHeaderRequestParamsObj
-      )
-        .map(([key, value]) => `${key}=${value}`)
-        .join('&');
+      const expectedHeaderRequestParams = 'location=value';
       const expectedError = new Error('expected');
       client.descriptors.page.listRevisions.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -927,11 +821,12 @@ describe('v2.RevisionsClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listRevisions.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listRevisions.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
