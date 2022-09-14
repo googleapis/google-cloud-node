@@ -27,6 +27,21 @@ import {PassThrough} from 'stream';
 
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -263,15 +278,11 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateConversationRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateConversationRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.Conversation()
       );
@@ -279,11 +290,14 @@ describe('v1.ContactCenterInsightsClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.createConversation(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createConversation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createConversation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createConversation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createConversation without error using callback', async () => {
@@ -296,15 +310,11 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateConversationRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateConversationRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.Conversation()
       );
@@ -327,11 +337,14 @@ describe('v1.ContactCenterInsightsClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createConversation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createConversation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createConversation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createConversation with error', async () => {
@@ -344,26 +357,25 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateConversationRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateConversationRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createConversation = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createConversation(request), expectedError);
-      assert(
-        (client.innerApiCalls.createConversation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createConversation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createConversation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createConversation with closed client', async () => {
@@ -376,7 +388,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateConversationRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue('CreateConversationRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createConversation(request), expectedError);
@@ -394,16 +409,13 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateConversationRequest()
       );
-      request.conversation = {};
-      request.conversation.name = '';
-      const expectedHeaderRequestParams = 'conversation.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.conversation ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateConversationRequest', [
+        'conversation',
+        'name',
+      ]);
+      request.conversation.name = defaultValue1;
+      const expectedHeaderRequestParams = `conversation.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.Conversation()
       );
@@ -411,11 +423,14 @@ describe('v1.ContactCenterInsightsClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.updateConversation(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateConversation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateConversation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateConversation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateConversation without error using callback', async () => {
@@ -428,16 +443,13 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateConversationRequest()
       );
-      request.conversation = {};
-      request.conversation.name = '';
-      const expectedHeaderRequestParams = 'conversation.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.conversation ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateConversationRequest', [
+        'conversation',
+        'name',
+      ]);
+      request.conversation.name = defaultValue1;
+      const expectedHeaderRequestParams = `conversation.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.Conversation()
       );
@@ -460,11 +472,14 @@ describe('v1.ContactCenterInsightsClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateConversation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateConversation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateConversation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateConversation with error', async () => {
@@ -477,27 +492,27 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateConversationRequest()
       );
-      request.conversation = {};
-      request.conversation.name = '';
-      const expectedHeaderRequestParams = 'conversation.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.conversation ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateConversationRequest', [
+        'conversation',
+        'name',
+      ]);
+      request.conversation.name = defaultValue1;
+      const expectedHeaderRequestParams = `conversation.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateConversation = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateConversation(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateConversation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateConversation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateConversation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateConversation with closed client', async () => {
@@ -510,8 +525,12 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateConversationRequest()
       );
-      request.conversation = {};
-      request.conversation.name = '';
+      request.conversation ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateConversationRequest', [
+        'conversation',
+        'name',
+      ]);
+      request.conversation.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateConversation(request), expectedError);
@@ -529,26 +548,25 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetConversationRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetConversationRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.Conversation()
       );
       client.innerApiCalls.getConversation = stubSimpleCall(expectedResponse);
       const [response] = await client.getConversation(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getConversation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getConversation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getConversation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getConversation without error using callback', async () => {
@@ -561,15 +579,11 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetConversationRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetConversationRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.Conversation()
       );
@@ -592,11 +606,14 @@ describe('v1.ContactCenterInsightsClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getConversation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getConversation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getConversation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getConversation with error', async () => {
@@ -609,26 +626,25 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetConversationRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetConversationRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getConversation = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getConversation(request), expectedError);
-      assert(
-        (client.innerApiCalls.getConversation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getConversation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getConversation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getConversation with closed client', async () => {
@@ -641,7 +657,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetConversationRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetConversationRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getConversation(request), expectedError);
@@ -659,15 +678,11 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteConversationRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteConversationRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -675,11 +690,14 @@ describe('v1.ContactCenterInsightsClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.deleteConversation(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteConversation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteConversation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteConversation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteConversation without error using callback', async () => {
@@ -692,15 +710,11 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteConversationRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteConversationRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -723,11 +737,14 @@ describe('v1.ContactCenterInsightsClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteConversation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteConversation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteConversation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteConversation with error', async () => {
@@ -740,26 +757,25 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteConversationRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteConversationRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteConversation = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteConversation(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteConversation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteConversation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteConversation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteConversation with closed client', async () => {
@@ -772,7 +788,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteConversationRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('DeleteConversationRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteConversation(request), expectedError);
@@ -790,26 +809,23 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetAnalysisRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetAnalysisRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.Analysis()
       );
       client.innerApiCalls.getAnalysis = stubSimpleCall(expectedResponse);
       const [response] = await client.getAnalysis(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getAnalysis as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getAnalysis as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAnalysis as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getAnalysis without error using callback', async () => {
@@ -822,15 +838,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetAnalysisRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetAnalysisRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.Analysis()
       );
@@ -853,11 +863,14 @@ describe('v1.ContactCenterInsightsClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getAnalysis as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getAnalysis as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAnalysis as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getAnalysis with error', async () => {
@@ -870,26 +883,23 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetAnalysisRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetAnalysisRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAnalysis = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getAnalysis(request), expectedError);
-      assert(
-        (client.innerApiCalls.getAnalysis as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getAnalysis as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAnalysis as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getAnalysis with closed client', async () => {
@@ -902,7 +912,8 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetAnalysisRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetAnalysisRequest', ['name']);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getAnalysis(request), expectedError);
@@ -920,26 +931,25 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteAnalysisRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteAnalysisRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
       client.innerApiCalls.deleteAnalysis = stubSimpleCall(expectedResponse);
       const [response] = await client.deleteAnalysis(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteAnalysis as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteAnalysis as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAnalysis as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteAnalysis without error using callback', async () => {
@@ -952,15 +962,11 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteAnalysisRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteAnalysisRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -983,11 +989,14 @@ describe('v1.ContactCenterInsightsClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteAnalysis as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteAnalysis as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAnalysis as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteAnalysis with error', async () => {
@@ -1000,26 +1009,25 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteAnalysisRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteAnalysisRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteAnalysis = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteAnalysis(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteAnalysis as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteAnalysis as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAnalysis as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteAnalysis with closed client', async () => {
@@ -1032,7 +1040,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteAnalysisRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('DeleteAnalysisRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteAnalysis(request), expectedError);
@@ -1050,27 +1061,27 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateIssueModelRequest()
       );
-      request.issueModel = {};
-      request.issueModel.name = '';
-      const expectedHeaderRequestParams = 'issue_model.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.issueModel ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateIssueModelRequest', [
+        'issueModel',
+        'name',
+      ]);
+      request.issueModel.name = defaultValue1;
+      const expectedHeaderRequestParams = `issue_model.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.IssueModel()
       );
       client.innerApiCalls.updateIssueModel = stubSimpleCall(expectedResponse);
       const [response] = await client.updateIssueModel(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateIssueModel as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateIssueModel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateIssueModel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateIssueModel without error using callback', async () => {
@@ -1083,16 +1094,13 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateIssueModelRequest()
       );
-      request.issueModel = {};
-      request.issueModel.name = '';
-      const expectedHeaderRequestParams = 'issue_model.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.issueModel ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateIssueModelRequest', [
+        'issueModel',
+        'name',
+      ]);
+      request.issueModel.name = defaultValue1;
+      const expectedHeaderRequestParams = `issue_model.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.IssueModel()
       );
@@ -1115,11 +1123,14 @@ describe('v1.ContactCenterInsightsClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateIssueModel as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateIssueModel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateIssueModel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateIssueModel with error', async () => {
@@ -1132,27 +1143,27 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateIssueModelRequest()
       );
-      request.issueModel = {};
-      request.issueModel.name = '';
-      const expectedHeaderRequestParams = 'issue_model.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.issueModel ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateIssueModelRequest', [
+        'issueModel',
+        'name',
+      ]);
+      request.issueModel.name = defaultValue1;
+      const expectedHeaderRequestParams = `issue_model.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateIssueModel = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateIssueModel(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateIssueModel as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateIssueModel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateIssueModel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateIssueModel with closed client', async () => {
@@ -1165,8 +1176,12 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateIssueModelRequest()
       );
-      request.issueModel = {};
-      request.issueModel.name = '';
+      request.issueModel ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateIssueModelRequest', [
+        'issueModel',
+        'name',
+      ]);
+      request.issueModel.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateIssueModel(request), expectedError);
@@ -1184,26 +1199,25 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetIssueModelRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetIssueModelRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.IssueModel()
       );
       client.innerApiCalls.getIssueModel = stubSimpleCall(expectedResponse);
       const [response] = await client.getIssueModel(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getIssueModel as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getIssueModel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getIssueModel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getIssueModel without error using callback', async () => {
@@ -1216,15 +1230,11 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetIssueModelRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetIssueModelRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.IssueModel()
       );
@@ -1247,11 +1257,14 @@ describe('v1.ContactCenterInsightsClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getIssueModel as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getIssueModel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getIssueModel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getIssueModel with error', async () => {
@@ -1264,26 +1277,25 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetIssueModelRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetIssueModelRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getIssueModel = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getIssueModel(request), expectedError);
-      assert(
-        (client.innerApiCalls.getIssueModel as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getIssueModel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getIssueModel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getIssueModel with closed client', async () => {
@@ -1296,7 +1308,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetIssueModelRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetIssueModelRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getIssueModel(request), expectedError);
@@ -1314,26 +1329,25 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListIssueModelsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListIssueModelsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListIssueModelsResponse()
       );
       client.innerApiCalls.listIssueModels = stubSimpleCall(expectedResponse);
       const [response] = await client.listIssueModels(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listIssueModels as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listIssueModels as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listIssueModels as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listIssueModels without error using callback', async () => {
@@ -1346,15 +1360,11 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListIssueModelsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListIssueModelsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListIssueModelsResponse()
       );
@@ -1377,11 +1387,14 @@ describe('v1.ContactCenterInsightsClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listIssueModels as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listIssueModels as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listIssueModels as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listIssueModels with error', async () => {
@@ -1394,26 +1407,25 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListIssueModelsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListIssueModelsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listIssueModels = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listIssueModels(request), expectedError);
-      assert(
-        (client.innerApiCalls.listIssueModels as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listIssueModels as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listIssueModels as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listIssueModels with closed client', async () => {
@@ -1426,7 +1438,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListIssueModelsRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue('ListIssueModelsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.listIssueModels(request), expectedError);
@@ -1444,26 +1459,23 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetIssueRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetIssueRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.Issue()
       );
       client.innerApiCalls.getIssue = stubSimpleCall(expectedResponse);
       const [response] = await client.getIssue(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getIssue as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getIssue as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getIssue as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getIssue without error using callback', async () => {
@@ -1476,15 +1488,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetIssueRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetIssueRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.Issue()
       );
@@ -1507,11 +1513,14 @@ describe('v1.ContactCenterInsightsClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getIssue as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getIssue as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getIssue as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getIssue with error', async () => {
@@ -1524,23 +1533,20 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetIssueRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetIssueRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getIssue = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getIssue(request), expectedError);
-      assert(
-        (client.innerApiCalls.getIssue as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getIssue as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getIssue as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getIssue with closed client', async () => {
@@ -1553,7 +1559,8 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetIssueRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetIssueRequest', ['name']);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getIssue(request), expectedError);
@@ -1571,26 +1578,25 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListIssuesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListIssuesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListIssuesResponse()
       );
       client.innerApiCalls.listIssues = stubSimpleCall(expectedResponse);
       const [response] = await client.listIssues(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listIssues as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listIssues as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listIssues as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listIssues without error using callback', async () => {
@@ -1603,15 +1609,11 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListIssuesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListIssuesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListIssuesResponse()
       );
@@ -1634,11 +1636,14 @@ describe('v1.ContactCenterInsightsClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listIssues as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listIssues as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listIssues as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listIssues with error', async () => {
@@ -1651,26 +1656,25 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListIssuesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListIssuesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listIssues = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listIssues(request), expectedError);
-      assert(
-        (client.innerApiCalls.listIssues as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listIssues as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listIssues as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listIssues with closed client', async () => {
@@ -1683,7 +1687,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListIssuesRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue('ListIssuesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.listIssues(request), expectedError);
@@ -1701,27 +1708,27 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateIssueRequest()
       );
-      request.issue = {};
-      request.issue.name = '';
-      const expectedHeaderRequestParams = 'issue.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.issue ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateIssueRequest', [
+        'issue',
+        'name',
+      ]);
+      request.issue.name = defaultValue1;
+      const expectedHeaderRequestParams = `issue.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.Issue()
       );
       client.innerApiCalls.updateIssue = stubSimpleCall(expectedResponse);
       const [response] = await client.updateIssue(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateIssue as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateIssue as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateIssue as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateIssue without error using callback', async () => {
@@ -1734,16 +1741,13 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateIssueRequest()
       );
-      request.issue = {};
-      request.issue.name = '';
-      const expectedHeaderRequestParams = 'issue.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.issue ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateIssueRequest', [
+        'issue',
+        'name',
+      ]);
+      request.issue.name = defaultValue1;
+      const expectedHeaderRequestParams = `issue.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.Issue()
       );
@@ -1766,11 +1770,14 @@ describe('v1.ContactCenterInsightsClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateIssue as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateIssue as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateIssue as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateIssue with error', async () => {
@@ -1783,27 +1790,27 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateIssueRequest()
       );
-      request.issue = {};
-      request.issue.name = '';
-      const expectedHeaderRequestParams = 'issue.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.issue ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateIssueRequest', [
+        'issue',
+        'name',
+      ]);
+      request.issue.name = defaultValue1;
+      const expectedHeaderRequestParams = `issue.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateIssue = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateIssue(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateIssue as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateIssue as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateIssue as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateIssue with closed client', async () => {
@@ -1816,8 +1823,12 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateIssueRequest()
       );
-      request.issue = {};
-      request.issue.name = '';
+      request.issue ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateIssueRequest', [
+        'issue',
+        'name',
+      ]);
+      request.issue.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateIssue(request), expectedError);
@@ -1835,15 +1846,12 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CalculateIssueModelStatsRequest()
       );
-      request.issueModel = '';
-      const expectedHeaderRequestParams = 'issue_model=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CalculateIssueModelStatsRequest',
+        ['issueModel']
+      );
+      request.issueModel = defaultValue1;
+      const expectedHeaderRequestParams = `issue_model=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CalculateIssueModelStatsResponse()
       );
@@ -1851,11 +1859,14 @@ describe('v1.ContactCenterInsightsClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.calculateIssueModelStats(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.calculateIssueModelStats as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.calculateIssueModelStats as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.calculateIssueModelStats as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes calculateIssueModelStats without error using callback', async () => {
@@ -1868,15 +1879,12 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CalculateIssueModelStatsRequest()
       );
-      request.issueModel = '';
-      const expectedHeaderRequestParams = 'issue_model=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CalculateIssueModelStatsRequest',
+        ['issueModel']
+      );
+      request.issueModel = defaultValue1;
+      const expectedHeaderRequestParams = `issue_model=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CalculateIssueModelStatsResponse()
       );
@@ -1899,11 +1907,14 @@ describe('v1.ContactCenterInsightsClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.calculateIssueModelStats as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.calculateIssueModelStats as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.calculateIssueModelStats as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes calculateIssueModelStats with error', async () => {
@@ -1916,15 +1927,12 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CalculateIssueModelStatsRequest()
       );
-      request.issueModel = '';
-      const expectedHeaderRequestParams = 'issue_model=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CalculateIssueModelStatsRequest',
+        ['issueModel']
+      );
+      request.issueModel = defaultValue1;
+      const expectedHeaderRequestParams = `issue_model=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.calculateIssueModelStats = stubSimpleCall(
         undefined,
@@ -1934,11 +1942,14 @@ describe('v1.ContactCenterInsightsClient', () => {
         client.calculateIssueModelStats(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.calculateIssueModelStats as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.calculateIssueModelStats as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.calculateIssueModelStats as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes calculateIssueModelStats with closed client', async () => {
@@ -1951,7 +1962,11 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CalculateIssueModelStatsRequest()
       );
-      request.issueModel = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'CalculateIssueModelStatsRequest',
+        ['issueModel']
+      );
+      request.issueModel = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1972,15 +1987,11 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreatePhraseMatcherRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreatePhraseMatcherRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.PhraseMatcher()
       );
@@ -1988,11 +1999,14 @@ describe('v1.ContactCenterInsightsClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.createPhraseMatcher(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createPhraseMatcher as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createPhraseMatcher as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createPhraseMatcher as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createPhraseMatcher without error using callback', async () => {
@@ -2005,15 +2019,11 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreatePhraseMatcherRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreatePhraseMatcherRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.PhraseMatcher()
       );
@@ -2036,11 +2046,14 @@ describe('v1.ContactCenterInsightsClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createPhraseMatcher as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createPhraseMatcher as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createPhraseMatcher as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createPhraseMatcher with error', async () => {
@@ -2053,26 +2066,25 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreatePhraseMatcherRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreatePhraseMatcherRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createPhraseMatcher = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createPhraseMatcher(request), expectedError);
-      assert(
-        (client.innerApiCalls.createPhraseMatcher as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createPhraseMatcher as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createPhraseMatcher as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createPhraseMatcher with closed client', async () => {
@@ -2085,7 +2097,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreatePhraseMatcherRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue('CreatePhraseMatcherRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createPhraseMatcher(request), expectedError);
@@ -2103,26 +2118,25 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetPhraseMatcherRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetPhraseMatcherRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.PhraseMatcher()
       );
       client.innerApiCalls.getPhraseMatcher = stubSimpleCall(expectedResponse);
       const [response] = await client.getPhraseMatcher(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getPhraseMatcher as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getPhraseMatcher as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getPhraseMatcher as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getPhraseMatcher without error using callback', async () => {
@@ -2135,15 +2149,11 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetPhraseMatcherRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetPhraseMatcherRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.PhraseMatcher()
       );
@@ -2166,11 +2176,14 @@ describe('v1.ContactCenterInsightsClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getPhraseMatcher as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getPhraseMatcher as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getPhraseMatcher as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getPhraseMatcher with error', async () => {
@@ -2183,26 +2196,25 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetPhraseMatcherRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetPhraseMatcherRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getPhraseMatcher = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getPhraseMatcher(request), expectedError);
-      assert(
-        (client.innerApiCalls.getPhraseMatcher as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getPhraseMatcher as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getPhraseMatcher as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getPhraseMatcher with closed client', async () => {
@@ -2215,7 +2227,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetPhraseMatcherRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetPhraseMatcherRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getPhraseMatcher(request), expectedError);
@@ -2233,15 +2248,11 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeletePhraseMatcherRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeletePhraseMatcherRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2249,11 +2260,14 @@ describe('v1.ContactCenterInsightsClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.deletePhraseMatcher(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deletePhraseMatcher as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deletePhraseMatcher as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deletePhraseMatcher as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deletePhraseMatcher without error using callback', async () => {
@@ -2266,15 +2280,11 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeletePhraseMatcherRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeletePhraseMatcherRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2297,11 +2307,14 @@ describe('v1.ContactCenterInsightsClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deletePhraseMatcher as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deletePhraseMatcher as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deletePhraseMatcher as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deletePhraseMatcher with error', async () => {
@@ -2314,26 +2327,25 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeletePhraseMatcherRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeletePhraseMatcherRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deletePhraseMatcher = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deletePhraseMatcher(request), expectedError);
-      assert(
-        (client.innerApiCalls.deletePhraseMatcher as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deletePhraseMatcher as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deletePhraseMatcher as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deletePhraseMatcher with closed client', async () => {
@@ -2346,7 +2358,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeletePhraseMatcherRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('DeletePhraseMatcherRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deletePhraseMatcher(request), expectedError);
@@ -2364,16 +2379,13 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdatePhraseMatcherRequest()
       );
-      request.phraseMatcher = {};
-      request.phraseMatcher.name = '';
-      const expectedHeaderRequestParams = 'phrase_matcher.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.phraseMatcher ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdatePhraseMatcherRequest', [
+        'phraseMatcher',
+        'name',
+      ]);
+      request.phraseMatcher.name = defaultValue1;
+      const expectedHeaderRequestParams = `phrase_matcher.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.PhraseMatcher()
       );
@@ -2381,11 +2393,14 @@ describe('v1.ContactCenterInsightsClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.updatePhraseMatcher(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updatePhraseMatcher as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updatePhraseMatcher as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updatePhraseMatcher as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updatePhraseMatcher without error using callback', async () => {
@@ -2398,16 +2413,13 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdatePhraseMatcherRequest()
       );
-      request.phraseMatcher = {};
-      request.phraseMatcher.name = '';
-      const expectedHeaderRequestParams = 'phrase_matcher.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.phraseMatcher ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdatePhraseMatcherRequest', [
+        'phraseMatcher',
+        'name',
+      ]);
+      request.phraseMatcher.name = defaultValue1;
+      const expectedHeaderRequestParams = `phrase_matcher.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.PhraseMatcher()
       );
@@ -2430,11 +2442,14 @@ describe('v1.ContactCenterInsightsClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updatePhraseMatcher as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updatePhraseMatcher as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updatePhraseMatcher as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updatePhraseMatcher with error', async () => {
@@ -2447,27 +2462,27 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdatePhraseMatcherRequest()
       );
-      request.phraseMatcher = {};
-      request.phraseMatcher.name = '';
-      const expectedHeaderRequestParams = 'phrase_matcher.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.phraseMatcher ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdatePhraseMatcherRequest', [
+        'phraseMatcher',
+        'name',
+      ]);
+      request.phraseMatcher.name = defaultValue1;
+      const expectedHeaderRequestParams = `phrase_matcher.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updatePhraseMatcher = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updatePhraseMatcher(request), expectedError);
-      assert(
-        (client.innerApiCalls.updatePhraseMatcher as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updatePhraseMatcher as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updatePhraseMatcher as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updatePhraseMatcher with closed client', async () => {
@@ -2480,8 +2495,12 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdatePhraseMatcherRequest()
       );
-      request.phraseMatcher = {};
-      request.phraseMatcher.name = '';
+      request.phraseMatcher ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdatePhraseMatcherRequest', [
+        'phraseMatcher',
+        'name',
+      ]);
+      request.phraseMatcher.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updatePhraseMatcher(request), expectedError);
@@ -2499,26 +2518,25 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CalculateStatsRequest()
       );
-      request.location = '';
-      const expectedHeaderRequestParams = 'location=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CalculateStatsRequest', [
+        'location',
+      ]);
+      request.location = defaultValue1;
+      const expectedHeaderRequestParams = `location=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CalculateStatsResponse()
       );
       client.innerApiCalls.calculateStats = stubSimpleCall(expectedResponse);
       const [response] = await client.calculateStats(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.calculateStats as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.calculateStats as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.calculateStats as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes calculateStats without error using callback', async () => {
@@ -2531,15 +2549,11 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CalculateStatsRequest()
       );
-      request.location = '';
-      const expectedHeaderRequestParams = 'location=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CalculateStatsRequest', [
+        'location',
+      ]);
+      request.location = defaultValue1;
+      const expectedHeaderRequestParams = `location=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CalculateStatsResponse()
       );
@@ -2562,11 +2576,14 @@ describe('v1.ContactCenterInsightsClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.calculateStats as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.calculateStats as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.calculateStats as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes calculateStats with error', async () => {
@@ -2579,26 +2596,25 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CalculateStatsRequest()
       );
-      request.location = '';
-      const expectedHeaderRequestParams = 'location=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CalculateStatsRequest', [
+        'location',
+      ]);
+      request.location = defaultValue1;
+      const expectedHeaderRequestParams = `location=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.calculateStats = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.calculateStats(request), expectedError);
-      assert(
-        (client.innerApiCalls.calculateStats as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.calculateStats as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.calculateStats as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes calculateStats with closed client', async () => {
@@ -2611,7 +2627,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CalculateStatsRequest()
       );
-      request.location = '';
+      const defaultValue1 = getTypeDefaultValue('CalculateStatsRequest', [
+        'location',
+      ]);
+      request.location = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.calculateStats(request), expectedError);
@@ -2629,26 +2648,23 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetSettingsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetSettingsRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.Settings()
       );
       client.innerApiCalls.getSettings = stubSimpleCall(expectedResponse);
       const [response] = await client.getSettings(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getSettings without error using callback', async () => {
@@ -2661,15 +2677,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetSettingsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetSettingsRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.Settings()
       );
@@ -2692,11 +2702,14 @@ describe('v1.ContactCenterInsightsClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getSettings with error', async () => {
@@ -2709,26 +2722,23 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetSettingsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetSettingsRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getSettings = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getSettings(request), expectedError);
-      assert(
-        (client.innerApiCalls.getSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getSettings with closed client', async () => {
@@ -2741,7 +2751,8 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetSettingsRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetSettingsRequest', ['name']);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getSettings(request), expectedError);
@@ -2759,27 +2770,27 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateSettingsRequest()
       );
-      request.settings = {};
-      request.settings.name = '';
-      const expectedHeaderRequestParams = 'settings.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.settings ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateSettingsRequest', [
+        'settings',
+        'name',
+      ]);
+      request.settings.name = defaultValue1;
+      const expectedHeaderRequestParams = `settings.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.Settings()
       );
       client.innerApiCalls.updateSettings = stubSimpleCall(expectedResponse);
       const [response] = await client.updateSettings(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateSettings without error using callback', async () => {
@@ -2792,16 +2803,13 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateSettingsRequest()
       );
-      request.settings = {};
-      request.settings.name = '';
-      const expectedHeaderRequestParams = 'settings.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.settings ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateSettingsRequest', [
+        'settings',
+        'name',
+      ]);
+      request.settings.name = defaultValue1;
+      const expectedHeaderRequestParams = `settings.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.Settings()
       );
@@ -2824,11 +2832,14 @@ describe('v1.ContactCenterInsightsClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateSettings with error', async () => {
@@ -2841,27 +2852,27 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateSettingsRequest()
       );
-      request.settings = {};
-      request.settings.name = '';
-      const expectedHeaderRequestParams = 'settings.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.settings ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateSettingsRequest', [
+        'settings',
+        'name',
+      ]);
+      request.settings.name = defaultValue1;
+      const expectedHeaderRequestParams = `settings.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateSettings = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateSettings(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateSettings with closed client', async () => {
@@ -2874,8 +2885,12 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateSettingsRequest()
       );
-      request.settings = {};
-      request.settings.name = '';
+      request.settings ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateSettingsRequest', [
+        'settings',
+        'name',
+      ]);
+      request.settings.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateSettings(request), expectedError);
@@ -2893,26 +2908,25 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateViewRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateViewRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.View()
       );
       client.innerApiCalls.createView = stubSimpleCall(expectedResponse);
       const [response] = await client.createView(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createView as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createView as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createView as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createView without error using callback', async () => {
@@ -2925,15 +2939,11 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateViewRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateViewRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.View()
       );
@@ -2956,11 +2966,14 @@ describe('v1.ContactCenterInsightsClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createView as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createView as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createView as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createView with error', async () => {
@@ -2973,26 +2986,25 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateViewRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateViewRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createView = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createView(request), expectedError);
-      assert(
-        (client.innerApiCalls.createView as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createView as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createView as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createView with closed client', async () => {
@@ -3005,7 +3017,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateViewRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue('CreateViewRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createView(request), expectedError);
@@ -3023,26 +3038,23 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetViewRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetViewRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.View()
       );
       client.innerApiCalls.getView = stubSimpleCall(expectedResponse);
       const [response] = await client.getView(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getView as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.getView as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getView as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getView without error using callback', async () => {
@@ -3055,15 +3067,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetViewRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetViewRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.View()
       );
@@ -3086,11 +3092,14 @@ describe('v1.ContactCenterInsightsClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getView as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (client.innerApiCalls.getView as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getView as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getView with error', async () => {
@@ -3103,23 +3112,20 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetViewRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetViewRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getView = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getView(request), expectedError);
-      assert(
-        (client.innerApiCalls.getView as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.getView as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getView as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getView with closed client', async () => {
@@ -3132,7 +3138,8 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetViewRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetViewRequest', ['name']);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getView(request), expectedError);
@@ -3150,27 +3157,27 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateViewRequest()
       );
-      request.view = {};
-      request.view.name = '';
-      const expectedHeaderRequestParams = 'view.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.view ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateViewRequest', [
+        'view',
+        'name',
+      ]);
+      request.view.name = defaultValue1;
+      const expectedHeaderRequestParams = `view.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.View()
       );
       client.innerApiCalls.updateView = stubSimpleCall(expectedResponse);
       const [response] = await client.updateView(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateView as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateView as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateView as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateView without error using callback', async () => {
@@ -3183,16 +3190,13 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateViewRequest()
       );
-      request.view = {};
-      request.view.name = '';
-      const expectedHeaderRequestParams = 'view.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.view ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateViewRequest', [
+        'view',
+        'name',
+      ]);
+      request.view.name = defaultValue1;
+      const expectedHeaderRequestParams = `view.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.View()
       );
@@ -3215,11 +3219,14 @@ describe('v1.ContactCenterInsightsClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateView as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateView as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateView as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateView with error', async () => {
@@ -3232,27 +3239,27 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateViewRequest()
       );
-      request.view = {};
-      request.view.name = '';
-      const expectedHeaderRequestParams = 'view.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.view ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateViewRequest', [
+        'view',
+        'name',
+      ]);
+      request.view.name = defaultValue1;
+      const expectedHeaderRequestParams = `view.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateView = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateView(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateView as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateView as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateView as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateView with closed client', async () => {
@@ -3265,8 +3272,12 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateViewRequest()
       );
-      request.view = {};
-      request.view.name = '';
+      request.view ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateViewRequest', [
+        'view',
+        'name',
+      ]);
+      request.view.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateView(request), expectedError);
@@ -3284,26 +3295,23 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteViewRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteViewRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
       client.innerApiCalls.deleteView = stubSimpleCall(expectedResponse);
       const [response] = await client.deleteView(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteView as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteView as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteView as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteView without error using callback', async () => {
@@ -3316,15 +3324,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteViewRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteViewRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -3347,11 +3349,14 @@ describe('v1.ContactCenterInsightsClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteView as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteView as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteView as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteView with error', async () => {
@@ -3364,26 +3369,23 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteViewRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteViewRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteView = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteView(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteView as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteView as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteView as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteView with closed client', async () => {
@@ -3396,7 +3398,8 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteViewRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('DeleteViewRequest', ['name']);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteView(request), expectedError);
@@ -3414,15 +3417,11 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateAnalysisRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateAnalysisRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3431,11 +3430,14 @@ describe('v1.ContactCenterInsightsClient', () => {
       const [operation] = await client.createAnalysis(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createAnalysis as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createAnalysis as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAnalysis as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createAnalysis without error using callback', async () => {
@@ -3448,15 +3450,11 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateAnalysisRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateAnalysisRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3486,11 +3484,14 @@ describe('v1.ContactCenterInsightsClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createAnalysis as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createAnalysis as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAnalysis as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createAnalysis with call error', async () => {
@@ -3503,26 +3504,25 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateAnalysisRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateAnalysisRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createAnalysis = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createAnalysis(request), expectedError);
-      assert(
-        (client.innerApiCalls.createAnalysis as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createAnalysis as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAnalysis as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createAnalysis with LRO error', async () => {
@@ -3535,15 +3535,11 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateAnalysisRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateAnalysisRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createAnalysis = stubLongRunningCall(
         undefined,
@@ -3552,11 +3548,14 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       const [operation] = await client.createAnalysis(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.createAnalysis as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createAnalysis as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAnalysis as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkCreateAnalysisProgress without error', async () => {
@@ -3614,15 +3613,11 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ExportInsightsDataRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ExportInsightsDataRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3631,11 +3626,14 @@ describe('v1.ContactCenterInsightsClient', () => {
       const [operation] = await client.exportInsightsData(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.exportInsightsData as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.exportInsightsData as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.exportInsightsData as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes exportInsightsData without error using callback', async () => {
@@ -3648,15 +3646,11 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ExportInsightsDataRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ExportInsightsDataRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3686,11 +3680,14 @@ describe('v1.ContactCenterInsightsClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.exportInsightsData as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.exportInsightsData as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.exportInsightsData as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes exportInsightsData with call error', async () => {
@@ -3703,26 +3700,25 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ExportInsightsDataRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ExportInsightsDataRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.exportInsightsData = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.exportInsightsData(request), expectedError);
-      assert(
-        (client.innerApiCalls.exportInsightsData as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.exportInsightsData as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.exportInsightsData as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes exportInsightsData with LRO error', async () => {
@@ -3735,15 +3731,11 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ExportInsightsDataRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ExportInsightsDataRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.exportInsightsData = stubLongRunningCall(
         undefined,
@@ -3752,11 +3744,14 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       const [operation] = await client.exportInsightsData(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.exportInsightsData as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.exportInsightsData as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.exportInsightsData as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkExportInsightsDataProgress without error', async () => {
@@ -3814,15 +3809,11 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateIssueModelRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateIssueModelRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3831,11 +3822,14 @@ describe('v1.ContactCenterInsightsClient', () => {
       const [operation] = await client.createIssueModel(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createIssueModel as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createIssueModel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createIssueModel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createIssueModel without error using callback', async () => {
@@ -3848,15 +3842,11 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateIssueModelRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateIssueModelRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3886,11 +3876,14 @@ describe('v1.ContactCenterInsightsClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createIssueModel as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createIssueModel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createIssueModel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createIssueModel with call error', async () => {
@@ -3903,26 +3896,25 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateIssueModelRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateIssueModelRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createIssueModel = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createIssueModel(request), expectedError);
-      assert(
-        (client.innerApiCalls.createIssueModel as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createIssueModel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createIssueModel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createIssueModel with LRO error', async () => {
@@ -3935,15 +3927,11 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateIssueModelRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateIssueModelRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createIssueModel = stubLongRunningCall(
         undefined,
@@ -3952,11 +3940,14 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       const [operation] = await client.createIssueModel(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.createIssueModel as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createIssueModel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createIssueModel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkCreateIssueModelProgress without error', async () => {
@@ -4014,15 +4005,11 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteIssueModelRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteIssueModelRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4031,11 +4018,14 @@ describe('v1.ContactCenterInsightsClient', () => {
       const [operation] = await client.deleteIssueModel(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteIssueModel as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteIssueModel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteIssueModel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteIssueModel without error using callback', async () => {
@@ -4048,15 +4038,11 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteIssueModelRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteIssueModelRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4086,11 +4072,14 @@ describe('v1.ContactCenterInsightsClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteIssueModel as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteIssueModel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteIssueModel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteIssueModel with call error', async () => {
@@ -4103,26 +4092,25 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteIssueModelRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteIssueModelRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteIssueModel = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteIssueModel(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteIssueModel as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteIssueModel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteIssueModel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteIssueModel with LRO error', async () => {
@@ -4135,15 +4123,11 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteIssueModelRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteIssueModelRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteIssueModel = stubLongRunningCall(
         undefined,
@@ -4152,11 +4136,14 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       const [operation] = await client.deleteIssueModel(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.deleteIssueModel as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteIssueModel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteIssueModel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkDeleteIssueModelProgress without error', async () => {
@@ -4214,15 +4201,11 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeployIssueModelRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeployIssueModelRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4231,11 +4214,14 @@ describe('v1.ContactCenterInsightsClient', () => {
       const [operation] = await client.deployIssueModel(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deployIssueModel as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deployIssueModel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deployIssueModel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deployIssueModel without error using callback', async () => {
@@ -4248,15 +4234,11 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeployIssueModelRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeployIssueModelRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4286,11 +4268,14 @@ describe('v1.ContactCenterInsightsClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deployIssueModel as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deployIssueModel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deployIssueModel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deployIssueModel with call error', async () => {
@@ -4303,26 +4288,25 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeployIssueModelRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeployIssueModelRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deployIssueModel = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deployIssueModel(request), expectedError);
-      assert(
-        (client.innerApiCalls.deployIssueModel as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deployIssueModel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deployIssueModel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deployIssueModel with LRO error', async () => {
@@ -4335,15 +4319,11 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeployIssueModelRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeployIssueModelRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deployIssueModel = stubLongRunningCall(
         undefined,
@@ -4352,11 +4332,14 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       const [operation] = await client.deployIssueModel(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.deployIssueModel as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deployIssueModel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deployIssueModel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkDeployIssueModelProgress without error', async () => {
@@ -4414,15 +4397,11 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UndeployIssueModelRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('UndeployIssueModelRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4431,11 +4410,14 @@ describe('v1.ContactCenterInsightsClient', () => {
       const [operation] = await client.undeployIssueModel(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.undeployIssueModel as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.undeployIssueModel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.undeployIssueModel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes undeployIssueModel without error using callback', async () => {
@@ -4448,15 +4430,11 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UndeployIssueModelRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('UndeployIssueModelRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4486,11 +4464,14 @@ describe('v1.ContactCenterInsightsClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.undeployIssueModel as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.undeployIssueModel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.undeployIssueModel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes undeployIssueModel with call error', async () => {
@@ -4503,26 +4484,25 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UndeployIssueModelRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('UndeployIssueModelRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.undeployIssueModel = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.undeployIssueModel(request), expectedError);
-      assert(
-        (client.innerApiCalls.undeployIssueModel as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.undeployIssueModel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.undeployIssueModel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes undeployIssueModel with LRO error', async () => {
@@ -4535,15 +4515,11 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UndeployIssueModelRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('UndeployIssueModelRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.undeployIssueModel = stubLongRunningCall(
         undefined,
@@ -4552,11 +4528,14 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       const [operation] = await client.undeployIssueModel(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.undeployIssueModel as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.undeployIssueModel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.undeployIssueModel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkUndeployIssueModelProgress without error', async () => {
@@ -4614,15 +4593,11 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListConversationsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListConversationsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.Conversation()
@@ -4637,11 +4612,14 @@ describe('v1.ContactCenterInsightsClient', () => {
       client.innerApiCalls.listConversations = stubSimpleCall(expectedResponse);
       const [response] = await client.listConversations(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listConversations as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listConversations as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listConversations as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listConversations without error using callback', async () => {
@@ -4654,15 +4632,11 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListConversationsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListConversationsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.Conversation()
@@ -4695,11 +4669,14 @@ describe('v1.ContactCenterInsightsClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listConversations as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listConversations as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listConversations as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listConversations with error', async () => {
@@ -4712,26 +4689,25 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListConversationsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListConversationsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listConversations = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listConversations(request), expectedError);
-      assert(
-        (client.innerApiCalls.listConversations as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listConversations as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listConversations as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listConversationsStream without error', async () => {
@@ -4744,8 +4720,11 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListConversationsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListConversationsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.Conversation()
@@ -4785,11 +4764,12 @@ describe('v1.ContactCenterInsightsClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listConversations, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listConversations.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listConversations.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -4803,8 +4783,11 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListConversationsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListConversationsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listConversations.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -4833,11 +4816,12 @@ describe('v1.ContactCenterInsightsClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listConversations, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listConversations.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listConversations.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -4851,8 +4835,11 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListConversationsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListConversationsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.Conversation()
@@ -4879,11 +4866,12 @@ describe('v1.ContactCenterInsightsClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listConversations.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listConversations.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -4897,8 +4885,11 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListConversationsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListConversationsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listConversations.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -4916,11 +4907,12 @@ describe('v1.ContactCenterInsightsClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listConversations.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listConversations.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -4936,15 +4928,11 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListAnalysesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListAnalysesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.Analysis()
@@ -4959,11 +4947,14 @@ describe('v1.ContactCenterInsightsClient', () => {
       client.innerApiCalls.listAnalyses = stubSimpleCall(expectedResponse);
       const [response] = await client.listAnalyses(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listAnalyses as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listAnalyses as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAnalyses as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listAnalyses without error using callback', async () => {
@@ -4976,15 +4967,11 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListAnalysesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListAnalysesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.Analysis()
@@ -5017,11 +5004,14 @@ describe('v1.ContactCenterInsightsClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listAnalyses as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listAnalyses as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAnalyses as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listAnalyses with error', async () => {
@@ -5034,26 +5024,25 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListAnalysesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListAnalysesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listAnalyses = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listAnalyses(request), expectedError);
-      assert(
-        (client.innerApiCalls.listAnalyses as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listAnalyses as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAnalyses as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listAnalysesStream without error', async () => {
@@ -5066,8 +5055,11 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListAnalysesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListAnalysesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.Analysis()
@@ -5105,11 +5097,12 @@ describe('v1.ContactCenterInsightsClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listAnalyses, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listAnalyses.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listAnalyses.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -5123,8 +5116,11 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListAnalysesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListAnalysesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAnalyses.createStream = stubPageStreamingCall(
         undefined,
@@ -5153,11 +5149,12 @@ describe('v1.ContactCenterInsightsClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listAnalyses, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listAnalyses.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listAnalyses.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -5171,8 +5168,11 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListAnalysesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListAnalysesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.Analysis()
@@ -5199,11 +5199,12 @@ describe('v1.ContactCenterInsightsClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listAnalyses.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listAnalyses.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -5217,8 +5218,11 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListAnalysesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListAnalysesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAnalyses.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -5236,11 +5240,12 @@ describe('v1.ContactCenterInsightsClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listAnalyses.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listAnalyses.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -5256,15 +5261,11 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListPhraseMatchersRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListPhraseMatchersRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.PhraseMatcher()
@@ -5280,11 +5281,14 @@ describe('v1.ContactCenterInsightsClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listPhraseMatchers(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listPhraseMatchers as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listPhraseMatchers as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listPhraseMatchers as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listPhraseMatchers without error using callback', async () => {
@@ -5297,15 +5301,11 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListPhraseMatchersRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListPhraseMatchersRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.PhraseMatcher()
@@ -5338,11 +5338,14 @@ describe('v1.ContactCenterInsightsClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listPhraseMatchers as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listPhraseMatchers as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listPhraseMatchers as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listPhraseMatchers with error', async () => {
@@ -5355,26 +5358,25 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListPhraseMatchersRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListPhraseMatchersRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listPhraseMatchers = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listPhraseMatchers(request), expectedError);
-      assert(
-        (client.innerApiCalls.listPhraseMatchers as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listPhraseMatchers as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listPhraseMatchers as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listPhraseMatchersStream without error', async () => {
@@ -5387,8 +5389,11 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListPhraseMatchersRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListPhraseMatchersRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.PhraseMatcher()
@@ -5428,11 +5433,12 @@ describe('v1.ContactCenterInsightsClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listPhraseMatchers, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listPhraseMatchers.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listPhraseMatchers.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -5446,8 +5452,11 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListPhraseMatchersRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListPhraseMatchersRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPhraseMatchers.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -5476,11 +5485,12 @@ describe('v1.ContactCenterInsightsClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listPhraseMatchers, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listPhraseMatchers.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listPhraseMatchers.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -5494,8 +5504,11 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListPhraseMatchersRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListPhraseMatchersRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.PhraseMatcher()
@@ -5522,11 +5535,12 @@ describe('v1.ContactCenterInsightsClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listPhraseMatchers.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listPhraseMatchers.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -5540,8 +5554,11 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListPhraseMatchersRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListPhraseMatchersRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPhraseMatchers.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -5559,11 +5576,12 @@ describe('v1.ContactCenterInsightsClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listPhraseMatchers.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listPhraseMatchers.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -5579,15 +5597,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListViewsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListViewsRequest', ['parent']);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.View()
@@ -5602,11 +5614,14 @@ describe('v1.ContactCenterInsightsClient', () => {
       client.innerApiCalls.listViews = stubSimpleCall(expectedResponse);
       const [response] = await client.listViews(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listViews as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listViews as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listViews as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listViews without error using callback', async () => {
@@ -5619,15 +5634,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListViewsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListViewsRequest', ['parent']);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.View()
@@ -5658,11 +5667,14 @@ describe('v1.ContactCenterInsightsClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listViews as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listViews as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listViews as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listViews with error', async () => {
@@ -5675,23 +5687,20 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListViewsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListViewsRequest', ['parent']);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listViews = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.listViews(request), expectedError);
-      assert(
-        (client.innerApiCalls.listViews as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listViews as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listViews as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listViewsStream without error', async () => {
@@ -5704,8 +5713,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListViewsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListViewsRequest', ['parent']);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.View()
@@ -5743,10 +5753,12 @@ describe('v1.ContactCenterInsightsClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listViews, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.listViews.createStream as SinonStub).getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listViews.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -5760,8 +5772,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListViewsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListViewsRequest', ['parent']);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listViews.createStream = stubPageStreamingCall(
         undefined,
@@ -5790,10 +5803,12 @@ describe('v1.ContactCenterInsightsClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listViews, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.listViews.createStream as SinonStub).getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listViews.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -5807,8 +5822,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListViewsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListViewsRequest', ['parent']);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.View()
@@ -5834,10 +5850,12 @@ describe('v1.ContactCenterInsightsClient', () => {
           .args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.listViews.asyncIterate as SinonStub).getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listViews.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -5851,8 +5869,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListViewsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListViewsRequest', ['parent']);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listViews.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -5871,10 +5890,12 @@ describe('v1.ContactCenterInsightsClient', () => {
           .args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.listViews.asyncIterate as SinonStub).getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listViews.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });

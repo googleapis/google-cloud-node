@@ -601,7 +601,7 @@ export class ContactCenterInsightsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createConversation(request, options, callback);
@@ -700,7 +700,7 @@ export class ContactCenterInsightsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'conversation.name': request.conversation!.name || '',
+        'conversation.name': request.conversation!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateConversation(request, options, callback);
@@ -799,7 +799,7 @@ export class ContactCenterInsightsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getConversation(request, options, callback);
@@ -900,7 +900,7 @@ export class ContactCenterInsightsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteConversation(request, options, callback);
@@ -997,7 +997,7 @@ export class ContactCenterInsightsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getAnalysis(request, options, callback);
@@ -1094,7 +1094,7 @@ export class ContactCenterInsightsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteAnalysis(request, options, callback);
@@ -1193,7 +1193,7 @@ export class ContactCenterInsightsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'issue_model.name': request.issueModel!.name || '',
+        'issue_model.name': request.issueModel!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateIssueModel(request, options, callback);
@@ -1290,7 +1290,7 @@ export class ContactCenterInsightsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getIssueModel(request, options, callback);
@@ -1387,7 +1387,7 @@ export class ContactCenterInsightsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listIssueModels(request, options, callback);
@@ -1478,7 +1478,7 @@ export class ContactCenterInsightsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getIssue(request, options, callback);
@@ -1575,7 +1575,7 @@ export class ContactCenterInsightsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listIssues(request, options, callback);
@@ -1674,7 +1674,7 @@ export class ContactCenterInsightsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'issue.name': request.issue!.name || '',
+        'issue.name': request.issue!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateIssue(request, options, callback);
@@ -1771,7 +1771,7 @@ export class ContactCenterInsightsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        issue_model: request.issueModel || '',
+        issue_model: request.issueModel ?? '',
       });
     this.initialize();
     return this.innerApiCalls.calculateIssueModelStats(
@@ -1877,7 +1877,7 @@ export class ContactCenterInsightsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createPhraseMatcher(request, options, callback);
@@ -1974,7 +1974,7 @@ export class ContactCenterInsightsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getPhraseMatcher(request, options, callback);
@@ -2071,7 +2071,7 @@ export class ContactCenterInsightsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deletePhraseMatcher(request, options, callback);
@@ -2170,7 +2170,7 @@ export class ContactCenterInsightsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'phrase_matcher.name': request.phraseMatcher!.name || '',
+        'phrase_matcher.name': request.phraseMatcher!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updatePhraseMatcher(request, options, callback);
@@ -2270,7 +2270,7 @@ export class ContactCenterInsightsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        location: request.location || '',
+        location: request.location ?? '',
       });
     this.initialize();
     return this.innerApiCalls.calculateStats(request, options, callback);
@@ -2367,7 +2367,7 @@ export class ContactCenterInsightsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getSettings(request, options, callback);
@@ -2466,7 +2466,7 @@ export class ContactCenterInsightsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'settings.name': request.settings!.name || '',
+        'settings.name': request.settings!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateSettings(request, options, callback);
@@ -2568,7 +2568,7 @@ export class ContactCenterInsightsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createView(request, options, callback);
@@ -2659,7 +2659,7 @@ export class ContactCenterInsightsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getView(request, options, callback);
@@ -2758,7 +2758,7 @@ export class ContactCenterInsightsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'view.name': request.view!.name || '',
+        'view.name': request.view!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateView(request, options, callback);
@@ -2855,7 +2855,7 @@ export class ContactCenterInsightsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteView(request, options, callback);
@@ -2962,7 +2962,7 @@ export class ContactCenterInsightsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createAnalysis(request, options, callback);
@@ -3111,7 +3111,7 @@ export class ContactCenterInsightsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.exportInsightsData(request, options, callback);
@@ -3251,7 +3251,7 @@ export class ContactCenterInsightsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createIssueModel(request, options, callback);
@@ -3389,7 +3389,7 @@ export class ContactCenterInsightsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteIssueModel(request, options, callback);
@@ -3528,7 +3528,7 @@ export class ContactCenterInsightsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deployIssueModel(request, options, callback);
@@ -3667,7 +3667,7 @@ export class ContactCenterInsightsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.undeployIssueModel(request, options, callback);
@@ -3810,7 +3810,7 @@ export class ContactCenterInsightsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listConversations(request, options, callback);
@@ -3858,7 +3858,7 @@ export class ContactCenterInsightsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listConversations'];
     const callSettings = defaultCallSettings.merge(options);
@@ -3915,7 +3915,7 @@ export class ContactCenterInsightsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listConversations'];
     const callSettings = defaultCallSettings.merge(options);
@@ -4027,7 +4027,7 @@ export class ContactCenterInsightsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listAnalyses(request, options, callback);
@@ -4073,7 +4073,7 @@ export class ContactCenterInsightsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listAnalyses'];
     const callSettings = defaultCallSettings.merge(options);
@@ -4128,7 +4128,7 @@ export class ContactCenterInsightsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listAnalyses'];
     const callSettings = defaultCallSettings.merge(options);
@@ -4240,7 +4240,7 @@ export class ContactCenterInsightsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listPhraseMatchers(request, options, callback);
@@ -4286,7 +4286,7 @@ export class ContactCenterInsightsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listPhraseMatchers'];
     const callSettings = defaultCallSettings.merge(options);
@@ -4341,7 +4341,7 @@ export class ContactCenterInsightsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listPhraseMatchers'];
     const callSettings = defaultCallSettings.merge(options);
@@ -4450,7 +4450,7 @@ export class ContactCenterInsightsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listViews(request, options, callback);
@@ -4493,7 +4493,7 @@ export class ContactCenterInsightsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listViews'];
     const callSettings = defaultCallSettings.merge(options);
@@ -4545,7 +4545,7 @@ export class ContactCenterInsightsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listViews'];
     const callSettings = defaultCallSettings.merge(options);
