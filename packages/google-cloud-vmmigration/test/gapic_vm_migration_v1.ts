@@ -27,6 +27,21 @@ import {PassThrough} from 'stream';
 
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -252,26 +267,23 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetSourceRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetSourceRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.Source()
       );
       client.innerApiCalls.getSource = stubSimpleCall(expectedResponse);
       const [response] = await client.getSource(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getSource as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getSource as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getSource as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getSource without error using callback', async () => {
@@ -283,15 +295,9 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetSourceRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetSourceRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.Source()
       );
@@ -314,11 +320,14 @@ describe('v1.VmMigrationClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getSource as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getSource as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getSource as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getSource with error', async () => {
@@ -330,23 +339,20 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetSourceRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetSourceRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getSource = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getSource(request), expectedError);
-      assert(
-        (client.innerApiCalls.getSource as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getSource as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getSource as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getSource with closed client', async () => {
@@ -358,7 +364,8 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetSourceRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetSourceRequest', ['name']);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getSource(request), expectedError);
@@ -375,26 +382,25 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.FetchInventoryRequest()
       );
-      request.source = '';
-      const expectedHeaderRequestParams = 'source=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('FetchInventoryRequest', [
+        'source',
+      ]);
+      request.source = defaultValue1;
+      const expectedHeaderRequestParams = `source=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.FetchInventoryResponse()
       );
       client.innerApiCalls.fetchInventory = stubSimpleCall(expectedResponse);
       const [response] = await client.fetchInventory(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.fetchInventory as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.fetchInventory as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchInventory as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes fetchInventory without error using callback', async () => {
@@ -406,15 +412,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.FetchInventoryRequest()
       );
-      request.source = '';
-      const expectedHeaderRequestParams = 'source=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('FetchInventoryRequest', [
+        'source',
+      ]);
+      request.source = defaultValue1;
+      const expectedHeaderRequestParams = `source=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.FetchInventoryResponse()
       );
@@ -437,11 +439,14 @@ describe('v1.VmMigrationClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.fetchInventory as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.fetchInventory as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchInventory as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes fetchInventory with error', async () => {
@@ -453,26 +458,25 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.FetchInventoryRequest()
       );
-      request.source = '';
-      const expectedHeaderRequestParams = 'source=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('FetchInventoryRequest', [
+        'source',
+      ]);
+      request.source = defaultValue1;
+      const expectedHeaderRequestParams = `source=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.fetchInventory = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.fetchInventory(request), expectedError);
-      assert(
-        (client.innerApiCalls.fetchInventory as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.fetchInventory as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchInventory as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes fetchInventory with closed client', async () => {
@@ -484,7 +488,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.FetchInventoryRequest()
       );
-      request.source = '';
+      const defaultValue1 = getTypeDefaultValue('FetchInventoryRequest', [
+        'source',
+      ]);
+      request.source = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.fetchInventory(request), expectedError);
@@ -501,15 +508,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetUtilizationReportRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetUtilizationReportRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.UtilizationReport()
       );
@@ -517,11 +520,14 @@ describe('v1.VmMigrationClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.getUtilizationReport(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getUtilizationReport as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getUtilizationReport as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getUtilizationReport as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getUtilizationReport without error using callback', async () => {
@@ -533,15 +539,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetUtilizationReportRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetUtilizationReportRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.UtilizationReport()
       );
@@ -564,11 +566,14 @@ describe('v1.VmMigrationClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getUtilizationReport as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getUtilizationReport as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getUtilizationReport as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getUtilizationReport with error', async () => {
@@ -580,26 +585,25 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetUtilizationReportRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetUtilizationReportRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getUtilizationReport = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getUtilizationReport(request), expectedError);
-      assert(
-        (client.innerApiCalls.getUtilizationReport as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getUtilizationReport as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getUtilizationReport as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getUtilizationReport with closed client', async () => {
@@ -611,7 +615,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetUtilizationReportRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetUtilizationReportRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getUtilizationReport(request), expectedError);
@@ -628,15 +635,12 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetDatacenterConnectorRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetDatacenterConnectorRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DatacenterConnector()
       );
@@ -644,11 +648,14 @@ describe('v1.VmMigrationClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.getDatacenterConnector(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getDatacenterConnector as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getDatacenterConnector as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDatacenterConnector as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getDatacenterConnector without error using callback', async () => {
@@ -660,15 +667,12 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetDatacenterConnectorRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetDatacenterConnectorRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DatacenterConnector()
       );
@@ -691,11 +695,14 @@ describe('v1.VmMigrationClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getDatacenterConnector as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getDatacenterConnector as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDatacenterConnector as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getDatacenterConnector with error', async () => {
@@ -707,15 +714,12 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetDatacenterConnectorRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetDatacenterConnectorRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getDatacenterConnector = stubSimpleCall(
         undefined,
@@ -725,11 +729,14 @@ describe('v1.VmMigrationClient', () => {
         client.getDatacenterConnector(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.getDatacenterConnector as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getDatacenterConnector as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDatacenterConnector as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getDatacenterConnector with closed client', async () => {
@@ -741,7 +748,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetDatacenterConnectorRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'GetDatacenterConnectorRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -761,26 +772,25 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetMigratingVmRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetMigratingVmRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.MigratingVm()
       );
       client.innerApiCalls.getMigratingVm = stubSimpleCall(expectedResponse);
       const [response] = await client.getMigratingVm(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getMigratingVm as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getMigratingVm as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getMigratingVm as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getMigratingVm without error using callback', async () => {
@@ -792,15 +802,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetMigratingVmRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetMigratingVmRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.MigratingVm()
       );
@@ -823,11 +829,14 @@ describe('v1.VmMigrationClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getMigratingVm as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getMigratingVm as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getMigratingVm as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getMigratingVm with error', async () => {
@@ -839,26 +848,25 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetMigratingVmRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetMigratingVmRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getMigratingVm = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getMigratingVm(request), expectedError);
-      assert(
-        (client.innerApiCalls.getMigratingVm as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getMigratingVm as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getMigratingVm as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getMigratingVm with closed client', async () => {
@@ -870,7 +878,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetMigratingVmRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetMigratingVmRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getMigratingVm(request), expectedError);
@@ -887,26 +898,23 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetCloneJobRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetCloneJobRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CloneJob()
       );
       client.innerApiCalls.getCloneJob = stubSimpleCall(expectedResponse);
       const [response] = await client.getCloneJob(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getCloneJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getCloneJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getCloneJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getCloneJob without error using callback', async () => {
@@ -918,15 +926,9 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetCloneJobRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetCloneJobRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CloneJob()
       );
@@ -949,11 +951,14 @@ describe('v1.VmMigrationClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getCloneJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getCloneJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getCloneJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getCloneJob with error', async () => {
@@ -965,26 +970,23 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetCloneJobRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetCloneJobRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getCloneJob = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getCloneJob(request), expectedError);
-      assert(
-        (client.innerApiCalls.getCloneJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getCloneJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getCloneJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getCloneJob with closed client', async () => {
@@ -996,7 +998,8 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetCloneJobRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetCloneJobRequest', ['name']);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getCloneJob(request), expectedError);
@@ -1013,26 +1016,25 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetCutoverJobRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetCutoverJobRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CutoverJob()
       );
       client.innerApiCalls.getCutoverJob = stubSimpleCall(expectedResponse);
       const [response] = await client.getCutoverJob(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getCutoverJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getCutoverJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getCutoverJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getCutoverJob without error using callback', async () => {
@@ -1044,15 +1046,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetCutoverJobRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetCutoverJobRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CutoverJob()
       );
@@ -1075,11 +1073,14 @@ describe('v1.VmMigrationClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getCutoverJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getCutoverJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getCutoverJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getCutoverJob with error', async () => {
@@ -1091,26 +1092,25 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetCutoverJobRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetCutoverJobRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getCutoverJob = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getCutoverJob(request), expectedError);
-      assert(
-        (client.innerApiCalls.getCutoverJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getCutoverJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getCutoverJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getCutoverJob with closed client', async () => {
@@ -1122,7 +1122,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetCutoverJobRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetCutoverJobRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getCutoverJob(request), expectedError);
@@ -1139,26 +1142,23 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetGroupRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetGroupRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.Group()
       );
       client.innerApiCalls.getGroup = stubSimpleCall(expectedResponse);
       const [response] = await client.getGroup(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getGroup as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getGroup without error using callback', async () => {
@@ -1170,15 +1170,9 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetGroupRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetGroupRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.Group()
       );
@@ -1201,11 +1195,14 @@ describe('v1.VmMigrationClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getGroup as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getGroup with error', async () => {
@@ -1217,23 +1214,20 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetGroupRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetGroupRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getGroup = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getGroup(request), expectedError);
-      assert(
-        (client.innerApiCalls.getGroup as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getGroup with closed client', async () => {
@@ -1245,7 +1239,8 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetGroupRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetGroupRequest', ['name']);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getGroup(request), expectedError);
@@ -1262,26 +1257,25 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetTargetProjectRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetTargetProjectRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.TargetProject()
       );
       client.innerApiCalls.getTargetProject = stubSimpleCall(expectedResponse);
       const [response] = await client.getTargetProject(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getTargetProject as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getTargetProject as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getTargetProject as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getTargetProject without error using callback', async () => {
@@ -1293,15 +1287,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetTargetProjectRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetTargetProjectRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.TargetProject()
       );
@@ -1324,11 +1314,14 @@ describe('v1.VmMigrationClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getTargetProject as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getTargetProject as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getTargetProject as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getTargetProject with error', async () => {
@@ -1340,26 +1333,25 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetTargetProjectRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetTargetProjectRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getTargetProject = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getTargetProject(request), expectedError);
-      assert(
-        (client.innerApiCalls.getTargetProject as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getTargetProject as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getTargetProject as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getTargetProject with closed client', async () => {
@@ -1371,7 +1363,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetTargetProjectRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetTargetProjectRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getTargetProject(request), expectedError);
@@ -1388,15 +1383,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateSourceRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateSourceRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1404,11 +1395,14 @@ describe('v1.VmMigrationClient', () => {
       const [operation] = await client.createSource(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createSource as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createSource as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createSource as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createSource without error using callback', async () => {
@@ -1420,15 +1414,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateSourceRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateSourceRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1458,11 +1448,14 @@ describe('v1.VmMigrationClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createSource as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createSource as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createSource as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createSource with call error', async () => {
@@ -1474,26 +1467,25 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateSourceRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateSourceRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createSource = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createSource(request), expectedError);
-      assert(
-        (client.innerApiCalls.createSource as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createSource as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createSource as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createSource with LRO error', async () => {
@@ -1505,15 +1497,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateSourceRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateSourceRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createSource = stubLongRunningCall(
         undefined,
@@ -1522,11 +1510,14 @@ describe('v1.VmMigrationClient', () => {
       );
       const [operation] = await client.createSource(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.createSource as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createSource as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createSource as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkCreateSourceProgress without error', async () => {
@@ -1578,16 +1569,13 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.UpdateSourceRequest()
       );
-      request.source = {};
-      request.source.name = '';
-      const expectedHeaderRequestParams = 'source.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.source ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateSourceRequest', [
+        'source',
+        'name',
+      ]);
+      request.source.name = defaultValue1;
+      const expectedHeaderRequestParams = `source.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1595,11 +1583,14 @@ describe('v1.VmMigrationClient', () => {
       const [operation] = await client.updateSource(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateSource as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateSource as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSource as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateSource without error using callback', async () => {
@@ -1611,16 +1602,13 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.UpdateSourceRequest()
       );
-      request.source = {};
-      request.source.name = '';
-      const expectedHeaderRequestParams = 'source.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.source ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateSourceRequest', [
+        'source',
+        'name',
+      ]);
+      request.source.name = defaultValue1;
+      const expectedHeaderRequestParams = `source.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1650,11 +1638,14 @@ describe('v1.VmMigrationClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateSource as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateSource as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSource as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateSource with call error', async () => {
@@ -1666,27 +1657,27 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.UpdateSourceRequest()
       );
-      request.source = {};
-      request.source.name = '';
-      const expectedHeaderRequestParams = 'source.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.source ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateSourceRequest', [
+        'source',
+        'name',
+      ]);
+      request.source.name = defaultValue1;
+      const expectedHeaderRequestParams = `source.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateSource = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateSource(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateSource as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateSource as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSource as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateSource with LRO error', async () => {
@@ -1698,16 +1689,13 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.UpdateSourceRequest()
       );
-      request.source = {};
-      request.source.name = '';
-      const expectedHeaderRequestParams = 'source.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.source ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateSourceRequest', [
+        'source',
+        'name',
+      ]);
+      request.source.name = defaultValue1;
+      const expectedHeaderRequestParams = `source.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateSource = stubLongRunningCall(
         undefined,
@@ -1716,11 +1704,14 @@ describe('v1.VmMigrationClient', () => {
       );
       const [operation] = await client.updateSource(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.updateSource as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateSource as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSource as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkUpdateSourceProgress without error', async () => {
@@ -1772,15 +1763,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DeleteSourceRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteSourceRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1788,11 +1775,14 @@ describe('v1.VmMigrationClient', () => {
       const [operation] = await client.deleteSource(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteSource as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteSource as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteSource as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteSource without error using callback', async () => {
@@ -1804,15 +1794,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DeleteSourceRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteSourceRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1842,11 +1828,14 @@ describe('v1.VmMigrationClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteSource as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteSource as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteSource as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteSource with call error', async () => {
@@ -1858,26 +1847,25 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DeleteSourceRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteSourceRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteSource = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteSource(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteSource as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteSource as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteSource as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteSource with LRO error', async () => {
@@ -1889,15 +1877,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DeleteSourceRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteSourceRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteSource = stubLongRunningCall(
         undefined,
@@ -1906,11 +1890,14 @@ describe('v1.VmMigrationClient', () => {
       );
       const [operation] = await client.deleteSource(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.deleteSource as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteSource as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteSource as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkDeleteSourceProgress without error', async () => {
@@ -1962,15 +1949,12 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateUtilizationReportRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateUtilizationReportRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1979,11 +1963,14 @@ describe('v1.VmMigrationClient', () => {
       const [operation] = await client.createUtilizationReport(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createUtilizationReport as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createUtilizationReport as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createUtilizationReport as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createUtilizationReport without error using callback', async () => {
@@ -1995,15 +1982,12 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateUtilizationReportRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateUtilizationReportRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2033,11 +2017,14 @@ describe('v1.VmMigrationClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createUtilizationReport as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createUtilizationReport as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createUtilizationReport as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createUtilizationReport with call error', async () => {
@@ -2049,15 +2036,12 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateUtilizationReportRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateUtilizationReportRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createUtilizationReport = stubLongRunningCall(
         undefined,
@@ -2067,11 +2051,14 @@ describe('v1.VmMigrationClient', () => {
         client.createUtilizationReport(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.createUtilizationReport as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createUtilizationReport as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createUtilizationReport as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createUtilizationReport with LRO error', async () => {
@@ -2083,15 +2070,12 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateUtilizationReportRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateUtilizationReportRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createUtilizationReport = stubLongRunningCall(
         undefined,
@@ -2100,11 +2084,14 @@ describe('v1.VmMigrationClient', () => {
       );
       const [operation] = await client.createUtilizationReport(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.createUtilizationReport as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createUtilizationReport as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createUtilizationReport as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkCreateUtilizationReportProgress without error', async () => {
@@ -2160,15 +2147,12 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DeleteUtilizationReportRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteUtilizationReportRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2177,11 +2161,14 @@ describe('v1.VmMigrationClient', () => {
       const [operation] = await client.deleteUtilizationReport(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteUtilizationReport as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteUtilizationReport as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteUtilizationReport as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteUtilizationReport without error using callback', async () => {
@@ -2193,15 +2180,12 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DeleteUtilizationReportRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteUtilizationReportRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2231,11 +2215,14 @@ describe('v1.VmMigrationClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteUtilizationReport as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteUtilizationReport as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteUtilizationReport as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteUtilizationReport with call error', async () => {
@@ -2247,15 +2234,12 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DeleteUtilizationReportRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteUtilizationReportRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteUtilizationReport = stubLongRunningCall(
         undefined,
@@ -2265,11 +2249,14 @@ describe('v1.VmMigrationClient', () => {
         client.deleteUtilizationReport(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.deleteUtilizationReport as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteUtilizationReport as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteUtilizationReport as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteUtilizationReport with LRO error', async () => {
@@ -2281,15 +2268,12 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DeleteUtilizationReportRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteUtilizationReportRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteUtilizationReport = stubLongRunningCall(
         undefined,
@@ -2298,11 +2282,14 @@ describe('v1.VmMigrationClient', () => {
       );
       const [operation] = await client.deleteUtilizationReport(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.deleteUtilizationReport as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteUtilizationReport as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteUtilizationReport as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkDeleteUtilizationReportProgress without error', async () => {
@@ -2358,15 +2345,12 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateDatacenterConnectorRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateDatacenterConnectorRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2375,11 +2359,14 @@ describe('v1.VmMigrationClient', () => {
       const [operation] = await client.createDatacenterConnector(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createDatacenterConnector as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createDatacenterConnector as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createDatacenterConnector as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createDatacenterConnector without error using callback', async () => {
@@ -2391,15 +2378,12 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateDatacenterConnectorRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateDatacenterConnectorRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2429,11 +2413,14 @@ describe('v1.VmMigrationClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createDatacenterConnector as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createDatacenterConnector as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createDatacenterConnector as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createDatacenterConnector with call error', async () => {
@@ -2445,15 +2432,12 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateDatacenterConnectorRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateDatacenterConnectorRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createDatacenterConnector = stubLongRunningCall(
         undefined,
@@ -2463,11 +2447,14 @@ describe('v1.VmMigrationClient', () => {
         client.createDatacenterConnector(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.createDatacenterConnector as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createDatacenterConnector as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createDatacenterConnector as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createDatacenterConnector with LRO error', async () => {
@@ -2479,15 +2466,12 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateDatacenterConnectorRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateDatacenterConnectorRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createDatacenterConnector = stubLongRunningCall(
         undefined,
@@ -2496,11 +2480,14 @@ describe('v1.VmMigrationClient', () => {
       );
       const [operation] = await client.createDatacenterConnector(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.createDatacenterConnector as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createDatacenterConnector as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createDatacenterConnector as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkCreateDatacenterConnectorProgress without error', async () => {
@@ -2556,15 +2543,12 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DeleteDatacenterConnectorRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteDatacenterConnectorRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2573,11 +2557,14 @@ describe('v1.VmMigrationClient', () => {
       const [operation] = await client.deleteDatacenterConnector(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteDatacenterConnector as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteDatacenterConnector as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteDatacenterConnector as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteDatacenterConnector without error using callback', async () => {
@@ -2589,15 +2576,12 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DeleteDatacenterConnectorRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteDatacenterConnectorRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2627,11 +2611,14 @@ describe('v1.VmMigrationClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteDatacenterConnector as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteDatacenterConnector as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteDatacenterConnector as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteDatacenterConnector with call error', async () => {
@@ -2643,15 +2630,12 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DeleteDatacenterConnectorRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteDatacenterConnectorRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDatacenterConnector = stubLongRunningCall(
         undefined,
@@ -2661,11 +2645,14 @@ describe('v1.VmMigrationClient', () => {
         client.deleteDatacenterConnector(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.deleteDatacenterConnector as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteDatacenterConnector as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteDatacenterConnector as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteDatacenterConnector with LRO error', async () => {
@@ -2677,15 +2664,12 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DeleteDatacenterConnectorRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteDatacenterConnectorRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDatacenterConnector = stubLongRunningCall(
         undefined,
@@ -2694,11 +2678,14 @@ describe('v1.VmMigrationClient', () => {
       );
       const [operation] = await client.deleteDatacenterConnector(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.deleteDatacenterConnector as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteDatacenterConnector as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteDatacenterConnector as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkDeleteDatacenterConnectorProgress without error', async () => {
@@ -2754,15 +2741,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.UpgradeApplianceRequest()
       );
-      request.datacenterConnector = '';
-      const expectedHeaderRequestParams = 'datacenter_connector=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('UpgradeApplianceRequest', [
+        'datacenterConnector',
+      ]);
+      request.datacenterConnector = defaultValue1;
+      const expectedHeaderRequestParams = `datacenter_connector=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2771,11 +2754,14 @@ describe('v1.VmMigrationClient', () => {
       const [operation] = await client.upgradeAppliance(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.upgradeAppliance as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.upgradeAppliance as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.upgradeAppliance as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes upgradeAppliance without error using callback', async () => {
@@ -2787,15 +2773,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.UpgradeApplianceRequest()
       );
-      request.datacenterConnector = '';
-      const expectedHeaderRequestParams = 'datacenter_connector=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('UpgradeApplianceRequest', [
+        'datacenterConnector',
+      ]);
+      request.datacenterConnector = defaultValue1;
+      const expectedHeaderRequestParams = `datacenter_connector=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2825,11 +2807,14 @@ describe('v1.VmMigrationClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.upgradeAppliance as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.upgradeAppliance as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.upgradeAppliance as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes upgradeAppliance with call error', async () => {
@@ -2841,26 +2826,25 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.UpgradeApplianceRequest()
       );
-      request.datacenterConnector = '';
-      const expectedHeaderRequestParams = 'datacenter_connector=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('UpgradeApplianceRequest', [
+        'datacenterConnector',
+      ]);
+      request.datacenterConnector = defaultValue1;
+      const expectedHeaderRequestParams = `datacenter_connector=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.upgradeAppliance = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.upgradeAppliance(request), expectedError);
-      assert(
-        (client.innerApiCalls.upgradeAppliance as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.upgradeAppliance as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.upgradeAppliance as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes upgradeAppliance with LRO error', async () => {
@@ -2872,15 +2856,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.UpgradeApplianceRequest()
       );
-      request.datacenterConnector = '';
-      const expectedHeaderRequestParams = 'datacenter_connector=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('UpgradeApplianceRequest', [
+        'datacenterConnector',
+      ]);
+      request.datacenterConnector = defaultValue1;
+      const expectedHeaderRequestParams = `datacenter_connector=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.upgradeAppliance = stubLongRunningCall(
         undefined,
@@ -2889,11 +2869,14 @@ describe('v1.VmMigrationClient', () => {
       );
       const [operation] = await client.upgradeAppliance(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.upgradeAppliance as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.upgradeAppliance as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.upgradeAppliance as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkUpgradeApplianceProgress without error', async () => {
@@ -2948,15 +2931,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateMigratingVmRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateMigratingVmRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2965,11 +2944,14 @@ describe('v1.VmMigrationClient', () => {
       const [operation] = await client.createMigratingVm(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createMigratingVm as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createMigratingVm as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createMigratingVm as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createMigratingVm without error using callback', async () => {
@@ -2981,15 +2963,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateMigratingVmRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateMigratingVmRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3019,11 +2997,14 @@ describe('v1.VmMigrationClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createMigratingVm as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createMigratingVm as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createMigratingVm as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createMigratingVm with call error', async () => {
@@ -3035,26 +3016,25 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateMigratingVmRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateMigratingVmRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createMigratingVm = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createMigratingVm(request), expectedError);
-      assert(
-        (client.innerApiCalls.createMigratingVm as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createMigratingVm as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createMigratingVm as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createMigratingVm with LRO error', async () => {
@@ -3066,15 +3046,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateMigratingVmRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateMigratingVmRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createMigratingVm = stubLongRunningCall(
         undefined,
@@ -3083,11 +3059,14 @@ describe('v1.VmMigrationClient', () => {
       );
       const [operation] = await client.createMigratingVm(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.createMigratingVm as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createMigratingVm as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createMigratingVm as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkCreateMigratingVmProgress without error', async () => {
@@ -3142,16 +3121,13 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.UpdateMigratingVmRequest()
       );
-      request.migratingVm = {};
-      request.migratingVm.name = '';
-      const expectedHeaderRequestParams = 'migrating_vm.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.migratingVm ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateMigratingVmRequest', [
+        'migratingVm',
+        'name',
+      ]);
+      request.migratingVm.name = defaultValue1;
+      const expectedHeaderRequestParams = `migrating_vm.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3160,11 +3136,14 @@ describe('v1.VmMigrationClient', () => {
       const [operation] = await client.updateMigratingVm(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateMigratingVm as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateMigratingVm as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateMigratingVm as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateMigratingVm without error using callback', async () => {
@@ -3176,16 +3155,13 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.UpdateMigratingVmRequest()
       );
-      request.migratingVm = {};
-      request.migratingVm.name = '';
-      const expectedHeaderRequestParams = 'migrating_vm.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.migratingVm ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateMigratingVmRequest', [
+        'migratingVm',
+        'name',
+      ]);
+      request.migratingVm.name = defaultValue1;
+      const expectedHeaderRequestParams = `migrating_vm.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3215,11 +3191,14 @@ describe('v1.VmMigrationClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateMigratingVm as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateMigratingVm as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateMigratingVm as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateMigratingVm with call error', async () => {
@@ -3231,27 +3210,27 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.UpdateMigratingVmRequest()
       );
-      request.migratingVm = {};
-      request.migratingVm.name = '';
-      const expectedHeaderRequestParams = 'migrating_vm.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.migratingVm ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateMigratingVmRequest', [
+        'migratingVm',
+        'name',
+      ]);
+      request.migratingVm.name = defaultValue1;
+      const expectedHeaderRequestParams = `migrating_vm.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateMigratingVm = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateMigratingVm(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateMigratingVm as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateMigratingVm as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateMigratingVm as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateMigratingVm with LRO error', async () => {
@@ -3263,16 +3242,13 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.UpdateMigratingVmRequest()
       );
-      request.migratingVm = {};
-      request.migratingVm.name = '';
-      const expectedHeaderRequestParams = 'migrating_vm.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.migratingVm ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateMigratingVmRequest', [
+        'migratingVm',
+        'name',
+      ]);
+      request.migratingVm.name = defaultValue1;
+      const expectedHeaderRequestParams = `migrating_vm.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateMigratingVm = stubLongRunningCall(
         undefined,
@@ -3281,11 +3257,14 @@ describe('v1.VmMigrationClient', () => {
       );
       const [operation] = await client.updateMigratingVm(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.updateMigratingVm as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateMigratingVm as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateMigratingVm as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkUpdateMigratingVmProgress without error', async () => {
@@ -3340,15 +3319,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DeleteMigratingVmRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteMigratingVmRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3357,11 +3332,14 @@ describe('v1.VmMigrationClient', () => {
       const [operation] = await client.deleteMigratingVm(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteMigratingVm as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteMigratingVm as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteMigratingVm as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteMigratingVm without error using callback', async () => {
@@ -3373,15 +3351,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DeleteMigratingVmRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteMigratingVmRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3411,11 +3385,14 @@ describe('v1.VmMigrationClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteMigratingVm as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteMigratingVm as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteMigratingVm as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteMigratingVm with call error', async () => {
@@ -3427,26 +3404,25 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DeleteMigratingVmRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteMigratingVmRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteMigratingVm = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteMigratingVm(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteMigratingVm as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteMigratingVm as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteMigratingVm as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteMigratingVm with LRO error', async () => {
@@ -3458,15 +3434,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DeleteMigratingVmRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteMigratingVmRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteMigratingVm = stubLongRunningCall(
         undefined,
@@ -3475,11 +3447,14 @@ describe('v1.VmMigrationClient', () => {
       );
       const [operation] = await client.deleteMigratingVm(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.deleteMigratingVm as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteMigratingVm as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteMigratingVm as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkDeleteMigratingVmProgress without error', async () => {
@@ -3534,15 +3509,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.StartMigrationRequest()
       );
-      request.migratingVm = '';
-      const expectedHeaderRequestParams = 'migrating_vm=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('StartMigrationRequest', [
+        'migratingVm',
+      ]);
+      request.migratingVm = defaultValue1;
+      const expectedHeaderRequestParams = `migrating_vm=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3551,11 +3522,14 @@ describe('v1.VmMigrationClient', () => {
       const [operation] = await client.startMigration(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.startMigration as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.startMigration as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.startMigration as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes startMigration without error using callback', async () => {
@@ -3567,15 +3541,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.StartMigrationRequest()
       );
-      request.migratingVm = '';
-      const expectedHeaderRequestParams = 'migrating_vm=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('StartMigrationRequest', [
+        'migratingVm',
+      ]);
+      request.migratingVm = defaultValue1;
+      const expectedHeaderRequestParams = `migrating_vm=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3605,11 +3575,14 @@ describe('v1.VmMigrationClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.startMigration as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.startMigration as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.startMigration as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes startMigration with call error', async () => {
@@ -3621,26 +3594,25 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.StartMigrationRequest()
       );
-      request.migratingVm = '';
-      const expectedHeaderRequestParams = 'migrating_vm=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('StartMigrationRequest', [
+        'migratingVm',
+      ]);
+      request.migratingVm = defaultValue1;
+      const expectedHeaderRequestParams = `migrating_vm=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.startMigration = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.startMigration(request), expectedError);
-      assert(
-        (client.innerApiCalls.startMigration as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.startMigration as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.startMigration as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes startMigration with LRO error', async () => {
@@ -3652,15 +3624,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.StartMigrationRequest()
       );
-      request.migratingVm = '';
-      const expectedHeaderRequestParams = 'migrating_vm=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('StartMigrationRequest', [
+        'migratingVm',
+      ]);
+      request.migratingVm = defaultValue1;
+      const expectedHeaderRequestParams = `migrating_vm=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.startMigration = stubLongRunningCall(
         undefined,
@@ -3669,11 +3637,14 @@ describe('v1.VmMigrationClient', () => {
       );
       const [operation] = await client.startMigration(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.startMigration as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.startMigration as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.startMigration as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkStartMigrationProgress without error', async () => {
@@ -3728,15 +3699,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ResumeMigrationRequest()
       );
-      request.migratingVm = '';
-      const expectedHeaderRequestParams = 'migrating_vm=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ResumeMigrationRequest', [
+        'migratingVm',
+      ]);
+      request.migratingVm = defaultValue1;
+      const expectedHeaderRequestParams = `migrating_vm=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3745,11 +3712,14 @@ describe('v1.VmMigrationClient', () => {
       const [operation] = await client.resumeMigration(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.resumeMigration as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.resumeMigration as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.resumeMigration as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes resumeMigration without error using callback', async () => {
@@ -3761,15 +3731,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ResumeMigrationRequest()
       );
-      request.migratingVm = '';
-      const expectedHeaderRequestParams = 'migrating_vm=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ResumeMigrationRequest', [
+        'migratingVm',
+      ]);
+      request.migratingVm = defaultValue1;
+      const expectedHeaderRequestParams = `migrating_vm=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3799,11 +3765,14 @@ describe('v1.VmMigrationClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.resumeMigration as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.resumeMigration as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.resumeMigration as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes resumeMigration with call error', async () => {
@@ -3815,26 +3784,25 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ResumeMigrationRequest()
       );
-      request.migratingVm = '';
-      const expectedHeaderRequestParams = 'migrating_vm=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ResumeMigrationRequest', [
+        'migratingVm',
+      ]);
+      request.migratingVm = defaultValue1;
+      const expectedHeaderRequestParams = `migrating_vm=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.resumeMigration = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.resumeMigration(request), expectedError);
-      assert(
-        (client.innerApiCalls.resumeMigration as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.resumeMigration as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.resumeMigration as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes resumeMigration with LRO error', async () => {
@@ -3846,15 +3814,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ResumeMigrationRequest()
       );
-      request.migratingVm = '';
-      const expectedHeaderRequestParams = 'migrating_vm=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ResumeMigrationRequest', [
+        'migratingVm',
+      ]);
+      request.migratingVm = defaultValue1;
+      const expectedHeaderRequestParams = `migrating_vm=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.resumeMigration = stubLongRunningCall(
         undefined,
@@ -3863,11 +3827,14 @@ describe('v1.VmMigrationClient', () => {
       );
       const [operation] = await client.resumeMigration(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.resumeMigration as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.resumeMigration as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.resumeMigration as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkResumeMigrationProgress without error', async () => {
@@ -3922,15 +3889,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.PauseMigrationRequest()
       );
-      request.migratingVm = '';
-      const expectedHeaderRequestParams = 'migrating_vm=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('PauseMigrationRequest', [
+        'migratingVm',
+      ]);
+      request.migratingVm = defaultValue1;
+      const expectedHeaderRequestParams = `migrating_vm=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3939,11 +3902,14 @@ describe('v1.VmMigrationClient', () => {
       const [operation] = await client.pauseMigration(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.pauseMigration as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.pauseMigration as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.pauseMigration as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes pauseMigration without error using callback', async () => {
@@ -3955,15 +3921,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.PauseMigrationRequest()
       );
-      request.migratingVm = '';
-      const expectedHeaderRequestParams = 'migrating_vm=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('PauseMigrationRequest', [
+        'migratingVm',
+      ]);
+      request.migratingVm = defaultValue1;
+      const expectedHeaderRequestParams = `migrating_vm=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3993,11 +3955,14 @@ describe('v1.VmMigrationClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.pauseMigration as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.pauseMigration as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.pauseMigration as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes pauseMigration with call error', async () => {
@@ -4009,26 +3974,25 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.PauseMigrationRequest()
       );
-      request.migratingVm = '';
-      const expectedHeaderRequestParams = 'migrating_vm=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('PauseMigrationRequest', [
+        'migratingVm',
+      ]);
+      request.migratingVm = defaultValue1;
+      const expectedHeaderRequestParams = `migrating_vm=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.pauseMigration = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.pauseMigration(request), expectedError);
-      assert(
-        (client.innerApiCalls.pauseMigration as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.pauseMigration as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.pauseMigration as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes pauseMigration with LRO error', async () => {
@@ -4040,15 +4004,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.PauseMigrationRequest()
       );
-      request.migratingVm = '';
-      const expectedHeaderRequestParams = 'migrating_vm=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('PauseMigrationRequest', [
+        'migratingVm',
+      ]);
+      request.migratingVm = defaultValue1;
+      const expectedHeaderRequestParams = `migrating_vm=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.pauseMigration = stubLongRunningCall(
         undefined,
@@ -4057,11 +4017,14 @@ describe('v1.VmMigrationClient', () => {
       );
       const [operation] = await client.pauseMigration(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.pauseMigration as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.pauseMigration as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.pauseMigration as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkPauseMigrationProgress without error', async () => {
@@ -4116,15 +4079,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.FinalizeMigrationRequest()
       );
-      request.migratingVm = '';
-      const expectedHeaderRequestParams = 'migrating_vm=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('FinalizeMigrationRequest', [
+        'migratingVm',
+      ]);
+      request.migratingVm = defaultValue1;
+      const expectedHeaderRequestParams = `migrating_vm=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4133,11 +4092,14 @@ describe('v1.VmMigrationClient', () => {
       const [operation] = await client.finalizeMigration(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.finalizeMigration as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.finalizeMigration as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.finalizeMigration as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes finalizeMigration without error using callback', async () => {
@@ -4149,15 +4111,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.FinalizeMigrationRequest()
       );
-      request.migratingVm = '';
-      const expectedHeaderRequestParams = 'migrating_vm=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('FinalizeMigrationRequest', [
+        'migratingVm',
+      ]);
+      request.migratingVm = defaultValue1;
+      const expectedHeaderRequestParams = `migrating_vm=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4187,11 +4145,14 @@ describe('v1.VmMigrationClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.finalizeMigration as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.finalizeMigration as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.finalizeMigration as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes finalizeMigration with call error', async () => {
@@ -4203,26 +4164,25 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.FinalizeMigrationRequest()
       );
-      request.migratingVm = '';
-      const expectedHeaderRequestParams = 'migrating_vm=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('FinalizeMigrationRequest', [
+        'migratingVm',
+      ]);
+      request.migratingVm = defaultValue1;
+      const expectedHeaderRequestParams = `migrating_vm=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.finalizeMigration = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.finalizeMigration(request), expectedError);
-      assert(
-        (client.innerApiCalls.finalizeMigration as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.finalizeMigration as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.finalizeMigration as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes finalizeMigration with LRO error', async () => {
@@ -4234,15 +4194,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.FinalizeMigrationRequest()
       );
-      request.migratingVm = '';
-      const expectedHeaderRequestParams = 'migrating_vm=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('FinalizeMigrationRequest', [
+        'migratingVm',
+      ]);
+      request.migratingVm = defaultValue1;
+      const expectedHeaderRequestParams = `migrating_vm=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.finalizeMigration = stubLongRunningCall(
         undefined,
@@ -4251,11 +4207,14 @@ describe('v1.VmMigrationClient', () => {
       );
       const [operation] = await client.finalizeMigration(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.finalizeMigration as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.finalizeMigration as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.finalizeMigration as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkFinalizeMigrationProgress without error', async () => {
@@ -4310,15 +4269,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateCloneJobRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateCloneJobRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4327,11 +4282,14 @@ describe('v1.VmMigrationClient', () => {
       const [operation] = await client.createCloneJob(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createCloneJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createCloneJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCloneJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createCloneJob without error using callback', async () => {
@@ -4343,15 +4301,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateCloneJobRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateCloneJobRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4381,11 +4335,14 @@ describe('v1.VmMigrationClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createCloneJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createCloneJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCloneJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createCloneJob with call error', async () => {
@@ -4397,26 +4354,25 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateCloneJobRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateCloneJobRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCloneJob = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createCloneJob(request), expectedError);
-      assert(
-        (client.innerApiCalls.createCloneJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createCloneJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCloneJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createCloneJob with LRO error', async () => {
@@ -4428,15 +4384,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateCloneJobRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateCloneJobRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCloneJob = stubLongRunningCall(
         undefined,
@@ -4445,11 +4397,14 @@ describe('v1.VmMigrationClient', () => {
       );
       const [operation] = await client.createCloneJob(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.createCloneJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createCloneJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCloneJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkCreateCloneJobProgress without error', async () => {
@@ -4504,15 +4459,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CancelCloneJobRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CancelCloneJobRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4521,11 +4472,14 @@ describe('v1.VmMigrationClient', () => {
       const [operation] = await client.cancelCloneJob(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.cancelCloneJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.cancelCloneJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.cancelCloneJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes cancelCloneJob without error using callback', async () => {
@@ -4537,15 +4491,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CancelCloneJobRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CancelCloneJobRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4575,11 +4525,14 @@ describe('v1.VmMigrationClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.cancelCloneJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.cancelCloneJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.cancelCloneJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes cancelCloneJob with call error', async () => {
@@ -4591,26 +4544,25 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CancelCloneJobRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CancelCloneJobRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.cancelCloneJob = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.cancelCloneJob(request), expectedError);
-      assert(
-        (client.innerApiCalls.cancelCloneJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.cancelCloneJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.cancelCloneJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes cancelCloneJob with LRO error', async () => {
@@ -4622,15 +4574,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CancelCloneJobRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CancelCloneJobRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.cancelCloneJob = stubLongRunningCall(
         undefined,
@@ -4639,11 +4587,14 @@ describe('v1.VmMigrationClient', () => {
       );
       const [operation] = await client.cancelCloneJob(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.cancelCloneJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.cancelCloneJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.cancelCloneJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkCancelCloneJobProgress without error', async () => {
@@ -4698,15 +4649,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateCutoverJobRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateCutoverJobRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4715,11 +4662,14 @@ describe('v1.VmMigrationClient', () => {
       const [operation] = await client.createCutoverJob(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createCutoverJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createCutoverJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCutoverJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createCutoverJob without error using callback', async () => {
@@ -4731,15 +4681,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateCutoverJobRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateCutoverJobRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4769,11 +4715,14 @@ describe('v1.VmMigrationClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createCutoverJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createCutoverJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCutoverJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createCutoverJob with call error', async () => {
@@ -4785,26 +4734,25 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateCutoverJobRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateCutoverJobRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCutoverJob = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createCutoverJob(request), expectedError);
-      assert(
-        (client.innerApiCalls.createCutoverJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createCutoverJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCutoverJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createCutoverJob with LRO error', async () => {
@@ -4816,15 +4764,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateCutoverJobRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateCutoverJobRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCutoverJob = stubLongRunningCall(
         undefined,
@@ -4833,11 +4777,14 @@ describe('v1.VmMigrationClient', () => {
       );
       const [operation] = await client.createCutoverJob(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.createCutoverJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createCutoverJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCutoverJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkCreateCutoverJobProgress without error', async () => {
@@ -4892,15 +4839,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CancelCutoverJobRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CancelCutoverJobRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4909,11 +4852,14 @@ describe('v1.VmMigrationClient', () => {
       const [operation] = await client.cancelCutoverJob(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.cancelCutoverJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.cancelCutoverJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.cancelCutoverJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes cancelCutoverJob without error using callback', async () => {
@@ -4925,15 +4871,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CancelCutoverJobRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CancelCutoverJobRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4963,11 +4905,14 @@ describe('v1.VmMigrationClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.cancelCutoverJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.cancelCutoverJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.cancelCutoverJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes cancelCutoverJob with call error', async () => {
@@ -4979,26 +4924,25 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CancelCutoverJobRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CancelCutoverJobRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.cancelCutoverJob = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.cancelCutoverJob(request), expectedError);
-      assert(
-        (client.innerApiCalls.cancelCutoverJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.cancelCutoverJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.cancelCutoverJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes cancelCutoverJob with LRO error', async () => {
@@ -5010,15 +4954,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CancelCutoverJobRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CancelCutoverJobRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.cancelCutoverJob = stubLongRunningCall(
         undefined,
@@ -5027,11 +4967,14 @@ describe('v1.VmMigrationClient', () => {
       );
       const [operation] = await client.cancelCutoverJob(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.cancelCutoverJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.cancelCutoverJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.cancelCutoverJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkCancelCutoverJobProgress without error', async () => {
@@ -5086,15 +5029,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateGroupRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateGroupRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5102,11 +5041,14 @@ describe('v1.VmMigrationClient', () => {
       const [operation] = await client.createGroup(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createGroup as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createGroup without error using callback', async () => {
@@ -5118,15 +5060,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateGroupRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateGroupRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5156,11 +5094,14 @@ describe('v1.VmMigrationClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createGroup as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createGroup with call error', async () => {
@@ -5172,26 +5113,25 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateGroupRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateGroupRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createGroup = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createGroup(request), expectedError);
-      assert(
-        (client.innerApiCalls.createGroup as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createGroup with LRO error', async () => {
@@ -5203,15 +5143,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateGroupRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateGroupRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createGroup = stubLongRunningCall(
         undefined,
@@ -5220,11 +5156,14 @@ describe('v1.VmMigrationClient', () => {
       );
       const [operation] = await client.createGroup(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.createGroup as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkCreateGroupProgress without error', async () => {
@@ -5276,16 +5215,13 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.UpdateGroupRequest()
       );
-      request.group = {};
-      request.group.name = '';
-      const expectedHeaderRequestParams = 'group.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.group ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateGroupRequest', [
+        'group',
+        'name',
+      ]);
+      request.group.name = defaultValue1;
+      const expectedHeaderRequestParams = `group.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5293,11 +5229,14 @@ describe('v1.VmMigrationClient', () => {
       const [operation] = await client.updateGroup(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateGroup as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateGroup without error using callback', async () => {
@@ -5309,16 +5248,13 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.UpdateGroupRequest()
       );
-      request.group = {};
-      request.group.name = '';
-      const expectedHeaderRequestParams = 'group.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.group ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateGroupRequest', [
+        'group',
+        'name',
+      ]);
+      request.group.name = defaultValue1;
+      const expectedHeaderRequestParams = `group.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5348,11 +5284,14 @@ describe('v1.VmMigrationClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateGroup as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateGroup with call error', async () => {
@@ -5364,27 +5303,27 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.UpdateGroupRequest()
       );
-      request.group = {};
-      request.group.name = '';
-      const expectedHeaderRequestParams = 'group.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.group ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateGroupRequest', [
+        'group',
+        'name',
+      ]);
+      request.group.name = defaultValue1;
+      const expectedHeaderRequestParams = `group.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateGroup = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateGroup(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateGroup as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateGroup with LRO error', async () => {
@@ -5396,16 +5335,13 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.UpdateGroupRequest()
       );
-      request.group = {};
-      request.group.name = '';
-      const expectedHeaderRequestParams = 'group.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.group ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateGroupRequest', [
+        'group',
+        'name',
+      ]);
+      request.group.name = defaultValue1;
+      const expectedHeaderRequestParams = `group.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateGroup = stubLongRunningCall(
         undefined,
@@ -5414,11 +5350,14 @@ describe('v1.VmMigrationClient', () => {
       );
       const [operation] = await client.updateGroup(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.updateGroup as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkUpdateGroupProgress without error', async () => {
@@ -5470,15 +5409,9 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DeleteGroupRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteGroupRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5486,11 +5419,14 @@ describe('v1.VmMigrationClient', () => {
       const [operation] = await client.deleteGroup(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteGroup as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteGroup without error using callback', async () => {
@@ -5502,15 +5438,9 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DeleteGroupRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteGroupRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5540,11 +5470,14 @@ describe('v1.VmMigrationClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteGroup as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteGroup with call error', async () => {
@@ -5556,26 +5489,23 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DeleteGroupRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteGroupRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteGroup = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteGroup(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteGroup as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteGroup with LRO error', async () => {
@@ -5587,15 +5517,9 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DeleteGroupRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteGroupRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteGroup = stubLongRunningCall(
         undefined,
@@ -5604,11 +5528,14 @@ describe('v1.VmMigrationClient', () => {
       );
       const [operation] = await client.deleteGroup(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.deleteGroup as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkDeleteGroupProgress without error', async () => {
@@ -5660,15 +5587,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.AddGroupMigrationRequest()
       );
-      request.group = '';
-      const expectedHeaderRequestParams = 'group=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('AddGroupMigrationRequest', [
+        'group',
+      ]);
+      request.group = defaultValue1;
+      const expectedHeaderRequestParams = `group=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5677,11 +5600,14 @@ describe('v1.VmMigrationClient', () => {
       const [operation] = await client.addGroupMigration(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.addGroupMigration as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.addGroupMigration as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addGroupMigration as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes addGroupMigration without error using callback', async () => {
@@ -5693,15 +5619,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.AddGroupMigrationRequest()
       );
-      request.group = '';
-      const expectedHeaderRequestParams = 'group=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('AddGroupMigrationRequest', [
+        'group',
+      ]);
+      request.group = defaultValue1;
+      const expectedHeaderRequestParams = `group=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5731,11 +5653,14 @@ describe('v1.VmMigrationClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.addGroupMigration as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.addGroupMigration as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addGroupMigration as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes addGroupMigration with call error', async () => {
@@ -5747,26 +5672,25 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.AddGroupMigrationRequest()
       );
-      request.group = '';
-      const expectedHeaderRequestParams = 'group=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('AddGroupMigrationRequest', [
+        'group',
+      ]);
+      request.group = defaultValue1;
+      const expectedHeaderRequestParams = `group=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.addGroupMigration = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.addGroupMigration(request), expectedError);
-      assert(
-        (client.innerApiCalls.addGroupMigration as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.addGroupMigration as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addGroupMigration as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes addGroupMigration with LRO error', async () => {
@@ -5778,15 +5702,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.AddGroupMigrationRequest()
       );
-      request.group = '';
-      const expectedHeaderRequestParams = 'group=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('AddGroupMigrationRequest', [
+        'group',
+      ]);
+      request.group = defaultValue1;
+      const expectedHeaderRequestParams = `group=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.addGroupMigration = stubLongRunningCall(
         undefined,
@@ -5795,11 +5715,14 @@ describe('v1.VmMigrationClient', () => {
       );
       const [operation] = await client.addGroupMigration(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.addGroupMigration as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.addGroupMigration as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addGroupMigration as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkAddGroupMigrationProgress without error', async () => {
@@ -5854,15 +5777,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.RemoveGroupMigrationRequest()
       );
-      request.group = '';
-      const expectedHeaderRequestParams = 'group=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('RemoveGroupMigrationRequest', [
+        'group',
+      ]);
+      request.group = defaultValue1;
+      const expectedHeaderRequestParams = `group=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5871,11 +5790,14 @@ describe('v1.VmMigrationClient', () => {
       const [operation] = await client.removeGroupMigration(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.removeGroupMigration as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.removeGroupMigration as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.removeGroupMigration as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes removeGroupMigration without error using callback', async () => {
@@ -5887,15 +5809,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.RemoveGroupMigrationRequest()
       );
-      request.group = '';
-      const expectedHeaderRequestParams = 'group=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('RemoveGroupMigrationRequest', [
+        'group',
+      ]);
+      request.group = defaultValue1;
+      const expectedHeaderRequestParams = `group=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5925,11 +5843,14 @@ describe('v1.VmMigrationClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.removeGroupMigration as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.removeGroupMigration as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.removeGroupMigration as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes removeGroupMigration with call error', async () => {
@@ -5941,26 +5862,25 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.RemoveGroupMigrationRequest()
       );
-      request.group = '';
-      const expectedHeaderRequestParams = 'group=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('RemoveGroupMigrationRequest', [
+        'group',
+      ]);
+      request.group = defaultValue1;
+      const expectedHeaderRequestParams = `group=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.removeGroupMigration = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.removeGroupMigration(request), expectedError);
-      assert(
-        (client.innerApiCalls.removeGroupMigration as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.removeGroupMigration as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.removeGroupMigration as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes removeGroupMigration with LRO error', async () => {
@@ -5972,15 +5892,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.RemoveGroupMigrationRequest()
       );
-      request.group = '';
-      const expectedHeaderRequestParams = 'group=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('RemoveGroupMigrationRequest', [
+        'group',
+      ]);
+      request.group = defaultValue1;
+      const expectedHeaderRequestParams = `group=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.removeGroupMigration = stubLongRunningCall(
         undefined,
@@ -5989,11 +5905,14 @@ describe('v1.VmMigrationClient', () => {
       );
       const [operation] = await client.removeGroupMigration(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.removeGroupMigration as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.removeGroupMigration as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.removeGroupMigration as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkRemoveGroupMigrationProgress without error', async () => {
@@ -6048,15 +5967,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateTargetProjectRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateTargetProjectRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -6065,11 +5980,14 @@ describe('v1.VmMigrationClient', () => {
       const [operation] = await client.createTargetProject(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createTargetProject as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createTargetProject as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createTargetProject as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createTargetProject without error using callback', async () => {
@@ -6081,15 +5999,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateTargetProjectRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateTargetProjectRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -6119,11 +6033,14 @@ describe('v1.VmMigrationClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createTargetProject as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createTargetProject as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createTargetProject as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createTargetProject with call error', async () => {
@@ -6135,26 +6052,25 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateTargetProjectRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateTargetProjectRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createTargetProject = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createTargetProject(request), expectedError);
-      assert(
-        (client.innerApiCalls.createTargetProject as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createTargetProject as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createTargetProject as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createTargetProject with LRO error', async () => {
@@ -6166,15 +6082,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateTargetProjectRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateTargetProjectRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createTargetProject = stubLongRunningCall(
         undefined,
@@ -6183,11 +6095,14 @@ describe('v1.VmMigrationClient', () => {
       );
       const [operation] = await client.createTargetProject(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.createTargetProject as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createTargetProject as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createTargetProject as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkCreateTargetProjectProgress without error', async () => {
@@ -6242,16 +6157,13 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.UpdateTargetProjectRequest()
       );
-      request.targetProject = {};
-      request.targetProject.name = '';
-      const expectedHeaderRequestParams = 'target_project.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.targetProject ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateTargetProjectRequest', [
+        'targetProject',
+        'name',
+      ]);
+      request.targetProject.name = defaultValue1;
+      const expectedHeaderRequestParams = `target_project.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -6260,11 +6172,14 @@ describe('v1.VmMigrationClient', () => {
       const [operation] = await client.updateTargetProject(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateTargetProject as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateTargetProject as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateTargetProject as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateTargetProject without error using callback', async () => {
@@ -6276,16 +6191,13 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.UpdateTargetProjectRequest()
       );
-      request.targetProject = {};
-      request.targetProject.name = '';
-      const expectedHeaderRequestParams = 'target_project.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.targetProject ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateTargetProjectRequest', [
+        'targetProject',
+        'name',
+      ]);
+      request.targetProject.name = defaultValue1;
+      const expectedHeaderRequestParams = `target_project.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -6315,11 +6227,14 @@ describe('v1.VmMigrationClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateTargetProject as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateTargetProject as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateTargetProject as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateTargetProject with call error', async () => {
@@ -6331,27 +6246,27 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.UpdateTargetProjectRequest()
       );
-      request.targetProject = {};
-      request.targetProject.name = '';
-      const expectedHeaderRequestParams = 'target_project.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.targetProject ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateTargetProjectRequest', [
+        'targetProject',
+        'name',
+      ]);
+      request.targetProject.name = defaultValue1;
+      const expectedHeaderRequestParams = `target_project.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateTargetProject = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateTargetProject(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateTargetProject as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateTargetProject as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateTargetProject as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateTargetProject with LRO error', async () => {
@@ -6363,16 +6278,13 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.UpdateTargetProjectRequest()
       );
-      request.targetProject = {};
-      request.targetProject.name = '';
-      const expectedHeaderRequestParams = 'target_project.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.targetProject ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateTargetProjectRequest', [
+        'targetProject',
+        'name',
+      ]);
+      request.targetProject.name = defaultValue1;
+      const expectedHeaderRequestParams = `target_project.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateTargetProject = stubLongRunningCall(
         undefined,
@@ -6381,11 +6293,14 @@ describe('v1.VmMigrationClient', () => {
       );
       const [operation] = await client.updateTargetProject(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.updateTargetProject as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateTargetProject as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateTargetProject as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkUpdateTargetProjectProgress without error', async () => {
@@ -6440,15 +6355,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DeleteTargetProjectRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteTargetProjectRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -6457,11 +6368,14 @@ describe('v1.VmMigrationClient', () => {
       const [operation] = await client.deleteTargetProject(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteTargetProject as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteTargetProject as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteTargetProject as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteTargetProject without error using callback', async () => {
@@ -6473,15 +6387,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DeleteTargetProjectRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteTargetProjectRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -6511,11 +6421,14 @@ describe('v1.VmMigrationClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteTargetProject as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteTargetProject as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteTargetProject as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteTargetProject with call error', async () => {
@@ -6527,26 +6440,25 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DeleteTargetProjectRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteTargetProjectRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteTargetProject = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteTargetProject(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteTargetProject as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteTargetProject as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteTargetProject as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteTargetProject with LRO error', async () => {
@@ -6558,15 +6470,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DeleteTargetProjectRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteTargetProjectRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteTargetProject = stubLongRunningCall(
         undefined,
@@ -6575,11 +6483,14 @@ describe('v1.VmMigrationClient', () => {
       );
       const [operation] = await client.deleteTargetProject(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.deleteTargetProject as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteTargetProject as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteTargetProject as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkDeleteTargetProjectProgress without error', async () => {
@@ -6634,15 +6545,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListSourcesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListSourcesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.vmmigration.v1.Source()),
         generateSampleMessage(new protos.google.cloud.vmmigration.v1.Source()),
@@ -6651,11 +6558,14 @@ describe('v1.VmMigrationClient', () => {
       client.innerApiCalls.listSources = stubSimpleCall(expectedResponse);
       const [response] = await client.listSources(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listSources as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listSources as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listSources as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listSources without error using callback', async () => {
@@ -6667,15 +6577,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListSourcesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListSourcesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.vmmigration.v1.Source()),
         generateSampleMessage(new protos.google.cloud.vmmigration.v1.Source()),
@@ -6700,11 +6606,14 @@ describe('v1.VmMigrationClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listSources as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listSources as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listSources as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listSources with error', async () => {
@@ -6716,26 +6625,25 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListSourcesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListSourcesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listSources = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listSources(request), expectedError);
-      assert(
-        (client.innerApiCalls.listSources as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listSources as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listSources as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listSourcesStream without error', async () => {
@@ -6747,8 +6655,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListSourcesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListSourcesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.vmmigration.v1.Source()),
         generateSampleMessage(new protos.google.cloud.vmmigration.v1.Source()),
@@ -6779,11 +6690,12 @@ describe('v1.VmMigrationClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listSources, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.listSources.createStream as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listSources.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -6796,8 +6708,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListSourcesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListSourcesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSources.createStream = stubPageStreamingCall(
         undefined,
@@ -6825,11 +6740,12 @@ describe('v1.VmMigrationClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listSources, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.listSources.createStream as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listSources.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -6842,8 +6758,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListSourcesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListSourcesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.vmmigration.v1.Source()),
         generateSampleMessage(new protos.google.cloud.vmmigration.v1.Source()),
@@ -6863,11 +6782,12 @@ describe('v1.VmMigrationClient', () => {
         ).args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.listSources.asyncIterate as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listSources.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -6880,8 +6800,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListSourcesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListSourcesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSources.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -6900,11 +6823,12 @@ describe('v1.VmMigrationClient', () => {
         ).args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.listSources.asyncIterate as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listSources.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -6919,15 +6843,12 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListUtilizationReportsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListUtilizationReportsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmmigration.v1.UtilizationReport()
@@ -6943,11 +6864,14 @@ describe('v1.VmMigrationClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listUtilizationReports(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listUtilizationReports as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listUtilizationReports as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listUtilizationReports as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listUtilizationReports without error using callback', async () => {
@@ -6959,15 +6883,12 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListUtilizationReportsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListUtilizationReportsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmmigration.v1.UtilizationReport()
@@ -7000,11 +6921,14 @@ describe('v1.VmMigrationClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listUtilizationReports as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listUtilizationReports as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listUtilizationReports as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listUtilizationReports with error', async () => {
@@ -7016,15 +6940,12 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListUtilizationReportsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListUtilizationReportsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listUtilizationReports = stubSimpleCall(
         undefined,
@@ -7034,11 +6955,14 @@ describe('v1.VmMigrationClient', () => {
         client.listUtilizationReports(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.listUtilizationReports as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listUtilizationReports as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listUtilizationReports as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listUtilizationReportsStream without error', async () => {
@@ -7050,8 +6974,12 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListUtilizationReportsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListUtilizationReportsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmmigration.v1.UtilizationReport()
@@ -7092,12 +7020,15 @@ describe('v1.VmMigrationClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listUtilizationReports, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listUtilizationReports
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -7110,8 +7041,12 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListUtilizationReportsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListUtilizationReportsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listUtilizationReports.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -7141,12 +7076,15 @@ describe('v1.VmMigrationClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listUtilizationReports, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listUtilizationReports
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -7159,8 +7097,12 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListUtilizationReportsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListUtilizationReportsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmmigration.v1.UtilizationReport()
@@ -7188,12 +7130,15 @@ describe('v1.VmMigrationClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listUtilizationReports
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -7206,8 +7151,12 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListUtilizationReportsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListUtilizationReportsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listUtilizationReports.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -7226,12 +7175,15 @@ describe('v1.VmMigrationClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listUtilizationReports
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -7246,15 +7198,12 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListDatacenterConnectorsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListDatacenterConnectorsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmmigration.v1.DatacenterConnector()
@@ -7270,11 +7219,14 @@ describe('v1.VmMigrationClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listDatacenterConnectors(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listDatacenterConnectors as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listDatacenterConnectors as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDatacenterConnectors as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listDatacenterConnectors without error using callback', async () => {
@@ -7286,15 +7238,12 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListDatacenterConnectorsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListDatacenterConnectorsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmmigration.v1.DatacenterConnector()
@@ -7327,11 +7276,14 @@ describe('v1.VmMigrationClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listDatacenterConnectors as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listDatacenterConnectors as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDatacenterConnectors as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listDatacenterConnectors with error', async () => {
@@ -7343,15 +7295,12 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListDatacenterConnectorsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListDatacenterConnectorsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDatacenterConnectors = stubSimpleCall(
         undefined,
@@ -7361,11 +7310,14 @@ describe('v1.VmMigrationClient', () => {
         client.listDatacenterConnectors(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.listDatacenterConnectors as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listDatacenterConnectors as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDatacenterConnectors as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listDatacenterConnectorsStream without error', async () => {
@@ -7377,8 +7329,12 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListDatacenterConnectorsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListDatacenterConnectorsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmmigration.v1.DatacenterConnector()
@@ -7421,12 +7377,15 @@ describe('v1.VmMigrationClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listDatacenterConnectors, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listDatacenterConnectors
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -7439,8 +7398,12 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListDatacenterConnectorsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListDatacenterConnectorsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDatacenterConnectors.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -7472,12 +7435,15 @@ describe('v1.VmMigrationClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listDatacenterConnectors, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listDatacenterConnectors
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -7490,8 +7456,12 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListDatacenterConnectorsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListDatacenterConnectorsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmmigration.v1.DatacenterConnector()
@@ -7519,12 +7489,15 @@ describe('v1.VmMigrationClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listDatacenterConnectors
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -7537,8 +7510,12 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListDatacenterConnectorsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListDatacenterConnectorsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDatacenterConnectors.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -7557,12 +7534,15 @@ describe('v1.VmMigrationClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listDatacenterConnectors
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -7577,15 +7557,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListMigratingVmsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListMigratingVmsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmmigration.v1.MigratingVm()
@@ -7600,11 +7576,14 @@ describe('v1.VmMigrationClient', () => {
       client.innerApiCalls.listMigratingVms = stubSimpleCall(expectedResponse);
       const [response] = await client.listMigratingVms(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listMigratingVms as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listMigratingVms as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listMigratingVms as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listMigratingVms without error using callback', async () => {
@@ -7616,15 +7595,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListMigratingVmsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListMigratingVmsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmmigration.v1.MigratingVm()
@@ -7655,11 +7630,14 @@ describe('v1.VmMigrationClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listMigratingVms as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listMigratingVms as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listMigratingVms as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listMigratingVms with error', async () => {
@@ -7671,26 +7649,25 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListMigratingVmsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListMigratingVmsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listMigratingVms = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listMigratingVms(request), expectedError);
-      assert(
-        (client.innerApiCalls.listMigratingVms as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listMigratingVms as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listMigratingVms as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listMigratingVmsStream without error', async () => {
@@ -7702,8 +7679,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListMigratingVmsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListMigratingVmsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmmigration.v1.MigratingVm()
@@ -7740,11 +7720,12 @@ describe('v1.VmMigrationClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listMigratingVms, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listMigratingVms.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listMigratingVms.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -7757,8 +7738,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListMigratingVmsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListMigratingVmsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listMigratingVms.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -7784,11 +7768,12 @@ describe('v1.VmMigrationClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listMigratingVms, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listMigratingVms.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listMigratingVms.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -7801,8 +7786,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListMigratingVmsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListMigratingVmsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmmigration.v1.MigratingVm()
@@ -7828,11 +7816,12 @@ describe('v1.VmMigrationClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listMigratingVms.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listMigratingVms.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -7845,8 +7834,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListMigratingVmsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListMigratingVmsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listMigratingVms.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -7863,11 +7855,12 @@ describe('v1.VmMigrationClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listMigratingVms.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listMigratingVms.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -7882,15 +7875,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListCloneJobsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListCloneJobsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmmigration.v1.CloneJob()
@@ -7905,11 +7894,14 @@ describe('v1.VmMigrationClient', () => {
       client.innerApiCalls.listCloneJobs = stubSimpleCall(expectedResponse);
       const [response] = await client.listCloneJobs(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listCloneJobs as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listCloneJobs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listCloneJobs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listCloneJobs without error using callback', async () => {
@@ -7921,15 +7913,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListCloneJobsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListCloneJobsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmmigration.v1.CloneJob()
@@ -7960,11 +7948,14 @@ describe('v1.VmMigrationClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listCloneJobs as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listCloneJobs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listCloneJobs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listCloneJobs with error', async () => {
@@ -7976,26 +7967,25 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListCloneJobsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListCloneJobsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listCloneJobs = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listCloneJobs(request), expectedError);
-      assert(
-        (client.innerApiCalls.listCloneJobs as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listCloneJobs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listCloneJobs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listCloneJobsStream without error', async () => {
@@ -8007,8 +7997,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListCloneJobsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListCloneJobsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmmigration.v1.CloneJob()
@@ -8045,11 +8038,12 @@ describe('v1.VmMigrationClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listCloneJobs, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listCloneJobs.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listCloneJobs.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -8062,8 +8056,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListCloneJobsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListCloneJobsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCloneJobs.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -8089,11 +8086,12 @@ describe('v1.VmMigrationClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listCloneJobs, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listCloneJobs.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listCloneJobs.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -8106,8 +8104,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListCloneJobsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListCloneJobsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmmigration.v1.CloneJob()
@@ -8133,11 +8134,12 @@ describe('v1.VmMigrationClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listCloneJobs.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listCloneJobs.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -8150,8 +8152,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListCloneJobsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListCloneJobsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCloneJobs.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -8168,11 +8173,12 @@ describe('v1.VmMigrationClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listCloneJobs.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listCloneJobs.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -8187,15 +8193,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListCutoverJobsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListCutoverJobsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmmigration.v1.CutoverJob()
@@ -8210,11 +8212,14 @@ describe('v1.VmMigrationClient', () => {
       client.innerApiCalls.listCutoverJobs = stubSimpleCall(expectedResponse);
       const [response] = await client.listCutoverJobs(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listCutoverJobs as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listCutoverJobs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listCutoverJobs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listCutoverJobs without error using callback', async () => {
@@ -8226,15 +8231,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListCutoverJobsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListCutoverJobsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmmigration.v1.CutoverJob()
@@ -8265,11 +8266,14 @@ describe('v1.VmMigrationClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listCutoverJobs as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listCutoverJobs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listCutoverJobs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listCutoverJobs with error', async () => {
@@ -8281,26 +8285,25 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListCutoverJobsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListCutoverJobsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listCutoverJobs = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listCutoverJobs(request), expectedError);
-      assert(
-        (client.innerApiCalls.listCutoverJobs as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listCutoverJobs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listCutoverJobs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listCutoverJobsStream without error', async () => {
@@ -8312,8 +8315,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListCutoverJobsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListCutoverJobsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmmigration.v1.CutoverJob()
@@ -8350,11 +8356,12 @@ describe('v1.VmMigrationClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listCutoverJobs, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listCutoverJobs.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listCutoverJobs.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -8367,8 +8374,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListCutoverJobsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListCutoverJobsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCutoverJobs.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -8394,11 +8404,12 @@ describe('v1.VmMigrationClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listCutoverJobs, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listCutoverJobs.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listCutoverJobs.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -8411,8 +8422,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListCutoverJobsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListCutoverJobsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmmigration.v1.CutoverJob()
@@ -8438,11 +8452,12 @@ describe('v1.VmMigrationClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listCutoverJobs.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listCutoverJobs.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -8455,8 +8470,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListCutoverJobsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListCutoverJobsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCutoverJobs.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -8473,11 +8491,12 @@ describe('v1.VmMigrationClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listCutoverJobs.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listCutoverJobs.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -8492,15 +8511,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListGroupsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListGroupsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.vmmigration.v1.Group()),
         generateSampleMessage(new protos.google.cloud.vmmigration.v1.Group()),
@@ -8509,11 +8524,14 @@ describe('v1.VmMigrationClient', () => {
       client.innerApiCalls.listGroups = stubSimpleCall(expectedResponse);
       const [response] = await client.listGroups(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listGroups as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listGroups as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listGroups as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listGroups without error using callback', async () => {
@@ -8525,15 +8543,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListGroupsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListGroupsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.vmmigration.v1.Group()),
         generateSampleMessage(new protos.google.cloud.vmmigration.v1.Group()),
@@ -8558,11 +8572,14 @@ describe('v1.VmMigrationClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listGroups as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listGroups as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listGroups as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listGroups with error', async () => {
@@ -8574,26 +8591,25 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListGroupsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListGroupsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listGroups = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listGroups(request), expectedError);
-      assert(
-        (client.innerApiCalls.listGroups as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listGroups as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listGroups as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listGroupsStream without error', async () => {
@@ -8605,8 +8621,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListGroupsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListGroupsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.vmmigration.v1.Group()),
         generateSampleMessage(new protos.google.cloud.vmmigration.v1.Group()),
@@ -8637,11 +8656,12 @@ describe('v1.VmMigrationClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listGroups, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.listGroups.createStream as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listGroups.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -8654,8 +8674,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListGroupsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListGroupsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listGroups.createStream = stubPageStreamingCall(
         undefined,
@@ -8683,11 +8706,12 @@ describe('v1.VmMigrationClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listGroups, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.listGroups.createStream as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listGroups.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -8700,8 +8724,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListGroupsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListGroupsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.vmmigration.v1.Group()),
         generateSampleMessage(new protos.google.cloud.vmmigration.v1.Group()),
@@ -8721,11 +8748,12 @@ describe('v1.VmMigrationClient', () => {
         ).args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.listGroups.asyncIterate as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listGroups.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -8738,8 +8766,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListGroupsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListGroupsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listGroups.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -8758,11 +8789,12 @@ describe('v1.VmMigrationClient', () => {
         ).args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.listGroups.asyncIterate as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listGroups.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -8777,15 +8809,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListTargetProjectsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListTargetProjectsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmmigration.v1.TargetProject()
@@ -8801,11 +8829,14 @@ describe('v1.VmMigrationClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listTargetProjects(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listTargetProjects as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listTargetProjects as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listTargetProjects as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listTargetProjects without error using callback', async () => {
@@ -8817,15 +8848,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListTargetProjectsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListTargetProjectsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmmigration.v1.TargetProject()
@@ -8856,11 +8883,14 @@ describe('v1.VmMigrationClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listTargetProjects as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listTargetProjects as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listTargetProjects as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listTargetProjects with error', async () => {
@@ -8872,26 +8902,25 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListTargetProjectsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListTargetProjectsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listTargetProjects = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listTargetProjects(request), expectedError);
-      assert(
-        (client.innerApiCalls.listTargetProjects as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listTargetProjects as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listTargetProjects as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listTargetProjectsStream without error', async () => {
@@ -8903,8 +8932,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListTargetProjectsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListTargetProjectsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmmigration.v1.TargetProject()
@@ -8942,11 +8974,12 @@ describe('v1.VmMigrationClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listTargetProjects, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listTargetProjects.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listTargetProjects.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -8959,8 +8992,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListTargetProjectsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListTargetProjectsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTargetProjects.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -8987,11 +9023,12 @@ describe('v1.VmMigrationClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listTargetProjects, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listTargetProjects.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listTargetProjects.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -9004,8 +9041,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListTargetProjectsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListTargetProjectsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmmigration.v1.TargetProject()
@@ -9031,11 +9071,12 @@ describe('v1.VmMigrationClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listTargetProjects.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listTargetProjects.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -9048,8 +9089,11 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListTargetProjectsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListTargetProjectsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTargetProjects.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -9067,11 +9111,12 @@ describe('v1.VmMigrationClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listTargetProjects.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listTargetProjects.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
