@@ -586,7 +586,7 @@ export class DomainsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        location: request.location || '',
+        location: request.location ?? '',
       });
     this.initialize();
     return this.innerApiCalls.searchDomains(request, options, callback);
@@ -686,7 +686,7 @@ export class DomainsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        location: request.location || '',
+        location: request.location ?? '',
       });
     this.initialize();
     return this.innerApiCalls.retrieveRegisterParameters(
@@ -794,7 +794,7 @@ export class DomainsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        location: request.location || '',
+        location: request.location ?? '',
       });
     this.initialize();
     return this.innerApiCalls.retrieveTransferParameters(
@@ -890,7 +890,7 @@ export class DomainsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getRegistration(request, options, callback);
@@ -992,7 +992,7 @@ export class DomainsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        registration: request.registration || '',
+        registration: request.registration ?? '',
       });
     this.initialize();
     return this.innerApiCalls.retrieveAuthorizationCode(
@@ -1097,7 +1097,7 @@ export class DomainsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        registration: request.registration || '',
+        registration: request.registration ?? '',
       });
     this.initialize();
     return this.innerApiCalls.resetAuthorizationCode(
@@ -1235,7 +1235,7 @@ export class DomainsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.registerDomain(request, options, callback);
@@ -1415,7 +1415,7 @@ export class DomainsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.transferDomain(request, options, callback);
@@ -1562,7 +1562,7 @@ export class DomainsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'registration.name': request.registration!.name || '',
+        'registration.name': request.registration!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateRegistration(request, options, callback);
@@ -1707,7 +1707,7 @@ export class DomainsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        registration: request.registration || '',
+        registration: request.registration ?? '',
       });
     this.initialize();
     return this.innerApiCalls.configureManagementSettings(
@@ -1864,7 +1864,7 @@ export class DomainsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        registration: request.registration || '',
+        registration: request.registration ?? '',
       });
     this.initialize();
     return this.innerApiCalls.configureDnsSettings(request, options, callback);
@@ -2015,7 +2015,7 @@ export class DomainsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        registration: request.registration || '',
+        registration: request.registration ?? '',
       });
     this.initialize();
     return this.innerApiCalls.configureContactSettings(
@@ -2166,7 +2166,7 @@ export class DomainsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.exportRegistration(request, options, callback);
@@ -2323,7 +2323,7 @@ export class DomainsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteRegistration(request, options, callback);
@@ -2475,7 +2475,7 @@ export class DomainsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listRegistrations(request, options, callback);
@@ -2532,7 +2532,7 @@ export class DomainsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listRegistrations'];
     const callSettings = defaultCallSettings.merge(options);
@@ -2598,7 +2598,7 @@ export class DomainsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listRegistrations'];
     const callSettings = defaultCallSettings.merge(options);

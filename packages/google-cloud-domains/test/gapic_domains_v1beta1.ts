@@ -27,6 +27,21 @@ import {PassThrough} from 'stream';
 
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -252,26 +267,25 @@ describe('v1beta1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.SearchDomainsRequest()
       );
-      request.location = '';
-      const expectedHeaderRequestParams = 'location=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SearchDomainsRequest', [
+        'location',
+      ]);
+      request.location = defaultValue1;
+      const expectedHeaderRequestParams = `location=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.SearchDomainsResponse()
       );
       client.innerApiCalls.searchDomains = stubSimpleCall(expectedResponse);
       const [response] = await client.searchDomains(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.searchDomains as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.searchDomains as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.searchDomains as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes searchDomains without error using callback', async () => {
@@ -283,15 +297,11 @@ describe('v1beta1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.SearchDomainsRequest()
       );
-      request.location = '';
-      const expectedHeaderRequestParams = 'location=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SearchDomainsRequest', [
+        'location',
+      ]);
+      request.location = defaultValue1;
+      const expectedHeaderRequestParams = `location=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.SearchDomainsResponse()
       );
@@ -314,11 +324,14 @@ describe('v1beta1.DomainsClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.searchDomains as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.searchDomains as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.searchDomains as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes searchDomains with error', async () => {
@@ -330,26 +343,25 @@ describe('v1beta1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.SearchDomainsRequest()
       );
-      request.location = '';
-      const expectedHeaderRequestParams = 'location=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SearchDomainsRequest', [
+        'location',
+      ]);
+      request.location = defaultValue1;
+      const expectedHeaderRequestParams = `location=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.searchDomains = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.searchDomains(request), expectedError);
-      assert(
-        (client.innerApiCalls.searchDomains as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.searchDomains as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.searchDomains as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes searchDomains with closed client', async () => {
@@ -361,7 +373,10 @@ describe('v1beta1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.SearchDomainsRequest()
       );
-      request.location = '';
+      const defaultValue1 = getTypeDefaultValue('SearchDomainsRequest', [
+        'location',
+      ]);
+      request.location = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.searchDomains(request), expectedError);
@@ -378,15 +393,12 @@ describe('v1beta1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.RetrieveRegisterParametersRequest()
       );
-      request.location = '';
-      const expectedHeaderRequestParams = 'location=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'RetrieveRegisterParametersRequest',
+        ['location']
+      );
+      request.location = defaultValue1;
+      const expectedHeaderRequestParams = `location=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.RetrieveRegisterParametersResponse()
       );
@@ -394,11 +406,14 @@ describe('v1beta1.DomainsClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.retrieveRegisterParameters(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.retrieveRegisterParameters as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.retrieveRegisterParameters as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.retrieveRegisterParameters as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes retrieveRegisterParameters without error using callback', async () => {
@@ -410,15 +425,12 @@ describe('v1beta1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.RetrieveRegisterParametersRequest()
       );
-      request.location = '';
-      const expectedHeaderRequestParams = 'location=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'RetrieveRegisterParametersRequest',
+        ['location']
+      );
+      request.location = defaultValue1;
+      const expectedHeaderRequestParams = `location=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.RetrieveRegisterParametersResponse()
       );
@@ -441,11 +453,14 @@ describe('v1beta1.DomainsClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.retrieveRegisterParameters as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.retrieveRegisterParameters as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.retrieveRegisterParameters as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes retrieveRegisterParameters with error', async () => {
@@ -457,15 +472,12 @@ describe('v1beta1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.RetrieveRegisterParametersRequest()
       );
-      request.location = '';
-      const expectedHeaderRequestParams = 'location=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'RetrieveRegisterParametersRequest',
+        ['location']
+      );
+      request.location = defaultValue1;
+      const expectedHeaderRequestParams = `location=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.retrieveRegisterParameters = stubSimpleCall(
         undefined,
@@ -475,11 +487,14 @@ describe('v1beta1.DomainsClient', () => {
         client.retrieveRegisterParameters(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.retrieveRegisterParameters as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.retrieveRegisterParameters as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.retrieveRegisterParameters as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes retrieveRegisterParameters with closed client', async () => {
@@ -491,7 +506,11 @@ describe('v1beta1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.RetrieveRegisterParametersRequest()
       );
-      request.location = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'RetrieveRegisterParametersRequest',
+        ['location']
+      );
+      request.location = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -511,15 +530,12 @@ describe('v1beta1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.RetrieveTransferParametersRequest()
       );
-      request.location = '';
-      const expectedHeaderRequestParams = 'location=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'RetrieveTransferParametersRequest',
+        ['location']
+      );
+      request.location = defaultValue1;
+      const expectedHeaderRequestParams = `location=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.RetrieveTransferParametersResponse()
       );
@@ -527,11 +543,14 @@ describe('v1beta1.DomainsClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.retrieveTransferParameters(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.retrieveTransferParameters as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.retrieveTransferParameters as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.retrieveTransferParameters as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes retrieveTransferParameters without error using callback', async () => {
@@ -543,15 +562,12 @@ describe('v1beta1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.RetrieveTransferParametersRequest()
       );
-      request.location = '';
-      const expectedHeaderRequestParams = 'location=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'RetrieveTransferParametersRequest',
+        ['location']
+      );
+      request.location = defaultValue1;
+      const expectedHeaderRequestParams = `location=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.RetrieveTransferParametersResponse()
       );
@@ -574,11 +590,14 @@ describe('v1beta1.DomainsClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.retrieveTransferParameters as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.retrieveTransferParameters as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.retrieveTransferParameters as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes retrieveTransferParameters with error', async () => {
@@ -590,15 +609,12 @@ describe('v1beta1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.RetrieveTransferParametersRequest()
       );
-      request.location = '';
-      const expectedHeaderRequestParams = 'location=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'RetrieveTransferParametersRequest',
+        ['location']
+      );
+      request.location = defaultValue1;
+      const expectedHeaderRequestParams = `location=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.retrieveTransferParameters = stubSimpleCall(
         undefined,
@@ -608,11 +624,14 @@ describe('v1beta1.DomainsClient', () => {
         client.retrieveTransferParameters(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.retrieveTransferParameters as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.retrieveTransferParameters as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.retrieveTransferParameters as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes retrieveTransferParameters with closed client', async () => {
@@ -624,7 +643,11 @@ describe('v1beta1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.RetrieveTransferParametersRequest()
       );
-      request.location = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'RetrieveTransferParametersRequest',
+        ['location']
+      );
+      request.location = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -644,26 +667,25 @@ describe('v1beta1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.GetRegistrationRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetRegistrationRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.Registration()
       );
       client.innerApiCalls.getRegistration = stubSimpleCall(expectedResponse);
       const [response] = await client.getRegistration(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getRegistration as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getRegistration as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getRegistration as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getRegistration without error using callback', async () => {
@@ -675,15 +697,11 @@ describe('v1beta1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.GetRegistrationRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetRegistrationRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.Registration()
       );
@@ -706,11 +724,14 @@ describe('v1beta1.DomainsClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getRegistration as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getRegistration as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getRegistration as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getRegistration with error', async () => {
@@ -722,26 +743,25 @@ describe('v1beta1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.GetRegistrationRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetRegistrationRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getRegistration = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getRegistration(request), expectedError);
-      assert(
-        (client.innerApiCalls.getRegistration as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getRegistration as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getRegistration as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getRegistration with closed client', async () => {
@@ -753,7 +773,10 @@ describe('v1beta1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.GetRegistrationRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetRegistrationRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getRegistration(request), expectedError);
@@ -770,15 +793,12 @@ describe('v1beta1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.RetrieveAuthorizationCodeRequest()
       );
-      request.registration = '';
-      const expectedHeaderRequestParams = 'registration=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'RetrieveAuthorizationCodeRequest',
+        ['registration']
+      );
+      request.registration = defaultValue1;
+      const expectedHeaderRequestParams = `registration=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.AuthorizationCode()
       );
@@ -786,11 +806,14 @@ describe('v1beta1.DomainsClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.retrieveAuthorizationCode(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.retrieveAuthorizationCode as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.retrieveAuthorizationCode as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.retrieveAuthorizationCode as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes retrieveAuthorizationCode without error using callback', async () => {
@@ -802,15 +825,12 @@ describe('v1beta1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.RetrieveAuthorizationCodeRequest()
       );
-      request.registration = '';
-      const expectedHeaderRequestParams = 'registration=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'RetrieveAuthorizationCodeRequest',
+        ['registration']
+      );
+      request.registration = defaultValue1;
+      const expectedHeaderRequestParams = `registration=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.AuthorizationCode()
       );
@@ -833,11 +853,14 @@ describe('v1beta1.DomainsClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.retrieveAuthorizationCode as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.retrieveAuthorizationCode as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.retrieveAuthorizationCode as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes retrieveAuthorizationCode with error', async () => {
@@ -849,15 +872,12 @@ describe('v1beta1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.RetrieveAuthorizationCodeRequest()
       );
-      request.registration = '';
-      const expectedHeaderRequestParams = 'registration=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'RetrieveAuthorizationCodeRequest',
+        ['registration']
+      );
+      request.registration = defaultValue1;
+      const expectedHeaderRequestParams = `registration=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.retrieveAuthorizationCode = stubSimpleCall(
         undefined,
@@ -867,11 +887,14 @@ describe('v1beta1.DomainsClient', () => {
         client.retrieveAuthorizationCode(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.retrieveAuthorizationCode as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.retrieveAuthorizationCode as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.retrieveAuthorizationCode as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes retrieveAuthorizationCode with closed client', async () => {
@@ -883,7 +906,11 @@ describe('v1beta1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.RetrieveAuthorizationCodeRequest()
       );
-      request.registration = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'RetrieveAuthorizationCodeRequest',
+        ['registration']
+      );
+      request.registration = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -903,15 +930,12 @@ describe('v1beta1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.ResetAuthorizationCodeRequest()
       );
-      request.registration = '';
-      const expectedHeaderRequestParams = 'registration=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ResetAuthorizationCodeRequest',
+        ['registration']
+      );
+      request.registration = defaultValue1;
+      const expectedHeaderRequestParams = `registration=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.AuthorizationCode()
       );
@@ -919,11 +943,14 @@ describe('v1beta1.DomainsClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.resetAuthorizationCode(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.resetAuthorizationCode as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.resetAuthorizationCode as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.resetAuthorizationCode as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes resetAuthorizationCode without error using callback', async () => {
@@ -935,15 +962,12 @@ describe('v1beta1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.ResetAuthorizationCodeRequest()
       );
-      request.registration = '';
-      const expectedHeaderRequestParams = 'registration=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ResetAuthorizationCodeRequest',
+        ['registration']
+      );
+      request.registration = defaultValue1;
+      const expectedHeaderRequestParams = `registration=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.AuthorizationCode()
       );
@@ -966,11 +990,14 @@ describe('v1beta1.DomainsClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.resetAuthorizationCode as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.resetAuthorizationCode as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.resetAuthorizationCode as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes resetAuthorizationCode with error', async () => {
@@ -982,15 +1009,12 @@ describe('v1beta1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.ResetAuthorizationCodeRequest()
       );
-      request.registration = '';
-      const expectedHeaderRequestParams = 'registration=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ResetAuthorizationCodeRequest',
+        ['registration']
+      );
+      request.registration = defaultValue1;
+      const expectedHeaderRequestParams = `registration=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.resetAuthorizationCode = stubSimpleCall(
         undefined,
@@ -1000,11 +1024,14 @@ describe('v1beta1.DomainsClient', () => {
         client.resetAuthorizationCode(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.resetAuthorizationCode as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.resetAuthorizationCode as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.resetAuthorizationCode as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes resetAuthorizationCode with closed client', async () => {
@@ -1016,7 +1043,11 @@ describe('v1beta1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.ResetAuthorizationCodeRequest()
       );
-      request.registration = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'ResetAuthorizationCodeRequest',
+        ['registration']
+      );
+      request.registration = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1036,15 +1067,11 @@ describe('v1beta1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.RegisterDomainRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('RegisterDomainRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1053,11 +1080,14 @@ describe('v1beta1.DomainsClient', () => {
       const [operation] = await client.registerDomain(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.registerDomain as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.registerDomain as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.registerDomain as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes registerDomain without error using callback', async () => {
@@ -1069,15 +1099,11 @@ describe('v1beta1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.RegisterDomainRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('RegisterDomainRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1107,11 +1133,14 @@ describe('v1beta1.DomainsClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.registerDomain as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.registerDomain as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.registerDomain as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes registerDomain with call error', async () => {
@@ -1123,26 +1152,25 @@ describe('v1beta1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.RegisterDomainRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('RegisterDomainRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.registerDomain = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.registerDomain(request), expectedError);
-      assert(
-        (client.innerApiCalls.registerDomain as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.registerDomain as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.registerDomain as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes registerDomain with LRO error', async () => {
@@ -1154,15 +1182,11 @@ describe('v1beta1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.RegisterDomainRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('RegisterDomainRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.registerDomain = stubLongRunningCall(
         undefined,
@@ -1171,11 +1195,14 @@ describe('v1beta1.DomainsClient', () => {
       );
       const [operation] = await client.registerDomain(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.registerDomain as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.registerDomain as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.registerDomain as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkRegisterDomainProgress without error', async () => {
@@ -1230,15 +1257,11 @@ describe('v1beta1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.TransferDomainRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('TransferDomainRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1247,11 +1270,14 @@ describe('v1beta1.DomainsClient', () => {
       const [operation] = await client.transferDomain(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.transferDomain as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.transferDomain as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.transferDomain as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes transferDomain without error using callback', async () => {
@@ -1263,15 +1289,11 @@ describe('v1beta1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.TransferDomainRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('TransferDomainRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1301,11 +1323,14 @@ describe('v1beta1.DomainsClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.transferDomain as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.transferDomain as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.transferDomain as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes transferDomain with call error', async () => {
@@ -1317,26 +1342,25 @@ describe('v1beta1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.TransferDomainRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('TransferDomainRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.transferDomain = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.transferDomain(request), expectedError);
-      assert(
-        (client.innerApiCalls.transferDomain as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.transferDomain as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.transferDomain as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes transferDomain with LRO error', async () => {
@@ -1348,15 +1372,11 @@ describe('v1beta1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.TransferDomainRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('TransferDomainRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.transferDomain = stubLongRunningCall(
         undefined,
@@ -1365,11 +1385,14 @@ describe('v1beta1.DomainsClient', () => {
       );
       const [operation] = await client.transferDomain(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.transferDomain as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.transferDomain as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.transferDomain as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkTransferDomainProgress without error', async () => {
@@ -1424,16 +1447,13 @@ describe('v1beta1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.UpdateRegistrationRequest()
       );
-      request.registration = {};
-      request.registration.name = '';
-      const expectedHeaderRequestParams = 'registration.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.registration ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateRegistrationRequest', [
+        'registration',
+        'name',
+      ]);
+      request.registration.name = defaultValue1;
+      const expectedHeaderRequestParams = `registration.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1442,11 +1462,14 @@ describe('v1beta1.DomainsClient', () => {
       const [operation] = await client.updateRegistration(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateRegistration as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateRegistration as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateRegistration as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateRegistration without error using callback', async () => {
@@ -1458,16 +1481,13 @@ describe('v1beta1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.UpdateRegistrationRequest()
       );
-      request.registration = {};
-      request.registration.name = '';
-      const expectedHeaderRequestParams = 'registration.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.registration ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateRegistrationRequest', [
+        'registration',
+        'name',
+      ]);
+      request.registration.name = defaultValue1;
+      const expectedHeaderRequestParams = `registration.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1497,11 +1517,14 @@ describe('v1beta1.DomainsClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateRegistration as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateRegistration as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateRegistration as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateRegistration with call error', async () => {
@@ -1513,27 +1536,27 @@ describe('v1beta1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.UpdateRegistrationRequest()
       );
-      request.registration = {};
-      request.registration.name = '';
-      const expectedHeaderRequestParams = 'registration.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.registration ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateRegistrationRequest', [
+        'registration',
+        'name',
+      ]);
+      request.registration.name = defaultValue1;
+      const expectedHeaderRequestParams = `registration.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateRegistration = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateRegistration(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateRegistration as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateRegistration as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateRegistration as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateRegistration with LRO error', async () => {
@@ -1545,16 +1568,13 @@ describe('v1beta1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.UpdateRegistrationRequest()
       );
-      request.registration = {};
-      request.registration.name = '';
-      const expectedHeaderRequestParams = 'registration.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.registration ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateRegistrationRequest', [
+        'registration',
+        'name',
+      ]);
+      request.registration.name = defaultValue1;
+      const expectedHeaderRequestParams = `registration.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateRegistration = stubLongRunningCall(
         undefined,
@@ -1563,11 +1583,14 @@ describe('v1beta1.DomainsClient', () => {
       );
       const [operation] = await client.updateRegistration(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.updateRegistration as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateRegistration as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateRegistration as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkUpdateRegistrationProgress without error', async () => {
@@ -1622,15 +1645,12 @@ describe('v1beta1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.ConfigureManagementSettingsRequest()
       );
-      request.registration = '';
-      const expectedHeaderRequestParams = 'registration=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ConfigureManagementSettingsRequest',
+        ['registration']
+      );
+      request.registration = defaultValue1;
+      const expectedHeaderRequestParams = `registration=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1639,11 +1659,14 @@ describe('v1beta1.DomainsClient', () => {
       const [operation] = await client.configureManagementSettings(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.configureManagementSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.configureManagementSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.configureManagementSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes configureManagementSettings without error using callback', async () => {
@@ -1655,15 +1678,12 @@ describe('v1beta1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.ConfigureManagementSettingsRequest()
       );
-      request.registration = '';
-      const expectedHeaderRequestParams = 'registration=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ConfigureManagementSettingsRequest',
+        ['registration']
+      );
+      request.registration = defaultValue1;
+      const expectedHeaderRequestParams = `registration=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1693,11 +1713,14 @@ describe('v1beta1.DomainsClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.configureManagementSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.configureManagementSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.configureManagementSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes configureManagementSettings with call error', async () => {
@@ -1709,15 +1732,12 @@ describe('v1beta1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.ConfigureManagementSettingsRequest()
       );
-      request.registration = '';
-      const expectedHeaderRequestParams = 'registration=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ConfigureManagementSettingsRequest',
+        ['registration']
+      );
+      request.registration = defaultValue1;
+      const expectedHeaderRequestParams = `registration=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.configureManagementSettings = stubLongRunningCall(
         undefined,
@@ -1727,11 +1747,14 @@ describe('v1beta1.DomainsClient', () => {
         client.configureManagementSettings(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.configureManagementSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.configureManagementSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.configureManagementSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes configureManagementSettings with LRO error', async () => {
@@ -1743,15 +1766,12 @@ describe('v1beta1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.ConfigureManagementSettingsRequest()
       );
-      request.registration = '';
-      const expectedHeaderRequestParams = 'registration=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ConfigureManagementSettingsRequest',
+        ['registration']
+      );
+      request.registration = defaultValue1;
+      const expectedHeaderRequestParams = `registration=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.configureManagementSettings = stubLongRunningCall(
         undefined,
@@ -1760,11 +1780,14 @@ describe('v1beta1.DomainsClient', () => {
       );
       const [operation] = await client.configureManagementSettings(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.configureManagementSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.configureManagementSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.configureManagementSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkConfigureManagementSettingsProgress without error', async () => {
@@ -1820,15 +1843,11 @@ describe('v1beta1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.ConfigureDnsSettingsRequest()
       );
-      request.registration = '';
-      const expectedHeaderRequestParams = 'registration=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ConfigureDnsSettingsRequest', [
+        'registration',
+      ]);
+      request.registration = defaultValue1;
+      const expectedHeaderRequestParams = `registration=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1837,11 +1856,14 @@ describe('v1beta1.DomainsClient', () => {
       const [operation] = await client.configureDnsSettings(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.configureDnsSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.configureDnsSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.configureDnsSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes configureDnsSettings without error using callback', async () => {
@@ -1853,15 +1875,11 @@ describe('v1beta1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.ConfigureDnsSettingsRequest()
       );
-      request.registration = '';
-      const expectedHeaderRequestParams = 'registration=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ConfigureDnsSettingsRequest', [
+        'registration',
+      ]);
+      request.registration = defaultValue1;
+      const expectedHeaderRequestParams = `registration=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1891,11 +1909,14 @@ describe('v1beta1.DomainsClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.configureDnsSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.configureDnsSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.configureDnsSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes configureDnsSettings with call error', async () => {
@@ -1907,26 +1928,25 @@ describe('v1beta1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.ConfigureDnsSettingsRequest()
       );
-      request.registration = '';
-      const expectedHeaderRequestParams = 'registration=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ConfigureDnsSettingsRequest', [
+        'registration',
+      ]);
+      request.registration = defaultValue1;
+      const expectedHeaderRequestParams = `registration=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.configureDnsSettings = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.configureDnsSettings(request), expectedError);
-      assert(
-        (client.innerApiCalls.configureDnsSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.configureDnsSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.configureDnsSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes configureDnsSettings with LRO error', async () => {
@@ -1938,15 +1958,11 @@ describe('v1beta1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.ConfigureDnsSettingsRequest()
       );
-      request.registration = '';
-      const expectedHeaderRequestParams = 'registration=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ConfigureDnsSettingsRequest', [
+        'registration',
+      ]);
+      request.registration = defaultValue1;
+      const expectedHeaderRequestParams = `registration=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.configureDnsSettings = stubLongRunningCall(
         undefined,
@@ -1955,11 +1971,14 @@ describe('v1beta1.DomainsClient', () => {
       );
       const [operation] = await client.configureDnsSettings(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.configureDnsSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.configureDnsSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.configureDnsSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkConfigureDnsSettingsProgress without error', async () => {
@@ -2014,15 +2033,12 @@ describe('v1beta1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.ConfigureContactSettingsRequest()
       );
-      request.registration = '';
-      const expectedHeaderRequestParams = 'registration=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ConfigureContactSettingsRequest',
+        ['registration']
+      );
+      request.registration = defaultValue1;
+      const expectedHeaderRequestParams = `registration=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2031,11 +2047,14 @@ describe('v1beta1.DomainsClient', () => {
       const [operation] = await client.configureContactSettings(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.configureContactSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.configureContactSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.configureContactSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes configureContactSettings without error using callback', async () => {
@@ -2047,15 +2066,12 @@ describe('v1beta1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.ConfigureContactSettingsRequest()
       );
-      request.registration = '';
-      const expectedHeaderRequestParams = 'registration=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ConfigureContactSettingsRequest',
+        ['registration']
+      );
+      request.registration = defaultValue1;
+      const expectedHeaderRequestParams = `registration=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2085,11 +2101,14 @@ describe('v1beta1.DomainsClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.configureContactSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.configureContactSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.configureContactSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes configureContactSettings with call error', async () => {
@@ -2101,15 +2120,12 @@ describe('v1beta1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.ConfigureContactSettingsRequest()
       );
-      request.registration = '';
-      const expectedHeaderRequestParams = 'registration=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ConfigureContactSettingsRequest',
+        ['registration']
+      );
+      request.registration = defaultValue1;
+      const expectedHeaderRequestParams = `registration=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.configureContactSettings = stubLongRunningCall(
         undefined,
@@ -2119,11 +2135,14 @@ describe('v1beta1.DomainsClient', () => {
         client.configureContactSettings(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.configureContactSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.configureContactSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.configureContactSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes configureContactSettings with LRO error', async () => {
@@ -2135,15 +2154,12 @@ describe('v1beta1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.ConfigureContactSettingsRequest()
       );
-      request.registration = '';
-      const expectedHeaderRequestParams = 'registration=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ConfigureContactSettingsRequest',
+        ['registration']
+      );
+      request.registration = defaultValue1;
+      const expectedHeaderRequestParams = `registration=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.configureContactSettings = stubLongRunningCall(
         undefined,
@@ -2152,11 +2168,14 @@ describe('v1beta1.DomainsClient', () => {
       );
       const [operation] = await client.configureContactSettings(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.configureContactSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.configureContactSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.configureContactSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkConfigureContactSettingsProgress without error', async () => {
@@ -2212,15 +2231,11 @@ describe('v1beta1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.ExportRegistrationRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ExportRegistrationRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2229,11 +2244,14 @@ describe('v1beta1.DomainsClient', () => {
       const [operation] = await client.exportRegistration(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.exportRegistration as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.exportRegistration as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.exportRegistration as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes exportRegistration without error using callback', async () => {
@@ -2245,15 +2263,11 @@ describe('v1beta1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.ExportRegistrationRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ExportRegistrationRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2283,11 +2297,14 @@ describe('v1beta1.DomainsClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.exportRegistration as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.exportRegistration as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.exportRegistration as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes exportRegistration with call error', async () => {
@@ -2299,26 +2316,25 @@ describe('v1beta1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.ExportRegistrationRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ExportRegistrationRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.exportRegistration = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.exportRegistration(request), expectedError);
-      assert(
-        (client.innerApiCalls.exportRegistration as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.exportRegistration as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.exportRegistration as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes exportRegistration with LRO error', async () => {
@@ -2330,15 +2346,11 @@ describe('v1beta1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.ExportRegistrationRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ExportRegistrationRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.exportRegistration = stubLongRunningCall(
         undefined,
@@ -2347,11 +2359,14 @@ describe('v1beta1.DomainsClient', () => {
       );
       const [operation] = await client.exportRegistration(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.exportRegistration as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.exportRegistration as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.exportRegistration as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkExportRegistrationProgress without error', async () => {
@@ -2406,15 +2421,11 @@ describe('v1beta1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.DeleteRegistrationRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteRegistrationRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2423,11 +2434,14 @@ describe('v1beta1.DomainsClient', () => {
       const [operation] = await client.deleteRegistration(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteRegistration as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteRegistration as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteRegistration as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteRegistration without error using callback', async () => {
@@ -2439,15 +2453,11 @@ describe('v1beta1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.DeleteRegistrationRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteRegistrationRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2477,11 +2487,14 @@ describe('v1beta1.DomainsClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteRegistration as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteRegistration as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteRegistration as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteRegistration with call error', async () => {
@@ -2493,26 +2506,25 @@ describe('v1beta1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.DeleteRegistrationRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteRegistrationRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteRegistration = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteRegistration(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteRegistration as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteRegistration as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteRegistration as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteRegistration with LRO error', async () => {
@@ -2524,15 +2536,11 @@ describe('v1beta1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.DeleteRegistrationRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteRegistrationRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteRegistration = stubLongRunningCall(
         undefined,
@@ -2541,11 +2549,14 @@ describe('v1beta1.DomainsClient', () => {
       );
       const [operation] = await client.deleteRegistration(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.deleteRegistration as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteRegistration as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteRegistration as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkDeleteRegistrationProgress without error', async () => {
@@ -2600,15 +2611,11 @@ describe('v1beta1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.ListRegistrationsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListRegistrationsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.domains.v1beta1.Registration()
@@ -2623,11 +2630,14 @@ describe('v1beta1.DomainsClient', () => {
       client.innerApiCalls.listRegistrations = stubSimpleCall(expectedResponse);
       const [response] = await client.listRegistrations(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listRegistrations as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listRegistrations as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listRegistrations as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listRegistrations without error using callback', async () => {
@@ -2639,15 +2649,11 @@ describe('v1beta1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.ListRegistrationsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListRegistrationsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.domains.v1beta1.Registration()
@@ -2678,11 +2684,14 @@ describe('v1beta1.DomainsClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listRegistrations as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listRegistrations as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listRegistrations as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listRegistrations with error', async () => {
@@ -2694,26 +2703,25 @@ describe('v1beta1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.ListRegistrationsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListRegistrationsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listRegistrations = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listRegistrations(request), expectedError);
-      assert(
-        (client.innerApiCalls.listRegistrations as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listRegistrations as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listRegistrations as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listRegistrationsStream without error', async () => {
@@ -2725,8 +2733,11 @@ describe('v1beta1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.ListRegistrationsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListRegistrationsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.domains.v1beta1.Registration()
@@ -2764,11 +2775,12 @@ describe('v1beta1.DomainsClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listRegistrations, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listRegistrations.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listRegistrations.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2781,8 +2793,11 @@ describe('v1beta1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.ListRegistrationsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListRegistrationsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listRegistrations.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2809,11 +2824,12 @@ describe('v1beta1.DomainsClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listRegistrations, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listRegistrations.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listRegistrations.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2826,8 +2842,11 @@ describe('v1beta1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.ListRegistrationsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListRegistrationsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.domains.v1beta1.Registration()
@@ -2853,11 +2872,12 @@ describe('v1beta1.DomainsClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listRegistrations.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listRegistrations.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2870,8 +2890,11 @@ describe('v1beta1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1beta1.ListRegistrationsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListRegistrationsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listRegistrations.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2889,11 +2912,12 @@ describe('v1beta1.DomainsClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listRegistrations.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listRegistrations.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
