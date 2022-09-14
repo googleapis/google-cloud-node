@@ -27,6 +27,21 @@ import {PassThrough} from 'stream';
 
 import {protobuf} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -222,26 +237,25 @@ describe('v1.DashboardsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.CreateDashboardRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateDashboardRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.Dashboard()
       );
       client.innerApiCalls.createDashboard = stubSimpleCall(expectedResponse);
       const [response] = await client.createDashboard(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createDashboard as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createDashboard as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createDashboard as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createDashboard without error using callback', async () => {
@@ -253,15 +267,11 @@ describe('v1.DashboardsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.CreateDashboardRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateDashboardRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.Dashboard()
       );
@@ -284,11 +294,14 @@ describe('v1.DashboardsServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createDashboard as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createDashboard as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createDashboard as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createDashboard with error', async () => {
@@ -300,26 +313,25 @@ describe('v1.DashboardsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.CreateDashboardRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateDashboardRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createDashboard = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createDashboard(request), expectedError);
-      assert(
-        (client.innerApiCalls.createDashboard as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createDashboard as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createDashboard as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createDashboard with closed client', async () => {
@@ -331,7 +343,10 @@ describe('v1.DashboardsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.CreateDashboardRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue('CreateDashboardRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createDashboard(request), expectedError);
@@ -348,26 +363,25 @@ describe('v1.DashboardsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.GetDashboardRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetDashboardRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.Dashboard()
       );
       client.innerApiCalls.getDashboard = stubSimpleCall(expectedResponse);
       const [response] = await client.getDashboard(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getDashboard as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getDashboard as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDashboard as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getDashboard without error using callback', async () => {
@@ -379,15 +393,11 @@ describe('v1.DashboardsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.GetDashboardRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetDashboardRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.Dashboard()
       );
@@ -410,11 +420,14 @@ describe('v1.DashboardsServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getDashboard as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getDashboard as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDashboard as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getDashboard with error', async () => {
@@ -426,26 +439,25 @@ describe('v1.DashboardsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.GetDashboardRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetDashboardRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getDashboard = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getDashboard(request), expectedError);
-      assert(
-        (client.innerApiCalls.getDashboard as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getDashboard as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDashboard as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getDashboard with closed client', async () => {
@@ -457,7 +469,10 @@ describe('v1.DashboardsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.GetDashboardRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetDashboardRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getDashboard(request), expectedError);
@@ -474,26 +489,25 @@ describe('v1.DashboardsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.DeleteDashboardRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteDashboardRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
       client.innerApiCalls.deleteDashboard = stubSimpleCall(expectedResponse);
       const [response] = await client.deleteDashboard(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteDashboard as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteDashboard as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteDashboard as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteDashboard without error using callback', async () => {
@@ -505,15 +519,11 @@ describe('v1.DashboardsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.DeleteDashboardRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteDashboardRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -536,11 +546,14 @@ describe('v1.DashboardsServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteDashboard as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteDashboard as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteDashboard as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteDashboard with error', async () => {
@@ -552,26 +565,25 @@ describe('v1.DashboardsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.DeleteDashboardRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteDashboardRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDashboard = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteDashboard(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteDashboard as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteDashboard as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteDashboard as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteDashboard with closed client', async () => {
@@ -583,7 +595,10 @@ describe('v1.DashboardsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.DeleteDashboardRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('DeleteDashboardRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteDashboard(request), expectedError);
@@ -600,27 +615,27 @@ describe('v1.DashboardsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.UpdateDashboardRequest()
       );
-      request.dashboard = {};
-      request.dashboard.name = '';
-      const expectedHeaderRequestParams = 'dashboard.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.dashboard ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateDashboardRequest', [
+        'dashboard',
+        'name',
+      ]);
+      request.dashboard.name = defaultValue1;
+      const expectedHeaderRequestParams = `dashboard.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.Dashboard()
       );
       client.innerApiCalls.updateDashboard = stubSimpleCall(expectedResponse);
       const [response] = await client.updateDashboard(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateDashboard as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateDashboard as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateDashboard as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateDashboard without error using callback', async () => {
@@ -632,16 +647,13 @@ describe('v1.DashboardsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.UpdateDashboardRequest()
       );
-      request.dashboard = {};
-      request.dashboard.name = '';
-      const expectedHeaderRequestParams = 'dashboard.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.dashboard ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateDashboardRequest', [
+        'dashboard',
+        'name',
+      ]);
+      request.dashboard.name = defaultValue1;
+      const expectedHeaderRequestParams = `dashboard.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.Dashboard()
       );
@@ -664,11 +676,14 @@ describe('v1.DashboardsServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateDashboard as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateDashboard as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateDashboard as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateDashboard with error', async () => {
@@ -680,27 +695,27 @@ describe('v1.DashboardsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.UpdateDashboardRequest()
       );
-      request.dashboard = {};
-      request.dashboard.name = '';
-      const expectedHeaderRequestParams = 'dashboard.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.dashboard ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateDashboardRequest', [
+        'dashboard',
+        'name',
+      ]);
+      request.dashboard.name = defaultValue1;
+      const expectedHeaderRequestParams = `dashboard.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateDashboard = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateDashboard(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateDashboard as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateDashboard as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateDashboard as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateDashboard with closed client', async () => {
@@ -712,8 +727,12 @@ describe('v1.DashboardsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.UpdateDashboardRequest()
       );
-      request.dashboard = {};
-      request.dashboard.name = '';
+      request.dashboard ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateDashboardRequest', [
+        'dashboard',
+        'name',
+      ]);
+      request.dashboard.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateDashboard(request), expectedError);
@@ -730,15 +749,11 @@ describe('v1.DashboardsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.ListDashboardsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListDashboardsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.monitoring.dashboard.v1.Dashboard()
@@ -753,11 +768,14 @@ describe('v1.DashboardsServiceClient', () => {
       client.innerApiCalls.listDashboards = stubSimpleCall(expectedResponse);
       const [response] = await client.listDashboards(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listDashboards as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listDashboards as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDashboards as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listDashboards without error using callback', async () => {
@@ -769,15 +787,11 @@ describe('v1.DashboardsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.ListDashboardsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListDashboardsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.monitoring.dashboard.v1.Dashboard()
@@ -808,11 +822,14 @@ describe('v1.DashboardsServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listDashboards as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listDashboards as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDashboards as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listDashboards with error', async () => {
@@ -824,26 +841,25 @@ describe('v1.DashboardsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.ListDashboardsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListDashboardsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDashboards = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listDashboards(request), expectedError);
-      assert(
-        (client.innerApiCalls.listDashboards as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listDashboards as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDashboards as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listDashboardsStream without error', async () => {
@@ -855,8 +871,11 @@ describe('v1.DashboardsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.ListDashboardsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListDashboardsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.monitoring.dashboard.v1.Dashboard()
@@ -893,11 +912,12 @@ describe('v1.DashboardsServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listDashboards, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listDashboards.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listDashboards.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -910,8 +930,11 @@ describe('v1.DashboardsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.ListDashboardsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListDashboardsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDashboards.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -937,11 +960,12 @@ describe('v1.DashboardsServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listDashboards, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listDashboards.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listDashboards.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -954,8 +978,11 @@ describe('v1.DashboardsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.ListDashboardsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListDashboardsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.monitoring.dashboard.v1.Dashboard()
@@ -981,11 +1008,12 @@ describe('v1.DashboardsServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listDashboards.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listDashboards.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -998,8 +1026,11 @@ describe('v1.DashboardsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.ListDashboardsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListDashboardsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDashboards.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1017,11 +1048,12 @@ describe('v1.DashboardsServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listDashboards.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listDashboards.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
