@@ -27,6 +27,21 @@ import {PassThrough} from 'stream';
 
 import {protobuf} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -222,15 +237,11 @@ describe('v1.AccessApprovalClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.GetApprovalRequestMessage()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetApprovalRequestMessage', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.ApprovalRequest()
       );
@@ -238,11 +249,14 @@ describe('v1.AccessApprovalClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.getApprovalRequest(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getApprovalRequest as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getApprovalRequest as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getApprovalRequest as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getApprovalRequest without error using callback', async () => {
@@ -254,15 +268,11 @@ describe('v1.AccessApprovalClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.GetApprovalRequestMessage()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetApprovalRequestMessage', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.ApprovalRequest()
       );
@@ -285,11 +295,14 @@ describe('v1.AccessApprovalClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getApprovalRequest as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getApprovalRequest as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getApprovalRequest as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getApprovalRequest with error', async () => {
@@ -301,26 +314,25 @@ describe('v1.AccessApprovalClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.GetApprovalRequestMessage()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetApprovalRequestMessage', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getApprovalRequest = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getApprovalRequest(request), expectedError);
-      assert(
-        (client.innerApiCalls.getApprovalRequest as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getApprovalRequest as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getApprovalRequest as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getApprovalRequest with closed client', async () => {
@@ -332,7 +344,10 @@ describe('v1.AccessApprovalClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.GetApprovalRequestMessage()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetApprovalRequestMessage', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getApprovalRequest(request), expectedError);
@@ -349,15 +364,12 @@ describe('v1.AccessApprovalClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.ApproveApprovalRequestMessage()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ApproveApprovalRequestMessage',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.ApprovalRequest()
       );
@@ -365,11 +377,14 @@ describe('v1.AccessApprovalClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.approveApprovalRequest(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.approveApprovalRequest as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.approveApprovalRequest as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.approveApprovalRequest as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes approveApprovalRequest without error using callback', async () => {
@@ -381,15 +396,12 @@ describe('v1.AccessApprovalClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.ApproveApprovalRequestMessage()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ApproveApprovalRequestMessage',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.ApprovalRequest()
       );
@@ -412,11 +424,14 @@ describe('v1.AccessApprovalClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.approveApprovalRequest as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.approveApprovalRequest as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.approveApprovalRequest as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes approveApprovalRequest with error', async () => {
@@ -428,15 +443,12 @@ describe('v1.AccessApprovalClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.ApproveApprovalRequestMessage()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ApproveApprovalRequestMessage',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.approveApprovalRequest = stubSimpleCall(
         undefined,
@@ -446,11 +458,14 @@ describe('v1.AccessApprovalClient', () => {
         client.approveApprovalRequest(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.approveApprovalRequest as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.approveApprovalRequest as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.approveApprovalRequest as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes approveApprovalRequest with closed client', async () => {
@@ -462,7 +477,11 @@ describe('v1.AccessApprovalClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.ApproveApprovalRequestMessage()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'ApproveApprovalRequestMessage',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -482,15 +501,12 @@ describe('v1.AccessApprovalClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.DismissApprovalRequestMessage()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DismissApprovalRequestMessage',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.ApprovalRequest()
       );
@@ -498,11 +514,14 @@ describe('v1.AccessApprovalClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.dismissApprovalRequest(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.dismissApprovalRequest as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.dismissApprovalRequest as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.dismissApprovalRequest as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes dismissApprovalRequest without error using callback', async () => {
@@ -514,15 +533,12 @@ describe('v1.AccessApprovalClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.DismissApprovalRequestMessage()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DismissApprovalRequestMessage',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.ApprovalRequest()
       );
@@ -545,11 +561,14 @@ describe('v1.AccessApprovalClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.dismissApprovalRequest as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.dismissApprovalRequest as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.dismissApprovalRequest as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes dismissApprovalRequest with error', async () => {
@@ -561,15 +580,12 @@ describe('v1.AccessApprovalClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.DismissApprovalRequestMessage()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DismissApprovalRequestMessage',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.dismissApprovalRequest = stubSimpleCall(
         undefined,
@@ -579,11 +595,14 @@ describe('v1.AccessApprovalClient', () => {
         client.dismissApprovalRequest(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.dismissApprovalRequest as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.dismissApprovalRequest as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.dismissApprovalRequest as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes dismissApprovalRequest with closed client', async () => {
@@ -595,7 +614,11 @@ describe('v1.AccessApprovalClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.DismissApprovalRequestMessage()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'DismissApprovalRequestMessage',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -615,15 +638,12 @@ describe('v1.AccessApprovalClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.InvalidateApprovalRequestMessage()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'InvalidateApprovalRequestMessage',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.ApprovalRequest()
       );
@@ -631,11 +651,14 @@ describe('v1.AccessApprovalClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.invalidateApprovalRequest(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.invalidateApprovalRequest as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.invalidateApprovalRequest as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.invalidateApprovalRequest as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes invalidateApprovalRequest without error using callback', async () => {
@@ -647,15 +670,12 @@ describe('v1.AccessApprovalClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.InvalidateApprovalRequestMessage()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'InvalidateApprovalRequestMessage',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.ApprovalRequest()
       );
@@ -678,11 +698,14 @@ describe('v1.AccessApprovalClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.invalidateApprovalRequest as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.invalidateApprovalRequest as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.invalidateApprovalRequest as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes invalidateApprovalRequest with error', async () => {
@@ -694,15 +717,12 @@ describe('v1.AccessApprovalClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.InvalidateApprovalRequestMessage()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'InvalidateApprovalRequestMessage',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.invalidateApprovalRequest = stubSimpleCall(
         undefined,
@@ -712,11 +732,14 @@ describe('v1.AccessApprovalClient', () => {
         client.invalidateApprovalRequest(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.invalidateApprovalRequest as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.invalidateApprovalRequest as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.invalidateApprovalRequest as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes invalidateApprovalRequest with closed client', async () => {
@@ -728,7 +751,11 @@ describe('v1.AccessApprovalClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.InvalidateApprovalRequestMessage()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'InvalidateApprovalRequestMessage',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -748,15 +775,12 @@ describe('v1.AccessApprovalClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.GetAccessApprovalSettingsMessage()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetAccessApprovalSettingsMessage',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.AccessApprovalSettings()
       );
@@ -764,11 +788,14 @@ describe('v1.AccessApprovalClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.getAccessApprovalSettings(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getAccessApprovalSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getAccessApprovalSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAccessApprovalSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getAccessApprovalSettings without error using callback', async () => {
@@ -780,15 +807,12 @@ describe('v1.AccessApprovalClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.GetAccessApprovalSettingsMessage()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetAccessApprovalSettingsMessage',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.AccessApprovalSettings()
       );
@@ -811,11 +835,14 @@ describe('v1.AccessApprovalClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getAccessApprovalSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getAccessApprovalSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAccessApprovalSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getAccessApprovalSettings with error', async () => {
@@ -827,15 +854,12 @@ describe('v1.AccessApprovalClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.GetAccessApprovalSettingsMessage()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetAccessApprovalSettingsMessage',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAccessApprovalSettings = stubSimpleCall(
         undefined,
@@ -845,11 +869,14 @@ describe('v1.AccessApprovalClient', () => {
         client.getAccessApprovalSettings(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.getAccessApprovalSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getAccessApprovalSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAccessApprovalSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getAccessApprovalSettings with closed client', async () => {
@@ -861,7 +888,11 @@ describe('v1.AccessApprovalClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.GetAccessApprovalSettingsMessage()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'GetAccessApprovalSettingsMessage',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -881,16 +912,13 @@ describe('v1.AccessApprovalClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.UpdateAccessApprovalSettingsMessage()
       );
-      request.settings = {};
-      request.settings.name = '';
-      const expectedHeaderRequestParams = 'settings.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.settings ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateAccessApprovalSettingsMessage',
+        ['settings', 'name']
+      );
+      request.settings.name = defaultValue1;
+      const expectedHeaderRequestParams = `settings.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.AccessApprovalSettings()
       );
@@ -898,11 +926,14 @@ describe('v1.AccessApprovalClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.updateAccessApprovalSettings(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateAccessApprovalSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateAccessApprovalSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAccessApprovalSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateAccessApprovalSettings without error using callback', async () => {
@@ -914,16 +945,13 @@ describe('v1.AccessApprovalClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.UpdateAccessApprovalSettingsMessage()
       );
-      request.settings = {};
-      request.settings.name = '';
-      const expectedHeaderRequestParams = 'settings.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.settings ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateAccessApprovalSettingsMessage',
+        ['settings', 'name']
+      );
+      request.settings.name = defaultValue1;
+      const expectedHeaderRequestParams = `settings.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.AccessApprovalSettings()
       );
@@ -946,11 +974,14 @@ describe('v1.AccessApprovalClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateAccessApprovalSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateAccessApprovalSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAccessApprovalSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateAccessApprovalSettings with error', async () => {
@@ -962,16 +993,13 @@ describe('v1.AccessApprovalClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.UpdateAccessApprovalSettingsMessage()
       );
-      request.settings = {};
-      request.settings.name = '';
-      const expectedHeaderRequestParams = 'settings.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.settings ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateAccessApprovalSettingsMessage',
+        ['settings', 'name']
+      );
+      request.settings.name = defaultValue1;
+      const expectedHeaderRequestParams = `settings.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateAccessApprovalSettings = stubSimpleCall(
         undefined,
@@ -981,11 +1009,14 @@ describe('v1.AccessApprovalClient', () => {
         client.updateAccessApprovalSettings(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.updateAccessApprovalSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateAccessApprovalSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAccessApprovalSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateAccessApprovalSettings with closed client', async () => {
@@ -997,8 +1028,12 @@ describe('v1.AccessApprovalClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.UpdateAccessApprovalSettingsMessage()
       );
-      request.settings = {};
-      request.settings.name = '';
+      request.settings ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateAccessApprovalSettingsMessage',
+        ['settings', 'name']
+      );
+      request.settings.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1018,15 +1053,12 @@ describe('v1.AccessApprovalClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.DeleteAccessApprovalSettingsMessage()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteAccessApprovalSettingsMessage',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1034,11 +1066,14 @@ describe('v1.AccessApprovalClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.deleteAccessApprovalSettings(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteAccessApprovalSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteAccessApprovalSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAccessApprovalSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteAccessApprovalSettings without error using callback', async () => {
@@ -1050,15 +1085,12 @@ describe('v1.AccessApprovalClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.DeleteAccessApprovalSettingsMessage()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteAccessApprovalSettingsMessage',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1081,11 +1113,14 @@ describe('v1.AccessApprovalClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteAccessApprovalSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteAccessApprovalSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAccessApprovalSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteAccessApprovalSettings with error', async () => {
@@ -1097,15 +1132,12 @@ describe('v1.AccessApprovalClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.DeleteAccessApprovalSettingsMessage()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteAccessApprovalSettingsMessage',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteAccessApprovalSettings = stubSimpleCall(
         undefined,
@@ -1115,11 +1147,14 @@ describe('v1.AccessApprovalClient', () => {
         client.deleteAccessApprovalSettings(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.deleteAccessApprovalSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteAccessApprovalSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAccessApprovalSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteAccessApprovalSettings with closed client', async () => {
@@ -1131,7 +1166,11 @@ describe('v1.AccessApprovalClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.DeleteAccessApprovalSettingsMessage()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteAccessApprovalSettingsMessage',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1151,15 +1190,12 @@ describe('v1.AccessApprovalClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.GetAccessApprovalServiceAccountMessage()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetAccessApprovalServiceAccountMessage',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.AccessApprovalServiceAccount()
       );
@@ -1167,11 +1203,14 @@ describe('v1.AccessApprovalClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.getAccessApprovalServiceAccount(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getAccessApprovalServiceAccount as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getAccessApprovalServiceAccount as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAccessApprovalServiceAccount as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getAccessApprovalServiceAccount without error using callback', async () => {
@@ -1183,15 +1222,12 @@ describe('v1.AccessApprovalClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.GetAccessApprovalServiceAccountMessage()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetAccessApprovalServiceAccountMessage',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.AccessApprovalServiceAccount()
       );
@@ -1214,11 +1250,14 @@ describe('v1.AccessApprovalClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getAccessApprovalServiceAccount as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getAccessApprovalServiceAccount as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAccessApprovalServiceAccount as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getAccessApprovalServiceAccount with error', async () => {
@@ -1230,15 +1269,12 @@ describe('v1.AccessApprovalClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.GetAccessApprovalServiceAccountMessage()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetAccessApprovalServiceAccountMessage',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAccessApprovalServiceAccount = stubSimpleCall(
         undefined,
@@ -1248,11 +1284,14 @@ describe('v1.AccessApprovalClient', () => {
         client.getAccessApprovalServiceAccount(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.getAccessApprovalServiceAccount as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getAccessApprovalServiceAccount as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAccessApprovalServiceAccount as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getAccessApprovalServiceAccount with closed client', async () => {
@@ -1264,7 +1303,11 @@ describe('v1.AccessApprovalClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.GetAccessApprovalServiceAccountMessage()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'GetAccessApprovalServiceAccountMessage',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1284,15 +1327,11 @@ describe('v1.AccessApprovalClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.ListApprovalRequestsMessage()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListApprovalRequestsMessage', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.accessapproval.v1.ApprovalRequest()
@@ -1308,11 +1347,14 @@ describe('v1.AccessApprovalClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listApprovalRequests(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listApprovalRequests as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listApprovalRequests as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listApprovalRequests as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listApprovalRequests without error using callback', async () => {
@@ -1324,15 +1366,11 @@ describe('v1.AccessApprovalClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.ListApprovalRequestsMessage()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListApprovalRequestsMessage', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.accessapproval.v1.ApprovalRequest()
@@ -1365,11 +1403,14 @@ describe('v1.AccessApprovalClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listApprovalRequests as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listApprovalRequests as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listApprovalRequests as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listApprovalRequests with error', async () => {
@@ -1381,26 +1422,25 @@ describe('v1.AccessApprovalClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.ListApprovalRequestsMessage()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListApprovalRequestsMessage', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listApprovalRequests = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listApprovalRequests(request), expectedError);
-      assert(
-        (client.innerApiCalls.listApprovalRequests as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listApprovalRequests as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listApprovalRequests as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listApprovalRequestsStream without error', async () => {
@@ -1412,8 +1452,11 @@ describe('v1.AccessApprovalClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.ListApprovalRequestsMessage()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListApprovalRequestsMessage', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.accessapproval.v1.ApprovalRequest()
@@ -1451,11 +1494,12 @@ describe('v1.AccessApprovalClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listApprovalRequests, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listApprovalRequests.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listApprovalRequests.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1468,8 +1512,11 @@ describe('v1.AccessApprovalClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.ListApprovalRequestsMessage()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListApprovalRequestsMessage', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listApprovalRequests.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1496,11 +1543,12 @@ describe('v1.AccessApprovalClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listApprovalRequests, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listApprovalRequests.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listApprovalRequests.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1513,8 +1561,11 @@ describe('v1.AccessApprovalClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.ListApprovalRequestsMessage()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListApprovalRequestsMessage', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.accessapproval.v1.ApprovalRequest()
@@ -1541,11 +1592,12 @@ describe('v1.AccessApprovalClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listApprovalRequests.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listApprovalRequests.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1558,8 +1610,11 @@ describe('v1.AccessApprovalClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.ListApprovalRequestsMessage()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListApprovalRequestsMessage', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listApprovalRequests.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1577,11 +1632,12 @@ describe('v1.AccessApprovalClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listApprovalRequests.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listApprovalRequests.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
