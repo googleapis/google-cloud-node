@@ -27,6 +27,21 @@ import {PassThrough} from 'stream';
 
 import {protobuf} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -222,26 +237,25 @@ describe('v1.BudgetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1.CreateBudgetRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateBudgetRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1.Budget()
       );
       client.innerApiCalls.createBudget = stubSimpleCall(expectedResponse);
       const [response] = await client.createBudget(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createBudget as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createBudget as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createBudget as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createBudget without error using callback', async () => {
@@ -253,15 +267,11 @@ describe('v1.BudgetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1.CreateBudgetRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateBudgetRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1.Budget()
       );
@@ -284,11 +294,14 @@ describe('v1.BudgetServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createBudget as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createBudget as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createBudget as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createBudget with error', async () => {
@@ -300,26 +313,25 @@ describe('v1.BudgetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1.CreateBudgetRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateBudgetRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createBudget = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createBudget(request), expectedError);
-      assert(
-        (client.innerApiCalls.createBudget as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createBudget as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createBudget as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createBudget with closed client', async () => {
@@ -331,7 +343,10 @@ describe('v1.BudgetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1.CreateBudgetRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue('CreateBudgetRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createBudget(request), expectedError);
@@ -348,27 +363,27 @@ describe('v1.BudgetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1.UpdateBudgetRequest()
       );
-      request.budget = {};
-      request.budget.name = '';
-      const expectedHeaderRequestParams = 'budget.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.budget ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateBudgetRequest', [
+        'budget',
+        'name',
+      ]);
+      request.budget.name = defaultValue1;
+      const expectedHeaderRequestParams = `budget.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1.Budget()
       );
       client.innerApiCalls.updateBudget = stubSimpleCall(expectedResponse);
       const [response] = await client.updateBudget(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateBudget as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateBudget as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateBudget as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateBudget without error using callback', async () => {
@@ -380,16 +395,13 @@ describe('v1.BudgetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1.UpdateBudgetRequest()
       );
-      request.budget = {};
-      request.budget.name = '';
-      const expectedHeaderRequestParams = 'budget.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.budget ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateBudgetRequest', [
+        'budget',
+        'name',
+      ]);
+      request.budget.name = defaultValue1;
+      const expectedHeaderRequestParams = `budget.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1.Budget()
       );
@@ -412,11 +424,14 @@ describe('v1.BudgetServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateBudget as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateBudget as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateBudget as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateBudget with error', async () => {
@@ -428,27 +443,27 @@ describe('v1.BudgetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1.UpdateBudgetRequest()
       );
-      request.budget = {};
-      request.budget.name = '';
-      const expectedHeaderRequestParams = 'budget.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.budget ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateBudgetRequest', [
+        'budget',
+        'name',
+      ]);
+      request.budget.name = defaultValue1;
+      const expectedHeaderRequestParams = `budget.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateBudget = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateBudget(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateBudget as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateBudget as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateBudget as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateBudget with closed client', async () => {
@@ -460,8 +475,12 @@ describe('v1.BudgetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1.UpdateBudgetRequest()
       );
-      request.budget = {};
-      request.budget.name = '';
+      request.budget ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateBudgetRequest', [
+        'budget',
+        'name',
+      ]);
+      request.budget.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateBudget(request), expectedError);
@@ -478,26 +497,23 @@ describe('v1.BudgetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1.GetBudgetRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetBudgetRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1.Budget()
       );
       client.innerApiCalls.getBudget = stubSimpleCall(expectedResponse);
       const [response] = await client.getBudget(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getBudget as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getBudget as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getBudget as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getBudget without error using callback', async () => {
@@ -509,15 +525,9 @@ describe('v1.BudgetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1.GetBudgetRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetBudgetRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1.Budget()
       );
@@ -540,11 +550,14 @@ describe('v1.BudgetServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getBudget as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getBudget as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getBudget as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getBudget with error', async () => {
@@ -556,23 +569,20 @@ describe('v1.BudgetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1.GetBudgetRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetBudgetRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getBudget = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getBudget(request), expectedError);
-      assert(
-        (client.innerApiCalls.getBudget as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getBudget as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getBudget as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getBudget with closed client', async () => {
@@ -584,7 +594,8 @@ describe('v1.BudgetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1.GetBudgetRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetBudgetRequest', ['name']);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getBudget(request), expectedError);
@@ -601,26 +612,25 @@ describe('v1.BudgetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1.DeleteBudgetRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteBudgetRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
       client.innerApiCalls.deleteBudget = stubSimpleCall(expectedResponse);
       const [response] = await client.deleteBudget(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteBudget as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteBudget as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteBudget as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteBudget without error using callback', async () => {
@@ -632,15 +642,11 @@ describe('v1.BudgetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1.DeleteBudgetRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteBudgetRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -663,11 +669,14 @@ describe('v1.BudgetServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteBudget as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteBudget as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteBudget as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteBudget with error', async () => {
@@ -679,26 +688,25 @@ describe('v1.BudgetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1.DeleteBudgetRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteBudgetRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteBudget = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteBudget(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteBudget as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteBudget as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteBudget as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteBudget with closed client', async () => {
@@ -710,7 +718,10 @@ describe('v1.BudgetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1.DeleteBudgetRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('DeleteBudgetRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteBudget(request), expectedError);
@@ -727,15 +738,11 @@ describe('v1.BudgetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1.ListBudgetsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListBudgetsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.billing.budgets.v1.Budget()
@@ -750,11 +757,14 @@ describe('v1.BudgetServiceClient', () => {
       client.innerApiCalls.listBudgets = stubSimpleCall(expectedResponse);
       const [response] = await client.listBudgets(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listBudgets as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listBudgets as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listBudgets as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listBudgets without error using callback', async () => {
@@ -766,15 +776,11 @@ describe('v1.BudgetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1.ListBudgetsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListBudgetsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.billing.budgets.v1.Budget()
@@ -805,11 +811,14 @@ describe('v1.BudgetServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listBudgets as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listBudgets as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listBudgets as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listBudgets with error', async () => {
@@ -821,26 +830,25 @@ describe('v1.BudgetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1.ListBudgetsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListBudgetsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listBudgets = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listBudgets(request), expectedError);
-      assert(
-        (client.innerApiCalls.listBudgets as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listBudgets as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listBudgets as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listBudgetsStream without error', async () => {
@@ -852,8 +860,11 @@ describe('v1.BudgetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1.ListBudgetsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListBudgetsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.billing.budgets.v1.Budget()
@@ -890,11 +901,12 @@ describe('v1.BudgetServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listBudgets, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.listBudgets.createStream as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listBudgets.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -907,8 +919,11 @@ describe('v1.BudgetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1.ListBudgetsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListBudgetsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listBudgets.createStream = stubPageStreamingCall(
         undefined,
@@ -936,11 +951,12 @@ describe('v1.BudgetServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listBudgets, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.listBudgets.createStream as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listBudgets.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -953,8 +969,11 @@ describe('v1.BudgetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1.ListBudgetsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListBudgetsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.billing.budgets.v1.Budget()
@@ -980,11 +999,12 @@ describe('v1.BudgetServiceClient', () => {
         ).args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.listBudgets.asyncIterate as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listBudgets.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -997,8 +1017,11 @@ describe('v1.BudgetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1.ListBudgetsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListBudgetsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listBudgets.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -1017,11 +1040,12 @@ describe('v1.BudgetServiceClient', () => {
         ).args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.listBudgets.asyncIterate as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listBudgets.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
