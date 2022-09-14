@@ -438,7 +438,7 @@ export class TranscoderServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createJob(request, options, callback);
@@ -524,7 +524,7 @@ export class TranscoderServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getJob(request, options, callback);
@@ -619,7 +619,7 @@ export class TranscoderServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteJob(request, options, callback);
@@ -725,7 +725,7 @@ export class TranscoderServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createJobTemplate(request, options, callback);
@@ -824,7 +824,7 @@ export class TranscoderServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getJobTemplate(request, options, callback);
@@ -925,7 +925,7 @@ export class TranscoderServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteJobTemplate(request, options, callback);
@@ -1031,7 +1031,7 @@ export class TranscoderServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listJobs(request, options, callback);
@@ -1076,7 +1076,7 @@ export class TranscoderServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listJobs'];
     const callSettings = defaultCallSettings.merge(options);
@@ -1130,7 +1130,7 @@ export class TranscoderServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listJobs'];
     const callSettings = defaultCallSettings.merge(options);
@@ -1242,7 +1242,7 @@ export class TranscoderServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listJobTemplates(request, options, callback);
@@ -1288,7 +1288,7 @@ export class TranscoderServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listJobTemplates'];
     const callSettings = defaultCallSettings.merge(options);
@@ -1343,7 +1343,7 @@ export class TranscoderServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listJobTemplates'];
     const callSettings = defaultCallSettings.merge(options);
